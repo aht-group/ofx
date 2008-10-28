@@ -1,0 +1,89 @@
+// Created on 28.04.2004
+package org.openfuxml.server.simple;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.SocketException;
+import java.util.Date;
+
+import org.apache.log4j.Logger;
+import org.openfuxml.communication.cluster.ejb.Host;
+import org.openfuxml.producer.handler.DirectProducer;
+import org.openfuxml.producer.handler.Producer;
+import org.openfuxml.server.AbstractServer;
+import org.openfuxml.util.FuXmlLogger;
+
+import de.kisner.util.xml.XmlConfig;
+
+/**
+ * Server oeffnet den ServerSocket und wartet dann auf Clientverbindungen.
+ * Fur jede Clientverbindung wird ein neuer ServerThread der Klasse.
+ * {@link org.openfuxml.communication.server.simple.SimpleServerThread.class SimpleServerThread}
+ * erzeugt. <br>
+ * @author Thorsten
+ * @version 0.3
+ */
+public class SimpleServer extends AbstractServer
+{
+	static Logger logger = Logger.getLogger(SimpleServer.class);
+	
+	public SimpleServer(XmlConfig xCnf)
+	{
+		logger.info("Applikation wird gestartet");
+		
+		int serverPort =xCnf.getIntAttribute("net/server[@typ=\"socket\"]","port");
+	
+		
+		setSystemProperties(xCnf);
+		checkSystemProperties();
+		
+		Host host = new Host();
+		host.setHostName(xCnf.getHostName());
+		host.setHostIP(xCnf.getHostIp());
+		host.setRecord(new Date());
+		
+		Producer p = new DirectProducer(xCnf,host);
+		
+		logger.debug("ServerSocket erstellen: "+serverPort);
+		ServerSocket serverSocket=null;
+		try {serverSocket = new ServerSocket(serverPort);}
+		catch (IOException e)
+		{
+			logger.fatal(e.getMessage());
+			logger.fatal("Could not listen on port: "+serverPort);
+			logger.fatal("Applikation wird beendet");
+            	System.exit(1);
+        }
+		logger.debug("Server lauscht auf Port "+serverSocket.getLocalPort());
+		
+		ThreadGroup clientTg = new ThreadGroup("Alle Clients");
+		SimpleShutdownThread myShutdownThread = new SimpleShutdownThread(clientTg,serverSocket);
+		(Runtime.getRuntime()).addShutdownHook(myShutdownThread);
+		try
+		{
+			while (myShutdownThread.getAppActive())
+			{
+				SimpleServerThread sst = new SimpleServerThread(clientTg, serverSocket.accept(),new DirectProducer(xCnf,host)); 
+				sst.start();
+			}
+		}
+		catch (SocketException e)
+		{
+			if (myShutdownThread.getAppActive())
+			{
+				logger.error(e.getMessage());
+			}
+		}
+		catch (IOException e){logger.error(e.getMessage());}
+
+		logger.debug(this.getClass().getSimpleName()+" ist beendet");
+	}
+
+	public static void main(String[] args) throws IOException
+	{
+		FuXmlLogger.init();
+		logger.info("**************************************************************");
+		XmlConfig xCnf = new XmlConfig("openFuXML-config.xml", "openFuXML-1.x.xsd");
+
+		new SimpleServer(xCnf);
+	}
+}

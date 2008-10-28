@@ -1,0 +1,19 @@
+openfuxml-version = 1.2
+swt-version = 3.3
+ant-version = 1.7.0
+log4j-version = 1.2.15
+saxon-version = 8.1.1
+jdom-version = 1.0
+jboss-version = 5.0.0.b4
+jsch-version = 0.1.29
+jmsutils-version = 0.3.4
+jaxen-version = 1.1.1
+xerces-version = 2.9.0
+mail-version = 1.4
+jmdns-version = 1.0
+tex4ht-version = 20020613-424.1
+
+fuxml-host = <ip>
+fuxml-user = <ssh-user>
+fuxml-password = <ssh-passwd>
+

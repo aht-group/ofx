@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+	<!-- ********************************************************************
+		$Id: openFuXML-Release.xml,v 1.58 2007/10/29 11:39:44 hemmer Exp $
+		********************************************************************
+		*******************************************************************************
+		| openFuXML open source                                                       |
+		*******************************************************************************
+		| Copyright (c) 2002-2006 openFuXML open source, University of Hagen          |
+		|                                                                             |
+		| This program is free software; you can redistribute it and/or               |
+		| modify it under the terms of the GNU General Public License                 |
+		| as published by the Free Software Foundation; either version 2              |
+		| of the License, or (at your option) any later version.                      |
+		|                                                                             |
+		| This program is distributed in the hope that it will be useful,             |
+		| but WITHOUT ANY WARRANTY; without even the implied warranty of              |
+		| MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               |
+		| GNU General Public License for more details.                                |
+		|                                                                             |
+		| You should have received a copy of the GNU General Public License           |
+		| along with this program; if not, write to the Free Software                 |
+		| Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. |
+		*******************************************************************************
+		******************************************************************** -->
+
+<project name="FuXML - Release" default="" basedir="../..">
+
+	<property file="resources/properties.dist"/>
+
+	<property name="src.dir" location="${basedir}/src" />
+	<property name="rsrc.dir" location="${basedir}/resources" />
+	<property name="app.dir" location="${basedir}/applications" />
+	<property name="doku.dir" location="${basedir}/doku" />
+	<property name="build.dir" location="${basedir}/build" />
+	<property name="build-bin.dir" location="${basedir}/build/bin" />
+	<property name="build-app.dir" location="${basedir}/build/app" />
+	<property name="pack.dir" value="${build-app.dir}/openFuXML-${openfuxml-version}" />
+	<property name="pack-lib.dir" value="${pack.dir}/lib" />
+	<property name="dist.dir" location="${basedir}/dist" />
+	<property name="lib.dir" location="${basedir}/lib" />
+	<property name="doku.dir" location="${basedir}/doku" />
+	
+	<!-- Namensdefinitionen .jar und .tar -->
+	<property name="simple.release" value="openFuXML-${openfuxml-version}s.tgz" />
+	<property name="simple.release.system" value="openFuXML-System-${openfuxml-version}s.tgz" />
+	<property name="simple.release.system.zip" value="openFuXML-System-${openfuxml-version}s.zip" />
+	<property name="src.release" value="openFuXML-${openfuxml-version}s-src.jar" />
+	<property name="simpleServer.name" value="openFuXML-${openfuxml-version}s.jar" />
+	<property name="enterpriseServer.name" value="openFuXML-${openfuxml-version}ee.jar" />
+	<property name="simpleClient.name" value="openFuXML-Client-${openfuxml-version}s" />
+
+	
+	<!-- Lib-Definition -->
+	<property name="log4j.dir" value="utils/log4j"/>
+		<property name="log4j.lib" value="log4j-${log4j-version}.jar" />
+		<property name="log4j-zeroconf.lib" value="log4j-zeroconf-${log4j-version}.jar" />
+	<property name="jmdns.dir" value="jmdns"/><property name="jmdns.lib" value="jmdns-${jmdns-version}.jar" />
+	<property name="jdom.dir" value="xml/jdom"/><property name="jdom.lib" value="jdom-${jdom-version}.jar" />
+	<property name="jaxen.dir" value="xml/jaxen"/><property name="jaxen.lib" value="jaxen-${jaxen-version}.jar" />
+	<property name="saxon.dir" value="xml/saxon"/><property name="saxon.lib" value="saxon-${saxon-version}.jar" />
+	<property name="xerces.dir" value="xml/xerces"/><property name="xerces.lib" value="xercesImpl-${xerces-version}.jar" />
+	<property name="jsch.dir" value="jsch"/><property name="jsch.lib" value="jsch-${jsch-version}.jar" />
+	<property name="jmsutils.dir" value="utils"/><property name="jmsutils.lib" value="jmsutils-${jmsutils-version}.jar" />
+	<property name="smack.dir" value="messaging/smack"/><property name="smack.lib" value="smack-${smack-version}.jar" />
+		<property name="smackx.lib" value="smackx-${smack-version}.jar" />
+	<property name="mail.dir" value="messaging/mail"/><property name="mail.lib" value="mail-${mail-version}.jar" />
+	<property name="tex4ht.dir" value="tex4ht"/><property name="tex4ht.lib" value="tex4ht-${tex4ht-version}.i586.rpm" />
+	
+	<!-- Lib-Definition JBoss -->
+	<property name="jboss-system.dir" value="jboss/system"/><property name="jboss-system.lib" value="jboss-system-${jboss-version}.jar" />
+	<property name="jboss-client.dir" value="jboss/client"/><property name="jboss-client.lib" value="jbossall-client-${jboss-version}.jar" />
+		
+	<!-- Lib-Definition EJB3 -->
+	<property name="ejb3.dir" value="jboss/ejb-${jboss-version}"/>
+	<property name="ejb3-persistence.lib" value="ejb3-persistence-${jboss-version}.jar" />
+	<property name="jboss-ejb3.lib" value="jboss-ejb3-${jboss-version}.jar"/>
+	<property name="jboss-ejb3x.lib" value="jboss-ejb3x-${jboss-version}.jar"/>
+	<property name="jboss-aspect.lib" value="jboss-aspect-jdk50-client-${jboss-version}.jar"/>
+	<property name="jboss-aop.lib" value="jboss-aop-jdk50-client-${jboss-version}.jar"/>
+	<property name="jboss-annotations.lib" value="jboss-annotations-ejb3-${jboss-version}.jar" />
+	<property name="hibernate-client.lib" value="hibernate-client-${jboss-version}.jar" />
+	
+	<!-- Directories for the Libraries -->
+	<property name="swt.dir" location="${lib.dir}/swt/swt-${swt-version}" />
+	
+	<property name="ant.bundle" value="apache-ant-${ant-version}-bin.tar.gz" />
+	
+	
+	<!-- Library-Definition für JAR-Files  -->
+	<property name="jar.ejb.1" value="${ejb3-persistence.lib} ${jboss-ejb3.lib} ${jboss-ejb3x.lib} ${jboss-aspect.lib}"/>
+	<property name="jar.ejb.2" value="${jboss-aop.lib} ${jboss-annotations.lib} ${hibernate-client.lib}"/>
+	<property name="jar.jboss" value="${jboss-client.lib} ${jar.ejb.1} ${jar.ejb.2}"/>
+	<property name="jar.xml" value="${jdom.lib} ${jaxen.lib} ${xerces.lib}"/>
+	<property name="jar.log" value="${log4j.lib} ${log4j-zeroconf.lib} ${jmdns.lib}"/>
+	<property name="jar.common" value="${jmsutils.lib} ${jsch.lib} ${mail.lib}"/>
+	<property name="jar.lib" value="${jar.log} ${jar.xml} ${jar.common} ${jar.jboss}"/>
+	
+	
+	<!-- Classpath wird gesetzt -->	
+	<path id="classpath">
+		<fileset dir="${swt.dir}" includes="*.jar"/>
+		<fileset dir="${swt.dir}/windows" includes="*.jar"/>	            		
+		<!--  <fileset dir="${jboss.dir}" includes="**/*.jar"/>  -->
+		
+		<!-- fileset dir="${servlet.dir}" includes="**/*.jar"/ -->
+		<pathelement location="${lib.dir}/jsch/${jsch.lib}"/>
+		<pathelement location="${lib.dir}/${log4j.dir}/${log4j.lib}"/>
+		<pathelement location="${lib.dir}/${jmdns.dir}/${jmdns.lib}"/>
+		<pathelement location="${lib.dir}/${jdom.dir}/${jdom.lib}"/>
+		<pathelement location="${lib.dir}/${jaxen.dir}/${jaxen.lib}"/>
+		<pathelement location="${lib.dir}/${xerces.dir}/${xerces.lib}"/>
+		<pathelement location="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}"/>
+		<pathelement location="${lib.dir}/${smack.dir}/${smack.lib}"/>
+		<pathelement location="${lib.dir}/${smack.dir}/${smackx.lib}"/>
+		<pathelement location="${lib.dir}/${jsch.dir}/${jsch.lib}"/>
+		<pathelement location="${lib.dir}/${mail.dir}/${mail.lib}"/>
+		<pathelement location="${lib.dir}/${jboss-client.dir}/${jboss-client.lib}"/>
+		<pathelement location="${lib.dir}/${jboss-system.dir}/${jboss-system.lib}"/>
+		<pathelement location="${lib.dir}/${ejb3.dir}/${ejb3-persistence.lib}"/>
+		<pathelement location="${lib.dir}/${ejb3.dir}/${jboss-ejb3x.lib}"/>
+	</path>
+		
+	<target name="00 - Classpath" description="Echos Classpath">
+			<echo level="info">Classpath: ${jboss-client.dir}/${jboss-client.lib}</echo>
+			<echo level="info">Classpath: ${jboss-system.dir}/${jboss-system.lib}</echo>
+			<echo level="info">Classpath: ${ejb3.dir}/${ejb3-persistence.lib}</echo>
+			<echo level="info">Classpath: ${ejb3.dir}/${jboss-ejb3x.lib}</echo>
+		
+			<echo level="info">Classpath: ${log4j.dir}/${log4j.lib}</echo>
+			<echo level="info">Classpath: ${log4j.dir}/${log4j-zeroconf.lib}</echo>
+			<echo level="info">Classpath: ${log4j.dir}/${jmdns.lib}</echo>
+			<echo level="info">Classpath: ${jdom.dir}/${jdom.lib}</echo>
+			<echo level="info">Classpath: ${jaxen.dir}/${jaxen.lib}</echo>
+			<echo level="info">Classpath: ${xerces.dir}/${xerces.lib}</echo>
+			<echo level="info">Classpath: ${jfreechart.dir}/${jfreechart.lib}</echo>
+			<echo level="info">Classpath: ${jcommon.dir}/${jcommon.lib}</echo>
+			<echo level="info">Classpath: ${jsch.dir}/${jsch.lib}</echo>
+			<echo level="info">Classpath: ${mail.dir}/${mail.lib}</echo>
+			<echo level="info">Classpath: ${jmsutils.dir}/${jmsutils.lib}</echo>
+			<echo level="info">Classpath: ${smack.dir}/${smack.lib}</echo>
+			<echo level="info">Classpath: ${smack.dir}/${smackx.lib}</echo>
+			<echo level="info">Classpath: ${irc.dir}/${irc.lib}</echo>
+			<echo level="info">Classpath: ${jaf.libdir}</echo>
+			
+			<echo level="info">------------------------</echo>
+			<echo level="info">${jar.lib}</echo>
+			<echo level="info">${classpath}</echo>
+	    </target>
+	
+	<!-- target clean -->	
+    <target name="01 - clean" description="Removes build artifacts">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+	<!-- target init -->	
+    <target name="02 - init" description="Init ...">
+		<mkdir dir="${build.dir}"/>
+    	<mkdir dir="${build-bin.dir}"/>
+    	<mkdir dir="${build-app.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}/${simpleClient.name}/lib"/>
+	</target>
+
+	<target name="03 - compile" depends="02 - init" description="Compile the source">
+		<javac	srcdir="${src.dir}"
+				destdir="${build-bin.dir}"
+				debug="true"
+				debuglevel="lines,vars,source" 
+				deprecation="on"
+				optimize="on"
+				encoding="ISO-8859-1"
+				classpathref="classpath">
+			<include name="org/openfuxml/**"/>
+		</javac>
+	</target>
+	
+<!--	<target name="03 - package-elements" depends="02 - init" description="Package Elements">
+		<echo>Simple Client</echo>
+		<ant antfile="resources/build/SimpleClient.xml" target="07 - package-application"/>
+	</target> -->
+	
+    <target name="04 - gen-structure">
+    	<mkdir dir="${pack.dir}"/>
+    	<mkdir dir="${pack.dir}/lib"/>
+    	<mkdir dir="${pack.dir}/logs"/>
+    	<mkdir dir="${pack.dir}/doku"/>
+    	<mkdir dir="${pack.dir}/applications"/>
+    	<mkdir dir="${pack.dir}/share/repository"/>
+    	<mkdir dir="${pack.dir}/share/repository/fuxml"/>
+    	<mkdir dir="${pack.dir}/share/output"/>
+    	<mkdir dir="${pack.dir}/share/output/fuxml"/>
+    	<mkdir dir="${pack.dir}/share/output/fuxml/sessionpreferences"/>
+    	<mkdir dir="${pack.dir}/share/client"/>
+    	<!-- Inhalte Kopieren: applications -->
+    	<copy todir="${pack.dir}/applications">
+    	    <fileset dir="${app.dir}">
+    			<exclude name="**/Cvs/**"/>
+    	    </fileset>
+    	</copy>
+    	
+    	<!-- Inhalte Kopieren: dokumentation -->
+    	<copy file="${doku.dir}/pdf/ke1.pdf" tofile="${pack.dir}/doku/Installation-Administration.pdf"/>
+    	<copy file="${doku.dir}/pdf/ke2.pdf" tofile="${pack.dir}/doku/Benutzerhandbuch.pdf"/>
+    	<copy file="${doku.dir}/pdf/ke3.pdf" tofile="${pack.dir}/doku/Gestaltungsschnittstelle.pdf"/>
+    	<unzip src="${doku.dir}/html/Handbuch.zip" dest="${pack.dir}/doku"/>
+    	<move file="${pack.dir}/doku/Handbuch" tofile="${pack.dir}/doku/html"/>
+    	
+    	<!-- Inhalte Kopieren: Handbuch 
+    	<mkdir dir="${pack.dir}/share/repository/fuxml/Handbuch"/>
+    	<copy todir="${pack.dir}/share/repository/fuxml/Handbuch">
+    	    <fileset dir="${doku.dir}/src/Handbuch" />
+    	</copy> -->
+    	
+    	<!-- Inhalte Kopieren: Referenzprojekt -->
+    	<mkdir dir="${pack.dir}/share/repository/fuxml/referenzprojekt"/>
+    	<copy todir="${pack.dir}/share/repository/fuxml/referenzprojekt">
+    	    <fileset dir="${rsrc.dir}/referenzprojekt" />
+    	</copy>
+    	
+    	<!-- Inhalte Kopieren: lib -->
+    	<copy file="${lib.dir}/${log4j.dir}/${log4j.lib}" todir="${pack-lib.dir}"/>
+    	<copy file="${lib.dir}/${log4j.dir}/${log4j-zeroconf.lib}" todir="${pack-lib.dir}"/>
+    	<copy file="${lib.dir}/${jmdns.dir}/${jmdns.lib}" todir="${pack-lib.dir}"/>
+    	<copy file="${lib.dir}/${jdom.dir}/${jdom.lib}" todir="${pack-lib.dir}"/>
+    	<copy file="${lib.dir}/${jaxen.dir}/${jaxen.lib}" todir="${pack-lib.dir}"/>
+    	<copy file="${lib.dir}/${xerces.dir}/${xerces.lib}" todir="${pack-lib.dir}"/>
+    	<copy file="${lib.dir}/${saxon.dir}/${saxon.lib}" todir="${pack-lib.dir}"/>
+    	<copy file="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}" todir="${pack-lib.dir}"/>
+    	<copy file="${lib.dir}/${jsch.dir}/${jsch.lib}" todir="${pack-lib.dir}"/>
+    	<copy file="${lib.dir}/${mail.dir}/${mail.lib}" todir="${pack-lib.dir}"/>
+    	<copy file="${lib.dir}/${ejb3.dir}/${ejb3-persistence.lib}" todir="${pack-lib.dir}"/>
+    	<copy file="${lib.dir}/${ejb3.dir}/${jboss-ejb3x.lib}" todir="${pack-lib.dir}"/>
+    	<untar src="${lib.dir}/ant/${ant.bundle}" dest="${pack-lib.dir}" compression="gzip"/>
+    		<delete dir="${pack.dir}/lib/apache-ant-${ant-version}/docs"/>
+    	<copy file="${lib.dir}/${tex4ht.dir}/${tex4ht.lib}" todir="${pack-lib.dir}"/>
+    	
+    	<!-- Inhalte Kopieren: Source-Files -->
+    	<jar destfile="${pack.dir}/lib/${src.release}">
+	        <fileset dir="${src.dir}/"/>
+	    </jar>
+    	
+    </target>    
+	
+   	<target name="05 - simpleRelease" depends="02 - init,04 - gen-structure,05a - SimpleServer,05b - SimpleClient">
+   		<echo>Simple-Release</echo>
+   		<property name="startSkript.name" value="openFuXML.sh"/>
+   		<property name="startSkriptEtc.name" value="openFuXML"/>
+   		<property name="serverConfig.name" value="openFuXML-config.xml"/>
+   		
+   		<copy todir="${pack.dir}/share/client">
+   			<fileset dir="${dist.dir}/${simpleClient.name}" />
+   		</copy>
+   		<copy file="${dist.dir}/${simpleServer.name}" todir="${pack-lib.dir}"/>
+	
+   		<copy file="${rsrc.dir}/config/log4j.xml" todir="${pack.dir}"/>
+   		<replace file="${pack.dir}/log4j.xml" token="@@@appender@@@" value="A-Server"/>
+   		
+   		<copy file="${rsrc.dir}/shell/windows/produce.bat" todir="${pack.dir}"/>
+   		<copy file="${rsrc.dir}/shell/windows/server.bat" todir="${pack.dir}"/>
+   		<copy file="${rsrc.dir}/shell/windows/config.bat" todir="${pack.dir}"/>
+   		<copy file="${rsrc.dir}/shell/windows/client.bat" todir="${pack.dir}"/>
+   		<copy file="${rsrc.dir}/shell/windows/init.vbs" todir="${pack.dir}"/>
+   		<copy file="${rsrc.dir}/shell/produce.sh" todir="${pack.dir}"/>
+   		<replace file="${pack.dir}/produce.bat" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+   		<replace file="${pack.dir}/produce.bat" token="@@@saxon-version@@@" value="${saxon-version}"/>
+    	<replace file="${pack.dir}/produce.bat" token="@@@ant-version@@@" value="${ant-version}"/>
+   		<replace file="${pack.dir}/server.bat" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+   		<replace file="${pack.dir}/server.bat" token="@@@saxon-version@@@" value="${saxon-version}"/>
+   		<replace file="${pack.dir}/server.bat" token="@@@ant-version@@@" value="${ant-version}"/>
+   		<replace file="${pack.dir}/client.bat" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+   		<replace file="${pack.dir}/client.bat" token="@@@saxon-version@@@" value="${saxon-version}"/>
+   		<replace file="${pack.dir}/client.bat" token="@@@ant-version@@@" value="${ant-version}"/>
+   		   		
+   		<replace file="${pack.dir}/produce.sh" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+   		<replace file="${pack.dir}/produce.sh" token="@@@saxon-version@@@" value="${saxon-version}"/>
+    	<replace file="${pack.dir}/produce.sh" token="@@@ant-version@@@" value="${ant-version}"/>
+   		<replace file="${pack.dir}/produce.sh" token="@@@saxon@@@" value="${saxon.lib}"/>
+   		<replace file="${pack.dir}/produce.sh" token="@@@openFuXML.simple@@@" value="${simpleServer.name}"/>
+
+   		<copy file="${rsrc.dir}/config/simpleServer.xml" tofile="${pack.dir}/${serverConfig.name}"/>
+   		<copy file="${rsrc.dir}/config/openFuXML-1.x.xsd" todir="${pack.dir}"/>
+   		
+   		<copy file="${rsrc.dir}/shell/windows/init.htm" todir="${pack.dir}"/>
+   		<copy file="${rsrc.dir}/shell/windows/init.cmd" todir="${pack.dir}"/>
+   		<copy file="${rsrc.dir}/shell/windows/openfuxml.ico" todir="${pack.dir}"/>
+   		<copy file="${rsrc.dir}/shell/windows/openFuXML.vbs" todir="${pack.dir}"/>
+   		<copy file="${rsrc.dir}/shell/simpleFuXMLserver.sh" tofile="${pack.dir}/${startSkript.name}"/>
+   		<replace file="${pack.dir}/init.htm" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+
+   		<replace file="${pack.dir}/${startSkript.name}" token="@@@log4j@@@" value="${log4j.lib}"/>
+   		<replace file="${pack.dir}/${startSkript.name}" token="@@@ant-version@@@" value="${ant-version}"/>
+   		<replace file="${pack.dir}/${startSkript.name}" token="@@@saxon@@@" value="${saxon.lib}"/>
+   		<replace file="${pack.dir}/${startSkript.name}" token="@@@openFuXML.simple@@@" value="${simpleServer.name}"/>
+   		<copy file="${rsrc.dir}/shell/etc-init-d.sh" tofile="${pack.dir}/${startSkriptEtc.name}"/>
+   		<replace file="${pack.dir}/${startSkriptEtc.name}" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+   		<fixcrlf file="${pack.dir}/${startSkriptEtc.name}" eol="lf" eof="remove" />   		
+   		
+   		<delete file="${dist.dir}/${simple.release}"/>
+   		<delete file="${dist.dir}/${simpleServer.name}"/>
+   		<delete dir="${dist.dir}/${simpleClient.name}"/>
+   		<delete dir="${pack.dir}/applications/fuxml/formats/validation"/>
+   		<fixcrlf srcdir="${build-app.dir}" includes="**/*.sh"
+   		         eol="lf" eof="remove" />   		   		
+   		<copy file="${rsrc.dir}/build/openFuXML-MSI-Release.xml" tofile="${pack.dir}/openFuXML-${openfuxml-version}.wsx"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@swt-version@@@" value="${swt-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@ant-version@@@" value="${ant-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@log4j-version@@@" value="${log4j-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@saxon-version@@@" value="${saxon-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jdom-version@@@" value="${jdom-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jboss-version@@@" value="${jboss-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jsch-version@@@" value="${jsch-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jmsutils-version@@@" value="${jmsutils-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jaxen-version@@@" value="${jaxen-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@xerces-version@@@" value="${xerces-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@mail-version@@@" value="${mail-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jmdns-version@@@" value="${jmdns-version}"/>
+   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@tex4ht-version@@@" value="${tex4ht-version}"/>
+   		<fixcrlf srcdir="${pack.dir}/applications/fuxml/formats/math/ht4t_files" includes="htlatex"
+   		   		         eol="lf" eof="remove" />  
+   		<mkdir dir="${pack.dir}/wix"/>
+   		<unzip dest="${pack.dir}/wix" src="${rsrc.dir}/build/wix-2.0.5325.0-binaries.zip"/>
+   		<exec executable="${pack.dir}/wix/candle.exe" dir="${pack.dir}">
+   			<arg value="openFuXML-${openfuxml-version}.wsx"/>
+   		</exec>
+   		<exec executable="${pack.dir}/wix/light.exe" dir="${pack.dir}">
+   		   	<arg value="openFuXML-${openfuxml-version}.wixobj"/>
+   		</exec>
+   		<copy file="${pack.dir}/openFuXML-${openfuxml-version}.msi" tofile="${dist.dir}/openFuXML-${openfuxml-version}.msi"/>
+   		<delete file="${pack.dir}/openFuXML-${openfuxml-version}.msi"/>
+   		<delete dir="${pack.dir}/wix}"/>
+   		<delete file="${pack.dir}/openFuXML-${openfuxml-version}.wsx"/>
+   		<delete file="${pack.dir}/openFuXML-${openfuxml-version}.wixobj"/>
+   		<zip destfile="${dist.dir}/${simple.release.system.zip}"  basedir="${build-app.dir}"/>
+   		   		
+	    <tar destfile="${dist.dir}/${simple.release.system}"  basedir="${build-app.dir}"
+   			compression="gzip" longfile="gnu"/>
+   		<copy file="${rsrc.dir}/shell/install.sh" todir="${dist.dir}"/>
+ 		<copy file="${rsrc.dir}/shell/uninstall.sh" todir="${dist.dir}"/>
+   		<fixcrlf srcdir="${dist.dir}" includes="openfuxml.sh"
+   		   		   		         eol="lf" eof="remove" />
+   		<replace file="${dist.dir}/install.sh" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+		<replace file="${dist.dir}/install.sh" token="@@@ant-version@@@" value="${ant-version}"/>
+   		<replace file="${dist.dir}/uninstall.sh" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+
+   		<copy file="${rsrc.dir}/shell/install_suse.sh" todir="${dist.dir}"/>
+   		<copy file="${rsrc.dir}/shell/uninstall_suse.sh" todir="${dist.dir}"/>
+   		<replace file="${dist.dir}/install_suse.sh" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+   		<replace file="${dist.dir}/install_suse.sh" token="@@@ant-version@@@" value="${ant-version}"/>
+   		<replace file="${dist.dir}/install_suse.sh" token="@@@tex4ht-version@@@" value="${tex4ht-version}"/>
+   		<replace file="${dist.dir}/uninstall_suse.sh" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+   		
+    	<mkdir dir="${dist.dir}/installertemp"/>
+   		<move file="${dist.dir}/install.sh" todir="${dist.dir}/installertemp"/>
+   		<move file="${dist.dir}/uninstall.sh" todir="${dist.dir}/installertemp"/>
+   		<move file="${dist.dir}/install_suse.sh" todir="${dist.dir}/installertemp"/>
+   		<move file="${dist.dir}/uninstall_suse.sh" todir="${dist.dir}/installertemp"/>
+
+   		   		
+   		<move file="${dist.dir}/${simple.release.system}" todir="${dist.dir}/installertemp"/>
+   		<fixcrlf srcdir="${dist.dir}/installertemp" includes="**/*.sh"
+   		   		         eol="lf" eof="remove" />
+  		<tar destfile="${dist.dir}/${simple.release}"  basedir="${dist.dir}/installertemp" 
+   		   			compression="gzip" longfile="gnu"/>
+   		<delete dir="${dist.dir}/installertemp"/>
+   	</target>
+	
+	<target name="05a - SimpleServer" depends="03 - compile">
+		<echo>Package SimpleServer ${simpleServer.name}</echo>
+        <jar destfile="${dist.dir}/${simpleServer.name}">
+            <fileset dir="${build-bin.dir}/"/>
+			<manifest>
+				<attribute name="Main-Class" value="org.openfuxml.server.simple.SimpleServer"/>
+				<attribute name="Class-Path" value=".. ${jar.lib}"/>
+				<attribute name="Built-By" value="${user.name}"/>
+			</manifest>        	
+        </jar>
+	</target>
+	
+	<target name="05b - SimpleClient" depends="03 - compile">
+		<!-- Hier den Inhalte von Simpleclient -->
+		<echo>Package SimpleClient ${simpleClient.name}</echo>
+		
+		<echo>Copy of the libs</echo>
+		<copy file="${lib.dir}/jboss/client/${jboss-client.lib}" todir="${dist.dir}/${simpleClient.name}/lib"/>
+		<copy file="${lib.dir}/${ejb3.dir}/${ejb3-persistence.lib}" todir="${dist.dir}/${simpleClient.name}/lib"/>
+		<copy file="${lib.dir}/log4j/${log4j.lib}" todir="${dist.dir}/${simpleClient.name}/lib"/>
+    	<copy file="${lib.dir}/${jdom.dir}/${jdom.lib}" todir="${dist.dir}/${simpleClient.name}/lib"/>
+		<copy file="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}" todir="${dist.dir}/${simpleClient.name}/lib"/>
+   		<copy file="${rsrc.dir}/config/log4j.xml" todir="${dist.dir}/${simpleClient.name}/lib"/>
+   		<replace file="${dist.dir}/${simpleClient.name}/lib/log4j.xml" token="@@@appender@@@" value="Client-RoFiAppender"/>
+		<copy file="${swt.dir}/windows/swt.jar" tofile="${dist.dir}/${simpleClient.name}/lib/swt-${swt-version}-win.jar"/>
+		<copy file="${swt.dir}/linux-gtk/swt.jar" tofile="${dist.dir}/${simpleClient.name}/lib/swt-${swt-version}-linux.jar"/>
+		<copy file="${swt.dir}/macosx/swt.jar" tofile="${dist.dir}/${simpleClient.name}/lib/swt-${swt-version}-osx.jar"/>
+		<copy todir="${dist.dir}/${simpleClient.name}/lib">
+			<fileset dir="${swt.dir}/linux-gtk/">
+				<include name="**"/>
+			</fileset>
+			<fileset dir="${swt.dir}/macosx/">
+				<include name="**"/>
+			</fileset>
+			<fileset dir="${swt.dir}/windows/">
+				<include name="**"/>
+			</fileset>
+		</copy>
+		<delete file="${dist.dir}/${simpleClient.name}/swt.jar"/>
+		
+		<echo>Package Resources</echo>
+		<jar destfile="${dist.dir}/${simpleClient.name}/lib/${simpleClient.name}-images.jar">
+			<fileset dir="${rsrc.dir}/">
+				<include name="images/**/*.gif"/>
+				<include name="images/**/*.jpg"/>
+				<include name="images/**/*.png"/>
+			</fileset>
+		</jar>    	
+
+		<echo>Client für Windows</echo>
+        <jar destfile="${dist.dir}/${simpleClient.name}/${simpleClient.name}-win.jar">
+            <fileset dir="${build-bin.dir}/"/>
+			<manifest>
+				<attribute name="Main-Class" value="org.openfuxml.communication.client.simple.Client"/>
+				<attribute name="Class-Path" value=".. ${jar.lib} ${simpleClient.name}-images.jar swt-${swt-version}-win.jar"/>
+				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="Implementation-Version"  value="${openfuxml-version}"/>
+			</manifest>        	
+        </jar>
+		
+		<echo>Client für OS X</echo>
+        <jar destfile="${dist.dir}/${simpleClient.name}/${simpleClient.name}-osx.jar">
+            <fileset dir="${build-bin.dir}/"/>
+			<manifest>
+				<attribute name="Main-Class" value="org.openfuxml.communication.client.simple.Client"/>
+				<attribute name="Class-Path" value=". ${jar.lib} ${simpleClient.name}-images.jar swt-${swt-version}-osx.jar"/>
+				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="Implementation-Version"  value="${openfuxml-version}"/>
+			</manifest>        	
+        </jar>
+		
+		<echo>Client für Linux</echo>
+        <jar destfile="${dist.dir}/${simpleClient.name}/${simpleClient.name}-linux.jar">
+            <fileset dir="${build-bin.dir}/"/>
+			<manifest>
+				<attribute name="Main-Class" value="org.openfuxml.communication.client.simple.Client"/>
+				<attribute name="Class-Path" value=".. ${jar.lib} ${simpleClient.name}-images.jar swt-${swt-version}-linux.jar"/>
+				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="Implementation-Version"  value="${openfuxml-version}"/>
+			</manifest>        	
+        </jar>
+
+		<!-- erzeugen des Shell-Scripts für Linux -->
+		<copy file="${rsrc.dir}/shell/openFuXML-Client.sh" todir="${dist.dir}/${simpleClient.name}/"/>
+		<replace file="${dist.dir}/${simpleClient.name}/openFuXML-Client.sh" token="@@@ClientJarName@@@" value="${simpleClient.name}-linux"/>
+	</target>
+	
+
+	<target name="05c - simpleReleaseDebPackage" depends="02 - init,04 - gen-structure,05a - SimpleServer,05b - SimpleClient">
+	   		<echo>Simple-Release</echo>
+	   		<property name="startSkript.name" value="openFuXML.sh"/>
+	   		<property name="startSkriptEtc.name" value="openFuXML"/>
+	   		<property name="serverConfig.name" value="openFuXML-config.xml"/>
+	   		
+	   		<copy todir="${pack.dir}/share/client">
+	   			<fileset dir="${dist.dir}/${simpleClient.name}" />
+	   		</copy>
+	   		<copy file="${dist.dir}/${simpleServer.name}" todir="${pack-lib.dir}"/>
+		
+	   		<copy file="${rsrc.dir}/config/log4j.xml" todir="${pack.dir}"/>
+	   		<replace file="${pack.dir}/log4j.xml" token="@@@appender@@@" value="A-Server"/>
+	   		
+	   		<copy file="${rsrc.dir}/config/simpleServer.xml" tofile="${pack.dir}/${serverConfig.name}"/>
+	   		<copy file="${rsrc.dir}/config/openFuXML-1.x.xsd" todir="${pack.dir}"/>
+	   		<copy file="${rsrc.dir}/shell/simpleFuXMLserver.sh" tofile="${pack.dir}/${startSkript.name}"/>
+	   		<replace file="${pack.dir}/${startSkript.name}" token="@@@log4j@@@" value="${log4j.lib}"/>
+	   		<replace file="${pack.dir}/${startSkript.name}" token="@@@ant-version@@@" value="${ant-version}"/>
+	   		<replace file="${pack.dir}/${startSkript.name}" token="@@@saxon@@@" value="${saxon.lib}"/>
+	   		<replace file="${pack.dir}/${startSkript.name}" token="@@@openFuXML.simple@@@" value="${simpleServer.name}"/>
+	   		<copy file="${rsrc.dir}/shell/etc-init-d.sh" tofile="${pack.dir}/${startSkriptEtc.name}"/>
+	   		<replace file="${pack.dir}/${startSkriptEtc.name}" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+	   		<fixcrlf file="${pack.dir}/${startSkriptEtc.name}" eol="lf" eof="remove" />   		
+	   		
+	   		<delete file="${dist.dir}/${simple.release}"/>
+	   		<delete file="${dist.dir}/${simpleServer.name}"/>
+	   		<delete dir="${dist.dir}/${simpleClient.name}"/>
+	   		<delete dir="${pack.dir}/applications/fuxml/formats/validation"/>
+	   		<fixcrlf srcdir="${build-app.dir}" includes="**/*.sh"
+	   		         eol="lf" eof="remove" />   		   		
+	   		<tar destfile="${dist.dir}/${simple.release.system}"  basedir="${build-app.dir}" 
+	   			compression="gzip" longfile="gnu"/>
+	   		
+	    	<mkdir dir="${dist.dir}/deb"/>
+			<mkdir dir="${dist.dir}/deb/control"/>
+			<mkdir dir="${dist.dir}/deb/data"/>
+			<mkdir dir="${dist.dir}/deb/data/root"/>
+		
+	   		<move file="${dist.dir}/${simple.release.system}" todir="${dist.dir}/deb/data/root"/>
+		
+			<copy file="${rsrc.dir}/shell/deb-create.sh" todir="${dist.dir}/deb"/>
+			<copy file="${rsrc.dir}/shell/debian-binary" todir="${dist.dir}/deb"/>
+   			<copy file="${rsrc.dir}/shell/postinst" todir="${dist.dir}/deb/control"/>
+			<copy file="${rsrc.dir}/shell/postrm" todir="${dist.dir}/deb/control"/>
+			<copy file="${rsrc.dir}/shell/control" todir="${dist.dir}/deb/control"/>			
+		
+	   		<replace file="${dist.dir}/deb/control/control" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+	   		<replace file="${dist.dir}/deb/control/postinst" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+   			<replace file="${dist.dir}/deb/control/postinst" token="@@@ant-version@@@" value="${ant-version}"/>
+   			<replace file="${dist.dir}/deb/control/postrm" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+			<replace file="${dist.dir}/deb/deb-create.sh" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
+		
+			<fixcrlf file="${dist.dir}/deb/control/control" eol="lf" eof="remove" />   		
+			<fixcrlf file="${dist.dir}/deb/debian-binary" eol="lf" eof="remove" />   		
+			<fixcrlf file="${dist.dir}/deb/control/postinst" eol="lf" eof="remove" />   		
+			<fixcrlf file="${dist.dir}/deb/control/postrm" eol="lf" eof="remove" />   		
+			<fixcrlf file="${dist.dir}/deb/deb-create.sh" eol="lf" eof="remove" />
+			<tar destfile="${dist.dir}/${simple.release}"  basedir="${dist.dir}/deb" 
+			   			compression="gzip" longfile="gnu"/>
+	</target>
+	
+	<target name="06 - enterpriseRelease" depends="02 - init,04 - gen-structure,
+   		06a - Additional Libs,06b - EnterpriseServer,06c - Jboss Components">
+   		<echo>Enterprise-Release</echo>
+   	</target>
+	
+	<target name="06a - Additional Libs">
+		<copy file="${lib.dir}/${jboss-client.dir}/${jboss-client.lib}" todir="${pack-lib.dir}"/>
+		<copy file="${lib.dir}/${ejb3.dir}/${jboss-ejb3.lib}" todir="${pack-lib.dir}"/>
+		<copy file="${lib.dir}/${ejb3.dir}/${jboss-aspect.lib}" todir="${pack-lib.dir}"/>
+		<copy file="${lib.dir}/${ejb3.dir}/${jboss-aop.lib}" todir="${pack-lib.dir}"/>
+		<copy file="${lib.dir}/${ejb3.dir}/${jboss-annotations.lib}" todir="${pack-lib.dir}"/>
+		<copy file="${lib.dir}/${ejb3.dir}/${hibernate-client.lib}" todir="${pack-lib.dir}"/>
+	</target>
+	
+	<target name="06b - EnterpriseServer" depends="03 - compile">
+		<echo>Package SimpleServer ${enterpriseServer.name}</echo>
+        <jar destfile="${dist.dir}/${enterpriseServer.name}">
+            <fileset dir="${build-bin.dir}/"/>
+			<manifest>
+				<attribute name="Main-Class" value="org.openfuxml.server.cluster.EnterpriseServer"/>
+				<attribute name="Class-Path" value=".. ${jar.lib}"/>
+				<attribute name="Built-By" value="${user.name}"/>
+			</manifest>        	
+        </jar>
+	</target>
+	
+	<target name="06c - Jboss Components" depends="03 - compile">
+		<!-- oepnFuXML EJB -->
+    	<copy file="${rsrc.dir}/db/persistence.xml" todir="${build-bin.dir}/META-INF"/> 
+    	<jar destfile="${dist.dir}/xx-openFuXML-EJB.jar" basedir="${build-bin.dir}">
+    		<include name="org/openfuxml/communication/cluster/ejb/*.class"/>
+    		<include name="org/openfuxml/producer/ejb/*.class"/>
+    		<include name="META-INF/*.xml"/>
+    	</jar>	
+    	<delete dir="${build-bin.dir}/META-INF"/>
+    	
+    	<!-- oepnFuXML Facade -->
+    	<jar destfile="${dist.dir}/xz-openFuXML-Facade.jar" basedir="${build-bin.dir}">
+			<include name="org/openfuxml/communication/cluster/facade/*.class"/>
+    		<include name="org/openfuxml/producer/handler/Producer.class"/>
+    		<include name="org/openfuxml/producer/handler/ProductionHandlerException.class"/>
+    		<!-- DEPRECATED -->
+    		<include name="org/openfuxml/producer/ProductionRequest.class"/>
+    		<include name="org/openfuxml/producer/SSIMessage.class"/>
+    		<include name="org/openfuxml/producer/ProductionResult.class"/>
+    		<include name="org/openfuxml/producer/ProductionSystemException.class"/>
+		</jar>	
+	</target>
+		
+   	<target name="07 - deployremote" >
+   		<echo>06 - deployremote</echo>
+   		<classpath path="${classpath}"/>
+   		<sshexec host="${fuxml-host}" username="${fuxml-user}" password="${fuxml-password}"
+   			command="rm ${simple.release}" />
+   	</target>  
+
+	
+</project>
