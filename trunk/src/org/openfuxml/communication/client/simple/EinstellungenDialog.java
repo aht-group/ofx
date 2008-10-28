@@ -1,0 +1,554 @@
+package org.openfuxml.communication.client.simple;
+
+import java.util.Enumeration;
+import java.util.Properties;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Dialog;
+import org.eclipse.swt.widgets.DirectoryDialog;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
+
+/**
+ * In dem Dialog EinstellungenDialog werden die Einstellungen für die
+ * Anwendung gesetzt.
+ * 
+ * @author Andrea Frank
+ */
+public class EinstellungenDialog extends Dialog
+{
+	private Shell shell;
+
+	private TabFolder tfEinstellungen;
+	
+	private TabItem tiServer;
+	private Text textHost;
+	private Text textPort;
+	
+	private TabItem tiVerzeichnisse;
+	private Label labelRepository;
+	private Button buttonRepository;
+	private Label labelOutput;
+	private Button buttonOutput;
+	
+	private TabItem tiAnwendungen;
+	private Table tableAnwendungen;
+	private Button BtnNeu;
+	private Button BtnAendern;
+	private Button BtnLoeschen;
+	
+	private Button BtnOK;
+	private Button BtnCancel;
+	
+	private Properties properties;
+	private RGB rgbBackground;
+
+	/**
+	 * Erzeugt eine Instanz von EinstellungenDialog.
+	 * 
+	 * @param parent
+	 * @param properties
+	 * @param rgb
+	 */
+	public EinstellungenDialog(Shell parent, Properties properties, RGB rgb)
+	{
+		super(parent, 0);
+		this.properties = properties;
+		this.rgbBackground = rgb;
+	}
+
+	/**
+	 * Öffnet den Dialog EinstellungenDialog. Die Eingabefelder werden
+	 * mit den Einstellungen aus den Porperties vorbelegt.
+	 * 
+	 * @return Liefert die neuen Einstellungen als Properties.
+	 */
+	public Properties open(Image[] images)
+	{
+		final Shell parent = this.getParent();
+		
+		shell = new Shell(parent, SWT.RESIZE | SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+		
+		shell.setText("Einstellungen");
+		
+		initGUI();
+
+		shell.pack();
+		
+		shell.setImages(images);
+
+		shell.open();
+		
+		final Display display = parent.getDisplay();
+		
+		while (!shell.isDisposed())
+		{
+			if (!display.readAndDispatch())
+			{
+				display.sleep();
+			}
+		}
+		
+		return properties;
+	}
+
+	/**
+	* Initializes the GUI.
+	*/
+	private void initGUI()
+	{
+		shell.setBackground(new Color (shell.getDisplay(), rgbBackground));
+		
+		{
+			GridLayout layout = new GridLayout();
+			layout.numColumns = 1;
+			layout.marginHeight = 20;
+			layout.marginWidth = 20;
+			layout.horizontalSpacing = 20;
+			layout.verticalSpacing = 20;
+			shell.setLayout(layout);
+		}
+		
+		{
+			tfEinstellungen = new TabFolder(shell, SWT.TOP);
+			tfEinstellungen.setBackground(new Color(shell.getDisplay(), rgbBackground));
+			tfEinstellungen.setSelection(0);
+			{
+				GridData data = new GridData();
+				data.grabExcessHorizontalSpace = true;
+				data.grabExcessVerticalSpace = true;
+				data.horizontalAlignment = GridData.FILL;
+				data.verticalAlignment = GridData.FILL;
+				tfEinstellungen.setLayoutData(data);
+			}
+		}
+		{
+			// TabItems generieren
+			// Die Inhalte der TabItems kommen weiter unten.
+			tiServer = new TabItem(tfEinstellungen, SWT.NONE);
+			tiServer.setText("Server");
+			tiVerzeichnisse = new TabItem(tfEinstellungen, SWT.NONE);
+			tiVerzeichnisse.setText("Verzeichnisse");
+			tiAnwendungen = new TabItem(tfEinstellungen, SWT.NONE);
+			tiAnwendungen.setText("Anwendungen");
+		}
+		
+		{
+			// Inhalt des TabItem tiServer
+			Composite compositeServer = new Composite(tfEinstellungen, SWT.NONE);
+			tiServer.setControl(compositeServer);
+			{
+		        GridLayout layout = new GridLayout();
+				layout.numColumns = 2;
+				layout.marginHeight = 20;
+				layout.marginWidth = 20;
+				layout.horizontalSpacing = 20;
+				layout.verticalSpacing = 20;
+				compositeServer.setLayout(layout);
+			}
+			{
+				Label label = new Label(compositeServer, SWT.NONE);
+				label.setText("Host:");
+			}
+			{
+				textHost = new Text(compositeServer, SWT.BORDER);
+				textHost.setText(properties.getProperty("Host",""));
+
+				{
+					GridData data = new GridData();
+					data.grabExcessHorizontalSpace = true;
+					data.horizontalAlignment = GridData.FILL;
+					textHost.setLayoutData(data);
+				}
+			}
+			{
+				Label label = new Label(compositeServer, SWT.NONE);
+				label.setText("Port:");
+			}
+			{
+				textPort = new Text(compositeServer, SWT.BORDER);
+				textPort.setText(properties.getProperty("Port",""));
+
+				{
+					GridData data = new GridData();
+					data.grabExcessHorizontalSpace = true;
+					data.horizontalAlignment = GridData.FILL;
+					textPort.setLayoutData(data);
+				}
+			}
+		}
+		{
+			// Inhalt des TabItem tiVerzeichnisse
+			Composite compositeVerzeichnisse = new Composite(tfEinstellungen, SWT.NONE);
+			tiVerzeichnisse.setControl(compositeVerzeichnisse);
+			{
+		        GridLayout layout = new GridLayout();
+				layout.numColumns = 3;
+				layout.marginHeight = 20;
+				layout.marginWidth = 20;
+				layout.horizontalSpacing = 20;
+				layout.verticalSpacing = 20;
+				compositeVerzeichnisse.setLayout(layout);
+			}
+			{
+				Label label = new Label(compositeVerzeichnisse, SWT.NONE);
+				label.setText("Repository:");
+			}
+			{
+				labelRepository = new Label(compositeVerzeichnisse, SWT.NONE);
+				labelRepository.setText(properties.getProperty("Verzeichnis",""));
+	
+				{
+					GridData data = new GridData();
+					data.grabExcessHorizontalSpace = true;
+					data.horizontalAlignment = GridData.FILL;
+					labelRepository.setLayoutData(data);
+				}
+			}
+			{
+				buttonRepository = new Button(compositeVerzeichnisse, SWT.PUSH | SWT.CENTER);
+				buttonRepository.setText("...");
+
+				{
+					GridData data = new GridData();
+					data.horizontalAlignment = GridData.FILL;
+					buttonRepository.setLayoutData(data);
+				}
+
+				buttonRepository.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent evt) {
+						DirectoryDialog dialog = new DirectoryDialog(shell);
+						dialog.setText(Client.Title);
+						dialog.setMessage("Verzeichnisauswahl für die Produktion");
+						dialog.setFilterPath(labelRepository.getText());
+						String dirname = dialog.open();
+						if (dirname!=null)
+						{
+							labelRepository.setText(dirname);
+						}
+					}
+				});
+			}
+			{
+				Label label = new Label(compositeVerzeichnisse, SWT.NONE);
+				label.setText("Output:");
+			}
+			{
+				labelOutput = new Label(compositeVerzeichnisse, SWT.NONE);
+				labelOutput.setText(properties.getProperty("Output",""));
+
+				{
+					GridData data = new GridData();
+					data.grabExcessHorizontalSpace = true;
+					data.horizontalAlignment = GridData.FILL;
+					labelOutput.setLayoutData(data);
+				}
+			}
+			{
+				buttonOutput = new Button(compositeVerzeichnisse, SWT.PUSH | SWT.CENTER);
+				buttonOutput.setText("...");
+				
+				GridData data = new GridData();
+				data.horizontalAlignment = GridData.FILL;
+				buttonOutput.setLayoutData(data);
+
+				buttonOutput.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent evt) {
+						DirectoryDialog dialog = new DirectoryDialog(shell);
+						dialog.setText(Client.Title);
+						dialog.setMessage("Verzeichnisauswahl für OUTPUT");
+						dialog.setFilterPath(labelOutput.getText());
+						String dirname = dialog.open();
+						if (dirname!=null)
+						{
+							labelOutput.setText(dirname);
+						}
+					}
+				});
+			}
+		}		
+		{
+			// Inhalt des TabItem tiAnwendungen
+			Composite compositeAnwendungen = new Composite(tfEinstellungen, SWT.NONE);
+			tiAnwendungen.setControl(compositeAnwendungen);
+			{
+		        GridLayout layout = new GridLayout();
+				layout.numColumns = 2;
+				layout.marginHeight = 20;
+				layout.marginWidth = 20;
+				layout.horizontalSpacing = 20;
+				layout.verticalSpacing = 20;
+				compositeAnwendungen.setLayout(layout);
+			}
+			
+			{
+				tableAnwendungen = new Table(compositeAnwendungen, SWT.FULL_SELECTION | SWT.SINGLE | SWT.BORDER);
+				{
+					GridData data = new GridData();
+					data.grabExcessHorizontalSpace = true;
+					data.grabExcessVerticalSpace = true;
+					data.horizontalAlignment = GridData.FILL;
+					data.verticalAlignment = GridData.FILL;
+					tableAnwendungen.setLayoutData(data);
+				}
+				{
+					TableColumn tableColumn = new TableColumn(tableAnwendungen, SWT.NONE);
+					tableColumn.setText("Dateityp");
+					tableColumn.setWidth(80);
+				}
+				{
+					TableColumn tableColumn = new TableColumn(tableAnwendungen, SWT.NONE);
+					tableColumn.setText("Anwendung");
+					tableColumn.setWidth(250);
+				}
+				tableAnwendungen.setHeaderVisible(true);
+				tableAnwendungen.setLinesVisible(true);
+				
+				tableAnwendungen.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent evt) {
+						BtnAendern.setEnabled(true);
+						BtnLoeschen.setEnabled(true);
+					}
+				});
+				
+				// Füllen der Table tableAnwendungen mit den Einträgen
+				// aus den Properties, die mit einem "." beginnen.
+				for (Enumeration e = properties.propertyNames(); e.hasMoreElements();)
+				{
+					// alle Properties, die mit einem "." beginnen, sind Anwendungen
+					String sProperty = e.nextElement().toString();
+					if (sProperty.charAt(0)=='.')
+					{
+						TableItem newItem = new TableItem(tableAnwendungen, 0);
+						newItem.setText(new String[] {sProperty, properties.getProperty(sProperty)});
+					} // if
+				} // for
+			}
+			{
+				Composite cButtons = new Composite(compositeAnwendungen, SWT.NONE);
+		        GridLayout layout = new GridLayout();
+				layout.verticalSpacing = 20;
+				cButtons.setLayout(layout);
+
+				{
+					GridData data = new GridData();
+					data.horizontalAlignment = GridData.END;
+					data.verticalAlignment = GridData.END;
+					cButtons.setLayoutData(data);
+				}
+				{
+					BtnNeu = new Button(cButtons, SWT.PUSH | SWT.CENTER);
+					BtnNeu.setText("   Neu ...  ");
+					BtnNeu.addSelectionListener(new SelectionAdapter() {
+						public void widgetSelected(SelectionEvent evt) {
+							btnNeu();
+						}
+					});
+	
+					GridData data = new GridData();
+					data.horizontalAlignment = GridData.FILL;
+					BtnNeu.setLayoutData(data);
+				}
+				{
+					BtnAendern = new Button(cButtons, SWT.PUSH | SWT.CENTER);
+					BtnAendern.setText("   Ändern ...  ");
+					BtnAendern.setEnabled(false);
+					BtnAendern.addSelectionListener(new SelectionAdapter() {
+						public void widgetSelected(SelectionEvent evt) {
+							btnAendern();
+						}
+					});
+	
+					GridData data = new GridData();
+					data.horizontalAlignment = GridData.FILL;
+					BtnAendern.setLayoutData(data);
+				}
+				{
+					BtnLoeschen = new Button(cButtons, SWT.PUSH | SWT.CENTER);
+					BtnLoeschen.setText("   Löschen   ");
+					BtnLoeschen.setEnabled(false);
+					BtnLoeschen.addSelectionListener(new SelectionAdapter() {
+						public void widgetSelected(SelectionEvent evt) {
+							btnLoeschen();
+						}
+					});
+	
+					GridData data = new GridData();
+					data.horizontalAlignment = GridData.FILL;
+					BtnLoeschen.setLayoutData(data);
+				}
+			}
+		}
+		{
+			Composite cButtons = new Composite(shell, SWT.NONE);
+			cButtons.setBackground(new Color(shell.getDisplay(), rgbBackground));
+			{
+		        GridLayout layout = new GridLayout();
+				layout.numColumns = 2;
+				layout.horizontalSpacing = 20;
+				layout.makeColumnsEqualWidth = true;
+				cButtons.setLayout(layout);
+			}
+
+			{
+				GridData data = new GridData();
+				data.horizontalAlignment = GridData.CENTER;
+				cButtons.setLayoutData(data);
+			}
+
+			{
+				BtnOK = new Button(cButtons, SWT.PUSH | SWT.CENTER);
+				BtnOK.setText("   OK   ");
+				BtnOK.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent evt) {
+						btnOK();
+					}
+				});
+
+				GridData data = new GridData();
+				data.horizontalAlignment = GridData.FILL;
+				BtnOK.setLayoutData(data);
+				
+				BtnOK.setFocus();
+			}
+			{
+				BtnCancel = new Button(cButtons, SWT.PUSH | SWT.CENTER);
+				BtnCancel.setText("   Abbrechen   ");
+				BtnCancel.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent evt) {
+						btnCancel();
+					}
+				});
+
+				GridData data = new GridData();
+				data.horizontalAlignment = GridData.FILL;
+				BtnCancel.setLayoutData(data);
+			}
+		}
+	}
+	
+	/**
+	 * btnNeu startet den Dialog AnwendungenDialog, mit dem neue 
+	 * Anwendungen für Dateierweiterungen eingerichtet werden können.
+	 */
+	public void btnNeu()
+	{
+		AnwendungenDialog dialog = new AnwendungenDialog(shell);
+		String sErg[] = dialog.open();
+		
+		// TODO @Andy Plausi, damit Einträge nicht doppelt vorkommen
+
+		// Falls "Abbrechen" gedrückt wurde, ist sErg == null.
+		if ( sErg != null )
+		{
+			TableItem newItem = new TableItem(tableAnwendungen, 0);
+			newItem.setText(new String[] {sErg[0], sErg[1]});
+		}
+	}
+	
+	/**
+	 * btnAendern startet den Dialog AnwendungenDialog, mit dem die 
+	 * aktuell ausgewählte Zeile der Table tableAnwendungen 
+	 * bearbeitet werden kann.
+	 */
+	public void btnAendern()
+	{
+		// Die in der ausgewählten Zeile angezeigte Einstellung
+		// wird geändert.
+		int index = tableAnwendungen.getSelectionIndex();
+		
+		if (index >= 0)
+		{
+			TableItem ti = tableAnwendungen.getItem(index);
+
+			AnwendungenDialog dialog = new AnwendungenDialog(shell, ti.getText(0), ti.getText(1));
+			String sErg[] = dialog.open();
+	
+			// TODO @Andy Plausi, damit Einträge nicht doppelt vorkommen
+			
+			// Falls "Abbrechen" gedrückt wurde, ist sErg == null.
+			if ( sErg != null )
+			{
+				ti.setText(new String[] {sErg[0], sErg[1]});
+			}
+		}
+	}
+	
+	/**
+	 * btnLoeschen löscht die aktuell ausgewählte Zeile der Table 
+	 * tableAnwendungen. 
+	 */
+	public void btnLoeschen()
+	{
+		// Die ausgewählte Zeile wird gelöscht.
+		int index = tableAnwendungen.getSelectionIndex();
+		if (index >= 0)
+		{
+			tableAnwendungen.remove(tableAnwendungen.getSelectionIndex());
+		}
+		
+		BtnAendern.setEnabled(false);
+		BtnLoeschen.setEnabled(false);
+	}
+
+	/**
+	 * Beim Betätigen des Buttons btnOK werden die neuen Einträge 
+	 * als Properties gesetzt und der Dialog geschlossen.
+	 */
+	public void btnOK()
+	{
+		// TODO @Andy Plausis fehlen noch
+		properties.setProperty("Host", textHost.getText());
+		properties.setProperty("Port", textPort.getText());
+		properties.setProperty("Verzeichnis", labelRepository.getText());
+		properties.setProperty("Output", labelOutput.getText());
+		
+		// Erst werden alle Properties, die mit einem "." beginnen gelöscht,
+		// dann werden die Properties, die in der Table tableAnwendungen
+		// eingetragen sind, gesetzt. 
+		// Alle Properties löschen, die mit einem "." beginnen.
+		for (Enumeration e = properties.propertyNames(); e.hasMoreElements();)
+		{
+			String sProperty = e.nextElement().toString();
+			if (sProperty.charAt(0)=='.')
+			{
+				properties.remove(sProperty);
+			}
+		}
+		
+		// Alle Einträge von tableAnwendungen als Properties setzen.
+		for (int i=0; i<tableAnwendungen.getItemCount(); i++)
+		{
+			TableItem ti = tableAnwendungen.getItem(i);
+			properties.setProperty(ti.getText(0), ti.getText(1));
+		}
+
+		shell.close();
+	}
+	
+	/**
+	 * btnCancel schließt den Dialog ohne Rückgabe der 
+	 * eingetragenen Werte.
+	 * Die Properties werden nicht neu gesetzt.
+	 */
+	public void btnCancel()
+	{
+		shell.close();
+	}
+}
