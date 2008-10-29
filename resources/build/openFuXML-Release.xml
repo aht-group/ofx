@@ -50,94 +50,92 @@
 	<property name="enterpriseServer.name" value="openFuXML-${openfuxml-version}ee.jar" />
 	<property name="simpleClient.name" value="openFuXML-Client-${openfuxml-version}s" />
 
+	<!-- Library Definitions -->
+	<property name="smack.dir" value="messaging/smack"/><property name="smack.lib" value="smack-${smack-version}.jar" />
+		<property name="smackx.lib" value="smackx-${smack-version}.jar" />
+	<property name="tex4ht.dir" value="tex/tex4ht"/><property name="tex4ht.lib" value="tex4ht-${tex4ht-version}.i586.rpm" />
 	
-	<!-- Lib-Definition -->
+	<!-- Library Definitions: Utils -->
 	<property name="log4j.dir" value="utils/log4j"/>
 		<property name="log4j.lib" value="log4j-${log4j-version}.jar" />
 		<property name="log4j-zeroconf.lib" value="log4j-zeroconf-${log4j-version}.jar" />
-	<property name="jmdns.dir" value="jmdns"/><property name="jmdns.lib" value="jmdns-${jmdns-version}.jar" />
-	<property name="jdom.dir" value="xml/jdom"/><property name="jdom.lib" value="jdom-${jdom-version}.jar" />
-	<property name="jaxen.dir" value="xml/jaxen"/><property name="jaxen.lib" value="jaxen-${jaxen-version}.jar" />
-	<property name="saxon.dir" value="xml/saxon"/><property name="saxon.lib" value="saxon-${saxon-version}.jar" />
-	<property name="xerces.dir" value="xml/xerces"/><property name="xerces.lib" value="xercesImpl-${xerces-version}.jar" />
-	<property name="jsch.dir" value="jsch"/><property name="jsch.lib" value="jsch-${jsch-version}.jar" />
-	<property name="jmsutils.dir" value="utils"/><property name="jmsutils.lib" value="jmsutils-${jmsutils-version}.jar" />
-	<property name="smack.dir" value="messaging/smack"/><property name="smack.lib" value="smack-${smack-version}.jar" />
-		<property name="smackx.lib" value="smackx-${smack-version}.jar" />
-	<property name="mail.dir" value="messaging/mail"/><property name="mail.lib" value="mail-${mail-version}.jar" />
-	<property name="tex4ht.dir" value="tex4ht"/><property name="tex4ht.lib" value="tex4ht-${tex4ht-version}.i586.rpm" />
+	<property name="jmsutils.dir" value="utils/jms"/><property name="jmsutils.lib" value="jmsutils-${jmsutils-version}.jar" />
+	<property name="ant.dir" value="utils/ant"/>
+		<property name="ant.lib" value="ant-${ant-version}.jar" />
+		<property name="ant.bundle" value="apache-ant-${ant-version}-bin.tar.gz" />
+	
+	<!-- Library Definitions: GUI-->
+	<property name="swt.dir" value="gui/swt/${swt-version}"/>
+	
+	<!-- Library Definitions: Messaging-->
+	<property name="mail.dir" value="msg/mail"/><property name="mail.lib" value="mail-${mail-version}.jar" />
+	<property name="jsch.dir" value="msg/jsch"/><property name="jsch.lib" value="jsch-${jsch-version}.jar" />
+	<property name="jmdns.dir" value="msg/jmdns"/><property name="jmdns.lib" value="jmdns-${jmdns-version}.jar" />
 	
 	<!-- Lib-Definition JBoss -->
-	<property name="jboss-system.dir" value="jboss/system"/><property name="jboss-system.lib" value="jboss-system-${jboss-version}.jar" />
-	<property name="jboss-client.dir" value="jboss/client"/><property name="jboss-client.lib" value="jbossall-client-${jboss-version}.jar" />
-		
-	<!-- Lib-Definition EJB3 -->
-	<property name="ejb3.dir" value="jboss/ejb-${jboss-version}"/>
-	<property name="ejb3-persistence.lib" value="ejb3-persistence-${jboss-version}.jar" />
-	<property name="jboss-ejb3.lib" value="jboss-ejb3-${jboss-version}.jar"/>
-	<property name="jboss-ejb3x.lib" value="jboss-ejb3x-${jboss-version}.jar"/>
-	<property name="jboss-aspect.lib" value="jboss-aspect-jdk50-client-${jboss-version}.jar"/>
-	<property name="jboss-aop.lib" value="jboss-aop-jdk50-client-${jboss-version}.jar"/>
-	<property name="jboss-annotations.lib" value="jboss-annotations-ejb3-${jboss-version}.jar" />
-	<property name="hibernate-client.lib" value="hibernate-client-${jboss-version}.jar" />
+	<property name="jboss.dir" value="jboss/${jboss-version}"/>
+		<property name="jboss-client.lib" value="jbossall-client-${jboss-version}.jar"/>
+		<property name="jboss-system-jmx.lib" value="jboss-system-jmx-${jboss-version}.jar"/>
 	
-	<!-- Directories for the Libraries -->
-	<property name="swt.dir" location="${lib.dir}/swt/swt-${swt-version}" />
-	
-	<property name="ant.bundle" value="apache-ant-${ant-version}-bin.tar.gz" />
-	
+	<!-- Library Definitions: XML -->
+		<property name="jdom.dir" value="xml/jdom"/><property name="jdom.lib" value="jdom-${jdom-version}.jar" />
+		<property name="jaxen.dir" value="xml/jaxen"/><property name="jaxen.lib" value="jaxen-${jaxen-version}.jar" />
+		<property name="saxon.dir" value="xml/saxon"/><property name="saxon.lib" value="saxon-${saxon-version}.jar" />
+		<property name="xerces.dir" value="xml/xerces"/><property name="xerces.lib" value="xercesImpl-${xerces-version}.jar" />
 	
 	<!-- Library-Definition für JAR-Files  -->
-	<property name="jar.ejb.1" value="${ejb3-persistence.lib} ${jboss-ejb3.lib} ${jboss-ejb3x.lib} ${jboss-aspect.lib}"/>
-	<property name="jar.ejb.2" value="${jboss-aop.lib} ${jboss-annotations.lib} ${hibernate-client.lib}"/>
-	<property name="jar.jboss" value="${jboss-client.lib} ${jar.ejb.1} ${jar.ejb.2}"/>
+	<property name="jar.jboss5" value="lib/${jboss-client.lib} lib/${jboss-system-jmx.lib}"/>
 	<property name="jar.xml" value="${jdom.lib} ${jaxen.lib} ${xerces.lib}"/>
 	<property name="jar.log" value="${log4j.lib} ${log4j-zeroconf.lib} ${jmdns.lib}"/>
 	<property name="jar.common" value="${jmsutils.lib} ${jsch.lib} ${mail.lib}"/>
-	<property name="jar.lib" value="${jar.log} ${jar.xml} ${jar.common} ${jar.jboss}"/>
-	
+	<property name="jar.msg" value="${mail.lib} ${jsch.lib} ${jmdns.lib}"/>
+	<property name="jar.lib" value="${jar.log} ${jar.xml} ${jar.common} ${jar.jboss5} ${jar.msg}"/>
 	
 	<!-- Classpath wird gesetzt -->	
 	<path id="classpath">
-		<fileset dir="${swt.dir}" includes="*.jar"/>
-		<fileset dir="${swt.dir}/windows" includes="*.jar"/>	            		
-		<!--  <fileset dir="${jboss.dir}" includes="**/*.jar"/>  -->
+		<!-- Utils  -->
+			<pathelement location="${lib.dir}/${log4j.dir}/${log4j.lib}"/>
+			<pathelement location="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}"/>
+		<!-- Msg  -->
+			<pathelement location="${lib.dir}/${mail.dir}/${mail.lib}"/>
+			<pathelement location="${lib.dir}/${jsch.dir}/${jsch.lib}"/>
+			<pathelement location="${lib.dir}/${jmdns.dir}/${jmdns.lib}"/>
+		<!-- GUI  -->
+			<fileset dir="${lib.dir}/${swt.dir}" includes="*.jar"/>          		
+		<!-- JBoss  -->
+			<pathelement location="${lib.dir}/${jboss.dir}/${jboss-client.lib}"/>
+			<pathelement location="${lib.dir}/${jboss.dir}/${jboss-system-jmx.lib}"/>
+		<!-- XML  -->
+			<pathelement location="${lib.dir}/${jdom.dir}/${jdom.lib}"/>
+			<pathelement location="${lib.dir}/${jaxen.dir}/${jaxen.lib}"/>
+			<pathelement location="${lib.dir}/${xerces.dir}/${xerces.lib}"/>  
 		
 		<!-- fileset dir="${servlet.dir}" includes="**/*.jar"/ -->
-		<pathelement location="${lib.dir}/jsch/${jsch.lib}"/>
-		<pathelement location="${lib.dir}/${log4j.dir}/${log4j.lib}"/>
-		<pathelement location="${lib.dir}/${jmdns.dir}/${jmdns.lib}"/>
-		<pathelement location="${lib.dir}/${jdom.dir}/${jdom.lib}"/>
-		<pathelement location="${lib.dir}/${jaxen.dir}/${jaxen.lib}"/>
-		<pathelement location="${lib.dir}/${xerces.dir}/${xerces.lib}"/>
-		<pathelement location="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}"/>
 		<pathelement location="${lib.dir}/${smack.dir}/${smack.lib}"/>
 		<pathelement location="${lib.dir}/${smack.dir}/${smackx.lib}"/>
-		<pathelement location="${lib.dir}/${jsch.dir}/${jsch.lib}"/>
-		<pathelement location="${lib.dir}/${mail.dir}/${mail.lib}"/>
-		<pathelement location="${lib.dir}/${jboss-client.dir}/${jboss-client.lib}"/>
-		<pathelement location="${lib.dir}/${jboss-system.dir}/${jboss-system.lib}"/>
-		<pathelement location="${lib.dir}/${ejb3.dir}/${ejb3-persistence.lib}"/>
-		<pathelement location="${lib.dir}/${ejb3.dir}/${jboss-ejb3x.lib}"/>
+
 	</path>
 		
 	<target name="00 - Classpath" description="Echos Classpath">
-			<echo level="info">Classpath: ${jboss-client.dir}/${jboss-client.lib}</echo>
-			<echo level="info">Classpath: ${jboss-system.dir}/${jboss-system.lib}</echo>
-			<echo level="info">Classpath: ${ejb3.dir}/${ejb3-persistence.lib}</echo>
-			<echo level="info">Classpath: ${ejb3.dir}/${jboss-ejb3x.lib}</echo>
+		<echo level="info">   Msg   : ${mail.dir}/${mail.lib}</echo>
+		<echo level="info">           ${jsch.dir}/${jsch.lib}</echo>
+		<echo level="info">           ${jmdns.dir}/${jmdns.lib}</echo>
+		<echo level="info">   Utils : ${log4j.dir}/${log4j.lib}</echo>
+		<echo level="info">           ${log4j.dir}/${log4j-zeroconf.lib}</echo>
+		<echo level="info">           ${jmsutils.dir}/${jmsutils.lib}</echo>
+		<echo level="info">           ${ant.dir}/${ant.lib}</echo>
+		<echo level="info">   Jboss : ${jboss.dir}/${jboss-client.lib}</echo>
+		<echo level="info">           ${jboss.dir}/${jboss-system-jmx.lib}</echo>
+		<echo level="info">   XML   : ${jdom.dir}/${jdom.lib}</echo>
+		<echo level="info">           ${jaxen.dir}/${jaxen.lib}</echo>
+		<echo level="info">           ${xerces.dir}/${xerces.lib}</echo>
 		
-			<echo level="info">Classpath: ${log4j.dir}/${log4j.lib}</echo>
-			<echo level="info">Classpath: ${log4j.dir}/${log4j-zeroconf.lib}</echo>
 			<echo level="info">Classpath: ${log4j.dir}/${jmdns.lib}</echo>
-			<echo level="info">Classpath: ${jdom.dir}/${jdom.lib}</echo>
-			<echo level="info">Classpath: ${jaxen.dir}/${jaxen.lib}</echo>
-			<echo level="info">Classpath: ${xerces.dir}/${xerces.lib}</echo>
+
 			<echo level="info">Classpath: ${jfreechart.dir}/${jfreechart.lib}</echo>
 			<echo level="info">Classpath: ${jcommon.dir}/${jcommon.lib}</echo>
-			<echo level="info">Classpath: ${jsch.dir}/${jsch.lib}</echo>
 			<echo level="info">Classpath: ${mail.dir}/${mail.lib}</echo>
-			<echo level="info">Classpath: ${jmsutils.dir}/${jmsutils.lib}</echo>
+			
 			<echo level="info">Classpath: ${smack.dir}/${smack.lib}</echo>
 			<echo level="info">Classpath: ${smack.dir}/${smackx.lib}</echo>
 			<echo level="info">Classpath: ${irc.dir}/${irc.lib}</echo>
@@ -176,11 +174,6 @@
 		</javac>
 	</target>
 	
-<!--	<target name="03 - package-elements" depends="02 - init" description="Package Elements">
-		<echo>Simple Client</echo>
-		<ant antfile="resources/build/SimpleClient.xml" target="07 - package-application"/>
-	</target> -->
-	
     <target name="04 - gen-structure">
     	<mkdir dir="${pack.dir}"/>
     	<mkdir dir="${pack.dir}/lib"/>
@@ -193,46 +186,43 @@
     	<mkdir dir="${pack.dir}/share/output/fuxml"/>
     	<mkdir dir="${pack.dir}/share/output/fuxml/sessionpreferences"/>
     	<mkdir dir="${pack.dir}/share/client"/>
-    	<!-- Inhalte Kopieren: applications -->
+    	<echo level="warn">ToDo: Copy applications</echo>
+    	<!-- Inhalte Kopieren: applications 
     	<copy todir="${pack.dir}/applications">
     	    <fileset dir="${app.dir}">
     			<exclude name="**/Cvs/**"/>
     	    </fileset>
-    	</copy>
+    	</copy>-->
     	
-    	<!-- Inhalte Kopieren: dokumentation -->
+    	<echo level="warn">ToDo: Copy documentation</echo>
+    	<!-- Inhalte Kopieren: dokumentation 
     	<copy file="${doku.dir}/pdf/ke1.pdf" tofile="${pack.dir}/doku/Installation-Administration.pdf"/>
     	<copy file="${doku.dir}/pdf/ke2.pdf" tofile="${pack.dir}/doku/Benutzerhandbuch.pdf"/>
     	<copy file="${doku.dir}/pdf/ke3.pdf" tofile="${pack.dir}/doku/Gestaltungsschnittstelle.pdf"/>
     	<unzip src="${doku.dir}/html/Handbuch.zip" dest="${pack.dir}/doku"/>
-    	<move file="${pack.dir}/doku/Handbuch" tofile="${pack.dir}/doku/html"/>
+    	<move file="${pack.dir}/doku/Handbuch" tofile="${pack.dir}/doku/html"/>-->
     	
-    	<!-- Inhalte Kopieren: Handbuch 
-    	<mkdir dir="${pack.dir}/share/repository/fuxml/Handbuch"/>
-    	<copy todir="${pack.dir}/share/repository/fuxml/Handbuch">
-    	    <fileset dir="${doku.dir}/src/Handbuch" />
-    	</copy> -->
-    	
-    	<!-- Inhalte Kopieren: Referenzprojekt -->
+    	<echo level="warn">ToDo: Copy Referenzprojekt</echo>
+    	<!-- Inhalte Kopieren: Referenzprojekt 
     	<mkdir dir="${pack.dir}/share/repository/fuxml/referenzprojekt"/>
     	<copy todir="${pack.dir}/share/repository/fuxml/referenzprojekt">
     	    <fileset dir="${rsrc.dir}/referenzprojekt" />
-    	</copy>
+    	</copy>-->
     	
     	<!-- Inhalte Kopieren: lib -->
-    	<copy file="${lib.dir}/${log4j.dir}/${log4j.lib}" todir="${pack-lib.dir}"/>
-    	<copy file="${lib.dir}/${log4j.dir}/${log4j-zeroconf.lib}" todir="${pack-lib.dir}"/>
-    	<copy file="${lib.dir}/${jmdns.dir}/${jmdns.lib}" todir="${pack-lib.dir}"/>
-    	<copy file="${lib.dir}/${jdom.dir}/${jdom.lib}" todir="${pack-lib.dir}"/>
-    	<copy file="${lib.dir}/${jaxen.dir}/${jaxen.lib}" todir="${pack-lib.dir}"/>
-    	<copy file="${lib.dir}/${xerces.dir}/${xerces.lib}" todir="${pack-lib.dir}"/>
+    	<!-- Utils  -->
+    		<copy file="${lib.dir}/${log4j.dir}/${log4j.lib}" todir="${pack-lib.dir}"/>
+    		<copy file="${lib.dir}/${log4j.dir}/${log4j-zeroconf.lib}" todir="${pack-lib.dir}"/>
+    		<copy file="${lib.dir}/${jmdns.dir}/${jmdns.lib}" todir="${pack-lib.dir}"/>
+    	<!-- XML  -->
+    		<copy file="${lib.dir}/${jdom.dir}/${jdom.lib}" todir="${pack-lib.dir}"/>
+    		<copy file="${lib.dir}/${jaxen.dir}/${jaxen.lib}" todir="${pack-lib.dir}"/>
+    		<copy file="${lib.dir}/${xerces.dir}/${xerces.lib}" todir="${pack-lib.dir}"/>
     	<copy file="${lib.dir}/${saxon.dir}/${saxon.lib}" todir="${pack-lib.dir}"/>
     	<copy file="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}" todir="${pack-lib.dir}"/>
     	<copy file="${lib.dir}/${jsch.dir}/${jsch.lib}" todir="${pack-lib.dir}"/>
     	<copy file="${lib.dir}/${mail.dir}/${mail.lib}" todir="${pack-lib.dir}"/>
-    	<copy file="${lib.dir}/${ejb3.dir}/${ejb3-persistence.lib}" todir="${pack-lib.dir}"/>
-    	<copy file="${lib.dir}/${ejb3.dir}/${jboss-ejb3x.lib}" todir="${pack-lib.dir}"/>
-    	<untar src="${lib.dir}/ant/${ant.bundle}" dest="${pack-lib.dir}" compression="gzip"/>
+    	<untar src="${lib.dir}/${ant.dir}/${ant.bundle}" dest="${pack-lib.dir}" compression="gzip"/>
     		<delete dir="${pack.dir}/lib/apache-ant-${ant-version}/docs"/>
     	<copy file="${lib.dir}/${tex4ht.dir}/${tex4ht.lib}" todir="${pack-lib.dir}"/>
     	
@@ -384,27 +374,16 @@
 		<echo>Package SimpleClient ${simpleClient.name}</echo>
 		
 		<echo>Copy of the libs</echo>
-		<copy file="${lib.dir}/jboss/client/${jboss-client.lib}" todir="${dist.dir}/${simpleClient.name}/lib"/>
-		<copy file="${lib.dir}/${ejb3.dir}/${ejb3-persistence.lib}" todir="${dist.dir}/${simpleClient.name}/lib"/>
-		<copy file="${lib.dir}/log4j/${log4j.lib}" todir="${dist.dir}/${simpleClient.name}/lib"/>
+		<copy file="${lib.dir}/${jboss.dir}/${jboss-client.lib}" todir="${dist.dir}/${simpleClient.name}/lib"/>
+		
+		<copy file="${lib.dir}/${log4j.dir}/${log4j.lib}" todir="${dist.dir}/${simpleClient.name}/lib"/>
     	<copy file="${lib.dir}/${jdom.dir}/${jdom.lib}" todir="${dist.dir}/${simpleClient.name}/lib"/>
 		<copy file="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}" todir="${dist.dir}/${simpleClient.name}/lib"/>
    		<copy file="${rsrc.dir}/config/log4j.xml" todir="${dist.dir}/${simpleClient.name}/lib"/>
    		<replace file="${dist.dir}/${simpleClient.name}/lib/log4j.xml" token="@@@appender@@@" value="Client-RoFiAppender"/>
-		<copy file="${swt.dir}/windows/swt.jar" tofile="${dist.dir}/${simpleClient.name}/lib/swt-${swt-version}-win.jar"/>
-		<copy file="${swt.dir}/linux-gtk/swt.jar" tofile="${dist.dir}/${simpleClient.name}/lib/swt-${swt-version}-linux.jar"/>
-		<copy file="${swt.dir}/macosx/swt.jar" tofile="${dist.dir}/${simpleClient.name}/lib/swt-${swt-version}-osx.jar"/>
-		<copy todir="${dist.dir}/${simpleClient.name}/lib">
-			<fileset dir="${swt.dir}/linux-gtk/">
-				<include name="**"/>
-			</fileset>
-			<fileset dir="${swt.dir}/macosx/">
-				<include name="**"/>
-			</fileset>
-			<fileset dir="${swt.dir}/windows/">
-				<include name="**"/>
-			</fileset>
-		</copy>
+		<copy file="${lib.dir}/${swt.dir}/swt-win32-${swt-version}.jar" todir="${dist.dir}/${simpleClient.name}/lib"/>
+		<copy file="${lib.dir}/${swt.dir}/swt-linux-${swt-version}.jar" todir="${dist.dir}/${simpleClient.name}/lib"/>
+		<copy file="${lib.dir}/${swt.dir}/swt-osx-${swt-version}.jar" todir="${dist.dir}/${simpleClient.name}/lib"/>
 		<delete file="${dist.dir}/${simpleClient.name}/swt.jar"/>
 		
 		<echo>Package Resources</echo>
