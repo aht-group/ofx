@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- xercesOK: http://www.w3.org/2001/XMLSchema -->
+<!-- xmlSpyOK: http://www.w3.org/2000/10/XMLSchema -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="dir">
+		<xs:complexType mixed="true">
+			<xs:attribute name="typ" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dirs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dir" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="file">
+		<xs:complexType mixed="true">
+			<xs:attribute name="typ" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="files">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="file" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="server">
+		<xs:complexType>
+			<xs:attribute name="typ" type="xs:string" use="required"/>
+			<xs:attribute name="host" type="xs:string" use="required"/>
+			<xs:attribute name="port" type="xs:decimal" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="properties">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="net">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="server" maxOccurs="unbounded"/>
+							<xs:element name="report" minOccurs="1" maxOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="server" minOccurs="0" maxOccurs="1"/>
+									</xs:sequence>
+									<xs:attribute name="active" type="xs:boolean" use="required"/>
+									<xs:attribute name="from" type="xs:string" use="required"/>
+									<xs:attribute name="to" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="dirs"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
