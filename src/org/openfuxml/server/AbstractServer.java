@@ -19,12 +19,22 @@ public abstract class AbstractServer
 		
 		logger.debug("baseDir="+baseDir);
 		String pathLog = xCnf.getText("dirs/dir[@typ=\"log\"]");
+		logger.debug("pathLog="+pathLog);
 		String pathRepo=xCnf.getText("dirs/dir[@typ=\"repository\"]");;
+		logger.debug("pathRepo="+pathRepo);
 		if(!pathLog.substring(0,1).equals("/")){pathLog=baseDir+"/"+pathLog;}
 		if(!pathRepo.substring(0,1).equals("/")){pathRepo=baseDir+"/"+pathRepo;}
 		
+		String antHome = sysenv.get("ANT_HOME");
+		if(antHome!=null){sysprops.put("ant.home",sysenv.get("ANT_HOME"));}
+		else
+		{
+			antHome = xCnf.getText("dirs/dir[@typ=\"ant\"]");
+			logger.debug("ANT_HOME not set, using config.xml value");
+		}
+		
 		sysprops.put("ilona.home",baseDir);
-		sysprops.put("ant.home",sysenv.get("ANT_HOME"));
+		sysprops.put("ant.home",antHome);
 		sysprops.put("logger.path",pathLog);
 		sysprops.put("ilona.contentstore",pathRepo);
 		System.setProperties(sysprops);
