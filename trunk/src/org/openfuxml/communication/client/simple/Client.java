@@ -164,7 +164,7 @@ public class Client extends Composite
 		}
 		else
 		{
-			logger.info("Setze Default-Properties");
+			logger.info("Setting default properties. "+propFile.getAbsolutePath()+" does not exist.");
 			myProperties.setProperty("Verzeichnis", System.getProperty("user.home"));
 			myProperties.setProperty("Host","localhost");
 			myProperties.setProperty("Port","4455");
@@ -172,19 +172,15 @@ public class Client extends Composite
 		
 		htProducableEntities = new Hashtable<String, ProducedEntities>();
 		alProducedEntities = new ArrayList<String[]>();
-		
+
+		logger.info("initNet");
 		initNet();
+		logger.info("initGUI");
 		initGUI();
 
 		// Pause für den Splashscreen einfügen
-		try
-		{
-			Thread.sleep(3000);
-		}
-		catch (InterruptedException e)
-		{
-			logger.error("InterruptedException", e);
-		}
+		try{Thread.sleep(3000);}
+		catch (InterruptedException e){logger.error("InterruptedException", e);}
 		
 		splashscreen.close();
 		splashscreen = null;
@@ -206,6 +202,7 @@ public class Client extends Composite
 			host.setRecord(new Date());
 			
 			producer = new DirectProducer(xCnf,host);
+			
 		}
 		else
 		{
