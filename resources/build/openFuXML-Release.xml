@@ -43,6 +43,7 @@
 	
 	<property name="simpleServer.name" value="openFuXML-ss-${openfuxml-version}" />
 	<property name="simpleClient.name" value="openFuXML-cl-${openfuxml-version}" />
+	<property name="simpleRelease.name" value="openFuXML-${openfuxml-version}.tgz" />
 	
 	
 	<!-- Library Definitions -->
@@ -57,7 +58,9 @@
 	<property name="jmsutils.dir" value="utils/jms"/><property name="jmsutils.lib" value="jmsutils-${jmsutils-version}.jar" />
 	<property name="ant.dir" value="utils/ant"/>
 		<property name="ant.lib" value="ant-${ant-version}.jar" />
+		<property name="antlauncher.lib" value="ant-launcher-${ant-version}.jar" />
 		<property name="ant.bundle" value="apache-ant-${ant-version}-bin.tar.gz" />
+	<property name="commonslang.dir" value="utils/lang"/><property name="commonslang.lib" value="commons-lang-${commonslang-version}.jar" />
 	<property name="wix.dir" value="utils/wix"/><property name="wix.zip" value="wix-${wix-version}-binaries.zip" />
 		
 	<!-- Library Definitions: GUI-->
@@ -83,15 +86,18 @@
 	<property name="jar.jboss5" value="${jboss-client.lib} ${jboss-system-jmx.lib}"/>
 	<property name="jar.xml" value="${jdom.lib} ${jaxen.lib} ${xerces.lib}"/>
 	<property name="jar.log" value="${log4j.lib} ${log4j-zeroconf.lib} ${jmdns.lib}"/>
-	<property name="jar.common" value="${jmsutils.lib} ${jsch.lib} ${mail.lib}"/>
+	<property name="jar.common" value="${jsch.lib} ${mail.lib}"/>
 	<property name="jar.msg" value="${mail.lib} ${jsch.lib} ${jmdns.lib}"/>
-	<property name="jar.lib" value="${jar.log} ${jar.xml} ${jar.common} ${jar.jboss5} ${jar.msg}"/>
+	<property name="jar.ant" value="${ant.lib} ${antlauncher.lib}"/>
+	<property name="jar.util" value="${jar.ant} ${commonslang.lib} ${jmsutils.lib}"/>
+	<property name="jar.lib" value="${jar.log} ${jar.xml} ${jar.common} ${jar.jboss5} ${jar.msg} ${jar.util}"/>
 	
 	<!-- Classpath wird gesetzt -->	
 	<path id="classpath">
 	<!-- Utils  -->
 		<pathelement location="${lib.dir}/${log4j.dir}/${log4j.lib}"/>
 		<pathelement location="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}"/>
+		<pathelement location="${lib.dir}/${commonslang.dir}/${commonslang.lib}"/>
 	<!-- Msg  -->
 		<pathelement location="${lib.dir}/${mail.dir}/${mail.lib}"/>
 		<pathelement location="${lib.dir}/${jsch.dir}/${jsch.lib}"/>
@@ -117,11 +123,13 @@
 		<echo level="info">           ${log4j.dir}/${log4j-zeroconf.lib}</echo>
 		<echo level="info">           ${jmsutils.dir}/${jmsutils.lib}</echo>
 		<echo level="info">           ${ant.dir}/${ant.lib}</echo>
+		<echo level="info">           ${commonslang.dir}/${commonslang.lib}</echo>
 		<echo level="info">   Jboss : ${jboss.dir}/${jboss-client.lib}</echo>
 		<echo level="info">           ${jboss.dir}/${jboss-system-jmx.lib}</echo>
 		<echo level="info">   XML   : ${jdom.dir}/${jdom.lib}</echo>
 		<echo level="info">           ${jaxen.dir}/${jaxen.lib}</echo>
 		<echo level="info">           ${xerces.dir}/${xerces.lib}</echo>
+		<echo level="info">           ${saxon.dir}/${saxon.lib}</echo>
 		
 			<echo level="info">Classpath: ${log4j.dir}/${jmdns.lib}</echo>
 
@@ -213,14 +221,18 @@
     		<copy file="${lib.dir}/${log4j.dir}/${log4j.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${log4j.dir}/${log4j-zeroconf.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${jmdns.dir}/${jmdns.lib}" todir="${pack-lib.dir}"/>
+    		<copy file="${lib.dir}/${commonslang.dir}/${commonslang.lib}" todir="${pack-lib.dir}"/>
+    		<copy file="${lib.dir}/${ant.dir}/${ant.lib}" todir="${pack-lib.dir}"/>
+    		<copy file="${lib.dir}/${ant.dir}/${antlauncher.lib}" todir="${pack-lib.dir}"/>
     	<!-- XML  -->
     		<copy file="${lib.dir}/${jdom.dir}/${jdom.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${jaxen.dir}/${jaxen.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${xerces.dir}/${xerces.lib}" todir="${pack-lib.dir}"/>
-    	<copy file="${lib.dir}/${saxon.dir}/${saxon.lib}" todir="${pack-lib.dir}"/>
+    		<copy file="${lib.dir}/${saxon.dir}/${saxon.lib}" todir="${pack-lib.dir}"/>
     	<copy file="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}" todir="${pack-lib.dir}"/>
     	<copy file="${lib.dir}/${jsch.dir}/${jsch.lib}" todir="${pack-lib.dir}"/>
     	<copy file="${lib.dir}/${mail.dir}/${mail.lib}" todir="${pack-lib.dir}"/>
+    	<echo level="warn">ant-bundle Required anymore??</echo>
     	<untar src="${lib.dir}/${ant.dir}/${ant.bundle}" dest="${pack-lib.dir}" compression="gzip"/>
     		<delete dir="${pack.dir}/lib/apache-ant-${ant-version}/docs"/>
     	<copy file="${lib.dir}/${tex4ht.dir}/${tex4ht.lib}" todir="${pack-lib.dir}"/>
@@ -241,6 +253,7 @@
    		<copy todir="${pack.dir}/share/client">
    			<fileset dir="${dist.dir}/${simpleClient.name}" />
    		</copy>
+  
    		<copy file="${dist.dir}/${simpleServer.name}.jar" todir="${pack-lib.dir}"/>
 	
    		<copy file="${rsrc.dir}/config/log4j.xml" todir="${pack.dir}"/>
@@ -268,8 +281,13 @@
    		<replace file="${pack.dir}/produce.sh" token="@@@saxon@@@" value="${saxon.lib}"/>
    		<replace file="${pack.dir}/produce.sh" token="@@@openFuXML.simple@@@" value="${simpleServer.name}"/>
 
+   		<echo level="debug">Generating ${serverConfig.name}</echo>
    		<copy file="${rsrc.dir}/config/simpleServer.xml" tofile="${pack.dir}/${serverConfig.name}"/>
    		<copy file="${rsrc.dir}/config/openFuXML-1.x.xsd" todir="${pack.dir}"/>
+   		<replace file="${pack.dir}/${serverConfig.name}" token="@@@ant@@@" value="${ant.lib}"/>
+   		<replace file="${pack.dir}/${serverConfig.name}" token="@@@antlauncher@@@" value="${antlauncher.lib}"/>
+   		<replace file="${pack.dir}/${serverConfig.name}" token="@@@saxon@@@" value="${saxon.lib}"/>
+   		<replace file="${pack.dir}/${serverConfig.name}" token="@@@openfuxml@@@" value="${simpleServer.name}.jar"/>
    		
    		<copy file="${rsrc.dir}/shell/windows/init.htm" todir="${pack.dir}"/>
    		<copy file="${rsrc.dir}/shell/windows/init.cmd" todir="${pack.dir}"/>
@@ -286,7 +304,7 @@
    		<replace file="${pack.dir}/${startSkriptEtc.name}" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
    		<fixcrlf file="${pack.dir}/${startSkriptEtc.name}" eol="lf" eof="remove" />   		
    		
-   		<delete file="${dist.dir}/${simple.release}"/>
+   		<!-- <delete file="${dist.dir}/${simple.release}"/> -->
    		<delete file="${dist.dir}/${simpleServer.name}.jar"/>
    		<delete dir="${dist.dir}/${simpleClient.name}"/>
    		<delete dir="${pack.dir}/applications/fuxml/formats/validation"/>
@@ -296,6 +314,14 @@
    		<fixcrlf srcdir="${pack.dir}/applications/fuxml/formats/math/ht4t_files" includes="htlatex" eol="lf" eof="remove" />  
    		
    		<echo level="warn">ToDo hh: Wix removed from here to 05d. Please check and remove this</echo>
+   		
+   		<echo level="info">Packaging Release </echo>
+   		<tar destfile="${dist.dir}/${simpleRelease.name}" compression="gzip">
+   			<tarfileset dir="${pack.dir}"
+				prefix="openFuXML-${openfuxml-version}"
+				preserveLeadingSlashes="true">
+			</tarfileset>
+   		</tar>
    	</target>
 	
 	<target name="05a - SimpleServer" depends="03 - compile">
@@ -351,7 +377,7 @@
 			</manifest>        	
         </jar>
 		
-		<echo>Client für Linux</echo>
+		<echo level="info">Client für Linux</echo>
         <jar destfile="${dist.dir}/${simpleClient.name}/${simpleClient.name}-linux.jar">
             <fileset dir="${build-bin.dir}/"/>
 			<manifest>
@@ -446,6 +472,8 @@
 	   		<replace file="${pack.dir}/log4j.xml" token="@@@appender@@@" value="A-Server"/>
 	   		
 	   		<copy file="${rsrc.dir}/config/simpleServer.xml" tofile="${pack.dir}/${serverConfig.name}"/>
+		
+		
 	   		<copy file="${rsrc.dir}/config/openFuXML-1.x.xsd" todir="${pack.dir}"/>
 	   		<copy file="${rsrc.dir}/shell/simpleFuXMLserver.sh" tofile="${pack.dir}/${startSkript.name}"/>
 	   		<replace file="${pack.dir}/${startSkript.name}" token="@@@log4j@@@" value="${log4j.lib}"/>

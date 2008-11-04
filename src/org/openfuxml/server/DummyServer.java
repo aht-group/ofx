@@ -10,9 +10,7 @@ public class DummyServer extends AbstractServer
 	
 	public DummyServer(XmlConfig xCnf)
 	{
-		logger.debug("vor set");
 		setSystemProperties(xCnf);
-		logger.debug("nach set");
 		checkSystemProperties();
 	}
 }

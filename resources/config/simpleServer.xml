@@ -13,5 +13,11 @@
 		<dir typ="output">share/output</dir>
 		<dir typ="repository">share/repository</dir>
 	</dirs>
+	<files>
+		<file typ="lib">@@@ant@@@</file>
+		<file typ="lib">@@@antlauncher@@@</file>
+		<file typ="lib">@@@saxon@@@</file>
+		<file typ="lib">@@@openfuxml@@@</file>
+	</files>
 </properties>
 
