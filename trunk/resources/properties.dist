@@ -1,4 +1,4 @@
-openfuxml-version = 1.2
+openfuxml-version = 1.2.1
 
 #GUI
 swt-version = 3.4M2
@@ -10,13 +10,14 @@ saxon-version = 8.1.1
 jdom-version = 1.1
 jboss-version = 5.0.0.b4
 jsch-version = 0.1.29
-jmsutils-version = 0.3.4
+jmsutils-version = 0.3.5
 jaxen-version = 1.1.1
 xerces-version = 2.9.0
 mail-version = 1.4
 jmdns-version = 1.0
 tex4ht-version = 20020613-424.1
 wix-version = 2.0.5325.0
+commonslang-version = 2.4
 
 fuxml-host = <ip>
 fuxml-user = <ssh-user>

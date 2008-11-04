@@ -16,6 +16,7 @@ import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.Format;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.exception.ProductionSystemException;
+import org.openfuxml.server.AbstractServer;
 import org.openfuxml.util.FuXmlLogger;
 
 import de.kisner.util.xml.XmlConfig;
@@ -175,8 +176,8 @@ public class DirectProducer extends AbstractProducer implements Producer
 		logger.debug("Ant Home:" + sysprops.getProperty("ant.home"));
 		
 		StringBuffer sbCmd = new StringBuffer(); 
-		sbCmd.append("java  -Dant.home=");
-		sbCmd.append(sysprops.getProperty("ant.home"));
+		sbCmd.append("java ");
+		sbCmd.append(" -Dant.home="+sysprops.getProperty("ant.home"));
 		sbCmd.append(" org.apache.tools.ant.Main ");
 		sbCmd.append("-buildfile "	+ buildfile);
 		sbCmd.append(" "+ sbParameters.toString()+ " ");
@@ -222,6 +223,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 	
 	private ProductionCode spawn(String cmd) throws ProductionSystemException
 	{
+		
 		ProductionCode pc = ProductionCode.Ok;
 		String s;
 		String stdlog = "";
@@ -229,7 +231,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 		try
 		{
 			logger.debug("Ant Call:" + cmd);
-			Process p = Runtime.getRuntime().exec(cmd);
+			Process p = Runtime.getRuntime().exec(cmd,AbstractServer.environmentParameters);
 			
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));

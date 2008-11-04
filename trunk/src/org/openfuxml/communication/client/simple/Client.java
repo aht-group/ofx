@@ -177,7 +177,8 @@ public class Client extends Composite
 		initNet();
 		logger.info("initGUI");
 		initGUI();
-
+		
+		logger.info("pause");
 		// Pause für den Splashscreen einfügen
 		try{Thread.sleep(3000);}
 		catch (InterruptedException e){logger.error("InterruptedException", e);}
@@ -277,9 +278,10 @@ public class Client extends Composite
 				data.grabExcessHorizontalSpace = true;
 				labelVerzeichnis.setLayoutData(data);
 			}
-
+			
 			// existiert das in Properties eingestellte Verzeichnis?
 			String sVerzeichnis = myProperties.getProperty("Verzeichnis");
+			logger.debug("Verzeichnis: "+sVerzeichnis);
 			File dir = new File(sVerzeichnis);
 			if (!dir.exists())
 			{
@@ -287,6 +289,7 @@ public class Client extends Composite
 			}
 			labelVerzeichnis.setText(myProperties.getProperty("Verzeichnis"));
 		}
+		logger.debug("we");
 		{
 			buttonWechseln = new Button(this, SWT.PUSH | SWT.CENTER);
 			buttonWechseln.setText("   wechseln ...   ");

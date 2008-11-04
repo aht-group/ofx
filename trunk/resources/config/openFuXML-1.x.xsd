@@ -54,6 +54,7 @@
 					</xs:complexType>
 				</xs:element>
 				<xs:element ref="dirs"/>
+				<xs:element ref="files"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
