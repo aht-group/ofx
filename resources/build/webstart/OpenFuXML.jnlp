@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" codebase="http://@@@webstart.url@@@:8080/OpenFuXML" href="OpenFuXML.jnlp">
+	<information>
+		<title>OpenFuXML</title>
+		<vendor>@@@vendor@@@</vendor>
+		<homepage href="index.html"/>
+		<icon href="images/icon.gif"/>
+		<icon href="images/splash.gif" kind="splash"/>
+		<description>OpenFuXML description</description>
+		<description kind="short">OpenFuXML description short</description>
+	</information>
+	<security>
+		<all-permissions/>
+	</security>
+	<resources>
+		<jar href="/OpenFuXML/openFuXML-@@@openfuxml@@@.jar"/>
+		<jar href="/OpenFuXML/lib/jbossall-client-@@@jboss@@@.jar"/>
+		<jar href="/OpenFuXML/lib/@@@log4j@@@"/>
+		<jar href="/OpenFuXML/lib/@@@commonslang@@@"/>
+		<jar href="/OpenFuXML/lib/@@@jdom@@@"/>
+		<jar href="/OpenFuXML/lib/@@@jmsutils@@@"/>
+		<jar href="/OpenFuXML/lib/@@@jaxen@@@"/>
+		<jar href="/OpenFuXML/lib/@@@xerces@@@"/>
+		<jar href="/OpenFuXML/lib/ant-@@@ant@@@.jar"/>
+		<jar href="/OpenFuXML/lib/ant-launcher-@@@ant@@@.jar"/>
+	</resources>
+	<resources os="Windows"> 
+		<j2se version="1.5"/>
+ 		<jar href="/OpenFuXML/lib/@@@swt-win@@@"/>
+ 	</resources>
+	<resources os="Linux"> 
+ 		<jar href="/OpenFuXML/lib/@@@swt-linux@@@"/>
+ 	</resources>
+	<resources os="Mac OS X">
+	 	<j2se version="1.5" java-vm-args="-XstartOnFirstThread"/>
+ 		<jar href="/OpenFuXML/lib/@@@swt-osx@@@"/>
+ 	</resources>
+	<application-desc main-class="org.openfuxml.communication.client.simple.WsOpenFuXML"/>
+</jnlp>

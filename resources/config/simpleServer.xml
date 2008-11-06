@@ -9,6 +9,7 @@
 		</report>
 	</net>
 	<dirs>
+		<dir typ="basedir">whatever</dir>
 		<dir typ="log">logs</dir>
 		<dir typ="output">share/output</dir>
 		<dir typ="repository">share/repository</dir>

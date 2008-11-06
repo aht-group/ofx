@@ -19,7 +19,4 @@ tex4ht-version = 20020613-424.1
 wix-version = 2.0.5325.0
 commonslang-version = 2.4
 
-fuxml-host = <ip>
-fuxml-user = <ssh-user>
-fuxml-password = <ssh-passwd>
 
