@@ -94,7 +94,19 @@ public abstract class AbstractServer
 						{
 							logger.warn("No PATH defined in xmlConfig. Using System PATH "+htEnv.get("PATH"));
 							logger.warn("   Errors are possible for "+SystemUtils.OS_NAME);
-							logger.warn("   Please insert your $PATH <dirs><dir typ=\"log\">HERE</dir></dirs>");
+							logger.warn("   Please insert your $PATH <dirs><dir typ=\"path\">HERE</dir></dirs>");
+						}
+						break;
+			case Win32:	try
+						{
+							String systemPath = xCnf.getTextException("dirs/dir[@typ=\"path\"]");
+							htEnv.put("PATH", systemPath);
+						}
+						catch (XmlElementNotFoundException e)
+						{
+							logger.warn("No PATH defined in xmlConfig. Using System PATH "+htEnv.get("PATH"));
+							logger.warn("   Errors are possible for "+SystemUtils.OS_NAME);
+							logger.warn("   Please insert your $PATH <dirs><dir typ=\"path\">HERE</dir></dirs>");
 						}
 						break;
 			default:	logger.fatal("Environment for "+ArchUtil.arch+" must be implemented!");break;

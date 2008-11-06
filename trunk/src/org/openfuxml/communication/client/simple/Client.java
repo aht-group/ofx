@@ -58,6 +58,7 @@ import org.openfuxml.producer.handler.SocketProducer;
 import org.openfuxml.server.DummyServer;
 import org.openfuxml.util.FuXmlLogger;
 
+import de.kisner.util.architecture.ArchUtil;
 import de.kisner.util.xml.XmlConfig;
 
 /**
@@ -119,7 +120,7 @@ public class Client extends Composite
 	private ArrayList<String[]> alProducedEntities;
 	
 	Properties myProperties;
-
+	XmlConfig xCnf;
 	File propFile;
 	
 	private Cursor cursor;
@@ -131,10 +132,10 @@ public class Client extends Composite
 	 * @param parent
 	 * @param disp
 	 */
-	public Client (Composite parent, Display disp)
+	public Client (Composite parent, Display disp, XmlConfig xCnf)
 	{
 	    super(parent, SWT.NULL);
-
+	    this.xCnf=xCnf;
 		toplevelShell = (Shell)parent;
 		
 		this.display = disp;
@@ -195,7 +196,6 @@ public class Client extends Composite
 		
 		if(sHost.equals("direct-producer"))
 		{
-			XmlConfig xCnf = new XmlConfig("openFuXML-config.xml", "openFuXML-1.x.xsd");
 			new DummyServer(xCnf);
 			Host host = new Host();
 			host.setHostName(xCnf.getHostName());
@@ -1335,10 +1335,20 @@ public class Client extends Composite
 	public static void main(String[] args)
 	{
 		FuXmlLogger.init();
-
+		String appDirName = ArchUtil.getAppSettingsDir("openFuXML");
+		File appDir = new File(appDirName);
+		if(!appDir.exists())
+		{
+			logger.fatal("Application directory does not exit: "+appDir.getAbsolutePath());
+			logger.fatal("Application will be shut down!");
+	//		System.exit(-1);
+		}
+		
+		XmlConfig xCnf = new XmlConfig("openFuXML-config.xml", "openFuXML-1.x.xsd");
+		
 		Display disp = Display.getDefault();
 		Shell sh = new Shell(disp);
-		Client client = new Client(sh, disp);
+		Client client = new Client(sh, disp, xCnf);
 		
 		Point size = client.getSize();
 		sh.setLayout(new FillLayout());
