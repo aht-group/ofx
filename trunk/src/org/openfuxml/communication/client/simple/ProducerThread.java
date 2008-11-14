@@ -61,7 +61,7 @@ public class ProducerThread extends Thread
     			try
     			{
     				pe = producer.invoke(pReq);
-//    				logger.info("Producable Entities:\n" + producableEntities.getMessageString());
+//   				logger.info("Producable Entities:\n" + pReq);
 
     				switch(pe.getTyp())
     				{
@@ -93,7 +93,7 @@ public class ProducerThread extends Thread
     public void startInvoke(ProductionRequest pReq)
     {
     	this.pReq=pReq;
-	productionType = ProductionType.INVOKE;
- 	this.start();
+    	productionType = ProductionType.INVOKE;
+    	this.start();
     }
 }

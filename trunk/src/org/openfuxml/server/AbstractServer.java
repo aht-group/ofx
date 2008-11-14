@@ -81,16 +81,9 @@ public abstract class AbstractServer
 		Hashtable<String,String> htEnv = new Hashtable<String,String>();
 		htEnv.putAll(System.getenv());
 		
-		StringBuffer sb = new StringBuffer();
-		boolean nextLib = false;
-		for(String lib : xCnf.getTexts("files/file[@typ=\"lib\"]"))
-		{
-			if(nextLib){sb.append(":");}
-			sb.append(baseDir+SystemUtils.FILE_SEPARATOR+"lib"+SystemUtils.FILE_SEPARATOR+lib);
-			nextLib=true;
-		}
-		htEnv.put("CLASSPATH",sb.toString());
-		logger.debug("Setting CLASSPATH for openFuXML Applications: "+sb.toString());
+		String cp = ArchUtil.getClassPath(xCnf.getTexts("files/file[@typ=\"lib\"]"),baseDir+SystemUtils.FILE_SEPARATOR+"lib"+SystemUtils.FILE_SEPARATOR);
+		htEnv.put("CLASSPATH",cp);
+		logger.debug("Setting CLASSPATH for openFuXML Applications: "+cp);
 		
 		ArchUtil.setArch();
 		switch(ArchUtil.arch)
