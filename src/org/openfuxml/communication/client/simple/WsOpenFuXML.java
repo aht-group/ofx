@@ -25,7 +25,7 @@ import de.kisner.util.xml.XmlElementNotFoundException;
 
 public class WsOpenFuXML
 {
-	static Logger logger = Logger.getLogger(AbstractProducer.class);
+	static Logger logger = Logger.getLogger(WsOpenFuXML.class);
 	String version,openFuXMLDir;
 	static String fSep;
 	
@@ -109,7 +109,8 @@ public class WsOpenFuXML
 	{
 		String xml = openFuXMLDir+fSep+version+fSep+"openFuXML-config.xml";
 		String xsd = openFuXMLDir+fSep+version+fSep+"openFuXML-1.x.xsd";
-		XmlConfig xCnf = new XmlConfig(xml, xsd);
+		logger.warn("No validation will be done with "+xml);
+		XmlConfig xCnf = new XmlConfig(xml,true);//, xsd);
 		
 		String baseDir;
 		try {baseDir = xCnf.getTextException("dirs/dir[@typ=\"basedir\"]");}
@@ -159,7 +160,7 @@ public class WsOpenFuXML
 	}
 	
 	public static void main(String[] args)
-	{
+	{		
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();

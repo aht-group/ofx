@@ -11,7 +11,7 @@
 
 	<appender name="Client-RoFiAppender" class="org.apache.log4j.RollingFileAppender">
 		<param name="maxFileSize" value="5000KB"/>
-		<param name="file" value="${user.home}/.openfuxml/logs/openfuxml.log"/>
+		<param name="file" value="${user.home}/openfuxml.log"/>
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{ISO8601} [%-5p] %c{1}:%5L - %m%n"/>
 		</layout>
@@ -37,7 +37,7 @@
 
 	<root>
 		<priority value="INFO"/>
-		<appender-ref ref="@@@appender@@@"/>
+		<appender-ref ref="Client-RoFiAppender"/>
 	</root>
 
 </log4j:configuration>
