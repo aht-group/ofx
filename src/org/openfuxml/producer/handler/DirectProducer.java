@@ -45,17 +45,14 @@ public class DirectProducer extends AbstractProducer implements Producer
 	public DirectProducer(XmlConfig xCnf,Host host)
 	{
 		this.host=host;
-		dirOutput=xCnf.getPath("dirs/dir[@typ=\"output\"]");
-	}
-	
-	public DirectProducer(String dirOutput, Host host)
-	{
-		this.host=host;
-		this.dirOutput=dirOutput;
-		if(!FuXmlLogger.isInited)
+		String baseDir;
+		try {baseDir = xCnf.getTextException("dirs/dir[@typ=\"basedir\"]");}
+		catch (XmlElementNotFoundException e)
 		{
-			FuXmlLogger.initLogger(sysprops.getProperty("logger.path"));
+			baseDir = xCnf.getWorkingDir();
+			logger.warn("No \"baseDir\" defined in xmlConfig. Using WorkingDir: "+baseDir);
 		}
+		dirOutput=xCnf.getPath("dirs/dir[@typ=\"output\"]",baseDir);
 	}
 	
 	/**
@@ -142,8 +139,13 @@ public class DirectProducer extends AbstractProducer implements Producer
 				+ request.getApplication() + fSep + "formats" + fSep
 				+ request.getFormat() + fSep + "build.xml";
 		
-		File fRequest = new File(dirOutput+fSep+request.getApplication()+fSep +
-				 "sessionpreferences"+fSep+request.getUsername()+"-"+request.getProject()+"-"+"request.xml");
+		StringBuffer sb = new StringBuffer();
+			sb.append(dirOutput);
+			sb.append(fSep+request.getApplication());
+			sb.append(fSep+"sessionpreferences");
+			sb.append(fSep+request.getUsername()+"-"+request.getProject()+"-"+"request.xml");
+			
+		File fRequest = new File(sb.toString());
 		XmlObject xmlRequest = new XmlObject(request.toXmlDoc());
 		if(!xmlRequest.save(fRequest))
 		{
@@ -177,7 +179,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 		
 		StringBuffer sbCmd = new StringBuffer(); 
 		sbCmd.append("java ");
-		sbCmd.append(" -Dant.home="+sysprops.getProperty("ant.home"));
+//		sbCmd.append(" -Dant.home="+sysprops.getProperty("ant.home"));
 		sbCmd.append(" org.apache.tools.ant.Main ");
 		sbCmd.append("-buildfile "	+ buildfile);
 		sbCmd.append(" "+ sbParameters.toString()+ " ");

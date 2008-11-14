@@ -13,6 +13,7 @@ import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
 
 import de.kisner.util.xml.XmlConfig;
+import de.kisner.util.xml.XmlElementNotFoundException;
 
 public class SyncProducer extends AbstractProducer implements Producer
 {
@@ -23,7 +24,15 @@ public class SyncProducer extends AbstractProducer implements Producer
 	
 	public SyncProducer(XmlConfig xCnf,Host host)
 	{
-		unisonSync = new UnisonSync(xCnf.getPath("dirs/dir[@typ=\"repository\"]"),xCnf.getPath("dirs/dir[@typ=\"output\"]"));
+		String baseDir;
+		try {baseDir = xCnf.getTextException("dirs/dir[@typ=\"basedir\"]");}
+		catch (XmlElementNotFoundException e)
+		{
+			baseDir = xCnf.getWorkingDir();
+			logger.warn("No \"baseDir\" defined in xmlConfig. Using WorkingDir: "+baseDir);
+		}
+		
+		unisonSync = new UnisonSync(xCnf.getPath("dirs/dir[@typ=\"repository\"]",baseDir),xCnf.getPath("dirs/dir[@typ=\"output\"]",baseDir));
 		noSync = new NoSync();
 		p = new DirectProducer(xCnf,host);
 	}

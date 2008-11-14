@@ -109,7 +109,15 @@ public class WsOpenFuXML
 	{
 		String xml = openFuXMLDir+fSep+version+fSep+"openFuXML-config.xml";
 		String xsd = openFuXMLDir+fSep+version+fSep+"openFuXML-1.x.xsd";
-		XmlConfig xCnf = new XmlConfig(xml, xsd);;
+		XmlConfig xCnf = new XmlConfig(xml, xsd);
+		
+		String baseDir;
+		try {baseDir = xCnf.getTextException("dirs/dir[@typ=\"basedir\"]");}
+		catch (XmlElementNotFoundException e)
+		{
+			baseDir = xCnf.getWorkingDir();
+			logger.warn("No \"baseDir\" defined in xmlConfig. Using WorkingDir: "+baseDir);
+		}
 		
 		Element xmlBaseDir = new Element("dir");
 		xmlBaseDir.setAttribute(new Attribute("typ","basedir")); 
