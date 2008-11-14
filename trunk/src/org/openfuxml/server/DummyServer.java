@@ -10,7 +10,8 @@ public class DummyServer extends AbstractServer
 	
 	public DummyServer(XmlConfig xCnf)
 	{
-		setSystemProperties(xCnf);
+		super(xCnf);
+		setSystemProperties();
 		checkSystemProperties();
 	}
 }

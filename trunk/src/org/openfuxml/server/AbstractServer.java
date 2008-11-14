@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
+import org.openfuxml.util.FuXmlLogger;
 
 import de.kisner.util.architecture.ArchUtil;
 import de.kisner.util.xml.XmlConfig;
@@ -19,7 +20,14 @@ public abstract class AbstractServer
 	public static String[] environmentParameters;
 	public static String baseDir;
 	
-	public void setSystemProperties(XmlConfig xCnf)
+	XmlConfig xCnf;
+	
+	public AbstractServer(XmlConfig xCnf)
+	{
+		this.xCnf=xCnf;
+	}
+	
+	public void setSystemProperties()
 	{
 		Properties sysprops = System.getProperties();
 		Map<String,String> sysenv = System.getenv();
@@ -38,9 +46,11 @@ public abstract class AbstractServer
 		String pathRepo=xCnf.getText("dirs/dir[@typ=\"repository\"]");
 		String pathOutput=xCnf.getText("dirs/dir[@typ=\"output\"]");
 		
-		if(!pathLog.substring(0,1).equals("/")){pathLog=baseDir+"/"+pathLog;}
-		if(!pathRepo.substring(0,1).equals("/")){pathRepo=baseDir+"/"+pathRepo;}
-		if(!pathOutput.substring(0,1).equals("/")){pathOutput=baseDir+"/"+pathRepo;}
+		if(!ArchUtil.isAbsolute(pathLog)){pathLog=baseDir+"/"+pathLog;}
+		if(!ArchUtil.isAbsolute(pathRepo)){pathRepo=baseDir+"/"+pathRepo;}
+		if(!ArchUtil.isAbsolute(pathOutput)){pathOutput=baseDir+"/"+pathRepo;}
+		
+		FuXmlLogger.initLogger(pathLog);
 		
 		logger.debug("baseDir="+baseDir);
 		logger.debug("pathLog="+pathLog);

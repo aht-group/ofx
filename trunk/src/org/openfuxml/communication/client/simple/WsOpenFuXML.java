@@ -111,11 +111,11 @@ public class WsOpenFuXML
 		String xsd = openFuXMLDir+fSep+version+fSep+"openFuXML-1.x.xsd";
 		XmlConfig xCnf = new XmlConfig(xml, xsd);;
 		
-	     Element xmlBaseDir = new Element("dir");
-	     xmlBaseDir.setAttribute(new Attribute("typ","basedir")); 
-	     xmlBaseDir.setText(openFuXMLDir+fSep+version);
-	     try{xCnf.updateElement("dirs/dir[@typ=\"basedir\"]", xmlBaseDir);}
-	     catch (XmlElementNotFoundException e) {e.printStackTrace();}
+		Element xmlBaseDir = new Element("dir");
+		xmlBaseDir.setAttribute(new Attribute("typ","basedir")); 
+		xmlBaseDir.setText(openFuXMLDir+fSep+version);
+		try{xCnf.updateElement("dirs/dir[@typ=\"basedir\"]", xmlBaseDir);}
+		catch (XmlElementNotFoundException e) {e.printStackTrace();}
 		
 		Display disp = Display.getDefault();
 		Shell sh = new Shell(disp);

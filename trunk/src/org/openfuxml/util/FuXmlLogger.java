@@ -37,36 +37,6 @@ public class FuXmlLogger
 		producer.setLevel(levelProducer);
 	}
 	
-	public static void init()
-	{
-		URL url = ClassLoader.getSystemResource("log4j.xml");
-		if(url!=null)
-		{	//Konfiguration fürs Package
-			DOMConfigurator.configure(url);
-			logger.debug("log4j ueber SystemResource "+url.getFile()+" konfiguriert");
-			initLogger(url.getPath()+"logs");
-		}
-		else
-		{
-			File f = new File("log4j.xml");
-			if(f.exists())
-			{
-				DOMConfigurator.configure(f.getAbsolutePath());
-				logger.debug("log4j ueber File "+f.getAbsolutePath()+" konfiguriert");
-				initLogger(f.getAbsolutePath()+"logs");
-			}
-			else
-			{
-				System.err.println("Log4j-Konfiguration nicht gefunden.");
-				System.err.println("log4j von config/log4j.xml ins root-Verzeichnis kopieren.");
-				System.err.println("Dort kann sie beliebig angepasst werden.");
-				System.err.println("Add to .cvsignore nicht vergessen!");
-				System.exit(-1);
-			}
-		}
-		log4jInited=true;
-	}
-	
 	public static void initLogger()
 	{
 		initLogger("");

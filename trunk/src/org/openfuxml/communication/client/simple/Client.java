@@ -58,6 +58,7 @@ import org.openfuxml.producer.handler.SocketProducer;
 import org.openfuxml.server.DummyServer;
 import org.openfuxml.util.FuXmlLogger;
 
+import de.kisner.util.LoggerInit;
 import de.kisner.util.architecture.ArchUtil;
 import de.kisner.util.xml.XmlConfig;
 
@@ -1334,7 +1335,10 @@ public class Client extends Composite
 	
 	public static void main(String[] args)
 	{
-		FuXmlLogger.init();
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("resources/config");
+			loggerInit.init();
+		
 		String appDirName = ArchUtil.getAppSettingsDir("openFuXML");
 		File appDir = new File(appDirName);
 		if(!appDir.exists())
