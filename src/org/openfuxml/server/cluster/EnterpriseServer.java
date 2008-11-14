@@ -27,6 +27,7 @@ import org.openfuxml.server.simple.SimpleShutdownThread;
 import org.openfuxml.util.FuXmlLogger;
 
 import de.kisner.util.Connector;
+import de.kisner.util.LoggerInit;
 import de.kisner.util.xml.XmlConfig;
 
 /**
@@ -45,6 +46,7 @@ public class EnterpriseServer extends AbstractServer
 	
 	public EnterpriseServer(XmlConfig xCnf)
 	{
+		super(xCnf);
 		logger.info("Applikation wird gestartet");
 		host = new Host();
 		host.setHostIP(xCnf.getHostIp());
@@ -54,7 +56,7 @@ public class EnterpriseServer extends AbstractServer
 		
 		int serverPort =xCnf.getIntAttribute("net/server[@typ=\"socket\"]","port");
 	
-		setSystemProperties(xCnf);
+		setSystemProperties();
 		checkSystemProperties();
 		
 		
@@ -130,7 +132,10 @@ public class EnterpriseServer extends AbstractServer
 	
 	public static void main(String[] args) throws IOException
 	{
-		FuXmlLogger.init();
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("resources/config");
+			loggerInit.init();
+		
 		logger.info("**************************************************************");
 		XmlConfig xCnf = new XmlConfig("openFuXML-config.xml", "openFuXML-1.x.xsd");
 
