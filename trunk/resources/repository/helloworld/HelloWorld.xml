@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Gerd Steinkamp (FernUniversität Hagen) -->
 <!DOCTYPE kurs SYSTEM "system/dtd/fernuni01.dtd">
-<kurs> <metadata> <kurs-nr></kurs-nr> <kurs-titel>Handbuch openFuXML</kurs-titel> <kurs-titel/> <kurs-titel/> <kurs-autor/> <kurs-autor/> <kurs-autor/> </metadata> 
+<kurs> <metadata> <kurs-nr></kurs-nr> <kurs-titel>openFuXML HelloWorld</kurs-titel> <kurs-titel/> <kurs-titel/> <kurs-autor/> <kurs-autor/> <kurs-autor/> </metadata> 
   <lehrtext> 
-  <abschnitt extern="ja" quelle="lehrtext/kapitel-1.xml"> 
+  <abschnitt extern="ja" quelle="content/chapter-1.xml"> 
 	 <titel>Kapitel I</titel> 
   </abschnitt> 
    
    
-  <abschnitt extern="ja" quelle="lehrtext/kapitel-2.xml"> 
+  <abschnitt extern="ja" quelle="content/chapter-2.xml"> 
 	 <titel>Kapitel II</titel> 
-  </abschnitt><abschnitt extern="ja" quelle="lehrtext/kapitel-3.xml"> 
+  </abschnitt><abschnitt extern="ja" quelle="content/chapter-3.xml"> 
 	 <titel>Kapitel III</titel> 
   </abschnitt></lehrtext> <fs-elemente> <vorwort> 
   <abschnitt> 
@@ -21,13 +21,13 @@
    
    
    </vorwort></fs-elemente> <kurseinheiten> 
-  <kurseinheit extern="ja" quelle="lehrtext/ke1.xml"> 
+  <kurseinheit extern="ja" quelle="content/vol-1.xml"> 
   </kurseinheit> 
    
    
    
    
    
-  <kurseinheit extern="ja" quelle="lehrtext/ke2.xml"> 
+  <kurseinheit extern="ja" quelle="content/vol-2.xml"> 
   </kurseinheit></kurseinheiten> 
-<aenderungsdatum>Freitag, 22. September 2006 08:22:08</aenderungsdatum></kurs>
+<aenderungsdatum>Mittwoch, 19. November 2008 15:47:21</aenderungsdatum></kurs>
