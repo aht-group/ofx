@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Gerd Steinkamp (FernUniversität Hagen) -->
+<!DOCTYPE kurs SYSTEM "system/dtd/fernuni01.dtd">
+<kurs> <metadata> <kurs-nr></kurs-nr> <kurs-titel>Handbuch openFuXML</kurs-titel> <kurs-titel/> <kurs-titel/> <kurs-autor/> <kurs-autor/> <kurs-autor/> </metadata> 
+  <lehrtext> 
+  <abschnitt extern="ja" quelle="lehrtext/kapitel-1.xml"> 
+	 <titel>Kapitel I</titel> 
+  </abschnitt> 
+   
+   
+  <abschnitt extern="ja" quelle="lehrtext/kapitel-2.xml"> 
+	 <titel>Kapitel II</titel> 
+  </abschnitt><abschnitt extern="ja" quelle="lehrtext/kapitel-3.xml"> 
+	 <titel>Kapitel III</titel> 
+  </abschnitt></lehrtext> <fs-elemente> <vorwort> 
+  <abschnitt> 
+	 <titel num="aus">Vorwort</titel> 
+  </abschnitt> 
+  <absatz>text text text.</absatz> 
+   
+   
+   
+   </vorwort></fs-elemente> <kurseinheiten> 
+  <kurseinheit extern="ja" quelle="lehrtext/ke1.xml"> 
+  </kurseinheit> 
+   
+   
+   
+   
+   
+  <kurseinheit extern="ja" quelle="lehrtext/ke2.xml"> 
+  </kurseinheit></kurseinheiten> 
+<aenderungsdatum>Freitag, 22. September 2006 08:22:08</aenderungsdatum></kurs>

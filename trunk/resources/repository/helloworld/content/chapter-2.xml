@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Gerd Steinkamp (FernUniversität Hagen) -->
+<!DOCTYPE abschnitt SYSTEM "../system/dtd/fernuni01.dtd">
+<abschnitt id="kapitel2">
+	<titel>Kapitel II</titel>
+	<abschnitt id="a_einleitung">
+		<titel>Eine Formel</titel>
+		<absatz><formel>e=mc^2</formel></absatz>
+		
+	</abschnitt>
+	
+	
+	
+	
+<aenderungsdatum>Freitag, 22. September 2006 08:29:55</aenderungsdatum></abschnitt>
