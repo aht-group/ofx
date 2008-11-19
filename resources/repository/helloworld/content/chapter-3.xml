@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Gerd Steinkamp (FernUniversität Hagen) -->
+<!DOCTYPE abschnitt SYSTEM "../system/dtd/fernuni01.dtd">
+<abschnitt id="kapitel3">
+	<titel id="kapitel-3">Kapitel III</titel>
+	<abschnitt id="a_einleitung">
+		<titel>Ein Bild</titel>
+		<medienobjekt gleiten="ja"><grafik align="center" fileref="../bilder/web/list.gif" fliessen="nicht" width="491" depth="461"/><objekttitel> <absatz-ohne>Ein Bild</absatz-ohne></objekttitel> 
+</medienobjekt>
+		
+	</abschnitt>
+	
+	
+	
+	
+<aenderungsdatum>Freitag, 22. September 2006 08:30:03</aenderungsdatum></abschnitt>
