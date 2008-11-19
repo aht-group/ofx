@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE abschnitt SYSTEM "../system/dtd/fernuni01.dtd">
-<abschnitt id="kapitel1"> 
+<abschnitt id="c1"> 
 <titel>Einleitung</titel> 
 <abschnitt> 
 <titel>Hello World</titel><absatz>Zeit für ein Hello World.</absatz> 
@@ -9,4 +9,4 @@
 
 
  
-<aenderungsdatum>Freitag, 22. September 2006 08:24:04</aenderungsdatum></abschnitt>
+<aenderungsdatum>Mittwoch, 19. November 2008 15:46:10</aenderungsdatum></abschnitt>

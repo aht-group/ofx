@@ -6,8 +6,8 @@
 			<bild fileref="../bilder/web/fuhlogo3d56.jpg" align="center" width="212" depth="39"/>
 		</feulogo>
 		<kurstitel>Referenz-Kurs openFuXML</kurstitel>
-		<ke-bezeich>Teil 1</ke-bezeich>
-		<ke-titel>Hello World</ke-titel>
+		<ke-bezeich>Kurseinheit 2</ke-bezeich>
+		<ke-titel>Kapitel II und Kapitel III</ke-titel>
 		<a-bezeich>Autoren</a-bezeich>
 		<autoren>A, B und C</autoren>
 		<m-bezeich/>
@@ -20,6 +20,7 @@
 		<codierung>Kennzeichnung</codierung>
 	</titelseite>
 	<fs-elemente/>
-	<ke-lehrtext bereich-ende="kapitel-1.xml#kapitel1" bereich-start="kapitel-1.xml#kapitel1"/>
-	<aenderungsdatum>Dienstag, 26. September 2006 18:22:34</aenderungsdatum>
-</kurseinheit>
+	<ke-lehrtext bereich-ende="chapter-2.xml#c2" bereich-start="chapter-2.xml#c2"/>
+	<ke-lehrtext bereich-ende="chapter-3.xml#c3" bereich-start="chapter-3.xml#c3"/>
+	
+<aenderungsdatum>Mittwoch, 19. November 2008 15:47:55</aenderungsdatum></kurseinheit>
