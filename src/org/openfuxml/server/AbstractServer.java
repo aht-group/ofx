@@ -57,17 +57,17 @@ public abstract class AbstractServer
 		logger.debug("pathRepo="+pathRepo);
 		logger.debug("pathOutput="+pathOutput);
 		
-/*		String antHome = sysenv.get("ANT_HOME");
+		String antHome = sysenv.get("ANT_HOME");
 		if(antHome!=null){sysprops.put("ant.home",sysenv.get("ANT_HOME"));}
 		else
 		{
-			antHome = xCnf.getText("dirs/dir[@typ=\"ant\"]");
+			antHome = baseDir+"/lib";
 			logger.debug("ANT_HOME not set, using config.xml value");
 			sysprops.put("ANT_HOME",antHome);
 		}
-*/			
+			
 		sysprops.put("ilona.home",baseDir);
-//		sysprops.put("ant.home",antHome);
+		sysprops.put("ant.home",antHome);
 		sysprops.put("logger.path",pathLog);
 		sysprops.put("ilona.contentstore",pathRepo);
 		sysprops.put("ilona.output",pathOutput);
@@ -84,6 +84,9 @@ public abstract class AbstractServer
 		String cp = ArchUtil.getClassPath(xCnf.getTexts("files/file[@typ=\"lib\"]"),baseDir+SystemUtils.FILE_SEPARATOR+"lib"+SystemUtils.FILE_SEPARATOR);
 		htEnv.put("CLASSPATH",cp);
 		logger.debug("Setting CLASSPATH for openFuXML Applications: "+cp);
+		
+		htEnv.put("ANT_HOME", baseDir+"/lib");
+		logger.debug("Setting ANT_HOME for openFuXML Applications: "+htEnv.get("ANT_HOME"));
 		
 		ArchUtil.setArch();
 		switch(ArchUtil.arch)
@@ -141,17 +144,17 @@ public abstract class AbstractServer
 		logger.debug("\tILONA_HOME="+System.getenv("ILONA_HOME"));
 		logger.debug("\tFUXML_HOME="+System.getenv("FUXML_HOME"));
 		
-/*	
-		for (Object o : sysprops.keySet())
+	
+/*		for (Object o : sysprops.keySet())
 		{
 			logger.debug(o+": "+sysprops.getProperty((String) o));
 		}
-		
+*/		
 		for( String s : environmentParameters)
 		{
 			logger.debug("Env: "+s);
 		}
-*/	
+	
 	}
 	
 }

@@ -59,7 +59,7 @@
 		<property name="log4j.lib" value="log4j-${log4j-version}.jar" />
 		<property name="log4j-zeroconf.lib" value="log4j-zeroconf-${log4j-version}.jar" />
 	<property name="jmsutils.dir" value="utils/jms"/><property name="jmsutils.lib" value="jmsutils-${jmsutils-version}.jar" />
-	<property name="ant.dir" value="utils/ant"/>
+	<property name="ant.dir" value="utils/ant/${ant-version}"/>
 		<property name="ant.lib" value="ant-${ant-version}.jar" />
 		<property name="antlauncher.lib" value="ant-launcher-${ant-version}.jar" />
 		<property name="ant.bundle" value="apache-ant-${ant-version}-bin.tar.gz" />
@@ -188,6 +188,7 @@
     	<echo level="info">Creating directories</echo>
     	<mkdir dir="${pack.dir}"/>
     	<mkdir dir="${pack.dir}/lib"/>
+    	<mkdir dir="${pack.dir}/lib/bin"/>
     	<mkdir dir="${pack.dir}/logs"/>
     	<mkdir dir="${pack.dir}/doku"/>
     	<mkdir dir="${pack.dir}/applications"/>
@@ -247,6 +248,10 @@
     	<echo level="warn">Ant-Bundle Removed. Check this!</echo>
     	<!-- <untar src="${lib.dir}/${ant.dir}/${ant.bundle}" dest="${pack-lib.dir}" compression="gzip"/>
     		<delete dir="${pack.dir}/lib/apache-ant-${ant-version}/docs"/> -->
+    	<echo level="info">Copy selected Ant-Files!</echo>
+    	<copy file="${lib.dir}/${ant.dir}/antRun" todir="${pack-lib.dir}/bin"/>
+    	<copy file="${lib.dir}/${ant.dir}/antRun.bat" todir="${pack-lib.dir}/bin"/>
+    	
     	<copy file="${lib.dir}/${tex4ht.dir}/${tex4ht.lib}" todir="${pack-lib.dir}"/>
     	
     	<!-- Inhalte Kopieren: Source-Files -->

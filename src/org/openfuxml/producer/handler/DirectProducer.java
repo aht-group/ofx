@@ -179,7 +179,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 		
 		StringBuffer sbCmd = new StringBuffer(); 
 		sbCmd.append("java ");
-//		sbCmd.append(" -Dant.home="+sysprops.getProperty("ant.home"));
+		sbCmd.append(" -Dant.home="+sysprops.getProperty("ant.home"));
 		sbCmd.append(" org.apache.tools.ant.Main ");
 		sbCmd.append("-buildfile "	+ buildfile);
 		sbCmd.append(" "+ sbParameters.toString()+ " ");
