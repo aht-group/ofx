@@ -120,7 +120,6 @@ public class Client extends Composite
 	 */
 	private ArrayList<String[]> alProducedEntities;
 	
-	Properties myProperties;
 	XmlConfig xCnf;
 	File propFile;
 	
@@ -152,25 +151,7 @@ public class Client extends Composite
 		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN);
 		splashscreen.open();
 		
-		myProperties = new Properties();
-		if(propFile.exists())
-		{
-			logger.info("Lade Properties von "+propFile.toString());
-			try {
-				myProperties.load(new FileInputStream(propFile));
-			}
-			catch (IOException e)
-			{
-				logger.fatal("IOException", e);
-			}
-		}
-		else
-		{
-			logger.info("Setting default properties. "+propFile.getAbsolutePath()+" does not exist.");
-			myProperties.setProperty("Verzeichnis", System.getProperty("user.home"));
-			myProperties.setProperty("Host","localhost");
-			myProperties.setProperty("Port","4455");
-		}
+		ClientConfigWrapper.init(xCnf);
 		
 		htProducableEntities = new Hashtable<String, ProducedEntities>();
 		alProducedEntities = new ArrayList<String[]>();
@@ -190,12 +171,13 @@ public class Client extends Composite
 	}
 	
 	public void initNet()
-	{
-		String sHost = myProperties.getProperty("Host");
-		String sPort = myProperties.getProperty("Port");		
-		int iPort = Integer.parseInt(sPort);
-		
-		if(sHost.equals("direct-producer"))
+	{	
+		switch(ClientConfigWrapper.typ)
+		{
+			case direct: break;
+			case socket: break;
+		}
+		if(ClientConfigWrapper.host.equals("direct-producer"))
 		{
 			new DummyServer(xCnf);
 			Host host = new Host();
@@ -211,7 +193,7 @@ public class Client extends Composite
 			try
 			{
 				logger.info("Socket Connection vorbereiten");
-				producer = new SocketProducer(sHost, iPort);
+				producer = new SocketProducer(ClientConfigWrapper.host, ClientConfigWrapper.port);
 				logger.info("[OK] ProducerThread");
 			}
 			catch (Exception e)	{logger.fatal("Exception", e);}
@@ -235,9 +217,7 @@ public class Client extends Composite
 		}
 		
 		this.addDisposeListener(new DisposeListener() {
-			public void widgetDisposed(DisposeEvent evt) {
-				saveProperties();
-			}
+			public void widgetDisposed(DisposeEvent evt) {xCnf.save();}
 		});
 		{
 			Label labelImage = new Label(this, SWT.NONE);
@@ -280,17 +260,15 @@ public class Client extends Composite
 				labelVerzeichnis.setLayoutData(data);
 			}
 			
-			// existiert das in Properties eingestellte Verzeichnis?
-			String sVerzeichnis = myProperties.getProperty("Verzeichnis");
-			logger.debug("Verzeichnis: "+sVerzeichnis);
-			File dir = new File(sVerzeichnis);
+			String sDir = ClientConfigWrapper.getServerDir("repository");
+			logger.debug("Repository: "+sDir);
+			File dir = new File(sDir);
 			if (!dir.exists())
 			{
-				myProperties.setProperty("Verzeichnis", System.getProperty("user.home"));
+				ClientConfigWrapper.updateServerDir("repository", System.getProperty("user.home"));
 			}
-			labelVerzeichnis.setText(myProperties.getProperty("Verzeichnis"));
+			labelVerzeichnis.setText(ClientConfigWrapper.getServerDir("repository"));
 		}
-		logger.debug("we");
 		{
 			buttonWechseln = new Button(this, SWT.PUSH | SWT.CENTER);
 			buttonWechseln.setText("   wechseln ...   ");
@@ -325,8 +303,7 @@ public class Client extends Composite
 			
 			comboAnwendungen.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
-					myProperties.setProperty("Anwendung", comboAnwendungen.getText());
-					
+					ClientConfigWrapper.updateKeyValue("application", comboAnwendungen.getText());
 					fuelleComboProjekte();
 					fuelleComboFormate();
 					
@@ -356,7 +333,7 @@ public class Client extends Composite
 			
 			comboProjekte.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
-					myProperties.setProperty("Projekt", comboProjekte.getText());
+					ClientConfigWrapper.updateKeyValue("project", comboProjekte.getText());
 					fuelleComboDokumente();
 					
 					fuelleTableProductionEntities();
@@ -385,7 +362,7 @@ public class Client extends Composite
 
 			comboDokumente.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
-					myProperties.setProperty("Dokument", comboDokumente.getText());
+					ClientConfigWrapper.updateKeyValue("document", comboDokumente.getText());
 					fuelleTableProductionEntities();
 					loescheErgebnis();
 				}
@@ -412,7 +389,7 @@ public class Client extends Composite
 		
 			comboFormate.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
-					myProperties.setProperty("Format", comboFormate.getText());
+					ClientConfigWrapper.updateKeyValue("format", comboFormate.getText());
 					fuelleTableProductionEntities();
 					loescheErgebnis();
 				}
@@ -595,38 +572,6 @@ public class Client extends Composite
 			}
 		}
 	} // initGUI
-
-	/**
-	 * Die Methode saveProperties speichert die Properties in einer Datei.  
-	 */
-	public void saveProperties()
-	{
-		logger.info("Speichere Properties in "+propFile.toString());
-
-		// Existiert das Verzeichnis, in dem die Prop-Datei gespeichert werden soll?
-		if (!propFile.getParentFile().exists())
-		{
-			// Das Verzeichnis erstellen.
-			propFile.getParentFile().mkdirs();
-		}
-		
-		// Existiert das Verzeichnis jetzt?
-		if (propFile.getParentFile().exists())
-		{
-			try
-			{
-				myProperties.store(new FileOutputStream(propFile),Title+" - Konfigurationseinstellungen");
-			}
-			catch (IOException e)
-			{
-				logger.fatal("IOException", e);
-			}
-		}
-		else
-		{
-			logger.error("Properties konnten nicht in " + propFile.toString() + " gespeichert werden.");
-		}
-	}
 	
 	public void fuelleComboAnwendungen()
 	{
@@ -664,8 +609,8 @@ public class Client extends Composite
 		}		
 		
 		// Vorauswahl der in Properties gespeicherten Einstellungen
-		String sAnwendung = myProperties.getProperty("Anwendung");
-		if (sAnwendung != null)
+		String sAnwendung = ClientConfigWrapper.getClientConf("application");
+		if (sAnwendung.length() > 0)
 		{
 			int index = comboAnwendungen.indexOf(sAnwendung);
 			if (index != -1)
@@ -717,8 +662,8 @@ public class Client extends Composite
 		
 		
 		// Vorauswahl der in Properties gespeicherten Einstellungen
-		String sFormat = myProperties.getProperty("Format");
-		if (sFormat != null)
+		String sFormat = ClientConfigWrapper.getClientConf("format");
+		if (sFormat.length()>0)
 		{
 			int index = comboFormate.indexOf(sFormat);
 			if (index != -1)
@@ -764,8 +709,8 @@ public class Client extends Composite
 				} // if
 
 				// Vorauswahl der in Properties gespeicherten Einstellungen
-				String sProjekt = myProperties.getProperty("Projekt");
-				if (sProjekt != null)
+				String sProjekt = ClientConfigWrapper.getClientConf("project");
+				if (sProjekt.length()>0)
 				{
 					int index = comboProjekte.indexOf(sProjekt);
 					if (index != -1)
@@ -806,8 +751,8 @@ public class Client extends Composite
 			} // for
 			
 			// Vorauswahl der in Properties gespeicherten Einstellungen
-			String sDokument = myProperties.getProperty("Dokument");
-			if (sDokument != null)
+			String sDokument = ClientConfigWrapper.getClientConf("document");
+			if (sDokument.length()>0)
 			{
 				int index = comboDokumente.indexOf(sDokument);
 				if (index != -1)
@@ -1154,7 +1099,7 @@ public class Client extends Composite
 	{
 		if (alProducedEntities.size() > 0)
 		{
-			OeffnenDialog dialog = new OeffnenDialog(this.getShell(), myProperties, alProducedEntities, rgbBackground);
+			OeffnenDialog dialog = new OeffnenDialog(this.getShell(), alProducedEntities, rgbBackground);
 			dialog.open(getShell().getImages());			
 		} // if
 		else
@@ -1182,12 +1127,12 @@ public class Client extends Composite
 	 */
 	public void Einstellungen()
 	{
-		EinstellungenDialog dialog = new EinstellungenDialog(this.getShell(), myProperties, rgbBackground);
-		myProperties = dialog.open(getShell().getImages());
+		EinstellungenDialog dialog = new EinstellungenDialog(this.getShell(), rgbBackground);
+		dialog.open(getShell().getImages());
 
 		initNet();
 		
-		labelVerzeichnis.setText(myProperties.getProperty("Verzeichnis",""));
+		labelVerzeichnis.setText(ClientConfigWrapper.repository);
 		
 		fuelleComboAnwendungen();
 	}
@@ -1213,8 +1158,8 @@ public class Client extends Composite
 				"\n"+
 				"Überprüfen Sie bitte Ihre Servereinstellungen." + "\n" +
 				"\n"+
-				"Host: " + myProperties.getProperty("Host") + "\n" +
-				"Port: " + myProperties.getProperty("Port")
+				"Host: " + ClientConfigWrapper.host + "\n" +
+				"Port: " + ClientConfigWrapper.port
 				); 
 		d.open();
 

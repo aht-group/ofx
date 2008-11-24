@@ -3,6 +3,7 @@ package org.openfuxml.communication.client.simple;
 import java.util.Enumeration;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -33,6 +34,8 @@ import org.eclipse.swt.widgets.Text;
  */
 public class EinstellungenDialog extends Dialog
 {
+	static Logger logger = Logger.getLogger(EinstellungenDialog.class);
+	
 	private Shell shell;
 
 	private TabFolder tfEinstellungen;
@@ -56,7 +59,6 @@ public class EinstellungenDialog extends Dialog
 	private Button BtnOK;
 	private Button BtnCancel;
 	
-	private Properties properties;
 	private RGB rgbBackground;
 
 	/**
@@ -66,10 +68,9 @@ public class EinstellungenDialog extends Dialog
 	 * @param properties
 	 * @param rgb
 	 */
-	public EinstellungenDialog(Shell parent, Properties properties, RGB rgb)
+	public EinstellungenDialog(Shell parent, RGB rgb)
 	{
 		super(parent, 0);
-		this.properties = properties;
 		this.rgbBackground = rgb;
 	}
 
@@ -79,7 +80,7 @@ public class EinstellungenDialog extends Dialog
 	 * 
 	 * @return Liefert die neuen Einstellungen als Properties.
 	 */
-	public Properties open(Image[] images)
+	public void open(Image[] images)
 	{
 		final Shell parent = this.getParent();
 		
@@ -88,11 +89,8 @@ public class EinstellungenDialog extends Dialog
 		shell.setText("Einstellungen");
 		
 		initGUI();
-
-		shell.pack();
-		
+		shell.pack();	
 		shell.setImages(images);
-
 		shell.open();
 		
 		final Display display = parent.getDisplay();
@@ -104,8 +102,6 @@ public class EinstellungenDialog extends Dialog
 				display.sleep();
 			}
 		}
-		
-		return properties;
 	}
 
 	/**
@@ -168,7 +164,7 @@ public class EinstellungenDialog extends Dialog
 			}
 			{
 				textHost = new Text(compositeServer, SWT.BORDER);
-				textHost.setText(properties.getProperty("Host",""));
+				textHost.setText(ClientConfigWrapper.host);
 
 				{
 					GridData data = new GridData();
@@ -183,7 +179,7 @@ public class EinstellungenDialog extends Dialog
 			}
 			{
 				textPort = new Text(compositeServer, SWT.BORDER);
-				textPort.setText(properties.getProperty("Port",""));
+				textPort.setText(""+ClientConfigWrapper.port);
 
 				{
 					GridData data = new GridData();
@@ -212,7 +208,7 @@ public class EinstellungenDialog extends Dialog
 			}
 			{
 				labelRepository = new Label(compositeVerzeichnisse, SWT.NONE);
-				labelRepository.setText(properties.getProperty("Verzeichnis",""));
+				labelRepository.setText(ClientConfigWrapper.getServerDir("repository"));
 	
 				{
 					GridData data = new GridData();
@@ -251,7 +247,7 @@ public class EinstellungenDialog extends Dialog
 			}
 			{
 				labelOutput = new Label(compositeVerzeichnisse, SWT.NONE);
-				labelOutput.setText(properties.getProperty("Output",""));
+				labelOutput.setText(ClientConfigWrapper.getServerDir("output"));
 
 				{
 					GridData data = new GridData();
@@ -329,6 +325,7 @@ public class EinstellungenDialog extends Dialog
 				
 				// Füllen der Table tableAnwendungen mit den Einträgen
 				// aus den Properties, die mit einem "." beginnen.
+				logger.warn("Not implemented from here ...");/*
 				for (Enumeration e = properties.propertyNames(); e.hasMoreElements();)
 				{
 					// alle Properties, die mit einem "." beginnen, sind Anwendungen
@@ -339,6 +336,8 @@ public class EinstellungenDialog extends Dialog
 						newItem.setText(new String[] {sProperty, properties.getProperty(sProperty)});
 					} // if
 				} // for
+				*/
+				logger.warn("......... to here");
 			}
 			{
 				Composite cButtons = new Composite(compositeAnwendungen, SWT.NONE);
@@ -514,15 +513,16 @@ public class EinstellungenDialog extends Dialog
 	public void btnOK()
 	{
 		// TODO @Andy Plausis fehlen noch
-		properties.setProperty("Host", textHost.getText());
-		properties.setProperty("Port", textPort.getText());
-		properties.setProperty("Verzeichnis", labelRepository.getText());
-		properties.setProperty("Output", labelOutput.getText());
+		ClientConfigWrapper.setServer(textHost.getText(), textPort.getText());
+		ClientConfigWrapper.updateServerDir("repository", labelRepository.getText());
+		ClientConfigWrapper.updateServerDir("output", labelOutput.getText());
 		
 		// Erst werden alle Properties, die mit einem "." beginnen gelöscht,
 		// dann werden die Properties, die in der Table tableAnwendungen
 		// eingetragen sind, gesetzt. 
 		// Alle Properties löschen, die mit einem "." beginnen.
+		
+		logger.warn("Not implemented from here ...");/*
 		for (Enumeration e = properties.propertyNames(); e.hasMoreElements();)
 		{
 			String sProperty = e.nextElement().toString();
@@ -537,7 +537,8 @@ public class EinstellungenDialog extends Dialog
 		{
 			TableItem ti = tableAnwendungen.getItem(i);
 			properties.setProperty(ti.getText(0), ti.getText(1));
-		}
+		}*/
+		logger.warn("......... to here");
 
 		shell.close();
 	}
