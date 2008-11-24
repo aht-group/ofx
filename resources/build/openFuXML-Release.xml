@@ -596,6 +596,7 @@
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@vendor@@@" value="${vendor.name}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@openfuxml@@@" value="${openfuxml-version}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@webstart.url@@@" value="${webstart.url}"/>
+		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@webstart.port@@@" value="${webstart.port}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@jboss@@@" value="${jboss-version}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@log4j@@@" value="${log4j.lib}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@commonslang@@@" value="${commonslang.lib}"/>
