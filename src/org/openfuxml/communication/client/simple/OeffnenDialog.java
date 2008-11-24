@@ -36,16 +36,13 @@ public class OeffnenDialog extends Dialog
 	private Button BtnSchliessen;
 	
 	private ArrayList<String[]> alProducedEntities;
-	private Properties properties;
 	private RGB rgbBackground;
 	
-	public OeffnenDialog(Shell parent, Properties properties, 
-			ArrayList<String[]> alProducedEntities, RGB rgb)
+	public OeffnenDialog(Shell parent, ArrayList<String[]> alProducedEntities, RGB rgb)
 	{
 		super(parent, 0);
 		
 		this.alProducedEntities = alProducedEntities;
-		this.properties = properties;
 		this.rgbBackground = rgb;
 	}
 	
@@ -201,7 +198,7 @@ public class OeffnenDialog extends Dialog
 	{
 		String sErweiterung = sDateiname.substring(sDateiname.lastIndexOf('.'));
 
-		String sProgramm = properties.getProperty(sErweiterung);
+		String sProgramm = ClientConfigWrapper.getClientConf(sErweiterung);
 
 		if (sProgramm == null)
 		{
@@ -216,7 +213,7 @@ public class OeffnenDialog extends Dialog
 			String sKommando = sProgramm + " ";
 			
 			// Die Ausgabedatei steht in dem Output-Verzeichnis
-			File file = new File(properties.getProperty("Output") + File.separator + sVerzeichnis, sDateiname);
+			File file = new File(ClientConfigWrapper.getServerDir("output") + File.separator + sVerzeichnis, sDateiname);
 			sKommando += file.toString();		 
 			
 			logger.debug("Kommando für das Öffnen: " + sKommando);

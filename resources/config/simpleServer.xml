@@ -20,5 +20,7 @@
 		<file typ="lib">@@@saxon@@@</file>
 		<file typ="lib">@@@openfuxml@@@</file>
 	</files>
+	<client>
+	</client>
 </properties>
 

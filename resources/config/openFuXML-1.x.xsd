@@ -2,6 +2,18 @@
 <!-- xercesOK: http://www.w3.org/2001/XMLSchema -->
 <!-- xmlSpyOK: http://www.w3.org/2000/10/XMLSchema -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="value">
+		<xs:complexType mixed="true">
+			<xs:attribute name="key" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="client">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="value" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="dir">
 		<xs:complexType mixed="true">
 			<xs:attribute name="typ" type="xs:string" use="required"/>
@@ -55,6 +67,7 @@
 				</xs:element>
 				<xs:element ref="dirs"/>
 				<xs:element ref="files"/>
+				<xs:element ref="client"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
