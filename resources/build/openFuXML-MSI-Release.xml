@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2003/01/wi">
-  <Product Id="87952548-8B19-4192-B997-05C2C55C9B7D" Name="openFuXML" Language="1033" Version="1.1" Manufacturer="University of Hagen, Germany">
+  <Product Id="87952548-8B19-4192-B997-05C2C55C9B7D" Name="openFuXML" Language="1033" Version="@@@openfuxml-version@@@" Manufacturer="OpenSource project hostet at SourceForge">
     <Package Id="34BD222D-7C1A-4660-873D-07185FD40E88" Description="Redaktionssystem für professionelle Dokumente in Forschung und Lehre" Comments="Install Package for openFuXML on Windows Machines" InstallerVersion="200" Compressed="yes" />
     <Media Id="1" Cabinet="simple.cab" EmbedCab="yes" />
     <Directory Id="TARGETDIR" Name="SourceDir">
@@ -10,7 +10,6 @@
             <Component Id="openFuXML_@@@openfuxml-version@@@" DiskId="1" Guid="3413BB87-CE9F-4888-8EF6-25179C301A8B">
               <File Id="log4j.xml" LongName="log4j.xml" Name="LOG4J.XML" Source="log4j.xml" />
               <File Id="openFuXML_1.x.xsd" LongName="openFuXML-1.x.xsd" Name="OPENFUX.XSD" Source="openFuXML-1.x.xsd" />
-              <File Id="openFuXML_config.xml" LongName="openFuXML-config.xml" Name="OPENFUX.XML" Source="openFuXML-config.xml" />
               <File Id="openFuXML_icon" LongName="openfuxml.ico" Name="OPENFUX.ICO" Source="openfuxml.ico" />
               <File Id="openFuXML.vbs" LongName="openFuXML.vbs" Name="OPENFUX.vbs" Source="openFuXML.vbs">
                 <Shortcut Id="openfuxmlSHORTCUT" Directory="ProgramMenuDir" WorkingDirectory="openFuXML_@@@openfuxml-version@@@" Name="init" LongName="openFuXML @@@openfuxml-version@@@" Icon="openfuxml.ico" IconIndex="0" />
@@ -200,9 +199,12 @@
                 <File Id="client_jmsutils_@@@jmsutils-version@@@.jar_1" LongName="jmsutils-@@@jmsutils-version@@@.jar" Name="JMSUTIL.JAR" Source="share\client\lib\jmsutils-@@@jmsutils-version@@@.jar" />
                 <File Id="client_log4j_@@@log4j-version@@@.jar_1" LongName="log4j-@@@log4j-version@@@.jar" Name="LOG4J-1.JAR" Source="share\client\lib\log4j-@@@log4j-version@@@.jar" />
                 <File Id="client_log4j.xml_1" LongName="log4j.xml" Name="LOG4J.XML" Source="share\client\lib\log4j.xml" />
-                <File Id="openFuXML_cl_@@@openfuxml-version@@@s_win.jar" LongName="openFuXML-cl-@@@openfuxml-version@@@-win.jar" Name="OPENFUX2.JAR" Source="share\client\openFuXML-cl-@@@openfuxml-version@@@-win.jar">
+                <File Id="openFuXML_cl_@@@openfuxml-version@@@s_win.jar" LongName="openFuXML-cl-@@@openfuxml-version@@@-win.jar" Name="OPENFUX2.JAR" Source="share\client\openFuXML-cl-@@@openfuxml-version@@@-win.jar"/>
+                <File Id="openFuXML_images" LongName="openFuXML-cl-@@@openfuxml-version@@@-images.jar" Name="OPENFUX5.JAR" Source="share\client\lib\openFuXML-cl-@@@openfuxml-version@@@-images.jar">
+                
                   <!--Shortcut Id="clientSHORTCUT" Directory="ProgramMenuDir" WorkingDirectory="client" Name="client" LongName="openFuXML Client" /-->
                 </File>
+                <File Id="commons" LongName="commons-lang-@@@commonslang-version@@@.jar" Name="comlang.JAR" Source="lib\commons-lang-@@@commonslang-version@@@.jar" />
                 <File Id="jaxen_@@@jaxen-version@@@.jar" LongName="jaxen-@@@jaxen-version@@@.jar" Name="JAXEN-1.JAR" Source="lib\jaxen-@@@jaxen-version@@@.jar" />
                 <File Id="jdom_@@@jdom-version@@@.jar" LongName="jdom-@@@jdom-version@@@.jar" Name="JDOM-1..JAR" Source="lib\jdom-@@@jdom-version@@@.jar" />
                 <File Id="jmdns_@@@jmdns-version@@@.jar" LongName="jmdns-@@@jmdns-version@@@.jar" Name="JMDNS-1.JAR" Source="lib\jmdns-@@@jmdns-version@@@.jar" />
@@ -230,7 +232,13 @@
               </Directory>
               <Directory Id="repository" LongName="repository" Name="reposit">
                 <Directory Id="fuxml_2" LongName="fuxml" Name="fuxml">
-                </Directory>
+                  <Directory Id="hello" LongName="HelloWorld" Name="hellow">
+                    <Component Id="repo" DiskId="1" Guid="C14DA3D8-6CBF-4A00-9535-410337076010">
+                
+                     <File Id="hwxml" LongName="HelloWorld.xml" Name="hw.xml" Source="share\repository\fuxml\HelloWorld\HelloWorld.xml" />
+                    </Component>
+                  </Directory>
+              </Directory>
               </Directory>
             </Directory>
           </Directory>
@@ -256,6 +264,8 @@
       <ComponentRef Id="moodle2fuX" />
       <ComponentRef Id="scorm" />
       <ComponentRef Id="lib" />
+      <ComponentRef Id="repo" />
+       
     </Feature>
     <Icon Id="openfuxml.ico" SourceFile="openfuxml.ico" />
     <UI />
