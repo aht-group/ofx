@@ -47,7 +47,8 @@
 	<property name="simpleClient.name" value="openFuXML-cl-${openfuxml-version}" />
 	<property name="simpleRelease.name" value="openFuXML-${openfuxml-version}.tgz" />
 	<property name="srcRelease.name" value="openFuXML-src-${openfuxml-version}.tgz" />
-	
+	<property name="simple.release.system" value="openFuXML-${openfuxml-version}.tgz" />
+	<property name="simple.release" value="openFuXML-${openfuxml-version}.tgz" />
 	
 	<!-- Library Definitions -->
 	<property name="smack.dir" value="messaging/smack"/><property name="smack.lib" value="smack-${smack-version}.jar" />
@@ -410,7 +411,7 @@
 		<replace file="${dist.dir}/${simpleClient.name}/openFuXML-Client.sh" token="@@@ClientJarName@@@" value="${simpleClient.name}-linux"/>
 	</target>
 	
-	<target name="05d - simpleRelease MSI" depends="02 - init,04 - Structure and Libs,05a - SimpleServer,05b - SimpleClient">
+	<target name="05d - simpleRelease MSI" depends="05 - simpleRelease">
 		<copy file="${rsrc.dir}/build/openFuXML-MSI-Release.xml" tofile="${pack.dir}/openFuXML-${openfuxml-version}.wsx"/>
    		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
    		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@swt-version@@@" value="${swt-version}"/>
