@@ -216,11 +216,11 @@
     	<move file="${pack.dir}/doku/Handbuch" tofile="${pack.dir}/doku/html"/>-->
     	
     	<echo level="warn">ToDo: Copy reference project</echo>
-    	<!-- Inhalte Kopieren: Referenzprojekt 
-    	<mkdir dir="${pack.dir}/share/repository/fuxml/referenzprojekt"/>
-    	<copy todir="${pack.dir}/share/repository/fuxml/referenzprojekt">
-    	    <fileset dir="${rsrc.dir}/referenzprojekt" />
-    	</copy>-->
+    	<!-- Inhalte Kopieren: Referenzprojekt -->
+    	<mkdir dir="${rsrc.dir}/repository/HelloWorld"/>
+    	<copy todir="${pack.dir}/share/repository/fuxml/HelloWorld">
+    	    <fileset dir="${rsrc.dir}/repository/HelloWorld" />
+    	</copy>
     	
     	<echo level="info">Copy required Java Libraries</echo>
     	<!-- Utils  -->
@@ -427,7 +427,8 @@
    		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@mail-version@@@" value="${mail-version}"/>
    		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jmdns-version@@@" value="${jmdns-version}"/>
    		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@tex4ht-version@@@" value="${tex4ht-version}"/>
-   		
+		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@commonslang-version@@@" value="${commonslang-version}"/>
+		   
    		<mkdir dir="${pack.dir}/wix"/>
    		<unzip dest="${pack.dir}/wix" src="${lib.dir}/${wix.dir}/${wix.zip}"/>
    		<exec executable="${pack.dir}/wix/candle.exe" dir="${pack.dir}">
