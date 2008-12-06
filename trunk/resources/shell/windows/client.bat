@@ -70,7 +70,7 @@ set FUXML_HOME=%FUXML_HOME:\=/%
 @echo Standalone Client wird gestartet!
 @echo ----------------------------------------------------------
 
-java -jar %FUXML_DIR%\lib\openFuXML-Client-@@@openfuxml-version@@@s-win.jar
+java -jar %FUXML_DIR%\lib\openFuXML-cl-@@@openfuxml-version@@@-win.jar
 
 rem         Die nächste Zeile benennt die windows-eigene CONVERT.EXE wieder zurück
 rem @rename %SystemRoot%\SYSTEM32\convert_fs.exe convert.exe
