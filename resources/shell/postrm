@@ -46,6 +46,7 @@ function newsection()
 
 newsection "openFuXML Deinstallationsroutine"
 
+if [ -f /etc/init.d/openFuXML ]; then
 /etc/init.d/openFuXML stop
 
 newsection "Entferne Skripte und stelle Einstellungen wieder her"
@@ -54,6 +55,14 @@ newsection "Entferne Skripte und stelle Einstellungen wieder her"
  rm ${rcdir}2.d/S22openFuXML
  rm ${rcdir}5.d/S22openFuXML
  rm ${rcdir}0.d/K22openFuXML
+ 
+ 
+  newsection "Entferne Benutzer fuxml mit all seinen Dateien aus /home/fuxml"
+  userdel -r fuxml
+  
+fi
+
+
 
 
 if [ -f /usr/bin/htlatex/htlatex ]; then
@@ -71,6 +80,3 @@ if [ -f /etc/samba/smb.conf ]; then
    sed '/openfuxml/,/browseable/d' /etc/samba/smb.conf > /etc/samba/smb_without_openfuxml.conf
    cp /etc/samba/smb_without_openfuxml.conf /etc/samba/smb.conf
 fi
-
-  newsection "Entferne Benutzer fuxml mit all seinen Dateien aus /home/fuxml"
-  userdel -r fuxml
