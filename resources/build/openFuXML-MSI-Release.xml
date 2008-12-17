@@ -234,15 +234,31 @@
                 <Directory Id="fuxml_2" LongName="fuxml" Name="fuxml">
                   <Directory Id="hello" LongName="HelloWorld" Name="hellow">
                     <Component Id="repo" DiskId="1" Guid="C14DA3D8-6CBF-4A00-9535-410337076010">
-                
-                     <File Id="hwxml" LongName="HelloWorld.xml" Name="hw.xml" Source="share\repository\fuxml\HelloWorld\HelloWorld.xml" />
+                       <File Id="hwxml" LongName="HelloWorld.xml" Name="hw.xml" Source="share\repository\fuxml\HelloWorld\HelloWorld.xml" />
                     </Component>
-                  </Directory>
-              </Directory>
+                    <Directory Id="hello_content" LongName="content" Name="cont">
+                      <Component Id="content" DiskId="1" Guid="C14DA3D8-6CBF-4A00-9535-410112076010">
+	                     <File Id="chap1" LongName="chapter-1.xml" Name="c1.xml" Source="share\repository\fuxml\HelloWorld\content\chapter-1.xml" />
+	                     <File Id="chap2" LongName="chapter-2.xml" Name="c2.xml" Source="share\repository\fuxml\HelloWorld\content\chapter-2.xml" />
+	                     <File Id="chap3" LongName="chapter-3.xml" Name="c3.xml" Source="share\repository\fuxml\HelloWorld\content\chapter-3.xml" />
+	                     <File Id="vol1" LongName="vol-1.xml" Name="v1.xml" Source="share\repository\fuxml\HelloWorld\content\vol-1.xml" />
+	                     <File Id="vol2" LongName="vol-2.xml" Name="v2.xml" Source="share\repository\fuxml\HelloWorld\content\vol-2.xml" />
+                       </Component>
+                    </Directory>
+                    <Directory Id="hello_system" LongName="system" Name="sys">
+                       <Directory Id="hello_cfg" LongName="config" Name="cfg">
+                          <Component Id="config" DiskId="1" Guid="C14DA3D8-6CBF-4A00-9535-410112034310">
+                             <File Id="cfgxml" LongName="config.xml" Name="cfg.xml" Source="share\repository\fuxml\HelloWorld\system\config\config.xml" />
+                             <File Id="cfgtex" LongName="config.tex" Name="cfg.tex" Source="share\repository\fuxml\HelloWorld\system\config\config.tex" />
+                          </Component>
+                       </Directory>
+                    </Directory>
+                 </Directory>
               </Directory>
             </Directory>
           </Directory>
         </Directory>
+		</Directory>
       </Directory>
       <Directory Id="ProgramMenuFolder" Name="PMenu" LongName="Programs">
         <Directory Id="ProgramMenuDir" Name="fuxml" LongName="openFuXML @@@openfuxml-version@@@">
@@ -265,6 +281,8 @@
       <ComponentRef Id="scorm" />
       <ComponentRef Id="lib" />
       <ComponentRef Id="repo" />
+      <ComponentRef Id="content" />
+      <ComponentRef Id="config" />
        
     </Feature>
     <Icon Id="openfuxml.ico" SourceFile="openfuxml.ico" />
