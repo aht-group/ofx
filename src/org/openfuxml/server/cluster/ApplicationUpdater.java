@@ -16,7 +16,7 @@ import org.openfuxml.communication.cluster.ejb.ApplicationRepository;
 import org.openfuxml.communication.cluster.facade.ApplicationRepositoryFacade;
 import org.openfuxml.communication.cluster.facade.ApplicationRepositoryFacadeBean;
 
-import de.kisner.util.ObjectIO;
+import de.kisner.util.io.ObjectIO;
 import de.kisner.util.xml.XmlConfig;
 
 public class ApplicationUpdater

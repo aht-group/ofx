@@ -14,12 +14,11 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.openfuxml.producer.handler.AbstractProducer;
 
 import de.kisner.util.LoggerInit;
-import de.kisner.util.ObjectIO;
 import de.kisner.util.architecture.ArchUtil;
-import de.kisner.util.resourceloader.MultiResourceLoader;
+import de.kisner.util.io.ObjectIO;
+import de.kisner.util.io.resourceloader.MultiResourceLoader;
 import de.kisner.util.xml.XmlConfig;
 import de.kisner.util.xml.XmlElementNotFoundException;
 

@@ -3,16 +3,19 @@ openfuxml-version = 1.2.1
 #GUI
 swt-version = 3.4M2
 
+#XML
+jaxb-version = 2.1.b01.EA2
+saxon-version = 8.1.1
+jdom-version = 1.1
+jaxen-version = 1.1.1
+xerces-version = 2.9.0
+
 #UTILS
 ant-version = 1.7.0
 log4j-version = 1.2.14
-saxon-version = 8.1.1
-jdom-version = 1.1
 jboss-version = 5.0.0.b4
 jsch-version = 0.1.29
 jmsutils-version = 0.3.6
-jaxen-version = 1.1.1
-xerces-version = 2.9.0
 mail-version = 1.4
 jmdns-version = 1.0
 tex4ht-version = 20020613-424.1

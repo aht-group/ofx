@@ -12,7 +12,6 @@ public class ProductionHandlerException extends Exception
 	public ProductionHandlerException(Throwable cause)
 	{
 		super(cause);
-
 	}
 	
 	public ProductionHandlerException(String message, Throwable cause)

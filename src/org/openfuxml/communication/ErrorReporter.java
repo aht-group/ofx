@@ -46,5 +46,4 @@ public class ErrorReporter
 		msg.setSentDate(new Date());
 		Transport.send(msg);
 	}
-	
 }

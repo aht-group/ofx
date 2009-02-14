@@ -16,6 +16,5 @@ public interface Producer
 	ProducedEntities invoke(ProductionRequest request) throws ProductionSystemException,ProductionHandlerException;
 	
 	public void close();
-
 }
 
