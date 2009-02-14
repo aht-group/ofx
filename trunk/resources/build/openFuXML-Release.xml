@@ -64,7 +64,7 @@
 		<property name="ant.lib" value="ant-${ant-version}.jar" />
 		<property name="antlauncher.lib" value="ant-launcher-${ant-version}.jar" />
 		<property name="ant.bundle" value="apache-ant-${ant-version}-bin.tar.gz" />
-	<property name="commonslang.dir" value="utils/lang"/><property name="commonslang.lib" value="commons-lang-${commonslang-version}.jar" />
+	<property name="commonslang.dir" value="utils/commons/lang"/><property name="commonslang.lib" value="commons-lang-${commonslang-version}.jar" />
 	<property name="wix.dir" value="utils/wix"/><property name="wix.zip" value="wix-${wix-version}-binaries.zip" />
 		
 	<!-- Library Definitions: GUI-->
@@ -73,10 +73,10 @@
 		<property name="swt-linux.lib" value="swt-linux-${swt-version}.jar"/>
 		<property name="swt-osx.lib" value="swt-osx-${swt-version}.jar"/>
 	
-	<!-- Library Definitions: Messaging-->
-	<property name="mail.dir" value="msg/mail"/><property name="mail.lib" value="mail-${mail-version}.jar"/>
-	<property name="jsch.dir" value="msg/jsch"/><property name="jsch.lib" value="jsch-${jsch-version}.jar"/>
-	<property name="jmdns.dir" value="msg/jmdns"/><property name="jmdns.lib" value="jmdns-${jmdns-version}.jar"/>
+	<!-- Library Definitions: Net-->
+	<property name="mail.dir" value="net/mail"/><property name="mail.lib" value="mail-${mail-version}.jar"/>
+	<property name="jsch.dir" value="net/jsch"/><property name="jsch.lib" value="jsch-${jsch-version}.jar"/>
+	<property name="jmdns.dir" value="net/jmdns"/><property name="jmdns.lib" value="jmdns-${jmdns-version}.jar"/>
 	
 	<!-- Lib-Definition JBoss -->
 	<property name="jboss.dir" value="jboss/${jboss-version}"/>
@@ -88,10 +88,14 @@
 	<property name="jaxen.dir" value="xml/jaxen"/><property name="jaxen.lib" value="jaxen-${jaxen-version}.jar" />
 	<property name="saxon.dir" value="xml/saxon"/><property name="saxon.lib" value="saxon-${saxon-version}.jar" />
 	<property name="xerces.dir" value="xml/xerces"/><property name="xerces.lib" value="xercesImpl-${xerces-version}.jar" />
+	<property name="jaxb.dir" value="xml/jaxb/${jaxb-version}"/>
+		<property name="jaxbapi.lib" value="jaxb-api-${jaxb-version}.jar"/>
+		<property name="jaxbimpl.lib" value="jaxb-impl-${jaxb-version}.jar"/>
 	
 	<!-- Library-Definition für JAR-Files  -->
 	<property name="jar.jboss5" value="${jboss-client.lib} ${jboss-system-jmx.lib}"/>
-	<property name="jar.xml" value="${jdom.lib} ${jaxen.lib} ${xerces.lib}"/>
+	<property name="jar.jaxb" value="lib/${jaxbapi.lib} lib/${jaxbimpl.lib}"/>
+	<property name="jar.xml" value="${jdom.lib} ${jaxen.lib} ${xerces.lib} ${jar.jaxb}"/>
 	<property name="jar.log" value="${log4j.lib} ${log4j-zeroconf.lib} ${jmdns.lib}"/>
 	<property name="jar.common" value="${jsch.lib} ${mail.lib}"/>
 	<property name="jar.msg" value="${mail.lib} ${jsch.lib} ${jmdns.lib}"/>
@@ -119,8 +123,17 @@
 	<!-- XML  -->
 		<pathelement location="${lib.dir}/${jdom.dir}/${jdom.lib}"/>
 		<pathelement location="${lib.dir}/${jaxen.dir}/${jaxen.lib}"/>
-		<pathelement location="${lib.dir}/${xerces.dir}/${xerces.lib}"/>  
+		<pathelement location="${lib.dir}/${xerces.dir}/${xerces.lib}"/>
+		<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbapi.lib}"/>
+		<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
 	</path>
+	
+	<!-- Definition of own Tasks -->
+	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+	  <classpath>
+	    <fileset dir="${lib.dir}/${jaxb.dir}" includes="*.jar"/>
+	  </classpath>
+	</taskdef>
 			
 	<target name="00 - Classpath" description="Echos Classpath">
 		<echo level="info">Lib-Info for openFuXML v.${openfuxml-version}</echo>
@@ -138,18 +151,19 @@
 		<echo level="info">           ${jaxen.dir}/${jaxen.lib}</echo>
 		<echo level="info">           ${xerces.dir}/${xerces.lib}</echo>
 		<echo level="info">           ${saxon.dir}/${saxon.lib}</echo>
+		<echo level="info">           ${jaxb.dir}/${jaxbapi.lib}</echo>
+		<echo level="info">           ${jaxb.dir}/${jaxbimpl.lib}</echo>
 
-			<echo level="info">Classpath: ${jfreechart.dir}/${jfreechart.lib}</echo>
-			<echo level="info">Classpath: ${jcommon.dir}/${jcommon.lib}</echo>
-			
-			<echo level="info">Classpath: ${smack.dir}/${smack.lib}</echo>
-			<echo level="info">Classpath: ${smack.dir}/${smackx.lib}</echo>
-			<echo level="info">Classpath: ${irc.dir}/${irc.lib}</echo>
-			<echo level="info">Classpath: ${jaf.libdir}</echo>
-			
-			<echo level="info">------------------------</echo>
-			<echo level="info">${jar.lib}</echo>
-			<echo level="info">${classpath}</echo>
+		<echo level="info">Classpath: ${jfreechart.dir}/${jfreechart.lib}</echo>
+		<echo level="info">Classpath: ${jcommon.dir}/${jcommon.lib}</echo>
+		
+		<echo level="info">Classpath: ${jaf.libdir}</echo>
+		
+		<echo level="info">------------------------</echo>
+		<echo level="info">${jar.lib}</echo>
+		<echo level="info">${classpath}</echo>
+		<echo level="info">------------------------</echo>
+		<echo level="warn">Please use Target04 to verify all libraries</echo>
 	</target>
 	
 	<!-- target clean -->	
@@ -168,6 +182,11 @@
 	</target>
 
 	<target name="03 - compile" depends="02 - init" description="Compile the source">
+		<echo level="info">Creating JAXB Configuration Class</echo>
+		<xjc schema="resources/xsd/config.xsd"
+						destdir="${src.dir}"
+						package="org.openfuxml.util.config.jaxb" /> 
+		
 		<javac	srcdir="${src.dir}"
 				destdir="${build-bin.dir}"
 				debug="true"
@@ -236,6 +255,8 @@
     		<copy file="${lib.dir}/${jaxen.dir}/${jaxen.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${xerces.dir}/${xerces.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${saxon.dir}/${saxon.lib}" todir="${pack-lib.dir}"/>
+    		<copy file="${lib.dir}/${jaxb.dir}/${jaxbapi.lib}" todir="${pack-lib.dir}"/>
+    		<copy file="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}" todir="${pack-lib.dir}"/>
     	<!-- JBoss  -->
     		<copy file="${lib.dir}/${jboss.dir}/${jboss-client.lib}" todir="${pack-lib.dir}"/>
     	<!-- GUI  -->

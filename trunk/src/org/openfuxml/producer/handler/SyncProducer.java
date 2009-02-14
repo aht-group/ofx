@@ -66,6 +66,5 @@ public class SyncProducer extends AbstractProducer implements Producer
 		ProducedEntities producedEntities=p.invoke(pReq);
 		sync.upOutput(pReq);
 		return producedEntities;
-		
 	}
 }

@@ -1,9 +1,6 @@
 package org.openfuxml.communication.client.simple;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -11,7 +8,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
@@ -56,7 +52,6 @@ import org.openfuxml.producer.handler.DirectProducer;
 import org.openfuxml.producer.handler.Producer;
 import org.openfuxml.producer.handler.SocketProducer;
 import org.openfuxml.server.DummyServer;
-import org.openfuxml.util.FuXmlLogger;
 
 import de.kisner.util.LoggerInit;
 import de.kisner.util.architecture.ArchUtil;
@@ -1282,8 +1277,8 @@ public class Client extends Composite
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("resources/config");
-			loggerInit.init();
-		
+			loggerInit.init();	
+			
 		String appDirName = ArchUtil.getAppSettingsDir("openFuXML");
 		File appDir = new File(appDirName);
 		if(!appDir.exists())
@@ -1293,7 +1288,7 @@ public class Client extends Composite
 	//		System.exit(-1);
 		}
 		
-		XmlConfig xCnf = new XmlConfig("openFuXML-config.xml", "openFuXML-1.x.xsd");
+		XmlConfig xCnf = new XmlConfig("openFuXML.xml", "openFuXML-1.x.xsd");
 		
 		Display disp = Display.getDefault();
 		Shell sh = new Shell(disp);
@@ -1302,10 +1297,13 @@ public class Client extends Composite
 		Point size = client.getSize();
 		sh.setLayout(new FillLayout());
 		sh.layout();
-		if(size.x == 0 && size.y == 0) {
+		if(size.x == 0 && size.y == 0)
+		{
 			client.pack();
 			sh.pack();
-		} else {
+		}
+		else
+		{
 			Rectangle shellBounds = sh.computeTrim(0, 0, size.x, size.y);
 			if (sh.getMenuBar() != null)
 				shellBounds.height -= 22;
@@ -1320,7 +1318,8 @@ public class Client extends Composite
 		sh.pack();
 		sh.open();
 
-		while (!sh.isDisposed()) {
+		while (!sh.isDisposed())
+		{
 			if (!disp.readAndDispatch())
 				disp.sleep();
 		}
