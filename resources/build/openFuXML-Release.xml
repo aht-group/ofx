@@ -26,7 +26,7 @@
 
 <project name="openFuXML" default="" basedir="../..">
 
-	<property file="resources/properties/ant.properties.dist"/>
+	<property file="resources/properties/ant.properties"/>
 	<property file="resources/properties/ws.properties"/>
 	
 
@@ -147,6 +147,9 @@
 		<echo level="info">           ${commonslang.dir}/${commonslang.lib}</echo>
 		<echo level="info">   Jboss : ${jboss.dir}/${jboss-client.lib}</echo>
 		<echo level="info">           ${jboss.dir}/${jboss-system-jmx.lib}</echo>
+		<echo level="info">   GUI   : ${swt.dir}/${swt-osx.lib}</echo>
+		<echo level="info">           ${swt.dir}/${swt-win.lib}</echo>
+		<echo level="info">           ${swt.dir}/${swt-linux.lib}</echo>
 		<echo level="info">   XML   : ${jdom.dir}/${jdom.lib}</echo>
 		<echo level="info">           ${jaxen.dir}/${jaxen.lib}</echo>
 		<echo level="info">           ${xerces.dir}/${xerces.lib}</echo>
