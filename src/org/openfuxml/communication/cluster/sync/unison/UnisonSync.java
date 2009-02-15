@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
 
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.openfuxml.communication.cluster.sync.ServerSync;
 import org.openfuxml.communication.cluster.sync.ssh.SshChecker;
@@ -32,15 +34,18 @@ import de.kisner.util.parser.LogParser;
 public class UnisonSync implements ServerSync
 {
 	static Logger logger = Logger.getLogger(UnisonSync.class);
+	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	String remoteRepo,remoteOutput;
 	String localRepo,localOutput;
 	SshChecker sshCC;
 	
-	public UnisonSync(String localRepo,String localOutput)
+	public UnisonSync(Configuration config)
 	{
-		this.localRepo=localRepo;
-		this.localOutput=localOutput;
+		String baseDir = config.getString("dirs/dir[@type='basedir']");
+		//TODO Relative PATH
+		localRepo=baseDir+fs+config.getString("dirs/dir[@type='repository']");;
+		localOutput= baseDir+fs+config.getString("dirs/dir[@type='output']");
 		
 		sshCC=new SshChecker(15,5);
 	}

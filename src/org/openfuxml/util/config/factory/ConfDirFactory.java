@@ -13,31 +13,42 @@ public class ConfDirFactory
 		
 	}
 	
-	public Dirs getDirs()
+	public Dirs getDirs(AbstractConfFactory.StartUpEnv startupenv, String baseDir)
 	{
 		Dirs dirs = new Dirs();
 	
-		Dir dir = new Dir();
-			dir.setType("basedir");
-			dir.setContent(".");
-			dir.setRel(true);
-			dirs.getDir().add(dir);
-		dir = new Dir();
-			dir.setType("logs");
-			dir.setContent("share/logs");
-			dir.setRel(true);
-			dirs.getDir().add(dir);
-		dir = new Dir();
-			dir.setType("output");
-			dir.setContent("share/output");
-			dir.setRel(true);
-			dirs.getDir().add(dir);
-		dir = new Dir();
-			dir.setType("repository");
-			dir.setContent("share/repositry");
-			dir.setRel(true);
-			dirs.getDir().add(dir);
-		 
+		Dir dirBase = new Dir();
+			dirBase.setType("basedir");
+			dirBase.setContent(baseDir);
+			dirBase.setRel(false);
+			
+		Dir dirLog = new Dir();
+			dirLog.setType("logs");
+			dirLog.setRel(true);
+			
+		Dir dirOutput = new Dir();
+			dirOutput.setType("output");
+			dirOutput.setRel(true);
+			
+		Dir dirRepo = new Dir();
+			dirRepo.setType("repository");
+			dirRepo.setRel(true);	
+		
+		switch(startupenv)
+		{
+			case DEVELOPER:		dirLog.setContent("dist/logs");
+								dirOutput.setContent("dist/output");
+								dirRepo.setContent("resources/repositry");break;
+			case PRODUCTION: 	dirLog.setContent("share/logs");
+								dirOutput.setContent("share/output");
+								dirRepo.setContent("share/repositry");break;
+		}
+			
+		dirs.getDir().add(dirBase);	
+		dirs.getDir().add(dirLog);
+		dirs.getDir().add(dirOutput);
+		dirs.getDir().add(dirRepo);
+		
 		return dirs;
 	} 
 }

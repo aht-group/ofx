@@ -9,6 +9,7 @@ import javax.naming.CommunicationException;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.communication.cluster.facade.OpenFuxmlFacade;
@@ -26,6 +27,7 @@ import org.openfuxml.server.simple.SimpleServerThread;
 import org.openfuxml.server.simple.SimpleShutdownThread;
 import org.openfuxml.util.FuXmlLogger;
 
+import de.kisner.util.ConfigLoader;
 import de.kisner.util.Connector;
 import de.kisner.util.LoggerInit;
 import de.kisner.util.xml.XmlConfig;
@@ -44,23 +46,20 @@ public class EnterpriseServer extends AbstractServer
 	
 	Host host;
 	
-	public EnterpriseServer(XmlConfig xCnf)
+	public EnterpriseServer(Configuration config)
 	{
-		super(xCnf);
+		super(config);
 		logger.info("Applikation wird gestartet");
-		host = new Host();
-		host.setHostIP(xCnf.getHostIp());
-		host.setHostName(xCnf.getHostName());
-		host.setRecord(new Date());
+		host = getHost();
 		logger.debug("Host "+host.getHostName()+"("+host.getHostIP()+") id="+host.getId());
 		
-		int serverPort =xCnf.getIntAttribute("net/server[@typ=\"socket\"]","port");
+		int serverPort =config.getInt("net/port");
 	
 		setSystemProperties();
 		checkSystemProperties();
 		
 		
-		String jndiHost = xCnf.getAttribute("net/server[@typ=\"jndi\"]","host")+":"+xCnf.getAttribute("net/server[@typ=\"jndi\"]","port");
+		String jndiHost = config.getString("net/jndi[@typ='host']","host")+":"+config.getInt("net/jndi[@typ='port']");
 		logger.info("Verbinden nach: "+jndiHost);
 		InitialContext ctx=null;
 		try {ctx = Connector.getContext(jndiHost);}
@@ -71,7 +70,7 @@ public class EnterpriseServer extends AbstractServer
 			OpenFuxmlFacade fO = (OpenFuxmlFacade) ctx.lookup(OpenFuxmlFacadeBean.class.getSimpleName()+"/remote");
 			
 			host=fO.updateHost(host);
-			Producer p = new SyncProducer(xCnf,host);
+			Producer p = new SyncProducer(config,host);
 			AvailableApplications aas = p.getAvailableApplications();
 			
 			for(Application a : aas.getApplications())
@@ -106,7 +105,7 @@ public class EnterpriseServer extends AbstractServer
 		{
 			while (myShutdownThread.getAppActive())
 			{
-				SimpleServerThread sst = new SimpleServerThread(clientTg, serverSocket.accept(),new SyncProducer(xCnf,host)); 
+				SimpleServerThread sst = new SimpleServerThread(clientTg, serverSocket.accept(),new SyncProducer(config,host)); 
 				sst.start();
 			}
 		}
@@ -136,9 +135,8 @@ public class EnterpriseServer extends AbstractServer
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
 		
-		logger.info("**************************************************************");
-		XmlConfig xCnf = new XmlConfig("openFuXML-config.xml", "openFuXML-1.x.xsd");
+		Configuration config = ConfigLoader.load("openFuXML.xml");
 
-		new EnterpriseServer(xCnf);
+		new EnterpriseServer(config);
 	}
 }

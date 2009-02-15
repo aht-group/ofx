@@ -3,6 +3,7 @@ package org.openfuxml.communication.client.simple;
 import java.util.Enumeration;
 import java.util.Properties;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -25,6 +26,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+
+import de.kisner.util.ConfigLoader;
 
 /**
  * In dem Dialog EinstellungenDialog werden die Einstellungen für die
@@ -60,7 +63,8 @@ public class EinstellungenDialog extends Dialog
 	private Button BtnCancel;
 	
 	private RGB rgbBackground;
-
+	private Configuration config;
+	
 	/**
 	 * Erzeugt eine Instanz von EinstellungenDialog.
 	 * 
@@ -68,10 +72,11 @@ public class EinstellungenDialog extends Dialog
 	 * @param properties
 	 * @param rgb
 	 */
-	public EinstellungenDialog(Shell parent, RGB rgb)
+	public EinstellungenDialog(Shell parent, RGB rgb, Configuration config)
 	{
 		super(parent, 0);
 		this.rgbBackground = rgb;
+		this.config=config;
 	}
 
 	/**
@@ -164,7 +169,7 @@ public class EinstellungenDialog extends Dialog
 			}
 			{
 				textHost = new Text(compositeServer, SWT.BORDER);
-				textHost.setText(ClientConfigWrapper.host);
+				textHost.setText(config.getString("net/host"));
 
 				{
 					GridData data = new GridData();
@@ -179,7 +184,7 @@ public class EinstellungenDialog extends Dialog
 			}
 			{
 				textPort = new Text(compositeServer, SWT.BORDER);
-				textPort.setText(""+ClientConfigWrapper.port);
+				textPort.setText(config.getString("net/port"));
 
 				{
 					GridData data = new GridData();
@@ -208,7 +213,7 @@ public class EinstellungenDialog extends Dialog
 			}
 			{
 				labelRepository = new Label(compositeVerzeichnisse, SWT.NONE);
-				labelRepository.setText(ClientConfigWrapper.getServerDir("repository"));
+				labelRepository.setText(config.getString("dirs/dir[@type='repository']"));
 	
 				{
 					GridData data = new GridData();
@@ -247,7 +252,7 @@ public class EinstellungenDialog extends Dialog
 			}
 			{
 				labelOutput = new Label(compositeVerzeichnisse, SWT.NONE);
-				labelOutput.setText(ClientConfigWrapper.getServerDir("output"));
+				labelOutput.setText(config.getString("dirs/dir[@type='output']"));
 
 				{
 					GridData data = new GridData();
@@ -513,9 +518,10 @@ public class EinstellungenDialog extends Dialog
 	public void btnOK()
 	{
 		// TODO @Andy Plausis fehlen noch
-		ClientConfigWrapper.setServer(textHost.getText(), textPort.getText());
-		ClientConfigWrapper.updateServerDir("repository", labelRepository.getText());
-		ClientConfigWrapper.updateServerDir("output", labelOutput.getText());
+		ConfigLoader.update("net/port", textPort.getText());
+		ConfigLoader.update("net/host", textHost.getText());
+		ConfigLoader.update("dirs/dir[@type='repository']", labelRepository.getText());
+		ConfigLoader.update("dirs/dir[@type='output']", labelOutput.getText());
 		
 		// Erst werden alle Properties, die mit einem "." beginnen gelöscht,
 		// dann werden die Properties, die in der Table tableAnwendungen

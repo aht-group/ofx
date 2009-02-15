@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.graphics.Point;
@@ -14,6 +15,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.jdom.Attribute;
 import org.jdom.Element;
+import org.openfuxml.util.config.factory.ClientConfFactory;
 
 import de.kisner.util.LoggerInit;
 import de.kisner.util.architecture.ArchUtil;
@@ -106,13 +108,14 @@ public class WsOpenFuXML
 	
 	public void initGui()
 	{
+		//TODO diesen Krempel prüfen
 		String xml = openFuXMLDir+fSep+version+fSep+"openFuXML-config.xml";
 		String xsd = openFuXMLDir+fSep+version+fSep+"openFuXML-1.x.xsd";
 		logger.warn("No validation will be done with "+xml);
 		XmlConfig xCnf = new XmlConfig(xml,true);//, xsd);
 		
 		String baseDir;
-		try {baseDir = xCnf.getTextException("dirs/dir[@typ=\"basedir\"]");}
+		try {baseDir = xCnf.getTextException("dirs/dir[@type=\"basedir\"]");}
 		catch (XmlElementNotFoundException e)
 		{
 			baseDir = xCnf.getWorkingDir();
@@ -122,12 +125,16 @@ public class WsOpenFuXML
 		Element xmlBaseDir = new Element("dir");
 		xmlBaseDir.setAttribute(new Attribute("typ","basedir")); 
 		xmlBaseDir.setText(openFuXMLDir+fSep+version);
-		try{xCnf.updateElement("dirs/dir[@typ=\"basedir\"]", xmlBaseDir);}
+		try{xCnf.updateElement("dirs/dir[@type=\"basedir\"]", xmlBaseDir);}
 		catch (XmlElementNotFoundException e) {e.printStackTrace();}
+		
+		ClientConfFactory ccf = new ClientConfFactory();
+		ccf.init("openFuXML.xml");
+		Configuration config = ccf.getConfiguration();	
 		
 		Display disp = Display.getDefault();
 		Shell sh = new Shell(disp);
-		Client client = new Client(sh, disp,xCnf);
+		Client client = new Client(sh, disp,config);
 		
 		Point size = client.getSize();
 		sh.setLayout(new FillLayout());
