@@ -18,6 +18,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
@@ -44,6 +46,7 @@ import org.openfuxml.client.util.ImgCanvas;
 import org.openfuxml.communication.client.dialog.HelpAboutDialog;
 import org.openfuxml.communication.client.simple.Client;
 import org.openfuxml.model.ejb.OfxProject;
+import org.openfuxml.util.config.factory.ClientConfFactory;
 
 import de.kisner.util.LoggerInit;
 import de.kisner.util.io.resourceloader.ImageResourceLoader;
@@ -56,13 +59,9 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
 public class OpenFuxmlClient extends Composite implements Runnable
 {
 	static Logger logger = Logger.getLogger(Client.class);
+	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	public final static String Title = "FuXML - Client";
-	
-	public final static String IMG_FUXLOGO			= "/swt/images/fuxlogo.gif";
-	public final static String IMG_FUXICON			= "/swt/images/FuXML-Icon.gif";
-	public final static String IMG_FUXICON_KLEIN	= "/swt/images/FuXML-Icon-klein.gif";
-	public final static String IMG_PROJECT			= "/swt/images/tab/project.png";
 	public final static String IMG_SYSTEMINFO		= "/swt/images/tab/systeminfo.png";
 	
 	private Label lBenutzer;
@@ -95,15 +94,15 @@ public class OpenFuxmlClient extends Composite implements Runnable
 	private Thread pingThread;
 	private boolean pingThreadAktiv;
 	private int pingThreadZaehler;
-	
+	private Configuration config;
 	private Shell shell;
 
-	public OpenFuxmlClient (Composite parent, int style)
+	public OpenFuxmlClient (Composite parent, int style, Configuration config)
 	{
 		super(parent, style);
-		
+		this.config=config;
 		// Open the SplashScreen
-		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN);
+		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
 		splashscreen.open();
 		
 		this.parent=parent;
@@ -266,7 +265,8 @@ public class OpenFuxmlClient extends Composite implements Runnable
 			lBenutzer.setLayoutData(data);
 		}
 		{
-			ImgCanvas imgCanvas = new ImgCanvas(this, IMG_FUXLOGO);
+			String res = config.getString("logos/@dir")+fs+config.getString("logos/logo[@type='fuxklein']");
+			ImgCanvas imgCanvas = new ImgCanvas(this, res);
 			GridData data = new GridData();
 			data.widthHint = 134;
 			data.heightHint = 40;
@@ -401,7 +401,8 @@ public class OpenFuxmlClient extends Composite implements Runnable
 				logger.debug("Adding "+ofxProject.getName());
 
 				TabItem tabItem = new TabItem(tfProjekte, SWT.NONE);
-				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), IMG_PROJECT, getDisplay());
+				String res = config.getString("icons/@dir")+fs+config.getString("icons/icon[@type='project']");
+				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 				
 				tabItem.setImage(img);
 				tabItem.setText(ofxProject.getName());
@@ -550,7 +551,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 */	
 	public void HilfeInfoUeber()
 	{
-		HelpAboutDialog dialog = new HelpAboutDialog(getShell(), HelpAboutDialog.ABOUT_DIALOG);
+		HelpAboutDialog dialog = new HelpAboutDialog(getShell(), HelpAboutDialog.ABOUT_DIALOG, config);
 		dialog.open();
 	}
 
@@ -572,16 +573,21 @@ public class OpenFuxmlClient extends Composite implements Runnable
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
 		
+		ClientConfFactory ccf = new ClientConfFactory();
+		ccf.init("openFuXML.xml");
+		
+		Configuration config = ccf.getConfiguration();	
+			
 		Display disp = Display.getDefault();
 		Shell sh = new Shell(disp);
 		
-		HelpAboutDialog splashscreen = new HelpAboutDialog(sh, HelpAboutDialog.SPLASH_SCREEN);
+		HelpAboutDialog splashscreen = new HelpAboutDialog(sh, HelpAboutDialog.SPLASH_SCREEN,config);
 		splashscreen.open();
 		try{Thread.sleep(3000);} catch (InterruptedException e){logger.error("InterruptedException", e);}
 		splashscreen.close();
 		splashscreen = null;
 		
-		OpenFuxmlClient client = new OpenFuxmlClient(sh, SWT.NULL);
+		OpenFuxmlClient client = new OpenFuxmlClient(sh, SWT.NULL, config);
 		
 		sh.setLayout(new FillLayout());
 		sh.layout();
@@ -614,8 +620,9 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		// Titelzeile
 		sh.setText(OpenFuxmlClient.Title);
 		
-		// Icon
-		final String strImages[] = {IMG_FUXICON_KLEIN, IMG_FUXICON};
+		String resIconFux = config.getString("icons/@dir")+fs+config.getString("icons/icon[@type='fux']");
+		String resIconFuxKlein = config.getString("icons/@dir")+fs+config.getString("icons/icon[@type='fuxklein']");
+		final String strImages[] = {resIconFuxKlein, resIconFux};
 		sh.setImages(client.makeImages(strImages));
 
 		sh.open();

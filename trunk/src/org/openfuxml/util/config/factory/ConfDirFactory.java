@@ -1,5 +1,6 @@
 package org.openfuxml.util.config.factory;
 
+import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.openfuxml.util.config.jaxb.Dirs;
 import org.openfuxml.util.config.jaxb.Dirs.Dir;
@@ -7,6 +8,7 @@ import org.openfuxml.util.config.jaxb.Dirs.Dir;
 public class ConfDirFactory
 {
 	static Logger logger = Logger.getLogger(ClientConfFactory.class);
+	protected static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	public ConfDirFactory()
 	{
@@ -36,12 +38,12 @@ public class ConfDirFactory
 		
 		switch(startupenv)
 		{
-			case DEVELOPER:		dirLog.setContent("dist/logs");
-								dirOutput.setContent("dist/output");
-								dirRepo.setContent("resources/repositry");break;
-			case PRODUCTION: 	dirLog.setContent("share/logs");
-								dirOutput.setContent("share/output");
-								dirRepo.setContent("share/repositry");break;
+			case DEVELOPER:		dirLog.setContent("dist"+fs+"logs");
+								dirOutput.setContent("dist"+fs+"output");
+								dirRepo.setContent("resources"+fs+"repository");break;
+			case PRODUCTION: 	dirLog.setContent("share"+fs+"logs");
+								dirOutput.setContent("share"+fs+"output");
+								dirRepo.setContent("share"+fs+"repository");break;
 		}
 			
 		dirs.getDir().add(dirBase);	

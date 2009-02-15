@@ -1,5 +1,7 @@
 package org.openfuxml.communication.client.dialog;
 
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 
 import org.eclipse.swt.SWT;
@@ -24,6 +26,8 @@ import org.eclipse.swt.widgets.Shell;
 
 import org.openfuxml.communication.client.simple.Client;
 
+import de.kisner.util.io.resourceloader.ImageResourceLoader;
+
 /**
  * The class HelpAboutDialog implements the Dialog "About FuXML-Client"
  * and the SplashScreen which can be opened at the programstart. 
@@ -41,14 +45,12 @@ import org.openfuxml.communication.client.simple.Client;
 public class HelpAboutDialog extends Dialog
 {
 	static Logger logger = Logger.getLogger(HelpAboutDialog.class);
+	private static String fs = SystemUtils.FILE_SEPARATOR;
 
 	public final static int ABOUT_DIALOG	= 0;
 	public final static int SPLASH_SCREEN	= 1;
 	
-	public final static String IMG_FUXLOGO = "/images/client/openFuXML-Logo-gross.png";
-	
-	private int type;
-	
+	private int type;	
 	private Color colBackground; 
 	
 	private Shell shell;
@@ -96,6 +98,7 @@ public class HelpAboutDialog extends Dialog
 	};
 	
 	private Listener listener;
+	private Configuration config;
 
 	/**
 	 * Constructor of the class HelpAboutDialog.
@@ -103,9 +106,10 @@ public class HelpAboutDialog extends Dialog
 	 * @param parent
 	 * @param type - defines the type (ABOUT_DIALOG or SPLASH_SCREEN)
 	 */
-	public HelpAboutDialog(Shell parent, int type)
+	public HelpAboutDialog(Shell parent, int type, Configuration config)
 	{
 		super(parent, 0);
+		this.config=config;
 		
 		this.type = type;
 		
@@ -232,7 +236,8 @@ public class HelpAboutDialog extends Dialog
 			labelImage.setLayoutData(data);
 			labelImage.setBackground(shell.getBackground());
 			
-			Image img = Client.loadImage(getClass(), shell.getDisplay(), IMG_FUXLOGO);
+			String res = config.getString("logos/@dir")+fs+config.getString("logos/logo[@type='fuxgross']");
+			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, shell.getDisplay());
 			if (img != null)
 			{
 				labelImage.setImage(img);
