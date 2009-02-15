@@ -65,6 +65,9 @@
 		<property name="antlauncher.lib" value="ant-launcher-${ant-version}.jar" />
 		<property name="ant.bundle" value="apache-ant-${ant-version}-bin.tar.gz" />
 	<property name="commonslang.dir" value="utils/commons/lang"/><property name="commonslang.lib" value="commons-lang-${commonslang-version}.jar" />
+	<property name="commonsconfig.dir" value="utils/commons/config"/><property name="commonsconfig.lib" value="commons-configuration-${commonsconfig-version}.jar" />
+	<property name="commonscollections.dir" value="utils/commons/collections"/><property name="commonscollections.lib" value="commons-collections-${commonscollections-version}.jar" />
+	<property name="commonsjxpath.dir" value="utils/commons/jxpath"/><property name="commonsjxpath.lib" value="commons-jxpath-${commonsjxpath-version}.jar" />
 	<property name="wix.dir" value="utils/wix"/><property name="wix.zip" value="wix-${wix-version}-binaries.zip" />
 		
 	<!-- Library Definitions: GUI-->
@@ -98,10 +101,11 @@
 	<property name="jar.xml" value="${jdom.lib} ${jaxen.lib} ${xerces.lib} ${jar.jaxb}"/>
 	<property name="jar.log" value="${log4j.lib} ${log4j-zeroconf.lib} ${jmdns.lib}"/>
 	<property name="jar.common" value="${jsch.lib} ${mail.lib}"/>
+	<property name="jar.commons" value="lib/${commonslang.lib}lib/${commonsconfig.lib} lib/${commonscollections.lib} lib/${commonsjxpath.lib}" />
 	<property name="jar.msg" value="${mail.lib} ${jsch.lib} ${jmdns.lib}"/>
 	<property name="jar.ant" value="${ant.lib} ${antlauncher.lib}"/>
 	<property name="jar.util" value="${jar.ant} ${commonslang.lib} ${jmsutils.lib}"/>
-	<property name="jar.lib" value="${jar.log} ${jar.xml} ${jar.common} ${jar.jboss5} ${jar.msg} ${jar.util}"/>
+	<property name="jar.lib" value="${jar.log} ${jar.xml} ${jar.common} ${jar.jboss5} ${jar.msg} ${jar.util} ${jar.commons}"/>
 	
 	<!-- Classpath wird gesetzt -->	
 	<path id="classpath">
@@ -109,6 +113,9 @@
 		<pathelement location="${lib.dir}/${log4j.dir}/${log4j.lib}"/>
 		<pathelement location="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}"/>
 		<pathelement location="${lib.dir}/${commonslang.dir}/${commonslang.lib}"/>
+		<pathelement location="${lib.dir}/${commonsconfig.dir}/${commonsconfig.lib}"/>
+		<pathelement location="${lib.dir}/${commonscollections.dir}/${commonscollections.lib}"/>
+		<pathelement location="${lib.dir}/${commonsjxpath.dir}/${commonsjxpath.lib}"/>
 	<!-- Msg  -->
 		<pathelement location="${lib.dir}/${mail.dir}/${mail.lib}"/>
 		<pathelement location="${lib.dir}/${jsch.dir}/${jsch.lib}"/>
@@ -145,6 +152,9 @@
 		<echo level="info">           ${jmsutils.dir}/${jmsutils.lib}</echo>
 		<echo level="info">           ${ant.dir}/${ant.lib}</echo>
 		<echo level="info">           ${commonslang.dir}/${commonslang.lib}</echo>
+		<echo level="info">           ${commonsconfig.dir}/${commonsconfig.lib}</echo>
+		<echo level="info">           ${commonscollections.dir}/${commonscollections.lib}</echo>
+		<echo level="info">           ${commonsjxpath.dir}/${commonsjxpath.lib}</echo>
 		<echo level="info">   Jboss : ${jboss.dir}/${jboss-client.lib}</echo>
 		<echo level="info">           ${jboss.dir}/${jboss-system-jmx.lib}</echo>
 		<echo level="info">   GUI   : ${swt.dir}/${swt-osx.lib}</echo>
@@ -249,7 +259,10 @@
     		<copy file="${lib.dir}/${log4j.dir}/${log4j.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${log4j.dir}/${log4j-zeroconf.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${jmdns.dir}/${jmdns.lib}" todir="${pack-lib.dir}"/>
-    		<copy file="${lib.dir}/${commonslang.dir}/${commonslang.lib}" todir="${pack-lib.dir}"/>
+			<copy file="${lib.dir}/${commonslang.dir}/${commonslang.lib}" todir="${pack-lib.dir}"/>
+			<copy file="${lib.dir}/${commonsconfig.dir}/${commonsconfig.lib}" todir="${pack-lib.dir}"/>
+			<copy file="${lib.dir}/${commonscollections.dir}/${commonscollections.lib}" todir="${pack-lib.dir}"/>
+			<copy file="${lib.dir}/${commonsjxpath.dir}/${commonsjxpath.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${ant.dir}/${ant.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${ant.dir}/${antlauncher.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}" todir="${pack-lib.dir}"/>
