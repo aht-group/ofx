@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Gerd Steinkamp (FernUniversität Hagen) -->
-<!DOCTYPE kurs SYSTEM "system/dtd/fernuni01.dtd">
+<!DOCTYPE kurs SYSTEM "system/dtd/openfuxml.dtd">
 <kurs> <metadata> <kurs-nr></kurs-nr> <kurs-titel>openFuXML HelloWorld</kurs-titel> <kurs-titel/> <kurs-titel/> <kurs-autor/> <kurs-autor/> <kurs-autor/> </metadata> 
   <lehrtext> 
   <abschnitt extern="ja" quelle="content/chapter-1.xml"> 
