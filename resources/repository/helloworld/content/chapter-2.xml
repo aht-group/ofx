@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Gerd Steinkamp (FernUniversität Hagen) -->
-<!DOCTYPE abschnitt SYSTEM "../system/dtd/fernuni01.dtd">
+<!DOCTYPE abschnitt SYSTEM "../system/dtd/openfuxml.dtd">
 <abschnitt id="c2">
 	<titel>Kapitel II</titel>
 	<abschnitt id="a_einleitung">

@@ -28,6 +28,7 @@
 	
 	
 	<xsl:template match="aenderungsdatum"/>	
+	<xsl:template match="sans"><xsl:param name="contextnode"/>{\textsf{<xsl:apply-templates  select="node()[name()!='margref']"><xsl:with-param name="contextnode" select="$contextnode"/></xsl:apply-templates>}}<xsl:apply-templates select="margref"/></xsl:template>
 		
 	<xsl:template match="fett"><xsl:param name="contextnode"/>{\bfseries{}<xsl:apply-templates  select="node()[name()!='margref']"><xsl:with-param name="contextnode" select="$contextnode"/></xsl:apply-templates>}<xsl:apply-templates select="margref"/></xsl:template>
 	<!--xsl:template match="fett"><xsl:choose>
