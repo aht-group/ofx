@@ -1,0 +1,628 @@
+/*
+ * Created on 19.01.2005
+ */
+package org.openfuxml.client;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.rmi.RemoteException;
+import java.util.List;
+import java.util.Properties;
+
+import javax.ejb.CreateException;
+import javax.ejb.RemoveException;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import org.apache.log4j.Logger;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
+import org.openfuxml.client.composites.ProjektComposite;
+import org.openfuxml.client.control.projects.ProjectFactory;
+import org.openfuxml.client.util.ImgCanvas;
+import org.openfuxml.communication.client.dialog.HelpAboutDialog;
+import org.openfuxml.communication.client.simple.Client;
+import org.openfuxml.model.ejb.OfxProject;
+
+import de.kisner.util.LoggerInit;
+import de.kisner.util.io.resourceloader.ImageResourceLoader;
+
+/**
+ * Client implementiert die Benutzeroberfläche für die FuXML-Produktion.
+ * @author Thorsten Kisner
+ * @author Andrea Frank
+ */
+public class OpenFuxmlClient extends Composite implements Runnable
+{
+	static Logger logger = Logger.getLogger(Client.class);
+	
+	public final static String Title = "FuXML - Client";
+	
+	public final static String IMG_FUXLOGO			= "/swt/images/fuxlogo.gif";
+	public final static String IMG_FUXICON			= "/swt/images/FuXML-Icon.gif";
+	public final static String IMG_FUXICON_KLEIN	= "/swt/images/FuXML-Icon-klein.gif";
+	public final static String IMG_PROJECT			= "/swt/images/tab/project.png";
+	public final static String IMG_SYSTEMINFO		= "/swt/images/tab/systeminfo.png";
+	
+	private Label lBenutzer;
+	private TabFolder tfProjekte;
+	private TabItem tiSystemInfo;
+//	private SystemInfoComposite systemInfoComposite;
+	
+	private Properties myProperties;
+	/**
+	 * propDir beschreibt das Verzeichnis, in dem die Properties-Datei 
+	 * und die ProjectUserSettings-Dateien abgelegt sind.
+	 */
+	private String propDir; 
+	private File propFile;
+	private Composite parent;
+	
+	private InitialContext iniCtx;
+
+	// Home Interfaces für die Beans
+//	private DispatcherHome hDispatcher;
+//	private ProjectUiHome hProjectUi;
+//	private UserUiHome hUserUi;
+//	private AuthHome hAuth;
+
+//	private UserUi myUserUi;
+//	private UserValue myUserValue; 
+	
+//	private SSIMessage availableFormats;
+	
+	private Thread pingThread;
+	private boolean pingThreadAktiv;
+	private int pingThreadZaehler;
+	
+	private Shell shell;
+
+	public OpenFuxmlClient (Composite parent, int style)
+	{
+		super(parent, style);
+		
+		// Open the SplashScreen
+		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN);
+		splashscreen.open();
+		
+		this.parent=parent;
+		this.shell = getShell();
+		pingThread = null;
+		pingThreadAktiv = false;
+		pingThreadZaehler = 0;
+
+		propDir = System.getProperty("user.home") + File.separator + ".fuxml";
+		propFile = new File(propDir, "fux-client.prop");
+		myProperties = new Properties();
+		if(propFile.exists())
+		{
+			splashscreen.setStatusline("Lade Properties von "+propFile.toString());
+
+			System.out.println("Lade Properties von "+propFile.toString());
+			try {myProperties.load(new FileInputStream(propFile));}
+				catch (IOException e) {e.printStackTrace();}
+		}
+		else
+		{
+			splashscreen.setStatusline("Setze Default-Properties");
+
+			System.out.println("Setze Default-Properties");
+			myProperties.setProperty("Verzeichnis", System.getProperty("user.home"));
+			myProperties.setProperty("Output", System.getProperty("user.home"));
+			myProperties.setProperty("Host","fuxml.fernuni-hagen.de");
+			myProperties.setProperty("Port","1099");
+		}
+		
+		splashscreen.setStatusline("Initialisiere Oberfläche ...");
+
+		initGUI();
+
+		if (myProperties.getProperty("AutoLogin", "0").equals("0") ||
+			myProperties.getProperty("KennwortSpeichern", "0").equals("0") )
+		{
+			splashscreen.setStatusline("Benutzereinstellungen");
+			Einstellungen();
+		}
+			
+		if (myProperties.getProperty("Beenden") != null)
+		{
+			splashscreen.setStatusline("FuXML-Client beenden");
+			System.exit(0);
+		}
+		
+		// new OpenFuxmlTray(parent,this);
+		
+		splashscreen.setStatusline("Login des Benutzers");
+		login();
+		
+		// Starten des pingThreads ...
+		pingThread = new Thread(this);
+		pingThread.start();
+		pingThreadAktiv = true;
+
+		// Close the SplashScreen
+		splashscreen.close();
+	}
+	
+	public InitialContext initNet()
+	{
+		iniCtx = null;
+		String jndiHost=myProperties.getProperty("Host");
+		String jndiPort=myProperties.getProperty("Port");
+		try
+		{
+			Properties p = new Properties();
+			p.put(Context.INITIAL_CONTEXT_FACTORY,"org.jnp.interfaces.NamingContextFactory");
+			p.put(Context.PROVIDER_URL,	jndiHost+":"+jndiPort);
+			iniCtx = new InitialContext(p);
+			System.out.print("Looking up Service " +jndiHost+":"+jndiPort);
+
+			// Home-Interfaces werden hier nur einmal erstellt und dann weitergegeben.
+//			hDispatcher = (DispatcherHome)PortableRemoteObject.narrow(iniCtx.lookup("DispatcherBean"), DispatcherHome.class);
+//			hAuth = (AuthHome)PortableRemoteObject.narrow(iniCtx.lookup("AuthBean"), AuthHome.class);
+//			hProjectUi = (ProjectUiHome)PortableRemoteObject.narrow(iniCtx.lookup("ProjectUiBean"), ProjectUiHome.class);
+//			hUserUi = (UserUiHome)PortableRemoteObject.narrow(iniCtx.lookup("UserUiBean"), UserUiHome.class);
+			
+			System.out.println(" .... abgeschlossen");
+		}
+		catch (NamingException e) {e.printStackTrace();}
+
+		// Abfragen der availableFormats
+//		try
+		{	
+//			Dispatcher beanRemote = hDispatcher.create();
+			
+			// Properties für die Bean setzen
+			Properties prop = new Properties();
+			prop.setProperty("AppRemote", "ssh://fuxml@132.176.12.1//home/ilona/applications");
+			prop.setProperty("RepoRemote", "ssh://repository@132.176.12.65//lgks/projekte/fuxml-repository");
+			prop.setProperty("OutputRemote", "ssh://repository@132.176.12.65//lgks/projekte/fuxml-repository/output");
+			prop.setProperty("SyncType", "nosync");
+//			beanRemote.setProperties(prop);
+			
+			System.out.print("Get available formats ");
+//			availableFormats = beanRemote.availableFormats("fuxml");
+			System.out.println(" .... abgeschlossen");
+//System.out.println("availFormats: "+availableFormats.getMessageString());			
+//			beanRemote.remove();
+		}
+//		catch (CreateException e) {e.printStackTrace();}
+//		catch (RemoteException e) {e.printStackTrace();}
+//		catch (RemoveException e) {e.printStackTrace();}
+//		catch (ProductionSystemException e) {e.printStackTrace();}
+		
+		return iniCtx;
+	}
+	
+	public void initGUI()
+	{
+		this.addDisposeListener(new DisposeListener() {
+			public void widgetDisposed(DisposeEvent evt) {
+				// pingThread stoppen
+				pingThread = null;
+				pingThreadAktiv = false;
+				
+				Rectangle rect = getShell().getBounds();
+				myProperties.setProperty("x",      "" + rect.x);
+				myProperties.setProperty("y",      "" + rect.y);
+				myProperties.setProperty("width",  "" + rect.width);
+				myProperties.setProperty("height", "" + rect.height);
+				
+				saveProperties();
+				
+//				try
+//				{
+//					myUserUi.remove();
+//				}
+//				catch (RemoteException e) {e.printStackTrace();}
+//				catch (RemoveException e) {e.printStackTrace();}
+			}
+		});
+
+		{
+			this.setBackground(new Color(this.getDisplay(), 244, 244, 255));
+			GridLayout layout = new GridLayout();
+			layout.numColumns = 3;
+			layout.marginHeight = 20;
+			layout.marginWidth = 20;
+			this.setLayout(layout);
+		}
+		
+		{
+			Label label = new Label(this, SWT.NONE);
+			label.setText("aktueller Benutzer:");
+			label.setBackground(this.getBackground());
+		}
+		{
+			lBenutzer = new Label(this, SWT.NONE);
+			lBenutzer.setText("");
+			lBenutzer.setBackground(this.getBackground());
+
+			GridData data = new GridData();
+			data.horizontalAlignment = GridData.FILL;
+			data.grabExcessHorizontalSpace = true;
+			
+			lBenutzer.setLayoutData(data);
+		}
+		{
+			ImgCanvas imgCanvas = new ImgCanvas(this, IMG_FUXLOGO);
+			GridData data = new GridData();
+			data.widthHint = 134;
+			data.heightHint = 40;
+			data.horizontalAlignment = GridData.END;
+			data.verticalAlignment = GridData.FILL;
+			imgCanvas.setLayoutData(data);
+			imgCanvas.setBackground(this.getBackground());
+		}
+		{
+			tfProjekte = new TabFolder(this, SWT.TOP);
+			tfProjekte.setSelection(0);
+			GridData data = new GridData();
+			data.horizontalSpan = 3;
+			data.grabExcessHorizontalSpace = true;
+			data.grabExcessVerticalSpace = true;
+			data.horizontalAlignment = GridData.FILL;
+			data.verticalAlignment = GridData.FILL;
+			tfProjekte.setLayoutData(data);
+
+			tfProjekte.addSelectionListener(new SelectionAdapter() {
+				public void widgetSelected(SelectionEvent evt) {
+					/*
+					// alle Icons der TabItems löschen
+					for (int i=0; i<tfProjekte.getItemCount(); i++)
+					{
+						tfProjekte.getItem(i).setImage(null);
+					}
+					// dem aktuellen TabItem ein Icon zuweisen
+					tfProjekte.getItem(tfProjekte.getSelectionIndex()).setImage(makeImage(IMG_PROJECT));
+					*/
+					// Merken des Projekt-Tabs für LastProject
+					{
+						// Setzen des Property-Wertes für LastTab
+						Control control = tfProjekte.getItem(tfProjekte.getSelectionIndex()).getControl();
+						
+						Integer iLastProject = new Integer(0);
+						if (control != null)
+						{
+							try
+							{
+//								ProjektComposite pComp = (ProjektComposite)control;
+//								iLastProject = pComp.getProjectValue().getID();
+							}
+							catch (ClassCastException cce1) 
+							{
+								try
+								{
+									iLastProject = new Integer(-1);
+								}
+								catch (ClassCastException cce2)	{}
+							}
+							myProperties.setProperty("LastProject", "" + iLastProject);
+						}
+					}
+				}
+			});
+		}
+		
+		new OpenFuxmlMenu(getShell());
+	} // initGUI
+
+	public void saveProperties()
+	{
+		// erst Aufräumen
+		myProperties.remove("Beenden");
+		myProperties.remove("Login");
+
+		System.out.println("Speichere Properties in " + propFile.toString());
+		
+		try
+		{
+			// Existiert das Verzeichnis, in dem die Prop-Datei gespeichert werden soll?
+			if (!propFile.getParentFile().exists())
+			{
+				// Das Verzeichnis erstellen.
+				propFile.getParentFile().mkdirs();
+			}
+			
+			// Existiert das Verzeichnis jetzt?
+			if (propFile.getParentFile().exists())
+			{
+				// Falls KennwortSpeichern nicht ausgewählt wurde, wird
+				// das Kennwort aus den Properties gestrichen.
+				if (myProperties.getProperty("KennwortSpeichern","0").equals("0"))
+				{
+				  myProperties.remove("Kennwort");	
+				}
+				myProperties.store(new FileOutputStream(propFile),Title+" - Konfigurationseinstellungen");
+			}
+			else
+			{
+				System.out.println("Properties konnten nicht in " + propFile.toString() + " gespeichert werden.");
+			}
+		}
+		catch (IOException e) {e.printStackTrace();}
+	}
+	
+	public Properties getMyProperties(){return myProperties;}
+//	public UserValue getMyUserValue(){return myUserValue;}
+//	public ProjectUiHome getHProjectUi(){return hProjectUi;}
+//	public SSIMessage getAvailableFormats(){return availableFormats;}
+	public String getPropDir(){return propDir;}
+	
+	public void login()
+	{
+		initNet();
+		
+//		try
+		{
+			ProjectFactory pf = new ProjectFactory();
+			List<OfxProject> lProjects = pf.lProjects();
+
+			while (tfProjekte.getItemCount()>0)
+			{	// Löschen der alten TabItems für die Projekte
+				tfProjekte.getItem(0).getControl().dispose();
+				tfProjekte.getItem(0).dispose();
+			}
+
+			if (lProjects.size() == 0)
+			{
+				StringBuffer sb = new StringBuffer();
+					sb.append("Keine Projekte verfügbar");
+				Label label = new Label(tfProjekte, SWT.NONE);
+				label.setText(sb.toString());
+
+				TabItem tabItem = new TabItem(tfProjekte, SWT.NONE);
+				tabItem.setControl(label);
+			} // if
+			
+			for(OfxProject ofxProject : lProjects)
+			{
+				logger.debug("Adding "+ofxProject.getName());
+
+				TabItem tabItem = new TabItem(tfProjekte, SWT.NONE);
+				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), IMG_PROJECT, getDisplay());
+				
+				tabItem.setImage(img);
+				tabItem.setText(ofxProject.getName());
+				ProjektComposite pComp = new ProjektComposite(tfProjekte, this, ofxProject);
+				tabItem.setControl(pComp);
+			}
+
+/*			tiSystemInfo = new TabItem(tfProjekte, SWT.NONE);
+			tiSystemInfo.setImage(makeImage(IMG_SYSTEMINFO));
+			tiSystemInfo.setText("Systeminfo");
+			systemInfoComposite = new SystemInfoComposite(tfProjekte, isSupervisor, iniCtx, hUserUi);
+			tiSystemInfo.setControl(systemInfoComposite);
+*/		}
+//		catch (CreateException e) {e.printStackTrace();}
+//		catch (RemoteException e) {e.printStackTrace();}
+//		catch (RemoveException e) {e.printStackTrace();}
+		
+/*		// Das letzte angezeigte Projekt bzw. Systeminfo wird angezeigt.
+		int iLastProject = -2;
+		try
+		{
+			iLastProject = Integer.parseInt(myProperties.getProperty("LastProject", "-2"));
+		}
+		catch (NumberFormatException e) {}
+		
+		if ( (iLastProject == -1) && (tiSystemInfo!=null) )
+		{
+			// SystemInfo-Tab auswählen.
+			TabItem ti[] = {tiSystemInfo};
+			tfProjekte.setSelection(ti);
+		}
+		else
+		{
+			// Projekt-Tab auswählen.
+
+			// Welches Projekt-Tab hat die Projekt-ID iLastProject???
+			for (int i=0; i<tfProjekte.getItemCount(); i++)
+			{
+				TabItem ti = tfProjekte.getItem(i);
+				Control control = ti.getControl();
+				
+				// try-Block für ClassCastException (Control könnte auch ein SystemInfoComposite sein)
+				try 
+				{
+					ProjektComposite pComp = (ProjektComposite)control;
+					Integer ID = pComp.getProjectValue().getID();
+
+					// vergleichen der IDs
+					if (ID.equals(new Integer(iLastProject)))
+					{
+						TabItem ti2[] = {ti};
+						tfProjekte.setSelection(ti2);
+						break;
+					}
+				}
+				catch (ClassCastException cce) {}
+			}
+		}
+*/	}
+	
+    public void run()
+	{  
+		while (pingThreadAktiv)
+		{
+			if (pingThreadZaehler >= 300) // 300 Sekunden ^= 5 Minuten
+			{
+				pingProjekte();
+				pingThreadZaehler = 0;
+			}
+			pingThreadZaehler++;
+
+			try 
+			{
+    			Thread.sleep(1000); // 1 Sekunde
+    		} 
+    		catch (InterruptedException e) {}
+    	}
+	}
+    
+    public void pingProjekte()
+    {
+		this.getDisplay().asyncExec(new Runnable()
+		{
+			public void run()
+			{
+				if (!shell.isDisposed())
+				{
+					// Ping für User
+/*					try
+					{
+						myUserUi.ping(System.currentTimeMillis());
+					}
+					catch (RemoteException e) {e.printStackTrace();}
+*/					
+					// Ping für jedes Projekt
+					for (int i=0; i<tfProjekte.getItemCount(); i++)
+					{
+						Object obj = tfProjekte.getItem(i).getControl();
+//						if(obj.getClass().getName().equals(ProjektComposite.class.getName()))
+						{
+//							((ProjektComposite)obj).ping();
+						}
+					} // for
+				} // if
+			}
+		});
+    } // pingProjekte
+
+	public void ClientBeenden()
+	{
+		this.getShell().close();
+	}
+	
+	public void Einstellungen()
+	{
+//		EinstellungenDialog dialog = new EinstellungenDialog(this, myProperties);
+//		myProperties = dialog.open();
+	}
+	
+/*	public void ExtrasNeuesProjekt()
+	{
+		NewProjectDialog dialog = new NewProjectDialog(shell, iniCtx, myUserValue);
+		Rolle r = dialog.open();
+		
+		// Dieses Projekt als neues TabItem einfügen
+		if (r != null)
+		{
+			try
+			{
+				RolleValue rv = (RolleValue)r.getRolleValue();
+				System.out.println("r.getProjektID()="+rv.getProjektID());
+				ProjectUi myProjectUi = hProjectUi.create(rv.getBenutzerID(),rv.getProjektID());
+				ProjectValue myProjectValue = myProjectUi.getProjectValue();
+				// TODO index 
+				TabItem tabItem = new TabItem(tfProjekte, SWT.NONE);
+				tabItem.setImage(makeImage(IMG_PROJECT));
+				tabItem.setText(myProjectValue.getProjectShortName());
+				ProjektComposite pComp = new ProjektComposite(tfProjekte, this,  
+						hDispatcher, myUserUi, myProjectUi, iniCtx);
+				tabItem.setControl(pComp);			
+			}
+			catch (CreateException e) {e.printStackTrace();}
+			catch (RemoteException e) {e.printStackTrace();}		
+		}
+	}
+*/	
+	public void HilfeInfoUeber()
+	{
+		HelpAboutDialog dialog = new HelpAboutDialog(getShell(), HelpAboutDialog.ABOUT_DIALOG);
+		dialog.open();
+	}
+
+	public Image[] makeImages(String[] Dateinamen)
+	{
+		int anzImages = Dateinamen.length;
+		Image[] img = new Image[anzImages];
+		
+		for (int i=0; i<anzImages; i++)
+		{
+	        img[i] = ImageResourceLoader.search(this.getClass().getClassLoader(), Dateinamen[i], getDisplay());
+		}
+        return img;		
+	}
+
+	public static void main(String[] args)
+	{
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("resources/config");
+			loggerInit.init();
+		
+		Display disp = Display.getDefault();
+		Shell sh = new Shell(disp);
+		
+		HelpAboutDialog splashscreen = new HelpAboutDialog(sh, HelpAboutDialog.SPLASH_SCREEN);
+		splashscreen.open();
+		try{Thread.sleep(3000);} catch (InterruptedException e){logger.error("InterruptedException", e);}
+		splashscreen.close();
+		splashscreen = null;
+		
+		OpenFuxmlClient client = new OpenFuxmlClient(sh, SWT.NULL);
+		
+		sh.setLayout(new FillLayout());
+		sh.layout();
+
+		// Die alte Größe wird benutzt.
+/*		try
+		{
+			String sX		= client.getMyProperties().getProperty("x");
+			String sY		= client.getMyProperties().getProperty("y");
+			String sWidth	= client.getMyProperties().getProperty("width");
+			String sHeight	= client.getMyProperties().getProperty("height");
+			
+			if ( (sX!=null) && (sY!=null) && (sWidth!=null) && (sHeight != null))
+			{
+				int x		= Integer.parseInt(sX);
+				int y		= Integer.parseInt(sY);
+				int width	= Integer.parseInt(sWidth);
+				int height	= Integer.parseInt(sHeight);
+				sh.setBounds(x, y, width, height);
+			}
+			else
+			{
+				sh.pack();
+			}
+		}
+		catch (NumberFormatException e) {sh.pack();}
+*/		
+		sh.pack();
+		
+		// Titelzeile
+		sh.setText(OpenFuxmlClient.Title);
+		
+		// Icon
+		final String strImages[] = {IMG_FUXICON_KLEIN, IMG_FUXICON};
+		sh.setImages(client.makeImages(strImages));
+
+		sh.open();
+		
+		while (!sh.isDisposed()) {
+			if (!disp.readAndDispatch())
+				disp.sleep();
+		}
+	}
+}
