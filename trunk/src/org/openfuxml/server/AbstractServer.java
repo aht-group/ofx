@@ -1,30 +1,43 @@
 package org.openfuxml.server;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Properties;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
+import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.util.FuXmlLogger;
 
+import de.kisner.util.HostCheck;
 import de.kisner.util.architecture.ArchUtil;
-import de.kisner.util.xml.XmlConfig;
-import de.kisner.util.xml.XmlElementNotFoundException;
 
 public abstract class AbstractServer
 {
 	static Logger logger = Logger.getLogger(AbstractServer.class);
 	
+	protected static String fs = SystemUtils.FILE_SEPARATOR;
 	public static String[] environmentParameters;
 	public static String baseDir;
 	
-	XmlConfig xCnf;
+	protected Configuration config;
 	
-	public AbstractServer(XmlConfig xCnf)
+	public AbstractServer(Configuration config)
 	{
-		this.xCnf=xCnf;
+		this.config=config;
+	}
+	
+	protected Host getHost()
+	{
+		Host host = new Host();
+			host.setHostName(HostCheck.getHostName());
+			host.setHostIP(HostCheck.getHostIP());
+			host.setRecord(new Date());
+		return host;
 	}
 	
 	public void setSystemProperties()
@@ -32,19 +45,12 @@ public abstract class AbstractServer
 		Properties sysprops = System.getProperties();
 		Map<String,String> sysenv = System.getenv();
 		
-		try
-		{
-			baseDir = xCnf.getTextException("dirs/dir[@typ=\"basedir\"]");
-		}
-		catch (XmlElementNotFoundException e)
-		{
-			baseDir = xCnf.getWorkingDir();
-			logger.warn("No \"baseDir\" defined in xmlConfig. Using WorkingDir: "+baseDir);
-		}
+		baseDir = config.getString("dirs/dir[@type='basedir']");
+
 		
-		String pathLog = xCnf.getText("dirs/dir[@typ=\"log\"]");
-		String pathRepo=xCnf.getText("dirs/dir[@typ=\"repository\"]");
-		String pathOutput=xCnf.getText("dirs/dir[@typ=\"output\"]");
+		String pathLog = config.getString("dirs/dir[@type='log']");
+		String pathRepo = config.getString("dirs/dir[@type='repository']");
+		String pathOutput=config.getString("dirs/dir[@type='output']");
 		
 		if(!ArchUtil.isAbsolute(pathLog)){pathLog=baseDir+"/"+pathLog;}
 		if(!ArchUtil.isAbsolute(pathRepo)){pathRepo=baseDir+"/"+pathRepo;}
@@ -73,15 +79,17 @@ public abstract class AbstractServer
 		sysprops.put("ilona.output",pathOutput);
 		System.setProperties(sysprops);
 		
-		setenvP(xCnf);
+		setenvP();
 	}
 	
-	private void setenvP(XmlConfig xCnf)
+	private void setenvP()
 	{	
 		Hashtable<String,String> htEnv = new Hashtable<String,String>();
 		htEnv.putAll(System.getenv());
 		
-		String cp = ArchUtil.getClassPath(xCnf.getTexts("files/file[@typ=\"lib\"]"),baseDir+SystemUtils.FILE_SEPARATOR+"lib"+SystemUtils.FILE_SEPARATOR);
+		//TODO Was passiert hier??
+		List<String> lLibs = config.getList("files/file[@typ='lib']");
+		String cp = ArchUtil.getClassPath(lLibs,baseDir+fs+"lib"+fs);
 		htEnv.put("CLASSPATH",cp);
 		logger.debug("Setting CLASSPATH for openFuXML Applications: "+cp);
 		
@@ -93,10 +101,10 @@ public abstract class AbstractServer
 		{
 			case OsX:	try
 						{
-							String systemPath = xCnf.getTextException("dirs/dir[@typ=\"path\"]");
+							String systemPath = config.getString("dirs/dir[@type='path']");
 							htEnv.put("PATH", systemPath);
 						}
-						catch (XmlElementNotFoundException e)
+						catch (NoSuchElementException e)
 						{
 							logger.warn("No PATH defined in xmlConfig. Using System PATH "+htEnv.get("PATH"));
 							logger.warn("   Errors are possible for "+SystemUtils.OS_NAME);
@@ -105,10 +113,10 @@ public abstract class AbstractServer
 						break;
 			case Win32:	try
 						{
-							String systemPath = xCnf.getTextException("dirs/dir[@typ=\"path\"]");
+							String systemPath = config.getString("dirs/dir[@type='path']");
 							htEnv.put("PATH", systemPath);
 						}
-						catch (XmlElementNotFoundException e)
+						catch (NoSuchElementException e)
 						{
 							logger.warn("No PATH defined in xmlConfig. Using System PATH "+htEnv.get("PATH"));
 							logger.warn("   Errors are possible for "+SystemUtils.OS_NAME);

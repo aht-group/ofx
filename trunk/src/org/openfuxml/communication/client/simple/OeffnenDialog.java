@@ -2,10 +2,10 @@ package org.openfuxml.communication.client.simple;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Properties;
 
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -29,7 +29,8 @@ import org.eclipse.swt.widgets.TableItem;
 public class OeffnenDialog extends Dialog
 {
 	static Logger logger = Logger.getLogger(OeffnenDialog.class);
-
+	private static String fs = SystemUtils.FILE_SEPARATOR;
+	
 	private Shell shell;
 
 	private Table tableProducedEntities;
@@ -38,10 +39,12 @@ public class OeffnenDialog extends Dialog
 	private ArrayList<String[]> alProducedEntities;
 	private RGB rgbBackground;
 	
-	public OeffnenDialog(Shell parent, ArrayList<String[]> alProducedEntities, RGB rgb)
+	private Configuration config;
+	
+	public OeffnenDialog(Shell parent, ArrayList<String[]> alProducedEntities, RGB rgb, Configuration config)
 	{
 		super(parent, 0);
-		
+		this.config=config;
 		this.alProducedEntities = alProducedEntities;
 		this.rgbBackground = rgb;
 	}
@@ -198,8 +201,10 @@ public class OeffnenDialog extends Dialog
 	{
 		String sErweiterung = sDateiname.substring(sDateiname.lastIndexOf('.'));
 
-		String sProgramm = ClientConfigWrapper.getClientConf(sErweiterung);
-
+		//TODO Erweiterungen für OpenDialog
+		//String sProgramm = ClientConfigWrapper.getClientConf(sErweiterung);
+		String sProgramm=null;
+		
 		if (sProgramm == null)
 		{
 			MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR | SWT.OK);
@@ -213,7 +218,7 @@ public class OeffnenDialog extends Dialog
 			String sKommando = sProgramm + " ";
 			
 			// Die Ausgabedatei steht in dem Output-Verzeichnis
-			File file = new File(ClientConfigWrapper.getServerDir("output") + File.separator + sVerzeichnis, sDateiname);
+			File file = new File(config.getString("dirs/dir[@type='output']") + fs + sVerzeichnis, sDateiname);
 			sKommando += file.toString();		 
 			
 			logger.debug("Kommando für das Öffnen: " + sKommando);

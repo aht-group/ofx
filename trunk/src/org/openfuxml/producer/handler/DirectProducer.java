@@ -8,6 +8,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.producer.ejb.Application;
@@ -19,7 +21,6 @@ import org.openfuxml.producer.exception.ProductionSystemException;
 import org.openfuxml.server.AbstractServer;
 import org.openfuxml.util.FuXmlLogger;
 
-import de.kisner.util.xml.XmlConfig;
 import de.kisner.util.xml.XmlElementNotFoundException;
 import de.kisner.util.xml.XmlObject;
 
@@ -35,24 +36,20 @@ public class DirectProducer extends AbstractProducer implements Producer
 	static Logger logger = Logger.getLogger(DirectProducer.class);
 	
 	private static Properties sysprops = System.getProperties();
-	private static String fSep = sysprops.getProperty("file.separator");
+	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	public static enum ProductionCode {Ok, InternalError, BuildError};
 	
 	private Host host;
 	private String dirOutput;
 	
-	public DirectProducer(XmlConfig xCnf,Host host)
+	public DirectProducer(Configuration config){this(config,null);}
+	public DirectProducer(Configuration config,Host host)
 	{
 		this.host=host;
-		String baseDir;
-		try {baseDir = xCnf.getTextException("dirs/dir[@typ=\"basedir\"]");}
-		catch (XmlElementNotFoundException e)
-		{
-			baseDir = xCnf.getWorkingDir();
-			logger.warn("No \"baseDir\" defined in xmlConfig. Using WorkingDir: "+baseDir);
-		}
-		dirOutput=xCnf.getPath("dirs/dir[@typ=\"output\"]",baseDir);
+		String baseDir = config.getString("dirs/dir[@type='basedir']");
+		//TODO Relative PATH
+		dirOutput = baseDir+fs+config.getString("dirs/dir[@type='output']");
 	}
 	
 	/**
@@ -76,7 +73,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 					a.setName(dirEntry.getName());
 					a.setAnzCores(1);
 					aas.addApplication(a);
-					File sessionpreferences = new File(dirOutput+fSep+dirEntry.getName()+fSep+"sessionpreferences");
+					File sessionpreferences = new File(dirOutput+fs+dirEntry.getName()+fs+"sessionpreferences");
 					if(!sessionpreferences.exists()){sessionpreferences.mkdirs();}
 				}
 			}
@@ -131,19 +128,19 @@ public class DirectProducer extends AbstractProducer implements Producer
 		String logfile="";
 		switch (invokeType)
 		{
-			case PRODUCE: 	logfile= sysprops.getProperty("logger.path") + fSep + 
+			case PRODUCE: 	logfile= sysprops.getProperty("logger.path") + fs + 
 							request.getProject() + "_" + request.getDocument() + ".log";break;
 		}
 		
-		String buildfile = sysprops.getProperty("ilona.home") + fSep + "applications" + fSep 
-				+ request.getApplication() + fSep + "formats" + fSep
-				+ request.getFormat() + fSep + "build.xml";
+		String buildfile = sysprops.getProperty("ilona.home") + fs + "applications" + fs 
+				+ request.getApplication() + fs + "formats" + fs
+				+ request.getFormat() + fs + "build.xml";
 		
 		StringBuffer sb = new StringBuffer();
 			sb.append(dirOutput);
-			sb.append(fSep+request.getApplication());
-			sb.append(fSep+"sessionpreferences");
-			sb.append(fSep+request.getUsername()+"-"+request.getProject()+"-"+"request.xml");
+			sb.append(fs+request.getApplication());
+			sb.append(fs+"sessionpreferences");
+			sb.append(fs+request.getUsername()+"-"+request.getProject()+"-"+"request.xml");
 			
 		File fRequest = new File(sb.toString());
 		XmlObject xmlRequest = new XmlObject(request.toXmlDoc());
@@ -209,8 +206,8 @@ public class DirectProducer extends AbstractProducer implements Producer
 		String path =null;
 		switch(request.getTyp())
 		{
-			case PRODUCE: 	path = dirOutput+fSep+request.getApplication()+ fSep + proDir + fSep + "result.xml";break;
-			case ENTITIES:	path = dirOutput+fSep+request.getApplication()+ fSep + proDir + fSep + "producableEntities.xml";break;
+			case PRODUCE: 	path = dirOutput+fs+request.getApplication()+ fs + proDir + fs + "result.xml";break;
+			case ENTITIES:	path = dirOutput+fs+request.getApplication()+ fs + proDir + fs + "producableEntities.xml";break;
 		}
 				
 		File xmlFile = new File(path);

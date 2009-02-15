@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.producer.ejb.AvailableApplications;
 import org.openfuxml.producer.ejb.AvailableFormats;
@@ -20,6 +21,10 @@ public class SocketProducer extends AbstractProducer implements Producer
 	String serverIP;
 	int serverPort;
 	
+	public SocketProducer(Configuration config)
+	{
+		this(config.getString("net/host"),config.getInt("net/port"));
+	}
 	public SocketProducer(String serverIP,int serverPort) 
 	{
 		this.serverIP=serverIP;

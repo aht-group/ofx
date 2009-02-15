@@ -5,14 +5,16 @@ import java.net.ServerSocket;
 import java.net.SocketException;
 import java.util.Date;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.producer.handler.DirectProducer;
 import org.openfuxml.producer.handler.Producer;
 import org.openfuxml.server.AbstractServer;
 
+import de.kisner.util.ConfigLoader;
+import de.kisner.util.HostCheck;
 import de.kisner.util.LoggerInit;
-import de.kisner.util.xml.XmlConfig;
 
 /**
  * Server oeffnet den ServerSocket und wartet dann auf Clientverbindungen.
@@ -26,22 +28,19 @@ public class SimpleServer extends AbstractServer
 {
 	static Logger logger = Logger.getLogger(SimpleServer.class);
 	
-	public SimpleServer(XmlConfig xCnf)
+	public SimpleServer(Configuration config)
 	{
-		super(xCnf);
+		super(config);
 		logger.info("Applikation wird gestartet");
 		
-		int serverPort =xCnf.getIntAttribute("net/server[@typ=\"socket\"]","port");
+		int serverPort = config.getInt("net/port");
 		
 		setSystemProperties();
 		checkSystemProperties();
 		
-		Host host = new Host();
-		host.setHostName(xCnf.getHostName());
-		host.setHostIP(xCnf.getHostIp());
-		host.setRecord(new Date());
+		Host host = getHost();
 		
-		Producer p = new DirectProducer(xCnf,host);
+		Producer p = new DirectProducer(config,host);
 		
 		logger.debug("ServerSocket erstellen: "+serverPort);
 		ServerSocket serverSocket=null;
@@ -62,7 +61,7 @@ public class SimpleServer extends AbstractServer
 		{
 			while (myShutdownThread.getAppActive())
 			{
-				SimpleServerThread sst = new SimpleServerThread(clientTg, serverSocket.accept(),new DirectProducer(xCnf,host)); 
+				SimpleServerThread sst = new SimpleServerThread(clientTg, serverSocket.accept(),new DirectProducer(config,host)); 
 				sst.start();
 			}
 		}
@@ -84,9 +83,8 @@ public class SimpleServer extends AbstractServer
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
 
-		logger.info("**************************************************************");
-		XmlConfig xCnf = new XmlConfig("openFuXML-config.xml", "openFuXML-1.x.xsd");
+		Configuration config = ConfigLoader.load("openFuXML.xml");
 
-		new SimpleServer(xCnf);
+		new SimpleServer(config);
 	}
 }

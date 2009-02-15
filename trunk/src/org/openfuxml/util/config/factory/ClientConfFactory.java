@@ -10,29 +10,43 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.util.config.jaxb.Openfuxml;
 import org.openfuxml.util.config.jaxb.Openfuxml.Net;
 
+import de.kisner.util.ConfigLoader;
 import de.kisner.util.LoggerInit;
+import de.kisner.util.architecture.ArchUtil;
 
-public class ClientConfFactory
+public class ClientConfFactory extends AbstractConfFactory
 {
 	static Logger logger = Logger.getLogger(ClientConfFactory.class);
 	
 	private Openfuxml openfuxml;
-	
+	private String mainConf;
 	public ClientConfFactory()
 	{
-		
+
 	}
 	
-	public void init(File fConf)
+	public Configuration getConfiguration()
 	{
+		ConfigLoader.add(openFuxmlBaseDir+fs+mainConf);
+		Configuration config = ConfigLoader.init();
+		return config;
+	}
+	
+	public void init(String mainConf)
+	{
+		this.mainConf=mainConf;
+		File fConf = new File(openFuxmlBaseDir,mainConf);
+		
 		try
 		{
 			if(!fConf.exists())
 			{
+				logger.info("No "+mainConf+" found. I will create a default one.");
 				createConfig();
 				FileOutputStream fos = new FileOutputStream(fConf);
 				writeConfig(fos);
@@ -57,7 +71,7 @@ public class ClientConfFactory
 		openfuxml = new Openfuxml();
 		openfuxml.setServer("direct");
 		openfuxml.setNet(getNet());
-		openfuxml.setDirs(cdf.getDirs());
+		openfuxml.setDirs(cdf.getDirs(startupenv,openFuxmlBaseDir.getAbsolutePath()));
 		openfuxml.setFiles(cff.getFiles());
 	}
 	

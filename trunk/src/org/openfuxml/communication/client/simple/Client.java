@@ -9,10 +9,10 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
@@ -37,7 +37,6 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.communication.client.dialog.HelpAboutDialog;
-import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.producer.ejb.Application;
 import org.openfuxml.producer.ejb.AvailableApplications;
 import org.openfuxml.producer.ejb.AvailableFormats;
@@ -54,8 +53,8 @@ import org.openfuxml.producer.handler.SocketProducer;
 import org.openfuxml.server.DummyServer;
 import org.openfuxml.util.config.factory.ClientConfFactory;
 
+import de.kisner.util.ConfigLoader;
 import de.kisner.util.LoggerInit;
-import de.kisner.util.architecture.ArchUtil;
 import de.kisner.util.xml.XmlConfig;
 
 /**
@@ -116,7 +115,7 @@ public class Client extends Composite
 	 */
 	private ArrayList<String[]> alProducedEntities;
 	
-	XmlConfig xCnf;
+	private Configuration config;
 	File propFile;
 	
 	private Cursor cursor;
@@ -128,26 +127,17 @@ public class Client extends Composite
 	 * @param parent
 	 * @param disp
 	 */
-	public Client (Composite parent, Display disp, XmlConfig xCnf)
+	public Client (Composite parent, Display disp, Configuration config)
 	{
 	    super(parent, SWT.NULL);
-	    this.xCnf=xCnf;
+	    this.config=config;
 		toplevelShell = (Shell)parent;
 		
 		this.display = disp;
-		
-		String openFuXMLDir=System.getProperty("user.home")+
-							System.getProperties().getProperty("file.separator")+
-							".openfuxml";
-		
-		propFile = new File(openFuXMLDir,"simple-client.prop");
-		logger.info("-------------------------------------------");
 
 		// Open the SplashScreen
 		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN);
 		splashscreen.open();
-		
-		ClientConfigWrapper.init(xCnf);
 		
 		htProducableEntities = new Hashtable<String, ProducedEntities>();
 		alProducedEntities = new ArrayList<String[]>();
@@ -167,28 +157,18 @@ public class Client extends Composite
 	
 	public void initNet()
 	{	
-		switch(ClientConfigWrapper.typ)
+		if(config.getString("server").equals("direct"))
 		{
-			case direct: break;
-			case socket: break;
-		}
-		if(ClientConfigWrapper.host.equals("direct-producer"))
-		{
-			new DummyServer(xCnf);
-			Host host = new Host();
-			host.setHostName(xCnf.getHostName());
-			host.setHostIP(xCnf.getHostIp());
-			host.setRecord(new Date());
-			
-			producer = new DirectProducer(xCnf,host);
-			
+			logger.info("Using "+DirectProducer.class.getSimpleName());
+			new DummyServer(config);
+			producer = new DirectProducer(config);
 		}
 		else
 		{
 			try
 			{
-				logger.info("Socket Connection vorbereiten");
-				producer = new SocketProducer(ClientConfigWrapper.host, ClientConfigWrapper.port);
+				logger.info("Using "+SocketProducer.class.getSimpleName());
+				producer = new SocketProducer(config);
 				logger.info("[OK] ProducerThread");
 			}
 			catch (Exception e)	{logger.fatal("Exception", e);}
@@ -211,9 +191,6 @@ public class Client extends Composite
 			this.setLayout(layout);
 		}
 		
-		this.addDisposeListener(new DisposeListener() {
-			public void widgetDisposed(DisposeEvent evt) {xCnf.save();}
-		});
 		{
 			Label labelImage = new Label(this, SWT.NONE);
 			labelImage.setBackground(this.getBackground());
@@ -255,14 +232,14 @@ public class Client extends Composite
 				labelVerzeichnis.setLayoutData(data);
 			}
 			
-			String sDir = ClientConfigWrapper.getServerDir("repository");
-			logger.debug("Repository: "+sDir);
-			File dir = new File(sDir);
+			String sDirRepo = config.getString("dirs/dir[@type='repository']");
+			logger.debug("Repository: "+sDirRepo);
+			File dir = new File(sDirRepo);
 			if (!dir.exists())
 			{
-				ClientConfigWrapper.updateServerDir("repository", System.getProperty("user.home"));
+				ConfigLoader.update(("dirs/dir[@type='repository']"), System.getProperty("user.home"));
 			}
-			labelVerzeichnis.setText(ClientConfigWrapper.getServerDir("repository"));
+			labelVerzeichnis.setText(config.getString("dirs/dir[@type='repository']"));
 		}
 		{
 			buttonWechseln = new Button(this, SWT.PUSH | SWT.CENTER);
@@ -298,7 +275,8 @@ public class Client extends Composite
 			
 			comboAnwendungen.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
-					ClientConfigWrapper.updateKeyValue("application", comboAnwendungen.getText());
+					//TODO Update Client Settings
+					//ClientConfigWrapper.updateKeyValue("application", comboAnwendungen.getText());
 					fuelleComboProjekte();
 					fuelleComboFormate();
 					
@@ -328,7 +306,8 @@ public class Client extends Composite
 			
 			comboProjekte.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
-					ClientConfigWrapper.updateKeyValue("project", comboProjekte.getText());
+					//TODO Update Client Settings
+					//ClientConfigWrapper.updateKeyValue("project", comboProjekte.getText());
 					fuelleComboDokumente();
 					
 					fuelleTableProductionEntities();
@@ -357,7 +336,8 @@ public class Client extends Composite
 
 			comboDokumente.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
-					ClientConfigWrapper.updateKeyValue("document", comboDokumente.getText());
+					//TODO Update Client Settings
+					//ClientConfigWrapper.updateKeyValue("document", comboDokumente.getText());
 					fuelleTableProductionEntities();
 					loescheErgebnis();
 				}
@@ -384,7 +364,8 @@ public class Client extends Composite
 		
 			comboFormate.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
-					ClientConfigWrapper.updateKeyValue("format", comboFormate.getText());
+					//TODO Update Client Settings
+					//ClientConfigWrapper.updateKeyValue("format", comboFormate.getText());
 					fuelleTableProductionEntities();
 					loescheErgebnis();
 				}
@@ -604,7 +585,7 @@ public class Client extends Composite
 		}		
 		
 		// Vorauswahl der in Properties gespeicherten Einstellungen
-		String sAnwendung = ClientConfigWrapper.getClientConf("application");
+/*		String sAnwendung = ClientConfigWrapper.getClientConf("application");
 		if (sAnwendung.length() > 0)
 		{
 			int index = comboAnwendungen.indexOf(sAnwendung);
@@ -613,7 +594,7 @@ public class Client extends Composite
 				comboAnwendungen.setText(sAnwendung);
 			}
 		}
-
+*/
 		// Inhalt der Combos Projekte und Dokumente setzen
 		fuelleComboProjekte();
 		// Inhalt der Combo Formate setzen
@@ -657,7 +638,7 @@ public class Client extends Composite
 		
 		
 		// Vorauswahl der in Properties gespeicherten Einstellungen
-		String sFormat = ClientConfigWrapper.getClientConf("format");
+/*		String sFormat = ClientConfigWrapper.getClientConf("format");
 		if (sFormat.length()>0)
 		{
 			int index = comboFormate.indexOf(sFormat);
@@ -666,7 +647,7 @@ public class Client extends Composite
 				comboFormate.setText(sFormat);
 			}
 		}
-	}
+*/	}
 
 	/**
 	 * Die Methode fuelleComboProjekte schreibt alle Verzeichnisse aus dem 
@@ -704,7 +685,7 @@ public class Client extends Composite
 				} // if
 
 				// Vorauswahl der in Properties gespeicherten Einstellungen
-				String sProjekt = ClientConfigWrapper.getClientConf("project");
+/*				String sProjekt = ClientConfigWrapper.getClientConf("project");
 				if (sProjekt.length()>0)
 				{
 					int index = comboProjekte.indexOf(sProjekt);
@@ -713,7 +694,7 @@ public class Client extends Composite
 						comboProjekte.setText(sProjekt);
 					} // if
 				} // if
-			} // if
+*/			} // if
 		} // if
 
 		fuelleComboDokumente();
@@ -746,7 +727,7 @@ public class Client extends Composite
 			} // for
 			
 			// Vorauswahl der in Properties gespeicherten Einstellungen
-			String sDokument = ClientConfigWrapper.getClientConf("document");
+/*			String sDokument = ClientConfigWrapper.getClientConf("document");
 			if (sDokument.length()>0)
 			{
 				int index = comboDokumente.indexOf(sDokument);
@@ -755,7 +736,7 @@ public class Client extends Composite
 					comboDokumente.setText(sDokument);
 				}
 			} // if
-		} // if
+*/		} // if
 	}
 	
 	/**
@@ -1094,7 +1075,7 @@ public class Client extends Composite
 	{
 		if (alProducedEntities.size() > 0)
 		{
-			OeffnenDialog dialog = new OeffnenDialog(this.getShell(), alProducedEntities, rgbBackground);
+			OeffnenDialog dialog = new OeffnenDialog(this.getShell(), alProducedEntities, rgbBackground,config);
 			dialog.open(getShell().getImages());			
 		} // if
 		else
@@ -1122,12 +1103,12 @@ public class Client extends Composite
 	 */
 	public void Einstellungen()
 	{
-		EinstellungenDialog dialog = new EinstellungenDialog(this.getShell(), rgbBackground);
+		EinstellungenDialog dialog = new EinstellungenDialog(this.getShell(), rgbBackground,config);
 		dialog.open(getShell().getImages());
 
 		initNet();
 		
-		labelVerzeichnis.setText(ClientConfigWrapper.repository);
+		labelVerzeichnis.setText(config.getString("dirs/dir[@type='repository']"));
 		
 		fuelleComboAnwendungen();
 	}
@@ -1153,8 +1134,8 @@ public class Client extends Composite
 				"\n"+
 				"Überprüfen Sie bitte Ihre Servereinstellungen." + "\n" +
 				"\n"+
-				"Host: " + ClientConfigWrapper.host + "\n" +
-				"Port: " + ClientConfigWrapper.port
+				"Host: " + config.getString("net/host") + "\n" +
+				"Port: " + config.getInt("net/port")
 				); 
 		d.open();
 
@@ -1280,22 +1261,13 @@ public class Client extends Composite
 			loggerInit.init();
 			
 		ClientConfFactory ccf = new ClientConfFactory();
-		ccf.init(new File("openFuXML.xml"));
-			
-		String appDirName = ArchUtil.getAppSettingsDir("openFuXML");
-		File appDir = new File(appDirName);
-		if(!appDir.exists())
-		{
-			logger.fatal("Application directory does not exit: "+appDir.getAbsolutePath());
-			logger.fatal("Application will be shut down!");
-	//		System.exit(-1);
-		}
+		ccf.init("openFuXML.xml");
 		
-		XmlConfig xCnf = new XmlConfig("openFuXML.xml", "openFuXML-1.x.xsd");
+		Configuration config = ccf.getConfiguration();	
 		
 		Display disp = Display.getDefault();
 		Shell sh = new Shell(disp);
-		Client client = new Client(sh, disp, xCnf);
+		Client client = new Client(sh, disp, config);
 		
 		Point size = client.getSize();
 		sh.setLayout(new FillLayout());

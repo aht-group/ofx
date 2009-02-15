@@ -38,7 +38,7 @@ public class ApplicationUpdater
 	
 	public void loadFromDb(String application, int version)
 	{
-		String baseDir = xCnf.getText("dirs/dir[@typ=\"applicationsrepository\"]");
+		String baseDir = xCnf.getText("dirs/dir[@type=\"applicationsrepository\"]");
 		File zipFile = new File(baseDir+fSep+"tmp.zip");
 		ApplicationRepository ar;
 		if((ar = restoreFromDb(zipFile,version))!=null)
@@ -59,7 +59,7 @@ public class ApplicationUpdater
 		try
 		{
 			ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipFile));
-			File baseDir = new File(xCnf.getWorkingDir()+fSep+xCnf.getText("dirs/dir[@typ=\"applications\"]")+fSep+application);
+			File baseDir = new File(xCnf.getWorkingDir()+fSep+xCnf.getText("dirs/dir[@type=\"applications\"]")+fSep+application);
 			logger.info("saveInDb:"+baseDir.getAbsolutePath());
 			ObjectIO.addFileToZip(baseDir,zos,"");
 			zos.close();
