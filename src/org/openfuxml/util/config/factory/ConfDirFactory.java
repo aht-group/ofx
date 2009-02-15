@@ -23,7 +23,7 @@ public class ConfDirFactory
 			dirBase.setRel(false);
 			
 		Dir dirLog = new Dir();
-			dirLog.setType("logs");
+			dirLog.setType("log");
 			dirLog.setRel(true);
 			
 		Dir dirOutput = new Dir();
