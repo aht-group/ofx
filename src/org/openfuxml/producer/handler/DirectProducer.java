@@ -66,7 +66,9 @@ public class DirectProducer extends AbstractProducer implements Producer
 		{
 			for(File dirEntry : dirApplications.listFiles())
 			{
-				if(dirEntry.isDirectory())
+				boolean isDir = dirEntry.isDirectory();
+				boolean isSvn = dirEntry.getAbsolutePath().endsWith(".svn");
+				if(isDir && !isSvn)
 				{
 					Application a = new Application();
 					a.setAvailableApplications(aas);
@@ -188,8 +190,6 @@ public class DirectProducer extends AbstractProducer implements Producer
 
 //		Unter Windows müssen die Backslashes ersetzt werden
 		pc=spawn(sbCmd.toString().replace('\\','/'));
-
-		
 		
 		// Get stop time of production process
 		Calendar endTime = Calendar.getInstance();

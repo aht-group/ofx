@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<openfuxml>
+    <icons dir="resources/images/icons">
+        <icon type="fuxklein">openFuXML-klein.gif</icon>
+        <icon type="fux">openFuXML.gif</icon>
+        <icon type="project">project.png</icon>
+    </icons>
+    <logos dir="resources/images/client">
+        <logo type="fuxklein">openFuXML-Logo.png</logo>
+        <logo type="fuxgross">openFuXML-Logo-gross.png</logo>
+    </logos>
+    </openfuxml>

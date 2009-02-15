@@ -1,7 +1,6 @@
 package org.openfuxml.communication.client.simple;
 
 import java.io.File;
-import java.net.URL;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,7 +9,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.tree.xpath.XPathExpressionEngine;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -55,7 +54,7 @@ import org.openfuxml.util.config.factory.ClientConfFactory;
 
 import de.kisner.util.ConfigLoader;
 import de.kisner.util.LoggerInit;
-import de.kisner.util.xml.XmlConfig;
+import de.kisner.util.io.resourceloader.ImageResourceLoader;
 
 /**
  * Client implementiert die Benutzeroberfläche für die FuXML-Produktion.
@@ -64,12 +63,10 @@ import de.kisner.util.xml.XmlConfig;
 public class Client extends Composite
 {
     static Logger logger = Logger.getLogger(Client.class);
+    private static String fs = SystemUtils.FILE_SEPARATOR;
+    
     public final static String Version = Client.class.getPackage().getImplementationVersion();
     public final static String Title = "openFuXML - Produktionssytem";
-
-	public final static String IMG_FUXLOGO			= "/images/client/openFuXML-Logo.png";
-	public final static String IMG_FUXICON			= "/images/client/openFuXML-Icon.gif";
-	public final static String IMG_FUXICON_KLEIN	= "/images/client/openFuXML-Icon-klein.gif";
 
 	public final static RGB rgbBackground = new RGB(231, 232, 235);
 	
@@ -136,7 +133,7 @@ public class Client extends Composite
 		this.display = disp;
 
 		// Open the SplashScreen
-		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN);
+		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
 		splashscreen.open();
 		
 		htProducableEntities = new Hashtable<String, ProducedEntities>();
@@ -204,8 +201,8 @@ public class Client extends Composite
 				data.verticalAlignment = GridData.FILL;
 				labelImage.setLayoutData(data);
 			}
-			
-			Image img = loadImage(getClass(), getDisplay(), IMG_FUXLOGO);
+			String res = config.getString("logos/@dir")+fs+config.getString("logos/logo[@type='fuxklein']");
+			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 			if (img != null)
 			{
 				labelImage.setImage(img);
@@ -559,9 +556,7 @@ public class Client extends Composite
 			this.labelErgebnis.setText("Einen Moment bitte ...");
 			
 			AvailableApplications availableAppliations = producer.getAvailableApplications();
-			
 			this.labelErgebnis.setText("");
-			
 			Collection<Application> collAppl = availableAppliations.getApplications();
 			
 			if (collAppl != null)
@@ -676,7 +671,9 @@ public class Client extends Composite
 					for (int i=0; i<list.length; i++)
 					{
 						File f = new File(dir, list[i]);
-						if (f.isDirectory())
+						boolean isDir = f.isDirectory();
+						boolean isSvn = f.getAbsolutePath().endsWith(".svn");
+						if (isDir && !isSvn)
 						{
 							// Diesen Eintrag in Combo comboProjekte einfügen.
 							comboProjekte.add(list[i]);
@@ -1118,7 +1115,7 @@ public class Client extends Composite
 	 */
 	public void HilfeInfoUeber()
 	{
-		HelpAboutDialog dialog = new HelpAboutDialog(getShell(), HelpAboutDialog.ABOUT_DIALOG);
+		HelpAboutDialog dialog = new HelpAboutDialog(getShell(), HelpAboutDialog.ABOUT_DIALOG,config);
 		dialog.open();
 	}
 
@@ -1185,38 +1182,6 @@ public class Client extends Composite
 		producedEntities = null;
 	}
 
-	/**
-	 * loadImage lädt das Image, das mittels des Resourcenamens angegeben wird.
-	 * Falls die Resource nicht gefunden werden kann, liefert die Methode null.  
-	 * @param cl
-	 * @param display
-	 * @param ResourceName
-	 * @return liefert das erzeugte Image
-	 */
-	public final static Image loadImage(Class cl, Display display, String ResourceName)
-	{
-		logger.debug("getResource: " + cl.getResource(ResourceName));
-		
-		URL url = cl.getResource(ResourceName);
-		if (url != null)
-		{
-			try
-			{
-				Image img = new Image(display, url.openStream());
-				return img;
-			}
-			catch (Exception e)
-			{
-				logger.error(e.getMessage());
-				return null;
-			}
-		}
-		else
-		{
-			logger.debug("Resource nicht gefunden: " + ResourceName);
-			return null;
-		}
-	}
 	
 	/**
 	 * makeImages liefert ein Array von Images.
@@ -1234,15 +1199,8 @@ public class Client extends Composite
 		ArrayList<Image> alImages = new ArrayList<Image>();
 		for (int i=0; i<Dateinamen.length; i++)
 		{
-			Image img = loadImage(getClass(), getDisplay(), Dateinamen[i]);
-			if (img != null)
-			{
-				alImages.add(img);
-			}
-			else
-			{
-				logger.error("Image not found: " + Dateinamen[i]);
-			}
+			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), Dateinamen[i], getDisplay());
+			if (img != null){alImages.add(img);}
 		}
 		
 		Image[] img = new Image[alImages.size()];
@@ -1286,8 +1244,9 @@ public class Client extends Composite
 		}
 		sh.setText(Client.Title);
 
-		// Icon
-		final String strImages[] = {IMG_FUXICON_KLEIN, IMG_FUXICON};
+		String resIconFuxKlein = config.getString("icons/@dir")+fs+config.getString("icons/icon[@type='fuxklein']");
+		String resIconFux = config.getString("icons/@dir")+fs+config.getString("icons/icon[@type='fux']");
+		final String strImages[] = {resIconFuxKlein, resIconFux};
 		sh.setImages(client.makeImages(strImages));
 
 		sh.pack();

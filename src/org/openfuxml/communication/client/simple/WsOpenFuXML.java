@@ -27,6 +27,8 @@ import de.kisner.util.xml.XmlElementNotFoundException;
 public class WsOpenFuXML
 {
 	static Logger logger = Logger.getLogger(WsOpenFuXML.class);
+	private static String fs = SystemUtils.FILE_SEPARATOR;
+	
 	String version,openFuXMLDir;
 	static String fSep;
 	
@@ -151,8 +153,9 @@ public class WsOpenFuXML
 		}
 		sh.setText(Client.Title);
 
-		// Icon
-		final String strImages[] = {Client.IMG_FUXICON_KLEIN, Client.IMG_FUXICON};
+		String resIconFuxKlein = config.getString("icons/@dir")+fs+config.getString("icons/icon[@type='fuxklein']");
+		String resIconFux = config.getString("icons/@dir")+fs+config.getString("icons/icon[@type='fux']");
+		final String strImages[] = {resIconFuxKlein, resIconFux};
 		sh.setImages(client.makeImages(strImages));
 
 		sh.pack();

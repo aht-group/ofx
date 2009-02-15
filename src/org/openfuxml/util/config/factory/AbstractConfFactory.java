@@ -33,7 +33,9 @@ public abstract class AbstractConfFactory
 	{
 		switch(startupenv)
 		{
-			case DEVELOPER:		openFuxmlBaseDir = new File(".");break;
+			case DEVELOPER:		String path = (new File(".")).getAbsolutePath();
+								openFuxmlBaseDir=new File(path.substring(0,path.length()-2));
+								break;
 			case PRODUCTION:	openFuxmlBaseDir = new File(ArchUtil.getAppSettingsDir("openFuXML"));
 								if(!openFuxmlBaseDir.exists())
 								{
