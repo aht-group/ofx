@@ -52,6 +52,7 @@ import org.openfuxml.producer.handler.DirectProducer;
 import org.openfuxml.producer.handler.Producer;
 import org.openfuxml.producer.handler.SocketProducer;
 import org.openfuxml.server.DummyServer;
+import org.openfuxml.util.config.factory.ClientConfFactory;
 
 import de.kisner.util.LoggerInit;
 import de.kisner.util.architecture.ArchUtil;
@@ -158,8 +159,7 @@ public class Client extends Composite
 		
 		logger.info("pause");
 		// Pause für den Splashscreen einfügen
-		try{Thread.sleep(3000);}
-		catch (InterruptedException e){logger.error("InterruptedException", e);}
+		try{Thread.sleep(3000);} catch (InterruptedException e){logger.error("InterruptedException", e);}
 		
 		splashscreen.close();
 		splashscreen = null;
@@ -1277,7 +1277,10 @@ public class Client extends Composite
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("resources/config");
-			loggerInit.init();	
+			loggerInit.init();
+			
+		ClientConfFactory ccf = new ClientConfFactory();
+		ccf.init(new File("openFuXML.xml"));
 			
 		String appDirName = ArchUtil.getAppSettingsDir("openFuXML");
 		File appDir = new File(appDirName);
