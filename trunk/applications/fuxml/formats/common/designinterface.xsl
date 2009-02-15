@@ -294,6 +294,31 @@
 		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/varlogo1"/>
 	</xsl:template>
 
+	<xsl:template match="processing-instruction('varlogo2')">
+		<xsl:param name="contextnode" tunnel="yes"/>
+		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/varlogo2"/>
+	</xsl:template>
+	
+	<xsl:template match="processing-instruction('varlogo3')">
+		<xsl:param name="contextnode" tunnel="yes"/>
+		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/varlogo3"/>
+	</xsl:template>
+	
+	<xsl:template match="processing-instruction('varlogo4')">
+		<xsl:param name="contextnode" tunnel="yes"/>
+		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/varlogo4"/>
+	</xsl:template>
+	
+	<xsl:template match="processing-instruction('varlogo5')">
+		<xsl:param name="contextnode" tunnel="yes"/>
+		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/varlogo5"/>
+	</xsl:template>
+	
+	<xsl:template match="processing-instruction('varlogo6')">
+		<xsl:param name="contextnode" tunnel="yes"/>
+		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/varlogo6"/>
+	</xsl:template>
+
 	<xsl:template match="processing-instruction('kurstitel')">
 		<xsl:param name="contextnode" tunnel="yes"/>
 		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/kurstitel"/>
@@ -344,11 +369,6 @@
 		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/titelbild"/>
 	</xsl:template>
 	
-	<xsl:template match="processing-instruction('varlogo2')">
-		<xsl:param name="contextnode" tunnel="yes"/>
-		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/varlogo2"/>
-	</xsl:template>
-
 	<xsl:template match="processing-instruction('copyright')">
 		<xsl:param name="contextnode" tunnel="yes"/>
 		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/copyright"/>

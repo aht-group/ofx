@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE abschnitt SYSTEM "../system/dtd/fernuni01.dtd">
+<!DOCTYPE abschnitt SYSTEM "../system/dtd/openfuxml.dtd">
 <abschnitt id="c1"> 
 <titel>Einleitung</titel> 
 <abschnitt> 
