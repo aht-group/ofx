@@ -40,7 +40,7 @@ public class SimpleServer extends AbstractServer
 		
 		Host host = getHost();
 		
-		Producer p = new DirectProducer(config,host);
+		Producer p = new DirectProducer(config,host,envParameter);
 		
 		logger.debug("ServerSocket erstellen: "+serverPort);
 		ServerSocket serverSocket=null;
@@ -61,7 +61,7 @@ public class SimpleServer extends AbstractServer
 		{
 			while (myShutdownThread.getAppActive())
 			{
-				SimpleServerThread sst = new SimpleServerThread(clientTg, serverSocket.accept(),new DirectProducer(config,host)); 
+				SimpleServerThread sst = new SimpleServerThread(clientTg, serverSocket.accept(),new DirectProducer(config,host,envParameter)); 
 				sst.start();
 			}
 		}

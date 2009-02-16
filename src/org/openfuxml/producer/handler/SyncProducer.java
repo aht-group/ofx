@@ -13,6 +13,8 @@ import org.openfuxml.producer.ejb.ProductionRequest;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
 
+import de.kisner.util.architecture.EnvironmentParameter;
+
 public class SyncProducer extends AbstractProducer implements Producer
 {
 	static Logger logger = Logger.getLogger(DirectProducer.class);
@@ -20,11 +22,12 @@ public class SyncProducer extends AbstractProducer implements Producer
 	private Producer p;
 	private ServerSync unisonSync,noSync;
 	
-	public SyncProducer(Configuration config,Host host)
+	public SyncProducer(Configuration config,Host host,EnvironmentParameter envP)
 	{	
+		super(envP);
 		unisonSync = new UnisonSync(config);
 		noSync = new NoSync();
-		p = new DirectProducer(config,host);
+		p = new DirectProducer(config,host,envP);
 	}
 	
 	public AvailableApplications getAvailableApplications() throws ProductionSystemException,ProductionHandlerException

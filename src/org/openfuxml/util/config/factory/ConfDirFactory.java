@@ -15,7 +15,7 @@ public class ConfDirFactory
 		
 	}
 	
-	public Dirs getDirs(AbstractConfFactory.StartUpEnv startupenv, String baseDir)
+	public Dirs getDirs(AbstractConfFactory.StartUpEnv startupenv, String baseDir, String openFuxmlVersion)
 	{
 		Dirs dirs = new Dirs();
 	
@@ -34,22 +34,29 @@ public class ConfDirFactory
 			
 		Dir dirRepo = new Dir();
 			dirRepo.setType("repository");
-			dirRepo.setRel(true);	
+			dirRepo.setRel(true);
+			
+		Dir dirLib = new Dir();
+			dirLib.setType("lib");
+			dirLib.setRel(true);	
 		
 		switch(startupenv)
 		{
 			case DEVELOPER:		dirLog.setContent("dist"+fs+"logs");
 								dirOutput.setContent("dist"+fs+"output");
-								dirRepo.setContent("resources"+fs+"repository");break;
+								dirRepo.setContent("resources"+fs+"repository");
+								dirLib.setContent("build"+fs+"app"+fs+"openFuXML-"+openFuxmlVersion+fs+"lib");break;
 			case PRODUCTION: 	dirLog.setContent("share"+fs+"logs");
 								dirOutput.setContent("share"+fs+"output");
-								dirRepo.setContent("share"+fs+"repository");break;
+								dirRepo.setContent("share"+fs+"repository");
+								dirLib.setContent("libs");break;
 		}
 			
 		dirs.getDir().add(dirBase);	
 		dirs.getDir().add(dirLog);
 		dirs.getDir().add(dirOutput);
 		dirs.getDir().add(dirRepo);
+		dirs.getDir().add(dirLib);
 		
 		return dirs;
 	} 

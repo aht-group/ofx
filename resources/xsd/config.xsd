@@ -4,7 +4,11 @@
     <xsd:element name="openfuxml">
         <xsd:complexType>
         <xsd:sequence>
-        	<xsd:element name="server" type="xsd:string"/>
+            <xsd:element name="server" minOccurs="1" maxOccurs="1">
+                <xsd:complexType mixed="true">
+                    <xsd:attribute name="version" type="xsd:string"/>
+                </xsd:complexType>
+            </xsd:element>
             <xsd:element name="net" minOccurs="1" maxOccurs="1">
             	<xsd:complexType>
             		<xsd:sequence>

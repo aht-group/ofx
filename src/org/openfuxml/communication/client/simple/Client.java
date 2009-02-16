@@ -157,8 +157,8 @@ public class Client extends Composite
 		if(config.getString("server").equals("direct"))
 		{
 			logger.info("Using "+DirectProducer.class.getSimpleName());
-			new DummyServer(config);
-			producer = new DirectProducer(config);
+			DummyServer server = new DummyServer(config);
+			producer = new DirectProducer(config,server.getEnvParameter());
 		}
 		else
 		{

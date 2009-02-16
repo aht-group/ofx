@@ -25,6 +25,7 @@ public class ClientConfFactory extends AbstractConfFactory
 	
 	private Openfuxml openfuxml;
 	private String mainConf;
+	
 	public ClientConfFactory()
 	{
 
@@ -70,9 +71,14 @@ public class ClientConfFactory extends AbstractConfFactory
 		ConfFileFactory cff = new ConfFileFactory();
 		
 		openfuxml = new Openfuxml();
-		openfuxml.setServer("direct");
+		
+		Openfuxml.Server server = new Openfuxml.Server();
+			server.setContent("direct");
+			server.setVersion(openFuxmlVersion);
+		
+		openfuxml.setServer(server);
 		openfuxml.setNet(getNet());
-		openfuxml.setDirs(cdf.getDirs(startupenv,openFuxmlBaseDir.getAbsolutePath()));
+		openfuxml.setDirs(cdf.getDirs(startupenv,openFuxmlBaseDir.getAbsolutePath(),openFuxmlVersion));
 		openfuxml.setFiles(cff.getFiles());
 	}
 	
