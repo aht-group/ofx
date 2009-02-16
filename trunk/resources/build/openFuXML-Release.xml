@@ -195,11 +195,6 @@
 	</target>
 
 	<target name="03 - compile" depends="02 - init" description="Compile the source">
-		<echo level="info">Creating JAXB Configuration Class</echo>
-		<xjc schema="resources/xsd/config.xsd"
-						destdir="${src.dir}"
-						package="org.openfuxml.util.config.jaxb" /> 
-		
 		<javac	srcdir="${src.dir}"
 				destdir="${build-bin.dir}"
 				debug="true"
@@ -210,6 +205,13 @@
 				classpathref="classpath">
 			<include name="org/openfuxml/**"/>
 		</javac>
+	</target>
+	
+	<target name="03a JAXB Class generation" depends="02 - init" description="Compile the source">
+		<echo level="info">Creating JAXB Configuration Class</echo>
+		<xjc schema="resources/xsd/config.xsd"
+						destdir="${src.dir}"
+						package="org.openfuxml.util.config.jaxb" /> 
 	</target>
 	
 <!--	<target name="03 - package-elements" depends="02 - init" description="Package Elements">
@@ -389,6 +391,7 @@
 				<attribute name="Built-By" value="${user.name}"/>
 			</manifest>        	
         </jar>
+		<copy file="${dist.dir}/${simpleServer.name}.jar" todir="${pack-lib.dir}"/>
 	</target>
 	
 	<target name="05b - SimpleClient" depends="03 - compile">

@@ -1,7 +1,7 @@
 package org.openfuxml.server;
 
+import java.io.File;
 import java.util.Date;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -15,15 +15,18 @@ import org.openfuxml.util.FuXmlLogger;
 
 import de.kisner.util.HostCheck;
 import de.kisner.util.architecture.ArchUtil;
+import de.kisner.util.architecture.EnvironmentParameter;
 
 public abstract class AbstractServer
 {
 	static Logger logger = Logger.getLogger(AbstractServer.class);
 	
 	protected static String fs = SystemUtils.FILE_SEPARATOR;
-	public static String[] environmentParameters;
-	public static String baseDir;
 	
+	public static String ofxBaseDir;
+	protected String  pathLog,pathRepo,pathOutput,pathLib;
+	protected EnvironmentParameter envParameter;
+
 	protected Configuration config;
 	
 	public AbstractServer(Configuration config)
@@ -45,56 +48,69 @@ public abstract class AbstractServer
 		Properties sysprops = System.getProperties();
 		Map<String,String> sysenv = System.getenv();
 		
-		baseDir = config.getString("dirs/dir[@type='basedir']");
+		ofxBaseDir = config.getString("dirs/dir[@type='basedir']");
 
+		pathLog = config.getString("dirs/dir[@type='log']");
+		pathRepo = config.getString("dirs/dir[@type='repository']");
+		pathOutput = config.getString("dirs/dir[@type='output']");
+		pathLib = config.getString("dirs/dir[@type='lib']");
 		
-		String pathLog = config.getString("dirs/dir[@type='log']");
-		String pathRepo = config.getString("dirs/dir[@type='repository']");
-		String pathOutput=config.getString("dirs/dir[@type='output']");
-		
-		if(!ArchUtil.isAbsolute(pathLog)){pathLog=baseDir+"/"+pathLog;}
-		if(!ArchUtil.isAbsolute(pathRepo)){pathRepo=baseDir+"/"+pathRepo;}
-		if(!ArchUtil.isAbsolute(pathOutput)){pathOutput=baseDir+"/"+pathRepo;}
+		if(config.getBoolean("dirs/dir[@type='log']/@rel")){pathLog=ofxBaseDir+fs+pathLog;}
+		if(config.getBoolean("dirs/dir[@type='repository']/@rel")){pathRepo=ofxBaseDir+fs+pathRepo;}
+		if(config.getBoolean("dirs/dir[@type='output']/@rel")){pathOutput=ofxBaseDir+fs+pathOutput;}
+		if(config.getBoolean("dirs/dir[@type='lib']/@rel")){pathLib=ofxBaseDir+fs+pathLib;}
 		
 		FuXmlLogger.initLogger(pathLog);
 		
-		logger.debug("baseDir="+baseDir);
+		logger.debug("baseDir="+ofxBaseDir);
 		logger.debug("pathLog="+pathLog);
 		logger.debug("pathRepo="+pathRepo);
 		logger.debug("pathOutput="+pathOutput);
+		logger.debug("pathLib="+pathLib);
 		
 		String antHome = sysenv.get("ANT_HOME");
 		if(antHome!=null){sysprops.put("ant.home",sysenv.get("ANT_HOME"));}
 		else
 		{
-			antHome = baseDir+"/lib";
-			logger.debug("ANT_HOME not set, using config.xml value");
+			antHome = pathLib;
+			logger.debug("ANT_HOME not set, using Lib directory from config.xml");
 			sysprops.put("ANT_HOME",antHome);
 		}
 			
-		sysprops.put("ilona.home",baseDir);
+		sysprops.put("ilona.home",ofxBaseDir);
 		sysprops.put("ant.home",antHome);
 		sysprops.put("logger.path",pathLog);
 		sysprops.put("ilona.contentstore",pathRepo);
 		sysprops.put("ilona.output",pathOutput);
 		System.setProperties(sysprops);
-		
+		checkDirs();
 		setenvP();
+	}
+	
+	private void checkDirs()
+	{
+		File f = new File(pathLog);
+		if(!f.exists()){f.mkdirs();logger.info("Created directory: "+f.getAbsolutePath());}
+		f = new File(pathOutput);
+		if(!f.exists()){f.mkdirs();logger.info("Created directory: "+f.getAbsolutePath());}
+		f = new File(pathRepo);
+		if(!f.exists()){logger.warn("Repository not found! Cheack for "+f.getAbsolutePath());}
+		f = new File(pathLib);
+		if(!f.exists()){logger.warn("Libraries not found! Check for "+f.getAbsolutePath());}
 	}
 	
 	private void setenvP()
 	{	
-		Hashtable<String,String> htEnv = new Hashtable<String,String>();
-		htEnv.putAll(System.getenv());
+		envParameter = new EnvironmentParameter();
 		
-		//TODO Was passiert hier??
-		List<String> lLibs = config.getList("files/file[@typ='lib']");
-		String cp = ArchUtil.getClassPath(lLibs,baseDir+fs+"lib"+fs);
-		htEnv.put("CLASSPATH",cp);
+		List<String> lLibs = config.getList("files/file[@type='lib']");
+
+		String cp = ArchUtil.getClassPath(lLibs,pathLib);
+		envParameter.put("CLASSPATH",cp);
 		logger.debug("Setting CLASSPATH for openFuXML Applications: "+cp);
 		
-		htEnv.put("ANT_HOME", baseDir+"/lib");
-		logger.debug("Setting ANT_HOME for openFuXML Applications: "+htEnv.get("ANT_HOME"));
+		envParameter.put("ANT_HOME", pathLib);
+		logger.debug("Setting ANT_HOME for openFuXML Applications: "+envParameter.get("ANT_HOME"));
 		
 		ArchUtil.setArch();
 		switch(ArchUtil.arch)
@@ -102,37 +118,29 @@ public abstract class AbstractServer
 			case OsX:	try
 						{
 							String systemPath = config.getString("dirs/dir[@type='path']");
-							htEnv.put("PATH", systemPath);
+							envParameter.put("PATH", systemPath);
 						}
 						catch (NoSuchElementException e)
 						{
-							logger.warn("No PATH defined in xmlConfig. Using System PATH "+htEnv.get("PATH"));
-							logger.warn("   Errors are possible for "+SystemUtils.OS_NAME);
-							logger.warn("   Please insert your $PATH <dirs><dir typ=\"path\">HERE</dir></dirs>");
+							logger.warn("No PATH defined in config.xml. Using System PATH "+envParameter.get("PATH"));
+							logger.warn("   Errors are *EXTREMELY* possible for "+SystemUtils.OS_NAME);
+							logger.warn("   Please insert your $PATH <dirs><dir type=\"path\">HERE</dir></dirs>");
+							logger.warn("   Get your $PATH in a Terminal-Windows with: 'echo $PATH'");
 						}
 						break;
 			case Win32:	try
 						{
 							String systemPath = config.getString("dirs/dir[@type='path']");
-							htEnv.put("PATH", systemPath);
+							envParameter.put("PATH", systemPath);
 						}
 						catch (NoSuchElementException e)
 						{
-							logger.warn("No PATH defined in xmlConfig. Using System PATH "+htEnv.get("PATH"));
-							logger.warn("   Errors are possible for "+SystemUtils.OS_NAME);
-							logger.warn("   Please insert your $PATH <dirs><dir typ=\"path\">HERE</dir></dirs>");
+							logger.warn("No PATH defined in xmlConfig. Using System PATH "+envParameter.get("PATH"));
+							logger.warn("   This must be tested for "+SystemUtils.OS_NAME);
 						}
 						break;
 			default:	logger.fatal("Environment for "+ArchUtil.arch+" must be implemented!");break;
 		}	
-		
-		environmentParameters = new String[htEnv.size()];
-		int index=0;
-		for(String key : htEnv.keySet())
-		{
-			environmentParameters[index]=key+"="+htEnv.get(key);
-			index++;
-		}
 	}
 	
 	public void checkSystemProperties()
@@ -152,17 +160,8 @@ public abstract class AbstractServer
 		logger.debug("\tILONA_HOME="+System.getenv("ILONA_HOME"));
 		logger.debug("\tFUXML_HOME="+System.getenv("FUXML_HOME"));
 		
-	
-/*		for (Object o : sysprops.keySet())
-		{
-			logger.debug(o+": "+sysprops.getProperty((String) o));
-		}
-*/		
-		for( String s : environmentParameters)
-		{
-			logger.debug("Env: "+s);
-		}
-	
+		envParameter.debug();
 	}
 	
+	public EnvironmentParameter getEnvParameter() {return envParameter;}
 }

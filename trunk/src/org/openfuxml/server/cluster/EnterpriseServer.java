@@ -3,7 +3,6 @@ package org.openfuxml.server.cluster;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.SocketException;
-import java.util.Date;
 
 import javax.naming.CommunicationException;
 import javax.naming.InitialContext;
@@ -25,12 +24,10 @@ import org.openfuxml.producer.handler.SyncProducer;
 import org.openfuxml.server.AbstractServer;
 import org.openfuxml.server.simple.SimpleServerThread;
 import org.openfuxml.server.simple.SimpleShutdownThread;
-import org.openfuxml.util.FuXmlLogger;
 
 import de.kisner.util.ConfigLoader;
 import de.kisner.util.Connector;
 import de.kisner.util.LoggerInit;
-import de.kisner.util.xml.XmlConfig;
 
 /**
  * Server oeffnet den ServerSocket und wartet dann auf Clientverbindungen.
@@ -70,7 +67,7 @@ public class EnterpriseServer extends AbstractServer
 			OpenFuxmlFacade fO = (OpenFuxmlFacade) ctx.lookup(OpenFuxmlFacadeBean.class.getSimpleName()+"/remote");
 			
 			host=fO.updateHost(host);
-			Producer p = new SyncProducer(config,host);
+			Producer p = new SyncProducer(config,host,envParameter);
 			AvailableApplications aas = p.getAvailableApplications();
 			
 			for(Application a : aas.getApplications())
@@ -105,7 +102,7 @@ public class EnterpriseServer extends AbstractServer
 		{
 			while (myShutdownThread.getAppActive())
 			{
-				SimpleServerThread sst = new SimpleServerThread(clientTg, serverSocket.accept(),new SyncProducer(config,host)); 
+				SimpleServerThread sst = new SimpleServerThread(clientTg, serverSocket.accept(),new SyncProducer(config,host,envParameter)); 
 				sst.start();
 			}
 		}

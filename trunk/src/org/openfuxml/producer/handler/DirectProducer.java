@@ -1,9 +1,6 @@
 package org.openfuxml.producer.handler;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
@@ -18,9 +15,10 @@ import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.Format;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.exception.ProductionSystemException;
-import org.openfuxml.server.AbstractServer;
 import org.openfuxml.util.FuXmlLogger;
 
+import de.kisner.util.architecture.EnvironmentParameter;
+import de.kisner.util.io.spawn.Spawn;
 import de.kisner.util.xml.XmlElementNotFoundException;
 import de.kisner.util.xml.XmlObject;
 
@@ -43,9 +41,10 @@ public class DirectProducer extends AbstractProducer implements Producer
 	private Host host;
 	private String dirOutput;
 	
-	public DirectProducer(Configuration config){this(config,null);}
-	public DirectProducer(Configuration config,Host host)
+	public DirectProducer(Configuration config,EnvironmentParameter envP){this(config,null,envP);}
+	public DirectProducer(Configuration config,Host host,EnvironmentParameter envP)
 	{
+		super(envP);
 		this.host=host;
 		String baseDir = config.getString("dirs/dir[@type='basedir']");
 		//TODO Relative PATH
@@ -127,13 +126,6 @@ public class DirectProducer extends AbstractProducer implements Producer
 		Calendar startTime = Calendar.getInstance();
 		ProductionCode pc=ProductionCode.Ok;
 		
-		String logfile="";
-		switch (invokeType)
-		{
-			case PRODUCE: 	logfile= sysprops.getProperty("logger.path") + fs + 
-							request.getProject() + "_" + request.getDocument() + ".log";break;
-		}
-		
 		String buildfile = sysprops.getProperty("ilona.home") + fs + "applications" + fs 
 				+ request.getApplication() + fs + "formats" + fs
 				+ request.getFormat() + fs + "build.xml";
@@ -156,9 +148,16 @@ public class DirectProducer extends AbstractProducer implements Producer
 		}
 		//Constructing parameters for spawned Java process
 		StringBuffer sbParameters = new StringBuffer();
-		switch (invokeType)
+		
+		boolean writeLogFile = false;
+		if(writeLogFile)
 		{
-			case PRODUCE: 	sbParameters.append(" -logfile " + logfile);break;
+			switch (invokeType)
+			{
+				case PRODUCE: 	String logfile= sysprops.getProperty("logger.path") + fs + request.getProject() + "_" + request.getDocument() + ".log";
+								sbParameters.append(" -logfile " + logfile);
+								break;
+			}
 		}
 		sbParameters.append(" -Dilona.home="+ sysprops.getProperty("ilona.home"));
 		sbParameters.append(" -Dilona.contentstore="+ sysprops.getProperty("ilona.contentstore")+File.separator+request.getApplication());
@@ -222,57 +221,16 @@ public class DirectProducer extends AbstractProducer implements Producer
 	
 	private ProductionCode spawn(String cmd) throws ProductionSystemException
 	{
-		
 		ProductionCode pc = ProductionCode.Ok;
-		String s;
-		String stdlog = "";
-		String errlog = "";
-		try
-		{
-			logger.debug("Ant Call:" + cmd);
-			Process p = Runtime.getRuntime().exec(cmd,AbstractServer.environmentParameters);
-			
-			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-
-			FuXmlLogger.spawn.debug("Here is the standard output of the command:\n");
-			while ((s = stdInput.readLine()) != null)
-			{
-				FuXmlLogger.spawn.debug(s);
-				stdlog = stdlog + s + "\n";
-			}
-			FuXmlLogger.spawn.debug("Here is the standard error of the command (if any):\n");
-			while ((s = stdError.readLine()) != null)
-			{ 
-				FuXmlLogger.spawn.error(s);;
-				errlog = errlog + s + "\n";
-			}
-			
-			int buildresult = 1;
-			try {buildresult = p.waitFor();}
-			catch(InterruptedException e)
-			{ 
-				logger.error("Interrupted while waiting for end of build process!\n" 
-				  + e.toString());
-			}
-			
-			if (buildresult != 0) 
-				pc = ProductionCode.BuildError;
-			else 
-				pc = ProductionCode.Ok;
-			
-			FuXmlLogger.spawn.info("Process Exit Value="+ buildresult);
-		}
 		
-		catch(IOException e)
-		{	//Process cannot be started
-			logger.error("Error during ant call!\n" + e.toString());
-			pc = ProductionCode.InternalError;
-			
-			//This is not due to an error in the build file
-			//Hence, we throw a ProductionSystemException to signal a system error
-			throw new ProductionSystemException();
-		}
+		Spawn spawn = new Spawn(envP,cmd);
+		spawn.cmd();
+		int exitValue = spawn.getExitValue();
+		if (exitValue != 0) 
+			pc = ProductionCode.BuildError;
+		else 
+			pc = ProductionCode.Ok;
+		
 		return pc;
 	}
 }

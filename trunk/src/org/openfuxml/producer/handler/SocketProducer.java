@@ -27,6 +27,7 @@ public class SocketProducer extends AbstractProducer implements Producer
 	}
 	public SocketProducer(String serverIP,int serverPort) 
 	{
+		super(null);
 		this.serverIP=serverIP;
 		this.serverPort=serverPort;
 	}
