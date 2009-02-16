@@ -15,7 +15,6 @@ import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.Format;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.exception.ProductionSystemException;
-import org.openfuxml.util.FuXmlLogger;
 
 import de.kisner.util.architecture.EnvironmentParameter;
 import de.kisner.util.io.spawn.Spawn;
@@ -218,7 +217,8 @@ public class DirectProducer extends AbstractProducer implements Producer
 		try {producedEntities.loadXML(xmlFile);}
 		catch (XmlElementNotFoundException e){throw  new ProductionSystemException(e.getMessage());}
 			
-		FuXmlLogger.productionLog( "ProducibleEntities()", request.getApplication(),  request.getProject(), request.getDocument(), request.getFormat(), request.getUsername(), startTime, endTime, pc);
+//		FuXmlLogger.productionLog( "ProducibleEntities()", request.getApplication(),  request.getProject(), request.getDocument(), request.getFormat(), request.getUsername(), startTime, endTime, pc);
+		logger.info("Invoke "+request.getProject()+"-"+request.getDocument()+": "+pc);
 		
 		return producedEntities;
 	}

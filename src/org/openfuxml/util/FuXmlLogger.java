@@ -1,9 +1,7 @@
 package org.openfuxml.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.net.URL;
 import java.util.Calendar;
 
 import org.apache.log4j.ConsoleAppender;
@@ -11,9 +9,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.RollingFileAppender;
-import org.apache.log4j.xml.DOMConfigurator;
 import org.openfuxml.producer.handler.DirectProducer.ProductionCode;
-
 
 public class FuXmlLogger
 {

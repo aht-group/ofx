@@ -488,8 +488,7 @@
    			compression="gzip" longfile="gnu"/>
    		<copy file="${rsrc.dir}/shell/install.sh" todir="${dist.dir}"/>
  		<copy file="${rsrc.dir}/shell/uninstall.sh" todir="${dist.dir}"/>
-   		<fixcrlf srcdir="${dist.dir}" includes="openfuxml.sh"
-   		   		   		         eol="lf" eof="remove" />
+   		<fixcrlf srcdir="${dist.dir}" includes="openfuxml.sh" eol="lf" eof="remove" />
    		<replace file="${dist.dir}/install.sh" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
 		<replace file="${dist.dir}/install.sh" token="@@@ant-version@@@" value="${ant-version}"/>
    		<replace file="${dist.dir}/uninstall.sh" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
