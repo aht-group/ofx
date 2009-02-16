@@ -11,7 +11,6 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.openfuxml.communication.cluster.ejb.Host;
-import org.openfuxml.util.FuXmlLogger;
 
 import de.kisner.util.HostCheck;
 import de.kisner.util.architecture.ArchUtil;
@@ -60,7 +59,7 @@ public abstract class AbstractServer
 		if(config.getBoolean("dirs/dir[@type='output']/@rel")){pathOutput=ofxBaseDir+fs+pathOutput;}
 		if(config.getBoolean("dirs/dir[@type='lib']/@rel")){pathLib=ofxBaseDir+fs+pathLib;}
 		
-		FuXmlLogger.initLogger(pathLog);
+//		FuXmlLogger.initLogger(pathLog);
 		
 		logger.debug("baseDir="+ofxBaseDir);
 		logger.debug("pathLog="+pathLog);
