@@ -75,7 +75,11 @@ public class DirectProducer extends AbstractProducer implements Producer
 					a.setAnzCores(1);
 					aas.addApplication(a);
 					File sessionpreferences = new File(dirOutput+fs+dirEntry.getName()+fs+"sessionpreferences");
-					if(!sessionpreferences.exists()){sessionpreferences.mkdirs();}
+					if(!sessionpreferences.exists())
+					{
+						logger.debug("Creating "+sessionpreferences.getAbsolutePath());
+						sessionpreferences.mkdirs();
+					}
 				}
 			}
 		}

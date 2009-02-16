@@ -37,7 +37,7 @@
 
 	<root>
 		<priority value="INFO"/>
-		<appender-ref ref="Client-RoFiAppender"/>
+		<appender-ref ref="A1"/>
 	</root>
 
 </log4j:configuration>

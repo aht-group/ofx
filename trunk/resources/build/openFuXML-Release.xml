@@ -251,9 +251,9 @@
     	
     	<echo level="warn">ToDo: Copy reference project</echo>
     	<!-- Inhalte Kopieren: Referenzprojekt -->
-    	<mkdir dir="${rsrc.dir}/repository/HelloWorld"/>
+    	<mkdir dir="${pack.dir}/repository/fuxml/HelloWorld"/>
     	<copy todir="${pack.dir}/share/repository/fuxml/HelloWorld">
-    	    <fileset dir="${rsrc.dir}/repository/HelloWorld" />
+    	    <fileset dir="${rsrc.dir}/repository/fuxml/HelloWorld" />
     	</copy>
     	
     	<echo level="info">Copy required Java Libraries</echo>
