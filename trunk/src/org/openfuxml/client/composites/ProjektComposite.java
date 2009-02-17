@@ -1,17 +1,10 @@
 package org.openfuxml.client.composites;
 
-import java.io.File;
-import java.io.InputStream;
-import java.rmi.RemoteException;
-
-import javax.ejb.RemoveException;
-import javax.naming.InitialContext;
-
+import org.apache.commons.configuration.Configuration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -25,16 +18,10 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
 
 /**
  * @author andy
+ * @author Thorsten Kisner
  */
 public class ProjektComposite extends Composite
-{
-	final static String IMG_PRODUCE		= "/swt/images/tab/produce.png";
-	final static String IMG_OPEN		= "/swt/images/tab/open.gif";
-	final static String IMG_LOG			= "/swt/images/tab/log.png";
-	final static String IMG_USERS		= "/swt/images/tab/users.gif";
-	final static String IMG_DOCUMENTS	= "/swt/images/tab/documents.png";
-	final static String IMG_PREFERENCES	= "/swt/images/tab/preferences.png";	
-	
+{	
 	private OpenFuxmlClient client;
 	private OfxProject ofxProject;
 	private TabFolder tabFolder;
@@ -52,16 +39,17 @@ public class ProjektComposite extends Composite
 	private UserUi myUserUi;
 	private ProjectValue myProjectValue;
 */	
-	public ProjektComposite(Composite parent, OpenFuxmlClient client, OfxProject ofxProject)
+	private Configuration config;
+	public ProjektComposite(Composite parent, OpenFuxmlClient client, OfxProject ofxProject, Configuration config)
 	{
 		super(parent, SWT.NONE);
 		this.client = client;
 		this.ofxProject=ofxProject;
+		this.config=config;
 	
 		this.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent evt) {
 				//TODO Settings speichern
-				
 			}
 		});
 
@@ -93,6 +81,8 @@ public class ProjektComposite extends Composite
 			tabFolder.setLayoutData(data);
 			
 		addTabProduce();
+		
+		//TODO Migration Process (tk, 2009-02-17)
 		boolean d = false;
 		if(d)
 		{
@@ -107,7 +97,8 @@ public class ProjektComposite extends Composite
 	private void addTabProduce()
 	{
 		TabItem tiProduzieren = new TabItem(tabFolder, SWT.NONE);
-		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), IMG_PRODUCE, getDisplay());
+		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='produce']");
+		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 		tiProduzieren.setImage(img);
 		tiProduzieren.setText("Produzieren");
 //			pComp = new ProduzierenComposite(tabFolder, this, hDispatcher,myProjectUi);
@@ -117,7 +108,8 @@ public class ProjektComposite extends Composite
 	private void addTabOpen()
 	{
 		TabItem tiOeffnen = new TabItem(tabFolder, SWT.NONE);
-		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), IMG_OPEN, getDisplay());
+		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='open']");
+		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 		tiOeffnen.setImage(img);
 		tiOeffnen.setText("Öffnen");
 //			oComp = new OeffnenComposite(tabFolder, this);
@@ -127,7 +119,8 @@ public class ProjektComposite extends Composite
 	private void addTabLog()
 	{		
 		TabItem tiLogView = new TabItem(tabFolder, SWT.NONE);
-		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), IMG_LOG, getDisplay());
+		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='log']");
+		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 		tiLogView.setImage(img);
 		tiLogView.setText("Log");
 //			logComp = new LogComposite(tabFolder, this, iniCtx,myProjectUi);
@@ -137,7 +130,8 @@ public class ProjektComposite extends Composite
 	private void addTabUser()
 	{
 		TabItem tiBenutzer = new TabItem(tabFolder, SWT.NONE);
-		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), IMG_USERS, getDisplay());
+		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='user']");
+		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 		tiBenutzer.setImage(img);
 		tiBenutzer.setText("Benutzer");
 //			benutzerComp = new BenutzerComposite(tabFolder, this,myProjectUi);
@@ -147,7 +141,8 @@ public class ProjektComposite extends Composite
 	private void addTabDoc()
 	{
 		TabItem tiDoc = new TabItem(tabFolder, SWT.NONE);
-		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), IMG_DOCUMENTS, getDisplay());
+		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='documents']");
+		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 		tiDoc.setImage(img);
 		tiDoc.setText("Dokumente");
 //			docComp = new DocComposite(tabFolder, this);
@@ -157,7 +152,8 @@ public class ProjektComposite extends Composite
 	private void addTabSettings()
 	{
 		TabItem tiEinst = new TabItem(tabFolder, SWT.NONE);
-		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), IMG_PREFERENCES, getDisplay());
+		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='preferences']");
+		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 		tiEinst.setImage(img);
 		tiEinst.setText("Einstellungen");
 //			einstComp = new EinstellungenComposite(tabFolder, this);
