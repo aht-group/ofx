@@ -66,7 +66,7 @@ public abstract class AbstractConfFactory
 			catch (IOException e) {logger.error(e);}
 		}
 		else {startupenv = StartUpEnv.PRODUCTION;}
-		startupenv = StartUpEnv.PRODUCTION;
+//		startupenv = StartUpEnv.PRODUCTION;
 		logger.info("OpenFuXML Version: "+openFuxmlVersion+" ("+startupenv.toString().toLowerCase()+")");
 	}
 	
