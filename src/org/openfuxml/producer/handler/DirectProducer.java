@@ -227,8 +227,9 @@ public class DirectProducer extends AbstractProducer implements Producer
 	{
 		ProductionCode pc = ProductionCode.Ok;
 		
-		Spawn spawn = new Spawn(envP,cmd);
-		spawn.cmd();
+		Spawn spawn = new Spawn(cmd);
+			spawn.setEnvParameter(envP);
+			spawn.cmd();
 		int exitValue = spawn.getExitValue();
 		if (exitValue != 0) 
 			pc = ProductionCode.BuildError;
