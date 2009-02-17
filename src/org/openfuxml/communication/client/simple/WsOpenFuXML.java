@@ -3,7 +3,6 @@ package org.openfuxml.communication.client.simple;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Properties;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
@@ -13,95 +12,61 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.jdom.Attribute;
-import org.jdom.Element;
 import org.openfuxml.util.config.factory.ClientConfFactory;
 
 import de.kisner.util.LoggerInit;
-import de.kisner.util.architecture.ArchUtil;
 import de.kisner.util.io.ObjectIO;
 import de.kisner.util.io.resourceloader.MultiResourceLoader;
-import de.kisner.util.xml.XmlConfig;
-import de.kisner.util.xml.XmlElementNotFoundException;
 
 public class WsOpenFuXML
 {
 	static Logger logger = Logger.getLogger(WsOpenFuXML.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
-	String version,openFuXMLDir;
-	static String fSep;
+	private Configuration config;
 	
 	public WsOpenFuXML()
 	{
-		fSep=SystemUtils.FILE_SEPARATOR;
+
 	}
 	
 	public void loadProperties()
 	{
-		try
-		{
-			openFuXMLDir = ArchUtil.getAppSettingsDir("openFuXML");
-			version = this.getClass().getPackage().getImplementationVersion();
-			if(version==null)
-			{
-				String propName = "resources/properties/ant.properties.dist";
-				logger.info("No package Version available. Using "+propName);
-				InputStream is = MultiResourceLoader.searchIs(this.getClass().getClassLoader(), propName);
-				Properties versionProperties = new Properties();
-				versionProperties.load(is);
-				version = versionProperties.getProperty("openfuxml-version");
-			}
-			logger.info("Version: "+version);
-		}
-		catch (IOException e){logger.fatal("IOException", e);}
+		ClientConfFactory ccf = new ClientConfFactory();
+		ccf.init("openFuXML.xml");
+		config = ccf.getConfiguration();
 	}
 	
 	public void checkExtract()
 	{
-		File baseDir = new File(openFuXMLDir);
-		File appDir = new File(openFuXMLDir+fSep+version);
-		
-		if(!baseDir.exists())
+		File baseDir = new File(config.getString("dirs/dir[@type='basedir']"));
+		File appDir = new File(baseDir,"applications");
+		if(!appDir.exists())
 		{
-			logger.info("Create directory: "+baseDir.getAbsolutePath());
-			baseDir.mkdir();
-		}
-		
-		if(appDir.exists() && appDir.isDirectory())
-		{
-			logger.debug("Verzeichnis existiert bereits");
-		}
-		else
-		{
-			createDirs(appDir);
-			extract("dist","openFuXML-app.zip",baseDir.getAbsolutePath(),appDir);
-			extract("dist","openFuXML-lib.zip",baseDir.getAbsolutePath(),appDir);
-			extract("dist","openFuXML-conf.zip",baseDir.getAbsolutePath(),appDir);
+			logger.info("Extracting content ...");
+			baseDir.mkdirs();
+			File logDir = new File(baseDir.getAbsoluteFile(),"logs");
+			logDir.mkdir();
+			extract("dist","openFuXML-app.zip",baseDir.getAbsolutePath(),baseDir,"applications");
+			extract("dist","openFuXML-lib.zip",baseDir.getAbsolutePath(),baseDir,"libraries");
+			extract("dist","openFuXML-rscr.zip",baseDir.getAbsolutePath(),baseDir,"configuration");
 		}
 	}
 	
-	private void createDirs(File appDir)
-	{
-		appDir.mkdir();
-		File logDir = new File(appDir.getAbsoluteFile()+fSep+"logs");
-		logDir.mkdir();
-	}
-	
-	private void extract(String zipDir, String zipFileName,String baseDir,File appDir)
+	private void extract(String zipDir, String zipFileName,String baseDir,File appDir, String name)
 	{
 		try
 		{
 			ClassLoader cl = this.getClass().getClassLoader();
-			InputStream is = MultiResourceLoader.searchIs(cl, zipDir+fSep+zipFileName);
+			InputStream is = MultiResourceLoader.searchIs(cl, zipDir+"/"+zipFileName);
 			if(is!=null)
 			{
 				logger.debug(is.getClass().getSimpleName()+" available: "+is.available());
 				
-				File zipFile = new File(baseDir+fSep+zipFileName);
-				ObjectIO.writeToFile(baseDir+fSep+zipFileName, is);
+				File zipFile = new File(baseDir+fs+zipFileName);
+				ObjectIO.writeToFile(baseDir+fs+zipFileName, is);
 				boolean result = ObjectIO.extractZip(zipFile, appDir);
-				logger.debug("Neue Version ("+version+") wird angelegt. Success:"+result);
+				logger.debug("New Version ("+appDir.getName()+") of "+name+" extracted ... success?"+result);
 				zipFile.deleteOnExit();
 			}
 		}
@@ -109,31 +74,7 @@ public class WsOpenFuXML
 	}
 	
 	public void initGui()
-	{
-		//TODO diesen Krempel prüfen
-		String xml = openFuXMLDir+fSep+version+fSep+"openFuXML-config.xml";
-		String xsd = openFuXMLDir+fSep+version+fSep+"openFuXML-1.x.xsd";
-		logger.warn("No validation will be done with "+xml);
-		XmlConfig xCnf = new XmlConfig(xml,true);//, xsd);
-		
-		String baseDir;
-		try {baseDir = xCnf.getTextException("dirs/dir[@type=\"basedir\"]");}
-		catch (XmlElementNotFoundException e)
-		{
-			baseDir = xCnf.getWorkingDir();
-			logger.warn("No \"baseDir\" defined in xmlConfig. Using WorkingDir: "+baseDir);
-		}
-		
-		Element xmlBaseDir = new Element("dir");
-		xmlBaseDir.setAttribute(new Attribute("typ","basedir")); 
-		xmlBaseDir.setText(openFuXMLDir+fSep+version);
-		try{xCnf.updateElement("dirs/dir[@type=\"basedir\"]", xmlBaseDir);}
-		catch (XmlElementNotFoundException e) {e.printStackTrace();}
-		
-		ClientConfFactory ccf = new ClientConfFactory();
-		ccf.init("openFuXML.xml");
-		Configuration config = ccf.getConfiguration();	
-		
+	{		
 		Display disp = Display.getDefault();
 		Shell sh = new Shell(disp);
 		Client client = new Client(sh, disp,config);
@@ -177,6 +118,7 @@ public class WsOpenFuXML
 		WsOpenFuXML openFuXML = new WsOpenFuXML();
 		openFuXML.loadProperties();
 		openFuXML.checkExtract();
+		logger.debug("Test");
 		openFuXML.initGui();
 	}
 }

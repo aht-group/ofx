@@ -16,8 +16,9 @@ import de.kisner.util.io.resourceloader.MultiResourceLoader;
 public abstract class AbstractConfFactory
 {
 	static Logger logger = Logger.getLogger(AbstractConfFactory.class);
+	
 	protected static String fs = SystemUtils.FILE_SEPARATOR;
-	protected static enum StartUpEnv {DEVELOPER,PRODUCTION}
+	public static enum StartUpEnv {DEVELOPER,PRODUCTION}
 	protected StartUpEnv startupenv;
 
 	public String openFuxmlVersion;
@@ -36,10 +37,10 @@ public abstract class AbstractConfFactory
 			case DEVELOPER:		String path = (new File(".")).getAbsolutePath();
 								openFuxmlBaseDir=new File(path.substring(0,path.length()-2));
 								break;
-			case PRODUCTION:	openFuxmlBaseDir = new File(ArchUtil.getAppSettingsDir("openFuXML"));
+			case PRODUCTION:	openFuxmlBaseDir = new File(ArchUtil.getAppSettingsDir("openFuXML")+fs+openFuxmlVersion);
 								if(!openFuxmlBaseDir.exists())
 								{
-									logger.warn("Application directory does not exit: "+openFuxmlBaseDir.getAbsolutePath());
+									logger.warn("openFuXML directory does not exit: "+openFuxmlBaseDir.getAbsolutePath());
 									logger.info("I will create it ...");
 									openFuxmlBaseDir.mkdirs();
 								} break;
@@ -55,7 +56,7 @@ public abstract class AbstractConfFactory
 			String propName = "resources/properties/ant.properties";
 			try
 			{
-				logger.info("Developing Environmet. Using "+propName+" to get Version");
+				logger.info("Developing Environment. Using "+propName+" to get Version");
 				InputStream is = MultiResourceLoader.searchIs(this.getClass().getClassLoader(), propName);
 				Properties versionProperties = new Properties();
 				versionProperties.load(is);
@@ -64,11 +65,13 @@ public abstract class AbstractConfFactory
 			catch (FileNotFoundException e) {logger.error("File is missing! "+propName);}
 			catch (IOException e) {logger.error(e);}
 		}
-		else {startupenv = StartUpEnv.DEVELOPER;}
-		logger.info("OpenFuXML Version: "+openFuxmlVersion);
+		else {startupenv = StartUpEnv.PRODUCTION;}
+		startupenv = StartUpEnv.PRODUCTION;
+		logger.info("OpenFuXML Version: "+openFuxmlVersion+" ("+startupenv.toString().toLowerCase()+")");
 	}
 	
-	public StartUpEnv getStartupenv() {return startupenv;}
+	public StartUpEnv getStartupenv() {return startupenv;}	
 	public String getOpenFuxmlVersion() {return openFuxmlVersion;}
+	
 	protected abstract Configuration getConfiguration();
 }
