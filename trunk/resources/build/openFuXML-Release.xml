@@ -151,9 +151,10 @@
 			
 	<target name="00 - Classpath" description="Echos Classpath">
 		<echo level="info">Lib-Info for openFuXML v.${openfuxml-version}</echo>
-		<echo level="info">   Msg   : ${mail.dir}/${mail.lib}</echo>
+		<echo level="info">   Net   : ${mail.dir}/${mail.lib}</echo>
 		<echo level="info">           ${jsch.dir}/${jsch.lib}</echo>
 		<echo level="info">           ${jmdns.dir}/${jmdns.lib}</echo>
+		<echo level="info">           ${webdavsync.dir}/${webdavsync.lib}</echo>
 		<echo level="info">   Utils : ${log4j.dir}/${log4j.lib}</echo>
 		<echo level="info">           ${log4j.dir}/${log4j-zeroconf.lib}</echo>
 		<echo level="info">           ${jmsutils.dir}/${jmsutils.lib}</echo>
@@ -226,7 +227,7 @@
 		<ant antfile="resources/build/SimpleClient.xml" target="07 - package-application"/>
 	</target> -->
 	
-	<target name="04b - Library WebDAV Sync">
+	<target name="04a - Library WebDAV Sync">
 	    <echo level="info">Sync of Libraries</echo>
 		<!-- <webdavsync directory="${lib.dir}"
 					url="${webdavsync.url}"
