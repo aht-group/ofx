@@ -28,7 +28,7 @@
 
 	<property file="resources/properties/ant.properties"/>
 	<property file="resources/properties/ws.properties"/>
-	
+	<property file="resources/properties/webdavsync.properties"/>
 
 	<property name="src.dir" location="${basedir}/src" />
 	<property name="rsrc.dir" location="${basedir}/resources" />
@@ -80,6 +80,7 @@
 	<property name="mail.dir" value="net/mail"/><property name="mail.lib" value="mail-${mail-version}.jar"/>
 	<property name="jsch.dir" value="net/jsch"/><property name="jsch.lib" value="jsch-${jsch-version}.jar"/>
 	<property name="jmdns.dir" value="net/jmdns"/><property name="jmdns.lib" value="jmdns-${jmdns-version}.jar"/>
+	<property name="webdavsync.dir" value="net/webdavsync"/><property name="webdavsync.lib" value="webdav-sync-${webdavsync-version}.jar"/>
 	
 	<!-- Lib-Definition JBoss -->
 	<property name="jboss.dir" value="jboss/${jboss-version}"/>
@@ -139,6 +140,12 @@
 	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
 	  <classpath>
 	    <fileset dir="${lib.dir}/${jaxb.dir}" includes="*.jar"/>
+	  </classpath>
+	</taskdef>
+	
+	<taskdef name="webdavsync" classname="be.re.webdav.cmd.SyncAntTask">
+	  <classpath>
+	    <fileset dir="${lib.dir}/${webdavsync.dir}" includes="${webdavsync.lib}"/>
 	  </classpath>
 	</taskdef>
 			
@@ -219,7 +226,24 @@
 		<ant antfile="resources/build/SimpleClient.xml" target="07 - package-application"/>
 	</target> -->
 	
-    <target name="04 - Structure and Libs">
+	<target name="04b - Library WebDAV Sync">
+	    <echo level="info">Sync of Libraries</echo>
+		<!-- <webdavsync directory="${lib.dir}"
+					url="${webdavsync.url}"
+					direction="${webdavsync.direction}">
+			<sysproperty key="be.re.http.no-compress"/>
+		</webdavsync> -->
+		<java classname="be.re.webdav.cmd.Sync" failonerror="true">
+			<classpath>
+				<pathelement location="${lib.dir}/${webdavsync.dir}/${webdavsync.lib}"/>
+				<pathelement location="${lib.dir}/${ant.dir}/${ant.lib}"/>
+			</classpath>
+			<sysproperty key="be.re.http.no-compress" value=""/>
+			<arg line="-d ${lib.dir}/ -${webdavsync.direction} -u ${webdavsync.url}"/>
+		</java>
+	</target>
+	
+    <target name="04b - Structure and Libs">
     	<echo level="info">Creating directories</echo>
     	<mkdir dir="${pack.dir}"/>
     	<mkdir dir="${pack.dir}/lib"/>
@@ -301,7 +325,7 @@
     	
     </target>    
 	
-   	<target name="05 - simpleRelease" depends="02 - init,04 - Structure and Libs,05a - SimpleServer,05b - SimpleClient">
+   	<target name="05 - simpleRelease" depends="02 - init,04b - Structure and Libs,05a - SimpleServer,05b - SimpleClient">
    		<echo>Simple-Release</echo>
    		<property name="startSkript.name" value="openFuXML.sh"/>
    		<property name="startSkriptEtc.name" value="openFuXML"/>
@@ -515,7 +539,7 @@
    		<delete dir="${dist.dir}/installertemp"/>	
 	</target>
 
-	<target name="05c - simpleReleaseDebPackage" depends="02 - init,04 - Structure and Libs,05a - SimpleServer,05b - SimpleClient">
+	<target name="05c - simpleReleaseDebPackage" depends="02 - init,04b - Structure and Libs,05a - SimpleServer,05b - SimpleClient">
 	   		<echo>Simple-Release</echo>
 	   		<property name="startSkript.name" value="openFuXML.sh"/>
 	   		<property name="startSkriptEtc.name" value="openFuXML"/>
@@ -578,7 +602,7 @@
 			<tar destfile="${dist.dir}/${simple.release}"  basedir="${dist.dir}/deb" compression="gzip" longfile="gnu"/>
 	</target>
 	
-	<target name="05e WebStart" depends="02 - init,04 - Structure and Libs">
+	<target name="05e WebStart" depends="02 - init,04b - Structure and Libs">
 		<echo level="info">Sign all jar libraries</echo>
 		<signjar keystore="${keystore.file}"  alias="${keystore.alias}" storepass="${keystore.password}" lazy="true">
 			<path><fileset dir="${pack.dir}/lib" includes="**/*.jar"/></path>
@@ -666,7 +690,7 @@
 		</war>
 	</target> 
 	
-	<target name="06 - enterpriseRelease" depends="02 - init,04 - Structure and Libs,
+	<target name="06 - enterpriseRelease" depends="02 - init,04b - Structure and Libs,
    		06a - Additional Libs,06b - EnterpriseServer,06c - Jboss Components">
    		<echo>Enterprise-Release</echo>
    	</target>
