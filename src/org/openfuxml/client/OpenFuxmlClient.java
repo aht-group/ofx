@@ -58,7 +58,7 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
  */
 public class OpenFuxmlClient extends Composite implements Runnable
 {
-	static Logger logger = Logger.getLogger(Client.class);
+	static Logger logger = Logger.getLogger(OpenFuxmlClient.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	public final static String Title = "FuXML - Client";
@@ -74,8 +74,8 @@ public class OpenFuxmlClient extends Composite implements Runnable
 	 * propDir beschreibt das Verzeichnis, in dem die Properties-Datei 
 	 * und die ProjectUserSettings-Dateien abgelegt sind.
 	 */
-	private String propDir; 
-	private File propFile;
+//	private String propDir; 
+//	private File propFile;
 	private Composite parent;
 	
 	private InitialContext iniCtx;
@@ -101,7 +101,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 	{
 		super(parent, style);
 		this.config=config;
-		// Open the SplashScreen
+
 		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
 		splashscreen.open();
 		
@@ -110,46 +110,24 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		pingThread = null;
 		pingThreadAktiv = false;
 		pingThreadZaehler = 0;
-
-		propDir = System.getProperty("user.home") + File.separator + ".fuxml";
-		propFile = new File(propDir, "fux-client.prop");
-		myProperties = new Properties();
-		if(propFile.exists())
-		{
-			splashscreen.setStatusline("Lade Properties von "+propFile.toString());
-
-			System.out.println("Lade Properties von "+propFile.toString());
-			try {myProperties.load(new FileInputStream(propFile));}
-				catch (IOException e) {e.printStackTrace();}
-		}
-		else
-		{
-			splashscreen.setStatusline("Setze Default-Properties");
-
-			System.out.println("Setze Default-Properties");
-			myProperties.setProperty("Verzeichnis", System.getProperty("user.home"));
-			myProperties.setProperty("Output", System.getProperty("user.home"));
-			myProperties.setProperty("Host","fuxml.fernuni-hagen.de");
-			myProperties.setProperty("Port","1099");
-		}
 		
 		splashscreen.setStatusline("Initialisiere Oberfläche ...");
 
 		initGUI();
 
-		if (myProperties.getProperty("AutoLogin", "0").equals("0") ||
+/*		if (myProperties.getProperty("AutoLogin", "0").equals("0") ||
 			myProperties.getProperty("KennwortSpeichern", "0").equals("0") )
 		{
 			splashscreen.setStatusline("Benutzereinstellungen");
 			Einstellungen();
 		}
-			
-		if (myProperties.getProperty("Beenden") != null)
+*/			
+/*		if (myProperties.getProperty("Beenden") != null)
 		{
 			splashscreen.setStatusline("FuXML-Client beenden");
 			System.exit(0);
 		}
-		
+*/		
 		// new OpenFuxmlTray(parent,this);
 		
 		splashscreen.setStatusline("Login des Benutzers");
@@ -164,56 +142,6 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		splashscreen.close();
 	}
 	
-	public InitialContext initNet()
-	{
-		iniCtx = null;
-		String jndiHost=myProperties.getProperty("Host");
-		String jndiPort=myProperties.getProperty("Port");
-		try
-		{
-			Properties p = new Properties();
-			p.put(Context.INITIAL_CONTEXT_FACTORY,"org.jnp.interfaces.NamingContextFactory");
-			p.put(Context.PROVIDER_URL,	jndiHost+":"+jndiPort);
-			iniCtx = new InitialContext(p);
-			System.out.print("Looking up Service " +jndiHost+":"+jndiPort);
-
-			// Home-Interfaces werden hier nur einmal erstellt und dann weitergegeben.
-//			hDispatcher = (DispatcherHome)PortableRemoteObject.narrow(iniCtx.lookup("DispatcherBean"), DispatcherHome.class);
-//			hAuth = (AuthHome)PortableRemoteObject.narrow(iniCtx.lookup("AuthBean"), AuthHome.class);
-//			hProjectUi = (ProjectUiHome)PortableRemoteObject.narrow(iniCtx.lookup("ProjectUiBean"), ProjectUiHome.class);
-//			hUserUi = (UserUiHome)PortableRemoteObject.narrow(iniCtx.lookup("UserUiBean"), UserUiHome.class);
-			
-			System.out.println(" .... abgeschlossen");
-		}
-		catch (NamingException e) {e.printStackTrace();}
-
-		// Abfragen der availableFormats
-//		try
-		{	
-//			Dispatcher beanRemote = hDispatcher.create();
-			
-			// Properties für die Bean setzen
-			Properties prop = new Properties();
-			prop.setProperty("AppRemote", "ssh://fuxml@132.176.12.1//home/ilona/applications");
-			prop.setProperty("RepoRemote", "ssh://repository@132.176.12.65//lgks/projekte/fuxml-repository");
-			prop.setProperty("OutputRemote", "ssh://repository@132.176.12.65//lgks/projekte/fuxml-repository/output");
-			prop.setProperty("SyncType", "nosync");
-//			beanRemote.setProperties(prop);
-			
-			System.out.print("Get available formats ");
-//			availableFormats = beanRemote.availableFormats("fuxml");
-			System.out.println(" .... abgeschlossen");
-//System.out.println("availFormats: "+availableFormats.getMessageString());			
-//			beanRemote.remove();
-		}
-//		catch (CreateException e) {e.printStackTrace();}
-//		catch (RemoteException e) {e.printStackTrace();}
-//		catch (RemoveException e) {e.printStackTrace();}
-//		catch (ProductionSystemException e) {e.printStackTrace();}
-		
-		return iniCtx;
-	}
-	
 	public void initGUI()
 	{
 		this.addDisposeListener(new DisposeListener() {
@@ -223,11 +151,11 @@ public class OpenFuxmlClient extends Composite implements Runnable
 				pingThreadAktiv = false;
 				
 				Rectangle rect = getShell().getBounds();
-				myProperties.setProperty("x",      "" + rect.x);
+/*				myProperties.setProperty("x",      "" + rect.x);
 				myProperties.setProperty("y",      "" + rect.y);
 				myProperties.setProperty("width",  "" + rect.width);
 				myProperties.setProperty("height", "" + rect.height);
-				
+*/				
 				saveProperties();
 				
 //				try
@@ -288,15 +216,6 @@ public class OpenFuxmlClient extends Composite implements Runnable
 
 			tfProjekte.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
-					/*
-					// alle Icons der TabItems löschen
-					for (int i=0; i<tfProjekte.getItemCount(); i++)
-					{
-						tfProjekte.getItem(i).setImage(null);
-					}
-					// dem aktuellen TabItem ein Icon zuweisen
-					tfProjekte.getItem(tfProjekte.getSelectionIndex()).setImage(makeImage(IMG_PROJECT));
-					*/
 					// Merken des Projekt-Tabs für LastProject
 					{
 						// Setzen des Property-Wertes für LastTab
@@ -334,45 +253,18 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		myProperties.remove("Beenden");
 		myProperties.remove("Login");
 
-		System.out.println("Speichere Properties in " + propFile.toString());
-		
-		try
-		{
-			// Existiert das Verzeichnis, in dem die Prop-Datei gespeichert werden soll?
-			if (!propFile.getParentFile().exists())
-			{
-				// Das Verzeichnis erstellen.
-				propFile.getParentFile().mkdirs();
-			}
-			
-			// Existiert das Verzeichnis jetzt?
-			if (propFile.getParentFile().exists())
-			{
-				// Falls KennwortSpeichern nicht ausgewählt wurde, wird
-				// das Kennwort aus den Properties gestrichen.
-				if (myProperties.getProperty("KennwortSpeichern","0").equals("0"))
-				{
-				  myProperties.remove("Kennwort");	
-				}
-				myProperties.store(new FileOutputStream(propFile),Title+" - Konfigurationseinstellungen");
-			}
-			else
-			{
-				System.out.println("Properties konnten nicht in " + propFile.toString() + " gespeichert werden.");
-			}
-		}
-		catch (IOException e) {e.printStackTrace();}
+		//TODO Speichern der Properties
+//		if (myProperties.getProperty("KennwortSpeichern","0").equals("0"))
+//		{myProperties.remove("Kennwort");}
 	}
 	
 	public Properties getMyProperties(){return myProperties;}
 //	public UserValue getMyUserValue(){return myUserValue;}
 //	public ProjectUiHome getHProjectUi(){return hProjectUi;}
 //	public SSIMessage getAvailableFormats(){return availableFormats;}
-	public String getPropDir(){return propDir;}
 	
 	public void login()
 	{
-		initNet();
 		
 //		try
 		{
@@ -406,7 +298,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 				
 				tabItem.setImage(img);
 				tabItem.setText(ofxProject.getName());
-				ProjektComposite pComp = new ProjektComposite(tfProjekte, this, ofxProject);
+				ProjektComposite pComp = new ProjektComposite(tfProjekte, this, ofxProject,config);
 				tabItem.setControl(pComp);
 			}
 

@@ -4,6 +4,14 @@
         <icon type="fuxklein">openFuXML-klein.gif</icon>
         <icon type="fux">openFuXML.gif</icon>
         <icon type="project">project.png</icon>
+        <project>
+            <icon type="open">open.gif</icon>
+            <icon type="produce">produce.png</icon>
+            <icon type="log">log.png</icon>
+            <icon type="user">users.gif</icon>
+            <icon type="preferences">preferences.png</icon>
+            <icon type="documents">documents.png</icon>
+        </project>
     </icons>
     <logos dir="resources/images/client">
         <logo type="fuxklein">openFuXML-Logo.png</logo>
