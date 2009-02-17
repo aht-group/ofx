@@ -615,30 +615,29 @@
 		<zip destfile="${dist.dir}/openFuXML-app.zip"  basedir="${pack.dir}">
 			<include name="applications/**"/>
 		</zip>
-		<zip destfile="${dist.dir}/openFuXML-conf.zip"  basedir="${pack.dir}">
-			<include name="log4j.xml"/>
-			<include name="openFuXML-config.xml"/>
-			<include name="openFuXML-1.x.xsd"/>
+		
+		<echo level="warn">Local log4j used!</echo>
+		<zip destfile="${dist.dir}/openFuXML-rscr.zip">
+			<zipfileset dir="${rsrc.dir}/repository" prefix="share/repository"/>
+			<zipfileset dir=".">
+				<include name="log4j.xml"/>
+			</zipfileset>
 		</zip>
-		<echo level="warn">Local openFuXML-config.xml used!</echo>
+		
 		<jar destfile="${pack.dir}/openFuXML-${openfuxml-version}.jar">
 			<fileset dir="${rsrc.dir}/">
 				<include name="images/**/*.gif"/>
 				<include name="images/**/*.jpg"/>
 				<include name="images/**/*.png"/>
 			</fileset>
-			<fileset dir="${rsrc.dir}/config">
-				<include name="openFuXML-1.x.xsd"/>
-			</fileset>
 			<fileset dir=".">
 				<include name="resources/properties/ant.properties.dist"/>
 				<include name="log4j.xml"/>
-				<include name="openFuXML-config.xml"/>
 			</fileset>
 			<fileset dir="${dist.dir}/..">
 				<include name="dist/openFuXML-app.zip"/>
 				<include name="dist/openFuXML-lib.zip"/>
-				<include name="dist/openFuXML-conf.zip"/>
+				<include name="dist/openFuXML-rscr.zip"/>
 			</fileset>
 			<fileset dir="${build-bin.dir}/"/>
 			<manifest>

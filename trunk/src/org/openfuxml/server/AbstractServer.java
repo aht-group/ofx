@@ -124,7 +124,7 @@ public abstract class AbstractServer
 							logger.warn("No PATH defined in config.xml. Using System PATH "+envParameter.get("PATH"));
 							logger.warn("   Errors are *EXTREMELY* possible for "+SystemUtils.OS_NAME);
 							logger.warn("   Please insert your $PATH <dirs><dir type=\"path\">HERE</dir></dirs>");
-							logger.warn("   Get your $PATH in a Terminal-Windows with: 'echo $PATH'");
+							logger.warn("   Get your $PATH in a terminal with: 'echo $PATH'");
 						}
 						break;
 			case Win32:	try

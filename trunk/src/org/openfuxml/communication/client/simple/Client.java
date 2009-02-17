@@ -229,14 +229,13 @@ public class Client extends Composite
 				labelVerzeichnis.setLayoutData(data);
 			}
 			
-			String sDirRepo = config.getString("dirs/dir[@type='repository']");
-			logger.debug("Repository: "+sDirRepo);
-			File dir = new File(sDirRepo);
-			if (!dir.exists())
+			String labelText=config.getString("dirs/dir[@type='repository']");;
+			if(config.getBoolean("dirs/dir[@type='repository']/@rel"))
 			{
-				ConfigLoader.update(("dirs/dir[@type='repository']"), System.getProperty("user.home"));
+				labelText=config.getString("dirs/dir[@type='basedir']")+fs+labelText;
 			}
-			labelVerzeichnis.setText(config.getString("dirs/dir[@type='repository']"));
+			labelVerzeichnis.setText(labelText);
+			logger.debug("Repository: "+labelText);
 		}
 		{
 			buttonWechseln = new Button(this, SWT.PUSH | SWT.CENTER);
@@ -1105,7 +1104,12 @@ public class Client extends Composite
 
 		initNet();
 		
-		labelVerzeichnis.setText(config.getString("dirs/dir[@type='repository']"));
+		String labelText=config.getString("dirs/dir[@type='repository']");;
+		if(config.getBoolean("dirs/dir[@type='repository']/@rel"))
+		{
+			labelText=config.getString("dirs/dir[@type='basedir']")+fs+labelText;
+		}
+		labelVerzeichnis.setText(labelText);
 		
 		fuelleComboAnwendungen();
 	}

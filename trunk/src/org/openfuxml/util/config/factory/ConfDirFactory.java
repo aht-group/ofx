@@ -49,7 +49,7 @@ public class ConfDirFactory
 			case PRODUCTION: 	dirLog.setContent("share"+fs+"logs");
 								dirOutput.setContent("share"+fs+"output");
 								dirRepo.setContent("share"+fs+"repository");
-								dirLib.setContent("libs");break;
+								dirLib.setContent("lib");break;
 		}
 			
 		dirs.getDir().add(dirBase);	

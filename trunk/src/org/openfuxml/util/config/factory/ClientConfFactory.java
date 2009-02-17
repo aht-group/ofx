@@ -34,7 +34,7 @@ public class ClientConfFactory extends AbstractConfFactory
 	public Configuration getConfiguration()
 	{
 		ConfigLoader.add(openFuxmlBaseDir+fs+mainConf);
-		ConfigLoader.add(openFuxmlBaseDir+fs+"resources"+fs+"config"+fs+"client-images.xml");
+		ConfigLoader.add("resources"+fs+"config"+fs+"client-images.xml");
 		Configuration config = ConfigLoader.init();
 		return config;
 	}
@@ -43,7 +43,7 @@ public class ClientConfFactory extends AbstractConfFactory
 	{
 		this.mainConf=mainConf;
 		File fConf = new File(openFuxmlBaseDir,mainConf);
-		
+		logger.debug("Searching "+fConf);
 		try
 		{
 			if(!fConf.exists())
