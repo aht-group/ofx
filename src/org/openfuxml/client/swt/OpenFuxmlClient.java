@@ -1,7 +1,7 @@
 /*
  * Created on 19.01.2005
  */
-package org.openfuxml.client;
+package org.openfuxml.client.swt;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,8 +40,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.openfuxml.client.composites.ProjektComposite;
 import org.openfuxml.client.control.projects.ProjectFactory;
+import org.openfuxml.client.swt.composites.ProjektComposite;
 import org.openfuxml.client.util.ImgCanvas;
 import org.openfuxml.communication.client.dialog.HelpAboutDialog;
 import org.openfuxml.communication.client.simple.Client;

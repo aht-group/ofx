@@ -1,4 +1,4 @@
-package org.openfuxml.client.dialog;
+package org.openfuxml.client.swt.dialog;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.openfuxml.client.OpenFuxmlClient;
+import org.openfuxml.client.swt.OpenFuxmlClient;
 
 /**
  * @author Andrea Frank
