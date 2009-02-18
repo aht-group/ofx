@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
@@ -29,15 +30,17 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.openfuxml.client.control.OpenFuxmlClientControl;
 import org.openfuxml.client.simple.dialog.HelpAboutDialog;
-import org.openfuxml.producer.ejb.Application;
-import org.openfuxml.producer.ejb.AvailableApplications;
+import org.openfuxml.client.simple.factory.SimpleMenuFactory;
+import org.openfuxml.client.simple.factory.SimpleTableFactory;
+import org.openfuxml.model.ejb.OfxApplication;
+import org.openfuxml.model.ejb.OfxDocument;
+import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.Format;
 import org.openfuxml.producer.ejb.ProducedEntities;
@@ -46,13 +49,9 @@ import org.openfuxml.producer.ejb.ProductionRequest;
 import org.openfuxml.producer.ejb.ProductionRequestEntityFile;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
-import org.openfuxml.producer.handler.DirectProducer;
-import org.openfuxml.producer.handler.Producer;
-import org.openfuxml.producer.handler.SocketProducer;
-import org.openfuxml.server.DummyServer;
+import org.openfuxml.util.config.OfxPathHelper;
 import org.openfuxml.util.config.factory.ClientConfFactory;
 
-import de.kisner.util.ConfigLoader;
 import de.kisner.util.LoggerInit;
 import de.kisner.util.io.resourceloader.ImageResourceLoader;
 
@@ -71,23 +70,11 @@ public class Client extends Composite
 	public final static RGB rgbBackground = new RGB(231, 232, 235);
 	
 	private Menu menu;
-	private Menu menuClient;
-	private MenuItem menuItemClient;
-	private MenuItem menuItemClientBeenden;	
-	private Menu menuEinstellungen;
-	private MenuItem menuItemEinstellungen;
-	private MenuItem menuItemEinstellungenServer;
-	private Menu menuHilfe;
-	private MenuItem menuItemHilfe;
-	private MenuItem menuItemHilfeInfoUeber;
 	
 	private Label labelVerzeichnis;
 	private Button buttonWechseln;
 	
-	private Combo comboAnwendungen;
-	private Combo comboProjekte;
-	private Combo comboDokumente;
-	private Combo comboFormate;
+	private Combo cboApplications,cboProjects,cboDocuments,cboFormats;
 
 	private Button buttonAktualisieren;
 
@@ -100,7 +87,6 @@ public class Client extends Composite
 	private Shell toplevelShell;
 	private Display display;
 	
-	private Producer producer;
 	private ProducerThread producerThread;
 	private int anzItems;
 	
@@ -113,6 +99,7 @@ public class Client extends Composite
 	private ArrayList<String[]> alProducedEntities;
 	
 	private Configuration config;
+	private OpenFuxmlClientControl ofxCC;
 	File propFile;
 	
 	private Cursor cursor;
@@ -131,46 +118,25 @@ public class Client extends Composite
 		toplevelShell = (Shell)parent;
 		
 		this.display = disp;
-
-		// Open the SplashScreen
+		ofxCC = new OpenFuxmlClientControl(config);
+		
 		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
 		splashscreen.open();
 		
 		htProducableEntities = new Hashtable<String, ProducedEntities>();
 		alProducedEntities = new ArrayList<String[]>();
 
-		logger.info("initNet");
-		initNet();
 		logger.info("initGUI");
 		initGUI();
 		
 		logger.info("pause");
-		// Pause für den Splashscreen einfügen
-		try{Thread.sleep(3000);} catch (InterruptedException e){logger.error("InterruptedException", e);}
+
+		try{Thread.sleep(1000);} catch (InterruptedException e){logger.error("InterruptedException", e);}
 		
 		splashscreen.close();
 		splashscreen = null;
 	}
 	
-	public void initNet()
-	{	
-		if(config.getString("server").equals("direct"))
-		{
-			logger.info("Using "+DirectProducer.class.getSimpleName());
-			DummyServer server = new DummyServer(config);
-			producer = new DirectProducer(config,server.getEnvParameter());
-		}
-		else
-		{
-			try
-			{
-				logger.info("Using "+SocketProducer.class.getSimpleName());
-				producer = new SocketProducer(config);
-				logger.info("[OK] ProducerThread");
-			}
-			catch (Exception e)	{logger.fatal("Exception", e);}
-		}
-	}
 	/**
 	 * initGUI initialisiert die grafische Oberfläche.
 	 */
@@ -229,13 +195,8 @@ public class Client extends Composite
 				labelVerzeichnis.setLayoutData(data);
 			}
 			
-			String labelText=config.getString("dirs/dir[@type='repository']");;
-			if(config.getBoolean("dirs/dir[@type='repository']/@rel"))
-			{
-				labelText=config.getString("dirs/dir[@type='basedir']")+fs+labelText;
-			}
-			labelVerzeichnis.setText(labelText);
-			logger.debug("Repository: "+labelText);
+			labelVerzeichnis.setText(OfxPathHelper.getDir(config, "repository"));
+			logger.debug("Repository: "+labelVerzeichnis.getText());
 		}
 		{
 			buttonWechseln = new Button(this, SWT.PUSH | SWT.CENTER);
@@ -260,20 +221,20 @@ public class Client extends Composite
 			labelAnwendungen.setBackground(this.getBackground());
 		}
 		{
-			comboAnwendungen = new Combo(this, SWT.READ_ONLY | SWT.NONE);
+			cboApplications = new Combo(this, SWT.READ_ONLY | SWT.NONE);
 
 			{
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
 				data.grabExcessHorizontalSpace = true;
-				comboAnwendungen.setLayoutData(data);
+				cboApplications.setLayoutData(data);
 			}
 			
-			comboAnwendungen.addSelectionListener(new SelectionAdapter() {
+			cboApplications.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
 					//TODO Update Client Settings
 					//ClientConfigWrapper.updateKeyValue("application", comboAnwendungen.getText());
-					fuelleComboProjekte();
+					fillCboProjects();
 					fuelleComboFormate();
 					
 					fuelleTableProductionEntities();
@@ -291,20 +252,20 @@ public class Client extends Composite
 			labelProjekt.setBackground(this.getBackground());
 		}
 		{
-			comboProjekte = new Combo(this, SWT.READ_ONLY | SWT.NONE);
+			cboProjects = new Combo(this, SWT.READ_ONLY | SWT.NONE);
 
 			{
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
 				data.grabExcessHorizontalSpace = true;
-				comboProjekte.setLayoutData(data);
+				cboProjects.setLayoutData(data);
 			}
 			
-			comboProjekte.addSelectionListener(new SelectionAdapter() {
+			cboProjects.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
 					//TODO Update Client Settings
 					//ClientConfigWrapper.updateKeyValue("project", comboProjekte.getText());
-					fuelleComboDokumente();
+					fillCboDocuments();
 					
 					fuelleTableProductionEntities();
 					loescheErgebnis();
@@ -321,16 +282,16 @@ public class Client extends Composite
 			labelDocument.setBackground(this.getBackground());
 		}
 		{
-			comboDokumente = new Combo(this, SWT.READ_ONLY | SWT.NONE);
+			cboDocuments = new Combo(this, SWT.READ_ONLY | SWT.NONE);
 
 			{
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
 				data.grabExcessHorizontalSpace = true;
-				comboDokumente.setLayoutData(data);
+				cboDocuments.setLayoutData(data);
 			}
 
-			comboDokumente.addSelectionListener(new SelectionAdapter() {
+			cboDocuments.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
 					//TODO Update Client Settings
 					//ClientConfigWrapper.updateKeyValue("document", comboDokumente.getText());
@@ -349,16 +310,16 @@ public class Client extends Composite
 			labelFormate.setBackground(this.getBackground());
 		}
 		{
-			comboFormate = new Combo(this, SWT.READ_ONLY | SWT.NONE);
+			cboFormats = new Combo(this, SWT.READ_ONLY | SWT.NONE);
 
 			{
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
 				data.grabExcessHorizontalSpace = true;
-				comboFormate.setLayoutData(data);
+				cboFormats.setLayoutData(data);
 			}
 		
-			comboFormate.addSelectionListener(new SelectionAdapter() {
+			cboFormats.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
 					//TODO Update Client Settings
 					//ClientConfigWrapper.updateKeyValue("format", comboFormate.getText());
@@ -399,44 +360,9 @@ public class Client extends Composite
 					}
 				});
 		}
-		{
-			tableProductionEntities = new Table(this, SWT.CHECK | SWT.BORDER);
-
-			{
-				GridData data = new GridData();
-				data.widthHint = 450;
-				data.heightHint = 200;
-				data.horizontalSpan = 2;
-				data.horizontalAlignment = GridData.FILL;
-				data.grabExcessHorizontalSpace = true;
-				data.verticalAlignment = GridData.FILL;
-				data.grabExcessVerticalSpace = true;
-				tableProductionEntities.setLayoutData(data);
-			}
-
-			{
-				TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
-				tableColumn.setText("");
-				tableColumn.setWidth(20);
-			}
-			{
-				TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
-				tableColumn.setText("Beschreibung");
-				tableColumn.setWidth(160);
-			}
-			{
-				TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
-				tableColumn.setText("Serverausgabe");
-				tableColumn.setWidth(180);
-			}
-			{
-				TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
-				tableColumn.setText("Dateiname");
-				tableColumn.setWidth(100);
-			}
-			tableProductionEntities.setHeaderVisible(true);
-			tableProductionEntities.setLinesVisible(true);
-		}
+		
+		tableProductionEntities = SimpleTableFactory.createTable(this);
+		
 		{
 			buttonProduzieren = new Button(this, SWT.PUSH | SWT.CENTER);
 			buttonProduzieren.setText("   produzieren   ");
@@ -482,99 +408,34 @@ public class Client extends Composite
 			});
 		}
 		
-		{
-			// Inhalt der Combo Anwendung setzen
-			fuelleComboAnwendungen();
-		}
+		fillCboApplications();
 
-		// Erstellen des Menüs
-		{
-			menu = new Menu(getShell(), SWT.BAR);
-			getShell().setMenuBar(menu);
-			{
-				menuItemClient = new MenuItem(menu, SWT.CASCADE);
-				menuItemClient.setText("Client");
-				{
-					menuClient = new Menu(menuItemClient);
-					{
-						menuItemClientBeenden = new MenuItem(menuClient, SWT.CASCADE);
-						menuItemClientBeenden.setText("Beenden");
-						menuItemClientBeenden.addSelectionListener(new SelectionAdapter() {
-							public void widgetSelected(SelectionEvent evt) {
-								ClientBeenden();
-							}
-							});
-					}
-					menuItemClient.setMenu(menuClient);
-				}
-			}
-			{
-				menuItemEinstellungen = new MenuItem(menu, SWT.CASCADE);
-				menuItemEinstellungen.setText("Extras");
-				{
-					menuEinstellungen = new Menu(menuItemEinstellungen);
-					{
-						menuItemEinstellungenServer = new MenuItem(menuEinstellungen, SWT.CASCADE);
-						menuItemEinstellungenServer.setText("Einstellungen ...");
-						menuItemEinstellungenServer.addSelectionListener(new SelectionAdapter() {
-							public void widgetSelected(SelectionEvent evt) {
-								Einstellungen();
-							}
-							});
-					}
-					menuItemEinstellungen.setMenu(menuEinstellungen);
-				}
-			}
-			{
-				menuItemHilfe = new MenuItem(menu, SWT.CASCADE);
-				menuItemHilfe.setText("Hilfe");
-				{
-					menuHilfe = new Menu(menuItemHilfe);
-					{
-						menuItemHilfeInfoUeber = new MenuItem(menuHilfe, SWT.CASCADE);
-						menuItemHilfeInfoUeber.setText("Info über ...");
-						menuItemHilfeInfoUeber.addSelectionListener(new SelectionAdapter() {
-							public void widgetSelected(SelectionEvent evt) {
-								HilfeInfoUeber();
-							}
-							});
-					}
-					menuItemHilfe.setMenu(menuHilfe);
-				}
-			}
-		}
-	} // initGUI
+		menu = SimpleMenuFactory.createMenu(getShell(),this);
+	}
 	
-	public void fuelleComboAnwendungen()
+	public void fillCboApplications()
 	{
-		// Löschen der Einträge in der Combo comboAnwendungen. 
-		comboAnwendungen.removeAll();
-
+		cboApplications.removeAll();
 		try
 		{
 			this.labelErgebnis.setText("Einen Moment bitte ...");
 			
-			AvailableApplications availableAppliations = producer.getAvailableApplications();
+			List<OfxApplication> lOfxA = ofxCC.getProducer().getAvailableApplications();
 			this.labelErgebnis.setText("");
-			Collection<Application> collAppl = availableAppliations.getApplications();
 			
-			if (collAppl != null)
+			if (lOfxA != null)
 			{
-				for(Application app : collAppl)
+				for(OfxApplication ofxA : lOfxA)
 				{
-					logger.debug("Applikation gefunden: " + app.getName());
-					comboAnwendungen.add(app.getName());
+					cboApplications.add(ofxA.getName());
+					cboApplications.setData(ofxA.getName(),ofxA);
 				}
 			}
 		}
-		catch (ProductionSystemException e)
-		{
-			logger.error("getAvailableApplications nicht möglich", e);
-		}
+		catch (ProductionSystemException e) {logger.error("getAvailableApplications nicht möglich", e);}
 		catch (ProductionHandlerException e)
 		{
 			logger.error("getAvailableApplications nicht möglich", e);
-
 			ServerFehler();
 		}		
 		
@@ -589,25 +450,17 @@ public class Client extends Composite
 			}
 		}
 */
-		// Inhalt der Combos Projekte und Dokumente setzen
-		fuelleComboProjekte();
-		// Inhalt der Combo Formate setzen
-		fuelleComboFormate();
 	}
 
 	public void fuelleComboFormate()
 	{
-		// Löschen der Einträge in der Combo comboFormate. 
-		comboFormate.removeAll();
-
-		
-
+		cboFormats.removeAll();
 		// TODO Füllen von comboFormate bald über getAvailableFormats.
 		
 		try
 		{
-			logger.debug("Get formats for: "+comboAnwendungen.getText());
-			AvailableFormats availableFormats = producer.getAvailableFormats(comboAnwendungen.getText());
+			logger.debug("Get formats for: "+cboApplications.getText());
+			AvailableFormats availableFormats = ofxCC.getProducer().getAvailableFormats(cboApplications.getText());
 			Collection collFormats = availableFormats.getFormats();
 
 			if (collFormats != null)
@@ -616,15 +469,15 @@ public class Client extends Composite
 				while (it.hasNext())
 				{
 					Format format = (Format) it.next();
-					comboFormate.add(format.getFormatId());
-					logger.debug("Format gefunden ("+comboAnwendungen.getText()+"): " + format.getFormatId());
+					cboFormats.add(format.getFormatId());
+					logger.debug("Format gefunden ("+cboApplications.getText()+"): " + format.getFormatId());
 				}
 			}
 			else
 			{
 				logger.error("Server meldet keine Formate! html und latexpdf wird hinzugefügt");
-				comboFormate.add("html");
-				comboFormate.add("latexpdf");
+				cboFormats.add("html");
+				cboFormats.add("latexpdf");
 			}
 		}
 		catch (ProductionHandlerException e) {logger.error("getAvailableFormats nicht möglich", e);}
@@ -648,52 +501,20 @@ public class Client extends Composite
 	 * Verzeichnis "labelVerzeichnis.getText()/comboAnwendungen.getText()"
 	 * in die Combo comboProjekte.
 	 */
-	public void fuelleComboProjekte()
+	public void fillCboProjects()
 	{
-		// Löschen der Einträge in der Combo comboProjekte. 
-		comboProjekte.removeAll();
-
-		if (comboAnwendungen.getText() != "")
+		cboProjects.removeAll();
+		logger.debug("Search Projects ...");
+		if (cboApplications.getText().length()>0)
 		{
-			String dirname = labelVerzeichnis.getText() + 
-				System.getProperties().getProperty("file.separator") + 
-				comboAnwendungen.getText();		
-
-			if (!dirname.equals(""))
+			List<OfxProject> lOfxP = ofxCC.getOfxProjectFactory().lProjects(cboApplications.getText());
+			for(OfxProject ofxP : lOfxP)
 			{
-				// Welche Unterverzeichnisse gibt es?
-				File dir = new File(dirname);
-				String list[] = dir.list();
-				  
-				if (list != null)
-				{
-					for (int i=0; i<list.length; i++)
-					{
-						File f = new File(dir, list[i]);
-						boolean isDir = f.isDirectory();
-						boolean isSvn = f.getAbsolutePath().endsWith(".svn");
-						if (isDir && !isSvn)
-						{
-							// Diesen Eintrag in Combo comboProjekte einfügen.
-							comboProjekte.add(list[i]);
-						} // if
-					} // for
-				} // if
-
-				// Vorauswahl der in Properties gespeicherten Einstellungen
-/*				String sProjekt = ClientConfigWrapper.getClientConf("project");
-				if (sProjekt.length()>0)
-				{
-					int index = comboProjekte.indexOf(sProjekt);
-					if (index != -1)
-					{
-						comboProjekte.setText(sProjekt);
-					} // if
-				} // if
-*/			} // if
-		} // if
-
-		fuelleComboDokumente();
+				cboProjects.add(ofxP.getName());
+				cboProjects.setData(ofxP.getName(),ofxP);
+				logger.debug(ofxP);
+			}
+		}
 	}
 		
 	/**
@@ -701,27 +522,25 @@ public class Client extends Composite
 	 * "labelVerzeichnis.getText()/comboAnwendungen.getText()/comboProjekte.getText()", 
 	 * die die Endung ".xml" haben, in die Combo comboDokumente.
 	 */
-	public void fuelleComboDokumente()
+	public void fillCboDocuments()
 	{
-		// Löschen der Einträge in der Combo comboDokumente. 
-		comboDokumente.removeAll();
-		// Löschen der Einträge in der Table tableProducableEntities.
+		cboDocuments.removeAll();
 		tableProductionEntities.removeAll();
-
-		if ( (comboAnwendungen.getText()!="") && (comboProjekte.getText()!="") )
+		
+		
+		if ( (cboApplications.getText().length()>0) && (cboProjects.getText().length()>0) )
 		{
-			String dirname = labelVerzeichnis.getText() + File.separator + comboAnwendungen.getText();		
 			
-			File dir = new File(dirname, comboProjekte.getText());
-			logger.debug("Suche in: "+dir.getAbsolutePath());
-			String list[] = dir.list(new ExtensionFilenameFilter(".xml"));
-			  
-			for (int i=0; i<list.length; i++)
+			OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
+			OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
+
+			List<OfxDocument> lOfxD = ofxCC.getOfxDocumentFactory().lDocuments(ofxA,ofxP);
+			
+			for (OfxDocument ofxD : lOfxD)
 			{
-				// Diesen Eintrag in Combo comboProjekte einfügen.
-				comboDokumente.add(list[i]);
-			} // for
-			
+				cboDocuments.add(ofxD.getName());
+				cboDocuments.setData(ofxD.getName(),ofxD);
+			}
 			// Vorauswahl der in Properties gespeicherten Einstellungen
 /*			String sDokument = ClientConfigWrapper.getClientConf("document");
 			if (sDokument.length()>0)
@@ -745,7 +564,7 @@ public class Client extends Composite
 	 */
 	public void fuelleTableProductionEntities()
 	{
-		String s = comboProjekte.getText()+comboDokumente.getText()+comboFormate.getText();
+		String s = cboProjects.getText()+cboDocuments.getText()+cboFormats.getText();
 		ProducedEntities producableEntities = (ProducedEntities) htProducableEntities.get(s);
 		
 		tableProductionEntities.removeAll();
@@ -780,7 +599,7 @@ public class Client extends Composite
 						if (error == ProducerThread.NO_ERROR)
 						{
 							// Hashtable aktualisieren
-							String s = comboProjekte.getText()+comboDokumente.getText()+comboFormate.getText();
+							String s = cboProjects.getText()+cboDocuments.getText()+cboFormats.getText();
 							htProducableEntities.put(s, producedEntities);
 
 							fuelleTableProductionEntities();
@@ -847,10 +666,10 @@ public class Client extends Composite
 	public void getProducableEntities()
 	{
 		String Verzeichnis = labelVerzeichnis.getText();
-		String Anwendung = comboAnwendungen.getText();
-		String Projekt = comboProjekte.getText();
-		String Dokument = comboDokumente.getText();
-		String Format = comboFormate.getText();
+		String Anwendung = cboApplications.getText();
+		String Projekt = cboProjects.getText();
+		String Dokument = cboDocuments.getText();
+		String Format = cboFormats.getText();
 		
 		if (Verzeichnis.equals(""))
 		{
@@ -893,19 +712,26 @@ public class Client extends Composite
 			{
 				setAllEnabled(false);
 
-				producerThread = new ProducerThread(this, producer);
+				producerThread = new ProducerThread(this, ofxCC.getProducer());
 				display.asyncExec(new Runnable()
 					{
 						public void run()
 						{
 							if (!toplevelShell.isDisposed())
 							{
+								OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
+								OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
+								OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
+								
+			//					ofxCC.getProducibleEntities(ofxA,ofxP,ofxD);
+
+								
 								ProductionRequest pReq = new ProductionRequest();
 						    	
-						    	pReq.setApplication(comboAnwendungen.getText());
-								pReq.setProject(comboProjekte.getText());
-								pReq.setDocument(comboDokumente.getText());
-								pReq.setFormat(comboFormate.getText());
+						    	pReq.setApplication(cboApplications.getText());
+								pReq.setProject(cboProjects.getText());
+								pReq.setDocument(cboDocuments.getText());
+								pReq.setFormat(cboFormats.getText());
 								pReq.setUsername(System.getProperty("user.name"));
 								pReq.setTyp(ProductionRequest.Typ.ENTITIES);
 								pReq.setSync(ProductionRequest.Sync.NOSYNC);
@@ -960,7 +786,7 @@ public class Client extends Composite
 			{
 				setAllEnabled(false);
 
-				producerThread = new ProducerThread(this, producer);
+				producerThread = new ProducerThread(this, ofxCC.getProducer());
 				display.asyncExec(new Runnable()
 					{
 						public void run()
@@ -980,12 +806,13 @@ public class Client extends Composite
 										efs.add(ef);
 									} 
 								}
-							
+
+								
 								ProductionRequest pReq = new ProductionRequest();				    	
-						    	pReq.setApplication(comboAnwendungen.getText());
-								pReq.setProject(comboProjekte.getText());
-								pReq.setDocument(comboDokumente.getText());
-								pReq.setFormat(comboFormate.getText());
+						    	pReq.setApplication(cboApplications.getText());
+								pReq.setProject(cboProjects.getText());
+								pReq.setDocument(cboDocuments.getText());
+								pReq.setFormat(cboFormats.getText());
 								pReq.setUsername(System.getProperty("user.name"));
 								pReq.setEntityFiles(efs);
 								pReq.setTyp(ProductionRequest.Typ.PRODUCE);	
@@ -1022,7 +849,7 @@ public class Client extends Composite
 		        // TODO @Thorsten: Ist es richtig den Application-Name hier vor 
 		        // den Verzeichnisnamen zu setzen oder willst Du das schon in 
 		        // producedEntities machen?
-		        String sDir = comboAnwendungen.getText() +
+		        String sDir = cboApplications.getText() +
 		        	System.getProperties().getProperty("file.separator") + 
 		        	ef.getDirectory();
 		        String pe[] = {ef.getDescription(), sDir, ef.getFilename(), sTimestamp};				
@@ -1102,7 +929,7 @@ public class Client extends Composite
 		EinstellungenDialog dialog = new EinstellungenDialog(this.getShell(), rgbBackground,config);
 		dialog.open(getShell().getImages());
 
-		initNet();
+		ofxCC = new OpenFuxmlClientControl(config);
 		
 		String labelText=config.getString("dirs/dir[@type='repository']");;
 		if(config.getBoolean("dirs/dir[@type='repository']/@rel"))
@@ -1111,7 +938,7 @@ public class Client extends Composite
 		}
 		labelVerzeichnis.setText(labelText);
 		
-		fuelleComboAnwendungen();
+		fillCboApplications();
 	}
 	
 	/**
@@ -1156,9 +983,9 @@ public class Client extends Composite
 		menu.setEnabled(bool);
 
 		buttonWechseln.setEnabled(bool);
-		comboProjekte.setEnabled(bool);
-		comboDokumente.setEnabled(bool);
-		comboFormate.setEnabled(bool);
+		cboProjects.setEnabled(bool);
+		cboDocuments.setEnabled(bool);
+		cboFormats.setEnabled(bool);
 		buttonAktualisieren.setEnabled(bool);
 		tableProductionEntities.setEnabled(bool);
 		buttonProduzieren.setEnabled(bool);

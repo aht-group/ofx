@@ -1,12 +1,14 @@
 package org.openfuxml.producer.handler;
 
+import java.util.List;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.communication.cluster.sync.NoSync;
 import org.openfuxml.communication.cluster.sync.ServerSync;
 import org.openfuxml.communication.cluster.sync.unison.UnisonSync;
-import org.openfuxml.producer.ejb.AvailableApplications;
+import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProductionRequest;
@@ -24,13 +26,13 @@ public class SyncProducer extends AbstractProducer implements Producer
 	
 	public SyncProducer(Configuration config,Host host,EnvironmentParameter envP)
 	{	
-		super(envP);
+		super(config,envP);
 		unisonSync = new UnisonSync(config);
 		noSync = new NoSync();
 		p = new DirectProducer(config,host,envP);
 	}
 	
-	public AvailableApplications getAvailableApplications() throws ProductionSystemException,ProductionHandlerException
+	public List<OfxApplication> getAvailableApplications() throws ProductionSystemException,ProductionHandlerException
 	{
 		return p.getAvailableApplications();
 	}

@@ -3,6 +3,7 @@ package org.openfuxml.server.cluster;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.SocketException;
+import java.util.List;
 
 import javax.naming.CommunicationException;
 import javax.naming.InitialContext;
@@ -15,8 +16,7 @@ import org.openfuxml.communication.cluster.facade.OpenFuxmlFacade;
 import org.openfuxml.communication.cluster.facade.OpenFuxmlFacadeBean;
 import org.openfuxml.communication.cluster.facade.ProducerFacade;
 import org.openfuxml.communication.cluster.facade.ProducerFacadeBean;
-import org.openfuxml.producer.ejb.Application;
-import org.openfuxml.producer.ejb.AvailableApplications;
+import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
 import org.openfuxml.producer.handler.Producer;
@@ -68,16 +68,16 @@ public class EnterpriseServer extends AbstractServer
 			
 			host=fO.updateHost(host);
 			Producer p = new SyncProducer(config,host,envParameter);
-			AvailableApplications aas = p.getAvailableApplications();
+			List<OfxApplication> lOfxA = p.getAvailableApplications();
 			
-			for(Application a : aas.getApplications())
+/*			for(Application a : aas.getApplications())
 			{
 				fP.newEjbObject(p.getAvailableFormats(a.getName()));
 			}
 			logger.debug("getAvailableApplications:"+aas.getHost().getHostName());
 			fP.newEjbObject(aas);
 			fP.close();
-		}
+*/		}
 		catch (javax.naming.NameNotFoundException e){exit("Alle EJB-Beans deployed?",e);}
 		catch (NamingException e) {e.printStackTrace();}
 		catch (ProductionSystemException e) {e.printStackTrace();}

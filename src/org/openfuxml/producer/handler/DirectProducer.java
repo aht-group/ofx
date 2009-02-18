@@ -1,20 +1,23 @@
 package org.openfuxml.producer.handler;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.openfuxml.communication.cluster.ejb.Host;
-import org.openfuxml.producer.ejb.Application;
-import org.openfuxml.producer.ejb.AvailableApplications;
+import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.Format;
 import org.openfuxml.producer.ejb.ProducedEntities;
+import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
+import org.openfuxml.util.config.OfxPathHelper;
 
 import de.kisner.util.architecture.EnvironmentParameter;
 import de.kisner.util.io.spawn.Spawn;
@@ -43,51 +46,40 @@ public class DirectProducer extends AbstractProducer implements Producer
 	public DirectProducer(Configuration config,EnvironmentParameter envP){this(config,null,envP);}
 	public DirectProducer(Configuration config,Host host,EnvironmentParameter envP)
 	{
-		super(envP);
+		super(config,envP);
 		this.host=host;
 		String baseDir = config.getString("dirs/dir[@type='basedir']");
 		//TODO Relative PATH
 		dirOutput = baseDir+fs+config.getString("dirs/dir[@type='output']");
 	}
 	
-	/**
-	 * Gibt verfügbare Applikationen zurück
-	 * @author Thorsten
-	 */
-	public AvailableApplications getAvailableApplications() throws ProductionSystemException
+	public List<OfxApplication> getAvailableApplications() throws ProductionSystemException,ProductionHandlerException
 	{
-		AvailableApplications aas= new AvailableApplications();
-		aas.setHost(host);
-		aas.setRecord(new Date());
-		File dirApplications = new File(sysprops.getProperty("ilona.home") + java.io.File.separator + "applications");
-		if (dirApplications.isDirectory() && dirApplications.exists())
+		List<OfxApplication> result = new ArrayList<OfxApplication>();
+		
+		File dirApp = new File(config.getString("dirs/dir[@type='basedir']")+fs+"applications");
+		logger.debug("Suche in "+dirApp);
+		if (dirApp.exists() && dirApp.isDirectory())
 		{
-			for(File dirEntry : dirApplications.listFiles())
+			for(File dirEntry : dirApp.listFiles())
 			{
 				boolean isDir = dirEntry.isDirectory();
 				boolean isSvn = dirEntry.getAbsolutePath().endsWith(".svn");
 				if(isDir && !isSvn)
 				{
-					Application a = new Application();
-					a.setAvailableApplications(aas);
-					a.setName(dirEntry.getName());
-					a.setAnzCores(1);
-					aas.addApplication(a);
-					File sessionpreferences = new File(dirOutput+fs+dirEntry.getName()+fs+"sessionpreferences");
-					if(!sessionpreferences.exists())
+					OfxApplication ofxA = new OfxApplication();
+					ofxA.setName(dirEntry.getName());
+					File dirSessionpreferences = new File(OfxPathHelper.getDir(config, "output")+fs+dirEntry.getName()+fs+"sessionpreferences");
+					if(!dirSessionpreferences.exists())
 					{
-						logger.debug("Creating "+sessionpreferences.getAbsolutePath());
-						sessionpreferences.mkdirs();
+						logger.debug("Creating "+dirSessionpreferences.getAbsolutePath());
+						dirSessionpreferences.mkdirs();
 					}
+					result.add(ofxA);
 				}
 			}
 		}
-		else
-		{
-			logger.fatal("Invalid Application-Directoriy: "+dirApplications.getAbsolutePath());
-			throw new ProductionSystemException("Invalid Application-Directoriy: "+dirApplications.getAbsolutePath());
-		}
-		return aas;
+		return result;
 	}
 	
 	/**

@@ -5,14 +5,18 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
-import org.openfuxml.producer.ejb.AvailableApplications;
+import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.RequestWrapper;
 import org.openfuxml.producer.exception.ProductionHandlerException;
+import org.openfuxml.producer.exception.ProductionSystemException;
+
+import de.kisner.util.architecture.EnvironmentParameter;
 
 public class SocketProducer extends AbstractProducer implements Producer
 {
@@ -23,24 +27,20 @@ public class SocketProducer extends AbstractProducer implements Producer
 	
 	public SocketProducer(Configuration config)
 	{
-		this(config.getString("net/host"),config.getInt("net/port"));
-	}
-	public SocketProducer(String serverIP,int serverPort) 
-	{
-		super(null);
-		this.serverIP=serverIP;
-		this.serverPort=serverPort;
+		super(config, new EnvironmentParameter());
+		serverIP=config.getString("net/host");
+		serverPort=config.getInt("net/port");
 	}
 	
-	public AvailableApplications getAvailableApplications() throws ProductionHandlerException
+	@SuppressWarnings("unchecked")
+	public List<OfxApplication> getAvailableApplications() throws ProductionSystemException,ProductionHandlerException
 	{
-		logger.debug("produce aufgerufen");
 		RequestWrapper po = new RequestWrapper();
 		po.setProductionType(RequestWrapper.ProductionType.AVAPPS);
 		po.setObject("");
 		RequestWrapper productionResult=handle(po);
 		logger.debug("Antwort bekommen: "+productionResult.getClass().getSimpleName()+"-"+productionResult.getObject().getClass().getSimpleName());
-		return (AvailableApplications)productionResult.getObject();  
+		return (List<OfxApplication>)productionResult.getObject();  
 	}
 	
 	public AvailableFormats getAvailableFormats(String application) throws  ProductionHandlerException

@@ -6,7 +6,6 @@ import javax.ejb.Remove;
 
 import org.openfuxml.communication.cluster.ejb.EjbObject;
 import org.openfuxml.communication.cluster.ejb.Host;
-import org.openfuxml.producer.ejb.AvailableApplications;
 import org.openfuxml.producer.ejb.AvailableFormats;
 
 public interface OpenFuxmlFacade
@@ -22,7 +21,7 @@ public interface OpenFuxmlFacade
 	Host updateHost(Host h);
 	
 	//Applications und Formats
-	AvailableApplications findLastAvailableApplicationsforHost(Host h);
+//	AvailableApplications findLastAvailableApplicationsforHost(Host h);
 	AvailableFormats findLastAvailableFormatsforHost(Host h);
 	
 	@Remove void close();

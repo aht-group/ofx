@@ -9,11 +9,12 @@ import java.util.Properties;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
+import org.openfuxml.model.factory.AbstractJaxbFactory;
 
 import de.kisner.util.architecture.ArchUtil;
 import de.kisner.util.io.resourceloader.MultiResourceLoader;
 
-public abstract class AbstractConfFactory
+public abstract class AbstractConfFactory extends AbstractJaxbFactory
 {
 	static Logger logger = Logger.getLogger(AbstractConfFactory.class);
 	
