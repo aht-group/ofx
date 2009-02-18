@@ -1,4 +1,4 @@
-package org.openfuxml.communication.client.simple;
+package org.openfuxml.client.simple;
 
 import java.util.Enumeration;
 import java.util.Properties;

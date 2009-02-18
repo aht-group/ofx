@@ -1,4 +1,4 @@
-package org.openfuxml.communication.client.dialog;
+package org.openfuxml.client.simple.dialog;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
@@ -24,7 +24,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
-import org.openfuxml.communication.client.simple.Client;
+import org.openfuxml.client.simple.Client;
 
 import de.kisner.util.io.resourceloader.ImageResourceLoader;
 

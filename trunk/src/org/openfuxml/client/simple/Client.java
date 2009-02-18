@@ -1,4 +1,4 @@
-package org.openfuxml.communication.client.simple;
+package org.openfuxml.client.simple;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
-import org.openfuxml.communication.client.dialog.HelpAboutDialog;
+import org.openfuxml.client.simple.dialog.HelpAboutDialog;
 import org.openfuxml.producer.ejb.Application;
 import org.openfuxml.producer.ejb.AvailableApplications;
 import org.openfuxml.producer.ejb.AvailableFormats;
