@@ -1,4 +1,4 @@
-package org.openfuxml.communication.client.simple;
+package org.openfuxml.client.simple;
 
 import java.io.File;
 import java.io.IOException;

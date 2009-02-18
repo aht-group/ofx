@@ -1,4 +1,4 @@
-package org.openfuxml.communication.client.simple;
+package org.openfuxml.client.simple;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.producer.ejb.ProducedEntities;

@@ -41,10 +41,10 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.openfuxml.client.control.projects.ProjectFactory;
+import org.openfuxml.client.simple.Client;
+import org.openfuxml.client.simple.dialog.HelpAboutDialog;
 import org.openfuxml.client.swt.composites.ProjektComposite;
 import org.openfuxml.client.util.ImgCanvas;
-import org.openfuxml.communication.client.dialog.HelpAboutDialog;
-import org.openfuxml.communication.client.simple.Client;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.util.config.factory.ClientConfFactory;
 
