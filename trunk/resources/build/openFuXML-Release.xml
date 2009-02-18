@@ -42,6 +42,7 @@
 	<property name="dist.dir" location="${basedir}/dist" />
 	<property name="lib.dir" location="${basedir}/lib" />
 	<property name="doku.dir" location="${basedir}/doku" />
+	<property name="xsd.dir" location="${rsrc.dir}/xsd" />
 	
 	<property name="simpleServer.name" value="openFuXML-ss-${openfuxml-version}" />
 	<property name="simpleClient.name" value="openFuXML-cl-${openfuxml-version}" />
@@ -217,9 +218,22 @@
 	
 	<target name="03a JAXB Class generation" depends="02 - init" description="Compile the source">
 		<echo level="info">Creating JAXB Configuration Class</echo>
-		<xjc schema="resources/xsd/config.xsd"
-						destdir="${src.dir}"
-						package="org.openfuxml.util.config.jaxb" /> 
+		<xjc schema="${xsd.dir}/config.xsd" package="org.openfuxml.util.config.jaxb" destdir="${src.dir}">
+			<depends dir="${xsd.dir}">
+				<include name="config.xsd"/>
+			</depends>
+			<produces dir="${src.dir}/org/openfuxml/util/config/jaxb">
+				<include name="*.java"/>
+			</produces>
+		</xjc><delete file="${src.dir}/org/openfuxml/util/config/jaxb/ObjectFactory.java"/>
+		<xjc schema="resources/xsd/sessionpreferences.xsd" package="org.openfuxml.model.jaxb" destdir="${src.dir}">
+			<depends dir="${xsd.dir}">
+				<include name="config.xsd"/>
+			</depends>
+			<produces dir="${src.dir}/org/openfuxml/model/jaxb">
+				<include name="Sessionpreferences.java"/>
+			</produces>
+		</xjc><delete file="${src.dir}/org/openfuxml/model/jaxb/ObjectFactory.java"/>
 	</target>
 	
 <!--	<target name="03 - package-elements" depends="02 - init" description="Package Elements">

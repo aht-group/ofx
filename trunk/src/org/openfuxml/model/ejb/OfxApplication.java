@@ -6,15 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
-public class OfxProject implements Serializable
+public class OfxApplication implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
 	private int id;
-	private String name, dir;
+	private String name, file;
 	
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	public int getId() {return id;}
@@ -23,15 +22,15 @@ public class OfxProject implements Serializable
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
 	
-	public String getDir() {return dir;}
-	public void setDir(String dir) {this.dir = dir;}
+	public String getFile() {return file;}
+	public void setFile(String file) {this.file = file;}
 	
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
 			sb.append(id);
 			sb.append(" "+name);
-			sb.append(" ("+dir+")");
+			sb.append(" ("+file+")");
 		return sb.toString();
 	}
 }

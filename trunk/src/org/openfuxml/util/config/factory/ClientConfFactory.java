@@ -82,19 +82,7 @@ public class ClientConfFactory extends AbstractConfFactory
 		openfuxml.setFiles(cff.getFiles());
 	}
 	
-	public void writeConfig(OutputStream os)
-	{
-		try
-		{
-			JAXBContext context = JAXBContext.newInstance(Openfuxml.class);
-			Marshaller m = context.createMarshaller(); 
-			m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE ); 
-			m.marshal( openfuxml, os);
-			os.close();
-		}
-		catch (JAXBException e) {logger.error(e);}
-		catch (IOException e) {logger.error(e);}
-	}
+	public void writeConfig(OutputStream os){writeJaxb(os,openfuxml);}
 	
 	public static void main(String args[]) 
 	{

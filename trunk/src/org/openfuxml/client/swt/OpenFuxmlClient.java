@@ -3,20 +3,10 @@
  */
 package org.openfuxml.client.swt;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Properties;
 
-import javax.ejb.CreateException;
-import javax.ejb.RemoveException;
-import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
@@ -28,7 +18,6 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -40,8 +29,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
+import org.openfuxml.client.control.OpenFuxmlClientControl;
 import org.openfuxml.client.control.projects.ProjectFactory;
-import org.openfuxml.client.simple.Client;
+import org.openfuxml.client.control.projects.ProjectFactoryDirect;
 import org.openfuxml.client.simple.dialog.HelpAboutDialog;
 import org.openfuxml.client.swt.composites.ProjektComposite;
 import org.openfuxml.client.util.ImgCanvas;
@@ -96,12 +86,15 @@ public class OpenFuxmlClient extends Composite implements Runnable
 	private int pingThreadZaehler;
 	private Configuration config;
 	private Shell shell;
+	private OpenFuxmlClientControl ofxCC;
 
 	public OpenFuxmlClient (Composite parent, int style, Configuration config)
 	{
 		super(parent, style);
 		this.config=config;
 
+		ofxCC = new OpenFuxmlClientControl(config);
+		
 		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
 		splashscreen.open();
 		
@@ -268,8 +261,8 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		
 //		try
 		{
-			ProjectFactory pf = new ProjectFactory();
-			List<OfxProject> lProjects = pf.lProjects();
+			ProjectFactory pf = new ProjectFactoryDirect(config);
+			List<OfxProject> lProjects = ofxCC.getOfxProjectFactory().lProjects("fuxml");
 
 			while (tfProjekte.getItemCount()>0)
 			{	// Löschen der alten TabItems für die Projekte
