@@ -1,4 +1,4 @@
-package org.openfuxml.client;
+package org.openfuxml.client.swt;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
