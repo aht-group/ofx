@@ -15,6 +15,7 @@ import org.openfuxml.communication.cluster.ejb.Host;
 import de.kisner.util.HostCheck;
 import de.kisner.util.architecture.ArchUtil;
 import de.kisner.util.architecture.EnvironmentParameter;
+import de.kisner.util.io.spawn.Spawn;
 
 public abstract class AbstractServer
 {
@@ -94,8 +95,21 @@ public abstract class AbstractServer
 		if(!f.exists()){f.mkdirs();logger.info("Created directory: "+f.getAbsolutePath());}
 		f = new File(pathRepo);
 		if(!f.exists()){logger.warn("Repository not found! Cheack for "+f.getAbsolutePath());}
+		
 		f = new File(pathLib);
-		if(!f.exists()){logger.warn("Libraries not found! Check for "+f.getAbsolutePath());}
+		if(f.exists())
+		{
+			if(ArchUtil.isUnixLike())
+			{
+				File antRun = new File(f,"bin"+fs+"antRun");
+				logger.debug("Setting +x antRun ("+antRun.getAbsolutePath()+")");
+				Spawn spawn = new Spawn("chmod +x "+antRun.getAbsolutePath());
+				spawn.cmd();
+			}
+		}
+		{
+			logger.warn("Libraries not found! Check for "+f.getAbsolutePath());
+		}
 	}
 	
 	private void setenvP()
