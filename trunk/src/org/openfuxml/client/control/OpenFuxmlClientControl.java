@@ -1,5 +1,7 @@
 package org.openfuxml.client.control;
 
+import java.util.Hashtable;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.client.control.documents.DocumentFactory;
@@ -11,6 +13,7 @@ import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.model.factory.OfxRequestFactory;
+import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 import org.openfuxml.producer.Producer;
@@ -27,6 +30,9 @@ public class OpenFuxmlClientControl
 	private DocumentFactory ofxDocumentFactory;
 	private Producer producer;
 	private ClientGuiCallback guiCallback;
+	private String comboUid;
+	
+	private Hashtable<String, ProducibleEntities> htDiscoveredEntities;
 
 	public OpenFuxmlClientControl(Configuration config, ClientGuiCallback guiCallback)
 	{
@@ -34,6 +40,7 @@ public class OpenFuxmlClientControl
 		this.guiCallback=guiCallback;
 		ofxProjectFactory = new ProjectFactoryDirect(config);
 		ofxDocumentFactory = new DocumentFactoryDirect(config);
+		htDiscoveredEntities = new Hashtable<String, ProducibleEntities>();
 		
 		DummyServer server = new DummyServer(config);
 		producer = new DirectProducer(config,server.getEnvParameter());
@@ -59,14 +66,23 @@ public class OpenFuxmlClientControl
 		}
 	}
 	
-	public void getProducibleEntities(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD)
+	public ProducibleEntities getCachedProducibleEntities(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD, OfxFormat ofxF)
 	{
+		setComboUid(ofxA, ofxP, ofxD, ofxF);
+		return htDiscoveredEntities.get(comboUid);
+	}
+	
+	public void getProducibleEntities(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD, OfxFormat ofxF)
+	{
+		setComboUid(ofxA, ofxP, ofxD, ofxF);
 		OfxRequestFactory ofxReqF = new OfxRequestFactory();
 			ofxReqF.setOfxA(ofxA);
 			ofxReqF.setOfxP(ofxP);
 			ofxReqF.setOfxD(ofxD);
+			ofxReqF.setOfxF(ofxF);
 		Sessionpreferences spref = ofxReqF.create();
-//			ofxReqF.writeJaxb(System.out, spref);
+		ProducerThread pt = new ProducerThread(this,guiCallback,producer);
+		pt.getProducibleEntities(spref);
 	}
 	
 	public void produce(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD, OfxFormat ofxF, Productionentities pe)
@@ -78,11 +94,29 @@ public class OpenFuxmlClientControl
 			orf.setOfxF(ofxF);
 		Sessionpreferences spref = orf.create();
 		spref.setProductionentities(pe);
-		ProducerThread pt = new ProducerThread(guiCallback,producer);
+		ProducerThread pt = new ProducerThread(this,guiCallback,producer);
 		pt.produce(spref);
 	}
 	
 	public ProjectFactory getOfxProjectFactory() {return ofxProjectFactory;}
 	public DocumentFactory getOfxDocumentFactory() {return ofxDocumentFactory;}
 	public Producer getProducer() {return producer;}
+	
+	public void setDiscoveredEntities(ProducibleEntities pe)
+	{
+		htDiscoveredEntities.put(comboUid, pe);
+	}
+	
+	private void setComboUid(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD, OfxFormat ofxF)
+	{
+		if(ofxA!=null && ofxP!=null && ofxD!=null && ofxF !=null)
+		{
+			StringBuffer sb = new StringBuffer();
+				sb.append(ofxA.getName()+"-");
+				sb.append(ofxP.getName()+"-");
+				sb.append(ofxD.getName()+"-");
+				sb.append(ofxF.getFormat().getId());
+			comboUid = sb.toString();
+		}
+	}
 }

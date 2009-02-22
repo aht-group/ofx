@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.openfuxml.communication.cluster.ejb.EjbObject;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
+import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.producer.ejb.ProducedEntities;
@@ -89,6 +90,12 @@ public class ProducerFacadeBean implements ProducerFacade, Serializable
 	}
 	
 	public Productionresult produce(Sessionpreferences spref) throws ProductionSystemException
+	{
+		logger.warn("Not implemented for this Handler!!");
+		return null;
+	}
+	
+	public ProducibleEntities discoverEntities(Sessionpreferences spref) throws ProductionSystemException, ProductionHandlerException
 	{
 		logger.warn("Not implemented for this Handler!!");
 		return null;

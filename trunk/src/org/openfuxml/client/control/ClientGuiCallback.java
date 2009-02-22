@@ -6,4 +6,5 @@ public interface ClientGuiCallback
 {
 	public void setStatus(String status);
 	public void setProduced(Productionresult presult);
+	public void entitiesDiscovered();
 }
