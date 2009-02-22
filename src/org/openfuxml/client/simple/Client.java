@@ -46,8 +46,6 @@ import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProducedEntitiesEntityFile;
-import org.openfuxml.producer.ejb.ProductionRequest;
-import org.openfuxml.producer.ejb.ProductionRequestEntityFile;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
 import org.openfuxml.util.config.OfxPathHelper;
@@ -88,7 +86,6 @@ public class Client extends Composite implements ClientGuiCallback
 	private Shell toplevelShell;
 	private Display display;
 	
-	private ProducerThread producerThread;
 	private int anzItems;
 	
 	private Hashtable<String, ProducedEntities> htProducableEntities;
@@ -103,7 +100,6 @@ public class Client extends Composite implements ClientGuiCallback
 	private OpenFuxmlClientControl ofxCC;
 	
 	private Productionresult presult;
-	private Hashtable<String, ProducibleEntities> htProducibleEntities;
 	
 	File propFile;
 	
@@ -128,7 +124,6 @@ public class Client extends Composite implements ClientGuiCallback
 		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
 		splashscreen.open();
 	
-		htProducibleEntities = new Hashtable<String, ProducibleEntities>();
 		alProducedEntities = new ArrayList<String[]>();
 
 		logger.info("initGUI");
@@ -572,40 +567,6 @@ public class Client extends Composite implements ClientGuiCallback
 		});
 	}
 	
-	public void setProducedEntities(ProducedEntities pe, int err)
-	{
-		this.producedEntities=pe;
-		final int error = err;
-		
-		display.asyncExec(new Runnable()
-			{
-				public void run()
-				{
-					if (!toplevelShell.isDisposed())
-					{
-						if (error == ProducerThread.NO_ERROR)
-						{
-							// Hashtable aktualisieren
-							String s = cboProjects.getText()+cboDocuments.getText()+cboFormats.getText();
-							htProducableEntities.put(s, producedEntities);
-
-							entitiesDiscovered();
-							setAllEnabled(true);
-						}
-						else
-						{
-							// Falls bei dem Aufruf von getProducableEntities irgendwelche Fehler auftreten,
-							// kommt hier eine Fehlemeldung.
-							ServerFehler();
-							setAllEnabled(true);
-							
-							logger.fatal("ProducableEntitiesEnde: Fehlercode=" + error);
-						}
-					} // if
-				} // run
-			});
-	}
-	
 	public void setStatus(final String status)
 	{
 		display.asyncExec(new Runnable()
@@ -639,38 +600,7 @@ public class Client extends Composite implements ClientGuiCallback
 			}
 		});
 	}
-	public void setProduced(ProducedEntities pe, int err)
-	{
-		this.producedEntities=pe;		
-		final int error = err;
-		
-		display.asyncExec(new Runnable()
-		{
-			public void run()
-			{
-				if (!toplevelShell.isDisposed())
-				{
-					if (error == ProducerThread.NO_ERROR)
-					{
-						labelErgebnis.setText("Status: " +"[OK] ");
-						addProducedEntities(producedEntities);
-						setAllEnabled(true);
-					}
-					else
-					{
-						// Falls bei dem Aufruf von produce irgendwelche Fehler auftreten,
-						// kommt hier eine Fehlemeldung.
-						labelErgebnis.setText("Status: " +
-								"[ERROR] ");
-						ServerFehler();
-						setAllEnabled(true);
-						
-						logger.fatal("ProduzierenEnde: Fehlercode=" + error);
-					}
-				} // if
-			} // run
-		});
-	}
+
 	
 	/**
 	 * Die Methode getProducableEntities testet, ob alle Eingaben gemacht wurden
@@ -725,8 +655,6 @@ public class Client extends Composite implements ClientGuiCallback
 			try
 			{
 				setAllEnabled(false);
-
-				producerThread = new ProducerThread(this, ofxCC.getProducer());
 				display.asyncExec(new Runnable()
 					{
 						public void run()
@@ -739,21 +667,10 @@ public class Client extends Composite implements ClientGuiCallback
 								OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
 								
 								ofxCC.getProducibleEntities(ofxA,ofxP,ofxD,ofxF);
-								
-/*								ProductionRequest pReq = new ProductionRequest();
-						    	
-						    	pReq.setApplication(cboApplications.getText());
-								pReq.setProject(cboProjects.getText());
-								pReq.setDocument(cboDocuments.getText());
-								pReq.setFormat(ofxF.getFormat().getId());
-								pReq.setUsername(System.getProperty("user.name"));
-								pReq.setTyp(ProductionRequest.Typ.ENTITIES);
-								pReq.setSync(ProductionRequest.Sync.NOSYNC);
-								producerThread.startInvoke(pReq);
-*/							} // if
-						} // run
+							}
+						}
 					});
-			} // try
+			}
 			catch (Exception e)
 			{
 				// Falls bei dem Aufruf von getProducableEntities irgendwelche Fehler auftreten,
@@ -797,8 +714,6 @@ public class Client extends Composite implements ClientGuiCallback
 		else
 		{
 			setAllEnabled(false);
-
-			producerThread = new ProducerThread(this, ofxCC.getProducer());
 			display.asyncExec(new Runnable()
 				{
 					public void run()
@@ -825,7 +740,6 @@ public class Client extends Composite implements ClientGuiCallback
 							OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
 						
 							ofxCC.produce(ofxA, ofxP, ofxD, ofxF, pe);
-							
 						} 
 					}
 				});
