@@ -92,8 +92,8 @@ public class OpenFuxmlClient extends Composite implements Runnable
 	{
 		super(parent, style);
 		this.config=config;
-
-		ofxCC = new OpenFuxmlClientControl(config);
+		SwtGuiCallback guiCallback = new SwtGuiCallback();
+		ofxCC = new OpenFuxmlClientControl(config,guiCallback);
 		
 		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
 		splashscreen.open();

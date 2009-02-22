@@ -12,9 +12,8 @@ import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.model.factory.OfxRequestFactory;
 import org.openfuxml.model.jaxb.Sessionpreferences;
+import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 import org.openfuxml.producer.Producer;
-import org.openfuxml.producer.exception.ProductionHandlerException;
-import org.openfuxml.producer.exception.ProductionSystemException;
 import org.openfuxml.producer.handler.DirectProducer;
 import org.openfuxml.producer.handler.SocketProducer;
 import org.openfuxml.server.DummyServer;
@@ -27,10 +26,12 @@ public class OpenFuxmlClientControl
 	private ProjectFactory ofxProjectFactory;
 	private DocumentFactory ofxDocumentFactory;
 	private Producer producer;
+	private ClientGuiCallback guiCallback;
 
-	public OpenFuxmlClientControl(Configuration config)
+	public OpenFuxmlClientControl(Configuration config, ClientGuiCallback guiCallback)
 	{
 		this.config=config;
+		this.guiCallback=guiCallback;
 		ofxProjectFactory = new ProjectFactoryDirect(config);
 		ofxDocumentFactory = new DocumentFactoryDirect(config);
 		
@@ -68,23 +69,17 @@ public class OpenFuxmlClientControl
 //			ofxReqF.writeJaxb(System.out, spref);
 	}
 	
-	public void produce(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD, OfxFormat ofxF)
+	public void produce(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD, OfxFormat ofxF, Productionentities pe)
 	{
 		OfxRequestFactory orf = new OfxRequestFactory();
 			orf.setOfxA(ofxA);
 			orf.setOfxP(ofxP);
 			orf.setOfxD(ofxD);
 			orf.setOfxF(ofxF);
-	
-	try {
-		producer.produce(orf.create());
-	} catch (ProductionSystemException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (ProductionHandlerException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		Sessionpreferences spref = orf.create();
+		spref.setProductionentities(pe);
+		ProducerThread pt = new ProducerThread(guiCallback,producer);
+		pt.produce(spref);
 	}
 	
 	public ProjectFactory getOfxProjectFactory() {return ofxProjectFactory;}

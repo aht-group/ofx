@@ -32,6 +32,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
+import org.openfuxml.client.control.ClientGuiCallback;
 import org.openfuxml.client.control.OpenFuxmlClientControl;
 import org.openfuxml.client.simple.dialog.HelpAboutDialog;
 import org.openfuxml.client.simple.factory.SimpleMenuFactory;
@@ -40,6 +41,8 @@ import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
+import org.openfuxml.model.jaxb.Productionresult;
+import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProducedEntitiesEntityFile;
 import org.openfuxml.producer.ejb.ProductionRequest;
@@ -56,7 +59,7 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
  * Client implementiert die Benutzeroberfläche für die FuXML-Produktion.
  * @author Andrea Frank
  */
-public class Client extends Composite
+public class Client extends Composite implements ClientGuiCallback
 {
     static Logger logger = Logger.getLogger(Client.class);
     private static String fs = SystemUtils.FILE_SEPARATOR;
@@ -97,6 +100,8 @@ public class Client extends Composite
 	
 	private Configuration config;
 	private OpenFuxmlClientControl ofxCC;
+	private Productionresult presult;
+	
 	File propFile;
 	
 	private Cursor cursor;
@@ -113,9 +118,9 @@ public class Client extends Composite
 	    super(parent, SWT.NULL);
 	    this.config=config;
 		toplevelShell = (Shell)parent;
-		
 		this.display = disp;
-		ofxCC = new OpenFuxmlClientControl(config);
+		
+		ofxCC = new OpenFuxmlClientControl(config,this);
 		
 		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
 		splashscreen.open();
@@ -593,10 +598,39 @@ public class Client extends Composite
 			});
 	}
 	
+	public void setStatus(final String status)
+	{
+		display.asyncExec(new Runnable()
+		{
+			public void run()
+			{
+				if (!toplevelShell.isDisposed())
+				{
+					labelErgebnis.setText(status);
+				}
+			}
+		});
+	}
+	
 	/**
 	 * Nach dem Produzieren muss der Status der Produktion angezeigt werden.
 	 * Alle Bedienelemente werden wieder auf enabled gesetzt.  
 	 */
+	public void setProduced(final Productionresult presult)
+	{
+		this.presult=presult;
+		display.asyncExec(new Runnable()
+		{
+			public void run()
+			{
+				if (!toplevelShell.isDisposed())
+				{
+					addProducedEntities(presult);
+					setAllEnabled(true);
+				}
+			}
+		});
+	}
 	public void setProduced(ProducedEntities pe, int err)
 	{
 		this.producedEntities=pe;		
@@ -610,10 +644,8 @@ public class Client extends Composite
 				{
 					if (error == ProducerThread.NO_ERROR)
 					{
-						labelErgebnis.setText("Status: " +
-								"[OK] ");
+						labelErgebnis.setText("Status: " +"[OK] ");
 						addProducedEntities(producedEntities);
-						
 						setAllEnabled(true);
 					}
 					else
@@ -758,58 +790,39 @@ public class Client extends Composite
 		}
 		else
 		{
-			try
-			{
-				setAllEnabled(false);
+			setAllEnabled(false);
 
-				producerThread = new ProducerThread(this, ofxCC.getProducer());
-				display.asyncExec(new Runnable()
+			producerThread = new ProducerThread(this, ofxCC.getProducer());
+			display.asyncExec(new Runnable()
+				{
+					public void run()
 					{
-						public void run()
-						{
-							if (!toplevelShell.isDisposed())
-							{				
-								ArrayList<ProductionRequestEntityFile> efs = new ArrayList<ProductionRequestEntityFile>();
-								for(int i=0; i<tableProductionEntities.getItemCount(); i++)
+						if (!toplevelShell.isDisposed())
+						{				
+							Productionentities pe = new Productionentities();
+							for(int i=0; i<tableProductionEntities.getItemCount(); i++)
+							{
+								TableItem tableItem = tableProductionEntities.getItem(i);
+								if (tableItem.getChecked())
 								{
-									TableItem tableItem = tableProductionEntities.getItem(i);
-									if (tableItem.getChecked())
-									{
-										ProductionRequestEntityFile ef = new ProductionRequestEntityFile();
-										ef.setFilename(tableItem.getText(3));
-										ef.setDescription(tableItem.getText(1));
-										ef.setDirectory(tableItem.getText(2));
-										efs.add(ef);
-									} 
-								}
-								
-								OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
-								OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
-								OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
-								OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
+									Productionentities.File f = new Productionentities.File();
+										f.setDescription(tableItem.getText(1));
+										f.setDirectory(tableItem.getText(2));
+										f.setFilename(tableItem.getText(3));
+									pe.getFile().add(f);
+								} 
+							}
 							
-//								ofxCC.produce(ofxA, ofxP, ofxD, ofxF);
-								
-								ProductionRequest pReq = new ProductionRequest();				    	
-						    	pReq.setApplication(cboApplications.getText());
-								pReq.setProject(cboProjects.getText());
-								pReq.setDocument(cboDocuments.getText());
-								pReq.setFormat(ofxF.getFormat().getId());
-								pReq.setUsername(System.getProperty("user.name"));
-								pReq.setEntityFiles(efs);
-								pReq.setTyp(ProductionRequest.Typ.PRODUCE);	
-								pReq.setSync(ProductionRequest.Sync.NOSYNC);
-								producerThread.startInvoke(pReq);
-							} // if
-						} // run
-					});
-			} // try
-			catch (Exception e)
-			{
-				// Falls bei dem Aufruf von getProducableEntities irgendwelche Fehler auftreten,
-				// kommt hier eine Fehlemeldung.
-				ServerFehler();
-			}
+							OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
+							OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
+							OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
+							OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
+						
+							ofxCC.produce(ofxA, ofxP, ofxD, ofxF, pe);
+							
+						} 
+					}
+				});
 		} // else
 	}
 	
@@ -819,6 +832,10 @@ public class Client extends Composite
 	 * Falls der Eintrag bereits vorhanden ist, wird er aktualisiert.
 	 * @param producedEntities
 	 */
+	public void addProducedEntities(Productionresult presult)
+	{
+		
+	}
 	public void addProducedEntities(ProducedEntities producedEntities)
 	{
 		if (producedEntities != null)
@@ -911,7 +928,7 @@ public class Client extends Composite
 		EinstellungenDialog dialog = new EinstellungenDialog(this.getShell(), rgbBackground,config);
 		dialog.open(getShell().getImages());
 
-		ofxCC = new OpenFuxmlClientControl(config);
+		ofxCC = new OpenFuxmlClientControl(config,this);
 		
 		String labelText=config.getString("dirs/dir[@type='repository']");;
 		if(config.getBoolean("dirs/dir[@type='repository']/@rel"))
