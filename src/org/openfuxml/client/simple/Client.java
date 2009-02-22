@@ -70,8 +70,8 @@ public class Client extends Composite implements ClientGuiCallback
 	
 	private Menu menu;
 	
-	private Label labelVerzeichnis;
-	private Button buttonWechseln;
+	private Label lblRepository,lblEvent;
+	private Button btnChange;
 	
 	private Combo cboApplications,cboProjects,cboDocuments,cboFormats;
 
@@ -79,16 +79,10 @@ public class Client extends Composite implements ClientGuiCallback
 
 	private Table tableProductionEntities;
 	private Button buttonProduzieren;
-
-	private Label labelErgebnis;
-	private Button buttonOeffnen;
 	
 	private Shell toplevelShell;
 	private Display display;
 	
-	private int anzItems;
-	
-	private Hashtable<String, ProducedEntities> htProducableEntities;
 	private ProducedEntities producedEntities;
 	
 	/**
@@ -185,30 +179,30 @@ public class Client extends Composite implements ClientGuiCallback
 			labelVerz.setBackground(this.getBackground());
 		}
 		{
-			labelVerzeichnis = new Label(this, SWT.NONE);
-			labelVerzeichnis.setBackground(this.getBackground());
+			lblRepository = new Label(this, SWT.NONE);
+			lblRepository.setBackground(this.getBackground());
 
 			{
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
 				data.grabExcessHorizontalSpace = true;
-				labelVerzeichnis.setLayoutData(data);
+				lblRepository.setLayoutData(data);
 			}
 			
-			labelVerzeichnis.setText(OfxPathHelper.getDir(config, "repository"));
-			logger.debug("Repository: "+labelVerzeichnis.getText());
+			lblRepository.setText(OfxPathHelper.getDir(config, "repository"));
+			logger.debug("Repository: "+lblRepository.getText());
 		}
 		{
-			buttonWechseln = new Button(this, SWT.PUSH | SWT.CENTER);
-			buttonWechseln.setText("   wechseln ...   ");
+			btnChange = new Button(this, SWT.PUSH | SWT.CENTER);
+			btnChange.setText("   wechseln ...   ");
 
 			{
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
-				buttonWechseln.setLayoutData(data);
+				btnChange.setLayoutData(data);
 			}
 
-			buttonWechseln
+			btnChange
 				.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
 					Einstellungen();
@@ -362,6 +356,16 @@ public class Client extends Composite implements ClientGuiCallback
 		}
 		
 		tableProductionEntities = SimpleTableFactory.createTable(this);
+		tableProductionEntities.addSelectionListener(new SelectionAdapter() {
+			public void widgetDefaultSelected(SelectionEvent evt) {
+				// Bestimmen des ausgewählten Eintrags.
+				TableItem[] selection = tableProductionEntities.getSelection();
+				TableItem selectedRow = selection[0];
+
+				logger.debug(selectedRow.getText(1)+" "+selectedRow.getText(2));
+			}
+		});
+		
 		
 		{
 			buttonProduzieren = new Button(this, SWT.PUSH | SWT.CENTER);
@@ -382,30 +386,14 @@ public class Client extends Composite implements ClientGuiCallback
 			});
 		}
 		{
-			labelErgebnis = new Label(this, SWT.NONE);
-			labelErgebnis.setText("");
-			labelErgebnis.setBackground(this.getBackground());
+			lblEvent = new Label(this, SWT.NONE);
+			lblEvent.setText("");
+			lblEvent.setBackground(this.getBackground());
 
 			GridData data = new GridData();
 			data.horizontalAlignment = GridData.FILL;
 			data.horizontalSpan = 2;
-			labelErgebnis.setLayoutData(data);
-		}
-		{
-			buttonOeffnen = new Button(this, SWT.PUSH | SWT.CENTER);
-			buttonOeffnen.setText("   öffnen ...   ");
-
-			{
-				GridData data = new GridData();
-				data.horizontalAlignment = GridData.FILL;
-				buttonOeffnen.setLayoutData(data);
-			}
-
-			buttonOeffnen.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					Oeffnen();
-				}
-			});
+			lblEvent.setLayoutData(data);
 		}
 		
 		fillCboApplications();
@@ -418,10 +406,10 @@ public class Client extends Composite implements ClientGuiCallback
 		cboApplications.removeAll();
 		try
 		{
-			this.labelErgebnis.setText("Einen Moment bitte ...");
+			this.lblEvent.setText("Einen Moment bitte ...");
 			
 			List<OfxApplication> lOfxA = ofxCC.getProducer().getAvailableApplications();
-			this.labelErgebnis.setText("");
+			this.lblEvent.setText("");
 			
 			if (lOfxA != null)
 			{
@@ -575,28 +563,22 @@ public class Client extends Composite implements ClientGuiCallback
 			{
 				if (!toplevelShell.isDisposed())
 				{
-					labelErgebnis.setText(status);
+					lblEvent.setText(status);
 				}
 			}
 		});
 	}
 	
 	/**
-	 * Nach dem Produzieren muss der Status der Produktion angezeigt werden.
-	 * Alle Bedienelemente werden wieder auf enabled gesetzt.  
+	 * Nach dem Produzieren werden alle Bedienelemente wieder auf enabled gesetzt.  
 	 */
-	public void setProduced(final Productionresult presult)
+	public void entitiesProduced()
 	{
-		this.presult=presult;
 		display.asyncExec(new Runnable()
 		{
 			public void run()
 			{
-				if (!toplevelShell.isDisposed())
-				{
-					addProducedEntities(presult);
-					setAllEnabled(true);
-				}
+				if (!toplevelShell.isDisposed()){setAllEnabled(true);}
 			}
 		});
 	}
@@ -609,7 +591,7 @@ public class Client extends Composite implements ClientGuiCallback
 	 */
 	public void getProducableEntities()
 	{	
-		String Verzeichnis = labelVerzeichnis.getText();
+		String Verzeichnis = lblRepository.getText();
 		String Anwendung = cboApplications.getText();
 		String Projekt = cboProjects.getText();
 		String Dokument = cboDocuments.getText();
@@ -691,18 +673,14 @@ public class Client extends Composite implements ClientGuiCallback
 	 * Vor dem Start werden alle Elemente disabled, um weitere Eingaben zu vermeiden.
 	 */
 	public void produce()
-	{
-		// Bestimmen der Anzahl der ausgewählten Einträge der Tabelle ProductionEntities.
-		anzItems = 0;
+	{	// Bestimmen der Anzahl der ausgewählten Einträge der Tabelle ProductionEntities.
+		int anzItems = 0;
 		
 		for(int i=0; i<tableProductionEntities.getItemCount(); i++)
 		{
 			TableItem tableItem = tableProductionEntities.getItem(i);
-			if (tableItem.getChecked())
-			{
-				anzItems++;
-			} // if
-		} // for
+			if (tableItem.getChecked()){anzItems++;}
+		}
 
 		if (anzItems == 0)
 		{
@@ -756,7 +734,7 @@ public class Client extends Composite implements ClientGuiCallback
 	{
 		
 	}
-	public void addProducedEntities(ProducedEntities producedEntities)
+	public void addProducedEntities1(ProducedEntities producedEntities)
 	{
 		if (producedEntities != null)
 		{
@@ -808,26 +786,6 @@ public class Client extends Composite implements ClientGuiCallback
 		}
 		return -1;
 	}
-
-	/**
-	 * Die Methode Oeffnen testet, ob schon ein Ergebnis vorhanden ist.
-	 * Falls ja, wird der Dialog Oeffnen gestartet.
-	 */
-	public void Oeffnen()
-	{
-		if (alProducedEntities.size() > 0)
-		{
-			OeffnenDialog dialog = new OeffnenDialog(this.getShell(), alProducedEntities, rgbBackground,config);
-			dialog.open(getShell().getImages());			
-		} // if
-		else
-		{
-			MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
-			messageBox.setText("Fehler");
-			messageBox.setMessage("Es ist noch kein Ergebnis vorhanden."); 
-			messageBox.open();
-		} // else
-	}
 	
 	/**
 	 * Die Methode ClientBeenden schließt das Programm. 
@@ -855,7 +813,7 @@ public class Client extends Composite implements ClientGuiCallback
 		{
 			labelText=config.getString("dirs/dir[@type='basedir']")+fs+labelText;
 		}
-		labelVerzeichnis.setText(labelText);
+		lblRepository.setText(labelText);
 		
 		fillCboApplications();
 	}
@@ -901,14 +859,13 @@ public class Client extends Composite implements ClientGuiCallback
 	{
 		menu.setEnabled(bool);
 
-		buttonWechseln.setEnabled(bool);
+		btnChange.setEnabled(bool);
 		cboProjects.setEnabled(bool);
 		cboDocuments.setEnabled(bool);
 		cboFormats.setEnabled(bool);
 		buttonAktualisieren.setEnabled(bool);
 		tableProductionEntities.setEnabled(bool);
 		buttonProduzieren.setEnabled(bool);
-		buttonOeffnen.setEnabled(bool);
 	
 		if (bool)
 		{
@@ -928,7 +885,7 @@ public class Client extends Composite implements ClientGuiCallback
 	 */
 	public void loescheErgebnis()
 	{
-		labelErgebnis.setText("");
+		lblEvent.setText("");
 		producedEntities = null;
 	}
 

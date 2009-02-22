@@ -5,7 +5,6 @@ import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.producer.Producer;
-import org.openfuxml.producer.ejb.ProductionRequest;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
 import org.openfuxml.producer.handler.DirectProducer;
@@ -56,13 +55,12 @@ public class ProducerThread extends Thread
 								ProducibleEntities pe = producer.discoverEntities(spref);
 								guiCallback.setStatus("Entities discovered");
 								ofxCC.setDiscoveredEntities(pe);
-								guiCallback.entitiesDiscovered();
-								//Parent.setProducedEntities(pe, NO_ERROR);
-								break;
+								guiCallback.entitiesDiscovered();break;
 				case PRODUCE:	guiCallback.setStatus("Producing ...");
 								Productionresult presult = producer.produce(spref);
 								guiCallback.setStatus("Entities produced");
-								guiCallback.setProduced(presult);break;
+								ofxCC.setProducedEntities(presult);
+								guiCallback.entitiesProduced();break;
 			}
 		}
 			catch (ProductionSystemException e)
