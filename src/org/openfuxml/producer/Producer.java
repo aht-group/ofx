@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
-import org.openfuxml.model.ejb.OfxProductionRequest;
-import org.openfuxml.model.ejb.OfxProductionResult;
+import org.openfuxml.model.jaxb.Productionresult;
+import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProductionRequest;
 import org.openfuxml.producer.exception.ProductionHandlerException;
@@ -19,7 +19,7 @@ public interface Producer
 	//ganz neue Methoden
 	List<OfxApplication> getAvailableApplications() throws ProductionSystemException,ProductionHandlerException;
 	public List<OfxFormat> getAvailableFormats(OfxApplication ofxA) throws ProductionSystemException, ProductionHandlerException;
-	public OfxProductionResult produce(OfxProductionRequest ofxR) throws ProductionSystemException, ProductionHandlerException;
+	public Productionresult produce(Sessionpreferences spref) throws ProductionSystemException, ProductionHandlerException;
 	
 	public void close();
 }
