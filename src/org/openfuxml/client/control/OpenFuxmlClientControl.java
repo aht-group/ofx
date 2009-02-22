@@ -69,6 +69,8 @@ public class OpenFuxmlClientControl
 	public ProducibleEntities getCachedProducibleEntities(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD, OfxFormat ofxF)
 	{
 		setComboUid(ofxA, ofxP, ofxD, ofxF);
+		if(htDiscoveredEntities==null){logger.debug("ht==null");}
+		if(!htDiscoveredEntities.containsKey(comboUid)){return null;}
 		return htDiscoveredEntities.get(comboUid);
 	}
 	
@@ -118,5 +120,6 @@ public class OpenFuxmlClientControl
 				sb.append(ofxF.getFormat().getId());
 			comboUid = sb.toString();
 		}
+		else {comboUid = "";}
 	}
 }
