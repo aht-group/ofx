@@ -400,11 +400,11 @@
 	<target name="producableEntities" depends="initialisation">
 		<basename property="document.plain" file="${document}" suffix=".xml"/>
 		<echo file="${html.dir}/${document.plain}/producableEntities.xml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
-			&lt;producableEntities logfile="${base.dir}/${document.plain}/${document.plain}.producableEntities.log"&gt;
+			&lt;producibleEntities logfile="${base.dir}/${document.plain}/${document.plain}.producableEntities.log"&gt;
    				&lt;file directory="${base.dir}/${document.plain}/" filename="index.html"&gt;
      					 &lt;description&gt;HTML-Version von ${document.plain}&lt;/description&gt;
    				&lt;/file&gt;
-			&lt;/producableEntities&gt;
+			&lt;/producibleEntities&gt;
 		</echo>
 	</target>
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->

@@ -14,6 +14,7 @@ import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.model.factory.OfxRequestFactory;
 import org.openfuxml.model.jaxb.ProducibleEntities;
+import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 import org.openfuxml.producer.Producer;
@@ -107,6 +108,11 @@ public class OpenFuxmlClientControl
 	public void setDiscoveredEntities(ProducibleEntities pe)
 	{
 		htDiscoveredEntities.put(comboUid, pe);
+	}
+	
+	public void setProducedEntities(Productionresult rResult)
+	{
+		
 	}
 	
 	private void setComboUid(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD, OfxFormat ofxF)
