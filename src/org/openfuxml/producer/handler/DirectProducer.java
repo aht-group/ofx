@@ -39,7 +39,7 @@ import de.kisner.util.xml.XmlObject;
 public class DirectProducer extends AbstractProducer implements Producer
 {
 	static Logger logger = Logger.getLogger(DirectProducer.class);
-	private static enum Typ {PRODUCE,ENTITIES};
+	public static enum Typ {PRODUCE,ENTITIES};
 	
 	private static Properties sysprops = System.getProperties();
 	private static String fs = SystemUtils.FILE_SEPARATOR;
@@ -147,7 +147,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 			}
 		}
 		sbParameters.append(" -Dilona.home="+ sysprops.getProperty("ilona.home"));
-		sbParameters.append(" -Dilona.contentstore="+ OfxPathHelper.getDir(config, "repositry")+fs+spref.getApplication());
+		sbParameters.append(" -Dilona.contentstore="+ OfxPathHelper.getDir(config, "repository")+fs+spref.getApplication());
 		sbParameters.append(" -Dilona.output="+dirOutput+fs+spref.getApplication());
 		sbParameters.append(" -Dapplication="+ spref.getApplication());
 		sbParameters.append(" -Dcoursename="+ spref.getProject());
@@ -196,11 +196,6 @@ public class DirectProducer extends AbstractProducer implements Producer
 			case PRODUCE: 	path = dirOutput+fs+spref.getApplication()+ fs + proDir + fs + "result.xml";break;
 			case ENTITIES:	path = dirOutput+fs+spref.getApplication()+ fs + proDir + fs + "producableEntities.xml";break;
 		}
-				
-		File xmlFile = new File(path);
-		logger.debug("lade XML: " +xmlFile.getAbsolutePath());
-		try {producedEntities.loadXML(xmlFile);}
-		catch (XmlElementNotFoundException e){throw  new ProductionSystemException(e.getMessage());}
 			
 //		FuXmlLogger.productionLog( "ProducibleEntities()", request.getApplication(),  request.getProject(), request.getDocument(), request.getFormat(), request.getUsername(), startTime, endTime, pc);
 		logger.info("Invoke "+spref.getProject()+"-"+spref.getDocument()+": "+pc);
