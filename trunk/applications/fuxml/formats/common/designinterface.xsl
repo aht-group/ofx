@@ -369,6 +369,11 @@
 		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/titelbild"/>
 	</xsl:template>
 	
+	<xsl:template match="processing-instruction('varlogo2')">
+		<xsl:param name="contextnode" tunnel="yes"/>
+		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/varlogo2"/>
+	</xsl:template>
+
 	<xsl:template match="processing-instruction('copyright')">
 		<xsl:param name="contextnode" tunnel="yes"/>
 		<xsl:apply-templates select="$contextnode/ancestor-or-self::kurseinheit/titelseite/copyright"/>

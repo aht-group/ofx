@@ -196,6 +196,10 @@
 	<xsl:param name="contextnode"/>
 	<xsl:param name="filenode" tunnel="yes"/>
 	<xsl:choose>
+		<!-- Wenn ein sectiontitle mitgebracht wird, verwende ihn -->
+		<xsl:when test="$contextnode/@htmlsectiontitle">
+			<xsl:value-of select="$contextnode/@htmlsectiontitle"/>	
+		</xsl:when>
 		<!-- Wenn das nächste Element ein (Haupt-)Abschnitt/Titel ist, und die Nummerierung auf "an" steht -->
 		<xsl:when test="$contextnode/descendant::abschnitt[1]/titel">
 			<xsl:if test="contains($contextnode/descendant::abschnitt[1]/titel/@num,'an')">
@@ -1489,6 +1493,138 @@
 	<xsl:value-of select="normalize-space(string(parent::*))"/>
 	</xsl:element>
 	</xsl:if>
+	</xsl:template>
+	
+	<!-- Hinzugefuegt am 11.01.2009 SGE -->
+	<xsl:template match="processing-instruction('link-auto')">
+		<xsl:param name="Pfad"/>
+		<xsl:param name="contextnode"/>
+		<xsl:param name="filenode" tunnel="yes"/>
+		<xsl:variable name="konfig" select="$config/config/screenconfig/link-auto"/>
+		<xsl:variable name="contextlevel">
+			<xsl:value-of select="$contextnode/abschnitt[1]/@level"/>
+		</xsl:variable>
+		<xsl:variable name="parentnode">
+			<xsl:value-of select="name(parent::node())"/>
+		</xsl:variable>
+		<xsl:variable name="id">
+			<xsl:value-of select="normalize-space(substring-after(., 'id='))"/>
+		</xsl:variable>
+		<xsl:variable name="lolevel" select="$contextnode/key('id_key',$id)/@level"/>
+		<xsl:variable name="cu" select="$contextnode/@kurseinheit"/>
+		<xsl:if test="$contextnode/key('id_key',$id)">
+			<xsl:element name="{$parentnode}">
+				<xsl:copy-of select="parent::*/@*"/>
+				<xsl:attribute name="href">
+					<xsl:apply-templates select="$contextnode/key('id_key',$id)" mode="getpage">
+						<xsl:with-param name="Pfad">
+							<xsl:value-of select="$Pfad"/>
+						</xsl:with-param>
+					</xsl:apply-templates>
+					<xsl:text>#</xsl:text>
+					<xsl:value-of select="normalize-space(substring-after(., 'id='))"/>
+				</xsl:attribute>
+				<xsl:if test="$contextnode/abschnitt/@id=$id or ($contextnode/preceding::abschnitt[@level=1][1]/@id=$id and number($contextlevel) ge 2) or $contextnode/*[@id=$id]">
+					<xsl:attribute name="class">
+						<xsl:value-of select="concat(parent::*/@class,'_akt')"/>
+					</xsl:attribute>
+				</xsl:if>
+				<xsl:choose>
+					<!-- gibt es den Konfigzweig screenconfig, wenn ja ist der Titel länger als die erlaubte element-laenge ?-->
+					<xsl:when test="exists($konfig/@element-lenght) and string-length(normalize-space(string(parent::*))) gt number($konfig/@element-lenght)">
+						<xsl:value-of select="concat(substring(normalize-space(string(parent::*)),0,number($konfig/@element-lenght)),$konfig/@overlenght-symbol)"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="normalize-space(string(parent::*))"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:element>
+		</xsl:if>
+		<!-- Hole Dir alle Abschnitte in linearer Abfolge dieser CU in die Variable $subs -->
+		<xsl:variable name="subs"
+			select="$contextnode/ancestor::document/kurs/kurseinheiten/kurseinheit[@number=$cu]/ke-lehrtext/abschnitt"/>
+		<!-- Gruppiere die Abschnitte nach Top-Levelelementen (level=1). Jede Gruppe besteht aus einem Toplevel und vielen Sublevelelementen -->
+		<xsl:for-each-group select="$subs" group-starting-with="abschnitt[@level=1]">
+			<xsl:choose>
+				<!-- wenn level=1, die GruppenID gleich der ElementID und der Kontextknoten zum Elementknoten level 1 gehoert -->
+				<xsl:when
+					test="@level=1
+					and @id=$id 
+					and ($contextnode/abschnitt/@id=$id or ($contextnode/preceding::abschnitt[@level=1][1]/@id=$id and number($contextlevel) ge 2))">
+					<div>
+						<xsl:attribute name="id">
+							<xsl:text>navi</xsl:text>
+							<xsl:value-of select="./@level"/>
+							<xsl:text>_layer</xsl:text>
+						</xsl:attribute>
+						<p>
+							<xsl:attribute name="class">
+								<xsl:text>navi</xsl:text>
+								<xsl:value-of select="./@level"/>
+								<xsl:text>_layer</xsl:text>
+							</xsl:attribute>
+							<xsl:for-each select="current-group()">
+								<xsl:variable name="lokalid" select="./@id"/>
+								<xsl:if test="@level=$konfig/sublevel/@level">
+									<a>
+										<xsl:choose>
+											<xsl:when test="./@id=$contextnode/abschnitt[1]/@id">
+												
+												<xsl:attribute name="class">
+													<xsl:choose>
+														<xsl:when test="exists($konfig/sublevel/class)">
+															<xsl:apply-templates select="$konfig/sublevel/class/node()">
+																<xsl:with-param name="contextnode" select="."/>
+															</xsl:apply-templates><xsl:text>_akt</xsl:text>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:text>navi1</xsl:text>
+															<xsl:text>_layer_akt</xsl:text>
+														</xsl:otherwise>
+													</xsl:choose>
+												</xsl:attribute>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:attribute name="class">
+													<xsl:choose>
+														<xsl:when test="exists($konfig/sublevel/class)">
+															<xsl:apply-templates select="$konfig/sublevel/class/node()">
+																<xsl:with-param name="contextnode" select="."/>
+															</xsl:apply-templates>
+														</xsl:when>
+														<xsl:otherwise>
+															<xsl:text>navi1</xsl:text>
+															<xsl:text>_layer</xsl:text>
+														</xsl:otherwise>
+													</xsl:choose>
+												</xsl:attribute>
+											</xsl:otherwise>
+										</xsl:choose>
+										<xsl:attribute name="href">
+											<xsl:apply-templates
+												select="$contextnode/key('id_key',$lokalid)"
+												mode="getpage">
+												<xsl:with-param name="Pfad">
+													<xsl:value-of select="$Pfad"/>
+												</xsl:with-param>
+											</xsl:apply-templates>
+											<xsl:text>#</xsl:text>
+											<xsl:value-of select="$lokalid"/>
+										</xsl:attribute>
+										<!-- zusammenstellung des titels laut konfigzweig/content -->
+										<xsl:apply-templates select="$konfig/sublevel/content/node()">
+											<xsl:with-param name="contextnode" select="."/>
+											<xsl:with-param name="element-lenght" select="$konfig/sublevel/@element-lenght"/>
+											<xsl:with-param name="overlenght-symbol" select="$konfig/sublevel/@overlenght-symbol"/>
+										</xsl:apply-templates>
+									</a>
+								</xsl:if>
+							</xsl:for-each>
+						</p>
+					</div>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:for-each-group>
 	</xsl:template>
 	
 	<xsl:template match="processing-instruction('glink-abbreviations')">

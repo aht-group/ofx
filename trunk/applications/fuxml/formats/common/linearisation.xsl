@@ -73,19 +73,33 @@
 	     	1. the section defines the start of a new course unit 
 		2. the section is the first child of another section
 	-->
-	<xsl:variable name="screencutlevel" select="$config/config/screenpage-cutlevel"/>
+	<xsl:variable name="screencutlevel">
+		<xsl:choose>
+			<xsl:when test="$config/config/screenconfig">
+				<xsl:comment>using screenconfig->page-cutlevel: <xsl:value-of select="$config/config/screenconfig/page-cutlevel"/></xsl:comment>
+				<xsl:value-of select="$config/config/screenconfig/page-cutlevel"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$config/config/screenpage-cutlevel"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
 	<xsl:variable name="style" select="$config/config/styles/entry[@name='abschnitt'][@level=$level]"/>
 	<xsl:if test="not(key('ba_key', @id))">
 		<xsl:choose>
 			<xsl:when test="$level='1' and xs:integer($screencutlevel) gt 0">
-				<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE"/>
+				<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE"><xsl:value-of select="$level"/></xsl:processing-instruction>
 			</xsl:when>
-			<xsl:when test="$level le $screencutlevel 
-							and	name(preceding::*[1])!='abschnitt'
-							and name(preceding-sibling::*[1])!='titel' 
-							and name(preceding-sibling::*[1])!='motto' 
-							">
-				<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE"/>
+			<xsl:when test="$level le $screencutlevel
+				and name(preceding-sibling::*[1])!='titel'
+				">
+				<xsl:if test="$config/config/screenpage-cutlevel/@min_element_quantity
+					and count(preceding-sibling::*[not(fett|unterstrichen|kursiv|zeilenende|url|hochgestellt|tiefgestellt)]) >= $config/config/screenpage-cutlevel/@min_element_quantity">
+					<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE">MEQ<xsl:value-of select="count(preceding-sibling::*[not(fett|unterstrichen|kursiv|zeilenende|url|hochgestellt|tiefgestellt)])"/></xsl:processing-instruction>
+				</xsl:if>
+				<xsl:if test="not($config/config/screenpage-cutlevel/@min_element_quantity)">
+					<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE"><xsl:value-of select="$level"/></xsl:processing-instruction>
+				</xsl:if>
 			</xsl:when>
 		</xsl:choose>
 	</xsl:if>
