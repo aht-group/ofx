@@ -1,4 +1,4 @@
-package org.openfuxml.client.swt.dialog;
+package org.openfuxml.client.gui.swt.dialog;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
-import org.openfuxml.client.swt.OpenFuxmlClient;
+import org.openfuxml.client.gui.swt.OpenFuxmlClient;
 
 /**
  * @author Andrea Frank

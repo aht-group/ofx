@@ -30,10 +30,6 @@ import de.kisner.util.Connector;
 import de.kisner.util.LoggerInit;
 
 /**
- * Server oeffnet den ServerSocket und wartet dann auf Clientverbindungen.
- * Fur jede Clientverbindung wird ein neuer ServerThread der Klasse.
- * {@link org.openfuxml.communication.server.simple.SimpleServerThread.class SimpleServerThread}
- * erzeugt. <br>
  * @author Thorsten
  * @version 0.3
  */

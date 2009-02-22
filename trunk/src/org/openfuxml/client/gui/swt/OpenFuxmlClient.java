@@ -1,7 +1,7 @@
 /*
  * Created on 19.01.2005
  */
-package org.openfuxml.client.swt;
+package org.openfuxml.client.gui.swt;
 
 import java.util.List;
 import java.util.Properties;
@@ -32,8 +32,8 @@ import org.eclipse.swt.widgets.TabItem;
 import org.openfuxml.client.control.OpenFuxmlClientControl;
 import org.openfuxml.client.control.projects.ProjectFactory;
 import org.openfuxml.client.control.projects.ProjectFactoryDirect;
+import org.openfuxml.client.gui.swt.composites.ProjektComposite;
 import org.openfuxml.client.simple.dialog.HelpAboutDialog;
-import org.openfuxml.client.swt.composites.ProjektComposite;
 import org.openfuxml.client.util.ImgCanvas;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.util.config.factory.ClientConfFactory;
