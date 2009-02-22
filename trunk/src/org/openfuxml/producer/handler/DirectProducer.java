@@ -3,7 +3,6 @@ package org.openfuxml.producer.handler;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -15,9 +14,12 @@ import org.openfuxml.client.control.formats.FormatFactoryDirect;
 import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
+import org.openfuxml.model.ejb.OfxProductionRequest;
+import org.openfuxml.model.ejb.OfxProductionResult;
+import org.openfuxml.model.factory.OfxProductionResultFactory;
+import org.openfuxml.model.factory.OfxRequestFactory;
+import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.producer.Producer;
-import org.openfuxml.producer.ejb.AvailableFormats;
-import org.openfuxml.producer.ejb.Format;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
@@ -46,15 +48,15 @@ public class DirectProducer extends AbstractProducer implements Producer
 	
 	private Host host;
 	private String dirOutput;
+	private String baseDir;
 	
 	public DirectProducer(Configuration config,EnvironmentParameter envP){this(config,null,envP);}
 	public DirectProducer(Configuration config,Host host,EnvironmentParameter envP)
 	{
 		super(config,envP);
 		this.host=host;
-		String baseDir = config.getString("dirs/dir[@type='basedir']");
-		//TODO Relative PATH
-		dirOutput = baseDir+fs+config.getString("dirs/dir[@type='output']");
+		baseDir = config.getString("dirs/dir[@type='basedir']");
+		dirOutput = OfxPathHelper.getDir(config, "output");
 	}
 	
 	public List<OfxApplication> getAvailableApplications() throws ProductionSystemException,ProductionHandlerException
@@ -95,6 +97,114 @@ public class DirectProducer extends AbstractProducer implements Producer
 		List<OfxApplication> result = new ArrayList<OfxApplication>();
 		FormatFactory ff = new FormatFactoryDirect(config);
 		return ff.getFormat(ofxA);
+	}
+	
+	public OfxProductionResult produce(OfxProductionRequest ofxR) throws ProductionSystemException
+	{
+		Sessionpreferences spref = ofxR.getSessionpreferences();
+		int suffixindex = spref.getDocument().indexOf(".xml");
+		String docName = spref.getDocument().substring(0,suffixindex);
+		
+		invoke(spref,ofxR.getTyp());
+		String proDir = spref.getProject()+fs+spref.getFormat()+fs+docName;
+		File fResult = new File(dirOutput+fs+spref.getApplication()+fs+proDir+fs+"result.xml");
+		OfxProductionResultFactory oprf = new OfxProductionResultFactory();
+		OfxProductionResult ofxResult = oprf.get(fResult);
+		return ofxResult;
+	}
+	
+	private void invoke(Sessionpreferences spref, OfxProductionRequest.Typ invokeType) throws ProductionSystemException
+	{
+		logger.debug("Invoke aufgerufen mit "+invokeType);
+		ProducedEntities producedEntities = new ProducedEntities();
+		
+		Calendar startTime = Calendar.getInstance();
+		ProductionCode pc=ProductionCode.Ok;
+		
+		String buildfile = baseDir+fs+"applications"+fs+spref.getApplication()+fs+"formats"+fs+spref.getFormat()+fs+"build.xml";
+		
+		StringBuffer sb = new StringBuffer();
+			sb.append(dirOutput);
+			sb.append(fs+spref.getApplication());
+			sb.append(fs+"sessionpreferences");
+			sb.append(fs+spref.getUsername()+"-"+spref.getProject()+"-"+"request.xml");
+			
+		File fRequest = new File(sb.toString());
+		
+		OfxRequestFactory orf = new OfxRequestFactory();
+		orf.write(spref, fRequest);
+		
+		//Constructing parameters for spawned Java process
+		StringBuffer sbParameters = new StringBuffer();
+		
+		boolean writeLogFile = false;
+		if(writeLogFile)
+		{
+			switch (invokeType)
+			{
+				case PRODUCE: 	String logfile= OfxPathHelper.getDir(config, "log")+fs+spref.getProject()+"_"+spref.getDocument() + ".log";
+								sbParameters.append(" -logfile " + logfile);
+								break;
+			}
+		}
+		sbParameters.append(" -Dilona.home="+ sysprops.getProperty("ilona.home"));
+		sbParameters.append(" -Dilona.contentstore="+ OfxPathHelper.getDir(config, "repositry")+fs+spref.getApplication());
+		sbParameters.append(" -Dilona.output="+dirOutput+fs+spref.getApplication());
+		sbParameters.append(" -Dapplication="+ spref.getApplication());
+		sbParameters.append(" -Dcoursename="+ spref.getProject());
+		sbParameters.append(" -Dmasterfile="+ spref.getDocument());
+			//TODO Thorsten productionDir Methode erstmal nicht berücksichtigt
+			//+ " -Ddocumentdir="	+ request.getProductionDir()
+		sbParameters.append(" -Ddocumentdir= ");
+		sbParameters.append(" -Dformat="+ spref.getFormat());
+		sbParameters.append(" -Dusername="+ spref.getUsername());
+				
+		logger.debug("Parameters: " + sbParameters);
+		logger.debug("Buildfile:" +buildfile);
+		logger.debug("Ant Home:" + sysprops.getProperty("ant.home"));
+		
+		StringBuffer sbCmd = new StringBuffer(); 
+		sbCmd.append("java ");
+		sbCmd.append(" -Dant.home="+sysprops.getProperty("ant.home"));
+		sbCmd.append(" org.apache.tools.ant.Main ");
+		sbCmd.append("-buildfile "	+ buildfile);
+		sbCmd.append(" "+ sbParameters.toString()+ " ");
+		switch (invokeType)
+		{
+			case ENTIITES: 	sbCmd.append(" producableEntities ");break;
+		}
+		logger.debug("Spawn: "+sbCmd.toString());
+
+//		Unter Windows müssen die Backslashes ersetzt werden
+		pc=spawn(sbCmd.toString().replace('\\','/'));
+		
+		// Get stop time of production process
+		Calendar endTime = Calendar.getInstance();
+					
+//		Create result message
+		
+		int suffixindex = spref.getDocument().indexOf(".xml");
+		String docName = spref.getDocument().substring(0,suffixindex);
+		
+		String proDir = spref.getProject()+fs +spref.getFormat()+fs
+			//TODO Methode überprüfen
+		//	+	request.getProductionDir()
+			+	docName;
+		
+		String path =null;
+		switch(invokeType)
+		{
+			case PRODUCE: 	path = dirOutput+fs+spref.getApplication()+ fs + proDir + fs + "result.xml";break;
+			case ENTIITES:	path = dirOutput+fs+spref.getApplication()+ fs + proDir + fs + "producableEntities.xml";break;
+		}
+				
+		File xmlFile = new File(path);
+		logger.debug("lade XML: " +xmlFile.getAbsolutePath());
+		try {producedEntities.loadXML(xmlFile);}
+		catch (XmlElementNotFoundException e){throw  new ProductionSystemException(e.getMessage());}
+			
+//		FuXmlLogger.productionLog( "ProducibleEntities()", request.getApplication(),  request.getProject(), request.getDocument(), request.getFormat(), request.getUsername(), startTime, endTime, pc);
+		logger.info("Invoke "+spref.getProject()+"-"+spref.getDocument()+": "+pc);
 	}
 	
 	public ProducedEntities invoke(org.openfuxml.producer.ejb.ProductionRequest request) throws ProductionSystemException
@@ -177,8 +287,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 //		Create result message
 		
 		
-		String proDir = 	request.getProject() + File.separator
-			+	request.getFormat() + File.separator
+		String proDir = 	request.getProject() + fs +	request.getFormat() + fs
 			//TODO Methode überprüfen
 		//	+	request.getProductionDir()
 			+	request.toDocumentName();

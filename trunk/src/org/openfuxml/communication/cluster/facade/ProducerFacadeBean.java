@@ -2,26 +2,20 @@ package org.openfuxml.communication.cluster.facade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Hashtable;
 import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.communication.cluster.ejb.EjbObject;
-import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
-import org.openfuxml.producer.ejb.AvailableFormats;
-import org.openfuxml.producer.ejb.Format;
+import org.openfuxml.model.ejb.OfxProductionRequest;
+import org.openfuxml.model.ejb.OfxProductionResult;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProductionRequest;
 import org.openfuxml.producer.exception.ProductionHandlerException;
@@ -52,7 +46,7 @@ public class ProducerFacadeBean implements ProducerFacade, Serializable
 		return new ArrayList<OfxApplication>();
 	}
 	
-	public AvailableFormats getAvailableFormats(String application) throws  ProductionHandlerException
+/*	public AvailableFormats getAvailableFormats(String application) throws  ProductionHandlerException
 	{
 		Hashtable<String,Format> htAvailableFormats = new Hashtable<String,Format>();
 		try
@@ -81,6 +75,7 @@ public class ProducerFacadeBean implements ProducerFacade, Serializable
 		afs.setRecord(new Date());
 		return afs;
 	}
+*/
 	public ProducedEntities invoke(ProductionRequest request) throws ProductionHandlerException
 	{
 		logger.error("invoke(org.openfuxml.producer.ejb.ProductionRequest request) noch nicht implementiert");
@@ -88,6 +83,12 @@ public class ProducerFacadeBean implements ProducerFacade, Serializable
 	}
 	
 	public List<OfxFormat> getAvailableFormats(OfxApplication ofxA) throws ProductionSystemException
+	{
+		logger.warn("Not implemented for this Handler!!");
+		return null;
+	}
+	
+	public OfxProductionResult produce(OfxProductionRequest ofxR) throws ProductionSystemException
 	{
 		logger.warn("Not implemented for this Handler!!");
 		return null;

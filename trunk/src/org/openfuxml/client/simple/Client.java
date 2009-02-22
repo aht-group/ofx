@@ -3,10 +3,8 @@ package org.openfuxml.client.simple;
 import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
@@ -41,9 +39,10 @@ import org.openfuxml.client.simple.factory.SimpleTableFactory;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
+import org.openfuxml.model.ejb.OfxProductionRequest;
 import org.openfuxml.model.ejb.OfxProject;
-import org.openfuxml.producer.ejb.AvailableFormats;
-import org.openfuxml.producer.ejb.Format;
+import org.openfuxml.model.factory.OfxRequestFactory;
+import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProducedEntitiesEntityFile;
 import org.openfuxml.producer.ejb.ProductionRequest;
@@ -642,7 +641,7 @@ public class Client extends Composite
 	 * Vor dem Start werden alle Elemente disabled, um weitere Eingaben zu vermeiden.
 	 */
 	public void getProducableEntities()
-	{
+	{	
 		String Verzeichnis = labelVerzeichnis.getText();
 		String Anwendung = cboApplications.getText();
 		String Projekt = cboProjects.getText();
@@ -697,13 +696,14 @@ public class Client extends Composite
 						{
 							if (!toplevelShell.isDisposed())
 							{
+								
+								
 								OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
 								OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
 								OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
 								OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
 								
 								ofxCC.getProducibleEntities(ofxA,ofxP,ofxD);
-
 								
 								ProductionRequest pReq = new ProductionRequest();
 						    	
@@ -786,7 +786,12 @@ public class Client extends Composite
 									} 
 								}
 								
+								OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
+								OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
+								OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
 								OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
+							
+//								ofxCC.produce(ofxA, ofxP, ofxD, ofxF);
 								
 								ProductionRequest pReq = new ProductionRequest();				    	
 						    	pReq.setApplication(cboApplications.getText());

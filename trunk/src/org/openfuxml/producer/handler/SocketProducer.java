@@ -5,17 +5,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
-import org.openfuxml.client.control.formats.FormatFactory;
-import org.openfuxml.client.control.formats.FormatFactoryDirect;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.producer.Producer;
-import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.RequestWrapper;
 import org.openfuxml.producer.exception.ProductionHandlerException;
