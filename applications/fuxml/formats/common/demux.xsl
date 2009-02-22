@@ -30,6 +30,8 @@
 
 	<xsl:param name="format">html</xsl:param>
 	<xsl:variable name="folder" select="$config/config/specialtables"/>
+	<xsl:variable name="page" select="$config/config/screenconfig"/>
+	<xsl:key name="abschnitt_key" match="//kurs/kurseinheiten/kurseinheit/ke-lehrtext/abschnitt" use="@id"/>
    	
 <xsl:strip-space elements="*"/><!-- Überflüssige Spaces (Leerstellen) werden hier entfernt -->
 
@@ -80,38 +82,118 @@
 					<!-- ... wenn nein, dann prüfe, ob im ke-lehrtext operiert wird -->
 					<xsl:choose>	
 						<xsl:when test="self::ke-lehrtext">
-						<!-- ... wenn ja, dann spalte FILE-Elemente nach PI ab -->
-					        <xsl:for-each-group select="node()" group-ending-with="processing-instruction('NEUE-BILDSCHIRMSEITE')">
-					        	<xsl:if test="current-group()[not(self::processing-instruction('NEUE-BILDSCHIRMSEITE'))]">
-								<xsl:variable name="pagenumber">
-									<xsl:number count="processing-instruction('NEUE-BILDSCHIRMSEITE')" from="/" level="any"/>
-								</xsl:variable>
-								<xsl:variable name="file">
-									<xsl:text>FuX_</xsl:text>								
-									<xsl:value-of select="concat(following::*[1]/@id,'.html')"/>
-								</xsl:variable>
-								<xsl:variable name="style" select="$styles/entry[@name='kurseinheit'][@number=ancestor::kurseinheit[1]/@number]/structure[@format='html']/file/directory"/>
-								<xsl:variable name="dir">
-									<xsl:apply-templates select="$style">
-									<xsl:with-param name="contextnode" select="ancestor::kurseinheit[1]"/>
-									</xsl:apply-templates>
-								</xsl:variable>
-								<file>
+							<!-- ... wenn ja, dann spalte FILE-Elemente nach PI ab -->
+							<xsl:for-each-group select="node()" group-ending-with="processing-instruction('NEUE-BILDSCHIRMSEITE')">
+								<xsl:if test="current-group()[not(self::processing-instruction('NEUE-BILDSCHIRMSEITE'))]">
+									<xsl:variable name="pagenumber">
+										<xsl:number count="processing-instruction('NEUE-BILDSCHIRMSEITE')" from="/" level="any"/>
+									</xsl:variable>
+									<xsl:variable name="file">
+										<xsl:text>FuX_</xsl:text>								
+										<xsl:value-of select="concat(following::*[1]/@id,'.html')"/>
+									</xsl:variable>
+									<xsl:variable name="style" select="$styles/entry[@name='kurseinheit'][@number=ancestor::kurseinheit[1]/@number]/structure[@format='html']/file/directory"/>
+									<xsl:variable name="dir">
+										<xsl:apply-templates select="$style">
+											<xsl:with-param name="contextnode" select="ancestor::kurseinheit[1]"/>
+										</xsl:apply-templates>
+									</xsl:variable>
+									<xsl:variable name="contentnumber">
+										<xsl:choose>
+											<xsl:when test="self::abschnitt">
+												<xsl:value-of select="self::abschnitt/@level"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="following::abschnitt[1]/@level"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:variable>
+									<xsl:variable name="id">
+										<xsl:choose>
+											<xsl:when test="./@id">
+												<xsl:value-of select="./@id"/>
+											</xsl:when>
+											<xsl:otherwise>
+												<xsl:value-of select="following::abschnitt[1]/@id"/>
+											</xsl:otherwise>
+										</xsl:choose>
+									</xsl:variable>
+									<file>
+										<!-- $contextnode/abschnitt/@id=$id or ($contextnode/preceding::abschnitt[@level=1][1]/@id=$id and number($contextlevel) ge 2) -->
+										<xsl:if test="$page/sectiontitle/@activ='1'">
+											<!-- Einstellungen fuer den Kolumnentitel in der HTML-Ausgabe-->
+											<xsl:attribute name="htmlsectiontitle">
+												<xsl:if test="number($contentnumber) ge 2">
+													<xsl:apply-templates select="$page/sectiontitle/level[@number=$contentnumber]/node()">
+														<xsl:with-param name="contextnode" select="key('abschnitt_key',./@id)/preceding::abschnitt[@level=1][1]"/>
+													</xsl:apply-templates>
+												</xsl:if>
+												<xsl:if test="number($contentnumber) ge 3">
+													<xsl:apply-templates select="$page/sectiontitle/level[@number=$contentnumber]/node()">
+														<xsl:with-param name="contextnode" select="key('abschnitt_key',./@id)/preceding::abschnitt[@level=2][1]"/>
+													</xsl:apply-templates>
+												</xsl:if>
+												<xsl:if test="number($contentnumber) ge 4">
+													<xsl:apply-templates select="$page/sectiontitle/level[@number=$contentnumber]/node()">
+														<xsl:with-param name="contextnode" select="key('abschnitt_key',./@id)/preceding::abschnitt[@level=3][1]"/>
+													</xsl:apply-templates>
+												</xsl:if>
+												<xsl:if test="number($contentnumber) ge 5">
+													<xsl:apply-templates select="$page/sectiontitle/level[@number=$contentnumber]/node()">
+														<xsl:with-param name="contextnode" select="key('abschnitt_key',./@id)/preceding::abschnitt[@level=4][1]"/>
+													</xsl:apply-templates>
+												</xsl:if>
+												<xsl:if test="number($contentnumber) ge 6">
+													<xsl:apply-templates select="$page/sectiontitle/level[@number=$contentnumber]/node()">
+														<xsl:with-param name="contextnode" select="key('abschnitt_key',./@id)/preceding::abschnitt[@level=5][1]"/>
+													</xsl:apply-templates>
+												</xsl:if>
+												<!-- Spezialfall Erstes-und letztes- Element, sowie letztes Element -->
+												<xsl:choose>
+													<xsl:when test="number($contentnumber) = 1">
+														<xsl:apply-templates select="$page/sectiontitle/level[@number=99]/node()">
+															<xsl:with-param name="contextnode" select="following::abschnitt[1]"/>
+														</xsl:apply-templates>													
+													</xsl:when>
+													<xsl:otherwise>
+														<xsl:choose>
+															<xsl:when test="self::abschnitt">
+																<xsl:apply-templates select="$page/sectiontitle/level[@number=99]/node()">
+																	<xsl:with-param name="contextnode" select="self::abschnitt"/>
+																</xsl:apply-templates>
+															</xsl:when>
+															<xsl:otherwise>
+																<xsl:apply-templates select="$page/sectiontitle/level[@number=99]/node()">
+																	<xsl:with-param name="contextnode" select="following::abschnitt[1]"/>
+																</xsl:apply-templates>
+															</xsl:otherwise>
+														</xsl:choose>
+													</xsl:otherwise>
+												</xsl:choose>
+											</xsl:attribute>
+											<xsl:attribute name="html_akt_id">
+												<xsl:value-of select="key('abschnitt_key',./@id)/preceding::abschnitt[@level=1][1]/@id"/>
+											</xsl:attribute>
+											<xsl:attribute name="debug">
+												<xsl:text>CNR</xsl:text><xsl:value-of select="number($contentnumber)"/>
+												<xsl:text>LV</xsl:text><xsl:value-of select="@level"/>
+											</xsl:attribute>
+										</xsl:if>
 										<xsl:attribute name="filename"><xsl:value-of select="normalize-space($file)"/></xsl:attribute>
 										<xsl:attribute name="directory"><xsl:value-of select="normalize-space($dir)"/></xsl:attribute>
 										<xsl:attribute name="design"><xsl:value-of select="ancestor::file[1]/@design"/></xsl:attribute>
 										<xsl:attribute name="integrate">yes</xsl:attribute>
 										<xsl:copy-of select="current-group()[not(self::processing-instruction('NEUE-BILDSCHIRMSEITE'))]"/>
-								</file>
+									</file>
 								</xsl:if>
-					        </xsl:for-each-group>
-					        <!-- ********************** -->
+							</xsl:for-each-group>
+							<!-- ********************** -->
 						</xsl:when>
 						<xsl:otherwise>
-						<!-- ...wenn nein, dann kopiere nur die Inhalte (Hier ist ein Problem, da alle Elemente, die kein 									Container sind nur copiert werden, können sie an dieser Stelle auch nicht applyed/									ausgeführt werden) -->
-						<xsl:copy>
-							<xsl:copy-of  select="node()|@*"/>
-						</xsl:copy>
+							<!-- ...wenn nein, dann kopiere nur die Inhalte (Hier ist ein Problem, da alle Elemente, die kein 									Container sind nur copiert werden, können sie an dieser Stelle auch nicht applyed/									ausgeführt werden) -->
+							<xsl:copy>
+								<xsl:copy-of  select="node()|@*"/>
+							</xsl:copy>
 						</xsl:otherwise>
 					</xsl:choose>
 					</xsl:otherwise>

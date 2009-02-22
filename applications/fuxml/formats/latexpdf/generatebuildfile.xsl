@@ -59,6 +59,8 @@
 				<echo>Latex Pass 2</echo>
 				<antcall target="latex"/>
 				<antcall target="toc_all"/>
+				<echo>Latex Pass 2.5</echo>
+				<antcall target="latex"/>				
 				<echo>Latex Pass 3</echo>
 				<antcall target="latex"/>
 				<antcall target="checksum"/>

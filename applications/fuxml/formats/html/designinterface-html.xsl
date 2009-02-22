@@ -510,6 +510,38 @@
 	<xsl:template match="processing-instruction('picto')">
 	</xsl:template>
 	
+	<xsl:template match="processing-instruction('level')">
+		<xsl:param name="contextnode"/>
+		<xsl:value-of select="normalize-space(($contextnode/@level)[1])"/>
+	</xsl:template>
+
+	<xsl:template match="processing-instruction('num')">
+		<xsl:param name="contextnode"/>
+		<xsl:param name="element-lenght"/>
+		<xsl:choose>
+			<xsl:when test="$element-lenght">
+				<xsl:value-of select="substring(normalize-space(($contextnode/@number)[1]),0,number($element-lenght))"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="normalize-space(($contextnode/@number)[1])"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	
+	<xsl:template match="processing-instruction('title')">
+		<xsl:param name="contextnode"/>
+		<xsl:param name="element-lenght"/>
+		<xsl:param name="overlenght-symbol"/>
+		<xsl:choose>
+			<xsl:when test="$element-lenght and number($element-lenght) lt string-length($contextnode/titel/node()[not(self::untertitel)]|$contextnode/zwischentitel|$contextnode/objekttitel)">
+				<xsl:value-of select="concat(substring(normalize-space($contextnode/titel/node()[not(self::untertitel)]|$contextnode/zwischentitel|$contextnode/objekttitel),0,number($element-lenght)),$overlenght-symbol)"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:apply-templates select="$contextnode/titel/node()[not(self::untertitel)]|$contextnode/zwischentitel|$contextnode/objekttitel"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 	<xsl:template name="get.htmlpath">
 		<xsl:param name="contextnode"/>
 		<xsl:param name="path">
