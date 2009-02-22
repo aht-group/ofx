@@ -1,12 +1,12 @@
 package org.openfuxml.client.simple;
 
 import org.apache.log4j.Logger;
+import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProductionRequest;
 import org.openfuxml.producer.ejb.RequestWrapper.ProductionType;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
-import org.openfuxml.producer.handler.Producer;
 
 /**
  * ProducerThread implementiert den Thread, in dem die Methoden      

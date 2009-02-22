@@ -219,20 +219,16 @@
 	<target name="03a JAXB Class generation" depends="02 - init" description="Compile the source">
 		<echo level="info">Creating JAXB Configuration Class</echo>
 		<xjc schema="${xsd.dir}/config.xsd" package="org.openfuxml.util.config.jaxb" destdir="${src.dir}">
-			<depends dir="${xsd.dir}">
-				<include name="config.xsd"/>
-			</depends>
-			<produces dir="${src.dir}/org/openfuxml/util/config/jaxb">
-				<include name="*.java"/>
-			</produces>
+			<depends dir="${xsd.dir}"><include name="config.xsd"/></depends>
+			<produces dir="${src.dir}/org/openfuxml/util/config/jaxb"><include name="*.java"/></produces>
 		</xjc><delete file="${src.dir}/org/openfuxml/util/config/jaxb/ObjectFactory.java"/>
 		<xjc schema="resources/xsd/sessionpreferences.xsd" package="org.openfuxml.model.jaxb" destdir="${src.dir}">
-			<depends dir="${xsd.dir}">
-				<include name="config.xsd"/>
-			</depends>
-			<produces dir="${src.dir}/org/openfuxml/model/jaxb">
-				<include name="Sessionpreferences.java"/>
-			</produces>
+			<depends dir="${xsd.dir}"><include name="config.xsd"/></depends>
+			<produces dir="${src.dir}/org/openfuxml/model/jaxb"><include name="Sessionpreferences.java"/></produces>
+		</xjc><delete file="${src.dir}/org/openfuxml/model/jaxb/ObjectFactory.java"/>
+		<xjc schema="resources/xsd/applicationformats.xsd" package="org.openfuxml.model.jaxb" destdir="${src.dir}">
+			<depends dir="${xsd.dir}"><include name="applicationformats.xsd"/></depends>
+			<produces dir="${src.dir}/org/openfuxml/model/jaxb"><include name="Format.java"/></produces>
 		</xjc><delete file="${src.dir}/org/openfuxml/model/jaxb/ObjectFactory.java"/>
 	</target>
 	

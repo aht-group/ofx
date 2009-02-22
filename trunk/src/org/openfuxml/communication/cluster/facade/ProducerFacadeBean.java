@@ -19,11 +19,13 @@ import org.apache.log4j.Logger;
 import org.openfuxml.communication.cluster.ejb.EjbObject;
 import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.model.ejb.OfxApplication;
+import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.Format;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProductionRequest;
 import org.openfuxml.producer.exception.ProductionHandlerException;
+import org.openfuxml.producer.exception.ProductionSystemException;
 
 @Stateful
 @Remote(ProducerFacade.class)
@@ -82,6 +84,12 @@ public class ProducerFacadeBean implements ProducerFacade, Serializable
 	public ProducedEntities invoke(ProductionRequest request) throws ProductionHandlerException
 	{
 		logger.error("invoke(org.openfuxml.producer.ejb.ProductionRequest request) noch nicht implementiert");
+		return null;
+	}
+	
+	public List<OfxFormat> getAvailableFormats(OfxApplication ofxA) throws ProductionSystemException
+	{
+		logger.warn("Not implemented for this Handler!!");
 		return null;
 	}
 	

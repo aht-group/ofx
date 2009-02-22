@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.model.ejb.OfxApplication;
+import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
 

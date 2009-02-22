@@ -11,8 +11,8 @@ import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.model.factory.OfxRequestFactory;
 import org.openfuxml.model.jaxb.Sessionpreferences;
+import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.handler.DirectProducer;
-import org.openfuxml.producer.handler.Producer;
 import org.openfuxml.producer.handler.SocketProducer;
 import org.openfuxml.server.DummyServer;
 

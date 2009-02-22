@@ -8,8 +8,8 @@ import java.util.Date;
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.communication.cluster.ejb.Host;
+import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.handler.DirectProducer;
-import org.openfuxml.producer.handler.Producer;
 import org.openfuxml.server.AbstractServer;
 
 import de.kisner.util.ConfigLoader;

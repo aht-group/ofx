@@ -7,30 +7,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.openfuxml.model.jaxb.Format;
+
 @Entity
-public class OfxProject implements Serializable
+public class OfxFormat implements Serializable
 {
-	public static final long serialVersionUID=1;
+public static final long serialVersionUID=1;
 	
 	private int id;
-	private String name, dir;
+	private Format format;
 	
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	public int getId() {return id;}
 	public void setId(int id){this.id = id;}
 	
-	public String getName() {return name;}
-	public void setName(String name) {this.name = name;}
-	
-	public String getDir() {return dir;}
-	public void setDir(String dir) {this.dir = dir;}
+	public Format getFormat() {return format;}
+	public void setFormat(Format format) {this.format = format;}
 	
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
 			sb.append(id);
-			sb.append(" "+name);
-			sb.append(" ("+dir+")");
+			sb.append(" "+format.getOutputformat());
 		return sb.toString();
 	}
 }
