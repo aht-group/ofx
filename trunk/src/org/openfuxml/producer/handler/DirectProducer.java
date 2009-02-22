@@ -14,10 +14,9 @@ import org.openfuxml.client.control.formats.FormatFactoryDirect;
 import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
-import org.openfuxml.model.ejb.OfxProductionRequest;
-import org.openfuxml.model.ejb.OfxProductionResult;
 import org.openfuxml.model.factory.OfxProductionResultFactory;
 import org.openfuxml.model.factory.OfxRequestFactory;
+import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.ejb.ProducedEntities;
@@ -40,6 +39,7 @@ import de.kisner.util.xml.XmlObject;
 public class DirectProducer extends AbstractProducer implements Producer
 {
 	static Logger logger = Logger.getLogger(DirectProducer.class);
+	private static enum Typ {PRODUCE,ENTITIES};
 	
 	private static Properties sysprops = System.getProperties();
 	private static String fs = SystemUtils.FILE_SEPARATOR;
@@ -99,21 +99,20 @@ public class DirectProducer extends AbstractProducer implements Producer
 		return ff.getFormat(ofxA);
 	}
 	
-	public OfxProductionResult produce(OfxProductionRequest ofxR) throws ProductionSystemException
+	public Productionresult produce(Sessionpreferences spref) throws ProductionSystemException
 	{
-		Sessionpreferences spref = ofxR.getSessionpreferences();
 		int suffixindex = spref.getDocument().indexOf(".xml");
 		String docName = spref.getDocument().substring(0,suffixindex);
 		
-		invoke(spref,ofxR.getTyp());
+		invoke(spref,Typ.PRODUCE);
 		String proDir = spref.getProject()+fs+spref.getFormat()+fs+docName;
 		File fResult = new File(dirOutput+fs+spref.getApplication()+fs+proDir+fs+"result.xml");
 		OfxProductionResultFactory oprf = new OfxProductionResultFactory();
-		OfxProductionResult ofxResult = oprf.get(fResult);
-		return ofxResult;
+		Productionresult result = oprf.getProductionResult(fResult);
+		return result;
 	}
 	
-	private void invoke(Sessionpreferences spref, OfxProductionRequest.Typ invokeType) throws ProductionSystemException
+	private void invoke(Sessionpreferences spref, Typ invokeType) throws ProductionSystemException
 	{
 		logger.debug("Invoke aufgerufen mit "+invokeType);
 		ProducedEntities producedEntities = new ProducedEntities();
@@ -171,7 +170,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 		sbCmd.append(" "+ sbParameters.toString()+ " ");
 		switch (invokeType)
 		{
-			case ENTIITES: 	sbCmd.append(" producableEntities ");break;
+			case ENTITIES: 	sbCmd.append(" producableEntities ");break;
 		}
 		logger.debug("Spawn: "+sbCmd.toString());
 
@@ -195,7 +194,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 		switch(invokeType)
 		{
 			case PRODUCE: 	path = dirOutput+fs+spref.getApplication()+ fs + proDir + fs + "result.xml";break;
-			case ENTIITES:	path = dirOutput+fs+spref.getApplication()+ fs + proDir + fs + "producableEntities.xml";break;
+			case ENTITIES:	path = dirOutput+fs+spref.getApplication()+ fs + proDir + fs + "producableEntities.xml";break;
 		}
 				
 		File xmlFile = new File(path);

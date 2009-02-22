@@ -9,7 +9,6 @@ import org.openfuxml.client.control.projects.ProjectFactoryDirect;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
-import org.openfuxml.model.ejb.OfxProductionRequest;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.model.factory.OfxRequestFactory;
 import org.openfuxml.model.jaxb.Sessionpreferences;
@@ -77,12 +76,8 @@ public class OpenFuxmlClientControl
 			orf.setOfxD(ofxD);
 			orf.setOfxF(ofxF);
 	
-		OfxProductionRequest ofxReq = new OfxProductionRequest();
-			ofxReq.setSessionpreferences(orf.create());
-			ofxReq.setTyp(OfxProductionRequest.Typ.PRODUCE);
-	
 	try {
-		producer.produce(ofxReq);
+		producer.produce(orf.create());
 	} catch (ProductionSystemException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
