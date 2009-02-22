@@ -41,6 +41,7 @@ import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
+import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 import org.openfuxml.producer.ejb.ProducedEntities;
@@ -100,7 +101,9 @@ public class Client extends Composite implements ClientGuiCallback
 	
 	private Configuration config;
 	private OpenFuxmlClientControl ofxCC;
+	
 	private Productionresult presult;
+	private Hashtable<String, ProducibleEntities> htProducibleEntities;
 	
 	File propFile;
 	
@@ -124,8 +127,8 @@ public class Client extends Composite implements ClientGuiCallback
 		
 		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
 		splashscreen.open();
-		
-		htProducableEntities = new Hashtable<String, ProducedEntities>();
+	
+		htProducibleEntities = new Hashtable<String, ProducibleEntities>();
 		alProducedEntities = new ArrayList<String[]>();
 
 		logger.info("initGUI");
@@ -239,7 +242,7 @@ public class Client extends Composite implements ClientGuiCallback
 					fillCboProjects();
 					fuelleComboFormate();
 					
-					fuelleTableProductionEntities();
+					entitiesDiscovered();
 					loescheErgebnis();
 				}
 			});
@@ -269,7 +272,7 @@ public class Client extends Composite implements ClientGuiCallback
 					//ClientConfigWrapper.updateKeyValue("project", comboProjekte.getText());
 					fillCboDocuments();
 					
-					fuelleTableProductionEntities();
+					entitiesDiscovered();
 					loescheErgebnis();
 				}
 			});
@@ -297,7 +300,7 @@ public class Client extends Composite implements ClientGuiCallback
 				public void widgetSelected(SelectionEvent evt) {
 					//TODO Update Client Settings
 					//ClientConfigWrapper.updateKeyValue("document", comboDokumente.getText());
-					fuelleTableProductionEntities();
+					entitiesDiscovered();
 					loescheErgebnis();
 				}
 			});
@@ -325,7 +328,7 @@ public class Client extends Composite implements ClientGuiCallback
 				public void widgetSelected(SelectionEvent evt) {
 					//TODO Update Client Settings
 					//ClientConfigWrapper.updateKeyValue("format", comboFormate.getText());
-					fuelleTableProductionEntities();
+					entitiesDiscovered();
 					loescheErgebnis();
 				}
 			});
@@ -541,29 +544,34 @@ public class Client extends Composite implements ClientGuiCallback
 	 * Diese werden nach den Elementen Beschreibung, Verzeichnis und Dateiname
 	 * "aufgedröselt" und als neuen Eintrag in die Tabelle eingefügt.
 	 */
-	public void fuelleTableProductionEntities()
+	public void entitiesDiscovered()
 	{
-		String s = cboProjects.getText()+cboDocuments.getText()+cboFormats.getText();
-		ProducedEntities producableEntities = (ProducedEntities) htProducableEntities.get(s);
-		
-		tableProductionEntities.removeAll();
-
-		if (producableEntities != null)
+		display.asyncExec(new Runnable()
 		{
-			for(ProducedEntitiesEntityFile ef : producableEntities.getEntityFiles())
+			public void run()
 			{
-				TableItem newItem = new TableItem(tableProductionEntities, 0);
-				newItem.setText(new String[] {"", ef.getDescription(),ef.getDirectory(), ef.getFilename()});
+				if (!toplevelShell.isDisposed())
+				{
+					tableProductionEntities.removeAll();
+					OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
+					OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
+					OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
+					OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
+					ProducibleEntities pe = ofxCC.getCachedProducibleEntities(ofxA, ofxP, ofxD, ofxF);
+					if (pe != null)
+					{
+						for(ProducibleEntities.File f :pe.getFile())
+						{
+							TableItem newItem = new TableItem(tableProductionEntities, 0);
+							newItem.setText(new String[] {"", f.getDescription(),f.getDirectory(), f.getFilename()});
+						}
+					};
+					setAllEnabled(true);
+				}
 			}
-		}
+		});
 	}
 	
-	/**
-	 * Nach dem Aktualisieren der ProducibleEntities werden die  
-	 * producableEntities in einer Hashtable gespeichert. 
-	 * Danach muss die Tabelle TableProductionEntities neu gefüllt werden. 
-	 * Alle Bedienelemente werden wieder auf enabled gesetzt.  
-	 */
 	public void setProducedEntities(ProducedEntities pe, int err)
 	{
 		this.producedEntities=pe;
@@ -581,7 +589,7 @@ public class Client extends Composite implements ClientGuiCallback
 							String s = cboProjects.getText()+cboDocuments.getText()+cboFormats.getText();
 							htProducableEntities.put(s, producedEntities);
 
-							fuelleTableProductionEntities();
+							entitiesDiscovered();
 							setAllEnabled(true);
 						}
 						else
@@ -725,16 +733,14 @@ public class Client extends Composite implements ClientGuiCallback
 						{
 							if (!toplevelShell.isDisposed())
 							{
-								
-								
 								OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
 								OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
 								OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
 								OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
 								
-								ofxCC.getProducibleEntities(ofxA,ofxP,ofxD);
+								ofxCC.getProducibleEntities(ofxA,ofxP,ofxD,ofxF);
 								
-								ProductionRequest pReq = new ProductionRequest();
+/*								ProductionRequest pReq = new ProductionRequest();
 						    	
 						    	pReq.setApplication(cboApplications.getText());
 								pReq.setProject(cboProjects.getText());
@@ -744,7 +750,7 @@ public class Client extends Composite implements ClientGuiCallback
 								pReq.setTyp(ProductionRequest.Typ.ENTITIES);
 								pReq.setSync(ProductionRequest.Sync.NOSYNC);
 								producerThread.startInvoke(pReq);
-							} // if
+*/							} // if
 						} // run
 					});
 			} // try

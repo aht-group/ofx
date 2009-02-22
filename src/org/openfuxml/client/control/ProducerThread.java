@@ -1,6 +1,7 @@
 package org.openfuxml.client.control;
 
 import org.apache.log4j.Logger;
+import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.producer.Producer;
@@ -17,21 +18,13 @@ import org.openfuxml.producer.handler.DirectProducer;
  */
 public class ProducerThread extends Thread
 {
-	final static int NO_ERROR	= 0;
-	final static int ERROR		= 1;
-	
 	static Logger logger = Logger.getLogger(ProducerThread.class);
 	
+	private OpenFuxmlClientControl ofxCC;
 	private ClientGuiCallback guiCallback;
 	private Producer producer;
 	private DirectProducer.Typ typ;
 	private Sessionpreferences spref;
-	String Result;
-	String Status;
-
-	
-
-	ProductionRequest pReq;
 
 	/**
 	 * Im Konstruktor wird die DispatcherBean erzeugt.
@@ -39,8 +32,9 @@ public class ProducerThread extends Thread
 	 * @param Parent - das  aufrufende Element
 	 * @param JndiHost - String, der Host und Port bestimmt (Syntax host:port).
 	 */
-	public ProducerThread(ClientGuiCallback guiCallback, Producer producer)
+	public ProducerThread(OpenFuxmlClientControl ofxCC, ClientGuiCallback guiCallback, Producer producer)
 	{
+		this.ofxCC=ofxCC;
 		this.guiCallback = guiCallback;
 		this.producer = producer;
 	}
@@ -56,16 +50,21 @@ public class ProducerThread extends Thread
 	{
 		try
 		{
-			guiCallback.setStatus("Producing ...");
-			Productionresult presult = producer.produce(spref);
 			switch(typ)
 			{
-//    					case ENTITIES:	Parent.setProducedEntities(pe, NO_ERROR);break;
-					case PRODUCE:	guiCallback.setStatus("Entities produced");
-									guiCallback.setProduced(presult);break;
+				case ENTITIES:	guiCallback.setStatus("Discovering entities ...");
+								ProducibleEntities pe = producer.discoverEntities(spref);
+								guiCallback.setStatus("Entities discovered");
+								ofxCC.setDiscoveredEntities(pe);
+								guiCallback.entitiesDiscovered();
+								//Parent.setProducedEntities(pe, NO_ERROR);
+								break;
+				case PRODUCE:	guiCallback.setStatus("Producing ...");
+								Productionresult presult = producer.produce(spref);
+								guiCallback.setStatus("Entities produced");
+								guiCallback.setProduced(presult);break;
 			}
-				
-			}
+		}
 			catch (ProductionSystemException e)
 			{
 				logger.fatal("ProductionSystemException", e);
@@ -76,8 +75,6 @@ public class ProducerThread extends Thread
 				logger.fatal("ProductionHandlerException", e);
 //    				Parent.setProducedEntities(pe, ERROR);
 			}		
-
-		
 	}
 
     public void produce(Sessionpreferences spref)
@@ -87,5 +84,11 @@ public class ProducerThread extends Thread
     	this.start();
     }
     
+    public void getProducibleEntities(Sessionpreferences spref)
+    {
+    	typ = DirectProducer.Typ.ENTITIES;
+    	this.spref=spref;
+    	this.start();
+    }
 
 }

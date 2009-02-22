@@ -6,6 +6,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 
 import de.kisner.util.LoggerInit;
@@ -15,6 +16,19 @@ public class OfxProductionResultFactory extends AbstractJaxbFactory
 	public OfxProductionResultFactory()
 	{
 		
+	}
+	
+	public ProducibleEntities getProducibleEntities(File fResult)
+	{
+		ProducibleEntities result=null;
+		try
+		{
+			JAXBContext jc = JAXBContext.newInstance(ProducibleEntities.class);
+			Unmarshaller u = jc.createUnmarshaller();
+			result = (ProducibleEntities)u.unmarshal(fResult);
+		}
+		catch (JAXBException e) {logger.error(e);}
+		return result;
 	}
 	
 	public Productionresult getProductionResult(File fResult)

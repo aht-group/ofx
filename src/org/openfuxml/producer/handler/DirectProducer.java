@@ -16,6 +16,7 @@ import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.factory.OfxProductionResultFactory;
 import org.openfuxml.model.factory.OfxRequestFactory;
+import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.producer.Producer;
@@ -97,6 +98,19 @@ public class DirectProducer extends AbstractProducer implements Producer
 		List<OfxApplication> result = new ArrayList<OfxApplication>();
 		FormatFactory ff = new FormatFactoryDirect(config);
 		return ff.getFormat(ofxA);
+	}
+	
+	public ProducibleEntities discoverEntities(Sessionpreferences spref) throws ProductionSystemException, ProductionHandlerException
+	{
+		int suffixindex = spref.getDocument().indexOf(".xml");
+		String docName = spref.getDocument().substring(0,suffixindex);
+		
+		invoke(spref,Typ.ENTITIES);
+		String proDir = spref.getProject()+fs+spref.getFormat()+fs+docName;
+		File fResult = new File(dirOutput+fs+spref.getApplication()+fs+proDir+fs+"producableEntities.xml");
+		OfxProductionResultFactory oprf = new OfxProductionResultFactory();
+		ProducibleEntities result = oprf.getProducibleEntities(fResult);
+		return result;
 	}
 	
 	public Productionresult produce(Sessionpreferences spref) throws ProductionSystemException

@@ -234,6 +234,10 @@
 			<depends dir="${xsd.dir}"><include name="productionresult.xsd"/></depends>
 			<produces dir="${src.dir}/org/openfuxml/model/jaxb"><include name="Productionresult.java"/></produces>
 		</xjc><delete file="${src.dir}/org/openfuxml/model/jaxb/ObjectFactory.java"/>
+		<xjc schema="resources/xsd/producibleentities.xsd" package="org.openfuxml.model.jaxb" destdir="${src.dir}">
+			<depends dir="${xsd.dir}"><include name="producibleentities.xsd"/></depends>
+			<produces dir="${src.dir}/org/openfuxml/model/jaxb"><include name="ProducibleEntities.java"/></produces>
+		</xjc><delete file="${src.dir}/org/openfuxml/model/jaxb/ObjectFactory.java"/>
 	</target>
 	
 <!--	<target name="03 - package-elements" depends="02 - init" description="Package Elements">

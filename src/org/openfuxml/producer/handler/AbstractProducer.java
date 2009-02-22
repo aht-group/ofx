@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.model.ejb.OfxApplication;
+import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.producer.exception.ProductionHandlerException;
@@ -36,6 +37,12 @@ public abstract class AbstractProducer
 	}
 	
 	public Productionresult produce(Sessionpreferences ofxR) throws ProductionSystemException
+	{
+		logger.warn("Not implemented for this Handler!!");
+		return null;
+	}
+	
+	public ProducibleEntities discoverEntities(Sessionpreferences spref) throws ProductionSystemException, ProductionHandlerException
 	{
 		logger.warn("Not implemented for this Handler!!");
 		return null;

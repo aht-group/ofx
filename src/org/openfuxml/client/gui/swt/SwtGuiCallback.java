@@ -11,4 +11,5 @@ public class SwtGuiCallback implements ClientGuiCallback
 	}
 	
 	public void setStatus(String status){}
+	public void entitiesDiscovered(){}
 }
