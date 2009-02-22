@@ -40,6 +40,7 @@ import org.openfuxml.client.simple.factory.SimpleMenuFactory;
 import org.openfuxml.client.simple.factory.SimpleTableFactory;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
+import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.Format;
@@ -455,46 +456,23 @@ public class Client extends Composite
 	public void fuelleComboFormate()
 	{
 		cboFormats.removeAll();
-		// TODO Füllen von comboFormate bald über getAvailableFormats.
-		
 		try
 		{
+			List<OfxFormat> lFormats = ofxCC.getProducer().getAvailableFormats((OfxApplication)cboApplications.getData(cboApplications.getText()));
 			logger.debug("Get formats for: "+cboApplications.getText());
-			AvailableFormats availableFormats = ofxCC.getProducer().getAvailableFormats(cboApplications.getText());
-			Collection collFormats = availableFormats.getFormats();
-
-			if (collFormats != null)
+			if(lFormats!=null && lFormats.size()>0)
 			{
-				Iterator it = collFormats.iterator();
-				while (it.hasNext())
+				for(OfxFormat ofxF : lFormats)
 				{
-					Format format = (Format) it.next();
-					cboFormats.add(format.getFormatId());
-					logger.debug("Format gefunden ("+cboApplications.getText()+"): " + format.getFormatId());
+					cboFormats.add(ofxF.getFormat().getTitle());
+					cboFormats.setData(ofxF.getFormat().getTitle(),ofxF);
 				}
 			}
-			else
-			{
-				logger.error("Server meldet keine Formate! html und latexpdf wird hinzugefügt");
-				cboFormats.add("html");
-				cboFormats.add("latexpdf");
-			}
+			else {logger.error("Server meldet keine Formate!");}
 		}
-		catch (ProductionHandlerException e) {logger.error("getAvailableFormats nicht möglich", e);}
-		catch (ProductionSystemException e) {logger.error(e);}		
-		
-		
-		// Vorauswahl der in Properties gespeicherten Einstellungen
-/*		String sFormat = ClientConfigWrapper.getClientConf("format");
-		if (sFormat.length()>0)
-		{
-			int index = comboFormate.indexOf(sFormat);
-			if (index != -1)
-			{
-				comboFormate.setText(sFormat);
-			}
-		}
-*/	}
+		catch (ProductionSystemException e) {logger.error(e);}
+		catch (ProductionHandlerException e) {logger.error(e);}
+	}
 
 	/**
 	 * Die Methode fuelleComboProjekte schreibt alle Verzeichnisse aus dem 
@@ -722,8 +700,9 @@ public class Client extends Composite
 								OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
 								OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
 								OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
+								OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
 								
-			//					ofxCC.getProducibleEntities(ofxA,ofxP,ofxD);
+								ofxCC.getProducibleEntities(ofxA,ofxP,ofxD);
 
 								
 								ProductionRequest pReq = new ProductionRequest();
@@ -731,7 +710,7 @@ public class Client extends Composite
 						    	pReq.setApplication(cboApplications.getText());
 								pReq.setProject(cboProjects.getText());
 								pReq.setDocument(cboDocuments.getText());
-								pReq.setFormat(cboFormats.getText());
+								pReq.setFormat(ofxF.getFormat().getId());
 								pReq.setUsername(System.getProperty("user.name"));
 								pReq.setTyp(ProductionRequest.Typ.ENTITIES);
 								pReq.setSync(ProductionRequest.Sync.NOSYNC);
@@ -806,13 +785,14 @@ public class Client extends Composite
 										efs.add(ef);
 									} 
 								}
-
+								
+								OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
 								
 								ProductionRequest pReq = new ProductionRequest();				    	
 						    	pReq.setApplication(cboApplications.getText());
 								pReq.setProject(cboProjects.getText());
 								pReq.setDocument(cboDocuments.getText());
-								pReq.setFormat(cboFormats.getText());
+								pReq.setFormat(ofxF.getFormat().getId());
 								pReq.setUsername(System.getProperty("user.name"));
 								pReq.setEntityFiles(efs);
 								pReq.setTyp(ProductionRequest.Typ.PRODUCE);	

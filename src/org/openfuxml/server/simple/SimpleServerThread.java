@@ -4,15 +4,18 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.openfuxml.model.ejb.OfxApplication;
+import org.openfuxml.model.ejb.OfxFormat;
+import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProductionRequest;
 import org.openfuxml.producer.ejb.RequestWrapper;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
-import org.openfuxml.producer.handler.Producer;
 
 /**
  * @author kisner
@@ -74,9 +77,9 @@ public class SimpleServerThread extends Thread
 									poOUT.setResultType(RequestWrapper.ResultType.OK);
 									break;
 					
-					case AVFORMATS:	String application=(String)poIN.getObject();
-									AvailableFormats alAvailableFormats = p.getAvailableFormats(application);
-									poOUT.setObject(alAvailableFormats);
+					case AVFORMATS:	OfxApplication ofxA=(OfxApplication)poIN.getObject();
+									List<OfxFormat> lOfxF= p.getAvailableFormats(ofxA);
+									poOUT.setObject(lOfxF);
 									poOUT.setResultType(RequestWrapper.ResultType.OK);
 									break;
 					

@@ -5,11 +5,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
+import org.openfuxml.client.control.formats.FormatFactory;
+import org.openfuxml.client.control.formats.FormatFactoryDirect;
 import org.openfuxml.model.ejb.OfxApplication;
+import org.openfuxml.model.ejb.OfxFormat;
+import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.RequestWrapper;
@@ -43,15 +48,15 @@ public class SocketProducer extends AbstractProducer implements Producer
 		return (List<OfxApplication>)productionResult.getObject();  
 	}
 	
-	public AvailableFormats getAvailableFormats(String application) throws  ProductionHandlerException
+	public List<OfxFormat> getAvailableFormats(OfxApplication ofxA) throws ProductionSystemException, ProductionHandlerException
 	{
-		logger.debug("ArrayList<AvailableFormat> getAvailableFormats("+application+")");
+		logger.debug("getAvailableFormats("+ofxA.getName()+")");
 		RequestWrapper po = new RequestWrapper();
 		po.setProductionType(RequestWrapper.ProductionType.AVFORMATS);
-		po.setObject(application);
+		po.setObject(ofxA);
 		RequestWrapper productionResult=handle(po);
 		logger.debug("Antwort bekommen: "+productionResult.getClass().getSimpleName()+"-"+productionResult.getObject().getClass().getSimpleName());
-		return (AvailableFormats)productionResult.getObject();  
+		return (List<OfxFormat>)productionResult.getObject();  
 	}
 	
 	public ProducedEntities invoke(org.openfuxml.producer.ejb.ProductionRequest request) throws ProductionHandlerException

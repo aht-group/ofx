@@ -10,8 +10,12 @@ import java.util.Properties;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
+import org.openfuxml.client.control.formats.FormatFactory;
+import org.openfuxml.client.control.formats.FormatFactoryDirect;
 import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.model.ejb.OfxApplication;
+import org.openfuxml.model.ejb.OfxFormat;
+import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.Format;
 import org.openfuxml.producer.ejb.ProducedEntities;
@@ -86,29 +90,11 @@ public class DirectProducer extends AbstractProducer implements Producer
 	 * Gibt verfügbare Formate zurück
 	 * @author Thorsten
 	 */
-	public AvailableFormats getAvailableFormats(String application) throws ProductionSystemException
+	public List<OfxFormat> getAvailableFormats(OfxApplication ofxA) throws ProductionSystemException
 	{
-		AvailableFormats availableFormats = new AvailableFormats();
-		availableFormats.setHost(host);
-		availableFormats.setRecord(new Date());
-		File dirFormats = new File(sysprops.getProperty("ilona.home") + File.separator + "applications"+ File.separator + application + File.separator + "formats");
-		logger.debug("getAvailableFormats("+application+"): "+dirFormats.getAbsoluteFile()+" exists:"+dirFormats.exists()+" isDirectory:"+dirFormats.isDirectory());
-		if (dirFormats.exists() && dirFormats.isDirectory())
-		{
-			for(File dirEntry : dirFormats.listFiles())
-			{
-				File fFormats = new File(dirEntry.getAbsoluteFile() + File.separator + "format.xml");
-				if (fFormats.exists())
-				{
-					Format f = new Format();
-					f.setAvailableFormats(availableFormats);
-					try{f.loadXML(fFormats);}
-					catch (XmlElementNotFoundException e) {logger.error(e);}
-					availableFormats.addFormat(f);
-				}
-			}
-		}
-		return availableFormats;
+		List<OfxApplication> result = new ArrayList<OfxApplication>();
+		FormatFactory ff = new FormatFactoryDirect(config);
+		return ff.getFormat(ofxA);
 	}
 	
 	public ProducedEntities invoke(org.openfuxml.producer.ejb.ProductionRequest request) throws ProductionSystemException

@@ -9,6 +9,8 @@ import org.openfuxml.communication.cluster.sync.NoSync;
 import org.openfuxml.communication.cluster.sync.ServerSync;
 import org.openfuxml.communication.cluster.sync.unison.UnisonSync;
 import org.openfuxml.model.ejb.OfxApplication;
+import org.openfuxml.model.ejb.OfxFormat;
+import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProductionRequest;
@@ -37,11 +39,10 @@ public class SyncProducer extends AbstractProducer implements Producer
 		return p.getAvailableApplications();
 	}
 	
-	public AvailableFormats getAvailableFormats(String application) throws  ProductionSystemException,ProductionHandlerException
+	public List<OfxFormat> getAvailableFormats(OfxApplication ofxA) throws ProductionSystemException, ProductionHandlerException
 	{
-		return p.getAvailableFormats(application);
+		return p.getAvailableFormats(ofxA);
 	}
-	
 	
 	public ProducedEntities invoke(ProductionRequest pReq) throws ProductionSystemException,ProductionHandlerException
 	{
