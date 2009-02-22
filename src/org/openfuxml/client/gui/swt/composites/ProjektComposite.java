@@ -1,4 +1,4 @@
-package org.openfuxml.client.swt.composites;
+package org.openfuxml.client.gui.swt.composites;
 
 import org.apache.commons.configuration.Configuration;
 import org.eclipse.swt.SWT;
@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.openfuxml.client.swt.OpenFuxmlClient;
+import org.openfuxml.client.gui.swt.OpenFuxmlClient;
 import org.openfuxml.model.ejb.OfxProject;
 
 import de.kisner.util.io.resourceloader.ImageResourceLoader;
