@@ -14,7 +14,6 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 import org.openfuxml.communication.cluster.ejb.EjbObject;
 import org.openfuxml.communication.cluster.ejb.Host;
-import org.openfuxml.producer.ejb.AvailableFormats;
 
 @Stateful
 @Remote(OpenFuxmlFacade.class)
@@ -97,7 +96,7 @@ public class OpenFuxmlFacadeBean implements OpenFuxmlFacade, Serializable
 		return aas;
 	}
 */
-	public AvailableFormats findLastAvailableFormatsforHost(Host h)
+/*	public AvailableFormats findLastAvailableFormatsforHost(Host h)
 	{
 		AvailableFormats afs=null;
 		StringBuffer sb = new StringBuffer();
@@ -111,7 +110,7 @@ public class OpenFuxmlFacadeBean implements OpenFuxmlFacade, Serializable
 		catch (NoResultException ex){}
 		return afs;
 	}
-	
+*/	
 	@Remove
 	public void close()
 	{

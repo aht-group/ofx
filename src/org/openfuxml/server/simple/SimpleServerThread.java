@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.producer.Producer;
-import org.openfuxml.producer.ejb.AvailableFormats;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProductionRequest;
 import org.openfuxml.producer.ejb.RequestWrapper;

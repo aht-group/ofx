@@ -8,10 +8,14 @@ import org.openfuxml.client.control.projects.ProjectFactory;
 import org.openfuxml.client.control.projects.ProjectFactoryDirect;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
+import org.openfuxml.model.ejb.OfxFormat;
+import org.openfuxml.model.ejb.OfxProductionRequest;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.model.factory.OfxRequestFactory;
 import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.producer.Producer;
+import org.openfuxml.producer.exception.ProductionHandlerException;
+import org.openfuxml.producer.exception.ProductionSystemException;
 import org.openfuxml.producer.handler.DirectProducer;
 import org.openfuxml.producer.handler.SocketProducer;
 import org.openfuxml.server.DummyServer;
@@ -63,6 +67,29 @@ public class OpenFuxmlClientControl
 			ofxReqF.setOfxD(ofxD);
 		Sessionpreferences spref = ofxReqF.create();
 //			ofxReqF.writeJaxb(System.out, spref);
+	}
+	
+	public void produce(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD, OfxFormat ofxF)
+	{
+		OfxRequestFactory orf = new OfxRequestFactory();
+			orf.setOfxA(ofxA);
+			orf.setOfxP(ofxP);
+			orf.setOfxD(ofxD);
+			orf.setOfxF(ofxF);
+	
+		OfxProductionRequest ofxReq = new OfxProductionRequest();
+			ofxReq.setSessionpreferences(orf.create());
+			ofxReq.setTyp(OfxProductionRequest.Typ.PRODUCE);
+	
+	try {
+		producer.produce(ofxReq);
+	} catch (ProductionSystemException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ProductionHandlerException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	}
 	
 	public ProjectFactory getOfxProjectFactory() {return ofxProjectFactory;}

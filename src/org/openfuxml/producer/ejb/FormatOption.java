@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import org.jdom.Element;
 
@@ -17,7 +15,6 @@ public class FormatOption implements Serializable
 	static final long serialVersionUID=1;
 	
 	private int id;
-	private Format availableFormat;
 	private String displayname,name,type;
 	private boolean value;
 	private String description;
@@ -25,11 +22,6 @@ public class FormatOption implements Serializable
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	public int getId() {return id;}
 	public void setId(int id){this.id = id;}
-	
-	@ManyToOne
-	@JoinColumn(name="availableFormat_id", nullable=false)
-	public Format getAvailableFormat(){return availableFormat;}
-	public void setAvailableFormat(Format availableFormat) {this.availableFormat = availableFormat;}
 	
 	public String getDescription() {return description;}
 	public void setDescription(String description) {this.description = description;}

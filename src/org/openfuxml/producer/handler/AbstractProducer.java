@@ -6,6 +6,8 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
+import org.openfuxml.model.ejb.OfxProductionRequest;
+import org.openfuxml.model.ejb.OfxProductionResult;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
 
@@ -29,6 +31,12 @@ public abstract class AbstractProducer
 	}
 	
 	public List<OfxApplication> getAvailableApplications22() throws ProductionSystemException,ProductionHandlerException
+	{
+		logger.warn("Not implemented for this Handler!!");
+		return null;
+	}
+	
+	public OfxProductionResult produce(OfxProductionRequest ofxR) throws ProductionSystemException
 	{
 		logger.warn("Not implemented for this Handler!!");
 		return null;
