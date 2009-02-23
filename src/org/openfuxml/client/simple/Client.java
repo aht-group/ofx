@@ -267,7 +267,6 @@ public class Client extends Composite implements ClientGuiCallback
 		cboDocuments.removeAll();
 		tableProductionEntities.removeAll();
 		
-		
 		if ( (cboApplications.getText().length()>0) && (cboProjects.getText().length()>0) )
 		{
 			

@@ -231,7 +231,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 								}
 								catch (ClassCastException cce2)	{}
 							}
-							myProperties.setProperty("LastProject", "" + iLastProject);
+//							myProperties.setProperty("LastProject", "" + iLastProject);
 						}
 					}
 				}
