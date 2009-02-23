@@ -10,7 +10,7 @@ public class OfxPathHelper
 	public synchronized static String getDir(Configuration config, String type)
 	{
 		String dir=config.getString("dirs/dir[@type='"+type+"']");;
-		if(config.getBoolean("dirs/dir[@type='repository']/@rel"))
+		if(config.getBoolean("dirs/dir[@type='"+type+"']/@rel"))
 		{
 			dir=config.getString("dirs/dir[@type='basedir']")+fs+dir;
 		}
