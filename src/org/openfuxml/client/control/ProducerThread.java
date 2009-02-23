@@ -19,7 +19,7 @@ public class ProducerThread extends Thread
 {
 	static Logger logger = Logger.getLogger(ProducerThread.class);
 	
-	private OpenFuxmlClientControl ofxCC;
+	private OfxClientControl ofxCC;
 	private ClientGuiCallback guiCallback;
 	private Producer producer;
 	private DirectProducer.Typ typ;
@@ -31,7 +31,7 @@ public class ProducerThread extends Thread
 	 * @param Parent - das  aufrufende Element
 	 * @param JndiHost - String, der Host und Port bestimmt (Syntax host:port).
 	 */
-	public ProducerThread(OpenFuxmlClientControl ofxCC, ClientGuiCallback guiCallback, Producer producer)
+	public ProducerThread(OfxClientControl ofxCC, ClientGuiCallback guiCallback, Producer producer)
 	{
 		this.ofxCC=ofxCC;
 		this.guiCallback = guiCallback;

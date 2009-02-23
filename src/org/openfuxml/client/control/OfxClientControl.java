@@ -22,20 +22,21 @@ import org.openfuxml.producer.handler.DirectProducer;
 import org.openfuxml.producer.handler.SocketProducer;
 import org.openfuxml.server.DummyServer;
 
-public class OpenFuxmlClientControl
+public class OfxClientControl implements OfxGuiAction
 {
-	static Logger logger = Logger.getLogger(OpenFuxmlClientControl.class);
+	static Logger logger = Logger.getLogger(OfxClientControl.class);
 	 
 	private Configuration config;
 	private ProjectFactory ofxProjectFactory;
 	private DocumentFactory ofxDocumentFactory;
 	private Producer producer;
 	private ClientGuiCallback guiCallback;
+
 	private String comboUid;
 	
 	private Hashtable<String, ProducibleEntities> htDiscoveredEntities;
 
-	public OpenFuxmlClientControl(Configuration config, ClientGuiCallback guiCallback)
+	public OfxClientControl(Configuration config, ClientGuiCallback guiCallback)
 	{
 		this.config=config;
 		this.guiCallback=guiCallback;
@@ -127,5 +128,26 @@ public class OpenFuxmlClientControl
 			comboUid = sb.toString();
 		}
 		else {comboUid = "";}
+	}
+	
+	public void setGuiCallback(ClientGuiCallback guiCallback) {this.guiCallback = guiCallback;}
+	
+	public void cboDocumentSelected()
+	{
+		guiCallback.entitiesDiscovered();
+		guiCallback.loescheErgebnis();
+	}
+	
+	public void cboFormateSelected()
+	{
+		guiCallback.entitiesDiscovered();
+		guiCallback.loescheErgebnis();
+		guiCallback.cboFormatSelected();
+	}
+	
+	public void btnUpdate()
+	{
+		guiCallback.loescheErgebnis();
+		guiCallback.getProducableEntities();
 	}
 }

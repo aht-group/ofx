@@ -31,13 +31,14 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.ClientGuiCallback;
-import org.openfuxml.client.control.OpenFuxmlClientControl;
+import org.openfuxml.client.control.OfxClientControl;
 import org.openfuxml.client.gui.simple.dialog.HelpAboutDialog;
 import org.openfuxml.client.gui.simple.factory.SimpleButtonFactory;
 import org.openfuxml.client.gui.simple.factory.SimpleComboFactory;
 import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
 import org.openfuxml.client.gui.simple.factory.SimpleMenuFactory;
 import org.openfuxml.client.gui.simple.factory.SimpleTableFactory;
+import org.openfuxml.client.gui.util.GuiSettingsValidator;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
@@ -75,7 +76,7 @@ public class Client extends Composite implements ClientGuiCallback
 	
 	private Combo cboApplications,cboProjects,cboDocuments,cboFormats;
 
-	private Table tableProductionEntities;
+	private Table tabDiscoveredEntities;
 	
 	private Shell toplevelShell;
 	private Display display;
@@ -87,7 +88,7 @@ public class Client extends Composite implements ClientGuiCallback
 	private ArrayList<String[]> alProducedEntities;
 	
 	private Configuration config;
-	private OpenFuxmlClientControl ofxCC;
+	private OfxClientControl ofxCC;
 	
 	private Cursor cursor;
 	
@@ -105,7 +106,7 @@ public class Client extends Composite implements ClientGuiCallback
 		toplevelShell = (Shell)parent;
 		this.display = disp;
 		
-		ofxCC = new OpenFuxmlClientControl(config,this);
+		ofxCC = new OfxClientControl(config,this);
 		
 		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
 		splashscreen.open();
@@ -141,8 +142,9 @@ public class Client extends Composite implements ClientGuiCallback
 		}
 		
 		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
-		SimpleButtonFactory sbf = new SimpleButtonFactory(this);
-		SimpleComboFactory scf = new SimpleComboFactory(this,config);
+		SimpleButtonFactory sbf = new SimpleButtonFactory(this,this,ofxCC);
+		SimpleComboFactory scf = new SimpleComboFactory(this,this,ofxCC);
+		SimpleTableFactory stf = new SimpleTableFactory();
 		
 		slf.createLogo();
 		
@@ -157,16 +159,8 @@ public class Client extends Composite implements ClientGuiCallback
 		
 		btnUpdate = sbf.createBtnUpdate();
 		
-		tableProductionEntities = SimpleTableFactory.createTable(this);
-		tableProductionEntities.addSelectionListener(new SelectionAdapter() {
-			public void widgetDefaultSelected(SelectionEvent evt) {
-				// Bestimmen des ausgewählten Eintrags.
-				TableItem[] selection = tableProductionEntities.getSelection();
-				TableItem selectedRow = selection[0];
-
-				logger.debug(selectedRow.getText(1)+" "+selectedRow.getText(2));
-			}
-		});
+		tabDiscoveredEntities = stf.createTable(this);
+		
 		
 		btnProduce = sbf.createBtnProduce();
 		lblEvent = slf.creatLblEvent();
@@ -265,7 +259,7 @@ public class Client extends Composite implements ClientGuiCallback
 	public void fillCboDocuments()
 	{
 		cboDocuments.removeAll();
-		tableProductionEntities.removeAll();
+		tabDiscoveredEntities.removeAll();
 		
 		if ( (cboApplications.getText().length()>0) && (cboProjects.getText().length()>0) )
 		{
@@ -309,7 +303,7 @@ public class Client extends Composite implements ClientGuiCallback
 			{
 				if (!toplevelShell.isDisposed())
 				{
-					tableProductionEntities.removeAll();
+					tabDiscoveredEntities.removeAll();
 					OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
 					OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
 					OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
@@ -319,7 +313,7 @@ public class Client extends Composite implements ClientGuiCallback
 					{
 						for(ProducibleEntities.File f :pe.getFile())
 						{
-							TableItem newItem = new TableItem(tableProductionEntities, 0);
+							TableItem newItem = new TableItem(tabDiscoveredEntities, 0);
 							newItem.setText(new String[] {"", f.getDescription(),f.getDirectory(), f.getFilename()});
 						}
 					};
@@ -343,14 +337,6 @@ public class Client extends Composite implements ClientGuiCallback
 			}
 		});
 	}
-
-	private void checkSet(Combo cbo) throws IllegalArgumentException
-	{
-		if(cbo.getText().equals(""))
-		{
-			throw new IllegalArgumentException("You have to chose a "+cbo.getData());
-		}
-	}
 	
 	/**
 	 * Die Methode getProducableEntities testet, ob alle Eingaben gemacht wurden
@@ -361,39 +347,27 @@ public class Client extends Composite implements ClientGuiCallback
 	{			
 		try
 		{
-			checkSet(cboApplications);
-			checkSet(cboProjects);
-			checkSet(cboDocuments);
-			checkSet(cboFormats);
+			GuiSettingsValidator.checkSet(cboApplications);
+			GuiSettingsValidator.checkSet(cboProjects);
+			GuiSettingsValidator.checkSet(cboDocuments);
+			GuiSettingsValidator.checkSet(cboFormats);
 			if(lblRepository.getText().equals("")){throw new IllegalArgumentException("You have to chose a repository!");}
-			
-			try
-			{
-				display.asyncExec(new Runnable()
+
+			display.asyncExec(new Runnable()
+				{
+					public void run()
 					{
-						public void run()
+						if (!toplevelShell.isDisposed())
 						{
-							if (!toplevelShell.isDisposed())
-							{
-								OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
-								OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
-								OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
-								OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
-								
-								ofxCC.getProducibleEntities(ofxA,ofxP,ofxD,ofxF);
-							}
+							OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
+							OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
+							OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
+							OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
+							
+							ofxCC.getProducibleEntities(ofxA,ofxP,ofxD,ofxF);
 						}
-					});
-			}
-			catch (Exception e)
-			{
-				// Falls bei dem Aufruf von getProducableEntities irgendwelche Fehler auftreten,
-				// kommt hier eine Fehlemeldung.
-				ServerFehler();
-				
-				logger.fatal("Exception", e);
-			}
-			
+					}
+				});			
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -415,9 +389,9 @@ public class Client extends Composite implements ClientGuiCallback
 	{	// Bestimmen der Anzahl der ausgewählten Einträge der Tabelle ProductionEntities.
 		int anzItems = 0;
 		
-		for(int i=0; i<tableProductionEntities.getItemCount(); i++)
+		for(int i=0; i<tabDiscoveredEntities.getItemCount(); i++)
 		{
-			TableItem tableItem = tableProductionEntities.getItem(i);
+			TableItem tableItem = tabDiscoveredEntities.getItem(i);
 			if (tableItem.getChecked()){anzItems++;}
 		}
 
@@ -437,9 +411,9 @@ public class Client extends Composite implements ClientGuiCallback
 						if (!toplevelShell.isDisposed())
 						{				
 							Productionentities pe = new Productionentities();
-							for(int i=0; i<tableProductionEntities.getItemCount(); i++)
+							for(int i=0; i<tabDiscoveredEntities.getItemCount(); i++)
 							{
-								TableItem tableItem = tableProductionEntities.getItem(i);
+								TableItem tableItem = tabDiscoveredEntities.getItem(i);
 								if (tableItem.getChecked())
 								{
 									Productionentities.File f = new Productionentities.File();
@@ -544,7 +518,7 @@ public class Client extends Composite implements ClientGuiCallback
 		EinstellungenDialog dialog = new EinstellungenDialog(this.getShell(), rgbBackground,config);
 		dialog.open(getShell().getImages());
 
-		ofxCC = new OpenFuxmlClientControl(config,this);
+		ofxCC = new OfxClientControl(config,this);
 		
 		String labelText=config.getString("dirs/dir[@type='repository']");;
 		if(config.getBoolean("dirs/dir[@type='repository']/@rel"))
@@ -609,7 +583,7 @@ public class Client extends Composite implements ClientGuiCallback
 					cboDocuments.setEnabled(bool);
 					cboFormats.setEnabled(bool);
 					btnUpdate.setEnabled(bool);
-					tableProductionEntities.setEnabled(bool);
+					tabDiscoveredEntities.setEnabled(bool);
 					btnProduce.setEnabled(bool);
 				
 					if (bool){cursor = new Cursor(display, SWT.CURSOR_ARROW);}
@@ -662,6 +636,8 @@ public class Client extends Composite implements ClientGuiCallback
 		
         return img;		
 	}
+	
+	public void cboFormatSelected(){}
 	
 	public static void main(String[] args)
 	{

@@ -14,7 +14,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.openfuxml.client.control.OpenFuxmlClientControl;
+import org.openfuxml.client.control.ClientGuiCallback;
+import org.openfuxml.client.control.OfxClientControl;
 import org.openfuxml.client.gui.swt.OpenFuxmlClient;
 import org.openfuxml.client.gui.swt.SwtGuiCallback;
 import org.openfuxml.model.ejb.OfxApplication;
@@ -49,7 +50,7 @@ public class ProjektComposite extends Composite
 	private Configuration config;
 	private OfxApplication ofxA;
 	private OfxProject ofxP;
-	private OpenFuxmlClientControl ofxCC;
+	private OfxClientControl ofxCC;
 	
 	public ProjektComposite(Composite parent, OpenFuxmlClient client, OfxProject ofxP, Configuration config)
 	{
@@ -65,7 +66,7 @@ public class ProjektComposite extends Composite
 			}
 		});
 		
-		ofxCC = new OpenFuxmlClientControl(config,new SwtGuiCallback());
+		ofxCC = new OfxClientControl(config,new SwtGuiCallback());
 		
 		ofxA = new OfxApplication();
 		ofxA.setName("fuxml");
@@ -108,6 +109,8 @@ public class ProjektComposite extends Composite
 			addTabDoc();
 			addTabSettings();
 		}
+		ClientGuiCallback guiCallback = new SwtGuiCallback(pComp);
+		ofxCC.setGuiCallback(guiCallback);
 	}
 	
 	private void addTabProduce()
@@ -121,7 +124,7 @@ public class ProjektComposite extends Composite
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
 		tiProduzieren.setText("Produzieren");
-			pComp = new ProduzierenComposite(tabFolder, ofxA, ofxP, ofxCC, this);
+			pComp = new ProduzierenComposite(tabFolder, ofxA, ofxP, ofxCC, this,config);
 			tiProduzieren.setControl(pComp);
 	}
 	

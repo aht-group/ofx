@@ -6,8 +6,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.openfuxml.client.gui.simple.Client;
 import org.openfuxml.util.config.OfxPathHelper;
 
 import de.kisner.util.io.resourceloader.ImageResourceLoader;
@@ -17,12 +17,12 @@ public class SimpleLabelFactory
 	 static Logger logger = Logger.getLogger(SimpleLabelFactory.class);
 	 
 	private static String fs = SystemUtils.FILE_SEPARATOR;
-	private Client client;
+	private Composite client;
 	private Configuration config;
 	
-	public SimpleLabelFactory(Client client, Configuration config)
+	public SimpleLabelFactory(Composite composite, Configuration config)
 	{
-		this.client=client;
+		this.client=composite;
 		this.config=config;
 	}
 	
