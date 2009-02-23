@@ -1,5 +1,8 @@
 package org.openfuxml.client.gui.swt;
 
+import java.io.FileNotFoundException;
+
+import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
@@ -10,11 +13,13 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Tray;
 import org.eclipse.swt.widgets.TrayItem;
+import org.openfuxml.client.simple.Client;
 
 import de.kisner.util.io.resourceloader.ImageResourceLoader;
 
 public class OpenFuxmlTray
 {
+	static Logger logger = Logger.getLogger(OpenFuxmlTray.class);
 	public final static String IMG_FUXICON_KLEIN	= "/swt/images/FuXML-Icon-klein.gif";
 	
 	private Composite parent;
@@ -60,8 +65,12 @@ public class OpenFuxmlTray
 					menu.setVisible (true);
 				}
 			});
-			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), IMG_FUXICON_KLEIN, of.getDisplay());
-			item.setImage(img);
+			try
+			{
+				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), IMG_FUXICON_KLEIN, of.getDisplay());
+				item.setImage(img);
+			}
+			catch (FileNotFoundException e) {logger.error(e);}
 		}
 	}
 	

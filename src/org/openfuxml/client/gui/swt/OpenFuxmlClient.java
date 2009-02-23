@@ -3,6 +3,7 @@
  */
 package org.openfuxml.client.gui.swt;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Properties;
 
@@ -287,9 +288,12 @@ public class OpenFuxmlClient extends Composite implements Runnable
 
 				TabItem tabItem = new TabItem(tfProjekte, SWT.NONE);
 				String res = config.getString("icons/@dir")+fs+config.getString("icons/icon[@type='project']");
-				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
-				
-				tabItem.setImage(img);
+				try
+				{
+					Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+					tabItem.setImage(img);
+				}
+				catch (FileNotFoundException e) {logger.error(e);}
 				tabItem.setText(ofxProject.getName());
 				ProjektComposite pComp = new ProjektComposite(tfProjekte, this, ofxProject,config);
 				tabItem.setControl(pComp);
@@ -447,7 +451,8 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		
 		for (int i=0; i<anzImages; i++)
 		{
-	        img[i] = ImageResourceLoader.search(this.getClass().getClassLoader(), Dateinamen[i], getDisplay());
+	        try{img[i] = ImageResourceLoader.search(this.getClass().getClassLoader(), Dateinamen[i], getDisplay());}
+	        catch (FileNotFoundException e) {logger.error(e);}
 		}
         return img;		
 	}

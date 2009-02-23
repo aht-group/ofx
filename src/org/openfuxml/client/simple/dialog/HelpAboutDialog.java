@@ -1,5 +1,7 @@
 package org.openfuxml.client.simple.dialog;
 
+import java.io.FileNotFoundException;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
@@ -237,12 +239,13 @@ public class HelpAboutDialog extends Dialog
 			labelImage.setBackground(shell.getBackground());
 			
 			String res = config.getString("logos/@dir")+fs+config.getString("logos/logo[@type='fuxgross']");
-			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, shell.getDisplay());
-			if (img != null)
+			
+			try
 			{
+				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, shell.getDisplay());
 				labelImage.setImage(img);
 			}
-			else
+			catch (FileNotFoundException e)
 			{
 				labelImage.setText("ERROR: Image not found!");
 				labelImage.setForeground(shell.getDisplay().getSystemColor(SWT.COLOR_RED));

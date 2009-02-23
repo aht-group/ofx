@@ -1,6 +1,9 @@
 package org.openfuxml.client.gui.swt.composites;
 
+import java.io.FileNotFoundException;
+
 import org.apache.commons.configuration.Configuration;
+import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -22,6 +25,8 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
  */
 public class ProjektComposite extends Composite
 {	
+	static Logger logger = Logger.getLogger(ProjektComposite.class);
+	
 	private OpenFuxmlClient client;
 	private OfxProject ofxProject;
 	private TabFolder tabFolder;
@@ -98,8 +103,12 @@ public class ProjektComposite extends Composite
 	{
 		TabItem tiProduzieren = new TabItem(tabFolder, SWT.NONE);
 		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='produce']");
-		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
-		tiProduzieren.setImage(img);
+		try
+		{
+			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			tiProduzieren.setImage(img);
+		}
+		catch (FileNotFoundException e) {logger.error(e);}
 		tiProduzieren.setText("Produzieren");
 //			pComp = new ProduzierenComposite(tabFolder, this, hDispatcher,myProjectUi);
 //			tiProduzieren.setControl(pComp);
@@ -109,8 +118,12 @@ public class ProjektComposite extends Composite
 	{
 		TabItem tiOeffnen = new TabItem(tabFolder, SWT.NONE);
 		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='open']");
-		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
-		tiOeffnen.setImage(img);
+		try
+		{
+			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			tiOeffnen.setImage(img);
+		}
+		catch (FileNotFoundException e) {logger.error(e);}
 		tiOeffnen.setText("Öffnen");
 //			oComp = new OeffnenComposite(tabFolder, this);
 //			tiOeffnen.setControl(oComp);
@@ -120,8 +133,12 @@ public class ProjektComposite extends Composite
 	{		
 		TabItem tiLogView = new TabItem(tabFolder, SWT.NONE);
 		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='log']");
-		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
-		tiLogView.setImage(img);
+		try
+		{
+			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			tiLogView.setImage(img);
+		}
+		catch (FileNotFoundException e) {logger.error(e);}
 		tiLogView.setText("Log");
 //			logComp = new LogComposite(tabFolder, this, iniCtx,myProjectUi);
 //			tiLogView.setControl(logComp);
@@ -131,8 +148,12 @@ public class ProjektComposite extends Composite
 	{
 		TabItem tiBenutzer = new TabItem(tabFolder, SWT.NONE);
 		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='user']");
-		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
-		tiBenutzer.setImage(img);
+		try
+		{
+			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			tiBenutzer.setImage(img);
+		}
+		catch (FileNotFoundException e) {logger.error(e);}
 		tiBenutzer.setText("Benutzer");
 //			benutzerComp = new BenutzerComposite(tabFolder, this,myProjectUi);
 //			tiBenutzer.setControl(benutzerComp);
@@ -142,8 +163,12 @@ public class ProjektComposite extends Composite
 	{
 		TabItem tiDoc = new TabItem(tabFolder, SWT.NONE);
 		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='documents']");
-		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
-		tiDoc.setImage(img);
+		try
+		{
+			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			tiDoc.setImage(img);
+		}
+		catch (FileNotFoundException e) {logger.error(e);}
 		tiDoc.setText("Dokumente");
 //			docComp = new DocComposite(tabFolder, this);
 //			tiDoc.setControl(docComp);
@@ -153,8 +178,12 @@ public class ProjektComposite extends Composite
 	{
 		TabItem tiEinst = new TabItem(tabFolder, SWT.NONE);
 		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='preferences']");
-		Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
-		tiEinst.setImage(img);
+		try
+		{
+			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			tiEinst.setImage(img);
+		}
+		catch (FileNotFoundException e) {logger.error(e);}
 		tiEinst.setText("Einstellungen");
 //			einstComp = new EinstellungenComposite(tabFolder, this);
 //			tiEinst.setControl(einstComp);
