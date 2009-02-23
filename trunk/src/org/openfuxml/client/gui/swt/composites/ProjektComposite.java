@@ -14,7 +14,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
+import org.openfuxml.client.control.OpenFuxmlClientControl;
 import org.openfuxml.client.gui.swt.OpenFuxmlClient;
+import org.openfuxml.client.gui.swt.SwtGuiCallback;
+import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxProject;
 
 import de.kisner.util.io.resourceloader.ImageResourceLoader;
@@ -31,8 +34,8 @@ public class ProjektComposite extends Composite
 	private OfxProject ofxProject;
 	private TabFolder tabFolder;
 	
-/*	private ProduzierenComposite pComp;
-	private OeffnenComposite oComp; 
+	private ProduzierenComposite pComp;
+	/*	private OeffnenComposite oComp; 
 	private LogComposite logComp;
 	private BenutzerComposite benutzerComp;
 	private DocComposite docComp;
@@ -45,11 +48,16 @@ public class ProjektComposite extends Composite
 	private ProjectValue myProjectValue;
 */	
 	private Configuration config;
-	public ProjektComposite(Composite parent, OpenFuxmlClient client, OfxProject ofxProject, Configuration config)
+	private OfxApplication ofxA;
+	private OfxProject ofxP;
+	private OpenFuxmlClientControl ofxCC;
+	
+	public ProjektComposite(Composite parent, OpenFuxmlClient client, OfxProject ofxP, Configuration config)
 	{
 		super(parent, SWT.NONE);
 		this.client = client;
-		this.ofxProject=ofxProject;
+		this.ofxP=ofxP;
+
 		this.config=config;
 	
 		this.addDisposeListener(new DisposeListener() {
@@ -57,7 +65,11 @@ public class ProjektComposite extends Composite
 				//TODO Settings speichern
 			}
 		});
-
+		
+		ofxCC = new OpenFuxmlClientControl(config,new SwtGuiCallback());
+		
+		ofxA = new OfxApplication();
+		ofxA.setName("fuxml");
 		initGUI();
 	}
 	
@@ -110,8 +122,8 @@ public class ProjektComposite extends Composite
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
 		tiProduzieren.setText("Produzieren");
-//			pComp = new ProduzierenComposite(tabFolder, this, hDispatcher,myProjectUi);
-//			tiProduzieren.setControl(pComp);
+			pComp = new ProduzierenComposite(tabFolder, ofxA, ofxP, ofxCC, this);
+			tiProduzieren.setControl(pComp);
 	}
 	
 	private void addTabOpen()
