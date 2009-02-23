@@ -1,10 +1,9 @@
 package org.openfuxml.client.simple;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Hashtable;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
@@ -35,6 +34,9 @@ import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.ClientGuiCallback;
 import org.openfuxml.client.control.OpenFuxmlClientControl;
 import org.openfuxml.client.simple.dialog.HelpAboutDialog;
+import org.openfuxml.client.simple.factory.SimpleButtonFactory;
+import org.openfuxml.client.simple.factory.SimpleComboFactory;
+import org.openfuxml.client.simple.factory.SimpleLabelFactory;
 import org.openfuxml.client.simple.factory.SimpleMenuFactory;
 import org.openfuxml.client.simple.factory.SimpleTableFactory;
 import org.openfuxml.model.ejb.OfxApplication;
@@ -48,7 +50,6 @@ import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProducedEntitiesEntityFile;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
-import org.openfuxml.util.config.OfxPathHelper;
 import org.openfuxml.util.config.factory.ClientConfFactory;
 
 import de.kisner.util.LoggerInit;
@@ -71,19 +72,15 @@ public class Client extends Composite implements ClientGuiCallback
 	private Menu menu;
 	
 	private Label lblRepository,lblEvent;
-	private Button btnChange;
+	private Button btnChange,btnUpdate,btnProduce;
 	
 	private Combo cboApplications,cboProjects,cboDocuments,cboFormats;
 
-	private Button buttonAktualisieren;
-
 	private Table tableProductionEntities;
-	private Button buttonProduzieren;
 	
 	private Shell toplevelShell;
 	private Display display;
 	
-	private ProducedEntities producedEntities;
 	
 	/**
 	 * alProducedEntities speichert alle Einträge, die in dieser Sitzung produziert wurden.
@@ -92,10 +89,6 @@ public class Client extends Composite implements ClientGuiCallback
 	
 	private Configuration config;
 	private OpenFuxmlClientControl ofxCC;
-	
-	private Productionresult presult;
-	
-	File propFile;
 	
 	private Cursor cursor;
 	
@@ -121,7 +114,7 @@ public class Client extends Composite implements ClientGuiCallback
 		alProducedEntities = new ArrayList<String[]>();
 
 		logger.info("initGUI");
-		initGUI();
+		guiInit();
 		
 		logger.info("pause");
 
@@ -134,7 +127,7 @@ public class Client extends Composite implements ClientGuiCallback
 	/**
 	 * initGUI initialisiert die grafische Oberfläche.
 	 */
-	public void initGUI()
+	public void guiInit()
 	{
 		this.setBackground(new Color(this.getDisplay(), rgbBackground));
 		
@@ -148,212 +141,22 @@ public class Client extends Composite implements ClientGuiCallback
 			this.setLayout(layout);
 		}
 		
-		{
-			Label labelImage = new Label(this, SWT.NONE);
-			labelImage.setBackground(this.getBackground());
-
-			{
-				GridData data = new GridData();
-				data.widthHint = 131;
-				data.heightHint = 60;
-				data.horizontalSpan = 3;
-				data.horizontalAlignment = GridData.END;
-				data.verticalAlignment = GridData.FILL;
-				labelImage.setLayoutData(data);
-			}
-			String res = config.getString("logos/@dir")+fs+config.getString("logos/logo[@type='fuxklein']");
-			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
-			if (img != null)
-			{
-				labelImage.setImage(img);
-			}
-			else
-			{
-				labelImage.setText("ERROR: Image not found!");
-				labelImage.setForeground(getDisplay().getSystemColor(SWT.COLOR_RED));
-			}
-		}
-		{
-			Label labelVerz = new Label(this, SWT.NONE);
-			labelVerz.setText("Verzeichnis");
-			labelVerz.setBackground(this.getBackground());
-		}
-		{
-			lblRepository = new Label(this, SWT.NONE);
-			lblRepository.setBackground(this.getBackground());
-
-			{
-				GridData data = new GridData();
-				data.horizontalAlignment = GridData.FILL;
-				data.grabExcessHorizontalSpace = true;
-				lblRepository.setLayoutData(data);
-			}
-			
-			lblRepository.setText(OfxPathHelper.getDir(config, "repository"));
-			logger.debug("Repository: "+lblRepository.getText());
-		}
-		{
-			btnChange = new Button(this, SWT.PUSH | SWT.CENTER);
-			btnChange.setText("   wechseln ...   ");
-
-			{
-				GridData data = new GridData();
-				data.horizontalAlignment = GridData.FILL;
-				btnChange.setLayoutData(data);
-			}
-
-			btnChange
-				.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					Einstellungen();
-					}
-				});
-		}
-		{
-			Label labelAnwendungen = new Label(this, SWT.NONE);
-			labelAnwendungen.setText("Anwendung");
-			labelAnwendungen.setBackground(this.getBackground());
-		}
-		{
-			cboApplications = new Combo(this, SWT.READ_ONLY | SWT.NONE);
-
-			{
-				GridData data = new GridData();
-				data.horizontalAlignment = GridData.FILL;
-				data.grabExcessHorizontalSpace = true;
-				cboApplications.setLayoutData(data);
-			}
-			
-			cboApplications.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					//TODO Update Client Settings
-					//ClientConfigWrapper.updateKeyValue("application", comboAnwendungen.getText());
-					fillCboProjects();
-					fuelleComboFormate();
-					
-					entitiesDiscovered();
-					loescheErgebnis();
-				}
-			});
-		}
-		{
-			Label labelDummy = new Label(this, SWT.NONE);
-			labelDummy.setText("");
-		}
-		{
-			Label labelProjekt = new Label(this, SWT.NONE);
-			labelProjekt.setText("Projekt");
-			labelProjekt.setBackground(this.getBackground());
-		}
-		{
-			cboProjects = new Combo(this, SWT.READ_ONLY | SWT.NONE);
-
-			{
-				GridData data = new GridData();
-				data.horizontalAlignment = GridData.FILL;
-				data.grabExcessHorizontalSpace = true;
-				cboProjects.setLayoutData(data);
-			}
-			
-			cboProjects.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					//TODO Update Client Settings
-					//ClientConfigWrapper.updateKeyValue("project", comboProjekte.getText());
-					fillCboDocuments();
-					
-					entitiesDiscovered();
-					loescheErgebnis();
-				}
-			});
-		}
-		{
-			Label labelDummy = new Label(this, SWT.NONE);
-			labelDummy.setText("");
-		}
-		{
-			Label labelDocument = new Label(this, SWT.NONE);
-			labelDocument.setText("Dokument");
-			labelDocument.setBackground(this.getBackground());
-		}
-		{
-			cboDocuments = new Combo(this, SWT.READ_ONLY | SWT.NONE);
-
-			{
-				GridData data = new GridData();
-				data.horizontalAlignment = GridData.FILL;
-				data.grabExcessHorizontalSpace = true;
-				cboDocuments.setLayoutData(data);
-			}
-
-			cboDocuments.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					//TODO Update Client Settings
-					//ClientConfigWrapper.updateKeyValue("document", comboDokumente.getText());
-					entitiesDiscovered();
-					loescheErgebnis();
-				}
-			});
-		}
-		{
-			Label labelDummy = new Label(this, SWT.NONE);
-			labelDummy.setText("");
-		}
-		{
-			Label labelFormate = new Label(this, SWT.NONE);
-			labelFormate.setText("Format");
-			labelFormate.setBackground(this.getBackground());
-		}
-		{
-			cboFormats = new Combo(this, SWT.READ_ONLY | SWT.NONE);
-
-			{
-				GridData data = new GridData();
-				data.horizontalAlignment = GridData.FILL;
-				data.grabExcessHorizontalSpace = true;
-				cboFormats.setLayoutData(data);
-			}
+		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
 		
-			cboFormats.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					//TODO Update Client Settings
-					//ClientConfigWrapper.updateKeyValue("format", comboFormate.getText());
-					entitiesDiscovered();
-					loescheErgebnis();
-				}
-			});
-		}
-		{
-			Label labelDummy = new Label(this, SWT.NONE);
-			labelDummy.setText("");
-		}
-		{
-			Label labelDummy = new Label(this, SWT.NONE);
-			labelDummy.setText("");
+		slf.createLogo();
+		logger.debug("Logo");
+		SimpleButtonFactory sbf = new SimpleButtonFactory(this);
+		SimpleComboFactory scf = new SimpleComboFactory(this,config);
+		lblRepository = scf.createCboRepository();
+		
+		btnChange = sbf.createBtnChange();
 
-			{
-				GridData data = new GridData();
-				data.horizontalSpan = 2;
-				labelDummy.setLayoutData(data);
-			}
-		}
-		{
-			buttonAktualisieren = new Button(this, SWT.PUSH | SWT.CENTER);
-			buttonAktualisieren.setText("   aktualisieren   ");
-
-			{
-				GridData data = new GridData();
-				data.horizontalAlignment = GridData.FILL;
-				buttonAktualisieren.setLayoutData(data);
-			}
-
-			buttonAktualisieren
-				.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					loescheErgebnis();
-					getProducableEntities();
-					}
-				});
-		}
+		cboApplications = scf.createCboApplication();
+		cboProjects = scf.createCboProject();
+		cboDocuments = scf.createCboDocument();
+		cboFormats = scf.createCboFormats();
+		
+		btnUpdate = sbf.createBtnUpdate();
 		
 		tableProductionEntities = SimpleTableFactory.createTable(this);
 		tableProductionEntities.addSelectionListener(new SelectionAdapter() {
@@ -366,25 +169,8 @@ public class Client extends Composite implements ClientGuiCallback
 			}
 		});
 		
+		btnProduce = sbf.createBtnProduce();
 		
-		{
-			buttonProduzieren = new Button(this, SWT.PUSH | SWT.CENTER);
-			buttonProduzieren.setText("   produzieren   ");
-
-			{
-				GridData data = new GridData();
-				data.verticalAlignment = GridData.END;
-				data.horizontalAlignment = GridData.FILL;
-				buttonProduzieren.setLayoutData(data);
-			}
-
-			buttonProduzieren.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					loescheErgebnis();
-					produce();
-				}
-			});
-		}
 		{
 			lblEvent = new Label(this, SWT.NONE);
 			lblEvent.setText("");
@@ -515,8 +301,8 @@ public class Client extends Composite implements ClientGuiCallback
 				{
 					comboDokumente.setText(sDokument);
 				}
-			} // if
-*/		} // if
+			}
+*/		}
 	}
 	
 	/**
@@ -583,6 +369,13 @@ public class Client extends Composite implements ClientGuiCallback
 		});
 	}
 
+	private void checkSet(Combo cbo) throws IllegalArgumentException
+	{
+		if(cbo.getText().equals(""))
+		{
+			throw new IllegalArgumentException("You have to chose a "+cbo.getData());
+		}
+	}
 	
 	/**
 	 * Die Methode getProducableEntities testet, ob alle Eingaben gemacht wurden
@@ -590,50 +383,15 @@ public class Client extends Composite implements ClientGuiCallback
 	 * Vor dem Start werden alle Elemente disabled, um weitere Eingaben zu vermeiden.
 	 */
 	public void getProducableEntities()
-	{	
-		String Verzeichnis = lblRepository.getText();
-		String Anwendung = cboApplications.getText();
-		String Projekt = cboProjects.getText();
-		String Dokument = cboDocuments.getText();
-		String Format = cboFormats.getText();
-		
-		if (Verzeichnis.equals(""))
+	{			
+		try
 		{
-			MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
-			messageBox.setText("Fehler");
-			messageBox.setMessage("Sie haben kein Verzeichnis ausgewählt."); 
-			messageBox.open();
-		}
-		else if (Anwendung.equals(""))
-		{
-			MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
-			messageBox.setText("Fehler");
-			messageBox.setMessage("Sie haben keine Anwendung ausgewählt."); 
-			messageBox.open();
-		}
-		else if (Projekt.equals(""))
-		{
-			MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
-			messageBox.setText("Fehler");
-			messageBox.setMessage("Sie haben kein Projekt ausgewählt."); 
-			messageBox.open();
-		}
-		else if (Dokument.equals(""))
-		{
-			MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
-			messageBox.setText("Fehler");
-			messageBox.setMessage("Sie haben kein Dokument ausgewählt."); 
-			messageBox.open();
-		}
-		else if (Format.equals(""))
-		{
-		    MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
-		    messageBox.setText("Fehler");
-		    messageBox.setMessage("Sie haben kein Format ausgewählt."); 
-		    messageBox.open();
-		}
-		else
-		{
+			checkSet(cboApplications);
+			checkSet(cboProjects);
+			checkSet(cboDocuments);
+			checkSet(cboFormats);
+			if(lblRepository.getText().equals("")){throw new IllegalArgumentException("You have to chose a repository!");}
+			
 			try
 			{
 				setAllEnabled(false);
@@ -662,7 +420,15 @@ public class Client extends Composite implements ClientGuiCallback
 				
 				logger.fatal("Exception", e);
 			}
-		} // else
+			
+		}
+		catch (IllegalArgumentException e)
+		{
+			MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
+			messageBox.setText("Error");
+			messageBox.setMessage(e.getMessage()); 
+			messageBox.open();
+		}
 	}
 
 	/**
@@ -863,9 +629,9 @@ public class Client extends Composite implements ClientGuiCallback
 		cboProjects.setEnabled(bool);
 		cboDocuments.setEnabled(bool);
 		cboFormats.setEnabled(bool);
-		buttonAktualisieren.setEnabled(bool);
+		btnUpdate.setEnabled(bool);
 		tableProductionEntities.setEnabled(bool);
-		buttonProduzieren.setEnabled(bool);
+		btnProduce.setEnabled(bool);
 	
 		if (bool)
 		{
@@ -886,7 +652,6 @@ public class Client extends Composite implements ClientGuiCallback
 	public void loescheErgebnis()
 	{
 		lblEvent.setText("");
-		producedEntities = null;
 	}
 
 	
@@ -906,8 +671,12 @@ public class Client extends Composite implements ClientGuiCallback
 		ArrayList<Image> alImages = new ArrayList<Image>();
 		for (int i=0; i<Dateinamen.length; i++)
 		{
-			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), Dateinamen[i], getDisplay());
-			if (img != null){alImages.add(img);}
+			try
+			{
+				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), Dateinamen[i], getDisplay());
+				alImages.add(img);
+			}
+			catch (FileNotFoundException e){logger.warn(e);}
 		}
 		
 		Image[] img = new Image[alImages.size()];

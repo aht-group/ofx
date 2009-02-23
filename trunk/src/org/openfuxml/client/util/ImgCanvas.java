@@ -1,5 +1,8 @@
 package org.openfuxml.client.util;
 
+import java.io.FileNotFoundException;
+
+import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
@@ -16,6 +19,8 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
  */
 public class ImgCanvas extends Canvas
 {
+	static Logger logger = Logger.getLogger(ImgCanvas.class);
+	
 	public final static int BEGIN  = 0;
 	public final static int CENTER = 1;
 	public final static int END    = 2;
@@ -120,8 +125,11 @@ public class ImgCanvas extends Canvas
 	
 	public void setImage(String Dateiname)
 	{
-		img = ImageResourceLoader.search(this.getClass().getClassLoader(), Dateiname, getDisplay());
-
+		try
+		{
+			img = ImageResourceLoader.search(this.getClass().getClassLoader(), Dateiname, getDisplay());
+		}
+		catch (FileNotFoundException e){logger.warn(e);}
         berechneKoordinaten();
 		
 		redraw();
