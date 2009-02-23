@@ -1,4 +1,4 @@
-package org.openfuxml.client.simple;
+package org.openfuxml.client.gui.simple;
 
 import java.io.File;
 import java.util.ArrayList;

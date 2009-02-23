@@ -1,4 +1,4 @@
-package org.openfuxml.client.simple.factory;
+package org.openfuxml.client.gui.simple.factory;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;

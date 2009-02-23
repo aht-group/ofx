@@ -1,4 +1,4 @@
-package org.openfuxml.client.simple.factory;
+package org.openfuxml.client.gui.simple.factory;
 
 import org.apache.commons.configuration.Configuration;
 import org.eclipse.swt.SWT;
@@ -7,7 +7,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Label;
-import org.openfuxml.client.simple.Client;
+import org.openfuxml.client.gui.simple.Client;
 
 public class SimpleButtonFactory
 {

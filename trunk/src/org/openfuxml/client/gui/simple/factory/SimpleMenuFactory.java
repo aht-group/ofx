@@ -1,4 +1,4 @@
-package org.openfuxml.client.simple.factory;
+package org.openfuxml.client.gui.simple.factory;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -6,7 +6,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
-import org.openfuxml.client.simple.Client;
+import org.openfuxml.client.gui.simple.Client;
 
 public class SimpleMenuFactory
 {

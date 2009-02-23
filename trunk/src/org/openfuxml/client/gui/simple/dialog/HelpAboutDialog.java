@@ -1,4 +1,4 @@
-package org.openfuxml.client.simple.dialog;
+package org.openfuxml.client.gui.simple.dialog;
 
 import java.io.FileNotFoundException;
 
@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
-import org.openfuxml.client.simple.Client;
+import org.openfuxml.client.gui.simple.Client;
 
 import de.kisner.util.io.resourceloader.ImageResourceLoader;
 

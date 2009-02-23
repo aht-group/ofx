@@ -1,4 +1,4 @@
-package org.openfuxml.client.simple;
+package org.openfuxml.client.gui.simple;
 
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
@@ -32,12 +32,12 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.ClientGuiCallback;
 import org.openfuxml.client.control.OpenFuxmlClientControl;
-import org.openfuxml.client.simple.dialog.HelpAboutDialog;
-import org.openfuxml.client.simple.factory.SimpleButtonFactory;
-import org.openfuxml.client.simple.factory.SimpleComboFactory;
-import org.openfuxml.client.simple.factory.SimpleLabelFactory;
-import org.openfuxml.client.simple.factory.SimpleMenuFactory;
-import org.openfuxml.client.simple.factory.SimpleTableFactory;
+import org.openfuxml.client.gui.simple.dialog.HelpAboutDialog;
+import org.openfuxml.client.gui.simple.factory.SimpleButtonFactory;
+import org.openfuxml.client.gui.simple.factory.SimpleComboFactory;
+import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
+import org.openfuxml.client.gui.simple.factory.SimpleMenuFactory;
+import org.openfuxml.client.gui.simple.factory.SimpleTableFactory;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;

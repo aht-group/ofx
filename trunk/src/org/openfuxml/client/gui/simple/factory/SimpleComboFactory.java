@@ -1,4 +1,4 @@
-package org.openfuxml.client.simple.factory;
+package org.openfuxml.client.gui.simple.factory;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
@@ -9,7 +9,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.openfuxml.client.simple.Client;
+import org.openfuxml.client.gui.simple.Client;
 import org.openfuxml.util.config.OfxPathHelper;
 
 public class SimpleComboFactory

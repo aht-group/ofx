@@ -1,4 +1,4 @@
-package org.openfuxml.client.simple.dialog;
+package org.openfuxml.client.gui.simple.dialog;
 
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
