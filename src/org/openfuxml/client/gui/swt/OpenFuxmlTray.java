@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Tray;
 import org.eclipse.swt.widgets.TrayItem;
-import org.openfuxml.client.simple.Client;
+import org.openfuxml.client.gui.simple.Client;
 
 import de.kisner.util.io.resourceloader.ImageResourceLoader;
 

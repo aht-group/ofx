@@ -1,4 +1,4 @@
-package org.openfuxml.client.simple.factory;
+package org.openfuxml.client.gui.simple.factory;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
@@ -7,7 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Label;
-import org.openfuxml.client.simple.Client;
+import org.openfuxml.client.gui.simple.Client;
 import org.openfuxml.util.config.OfxPathHelper;
 
 import de.kisner.util.io.resourceloader.ImageResourceLoader;

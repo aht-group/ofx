@@ -32,8 +32,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.OpenFuxmlClientControl;
 import org.openfuxml.client.control.ProducerThread;
-import org.openfuxml.client.simple.Client;
-import org.openfuxml.client.simple.factory.SimpleComboFactory;
+import org.openfuxml.client.gui.simple.Client;
+import org.openfuxml.client.gui.simple.factory.SimpleComboFactory;
 import org.openfuxml.client.util.ImgCanvas;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
@@ -118,7 +118,7 @@ public class ProduzierenComposite extends Composite
 		
 		alProductionEntities = new ArrayList<ProductionEntity>();
 		
-		SimpleComboFactory scf = new SimpleComboFactory(this,config);
+//		SimpleComboFactory scf = new SimpleComboFactory(this,config);
 		
 		{
 			GridLayout layout = new GridLayout();

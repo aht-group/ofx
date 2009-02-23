@@ -1,4 +1,4 @@
-package org.openfuxml.client.simple;
+package org.openfuxml.client.gui.simple;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;

@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
-import org.openfuxml.client.simple.ExtensionFilenameFilter;
+import org.openfuxml.client.gui.simple.ExtensionFilenameFilter;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxProject;
