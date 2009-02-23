@@ -25,30 +25,6 @@ public class SimpleComboFactory
 		this.config=config;
 	}
 	
-	public Label createCboRepository()
-	{
-		Label labelVerz = new Label(client, SWT.NONE);
-		labelVerz.setText("Verzeichnis");
-		labelVerz.setBackground(client.getBackground());
-			
-
-			Label lblRepository = new Label(client, SWT.NONE);
-			lblRepository.setBackground(client.getBackground());
-
-			{
-				GridData data = new GridData();
-				data.horizontalAlignment = GridData.FILL;
-				data.grabExcessHorizontalSpace = true;
-				lblRepository.setLayoutData(data);
-			}
-			
-			lblRepository.setText(OfxPathHelper.getDir(config, "repository"));
-			logger.debug("Repository: "+lblRepository.getText());
-
-		
-		return lblRepository;
-	}
-	
 	public Combo createCboApplication()
 	{
 		Label labelAnwendungen = new Label(client, SWT.NONE);

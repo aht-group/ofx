@@ -20,6 +20,7 @@ import org.openfuxml.communication.cluster.sync.ssh.SshTarget;
 import org.openfuxml.producer.ejb.ProductionRequest;
 import org.openfuxml.producer.ejb.SyncLocation;
 import org.openfuxml.producer.exception.ProductionHandlerException;
+import org.openfuxml.util.config.OfxPathHelper;
 
 import de.kisner.util.event.EventInterface;
 import de.kisner.util.event.handler.EventHandlerHash;
@@ -43,9 +44,9 @@ public class UnisonSync implements ServerSync
 	public UnisonSync(Configuration config)
 	{
 		String baseDir = config.getString("dirs/dir[@type='basedir']");
-		//TODO Relative PATH
-		localRepo=baseDir+fs+config.getString("dirs/dir[@type='repository']");;
-		localOutput= baseDir+fs+config.getString("dirs/dir[@type='output']");
+		
+		localRepo=OfxPathHelper.getDir(config, "repository");
+		localOutput=OfxPathHelper.getDir(config, "output");
 		
 		sshCC=new SshChecker(15,5);
 	}
