@@ -33,6 +33,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.OpenFuxmlClientControl;
 import org.openfuxml.client.control.ProducerThread;
 import org.openfuxml.client.simple.Client;
+import org.openfuxml.client.simple.factory.SimpleComboFactory;
 import org.openfuxml.client.util.ImgCanvas;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
@@ -116,7 +117,8 @@ public class ProduzierenComposite extends Composite
 		alMetaDokumente = new ArrayList();
 		
 		alProductionEntities = new ArrayList<ProductionEntity>();
-
+		
+		SimpleComboFactory scf = new SimpleComboFactory(this,config);
 		
 		{
 			GridLayout layout = new GridLayout();
@@ -146,7 +148,7 @@ public class ProduzierenComposite extends Composite
 			// Die Combo für die Dokumente kann erst am Schluß gefüllt werden,
 			// da auch auf Elemente zugegriffen wird, die vorher noch nicht
 			// angelegt worden sind.
-			fuelleComboDokumente();
+//			fuelleComboDokumente();
 		}
 		{
 			Label labelDummy = new Label(this, SWT.NONE);
@@ -170,7 +172,7 @@ public class ProduzierenComposite extends Composite
 				}
 			});
 			
-			fuelleComboFormate();			
+//			fuelleComboFormate();			
 		}
 		{
 			Label labelDummy = new Label(this, SWT.NONE);
@@ -403,7 +405,7 @@ for (int i=0; i<alProductionEntities.size(); i++)
 	 * Verzeichnis sVerzeichnis/sProjektname", die die Endung
 	 * ".xml" haben, in die Combo comboDokumente.
 	 */
-	public void fuelleComboDokumente()
+	public void fuelleComboDokumente2()
 	{
 		// Löschen der Einträge in der Combo comboDokumente. 
 		comboDokumente.removeAll();
@@ -424,7 +426,7 @@ for (int i=0; i<alProductionEntities.size(); i++)
 	 * Die Methode fuelleComboFormate schreibt alle Formate
 	 * aus availableFormats in die Combo comboFormate.
 	 */
-	public void fuelleComboFormate()
+	public void fuelleComboFormate2()
 	{
 		try
 		{
