@@ -31,7 +31,6 @@ public class ProjektComposite extends Composite
 	static Logger logger = Logger.getLogger(ProjektComposite.class);
 	
 	private OpenFuxmlClient client;
-	private OfxProject ofxProject;
 	private TabFolder tabFolder;
 	
 	private ProduzierenComposite pComp;
@@ -82,7 +81,7 @@ public class ProjektComposite extends Composite
 			this.setLayout(layout);
 		
 		Label label = new Label(this, SWT.NONE);
-			label.setText("Projektname: " + ofxProject.getName());		
+			label.setText("Projektname: " + ofxP.getName());		
 			GridData data = new GridData();
 			data.grabExcessHorizontalSpace = true;
 			data.horizontalAlignment = GridData.FILL;
