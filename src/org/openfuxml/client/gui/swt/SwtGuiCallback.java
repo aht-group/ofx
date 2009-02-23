@@ -7,4 +7,5 @@ public class SwtGuiCallback implements ClientGuiCallback
 	public void entitiesProduced(){}
 	public void setStatus(String status){}
 	public void entitiesDiscovered(){}
+	public void setControlsEnabled(boolean enabled){}
 }

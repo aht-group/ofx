@@ -19,7 +19,6 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -60,7 +59,7 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
  * @author Andrea Frank
  */
 public class Client extends Composite implements ClientGuiCallback
-{
+{ 
     static Logger logger = Logger.getLogger(Client.class);
     private static String fs = SystemUtils.FILE_SEPARATOR;
     
@@ -142,12 +141,12 @@ public class Client extends Composite implements ClientGuiCallback
 		}
 		
 		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
-		
-		slf.createLogo();
-		logger.debug("Logo");
 		SimpleButtonFactory sbf = new SimpleButtonFactory(this);
 		SimpleComboFactory scf = new SimpleComboFactory(this,config);
-		lblRepository = scf.createCboRepository();
+		
+		slf.createLogo();
+		
+		lblRepository = slf.createLblRepository();
 		
 		btnChange = sbf.createBtnChange();
 
@@ -170,17 +169,7 @@ public class Client extends Composite implements ClientGuiCallback
 		});
 		
 		btnProduce = sbf.createBtnProduce();
-		
-		{
-			lblEvent = new Label(this, SWT.NONE);
-			lblEvent.setText("");
-			lblEvent.setBackground(this.getBackground());
-
-			GridData data = new GridData();
-			data.horizontalAlignment = GridData.FILL;
-			data.horizontalSpan = 2;
-			lblEvent.setLayoutData(data);
-		}
+		lblEvent = slf.creatLblEvent();
 		
 		fillCboApplications();
 
@@ -335,11 +324,12 @@ public class Client extends Composite implements ClientGuiCallback
 							newItem.setText(new String[] {"", f.getDescription(),f.getDirectory(), f.getFilename()});
 						}
 					};
-					setAllEnabled(true);
 				}
 			}
 		});
 	}
+	
+	public void entitiesProduced(){}
 	
 	public void setStatus(final String status)
 	{
@@ -351,20 +341,6 @@ public class Client extends Composite implements ClientGuiCallback
 				{
 					lblEvent.setText(status);
 				}
-			}
-		});
-	}
-	
-	/**
-	 * Nach dem Produzieren werden alle Bedienelemente wieder auf enabled gesetzt.  
-	 */
-	public void entitiesProduced()
-	{
-		display.asyncExec(new Runnable()
-		{
-			public void run()
-			{
-				if (!toplevelShell.isDisposed()){setAllEnabled(true);}
 			}
 		});
 	}
@@ -394,7 +370,6 @@ public class Client extends Composite implements ClientGuiCallback
 			
 			try
 			{
-				setAllEnabled(false);
 				display.asyncExec(new Runnable()
 					{
 						public void run()
@@ -416,7 +391,6 @@ public class Client extends Composite implements ClientGuiCallback
 				// Falls bei dem Aufruf von getProducableEntities irgendwelche Fehler auftreten,
 				// kommt hier eine Fehlemeldung.
 				ServerFehler();
-				setAllEnabled(true);
 				
 				logger.fatal("Exception", e);
 			}
@@ -457,7 +431,6 @@ public class Client extends Composite implements ClientGuiCallback
 		}
 		else
 		{
-			setAllEnabled(false);
 			display.asyncExec(new Runnable()
 				{
 					public void run()
@@ -621,28 +594,31 @@ public class Client extends Composite implements ClientGuiCallback
 	 * 
 	 * @param bool - gibt an, ob die Bedienelemente enabled bzw. disabled werden.
 	 */
-	public void setAllEnabled(boolean bool)
+	public void setControlsEnabled(final boolean bool)
 	{
-		menu.setEnabled(bool);
+		display.asyncExec(new Runnable()
+		{
+			public void run()
+			{
+				if (!toplevelShell.isDisposed())
+				{				
+					menu.setEnabled(bool);
 
-		btnChange.setEnabled(bool);
-		cboProjects.setEnabled(bool);
-		cboDocuments.setEnabled(bool);
-		cboFormats.setEnabled(bool);
-		btnUpdate.setEnabled(bool);
-		tableProductionEntities.setEnabled(bool);
-		btnProduce.setEnabled(bool);
-	
-		if (bool)
-		{
-			cursor = new Cursor(display, SWT.CURSOR_ARROW);
-			toplevelShell.setCursor(cursor);
-		}
-		else
-		{
-			cursor = new Cursor(display, SWT.CURSOR_WAIT);
-			toplevelShell.setCursor(cursor);
-		}
+					btnChange.setEnabled(bool);
+					cboApplications.setEnabled(bool);
+					cboProjects.setEnabled(bool);
+					cboDocuments.setEnabled(bool);
+					cboFormats.setEnabled(bool);
+					btnUpdate.setEnabled(bool);
+					tableProductionEntities.setEnabled(bool);
+					btnProduce.setEnabled(bool);
+				
+					if (bool){cursor = new Cursor(display, SWT.CURSOR_ARROW);}
+					else {cursor = new Cursor(display, SWT.CURSOR_WAIT);}
+					toplevelShell.setCursor(cursor);
+				} 
+			}
+		});
 	}
 	
 	/**
