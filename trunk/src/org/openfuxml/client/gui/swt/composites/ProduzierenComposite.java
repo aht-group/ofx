@@ -1,10 +1,9 @@
 package org.openfuxml.client.gui.swt.composites;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -19,7 +18,6 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -28,24 +26,21 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
-import org.openfuxml.client.control.OpenFuxmlClientControl;
-import org.openfuxml.client.control.ProducerThread;
-import org.openfuxml.client.gui.simple.Client;
+import org.openfuxml.client.control.OfxClientControl;
+import org.openfuxml.client.gui.simple.factory.SimpleButtonFactory;
 import org.openfuxml.client.gui.simple.factory.SimpleComboFactory;
+import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
+import org.openfuxml.client.gui.simple.factory.SimpleTableFactory;
+import org.openfuxml.client.gui.util.GuiSettingsValidator;
 import org.openfuxml.client.util.ImgCanvas;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
-import org.openfuxml.producer.Producer;
+import org.openfuxml.model.jaxb.Format.Options.Option;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * 
@@ -66,9 +61,7 @@ public class ProduzierenComposite extends Composite
 	
 	private ProjektComposite projekt;	
 	
-	private Combo comboDokumente;
-	private Combo comboFormate;
-	private ArrayList alMetaDokumente;
+	private Combo cboDocuments,cboFormats;
 
 	private Button buttonAktualisieren;
 
@@ -89,36 +82,37 @@ public class ProduzierenComposite extends Composite
 	
 	private Button buttonProduzieren;
 
-	private Label labelStatus;
+	private Label lblEvent;
 	private ImgCanvas imgCanvasStatus;
 	private Button buttonErgebnisDetails;
-	
-	private ProducerThread producerThread;
-	private int anzItems;
-	
+		
 
 	private ArrayList<ProductionEntity> alProductionEntities;
 
 	
 	private OfxProject ofxP;
 	private OfxApplication ofxA;
-	private OpenFuxmlClientControl ofxCC;
+	private OfxClientControl ofxCC;
 	
 	
-	public ProduzierenComposite(Composite parent, OfxApplication ofxA, OfxProject ofxP, OpenFuxmlClientControl ofxCC, ProjektComposite projekt)
+	public ProduzierenComposite(Composite parent, OfxApplication ofxA, OfxProject ofxP, OfxClientControl ofxCC, ProjektComposite projekt, Configuration config)
 	{
 		super(parent, SWT.NONE);
+		this.ofxA=ofxA;
 		this.ofxP=ofxP;
+		this.ofxCC=ofxCC;
 		display = this.getDisplay();
 		toplevelShell = this.getShell();
 
 		this.projekt = projekt;		
 		
-		alMetaDokumente = new ArrayList();
 		
 		alProductionEntities = new ArrayList<ProductionEntity>();
 		
-//		SimpleComboFactory scf = new SimpleComboFactory(this,config);
+		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
+		SimpleComboFactory scf = new SimpleComboFactory(this,ofxCC);
+		SimpleButtonFactory sbf = new SimpleButtonFactory(this,ofxCC);
+		SimpleTableFactory stf = new SimpleTableFactory();
 		
 		{
 			GridLayout layout = new GridLayout();
@@ -127,79 +121,14 @@ public class ProduzierenComposite extends Composite
 			layout.marginWidth = 20;
 			this.setLayout(layout);
 		}
-		{
-			Label labelDocument = new Label(this, SWT.NONE);
-			labelDocument.setText("Dokument");
-			labelDocument.setBackground(this.getBackground());
-		}
-		{
-			comboDokumente = new Combo(this, SWT.READ_ONLY | SWT.NONE);
-
-			GridData data = new GridData();
-			data.horizontalAlignment = GridData.FILL;
-			comboDokumente.setLayoutData(data);
-			
-			comboDokumente.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					comboDokumenteSelected();
-				}
-			});
-
-			// Die Combo für die Dokumente kann erst am Schluß gefüllt werden,
-			// da auch auf Elemente zugegriffen wird, die vorher noch nicht
-			// angelegt worden sind.
-//			fuelleComboDokumente();
-		}
-		{
-			Label labelDummy = new Label(this, SWT.NONE);
-			labelDummy.setText("");
-		}
-		{
-			Label labelFormate = new Label(this, SWT.NONE);
-			labelFormate.setText("Format");
-			labelFormate.setBackground(this.getBackground());
-		}
-		{
-			comboFormate = new Combo(this, SWT.READ_ONLY | SWT.NONE);
-
-			GridData data = new GridData();
-			data.horizontalAlignment = GridData.FILL;
-			comboFormate.setLayoutData(data);
-
-			comboFormate.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					comboFormateSelected();
-				}
-			});
-			
-//			fuelleComboFormate();			
-		}
-		{
-			Label labelDummy = new Label(this, SWT.NONE);
-			labelDummy.setText("");
-		}
-		{
-			Label labelDummy = new Label(this, SWT.NONE);
-			labelDummy.setText("");
-			
-			GridData data = new GridData();
-			data.horizontalSpan = 2;
-			labelDummy.setLayoutData(data);
-		}
-		{
-			buttonAktualisieren = new Button(this, SWT.PUSH | SWT.CENTER);
-			buttonAktualisieren.setText("aktualisieren");
-			
-			GridData data = new GridData();
-			data.horizontalAlignment = GridData.FILL;
-			buttonAktualisieren.setLayoutData(data);
-
-			buttonAktualisieren.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					aktualisieren();
-					}
-				});
-		}
+		
+		cboDocuments = scf.createCboDocument();
+		fuelleComboDokumente();
+		cboFormats = scf.createCboFormats();
+		fuelleComboFormate();
+		
+		buttonAktualisieren = sbf.createBtnUpdate();
+	
 		{
 			tfAnsicht = new TabFolder(this, SWT.TOP);
 			{
@@ -212,49 +141,16 @@ public class ProduzierenComposite extends Composite
 				tfAnsicht.setLayoutData(data);
 			}
 
-			tableProductionEntities = new Table(tfAnsicht, SWT.CHECK);
+			tableProductionEntities = stf.createTable(tfAnsicht); //new Table(tfAnsicht, SWT.CHECK);
 
 			tiAnsichtTabelle = new TabItem(tfAnsicht, SWT.NONE);
 			tiAnsichtTabelle.setText("Tabellenansicht");
 			tiAnsichtTabelle.setControl(tableProductionEntities);
 			
-			// tiAnsichtMatrix wird erst in der Methode fuelleTableProductionEntities
-			// mit Inhalt gefüllt, da dieser vom ausgewählten Format abhängt.
 			tiAnsichtMatrix = null;
 			
 			{
-				{
-					GridData data = new GridData();
-					data.grabExcessHorizontalSpace = true;
-					data.grabExcessVerticalSpace = true;
-					data.horizontalAlignment = GridData.FILL;
-					data.verticalAlignment = GridData.FILL;
-					data.horizontalSpan = 1;
-					tableProductionEntities.setLayoutData(data);
-				}
-				{
-					TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
-					tableColumn.setText("");
-					tableColumn.setWidth(20);
-				}
-				{
-					TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
-					tableColumn.setText("Beschreibung");
-					tableColumn.setWidth(160);
-				}
-				{
-					TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
-					tableColumn.setText("Serverausgabe");
-					tableColumn.setWidth(180);
-				}
-				{
-					TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
-					tableColumn.setText("Dateiname");
-					tableColumn.setWidth(100);
-				}
-				tableProductionEntities.setHeaderVisible(true);
-				tableProductionEntities.setLinesVisible(true);
-				
+/*
 				tableProductionEntities.addSelectionListener(new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent evt) {
 System.out.println("tablePE.widgetSelected !!!");
@@ -297,7 +193,7 @@ for (int i=0; i<alProductionEntities.size(); i++)
 //						speicherPEHaekchen();
  					}
 				});
-				
+*/
 				erzeugeAlProductionEntities();
 //				setzePEHaekchen();
 			}
@@ -309,7 +205,7 @@ for (int i=0; i<alProductionEntities.size(); i++)
 		{
 			compositeOptionen = new Composite(this, SWT.NONE);
 			
-//			fuelleCompositeOptionen();
+			fuelleCompositeOptionen();
 			
 			stackLayout = new StackLayout();
 			compositeOptionen.setLayout(stackLayout);			
@@ -361,15 +257,9 @@ for (int i=0; i<alProductionEntities.size(); i++)
 				}
 			});
 		}
-		{
-			labelStatus = new Label(this, SWT.NONE);
-			labelStatus.setText("Status:");
-			labelStatus.setBackground(this.getBackground());
-
-			GridData data = new GridData();
-			data.horizontalAlignment = GridData.FILL;
-			labelStatus.setLayoutData(data);
-		}
+		
+		lblEvent = slf.creatLblEvent();
+		
 		{
 			imgCanvasStatus = new ImgCanvas(this, "/swt/images/ok.gif");
 			GridData data = new GridData();
@@ -396,7 +286,6 @@ for (int i=0; i<alProductionEntities.size(); i++)
 		
 		pack();
 		
-		labelStatus.setVisible(false);
 		imgCanvasStatus.setVisible(false);
 	}
 	
@@ -405,20 +294,22 @@ for (int i=0; i<alProductionEntities.size(); i++)
 	 * Verzeichnis sVerzeichnis/sProjektname", die die Endung
 	 * ".xml" haben, in die Combo comboDokumente.
 	 */
-	public void fuelleComboDokumente2()
-	{
-		// Löschen der Einträge in der Combo comboDokumente. 
-		comboDokumente.removeAll();
-		alMetaDokumente.clear();
+	public void fuelleComboDokumente()
+	{	// Löschen der Einträge in der Combo comboDokumente.
 
-		tableProductionEntities.removeAll();
+		cboDocuments.removeAll();
+//		alMetaDokumente.clear();
 
+//		tableProductionEntities.removeAll();
+		logger.debug("!");
+		logger.debug(ofxA.getName());
+		logger.debug(ofxP.getName());
 		List<OfxDocument> lOfxD = ofxCC.getOfxDocumentFactory().lDocuments(ofxA,ofxP);
-		
+		logger.debug(lOfxD.size());
 		for (OfxDocument ofxD : lOfxD)
 		{
-			comboDokumente.add(ofxD.getName());
-			comboDokumente.setData(ofxD.getName(),ofxD);
+			cboDocuments.add(ofxD.getName());
+			cboDocuments.setData(ofxD.getName(),ofxD);
 		}
 	}
 	
@@ -426,7 +317,7 @@ for (int i=0; i<alProductionEntities.size(); i++)
 	 * Die Methode fuelleComboFormate schreibt alle Formate
 	 * aus availableFormats in die Combo comboFormate.
 	 */
-	public void fuelleComboFormate2()
+	public void fuelleComboFormate()
 	{
 		try
 		{
@@ -436,8 +327,8 @@ for (int i=0; i<alProductionEntities.size(); i++)
 			{
 				for(OfxFormat ofxF : lFormats)
 				{
-					comboFormate.add(ofxF.getFormat().getTitle());
-					comboFormate.setData(ofxF.getFormat().getTitle(),ofxF);
+					cboFormats.add(ofxF.getFormat().getTitle());
+					cboFormats.setData(ofxF.getFormat().getTitle(),ofxF);
 				}
 			}
 			else {logger.error("Server meldet keine Formate!");}
@@ -457,77 +348,39 @@ for (int i=0; i<alProductionEntities.size(); i++)
 	 * damit sie beim Betätigen des Buttons "setze Default"(-Optionen) auf den jeweiligen
 	 * Default-Wert zurückgesetzt werden können. 
 	 */
-/*	public void fuelleCompositeOptionen()
+	public void fuelleCompositeOptionen()
 	{
-		SSIMessage availableFormats = projekt.getClient().getAvailableFormats();
-
-		groupsOptionen = new Group[comboFormate.getItemCount()];
-		
-		for (int i=0; i<groupsOptionen.length; i++)
+		groupsOptionen = new Group[cboFormats.getItemCount()];
+		logger.debug("optionen ..."+cboFormats.getItemCount());
+		for(int i=0; i<cboFormats.getItemCount(); i++)
 		{
-			String sFormat = comboFormate.getItem(i);
+			String sFormatLabel = cboFormats.getItem(i);
+			OfxFormat ofxF = (OfxFormat)cboFormats.getData(sFormatLabel);
+			
+			logger.debug("optionen ..."+ofxF.getFormat().getOutputformat());
+			
 			groupsOptionen[i] = new Group(compositeOptionen, SWT.NONE);
-			groupsOptionen[i].setText(getGroupLabel(sFormat));	
+			groupsOptionen[i].setText(getGroupLabel(ofxF.getFormat().getOutputformat()));	
 			
 			RowLayout rowLayout = new RowLayout ();
 			rowLayout.pack = false;
 			groupsOptionen[i].setLayout (rowLayout);
-
-			if (availableFormats != null)
+			
+			for(Option o : ofxF.getFormat().getOptions().getOption())
 			{
-				// Umwandeln der benötigten Informationen
-				Document docAvailableFormats = availableFormats.getMessage();
-
-				// Alle Nodes mit dem Namen "option" raussuchen.
-				NodeList nl_optionen = docAvailableFormats.getElementsByTagName("option");
-
-				// Gefundene Knoten zählen.
-				int anzOptionen = nl_optionen.getLength();
-
-				for (int k=0; k<anzOptionen; k++)
-				{
-					// jeden Knoten option untersuchen
-					Node n_option = nl_optionen.item(k);
-					
-					// den zugehörigen Knoten format bestimmen
-					Node n_format = n_option.getParentNode().getParentNode();
-					
-					// ist sFormat gleich dem Attribut id?
-					if (sFormat.equals(n_format.getAttributes().getNamedItem("id").getNodeValue()))
-					{
-						String sName = n_option.getAttributes().getNamedItem("name").getNodeValue();
-						String sDisplayname = n_option.getAttributes().getNamedItem("displayname").getNodeValue();
-						String sValue = n_option.getAttributes().getNamedItem("value").getNodeValue();
-						String sDescription = n_option.getFirstChild().getNextSibling().getFirstChild().getNodeValue();
-
-						boolean bValue = false;
-						if (sValue.equals("true"))
-						{
-							bValue = true;
-						}
-						
-						// Die Werte zu dieser Option werden in aProducerOption zusammengefasst ...
-						ProducerOption aProducerOption = new ProducerOption(sFormat, sName, sDisplayname,
-								sDescription, bValue);
-						
-						Button buttonOption = new Button(groupsOptionen[i], SWT.CHECK);
-						buttonOption.setText(aProducerOption.getDisplayname());
-						buttonOption.setToolTipText(aProducerOption.getDescription());
-						
-						buttonOption.addSelectionListener(new SelectionAdapter() {
-							public void widgetSelected(SelectionEvent evt) {
-								speicherOptionenHaekchen();					
-							}
-						});
-						
-						// ... und dann in htOptionen gespeichert.
-						htOptionen.put(aProducerOption.getKey(), aProducerOption);
-					} // if
-				} // for
-			} // if
+				Button buttonOption = new Button(groupsOptionen[i], SWT.CHECK);
+				buttonOption.setText(o.getName());
+				buttonOption.setToolTipText(o.getDescription());
+				
+				buttonOption.addSelectionListener(new SelectionAdapter() {
+					public void widgetSelected(SelectionEvent evt) {
+//						speicherOptionenHaekchen();					
+					}
+				});	
+			}			
 		} // for
 	} // fuelleCompositeOptionen
-/*
+
 	/**
 	 * Die Optionen sind vom eingestellten Format (z. Zt. html, latexpdf, validation) 
 	 * abhängig. Je nachdem welches Format gewählt wurde, sind andere Optionen
@@ -537,9 +390,10 @@ for (int i=0; i<alProductionEntities.size(); i++)
 	 */
 	public void zeigeOptionen()
 	{
-		int i = comboFormate.getSelectionIndex();
+		int i = cboFormats.getSelectionIndex();
 		if (i > -1)
 		{
+			logger.debug("Zeige optionen "+i);
 			stackLayout.topControl = groupsOptionen[i];
 			compositeOptionen.layout();
 		}
@@ -654,7 +508,7 @@ System.out.println(hString);
 	public void fuelleMatrix()
 	{
 		// Bearbeiten der "Matrixansicht"
-		if (!comboFormate.getText().equals("latexpdf"))
+		if (!cboFormats.getText().equals("latexpdf"))
 		{
 			TabItem ti[] = {tiAnsichtTabelle};
 			tfAnsicht.setSelection(ti);
@@ -1046,18 +900,42 @@ System.out.println(hString);
 		}
 */	}
 	
+	
 	/**
-	 * Die Methode aktualisieren testet, ob alle Eingaben gemacht wurden
-	 * (Auswahl eines Dokuments und eines Formats)
+	 * Die Methode getProducableEntities testet, ob alle Eingaben gemacht wurden
 	 * und startet dann einen ProducerThread mit dem Auftrag startProducableEntities.
 	 * Vor dem Start werden alle Elemente disabled, um weitere Eingaben zu vermeiden.
 	 */
-	public void aktualisieren()
-	{
-		logger.debug("aktualisieren");
+	public void getProducableEntities()
+	{			
+		try
+		{
+			GuiSettingsValidator.checkSet(cboDocuments);
+			GuiSettingsValidator.checkSet(cboFormats);
+			display.asyncExec(new Runnable()
+				{
+					public void run()
+					{
+						if (!toplevelShell.isDisposed())
+						{
+							OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
+							OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
+							
+							ofxCC.getProducibleEntities(ofxA,ofxP,ofxD,ofxF);
+						}
+					}
+				});			
+		}
+		catch (IllegalArgumentException e)
+		{
+			MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
+			messageBox.setText("Error");
+			messageBox.setMessage(e.getMessage()); 
+			messageBox.open();
+		}
 	}
 	
-
+	
 	public void produzieren()
 	{
 		logger.debug("aktualisieren");
@@ -1074,8 +952,8 @@ System.out.println(hString);
 	 */
 	public void setAllEnabled(boolean bool)
 	{
-		comboDokumente.setEnabled(bool);
-		comboFormate.setEnabled(bool);
+		cboDocuments.setEnabled(bool);
+		cboFormats.setEnabled(bool);
 		buttonAktualisieren.setEnabled(bool);
 		tableProductionEntities.setEnabled(bool);
 		if (compositeMatrix!=null)
@@ -1098,6 +976,20 @@ System.out.println(hString);
 			Cursor cursor = new Cursor(display, SWT.CURSOR_WAIT);
 			setCursor(cursor);
 		}
+	}
+	
+	public void setStatus(final String status)
+	{
+		display.asyncExec(new Runnable()
+		{
+			public void run()
+			{
+				if (!toplevelShell.isDisposed())
+				{
+					lblEvent.setText(status);
+				}
+			}
+		});
 	}
 	
 	public ProjektComposite getProjektComposite()

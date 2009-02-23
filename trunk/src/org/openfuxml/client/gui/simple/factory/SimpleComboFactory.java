@@ -1,6 +1,5 @@
 package org.openfuxml.client.gui.simple.factory;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -9,20 +8,28 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.openfuxml.client.control.OfxGuiAction;
 import org.openfuxml.client.gui.simple.Client;
-import org.openfuxml.util.config.OfxPathHelper;
 
 public class SimpleComboFactory
 {
 	 static Logger logger = Logger.getLogger(SimpleComboFactory.class);
-	 
-	private Client client;
-	private Configuration config;
 	
-	public SimpleComboFactory(Client client, Configuration config)
+	private Composite composite;
+	private Client client;
+	private OfxGuiAction ofxAction;
+	
+	public SimpleComboFactory(Composite composite, OfxGuiAction ofxAction)
+	{
+		this.composite=composite;
+		this.ofxAction=ofxAction;
+	}
+	
+	public SimpleComboFactory(Client client, Composite composite, OfxGuiAction ofxAction)
 	{
 		this.client=client;
-		this.config=config;
+		this.composite=composite;
+		this.ofxAction=ofxAction;
 	}
 	
 	public Combo createCboApplication()
@@ -87,12 +94,12 @@ public class SimpleComboFactory
 	
 	public Combo createCboDocument()
 	{
-		Label labelDocument = new Label(client, SWT.NONE);
+		Label labelDocument = new Label(composite, SWT.NONE);
 		labelDocument.setText("Dokument");
-		labelDocument.setBackground(client.getBackground());
+		labelDocument.setBackground(composite.getBackground());
 
 
-		Combo cboDocuments = new Combo(client, SWT.READ_ONLY | SWT.NONE);
+		Combo cboDocuments = new Combo(composite, SWT.READ_ONLY | SWT.NONE);
 		cboDocuments.setData("Document");
 		
 		GridData data = new GridData();
@@ -102,25 +109,22 @@ public class SimpleComboFactory
 
 		cboDocuments.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent evt) {
-				//TODO Update Client Settings
-				//ClientConfigWrapper.updateKeyValue("document", comboDokumente.getText());
-				client.entitiesDiscovered();
-				client.loescheErgebnis();
+				ofxAction.cboDocumentSelected();
 			}
 		});
 
-		Label labelDummy = new Label(client, SWT.NONE);
+		Label labelDummy = new Label(composite, SWT.NONE);
 		labelDummy.setText("");
 		return cboDocuments;
 	}
 	
 	public Combo createCboFormats()
 	{
-		Label labelFormate = new Label(client, SWT.NONE);
+		Label labelFormate = new Label(composite, SWT.NONE);
 		labelFormate.setText("Format");
-		labelFormate.setBackground(client.getBackground());
+		labelFormate.setBackground(composite.getBackground());
 
-		Combo cboFormats = new Combo(client, SWT.READ_ONLY | SWT.NONE);
+		Combo cboFormats = new Combo(composite, SWT.READ_ONLY | SWT.NONE);
 		cboFormats.setData("Format");
 
 		GridData data = new GridData();
@@ -131,14 +135,11 @@ public class SimpleComboFactory
 	
 		cboFormats.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent evt) {
-				//TODO Update Client Settings
-				//ClientConfigWrapper.updateKeyValue("format", comboFormate.getText());
-				client.entitiesDiscovered();
-				client.loescheErgebnis();
+				ofxAction.cboFormateSelected();
 			}
 		});
 
-		Label labelDummy = new Label(client, SWT.NONE);
+		Label labelDummy = new Label(composite, SWT.NONE);
 		labelDummy.setText("");
 		return cboFormats;
 	}

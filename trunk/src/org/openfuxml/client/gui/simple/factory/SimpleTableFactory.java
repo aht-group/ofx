@@ -1,16 +1,29 @@
 package org.openfuxml.client.gui.simple.factory;
 
+import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 
 public class SimpleTableFactory
 {
-	public synchronized static Table createTable(Composite composite)
+	 static Logger logger = Logger.getLogger(SimpleTableFactory.class);
+	 
+	private Table tableProductionEntities;
+	
+	public SimpleTableFactory()
 	{
-		Table tableProductionEntities = new Table(composite, SWT.CHECK | SWT.BORDER);
+
+	}
+	
+	public Table createTable(Composite composite)
+	{
+		tableProductionEntities = new Table(composite, SWT.CHECK | SWT.BORDER);
 
 		{
 			GridData data = new GridData();
@@ -46,6 +59,16 @@ public class SimpleTableFactory
 		}
 		tableProductionEntities.setHeaderVisible(true);
 		tableProductionEntities.setLinesVisible(true);
+		
+		tableProductionEntities.addSelectionListener(new SelectionAdapter() {
+			public void widgetDefaultSelected(SelectionEvent evt) {
+				// Bestimmen des ausgewählten Eintrags.
+				TableItem[] selection = tableProductionEntities.getSelection();
+				TableItem selectedRow = selection[0];
+
+				logger.debug(selectedRow.getText(1)+" "+selectedRow.getText(2));
+			}
+		});
 		
 		return tableProductionEntities;
 	}

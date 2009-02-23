@@ -30,7 +30,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.openfuxml.client.control.OpenFuxmlClientControl;
+import org.openfuxml.client.control.OfxClientControl;
 import org.openfuxml.client.control.projects.ProjectFactory;
 import org.openfuxml.client.control.projects.ProjectFactoryDirect;
 import org.openfuxml.client.gui.simple.dialog.HelpAboutDialog;
@@ -87,14 +87,14 @@ public class OpenFuxmlClient extends Composite implements Runnable
 	private int pingThreadZaehler;
 	private Configuration config;
 	private Shell shell;
-	private OpenFuxmlClientControl ofxCC;
+	private OfxClientControl ofxCC;
 
 	public OpenFuxmlClient (Composite parent, int style, Configuration config)
 	{
 		super(parent, style);
 		this.config=config;
 		SwtGuiCallback guiCallback = new SwtGuiCallback();
-		ofxCC = new OpenFuxmlClientControl(config,guiCallback);
+		ofxCC = new OfxClientControl(config,guiCallback);
 		
 		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
 		splashscreen.open();
