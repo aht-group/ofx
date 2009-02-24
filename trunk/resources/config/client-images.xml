@@ -4,6 +4,7 @@
         <icon type="fuxklein">openFuXML-klein.gif</icon>
         <icon type="fux">openFuXML.gif</icon>
         <icon type="project">project.png</icon>
+        <icon type="ok">ok.gif</icon>
         <project>
             <icon type="open">open.gif</icon>
             <icon type="produce">produce.png</icon>

@@ -76,21 +76,21 @@ public class ProjektComposite extends Composite
 	private void initGUI()
 	{
         GridLayout layout = new GridLayout();
-			layout.marginHeight = 20;
-			layout.marginWidth = 20;
-			layout.verticalSpacing = 20;
+			layout.marginHeight = 10;
+			layout.marginWidth = 10;
+			layout.verticalSpacing = 10;
 			this.setLayout(layout);
 		
-		Label label = new Label(this, SWT.NONE);
+/*		Label label = new Label(this, SWT.NONE);
 			label.setText("Projektname: " + ofxP.getName());		
 			GridData data = new GridData();
 			data.grabExcessHorizontalSpace = true;
 			data.horizontalAlignment = GridData.FILL;
 			label.setLayoutData(data);
-
+*/
 		tabFolder = new TabFolder(this, SWT.TOP);
 			tabFolder.setSelection(0);
-			data = new GridData();
+			GridData data = new GridData();
 			data.grabExcessHorizontalSpace = true;
 			data.grabExcessVerticalSpace = true;
 			data.horizontalAlignment = GridData.FILL;

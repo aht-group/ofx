@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -47,13 +48,11 @@ import org.openfuxml.producer.exception.ProductionSystemException;
  * @author Andrea Frank
  */
 public class ProduzierenComposite extends Composite
-{
-	
+{	
 	static Logger logger = Logger.getLogger(ProduzierenComposite.class);
-	
+	private static String fs = SystemUtils.FILE_SEPARATOR;	
 	final static int MAX_ANZ_KE = 8;
-	
-	final static String IMG_OK		= "/swt/images/ok.gif";
+
 	final static String IMG_ERROR	= "/swt/images/error.gif";
 	
 	private Display display;
@@ -261,7 +260,8 @@ for (int i=0; i<alProductionEntities.size(); i++)
 		lblEvent = slf.creatLblEvent();
 		
 		{
-			imgCanvasStatus = new ImgCanvas(this, "/swt/images/ok.gif");
+			String resOK = config.getString("icons/@dir")+fs+config.getString("icons/icon[@type='ok']");
+			imgCanvasStatus = new ImgCanvas(this, resOK);
 			GridData data = new GridData();
 			data.widthHint = 50;
 			data.heightHint = 30;

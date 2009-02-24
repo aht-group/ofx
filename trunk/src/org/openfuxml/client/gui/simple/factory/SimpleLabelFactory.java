@@ -39,20 +39,18 @@ public class SimpleLabelFactory
 			labelImage.setBackground(client.getBackground());
 	
 			GridData data = new GridData();
-			data.widthHint = 131;
-			data.heightHint = 60;
 			if(logoRes.length==1){data.horizontalSpan = 3;}
 			else if(logoRes.length==2){data.horizontalSpan = 2-i;}
 			else if(logoRes.length==3){data.horizontalSpan = 1;}
 			data.horizontalAlignment = GridData.END;
 			data.verticalAlignment = GridData.FILL;
-			labelImage.setLayoutData(data);
-	
+			
 			try
 			{
 				String res = config.getString("logos/@dir")+fs+logoRes[i];
-				
 				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, client.getDisplay());
+				data.widthHint = img.getBounds().width;
+				data.heightHint = img.getBounds().height;
 				labelImage.setImage(img);
 			}
 			catch (Exception e)
@@ -61,6 +59,7 @@ public class SimpleLabelFactory
 				logger.error(e);
 				labelImage.setForeground(client.getDisplay().getSystemColor(SWT.COLOR_RED));
 			}
+			labelImage.setLayoutData(data);
 		}
 	}
 	
