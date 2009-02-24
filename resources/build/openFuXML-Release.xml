@@ -151,7 +151,7 @@
 	  </classpath>
 	</taskdef>
 	
-	<taskdef name="msixml" classname="org.openfuxml.util.AntTaskMsiXmlCreation" >
+	<taskdef name="msixml" classname="org.openfuxml.util.msi.AntTaskMsiXmlCreation" >
 		<classpath>
 			<pathelement location="${bin.dir}"/>
 		</classpath>
