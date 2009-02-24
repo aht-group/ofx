@@ -713,7 +713,7 @@
 		
 		-->
 		<xsl:param name="contextnode"/>
-		<xsl:variable name="m_max" select="."/>
+		<xsl:variable name="m_max" select="number(.)"/>
 		<xsl:variable name="k"><xsl:value-of select="count($contextnode/(grafik|bild))"/></xsl:variable>
 		<xsl:variable name="m">
 			<xsl:choose>
