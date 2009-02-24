@@ -31,6 +31,7 @@
 	<property file="resources/properties/webdavsync.properties"/>
 
 	<property name="src.dir" location="${basedir}/src" />
+	<property name="bin.dir" location="${basedir}/bin" />
 	<property name="rsrc.dir" location="${basedir}/resources" />
 	<property name="app.dir" location="${basedir}/applications" />
 	<property name="doku.dir" location="${basedir}/doku" />
@@ -148,6 +149,12 @@
 	  <classpath>
 	    <fileset dir="${lib.dir}/${webdavsync.dir}" includes="${webdavsync.lib}"/>
 	  </classpath>
+	</taskdef>
+	
+	<taskdef name="msixml" classname="org.openfuxml.util.AntTaskMsiXmlCreation" >
+		<classpath>
+			<pathelement location="${bin.dir}"/>
+		</classpath>
 	</taskdef>
 			
 	<target name="00 - Classpath" description="Echos Classpath">
