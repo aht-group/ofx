@@ -19,6 +19,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -34,6 +35,7 @@ import org.openfuxml.client.control.OfxClientControl;
 import org.openfuxml.client.control.projects.ProjectFactory;
 import org.openfuxml.client.control.projects.ProjectFactoryDirect;
 import org.openfuxml.client.gui.simple.dialog.HelpAboutDialog;
+import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
 import org.openfuxml.client.gui.swt.composites.ProjektComposite;
 import org.openfuxml.client.util.ImgCanvas;
 import org.openfuxml.model.ejb.OfxProject;
@@ -70,17 +72,6 @@ public class OpenFuxmlClient extends Composite implements Runnable
 	private Composite parent;
 	
 	private InitialContext iniCtx;
-
-	// Home Interfaces für die Beans
-//	private DispatcherHome hDispatcher;
-//	private ProjectUiHome hProjectUi;
-//	private UserUiHome hUserUi;
-//	private AuthHome hAuth;
-
-//	private UserUi myUserUi;
-//	private UserValue myUserValue; 
-	
-//	private SSIMessage availableFormats;
 	
 	private Thread pingThread;
 	private boolean pingThreadAktiv;
@@ -162,41 +153,17 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		});
 
 		{
-			this.setBackground(new Color(this.getDisplay(), 244, 244, 255));
+			this.setBackground(new Color(this.getDisplay(), new RGB(231, 232, 235)));
 			GridLayout layout = new GridLayout();
 			layout.numColumns = 3;
-			layout.marginHeight = 20;
-			layout.marginWidth = 20;
+			layout.marginHeight = 14;
+			layout.marginWidth = 14;
 			this.setLayout(layout);
 		}
 		
-		{
-			Label label = new Label(this, SWT.NONE);
-			label.setText("aktueller Benutzer:");
-			label.setBackground(this.getBackground());
-		}
-		{
-			lBenutzer = new Label(this, SWT.NONE);
-			lBenutzer.setText("");
-			lBenutzer.setBackground(this.getBackground());
-
-			GridData data = new GridData();
-			data.horizontalAlignment = GridData.FILL;
-			data.grabExcessHorizontalSpace = true;
-			
-			lBenutzer.setLayoutData(data);
-		}
-		{
-			String res = config.getString("logos/@dir")+fs+config.getString("logos/logo[@type='fuxklein']");
-			ImgCanvas imgCanvas = new ImgCanvas(this, res);
-			GridData data = new GridData();
-			data.widthHint = 134;
-			data.heightHint = 40;
-			data.horizontalAlignment = GridData.END;
-			data.verticalAlignment = GridData.FILL;
-			imgCanvas.setLayoutData(data);
-			imgCanvas.setBackground(this.getBackground());
-		}
+		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
+		slf.createLogo();
+		
 		{
 			tfProjekte = new TabFolder(this, SWT.TOP);
 			tfProjekte.setSelection(0);
