@@ -80,15 +80,7 @@ public class ProducerEntitiesDisplayFactory
 					TableItem tableItem = tableProductionEntities.getItem(i);
 					if (tableItem.getChecked())
 					{
-						logger.debug("setData?");
-						Productionentities.File fi = (Productionentities.File)tableItem.getData();
-						logger.debug("setData?");
-						if(fi!=null){logger.debug("YES: "+fi.getDescription());}
-						else{logger.debug("NO");}
-						ProducibleEntities.File f = new ProducibleEntities.File();
-							f.setDescription(tableItem.getText(1));
-							f.setDirectory(tableItem.getText(2));
-							f.setFilename(tableItem.getText(3));
+						ProducibleEntities.File f = (ProducibleEntities.File)tableItem.getData();
 						pe.getFile().add(f);
 					} 
 				}
