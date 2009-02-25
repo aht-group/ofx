@@ -38,14 +38,16 @@ public class OfxRequestFactory extends AbstractJaxbFactory
 			
 			if(pe!=null && pe.getFile()!=null && pe.getFile().size()>0)
 			{
+				Sessionpreferences.Productionentities peSes = new Sessionpreferences.Productionentities();
 				for(ProducibleEntities.File fPe : pe.getFile())
 				{
 					Sessionpreferences.Productionentities.File fSe = new Sessionpreferences.Productionentities.File();
 					fSe.setDescription(fPe.getDescription());
 					fSe.setDirectory(fPe.getDirectory());
 					fSe.setFilename(fPe.getFilename());
-					spref.getProductionentities().getFile().add(fSe);
+					peSes.getFile().add(fSe);
 				}
+				spref.setProductionentities(peSes);
 			}
 			
 			spref.setUsername("changeme");
