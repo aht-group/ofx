@@ -29,10 +29,10 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.OfxClientControl;
-import org.openfuxml.client.gui.simple.factory.SimpleButtonFactory;
-import org.openfuxml.client.gui.simple.factory.SimpleComboFactory;
 import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
-import org.openfuxml.client.gui.simple.factory.SimpleTableFactory;
+import org.openfuxml.client.gui.swt.factory.ProducerComboFactory;
+import org.openfuxml.client.gui.swt.factory.ProducerButtonFactory;
+import org.openfuxml.client.gui.swt.factory.ProducerEntitiesDisplayFactory;
 import org.openfuxml.client.gui.util.GuiSettingsValidator;
 import org.openfuxml.client.util.ImgCanvas;
 import org.openfuxml.model.ejb.OfxApplication;
@@ -47,9 +47,9 @@ import org.openfuxml.producer.exception.ProductionSystemException;
  * 
  * @author Andrea Frank
  */
-public class ProduzierenComposite extends AbstractProducerComposite
+public class ProducerComposite extends AbstractProducerComposite
 {	
-	static Logger logger = Logger.getLogger(ProduzierenComposite.class);
+	static Logger logger = Logger.getLogger(ProducerComposite.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	final static int MAX_ANZ_KE = 8;
@@ -58,12 +58,10 @@ public class ProduzierenComposite extends AbstractProducerComposite
 	
 	private Display display;
 	private Shell toplevelShell;
-	
-	private ProjektComposite projekt;	
 
-	private Button buttonAktualisieren;
+	private Button btnUpdate,btnProduce;
 
-	private TabFolder tfAnsicht;
+	private TabFolder tfEntities;
 	private TabItem tiAnsichtTabelle;
 	private TabItem tiAnsichtMatrix;
 	private Table tableProductionEntities;
@@ -78,7 +76,6 @@ public class ProduzierenComposite extends AbstractProducerComposite
 	
 	private Button buttonDefaultOptionen;
 	
-	private Button btnProduce;
 
 	private Label lblEvent;
 	private ImgCanvas imgCanvasStatus;
@@ -88,7 +85,7 @@ public class ProduzierenComposite extends AbstractProducerComposite
 	private ArrayList<ProductionEntity> alProductionEntities;
 
 	
-	public ProduzierenComposite(Composite parent, OfxApplication ofxA, OfxProject ofxP, OfxClientControl ofxCC, ProjektComposite projekt, Configuration config)
+	public ProducerComposite(Composite parent, OfxApplication ofxA, OfxProject ofxP, OfxClientControl ofxCC, Configuration config)
 	{
 		super(parent,SWT.NONE);
 		ofxCC.cboApplicationSelected(ofxA);
@@ -96,48 +93,39 @@ public class ProduzierenComposite extends AbstractProducerComposite
 		this.ofxCC=ofxCC;
 		display = this.getDisplay();
 		toplevelShell = this.getShell();
-
-		this.projekt = projekt;		
 		
 		
 		alProductionEntities = new ArrayList<ProductionEntity>();
 		
 		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
-		SimpleComboFactory scf = new SimpleComboFactory(this,ofxCC);
-		SimpleButtonFactory sbf = new SimpleButtonFactory(this,ofxCC);
-		SimpleTableFactory stf = new SimpleTableFactory();
+		ProducerComboFactory scf = new ProducerComboFactory(this,ofxCC);
+		ProducerButtonFactory sbf = new ProducerButtonFactory(this,ofxCC);
+		ProducerEntitiesDisplayFactory pedf = new ProducerEntitiesDisplayFactory();
 		
-		{
-			GridLayout layout = new GridLayout();
-			layout.numColumns = 3;
+		GridLayout layout = new GridLayout();
+			layout.numColumns = 4;
 			layout.marginHeight = 20;
 			layout.marginWidth = 20;
 			this.setLayout(layout);
-		}
 		
+		slf.createLabel("Document", 1);
 		cboDocuments = scf.createCboDocument();
-		fillCboDocuments();
+		slf.createDummyLabel(1);
+		btnUpdate = sbf.createBtnUpdate("update");
+		
+		slf.createLabel("Format", 1);
 		cboFormats = scf.createCboFormats();
+		slf.createDummyLabel(1);
+		btnProduce = sbf.createBtnProduce("produce");
+		
+		fillCboDocuments();
 		fillCboFormats();
 		
-		slf.createDummyLabel(2);
-		buttonAktualisieren = sbf.createBtnUpdate();
-	
-		{
-			tfAnsicht = new TabFolder(this, SWT.TOP);
-			{
-				GridData data = new GridData();
-				data.grabExcessHorizontalSpace = true;
-				data.grabExcessVerticalSpace = true;
-				data.horizontalAlignment = GridData.FILL;
-				data.verticalAlignment = GridData.FILL;
-				data.horizontalSpan = 2;
-				tfAnsicht.setLayoutData(data);
-			}
+		tfEntities = pedf.createTabFolder(this);
 
-			tableProductionEntities = stf.createTable(tfAnsicht); //new Table(tfAnsicht, SWT.CHECK);
+			tableProductionEntities = pedf.createTable(tfEntities); //new Table(tfAnsicht, SWT.CHECK);
 
-			tiAnsichtTabelle = new TabItem(tfAnsicht, SWT.NONE);
+			tiAnsichtTabelle = new TabItem(tfEntities, SWT.NONE);
 			tiAnsichtTabelle.setText("Tabellenansicht");
 			tiAnsichtTabelle.setControl(tableProductionEntities);
 			
@@ -191,11 +179,7 @@ for (int i=0; i<alProductionEntities.size(); i++)
 				erzeugeAlProductionEntities();
 //				setzePEHaekchen();
 			}
-		}
-		{
-			Label labelDummy = new Label(this, SWT.NONE);
-			labelDummy.setText("");
-		}
+		
 		{
 			compositeOptionen = new Composite(this, SWT.NONE);
 			
@@ -207,7 +191,7 @@ for (int i=0; i<alProductionEntities.size(); i++)
 			GridData data = new GridData();
 			data.grabExcessHorizontalSpace = true;
 			data.horizontalAlignment = GridData.FILL;
-			data.horizontalSpan = 2;
+			data.horizontalSpan = 3;
 			compositeOptionen.setLayoutData(data);
 
 			zeigeOptionen();
@@ -230,7 +214,7 @@ for (int i=0; i<alProductionEntities.size(); i++)
 		}
 		
 		slf.createDummyLabel(2);
-		btnProduce = sbf.createBtnProduce();
+		
 		
 		lblEvent = slf.creatLblEvent();
 		
@@ -439,7 +423,7 @@ System.out.println(hString);
 		if (!cboFormats.getText().equals("latexpdf"))
 		{
 			TabItem ti[] = {tiAnsichtTabelle};
-			tfAnsicht.setSelection(ti);
+			tfEntities.setSelection(ti);
 			if (tiAnsichtMatrix != null)
 			{
 				tiAnsichtMatrix.dispose();
@@ -453,7 +437,7 @@ System.out.println(hString);
 			{
 				// Nur wenn kein TabItem tiAnsichtMatrix da ist,
 				// wird ein neues erstellt.
-				tiAnsichtMatrix = new TabItem(tfAnsicht, SWT.NONE);
+				tiAnsichtMatrix = new TabItem(tfEntities, SWT.NONE);
 				tiAnsichtMatrix.setText("Matrixansicht");
 			}
 			
@@ -463,7 +447,7 @@ System.out.println(hString);
 					scrolledCompositeMatrix.dispose();
 				}
 				
-				scrolledCompositeMatrix = new ScrolledComposite(tfAnsicht, SWT.H_SCROLL | SWT.V_SCROLL);
+				scrolledCompositeMatrix = new ScrolledComposite(tfEntities, SWT.H_SCROLL | SWT.V_SCROLL);
 				{
 					GridData data = new GridData();
 					data.grabExcessHorizontalSpace = true;
@@ -828,40 +812,6 @@ System.out.println(hString);
 		}
 */	}
 	
-	
-	/**
-	 * Die Methode getProducableEntities testet, ob alle Eingaben gemacht wurden
-	 * und startet dann einen ProducerThread mit dem Auftrag startProducableEntities.
-	 * Vor dem Start werden alle Elemente disabled, um weitere Eingaben zu vermeiden.
-	 */
-	public void getProducableEntities()
-	{			
-		try
-		{
-			GuiSettingsValidator.checkSet(cboDocuments);
-			GuiSettingsValidator.checkSet(cboFormats);
-			display.asyncExec(new Runnable()
-				{
-					public void run()
-					{
-						if (!toplevelShell.isDisposed())
-						{
-							OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
-							
-							ofxCC.getProducibleEntities(ofxF);
-						}
-					}
-				});			
-		}
-		catch (IllegalArgumentException e)
-		{
-			MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
-			messageBox.setText("Error");
-			messageBox.setMessage(e.getMessage()); 
-			messageBox.open();
-		}
-	}
-	
 	public void produzieren()
 	{
 		logger.debug("aktualisieren");
@@ -879,7 +829,7 @@ System.out.println(hString);
 	{
 		cboDocuments.setEnabled(bool);
 		cboFormats.setEnabled(bool);
-		buttonAktualisieren.setEnabled(bool);
+		btnUpdate.setEnabled(bool);
 		tableProductionEntities.setEnabled(bool);
 		if (compositeMatrix!=null)
 		{
@@ -915,11 +865,6 @@ System.out.println(hString);
 				}
 			}
 		});
-	}
-	
-	public ProjektComposite getProjektComposite()
-	{
-		return projekt;
 	}
 	
 	/**

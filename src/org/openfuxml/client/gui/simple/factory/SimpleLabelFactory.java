@@ -8,7 +8,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.openfuxml.util.config.OfxPathHelper;
 
 import de.kisner.util.io.resourceloader.ImageResourceLoader;
 
@@ -26,21 +25,26 @@ public class SimpleLabelFactory
 		this.config=config;
 	}
 	
-	public void createDummyLabel(int horizontalSpan)
+	public Label createLabel(String text, int horizontalSpan)
 	{
-		Label labelDummy = new Label(composite, SWT.NONE);
-		labelDummy.setText("");
+		Label label = new Label(composite, SWT.NONE);
+		label.setText(text);
 
 		GridData data = new GridData();
-		data.horizontalSpan = 2;
-		labelDummy.setLayoutData(data);
+		data.horizontalSpan = horizontalSpan;
+		label.setLayoutData(data);
+		return label;
+	}
+	
+	public void createDummyLabel(int horizontalSpan)
+	{
+		createLabel("",horizontalSpan);
 	}
 	
 	public void createLogo()
 	{
-		logger.debug("Creating Logos");
 		String[] logoRes = config.getStringArray("logos/logo[@type='fuxklein']");
-		logger.debug(logoRes.length);
+		logger.debug("Creating Logos: "+logoRes.length);
 		
 		for(int i=0;i<logoRes.length;i++)
 		{
@@ -72,30 +76,7 @@ public class SimpleLabelFactory
 			labelImage.setLayoutData(data);
 		}
 	}
-	
-	public Label createLblRepository()
-	{
-		Label labelVerz = new Label(composite, SWT.NONE);
-		labelVerz.setText("Verzeichnis");
-		labelVerz.setBackground(composite.getBackground());
-			
-
-			Label lblRepository = new Label(composite, SWT.NONE);
-			lblRepository.setBackground(composite.getBackground());
-
-			{
-				GridData data = new GridData();
-				data.horizontalAlignment = GridData.FILL;
-				data.grabExcessHorizontalSpace = true;
-				lblRepository.setLayoutData(data);
-			}
-			
-			lblRepository.setText(OfxPathHelper.getDir(config, "repository"));
-			logger.debug("Repository: "+lblRepository.getText());
-
-		return lblRepository;
-	}
-	
+		
 	public Label creatLblEvent()
 	{
 		Label lblEvent = new Label(composite, SWT.NONE);
