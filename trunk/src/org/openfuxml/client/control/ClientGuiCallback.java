@@ -7,8 +7,10 @@ public interface ClientGuiCallback
 	public void entitiesDiscovered();
 	public void loescheErgebnis();
 	
-	//ErrorMessage
+	//Messages
 	public void error(String s);
+	public void addLogline(String s);
+	public void clearLog();
 	
 	//Combo-Actions
 	public void cboFormatSelected();
@@ -17,4 +19,6 @@ public interface ClientGuiCallback
 	
 	//Controls
 	public void setProductionControlsEnabled(boolean isEnabled);
+	
+	
 }

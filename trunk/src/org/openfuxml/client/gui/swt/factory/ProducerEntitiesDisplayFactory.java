@@ -134,7 +134,8 @@ public class ProducerEntitiesDisplayFactory
 		tabDiscoveredEntities.setHeaderVisible(true);
 		tabDiscoveredEntities.setLinesVisible(true);
 		
-		tabDiscoveredEntities.addSelectionListener(new SelectionAdapter() {
+		tabDiscoveredEntities.addSelectionListener(new SelectionAdapter()
+		{
 			public void widgetSelected(SelectionEvent evt)
 			{
 				ProducibleEntities pe = new ProducibleEntities();
@@ -150,8 +151,8 @@ public class ProducerEntitiesDisplayFactory
 				ofxAction.tblEntitiesSelected(pe);
 			}
 			
-			public void widgetDefaultSelected(SelectionEvent evt) {
-				// Bestimmen des ausgewählten Eintrags.
+			public void widgetDefaultSelected(SelectionEvent evt)
+			{
 				TableItem[] selection = tabDiscoveredEntities.getSelection();
 				TableItem selectedRow = selection[0];
 				ProducibleEntities.File f = (ProducibleEntities.File)selectedRow.getData();
