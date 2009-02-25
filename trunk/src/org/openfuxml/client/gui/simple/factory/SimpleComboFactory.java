@@ -10,6 +10,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.openfuxml.client.control.OfxGuiAction;
 import org.openfuxml.client.gui.simple.Client;
+import org.openfuxml.model.ejb.OfxApplication;
+import org.openfuxml.model.ejb.OfxDocument;
+import org.openfuxml.model.ejb.OfxProject;
 
 public class SimpleComboFactory
 {
@@ -38,7 +41,7 @@ public class SimpleComboFactory
 		labelAnwendungen.setText("Anwendung");
 		labelAnwendungen.setBackground(client.getBackground());
 
-		Combo cboApplications = new Combo(client, SWT.READ_ONLY | SWT.NONE);
+		final Combo cboApplications = new Combo(client, SWT.READ_ONLY | SWT.NONE);
 		cboApplications.setData("Application");
 
 		GridData data = new GridData();
@@ -48,12 +51,8 @@ public class SimpleComboFactory
 
 		cboApplications.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent evt) {
-				//TODO Update Client Settings
-				//ClientConfigWrapper.updateKeyValue("application", comboAnwendungen.getText());
-				client.fillCboProjects();
-				client.fuelleComboFormate();
-				client.entitiesDiscovered();
-				client.loescheErgebnis();
+				OfxApplication selectedOfxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
+				ofxAction.cboApplicationSelected(selectedOfxA);
 			}
 		});
 
@@ -68,7 +67,7 @@ public class SimpleComboFactory
 		labelProjekt.setText("Projekt");
 		labelProjekt.setBackground(client.getBackground());
 
-		Combo cboProjects = new Combo(client, SWT.READ_ONLY | SWT.NONE);
+		final Combo cboProjects = new Combo(client, SWT.READ_ONLY | SWT.NONE);
 		cboProjects.setData("Project");
 		
 		GridData data = new GridData();
@@ -78,12 +77,8 @@ public class SimpleComboFactory
 
 		cboProjects.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent evt) {
-				//TODO Update Client Settings
-				//ClientConfigWrapper.updateKeyValue("project", comboProjekte.getText());
-				client.fillCboDocuments();
-				
-				client.entitiesDiscovered();
-				client.loescheErgebnis();
+				OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
+				ofxAction.cboProjectSelected(ofxP);
 			}
 		});
 
@@ -99,7 +94,7 @@ public class SimpleComboFactory
 		labelDocument.setBackground(composite.getBackground());
 
 
-		Combo cboDocuments = new Combo(composite, SWT.READ_ONLY | SWT.NONE);
+		final Combo cboDocuments = new Combo(composite, SWT.READ_ONLY | SWT.NONE);
 		cboDocuments.setData("Document");
 		
 		GridData data = new GridData();
@@ -109,7 +104,8 @@ public class SimpleComboFactory
 
 		cboDocuments.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent evt) {
-				ofxAction.cboDocumentSelected();
+				OfxDocument selectedofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
+				ofxAction.cboDocumentSelected(selectedofxD);
 			}
 		});
 
