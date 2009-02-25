@@ -2,7 +2,6 @@ package org.openfuxml.client.gui.swt;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.client.control.ClientGuiCallback;
-import org.openfuxml.client.gui.simple.Client;
 import org.openfuxml.client.gui.swt.composites.ProduzierenComposite;
 
 public class SwtGuiCallback implements ClientGuiCallback
@@ -18,6 +17,9 @@ public class SwtGuiCallback implements ClientGuiCallback
 	}
 	
 	public void cboFormatSelected(){compP.zeigeOptionen();}
+	public void cboApplicationSelected(){}
+	public void cboProjectSelected(){}
+	
 	public void entitiesProduced(){logger.debug("entitiesProduced");}
 	public void setStatus(String status){compP.setStatus(status);}
 	public void entitiesDiscovered(){logger.debug("entitiesDiscovered");}

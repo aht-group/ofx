@@ -17,13 +17,23 @@ public class SimpleLabelFactory
 	 static Logger logger = Logger.getLogger(SimpleLabelFactory.class);
 	 
 	private static String fs = SystemUtils.FILE_SEPARATOR;
-	private Composite client;
+	private Composite composite;
 	private Configuration config;
 	
 	public SimpleLabelFactory(Composite composite, Configuration config)
 	{
-		this.client=composite;
+		this.composite=composite;
 		this.config=config;
+	}
+	
+	public void createDummyLabel(int horizontalSpan)
+	{
+		Label labelDummy = new Label(composite, SWT.NONE);
+		labelDummy.setText("");
+
+		GridData data = new GridData();
+		data.horizontalSpan = 2;
+		labelDummy.setLayoutData(data);
 	}
 	
 	public void createLogo()
@@ -35,8 +45,8 @@ public class SimpleLabelFactory
 		for(int i=0;i<logoRes.length;i++)
 		{
 		
-			Label labelImage = new Label(client, SWT.NONE);
-			labelImage.setBackground(client.getBackground());
+			Label labelImage = new Label(composite, SWT.NONE);
+			labelImage.setBackground(composite.getBackground());
 	
 			GridData data = new GridData();
 			if(logoRes.length==1){data.horizontalSpan = 3;}
@@ -48,7 +58,7 @@ public class SimpleLabelFactory
 			try
 			{
 				String res = config.getString("logos/@dir")+fs+logoRes[i];
-				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, client.getDisplay());
+				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, composite.getDisplay());
 				data.widthHint = img.getBounds().width;
 				data.heightHint = img.getBounds().height;
 				labelImage.setImage(img);
@@ -57,7 +67,7 @@ public class SimpleLabelFactory
 			{
 				labelImage.setText("ERROR");
 				logger.error(e);
-				labelImage.setForeground(client.getDisplay().getSystemColor(SWT.COLOR_RED));
+				labelImage.setForeground(composite.getDisplay().getSystemColor(SWT.COLOR_RED));
 			}
 			labelImage.setLayoutData(data);
 		}
@@ -65,13 +75,13 @@ public class SimpleLabelFactory
 	
 	public Label createLblRepository()
 	{
-		Label labelVerz = new Label(client, SWT.NONE);
+		Label labelVerz = new Label(composite, SWT.NONE);
 		labelVerz.setText("Verzeichnis");
-		labelVerz.setBackground(client.getBackground());
+		labelVerz.setBackground(composite.getBackground());
 			
 
-			Label lblRepository = new Label(client, SWT.NONE);
-			lblRepository.setBackground(client.getBackground());
+			Label lblRepository = new Label(composite, SWT.NONE);
+			lblRepository.setBackground(composite.getBackground());
 
 			{
 				GridData data = new GridData();
@@ -88,9 +98,9 @@ public class SimpleLabelFactory
 	
 	public Label creatLblEvent()
 	{
-		Label lblEvent = new Label(client, SWT.NONE);
+		Label lblEvent = new Label(composite, SWT.NONE);
 		lblEvent.setText("");
-		lblEvent.setBackground(client.getBackground());
+		lblEvent.setBackground(composite.getBackground());
 
 		GridData data = new GridData();
 		data.horizontalAlignment = GridData.FILL;

@@ -47,10 +47,11 @@ import org.openfuxml.producer.exception.ProductionSystemException;
  * 
  * @author Andrea Frank
  */
-public class ProduzierenComposite extends Composite
+public class ProduzierenComposite extends AbstractProducerComposite
 {	
 	static Logger logger = Logger.getLogger(ProduzierenComposite.class);
-	private static String fs = SystemUtils.FILE_SEPARATOR;	
+	private static String fs = SystemUtils.FILE_SEPARATOR;
+	
 	final static int MAX_ANZ_KE = 8;
 
 	final static String IMG_ERROR	= "/swt/images/error.gif";
@@ -59,8 +60,6 @@ public class ProduzierenComposite extends Composite
 	private Shell toplevelShell;
 	
 	private ProjektComposite projekt;	
-	
-	private Combo cboDocuments,cboFormats;
 
 	private Button buttonAktualisieren;
 
@@ -79,7 +78,7 @@ public class ProduzierenComposite extends Composite
 	
 	private Button buttonDefaultOptionen;
 	
-	private Button buttonProduzieren;
+	private Button btnProduce;
 
 	private Label lblEvent;
 	private ImgCanvas imgCanvasStatus;
@@ -89,16 +88,11 @@ public class ProduzierenComposite extends Composite
 	private ArrayList<ProductionEntity> alProductionEntities;
 
 	
-	private OfxProject ofxP;
-	private OfxApplication ofxA;
-	private OfxClientControl ofxCC;
-	
-	
 	public ProduzierenComposite(Composite parent, OfxApplication ofxA, OfxProject ofxP, OfxClientControl ofxCC, ProjektComposite projekt, Configuration config)
 	{
-		super(parent, SWT.NONE);
-		this.ofxA=ofxA;
-		this.ofxP=ofxP;
+		super(parent,SWT.NONE);
+		ofxCC.cboApplicationSelected(ofxA);
+		ofxCC.cboProjectSelected(ofxP);
 		this.ofxCC=ofxCC;
 		display = this.getDisplay();
 		toplevelShell = this.getShell();
@@ -122,10 +116,11 @@ public class ProduzierenComposite extends Composite
 		}
 		
 		cboDocuments = scf.createCboDocument();
-		fuelleComboDokumente();
+		fillCboDocuments();
 		cboFormats = scf.createCboFormats();
-		fuelleComboFormate();
+		fillCboFormats();
 		
+		slf.createDummyLabel(2);
 		buttonAktualisieren = sbf.createBtnUpdate();
 	
 		{
@@ -233,29 +228,9 @@ for (int i=0; i<alProductionEntities.size(); i++)
 				}
 			});
 		}
-		{
-			Label labelDummy = new Label(this, SWT.NONE);
-			labelDummy.setText("");
-			
-			GridData data = new GridData();
-			data.horizontalSpan = 2;
-			labelDummy.setLayoutData(data);
-		}
-		{
-			buttonProduzieren = new Button(this, SWT.PUSH | SWT.CENTER);
-			buttonProduzieren.setText("produzieren");
-
-			GridData data = new GridData();
-			data.verticalAlignment = GridData.END;
-			data.horizontalAlignment = GridData.FILL;
-			buttonProduzieren.setLayoutData(data);
-
-			buttonProduzieren.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					produzieren();
-				}
-			});
-		}
+		
+		slf.createDummyLabel(2);
+		btnProduce = sbf.createBtnProduce();
 		
 		lblEvent = slf.creatLblEvent();
 		
@@ -289,53 +264,6 @@ for (int i=0; i<alProductionEntities.size(); i++)
 		imgCanvasStatus.setVisible(false);
 	}
 	
-	/**
-	 * Die Methode fuelleComboDokumente schreibt alle Dateien aus dem
-	 * Verzeichnis sVerzeichnis/sProjektname", die die Endung
-	 * ".xml" haben, in die Combo comboDokumente.
-	 */
-	public void fuelleComboDokumente()
-	{	// Löschen der Einträge in der Combo comboDokumente.
-
-		cboDocuments.removeAll();
-//		alMetaDokumente.clear();
-
-//		tableProductionEntities.removeAll();
-		logger.debug("!");
-		logger.debug(ofxA.getName());
-		logger.debug(ofxP.getName());
-		List<OfxDocument> lOfxD = ofxCC.getOfxDocumentFactory().lDocuments(ofxA,ofxP);
-		logger.debug(lOfxD.size());
-		for (OfxDocument ofxD : lOfxD)
-		{
-			cboDocuments.add(ofxD.getName());
-			cboDocuments.setData(ofxD.getName(),ofxD);
-		}
-	}
-	
-	/**
-	 * Die Methode fuelleComboFormate schreibt alle Formate
-	 * aus availableFormats in die Combo comboFormate.
-	 */
-	public void fuelleComboFormate()
-	{
-		try
-		{
-			List<OfxFormat> lFormats = ofxCC.getProducer().getAvailableFormats(ofxA);
-			logger.debug("Get formats for: "+ofxA.getName());
-			if(lFormats!=null && lFormats.size()>0)
-			{
-				for(OfxFormat ofxF : lFormats)
-				{
-					cboFormats.add(ofxF.getFormat().getTitle());
-					cboFormats.setData(ofxF.getFormat().getTitle(),ofxF);
-				}
-			}
-			else {logger.error("Server meldet keine Formate!");}
-		}
-		catch (ProductionSystemException e) {logger.error(e);}
-		catch (ProductionHandlerException e) {logger.error(e);}
-	}
 	
 	/**
 	 * Die Methode fuelleCompositeOptionen ermittelt zu allen einstellbaren Formaten
@@ -918,10 +846,9 @@ System.out.println(hString);
 					{
 						if (!toplevelShell.isDisposed())
 						{
-							OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
 							OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
 							
-							ofxCC.getProducibleEntities(ofxA,ofxP,ofxD,ofxF);
+							ofxCC.getProducibleEntities(ofxF);
 						}
 					}
 				});			
@@ -935,12 +862,10 @@ System.out.println(hString);
 		}
 	}
 	
-	
 	public void produzieren()
 	{
 		logger.debug("aktualisieren");
 	}
-
 
 	/**
 	 * Die Methode setAllEnabled sperrt das ProduzierenComposite für 
@@ -960,7 +885,7 @@ System.out.println(hString);
 		{
 			compositeMatrix.setEnabled(bool);
 		}
-		buttonProduzieren.setEnabled(bool);
+		btnProduce.setEnabled(bool);
 		buttonErgebnisDetails.setEnabled(bool);
 
 		compositeOptionen.setEnabled(bool);

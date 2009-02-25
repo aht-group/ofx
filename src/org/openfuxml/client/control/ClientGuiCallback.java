@@ -9,5 +9,8 @@ public interface ClientGuiCallback
 	public void loescheErgebnis();
 	public void getProducableEntities();
 	
+	//Combo-Actions
 	public void cboFormatSelected();
+	public void cboApplicationSelected();
+	public void cboProjectSelected();
 }

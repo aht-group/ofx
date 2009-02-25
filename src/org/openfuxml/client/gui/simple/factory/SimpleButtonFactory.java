@@ -49,17 +49,10 @@ public class SimpleButtonFactory
 	
 	public Button createBtnUpdate()
 	{
-		Label labelDummy = new Label(composite, SWT.NONE);
-		labelDummy.setText("");
-
-		GridData data = new GridData();
-		data.horizontalSpan = 2;
-		labelDummy.setLayoutData(data);
-
 		Button btnUpdate = new Button(composite, SWT.PUSH | SWT.CENTER);
 		btnUpdate.setText("update");
 
-		data = new GridData();
+		GridData data = new GridData();
 		data.horizontalAlignment = GridData.FILL;
 		btnUpdate.setLayoutData(data);
 

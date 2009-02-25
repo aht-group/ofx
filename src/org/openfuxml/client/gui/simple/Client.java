@@ -10,8 +10,6 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
@@ -38,6 +36,7 @@ import org.openfuxml.client.gui.simple.factory.SimpleComboFactory;
 import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
 import org.openfuxml.client.gui.simple.factory.SimpleMenuFactory;
 import org.openfuxml.client.gui.simple.factory.SimpleTableFactory;
+import org.openfuxml.client.gui.swt.composites.AbstractProducerComposite;
 import org.openfuxml.client.gui.util.GuiSettingsValidator;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
@@ -59,7 +58,7 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
  * Client implementiert die Benutzeroberfläche für die FuXML-Produktion.
  * @author Andrea Frank
  */
-public class Client extends Composite implements ClientGuiCallback
+public class Client extends AbstractProducerComposite implements ClientGuiCallback
 { 
     static Logger logger = Logger.getLogger(Client.class);
     private static String fs = SystemUtils.FILE_SEPARATOR;
@@ -74,13 +73,12 @@ public class Client extends Composite implements ClientGuiCallback
 	private Label lblRepository,lblEvent;
 	private Button btnChange,btnUpdate,btnProduce;
 	
-	private Combo cboApplications,cboProjects,cboDocuments,cboFormats;
+	private Combo cboApplications,cboProjects;
 
 	private Table tabDiscoveredEntities;
 	
 	private Shell toplevelShell;
 	private Display display;
-	
 	
 	/**
 	 * alProducedEntities speichert alle Einträge, die in dieser Sitzung produziert wurden.
@@ -88,8 +86,6 @@ public class Client extends Composite implements ClientGuiCallback
 	private ArrayList<String[]> alProducedEntities;
 	
 	private Configuration config;
-	private OfxClientControl ofxCC;
-	
 	private Cursor cursor;
 	
 	/**
@@ -150,6 +146,7 @@ public class Client extends Composite implements ClientGuiCallback
 		
 		lblRepository = slf.createLblRepository();
 		
+		
 		btnChange = sbf.createBtnChange();
 
 		cboApplications = scf.createCboApplication();
@@ -157,6 +154,7 @@ public class Client extends Composite implements ClientGuiCallback
 		cboDocuments = scf.createCboDocument();
 		cboFormats = scf.createCboFormats();
 		
+		slf.createDummyLabel(2);
 		btnUpdate = sbf.createBtnUpdate();
 		
 		tabDiscoveredEntities = stf.createTable(this);
@@ -209,26 +207,7 @@ public class Client extends Composite implements ClientGuiCallback
 */
 	}
 
-	public void fuelleComboFormate()
-	{
-		cboFormats.removeAll();
-		try
-		{
-			List<OfxFormat> lFormats = ofxCC.getProducer().getAvailableFormats((OfxApplication)cboApplications.getData(cboApplications.getText()));
-			logger.debug("Get formats for: "+cboApplications.getText());
-			if(lFormats!=null && lFormats.size()>0)
-			{
-				for(OfxFormat ofxF : lFormats)
-				{
-					cboFormats.add(ofxF.getFormat().getTitle());
-					cboFormats.setData(ofxF.getFormat().getTitle(),ofxF);
-				}
-			}
-			else {logger.error("Server meldet keine Formate!");}
-		}
-		catch (ProductionSystemException e) {logger.error(e);}
-		catch (ProductionHandlerException e) {logger.error(e);}
-	}
+
 
 	/**
 	 * Die Methode fuelleComboProjekte schreibt alle Verzeichnisse aus dem 
@@ -251,41 +230,7 @@ public class Client extends Composite implements ClientGuiCallback
 		}
 	}
 		
-	/**
-	 * Die Methode fuelleComboDokumente schreibt alle Dateien aus dem Verzeichnis 
-	 * "labelVerzeichnis.getText()/comboAnwendungen.getText()/comboProjekte.getText()", 
-	 * die die Endung ".xml" haben, in die Combo comboDokumente.
-	 */
-	public void fillCboDocuments()
-	{
-		cboDocuments.removeAll();
-		tabDiscoveredEntities.removeAll();
-		
-		if ( (cboApplications.getText().length()>0) && (cboProjects.getText().length()>0) )
-		{
-			
-			OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
-			OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
 
-			List<OfxDocument> lOfxD = ofxCC.getOfxDocumentFactory().lDocuments(ofxA,ofxP);
-			
-			for (OfxDocument ofxD : lOfxD)
-			{
-				cboDocuments.add(ofxD.getName());
-				cboDocuments.setData(ofxD.getName(),ofxD);
-			}
-			// Vorauswahl der in Properties gespeicherten Einstellungen
-/*			String sDokument = ClientConfigWrapper.getClientConf("document");
-			if (sDokument.length()>0)
-			{
-				int index = comboDokumente.indexOf(sDokument);
-				if (index != -1)
-				{
-					comboDokumente.setText(sDokument);
-				}
-			}
-*/		}
-	}
 	
 	/**
 	 * Die Methode fuelleTableProductionEntities füllt die Tabelle
@@ -347,9 +292,6 @@ public class Client extends Composite implements ClientGuiCallback
 	{			
 		try
 		{
-			GuiSettingsValidator.checkSet(cboApplications);
-			GuiSettingsValidator.checkSet(cboProjects);
-			GuiSettingsValidator.checkSet(cboDocuments);
 			GuiSettingsValidator.checkSet(cboFormats);
 			if(lblRepository.getText().equals("")){throw new IllegalArgumentException("You have to chose a repository!");}
 
@@ -359,18 +301,17 @@ public class Client extends Composite implements ClientGuiCallback
 					{
 						if (!toplevelShell.isDisposed())
 						{
-							OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
-							OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
-							OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
 							OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
-							
-							ofxCC.getProducibleEntities(ofxA,ofxP,ofxD,ofxF);
+							logger.debug("here");
+							ofxCC.getProducibleEntities(ofxF);
+							logger.debug("here2");
 						}
 					}
 				});			
 		}
 		catch (IllegalArgumentException e)
 		{
+			logger.debug("here3");
 			MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
 			messageBox.setText("Error");
 			messageBox.setMessage(e.getMessage()); 
@@ -424,12 +365,9 @@ public class Client extends Composite implements ClientGuiCallback
 								} 
 							}
 							
-							OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
-							OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
-							OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
 							OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
 						
-							ofxCC.produce(ofxA, ofxP, ofxD, ofxF, pe);
+							ofxCC.produce(ofxF, pe);
 						} 
 					}
 				});
@@ -637,6 +575,19 @@ public class Client extends Composite implements ClientGuiCallback
         return img;		
 	}
 	
+	public void cboApplicationSelected()
+	{
+		fillCboProjects();
+		fillCboFormats();
+		entitiesDiscovered();
+		loescheErgebnis();
+	}
+	public void cboProjectSelected()
+	{
+		fillCboDocuments();
+		entitiesDiscovered();
+		loescheErgebnis();
+	}
 	public void cboFormatSelected(){}
 	
 	public static void main(String[] args)

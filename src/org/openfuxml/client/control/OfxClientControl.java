@@ -1,6 +1,7 @@
 package org.openfuxml.client.control;
 
 import java.util.Hashtable;
+import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
@@ -18,6 +19,8 @@ import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
 import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 import org.openfuxml.producer.Producer;
+import org.openfuxml.producer.exception.ProductionHandlerException;
+import org.openfuxml.producer.exception.ProductionSystemException;
 import org.openfuxml.producer.handler.DirectProducer;
 import org.openfuxml.producer.handler.SocketProducer;
 import org.openfuxml.server.DummyServer;
@@ -33,6 +36,10 @@ public class OfxClientControl implements OfxGuiAction
 	private ClientGuiCallback guiCallback;
 
 	private String comboUid;
+	
+	private OfxProject selectedOfxP;
+	private OfxApplication selectedOfxA;
+	private OfxDocument selectedOfxD;
 	
 	private Hashtable<String, ProducibleEntities> htDiscoveredEntities;
 
@@ -76,25 +83,44 @@ public class OfxClientControl implements OfxGuiAction
 		return htDiscoveredEntities.get(comboUid);
 	}
 	
-	public void getProducibleEntities(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD, OfxFormat ofxF)
+	public List<OfxFormat> getAvailableFormats()
 	{
-		setComboUid(ofxA, ofxP, ofxD, ofxF);
+		List<OfxFormat> lOfxF=null;
+		try
+		{
+			lOfxF = producer.getAvailableFormats(selectedOfxA);
+		}
+		catch (ProductionSystemException e) {logger.error(e);}
+		catch (ProductionHandlerException e) {logger.error(e);}
+		return lOfxF;
+	}
+	
+	public void getProducibleEntities(OfxFormat ofxF) throws IllegalArgumentException
+	{
+		logger.debug("here");
+		if(selectedOfxA==null){throw new IllegalArgumentException("You have to chose a Application");}
+		logger.debug("here");
+		if(selectedOfxP==null){throw new IllegalArgumentException("You have to chose a Project");}
+		logger.debug("here");
+		if(selectedOfxD==null){throw new IllegalArgumentException("You have to chose a Document");}
+		logger.debug("and here");
+		setComboUid(selectedOfxA, selectedOfxP, selectedOfxD, ofxF);
 		OfxRequestFactory ofxReqF = new OfxRequestFactory();
-			ofxReqF.setOfxA(ofxA);
-			ofxReqF.setOfxP(ofxP);
-			ofxReqF.setOfxD(ofxD);
+			ofxReqF.setOfxA(selectedOfxA);
+			ofxReqF.setOfxP(selectedOfxP);
+			ofxReqF.setOfxD(selectedOfxD);
 			ofxReqF.setOfxF(ofxF);
 		Sessionpreferences spref = ofxReqF.create();
 		ProducerThread pt = new ProducerThread(this,guiCallback,producer);
 		pt.getProducibleEntities(spref);
 	}
 	
-	public void produce(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD, OfxFormat ofxF, Productionentities pe)
+	public void produce(OfxFormat ofxF, Productionentities pe)
 	{
 		OfxRequestFactory orf = new OfxRequestFactory();
-			orf.setOfxA(ofxA);
-			orf.setOfxP(ofxP);
-			orf.setOfxD(ofxD);
+			orf.setOfxA(selectedOfxA);
+			orf.setOfxP(selectedOfxP);
+			orf.setOfxD(selectedOfxD);
 			orf.setOfxF(ofxF);
 		Sessionpreferences spref = orf.create();
 		spref.setProductionentities(pe);
@@ -103,7 +129,15 @@ public class OfxClientControl implements OfxGuiAction
 	}
 	
 	public ProjectFactory getOfxProjectFactory() {return ofxProjectFactory;}
-	public DocumentFactory getOfxDocumentFactory() {return ofxDocumentFactory;}
+	
+	public List<OfxDocument> lDocuments() throws IllegalArgumentException
+	{
+		if(selectedOfxA==null){throw new IllegalArgumentException("You have to chose a Application");}
+		if(selectedOfxP==null){throw new IllegalArgumentException("You have to chose a Project");}
+		List<OfxDocument> lOfxD = ofxDocumentFactory.lDocuments(selectedOfxA, selectedOfxP);
+		return lOfxD;
+	}
+	
 	public Producer getProducer() {return producer;}
 	
 	public void setDiscoveredEntities(ProducibleEntities pe)
@@ -132,8 +166,21 @@ public class OfxClientControl implements OfxGuiAction
 	
 	public void setGuiCallback(ClientGuiCallback guiCallback) {this.guiCallback = guiCallback;}
 	
-	public void cboDocumentSelected()
+	public void cboApplicationSelected(OfxApplication selectedOfxA)
 	{
+		this.selectedOfxA=selectedOfxA;
+		guiCallback.cboApplicationSelected();
+	}
+	
+	public void cboProjectSelected(OfxProject selectedOfxP)
+	{
+		this.selectedOfxP=selectedOfxP;
+		guiCallback.cboProjectSelected();
+	}
+	
+	public void cboDocumentSelected(OfxDocument selectedOfxD)
+	{
+		this.selectedOfxD=selectedOfxD;
 		guiCallback.entitiesDiscovered();
 		guiCallback.loescheErgebnis();
 	}
