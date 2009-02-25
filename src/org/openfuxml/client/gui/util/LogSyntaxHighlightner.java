@@ -24,6 +24,8 @@ public class LogSyntaxHighlightner
 		aktuellerIndex=0;
 	}
 	
+	public void clear()	{aktuellerIndex=0;}
+	
 	public void highlight(String highlightline)
 	{
 		String s="Element abschnitt";

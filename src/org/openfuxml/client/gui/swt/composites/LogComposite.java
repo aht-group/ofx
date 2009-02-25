@@ -64,6 +64,7 @@ public class LogComposite extends Composite
 				if (!shell.isDisposed())
 				{
 					textLog.setText("");
+					lsh.clear();
 				}
 			}
 		  });
