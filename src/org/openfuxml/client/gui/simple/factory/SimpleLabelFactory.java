@@ -25,6 +25,13 @@ public class SimpleLabelFactory
 		this.config=config;
 	}
 	
+	public SimpleLabelFactory(Composite composite)
+	{
+		this.composite=composite;
+	}
+	
+	public Label createLabel(int i){return createLabel(""+i, 1);}
+	public Label createLabel(String text){return createLabel(text, 1);}
 	public Label createLabel(String text, int horizontalSpan)
 	{
 		Label label = new Label(composite, SWT.NONE);

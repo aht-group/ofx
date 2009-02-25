@@ -20,4 +20,6 @@ public interface OfxGuiAction
 	//Buttons
 	public void btnUpdate();
 	public void btnProduce();
+	
+	public void openDocument(ProducibleEntities.File f);
 }

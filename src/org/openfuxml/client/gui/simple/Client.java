@@ -133,31 +133,31 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
 		ProducerButtonFactory sbf = new ProducerButtonFactory(this,this,ofxCC);
 		ProducerComboFactory scf = new ProducerComboFactory(this,ofxCC);
-		ProducerEntitiesDisplayFactory stf = new ProducerEntitiesDisplayFactory(ofxCC);
+		ProducerEntitiesDisplayFactory stf = new ProducerEntitiesDisplayFactory(ofxCC,config);
 		
 		slf.createLogo();
 		
-		slf.createLabel("Repository", 1);
-		lblRepository = slf.createLabel(OfxPathHelper.getDir(config, "repository"), 1);
+		slf.createLabel("Repository");
+		lblRepository = slf.createLabel(OfxPathHelper.getDir(config, "repository"));
 		GridData data = new GridData();
 			data.horizontalAlignment = GridData.FILL;
 			data.grabExcessHorizontalSpace = true;
 			lblRepository.setLayoutData(data);
 		btnChange = sbf.createBtnChange("change");
 
-		slf.createLabel("Application", 1);
+		slf.createLabel("Application");
 		cboApplications = scf.createCboApplication();
 		slf.createDummyLabel(1);
 		
-		slf.createLabel("Project", 1);
+		slf.createLabel("Project");
 		cboProjects = scf.createCboProject();
 		slf.createDummyLabel(1);
 		
-		slf.createLabel("Document", 1);
+		slf.createLabel("Document");
 		cboDocuments = scf.createCboDocument();
 		slf.createDummyLabel(1);
 		
-		slf.createLabel("Format", 1);
+		slf.createLabel("Format");
 		cboFormats = scf.createCboFormats();
 		slf.createDummyLabel(1);
 		

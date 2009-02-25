@@ -1,28 +1,35 @@
 package org.openfuxml.client.gui.swt.factory;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.OfxGuiAction;
+import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
 import org.openfuxml.model.jaxb.ProducibleEntities;
-import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 
 public class ProducerEntitiesDisplayFactory
 {
 	static Logger logger = Logger.getLogger(ProducerEntitiesDisplayFactory.class);
 	
 	private OfxGuiAction ofxAction;
+	private Configuration config;
 	
-	public ProducerEntitiesDisplayFactory(OfxGuiAction ofxAction)
+	public ProducerEntitiesDisplayFactory(OfxGuiAction ofxAction, Configuration config)
 	{
 		this.ofxAction=ofxAction;
+		this.config=config;
 	}
 	
 	public TabFolder createTabFolder(Composite composite)
@@ -38,9 +45,65 @@ public class ProducerEntitiesDisplayFactory
 		return tf;
 	}
 	
+	public ScrolledComposite createMatrix(Composite composite)
+	{
+		ScrolledComposite scrolledCompositeMatrix = new ScrolledComposite(composite, SWT.H_SCROLL | SWT.V_SCROLL);
+
+		GridData data = new GridData();
+			data.grabExcessHorizontalSpace = true;
+			data.grabExcessVerticalSpace = true;
+			data.horizontalAlignment = GridData.FILL;
+			data.verticalAlignment = GridData.FILL;
+			data.horizontalSpan = 1;
+			scrolledCompositeMatrix.setLayoutData(data);
+
+		Composite compositeMatrix = new Composite(scrolledCompositeMatrix, SWT.NONE);
+		SimpleLabelFactory slf = new SimpleLabelFactory(compositeMatrix);
+		
+		GridLayout layout = new GridLayout();
+			layout.numColumns = 5;
+			layout.marginHeight = 20;
+			layout.marginWidth = 20;
+			layout.horizontalSpacing = 20;
+			layout.verticalSpacing = 20;
+			//layout.makeColumnsEqualWidth = true;
+			compositeMatrix.setLayout(layout);
+
+		slf.createLabel("Kurseinheit");
+		slf.createLabel("Lehrtext");
+		slf.createLabel("Einsendeaufgaben");
+		slf.createLabel("Musterlösungen");
+		slf.createLabel("Korrekturversion");
+
+		int anzKE = 8;
+		int anzEntities = 4;
+		for(int i=0;i<anzKE;i++)
+		{
+			slf.createLabel(i);
+			for(int j=0;j<anzEntities;j++)
+			{
+				Button b = new Button(compositeMatrix, SWT.CHECK);
+				b.setEnabled(false);
+			}
+		}
+		
+		Point pt = compositeMatrix.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+		scrolledCompositeMatrix.setContent(compositeMatrix);
+		scrolledCompositeMatrix.setExpandHorizontal(true);
+		scrolledCompositeMatrix.setExpandVertical(true);
+		scrolledCompositeMatrix.setMinWidth(pt.x);
+		scrolledCompositeMatrix.setMinHeight(pt.y);
+		
+		scrolledCompositeMatrix.getVerticalBar().setIncrement(10);
+		scrolledCompositeMatrix.getVerticalBar().setPageIncrement(10);
+		scrolledCompositeMatrix.getHorizontalBar().setIncrement(10);
+		scrolledCompositeMatrix.getHorizontalBar().setPageIncrement(10);
+		return scrolledCompositeMatrix;
+	}
+	
 	public Table createTable(Composite composite)
 	{
-		final Table tableProductionEntities = new Table(composite, SWT.CHECK | SWT.BORDER);
+		final Table tabDiscoveredEntities = new Table(composite, SWT.CHECK | SWT.BORDER);
 
 		GridData data = new GridData();
 			data.widthHint = 450;
@@ -50,34 +113,34 @@ public class ProducerEntitiesDisplayFactory
 			data.grabExcessHorizontalSpace = true;
 			data.verticalAlignment = GridData.FILL;
 			data.grabExcessVerticalSpace = true;
-			tableProductionEntities.setLayoutData(data);
+			tabDiscoveredEntities.setLayoutData(data);
 
-		TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
+		TableColumn tableColumn = new TableColumn(tabDiscoveredEntities, SWT.NONE);
 			tableColumn.setText("");
 			tableColumn.setWidth(20);
 
-		tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
+		tableColumn = new TableColumn(tabDiscoveredEntities, SWT.NONE);
 			tableColumn.setText("Beschreibung");
 			tableColumn.setWidth(160);
 
-		tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
+		tableColumn = new TableColumn(tabDiscoveredEntities, SWT.NONE);
 			tableColumn.setText("Serverausgabe");
 			tableColumn.setWidth(180);
 			
-		tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
+		tableColumn = new TableColumn(tabDiscoveredEntities, SWT.NONE);
 			tableColumn.setText("Dateiname");
 			tableColumn.setWidth(100);
 
-		tableProductionEntities.setHeaderVisible(true);
-		tableProductionEntities.setLinesVisible(true);
+		tabDiscoveredEntities.setHeaderVisible(true);
+		tabDiscoveredEntities.setLinesVisible(true);
 		
-		tableProductionEntities.addSelectionListener(new SelectionAdapter() {
+		tabDiscoveredEntities.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent evt)
 			{
 				ProducibleEntities pe = new ProducibleEntities();
-				for(int i=0; i<tableProductionEntities.getItemCount(); i++)
+				for(int i=0; i<tabDiscoveredEntities.getItemCount(); i++)
 				{
-					TableItem tableItem = tableProductionEntities.getItem(i);
+					TableItem tableItem = tabDiscoveredEntities.getItem(i);
 					if (tableItem.getChecked())
 					{
 						ProducibleEntities.File f = (ProducibleEntities.File)tableItem.getData();
@@ -89,13 +152,12 @@ public class ProducerEntitiesDisplayFactory
 			
 			public void widgetDefaultSelected(SelectionEvent evt) {
 				// Bestimmen des ausgewählten Eintrags.
-				TableItem[] selection = tableProductionEntities.getSelection();
+				TableItem[] selection = tabDiscoveredEntities.getSelection();
 				TableItem selectedRow = selection[0];
-
-				logger.debug(selectedRow.getText(1)+" "+selectedRow.getText(2));
+				ProducibleEntities.File f = (ProducibleEntities.File)selectedRow.getData();
+				ofxAction.openDocument(f);
 			}
 		});
-		
-		return tableProductionEntities;
+		return tabDiscoveredEntities;
 	}
 }
