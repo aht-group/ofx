@@ -2,19 +2,21 @@ package org.openfuxml.client.gui.swt;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.client.control.ClientGuiCallback;
-import org.openfuxml.client.gui.swt.composites.ProduzierenComposite;
+import org.openfuxml.client.gui.swt.composites.ProducerComposite;
 
 public class SwtGuiCallback implements ClientGuiCallback
 {
 	 static Logger logger = Logger.getLogger(SwtGuiCallback.class);
 	 
-	private ProduzierenComposite compP;
+	private ProducerComposite compP;
 	
 	public SwtGuiCallback(){}
-	public SwtGuiCallback(ProduzierenComposite compP)
+	public SwtGuiCallback(ProducerComposite compP)
 	{
 		this.compP=compP;
 	}
+	
+	public void error(String s){{logger.debug("DISPLAY "+s);}}
 	
 	public void cboFormatSelected(){compP.zeigeOptionen();}
 	public void cboApplicationSelected(){}
@@ -25,5 +27,4 @@ public class SwtGuiCallback implements ClientGuiCallback
 	public void entitiesDiscovered(){logger.debug("entitiesDiscovered");}
 	public void setControlsEnabled(boolean enabled){logger.debug("setControlsEnabled");}
 	public void loescheErgebnis(){logger.debug("loescheErgebnis");}
-	public void getProducableEntities(){compP.getProducableEntities();}
 }

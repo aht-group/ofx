@@ -1,4 +1,4 @@
-package org.openfuxml.client.gui.simple.factory;
+package org.openfuxml.client.gui.swt.factory;
 
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
@@ -6,27 +6,38 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
-public class SimpleTableFactory
+public class ProducerEntitiesDisplayFactory
 {
-	 static Logger logger = Logger.getLogger(SimpleTableFactory.class);
+	static Logger logger = Logger.getLogger(ProducerEntitiesDisplayFactory.class);
 	 
-	private Table tableProductionEntities;
-	
-	public SimpleTableFactory()
+	public ProducerEntitiesDisplayFactory()
 	{
 
 	}
 	
+	public TabFolder createTabFolder(Composite composite)
+	{
+		TabFolder tf = new TabFolder(composite, SWT.TOP);
+		GridData data = new GridData();
+			data.grabExcessHorizontalSpace = true;
+			data.grabExcessVerticalSpace = true;
+			data.horizontalAlignment = GridData.FILL;
+			data.verticalAlignment = GridData.FILL;
+			data.horizontalSpan = 4;
+			tf.setLayoutData(data);
+		return tf;
+	}
+	
 	public Table createTable(Composite composite)
 	{
-		tableProductionEntities = new Table(composite, SWT.CHECK | SWT.BORDER);
+		final Table tableProductionEntities = new Table(composite, SWT.CHECK | SWT.BORDER);
 
-		{
-			GridData data = new GridData();
+		GridData data = new GridData();
 			data.widthHint = 450;
 			data.heightHint = 200;
 			data.horizontalSpan = 2;
@@ -35,28 +46,23 @@ public class SimpleTableFactory
 			data.verticalAlignment = GridData.FILL;
 			data.grabExcessVerticalSpace = true;
 			tableProductionEntities.setLayoutData(data);
-		}
 
-		{
-			TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
+		TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
 			tableColumn.setText("");
 			tableColumn.setWidth(20);
-		}
-		{
-			TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
+
+		tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
 			tableColumn.setText("Beschreibung");
 			tableColumn.setWidth(160);
-		}
-		{
-			TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
+
+		tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
 			tableColumn.setText("Serverausgabe");
 			tableColumn.setWidth(180);
-		}
-		{
-			TableColumn tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
+			
+		tableColumn = new TableColumn(tableProductionEntities, SWT.NONE);
 			tableColumn.setText("Dateiname");
 			tableColumn.setWidth(100);
-		}
+
 		tableProductionEntities.setHeaderVisible(true);
 		tableProductionEntities.setLinesVisible(true);
 		

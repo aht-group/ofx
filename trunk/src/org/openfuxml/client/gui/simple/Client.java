@@ -17,6 +17,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -31,12 +32,12 @@ import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.ClientGuiCallback;
 import org.openfuxml.client.control.OfxClientControl;
 import org.openfuxml.client.gui.simple.dialog.HelpAboutDialog;
-import org.openfuxml.client.gui.simple.factory.SimpleButtonFactory;
-import org.openfuxml.client.gui.simple.factory.SimpleComboFactory;
 import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
 import org.openfuxml.client.gui.simple.factory.SimpleMenuFactory;
-import org.openfuxml.client.gui.simple.factory.SimpleTableFactory;
 import org.openfuxml.client.gui.swt.composites.AbstractProducerComposite;
+import org.openfuxml.client.gui.swt.factory.ProducerComboFactory;
+import org.openfuxml.client.gui.swt.factory.ProducerButtonFactory;
+import org.openfuxml.client.gui.swt.factory.ProducerEntitiesDisplayFactory;
 import org.openfuxml.client.gui.util.GuiSettingsValidator;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
@@ -49,6 +50,7 @@ import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProducedEntitiesEntityFile;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
+import org.openfuxml.util.config.OfxPathHelper;
 import org.openfuxml.util.config.factory.ClientConfFactory;
 
 import de.kisner.util.LoggerInit;
@@ -138,29 +140,42 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 		}
 		
 		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
-		SimpleButtonFactory sbf = new SimpleButtonFactory(this,this,ofxCC);
-		SimpleComboFactory scf = new SimpleComboFactory(this,this,ofxCC);
-		SimpleTableFactory stf = new SimpleTableFactory();
+		ProducerButtonFactory sbf = new ProducerButtonFactory(this,this,ofxCC);
+		ProducerComboFactory scf = new ProducerComboFactory(this,ofxCC);
+		ProducerEntitiesDisplayFactory stf = new ProducerEntitiesDisplayFactory();
 		
 		slf.createLogo();
 		
-		lblRepository = slf.createLblRepository();
-		
-		
-		btnChange = sbf.createBtnChange();
+		slf.createLabel("Repository", 1);
+		lblRepository = slf.createLabel(OfxPathHelper.getDir(config, "repository"), 1);
+		GridData data = new GridData();
+			data.horizontalAlignment = GridData.FILL;
+			data.grabExcessHorizontalSpace = true;
+			lblRepository.setLayoutData(data);
+		btnChange = sbf.createBtnChange("change");
 
+		slf.createLabel("Application", 1);
 		cboApplications = scf.createCboApplication();
+		slf.createDummyLabel(1);
+		
+		slf.createLabel("Project", 1);
 		cboProjects = scf.createCboProject();
+		slf.createDummyLabel(1);
+		
+		slf.createLabel("Document", 1);
 		cboDocuments = scf.createCboDocument();
+		slf.createDummyLabel(1);
+		
+		slf.createLabel("Format", 1);
 		cboFormats = scf.createCboFormats();
+		slf.createDummyLabel(1);
 		
 		slf.createDummyLabel(2);
-		btnUpdate = sbf.createBtnUpdate();
+		btnUpdate = sbf.createBtnUpdate("update");
 		
 		tabDiscoveredEntities = stf.createTable(this);
 		
-		
-		btnProduce = sbf.createBtnProduce();
+		btnProduce = sbf.createBtnProduce("produce");
 		lblEvent = slf.creatLblEvent();
 		
 		fillCboApplications();
@@ -207,13 +222,6 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 */
 	}
 
-
-
-	/**
-	 * Die Methode fuelleComboProjekte schreibt alle Verzeichnisse aus dem 
-	 * Verzeichnis "labelVerzeichnis.getText()/comboAnwendungen.getText()"
-	 * in die Combo comboProjekte.
-	 */
 	public void fillCboProjects()
 	{
 		cboProjects.removeAll();
@@ -229,8 +237,6 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 			}
 		}
 	}
-		
-
 	
 	/**
 	 * Die Methode fuelleTableProductionEntities füllt die Tabelle
@@ -249,11 +255,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 				if (!toplevelShell.isDisposed())
 				{
 					tabDiscoveredEntities.removeAll();
-					OfxApplication ofxA = (OfxApplication)cboApplications.getData(cboApplications.getText());
-					OfxProject ofxP = (OfxProject)cboProjects.getData(cboProjects.getText());
-					OfxDocument ofxD = (OfxDocument)cboDocuments.getData(cboDocuments.getText());
-					OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
-					ProducibleEntities pe = ofxCC.getCachedProducibleEntities(ofxA, ofxP, ofxD, ofxF);
+					ProducibleEntities pe = ofxCC.getCachedProducibleEntities();
 					if (pe != null)
 					{
 						for(ProducibleEntities.File f :pe.getFile())
@@ -275,48 +277,9 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 		{
 			public void run()
 			{
-				if (!toplevelShell.isDisposed())
-				{
-					lblEvent.setText(status);
-				}
+				if (!toplevelShell.isDisposed()) {lblEvent.setText(status);}
 			}
 		});
-	}
-	
-	/**
-	 * Die Methode getProducableEntities testet, ob alle Eingaben gemacht wurden
-	 * und startet dann einen ProducerThread mit dem Auftrag startProducableEntities.
-	 * Vor dem Start werden alle Elemente disabled, um weitere Eingaben zu vermeiden.
-	 */
-	public void getProducableEntities()
-	{			
-		try
-		{
-			GuiSettingsValidator.checkSet(cboFormats);
-			if(lblRepository.getText().equals("")){throw new IllegalArgumentException("You have to chose a repository!");}
-
-			display.asyncExec(new Runnable()
-				{
-					public void run()
-					{
-						if (!toplevelShell.isDisposed())
-						{
-							OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
-							logger.debug("here");
-							ofxCC.getProducibleEntities(ofxF);
-							logger.debug("here2");
-						}
-					}
-				});			
-		}
-		catch (IllegalArgumentException e)
-		{
-			logger.debug("here3");
-			MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
-			messageBox.setText("Error");
-			messageBox.setMessage(e.getMessage()); 
-			messageBox.open();
-		}
 	}
 
 	/**
@@ -573,6 +536,14 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 		}
 		
         return img;		
+	}
+	
+	public void error(String s)
+	{
+		MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
+		messageBox.setText("Fehler");
+		messageBox.setMessage(s); 
+		messageBox.open();
 	}
 	
 	public void cboApplicationSelected()

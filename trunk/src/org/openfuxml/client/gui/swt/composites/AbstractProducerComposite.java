@@ -8,8 +8,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.openfuxml.client.control.OfxClientControl;
 import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
-import org.openfuxml.producer.exception.ProductionHandlerException;
-import org.openfuxml.producer.exception.ProductionSystemException;
 
 public class AbstractProducerComposite extends Composite
 {

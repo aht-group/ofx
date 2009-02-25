@@ -1,4 +1,4 @@
-package org.openfuxml.client.gui.simple.factory;
+package org.openfuxml.client.gui.swt.factory;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -10,29 +10,29 @@ import org.eclipse.swt.widgets.Label;
 import org.openfuxml.client.control.OfxGuiAction;
 import org.openfuxml.client.gui.simple.Client;
 
-public class SimpleButtonFactory
+public class ProducerButtonFactory
 {
 	private Client client;
 	private Composite composite;
 	private OfxGuiAction ofxAction;
 	
-	public SimpleButtonFactory(Client client,Composite composite,OfxGuiAction ofxAction)
+	public ProducerButtonFactory(Client client,Composite composite,OfxGuiAction ofxAction)
 	{
 		this.client=client;
 		this.composite=composite;
 		this.ofxAction=ofxAction;
 	}
 	
-	public SimpleButtonFactory(Composite composite,OfxGuiAction ofxAction)
+	public ProducerButtonFactory(Composite composite,OfxGuiAction ofxAction)
 	{
 		this.composite=composite;
 		this.ofxAction=ofxAction;
 	}
 	
-	public Button createBtnChange()
+	public Button createBtnChange(String label)
 	{
 		Button btnChange = new Button(composite, SWT.PUSH | SWT.CENTER);
-		btnChange.setText("change");
+		btnChange.setText(label);
 
 		GridData data = new GridData();
 		data.horizontalAlignment = GridData.FILL;
@@ -47,10 +47,10 @@ public class SimpleButtonFactory
 		return btnChange;
 	}
 	
-	public Button createBtnUpdate()
+	public Button createBtnUpdate(String label)
 	{
 		Button btnUpdate = new Button(composite, SWT.PUSH | SWT.CENTER);
-		btnUpdate.setText("update");
+		btnUpdate.setText(label);
 
 		GridData data = new GridData();
 		data.horizontalAlignment = GridData.FILL;
@@ -63,10 +63,10 @@ public class SimpleButtonFactory
 		return btnUpdate;
 	}
 	
-	public Button createBtnProduce()
+	public Button createBtnProduce(String label)
 	{
 		Button btnProduce = new Button(composite, SWT.PUSH | SWT.CENTER);
-		btnProduce.setText("produce");
+		btnProduce.setText(label);
 
 		GridData data = new GridData();
 		data.verticalAlignment = GridData.END;

@@ -40,6 +40,7 @@ public class OfxClientControl implements OfxGuiAction
 	private OfxProject selectedOfxP;
 	private OfxApplication selectedOfxA;
 	private OfxDocument selectedOfxD;
+	private OfxFormat selectedOfxF;
 	
 	private Hashtable<String, ProducibleEntities> htDiscoveredEntities;
 
@@ -75,9 +76,9 @@ public class OfxClientControl implements OfxGuiAction
 		}
 	}
 	
-	public ProducibleEntities getCachedProducibleEntities(OfxApplication ofxA, OfxProject ofxP, OfxDocument ofxD, OfxFormat ofxF)
+	public ProducibleEntities getCachedProducibleEntities()
 	{
-		setComboUid(ofxA, ofxP, ofxD, ofxF);
+		setComboUid(selectedOfxA, selectedOfxP, selectedOfxD, selectedOfxF);
 		if(htDiscoveredEntities==null){logger.debug("ht==null");}
 		if(!htDiscoveredEntities.containsKey(comboUid)){return null;}
 		return htDiscoveredEntities.get(comboUid);
@@ -95,21 +96,19 @@ public class OfxClientControl implements OfxGuiAction
 		return lOfxF;
 	}
 	
-	public void getProducibleEntities(OfxFormat ofxF) throws IllegalArgumentException
+	public void getProducibleEntities() throws IllegalArgumentException
 	{
-		logger.debug("here");
 		if(selectedOfxA==null){throw new IllegalArgumentException("You have to chose a Application");}
-		logger.debug("here");
 		if(selectedOfxP==null){throw new IllegalArgumentException("You have to chose a Project");}
-		logger.debug("here");
 		if(selectedOfxD==null){throw new IllegalArgumentException("You have to chose a Document");}
-		logger.debug("and here");
-		setComboUid(selectedOfxA, selectedOfxP, selectedOfxD, ofxF);
+		if(selectedOfxF==null){throw new IllegalArgumentException("You have to chose a Format");}
+
+		setComboUid(selectedOfxA, selectedOfxP, selectedOfxD, selectedOfxF);
 		OfxRequestFactory ofxReqF = new OfxRequestFactory();
 			ofxReqF.setOfxA(selectedOfxA);
 			ofxReqF.setOfxP(selectedOfxP);
 			ofxReqF.setOfxD(selectedOfxD);
-			ofxReqF.setOfxF(ofxF);
+			ofxReqF.setOfxF(selectedOfxF);
 		Sessionpreferences spref = ofxReqF.create();
 		ProducerThread pt = new ProducerThread(this,guiCallback,producer);
 		pt.getProducibleEntities(spref);
@@ -185,8 +184,9 @@ public class OfxClientControl implements OfxGuiAction
 		guiCallback.loescheErgebnis();
 	}
 	
-	public void cboFormateSelected()
+	public void cboFormateSelected(OfxFormat selectedOfxF)
 	{
+		this.selectedOfxF=selectedOfxF;
 		guiCallback.entitiesDiscovered();
 		guiCallback.loescheErgebnis();
 		guiCallback.cboFormatSelected();
@@ -195,6 +195,6 @@ public class OfxClientControl implements OfxGuiAction
 	public void btnUpdate()
 	{
 		guiCallback.loescheErgebnis();
-		guiCallback.getProducableEntities();
+		getProducibleEntities();
 	}
 }

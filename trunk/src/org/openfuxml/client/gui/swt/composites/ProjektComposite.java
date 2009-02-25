@@ -34,7 +34,7 @@ public class ProjektComposite extends Composite
 	private OpenFuxmlClient client;
 	private TabFolder tabFolder;
 	
-	private ProduzierenComposite pComp;
+	private ProducerComposite pComp;
 	/*	private OeffnenComposite oComp; 
 	private LogComposite logComp;
 	private BenutzerComposite benutzerComp;
@@ -124,7 +124,7 @@ public class ProjektComposite extends Composite
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
 		tiProduzieren.setText("Produzieren");
-			pComp = new ProduzierenComposite(tabFolder, ofxA, ofxP, ofxCC, this,config);
+			pComp = new ProducerComposite(tabFolder, ofxA, ofxP, ofxCC, config);
 			tiProduzieren.setControl(pComp);
 	}
 	

@@ -7,7 +7,9 @@ public interface ClientGuiCallback
 	public void entitiesDiscovered();
 	public void setControlsEnabled(boolean enabled);
 	public void loescheErgebnis();
-	public void getProducableEntities();
+	
+	//ErrorMessage
+	public void error(String s);
 	
 	//Combo-Actions
 	public void cboFormatSelected();
