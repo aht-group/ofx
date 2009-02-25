@@ -4,7 +4,7 @@ import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
-import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
+import org.openfuxml.model.jaxb.ProducibleEntities;
 
 public interface OfxGuiAction
 {
@@ -15,7 +15,7 @@ public interface OfxGuiAction
 	public void cboFormateSelected(OfxFormat selectedOfxF);
 	
 	//Tables
-	public void tblEntitiesSelected(Productionentities pe);
+	public void tblEntitiesSelected(ProducibleEntities pe);
 	
 	//Buttons
 	public void btnUpdate();

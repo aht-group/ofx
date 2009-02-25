@@ -42,7 +42,7 @@ public class OfxClientControl implements OfxGuiAction
 	private OfxApplication selectedOfxA;
 	private OfxDocument selectedOfxD;
 	private OfxFormat selectedOfxF;
-	private Productionentities selectedPe;
+	private ProducibleEntities selectedPe;
 	
 	private Hashtable<String, ProducibleEntities> htDiscoveredEntities;
 
@@ -129,8 +129,8 @@ public class OfxClientControl implements OfxGuiAction
 			orf.setOfxP(selectedOfxP);
 			orf.setOfxD(selectedOfxD);
 			orf.setOfxF(selectedOfxF);
+			orf.setProducibleEntities(selectedPe);
 		Sessionpreferences spref = orf.create();
-		spref.setProductionentities(selectedPe);
 		ProducerThread pt = new ProducerThread(this,guiCallback,producer);
 		pt.produce(spref);
 	}
@@ -200,7 +200,7 @@ public class OfxClientControl implements OfxGuiAction
 		guiCallback.cboFormatSelected();
 	}
 	
-	public void tblEntitiesSelected(Productionentities pe)
+	public void tblEntitiesSelected(ProducibleEntities pe)
 	{
 		logger.debug("Einträge: "+pe.getFile().size());
 		this.selectedPe=pe;

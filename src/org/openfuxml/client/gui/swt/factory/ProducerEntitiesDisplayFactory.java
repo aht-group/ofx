@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.OfxGuiAction;
+import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 
 public class ProducerEntitiesDisplayFactory
@@ -73,7 +74,7 @@ public class ProducerEntitiesDisplayFactory
 		tableProductionEntities.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent evt)
 			{
-				Productionentities pe = new Productionentities();
+				ProducibleEntities pe = new ProducibleEntities();
 				for(int i=0; i<tableProductionEntities.getItemCount(); i++)
 				{
 					TableItem tableItem = tableProductionEntities.getItem(i);
@@ -84,7 +85,7 @@ public class ProducerEntitiesDisplayFactory
 						logger.debug("setData?");
 						if(fi!=null){logger.debug("YES: "+fi.getDescription());}
 						else{logger.debug("NO");}
-						Productionentities.File f = new Productionentities.File();
+						ProducibleEntities.File f = new ProducibleEntities.File();
 							f.setDescription(tableItem.getText(1));
 							f.setDirectory(tableItem.getText(2));
 							f.setFilename(tableItem.getText(3));
