@@ -5,21 +5,61 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.OfxClientControl;
 import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
+import org.openfuxml.model.jaxb.ProducibleEntities;
 
 public class AbstractProducerComposite extends Composite
 {
 	static Logger logger = Logger.getLogger(AbstractProducerComposite.class);
 	
 	protected OfxClientControl ofxCC;
-	
 	protected Combo cboFormats, cboDocuments;
+	protected Table tabDiscoveredEntities;
+	
+	protected Shell toplevelShell;
+	protected Display display;
 	
 	public AbstractProducerComposite(Composite parent, int swt)
 	{
 		super(parent, swt);
+	}
+	
+	/**
+	 * Die Methode fuelleTableProductionEntities füllt die Tabelle
+	 * tableProductionEntities.
+	 * Dabei werden anhand der ausgewählten 3 Auswahlfelder aus der Hashtable 
+	 * die producableEntities in Form einer SSIMessage ermittelt.
+	 * Diese werden nach den Elementen Beschreibung, Verzeichnis und Dateiname
+	 * "aufgedröselt" und als neuen Eintrag in die Tabelle eingefügt.
+	 */
+	public void entitiesDiscovered()
+	{
+		display.asyncExec(new Runnable()
+		{
+			public void run()
+			{
+				if (!toplevelShell.isDisposed())
+				{
+					tabDiscoveredEntities.removeAll();
+					ProducibleEntities pe = ofxCC.getCachedProducibleEntities();
+					if (pe != null)
+					{
+						for(ProducibleEntities.File f :pe.getFile())
+						{
+							TableItem tblItem = new TableItem(tabDiscoveredEntities, 0);
+							tblItem.setData(f);
+							tblItem.setText(new String[] {"", f.getDescription(),f.getDirectory(), f.getFilename()});
+						}
+					};
+				}
+			}
+		});
 	}
 	
 	public void fillCboFormats()

@@ -10,14 +10,18 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.openfuxml.client.control.OfxGuiAction;
+import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 
 public class ProducerEntitiesDisplayFactory
 {
 	static Logger logger = Logger.getLogger(ProducerEntitiesDisplayFactory.class);
-	 
-	public ProducerEntitiesDisplayFactory()
+	
+	private OfxGuiAction ofxAction;
+	
+	public ProducerEntitiesDisplayFactory(OfxGuiAction ofxAction)
 	{
-
+		this.ofxAction=ofxAction;
 	}
 	
 	public TabFolder createTabFolder(Composite composite)
@@ -67,6 +71,29 @@ public class ProducerEntitiesDisplayFactory
 		tableProductionEntities.setLinesVisible(true);
 		
 		tableProductionEntities.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent evt)
+			{
+				Productionentities pe = new Productionentities();
+				for(int i=0; i<tableProductionEntities.getItemCount(); i++)
+				{
+					TableItem tableItem = tableProductionEntities.getItem(i);
+					if (tableItem.getChecked())
+					{
+						logger.debug("setData?");
+						Productionentities.File fi = (Productionentities.File)tableItem.getData();
+						logger.debug("setData?");
+						if(fi!=null){logger.debug("YES: "+fi.getDescription());}
+						else{logger.debug("NO");}
+						Productionentities.File f = new Productionentities.File();
+							f.setDescription(tableItem.getText(1));
+							f.setDirectory(tableItem.getText(2));
+							f.setFilename(tableItem.getText(3));
+						pe.getFile().add(f);
+					} 
+				}
+				ofxAction.tblEntitiesSelected(pe);
+			}
+			
 			public void widgetDefaultSelected(SelectionEvent evt) {
 				// Bestimmen des ausgewählten Eintrags.
 				TableItem[] selection = tableProductionEntities.getSelection();
