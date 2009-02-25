@@ -1,6 +1,7 @@
 package org.openfuxml.client.control;
 
 import org.apache.log4j.Logger;
+import org.openfuxml.client.control.log.DirectLogFetcher;
 import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
@@ -49,6 +50,9 @@ public class ProducerThread extends Thread
 	{
 		try
 		{
+			DirectLogFetcher xW = new DirectLogFetcher(guiCallback);
+			producer.setLogWriter(xW);
+			guiCallback.clearLog();
 			switch(typ)
 			{
 				case ENTITIES:	guiCallback.setStatus("Discovering entities ...");

@@ -1,5 +1,6 @@
 package org.openfuxml.producer;
 
+import java.io.Writer;
 import java.util.List;
 
 import org.openfuxml.model.ejb.OfxApplication;
@@ -23,6 +24,7 @@ public interface Producer
 	public Productionresult produce(Sessionpreferences spref) throws ProductionSystemException, ProductionHandlerException;
 	public ProducibleEntities discoverEntities(Sessionpreferences spref) throws ProductionSystemException, ProductionHandlerException;
 	
+	public void setLogWriter(Writer w);
 	public void close();
 }
 

@@ -1,6 +1,7 @@
 package org.openfuxml.communication.cluster.facade;
 
 import java.io.Serializable;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +101,8 @@ public class ProducerFacadeBean implements ProducerFacade, Serializable
 		logger.warn("Not implemented for this Handler!!");
 		return null;
 	}
+	
+	public void setLogWriter(Writer w){}
 	
 	@Remove
 	public void close()

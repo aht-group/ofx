@@ -324,13 +324,14 @@ public class DirectProducer extends AbstractProducer implements Producer
 		
 		Spawn spawn = new Spawn(cmd);
 			spawn.setEnvParameter(envP);
+			spawn.setWriter(w);
 			spawn.cmd();
 		int exitValue = spawn.getExitValue();
 		if (exitValue != 0) 
 			pc = ProductionCode.BuildError;
 		else 
 			pc = ProductionCode.Ok;
-		
+		w=null;
 		return pc;
 	}
 }

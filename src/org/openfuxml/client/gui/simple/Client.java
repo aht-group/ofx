@@ -465,6 +465,8 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 		loescheErgebnis();
 	}
 	public void cboFormatSelected(){}
+	public void addLogline(String s){}
+	public void clearLog(){}
 	
 	public static void main(String[] args)
 	{

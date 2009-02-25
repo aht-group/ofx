@@ -35,8 +35,9 @@ public class ProjektComposite extends Composite
 	private TabFolder tabFolder;
 	
 	private ProducerComposite pComp;
+	private LogComposite compLog;
 	/*	private OeffnenComposite oComp; 
-	private LogComposite logComp;
+	
 	private BenutzerComposite benutzerComp;
 	private DocComposite docComp;
 	private EinstellungenComposite einstComp;
@@ -81,13 +82,6 @@ public class ProjektComposite extends Composite
 			layout.verticalSpacing = 10;
 			this.setLayout(layout);
 		
-/*		Label label = new Label(this, SWT.NONE);
-			label.setText("Projektname: " + ofxP.getName());		
-			GridData data = new GridData();
-			data.grabExcessHorizontalSpace = true;
-			data.horizontalAlignment = GridData.FILL;
-			label.setLayoutData(data);
-*/
 		tabFolder = new TabFolder(this, SWT.TOP);
 			tabFolder.setSelection(0);
 			GridData data = new GridData();
@@ -98,18 +92,19 @@ public class ProjektComposite extends Composite
 			tabFolder.setLayoutData(data);
 			
 		addTabProduce();
+		addTabLog();
 		
 		//TODO Migration Process (tk, 2009-02-17)
 		boolean d = false;
 		if(d)
 		{
 			addTabOpen();
-			addTabLog();
+			
 			addTabUser();
 			addTabDoc();
 			addTabSettings();
 		}
-		ClientGuiCallback guiCallback = new SwtGuiCallback(pComp);
+		ClientGuiCallback guiCallback = new SwtGuiCallback(pComp,compLog);
 		ofxCC.setGuiCallback(guiCallback);
 	}
 	
@@ -154,8 +149,8 @@ public class ProjektComposite extends Composite
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
 		tiLogView.setText("Log");
-//			logComp = new LogComposite(tabFolder, this, iniCtx,myProjectUi);
-//			tiLogView.setControl(logComp);
+		compLog = new LogComposite(tabFolder);
+		tiLogView.setControl(compLog);
 	}
 	
 	private void addTabUser()

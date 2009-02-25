@@ -1,5 +1,6 @@
 package org.openfuxml.producer.handler;
 
+import java.io.Writer;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
@@ -18,11 +19,13 @@ public abstract class AbstractProducer
 	static Logger logger = Logger.getLogger(AbstractProducer.class);
 	protected EnvironmentParameter envP;
 	protected Configuration config;
+	protected Writer w;
 	
 	public AbstractProducer(Configuration config, EnvironmentParameter envP)
 	{
 		this.config=config;
 		this.envP=envP;
+		w=null;
 	}
 	
 	public void close()
@@ -46,5 +49,11 @@ public abstract class AbstractProducer
 	{
 		logger.warn("Not implemented for this Handler!!");
 		return null;
+	}
+	
+	public void setLogWriter(Writer w)
+	{
+		logger.trace("Setting Writer: "+w.getClass().getSimpleName());
+		this.w=w;
 	}
 }
