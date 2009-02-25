@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
+import org.eclipse.swt.events.SelectionEvent;
 import org.openfuxml.client.control.documents.DocumentFactory;
 import org.openfuxml.client.control.documents.DocumentFactoryDirect;
 import org.openfuxml.client.control.projects.ProjectFactory;
@@ -41,6 +42,7 @@ public class OfxClientControl implements OfxGuiAction
 	private OfxApplication selectedOfxA;
 	private OfxDocument selectedOfxD;
 	private OfxFormat selectedOfxF;
+	private Productionentities selectedPe;
 	
 	private Hashtable<String, ProducibleEntities> htDiscoveredEntities;
 
@@ -114,15 +116,21 @@ public class OfxClientControl implements OfxGuiAction
 		pt.getProducibleEntities(spref);
 	}
 	
-	public void produce(OfxFormat ofxF, Productionentities pe)
+	public void produce()
 	{
+		if(selectedOfxA==null){throw new IllegalArgumentException("You have to chose a Application");}
+		if(selectedOfxP==null){throw new IllegalArgumentException("You have to chose a Project");}
+		if(selectedOfxD==null){throw new IllegalArgumentException("You have to chose a Document");}
+		if(selectedOfxF==null){throw new IllegalArgumentException("You have to chose a Format");}
+		if(selectedPe==null || selectedPe.getFile()==null || selectedPe.getFile().size()<1){throw new IllegalArgumentException("You have to chose som entities");}
+		
 		OfxRequestFactory orf = new OfxRequestFactory();
 			orf.setOfxA(selectedOfxA);
 			orf.setOfxP(selectedOfxP);
 			orf.setOfxD(selectedOfxD);
-			orf.setOfxF(ofxF);
+			orf.setOfxF(selectedOfxF);
 		Sessionpreferences spref = orf.create();
-		spref.setProductionentities(pe);
+		spref.setProductionentities(selectedPe);
 		ProducerThread pt = new ProducerThread(this,guiCallback,producer);
 		pt.produce(spref);
 	}
@@ -192,9 +200,23 @@ public class OfxClientControl implements OfxGuiAction
 		guiCallback.cboFormatSelected();
 	}
 	
+	public void tblEntitiesSelected(Productionentities pe)
+	{
+		logger.debug("Einträge: "+pe.getFile().size());
+		this.selectedPe=pe;
+	}
+	
 	public void btnUpdate()
 	{
 		guiCallback.loescheErgebnis();
-		getProducibleEntities();
+		try{getProducibleEntities();}
+		catch(IllegalArgumentException e){guiCallback.error(e.getMessage());}
+	}
+	
+	public void btnProduce()
+	{
+		guiCallback.loescheErgebnis();
+		try{produce();}
+		catch(IllegalArgumentException e){guiCallback.error(e.getMessage());}
 	}
 }

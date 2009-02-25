@@ -5,7 +5,6 @@ public interface ClientGuiCallback
 	public void setStatus(String status);
 	public void entitiesProduced();
 	public void entitiesDiscovered();
-	public void setControlsEnabled(boolean enabled);
 	public void loescheErgebnis();
 	
 	//ErrorMessage
@@ -15,4 +14,7 @@ public interface ClientGuiCallback
 	public void cboFormatSelected();
 	public void cboApplicationSelected();
 	public void cboProjectSelected();
+	
+	//Controls
+	public void setProductionControlsEnabled(boolean isEnabled);
 }

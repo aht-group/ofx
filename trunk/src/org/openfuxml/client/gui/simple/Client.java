@@ -27,7 +27,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.ClientGuiCallback;
 import org.openfuxml.client.control.OfxClientControl;
@@ -35,15 +34,12 @@ import org.openfuxml.client.gui.simple.dialog.HelpAboutDialog;
 import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
 import org.openfuxml.client.gui.simple.factory.SimpleMenuFactory;
 import org.openfuxml.client.gui.swt.composites.AbstractProducerComposite;
-import org.openfuxml.client.gui.swt.factory.ProducerComboFactory;
 import org.openfuxml.client.gui.swt.factory.ProducerButtonFactory;
+import org.openfuxml.client.gui.swt.factory.ProducerComboFactory;
 import org.openfuxml.client.gui.swt.factory.ProducerEntitiesDisplayFactory;
-import org.openfuxml.client.gui.util.GuiSettingsValidator;
 import org.openfuxml.model.ejb.OfxApplication;
-import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
-import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 import org.openfuxml.producer.ejb.ProducedEntities;
@@ -76,11 +72,6 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	private Button btnChange,btnUpdate,btnProduce;
 	
 	private Combo cboApplications,cboProjects;
-
-	private Table tabDiscoveredEntities;
-	
-	private Shell toplevelShell;
-	private Display display;
 	
 	/**
 	 * alProducedEntities speichert alle Einträge, die in dieser Sitzung produziert wurden.
@@ -100,9 +91,9 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	public Client (Composite parent, Display disp, Configuration config)
 	{
 	    super(parent, SWT.NULL);
+	    this.display=disp;
+	    this.toplevelShell=(Shell)parent;
 	    this.config=config;
-		toplevelShell = (Shell)parent;
-		this.display = disp;
 		
 		ofxCC = new OfxClientControl(config,this);
 		
@@ -142,7 +133,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
 		ProducerButtonFactory sbf = new ProducerButtonFactory(this,this,ofxCC);
 		ProducerComboFactory scf = new ProducerComboFactory(this,ofxCC);
-		ProducerEntitiesDisplayFactory stf = new ProducerEntitiesDisplayFactory();
+		ProducerEntitiesDisplayFactory stf = new ProducerEntitiesDisplayFactory(ofxCC);
 		
 		slf.createLogo();
 		
@@ -238,37 +229,6 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 		}
 	}
 	
-	/**
-	 * Die Methode fuelleTableProductionEntities füllt die Tabelle
-	 * tableProductionEntities.
-	 * Dabei werden anhand der ausgewählten 3 Auswahlfelder aus der Hashtable 
-	 * die producableEntities in Form einer SSIMessage ermittelt.
-	 * Diese werden nach den Elementen Beschreibung, Verzeichnis und Dateiname
-	 * "aufgedröselt" und als neuen Eintrag in die Tabelle eingefügt.
-	 */
-	public void entitiesDiscovered()
-	{
-		display.asyncExec(new Runnable()
-		{
-			public void run()
-			{
-				if (!toplevelShell.isDisposed())
-				{
-					tabDiscoveredEntities.removeAll();
-					ProducibleEntities pe = ofxCC.getCachedProducibleEntities();
-					if (pe != null)
-					{
-						for(ProducibleEntities.File f :pe.getFile())
-						{
-							TableItem newItem = new TableItem(tabDiscoveredEntities, 0);
-							newItem.setText(new String[] {"", f.getDescription(),f.getDirectory(), f.getFilename()});
-						}
-					};
-				}
-			}
-		});
-	}
-	
 	public void entitiesProduced(){}
 	
 	public void setStatus(final String status)
@@ -281,61 +241,6 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 			}
 		});
 	}
-
-	/**
-	 * Die Methode produce testet, ob Einträge der Tabelle ProductionEntities
-	 * für die Produktion augewählt wurden.
-	 * Danach wird der ProducerThread mit dem Auftrag starteProduktion
-	 * gestartet.
-	 * Vor dem Start werden alle Elemente disabled, um weitere Eingaben zu vermeiden.
-	 */
-	public void produce()
-	{	// Bestimmen der Anzahl der ausgewählten Einträge der Tabelle ProductionEntities.
-		int anzItems = 0;
-		
-		for(int i=0; i<tabDiscoveredEntities.getItemCount(); i++)
-		{
-			TableItem tableItem = tabDiscoveredEntities.getItem(i);
-			if (tableItem.getChecked()){anzItems++;}
-		}
-
-		if (anzItems == 0)
-		{
-			MessageBox messageBox = new MessageBox(this.getShell(), SWT.ICON_ERROR | SWT.OK);
-			messageBox.setText("Fehler");
-			messageBox.setMessage("Sie  müssen mindestens einen Eintrag auswählen."); 
-			messageBox.open();
-		}
-		else
-		{
-			display.asyncExec(new Runnable()
-				{
-					public void run()
-					{
-						if (!toplevelShell.isDisposed())
-						{				
-							Productionentities pe = new Productionentities();
-							for(int i=0; i<tabDiscoveredEntities.getItemCount(); i++)
-							{
-								TableItem tableItem = tabDiscoveredEntities.getItem(i);
-								if (tableItem.getChecked())
-								{
-									Productionentities.File f = new Productionentities.File();
-										f.setDescription(tableItem.getText(1));
-										f.setDirectory(tableItem.getText(2));
-										f.setFilename(tableItem.getText(3));
-									pe.getFile().add(f);
-								} 
-							}
-							
-							OfxFormat ofxF = (OfxFormat)cboFormats.getData(cboFormats.getText());
-						
-							ofxCC.produce(ofxF, pe);
-						} 
-					}
-				});
-		} // else
-	}
 	
 	/**
 	 * Die Methode addProducedEntities schreibt die produzierten
@@ -343,11 +248,11 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	 * Falls der Eintrag bereits vorhanden ist, wird er aktualisiert.
 	 * @param producedEntities
 	 */
-	public void addProducedEntities(Productionresult presult)
+	public void addProducedEntities2(Productionresult presult)
 	{
 		
 	}
-	public void addProducedEntities1(ProducedEntities producedEntities)
+	public void addProducedEntities3(ProducedEntities producedEntities)
 	{
 		if (producedEntities != null)
 		{
@@ -466,9 +371,9 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	 * Sie ruft dabei für alle Bedienelemente die Methode setEnabled auf.
 	 * Außerem wird der Cursor auf "Warten" bzw. auf "normal" gestellt.
 	 * 
-	 * @param bool - gibt an, ob die Bedienelemente enabled bzw. disabled werden.
+	 * @param isEnabled - gibt an, ob die Bedienelemente enabled bzw. disabled werden.
 	 */
-	public void setControlsEnabled(final boolean bool)
+	public void setProductionControlsEnabled(final boolean isEnabled)
 	{
 		display.asyncExec(new Runnable()
 		{
@@ -476,18 +381,18 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 			{
 				if (!toplevelShell.isDisposed())
 				{				
-					menu.setEnabled(bool);
+					menu.setEnabled(isEnabled);
 
-					btnChange.setEnabled(bool);
-					cboApplications.setEnabled(bool);
-					cboProjects.setEnabled(bool);
-					cboDocuments.setEnabled(bool);
-					cboFormats.setEnabled(bool);
-					btnUpdate.setEnabled(bool);
-					tabDiscoveredEntities.setEnabled(bool);
-					btnProduce.setEnabled(bool);
+					btnChange.setEnabled(isEnabled);
+					cboApplications.setEnabled(isEnabled);
+					cboProjects.setEnabled(isEnabled);
+					cboDocuments.setEnabled(isEnabled);
+					cboFormats.setEnabled(isEnabled);
+					btnUpdate.setEnabled(isEnabled);
+					tabDiscoveredEntities.setEnabled(isEnabled);
+					btnProduce.setEnabled(isEnabled);
 				
-					if (bool){cursor = new Cursor(display, SWT.CURSOR_ARROW);}
+					if (isEnabled){cursor = new Cursor(display, SWT.CURSOR_ARROW);}
 					else {cursor = new Cursor(display, SWT.CURSOR_WAIT);}
 					toplevelShell.setCursor(cursor);
 				} 

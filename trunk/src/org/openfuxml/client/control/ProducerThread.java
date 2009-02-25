@@ -52,20 +52,20 @@ public class ProducerThread extends Thread
 			switch(typ)
 			{
 				case ENTITIES:	guiCallback.setStatus("Discovering entities ...");
-								guiCallback.setControlsEnabled(false);
+								guiCallback.setProductionControlsEnabled(false);
 								ProducibleEntities pe = producer.discoverEntities(spref);
 								guiCallback.setStatus("Entities discovered");
 								ofxCC.setDiscoveredEntities(pe);
 								guiCallback.entitiesDiscovered();
-								guiCallback.setControlsEnabled(true);break;
+								guiCallback.setProductionControlsEnabled(true);break;
 								
 				case PRODUCE:	guiCallback.setStatus("Producing ...");
-								guiCallback.setControlsEnabled(false);
+								guiCallback.setProductionControlsEnabled(false);
 								Productionresult presult = producer.produce(spref);
 								guiCallback.setStatus("Entities produced");
 								ofxCC.setProducedEntities(presult);
 								guiCallback.entitiesProduced();
-								guiCallback.setControlsEnabled(true);break;
+								guiCallback.setProductionControlsEnabled(true);break;
 			}
 		}
 			catch (ProductionSystemException e)

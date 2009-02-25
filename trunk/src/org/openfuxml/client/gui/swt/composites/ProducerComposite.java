@@ -1,7 +1,6 @@
 package org.openfuxml.client.gui.swt.composites;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
@@ -17,31 +16,21 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.OfxClientControl;
 import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
-import org.openfuxml.client.gui.swt.factory.ProducerComboFactory;
 import org.openfuxml.client.gui.swt.factory.ProducerButtonFactory;
+import org.openfuxml.client.gui.swt.factory.ProducerComboFactory;
 import org.openfuxml.client.gui.swt.factory.ProducerEntitiesDisplayFactory;
-import org.openfuxml.client.gui.util.GuiSettingsValidator;
 import org.openfuxml.client.util.ImgCanvas;
 import org.openfuxml.model.ejb.OfxApplication;
-import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.model.jaxb.Format.Options.Option;
-import org.openfuxml.producer.exception.ProductionHandlerException;
-import org.openfuxml.producer.exception.ProductionSystemException;
 
 /**
  * 
@@ -55,16 +44,12 @@ public class ProducerComposite extends AbstractProducerComposite
 	final static int MAX_ANZ_KE = 8;
 
 	final static String IMG_ERROR	= "/swt/images/error.gif";
-	
-	private Display display;
-	private Shell toplevelShell;
 
 	private Button btnUpdate,btnProduce;
 
 	private TabFolder tfEntities;
 	private TabItem tiAnsichtTabelle;
 	private TabItem tiAnsichtMatrix;
-	private Table tableProductionEntities;
 	private Composite compositeMatrix;
 	private ScrolledComposite scrolledCompositeMatrix;
 	private Button[] checkBtnMatrix;
@@ -76,7 +61,6 @@ public class ProducerComposite extends AbstractProducerComposite
 	
 	private Button buttonDefaultOptionen;
 	
-
 	private Label lblEvent;
 	private ImgCanvas imgCanvasStatus;
 	private Button buttonErgebnisDetails;
@@ -100,7 +84,7 @@ public class ProducerComposite extends AbstractProducerComposite
 		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
 		ProducerComboFactory scf = new ProducerComboFactory(this,ofxCC);
 		ProducerButtonFactory sbf = new ProducerButtonFactory(this,ofxCC);
-		ProducerEntitiesDisplayFactory pedf = new ProducerEntitiesDisplayFactory();
+		ProducerEntitiesDisplayFactory pedf = new ProducerEntitiesDisplayFactory(ofxCC);
 		
 		GridLayout layout = new GridLayout();
 			layout.numColumns = 4;
@@ -123,13 +107,13 @@ public class ProducerComposite extends AbstractProducerComposite
 		
 		tfEntities = pedf.createTabFolder(this);
 
-			tableProductionEntities = pedf.createTable(tfEntities); //new Table(tfAnsicht, SWT.CHECK);
+		tabDiscoveredEntities = pedf.createTable(tfEntities); //new Table(tfAnsicht, SWT.CHECK);
 
-			tiAnsichtTabelle = new TabItem(tfEntities, SWT.NONE);
+		tiAnsichtTabelle = new TabItem(tfEntities, SWT.NONE);
 			tiAnsichtTabelle.setText("Tabellenansicht");
-			tiAnsichtTabelle.setControl(tableProductionEntities);
+			tiAnsichtTabelle.setControl(tabDiscoveredEntities);
 			
-			tiAnsichtMatrix = null;
+		tiAnsichtMatrix = null;
 			
 			{
 /*
@@ -388,34 +372,6 @@ System.out.println(hString);
 		fuelleTableProductionEntities();
 */		fuelleMatrix();
 	} // erzeugeAlProductionEntities
-	
-	/**
-	 * TODO neu formulieren
-	 * Anhand der beiden ausgewählten Auswahlfelder (Dokument und Format)
-	 * werden aus einer Hashtable die ProducableEntities, die schon einmal
-	 * heruntergeladen wurden, ermittelt. 
-	 * Das Ergebnis wird in die Tabelle der ProducableEntities  
-	 * (tableProductionEntities) geschrieben. Sollte es leer sein, bleibt 
-	 * auch die Tabelle leer und der Anwender muss erst auf aktualisieren 
-	 * gehen.
-	 */
-	public void fuelleTableProductionEntities()
-	{
-		tableProductionEntities.removeAll();
-		
-		for (int i=0; i<alProductionEntities.size(); i++)
-		{
-			TableItem newItem = new TableItem(tableProductionEntities, 0);
-			
-			ProductionEntity pe = (ProductionEntity)alProductionEntities.get(i);
-			String sDir			= pe.getDirectory();
-			String sFilename	= pe.getFilename();
-	        String sDesc		= pe.getDescription();
-
-	        newItem.setText(new String[] {"", sDesc, sDir, sFilename});
-        	newItem.setChecked(pe.getChecked());
-		} // for
-	} // fuelleTableProductionEntities
 			
 	public void fuelleMatrix()
 	{
@@ -620,7 +576,7 @@ System.out.println(hString);
 										} // if
 									} // for									
 									
-									fuelleTableProductionEntities();
+//									fuelleTableProductionEntities();
 									
 //									speicherPEHaekchen();
 								}
@@ -823,34 +779,43 @@ System.out.println(hString);
 	 * Sie ruft dabei für alle Bedienelemente die Methode setEnabled auf.
 	 * Außerem wird der Cursor auf "Warten" bzw. auf "normal" gestellt.
 	 * 
-	 * @param bool - gibt an, ob die Bedienelemente enabled bzw. disabled werden.
+	 * @param isEnabled - gibt an, ob die Bedienelemente enabled bzw. disabled werden.
 	 */
-	public void setAllEnabled(boolean bool)
+	public void setControlsEnabled(final boolean isEnabled)
 	{
-		cboDocuments.setEnabled(bool);
-		cboFormats.setEnabled(bool);
-		btnUpdate.setEnabled(bool);
-		tableProductionEntities.setEnabled(bool);
-		if (compositeMatrix!=null)
+		display.asyncExec(new Runnable()
 		{
-			compositeMatrix.setEnabled(bool);
-		}
-		btnProduce.setEnabled(bool);
-		buttonErgebnisDetails.setEnabled(bool);
-
-		compositeOptionen.setEnabled(bool);
-		buttonDefaultOptionen.setEnabled(bool);
-		
-		if (bool)
-		{
-			Cursor cursor = new Cursor(display, SWT.CURSOR_ARROW);
-			setCursor(cursor);
-		}
-		else
-		{
-			Cursor cursor = new Cursor(display, SWT.CURSOR_WAIT);
-			setCursor(cursor);
-		}
+			public void run()
+			{
+				if (!toplevelShell.isDisposed())
+				{	
+					cboDocuments.setEnabled(isEnabled);
+					cboFormats.setEnabled(isEnabled);
+					btnUpdate.setEnabled(isEnabled);
+					tabDiscoveredEntities.setEnabled(isEnabled);
+					if (compositeMatrix!=null)
+					{
+						compositeMatrix.setEnabled(isEnabled);
+					}
+					btnProduce.setEnabled(isEnabled);
+					buttonErgebnisDetails.setEnabled(isEnabled);
+			
+					compositeOptionen.setEnabled(isEnabled);
+					buttonDefaultOptionen.setEnabled(isEnabled);
+					
+					if (isEnabled)
+					{
+						Cursor cursor = new Cursor(display, SWT.CURSOR_ARROW);
+						setCursor(cursor);
+					}
+					else
+					{
+						Cursor cursor = new Cursor(display, SWT.CURSOR_WAIT);
+						setCursor(cursor);
+					}
+				} 
+			}
+		});
 	}
 	
 	public void setStatus(final String status)

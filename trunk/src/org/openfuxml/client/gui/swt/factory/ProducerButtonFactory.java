@@ -6,7 +6,6 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
 import org.openfuxml.client.control.OfxGuiAction;
 import org.openfuxml.client.gui.simple.Client;
 
@@ -75,8 +74,7 @@ public class ProducerButtonFactory
 
 		btnProduce.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent evt) {
-				client.loescheErgebnis();
-				client.produce();
+				ofxAction.btnProduce();
 			}
 		});
 		return btnProduce;

@@ -24,7 +24,7 @@ public class SwtGuiCallback implements ClientGuiCallback
 	
 	public void entitiesProduced(){logger.debug("entitiesProduced");}
 	public void setStatus(String status){compP.setStatus(status);}
-	public void entitiesDiscovered(){logger.debug("entitiesDiscovered");}
-	public void setControlsEnabled(boolean enabled){logger.debug("setControlsEnabled");}
+	public void entitiesDiscovered(){compP.entitiesDiscovered();}
+	public void setProductionControlsEnabled(boolean isEnabled){compP.setControlsEnabled(isEnabled);}
 	public void loescheErgebnis(){logger.debug("loescheErgebnis");}
 }
