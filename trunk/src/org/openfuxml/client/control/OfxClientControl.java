@@ -1,11 +1,12 @@
 package org.openfuxml.client.control;
 
+import java.io.File;
 import java.util.Hashtable;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
-import org.eclipse.swt.events.SelectionEvent;
 import org.openfuxml.client.control.documents.DocumentFactory;
 import org.openfuxml.client.control.documents.DocumentFactoryDirect;
 import org.openfuxml.client.control.projects.ProjectFactory;
@@ -18,18 +19,21 @@ import org.openfuxml.model.factory.OfxRequestFactory;
 import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
-import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
 import org.openfuxml.producer.handler.DirectProducer;
 import org.openfuxml.producer.handler.SocketProducer;
 import org.openfuxml.server.DummyServer;
+import org.openfuxml.util.config.OfxPathHelper;
+
+import de.kisner.util.architecture.ArchOpen;
 
 public class OfxClientControl implements OfxGuiAction
 {
 	static Logger logger = Logger.getLogger(OfxClientControl.class);
-	 
+	private static String fs = SystemUtils.FILE_SEPARATOR;
+	
 	private Configuration config;
 	private ProjectFactory ofxProjectFactory;
 	private DocumentFactory ofxDocumentFactory;
@@ -218,5 +222,17 @@ public class OfxClientControl implements OfxGuiAction
 		guiCallback.loescheErgebnis();
 		try{produce();}
 		catch(IllegalArgumentException e){guiCallback.error(e.getMessage());}
+	}
+	
+	public void openDocument(ProducibleEntities.File f)
+	{
+		StringBuffer sb = new StringBuffer();
+			sb.append(OfxPathHelper.getDir(config, "output"));
+			sb.append(fs+selectedOfxA.getName());
+			sb.append(fs+f.getDirectory());
+			sb.append(f.getFilename());
+		File openF = new File(sb.toString());
+		if(openF.exists() && openF.isFile()){ArchOpen.open(openF.getAbsolutePath());}
+		else{logger.warn("Trying to open, but does not exist: "+openF.getAbsolutePath());}
 	}
 }

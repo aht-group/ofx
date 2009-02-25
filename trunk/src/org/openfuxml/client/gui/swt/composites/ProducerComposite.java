@@ -1,7 +1,5 @@
 package org.openfuxml.client.gui.swt.composites;
 
-import java.util.ArrayList;
-
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
@@ -21,6 +19,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.OfxClientControl;
 import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
 import org.openfuxml.client.gui.swt.factory.ProducerButtonFactory;
@@ -30,6 +29,7 @@ import org.openfuxml.client.util.ImgCanvas;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
+import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Format.Options.Option;
 
 /**
@@ -50,7 +50,6 @@ public class ProducerComposite extends AbstractProducerComposite
 	private TabFolder tfEntities;
 	private TabItem tiAnsichtTabelle;
 	private TabItem tiAnsichtMatrix;
-	private Composite compositeMatrix;
 	private ScrolledComposite scrolledCompositeMatrix;
 	private Button[] checkBtnMatrix;
 	private int checkBtnMatrixCounter;
@@ -64,27 +63,21 @@ public class ProducerComposite extends AbstractProducerComposite
 	private Label lblEvent;
 	private ImgCanvas imgCanvasStatus;
 	private Button buttonErgebnisDetails;
-		
-
-	private ArrayList<ProductionEntity> alProductionEntities;
-
 	
 	public ProducerComposite(Composite parent, OfxApplication ofxA, OfxProject ofxP, OfxClientControl ofxCC, Configuration config)
 	{
 		super(parent,SWT.NONE);
-		ofxCC.cboApplicationSelected(ofxA);
-		ofxCC.cboProjectSelected(ofxP);
 		this.ofxCC=ofxCC;
 		display = this.getDisplay();
 		toplevelShell = this.getShell();
 		
-		
-		alProductionEntities = new ArrayList<ProductionEntity>();
+		ofxCC.cboApplicationSelected(ofxA);
+		ofxCC.cboProjectSelected(ofxP);
 		
 		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
 		ProducerComboFactory scf = new ProducerComboFactory(this,ofxCC);
 		ProducerButtonFactory sbf = new ProducerButtonFactory(this,ofxCC);
-		ProducerEntitiesDisplayFactory pedf = new ProducerEntitiesDisplayFactory(ofxCC);
+		ProducerEntitiesDisplayFactory pedf = new ProducerEntitiesDisplayFactory(ofxCC,config);
 		
 		GridLayout layout = new GridLayout();
 			layout.numColumns = 4;
@@ -92,12 +85,12 @@ public class ProducerComposite extends AbstractProducerComposite
 			layout.marginWidth = 20;
 			this.setLayout(layout);
 		
-		slf.createLabel("Document", 1);
+		slf.createLabel("Document");
 		cboDocuments = scf.createCboDocument();
 		slf.createDummyLabel(1);
 		btnUpdate = sbf.createBtnUpdate("update");
 		
-		slf.createLabel("Format", 1);
+		slf.createLabel("Format");
 		cboFormats = scf.createCboFormats();
 		slf.createDummyLabel(1);
 		btnProduce = sbf.createBtnProduce("produce");
@@ -108,61 +101,16 @@ public class ProducerComposite extends AbstractProducerComposite
 		tfEntities = pedf.createTabFolder(this);
 
 		tabDiscoveredEntities = pedf.createTable(tfEntities); //new Table(tfAnsicht, SWT.CHECK);
-
+		scrolledCompositeMatrix = pedf.createMatrix(tfEntities);
+		
 		tiAnsichtTabelle = new TabItem(tfEntities, SWT.NONE);
 			tiAnsichtTabelle.setText("Tabellenansicht");
 			tiAnsichtTabelle.setControl(tabDiscoveredEntities);
+		
+//		tiAnsichtMatrix = new TabItem(tfEntities, SWT.NONE);
+//			tiAnsichtMatrix.setText("Matrix");
+//			tiAnsichtMatrix.setControl(scrolledCompositeMatrix);	
 			
-		tiAnsichtMatrix = null;
-			
-			{
-/*
-				tableProductionEntities.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent evt) {
-System.out.println("tablePE.widgetSelected !!!");
-System.out.println("tablePE.size: " + tableProductionEntities.getItemCount());
-System.out.println("alPE.size:    " + alProductionEntities.size());
-
-						// Ein Eintrag in der Ansicht-Tabelle wurde gedrückt, daher
-						//   - speichern in alProductionEntities
-						//   - anzeigen der Auswahl auch in der Ansicht-Matrix
-						
-						// Da man hier nicht auf den Eintrag TableItem, der geklickt wurde, direkt zugreifen kann,
-						// werden alle Einträge durchlaufen und evtl. identische Einträge in der Matrix-Ansicht gesetzt.
-						for(int i=0; i<tableProductionEntities.getItemCount(); i++)
-						{
-							TableItem tableItem = tableProductionEntities.getItem(i);
-							
-							String s = tableItem.getText(3);
-
-							for(int j=0; j<alProductionEntities.size(); j++)
-							{
-								ProductionEntity pe = (ProductionEntity) alProductionEntities.get(j);
-								
-								if (pe.getFilename().equals(s))
-								{
-									pe.setChecked(tableItem.getChecked());
-									alProductionEntities.set(j, pe);
-									// wenn einer gefunden wurde, aufhören
-									break;
-								} // if
-							} // for									
-						} // for
-
-for (int i=0; i<alProductionEntities.size(); i++)
-{
-	ProductionEntity pe = (ProductionEntity)alProductionEntities.get(i);
-	System.out.println("alPE["+i+"]:   "+pe.toString());
-}
-						fuelleMatrix();
-						
-//						speicherPEHaekchen();
- 					}
-				});
-*/
-				erzeugeAlProductionEntities();
-//				setzePEHaekchen();
-			}
 		
 		{
 			compositeOptionen = new Composite(this, SWT.NONE);
@@ -232,6 +180,11 @@ for (int i=0; i<alProductionEntities.size(); i++)
 		imgCanvasStatus.setVisible(false);
 	}
 	
+	public void entitiesDiscovered()
+	{
+		super.entitiesDiscovered();
+		logger.debug("here!!");
+	}
 	
 	/**
 	 * Die Methode fuelleCompositeOptionen ermittelt zu allen einstellbaren Formaten
@@ -294,314 +247,7 @@ for (int i=0; i<alProductionEntities.size(); i++)
 			compositeOptionen.layout();
 		}
 	}
-	
-	/**
-	 * TODO
-	 *
-	 */
-	public void erzeugeAlProductionEntities()
-	{
-		alProductionEntities.clear();
-/*
-		if(!comboDokumente.getText().equals("") && !comboFormate.getText().equals("")) 
-		{
-			try	
-			{
-				System.out.println("ID: "+projekt.getProjectValue().getID() +" Dokument: "+ getDokFilenameFromSelection()+" Format: " + JobValue.getFormatInt(comboFormate.getText()));				
-				producableEntities=myProjectUi.getPE(getDokIdFromSelection(), JobValue.getFormatInt(comboFormate.getText()));
-				System.out.println("PeCache gefunden");
-			}
-			catch (RemoteException e){e.printStackTrace();}
-		}
-		else {producableEntities=null;}
 			
-		if (producableEntities != null)
-		{
-String hString = producableEntities.getMessageString();
-System.out.println("producableEntities-Message-String:");
-System.out.println(hString);
-
-			// Umwandeln der benötigten Informationen und schreiben in die ArrayList alProductionEntities.
-
-			// ??? Diese werden später an das aufrufende Element (Parent) übergeben.
-			// producableEntities in Document umwandeln
-			Document doc = producableEntities.getMessage();
-			// Alle Nodes mit dem Namen "file" raussuchen.
-			NodeList nl_file = doc.getElementsByTagName("file");
-			// Gefundene Knoten zählen.
-			int anzPE = nl_file.getLength();
-			
-			// Für jeden gefundenen Knoten die Attribute "filename" und 
-			// "directory" sowie den Wert für "description" in der ArrayList 
-			// alProductionEntities speichern.
-			for (int i=0; i<anzPE; i++)
-			{
-				Node n_file = nl_file.item(i);
-				
-		        NodeList nl_desc 	= ((Element)n_file).getElementsByTagName("description");
-		        String sDesc = "";
-		        // Falls keine Description angegeben ist, wird die Description auf "" leer gesetzt.
-		        try
-		        {
-		        	sDesc		= nl_desc.item(0).getFirstChild().getNodeValue();
-		        }
-		        catch (NullPointerException e)
-		        {
-		        	sDesc = "";
-		        }
-
-	        	String sDir			= "";				
-				String sFilename	= "";
-		        try
-		        {
-		        	sDir		= n_file.getAttributes().getNamedItem("directory").getNodeValue();				
-					sFilename	= n_file.getAttributes().getNamedItem("filename").getNodeValue();
-		        }
-		        catch (NullPointerException e)
-		        {
-		        	System.out.println("Fehler: directory bzw. filename in den ProducableEntities nicht angegeben.");
-		        	System.out.println("producableEntities-Message-String:");
-//		        	System.out.println(producableEntities.getMessageString());
-		        }
-		        
-				ProductionEntity pe = new ProductionEntity(false, sDesc, sDir, sFilename);
-				alProductionEntities.add(pe);		        
-			} // for
-		} // if
-		
-		fuelleTableProductionEntities();
-*/		fuelleMatrix();
-	} // erzeugeAlProductionEntities
-			
-	public void fuelleMatrix()
-	{
-		// Bearbeiten der "Matrixansicht"
-		if (!cboFormats.getText().equals("latexpdf"))
-		{
-			TabItem ti[] = {tiAnsichtTabelle};
-			tfEntities.setSelection(ti);
-			if (tiAnsichtMatrix != null)
-			{
-				tiAnsichtMatrix.dispose();
-				tiAnsichtMatrix = null;
-			}
-		}
-		else
-		{
-			// "latexpdf" ist ausgewählt
-			if (tiAnsichtMatrix == null)
-			{
-				// Nur wenn kein TabItem tiAnsichtMatrix da ist,
-				// wird ein neues erstellt.
-				tiAnsichtMatrix = new TabItem(tfEntities, SWT.NONE);
-				tiAnsichtMatrix.setText("Matrixansicht");
-			}
-			
-			{
-				if (scrolledCompositeMatrix != null)
-				{
-					scrolledCompositeMatrix.dispose();
-				}
-				
-				scrolledCompositeMatrix = new ScrolledComposite(tfEntities, SWT.H_SCROLL | SWT.V_SCROLL);
-				{
-					GridData data = new GridData();
-					data.grabExcessHorizontalSpace = true;
-					data.grabExcessVerticalSpace = true;
-					data.horizontalAlignment = GridData.FILL;
-					data.verticalAlignment = GridData.FILL;
-					data.horizontalSpan = 1;
-					scrolledCompositeMatrix.setLayoutData(data);
-				}
-
-				compositeMatrix = new Composite(scrolledCompositeMatrix, SWT.NONE);
-				{
-					{
-						GridLayout layout = new GridLayout();
-						layout.numColumns = 5;
-						layout.marginHeight = 20;
-						layout.marginWidth = 20;
-						layout.horizontalSpacing = 20;
-						layout.verticalSpacing = 20;
-						//layout.makeColumnsEqualWidth = true;
-						compositeMatrix.setLayout(layout);
-					}
-					{
-						Label l;
-						l = new Label(compositeMatrix, SWT.NONE);
-						l.setText("Kurseinheit");
-						l = new Label(compositeMatrix, SWT.NONE);
-						l.setText("Lehrtext");
-						l = new Label(compositeMatrix, SWT.NONE);
-						l.setText("Einsendeaufgaben");
-						l = new Label(compositeMatrix, SWT.NONE);
-						l.setText("Musterlösungen");
-						l = new Label(compositeMatrix, SWT.NONE);
-						l.setText("Korrekturversion");
-					}
-					
-					// TODO config.xml: Das Füllen der Matrix ist bisher ziemlich statisch ...
-					// und soll in Zukunft über die config.xml erweitert werden.
-					
-					{
-						// maximal MAX_ANZ_KE Kurseinheiten
-						// maximal 4 Elemente pro Kurseinheit
-						// => maximal 4*MAX_ANZ_KE Checkboxen
-						checkBtnMatrix = new Button[4*MAX_ANZ_KE];
-						
-						checkBtnMatrixCounter = 0;
-						for (int i=1; i<=MAX_ANZ_KE; i++)
-						{
-							Label l;
-							l = new Label(compositeMatrix, SWT.NONE);
-							l.setText(""+i);
-
-							// Ist ein Eintrag ke"i".pdf im Array filename enthalten?
-							boolean gefunden = false;
-							for (int j=0; j<alProductionEntities.size(); j++)
-							{
-								String sFilename = "ke"+i+".pdf";
-								String sALFilename = ((ProductionEntity)(alProductionEntities.get(j))).getFilename();
-								if (sALFilename.equals(sFilename))
-								{
-									checkBtnMatrix[checkBtnMatrixCounter] = new Button(compositeMatrix, SWT.CHECK);
-									checkBtnMatrix[checkBtnMatrixCounter].setToolTipText(sFilename);
-									boolean bool = ((ProductionEntity)(alProductionEntities.get(j))).getChecked();
-									checkBtnMatrix[checkBtnMatrixCounter].setSelection(bool);
-									checkBtnMatrixCounter++;
-									gefunden = true;
-									break;
-								}
-							} // for
-							if (!gefunden)
-							{
-								Label dummyLabel = new Label(compositeMatrix, SWT.NONE);
-								dummyLabel.setText("/");
-							}
-							
-							// Ist ein Eintrag ea"i".pdf im Array filename enthlanten?
-							gefunden = false;
-							for (int j=0; j<alProductionEntities.size(); j++)
-							{
-								String sFilename = "ea"+i+".pdf";
-								String sALFilename = ((ProductionEntity)(alProductionEntities.get(j))).getFilename();
-								if (sALFilename.equals(sFilename))
-								{
-									checkBtnMatrix[checkBtnMatrixCounter] = new Button(compositeMatrix, SWT.CHECK);
-									checkBtnMatrix[checkBtnMatrixCounter].setToolTipText(sFilename);
-									boolean bool = ((ProductionEntity)(alProductionEntities.get(j))).getChecked();
-									checkBtnMatrix[checkBtnMatrixCounter].setSelection(bool);
-									checkBtnMatrixCounter++;
-									gefunden = true;
-									break;
-								}
-							} // for
-							if (!gefunden)
-							{
-								Label dummyLabel = new Label(compositeMatrix, SWT.NONE);
-								dummyLabel.setText("/");
-							}
-							
-							// Ist ein Eintrag ml"i".pdf im Array filename enthlanten?
-							gefunden = false;
-							for (int j=0; j<alProductionEntities.size(); j++)
-							{
-								String sFilename = "ml"+i+".pdf";
-								String sALFilename = ((ProductionEntity)(alProductionEntities.get(j))).getFilename();
-								if (sALFilename.equals(sFilename))
-								{
-									checkBtnMatrix[checkBtnMatrixCounter] = new Button(compositeMatrix, SWT.CHECK);
-									checkBtnMatrix[checkBtnMatrixCounter].setToolTipText(sFilename);
-									boolean bool = ((ProductionEntity)(alProductionEntities.get(j))).getChecked();
-									checkBtnMatrix[checkBtnMatrixCounter].setSelection(bool);
-									checkBtnMatrixCounter++;
-									gefunden = true;
-									break;
-								}
-							} // for
-							if (!gefunden)
-							{
-								Label dummyLabel = new Label(compositeMatrix, SWT.NONE);
-								dummyLabel.setText("/");
-							}
-
-							// Ist ein Eintrag korr"i".pdf im Array filename enthlanten?
-							gefunden = false;
-							for (int j=0; j<alProductionEntities.size(); j++)
-							{
-								String sFilename = "kor"+i+".pdf";
-								String sALFilename = ((ProductionEntity)(alProductionEntities.get(j))).getFilename();
-								if (sALFilename.equals(sFilename))
-								{
-									checkBtnMatrix[checkBtnMatrixCounter] = new Button(compositeMatrix, SWT.CHECK);
-									checkBtnMatrix[checkBtnMatrixCounter].setToolTipText(sFilename);
-									boolean bool = ((ProductionEntity)(alProductionEntities.get(j))).getChecked();
-									checkBtnMatrix[checkBtnMatrixCounter].setSelection(bool);
-									checkBtnMatrixCounter++;
-									gefunden = true;
-									break;
-								}
-							} // for
-							if (!gefunden)
-							{
-								Label dummyLabel = new Label(compositeMatrix, SWT.NONE);
-								dummyLabel.setText("/");
-							}
-
-						} // for (i=1..8)
-
-						// Allen Buttons SelectionListener zusweisen.  
-						for (int i=0; i<checkBtnMatrixCounter; i++)
-						{
-							checkBtnMatrix[i].addSelectionListener(new SelectionAdapter() {
-								public void widgetSelected(SelectionEvent evt) {
-									
-									// Ein Button in der Ansicht-Matrix wurde gedrückt, daher
-									//   - speichern in alProductionEntities
-									//   - anzeigen der Auswahl auch in tableProductionEntities
-									
-									Object source = evt.getSource();
-									String s = ((Button)source).getToolTipText();
-
-									for(int j=0; j<alProductionEntities.size(); j++)
-									{
-										ProductionEntity pe = (ProductionEntity) alProductionEntities.get(j);
-										
-										if (pe.getFilename().equals(s))
-										{
-											pe.setChecked(((Button)source).getSelection());
-											alProductionEntities.set(j, pe);
-											// wenn einer gefunden wurde, aufhören
-											break;
-										} // if
-									} // for									
-									
-//									fuelleTableProductionEntities();
-									
-//									speicherPEHaekchen();
-								}
-							});
-						} // for							
-					}
-				}
-				
-				scrolledCompositeMatrix.setContent(compositeMatrix);
-
-				Point pt = compositeMatrix.computeSize(SWT.DEFAULT, SWT.DEFAULT);
-				scrolledCompositeMatrix.setExpandHorizontal(true);
-				scrolledCompositeMatrix.setExpandVertical(true);
-				scrolledCompositeMatrix.setMinWidth(pt.x);
-				scrolledCompositeMatrix.setMinHeight(pt.y);
-				
-				scrolledCompositeMatrix.getVerticalBar().setIncrement(10);
-				scrolledCompositeMatrix.getVerticalBar().setPageIncrement(10);
-				scrolledCompositeMatrix.getHorizontalBar().setIncrement(10);
-				scrolledCompositeMatrix.getHorizontalBar().setPageIncrement(10);
-				
-				tiAnsichtMatrix.setControl(scrolledCompositeMatrix);
-			}
-		}
-	} // fuelleMatrix
 
 	/**
 	 * Die Methode setzePEHaekchen wird die in den ProjectUserSettings gespeicherten
@@ -731,29 +377,10 @@ System.out.println(hString);
 		speicherOptionenHaekchen();
 	}
 */
-	public void comboDokumenteSelected()
-	{
-		
 
-//		projekt.getMyProjectUserSettings().clearAlSelected();
-		erzeugeAlProductionEntities();
-		// TODO überprüfen der folgenden Behauptung
-		// Die TPE wurde neu gefüllt, es sind keine Einträge ausgewählt,
-		// also brauchen auch keine Einträge in den ProjectUserSettings 
-		// gespeichert zu werden.
-	}
 
 	public void comboFormateSelected()
 	{
-		
-		
-//		projekt.getMyProjectUserSettings().clearAlSelected();
-		erzeugeAlProductionEntities();
-		// TODO überprüfen der folgenden Behauptung
-		// Die TPE wurde neu gefüllt, es sind keine Einträge ausgewählt,
-		// also brauchen auch keine Einträge in den ProjectUserSettings 
-		// gespeichert zu werden.
-
 		zeigeOptionen();
 	}
 
@@ -793,10 +420,7 @@ System.out.println(hString);
 					cboFormats.setEnabled(isEnabled);
 					btnUpdate.setEnabled(isEnabled);
 					tabDiscoveredEntities.setEnabled(isEnabled);
-					if (compositeMatrix!=null)
-					{
-						compositeMatrix.setEnabled(isEnabled);
-					}
+
 					btnProduce.setEnabled(isEnabled);
 					buttonErgebnisDetails.setEnabled(isEnabled);
 			
