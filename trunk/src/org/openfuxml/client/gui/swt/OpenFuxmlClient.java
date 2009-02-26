@@ -37,7 +37,6 @@ import org.openfuxml.client.control.projects.ProjectFactoryDirect;
 import org.openfuxml.client.gui.simple.dialog.HelpAboutDialog;
 import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
 import org.openfuxml.client.gui.swt.composites.ProjektComposite;
-import org.openfuxml.client.util.ImgCanvas;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.util.config.factory.ClientConfFactory;
 
@@ -57,7 +56,6 @@ public class OpenFuxmlClient extends Composite implements Runnable
 	public final static String Title = "FuXML - Client";
 	public final static String IMG_SYSTEMINFO		= "/swt/images/tab/systeminfo.png";
 	
-	private Label lBenutzer;
 	private TabFolder tfProjekte;
 	private TabItem tiSystemInfo;
 //	private SystemInfoComposite systemInfoComposite;
@@ -70,9 +68,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 //	private String propDir; 
 //	private File propFile;
 	private Composite parent;
-	
-	private InitialContext iniCtx;
-	
+		
 	private Thread pingThread;
 	private boolean pingThreadAktiv;
 	private int pingThreadZaehler;

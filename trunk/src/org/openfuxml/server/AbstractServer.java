@@ -91,8 +91,10 @@ public abstract class AbstractServer
 	{
 		File f = new File(pathLog);
 		if(!f.exists()){f.mkdirs();logger.info("Created directory: "+f.getAbsolutePath());}
+		
 		f = new File(pathOutput);
 		if(!f.exists()){f.mkdirs();logger.info("Created directory: "+f.getAbsolutePath());}
+		
 		f = new File(pathRepo);
 		if(!f.exists()){logger.warn("Repository not found! Cheack for "+f.getAbsolutePath());}
 		

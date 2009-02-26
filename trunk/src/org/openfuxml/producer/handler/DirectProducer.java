@@ -72,7 +72,8 @@ public class DirectProducer extends AbstractProducer implements Producer
 			{
 				boolean isDir = dirEntry.isDirectory();
 				boolean isSvn = dirEntry.getAbsolutePath().endsWith(".svn");
-				if(isDir && !isSvn)
+				boolean isOutput = dirEntry.getName().equals("output");
+				if(isDir && !isSvn && !isOutput)
 				{
 					OfxApplication ofxA = new OfxApplication();
 					ofxA.setName(dirEntry.getName());

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<openfuxml>
+    <highlight active="true">
+        <!-- color codes are required. Find them in org.eclipse.swt.SWT.COLOR_xxx -->
+        <color swt="3" info="org.eclipse.swt.SWT.COLOR_RED">
+            <key>Could not find figure file</key>
+        </color>
+        <color swt="5" info="org.eclipse.swt.SWT.COLOR_GREEN">
+            <key>BUILD SUCCESSFUL</key>
+        </color>
+    </highlight>
+</openfuxml>

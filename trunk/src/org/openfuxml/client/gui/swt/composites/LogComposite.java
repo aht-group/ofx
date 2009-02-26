@@ -5,6 +5,7 @@ package org.openfuxml.client.gui.swt.composites;
 
 import javax.naming.InitialContext;
 
+import org.apache.commons.configuration.Configuration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.DisposeEvent;
@@ -26,7 +27,7 @@ public class LogComposite extends Composite
 	private Shell shell;
 	private LogSyntaxHighlightner lsh;
 	
-	public LogComposite(Composite parent)
+	public LogComposite(Composite parent,Configuration config)
 	{
 		super(parent, SWT.NONE);
 		this.shell = getShell();
@@ -53,7 +54,7 @@ public class LogComposite extends Composite
 		data.horizontalAlignment = GridData.FILL;
 		data.verticalAlignment = GridData.FILL;
 		textLog.setLayoutData(data);
-		lsh=new LogSyntaxHighlightner(textLog,shell.getDisplay());
+		lsh=new LogSyntaxHighlightner(textLog,shell.getDisplay(),config);
 	}
 	
 	public void clearLog()
@@ -70,7 +71,7 @@ public class LogComposite extends Composite
 		  });
 	}
 		
-	public void addLogline(final String line)
+	public synchronized void addLogline(final String line)
 	{
 		shell.getDisplay().asyncExec(new Runnable(){
 			public void run()

@@ -3,12 +3,7 @@ package org.openfuxml.util.config.factory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
@@ -17,7 +12,6 @@ import org.openfuxml.util.config.jaxb.Openfuxml.Net;
 
 import de.kisner.util.ConfigLoader;
 import de.kisner.util.LoggerInit;
-import de.kisner.util.architecture.ArchUtil;
 
 public class ClientConfFactory extends AbstractConfFactory
 {
@@ -35,6 +29,7 @@ public class ClientConfFactory extends AbstractConfFactory
 	{
 		ConfigLoader.add(openFuxmlBaseDir+fs+mainConf);
 		ConfigLoader.add("resources"+fs+"config"+fs+"client-images.xml");
+		ConfigLoader.add("resources"+fs+"config"+fs+"client-highlight.xml");
 		Configuration config = ConfigLoader.init();
 		return config;
 	}
