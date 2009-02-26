@@ -1,7 +1,10 @@
 package org.openfuxml.client.control;
 
+import java.util.concurrent.LinkedBlockingQueue;
+
 import org.apache.log4j.Logger;
-import org.openfuxml.client.control.log.DirectLogFetcher;
+import org.openfuxml.client.control.log.QueueLogConsumer;
+import org.openfuxml.client.control.log.QueueLogFetcher;
 import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
@@ -14,7 +17,7 @@ import org.openfuxml.producer.handler.DirectProducer;
  * ProducerThread implementiert den Thread, in dem die Methoden      
  * producableEntities bzw. produce der DispatcherBean ausgeführt werden.
  *   
- * @author Andrea Frank
+ * @author Thorsten Kisner
  */
 public class ProducerThread extends Thread
 {
@@ -50,9 +53,13 @@ public class ProducerThread extends Thread
 	{
 		try
 		{
-			DirectLogFetcher xW = new DirectLogFetcher(guiCallback);
-			producer.setLogWriter(xW);
 			guiCallback.clearLog();
+			LinkedBlockingQueue<String> q = new LinkedBlockingQueue<String>();
+			QueueLogConsumer qlc = new QueueLogConsumer(q,guiCallback);
+			QueueLogFetcher qlf = new QueueLogFetcher(q);
+			producer.setLogWriter(qlf);
+			qlc.start();
+			
 			switch(typ)
 			{
 				case ENTITIES:	guiCallback.setStatus("Discovering entities ...");

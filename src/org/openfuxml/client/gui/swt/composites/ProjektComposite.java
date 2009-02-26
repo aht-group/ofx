@@ -149,7 +149,7 @@ public class ProjektComposite extends Composite
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
 		tiLogView.setText("Log");
-		compLog = new LogComposite(tabFolder);
+		compLog = new LogComposite(tabFolder,config);
 		tiLogView.setControl(compLog);
 	}
 	

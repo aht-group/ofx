@@ -183,7 +183,6 @@ public class ProducerComposite extends AbstractProducerComposite
 	public void entitiesDiscovered()
 	{
 		super.entitiesDiscovered();
-		logger.debug("here!!");
 	}
 	
 	/**
