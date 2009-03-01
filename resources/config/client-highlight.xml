@@ -3,6 +3,7 @@
     <highlight active="true">
         <!-- color codes are required. Find them in org.eclipse.swt.SWT.COLOR_xxx -->
         <color swt="3" info="org.eclipse.swt.SWT.COLOR_RED">
+            <key>Warning: Could not find file</key>
             <key>Could not find figure file</key>
             <key>java.io.FileNotFoundException</key>
         </color>

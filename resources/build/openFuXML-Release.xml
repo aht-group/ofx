@@ -30,6 +30,7 @@
 	<property file="resources/properties/ws.properties"/>
 	<property file="resources/properties/webdavsync.properties"/>
 
+	<!-- Ddirectory Definitions -->
 	<property name="src.dir" location="${basedir}/src" />
 	<property name="bin.dir" location="${basedir}/bin" />
 	<property name="rsrc.dir" location="${basedir}/resources" />
@@ -158,6 +159,7 @@
 	</taskdef>
 			
 	<target name="00 - Classpath" description="Echos Classpath">
+		<echo level="info">Using ${ant.version} in ${ant.home}</echo>
 		<echo level="info">Lib-Info for openFuXML v.${openfuxml-version}</echo>
 		<echo level="info">   Net   : ${mail.dir}/${mail.lib}</echo>
 		<echo level="info">           ${jsch.dir}/${jsch.lib}</echo>
