@@ -25,5 +25,8 @@
 		<option name="cleanmath" type="boolean" value="false" displayname="Lösche Formelbilder">
 			<description>Wenn aktiviert, werden alle aktuell vorhandenen Formelbilder vor der Produktion gelöscht.</description>
 		</option>
+		<option name="postprocessing" type="boolean" value="false" displayname="Postprocessing">
+			<description>Die HTML-Ausgabe wird formatiert und Elemente ersetzt.</description>
+		</option>
 	</options>
 </format>

@@ -142,25 +142,6 @@
 		<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
 		<pathelement location="${lib.dir}/${htmlcleaner.dir}/${htmlcleaner.lib}"/>
 	</path>
-	
-	<!-- Definition of own Tasks -->
-	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
-	  <classpath>
-	    <fileset dir="${lib.dir}/${jaxb.dir}" includes="*.jar"/>
-	  </classpath>
-	</taskdef>
-	
-	<taskdef name="webdavsync" classname="be.re.webdav.cmd.SyncAntTask">
-	  <classpath>
-	    <fileset dir="${lib.dir}/${webdavsync.dir}" includes="${webdavsync.lib}"/>
-	  </classpath>
-	</taskdef>
-	
-	<taskdef name="msixml" classname="org.openfuxml.util.msi.AntTaskMsiXmlCreation" >
-		<classpath>
-			<pathelement location="${bin.dir}"/>
-		</classpath>
-	</taskdef>
 			
 	<target name="00 - Classpath" description="Echos Classpath">
 		<echo level="info">Using ${ant.version} in ${ant.home}</echo>
@@ -202,6 +183,26 @@
 		<echo level="info">------------------------</echo>
 		<echo level="warn">Please use Target04 to verify all libraries</echo>
 	</target>
+	
+    <target name="00 - TaskDef" description="Task definition">
+    	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+    	  <classpath>
+    	    <fileset dir="${lib.dir}/${jaxb.dir}" includes="*.jar"/>
+    	  </classpath>
+    	</taskdef>
+    	
+    	<taskdef name="webdavsync" classname="be.re.webdav.cmd.SyncAntTask">
+    	  <classpath>
+    	    <fileset dir="${lib.dir}/${webdavsync.dir}" includes="${webdavsync.lib}"/>
+    	  </classpath>
+    	</taskdef>
+    	
+    	<taskdef name="msixml" classname="org.openfuxml.util.msi.AntTaskMsiXmlCreation" >
+    		<classpath>
+    			<pathelement location="${bin.dir}"/>
+    		</classpath>
+    	</taskdef>
+    </target>
 	
 	<!-- target clean -->	
     <target name="01 - clean" description="Removes build artifacts">
