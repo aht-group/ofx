@@ -48,8 +48,12 @@ public class ConfFileFactory
 			file.setType("lib");
 			file.setContent("openfuxml-ss-"+properties.getProperty("openfuxml-version")+".jar");
 			files.getFile().add(file);
-			file = new File();
-		file.setType("lib");
+		file = new File();
+			file.setType("ofxlib");
+			file.setContent("openfuxml-"+properties.getProperty("openfuxml-version")+".jar");
+			files.getFile().add(file);
+		file = new File();
+			file.setType("lib");
 			file.setContent("saxon-"+properties.getProperty("saxon-version")+".jar");
 			files.getFile().add(file);
 		

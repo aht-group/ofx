@@ -268,6 +268,23 @@
 			<mapper type="glob" from="*.demux2.xml" to="*.linkwatch.xml"/>
 		</apply>
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<!-- + Pass6: Postprocessing                                      + -->
+		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<echo message="Pass6: Postprocessing in ${html.dir}/${document.plain} "/>
+		<java jar="${ofx.lib}" fork="true">
+			<sysproperty key="file.encoding" value="ISO-8859-1"/>
+			<arg value="HtmlPrettyFormatter"/>
+			<arg value="${html.dir}/${document.plain}"/>
+			<arg value="html"/>
+		</java>
+		<java jar="${ofx.lib}" fork="true">
+			<sysproperty key="file.encoding" value="ISO-8859-1"/>
+			<arg value="HtmlTagSubstitutor"/>
+			<arg value="${html.dir}/${document.plain}"/>
+			<arg value="html"/>
+			<arg value="${ilona.contentstore}/${project}/system/config/HtmlTagSubstitute.xml"/>
+		</java>
+		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<!-- +                                  Create Math Images                                                                    + -->
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<!-- determine if "clean math" option is "true"-->
