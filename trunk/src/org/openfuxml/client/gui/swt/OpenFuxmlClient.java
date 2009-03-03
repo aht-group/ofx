@@ -468,6 +468,8 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		}
 		catch (NumberFormatException e) {sh.pack();}
 */		
+		
+		sh.setBounds(10, 30, 300, 900);
 		sh.pack();
 		
 		// Titelzeile

@@ -163,6 +163,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 		}
 		sbParameters.append(" -Dilona.home="+ sysprops.getProperty("ilona.home"));
 		sbParameters.append(" -Dilona.contentstore="+ OfxPathHelper.getDir(config, "repository")+fs+spref.getApplication());
+		sbParameters.append(" -Dofx.lib="+ OfxPathHelper.getDir(config, "lib")+fs+config.getString("files/file[@type='ofxlib']"));
 		sbParameters.append(" -Dilona.output="+dirOutput+fs+spref.getApplication());
 		sbParameters.append(" -Dapplication="+ spref.getApplication());
 		sbParameters.append(" -Dcoursename="+ spref.getProject());
