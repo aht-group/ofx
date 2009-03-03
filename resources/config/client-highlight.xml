@@ -6,6 +6,7 @@
             <key>Warning: Could not find file</key>
             <key>Could not find figure file</key>
             <key>java.io.FileNotFoundException</key>
+            <key>OVERLAPPING COURSEUNITS</key>
         </color>
         <color swt="5" info="org.eclipse.swt.SWT.COLOR_GREEN">
             <key>BUILD SUCCESSFUL</key>
