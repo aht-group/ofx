@@ -322,14 +322,14 @@
 		<basename property="document.plain" file="${document}" suffix=".xml"/>
 		<record name="${validation.dir}/${document.plain}/${document.plain}.producableEntities.log" action="start" append="no"/>
 		<echo file="${validation.dir}/${document.plain}/producableEntities.xml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
-			&lt;producableentities logfile="${base.dir}/${document.plain}/${document.plain}.producableEntities.log"&gt;
+			&lt;producibleEntities logfile="${base.dir}/${document.plain}/${document.plain}.producableEntities.log"&gt;
    				&lt;file directory="${base.dir}/${document.plain}/" filename="report.html"&gt;
      					 &lt;description&gt;Validierungsbericht fuer ${document}&lt;/description&gt;
    				&lt;/file&gt;
 				&lt;file directory="${base.dir}/${document.plain}/" filename="report_all.html"&gt;
      					 &lt;description&gt;Validierungsbericht fuer ${document} inkl. aller externen Dokumente&lt;/description&gt;
    				&lt;/file&gt;
-			&lt;/producableentities&gt;
+			&lt;/producibleEntities&gt;
 		</echo>
 		<record name="${validation.dir}${document.plain}/${document.plain}.producableEntities.log" action="stop"/>
 	</target>
