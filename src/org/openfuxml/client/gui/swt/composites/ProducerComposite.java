@@ -203,9 +203,7 @@ public class ProducerComposite extends AbstractProducerComposite
 		for(int i=0; i<cboFormats.getItemCount(); i++)
 		{
 			String sFormatLabel = cboFormats.getItem(i);
-			OfxFormat ofxF = (OfxFormat)cboFormats.getData(sFormatLabel);
-			
-			logger.debug("optionen ..."+ofxF.getFormat().getOutputformat());
+			final OfxFormat ofxF = (OfxFormat)cboFormats.getData(sFormatLabel);
 			
 			groupsOptionen[i] = new Group(compositeOptionen, SWT.NONE);
 			groupsOptionen[i].setText(getGroupLabel(ofxF.getFormat().getOutputformat()));	
@@ -214,15 +212,20 @@ public class ProducerComposite extends AbstractProducerComposite
 			rowLayout.pack = false;
 			groupsOptionen[i].setLayout (rowLayout);
 			
-			for(Option o : ofxF.getFormat().getOptions().getOption())
+			for(final Option o : ofxF.getFormat().getOptions().getOption())
 			{
-				Button buttonOption = new Button(groupsOptionen[i], SWT.CHECK);
+				final Button buttonOption = new Button(groupsOptionen[i], SWT.CHECK);
 				buttonOption.setText(o.getName());
 				buttonOption.setToolTipText(o.getDescription());
+				boolean defaultSelected = new Boolean(o.getValue());
+				buttonOption.setSelection(defaultSelected);
+				if(defaultSelected){ofxCC.boxOptionsSelected(ofxF,o);}
 				
 				buttonOption.addSelectionListener(new SelectionAdapter() {
-					public void widgetSelected(SelectionEvent evt) {
-//						speicherOptionenHaekchen();					
+					public void widgetSelected(SelectionEvent evt)
+					{
+						o.setValue(buttonOption.getSelection()+"");
+						ofxCC.boxOptionsSelected(ofxF,o);
 					}
 				});	
 			}			

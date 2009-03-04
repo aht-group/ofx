@@ -5,6 +5,7 @@ import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.model.jaxb.ProducibleEntities;
+import org.openfuxml.model.jaxb.Format.Options.Option;
 
 public interface OfxGuiAction
 {
@@ -13,6 +14,9 @@ public interface OfxGuiAction
 	public void cboProjectSelected(OfxProject selectedOfxP);
 	public void cboDocumentSelected(OfxDocument selectedofxD);
 	public void cboFormateSelected(OfxFormat selectedOfxF);
+	
+	//Boxes
+	public void boxOptionsSelected(OfxFormat ofxF, Option o);
 	
 	//Tables
 	public void tblEntitiesSelected(ProducibleEntities pe);
