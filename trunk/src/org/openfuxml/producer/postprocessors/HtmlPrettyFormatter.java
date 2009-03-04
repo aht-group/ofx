@@ -58,6 +58,10 @@ public class HtmlPrettyFormatter extends DirectoryWalker
 			cleaner.setTransformations(ct);
 			
 			CleanerProperties props = cleaner.getProperties();
+			props.setAdvancedXmlEscape(false);
+//			props.setTranslateSpecialEntities(false);
+//			props.setRecognizeUnicodeChars(false);
+			
 			TagNode node = cleaner.clean(f);
 			
 			TagNode tnBody = node.getAllElements(false)[1];
@@ -69,7 +73,7 @@ public class HtmlPrettyFormatter extends DirectoryWalker
 			
 			Document myJDom = new JDomSerializer(props, true).createJDom(node);
 			
-			Format format = Format.getPrettyFormat();
+			Format format = Format.getRawFormat();
 			format.setEncoding("iso-8859-1");
 			XMLOutputter outputter = new XMLOutputter(format);
 			
