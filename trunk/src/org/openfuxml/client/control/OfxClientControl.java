@@ -141,7 +141,10 @@ public class OfxClientControl implements OfxGuiAction
 			orf.setOfxD(selectedOfxD);
 			orf.setOfxF(selectedOfxF);
 			orf.setProducibleEntities(selectedPe);
-			orf.setOptions(htSelectedOptions.get(selectedOfxF.getFormat().getId()).values());
+			if(htSelectedOptions.containsKey(selectedOfxF.getFormat().getId()))
+			{
+				orf.setOptions(htSelectedOptions.get(selectedOfxF.getFormat().getId()).values());
+			}
 		Sessionpreferences spref = orf.create();
 		ProducerThread pt = new ProducerThread(this,guiCallback,producer);
 		pt.produce(spref);
