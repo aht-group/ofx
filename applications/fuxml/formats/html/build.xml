@@ -18,8 +18,7 @@
   | You should have received a copy of the GNU General Public License           |
   | along with this program; if not, write to the Free Software                 |
   | Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. |
-*******************************************************************************
-	-->
+*******************************************************************************-->
 <project name="html" default="html">
 	<!--property file="build.properties"/-->
 	<!-- folgende properties werden an das makefile uebergeben: -->
@@ -45,6 +44,8 @@
 	<property name="base.dir" value="${project}/${format}"/>
 	<property name="request" value="${html.dir}/${document.plain}/request.xml"/>
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- +         Initialisation - target                                   + -->
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<target name="initialisation">
 		<basename property="document.plain" file="${document}" suffix=".xml"/>
 		<!-- Copy XSL files to temporary directory -->
@@ -59,6 +60,10 @@
 			<arg value="${ilona.output}/sessionpreferences/${username}-${project}-request.xml"/>
 			<arg value="${xsltemp.dir}/common/processoptions.xsl"/>
 		</exec>
+		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<!-- +     OPTIONS                                                       + -->
+		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<!-- Load properties -->
 		<property file="${ilona.output}/sessionpreferences/${username}-${project}-request.options"/>
 		<!-- determine if "clean" option is "true"-->
 		<condition property="do_clean">
@@ -69,6 +74,9 @@
 		<!-- Create directories -->
 		<mkdir dir="${html.dir}"/>
 		<mkdir dir="${html.dir}/${document.plain}"/>
+		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<!-- +     start logging her                                             + -->
+		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<record name="${html.dir}/${document.plain}/${document.plain}.build.log" action="start" append="no"/>
 		<tstamp>
 			<format property="time" pattern="dd/MM/yyyy hh:mm aa"/>
@@ -78,14 +86,6 @@
 		<echo message="Ant Version = ${ant.home}"/>
 		<echo message="Ant Version = ${ant.version}"/>
 		<echo message="Java Version = ${java.version}"/>
-		<!--exec executable="java" dir="${html.dir}/${document.plain}" failonerror="true">
-			<arg value="net.sf.saxon.Transform"/>
-			<arg line="-o"/>
-			<arg value="${html.dir}/${document.plain}/${username}-${project}-request.options"/>
-			<arg value="${ilona.output}/sessionpreferences/${username}-${project}-request.xml"/>
-			<arg value="${xsltemp.dir}/common/processoptions.xsl"/>
-		</exec>
-		<property file="${html.dir}/${document.plain}/${username}-${project}-request.options"/-->
 		<loadfile property="prod_request" srcfile="${ilona.output}/sessionpreferences/${username}-${project}-request.xml"/>
 		<echo message="Request: ${prod_request}"/>
 		<!-- copy ProductionRequest -->
@@ -103,12 +103,8 @@
 			<fileset dir="${config.dir}/html"/>
 		</copy>
 	</target>
-	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<target name="clean"><!-- if="do_clean": always clean due to otherwise stalling of build process -->
-		<echo>Deleting old files</echo>
-		<delete dir="${html.dir}/${document.plain}"/>
-		<delete dir="${common.dir}/${document.plain}"/>
-	</target>
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- +     Main target for html-production                               + -->
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<target name="html" depends="initialisation">
 		<basename property="document.plain" file="${document}" suffix=".xml"/>
@@ -118,24 +114,19 @@
 			<targetfileset dir="${common.dir}/${document.plain}" includes="*"/>
 		</dependset>
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +                                                            Run Prestage                                                                    + -->
+		<!-- +     Run Prestage                                                  + -->
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<ant antfile="${xsltemp.dir}/common/build.xml" dir="." target="prestage" inheritAll="true"/>
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +                                    XSLT: Pass1:  Insertion of directories (Lists, TOC)                                 + -->
+		<!-- +     XSLT: Pass1:  Insertion of directories (Lists, TOC)           + -->
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<echo message="Pass1: making NEUE-BILDSCHIRMSEITE work"/>
 		<apply executable="java" dest="${html.dir}/${document.plain}" parallel="false" failonerror="true">
 			<arg value="net.sf.saxon.Transform"/>
-			<!--arg value="-ds"/-->
-			<!--arg value="-w0"/-->
 			<arg value="-o"/>
 			<targetfile/>
 			<srcfile/>
 			<arg value="${xsltemp.dir}/common/demux.xsl"/>
-			<!-- Umstellung von Projektnamen auf Dokumentenname ...
-			<arg value="documentname=${project}"/>
-			-->
 			<arg value="projectname=${project}"/>
 			<arg value="documentname=${document.plain}"/>
 			<arg value="document_url=${common.dir}/${document.plain}/${document.plain}.assembled.lin.cu.num.xml"/>
@@ -146,38 +137,27 @@
 		<echo message="little correction: split assignment-solutions from assignments"/>
 		<apply executable="java" dest="${html.dir}/${document.plain}" parallel="false" failonerror="true">
 			<arg value="net.sf.saxon.Transform"/>
-			<!--arg value="-ds"/-->
-			<!--arg value="-w0"/-->
 			<arg value="-o"/>
 			<targetfile/>
 			<srcfile/>
 			<arg value="${xsltemp.dir}/common/demux2.xsl"/>
-			<!-- Umstellung von Projektnamen auf Dokumentenname ...
-			<arg value="documentname=${project}"/>
-			-->
 			<arg value="projectname=${project}"/>
 			<arg value="documentname=${document.plain}"/>
 			<arg value="document_url=${common.dir}/${document.plain}/${document.plain}.d-temp.xml"/>
 			<arg value="designpath=${src.dir}/system/design/"/>
 			<fileset dir="${html.dir}/${document.plain}" includes="${document.plain}.d-temp.xml"/>
 			<mapper type="glob" from="*.d-temp.xml" to="*.demux.xml"/>
-		</apply>
-		<echo message="... Pass1: ready"/>		
+		</apply>	
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +                                    XSLT: Pass2:  linearisation of files                                                           + -->
+		<!-- +     XSLT: Pass2:  linearisation of files                          + -->
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<echo message="Pass2: linearisation of files"/>
 		<apply executable="java" dest="${html.dir}/${document.plain}" parallel="false" failonerror="true">
 			<arg value="net.sf.saxon.Transform"/>
-			<!--arg value="-ds"/-->
-			<!--arg value="-w0"/-->
 			<arg value="-o"/>
 			<targetfile/>
 			<srcfile/>
 			<arg value="${xsltemp.dir}/html/demux-html.xsl"/>
-			<!-- Umstellung von Projektnamen auf Dokumentenname ...
-			<arg value="documentname=${project}"/>
-			-->
 			<arg value="projectname=${project}"/>
 			<arg value="documentname=${document.plain}"/>
 			<arg value="document_url=${html.dir}/${document.plain}/${document.plain}.tag.xml"/>
@@ -186,7 +166,7 @@
 			<mapper type="glob" from="*.demux.xml" to="*.demux2.xml"/>
 		</apply>
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +                                    XSLT: Pass3:  Character mapping for source document                        + -->
+		<!-- +    XSLT: Pass3:  Character mapping for source documen             + -->
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<echo message="Pass3: Mapping of Unicode Characters"/>
 		<apply executable="java" dest="${html.dir}/${document.plain}" parallel="false" failonerror="true">
@@ -205,21 +185,9 @@
 			<arg value="${html.dir}/${document.plain}/config.html.xml"/>
 			<arg value="${xsltemp.dir}/html/conversionlist.xml"/>
 			<arg value="${xsltemp.dir}/html/idtransform.xsl"/>
-		</exec>
+		</exec>	
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +     alter Equation Tagger mit java-Aufruf                         + -->
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-		<echo message="EquationTagger"/>
-		<echo message="xsltemp.dir=${xsltemp.dir}"/>
-		<java classname="org.openfuxml.producer.preprocessors.EquationTagger" fork="false">
-			<arg line="${html.dir}/${document.plain}/${document.plain}.demux2.cl.xml  ${html.dir}/${document.plain}/${document.plain}.demux2.cl.tag.xml"/>
-			<classpath>
-				<pathelement location="${xsltemp.dir}/common/lib/fuxmltools.jar"/>
-				<pathelement location="${xsltemp.dir}/common/lib/saxon8.jar"/>
-			</classpath>
-		</java>		
-		 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +    neuer Equation Tagger mit executable-Aufruf                    + -->
+		<!-- +    Equation Tagger							                     + -->
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<exec executable="java" failonerror="true">
 			<arg value="org.openfuxml.producer.preprocessors.EquationTagger"/>
@@ -227,13 +195,11 @@
 			<arg value="${html.dir}/${document.plain}/${document.plain}.demux2.cl.tag.xml"/>
 		</exec>
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +                                    XSLT: Pass4: XML to HTML                                                       + -->
+		<!-- +    XSLT: Pass4: XML to HTML                                       + -->
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<echo message="Pass4: XML to HTML"/>
 		<apply executable="java" dest="${html.dir}/${document.plain}" parallel="false" failonerror="true">
 			<arg value="net.sf.saxon.Transform"/>
-			<!--arg value="-ds"/-->
-			<!--arg value="-w0"/-->
 			<arg value="-o"/>
 			<targetfile/>
 			<srcfile/>
@@ -242,9 +208,6 @@
 			<arg value="Quellpfad=${src.dir}/"/>
 			<arg value="logfile=${document.plain}.build.log"/>
 			<arg value="document=${document.plain}"/>
-			<!-- Umstellung von Projektnamen auf Dokumentenname ...
-			<arg value="documentname=${project}"/>
-			-->
 			<arg value="projectname=${project}"/>
 			<arg value="documentname=${document.plain}"/>
 			<arg value="designpath=${src.dir}/system/design/"/>
@@ -253,53 +216,40 @@
 			<mapper type="glob" from="*.demux2.cl.tag.xml" to="*.html"/>
 		</apply>
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +                                    XSLT: Pass5: Making of Linkwatch-file                                           + -->
+		<!-- +     more processing OPTIONS                                       + -->
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<echo message="Pass5: Making of Linkwatch-file"/>
-		<apply executable="java" dest="${html.dir}/${document.plain}" parallel="false" failonerror="true">
-			<arg value="net.sf.saxon.Transform"/>
-			<!--arg value="-ds"/-->
-			<!--arg value="-w0"/-->
-			<arg value="-o"/>
-			<targetfile/>
-			<srcfile/>
-			<arg value="${xsltemp.dir}/html/linkwatch.xsl"/>
-			<fileset dir="${html.dir}/${document.plain}" includes="${document.plain}.demux2.xml"/>
-			<mapper type="glob" from="*.demux2.xml" to="*.linkwatch.xml"/>
-		</apply>
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- + Pass6: Postprocessing                                      + -->
+		<!-- +     linkwatch-file ?                                              + -->
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<echo message="Pass6: Postprocessing in ${html.dir}/${document.plain} "/>
-		<java jar="${ofx.lib}" fork="true">
-			<sysproperty key="file.encoding" value="ISO-8859-1"/>
-			<arg value="HtmlTagSubstitutor"/>
-			<arg value="${html.dir}/${document.plain}"/>
-			<arg value="html"/>
-			<arg value="${ilona.contentstore}/${project}/system/config/HtmlTagSubstitute.xml"/>
-		</java>
+		<condition property="do_linkredirect">
+			<istrue value="${option.linkredirect}"/>
+		</condition>
+		<antcall target="linkredirect"/>
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +                                  Create Math Images                                                                    + -->
+		<!-- +     postprocessing ?                                  			     + -->
+		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<condition property="do_postprocessing">
+			<istrue value="${option.postprocessing}"/>
+		</condition>
+		<antcall target="postprocessing"/>
+		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		<!-- +     Create Math Images ? cleaning old ones before?                                             + -->
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<!-- determine if "clean math" option is "true"-->
 		<condition property="do_cleanmath">
 			<istrue value="${option.cleanmath}"/>
 		</condition>
-		<echo>Delete math images: ${do_cleanmath}</echo>
 		<antcall target="cleanmath"/>
 		<!-- determine if "mathimages" option is "false"-->
 		<condition property="do_mathimages">
-			<isfalse value="${option.mathimages}"/>
+			<istrue value="${option.mathimages}"/>
 		</condition>
 		<echo>Produce Mathimages: ${do_mathimages}</echo>
 		<ant antfile="${xsltemp.dir}/math/build.xml" dir="." target="math" inheritAll="true"/>
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-		<!-- +                                    Copy media files                                                                        + -->
+		<!-- +     Copy media files                                              + -->
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<!-- Copy design files -->
-		<!--copy includeEmptyDirs="false" flatten="false" todir="${html.dir}/system/design" failonerror="false">
-			<fileset dir="${src.dir}/system/design"/>
-		</copy-->
 		<echo message="Copy designfolder from ${src.dir}/system/design to ${html.dir}${document.plain}"/>
 		<copy includeEmptyDirs="false" flatten="false" todir="${html.dir}/${document.plain}" failonerror="false" verbose="true">
 			<fileset dir="${src.dir}/system/design">
@@ -355,14 +305,49 @@
 	</target>
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<!-- Clean math images             -->
+	<target name="clean" if="do_clean"> 
+		<echo>Deleting old files</echo>
+		<delete dir="${html.dir}/${document.plain}"/>
+		<delete dir="${common.dir}/${document.plain}"/>
+	</target>
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- Clean math images target -->
 	<target name="cleanmath" if="do_cleanmath">
+		<echo>Delete math images.</echo>
 		<delete dir="${html.dir}/math"/>
 		<delete dir="${html.dir}/${document.plain}/math"/>
 		<delete dir="${html.dir}/${document.plain}/**/math"/>
 	</target>
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- Postprocessing target -->
+	<target name="postprocessing" if="do_postprocessing">
+		<echo message="start postprocessing of ${html.dir}/${document.plain} "/>
+		<java jar="${ofx.lib}" fork="true">
+			<sysproperty key="file.encoding" value="ISO-8859-1"/>
+			<arg value="HtmlTagSubstitutor"/>
+			<arg value="${html.dir}/${document.plain}"/>
+			<arg value="html"/>
+			<arg value="${ilona.contentstore}/${project}/system/config/HtmlTagSubstitute.xml"/>
+		</java>
+	</target>
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<target name="linkredirect" if="do_linkredirect">
+		<echo message="produce the linkwatch-file for FeU-system compatibility"/>
+		<apply executable="java" dest="${html.dir}/${document.plain}" parallel="false" failonerror="true">
+			<arg value="net.sf.saxon.Transform"/>
+			<arg value="-o"/>
+			<targetfile/>
+			<srcfile/>
+			<arg value="${xsltemp.dir}/html/linkwatch.xsl"/>
+			<fileset dir="${html.dir}/${document.plain}" includes="${document.plain}.demux2.xml"/>
+			<mapper type="glob" from="*.demux2.xml" to="*.linkwatch.xml"/>
+		</apply>
+	</target>
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<target name="producibleEntities" depends="initialisation">
 		<basename property="document.plain" file="${document}" suffix=".xml"/>
 		<echo file="${html.dir}/${document.plain}/producibleEntities.xml">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
@@ -373,14 +358,14 @@
 			&lt;/producibleEntities&gt;
 		</echo>
 	</target>
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<target name="producibleEntitiesNEW" depends="initialisation">
 		<basename property="document.plain" file="${document}" suffix=".xml"/>
 		<record name="${html.dir}/${document.plain}/${document.plain}.producibleEntities.log" action="start" append="no"/>
 		<echo message="producibleEntities - Pass1: making demux1"/>
 		<apply executable="java" dest="${html.dir}/${document.plain}" parallel="false" failonerror="true">
 			<arg value="net.sf.saxon.Transform"/>
-			<!--arg value="-ds"/-->
-			<!--arg value="-w0"/-->
 			<arg value="-o"/>
 			<targetfile/>
 			<srcfile/>
@@ -394,8 +379,6 @@
 		<echo message="producibleEntities - Pass2: making producibleEntities.xml"/>
 		<apply executable="java" dest="${html.dir}/${document.plain}" parallel="false" failonerror="true">
 			<arg value="net.sf.saxon.Transform"/>
-			<!--arg value="-ds"/-->
-			<!--arg value="-w0"/-->
 			<arg value="-o"/>
 			<targetfile/>
 			<srcfile/>
@@ -418,44 +401,4 @@
 			&lt;/producibleEntities&gt;
 		</echo>
 	</target>
-	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<target name="cvs">
-		<echo message="CVS"/>
-		<cvspass cvsroot=":pserver:steinkam@red-stripe.fernuni-hagen.de:/home/cvsrepository" password="stardust"/>
-		<!-- cvs cvsRoot=":pserver:steinkam@budweiser.fernuni-hagen.de:/software/cvsroot" package="dtd"
-      			dest="${ilona.home}/tmp"
-  	/-->
-		<cvs cvsRoot=":pserver:steinkam@red-stripe.fernuni-hagen.de:/home/cvsrepository" package="html" dest="${format.dir}"/>
-	</target>
-	<target name="cvs_html_css">
-		<echo message="CVS_HTML_CSS"/>
-		<cvspass cvsroot=":pserver:steinkam@red-stripe.fernuni-hagen.de:/home/cvsrepository" password="stardust"/>
-		<cvs cvsRoot=":pserver:steinkam@red-stripe.fernuni-hagen.de:/home/cvsrepository" package="style" dest="${html.dir}/${document.plain}" date="true"/>
-	</target>
-	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<!-- +                                               Old   COPY                                                               + -->
-	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<!--echo>Copy media</echo>
-		<copy includeEmptyDirs="false" flatten="true" todir="${html.dir}/bilder" failonerror="false">
-			<fileset dir="${src.dir}" includes="bilder/**/*.gif, bilder/**/*.jpg, bilder/**/*.png"/>
-		</copy>
-		<copy includeEmptyDirs="false" flatten="true" todir="${html.dir}/bilder" failonerror="false">
-			<fileset dir="${src.dir}" includes="grafiken/**/*.gif, grafiken/**i/*.png, grafiken/**/*.jpg"/>
-		</copy>
-		<copy includeEmptyDirs="false" flatten="false" todir="${html.dir}" failonerror="false">
-			<fileset dir="${src.dir}" includes="animationen/**/*.*"/>
-		</copy>
-		<copy includeEmptyDirs="false" flatten="false" todir="${html.dir}" failonerror="false">
-			<fileset dir="${src.dir}" includes="video/**/*.mpg, **/*.mpeg, video/**/*.avi"/>
-		</copy>
-		<copy includeEmptyDirs="false" flatten="false" todir="${html.dir}" failonerror="false">
-			<fileset dir="${src.dir}" includes="audio/**/*.wav, audio/**/*.mp3"/>
-		</copy>
-		
-		<copy includeEmptyDirs="false" flatten="false" todir="${html.dir}" failonerror="false">
-			<fileset dir="${src.dir}" includes="simulationen/**/*.*"/>
-		</copy-->
-	<!--		<copy file="${format.dir}/html/html.css" todir="${html.dir}/${document.plain}"/>
-		<copy file="${format.dir}/html/navi.css" todir="${html.dir}/${document.plain}"/> -->
 </project>
