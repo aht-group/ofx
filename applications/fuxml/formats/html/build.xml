@@ -273,12 +273,6 @@
 		<echo message="Pass6: Postprocessing in ${html.dir}/${document.plain} "/>
 		<java jar="${ofx.lib}" fork="true">
 			<sysproperty key="file.encoding" value="ISO-8859-1"/>
-			<arg value="HtmlPrettyFormatter"/>
-			<arg value="${html.dir}/${document.plain}"/>
-			<arg value="html"/>
-		</java>
-		<java jar="${ofx.lib}" fork="true">
-			<sysproperty key="file.encoding" value="ISO-8859-1"/>
 			<arg value="HtmlTagSubstitutor"/>
 			<arg value="${html.dir}/${document.plain}"/>
 			<arg value="html"/>

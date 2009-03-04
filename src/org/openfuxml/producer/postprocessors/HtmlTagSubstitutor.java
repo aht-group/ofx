@@ -1,9 +1,9 @@
 package org.openfuxml.producer.postprocessors;
 
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -14,15 +14,13 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.HiddenFileFilter;
 import org.apache.log4j.Logger;
+import org.htmlcleaner.BrowserCompactXmlSerializer;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.CleanerTransformations;
 import org.htmlcleaner.HtmlCleaner;
-import org.htmlcleaner.JDomSerializer;
+import org.htmlcleaner.PrettyXmlSerializer;
 import org.htmlcleaner.TagNode;
 import org.htmlcleaner.TagTransformation;
-import org.jdom.Document;
-import org.jdom.output.Format;
-import org.jdom.output.XMLOutputter;
 import org.openfuxml.util.OfxApp;
 
 import de.kisner.util.ConfigLoader;
@@ -32,9 +30,9 @@ public class HtmlTagSubstitutor extends DirectoryWalker
 {
 	static Logger logger = Logger.getLogger(OfxApp.class);
 	
-	private CleanerTransformations ct;
 	private Configuration config;
 	private int anzElements;
+	private CleanerTransformations ct;
 	
 	public HtmlTagSubstitutor(String suffix)
 	{
@@ -62,6 +60,11 @@ public class HtmlTagSubstitutor extends DirectoryWalker
 			cleaner.setTransformations(ct);
 			
 			CleanerProperties props = cleaner.getProperties();
+				props.setAdvancedXmlEscape(false);
+				props.setUseEmptyElementTags(false);
+				props.setTranslateSpecialEntities(false);
+				props.setRecognizeUnicodeChars(false);
+				
 			TagNode node = cleaner.clean(f);
 			
 			TagNode tnBody = node.getAllElements(false)[1];
@@ -84,23 +87,32 @@ public class HtmlTagSubstitutor extends DirectoryWalker
 				for(TagNode tn : imgs)
 				{
 					String srcAtt = tn.getAttributeByName(att);
-					if(srcAtt.equals(from))
+					int index = srcAtt.indexOf(from);
+					if(index>=0)
 					{
 						tn.addAttribute(att, to);
 					}
 				}
 			}
-
-			Document myJDom = new JDomSerializer(props, true).createJDom(node);
 			
-			Format format = Format.getPrettyFormat();
-			format.setEncoding("iso-8859-1");
-			XMLOutputter outputter = new XMLOutputter(format);
+			BrowserCompactXmlSerializer serializer = new BrowserCompactXmlSerializer(props);
+//			PrettyXmlSerializer serializer = new PrettyXmlSerializer(props);
 			
-			OutputStream os = new FileOutputStream(f);
+			String s = serializer.getXmlAsString(node, "ISO-8859-1"); 
+		
+			Writer fw = null; 	 
+			try 
+			{ 
+			  fw = new FileWriter(f); 
+			  fw.write(s); 
+			} 
+			catch ( IOException e ) {logger.error(e);} 
+			finally
+			{
+				if (fw != null) 
+			    try {fw.close();} catch (IOException e) {} 
+			}
 			
-			outputter.output(myJDom,os);
-//			sbResult.append(outputter.outputString(myJDom));
 			results.add(f.getAbsoluteFile());
 		}
 		catch (IOException e) {logger.error(e);}
@@ -140,6 +152,5 @@ public class HtmlTagSubstitutor extends DirectoryWalker
 			
 		HtmlTagSubstitutor hpf = new HtmlTagSubstitutor("html"); 
 		hpf.start(f, c,"/Users/thorsten/Documents/workspace/svn/jwan/system/config/HtmlTagSubstitute.xml");
-		logger.debug("Processed files: "+c.size());
 	}
 }
