@@ -232,7 +232,7 @@
 		</javac>
 	</target>
 	
-	<target name="03a JAXB Class generation" depends="02 - init" description="Compile the source">
+	<target name="03a JAXB Class generation" depends="02 - init,00 - TaskDef" description="Compile the source">
 		<echo level="info">Creating JAXB Configuration Class</echo>
 		<xjc schema="${xsd.dir}/config.xsd" package="org.openfuxml.util.config.jaxb" destdir="${src.dir}">
 			<depends dir="${xsd.dir}"><include name="config.xsd"/></depends>

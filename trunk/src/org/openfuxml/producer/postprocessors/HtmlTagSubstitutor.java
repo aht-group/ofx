@@ -18,7 +18,6 @@ import org.htmlcleaner.BrowserCompactXmlSerializer;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.CleanerTransformations;
 import org.htmlcleaner.HtmlCleaner;
-import org.htmlcleaner.PrettyXmlSerializer;
 import org.htmlcleaner.TagNode;
 import org.htmlcleaner.TagTransformation;
 import org.openfuxml.util.OfxApp;

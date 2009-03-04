@@ -23,6 +23,18 @@
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
+                <xsd:element name="options" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="option" minOccurs="1" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:attribute name="value" type="xsd:string"/>
+                                    <xsd:attribute name="name" type="xsd:string"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
             </xsd:sequence>
             <xsd:attribute name="version" type="xsd:string"/>
             <xsd:attribute name="reqType" type="xsd:string"/>

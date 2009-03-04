@@ -1,6 +1,7 @@
 package org.openfuxml.client.control;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.openfuxml.model.factory.OfxRequestFactory;
 import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
+import org.openfuxml.model.jaxb.Format.Options.Option;
 import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
@@ -47,6 +49,7 @@ public class OfxClientControl implements OfxGuiAction
 	private OfxDocument selectedOfxD;
 	private OfxFormat selectedOfxF;
 	private ProducibleEntities selectedPe;
+	private Hashtable<String,Hashtable<String,Option>> htSelectedOptions;
 	
 	private Hashtable<String, ProducibleEntities> htDiscoveredEntities;
 
@@ -57,6 +60,7 @@ public class OfxClientControl implements OfxGuiAction
 		ofxProjectFactory = new ProjectFactoryDirect(config);
 		ofxDocumentFactory = new DocumentFactoryDirect(config);
 		htDiscoveredEntities = new Hashtable<String, ProducibleEntities>();
+		htSelectedOptions = new Hashtable<String,Hashtable<String,Option>>();
 		
 		DummyServer server = new DummyServer(config);
 		producer = new DirectProducer(config,server.getEnvParameter());
@@ -137,6 +141,7 @@ public class OfxClientControl implements OfxGuiAction
 			orf.setOfxD(selectedOfxD);
 			orf.setOfxF(selectedOfxF);
 			orf.setProducibleEntities(selectedPe);
+			orf.setOptions(htSelectedOptions.get(selectedOfxF.getFormat().getId()).values());
 		Sessionpreferences spref = orf.create();
 		ProducerThread pt = new ProducerThread(this,guiCallback,producer);
 		pt.produce(spref);
@@ -205,6 +210,16 @@ public class OfxClientControl implements OfxGuiAction
 		guiCallback.entitiesDiscovered();
 		guiCallback.loescheErgebnis();
 		guiCallback.cboFormatSelected();
+	}
+	
+	public void boxOptionsSelected(OfxFormat ofxF,Option o)
+	{
+		String formatId = ofxF.getFormat().getId();
+		Hashtable<String,Option> htOption;
+		if(htSelectedOptions.containsKey(formatId)){htOption = htSelectedOptions.get(formatId);}
+		else{htOption = new Hashtable<String,Option>();}
+		htOption.put(o.getName(), o);
+		htSelectedOptions.put(formatId, htOption);
 	}
 	
 	public void tblEntitiesSelected(ProducibleEntities pe)

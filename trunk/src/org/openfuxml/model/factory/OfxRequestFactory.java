@@ -3,6 +3,7 @@ package org.openfuxml.model.factory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.Collection;
 
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
@@ -10,6 +11,7 @@ import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Sessionpreferences;
+import org.openfuxml.model.jaxb.Format.Options.Option;
 
 import de.kisner.util.LoggerInit;
 
@@ -20,6 +22,7 @@ public class OfxRequestFactory extends AbstractJaxbFactory
 	private OfxDocument ofxD;
 	private OfxFormat ofxF;
 	private ProducibleEntities pe;
+	private Collection<Option> fOptions;
 	
 	public OfxRequestFactory()
 	{
@@ -49,6 +52,18 @@ public class OfxRequestFactory extends AbstractJaxbFactory
 				}
 				spref.setProductionentities(peSes);
 			}
+			if(fOptions!=null && fOptions.size()>0)
+			{
+				Sessionpreferences.Options opSes = new Sessionpreferences.Options();
+				for(Option o : fOptions)
+				{
+					Sessionpreferences.Options.Option opSe = new Sessionpreferences.Options.Option();
+					opSe.setName(o.getName());
+					opSe.setValue(o.getValue());
+					opSes.getOption().add(opSe);
+				}
+				spref.setOptions(opSes);
+			}
 			
 			spref.setUsername("changeme");
 //		writeJaxb(System.out, spref);
@@ -61,6 +76,7 @@ public class OfxRequestFactory extends AbstractJaxbFactory
 	public void setOfxD(OfxDocument ofxD) {this.ofxD = ofxD;}
 	public void setOfxF(OfxFormat ofxF) {this.ofxF = ofxF;}
 	public void setProducibleEntities(ProducibleEntities pe){this.pe=pe;}
+	public void setOptions(Collection<Option> fOptions){this.fOptions=fOptions;}
 	
 	public void write(Sessionpreferences spref, File f)
 	{
