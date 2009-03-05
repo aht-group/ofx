@@ -59,10 +59,10 @@ public class HtmlTagSubstitutor extends DirectoryWalker
 			cleaner.setTransformations(ct);
 			
 			CleanerProperties props = cleaner.getProperties();
-				props.setAdvancedXmlEscape(false);
+//				props.setAdvancedXmlEscape(false);
 				props.setUseEmptyElementTags(false);
-				props.setTranslateSpecialEntities(false);
-				props.setRecognizeUnicodeChars(false);
+//				props.setTranslateSpecialEntities(false);
+//				props.setRecognizeUnicodeChars(false);
 				
 			TagNode node = cleaner.clean(f);
 			
