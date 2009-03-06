@@ -11,7 +11,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.openfuxml.client.control.ClientGuiCallback;
@@ -93,6 +92,7 @@ public class ProjektComposite extends Composite
 			
 		addTabProduce();
 		addTabLog();
+		addTabBrowser();
 		
 		//TODO Migration Process (tk, 2009-02-17)
 		boolean d = false;
@@ -136,6 +136,21 @@ public class ProjektComposite extends Composite
 		tiOeffnen.setText("Öffnen");
 //			oComp = new OeffnenComposite(tabFolder, this);
 //			tiOeffnen.setControl(oComp);
+	}
+	
+	private void addTabBrowser()
+	{
+		TabItem ti = new TabItem(tabFolder, SWT.NONE);
+		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='open']");
+		try
+		{
+			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			ti.setImage(img);
+		}
+		catch (FileNotFoundException e) {logger.error(e);}
+		ti.setText("Browser");
+		BrowserComposite composite = new BrowserComposite(tabFolder, config);
+		ti.setControl(composite);
 	}
 	
 	private void addTabLog()
