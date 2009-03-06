@@ -1,7 +1,10 @@
 package org.openfuxml.client.gui.swt;
 
+import java.net.URL;
+
 import org.apache.log4j.Logger;
 import org.openfuxml.client.control.ClientGuiCallback;
+import org.openfuxml.client.gui.swt.composites.BrowserComposite;
 import org.openfuxml.client.gui.swt.composites.LogComposite;
 import org.openfuxml.client.gui.swt.composites.ProducerComposite;
 
@@ -11,12 +14,14 @@ public class SwtGuiCallback implements ClientGuiCallback
 	 
 	private ProducerComposite compP;
 	private LogComposite compL;
+	private BrowserComposite compBrowser;
 	
 	public SwtGuiCallback(){}
-	public SwtGuiCallback(ProducerComposite compP, LogComposite compL)
+	public SwtGuiCallback(ProducerComposite compP, LogComposite compL, BrowserComposite compBrowser)
 	{
 		this.compP=compP;
 		this.compL=compL;
+		this.compBrowser=compBrowser;
 	}
 	
 	public void error(String s){{logger.debug("DISPLAY "+s);}}
@@ -27,6 +32,7 @@ public class SwtGuiCallback implements ClientGuiCallback
 	public void cboApplicationSelected(){}
 	public void cboProjectSelected(){}
 	
+	public void openUrl(URL url){compBrowser.open(url);}
 	public void entitiesProduced(){logger.debug("entitiesProduced");}
 	public void setStatus(String status){compP.setStatus(status);}
 	public void entitiesDiscovered(){compP.entitiesDiscovered();}

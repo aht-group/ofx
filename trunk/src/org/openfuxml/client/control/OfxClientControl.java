@@ -1,7 +1,6 @@
 package org.openfuxml.client.control;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -123,7 +122,7 @@ public class OfxClientControl implements OfxGuiAction
 			ofxReqF.setOfxD(selectedOfxD);
 			ofxReqF.setOfxF(selectedOfxF);
 		Sessionpreferences spref = ofxReqF.create();
-		ProducerThread pt = new ProducerThread(this,guiCallback,producer);
+		ProducerThread pt = new ProducerThread(this,guiCallback,producer,config);
 		pt.getProducibleEntities(spref);
 	}
 	
@@ -146,7 +145,7 @@ public class OfxClientControl implements OfxGuiAction
 				orf.setOptions(htSelectedOptions.get(selectedOfxF.getFormat().getId()).values());
 			}
 		Sessionpreferences spref = orf.create();
-		ProducerThread pt = new ProducerThread(this,guiCallback,producer);
+		ProducerThread pt = new ProducerThread(this,guiCallback,producer,config);
 		pt.produce(spref);
 	}
 	
