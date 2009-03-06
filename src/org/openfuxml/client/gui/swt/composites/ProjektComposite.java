@@ -35,6 +35,8 @@ public class ProjektComposite extends Composite
 	
 	private ProducerComposite pComp;
 	private LogComposite compLog;
+	private BrowserComposite compBrowser;
+	
 	/*	private OeffnenComposite oComp; 
 	
 	private BenutzerComposite benutzerComp;
@@ -104,7 +106,7 @@ public class ProjektComposite extends Composite
 			addTabDoc();
 			addTabSettings();
 		}
-		ClientGuiCallback guiCallback = new SwtGuiCallback(pComp,compLog);
+		ClientGuiCallback guiCallback = new SwtGuiCallback(pComp,compLog,compBrowser);
 		ofxCC.setGuiCallback(guiCallback);
 	}
 	
@@ -141,16 +143,17 @@ public class ProjektComposite extends Composite
 	private void addTabBrowser()
 	{
 		TabItem ti = new TabItem(tabFolder, SWT.NONE);
-		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='open']");
 		try
 		{
+			String browserIconDir = config.getString("icons/browser/@dir");
+			String res = browserIconDir+"/"+config.getString("icons/browser/icon[@type='browser']");
 			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 			ti.setImage(img);
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
 		ti.setText("Browser");
-		BrowserComposite composite = new BrowserComposite(tabFolder, config);
-		ti.setControl(composite);
+		compBrowser = new BrowserComposite(tabFolder, config);
+		ti.setControl(compBrowser);
 	}
 	
 	private void addTabLog()

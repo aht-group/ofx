@@ -1,7 +1,11 @@
 package org.openfuxml.client.control;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.client.control.log.QueueLogConsumer;
 import org.openfuxml.client.control.log.QueueLogFetcher;
@@ -12,6 +16,7 @@ import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
 import org.openfuxml.producer.handler.DirectProducer;
+import org.openfuxml.util.config.OfxPathHelper;
 
 /**
  * ProducerThread implementiert den Thread, in dem die Methoden      
@@ -24,6 +29,8 @@ public class ProducerThread extends Thread
 	static Logger logger = Logger.getLogger(ProducerThread.class);
 	
 	private OfxClientControl ofxCC;
+	private Configuration config;
+	
 	private ClientGuiCallback guiCallback;
 	private Producer producer;
 	private DirectProducer.Typ typ;
@@ -35,11 +42,12 @@ public class ProducerThread extends Thread
 	 * @param Parent - das  aufrufende Element
 	 * @param JndiHost - String, der Host und Port bestimmt (Syntax host:port).
 	 */
-	public ProducerThread(OfxClientControl ofxCC, ClientGuiCallback guiCallback, Producer producer)
+	public ProducerThread(OfxClientControl ofxCC, ClientGuiCallback guiCallback, Producer producer, Configuration config)
 	{
 		this.ofxCC=ofxCC;
 		this.guiCallback = guiCallback;
 		this.producer = producer;
+		this.config=config;
 	}
 
 	/**
@@ -76,6 +84,7 @@ public class ProducerThread extends Thread
 								guiCallback.setStatus("Entities produced");
 								ofxCC.setProducedEntities(presult);
 								guiCallback.entitiesProduced();
+								if(spref.getFormat().equals("validation")){validationFinished(spref,presult);}
 								guiCallback.setProductionControlsEnabled(true);break;
 			}
 		}
@@ -91,6 +100,27 @@ public class ProducerThread extends Thread
 			}		
 	}
 
+    private void validationFinished(Sessionpreferences spref,Productionresult presult)
+    {
+		try
+		{
+			
+			StringBuffer sb = new StringBuffer();
+				sb.append(OfxPathHelper.getDir(config, "output")+"/");
+				sb.append(spref.getApplication()+"/");
+				sb.append(spref.getProject()+"/");
+				sb.append("validation/");
+				sb.append(spref.getDocument().substring(0, spref.getDocument().indexOf(".xml"))+"/");
+				sb.append(presult.getProducedentities().getFile().get(0).getFilename());
+				
+			URL url = new URL("file","localhost",sb.toString());
+			logger.debug(url);
+			guiCallback.openUrl(url);
+		}
+		catch (MalformedURLException e) {logger.error(e);}
+    	
+    }
+    
     public void produce(Sessionpreferences spref)
     {
     	typ = DirectProducer.Typ.PRODUCE;

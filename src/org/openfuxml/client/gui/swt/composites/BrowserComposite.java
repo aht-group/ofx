@@ -1,7 +1,7 @@
 package org.openfuxml.client.gui.swt.composites;
 
 import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.net.URL;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
@@ -18,7 +18,6 @@ import org.eclipse.swt.browser.WindowEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -34,24 +33,9 @@ public class BrowserComposite extends Composite
 {
 	static Logger logger = Logger.getLogger(ProjektComposite.class);
 	
-	final static String ICON = "/swt/images/browser/fuxicon.gif";
-	final static String ICON_ROTATION = "/swt/images/browser/fuxicon-rotation.gif";
+	private Image imgBtnBack,imgBtnForward,imgBtnRefresh,imgBtnStop;		
 	
-	final static String IMG_BTN_BACK	= "/swt/images/browser/back.gif";
-	final static String IMG_BTN_FORWARD	= "/swt/images/browser/forward.gif";
-	final static String IMG_BTN_REFRESH	= "/swt/images/browser/refresh.gif";
-	final static String IMG_BTN_STOP	= "/swt/images/browser/stop.gif";
-	
-	private Image imgBtnBack;		
-	private Image imgBtnForward;		
-	private Image imgBtnRefresh;		
-	private Image imgBtnStop;		
-	
-	private Button btnBack;
-	private Button btnForward;
-	private Button btnRefresh;
-	private Button btnStop;
-	
+	private Button btnBack,btnForward,btnRefresh,btnStop;
 	private Text textURL;
 	
 	private ImgCanvas imgIconRotation;
@@ -61,18 +45,35 @@ public class BrowserComposite extends Composite
 	private Label labelStatus;
 	
 	private ProgressBar progressBar;
+	private final String ofxNoRotate,ofxRotate;
 
+	private Composite parent;
+	
 	public BrowserComposite(Composite parent, Configuration config)
 	{
 		super(parent, SWT.NONE);
-	
+		this.parent=parent;
+		String browserIconDir = config.getString("icons/browser/@dir");
+		ofxNoRotate = browserIconDir+"/"+config.getString("icons/browser/icon[@type='ofx' and @rotating='false']");
+		ofxRotate = browserIconDir+"/"+config.getString("icons/browser/icon[@type='ofx' and @rotating='true']");
+		
+		
 		try
 		{
-			String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='produce']");
+			String res = browserIconDir+"/"+config.getString("icons/browser/icon[@type='go-previous' and @enabled='true']");
 			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 			imgBtnBack = new Image(null, img.getImageData(), img.getImageData().getTransparencyMask());
+			
+			res = browserIconDir+"/"+config.getString("icons/browser/icon[@type='go-next' and @enabled='true']");
+			img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 			imgBtnForward	= new Image(null, img.getImageData(), img.getImageData().getTransparencyMask());
+			
+			res = browserIconDir+"/"+config.getString("icons/browser/icon[@type='refresh' and @enabled='true']");
+			img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 			imgBtnRefresh	= new Image(null, img.getImageData(), img.getImageData().getTransparencyMask());
+			
+			res = browserIconDir+"/"+config.getString("icons/browser/icon[@type='stop' and @enabled='true']");
+			img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
 			imgBtnStop		= new Image(null, img.getImageData(), img.getImageData().getTransparencyMask()); 
 			
 		}
@@ -163,7 +164,7 @@ public class BrowserComposite extends Composite
 				});
 		}
 		{
-			imgIconRotation = new ImgCanvas(this, ICON);
+			imgIconRotation = new ImgCanvas(this, ofxNoRotate);
 			GridData data = new GridData();
 			data.widthHint = 40;
 			data.heightHint = 40;
@@ -196,17 +197,12 @@ System.out.println("LocationListener---changing: "+ event.location);
 							Runtime.getRuntime().exec("C:/Programme/SoftQuad/XMetaL 3/xmetal31.exe");
 						}
 						catch (Exception e) {e.printStackTrace();}
-						
-						
-						
-						System.out.println("hartesBack aufrufen");
-						hartesBack();
 					}
 					else
 					{
 						textURL.setText(browser.getUrl());
 						
-						imgIconRotation.setImage(ICON_ROTATION);
+						imgIconRotation.setImage(ofxRotate);
 						
 						btnBack.setEnabled(browser.isBackEnabled());
 						btnForward.setEnabled(browser.isForwardEnabled());
@@ -217,7 +213,7 @@ System.out.println("LocationListener---changing: "+ event.location);
 System.out.println("LocationListener---changed: "+ event.location);
 					textURL.setText(browser.getUrl());
 					
-					imgIconRotation.setImage(ICON);
+					imgIconRotation.setImage(ofxNoRotate);
 					
 					btnBack.setEnabled(browser.isBackEnabled());
 					btnForward.setEnabled(browser.isForwardEnabled());
@@ -277,19 +273,24 @@ System.out.println("ProgressListener---changed: "+ event.current + " von " + eve
 			
 		}
 	}
-
-	public void setUrl(String URL)
+	
+	public void open(final URL url)
 	{
-		browser.setUrl(URL);
+		this.getDisplay().asyncExec(new Runnable()
+		{
+			public void run()
+			{
+				if (!parent.isDisposed())
+				{				
+					browser.setUrl(url.toString());
+					browser.refresh();
+				} 
+			}
+		});
 	}
 	
 	public void setText(String text)
 	{
 		browser.setText(text);
-	}
-	
-	public void hartesBack()
-	{
-		
 	}
 }

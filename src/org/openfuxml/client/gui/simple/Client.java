@@ -1,6 +1,7 @@
 package org.openfuxml.client.gui.simple;
 
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +28,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.ClientGuiCallback;
 import org.openfuxml.client.control.OfxClientControl;
 import org.openfuxml.client.gui.simple.dialog.HelpAboutDialog;
@@ -38,10 +38,8 @@ import org.openfuxml.client.gui.swt.factory.ProducerButtonFactory;
 import org.openfuxml.client.gui.swt.factory.ProducerComboFactory;
 import org.openfuxml.client.gui.swt.factory.ProducerEntitiesDisplayFactory;
 import org.openfuxml.model.ejb.OfxApplication;
-import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.model.jaxb.Productionresult;
-import org.openfuxml.model.jaxb.Sessionpreferences.Productionentities;
 import org.openfuxml.producer.ejb.ProducedEntities;
 import org.openfuxml.producer.ejb.ProducedEntitiesEntityFile;
 import org.openfuxml.producer.exception.ProductionHandlerException;
@@ -467,6 +465,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	public void cboFormatSelected(){}
 	public void addLogline(String s){}
 	public void clearLog(){}
+	public void openUrl(URL url){}
 	
 	public static void main(String[] args)
 	{
