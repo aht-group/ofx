@@ -53,7 +53,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 	static Logger logger = Logger.getLogger(OpenFuxmlClient.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
-	public final static String Title = "FuXML - Client";
+	public final static String Title = "openFuXML - Client";
 	public final static String IMG_SYSTEMINFO		= "/swt/images/tab/systeminfo.png";
 	
 	private TabFolder tfProjekte;
