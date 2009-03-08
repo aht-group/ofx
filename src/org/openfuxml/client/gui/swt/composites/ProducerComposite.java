@@ -58,11 +58,8 @@ public class ProducerComposite extends AbstractProducerComposite
 	private Composite compositeOptionen;
 	private Group[] groupsOptionen;
 	
-	private Button buttonDefaultOptionen;
-	
 	private Label lblEvent;
 	private ImgCanvas imgCanvasStatus;
-	private Button buttonErgebnisDetails;
 	
 	public ProducerComposite(Composite parent, OfxApplication ofxA, OfxProject ofxP, OfxClientControl ofxCC, Configuration config)
 	{
@@ -123,29 +120,13 @@ public class ProducerComposite extends AbstractProducerComposite
 			GridData data = new GridData();
 			data.grabExcessHorizontalSpace = true;
 			data.horizontalAlignment = GridData.FILL;
-			data.horizontalSpan = 3;
+			data.horizontalSpan = 4;
 			compositeOptionen.setLayoutData(data);
 
 			zeigeOptionen();
-//			setzeOptionenHaekchen();
-		}
-		{
-			buttonDefaultOptionen = new Button(this, SWT.PUSH | SWT.CENTER);
-			buttonDefaultOptionen.setText("setze Default");
-
-			GridData data = new GridData();
-			data.verticalAlignment = GridData.END;
-			data.horizontalAlignment = GridData.FILL;
-			buttonDefaultOptionen.setLayoutData(data);
-
-			buttonDefaultOptionen.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-//					setzeDefaultOptionen();
-				}
-			});
 		}
 		
-		slf.createDummyLabel(2);
+	//	slf.createDummyLabel(2);
 		
 		
 		lblEvent = slf.creatLblEvent();
@@ -156,23 +137,9 @@ public class ProducerComposite extends AbstractProducerComposite
 			GridData data = new GridData();
 			data.widthHint = 50;
 			data.heightHint = 30;
+			data.horizontalSpan = 4;
 			imgCanvasStatus.setLayoutData(data);
 			imgCanvasStatus.setBackground(this.getBackground());
-		}
-		{
-			buttonErgebnisDetails = new Button(this, SWT.PUSH | SWT.CENTER);
-			buttonErgebnisDetails.setText("Details ...");
-
-			GridData data = new GridData();
-			data.verticalAlignment = GridData.END;
-			data.horizontalAlignment = GridData.FILL;
-			buttonErgebnisDetails.setLayoutData(data);
-
-			buttonErgebnisDetails.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent evt) {
-					AnzeigeErgebnisDetails();
-				}
-			});
 		}
 		
 		pack();
@@ -424,10 +391,8 @@ public class ProducerComposite extends AbstractProducerComposite
 					tabDiscoveredEntities.setEnabled(isEnabled);
 
 					btnProduce.setEnabled(isEnabled);
-					buttonErgebnisDetails.setEnabled(isEnabled);
 			
 					compositeOptionen.setEnabled(isEnabled);
-					buttonDefaultOptionen.setEnabled(isEnabled);
 					
 					if (isEnabled)
 					{
