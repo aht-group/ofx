@@ -202,6 +202,9 @@
     			<pathelement location="${bin.dir}"/>
     		</classpath>
     	</taskdef>
+    	
+    	<taskdef name="izpack" classpath="${lib.dir}/utils/izpack/izpack-4.2.1.jar" classname="com.izforge.izpack.ant.IzPackTask"/>
+    	
     </target>
 	
 	<!-- target clean -->	
