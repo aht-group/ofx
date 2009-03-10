@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Properties;
 
-import javax.naming.InitialContext;
-
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
@@ -73,6 +71,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 	private boolean pingThreadAktiv;
 	private int pingThreadZaehler;
 	private Configuration config;
+	private ImageResourceLoader irl;
 	private Shell shell;
 	private OfxClientControl ofxCC;
 
@@ -83,7 +82,9 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		SwtGuiCallback guiCallback = new SwtGuiCallback();
 		ofxCC = new OfxClientControl(config,guiCallback);
 		
-		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
+		irl = new ImageResourceLoader();
+		
+		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config,irl);
 		splashscreen.open();
 		
 		this.parent=parent;
@@ -157,7 +158,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 			this.setLayout(layout);
 		}
 		
-		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
+		SimpleLabelFactory slf = new SimpleLabelFactory(this,config,irl);
 		slf.createLogo();
 		
 		{
@@ -253,7 +254,8 @@ public class OpenFuxmlClient extends Composite implements Runnable
 				String res = config.getString("icons/@dir")+fs+config.getString("icons/icon[@type='project']");
 				try
 				{
-					Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+					ImageResourceLoader irl = new ImageResourceLoader();
+					Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 					tabItem.setImage(img);
 				}
 				catch (FileNotFoundException e) {logger.error(e);}
@@ -403,7 +405,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 */	
 	public void HilfeInfoUeber()
 	{
-		HelpAboutDialog dialog = new HelpAboutDialog(getShell(), HelpAboutDialog.ABOUT_DIALOG, config);
+		HelpAboutDialog dialog = new HelpAboutDialog(getShell(), HelpAboutDialog.ABOUT_DIALOG, config,irl);
 		dialog.open();
 	}
 
@@ -411,10 +413,10 @@ public class OpenFuxmlClient extends Composite implements Runnable
 	{
 		int anzImages = Dateinamen.length;
 		Image[] img = new Image[anzImages];
-		
+		ImageResourceLoader irl = new ImageResourceLoader();
 		for (int i=0; i<anzImages; i++)
 		{
-	        try{img[i] = ImageResourceLoader.search(this.getClass().getClassLoader(), Dateinamen[i], getDisplay());}
+	        try{img[i] = irl.search(this.getClass().getClassLoader(), Dateinamen[i], getDisplay());}
 	        catch (FileNotFoundException e) {logger.error(e);}
 		}
         return img;		
@@ -434,7 +436,8 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		Display disp = Display.getDefault();
 		Shell sh = new Shell(disp);
 		
-		HelpAboutDialog splashscreen = new HelpAboutDialog(sh, HelpAboutDialog.SPLASH_SCREEN,config);
+		ImageResourceLoader irl = new ImageResourceLoader();
+		HelpAboutDialog splashscreen = new HelpAboutDialog(sh, HelpAboutDialog.SPLASH_SCREEN,config,irl);
 		splashscreen.open();
 		try{Thread.sleep(3000);} catch (InterruptedException e){logger.error("InterruptedException", e);}
 		splashscreen.close();

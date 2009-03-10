@@ -57,24 +57,25 @@ public class BrowserComposite extends Composite
 		ofxNoRotate = browserIconDir+"/"+config.getString("icons/browser/icon[@type='ofx' and @rotating='false']");
 		ofxRotate = browserIconDir+"/"+config.getString("icons/browser/icon[@type='ofx' and @rotating='true']");
 		
+		ImageResourceLoader irl = new ImageResourceLoader();
 		
 		try
 		{
 			String res = browserIconDir+"/"+config.getString("icons/browser/icon[@type='go-previous' and @enabled='true']");
-			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			imgBtnBack = new Image(null, img.getImageData(), img.getImageData().getTransparencyMask());
 			
 			res = browserIconDir+"/"+config.getString("icons/browser/icon[@type='go-next' and @enabled='true']");
-			img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
-			imgBtnForward	= new Image(null, img.getImageData(), img.getImageData().getTransparencyMask());
+			img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
+			imgBtnForward = new Image(null, img.getImageData(), img.getImageData().getTransparencyMask());
 			
 			res = browserIconDir+"/"+config.getString("icons/browser/icon[@type='refresh' and @enabled='true']");
-			img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
-			imgBtnRefresh	= new Image(null, img.getImageData(), img.getImageData().getTransparencyMask());
+			img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
+			imgBtnRefresh = new Image(null, img.getImageData(), img.getImageData().getTransparencyMask());
 			
 			res = browserIconDir+"/"+config.getString("icons/browser/icon[@type='stop' and @enabled='true']");
-			img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
-			imgBtnStop		= new Image(null, img.getImageData(), img.getImageData().getTransparencyMask()); 
+			img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
+			imgBtnStop = new Image(null, img.getImageData(), img.getImageData().getTransparencyMask()); 
 			
 		}
 		catch (FileNotFoundException e) {logger.error(e);}

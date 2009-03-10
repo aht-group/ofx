@@ -53,15 +53,17 @@ public class ProjektComposite extends Composite
 	private OfxApplication ofxA;
 	private OfxProject ofxP;
 	private OfxClientControl ofxCC;
+	private ImageResourceLoader irl;
 	
 	public ProjektComposite(Composite parent, OpenFuxmlClient client, OfxProject ofxP, Configuration config)
 	{
 		super(parent, SWT.NONE);
 		this.client = client;
 		this.ofxP=ofxP;
-
 		this.config=config;
 	
+		irl = new ImageResourceLoader();
+		
 		this.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent evt) {
 				//TODO Settings speichern
@@ -116,7 +118,7 @@ public class ProjektComposite extends Composite
 		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='produce']");
 		try
 		{
-			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			tiProduzieren.setImage(img);
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
@@ -131,7 +133,7 @@ public class ProjektComposite extends Composite
 		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='open']");
 		try
 		{
-			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			tiOeffnen.setImage(img);
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
@@ -147,7 +149,7 @@ public class ProjektComposite extends Composite
 		{
 			String browserIconDir = config.getString("icons/browser/@dir");
 			String res = browserIconDir+"/"+config.getString("icons/browser/icon[@type='browser']");
-			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			ti.setImage(img);
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
@@ -162,7 +164,7 @@ public class ProjektComposite extends Composite
 		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='log']");
 		try
 		{
-			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			tiLogView.setImage(img);
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
@@ -177,7 +179,7 @@ public class ProjektComposite extends Composite
 		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='user']");
 		try
 		{
-			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			tiBenutzer.setImage(img);
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
@@ -192,7 +194,7 @@ public class ProjektComposite extends Composite
 		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='documents']");
 		try
 		{
-			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			tiDoc.setImage(img);
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
@@ -207,7 +209,7 @@ public class ProjektComposite extends Composite
 		String res = config.getString("icons/@dir")+"/"+config.getString("icons/project/icon[@type='preferences']");
 		try
 		{
-			Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, getDisplay());
+			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			tiEinst.setImage(img);
 		}
 		catch (FileNotFoundException e) {logger.error(e);}

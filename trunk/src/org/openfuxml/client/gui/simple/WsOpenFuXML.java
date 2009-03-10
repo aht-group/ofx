@@ -58,7 +58,8 @@ public class WsOpenFuXML
 		try
 		{
 			ClassLoader cl = this.getClass().getClassLoader();
-			InputStream is = MultiResourceLoader.searchIs(cl, zipDir+"/"+zipFileName);
+			MultiResourceLoader mrl = new MultiResourceLoader();
+			InputStream is = mrl.searchIs(cl, zipDir+"/"+zipFileName);
 			if(is!=null)
 			{
 				logger.debug(is.getClass().getSimpleName()+" available: "+is.available());

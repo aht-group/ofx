@@ -77,6 +77,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	private ArrayList<String[]> alProducedEntities;
 	
 	private Configuration config;
+	private ImageResourceLoader irl;
 	private Cursor cursor;
 	
 	/**
@@ -93,9 +94,11 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	    this.toplevelShell=(Shell)parent;
 	    this.config=config;
 		
+	    irl = new ImageResourceLoader();
+	    
 		ofxCC = new OfxClientControl(config,this);
 		
-		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config);
+		HelpAboutDialog splashscreen = new HelpAboutDialog(this.getShell(), HelpAboutDialog.SPLASH_SCREEN,config,irl);
 		splashscreen.open();
 	
 		alProducedEntities = new ArrayList<String[]>();
@@ -128,10 +131,10 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 			this.setLayout(layout);
 		}
 		
-		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
+		SimpleLabelFactory slf = new SimpleLabelFactory(this,config,irl);
 		ProducerButtonFactory sbf = new ProducerButtonFactory(this,this,ofxCC);
 		ProducerComboFactory scf = new ProducerComboFactory(this,ofxCC);
-		ProducerEntitiesDisplayFactory stf = new ProducerEntitiesDisplayFactory(ofxCC,config);
+		ProducerEntitiesDisplayFactory stf = new ProducerEntitiesDisplayFactory(ofxCC,config,irl);
 		
 		slf.createLogo();
 		
@@ -339,7 +342,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	 */
 	public void HilfeInfoUeber()
 	{
-		HelpAboutDialog dialog = new HelpAboutDialog(getShell(), HelpAboutDialog.ABOUT_DIALOG,config);
+		HelpAboutDialog dialog = new HelpAboutDialog(getShell(), HelpAboutDialog.ABOUT_DIALOG,config,irl);
 		dialog.open();
 	}
 
@@ -426,7 +429,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 		{
 			try
 			{
-				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), Dateinamen[i], getDisplay());
+				Image img = irl.search(this.getClass().getClassLoader(), Dateinamen[i], getDisplay());
 				alImages.add(img);
 			}
 			catch (FileNotFoundException e){logger.warn(e);}

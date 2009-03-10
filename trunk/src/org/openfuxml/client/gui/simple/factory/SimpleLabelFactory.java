@@ -18,16 +18,19 @@ public class SimpleLabelFactory
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	private Composite composite;
 	private Configuration config;
+	private ImageResourceLoader irl;
 	
-	public SimpleLabelFactory(Composite composite, Configuration config)
+	public SimpleLabelFactory(Composite composite, Configuration config, ImageResourceLoader irl)
 	{
 		this.composite=composite;
 		this.config=config;
+		this.irl=irl;
 	}
 	
-	public SimpleLabelFactory(Composite composite)
+	public SimpleLabelFactory(Composite composite, ImageResourceLoader irl)
 	{
 		this.composite=composite;
+		this.irl=irl;
 	}
 	
 	public Label createLabel(int i){return createLabel(""+i, 1);}
@@ -69,7 +72,7 @@ public class SimpleLabelFactory
 			try
 			{
 				String res = config.getString("logos/@dir")+fs+logoRes[i];
-				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, composite.getDisplay());
+				Image img = irl.search(this.getClass().getClassLoader(), res, composite.getDisplay());
 				data.widthHint = img.getBounds().width;
 				data.heightHint = img.getBounds().height;
 				labelImage.setImage(img);

@@ -67,7 +67,8 @@ public class OpenFuxmlTray
 			});
 			try
 			{
-				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), IMG_FUXICON_KLEIN, of.getDisplay());
+				ImageResourceLoader irl = new ImageResourceLoader();
+				Image img = irl.search(this.getClass().getClassLoader(), IMG_FUXICON_KLEIN, of.getDisplay());
 				item.setImage(img);
 			}
 			catch (FileNotFoundException e) {logger.error(e);}
