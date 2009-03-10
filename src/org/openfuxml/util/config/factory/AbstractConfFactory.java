@@ -58,7 +58,8 @@ public abstract class AbstractConfFactory extends AbstractJaxbFactory
 			try
 			{
 				logger.info("Developing Environment. Using "+propName+" to get Version");
-				InputStream is = MultiResourceLoader.searchIs(this.getClass().getClassLoader(), propName);
+				MultiResourceLoader mrl = new MultiResourceLoader();
+				InputStream is = mrl.searchIs(this.getClass().getClassLoader(), propName);
 				Properties versionProperties = new Properties();
 				versionProperties.load(is);
 				openFuxmlVersion = versionProperties.getProperty("openfuxml-version");

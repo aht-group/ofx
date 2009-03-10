@@ -101,20 +101,20 @@ public class HelpAboutDialog extends Dialog
 	
 	private Listener listener;
 	private Configuration config;
-
+	private ImageResourceLoader irl;
+	
 	/**
 	 * Constructor of the class HelpAboutDialog.
 	 * 
 	 * @param parent
 	 * @param type - defines the type (ABOUT_DIALOG or SPLASH_SCREEN)
 	 */
-	public HelpAboutDialog(Shell parent, int type, Configuration config)
+	public HelpAboutDialog(Shell parent, int type, Configuration config, ImageResourceLoader irl)
 	{
 		super(parent, 0);
 		this.config=config;
-		
 		this.type = type;
-		
+		this.irl=irl;
 		colBackground = new Color(parent.getDisplay(), 231, 232, 235);		
 	}
 	
@@ -242,7 +242,7 @@ public class HelpAboutDialog extends Dialog
 			
 			try
 			{
-				Image img = ImageResourceLoader.search(this.getClass().getClassLoader(), res, shell.getDisplay());
+				Image img = irl.search(this.getClass().getClassLoader(), res, shell.getDisplay());
 				labelImage.setImage(img);
 			}
 			catch (FileNotFoundException e)

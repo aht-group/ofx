@@ -1,8 +1,5 @@
 package org.openfuxml.client.gui.simple;
 
-import java.util.Enumeration;
-import java.util.Properties;
-
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;

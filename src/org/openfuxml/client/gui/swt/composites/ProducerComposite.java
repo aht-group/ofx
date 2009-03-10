@@ -32,6 +32,8 @@ import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Format.Options.Option;
 
+import de.kisner.util.io.resourceloader.ImageResourceLoader;
+
 /**
  * 
  * @author Andrea Frank
@@ -71,10 +73,12 @@ public class ProducerComposite extends AbstractProducerComposite
 		ofxCC.cboApplicationSelected(ofxA);
 		ofxCC.cboProjectSelected(ofxP);
 		
-		SimpleLabelFactory slf = new SimpleLabelFactory(this,config);
+		ImageResourceLoader irl = new ImageResourceLoader();
+		
+		SimpleLabelFactory slf = new SimpleLabelFactory(this,config,irl);
 		ProducerComboFactory scf = new ProducerComboFactory(this,ofxCC);
 		ProducerButtonFactory sbf = new ProducerButtonFactory(this,ofxCC);
-		ProducerEntitiesDisplayFactory pedf = new ProducerEntitiesDisplayFactory(ofxCC,config);
+		ProducerEntitiesDisplayFactory pedf = new ProducerEntitiesDisplayFactory(ofxCC,config,irl);
 		
 		GridLayout layout = new GridLayout();
 			layout.numColumns = 4;

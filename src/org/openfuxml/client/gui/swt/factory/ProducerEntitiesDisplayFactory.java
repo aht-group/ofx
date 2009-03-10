@@ -19,17 +19,21 @@ import org.openfuxml.client.control.OfxGuiAction;
 import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
 import org.openfuxml.model.jaxb.ProducibleEntities;
 
+import de.kisner.util.io.resourceloader.ImageResourceLoader;
+
 public class ProducerEntitiesDisplayFactory
 {
 	static Logger logger = Logger.getLogger(ProducerEntitiesDisplayFactory.class);
 	
 	private OfxGuiAction ofxAction;
 	private Configuration config;
+	private ImageResourceLoader irl;
 	
-	public ProducerEntitiesDisplayFactory(OfxGuiAction ofxAction, Configuration config)
+	public ProducerEntitiesDisplayFactory(OfxGuiAction ofxAction, Configuration config, ImageResourceLoader irl)
 	{
 		this.ofxAction=ofxAction;
 		this.config=config;
+		this.irl=irl;
 	}
 	
 	public TabFolder createTabFolder(Composite composite)
@@ -58,7 +62,7 @@ public class ProducerEntitiesDisplayFactory
 			scrolledCompositeMatrix.setLayoutData(data);
 
 		Composite compositeMatrix = new Composite(scrolledCompositeMatrix, SWT.NONE);
-		SimpleLabelFactory slf = new SimpleLabelFactory(compositeMatrix);
+		SimpleLabelFactory slf = new SimpleLabelFactory(compositeMatrix,irl);
 		
 		GridLayout layout = new GridLayout();
 			layout.numColumns = 5;

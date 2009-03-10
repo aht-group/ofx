@@ -7,7 +7,6 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.util.config.jaxb.Files;
-import org.openfuxml.util.config.jaxb.Dirs.Dir;
 import org.openfuxml.util.config.jaxb.Files.File;
 
 import de.kisner.util.io.resourceloader.MultiResourceLoader;
@@ -21,10 +20,10 @@ public class ConfFileFactory
 	public ConfFileFactory()
 	{
 		String resource = "resources/properties/ant.properties";
-		InputStream is;
 		try
 		{
-			is = MultiResourceLoader.searchIs(this.getClass().getClassLoader(),resource);
+			MultiResourceLoader mrl = new MultiResourceLoader();
+			InputStream is = mrl.searchIs(this.getClass().getClassLoader(),resource);
 			properties = new Properties();
 			properties.load(is);
 		}

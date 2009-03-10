@@ -127,7 +127,8 @@ public class ImgCanvas extends Canvas
 	{
 		try
 		{
-			img = ImageResourceLoader.search(this.getClass().getClassLoader(), Dateiname, getDisplay());
+			ImageResourceLoader irl = new ImageResourceLoader();
+			img = irl.search(this.getClass().getClassLoader(), Dateiname, getDisplay());
 		}
 		catch (FileNotFoundException e){logger.warn(e);}
         berechneKoordinaten();
