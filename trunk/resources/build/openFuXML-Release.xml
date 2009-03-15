@@ -198,7 +198,7 @@
     	</taskdef> 
     	
     	
-    	<taskdef name="msi" classpath="${lib.dir}/utils/wix/msi-1.0.jar" classname="org.openfuxml.util.msi.AntTaskMsiXmlCreation"/>
+    	<taskdef name="msi" classpath="${bin.dir}" classname="org.openfuxml.util.msi.AntTaskMsiXmlCreation"/>
     	    	
     	<taskdef name="izpack" classpath="${lib.dir}/utils/izpack/izpack-4.2.1.jar" classname="com.izforge.izpack.ant.IzPackTask"/>
     	
