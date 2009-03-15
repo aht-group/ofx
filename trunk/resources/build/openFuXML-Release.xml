@@ -195,14 +195,11 @@
     	  <classpath>
     	    <fileset dir="${lib.dir}/${webdavsync.dir}" includes="${webdavsync.lib}"/>
     	  </classpath>
-    	</taskdef>
+    	</taskdef> 
     	
-    	<taskdef name="msixml" classname="org.openfuxml.util.msi.AntTaskMsiXmlCreation" >
-    		<classpath>
-    			<pathelement location="${bin.dir}"/>
-    		</classpath>
-    	</taskdef>
     	
+    	<taskdef name="msi" classpath="${lib.dir}/utils/wix/msi-1.0.jar" classname="org.openfuxml.util.msi.AntTaskMsiXmlCreation"/>
+    	    	
     	<taskdef name="izpack" classpath="${lib.dir}/utils/izpack/izpack-4.2.1.jar" classname="com.izforge.izpack.ant.IzPackTask"/>
     	
     </target>
@@ -526,37 +523,22 @@
 		<replace file="${dist.dir}/${simpleClient.name}/openFuXML-Client.sh" token="@@@ClientJarName@@@" value="${simpleClient.name}-linux"/>
 	</target>
 	
-	<target name="05d - simpleRelease MSI" depends="05 - simpleRelease">
-		<copy file="${rsrc.dir}/build/openFuXML-MSI-Release.xml" tofile="${pack.dir}/openFuXML-${openfuxml-version}.wsx"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@openfuxml-version@@@" value="${openfuxml-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@swt-version@@@" value="${swt-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@ant-version@@@" value="${ant-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@log4j-version@@@" value="${log4j-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@saxon-version@@@" value="${saxon-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jdom-version@@@" value="${jdom-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jboss-version@@@" value="${jboss-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jsch-version@@@" value="${jsch-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jmsutils-version@@@" value="${jmsutils-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jaxen-version@@@" value="${jaxen-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@xerces-version@@@" value="${xerces-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@mail-version@@@" value="${mail-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@jmdns-version@@@" value="${jmdns-version}"/>
-   		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@tex4ht-version@@@" value="${tex4ht-version}"/>
-		<replace file="${pack.dir}/openFuXML-${openfuxml-version}.wsx" token="@@@commonslang-version@@@" value="${commonslang-version}"/>
-		   
-   		<mkdir dir="${pack.dir}/wix"/>
-   		<unzip dest="${pack.dir}/wix" src="${lib.dir}/${wix.dir}/${wix.zip}"/>
-   		<exec executable="${pack.dir}/wix/candle.exe" dir="${pack.dir}">
-   			<arg value="openFuXML-${openfuxml-version}.wsx"/>
+	<target name="05d - simpleRelease MSI" depends="05 - simpleRelease,00 - TaskDef">
+		<mkdir dir="${build-app.dir}/wix"/>
+		<!-- Here the needed XML File is created -->
+		<msi rootDir="${pack.dir}" filename="openFuXML-${openfuxml-version}.wsx" version="1.2.1" outputDir="${pack.dir}/" />
+   		<unzip dest="${build-app.dir}/wix" src="${lib.dir}/${wix.dir}/${wix.zip}"/>
+   		<exec executable="${build-app.dir}/wix/candle.exe" dir="${pack.dir}">
+   			<arg value="${pack.dir}\openFuXML-${openfuxml-version}.wsx"/>
    		</exec>
-   		<exec executable="${pack.dir}/wix/light.exe" dir="${pack.dir}">
-   		   	<arg value="openFuXML-${openfuxml-version}.wixobj"/>
+   		<exec executable="${build-app.dir}/wix/light.exe" dir="${pack.dir}">
+   		   	<arg value="${pack.dir}\openFuXML-${openfuxml-version}.wixobj"/>
    		</exec>
    		<copy file="${pack.dir}/openFuXML-${openfuxml-version}.msi" tofile="${dist.dir}/openFuXML-${openfuxml-version}.msi"/>
    		<delete file="${pack.dir}/openFuXML-${openfuxml-version}.msi"/>
    		<delete dir="${pack.dir}/wix}"/>
-   		<delete file="${pack.dir}/openFuXML-${openfuxml-version}.wsx"/>
-   		<delete file="${pack.dir}/openFuXML-${openfuxml-version}.wixobj"/>
+   		<!--delete file="${pack.dir}/openFuXML-${openfuxml-version}.wsx"/>
+   		<delete file="${pack.dir}/openFuXML-${openfuxml-version}.wixobj"/-->
    		<zip destfile="${dist.dir}/${simple.release.system.zip}"  basedir="${build-app.dir}"/>
    		   		
 	    <tar destfile="${dist.dir}/${simple.release.system}"  basedir="${build-app.dir}"

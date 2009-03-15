@@ -20,13 +20,20 @@ public class AntTaskMsiXmlCreation extends Task {
 	public static String            output;
 	public static String            filename;
 	public static String            linebreak;
+	public static String            version;
+	
 	
 	public void setRootDir(String rootDir)
 	{
 		root = rootDir;
 	}
 	
-
+	public void setVersion(String Version)
+	{
+		version = Version;
+	}
+	
+	
 	public void setOutputDir(String outputDir)
 	{
 		output = outputDir;
@@ -44,17 +51,29 @@ public class AntTaskMsiXmlCreation extends Task {
 		if (containsFiles(directory))
 		{
 			empty = false;
-			sb.append("<component id='" + directory.getName() + "' DiskId='1' Guid='" +UUID.randomUUID().toString() +"'/>" + linebreak);
+		//	sb.append("<component id='" + directory.getName() + "' DiskId='1' Guid='" +UUID.randomUUID().toString() +"'/>" + linebreak);
+			sb.append("<Component Id='id" + id_counter + "' DiskId='1' Guid='" +UUID.randomUUID().toString() +"'>" + linebreak);
+			components.add("" +id_counter);
+			id_counter++;
 		}
 		for (int i=0;i<contents.length;i++)
 		{
 			if (contents[i].isFile())
 			{
-				sb.append("<file id='" +id_counter +"' LongName='"+contents[i].getName() +"' Name='" +id_counter +"' source='" +contents[i].getName() +"'/>" + linebreak);
+				if (contents[i].getName().equals("openFuXML.vbs"))
+				{
+					sb.append("<File Id='id" +id_counter +"' LongName='"+contents[i].getName() +"' Name='" +id_counter +"' Source='" +contents[i].getAbsolutePath() +"'>" + linebreak);
+					sb.append("<Shortcut Id='openfuxmlSHORTCUT' Directory='ProgramMenuDir' WorkingDirectory='id0' Name='init' LongName='openFuXML " +version +"' Icon='openfuxml.ico' IconIndex='0' />"+ linebreak);
+					sb.append("</File>"+ linebreak);
+				}
+				else
+				{
+					sb.append("<File Id='id" +id_counter +"' LongName='"+contents[i].getName() +"' Name='" +id_counter +"' Source='" +contents[i].getAbsolutePath() +"'/>" + linebreak);
+				}
 				id_counter++;
 			}
 		}
-		if (!empty) {sb.append("</component>" + linebreak);}
+		if (!empty) {sb.append("</Component>" + linebreak);}
 		for (int i=0;i<contents.length;i++)
 		{
 			if (contents[i].isDirectory())
@@ -82,10 +101,11 @@ public class AntTaskMsiXmlCreation extends Task {
 	
 	public static void addDirectory(File directory)
 	{
-		sb.append("<directory name=" +directory.getName() +">" + linebreak);
-		components.add(directory.getName());
+		sb.append("<Directory Id='id" +id_counter +"' Name='" +id_counter +"' LongName='" +directory.getName() +"'>" + linebreak);
+	//	components.add(directory.getName());
+		id_counter++;
 		addFiles(directory);
-		sb.append("</directory>" + linebreak);
+		sb.append("</Directory>" + linebreak);
 	}
 	
 	public static void writeHeader()
@@ -96,15 +116,23 @@ public class AntTaskMsiXmlCreation extends Task {
 		sb.append("    <Package Id='34BD222D-7C1A-4660-873D-07185FD40E88' Description='Redaktionssystem für professionelle Dokumente in Forschung und Lehre' Comments='Install Package for openFuXML on Windows Machines' InstallerVersion='200' Compressed='yes' />" + linebreak);
 		sb.append("         <Media Id='1' Cabinet='simple.cab' EmbedCab='yes' />" + linebreak);
 		sb.append("         <Directory Id='TARGETDIR' Name='SourceDir'>" + linebreak);
-		sb.append("         <Directory Id='ProgramFilesFolder' Name='PFiles'>" + linebreak);
+		sb.append("              <Directory Id='ProgramFilesFolder' Name='PFiles'>" + linebreak);
+		sb.append("                   <Directory Id='OpenFuXML' Name='FuXMLdir' LongName='openFuXML'>" + linebreak);
 	}
 	
 	public static void writeFooter()
 	{
+		sb.append("</Directory>" + linebreak);
+		sb.append("</Directory>" + linebreak);
+		sb.append("<Directory Id='ProgramMenuFolder' Name='PMenu' LongName='Programs'>");
+		sb.append("   <Directory Id='ProgramMenuDir' Name='fuxml' LongName='openFuXML " +version +"'>");
+		sb.append("</Directory>");
+		sb.append("</Directory>" + linebreak);
+		sb.append("</Directory>" + linebreak);
 		sb.append("<Feature Id='TestProductFeature' Title='Test' Level='1'>" + linebreak);
 		for (int i=0;i<components.size();i++)
 		{
-			sb.append("<ComponentRef Id='" +components.get(i) +"' />" + linebreak);
+			sb.append("<ComponentRef Id='id" +components.get(i) +"' />" + linebreak);
 		}  
 		sb.append("</Feature>" + linebreak);
 		sb.append("<Icon Id='openfuxml.ico' SourceFile='openfuxml.ico' />" + linebreak);
@@ -128,6 +156,7 @@ public class AntTaskMsiXmlCreation extends Task {
 			BufferedWriter textstream =new BufferedWriter(datei);
 			textstream.write(sb.toString());
 			textstream.flush();
+			datei.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
