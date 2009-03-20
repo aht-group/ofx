@@ -119,6 +119,7 @@ public class WsOpenFuXML
 		WsOpenFuXML openFuXML = new WsOpenFuXML();
 		openFuXML.loadProperties();
 		openFuXML.checkExtract();
+		openFuXML.loadProperties();
 		logger.debug("Test");
 		openFuXML.initGui();
 	}
