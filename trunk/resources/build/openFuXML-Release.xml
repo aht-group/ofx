@@ -63,6 +63,7 @@
 		<property name="log4j.lib" value="log4j-${log4j-version}.jar" />
 		<property name="log4j-zeroconf.lib" value="log4j-zeroconf-${log4j-version}.jar" />
 	<property name="jmsutils.dir" value="utils/jms"/><property name="jmsutils.lib" value="jmsutils-${jmsutils-version}.jar" />
+	<property name="jaf.dir" value="utils/jaf"/><property name="jaf.lib" value="activation-${jaf-version}.jar" />
 	<property name="ant.dir" value="utils/ant/${ant-version}"/>
 		<property name="ant.lib" value="ant-${ant-version}.jar" />
 		<property name="antlauncher.lib" value="ant-launcher-${ant-version}.jar" />
@@ -110,13 +111,14 @@
 	<property name="jar.commons" value="${commonslang.lib} ${commonsio.lib} ${commonsconfig.lib} ${commonscollections.lib} ${commonsjxpath.lib} " />
 	<property name="jar.msg" value="${mail.lib} ${jsch.lib} ${jmdns.lib}"/>
 	<property name="jar.ant" value="${ant.lib} ${antlauncher.lib}"/>
-	<property name="jar.util" value="${jar.ant} ${htmlcleaner.lib} ${jmsutils.lib}"/>
+	<property name="jar.util" value="${jar.ant} ${htmlcleaner.lib} ${jmsutils.lib} ${jaf.lib}"/>
 	<property name="jar.lib" value="${jar.log} ${jar.xml} ${jar.net} ${jar.jboss5} ${jar.msg} ${jar.util} ${jar.commons}"/>
 	
 	<!-- Classpath wird gesetzt -->	
 	<path id="classpath">
 	<!-- Utils  -->
 		<pathelement location="${lib.dir}/${log4j.dir}/${log4j.lib}"/>
+		<pathelement location="${lib.dir}/${jaf.dir}/${jaf.lib}"/>
 		<pathelement location="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}"/>
 		<pathelement location="${lib.dir}/${commonslang.dir}/${commonslang.lib}"/>
 		<pathelement location="${lib.dir}/${commonsconfig.dir}/${commonsconfig.lib}"/>
@@ -152,6 +154,7 @@
 		<echo level="info">           ${webdavsync.dir}/${webdavsync.lib}</echo>
 		<echo level="info">   Utils : ${log4j.dir}/${log4j.lib}</echo>
 		<echo level="info">           ${log4j.dir}/${log4j-zeroconf.lib}</echo>
+		<echo level="info">           ${jaf.dir}/${jaf.lib}</echo>
 		<echo level="info">           ${jmsutils.dir}/${jmsutils.lib}</echo>
 		<echo level="info">           ${ant.dir}/${ant.lib}</echo>
 		<echo level="info">           ${commonslang.dir}/${commonslang.lib}</echo>
@@ -321,6 +324,7 @@
     		<copy file="${lib.dir}/${log4j.dir}/${log4j.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${log4j.dir}/${log4j-zeroconf.lib}" todir="${pack-lib.dir}"/>
     		<copy file="${lib.dir}/${jmdns.dir}/${jmdns.lib}" todir="${pack-lib.dir}"/>
+    		<copy file="${lib.dir}/${jaf.dir}/${jaf.lib}" todir="${pack-lib.dir}"/>
 			<copy file="${lib.dir}/${commonslang.dir}/${commonslang.lib}" todir="${pack-lib.dir}"/>
 			<copy file="${lib.dir}/${commonsconfig.dir}/${commonsconfig.lib}" todir="${pack-lib.dir}"/>
 			<copy file="${lib.dir}/${commonscollections.dir}/${commonscollections.lib}" todir="${pack-lib.dir}"/>
@@ -347,10 +351,6 @@
     	<copy file="${lib.dir}/${jsch.dir}/${jsch.lib}" todir="${pack-lib.dir}"/>
     	<copy file="${lib.dir}/${mail.dir}/${mail.lib}" todir="${pack-lib.dir}"/>
     	
-    	<echo level="warn">Ant-Bundle Removed. Check this!</echo>
-    	<!-- <untar src="${lib.dir}/${ant.dir}/${ant.bundle}" dest="${pack-lib.dir}" compression="gzip"/>
-    		<delete dir="${pack.dir}/lib/apache-ant-${ant-version}/docs"/> -->
-    	<echo level="info">Copy selected Ant-Files!</echo>
     	<copy file="${lib.dir}/${ant.dir}/antRun" todir="${pack-lib.dir}/bin"/>
     	<copy file="${lib.dir}/${ant.dir}/antRun.bat" todir="${pack-lib.dir}/bin"/>
     	
@@ -635,7 +635,17 @@
 			<tar destfile="${dist.dir}/${simple.release}"  basedir="${dist.dir}/deb" compression="gzip" longfile="gnu"/>
 	</target>
 	
-	<target name="05e WebStart" depends="02 - init,04b - Structure and Libs">
+	<target name="05e WebStart" depends="02 - init,04b - Structure and Libs,03 - compile">
+		<jar destfile="${pack.dir}/lib/openFuXML-${openfuxml-version}.jar">
+			<fileset dir="${build-bin.dir}/"/>
+			<manifest>
+				<attribute name="Main-Class" value="org.openfuxml.server.simple.SimpleServer"/>
+				<attribute name="Class-Path" value=".. ${jar.lib}"/>
+				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="Implementation-Version" value="${openfuxml-version}"/>
+			</manifest>        	
+		</jar>
+		
 		<echo level="info">Sign all jar libraries</echo>
 		<signjar keystore="${keystore.file}"  alias="${keystore.alias}" storepass="${keystore.password}" lazy="true">
 			<path><fileset dir="${pack.dir}/lib" includes="**/*.jar"/></path>
@@ -655,6 +665,12 @@
 			<zipfileset dir=".">
 				<include name="log4j.xml"/>
 			</zipfileset>
+			<zipfileset dir=".">
+				<include name="log4j.xml"/>
+			</zipfileset>
+			<zipfileset dir=".">
+				<include name="resources/config/client-images.xml"/>
+			</zipfileset>
 		</zip>
 		
 		<jar destfile="${pack.dir}/openFuXML-${openfuxml-version}.jar">
@@ -664,7 +680,7 @@
 				<include name="images/**/*.png"/>
 			</fileset>
 			<fileset dir=".">
-				<include name="resources/properties/ant.properties.dist"/>
+				<include name="resources/properties/ant.properties"/>
 				<include name="log4j.xml"/>
 			</fileset>
 			<fileset dir="${dist.dir}/..">
@@ -677,6 +693,7 @@
 				<attribute name="Main-Class" value="org.openfuxml.server.simple.SimpleServer"/>
 				<attribute name="Class-Path" value=".. ${jar.lib}"/>
 				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="Implementation-Version" value="${openfuxml-version}"/>
 			</manifest>        	
 		</jar>
 		<signjar jar="${pack.dir}/openFuXML-${openfuxml-version}.jar" keystore="${keystore.file}" alias="${keystore.alias}" storepass="${keystore.password}"/>
@@ -690,10 +707,13 @@
 			</fileset>
 		</copy>
 		
+		<property name="webstart.jnlp" value="OpenFuXML.jnlp"/>
+		
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@vendor@@@" value="${vendor.name}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@openfuxml@@@" value="${openfuxml-version}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@webstart.url@@@" value="${webstart.url}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@webstart.port@@@" value="${webstart.port}"/>
+		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@webstart.path@@@" value="${webstart.path}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@jboss@@@" value="${jboss-version}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@log4j@@@" value="${log4j.lib}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@commonslang@@@" value="${commonslang.lib}"/>
@@ -708,7 +728,13 @@
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@swt-linux@@@" value="${swt-linux.lib}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@swt-osx@@@" value="${swt-osx.lib}"/>
 		<replace file="${pack.dir}/tmp/OpenFuXML.jnlp" token="@@@ant@@@" value="${ant-version}"/>
-		
+		<replace file="${pack.dir}/tmp/${webstart.jnlp}" token="@@@jaxb-api@@@" value="${jaxbapi.lib}"/>
+		<replace file="${pack.dir}/tmp/${webstart.jnlp}" token="@@@jaxb-impl@@@" value="${jaxbimpl.lib}"/>
+		<replace file="${pack.dir}/tmp/${webstart.jnlp}" token="@@@commons-config@@@" value="${commonsconfig.lib}"/>
+		<replace file="${pack.dir}/tmp/${webstart.jnlp}" token="@@@commons-jxpath@@@" value="${commonsjxpath.lib}"/>
+		<replace file="${pack.dir}/tmp/${webstart.jnlp}" token="@@@commons-collections@@@" value="${commonscollections.lib}"/>
+		<replace file="${pack.dir}/tmp/${webstart.jnlp}" token="@@@jaf@@@" value="${jaf.lib}"/>
+				
 		<war destfile="${dist.dir}/OpenFuXML.war" webxml="${rsrc.dir}/build/webstart/web.xml" compress="true">
 			<fileset dir="${pack.dir}/tmp">
 				<include name="**/*.html"/>
