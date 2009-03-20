@@ -28,8 +28,8 @@ public class ClientConfFactory extends AbstractConfFactory
 	public Configuration getConfiguration()
 	{
 		ConfigLoader.add(openFuxmlBaseDir+fs+mainConf);
-		ConfigLoader.add("resources"+fs+"config"+fs+"client-images.xml");
-		ConfigLoader.add("resources"+fs+"config"+fs+"client-highlight.xml");
+		ConfigLoader.add(openFuxmlBaseDir+fs+"resources"+fs+"config"+fs+"client-images.xml");
+		ConfigLoader.add(openFuxmlBaseDir+fs+"resources"+fs+"config"+fs+"client-highlight.xml");
 		Configuration config = ConfigLoader.init();
 		return config;
 	}
