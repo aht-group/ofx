@@ -130,7 +130,6 @@ public class DirectProducer extends AbstractProducer implements Producer
 	private void invoke(Sessionpreferences spref, Typ invokeType) throws ProductionSystemException
 	{
 		logger.debug("Invoke aufgerufen mit "+invokeType);
-		ProducedEntities producedEntities = new ProducedEntities();
 		
 		Calendar startTime = Calendar.getInstance();
 		ProductionCode pc=ProductionCode.Ok;
@@ -144,11 +143,9 @@ public class DirectProducer extends AbstractProducer implements Producer
 			sb.append(fs+spref.getUsername()+"-"+spref.getProject()+"-"+"request.xml");
 			
 		File fRequest = new File(sb.toString());
-		
 		OfxRequestFactory orf = new OfxRequestFactory();
 		orf.write(spref, fRequest);
 		
-		//Constructing parameters for spawned Java process
 		StringBuffer sbParameters = new StringBuffer();
 		
 		boolean writeLogFile = false;
@@ -192,137 +189,17 @@ public class DirectProducer extends AbstractProducer implements Producer
 
 //		Unter Windows müssen die Backslashes ersetzt werden
 		pc=spawn(sbCmd.toString().replace('\\','/'));
-		
-		// Get stop time of production process
-		Calendar endTime = Calendar.getInstance();
-					
-//		Create result message
-		
-		int suffixindex = spref.getDocument().indexOf(".xml");
-		String docName = spref.getDocument().substring(0,suffixindex);
-		
-		String proDir = spref.getProject()+fs +spref.getFormat()+fs
-			//TODO Methode überprüfen
-		//	+	request.getProductionDir()
-			+	docName;
-		
-		String path =null;
-		switch(invokeType)
-		{
-			case PRODUCE: 	path = dirOutput+fs+spref.getApplication()+ fs + proDir + fs + "result.xml";break;
-			case ENTITIES:	path = dirOutput+fs+spref.getApplication()+ fs + proDir + fs + "producableEntities.xml";break;
-		}
-			
-//		FuXmlLogger.productionLog( "ProducibleEntities()", request.getApplication(),  request.getProject(), request.getDocument(), request.getFormat(), request.getUsername(), startTime, endTime, pc);
-		logger.info("Invoke "+spref.getProject()+"-"+spref.getDocument()+": "+pc);
 	}
 	
 	public ProducedEntities invoke(org.openfuxml.producer.ejb.ProductionRequest request) throws ProductionSystemException
 	{
-		org.openfuxml.producer.ejb.ProductionRequest.Typ invokeType = request.getTyp();
-		logger.debug("Invoke aufgerufen mit "+invokeType);
-		ProducedEntities producedEntities = new ProducedEntities();
-		producedEntities.setTyp(invokeType);
-		
-		Calendar startTime = Calendar.getInstance();
-		ProductionCode pc=ProductionCode.Ok;
-		
-		String buildfile = sysprops.getProperty("ilona.home") + fs + "applications" + fs 
-				+ request.getApplication() + fs + "formats" + fs
-				+ request.getFormat() + fs + "build.xml";
-		
-		StringBuffer sb = new StringBuffer();
-			sb.append(dirOutput);
-			sb.append(fs+request.getApplication());
-			sb.append(fs+"sessionpreferences");
-			sb.append(fs+request.getUsername()+"-"+request.getProject()+"-"+"request.xml");
-			
-		File fRequest = new File(sb.toString());
-		XmlObject xmlRequest = new XmlObject(request.toXmlDoc());
-		if(!xmlRequest.save(fRequest))
-		{
-			//TODO Fehlercode hinzufügen
-			logger.error("Error writing request: " + fRequest.getAbsolutePath());
-			logger.debug("\tdirOutput="+dirOutput);
-			logger.debug("\tapplication="+request.getApplication());
-			return producedEntities;
-		}
-		//Constructing parameters for spawned Java process
-		StringBuffer sbParameters = new StringBuffer();
-		
-		boolean writeLogFile = false;
-		if(writeLogFile)
-		{
-			switch (invokeType)
-			{
-				case PRODUCE: 	String logfile= sysprops.getProperty("logger.path") + fs + request.getProject() + "_" + request.getDocument() + ".log";
-								sbParameters.append(" -logfile " + logfile);
-								break;
-			}
-		}
-		sbParameters.append(" -Dilona.home="+ sysprops.getProperty("ilona.home"));
-		sbParameters.append(" -Dilona.contentstore="+ sysprops.getProperty("ilona.contentstore")+File.separator+request.getApplication());
-		sbParameters.append(" -Dilona.output="+dirOutput+File.separator+request.getApplication());
-		sbParameters.append(" -Dapplication="+ request.getApplication());
-		sbParameters.append(" -Dcoursename="+ request.getProject());
-		sbParameters.append(" -Dmasterfile="+ request.getDocument());
-			//TODO Thorsten productionDir Methode erstmal nicht berücksichtigt
-			//+ " -Ddocumentdir="	+ request.getProductionDir()
-		sbParameters.append(" -Ddocumentdir= ");
-		sbParameters.append(" -Dformat="+ request.getFormat());
-		sbParameters.append(" -Dusername="+ request.getUsername());
-				
-		logger.debug("Parameters: " + sbParameters);
-		logger.debug("Buildfile:" +buildfile);
-		logger.debug("Ant Home:" + sysprops.getProperty("ant.home"));
-		
-		StringBuffer sbCmd = new StringBuffer(); 
-		sbCmd.append("java ");
-		sbCmd.append(" -Dant.home="+sysprops.getProperty("ant.home"));
-		sbCmd.append(" org.apache.tools.ant.Main ");
-		sbCmd.append("-buildfile "	+ buildfile);
-		sbCmd.append(" "+ sbParameters.toString()+ " ");
-		switch (invokeType)
-		{
-			case ENTITIES: 	sbCmd.append(" producableEntities ");break;
-		}
-		logger.debug("Spawn: "+sbCmd.toString());
-
-//		Unter Windows müssen die Backslashes ersetzt werden
-		pc=spawn(sbCmd.toString().replace('\\','/'));
-		
-		// Get stop time of production process
-		Calendar endTime = Calendar.getInstance();
-					
-//		Create result message
-		
-		
-		String proDir = 	request.getProject() + fs +	request.getFormat() + fs
-			//TODO Methode überprüfen
-		//	+	request.getProductionDir()
-			+	request.toDocumentName();
-		
-		String path =null;
-		switch(request.getTyp())
-		{
-			case PRODUCE: 	path = dirOutput+fs+request.getApplication()+ fs + proDir + fs + "result.xml";break;
-			case ENTITIES:	path = dirOutput+fs+request.getApplication()+ fs + proDir + fs + "producableEntities.xml";break;
-		}
-				
-		File xmlFile = new File(path);
-		logger.debug("lade XML: " +xmlFile.getAbsolutePath());
-		try {producedEntities.loadXML(xmlFile);}
-		catch (XmlElementNotFoundException e){throw  new ProductionSystemException(e.getMessage());}
-			
-//		FuXmlLogger.productionLog( "ProducibleEntities()", request.getApplication(),  request.getProject(), request.getDocument(), request.getFormat(), request.getUsername(), startTime, endTime, pc);
-		logger.info("Invoke "+request.getProject()+"-"+request.getDocument()+": "+pc);
-		
-		return producedEntities;
+		logger.warn("This is deprecated. Should never happen ...");
+		return null;
 	}
 	
 	private ProductionCode spawn(String cmd) throws ProductionSystemException
 	{
-		ProductionCode pc = ProductionCode.Ok;
+		ProductionCode pc;
 		
 		Spawn spawn = new Spawn(cmd);
 			spawn.setEnvParameter(envP);
