@@ -45,7 +45,7 @@ public class ConfFileFactory
 			files.getFile().add(file);
 		file = new File();
 			file.setType("lib");
-			file.setContent("openfuxml-ss-"+properties.getProperty("openfuxml-version")+".jar");
+			file.setContent("openfuxml-"+properties.getProperty("openfuxml-version")+".jar");
 			files.getFile().add(file);
 		file = new File();
 			file.setType("ofxlib");
