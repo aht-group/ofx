@@ -23,7 +23,7 @@ public class ConfFileFactory
 		try
 		{
 			MultiResourceLoader mrl = new MultiResourceLoader();
-			InputStream is = mrl.searchIs(this.getClass().getClassLoader(),resource);
+			InputStream is = mrl.searchIs(resource);
 			properties = new Properties();
 			properties.load(is);
 		}
