@@ -669,14 +669,13 @@
 			</zipfileset>
 			<zipfileset dir=".">
 				<include name="resources/config/client-images.xml"/>
+				<include name="resources/config/client-highlight.xml"/>
 			</zipfileset>
 		</zip>
 		
 		<jar destfile="${pack.dir}/openFuXML-${openfuxml-version}.jar">
-			<fileset dir="${rsrc.dir}/">
-				<include name="images/**/*.gif"/>
-				<include name="images/**/*.jpg"/>
-				<include name="images/**/*.png"/>
+			<fileset dir="${rsrc.dir}/..">
+				<include name="resources/images/**"/>
 			</fileset>
 			<fileset dir=".">
 				<include name="resources/properties/ant.properties"/>
@@ -710,6 +709,7 @@
 		
 		<replace file="${pack.dir}/tmp/${webstart.jnlp}" token="@@@vendor@@@" value="${vendor.name}"/>
 		<replace file="${pack.dir}/tmp/${webstart.jnlp}" token="@@@openfuxml@@@" value="${openfuxml-version}"/>
+		<echo level="info">${webstart.url}</echo>
 		<replace file="${pack.dir}/tmp/${webstart.jnlp}" token="@@@webstart.url@@@" value="${webstart.url}"/>
 		<replace file="${pack.dir}/tmp/${webstart.jnlp}" token="@@@webstart.port@@@" value="${webstart.port}"/>
 		<replace file="${pack.dir}/tmp/${webstart.jnlp}" token="@@@webstart.path@@@" value="${webstart.path}"/>

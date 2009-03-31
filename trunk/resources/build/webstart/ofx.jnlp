@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jnlp spec="1.0+" codebase="http://@@@webstart.url@@@:@@@webstart.port@@@/@@@webstart.path@@@" href="ofx.jnlp">
 	<information>
-		<title>OpenFuXML</title>
+		<title>openFuXML</title>
 		<vendor>@@@vendor@@@</vendor>
 		<homepage href="index.html"/>
 		<icon href="images/icon.gif"/>
 		<icon href="images/splash.gif" kind="splash"/>
-		<description>OpenFuXML description</description>
+		<description>openFuXML description</description>
 		<description kind="short">OpenFuXML description short</description>
 	</information>
 	<security>
@@ -42,5 +42,5 @@
 	 	<j2se version="1.5" java-vm-args="-XstartOnFirstThread"/>
  		<jar href="/@@@webstart.path@@@/lib/@@@swt-osx@@@"/>
  	</resources>
-	<application-desc main-class="org.openfuxml.client.gui.simple.WsOpenFuXML"/>
+	<application-desc main-class="org.openfuxml.client.gui.WsOpenFuXML"/>
 </jnlp>

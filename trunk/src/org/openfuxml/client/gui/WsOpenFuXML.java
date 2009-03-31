@@ -1,4 +1,4 @@
-package org.openfuxml.client.gui.simple;
+package org.openfuxml.client.gui;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,15 +7,20 @@ import java.io.InputStream;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.openfuxml.client.gui.simple.Client;
+import org.openfuxml.client.gui.simple.dialog.HelpAboutDialog;
+import org.openfuxml.client.gui.swt.OpenFuxmlClient;
 import org.openfuxml.util.config.factory.ClientConfFactory;
 
 import de.kisner.util.LoggerInit;
 import de.kisner.util.io.ObjectIO;
+import de.kisner.util.io.resourceloader.ImageResourceLoader;
 import de.kisner.util.io.resourceloader.MultiResourceLoader;
 
 public class WsOpenFuXML
@@ -59,7 +64,7 @@ public class WsOpenFuXML
 		{
 			ClassLoader cl = this.getClass().getClassLoader();
 			MultiResourceLoader mrl = new MultiResourceLoader();
-			InputStream is = mrl.searchIs(cl, zipDir+"/"+zipFileName);
+			InputStream is = mrl.searchIs(zipDir+"/"+zipFileName);
 			if(is!=null)
 			{
 				logger.debug(is.getClass().getSimpleName()+" available: "+is.available());
@@ -74,7 +79,7 @@ public class WsOpenFuXML
 		catch (IOException e){logger.error(e);}
 	}
 	
-	public void initGui()
+	public void initSimpleGui()
 	{		
 		Display disp = Display.getDefault();
 		Shell sh = new Shell(disp);
@@ -110,6 +115,41 @@ public class WsOpenFuXML
 		System.exit(0);
 	}
 	
+	public void initSwtGui()
+	{
+		Display disp = Display.getDefault();
+		Shell sh = new Shell(disp);
+		
+		ImageResourceLoader irl = new ImageResourceLoader();
+		HelpAboutDialog splashscreen = new HelpAboutDialog(sh, HelpAboutDialog.SPLASH_SCREEN,config,irl);
+		splashscreen.open();
+		try{Thread.sleep(3000);} catch (InterruptedException e){logger.error("InterruptedException", e);}
+		splashscreen.close();
+		splashscreen = null;
+		
+		OpenFuxmlClient client = new OpenFuxmlClient(sh, SWT.NULL, config);
+		
+		sh.setLayout(new FillLayout());
+		sh.layout();
+		
+		sh.setBounds(10, 30, 300, 900);
+		sh.pack();
+		
+		sh.setText(OpenFuxmlClient.Title);
+		
+		String resIconFux = config.getString("icons/@dir")+fs+config.getString("icons/icon[@type='fux']");
+		String resIconFuxKlein = config.getString("icons/@dir")+fs+config.getString("icons/icon[@type='fuxklein']");
+		final String strImages[] = {resIconFuxKlein, resIconFux};
+		sh.setImages(client.makeImages(strImages));
+
+		sh.open();
+		
+		while (!sh.isDisposed()) {
+			if (!disp.readAndDispatch())
+				disp.sleep();
+		}
+	}
+	
 	public static void main(String[] args)
 	{		
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
@@ -120,7 +160,6 @@ public class WsOpenFuXML
 		openFuXML.loadProperties();
 		openFuXML.checkExtract();
 		openFuXML.loadProperties();
-		logger.debug("Test");
-		openFuXML.initGui();
+		openFuXML.initSwtGui();
 	}
 }
