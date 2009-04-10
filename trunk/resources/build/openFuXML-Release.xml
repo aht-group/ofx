@@ -674,6 +674,15 @@
 		</zip>
 		
 		<jar destfile="${pack.dir}/openFuXML-${openfuxml-version}.jar">
+			<fileset dir="${build-bin.dir}/"/>
+			<manifest>
+				<attribute name="Main-Class" value="org.openfuxml.server.simple.SimpleServer"/>
+				<attribute name="Class-Path" value=".. ${jar.lib}"/>
+				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="Implementation-Version" value="${openfuxml-version}"/>
+			</manifest>        	
+		</jar>
+		<jar destfile="${pack.dir}/lib/openFuXML-rsrc-${openfuxml-version}.jar">
 			<fileset dir="${rsrc.dir}/..">
 				<include name="resources/images/**"/>
 			</fileset>
@@ -685,16 +694,10 @@
 				<include name="dist/openFuXML-app.zip"/>
 				<include name="dist/openFuXML-lib.zip"/>
 				<include name="dist/openFuXML-rscr.zip"/>
-			</fileset>
-			<fileset dir="${build-bin.dir}/"/>
-			<manifest>
-				<attribute name="Main-Class" value="org.openfuxml.server.simple.SimpleServer"/>
-				<attribute name="Class-Path" value=".. ${jar.lib}"/>
-				<attribute name="Built-By" value="${user.name}"/>
-				<attribute name="Implementation-Version" value="${openfuxml-version}"/>
-			</manifest>        	
+			</fileset>     	
 		</jar>
 		<signjar jar="${pack.dir}/openFuXML-${openfuxml-version}.jar" keystore="${keystore.file}" alias="${keystore.alias}" storepass="${keystore.password}"/>
+		<signjar jar="${pack.dir}/lib/openFuXML-rsrc-${openfuxml-version}.jar" keystore="${keystore.file}" alias="${keystore.alias}" storepass="${keystore.password}"/>
 		
 		<copy todir="${pack.dir}/tmp">
 			<fileset dir="${rsrc.dir}/build/webstart" casesensitive="yes">

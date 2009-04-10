@@ -11,5 +11,8 @@
         <color swt="5" info="org.eclipse.swt.SWT.COLOR_GREEN">
             <key>BUILD SUCCESSFUL</key>
         </color>
+        <color swt="8" info="org.eclipse.swt.SWT.COLOR_DARK_YELLOW">
+            <key>org.xml.sax.SAXParseException: Content is not allowed in prolog</key>
+        </color>
     </highlight>
 </openfuxml>

@@ -1,5 +1,6 @@
 package org.openfuxml.util.config.factory;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.openfuxml.util.config.jaxb.Dirs;
@@ -10,9 +11,11 @@ public class ConfDirFactory
 	static Logger logger = Logger.getLogger(ClientConfFactory.class);
 	protected static String fs = SystemUtils.FILE_SEPARATOR;
 	
-	public ConfDirFactory()
+	private Configuration previousConfig;
+	
+	public ConfDirFactory(Configuration previousConfig)
 	{
-		
+		this.previousConfig=previousConfig;
 	}
 	
 	public Dirs getDirs(AbstractConfFactory.StartUpEnv startupenv, String baseDir, String openFuxmlVersion)
@@ -52,6 +55,14 @@ public class ConfDirFactory
 								dirLib.setContent("lib");break;
 		}
 			
+		if(previousConfig!=null)
+		{
+			dirOutput.setContent(previousConfig.getString("dirs/dir[@type='output']"));
+			dirOutput.setRel(previousConfig.getBoolean("dirs/dir[@type='output']/@rel"));
+			dirRepo.setContent(previousConfig.getString("dirs/dir[@type='repository']"));
+			dirRepo.setRel(previousConfig.getBoolean("dirs/dir[@type='repository']/@rel"));
+		}
+		
 		dirs.getDir().add(dirBase);	
 		dirs.getDir().add(dirLog);
 		dirs.getDir().add(dirOutput);
