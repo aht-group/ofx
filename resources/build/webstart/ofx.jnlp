@@ -15,6 +15,7 @@
 	<resources>
 		<jar href="/@@@webstart.path@@@/openFuXML-@@@openfuxml@@@.jar"/>
 		<jar href="/@@@webstart.path@@@/lib/openFuXML-@@@openfuxml@@@.jar"/>
+		<jar href="/@@@webstart.path@@@/lib/openFuXML-rsrc-@@@openfuxml@@@.jar"/>
 		<jar href="/@@@webstart.path@@@/lib/jbossall-client-@@@jboss@@@.jar"/>
 		<jar href="/@@@webstart.path@@@/lib/@@@log4j@@@"/>
 		<jar href="/@@@webstart.path@@@/lib/@@@commonslang@@@"/>

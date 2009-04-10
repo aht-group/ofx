@@ -7,6 +7,7 @@ import java.io.OutputStream;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
+import org.openfuxml.util.config.PreviousConfigFinder;
 import org.openfuxml.util.config.jaxb.Openfuxml;
 import org.openfuxml.util.config.jaxb.Openfuxml.Net;
 
@@ -27,6 +28,7 @@ public class ClientConfFactory extends AbstractConfFactory
 	
 	public Configuration getConfiguration()
 	{
+		ConfigLoader.clear();
 		ConfigLoader.add(openFuxmlBaseDir+fs+mainConf);
 		ConfigLoader.add(openFuxmlBaseDir+fs+"resources"+fs+"config"+fs+"client-images.xml");
 		ConfigLoader.add(openFuxmlBaseDir+fs+"resources"+fs+"config"+fs+"client-highlight.xml");
@@ -42,9 +44,12 @@ public class ClientConfFactory extends AbstractConfFactory
 		try
 		{
 			if(!fConf.exists())
-			{
+			{				
+				PreviousConfigFinder pcf = new PreviousConfigFinder(mainConf); 
+				Configuration previousConfig=pcf.find(openFuxmlBaseDir.getParentFile(),openFuxmlVersion);
+				
 				logger.info("No "+mainConf+" found. I will create a default one.");
-				createConfig();
+				createConfig(previousConfig);
 				FileOutputStream fos = new FileOutputStream(fConf);
 				writeConfig(fos);
 			}
@@ -60,9 +65,9 @@ public class ClientConfFactory extends AbstractConfFactory
 		return net;
 	}
 	
-	public void createConfig()
+	public void createConfig(Configuration previousConfig)
 	{
-		ConfDirFactory cdf = new ConfDirFactory();
+		ConfDirFactory cdf = new ConfDirFactory(previousConfig);
 		ConfFileFactory cff = new ConfFileFactory();
 		
 		openfuxml = new Openfuxml();
@@ -86,7 +91,7 @@ public class ClientConfFactory extends AbstractConfFactory
 			loggerInit.init();
 			
 		ClientConfFactory ccf = new ClientConfFactory();
-			ccf.createConfig();
+			ccf.createConfig(null);
 			ccf.writeConfig(System.out);
 	}
 }

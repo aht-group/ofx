@@ -62,7 +62,6 @@ public class WsOpenFuXML
 	{
 		try
 		{
-			ClassLoader cl = this.getClass().getClassLoader();
 			MultiResourceLoader mrl = new MultiResourceLoader();
 			InputStream is = mrl.searchIs(zipDir+"/"+zipFileName);
 			if(is!=null)
