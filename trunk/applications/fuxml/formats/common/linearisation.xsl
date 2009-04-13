@@ -28,9 +28,6 @@
 -->
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:saxon="http://saxon.sf.net/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 <xsl:include href="designinterface.xsl"/>
-<!--xsl:variable name="config" select="document('config.xml')"/>
-<xsl:variable name="styles" select="$config/config/styles"/>
-<xsl:param name="documentname">document</xsl:param-->
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="no"/>
 <!--xsl:strip-space elements="*"/--><!-- <fett>...</fett> <kursiv>...</kursiv> ... -->
 <!--xsl:include href="projectsettings.xsl"/-->
@@ -76,7 +73,6 @@
 	<xsl:variable name="screencutlevel">
 		<xsl:choose>
 			<xsl:when test="$config/config/screenconfig">
-				<xsl:comment>using screenconfig->page-cutlevel: <xsl:value-of select="$config/config/screenconfig/page-cutlevel"/></xsl:comment>
 				<xsl:value-of select="$config/config/screenconfig/page-cutlevel"/>
 			</xsl:when>
 			<xsl:otherwise>
@@ -84,20 +80,23 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
+	<xsl:variable name="elementcount">
+		<xsl:value-of select="count(preceding-sibling::abschnitt[1]/*[not(self::titel|self::abschnitt)])"/>
+	</xsl:variable>
 	<xsl:variable name="style" select="$config/config/styles/entry[@name='abschnitt'][@level=$level]"/>
 	<xsl:if test="not(key('ba_key', @id))">
 		<xsl:choose>
 			<xsl:when test="$level='1' and xs:integer($screencutlevel) gt 0">
 				<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE"><xsl:value-of select="$level"/></xsl:processing-instruction>
 			</xsl:when>
-			<xsl:when test="$level le $screencutlevel
-				and name(preceding-sibling::*[1])!='titel'
-				">
-				<xsl:if test="$config/config/screenpage-cutlevel/@min_element_quantity
-					and count(preceding-sibling::*[not(fett|unterstrichen|kursiv|zeilenende|url|hochgestellt|tiefgestellt)]) >= $config/config/screenpage-cutlevel/@min_element_quantity">
-					<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE">MEQ<xsl:value-of select="count(preceding-sibling::*[not(fett|unterstrichen|kursiv|zeilenende|url|hochgestellt|tiefgestellt)])"/></xsl:processing-instruction>
+			<xsl:when test="xs:integer($level) le xs:integer($screencutlevel) and name(preceding-sibling::*[1])!='titel'">
+				<xsl:if test="$config/config/screenconfig/page-cutlevel/@min_element_quantity
+					and xs:integer($elementcount) ge xs:integer($config/config/screenconfig/page-cutlevel/@min_element_quantity)">
+					<xsl:message>parentElementCount: <xsl:value-of select="$elementcount"/></xsl:message>
+					<xsl:message>Abschnitt (<xsl:value-of select="@id"/>) using min_element_quantity: <xsl:value-of select="$config/config/screenconfig/page-cutlevel/@min_element_quantity"/></xsl:message>
+					<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE">MEQ<xsl:value-of select="$elementcount"/></xsl:processing-instruction>
 				</xsl:if>
-				<xsl:if test="not($config/config/screenpage-cutlevel/@min_element_quantity)">
+				<xsl:if test="not($config/config/screenconfig/page-cutlevel/@min_element_quantity)">
 					<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE"><xsl:value-of select="$level"/></xsl:processing-instruction>
 				</xsl:if>
 			</xsl:when>
