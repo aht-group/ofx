@@ -21,18 +21,9 @@
 	| Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. |
 	*******************************************************************************	
 	  -->	
-	<xsl:param name="documentname">document</xsl:param>
+	<xsl:param name="documentname"/>
 	<xsl:param name="projectname"></xsl:param>
-	<!--xsl:param name="workdir">file:///I:/output/k20022/latexpdf/oop_kurs</xsl:param-->
-	<!--xsl:param name="workdir">file:///I:/output/k20026/latexpdf/pk_kurs</xsl:param-->
-	<!--xsl:param name="workdir">file:///I:/output/orecht_kurse/latexpdf/k05366</xsl:param-->
-	<!--xsl:param name="workdir">file:///I:/output/wi_kurse/latexpdf/k00813</xsl:param-->
-	<!--xsl:param name="workdir">file:///I:/output/ip_kurse/latexpdf/k34661</xsl:param-->
-	<!--xsl:param name="workdir">file:///I:/output/testprojekt_ks/latexpdf/bilder</xsl:param-->
-	<!--xsl:param name="workdir">file:///I:/output/zfepub/latexpdf/zfetest30</xsl:param-->
-	<xsl:param name="workdir">file:///I:/output/testprojekt_ks/latexpdf/zfetest</xsl:param>
-	<!--xsl:param name="workdir">file:///I:/output/testprojekt_ks/latexpdf/tabelletest</xsl:param-->
-	<!--xsl:param name="workdir">file:///I:/output/lgks_krypto/latexpdf/crypto2_kurs</xsl:param-->
+	<xsl:param name="workdir"/>
    	<xsl:variable name="config" select="document('config.xml')"/>
 	<xsl:variable name="styles" select="$config/config/styles"/>
 </xsl:stylesheet>
