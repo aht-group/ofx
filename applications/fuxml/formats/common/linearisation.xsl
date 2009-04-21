@@ -88,13 +88,17 @@
 		<xsl:choose>
 			<xsl:when test="$level='1' and xs:integer($screencutlevel) gt 0">
 				<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE"><xsl:value-of select="$level"/></xsl:processing-instruction>
+				<xsl:message>PI-NEUE-BILDSCHIRMSEITE set; first level capter (<xsl:value-of select="titel/@id"/>)</xsl:message>
 			</xsl:when>
 			<xsl:when test="xs:integer($level) le xs:integer($screencutlevel) and name(preceding-sibling::*[1])!='titel'">
 				<xsl:if test="$config/config/screenconfig/page-cutlevel/@min_element_quantity
 					and xs:integer($elementcount) ge xs:integer($config/config/screenconfig/page-cutlevel/@min_element_quantity)">
-					<xsl:message>parentElementCount: <xsl:value-of select="$elementcount"/></xsl:message>
-					<xsl:message>Abschnitt (<xsl:value-of select="@id"/>) using min_element_quantity: <xsl:value-of select="$config/config/screenconfig/page-cutlevel/@min_element_quantity"/></xsl:message>
-					<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE">MEQ<xsl:value-of select="$elementcount"/></xsl:processing-instruction>
+					<xsl:message>PI-NEUE-BILDSCHIRMSEITE set; Elementcount (<xsl:value-of select="$elementcount"/>) greater then @min_element_quantity(<xsl:value-of select="$config/config/screenconfig/page-cutlevel/@min_element_quantity"/>) on abschnitt (<xsl:value-of select="titel/@id"/>)</xsl:message>
+					<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE">MEQ<xsl:value-of select="$elementcount"/>ge<xsl:value-of select="$config/config/screenconfig/page-cutlevel/@min_element_quantity"/></xsl:processing-instruction>
+				</xsl:if>
+				<xsl:if test="$config/config/screenconfig/page-cutlevel/@min_element_quantity
+					and xs:integer($elementcount) lt xs:integer($config/config/screenconfig/page-cutlevel/@min_element_quantity)">
+					<xsl:message>parentElementCount (<xsl:value-of select="$elementcount"/>) is smaller then @min_element_quantity(<xsl:value-of select="$config/config/screenconfig/page-cutlevel/@min_element_quantity"/>) on abschnitt (<xsl:value-of select="titel/@id"/>)</xsl:message>
 				</xsl:if>
 				<xsl:if test="not($config/config/screenconfig/page-cutlevel/@min_element_quantity)">
 					<xsl:processing-instruction name="NEUE-BILDSCHIRMSEITE"><xsl:value-of select="$level"/></xsl:processing-instruction>
