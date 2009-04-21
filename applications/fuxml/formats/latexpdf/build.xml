@@ -94,7 +94,7 @@
 	</target>
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<target name="clean"><!-- if="do_clean": allways clean due to otherwise stalling of build process -->
+	<target name="clean" if="do_clean"> <!-- allways clean due to otherwise stalling of build process -->
 		<echo>Deleting old files</echo>
 		<delete dir="${latexpdf.dir}/${document.plain}"/>
 		<delete dir="${common.dir}/${document.plain}"/>
@@ -134,18 +134,6 @@
 			<srcfileset dir="${xsltemp.dir}/latexpdf" includes="*"/>
 			<targetfilelist dir="${latexpdf.dir}/${document.plain}" files="${document.plain}.tex.xml"/>
 		</dependset>
-		<!-- Removing empty lines in XML-file -->
-		<!--echo message="Removing empty lines in XML-file"/>
-		<apply executable="java" dest="${latexpdf.dir}/${document.plain}" parallel="false" failonerror="true">
-			<arg value="org.openfuxml.producer.preprocessors.MappingPreprocessor"/>
-			<srcfile/>
-			<targetfile/>
-			<arg value="${xsltemp.dir}/latexpdf/remove_lf.xml"/>
-			<arg value="${xsltemp.dir}/latexpdf/idtransform.xsl"/>
-			<fileset dir="${common.dir}/${document.plain}" includes="${document.plain}.assembled.lin.cu.num.xml"/>
-			<mapper type="glob" from="*.assembled.lin.cu.num.xml" to="*.lf.xml"/>
-		</apply-->
-		<!-- Character mapping for source document-->
 		<echo message="Mapping of Unicode Characters to Latex commands"/>
 		<apply executable="java" dest="${latexpdf.dir}/${document.plain}" parallel="false" failonerror="true">
 			<arg value="org.openfuxml.producer.preprocessors.MappingPreprocessor"/>
@@ -167,14 +155,6 @@
 			<arg value="${xsltemp.dir}/latexpdf/conversionlist.xml"/>
 			<arg value="${xsltemp.dir}/latexpdf/idtransform.xsl"/>
 		</exec>
-		<!-- 2. rest of conversion -->
-		<!--exec executable="java" dir="${xsltemp.dir}/common" failonerror="true">
-			<arg value="org.openfuxml.producer.preprocessors.MappingPreprocessor"/>
-			<arg value="${latexpdf.dir}/${document.plain}/config.c.xml"/>
-			<arg value="${latexpdf.dir}/${document.plain}/config.tex.xml"/>
-			<arg value="${xsltemp.dir}/latexpdf/conversionlist.xml"/>
-			<arg value="${xsltemp.dir}/latexpdf/idtransform.xsl"/>
-		</exec-->
 		<!-- Character mapping for bibtex documents -->
 		<apply executable="java" dest="${latexpdf.dir}/${document.plain}" parallel="false" failonerror="false">
 			<arg value="org.openfuxml.producer.preprocessors.MappingPreprocessor"/>
@@ -207,7 +187,6 @@
 			<arg value="${xsltemp.dir}/latexpdf/latex.xsl"/>
 			<arg value="documentname=${document.plain}"/>
 			<arg value="workdir=${latexpdf.dir}/${document.plain}"/>
-			<!--arg value="workdir=file://${latexpdf.dir}/${document.plain}"/-->
 		</exec>
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<!-- Creation of result document -->
@@ -392,21 +371,10 @@
 	</target>
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<target name="cvs">
-		<echo message="CVS"/>
-		<cvspass cvsroot=":pserver:steinkam@budweiser.fernuni-hagen.de:/software/cvsroot" password="stardust"/>
-		<!-- cvs cvsRoot=":pserver:steinkam@budweiser.fernuni-hagen.de:/software/cvsroot" package="dtd"
-      			dest="${ilona.home}/tmp"
-  	/-->
-		<cvs cvsRoot=":pserver:steinkam@budweiser.fernuni-hagen.de:/software/cvsroot" package="latexpdf" dest="${format.dir}"/>
-		<cvs cvsRoot=":pserver:steinkam@budweiser.fernuni-hagen.de:/software/cvsroot" package="html" dest="${format.dir}"/>
-	</target>
-		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<target name="epsautocreate">
 		<echo message="Automatic creation of missing EPS graphics"/>
 		<copy includeEmptyDirs="false" flatten="true" todir="${image.dir}">
 			<fileset dir="${src.dir}" includes="**/*.gif,**/*.jpg,**/*.bmp,**/*.png"/>
-			<!--fileset dir="${src.dir}/grafiken" includes="**/*.gif,**/*.jpg,**/*.bmp,**/*.png"/-->
 		</copy>
 		<touch>
 			<fileset dir="${image.dir}" includes="*.eps"/>
@@ -453,5 +421,4 @@
 		</apply>
 	</target>
 	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
 </project>
