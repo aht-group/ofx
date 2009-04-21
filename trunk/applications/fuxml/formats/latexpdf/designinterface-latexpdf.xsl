@@ -581,7 +581,10 @@
 	
 	<!-- pagestyle -->
 	<xsl:template match="lheadeven|lheadodd|cheadeven|cheadodd|lfooteven|lfootodd|cfooteven|cfootodd|rfooteven|rfootodd">
-		<xsl:apply-templates select="node()"></xsl:apply-templates>
+		<xsl:param name="contextnode" tunnel="yes"/>
+		<xsl:apply-templates select="node()">
+			<xsl:with-param name="contextnode" select="$contextnode" tunnel="yes"/>
+		</xsl:apply-templates>
 	 </xsl:template>
 
 	
@@ -745,7 +748,29 @@
 		
 	<xsl:template match="processing-instruction('pagenumbering')"><xsl:if test=".!=''">\pagenumbering{<xsl:value-of select="."/>}</xsl:if></xsl:template>
 		
-	<xsl:template match="processing-instruction('thispagestyle')"><xsl:if test=".!=''">\thispagestyle{<xsl:value-of select="."/>}</xsl:if></xsl:template>
+	<xsl:template match="processing-instruction('thispagestyle')">
+		<xsl:param name="contextnode" tunnel="yes"/>
+		<!-- umschaltbares pagelayout im latex /SGE 14.03.2009 -->
+		<xsl:if test=".!=''">
+			<xsl:variable name="id"><xsl:value-of select="."/></xsl:variable>
+			<xsl:choose>
+				<xsl:when test="$id='fancy'">
+					\thispagestyle{fancy}
+				</xsl:when>
+				<xsl:when test="$id='emty'">
+					\thispagestyle{emty}		
+				</xsl:when>
+				<xsl:when test="$id='mlea'">
+					\thispagestyle{mlea}		
+				</xsl:when>
+				<xsl:otherwise>
+			 		<xsl:apply-templates select="$config/config/pagelayout/pagestyle[@id=$id]" mode="thispagestyle">
+			 			<xsl:with-param name="contextnode" select="current()" tunnel="yes"/>
+			    	</xsl:apply-templates>			
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
+	</xsl:template>
 
 	<xsl:template match="processing-instruction('nopagebreak')">\nopagebreak{}</xsl:template>
 	

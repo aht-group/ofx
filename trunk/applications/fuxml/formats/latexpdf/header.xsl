@@ -239,8 +239,15 @@
 	<xsl:call-template name="pagestylesettings"/>
 	}
 </xsl:template>
+<xsl:template match="pagestyle[@id]" mode="thispagestyle">
+<xsl:param name="contextnode" tunnel="yes"/>
+    <xsl:call-template name="pagestylesettings">
+        <xsl:with-param name="contextnode" select="$contextnode"/>
+    </xsl:call-template>
+</xsl:template>
 
 <xsl:template name="pagestylesettings">
+<xsl:param name="contextnode"/>
 \lhead[<xsl:apply-templates select="lheadeven"/>]{<xsl:apply-templates select="lheadodd"/>}
 \chead[<xsl:apply-templates select="cheadeven"/>]{<xsl:apply-templates select="cheadodd"/>}
 \rhead[<xsl:apply-templates select="rheadeven"/>]{<xsl:apply-templates select="rheadodd"/>}
