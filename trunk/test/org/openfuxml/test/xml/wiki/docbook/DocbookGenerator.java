@@ -1,4 +1,4 @@
-package test.xml.wiki.docbook;
+package org.openfuxml.test.xml.wiki.docbook;
 
 import java.io.IOException;
 import java.io.StringReader;

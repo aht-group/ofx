@@ -1,4 +1,4 @@
-package test.xml.wiki;
+package org.openfuxml.test.xml.wiki;
 
 import info.bliki.wiki.model.WikiModel;
 
@@ -13,6 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.log4j.Logger;
+import org.openfuxml.test.xml.wiki.docbook.DocbookGenerator;
 import org.openfuxml.wiki.OpenFuxmlGenerator;
 import org.openfuxml.wiki.WikiTemplates;
 import org.openfuxml.wiki.WikiTextFetcher;
@@ -21,7 +22,6 @@ import org.openfuxml.wiki.processing.WikiProcessor;
 import org.openfuxml.wiki.processing.XhtmlProcessor;
 import org.xml.sax.SAXException;
 
-import test.xml.wiki.docbook.DocbookGenerator;
 import de.kisner.util.LoggerInit;
 
 public class TestWiki
