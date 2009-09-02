@@ -265,7 +265,7 @@
 	</target> -->
 	
 	<target name="04a - Library WebDAV Sync">
-	    <echo level="info">Sync of Libraries</echo>
+	    <echo level="info">Sync of Libraries. Direction=${webdavsync.direction}</echo>
 		<!-- <webdavsync directory="${lib.dir}"
 					url="${webdavsync.url}"
 					direction="${webdavsync.direction}">
