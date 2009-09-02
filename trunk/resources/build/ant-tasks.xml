@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<project basedir="../../">
+
+	<property file="resources/properties/ant.properties"/>
+
+	<property name="lib.dir" location="${basedir}/libs" />
+	<import file="ant-libs.xml"/>
+	
+    <target name="1 - Tasks" description="Task definition">
+    	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+    	  <classpath>
+    	    <fileset dir="${lib.dir}/${jaxb.dir}" includes="*.jar"/>
+    	  </classpath>
+    	</taskdef>
+    </target>
+	
+</project>

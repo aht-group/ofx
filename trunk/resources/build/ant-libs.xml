@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<project basedir="../..">
+
+	<property file="resources/properties/ant.properties"/>
+	<property name="lib.dir" location="${basedir}/lib" />
+	
+	<!-- Library Definitions: Utils -->
+	<property name="log4j.dir" value="utils/log4j"/><property name="log4j.lib" value="log4j-${log4j-version}.jar" />
+	<property name="commonslang.dir" value="utils/commons/lang"/><property name="commonslang.lib" value="commons-lang-${commonslang-version}.jar" />
+	<property name="jmsutils.dir" value="utils/jmsutils"/><property name="jmsutils.lib" value="jmsutils-${jmsutils-version}.jar" />
+		
+	<!-- Library Definitions: XML -->
+	<property name="jdom.dir" value="xml/jdom"/><property name="jdom.lib" value="jdom-${jdom-version}.jar"/>
+	<property name="jaxb.dir" value="xml/jaxb/${jaxb-version}"/>
+			<property name="jaxbapi.lib" value="jaxb-api-${jaxb-version}.jar"/>
+			<property name="jaxbimpl.lib" value="jaxb-impl-${jaxb-version}.jar"/>
+	
+	<!-- Library Definitions: HTTP -->
+	<property name="jsf.dir" value="net/http/jsf/${jsf-version}"/>
+				<property name="jsf-api.lib" value="jsf-api-${jsf-version}.jar"/>
+				<property name="jsf-impl.lib" value="jsf-impl-${jsf-version}.jar"/>
+	<property name="servlet.dir" value="net/http/servlet"/><property name="servlet.lib" value="servlet-api-${servlet-version}.jar"/>
+	<property name="jsp.dir" value="net/http/jsp"/><property name="jsp-api.lib" value="jsp-api-${jsp-version}.jar"/>
+	<property name="jstl.dir" value="net/http/jstl"/><property name="jstl.lib" value="jstl-${jstl-version}.jar" />
+	
+	<target name="00 - Classpath" description="Echos Classpath">
+		<echo level="info">Using ${ant.version} in ${ant.home}</echo>
+		<echo level="info">Lib-Info for ofx v.${openfuml-version}</echo>
+		<echo level="info">   Utils : ${log4j.dir}/${log4j.lib}</echo>
+		<echo level="info">           ${commonslang.dir}/${commonslang.lib}</echo>
+		<echo level="info">           ${jmsutils.dir}/${jmsutils.lib}</echo>
+		<echo level="info">   XML   : ${jaxb.dir}/${jaxbapi.lib}</echo>
+		<echo level="info">           ${jaxb.dir}/${jaxbimpl.lib}</echo>
+		<echo level="info">           ${jdom.dir}/${jdom.lib}</echo>
+		<echo level="info">   HTML  : ${servlet.dir}/${servlet.lib}</echo>
+		<echo level="info">           ${jsp.dir}/${jsp-api.lib}</echo>
+		<echo level="info">           ${jstl.dir}/${jstl.lib}</echo>
+		<echo level="info">           ${jsf.dir}/${jsf-api.lib}</echo>
+		<echo level="info">           ${jsf.dir}/${jsf-impl.lib}</echo>
+    </target>
+	
+</project>
