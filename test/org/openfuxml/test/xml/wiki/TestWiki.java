@@ -2,11 +2,7 @@ package org.openfuxml.test.xml.wiki;
 
 import info.bliki.wiki.model.WikiModel;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -20,6 +16,7 @@ import org.openfuxml.wiki.WikiTextFetcher;
 import org.openfuxml.wiki.model.WikiDefaultModel;
 import org.openfuxml.wiki.processing.WikiProcessor;
 import org.openfuxml.wiki.processing.XhtmlProcessor;
+import org.openfuxml.wiki.util.WikiContentIO;
 import org.xml.sax.SAXException;
 
 import de.kisner.util.LoggerInit;
@@ -27,6 +24,7 @@ import de.kisner.util.LoggerInit;
 public class TestWiki
 {
 	static Logger logger = Logger.getLogger(TestWiki.class);
+	private static enum Status {txtFetched,txtProcessed,xhtmlRendered,xhtmlProcessed,ofx};
 	
 	private String wikiText;
 	private String wikiImage,wikiTitle;
@@ -34,62 +32,44 @@ public class TestWiki
 	private WikiProcessor wikiP;
 	private XhtmlProcessor xhtmlP;
 	
-	public TestWiki()
+	private String dirName;
+	
+	public TestWiki(String dirName)
 	{
+		this.dirName=dirName;
 		wikiP = new WikiProcessor();
 		xhtmlP = new XhtmlProcessor();
 	}
 	
-	private String fetchTextHttp()
+	private String fetchTextHttp(String article)
 	{
 		WikiTextFetcher tw = new WikiTextFetcher();
-		wikiText = tw.fetchText("Bellagio");
+		wikiText = tw.fetchText(article);
+		WikiContentIO.writeTxt("dist", article+"-"+Status.txtFetched+".txt", wikiText);
 		
 		wikiText = wikiP.process(wikiText);
-		
-		logger.debug("Modified: "+wikiText);
+		WikiContentIO.writeTxt("dist", article+"-"+Status.txtProcessed+".txt", wikiText);
 		
 		wikiImage="file:///c:/temp/${image}";
 		wikiTitle="file:///c:/temp/${title}";
 		
         WikiModel myWikiModel = new WikiDefaultModel(wikiImage,wikiTitle);
         String xHtml = myWikiModel.render(wikiText);
+        WikiContentIO.writeTxt("dist", article+"-"+Status.xhtmlRendered+".xhtml", xHtml);
         
-        try
-		{
-			logger.debug("XHTML: "+xHtml);
-			BufferedWriter bw = new BufferedWriter(new FileWriter(new File("dist/xhtml.txt")));
-			bw.write(xHtml);
-			bw.close();
-		}
-		catch (IOException e1) {logger.error(e1);}
 		return xHtml;
 	}
-	
-	private String fetchTextFile()
+		
+	public void testOfx(String article)
 	{
-		StringBuffer sb = new StringBuffer();
-		try
-		{
-			logger.debug("XHTML: ");
-			BufferedReader bw = new BufferedReader(new FileReader(new File("dist/xhtml.txt")));
-			while(bw.ready())
-			{
-				sb.append(bw.readLine());
-			}
-			bw.close();
-		}
-		catch (IOException e) {logger.error(e);}
-		return sb.toString();
-	}
-	
-	public void testOfx()
-	{
+		File f = new File(dirName+"/"+article+"-"+Status.txtProcessed+".xhtml");
 		String xHtml;
-		xHtml = fetchTextFile();
-		xHtml = fetchTextHttp();
+		
+		if(f.exists() && f.isFile()){xHtml = WikiContentIO.loadTxt(dirName,article+"-"+Status.xhtmlRendered+".xhtml");}
+		else{xHtml = fetchTextHttp(article);}
 		
 		xHtml = xhtmlP.process(xHtml);
+		WikiContentIO.writeTxt(dirName, article+"-"+Status.xhtmlProcessed+".xhtml", xHtml);
 		
 		OpenFuxmlGenerator ofxGenerator = new OpenFuxmlGenerator();
 		
@@ -99,7 +79,7 @@ public class TestWiki
 		try
 		{
 			String output = ofxGenerator.create(xHtml, htmlFooter, htmlTitle);
-			logger.debug("XML: "+output);
+			WikiContentIO.writeTxt(dirName, article+"-"+Status.ofx+".xml", output);
 		}
 		catch (IOException e) {logger.error(e);}
 		catch (ParserConfigurationException e) {logger.error(e);}
@@ -124,8 +104,8 @@ public class TestWiki
 		
 		WikiTemplates.init();	
 			
-		TestWiki tw = new TestWiki();
+		TestWiki tw = new TestWiki("dist");
 //		tw.testHtml();
-		tw.testOfx();
+		tw.testOfx("Bellagio");
     }
 }
