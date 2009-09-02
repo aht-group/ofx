@@ -26,7 +26,6 @@ public class TestWiki
 	static Logger logger = Logger.getLogger(TestWiki.class);
 	private static enum Status {txtFetched,txtProcessed,xhtmlRendered,xhtmlProcessed,ofx};
 	
-	private String wikiText;
 	private String wikiImage,wikiTitle;
 	
 	private WikiProcessor wikiP;
@@ -44,7 +43,7 @@ public class TestWiki
 	private String fetchTextHttp(String article)
 	{
 		WikiTextFetcher tw = new WikiTextFetcher();
-		wikiText = tw.fetchText(article);
+		String wikiText = tw.fetchText(article);
 		WikiContentIO.writeTxt("dist", article+"-"+Status.txtFetched+".txt", wikiText);
 		
 		wikiText = wikiP.process(wikiText);
@@ -87,15 +86,6 @@ public class TestWiki
 		catch (SAXException e) {logger.error(e);}
     }
 	
-	public void testHtml()
-	{
-		wikiImage="http://www.mywiki.com/wiki/${image}";
-		wikiTitle="http://www.mywiki.com/wiki/${title}";
-		WikiModel wikiModel = new WikiModel(wikiImage,wikiTitle);
-		String htmlStr = wikiModel.render(wikiText);
-		System.out.print(htmlStr);
-	}
-	
 	public static void main(String[] args)
     {
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
@@ -105,7 +95,6 @@ public class TestWiki
 		WikiTemplates.init();	
 			
 		TestWiki tw = new TestWiki("dist");
-//		tw.testHtml();
 		tw.testOfx("Bellagio");
     }
 }

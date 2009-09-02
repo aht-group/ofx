@@ -9,12 +9,8 @@ import java.util.Locale;
 import java.util.Map;
 
 
-/**
- * Wiki model implementation which allows some special JUnit tests with
- * namespaces and predefined templates
- * 
- */
-public class WikiDefaultModel extends WikiModel {
+public class WikiDefaultModel extends WikiModel
+{
 	public final static String TL = "{{[[Template:{{{1}}}|{{{1}}}]]}}<noinclude>\n" + "{{pp-template|small=yes}}\n"
 			+ "{{documentation}}\n" + "</noinclude>";
 	public final static String PRON_ENG = "#REDIRECT [[Template:Pron-en]]";
