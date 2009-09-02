@@ -1,4 +1,4 @@
-package test.xml.wiki.docbook;
+package org.openfuxml.test.xml.wiki.docbook;
 
 import java.util.HashMap;
 import java.util.Map;
