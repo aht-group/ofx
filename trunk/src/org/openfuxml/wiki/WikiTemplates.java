@@ -1,0 +1,28 @@
+package org.openfuxml.wiki;
+
+public class WikiTemplates
+{
+	public static String xmlDoctype, htmlDoctype;
+	public static String htmlHeader;
+	
+	public WikiTemplates()
+	{
+		
+	}
+	
+	public static void init()
+	{
+		xmlDoctype = "<!DOCTYPE book PUBLIC \"-//OASIS//DTD DocBook XML V4.5//EN\" \"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd\">";
+		xmlDoctype = "";
+		
+		htmlDoctype = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">";
+		htmlDoctype = "";
+		
+		htmlHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+			+ htmlDoctype
+			+ "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
+			+ "<head>\n"
+			+ "        <title2>{0}</title2>\n   </head>\n"
+			+ "    <body>";
+	}
+}
