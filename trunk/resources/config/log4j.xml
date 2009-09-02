@@ -3,21 +3,15 @@
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
-	<appender name="A1" class="org.apache.log4j.ConsoleAppender">
+	<appender name="AppCon" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{HH:mm:ss,SSS} [%5p] %C{1}-%L: %m%n" />
 		</layout>
 	</appender>
 
-	<appender name="Client-RoFiAppender" class="org.apache.log4j.RollingFileAppender">
+	<appender name="AppRoFi" class="org.apache.log4j.RollingFileAppender">
 		<param name="maxFileSize" value="5000KB"/>
 		<param name="file" value="${user.home}/openfuxml.log"/>
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{ISO8601} [%-5p] %c{1}:%5L - %m%n"/>
-		</layout>
-	</appender>
-	
-	<appender name="Client-ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{ISO8601} [%-5p] %c{1}:%5L - %m%n"/>
 		</layout>
@@ -34,10 +28,15 @@
 	<appender name="zeroconf" class="org.apache.log4j.net.ZeroConfSocketHubAppender">
 		<param name="Name" value="openFuXML Zero-Conf Logger" />
 	</appender>
+	
+	<logger name="org.openfuxml" additivity="false">
+		<level value="DEBUG"/>
+		<appender-ref ref="AppCon"/>
+	</logger>
 
 	<root>
-		<priority value="DEBUG"/>
-		<appender-ref ref="A1"/>
+		<priority value="INFO"/>
+		<appender-ref ref="AppCon"/>
 	</root>
 
 </log4j:configuration>

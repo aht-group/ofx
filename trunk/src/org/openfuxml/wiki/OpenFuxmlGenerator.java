@@ -41,7 +41,7 @@ public class OpenFuxmlGenerator
 		sb.append(header);
 		sb.append(xhtmlContent);
 		sb.append(footer);
-		logger.debug("Parsing: "+sb);
+		logger.debug("Parsing: "+sb.length()+" characters");
 
 		InputSource inputSource = new InputSource(new StringReader(sb.toString()));
 
