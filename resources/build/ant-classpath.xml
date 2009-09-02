@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<project basedir="../..">
+	<property file="resources/properties/ant.properties"/>
+	<import file="ant-libs.xml"/>
+	<path id="classpath">
+	<!-- Utils  -->
+		<pathelement location="${lib.dir}/${log4j.dir}/${log4j.lib}"/>
+		<pathelement location="${lib.dir}/${commonslang.dir}/${commonslang.lib}"/>
+		<pathelement location="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}"/>
+	<!-- XML  -->
+		<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbapi.lib}"/>
+		<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
+		<pathelement location="${lib.dir}/${jdom.dir}/${jdom.lib}"/>
+	<!-- HTTP  -->
+		<pathelement location="${lib.dir}/${htmlcleaner.dir}/${htmlcleaner.lib}"/>
+		<pathelement location="${lib.dir}/${jetty.dir}/${jetty.lib}"/>
+		<pathelement location="${lib.dir}/${jetty.dir}/${jettyutil.lib}"/>
+		<pathelement location="${lib.dir}/${servlet.dir}/${servlet.lib}"/>
+		<pathelement location="${lib.dir}/${jsp.dir}/${jsp-api.lib}"/>
+		<pathelement location="${lib.dir}/${jsf.dir}/${jsf-api.lib}"/>
+	</path>
+</project>
