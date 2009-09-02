@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+	<wikiprocessor>
+		<file>resources/config/wiki/wikireplace.xml</file>
+	</wikiprocessor>
+</config>
