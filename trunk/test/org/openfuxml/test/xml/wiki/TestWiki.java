@@ -8,6 +8,9 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 
+import net.sf.exlp.io.ConfigLoader;
+
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.test.xml.wiki.docbook.DocbookGenerator;
 import org.openfuxml.wiki.OpenFuxmlGenerator;
@@ -33,10 +36,10 @@ public class TestWiki
 	
 	private String dirName;
 	
-	public TestWiki(String dirName)
+	public TestWiki(Configuration config,String dirName)
 	{
 		this.dirName=dirName;
-		wikiP = new WikiProcessor();
+		wikiP = new WikiProcessor(config);
 		xhtmlP = new XhtmlProcessor();
 	}
 	
@@ -92,9 +95,12 @@ public class TestWiki
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
 		
+		ConfigLoader.add("resources/config/wiki/wiki.xml");
+		Configuration config = ConfigLoader.init();
+			
 		WikiTemplates.init();	
 			
-		TestWiki tw = new TestWiki("dist");
-		tw.testOfx("Bellagio");
+		TestWiki tw = new TestWiki(config,"dist");
+		tw.testOfx("Albert_Einstein");
     }
 }
