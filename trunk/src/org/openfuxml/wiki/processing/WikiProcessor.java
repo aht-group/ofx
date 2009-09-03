@@ -23,6 +23,8 @@ public class WikiProcessor
 	private List<Wikireplace> wikiReplaces;
 	private List<Wikiinjection> wikiInjections;
 	
+	private String wikiText;
+	
 	public WikiProcessor(Configuration config)
 	{
 		wikiReplaces = new ArrayList<Wikireplace>();
@@ -56,11 +58,33 @@ public class WikiProcessor
 	
 	public String process(String wikiText)
 	{
-		for(Wikireplace replace : wikiReplaces)
-		{
-			wikiText = wikiText.replaceAll(replace.getFrom(), replace.getTo());
-		}
-		return wikiText;
+		this.wikiText=wikiText;
+		for(Wikireplace replace : wikiReplaces){wikiReplace(replace);}
+		for(Wikiinjection inject : wikiInjections){wikiInject(inject);}
+		return this.wikiText;
 	}
 
+	private void wikiReplace(Wikireplace replace)
+	{
+		wikiText = wikiText.replaceAll(replace.getFrom(), replace.getTo());
+	}
+	
+	private void wikiInject(Wikiinjection inject)
+	{
+		while(wikiText.indexOf(inject.getFrom())>0)
+		{
+			StringBuffer sbDebug = new StringBuffer();
+			int from = wikiText.indexOf(inject.getFrom());
+			int to = wikiText.indexOf(inject.getTo());
+			sbDebug.append("Injection: "+from+" "+to);
+			sbDebug.append(" oldSize="+wikiText.length());
+			String injectionArea = wikiText.substring(from, to+inject.getTo().length());
+			StringBuffer sb = new StringBuffer();
+				sb.append(wikiText.substring(0, from-1));
+				sb.append(wikiText.substring(to+inject.getTo().length()+1,wikiText.length()));
+			wikiText=sb.toString();
+			sbDebug.append(" newSize="+wikiText.length());
+			logger.debug(sbDebug);
+		}
+	}
 }

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
+	<wiki>
+		<article>Bellagio</article>
+	</wiki>
 	<wikiprocessor>
 		<file>resources/config/wiki/wikireplace.xml</file>
+		<file>resources/config/wiki/wikiinjection.xml</file>
 	</wikiprocessor>
 </config>

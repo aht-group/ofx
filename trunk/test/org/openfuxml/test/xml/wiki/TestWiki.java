@@ -35,9 +35,11 @@ public class TestWiki
 	private XhtmlProcessor xhtmlP;
 	
 	private String dirName;
+	private Configuration config;
 	
 	public TestWiki(Configuration config,String dirName)
 	{
+		this.config=config;
 		this.dirName=dirName;
 		wikiP = new WikiProcessor(config);
 		xhtmlP = new XhtmlProcessor();
@@ -62,8 +64,9 @@ public class TestWiki
 		return xHtml;
 	}
 		
-	public void testOfx(String article)
+	public void testOfx()
 	{
+		String article = config.getString("wiki/article");
 		File f = new File(dirName+"/"+article+"-"+Status.txtProcessed+".xhtml");
 		String xHtml;
 		
@@ -101,6 +104,6 @@ public class TestWiki
 		WikiTemplates.init();	
 			
 		TestWiki tw = new TestWiki(config,"dist");
-		tw.testOfx("Albert_Einstein");
+		tw.testOfx();
     }
 }

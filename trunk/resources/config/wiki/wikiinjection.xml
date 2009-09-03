@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<wikicontainer xmlns="http://www.openfuxml.org/wiki">
+    <wikiinjection from="&lt;gallery&gt;" to="&lt;/gallery&gt;"/>
+    <wikiinjection from="&lt;timeline&gt;" to="&lt;/timeline&gt;"/>
+</wikicontainer>
