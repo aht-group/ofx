@@ -56,6 +56,14 @@ public class WikiProcessor
 		catch (FileNotFoundException e) {logger.error(e);}
 	}
 	
+	private StringBuffer getInjection(Wikiinjection inject)
+	{
+		StringBuffer sb = new StringBuffer();
+			sb.append("<"+inject.getId()+">");
+			sb.append("</"+inject.getId()+">");
+		return sb;
+	}
+	
 	public String process(String wikiText)
 	{
 		this.wikiText=wikiText;
@@ -71,17 +79,18 @@ public class WikiProcessor
 	
 	private void wikiInject(Wikiinjection inject)
 	{
-		while(wikiText.indexOf(inject.getFrom())>0)
+		while(wikiText.indexOf("<"+inject.getTag()+">")>0)
 		{
 			StringBuffer sbDebug = new StringBuffer();
-			int from = wikiText.indexOf(inject.getFrom());
-			int to = wikiText.indexOf(inject.getTo());
+			int from = wikiText.indexOf("<"+inject.getTag()+">");
+			int to = wikiText.indexOf("</"+inject.getTag()+">");
 			sbDebug.append("Injection: "+from+" "+to);
 			sbDebug.append(" oldSize="+wikiText.length());
-			String injectionArea = wikiText.substring(from, to+inject.getTo().length());
+			String injectionArea = wikiText.substring(from, to+inject.getTag().length()+3);
 			StringBuffer sb = new StringBuffer();
 				sb.append(wikiText.substring(0, from-1));
-				sb.append(wikiText.substring(to+inject.getTo().length()+1,wikiText.length()));
+				if(inject.getId()!=null && inject.getId().length()>0){sb.append(getInjection(inject));}
+				sb.append(wikiText.substring(to+inject.getTag().length()+3+1,wikiText.length()));
 			wikiText=sb.toString();
 			sbDebug.append(" newSize="+wikiText.length());
 			logger.debug(sbDebug);
