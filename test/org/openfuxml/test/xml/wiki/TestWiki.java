@@ -27,7 +27,7 @@ import de.kisner.util.LoggerInit;
 public class TestWiki
 {
 	static Logger logger = Logger.getLogger(TestWiki.class);
-	private static enum Status {txtFetched,txtProcessed,xhtmlRendered,xhtmlProcessed,ofx};
+	public static enum Status {txtFetched,txtProcessed,xhtmlRendered,xhtmlProcessed,ofx};
 	
 	private String wikiImage,wikiTitle;
 	
@@ -74,8 +74,8 @@ public class TestWiki
 		else{xHtml = fetchTextHttp(article);}
 		
 		xHtml = xhtmlP.process(xHtml);
-		WikiContentIO.writeTxt(dirName, article+"-"+Status.xhtmlProcessed+".xhtml", xHtml);
-		
+		WikiContentIO.writeXml(dirName, article+"-"+Status.xhtmlProcessed+".xhtml", xHtml);
+		xHtml=xhtmlP.removeWellFormed(xHtml);
 		OpenFuxmlGenerator ofxGenerator = new OpenFuxmlGenerator();
 		
     	String htmlFooter = DocbookGenerator.FOOTER;

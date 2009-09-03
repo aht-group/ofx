@@ -9,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.StringReader;
 
 import org.apache.log4j.Logger;
 import org.jdom.Document;
@@ -33,12 +35,13 @@ public class WikiContentIO
 		catch (IOException e) {logger.error(e);}
 	}
 	
-	public static synchronized void writeXML(String dirName, String fileName, String content)
+	public static synchronized void writeXml(String dirName, String fileName, String content)
 	{
 		logger.debug("Writing Xml to "+dirName+"/"+fileName);
 		try
 		{
-			Document doc = new SAXBuilder().build( content );
+			Reader sr = new StringReader(content);  
+			Document doc = new SAXBuilder().build(sr);
 			XMLOutputter xmlOut = new XMLOutputter( Format.getPrettyFormat() );
 			
 			File f = new File(dirName+"/"+fileName);
