@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://www.openfuxml.org/wiki" xmlns="http://www.openfuxml.org/wiki"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:element name="wikireplace">
-        <xsd:complexType>
-            <xsd:attribute name="from" type="xsd:string"/>
-            <xsd:attribute name="to" type="xsd:string"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="wikiinjection">
-        <xsd:complexType>
-            <xsd:attribute name="from" type="xsd:string"/>
-            <xsd:attribute name="to" type="xsd:string"/>
-        </xsd:complexType>
-    </xsd:element>
     <xsd:element name="wikicontainer">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="wikireplace" maxOccurs="unbounded"/>
                 <xsd:element ref="wikiinjection" maxOccurs="unbounded"/>
             </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="wikiinjection">
+        <xsd:complexType>
+            <xsd:attribute name="tag" type="xsd:string"/>
+            <xsd:attribute name="id" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="wikireplace">
+        <xsd:complexType>
+            <xsd:attribute name="from" type="xsd:string"/>
+            <xsd:attribute name="to" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>

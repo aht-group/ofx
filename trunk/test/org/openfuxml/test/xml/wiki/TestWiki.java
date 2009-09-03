@@ -42,7 +42,7 @@ public class TestWiki
 		this.config=config;
 		this.dirName=dirName;
 		wikiP = new WikiProcessor(config);
-		xhtmlP = new XhtmlProcessor();
+		xhtmlP = new XhtmlProcessor(config);
 	}
 	
 	private String fetchTextHttp(String article)
