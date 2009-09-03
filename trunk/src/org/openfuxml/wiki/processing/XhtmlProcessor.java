@@ -1,6 +1,9 @@
 package org.openfuxml.wiki.processing;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,9 @@ import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
+import org.jdom.Document;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 import org.openfuxml.wiki.data.jaxb.Wikicontainer;
 import org.openfuxml.wiki.data.jaxb.Wikiinjection;
 
@@ -50,13 +56,44 @@ public class XhtmlProcessor
 		catch (FileNotFoundException e) {logger.error(e);}
 	}
 	
-	public String process(String xHtmlText)
+	public String process(String text)
 	{
-		this.xHtmlText=xHtmlText;
+		xHtmlText=addWellFormed(text);
 		xHtmlText = xHtmlText.replace("&#160;", " ");
 		xHtmlText = xHtmlText.replaceAll("&nbsp;", " ");
 		for(Wikiinjection inject : wikiInjections){repairXml(inject);}
+		tryJdom();
 		return this.xHtmlText;
+	}
+	
+	public String addWellFormed(String text)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>");
+		sb.append("<wiki>");
+		sb.append(text);
+		sb.append("</wiki>");
+		return sb.toString();
+	}
+	
+	public String removeWellFormed(String text)
+	{
+		int from = text.indexOf("<wiki>")+6;
+		int to = text.lastIndexOf("</wiki>");
+		return text.substring(from,to);
+	}
+	
+	private void tryJdom()
+	{
+		Document doc = null;
+		try
+		{
+//			System.out.print(xHtmlText);
+			Reader sr = new StringReader(xHtmlText);  
+			doc = new SAXBuilder().build(sr);
+		}
+		catch (JDOMException e) {e.printStackTrace();}
+		catch (IOException e) {logger.error(e);}
 	}
 	
 	private void repairXml(Wikiinjection inject)
@@ -75,5 +112,4 @@ public class XhtmlProcessor
 			xHtmlText=sb.toString();
 		}
 	}
-
 }
