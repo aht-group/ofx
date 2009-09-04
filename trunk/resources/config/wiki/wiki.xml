@@ -7,4 +7,8 @@
 		<file>resources/config/wiki/wikireplace.xml</file>
 		<file>resources/config/wiki/wikiinjection.xml</file>
 	</wikiprocessor>
+	<xhtmlprocessor>
+		<file>resources/config/wiki/xhtmlreplace.xml</file>
+		<file>resources/config/wiki/wikiinjection.xml</file>
+	</xhtmlprocessor>
 </config>
