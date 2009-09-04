@@ -35,13 +35,13 @@ public class WikiProcessor
 		for(int i=1;i<=numberTranslations;i++)
 		{
 			String xmlFile = config.getString("wikiprocessor/file["+i+"]");
-			loadReplacements(xmlFile,mrl);
+			loadWikiContainer(xmlFile,mrl);
 		}
 		logger.debug("Replacements loaded: "+wikiReplaces.size());
 		logger.debug("Injections loaded: "+wikiInjections.size());
 	}
 	
-	private void loadReplacements(String xmlFile,MultiResourceLoader mrl)
+	private void loadWikiContainer(String xmlFile,MultiResourceLoader mrl)
 	{
 		Wikicontainer container=null;
 		try

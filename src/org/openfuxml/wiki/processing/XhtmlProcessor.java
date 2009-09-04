@@ -5,21 +5,28 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import net.sf.exlp.io.StringBufferOutputStream;
 import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.jdom.Document;
+import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 import org.openfuxml.wiki.data.jaxb.Wikicontainer;
 import org.openfuxml.wiki.data.jaxb.Wikiinjection;
+import org.openfuxml.wiki.data.jaxb.Wikireplace;
 
 public class XhtmlProcessor
 {
@@ -28,21 +35,23 @@ public class XhtmlProcessor
 	private String xHtmlText;
 	
 	private List<Wikiinjection> wikiInjections;
+	private List<Wikireplace> xhtmlReplaces;
 	
 	public XhtmlProcessor(Configuration config)
 	{
 		wikiInjections = new ArrayList<Wikiinjection>();
+		xhtmlReplaces = new ArrayList<Wikireplace>();
 		
 		MultiResourceLoader mrl = new MultiResourceLoader();
-		int numberTranslations = config.getStringArray("wikiprocessor/file").length;
+		int numberTranslations = config.getStringArray("xhtmlprocessor/file").length;
 		for(int i=1;i<=numberTranslations;i++)
 		{
-			loadInjections(config.getString("wikiprocessor/file["+i+"]"),mrl);
+			loadWikiContainer(config.getString("xhtmlprocessor/file["+i+"]"),mrl);
 		}
 		logger.debug("Injections loaded: "+wikiInjections.size());
 	}
 	
-	private void loadInjections(String xmlFile,MultiResourceLoader mrl)
+	private void loadWikiContainer(String xmlFile,MultiResourceLoader mrl)
 	{
 		Wikicontainer container=null;
 		try
@@ -51,6 +60,7 @@ public class XhtmlProcessor
 			Unmarshaller u = jc.createUnmarshaller();
 			container = (Wikicontainer)u.unmarshal(mrl.searchIs(xmlFile));
 			wikiInjections.addAll(container.getWikiinjection());
+			xhtmlReplaces.addAll(container.getWikireplace());
 		}
 		catch (JAXBException e) {logger.error(e);}
 		catch (FileNotFoundException e) {logger.error(e);}
@@ -59,11 +69,15 @@ public class XhtmlProcessor
 	public String process(String text)
 	{
 		xHtmlText=addWellFormed(text);
-		xHtmlText = xHtmlText.replace("&#160;", " ");
 		xHtmlText = xHtmlText.replaceAll("&nbsp;", " ");
+		for(Wikireplace replace : xhtmlReplaces){xhtmlReplace(replace);}
 		for(Wikiinjection inject : wikiInjections){repairXml(inject);}
-		tryJdom();
 		return this.xHtmlText;
+	}
+	
+	private void xhtmlReplace(Wikireplace replace)
+	{
+		xHtmlText = xHtmlText.replaceAll(replace.getFrom(), replace.getTo());
 	}
 	
 	public String addWellFormed(String text)
@@ -83,19 +97,6 @@ public class XhtmlProcessor
 		return text.substring(from,to);
 	}
 	
-	private void tryJdom()
-	{
-		Document doc = null;
-		try
-		{
-//			System.out.print(xHtmlText);
-			Reader sr = new StringReader(xHtmlText);  
-			doc = new SAXBuilder().build(sr);
-		}
-		catch (JDOMException e) {e.printStackTrace();}
-		catch (IOException e) {logger.error(e);}
-	}
-	
 	private void repairXml(Wikiinjection inject)
 	{
 		while(xHtmlText.indexOf("&#60;"+inject.getId()+"&#62;")>0)
@@ -111,5 +112,62 @@ public class XhtmlProcessor
 				sb.append(xHtmlText.substring(to+inject.getId().length()+11, xHtmlText.length()));
 			xHtmlText=sb.toString();
 		}
+	}
+	
+	public String removeOfxElements()
+	{
+		Map<String,Boolean> ofxTags = new Hashtable<String,Boolean>();
+		for(Wikiinjection wikiinjection : wikiInjections)
+		{
+			String tag = wikiinjection.getId();
+			if(!ofxTags.containsKey(tag)){ofxTags.put(tag, false);}
+		}
+		try
+		{
+			Reader sr = new StringReader(xHtmlText);  
+			Document doc = new SAXBuilder().build(sr);
+			Element rootElement = doc.getRootElement();
+			rootElement.detach();
+			for(String s :ofxTags.keySet())
+			{
+				rootElement=removeOfxElement(rootElement,s,0);
+			}
+			doc.addContent(rootElement);
+			
+			StringBufferOutputStream sbos = new StringBufferOutputStream();
+			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
+			xmlOut.output(doc, sbos);
+			xHtmlText=sbos.getStringBuffer().toString();
+		}
+		catch (JDOMException e) {logger.error(e);}
+		catch (IOException e) {logger.error(e);}
+		return xHtmlText;
+	}
+	
+	private Element removeOfxElement(Element oldRoot, String tag, int level)
+	{
+		Element newRoot = new Element(oldRoot.getName());
+		
+		//newRoot.setAttributes(oldRoot.getAttributes());
+		newRoot.setText(oldRoot.getText());
+//		logger.debug(oldRoot.getValue());
+		StringBuffer sb = new StringBuffer();
+		sb.append("Tag="+tag+" Level="+level);
+		for(Object o : oldRoot.getChildren())
+		{
+			Element oldChild = (Element)o;
+			sb.append(" "+oldChild.getName());
+			if(oldChild.getName().equals(tag))
+			{
+				logger.debug("Detaching "+oldChild.getName());
+			}
+			else
+			{
+				Element newChild=removeOfxElement(oldChild, tag, level+1);
+				newRoot.addContent(newChild);
+			}
+		}
+		logger.debug(sb);
+		return newRoot;
 	}
 }

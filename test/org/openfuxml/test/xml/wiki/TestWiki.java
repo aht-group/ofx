@@ -27,7 +27,7 @@ import de.kisner.util.LoggerInit;
 public class TestWiki
 {
 	static Logger logger = Logger.getLogger(TestWiki.class);
-	public static enum Status {txtFetched,txtProcessed,xhtmlRendered,xhtmlProcessed,ofx};
+	public static enum Status {txtFetched,txtProcessed,xhtmlRendered,xhtmlProcessed,xhtmlFinal,ofx};
 	
 	private String wikiImage,wikiTitle;
 	
@@ -47,9 +47,25 @@ public class TestWiki
 	
 	private String fetchTextHttp(String article)
 	{
+		logger.debug("Fetching article: "+article);
 		WikiTextFetcher tw = new WikiTextFetcher();
 		String wikiText = tw.fetchText(article);
 		WikiContentIO.writeTxt("dist", article+"-"+Status.txtFetched+".txt", wikiText);
+		return wikiText;
+	}
+		
+	public void testOfx()
+	{
+		String article = config.getString("wiki/article");
+		File f = new File(dirName+"/"+article+"-"+Status.txtFetched+".txt");
+		String wikiText;
+		
+		boolean fExists = f.exists();
+		boolean fIsFile = f.isFile();
+		logger.debug(f.getAbsoluteFile()+" exists="+fExists+" isFile="+fIsFile);
+		
+		if(fExists && fIsFile){wikiText = WikiContentIO.loadTxt(dirName,article+"-"+Status.txtFetched+".txt");}
+		else{wikiText = fetchTextHttp(article);}
 		
 		wikiText = wikiP.process(wikiText);
 		WikiContentIO.writeTxt("dist", article+"-"+Status.txtProcessed+".txt", wikiText);
@@ -60,21 +76,13 @@ public class TestWiki
         WikiModel myWikiModel = new WikiDefaultModel(wikiImage,wikiTitle);
         String xHtml = myWikiModel.render(wikiText);
         WikiContentIO.writeTxt("dist", article+"-"+Status.xhtmlRendered+".xhtml", xHtml);
-        
-		return xHtml;
-	}
-		
-	public void testOfx()
-	{
-		String article = config.getString("wiki/article");
-		File f = new File(dirName+"/"+article+"-"+Status.txtProcessed+".xhtml");
-		String xHtml;
-		
-		if(f.exists() && f.isFile()){xHtml = WikiContentIO.loadTxt(dirName,article+"-"+Status.xhtmlRendered+".xhtml");}
-		else{xHtml = fetchTextHttp(article);}
 		
 		xHtml = xhtmlP.process(xHtml);
 		WikiContentIO.writeXml(dirName, article+"-"+Status.xhtmlProcessed+".xhtml", xHtml);
+		
+		xHtml = xhtmlP.removeOfxElements();
+		WikiContentIO.writeXml(dirName, article+"-"+Status.xhtmlFinal+".xhtml", xHtml);
+		
 		xHtml=xhtmlP.removeWellFormed(xHtml);
 		OpenFuxmlGenerator ofxGenerator = new OpenFuxmlGenerator();
 		
