@@ -23,6 +23,11 @@
 			<depends dir="${xsd.dir}"><include name="ofx-wiki.xsd"/></depends>
 			<produces dir="${src.dir}/org/openfuxml/wiki/data/jaxb"><include name="*.java"/></produces>
 		</xjc>
+		<xjc schema="${xsd.dir}/jsf-taglib.xsd" package="org.openfuxml.addon.jsf.data.jaxb" destdir="${src.dir}">
+			<arg value="-extension" />
+			<depends dir="${xsd.dir}"><include name="jsf-taglib.xsd"/></depends>
+			<produces dir="${src.dir}/org/openfuxml/addon/jsf/data/jaxb"><include name="*.java"/></produces>
+		</xjc>
 	</target>
 	
 </project>
