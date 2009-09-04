@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="taglib">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="tlibversion" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="jspversion" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="shortname" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="uri" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="info" maxOccurs="1" type="xsd:string"/>
+                <xsd:element ref="tag" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="tag">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="name" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="tagclass" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="bodycontent" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="info" maxOccurs="1" type="xsd:string"/>
+                <xsd:element ref="attribute" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="attribute">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="name" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="required" maxOccurs="1" type="xsd:boolean"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
