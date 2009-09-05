@@ -15,11 +15,10 @@ import org.jdom.output.XMLOutputter;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
-import org.openfuxml.test.xml.jsftaglib.jaxb.TestJsfTagTransformator;
 
 public class JsfTagTransformator
 {
-	private static Logger logger = Logger.getLogger(TestJsfTagTransformator.class);
+	private static Logger logger = Logger.getLogger(JsfTagTransformator.class);
 	
 	private File baseDir;
 	private int dtdLevel;
