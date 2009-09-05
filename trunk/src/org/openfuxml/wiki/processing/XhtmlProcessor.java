@@ -21,6 +21,7 @@ import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
+import org.jdom.Text;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -144,27 +145,42 @@ public class XhtmlProcessor
 		return xHtmlText;
 	}
 	
-	private Element removeOfxElement(Element oldRoot, String tag, int level)
+	//TODO public here ist only for testing, remove this later!
+	public Element removeOfxElement(Element oldRoot, String tag, int level)
 	{
 		Element newRoot = new Element(oldRoot.getName());
 		
 		//newRoot.setAttributes(oldRoot.getAttributes());
 		newRoot.setText(oldRoot.getText());
-//		logger.debug(oldRoot.getValue());
 		StringBuffer sb = new StringBuffer();
 		sb.append("Tag="+tag+" Level="+level);
-		for(Object o : oldRoot.getChildren())
+		for(Object o : oldRoot.getContent())
 		{
-			Element oldChild = (Element)o;
-			sb.append(" "+oldChild.getName());
-			if(oldChild.getName().equals(tag))
+			if(org.jdom.Text.class.isInstance(o))
 			{
-				logger.debug("Detaching "+oldChild.getName());
+				Text txt = (Text)o;
+				Text newText = new Text(txt.getText());
+				logger.debug("adding: "+newText.getText());
+				newRoot.addContent(newText);
+				sb.append(" txt");
+			}
+			else if(org.jdom.Element.class.isInstance(o))
+			{
+				Element oldChild = (Element)o;
+				sb.append(" "+oldChild.getName());
+				if(oldChild.getName().equals(tag))
+				{
+					logger.debug("Detaching "+oldChild.getName());
+				}
+				else
+				{
+					Element newChild=removeOfxElement(oldChild, tag, level+1);
+					newRoot.addContent(newChild);
+				}
 			}
 			else
 			{
-				Element newChild=removeOfxElement(oldChild, tag, level+1);
-				newRoot.addContent(newChild);
+				logger.warn("Unknown content: "+o.getClass().getName());
 			}
 		}
 		logger.debug(sb);
