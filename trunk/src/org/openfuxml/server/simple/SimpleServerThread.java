@@ -44,7 +44,7 @@ public class SimpleServerThread extends Thread
 
 	/**
 	 * Erzeugt einen ObjectInput- und OutputStream vom Client.
-	 * Sorgt am Schluss für das Schließen der Streams und des Sockets.
+	 * Sorgt am Schluss fÃ¼r das SchlieÃŸen der Streams und des Sockets.
 	 */
 	public void run()
 	{
