@@ -226,7 +226,7 @@ public class OfxClientControl implements OfxGuiAction
 	
 	public void tblEntitiesSelected(ProducibleEntities pe)
 	{
-		logger.debug("Eintr‰ge: "+pe.getFile().size());
+		logger.debug("Eintr√§ge: "+pe.getFile().size());
 		this.selectedPe=pe;
 	}
 	

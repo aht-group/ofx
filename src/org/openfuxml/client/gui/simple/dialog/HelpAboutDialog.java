@@ -2,10 +2,11 @@ package org.openfuxml.client.gui.simple.dialog;
 
 import java.io.FileNotFoundException;
 
+import net.sf.exlp.io.resourceloader.ImageResourceLoader;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -25,10 +26,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
-
 import org.openfuxml.client.gui.simple.Client;
-
-import de.kisner.util.io.resourceloader.ImageResourceLoader;
 
 /**
  * The class HelpAboutDialog implements the Dialog "About FuXML-Client"
@@ -60,7 +58,7 @@ public class HelpAboutDialog extends Dialog
 	private Label labelStatus;
 	private Button btnClose;
 	
-	// Region für die Shell
+	// Region fï¿½r die Shell
 	Region region;
 	
 	// Umriss der Shell
@@ -140,18 +138,18 @@ public class HelpAboutDialog extends Dialog
 		}
 		
 		//------------------------------
-		// Region für den Umriss des Programms erzeugen
+		// Region fï¿½r den Umriss des Programms erzeugen
 		region = new Region();
 		region.add(OUTLINE);
 		region.subtract(HOLLOW);
 		
-		// Gestalt der Region der Shell aufprägen
+		// Gestalt der Region der Shell aufprï¿½gen
 		shell.setRegion(region);
 		
-		// Größe der Region abfragen
+		// Grï¿½ï¿½e der Region abfragen
 		Rectangle size = region.getBounds();
 		
-		// Shell auf Primärmonitor positionieren
+		// Shell auf Primï¿½rmonitor positionieren
 		Monitor mon1 = shell.getDisplay().getPrimaryMonitor();
 		Rectangle r = mon1.getClientArea();
 		shell.setBounds((r.width-size.width)/2, (r.height-size.height)/2, size.width, size.height);
@@ -292,7 +290,7 @@ public class HelpAboutDialog extends Dialog
 				label.setText(sTitelVersion +
 						"\n" +
 						"Lehrgebiet Kommunikationssysteme" + "\n" +
-						"FernUniversität Hagen" + "\n" +
+						"FernUniversitï¿½t Hagen" + "\n" +
 						"2006" + "\n");
 				label.setBackground(colBackground);
 
@@ -313,16 +311,16 @@ public class HelpAboutDialog extends Dialog
 				RollTextCanvas canvas = new RollTextCanvas(compo, SWT.NONE, 
 						"\n" +
 						"Dieses Produkt wurde am Lehrgebiet Kommunikationssysteme, \n" +
-						"Prof. Dr.-Ing. Firoz Kaderali, der FernUniversität in Hagen \n"+
+						"Prof. Dr.-Ing. Firoz Kaderali, der FernUniversitï¿½t in Hagen \n"+
 						"entwickelt.\n" +
 						"\n" +
 						"\n" +
 						"\n" +
 						"\n" +
-						"Freundliche Grüße!\n"+
-						"Viel Spaß!"+
+						"Freundliche Grï¿½ï¿½e!\n"+
+						"Viel Spaï¿½!"+
 						"...\n" +
-						"und was sonst noch dazu gehört!");
+						"und was sonst noch dazu gehï¿½rt!");
 				canvas.setBackground(colBackground);
 
 				{

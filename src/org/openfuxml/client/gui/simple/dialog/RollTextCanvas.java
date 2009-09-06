@@ -61,11 +61,11 @@ public class RollTextCanvas extends Canvas implements Runnable
 				GC gc = evt.gc;
 				// Das Widget, das das Ereignis verursacht hat
 				Composite source = (Composite) evt.widget;
-				// Größe der nutzbaren Fläche
+				// GrÃ¶ÃŸe der nutzbaren FlÃ¤che
 				Rectangle rect = source.getClientArea();
 				// Puffer aufbauen
 				Image buffer = new Image(display,rect.width,rect.height);
-				// Neuer Grafikkontext für Puffer
+				// Neuer Grafikkontext fÃ¼r Puffer
 				GC bufferGC = new GC(buffer);
 				paint(bufferGC);
 				// Nun das gepufferte Bild auf Canvas zeichnen

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.io.resourceloader.ImageResourceLoader;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
@@ -47,11 +50,8 @@ import org.openfuxml.producer.exception.ProductionSystemException;
 import org.openfuxml.util.config.OfxPathHelper;
 import org.openfuxml.util.config.factory.ClientConfFactory;
 
-import de.kisner.util.LoggerInit;
-import de.kisner.util.io.resourceloader.ImageResourceLoader;
-
 /**
- * Client implementiert die Benutzeroberfläche für die FuXML-Produktion.
+ * Client implementiert die BenutzeroberflÃ¤che fÃ¼r die FuXML-Produktion.
  * @author Andrea Frank
  */
 public class Client extends AbstractProducerComposite implements ClientGuiCallback
@@ -72,7 +72,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	private Combo cboApplications,cboProjects;
 	
 	/**
-	 * alProducedEntities speichert alle Einträge, die in dieser Sitzung produziert wurden.
+	 * alProducedEntities speichert alle Eintrï¿½ge, die in dieser Sitzung produziert wurden.
 	 */
 	private ArrayList<String[]> alProducedEntities;
 	
@@ -81,8 +81,8 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	private Cursor cursor;
 	
 	/**
-	 * Im Konstruktor für die Klasse Client werden neben den Initialiserungen
-	 * der FuXMLLogger und die Properties gesetzt. Die Oberfläche wird 
+	 * Im Konstruktor fï¿½r die Klasse Client werden neben den Initialiserungen
+	 * der FuXMLLogger und die Properties gesetzt. Die Oberflï¿½che wird 
 	 * generiert und ein sogenannter Splashscreen angezeigt. 
 	 * @param parent
 	 * @param disp
@@ -115,7 +115,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	}
 	
 	/**
-	 * initGUI initialisiert die grafische Oberfläche.
+	 * initGUI initialisiert die grafische Oberflï¿½che.
 	 */
 	public void guiInit()
 	{
@@ -194,10 +194,10 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 				}
 			}
 		}
-		catch (ProductionSystemException e) {logger.error("getAvailableApplications nicht möglich", e);}
+		catch (ProductionSystemException e) {logger.error("getAvailableApplications nicht mï¿½glich", e);}
 		catch (ProductionHandlerException e)
 		{
-			logger.error("getAvailableApplications nicht möglich", e);
+			logger.error("getAvailableApplications nicht mï¿½glich", e);
 			ServerFehler();
 		}		
 		
@@ -288,7 +288,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	
 	/**
 	 * Die Methode getIndexOfArrayList liefert den Index der alProducedEntities,
-	 * an der das Element, das im Prameter übergeben wird, steht.
+	 * an der das Element, das im Prameter ï¿½bergeben wird, steht.
 	 * Ist das Element nicht enthalten, wird -1 geliefert.
 	 * @param pe
 	 * @return
@@ -307,7 +307,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	}
 	
 	/**
-	 * Die Methode ClientBeenden schließt das Programm. 
+	 * Die Methode ClientBeenden schlieï¿½t das Programm. 
 	 */
 	public void ClientBeenden()
 	{
@@ -315,10 +315,10 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	}
 	
 	/**
-	 * Die Methode Einstellungen öffnet den Dialog Einstellungen.
+	 * Die Methode Einstellungen ï¿½ffnet den Dialog Einstellungen.
 	 * Die neuen Einstellungen werden in myProperties gespeichert,
-	 * das labelVerzeichnis wird mit der Einstellung für Repository
-	 * belegt und die Combo für Projekte wird aktualisiert.
+	 * das labelVerzeichnis wird mit der Einstellung fï¿½r Repository
+	 * belegt und die Combo fï¿½r Projekte wird aktualisiert.
 	 */
 	public void Einstellungen()
 	{
@@ -338,7 +338,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	}
 	
 	/**
-	 * Die Methode HilfeInfoUeber öffnet den Dialog HilfeInfoUeber. 
+	 * Die Methode HilfeInfoUeber ï¿½ffnet den Dialog HilfeInfoUeber. 
 	 */
 	public void HilfeInfoUeber()
 	{
@@ -348,7 +348,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 
 	/**
 	 * Die Methode ServerFehler gibt eine Fehlermeldung aus und 
-	 * öffnet den Dialog Einstellungen.
+	 * ï¿½ffnet den Dialog Einstellungen.
 	 */
 	public void ServerFehler()
 	{
@@ -356,7 +356,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 		d.setText("Fehler");
 		d.setMessage("Es ist ein Fehler aufgetreten." + "\n" +
 				"\n"+
-				"Überprüfen Sie bitte Ihre Servereinstellungen." + "\n" +
+				"ï¿½berprï¿½fen Sie bitte Ihre Servereinstellungen." + "\n" +
 				"\n"+
 				"Host: " + config.getString("net/host") + "\n" +
 				"Port: " + config.getInt("net/port")
@@ -367,10 +367,10 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	}
 	
 	/**
-	 * Die Methode setAllEnabled sperrt die Benutzeroberfläche für weitere Eingaben, bzw. 
+	 * Die Methode setAllEnabled sperrt die Benutzeroberflï¿½che fï¿½r weitere Eingaben, bzw. 
 	 * gibt sie wieder frei. 
-	 * Sie ruft dabei für alle Bedienelemente die Methode setEnabled auf.
-	 * Außerem wird der Cursor auf "Warten" bzw. auf "normal" gestellt.
+	 * Sie ruft dabei fï¿½r alle Bedienelemente die Methode setEnabled auf.
+	 * Auï¿½erem wird der Cursor auf "Warten" bzw. auf "normal" gestellt.
 	 * 
 	 * @param isEnabled - gibt an, ob die Bedienelemente enabled bzw. disabled werden.
 	 */
@@ -402,7 +402,7 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	}
 	
 	/**
-	 * Die Methode loescheErgebnis setzt das Label für den Status auf ""
+	 * Die Methode loescheErgebnis setzt das Label fï¿½r den Status auf ""
 	 * und productionResult auf null.
 	 */
 	public void loescheErgebnis()
@@ -413,16 +413,16 @@ public class Client extends AbstractProducerComposite implements ClientGuiCallba
 	
 	/**
 	 * makeImages liefert ein Array von Images.
-	 * Sollte ein Image nicht geladen werden können, ist das Ergebnisarray
+	 * Sollte ein Image nicht geladen werden kï¿½nnen, ist das Ergebnisarray
 	 * kleiner als das Array der Resourcedateinamen.
-	 * @param Dateinamen - Array der Resourcedateinamen für die Images.
+	 * @param Dateinamen - Array der Resourcedateinamen fï¿½r die Images.
 	 * @return Array der erzeugten Images
 	 */
 	public Image[] makeImages(String[] Dateinamen)
 	{
-		// Falls eine Datei für ein Image nicht existiert,
+		// Falls eine Datei fï¿½r ein Image nicht existiert,
 		// werden die Images erst in eine ArrayList und
-		// dann in das Array Image[] für den return-Wert geschrieben.
+		// dann in das Array Image[] fï¿½r den return-Wert geschrieben.
 		
 		ArrayList<Image> alImages = new ArrayList<Image>();
 		for (int i=0; i<Dateinamen.length; i++)

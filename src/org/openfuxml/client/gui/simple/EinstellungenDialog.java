@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.Text;
 import de.kisner.util.ConfigLoader;
 
 /**
- * In dem Dialog EinstellungenDialog werden die Einstellungen für die
+ * In dem Dialog EinstellungenDialog werden die Einstellungen fï¿½r die
  * Anwendung gesetzt.
  * 
  * @author Andrea Frank
@@ -77,7 +77,7 @@ public class EinstellungenDialog extends Dialog
 	}
 
 	/**
-	 * Öffnet den Dialog EinstellungenDialog. Die Eingabefelder werden
+	 * ï¿½ffnet den Dialog EinstellungenDialog. Die Eingabefelder werden
 	 * mit den Einstellungen aus den Porperties vorbelegt.
 	 * 
 	 * @return Liefert die neuen Einstellungen als Properties.
@@ -233,7 +233,7 @@ public class EinstellungenDialog extends Dialog
 					public void widgetSelected(SelectionEvent evt) {
 						DirectoryDialog dialog = new DirectoryDialog(shell);
 						dialog.setText(Client.Title);
-						dialog.setMessage("Verzeichnisauswahl für die Produktion");
+						dialog.setMessage("Verzeichnisauswahl fï¿½r die Produktion");
 						dialog.setFilterPath(labelRepository.getText());
 						String dirname = dialog.open();
 						if (dirname!=null)
@@ -270,7 +270,7 @@ public class EinstellungenDialog extends Dialog
 					public void widgetSelected(SelectionEvent evt) {
 						DirectoryDialog dialog = new DirectoryDialog(shell);
 						dialog.setText(Client.Title);
-						dialog.setMessage("Verzeichnisauswahl für OUTPUT");
+						dialog.setMessage("Verzeichnisauswahl fï¿½r OUTPUT");
 						dialog.setFilterPath(labelOutput.getText());
 						String dirname = dialog.open();
 						if (dirname!=null)
@@ -325,7 +325,7 @@ public class EinstellungenDialog extends Dialog
 					}
 				});
 				
-				// Füllen der Table tableAnwendungen mit den Einträgen
+				// Fï¿½llen der Table tableAnwendungen mit den Eintrï¿½gen
 				// aus den Properties, die mit einem "." beginnen.
 				logger.warn("Not implemented from here ...");/*
 				for (Enumeration e = properties.propertyNames(); e.hasMoreElements();)
@@ -368,7 +368,7 @@ public class EinstellungenDialog extends Dialog
 				}
 				{
 					BtnAendern = new Button(cButtons, SWT.PUSH | SWT.CENTER);
-					BtnAendern.setText("   Ändern ...  ");
+					BtnAendern.setText("   ï¿½ndern ...  ");
 					BtnAendern.setEnabled(false);
 					BtnAendern.addSelectionListener(new SelectionAdapter() {
 						public void widgetSelected(SelectionEvent evt) {
@@ -382,7 +382,7 @@ public class EinstellungenDialog extends Dialog
 				}
 				{
 					BtnLoeschen = new Button(cButtons, SWT.PUSH | SWT.CENTER);
-					BtnLoeschen.setText("   Löschen   ");
+					BtnLoeschen.setText("   Lï¿½schen   ");
 					BtnLoeschen.setEnabled(false);
 					BtnLoeschen.addSelectionListener(new SelectionAdapter() {
 						public void widgetSelected(SelectionEvent evt) {
@@ -446,16 +446,16 @@ public class EinstellungenDialog extends Dialog
 	
 	/**
 	 * btnNeu startet den Dialog AnwendungenDialog, mit dem neue 
-	 * Anwendungen für Dateierweiterungen eingerichtet werden können.
+	 * Anwendungen fï¿½r Dateierweiterungen eingerichtet werden kï¿½nnen.
 	 */
 	public void btnNeu()
 	{
 		AnwendungenDialog dialog = new AnwendungenDialog(shell);
 		String sErg[] = dialog.open();
 		
-		// TODO @Andy Plausi, damit Einträge nicht doppelt vorkommen
+		// TODO @Andy Plausi, damit Eintrï¿½ge nicht doppelt vorkommen
 
-		// Falls "Abbrechen" gedrückt wurde, ist sErg == null.
+		// Falls "Abbrechen" gedrï¿½ckt wurde, ist sErg == null.
 		if ( sErg != null )
 		{
 			TableItem newItem = new TableItem(tableAnwendungen, 0);
@@ -465,13 +465,13 @@ public class EinstellungenDialog extends Dialog
 	
 	/**
 	 * btnAendern startet den Dialog AnwendungenDialog, mit dem die 
-	 * aktuell ausgewählte Zeile der Table tableAnwendungen 
+	 * aktuell ausgewï¿½hlte Zeile der Table tableAnwendungen 
 	 * bearbeitet werden kann.
 	 */
 	public void btnAendern()
 	{
-		// Die in der ausgewählten Zeile angezeigte Einstellung
-		// wird geändert.
+		// Die in der ausgewï¿½hlten Zeile angezeigte Einstellung
+		// wird geï¿½ndert.
 		int index = tableAnwendungen.getSelectionIndex();
 		
 		if (index >= 0)
@@ -481,9 +481,9 @@ public class EinstellungenDialog extends Dialog
 			AnwendungenDialog dialog = new AnwendungenDialog(shell, ti.getText(0), ti.getText(1));
 			String sErg[] = dialog.open();
 	
-			// TODO @Andy Plausi, damit Einträge nicht doppelt vorkommen
+			// TODO @Andy Plausi, damit Eintrï¿½ge nicht doppelt vorkommen
 			
-			// Falls "Abbrechen" gedrückt wurde, ist sErg == null.
+			// Falls "Abbrechen" gedrï¿½ckt wurde, ist sErg == null.
 			if ( sErg != null )
 			{
 				ti.setText(new String[] {sErg[0], sErg[1]});
@@ -492,12 +492,12 @@ public class EinstellungenDialog extends Dialog
 	}
 	
 	/**
-	 * btnLoeschen löscht die aktuell ausgewählte Zeile der Table 
+	 * btnLoeschen lï¿½scht die aktuell ausgewï¿½hlte Zeile der Table 
 	 * tableAnwendungen. 
 	 */
 	public void btnLoeschen()
 	{
-		// Die ausgewählte Zeile wird gelöscht.
+		// Die ausgewï¿½hlte Zeile wird gelï¿½scht.
 		int index = tableAnwendungen.getSelectionIndex();
 		if (index >= 0)
 		{
@@ -509,7 +509,7 @@ public class EinstellungenDialog extends Dialog
 	}
 
 	/**
-	 * Beim Betätigen des Buttons btnOK werden die neuen Einträge 
+	 * Beim BestÃ¤tigen des Buttons btnOK werden die neuen EintrÃ¤ge 
 	 * als Properties gesetzt und der Dialog geschlossen.
 	 */
 	public void btnOK()
@@ -520,10 +520,10 @@ public class EinstellungenDialog extends Dialog
 		ConfigLoader.update("dirs/dir[@type='repository']", labelRepository.getText());
 		ConfigLoader.update("dirs/dir[@type='output']", labelOutput.getText());
 		
-		// Erst werden alle Properties, die mit einem "." beginnen gelöscht,
+		// Erst werden alle Properties, die mit einem "." beginnen gelï¿½scht,
 		// dann werden die Properties, die in der Table tableAnwendungen
 		// eingetragen sind, gesetzt. 
-		// Alle Properties löschen, die mit einem "." beginnen.
+		// Alle Properties lï¿½schen, die mit einem "." beginnen.
 		
 		logger.warn("Not implemented from here ...");/*
 		for (Enumeration e = properties.propertyNames(); e.hasMoreElements();)
@@ -535,7 +535,7 @@ public class EinstellungenDialog extends Dialog
 			}
 		}
 		
-		// Alle Einträge von tableAnwendungen als Properties setzen.
+		// Alle Eintrï¿½ge von tableAnwendungen als Properties setzen.
 		for (int i=0; i<tableAnwendungen.getItemCount(); i++)
 		{
 			TableItem ti = tableAnwendungen.getItem(i);
@@ -547,7 +547,7 @@ public class EinstellungenDialog extends Dialog
 	}
 	
 	/**
-	 * btnCancel schließt den Dialog ohne Rückgabe der 
+	 * btnCancel schlieï¿½t den Dialog ohne Rï¿½ckgabe der 
 	 * eingetragenen Werte.
 	 * Die Properties werden nicht neu gesetzt.
 	 */
