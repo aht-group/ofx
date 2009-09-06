@@ -55,7 +55,7 @@ public class Parser{
 		 db.setErrorHandler(new LogErrorHandler(Logfile));
 		 doc = db.parse(new File(Dateiname));
 
-		 // Auch die folgenden Anweisungen brachten keinen Erfolg für
+		 // Auch die folgenden Anweisungen brachten keinen Erfolg fÃ¼r
 		 // die Ausgabe als ISO-8859-1.
 		 // InputSource is = new InputSource(new FileInputStream(Dateiname));
 		 // is.setEncoding(Encoding);

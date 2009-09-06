@@ -25,17 +25,17 @@ import org.w3c.dom.NodeList;
 
 /**
  * Die Klasse wandelt Zeichenfolgen in andere Zeichenfolgen um. Die Zeichen, die
- * umzuwandeln sind werden in Form eines XML-Objektes bzw. -Datei übergeben. Die
- * Elemente, in denen die Zeichen nicht gewandelt werden dürfen werden in einer
- * sogenannten Auschlußliste spezifiziert.
+ * umzuwandeln sind werden in Form eines XML-Objektes bzw. -Datei ï¿½bergeben. Die
+ * Elemente, in denen die Zeichen nicht gewandelt werden dï¿½rfen werden in einer
+ * sogenannten Auschluï¿½liste spezifiziert.
  */
 public class MappingPreprocessor
 {
-  // Das Array für die Ersetzungsliste
+  // Das Array fï¿½r die Ersetzungsliste
   // als sortierte Menge
   SortedSet EntrySet;
 
-  // Das Array für die Ausschlußliste
+  // Das Array fï¿½r die Ausschluï¿½liste
   private String[] ExclusionElement;
   
   
@@ -54,11 +54,11 @@ public class MappingPreprocessor
 
     System.out.println("Dateiname ConversionList: " + FilenameConversionList);
     
-    // Bestimmen der Dateierweiterung für die Ausgabedatei
+    // Bestimmen der Dateierweiterung fï¿½r die Ausgabedatei
     String sNewFileExtension = "." + "tex.xml";
       
     //------------------------------------------------
-    // Erzeugen eines Arrays für die Ersetzungsliste
+    // Erzeugen eines Arrays fï¿½r die Ersetzungsliste
     NodeList nlFrom = docConversionList.getElementsByTagName("From");
     NodeList nlTo   = docConversionList.getElementsByTagName("To");
 
@@ -83,7 +83,7 @@ public class MappingPreprocessor
     */
 
     //------------------------------------------------
-    // Erzeugen eines Arrays für die Ausschlußliste
+    // Erzeugen eines Arrays fÃ¼r die AusschluÃŸliste
     NodeList nl = docConversionList.getElementsByTagName("Element");
     ExclusionElement = new String[nl.getLength()];
 
@@ -173,15 +173,15 @@ public class MappingPreprocessor
 
   /**
    * Die Methode convert ist eine rekursive Methode.
-   * Es werden alle Knoten des übergebenen DOM-Trees rekursiv durchlaufen.
-   * Dabei wird auf alle Knoten, die nicht zur Ausschlußliste gehören,
+   * Es werden alle Knoten des ï¿½bergebenen DOM-Trees rekursiv durchlaufen.
+   * Dabei wird auf alle Knoten, die nicht zur Ausschluï¿½liste gehï¿½ren,
    * die Ersetzungstabelle angewandt.
    */
 	public void convert(Node n)
 	{
 		// - alle Knoten durchlaufen
-		// - Knoten des Typs Node.ELEMENT_NODE, deren Namen in der Ausschlußliste steht
-		//   werden übersprungen
+		// - Knoten des Typs Node.ELEMENT_NODE, deren Namen in der Ausschluï¿½liste steht
+		//   werden ï¿½bersprungen
 		// - Knoten des Typs Node.TEXT_NODE werden mit der Ersetzungstabelle bearbeitet
 
 		int i;
@@ -214,7 +214,7 @@ public class MappingPreprocessor
 			      while ( pos <= s.length() )
 			      {
 			        weiter = true;
-			        // für jeden Eintrag in der Entry-Liste
+			        // fï¿½r jeden Eintrag in der Entry-Liste
 			        for (it = EntrySet.iterator(); (it.hasNext() && weiter); )
 			        {
 			          cte = (ConversionTableEntry) it.next();
@@ -274,7 +274,7 @@ public class MappingPreprocessor
       while ( pos <= s.length() )
       {
         weiter = true;
-        // für jeden Eintrag in der Entry-Liste
+        // fï¿½r jeden Eintrag in der Entry-Liste
         for (it = EntrySet.iterator(); (it.hasNext() && weiter); )
         {
           cte = (ConversionTableEntry) it.next();
@@ -305,7 +305,7 @@ public class MappingPreprocessor
   } // convert
 
   /**
-   * Übergabe  des Dateinamens der Config-Datei
+   * ï¿½bergabe  des Dateinamens der Config-Datei
    * @param argv[]
    * @roseuid 3B83803902F8
    */

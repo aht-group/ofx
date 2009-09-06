@@ -91,7 +91,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 	}
 	
 	/**
-	 * Gibt verfügbare Formate zurück
+	 * Gibt verfÃ¼gbare Formate zurÃ¼ck
 	 * @author Thorsten
 	 */
 	public List<OfxFormat> getAvailableFormats(OfxApplication ofxA) throws ProductionSystemException
@@ -165,7 +165,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 		sbParameters.append(" -Dapplication="+ spref.getApplication());
 		sbParameters.append(" -Dcoursename="+ spref.getProject());
 		sbParameters.append(" -Dmasterfile="+ spref.getDocument());
-			//TODO Thorsten productionDir Methode erstmal nicht berücksichtigt
+			//TODO Thorsten productionDir Methode erstmal nicht berÃ¼cksichtigt
 			//+ " -Ddocumentdir="	+ request.getProductionDir()
 		sbParameters.append(" -Ddocumentdir= ");
 		sbParameters.append(" -Dformat="+ spref.getFormat());
@@ -187,7 +187,7 @@ public class DirectProducer extends AbstractProducer implements Producer
 		}
 		logger.debug("Spawn: "+sbCmd.toString());
 
-//		Unter Windows müssen die Backslashes ersetzt werden
+//		Unter Windows mï¿½ssen die Backslashes ersetzt werden
 		pc=spawn(sbCmd.toString().replace('\\','/'));
 	}
 	

@@ -55,25 +55,25 @@ public class XMLLogger
 		
 		eError.setAttribute(ASSISTANTURL,assistanturl);
 		
-		//Message wird hinzugefügt
+		//Message wird hinzugefï¿½gt
 		Element eMessage = XMLDoc.createElement("message");
 		eMessage.appendChild(XMLDoc.createTextNode(message));
 		
-		//Hint wird hinzugefügt
+		//Hint wird hinzugefï¿½gt
 		Element eHint = XMLDoc.createElement("hint");
 		eHint.appendChild(XMLDoc.createTextNode(hint));
 		
 		eError.appendChild(eMessage);
 		eError.appendChild(eHint);
 		
-		//Position und Message werden zum Error Hinzugefügt
+		//Position und Message werden zum Error Hinzugefï¿½gt
 				
 		MainNode.appendChild(eError);
 		
 		
 		return true;
-	
 	}
+	
 	public boolean addError(String type, String xPath, String assistanturl, String message, String hint)
 	{
 		Element eError = XMLDoc.createElement(XML_DOC_ERROR);
@@ -83,25 +83,24 @@ public class XMLLogger
 		eError.setAttribute(XPATH,xPath);
 		eError.setAttribute(ASSISTANTURL,assistanturl);
 		
-		//Message wird hinzugefügt
+		//Message wird hinzugefÃ¼gt
 		Element eMessage = XMLDoc.createElement("message");
 		eMessage.appendChild(XMLDoc.createTextNode(message));
 		
-		//Hint wird hinzugefügt
+		//Hint wird hinzugefÃ¼gt
 		Element eHint = XMLDoc.createElement("hint");
 		eHint.appendChild(XMLDoc.createTextNode(hint));
 		
 		eError.appendChild(eMessage);
 		eError.appendChild(eHint);
 		
-		//Position und Message werden zum Error Hinzugefügt
+		//Position und Message werden zum Error HinzugefÃ¼gt
 				
 		MainNode.appendChild(eError);
 		
-		
 		return true;
-	
 	}
+	
 	public boolean addError(String ID,String Error)
 	{
 		Element eError = XMLDoc.createElement(XML_DOC_ERROR);
@@ -120,13 +119,11 @@ public class XMLLogger
 		eMessage.appendChild(ErrorText);
 		
 		
-		//		Hint wird hinzugefügt
+		//		Hint wird hinzugefÃ¼gt
 		Text HintText = XMLDoc.createTextNode("Latex Syntax Error");
 		eHint.appendChild(HintText);
 		
-		
-		
-		//		Message und Hint werden zum Error Hinzugefügt
+		//		Message und Hint werden zum Error HinzugefÃ¼gt
 		eError.appendChild(eMessage);
 		eError.appendChild(eHint);
 	
@@ -134,6 +131,7 @@ public class XMLLogger
 		MainNode.appendChild(eError);
 		return true;
 	}
+	
 	public boolean Save()
 	{
 		try
@@ -189,7 +187,7 @@ public class XMLLogger
 			  //db.setErrorHandler(new OwnErrorHandler(Dateiname));
 			  doc = db.newDocument();
 				
-			  // Auch die folgenden Anweisungen brachten keinen Erfolg für
+			  // Auch die folgenden Anweisungen brachten keinen Erfolg fï¿½r
 			  // die Ausgabe als ISO-8859-1.
 			  // InputSource is = new InputSource(new FileInputStream(Dateiname));
 			  // is.setEncoding(Encoding);

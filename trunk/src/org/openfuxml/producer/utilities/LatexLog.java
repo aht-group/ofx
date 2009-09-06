@@ -86,7 +86,7 @@ public class LatexLog {
 	}
 	private String[] splitError(String ErrorMessage)
 	{
-            //StringArray wird zurück gegeben
+            //StringArray wird zurï¿½ck gegeben
             //3 Strings enthalten
             //1. Fehlermeldung
             //2. Formel
@@ -98,7 +98,7 @@ public class LatexLog {
 		String[] sError = ErrorMessage.split("\n");
 		String[] vReturn = new String[3];
 		
-		vReturn[0] = sError[0]; //sError[0] enthält immer die Zeile mit dem ! 
+		vReturn[0] = sError[0]; //sError[0] enthï¿½lt immer die Zeile mit dem ! 
 		vReturn[1] = "";
 		for (t = 1;t < sError.length;t++)
                 {
@@ -132,7 +132,7 @@ public class LatexLog {
 	{
 		//--------------------------------------------------
 		//Funktion Filter aus einer ErrorMessage 
-		// Die Line heraus und gibt sie als int zurück
+		// Die Line heraus und gibt sie als int zurï¿½ck
 		//--------------------------------------------------
 		try
 		{
@@ -160,13 +160,13 @@ class LatexLogFile
 {
 	String aktFile;				//String des aktuellen Logfiles
 	String aktZeile;			//String der aktuellen Zeile 
-	LineNumberReader LNR;		//Leser für File
+	LineNumberReader LNR;		//Leser fï¿½r File
 	
 	boolean EndOfText;			//True wenn ende des Textes erreicht wurde
 
 	//----------------------------
-	// Konstruktor für das LogFile
-	// 	übergeben wird Dateiname
+	// Konstruktor fï¿½r das LogFile
+	// 	ï¿½bergeben wird Dateiname
 	//----------------------------
 	LatexLogFile(String Filename)	
 	{
@@ -177,9 +177,9 @@ class LatexLogFile
 	public boolean checkForError()
 	{
 		//-------------------------------------------------------
-		//		Prüfung auf Fehler
+		//		Prï¿½fung auf Fehler
 		//-------------------------------------------------------
-		// überprüft ob ein Fehler im Logfile aufgezeichnet wurde
+		// ï¿½berprï¿½ft ob ein Fehler im Logfile aufgezeichnet wurde
 		//	LNR liest solange bis er auf ein "!" erkennt
 		//	Dann wird aktZeile auf selbige gesetzt
 		//-------------------------------------------------------
@@ -196,12 +196,12 @@ class LatexLogFile
 			//solange das ende des Files nicht erreicht ist
 			while((sLine = LNR.readLine()) != null)	
 			{
-				if (sLine.length() > 0)				//überprüfung ob Zeichen in Zeile
+				if (sLine.length() > 0)				//ï¿½berprï¿½fung ob Zeichen in Zeile
 				{
 					if ( sLine.charAt(0) == '!')	//wenn erstes Zeichen ein "!" 
 					{ 
 						this.aktZeile = sLine;		//dann setzen der aktuellen Zeile
-						return true;				//und rückgabe von True
+						return true;				//und rï¿½ckgabe von True
 					}//if
 				}//if 
 			}//while 
@@ -210,28 +210,28 @@ class LatexLogFile
 		{
 			e.printStackTrace();
 			EndOfText = true;
-			return false;	//False wird zurück gegeben
+			return false;	//False wird zurï¿½ck gegeben
 		}
 		
 		EndOfText = true;	//Ende des Files erreicht und keinen Fehler gefunden	
-		return false;		//False wird zurück gegeben
+		return false;		//False wird zurï¿½ck gegeben
 	}
 	public String getNextError()
 	{
 		//--------------------------------------------------
-		//			gibt den nächsten Fehler zurück
+		//			gibt den nï¿½chsten Fehler zurï¿½ck
 		//--------------------------------------------------
 		
 		String vReturn;				//String der Erromeldung
-		String line;				//speicher für Zeile
+		String line;				//speicher fï¿½r Zeile
 		
-		if (EndOfText == false)		//überprüfung ob ende des Textes schon erreicht wurde
+		if (EndOfText == false)		//ï¿½berprï¿½fung ob ende des Textes schon erreicht wurde
 		{
 			vReturn = this.aktZeile + "\n";		//erstmal wird aktuelle Zeile geschrieben
 			
 			while((line = getNextLine()) != null)	//getNextLine 
 			{
-				vReturn +=  line + "\n";	//Solange was gefunden wird, wird angehängt
+				vReturn +=  line + "\n";	//Solange was gefunden wird, wird angehï¿½ngt
 			}//while
 			if (EndOfText == true)
 			{
@@ -251,33 +251,33 @@ class LatexLogFile
 	private String getNextLine()
 	{
 		//--------------------------------------------------------
-		//		gibt die nächste Zeile zurück
+		//		gibt die nÃ¤chste Zeile zurÃ¼ck
 		//--------------------------------------------------------
 		// Solange kein neuer Fehler erkannt wird
-		//  wird neuer Fehler erkannt wird null zurück gegeben
+		//  wird neuer Fehler erkannt wird null zurÃ¼ck gegeben
 		//--------------------------------------------------------
 		
-		String sLine;		//speicher für gelesene Zeile
+		String sLine;		//speicher fÃ¼r gelesene Zeile
 		
 		try
 		{
-			while((sLine = LNR.readLine()) != null)	//überprüfung ob Ende erreicht
+			while((sLine = LNR.readLine()) != null)	//ÃœberprÃ¼fung ob Ende erreicht
 			{
-				if (sLine.length() > 0)				//überprüfung ob Leerzeile
+				if (sLine.length() > 0)				//ÃœberprÃ¼fung ob Leerzeile
 				{
-					if ( sLine.charAt(0) == '!')	//überprüfung ob neue Fehlermeldung anfängt
+					if ( sLine.charAt(0) == '!')	//ÃœberprÃ¼fung ob neue Fehlermeldung anfÃ¤ngt
 					{ 
 						this.aktZeile = sLine;		//aktZeile wird gesetzt	
-						return null;				//null zurückgebeben
+						return null;				//null zurÃ¼ckgebeben
 					}//if
 					else
 					{
-						return sLine;				//nur die Zeile wird zurück gegeben
+						return sLine;				//nur die Zeile wird zurÃ¼ck gegeben
 					}//else
 				}
 				else
 				{
-					return "\n";					//gibt leerzeile zürck wenn eine gefunden wurde
+					return "\n";					//gibt leerzeile zÃ¼rck wenn eine gefunden wurde
 				}//else
 			}//while
 		}//try
@@ -296,12 +296,12 @@ class LatexLogFile
 class LatexTexFile
 {
 	String aktFile;				//String des aktuellen Logfiles							//Aktuelles TexFile
-	LineNumberReader LNR;			//Leser für File
+	LineNumberReader LNR;			//Leser fï¿½r File
 
 	
 	
 	//-------------------Konstruktor---------------------------
-	//	FileName des TexFiles wird übergeben und gesetzt
+	//	FileName des TexFiles wird ï¿½bergeben und gesetzt
 	//---------------------------------------------------------
 	LatexTexFile(String FileName)
 	{		
@@ -309,16 +309,16 @@ class LatexTexFile
 	}
 	
 	//----------------------Funktionen---------------------------
-	// Funktion gibt Identifiere zurück,
-	//	der in der übergebenen Zeile gefunden wird
+	// Funktion gibt Identifiere zurï¿½ck,
+	//	der in der ï¿½bergebenen Zeile gefunden wird
 	//-----------------------------------------------------------
         public int LineCounter;
         
 	public String getID(int LineNumber)
 	{
-		//Funktion öffnet File
+		//Funktion ï¿½ffnet File
 		//Springt zur Zeile
-		//gibt ID zurück
+		//gibt ID zurï¿½ck
 		try
 		{
 			File f = new File(aktFile);

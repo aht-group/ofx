@@ -134,12 +134,11 @@ public class TaggedEquationFilter {
 		String hashString= "";
 		Vector v = new Vector();
 
-
-
 		nl = doc.getChildNodes();
 
 		//Durchlauf aller FormelDefinitionen		
-		for (int k = 0; k < elements.length; k++) {
+		for (int k = 0; k < elements.length; k++)
+		{
 			nl = doc.getElementsByTagName(elements[k]);
 
 			//Durchlauf aller gefundenen Formeln		
@@ -149,7 +148,7 @@ public class TaggedEquationFilter {
 				
 				e = (Element) nl.item(i);
 				e.normalize();
-				//Überprüfung ob "FormelArray" oder "FormelArray_num"
+				//ÃœberprÃ¼fung ob "FormelArray" oder "FormelArray_num"
 				if (e.getParentNode().getNodeName().equalsIgnoreCase("formelarray"))
 				{					
 					continue;
