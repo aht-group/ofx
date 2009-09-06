@@ -70,7 +70,7 @@ public class MsiXmlCreation {
 		sb.append("<?xml version='1.0' encoding='utf-8'?>" +linebreak);
 		sb.append("<Wix xmlns='http://schemas.microsoft.com/wix/2003/01/wi'>" + linebreak);
 		sb.append("<Product Id='87952548-8B19-4192-B997-05C2C55C9B7D' Name='openFuXML' Language='1033' Version='@@@openfuxml-version@@@' Manufacturer='OpenSource project hostet at SourceForge'>" + linebreak);
-		sb.append("    <Package Id='34BD222D-7C1A-4660-873D-07185FD40E88' Description='Redaktionssystem fŸr professionelle Dokumente in Forschung und Lehre' Comments='Install Package for openFuXML on Windows Machines' InstallerVersion='200' Compressed='yes' />" + linebreak);
+		sb.append("    <Package Id='34BD222D-7C1A-4660-873D-07185FD40E88' Description='Redaktionssystem fÃ¼r professionelle Dokumente in Forschung und Lehre' Comments='Install Package for openFuXML on Windows Machines' InstallerVersion='200' Compressed='yes' />" + linebreak);
 		sb.append("         <Media Id='1' Cabinet='simple.cab' EmbedCab='yes' />" + linebreak);
 		sb.append("         <Directory Id='TARGETDIR' Name='SourceDir'>" + linebreak);
 		sb.append("         <Directory Id='ProgramFilesFolder' Name='PFiles'>" + linebreak);

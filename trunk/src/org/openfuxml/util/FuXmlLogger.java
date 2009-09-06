@@ -119,7 +119,7 @@ public class FuXmlLogger
 		isInited=true;
 	}
 	
-	//Beim Starten werden dem Logger informationen über Client und aus dem Request übergeben
+	//Beim Starten werden dem Logger informationen Ã¼ber Client und aus dem Request Ã¼bergeben
 	
 	public static void productionLog(String method,String application,String project,
 			String document,String format, String username,	
