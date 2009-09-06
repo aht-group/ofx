@@ -17,7 +17,7 @@ public class OfxSectionEmitter extends SimpleMappingEmitter
 	
 	public OfxSectionEmitter(EmitterFactory ef)
 	{
-		super(ef,"section");
+		super(ef,"abschnitt");
 	}
 
 	@Override

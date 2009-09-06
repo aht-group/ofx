@@ -24,6 +24,7 @@ public class TestWikiReplace
 		Wikireplace wikireplace = new Wikireplace();
 		wikireplace.setFrom("a");
 		wikireplace.setTo("b");
+		wikireplace.setDescription("Description");
 		
 		Wikicontainer container = new Wikicontainer();
 		container.getWikireplace().add(wikireplace);

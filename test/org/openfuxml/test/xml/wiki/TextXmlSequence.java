@@ -40,7 +40,7 @@ public class TextXmlSequence
 		{
 			File f = new File(dirName+"/"+article+"-"+TestWiki.Status.xhtmlProcessed+".xhtml");
 			doc = new SAXBuilder().build( f );
-			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
+			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat());
 			xmlOut.output(doc, System.out);
 		}
 		catch (JDOMException e) {logger.error(e);}
@@ -53,7 +53,7 @@ public class TextXmlSequence
 		{
 			XhtmlProcessor xhtmlP = new XhtmlProcessor(config);
 			Element result = xhtmlP.removeOfxElement(doc.getRootElement(), "ofxgallery", 0);
-			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
+			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat());
 			xmlOut.output(result, System.out);
 		}
 		catch (IOException e) {logger.error(e);}

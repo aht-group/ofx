@@ -19,16 +19,19 @@ import org.openfuxml.wiki.data.jaxb.Wikireplace;
 public class WikiProcessor
 {
 	static Logger logger = Logger.getLogger(WikiProcessor.class);
+	public static enum InjectionType {xml,wiki};
+	
 	
 	private List<Wikireplace> wikiReplaces;
-	private List<Wikiinjection> wikiInjections;
+	private List<Wikiinjection> wikiInjectionsXml,wikiInjectionsWiki;
 	
 	private String wikiText;
 	
 	public WikiProcessor(Configuration config)
 	{
 		wikiReplaces = new ArrayList<Wikireplace>();
-		wikiInjections = new ArrayList<Wikiinjection>();
+		wikiInjectionsXml = new ArrayList<Wikiinjection>();
+		wikiInjectionsWiki = new ArrayList<Wikiinjection>();
 		
 		MultiResourceLoader mrl = new MultiResourceLoader();
 		int numberTranslations = config.getStringArray("wikiprocessor/file").length;
@@ -38,7 +41,7 @@ public class WikiProcessor
 			loadWikiContainer(xmlFile,mrl);
 		}
 		logger.debug("Replacements loaded: "+wikiReplaces.size());
-		logger.debug("Injections loaded: "+wikiInjections.size());
+		logger.debug("Injections loaded: xml="+wikiInjectionsXml.size()+" wiki="+wikiInjectionsWiki.size());
 	}
 	
 	private void loadWikiContainer(String xmlFile,MultiResourceLoader mrl)
@@ -50,7 +53,14 @@ public class WikiProcessor
 			Unmarshaller u = jc.createUnmarshaller();
 			container = (Wikicontainer)u.unmarshal(mrl.searchIs(xmlFile));
 			wikiReplaces.addAll(container.getWikireplace());
-			wikiInjections.addAll(container.getWikiinjection());
+			for(Wikiinjection wikiInjection : container.getWikiinjection())
+			{
+				switch (InjectionType.valueOf(wikiInjection.getType()))
+				{
+					case xml: 	wikiInjectionsXml.add(wikiInjection);break;
+					case wiki:	wikiInjectionsWiki.add(wikiInjection);break;
+				}
+			}
 		}
 		catch (JAXBException e) {logger.error(e);}
 		catch (FileNotFoundException e) {logger.error(e);}
@@ -68,7 +78,7 @@ public class WikiProcessor
 	{
 		this.wikiText=wikiText;
 		for(Wikireplace replace : wikiReplaces){wikiReplace(replace);}
-		for(Wikiinjection inject : wikiInjections){wikiInject(inject);}
+		for(Wikiinjection inject : wikiInjectionsXml){wikiInject(inject);}
 		return this.wikiText;
 	}
 
@@ -86,7 +96,6 @@ public class WikiProcessor
 			int to = wikiText.indexOf("</"+inject.getTag()+">");
 			sbDebug.append("Injection: "+from+" "+to);
 			sbDebug.append(" oldSize="+wikiText.length());
-			String injectionArea = wikiText.substring(from, to+inject.getTag().length()+3);
 			StringBuffer sb = new StringBuffer();
 				sb.append(wikiText.substring(0, from-1));
 				if(inject.getId()!=null && inject.getId().length()>0){sb.append(getInjection(inject));}

@@ -42,7 +42,7 @@ public class WikiContentIO
 		{
 			Reader sr = new StringReader(content);  
 			Document doc = new SAXBuilder().build(sr);
-			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
+			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat() );
 			
 			File f = new File(dirName+"/"+fileName);
 			OutputStream os = new FileOutputStream(f);

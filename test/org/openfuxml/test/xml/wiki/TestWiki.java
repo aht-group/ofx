@@ -53,18 +53,29 @@ public class TestWiki
 		WikiContentIO.writeTxt("dist", article+"-"+Status.txtFetched+".txt", wikiText);
 		return wikiText;
 	}
-		
+	
+	private void delete(File f)
+	{
+		if(f.exists() && f.isFile())
+		{
+			logger.debug("Delete: "+f.getAbsolutePath());
+			f.delete();
+		}
+	}
+	
 	public void testOfx()
 	{
 		String article = config.getString("wiki/article");
 		File f = new File(dirName+"/"+article+"-"+Status.txtFetched+".txt");
 		String wikiText;
 		
-		boolean fExists = f.exists();
-		boolean fIsFile = f.isFile();
-		logger.debug(f.getAbsoluteFile()+" exists="+fExists+" isFile="+fIsFile);
+		delete(new File(dirName,article+"-"+Status.txtFetched+".txt"));
+		delete(new File(dirName,article+"-"+Status.txtProcessed+".txt"));
+		delete(new File(dirName,article+"-"+Status.xhtmlRendered+".xhtml"));
+		delete(new File(dirName,article+"-"+Status.xhtmlFinal+".xhtml"));
+		delete(new File(dirName,article+"-"+Status.ofx+".xml"));
 		
-		if(fExists && fIsFile){wikiText = WikiContentIO.loadTxt(dirName,article+"-"+Status.txtFetched+".txt");}
+		if(f.exists() && f.isFile()){wikiText = WikiContentIO.loadTxt(dirName,article+"-"+Status.txtFetched+".txt");}
 		else{wikiText = fetchTextHttp(article);}
 		
 		wikiText = wikiP.process(wikiText);
@@ -84,15 +95,14 @@ public class TestWiki
 		WikiContentIO.writeXml(dirName, article+"-"+Status.xhtmlFinal+".xhtml", xHtml);
 		
 		xHtml=xhtmlP.removeWellFormed(xHtml);
-		OpenFuxmlGenerator ofxGenerator = new OpenFuxmlGenerator();
 		
+		OpenFuxmlGenerator ofxGenerator = new OpenFuxmlGenerator();
     	String htmlFooter = DocbookGenerator.FOOTER;
-    	String htmlTitle = "Big Docbook Test";
         
 		try
 		{
-			String output = ofxGenerator.create(xHtml, htmlFooter, htmlTitle);
-			WikiContentIO.writeTxt(dirName, article+"-"+Status.ofx+".xml", output);
+			String output = ofxGenerator.create(xHtml, htmlFooter, article);
+			WikiContentIO.writeXml(dirName, article+"-"+Status.ofx+".xml", output);
 		}
 		catch (IOException e) {logger.error(e);}
 		catch (ParserConfigurationException e) {logger.error(e);}

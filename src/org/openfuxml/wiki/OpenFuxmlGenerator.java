@@ -20,8 +20,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-
-
 public class OpenFuxmlGenerator
 {
 	static Logger logger = Logger.getLogger(OpenFuxmlGenerator.class);
@@ -37,6 +35,8 @@ public class OpenFuxmlGenerator
 		objects[0] = titleText;
 		String header = MessageFormat.format(WikiTemplates.htmlHeader, objects);
 
+		logger.debug("Header ist: "+header);
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append(header);
 		sb.append(xhtmlContent);
@@ -46,9 +46,8 @@ public class OpenFuxmlGenerator
 		InputSource inputSource = new InputSource(new StringReader(sb.toString()));
 
 		SAXParserFactory factory = SAXParserFactory.newInstance();
-
-		factory.setNamespaceAware(true);
-		factory.setValidating(false);
+			factory.setNamespaceAware(true);
+			factory.setValidating(false);
 		SAXParser saxParser = factory.newSAXParser();
 
 		XMLReader xmlReader = saxParser.getXMLReader();

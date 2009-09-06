@@ -44,16 +44,17 @@ public class HtmlToOpenFuxmlContentHandler implements ContentHandler
 		catch (XMLStreamException e) {throw new SAXException(e);}
 	}
 
-	public void endDocument() throws SAXException {
-		try {
+	public void endDocument() throws SAXException
+	{
+		try
+		{
 			emitter.close();
 			emitter = null;
 			writer.writeEndDocument();
 
 			acronyms.clear();
-		} catch (XMLStreamException e) {
-			throw new SAXException(e);
 		}
+		catch (XMLStreamException e) {throw new SAXException(e);}
 	}
 
 	public void endElement(String uri, String localName, String name) throws SAXException
