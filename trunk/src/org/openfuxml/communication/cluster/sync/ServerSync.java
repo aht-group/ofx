@@ -16,15 +16,15 @@ public interface ServerSync
 {
 	/**
 	 * @author Thorsten
-	 * Das gesamte Repository für das aktive Projeckt wird mit dem Server
-	 * synchronisiert. Der Server überschreibt lokale Änderungen.
+	 * Das gesamte Repository fÃ¼r das aktive Projeckt wird mit dem Server
+	 * synchronisiert. Der Server Ã¼berschreibt lokale Ã„nderungen.
 	 */
 	public void getRepo(ProductionRequest request);
 	
 	/**
 	 * @author Thorsten
-	 * Das gesamte Output für das aktive Projeckt wird mit dem Server
-	 * synchronisiert. Der Server überschreibt lokale Änderungen.
+	 * Das gesamte Output fÃ¼r das aktive Projeckt wird mit dem Server
+	 * synchronisiert. Der Server Ã¼berschreibt lokale Ã„nderungen.
 	 */
 	public void getOutput(ProductionRequest request);
 	
@@ -32,13 +32,13 @@ public interface ServerSync
 	
 	/**
 	 * @author Thorsten
-	 * Prüft, ob die Synchronisationsmethode verfügbar ist.
+	 * PrÃ¼ft, ob die Synchronisationsmethode verfÃ¼gbar ist.
 	 */
 	public boolean available() throws ProductionHandlerException;
 	
 	/**
 	 * @author Thorsten
-	 * Definiert die Sync-Ziele f+ür die aktuelle Verbindung.
+	 * Definiert die Sync-Ziele fÃ¼r die aktuelle Verbindung.
 	 */
 	public void setSyncLocations(Collection<SyncLocation> sls);
 }
