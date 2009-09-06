@@ -134,7 +134,7 @@ public class UnisonSync implements ServerSync
 //			System.out.println("Report wird explizit geloescht: "+s);
 //			writeFile(s,sysprops.getProperty("ilona.output")+"/batch.bat");
 //			spawn("sftp -b "+sysprops.getProperty("ilona.output")+"/batch.bat "+ssh);
-			logger.warn("Noch nicht implementiert: Explizites Löschen des Repors!");
+			logger.warn("Noch nicht implementiert: Explizites LÃ¶schen des Repors!");
 			sync(lokal, remote, force, path);
 		}
 */	}

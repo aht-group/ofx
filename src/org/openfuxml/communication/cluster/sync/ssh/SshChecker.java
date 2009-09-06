@@ -39,7 +39,7 @@ public class SshChecker
 		ArrayList<SshCheckerThread> ssCCt=new ArrayList<SshCheckerThread>();
 		for(String url : alSshCheckTargets)
 		{
-			logger.debug("Prüfe: "+url);
+			logger.debug("PrÃ¼fe: "+url);
 			SshTarget ssh = SshTarget.getSshTarget(url);
 			if(!checkedConnections.stillVerified(ssh.getUser()+"@"+ssh.getHost()))
 			{
