@@ -1,27 +1,44 @@
 <?xml version="1.0" ?>
 <project basedir="../..">
-
 	<property file="resources/properties/ant.properties"/>
 	<property name="lib.dir" location="${basedir}/lib" />
 	
 	<!-- Library Definitions: Utils -->
 	<property name="log4j.dir" value="utils/log4j"/><property name="log4j.lib" value="log4j-${log4j-version}.jar" />
 	<property name="commonslang.dir" value="utils/commons/lang"/><property name="commonslang.lib" value="commons-lang-${commonslang-version}.jar" />
-	<property name="jmsutils.dir" value="utils/jmsutils"/><property name="jmsutils.lib" value="jmsutils-${jmsutils-version}.jar" />
-		
+	<property name="jmsutils.dir" value="utils/jms"/><property name="jmsutils.lib" value="jmsutils-${jmsutils-version}.jar" />
+	<property name="exlp.dir" value="utils/exlp"/><property name="exlp.lib" value="exlp-${exlp-version}.jar" />
+	<property name="commonsconfig.dir" value="utils/commons/config"/><property name="commonsconfig.lib" value="commons-configuration-${commonsconfig-version}.jar" />
+	<property name="commonsio.dir" value="utils/commons/io"/><property name="commonsio.lib" value="commons-io-${commonsio-version}.jar" />
+	
 	<!-- Library Definitions: XML -->
 	<property name="jdom.dir" value="xml/jdom"/><property name="jdom.lib" value="jdom-${jdom-version}.jar"/>
 	<property name="jaxb.dir" value="xml/jaxb/${jaxb-version}"/>
-			<property name="jaxbapi.lib" value="jaxb-api-${jaxb-version}.jar"/>
-			<property name="jaxbimpl.lib" value="jaxb-impl-${jaxb-version}.jar"/>
+		<property name="jaxbapi.lib" value="jaxb-api-${jaxb-version}.jar"/>
+		<property name="jaxbimpl.lib" value="jaxb-impl-${jaxb-version}.jar"/>
+	<property name="bliki.dir" value="xml/bliki"/><property name="bliki.lib" value="bliki-core-${bliki-version}.jar"/>
+	<property name="jwbf.dir" value="xml/jwbf"/><property name="jwbf.lib" value="jwbf-${jwbf-version}.jar"/>
+	<property name="htmlcleaner.dir" value="xml/html/cleaner"/><property name="htmlcleaner.lib" value="htmlcleaner-${htmlcleaner-version}.jar" />
 	
 	<!-- Library Definitions: HTTP -->
 	<property name="jsf.dir" value="net/http/jsf/${jsf-version}"/>
-				<property name="jsf-api.lib" value="jsf-api-${jsf-version}.jar"/>
-				<property name="jsf-impl.lib" value="jsf-impl-${jsf-version}.jar"/>
+		<property name="jsf-api.lib" value="jsf-api-${jsf-version}.jar"/>
+		<property name="jsf-impl.lib" value="jsf-impl-${jsf-version}.jar"/>
 	<property name="servlet.dir" value="net/http/servlet"/><property name="servlet.lib" value="servlet-api-${servlet-version}.jar"/>
 	<property name="jsp.dir" value="net/http/jsp"/><property name="jsp-api.lib" value="jsp-api-${jsp-version}.jar"/>
 	<property name="jstl.dir" value="net/http/jstl"/><property name="jstl.lib" value="jstl-${jstl-version}.jar" />
+	
+	<!-- Library Definitions: Net-->
+	<property name="jsch.dir" value="net/jsch"/><property name="jsch.lib" value="jsch-${jsch-version}.jar"/>
+	<property name="jmdns.dir" value="net/jmdns"/><property name="jmdns.lib" value="jmdns-${jmdns-version}.jar"/>
+	<property name="mail.dir" value="net/mail"/><property name="mail.lib" value="mail-${mail-version}.jar"/>
+	
+	<!-- Jboss -->
+	<property name="jboss.dir" value="jboss/${jboss-version}"/>
+		<property name="jboss-ejb3.lib" value="ejb3-persistence.jar"/>
+		<property name="jboss-javaee.lib" value="jboss-javaee.jar"/>
+		<property name="jboss-stax.lib" value="stax-api.jar"/>
+		<property name="jboss-ejb3extapi.lib" value="jboss-ejb3-ext-api.jar"/>
 	
 	<target name="00 - Classpath" description="Echos Classpath">
 		<echo level="info">Using ${ant.version} in ${ant.home}</echo>
@@ -29,14 +46,27 @@
 		<echo level="info">   Utils : ${log4j.dir}/${log4j.lib}</echo>
 		<echo level="info">           ${commonslang.dir}/${commonslang.lib}</echo>
 		<echo level="info">           ${jmsutils.dir}/${jmsutils.lib}</echo>
+		<echo level="info">           ${exlp.dir}/${exlp.lib}</echo>
+		<echo level="info">           ${commonsconfig.dir}/${commonsconfig.lib}</echo>
+		<echo level="info">           ${commonsio.dir}/${commonsio.lib}</echo>
 		<echo level="info">   XML   : ${jaxb.dir}/${jaxbapi.lib}</echo>
 		<echo level="info">           ${jaxb.dir}/${jaxbimpl.lib}</echo>
 		<echo level="info">           ${jdom.dir}/${jdom.lib}</echo>
+		<echo level="info">           ${bliki.dir}/${bliki.lib}</echo>
+		<echo level="info">           ${jwbf.dir}/${jwbf.lib}</echo>
+		<echo level="info">           ${htmlcleaner.dir}/${htmlcleaner.lib}</echo>
+		<echo level="info">   Net   : ${jsch.dir}/${jsch.lib}</echo>
+		<echo level="info">           ${jmdns.dir}/${jmdns.lib}</echo>
+		<echo level="info">           ${mail.dir}/${mail.lib}</echo>
 		<echo level="info">   HTML  : ${servlet.dir}/${servlet.lib}</echo>
 		<echo level="info">           ${jsp.dir}/${jsp-api.lib}</echo>
 		<echo level="info">           ${jstl.dir}/${jstl.lib}</echo>
 		<echo level="info">           ${jsf.dir}/${jsf-api.lib}</echo>
 		<echo level="info">           ${jsf.dir}/${jsf-impl.lib}</echo>
+		<echo level="info">   JBoss : ${jboss.dir}/${jboss-ejb3.lib}</echo>
+		<echo level="info">           ${jboss.dir}/${jboss-javaee.lib}</echo>
+		<echo level="info">           ${jboss.dir}/${jboss-stax.lib}</echo>
+		<echo level="info">           ${jboss.dir}/${jboss-ejb3extapi.lib}</echo>
     </target>
 	
 </project>

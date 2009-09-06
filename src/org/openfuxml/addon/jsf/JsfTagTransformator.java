@@ -1,10 +1,17 @@
 package org.openfuxml.addon.jsf;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
+import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
 import org.apache.log4j.Logger;
 import org.jdom.DocType;
@@ -22,15 +29,38 @@ public class JsfTagTransformator
 	
 	private File baseDir;
 	private int dtdLevel;
+	private boolean useLog4j;
+	private String logMsg;
+	private Taglib taglib;
 	
 	public JsfTagTransformator(File baseDir,int dtdLevel)
 	{
-		this.baseDir=baseDir;
-		this.dtdLevel=dtdLevel;
-		logger.debug("Using baseDir="+baseDir.getAbsolutePath());
+		this(baseDir,dtdLevel,true);
 	}
 	
-	public void transform(Taglib taglib)
+	public JsfTagTransformator(File baseDir,int dtdLevel,boolean useLog4j)
+	{
+		this.baseDir=baseDir;
+		this.dtdLevel=dtdLevel;
+		this.useLog4j=useLog4j;
+		logMsg="Using baseDir="+baseDir.getAbsolutePath();
+		if(useLog4j){logger.debug(logMsg);}else{System.out.println(logMsg);}
+	}
+	
+	public void readTaglib(String xmlFile)
+	{
+		MultiResourceLoader mrl = new MultiResourceLoader();
+		try
+		{
+			JAXBContext jc = JAXBContext.newInstance(Taglib.class);
+			Unmarshaller u = jc.createUnmarshaller();
+			taglib = (Taglib)u.unmarshal(mrl.searchIs(xmlFile));
+		}
+		catch (JAXBException e) {if(useLog4j){logger.error(e);}else{e.printStackTrace();}}
+		catch (FileNotFoundException e) {if(useLog4j){logger.error(e);}else{e.printStackTrace();}}
+	}
+	
+	public void transform()
 	{
 		for(Tag tag : taglib.getTag())
 		{
@@ -65,7 +95,6 @@ public class JsfTagTransformator
 			debug(doc);
 			save(doc, tag);
 		}
-		
 	}
 	
 	private Element getTitel(Taglib taglib, Tag tag)
@@ -118,7 +147,7 @@ public class JsfTagTransformator
 			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
 			xmlOut.output( doc, System.out );
 		}
-		catch (IOException e) {logger.error(e);}
+		catch (IOException e) {if(useLog4j){logger.error(e);}else{e.printStackTrace();}}
 	}
 	
 	private void save(Document doc,Tag tag)
@@ -134,7 +163,7 @@ public class JsfTagTransformator
 			xmlOut.output( doc, osw );
 			osw.close();os.close();
 		} 
-		catch (IOException e) {logger.error(e);}
+		catch (IOException e) {if(useLog4j){logger.error(e);}else{e.printStackTrace();}}
 	}
 	
 	private DocType getDocType()

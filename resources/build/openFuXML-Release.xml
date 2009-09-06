@@ -74,7 +74,8 @@
 	<property name="commonsjxpath.dir" value="utils/commons/jxpath"/><property name="commonsjxpath.lib" value="commons-jxpath-${commonsjxpath-version}.jar" />
 	<property name="commonsio.dir" value="utils/commons/io"/><property name="commonsio.lib" value="commons-io-${commonsio-version}.jar" />
 	<property name="wix.dir" value="utils/wix"/><property name="wix.zip" value="wix-${wix-version}-binaries.zip" />
-		
+	<property name="exlp.dir" value="utils/exlp"/><property name="exlp.lib" value="exlp-${exlp-version}.jar" />
+	
 	<!-- Library Definitions: GUI-->
 	<property name="swt.dir" value="gui/swt/${swt-version}"/>
 		<property name="swt-win.lib" value="swt-win32-${swt-version}.jar"/>
@@ -101,6 +102,8 @@
 		<property name="jaxbapi.lib" value="jaxb-api-${jaxb-version}.jar"/>
 		<property name="jaxbimpl.lib" value="jaxb-impl-${jaxb-version}.jar"/>
 	<property name="htmlcleaner.dir" value="xml/html/cleaner"/><property name="htmlcleaner.lib" value="htmlcleaner-${htmlcleaner-version}.jar" />
+	<property name="bliki.dir" value="xml/bliki"/><property name="bliki.lib" value="bliki-core-${bliki-version}.jar"/>
+	<property name="jwbf.dir" value="xml/jwbf"/><property name="jwbf.lib" value="jwbf-${jwbf-version}.jar"/>
 	
 	<!-- Library-Definition für JAR-Files  -->
 	<property name="jar.jboss5" value="${jboss-client.lib} ${jboss-system-jmx.lib}"/>
@@ -120,6 +123,7 @@
 		<pathelement location="${lib.dir}/${log4j.dir}/${log4j.lib}"/>
 		<pathelement location="${lib.dir}/${jaf.dir}/${jaf.lib}"/>
 		<pathelement location="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}"/>
+		<pathelement location="${lib.dir}/${exlp.dir}/${exlp.lib}"/>
 		<pathelement location="${lib.dir}/${commonslang.dir}/${commonslang.lib}"/>
 		<pathelement location="${lib.dir}/${commonsconfig.dir}/${commonsconfig.lib}"/>
 		<pathelement location="${lib.dir}/${commonscollections.dir}/${commonscollections.lib}"/>
@@ -143,6 +147,8 @@
 		<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbapi.lib}"/>
 		<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
 		<pathelement location="${lib.dir}/${htmlcleaner.dir}/${htmlcleaner.lib}"/>
+		<pathelement location="${lib.dir}/${bliki.dir}/${bliki.lib}"/>
+		<pathelement location="${lib.dir}/${jwbf.dir}/${jwbf.lib}"/>
 	</path>
 			
 	<target name="00 - Classpath" description="Echos Classpath">
@@ -156,6 +162,7 @@
 		<echo level="info">           ${log4j.dir}/${log4j-zeroconf.lib}</echo>
 		<echo level="info">           ${jaf.dir}/${jaf.lib}</echo>
 		<echo level="info">           ${jmsutils.dir}/${jmsutils.lib}</echo>
+		<echo level="info">           ${exlp.dir}/${exlp.lib}</echo>
 		<echo level="info">           ${ant.dir}/${ant.lib}</echo>
 		<echo level="info">           ${commonslang.dir}/${commonslang.lib}</echo>
 		<echo level="info">           ${commonsconfig.dir}/${commonsconfig.lib}</echo>
@@ -174,6 +181,8 @@
 		<echo level="info">           ${jaxb.dir}/${jaxbapi.lib}</echo>
 		<echo level="info">           ${jaxb.dir}/${jaxbimpl.lib}</echo>
 		<echo level="info">           ${htmlcleaner.dir}/${htmlcleaner.lib}</echo>
+		<echo level="info">           ${bliki.dir}/${bliki.lib}</echo>
+		<echo level="info">           ${jwbf.dir}/${jwbf.lib}</echo>
 
 		<echo level="info">Classpath: ${jfreechart.dir}/${jfreechart.lib}</echo>
 		<echo level="info">Classpath: ${jcommon.dir}/${jcommon.lib}</echo>
@@ -342,6 +351,8 @@
     		<copy file="${lib.dir}/${jaxb.dir}/${jaxbapi.lib}" todir="${copyto.dir}"/>
     		<copy file="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}" todir="${copyto.dir}"/>
     		<copy file="${lib.dir}/${htmlcleaner.dir}/${htmlcleaner.lib}" todir="${copyto.dir}"/>
+    		<copy file="${lib.dir}/${bliki.dir}/${bliki.lib}" todir="${copyto.dir}"/>
+    		<copy file="${lib.dir}/${jwbf.dir}/${jwbf.lib}" todir="${copyto.dir}"/>
     	<!-- JBoss  -->
     		<copy file="${lib.dir}/${jboss.dir}/${jboss-client.lib}" todir="${copyto.dir}"/>
     	<!-- GUI  -->
