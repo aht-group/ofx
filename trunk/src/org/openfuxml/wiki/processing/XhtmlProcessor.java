@@ -18,6 +18,7 @@ import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
+import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -136,7 +137,7 @@ public class XhtmlProcessor
 			doc.addContent(rootElement);
 			
 			StringBufferOutputStream sbos = new StringBufferOutputStream();
-			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
+			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat());
 			xmlOut.output(doc, sbos);
 			xHtmlText=sbos.getStringBuffer().toString();
 		}
@@ -150,8 +151,13 @@ public class XhtmlProcessor
 	{
 		Element newRoot = new Element(oldRoot.getName());
 		
-		//newRoot.setAttributes(oldRoot.getAttributes());
-		newRoot.setText(oldRoot.getText());
+		for(Object oAtt : oldRoot.getAttributes())
+		{
+			Attribute att = (Attribute)oAtt;
+			Attribute newAtt = new Attribute(att.getName(),att.getValue());
+			newRoot.setAttribute(newAtt);
+		}
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append("Tag="+tag+" Level="+level);
 		for(Object o : oldRoot.getContent())
@@ -160,7 +166,6 @@ public class XhtmlProcessor
 			{
 				Text txt = (Text)o;
 				Text newText = new Text(txt.getText());
-				logger.debug("adding: "+newText.getText());
 				newRoot.addContent(newText);
 				sb.append(" txt");
 			}
@@ -178,12 +183,9 @@ public class XhtmlProcessor
 					newRoot.addContent(newChild);
 				}
 			}
-			else
-			{
-				logger.warn("Unknown content: "+o.getClass().getName());
-			}
+			else {logger.warn("Unknown content: "+o.getClass().getName());}
 		}
-		logger.debug(sb);
+		logger.trace(sb);
 		return newRoot;
 	}
 }

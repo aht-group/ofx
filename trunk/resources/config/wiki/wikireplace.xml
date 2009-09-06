@@ -2,4 +2,7 @@
 <wikicontainer xmlns="http://www.openfuxml.org/wiki">
     <wikireplace from="&lt;noinclude&gt;" to=""/>
     <wikireplace from="&lt;/noinclude&gt;" to=""/>
+    <wikireplace from="\{\{Belege\}\}" to="">
+        <description>Removes Belege-Box</description>
+    </wikireplace>
 </wikicontainer>

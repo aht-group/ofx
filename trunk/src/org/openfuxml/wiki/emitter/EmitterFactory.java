@@ -9,7 +9,7 @@ public class EmitterFactory
 	private static Logger logger = Logger.getLogger(EmitterFactory.class);
 	private XMLStreamWriter writer;
 
-	public static enum HtmlElement {p,i,b,strong,ul,li,a,body,sup};
+	public static enum HtmlElement {title,p,i,b,strong,ul,li,a,body,sup};
 	
 	public EmitterFactory(XMLStreamWriter writer)
 	{
@@ -24,7 +24,7 @@ public class EmitterFactory
 			switch (htmlElement)
 			{
 				case sup:	return new SimpleMappingEmitter(this,"hochgestellt");
-				case p:		return new SimpleMappingEmitter(this,"abschnitt");
+				case p:		return new SimpleMappingEmitter(this,"absatz");
 				case i:		return new SimpleMappingEmitter(this,"kursiv");
 				case b:		return new SimpleMappingEmitter(this,"fett");
 				case strong:return new SimpleMappingEmitter(this,"fett");
@@ -32,6 +32,7 @@ public class EmitterFactory
 				case li:	return new SimpleMappingEmitter(this,"listitem", "absatz");
 				case a:		return new AnchorEmitter(this);
 				case body:	return new NestingEmitter(this);
+				case title: return new SimpleMappingEmitter(this,"titel");
 			}
 		}
 		catch (IllegalArgumentException e)
@@ -41,7 +42,7 @@ public class EmitterFactory
 				return new HeaderEmitter(this,Integer.parseInt(elementName.substring(1)));
 			}
 		}
-		logger.debug("Unknown element .. using default structure "+elementName);
+		logger.debug("Unknown element \""+elementName+"\" using default structure");
 		if ("acronym".equals(elementName)) {return new GlosstermEmitter(this);} 
 		else if ("img".equals(elementName)) {return new ImageEmitter(this);}
 		else if ("ol".equals(elementName)) {return new SimpleMappingEmitter(this,"orderedlist");}

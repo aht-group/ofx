@@ -21,8 +21,8 @@ public class WikiTemplates
 		htmlHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
 			+ htmlDoctype
 			+ "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
-			+ "<head>\n"
-			+ "        <title2>{0}</title2>\n   </head>\n"
-			+ "    <body>";
+			+ "<head></head>\n"
+			+ "    <body>"
+			+ "<title>{0}</title>";
 	}
 }

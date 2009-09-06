@@ -27,8 +27,7 @@ public class HeaderEmitter implements Emitter
 	{
 		this.ef=ef;
 		this.headerLevel = headerLevel;
-		if (headerLevel == 1) {sectionName = "chapter";}
-		else {sectionName = "section";}
+		sectionName = "abschnitt";
 		logger.debug("inited sectionName:"+sectionName);
 	}
 

@@ -24,6 +24,7 @@ public class TestWikiInjection
 		Wikiinjection wikiinjection = new Wikiinjection();
 		wikiinjection.setTag("a");
 		wikiinjection.setId("b");
+		wikiinjection.setType("xml");
 		
 		Wikicontainer container = new Wikicontainer();
 		container.getWikiinjection().add(wikiinjection);
