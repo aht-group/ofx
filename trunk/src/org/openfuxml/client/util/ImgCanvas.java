@@ -34,15 +34,15 @@ public class ImgCanvas extends Canvas
 	private int verticalAlignment;
 
 	/**
-	 * Konstruktor für die Klasse ImgCanvas.
+	 * Konstruktor fÃ¼r die Klasse ImgCanvas.
 	 * @param Parent
 	 * 	- Das aufrufende Element
 	 * @param Dateiname
 	 * 	- Name der Grafik, die angezeigt werden soll.
 	 * @param ha
-	 * 	- Angabe für die horizontale Ausrichtung
+	 * 	- Angabe fÃ¼r die horizontale Ausrichtung
 	 * @param va
-	 * 	- Angabe für die vertikale Ausrichtung
+	 * 	- Angabe fÃ¼r die vertikale Ausrichtung
 	 */
 	public ImgCanvas(Composite Parent, String Dateiname, int ha, int va)
 	{
@@ -65,7 +65,7 @@ public class ImgCanvas extends Canvas
 	}
 	
 	/**
-	 * Konstruktor für die Klasse ImgCanvas.
+	 * Konstruktor fï¿½r die Klasse ImgCanvas.
 	 * Die Ausrichtung der Grafik wird auf einen Defaultwert gesetzt.
 	 * @param Parent
 	 * 	- Das aufrufende Element
@@ -89,7 +89,7 @@ public class ImgCanvas extends Canvas
 	
 	private void berechneKoordinaten()
 	{
-		// berechnen der Koordinaten für die Ausgabe des Bildes
+		// berechnen der Koordinaten fï¿½r die Ausgabe des Bildes
 		switch (horizontalAlignment)
 		{
 			case BEGIN:

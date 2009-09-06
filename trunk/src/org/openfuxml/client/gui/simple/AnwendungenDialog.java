@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 /**
- * In dem Dialog AnwendungenDialog kann für einen Dateityp
+ * In dem Dialog AnwendungenDialog kann fï¿½r einen Dateityp
  * eine Anwendung gesetzt werden.
  *  
  * @author Andrea Frank
@@ -39,7 +39,7 @@ public class AnwendungenDialog extends Dialog
 
 	/**
 	 * Erzeugt eine Instanz von AnwendungenDialog.
-	 * Die Eingaben für Dateityp und Anwendungen werden vorbelegt.
+	 * Die Eingaben fÃ¼r Dateityp und Anwendungen werden vorbelegt.
 	 * 
 	 * @param parent
 	 * @param Dateityp
@@ -64,7 +64,7 @@ public class AnwendungenDialog extends Dialog
 	}
 	
 	/**
-	 * Öffnet den Dialog AnwendungenDialog. Dateityp und Anwendung 
+	 * Ã–ffnet den Dialog AnwendungenDialog. Dateityp und Anwendung 
 	 * werden vorbelegt.
 	 * 
 	 * @return Liefert die Eingabe im Dialog als Stringarray der Dimension 2.
@@ -206,14 +206,14 @@ public class AnwendungenDialog extends Dialog
 	}
 	
 	/**
-	 * btnOK prüft verschiedenen Plausis.
-	 * Wenn alles ok ist, wird das Stringarray für das Ergebnis
-	 * mit den Einträgen des Benutzers belegt und der Dialog 
+	 * btnOK prï¿½ft verschiedenen Plausis.
+	 * Wenn alles ok ist, wird das Stringarray fï¿½r das Ergebnis
+	 * mit den Eintrï¿½gen des Benutzers belegt und der Dialog 
 	 * geschlossen.
 	 */
 	public void btnOK()
 	{
-		// Plausiprüfung für den Dateityp
+		// Plausiprï¿½fung fï¿½r den Dateityp
 		if (textDateityp.getText().length() <= 1)
 		{
 			MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR | SWT.OK);
@@ -242,7 +242,7 @@ public class AnwendungenDialog extends Dialog
 		{
 			MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR | SWT.OK);
 			messageBox.setText("Fehler");
-			messageBox.setMessage("Wählen Sie bitte eine Anwendung aus."); 
+			messageBox.setMessage("Wï¿½hlen Sie bitte eine Anwendung aus."); 
 			messageBox.open();
 			BtnAnwendung.setFocus();
 		}
@@ -256,9 +256,9 @@ public class AnwendungenDialog extends Dialog
 	}
 
 	/**
-	 * btnCancel schließt den Dialog ohne Rückgabe der 
+	 * btnCancel schlieï¿½t den Dialog ohne Rï¿½ckgabe der 
 	 * eingetragenen Werte.
-	 * Das Stringarray für das Ergebnis bleibt leer.
+	 * Das Stringarray fï¿½r das Ergebnis bleibt leer.
 	 */
 	public void btnCancel()
 	{

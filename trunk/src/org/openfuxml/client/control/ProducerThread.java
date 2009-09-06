@@ -20,7 +20,7 @@ import org.openfuxml.util.config.OfxPathHelper;
 
 /**
  * ProducerThread implementiert den Thread, in dem die Methoden      
- * producableEntities bzw. produce der DispatcherBean ausgeführt werden.
+ * producableEntities bzw. produce der DispatcherBean ausgefÃ¼hrt werden.
  *   
  * @author Thorsten Kisner
  */
@@ -53,7 +53,7 @@ public class ProducerThread extends Thread
 	/**
 	 * In der Methode run wird unterschieden (typ), welche Methode der DispatcherBean
 	 * aufgerufen wird. Nach  dem Aufruf wird die Bean entfernt und das Ergebnis 
-	 * dem aufrufenden Element übergeben (Parent.fuelleTableProductionEntities 
+	 * dem aufrufenden Element Ã¼bergeben (Parent.fuelleTableProductionEntities 
 	 * bzw. Parent.ProduktionEnde).
 	 * Zum Schluss wird der Thread gestoppt.
 	 */

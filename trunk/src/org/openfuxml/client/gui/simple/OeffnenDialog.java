@@ -50,7 +50,7 @@ public class OeffnenDialog extends Dialog
 	}
 	
 	/**
-	 * open öffnet den Dialog.
+	 * open ï¿½ffnet den Dialog.
 	 * @param images
 	 */
 	public void open(Image[] images)
@@ -59,7 +59,7 @@ public class OeffnenDialog extends Dialog
 		
 		shell = new Shell(parent, (SWT.RESIZE) | (SWT.DIALOG_TRIM) | SWT.APPLICATION_MODAL);
 		
-		shell.setText("Öffnen");
+		shell.setText("ï¿½ffnen");
 		
 		initGUI();
 
@@ -144,7 +144,7 @@ public class OeffnenDialog extends Dialog
 				 * Properties ermittelt.
 				 */
 				public void widgetDefaultSelected(SelectionEvent evt) {
-					// Bestimmen des ausgewählten Eintrags.
+					// Bestimmen des ausgewÃ¤hlten Eintrags.
 					TableItem[] selection = tableProducedEntities.getSelection();
 					TableItem selectedRow = selection[0];
 
@@ -155,7 +155,7 @@ public class OeffnenDialog extends Dialog
 		}
 		{
 			BtnSchliessen = new Button(shell, SWT.PUSH | SWT.CENTER);
-			BtnSchliessen.setText("   Schließen   ");
+			BtnSchliessen.setText("   SchlieÃŸen   ");
 			BtnSchliessen.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
 					shell.close();
@@ -171,13 +171,13 @@ public class OeffnenDialog extends Dialog
 	}
 	
 	/**
-	 * Die Methode fuelleTableProducedEntities füllt die Table 
-	 * tableProducedEntities mit den Einträgen aus der ArrayList 
+	 * Die Methode fuelleTableProducedEntities fï¿½llt die Table 
+	 * tableProducedEntities mit den Eintrï¿½gen aus der ArrayList 
 	 * alProducedEntities.
 	 */
 	public void fuelleTableProducedEntities()
 	{
-		// Füllen der Table mit den Werten aus der ArrayList.
+		// Fï¿½llen der Table mit den Werten aus der ArrayList.
 		for (int i=0; i<alProducedEntities.size(); i++)
 		{
 			TableItem newItem = new TableItem(tableProducedEntities, 0);
@@ -187,7 +187,7 @@ public class OeffnenDialog extends Dialog
 	} // fuelleTableProducedEntities
 
 	/**
-	 * DateiOeffnen bestimmt anhand des Dateinamens das auszuführende Programm.
+	 * DateiOeffnen bestimmt anhand des Dateinamens das auszufï¿½hrende Programm.
 	 * Das Programm wird mit Hilfe der File-Extension aus den Properties ermittelt.
 	 * 
 	 * Dieses Programm wird mit der Datei als Parameter gestartet.
@@ -201,7 +201,7 @@ public class OeffnenDialog extends Dialog
 	{
 		String sErweiterung = sDateiname.substring(sDateiname.lastIndexOf('.'));
 
-		//TODO Erweiterungen für OpenDialog
+		//TODO Erweiterungen fï¿½r OpenDialog
 		//String sProgramm = ClientConfigWrapper.getClientConf(sErweiterung);
 		String sProgramm=null;
 		
@@ -209,7 +209,7 @@ public class OeffnenDialog extends Dialog
 		{
 			MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR | SWT.OK);
 			messageBox.setText("Fehler");
-			messageBox.setMessage("Sie haben bisher kein Programm für Dateien mit der Erweiterung \""
+			messageBox.setMessage("Sie haben bisher kein Programm fï¿½r Dateien mit der Erweiterung \""
 					+ sErweiterung + "\" eingestellt."); 
 			messageBox.open();
 		}
@@ -221,7 +221,7 @@ public class OeffnenDialog extends Dialog
 			File file = new File(config.getString("dirs/dir[@type='output']") + fs + sVerzeichnis, sDateiname);
 			sKommando += file.toString();		 
 			
-			logger.debug("Kommando für das Öffnen: " + sKommando);
+			logger.debug("Kommando fï¿½r das ï¿½ffnen: " + sKommando);
 			
 			try
 			{
