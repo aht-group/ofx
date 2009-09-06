@@ -12,16 +12,16 @@ import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.StreamResult;
 /*------------------------
 	FileChecker
-	Überprüft ein XML-File auf die enthaltenen Daten auf Existens
+	ÃœberprÃ¼ft ein XML-File auf die enthaltenen Daten auf Existens
   ----------------------*/
 public class FileChecker {
 
 	//--------------------------------------
 	//Main Methode
-	//	Überprüft ob übergebene Werte OK
+	//	ÃœberprÃ¼ft ob Ã¼bergebene Werte OK
 	//--------------------------------------
 	public static void main(String[] argv) {
-		//Benötigt werden 4 Parameter
+		//BenÃ¤tigt werden 4 Parameter
 		// 1. ProjectPath: 
 		// 2. Source:
 		// 3. Destination: 
@@ -52,15 +52,15 @@ public class FileChecker {
 	}
 	//-------------------------------------------------------------------------------
 	//	Hauptfunktion
-	//		Öffnet XML-File
+	//		Ã–ffnet XML-File
 	//		Liest die einzelnen Pfade
-	//		Überprüft ob diese existieren
+	//		ÃœberprÃ¼ft ob diese existieren
 	//		Setzt dementsprechend das Attribut	
 	//-------------------------------------------------------------------------------
 	public boolean checkFolder(String ProjectPath, String Source, String Destination, String Element)
 	{
 		try
-		{	//Dokument wird geöffnet
+		{	//Dokument wird geÃ¶ffnet
 			Document refSources = UtilityClass.readDocument(Source, false);			
 			
 			//Nodes werden gesucht
@@ -92,8 +92,8 @@ public class FileChecker {
 	}
 
 	//------------------------------------------------------------
-	//	Überprüft den übergebenen Pfad und das File auf Existens
-	//		Dabei wird zusätzlich das trennzeichen überprüft
+	//	ï¿½berprï¿½ft den ï¿½bergebenen Pfad und das File auf Existens
+	//		Dabei wird zusï¿½tzlich das trennzeichen ï¿½berprï¿½ft
 	//------------------------------------------------------------
 	private String checkFile(String ProjectPath, String Filename)
 	{
@@ -121,8 +121,8 @@ public class FileChecker {
 	}
 
 	//----------------------------------------------------
-	//Speichert das übergebene XML-Document 
-	//	Dateiname wird ebenfalls übergeben
+	//Speichert das ï¿½bergebene XML-Document 
+	//	Dateiname wird ebenfalls ï¿½bergeben
 	//----------------------------------------------------
 	private boolean Save(Document XMLDoc, String FileName)
 	{

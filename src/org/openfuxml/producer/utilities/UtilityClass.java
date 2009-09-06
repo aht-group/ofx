@@ -18,14 +18,14 @@ public class UtilityClass
 	public final static String xmlExt = ".xml";
 	public final static String Encoding = "UTF-8";
 	/**
-	* Die Methode readDocument liest die Datei mit dem übergebenen
+	* Die Methode readDocument liest die Datei mit dem Ã¼bergebenen
 	* Dateinamen ein, parst sie als XML und gibt das Ergebnis vom
-	* Typ Document als Rückgabewert zurück.
-	* Falls die Methode auf einen Fehler läuft, wird der Wert null
-	* zurückgegeben. Der Fehler wird an den FehlerStream System.err ausgegeben.
+	* Typ Document als RÃ¼ckgabewert zurÃ¼ck.
+	* Falls die Methode auf einen Fehler lÃ¤uft, wird der Wert null
+	* zurÃ¼ckgegeben. Der Fehler wird an den FehlerStream System.err ausgegeben.
 	* Das aufrufenden Programm kann dann selbst entscheiden, ob es nach dem
 	* Fehler abgebrochen wird.
-	* Da diese Methode an vielen Stellen in unserem Projekt benötigt
+	* Da diese Methode an vielen Stellen in unserem Projekt benÃ¶tigt
 	* wird, wird sie in der Klasse DEFINE implementiert.
 	*/
 	
@@ -54,7 +54,7 @@ public class UtilityClass
 		  db.setErrorHandler(new OwnErrorHandler(Dateiname));
 		  doc = db.parse(new File(Dateiname));
 		
-		  // Auch die folgenden Anweisungen brachten keinen Erfolg für
+		  // Auch die folgenden Anweisungen brachten keinen Erfolg fÃ¼r
 		  // die Ausgabe als ISO-8859-1.
 		  // InputSource is = new InputSource(new FileInputStream(Dateiname));
 		  // is.setEncoding(Encoding);
