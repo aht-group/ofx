@@ -246,7 +246,7 @@ System.out.println("ProgressListener---changed: "+ event.current + " von " + eve
 			browser.addOpenWindowListener(new OpenWindowListener(){
 				public void open(WindowEvent event) {
 					// Der folgende Code ist notwendig, damit ein neues Browser-Fenster
-					// geöffnet wird.
+					// geÃ¶ffnet wird.
 					// Allerdings wird die Debug-Meldung nicht ausgegeben.
 					// WARUM???
 					System.out.println("EventBrowser: " +  event.browser.getUrl());					

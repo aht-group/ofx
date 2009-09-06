@@ -7,6 +7,9 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Properties;
 
+import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.io.resourceloader.ImageResourceLoader;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
@@ -38,11 +41,8 @@ import org.openfuxml.client.gui.swt.composites.ProjektComposite;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.util.config.factory.ClientConfFactory;
 
-import de.kisner.util.LoggerInit;
-import de.kisner.util.io.resourceloader.ImageResourceLoader;
-
 /**
- * Client implementiert die Benutzeroberfläche für die FuXML-Produktion.
+ * Client implementiert die BenutzeroberflÃ¤che fÃ¼r die FuXML-Produktion.
  * @author Thorsten Kisner
  * @author Andrea Frank
  */
@@ -93,7 +93,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		pingThreadAktiv = false;
 		pingThreadZaehler = 0;
 		
-		splashscreen.setStatusline("Initialisiere Oberfläche ...");
+		splashscreen.setStatusline("Initialisiere Oberflï¿½che ...");
 
 		initGUI();
 
@@ -174,9 +174,9 @@ public class OpenFuxmlClient extends Composite implements Runnable
 
 			tfProjekte.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
-					// Merken des Projekt-Tabs für LastProject
+					// Merken des Projekt-Tabs fï¿½r LastProject
 					{
-						// Setzen des Property-Wertes für LastTab
+						// Setzen des Property-Wertes fï¿½r LastTab
 						Control control = tfProjekte.getItem(tfProjekte.getSelectionIndex()).getControl();
 						
 						Integer iLastProject = new Integer(0);
@@ -207,7 +207,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 
 	public void saveProperties()
 	{
-		// erst Aufräumen
+		// erst Aufrï¿½umen
 		myProperties.remove("Beenden");
 		myProperties.remove("Login");
 
@@ -230,7 +230,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 			List<OfxProject> lProjects = ofxCC.getOfxProjectFactory().lProjects("fuxml");
 
 			while (tfProjekte.getItemCount()>0)
-			{	// Löschen der alten TabItems für die Projekte
+			{	// Lï¿½schen der alten TabItems fï¿½r die Projekte
 				tfProjekte.getItem(0).getControl().dispose();
 				tfProjekte.getItem(0).dispose();
 			}
@@ -238,7 +238,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 			if (lProjects.size() == 0)
 			{
 				StringBuffer sb = new StringBuffer();
-					sb.append("Keine Projekte verfügbar");
+					sb.append("Keine Projekte verfï¿½gbar");
 				Label label = new Label(tfProjekte, SWT.NONE);
 				label.setText(sb.toString());
 
@@ -284,13 +284,13 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		
 		if ( (iLastProject == -1) && (tiSystemInfo!=null) )
 		{
-			// SystemInfo-Tab auswählen.
+			// SystemInfo-Tab auswï¿½hlen.
 			TabItem ti[] = {tiSystemInfo};
 			tfProjekte.setSelection(ti);
 		}
 		else
 		{
-			// Projekt-Tab auswählen.
+			// Projekt-Tab auswï¿½hlen.
 
 			// Welches Projekt-Tab hat die Projekt-ID iLastProject???
 			for (int i=0; i<tfProjekte.getItemCount(); i++)
@@ -298,7 +298,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 				TabItem ti = tfProjekte.getItem(i);
 				Control control = ti.getControl();
 				
-				// try-Block für ClassCastException (Control könnte auch ein SystemInfoComposite sein)
+				// try-Block fï¿½r ClassCastException (Control kï¿½nnte auch ein SystemInfoComposite sein)
 				try 
 				{
 					ProjektComposite pComp = (ProjektComposite)control;
@@ -344,14 +344,14 @@ public class OpenFuxmlClient extends Composite implements Runnable
 			{
 				if (!shell.isDisposed())
 				{
-					// Ping für User
+					// Ping fï¿½r User
 /*					try
 					{
 						myUserUi.ping(System.currentTimeMillis());
 					}
 					catch (RemoteException e) {e.printStackTrace();}
 */					
-					// Ping für jedes Projekt
+					// Ping fï¿½r jedes Projekt
 					for (int i=0; i<tfProjekte.getItemCount(); i++)
 					{
 						Object obj = tfProjekte.getItem(i).getControl();
@@ -381,7 +381,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		NewProjectDialog dialog = new NewProjectDialog(shell, iniCtx, myUserValue);
 		Rolle r = dialog.open();
 		
-		// Dieses Projekt als neues TabItem einfügen
+		// Dieses Projekt als neues TabItem einfï¿½gen
 		if (r != null)
 		{
 			try
@@ -448,7 +448,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		sh.setLayout(new FillLayout());
 		sh.layout();
 
-		// Die alte Größe wird benutzt.
+		// Die alte Grï¿½ï¿½e wird benutzt.
 /*		try
 		{
 			String sX		= client.getMyProperties().getProperty("x");

@@ -1,5 +1,7 @@
 package org.openfuxml.client.gui.swt.composites;
 
+import net.sf.exlp.io.resourceloader.ImageResourceLoader;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
@@ -9,7 +11,6 @@ import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Cursor;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
@@ -19,7 +20,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.OfxClientControl;
 import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
 import org.openfuxml.client.gui.swt.factory.ProducerButtonFactory;
@@ -29,10 +29,7 @@ import org.openfuxml.client.util.ImgCanvas;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
-import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Format.Options.Option;
-
-import de.kisner.util.io.resourceloader.ImageResourceLoader;
 
 /**
  * 
@@ -158,14 +155,14 @@ public class ProducerComposite extends AbstractProducerComposite
 	
 	/**
 	 * Die Methode fuelleCompositeOptionen ermittelt zu allen einstellbaren Formaten
-	 * (stehen in comboFormate) die möglichen Optionen und zeigt sie in der entsprechenden
+	 * (stehen in comboFormate) die mï¿½glichen Optionen und zeigt sie in der entsprechenden
 	 * Group als Buttons an.
-	 * Außerdem werden die möglichen Optionen in einer Hashtable gespeichert,
-	 * um sie später bei der Produktion mit den Merkmalen "displayname" und "name" 
-	 * angeben zu können.
-	 * Zusätzlich werden die Optionen mit ihren Default-Werten in einer Hashtable gespeichert,
-	 * damit sie beim Betätigen des Buttons "setze Default"(-Optionen) auf den jeweiligen
-	 * Default-Wert zurückgesetzt werden können. 
+	 * Auï¿½erdem werden die mï¿½glichen Optionen in einer Hashtable gespeichert,
+	 * um sie spï¿½ter bei der Produktion mit den Merkmalen "displayname" und "name" 
+	 * angeben zu kï¿½nnen.
+	 * Zusï¿½tzlich werden die Optionen mit ihren Default-Werten in einer Hashtable gespeichert,
+	 * damit sie beim Betï¿½tigen des Buttons "setze Default"(-Optionen) auf den jeweiligen
+	 * Default-Wert zurï¿½ckgesetzt werden kï¿½nnen. 
 	 */
 	public void fuelleCompositeOptionen()
 	{
@@ -205,8 +202,8 @@ public class ProducerComposite extends AbstractProducerComposite
 
 	/**
 	 * Die Optionen sind vom eingestellten Format (z. Zt. html, latexpdf, validation) 
-	 * abhängig. Je nachdem welches Format gewählt wurde, sind andere Optionen
-	 * möglich. Die verschiedenen Optionen sind zu Gruppen zusammengefaßt. 
+	 * abhï¿½ngig. Je nachdem welches Format gewï¿½hlt wurde, sind andere Optionen
+	 * mï¿½glich. Die verschiedenen Optionen sind zu Gruppen zusammengefaï¿½t. 
 	 * Die Methode zeigeOptionen ermittelt, welche Gruppe angezeigt wird. 
 	 * Im Stacklayout wird diese Gruppe dann angezeigt.
 	 */
@@ -224,8 +221,8 @@ public class ProducerComposite extends AbstractProducerComposite
 
 	/**
 	 * Die Methode setzePEHaekchen wird die in den ProjectUserSettings gespeicherten
-	 * Häkchen auf die ArrayList alProductionEntitites übertragen.
-	 * Anschließend wird die Anzeige akualisiert (fuelleTableProductionEntities, fuelleMatrix).
+	 * Hï¿½kchen auf die ArrayList alProductionEntitites ï¿½bertragen.
+	 * Anschlieï¿½end wird die Anzeige akualisiert (fuelleTableProductionEntities, fuelleMatrix).
 	 */
 /*	public void setzePEHaekchen()
 	{
@@ -259,7 +256,7 @@ public class ProducerComposite extends AbstractProducerComposite
 	 */
 /*	public void speicherPEHaekchen()
 	{
-		// Liste der Häkchen löschen
+		// Liste der Hï¿½kchen lï¿½schen
 		getProjektComposite().getMyProjectUserSettings().clearAlProductionEntities();
 		
 		// Speichern der aktuellen ArrayList AlProductionEntities
@@ -269,13 +266,13 @@ public class ProducerComposite extends AbstractProducerComposite
 */
 	/**
 	 * Die Methode setzeOptionenHaekchen wird die in den ProjectUserSettings gespeicherten
-	 * Häkchen für die Optionen wieder anzeigen.
+	 * Hï¿½kchen fï¿½r die Optionen wieder anzeigen.
 	 */
 /*	public void setzeOptionenHaekchen()
 	{
 		ArrayList al = projekt.getMyProjectUserSettings().getAlOptionen();
 
-		// Erst alle Häkchen auf "false" setzen.
+		// Erst alle Hï¿½kchen auf "false" setzen.
 		for (int k=0; k<groupsOptionen.length; k++)
 		{
 			Control control[] = groupsOptionen[k].getChildren();
@@ -285,7 +282,7 @@ public class ProducerComposite extends AbstractProducerComposite
 			} // for
 		} // for
 		
-		// Dann die "true"-Häkchen bestimmen.
+		// Dann die "true"-Hï¿½kchen bestimmen.
 		for (int i=0; i<al.size(); i++)
 		{
 			String s[] = (String[])al.get(i);
@@ -306,7 +303,7 @@ public class ProducerComposite extends AbstractProducerComposite
 */
 /*	public void speicherOptionenHaekchen()
 	{
-		// Bestimmen der ausgewählten Optionen
+		// Bestimmen der ausgewï¿½hlten Optionen
 		ArrayList<String[]> alOptionen = new ArrayList<String[]>();
 		for (int i=0; i<groupsOptionen.length; i++)
 		{
@@ -374,10 +371,10 @@ public class ProducerComposite extends AbstractProducerComposite
 	}
 
 	/**
-	 * Die Methode setAllEnabled sperrt das ProduzierenComposite für 
+	 * Die Methode setAllEnabled sperrt das ProduzierenComposite fï¿½r 
 	 * weitere Eingaben, bzw. gibt es wieder frei. 
-	 * Sie ruft dabei für alle Bedienelemente die Methode setEnabled auf.
-	 * Außerem wird der Cursor auf "Warten" bzw. auf "normal" gestellt.
+	 * Sie ruft dabei fï¿½r alle Bedienelemente die Methode setEnabled auf.
+	 * Auï¿½erem wird der Cursor auf "Warten" bzw. auf "normal" gestellt.
 	 * 
 	 * @param isEnabled - gibt an, ob die Bedienelemente enabled bzw. disabled werden.
 	 */
@@ -428,13 +425,13 @@ public class ProducerComposite extends AbstractProducerComposite
 	}
 	
 	/**
-	 * Die Methode getGroupLabel gibt einen String zurück, der Group als Text übergeben wird.
-	 * Die Methode wurde erstellt, damit keine Tipp-Fehler oder spätere Änderungen zu Fehlern führen. 
+	 * Die Methode getGroupLabel gibt einen String zurï¿½ck, der Group als Text ï¿½bergeben wird.
+	 * Die Methode wurde erstellt, damit keine Tipp-Fehler oder spï¿½tere ï¿½nderungen zu Fehlern fï¿½hren. 
 	 * @param s
 	 * @return
 	 */
 	public String getGroupLabel(String s)
 	{
-		return("Optionen für das Format \""+s+"\"");
+		return("Optionen fï¿½r das Format \""+s+"\"");
 	}
 }

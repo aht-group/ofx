@@ -197,7 +197,7 @@ public class AnwendungenDialog extends Dialog
 	
 	public void btnOK()
 	{
-		// Plausiprüfung für den Dateityp
+		// PlausiprÃ¼fung fÃ¼r den Dateityp
 		if (textDateityp.getText().length() <= 1)
 		{
 			MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR | SWT.OK);
@@ -226,7 +226,7 @@ public class AnwendungenDialog extends Dialog
 		{
 			MessageBox messageBox = new MessageBox(shell, SWT.ICON_ERROR | SWT.OK);
 			messageBox.setText("Fehler");
-			messageBox.setMessage("Wählen Sie bitte eine Anwendung aus."); 
+			messageBox.setMessage("Wï¿½hlen Sie bitte eine Anwendung aus."); 
 			messageBox.open();
 			BtnAnwendung.setFocus();
 		}
