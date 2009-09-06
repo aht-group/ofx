@@ -66,7 +66,7 @@ public class SimpleMenuFactory
 			Menu menuHilfe = new Menu(menuItemHilfe);
 			{
 				MenuItem menuItemHilfeInfoUeber = new MenuItem(menuHilfe, SWT.CASCADE);
-				menuItemHilfeInfoUeber.setText("Info über ...");
+				menuItemHilfeInfoUeber.setText("Info Ã¼ber ...");
 				menuItemHilfeInfoUeber.addSelectionListener(new SelectionAdapter() {
 					public void widgetSelected(SelectionEvent evt) {
 						client.HilfeInfoUeber();
