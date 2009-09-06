@@ -242,7 +242,7 @@ public class EinstellungenDialog extends Dialog
 			}
 			{
 				labelKennwortHinweis = new Label(compositeBenutzer, SWT.NONE);
-				labelKennwortHinweis.setText("Hinweis: Das Kennwort wird unverschlüsselt gespeichert und versendet.");
+				labelKennwortHinweis.setText("Hinweis: Das Kennwort wird unverschlï¿½sselt gespeichert und versendet.");
 
 				GridData data = new GridData();
 				data.horizontalSpan = 3;
@@ -265,7 +265,7 @@ public class EinstellungenDialog extends Dialog
 			}
 			
 			{
-				// Häkchen für KennwortSpeichern und AutoLogin setzen
+				// Hï¿½kchen fï¿½r KennwortSpeichern und AutoLogin setzen
 				if (properties.getProperty("KennwortSpeichern","0").equals("1"))
 				{
 					BtnKennwortSpeichern.setSelection(true);
@@ -364,7 +364,7 @@ public class EinstellungenDialog extends Dialog
 					public void widgetSelected(SelectionEvent evt) {
 						DirectoryDialog dialog = new DirectoryDialog(shell);
 						dialog.setText(OpenFuxmlClient.Title);
-						dialog.setMessage("Verzeichnisauswahl für die Produktion");
+						dialog.setMessage("Verzeichnisauswahl fï¿½r die Produktion");
 						dialog.setFilterPath(labelRepository.getText());
 						String dirname = dialog.open();
 						if (dirname!=null)
@@ -399,7 +399,7 @@ public class EinstellungenDialog extends Dialog
 					public void widgetSelected(SelectionEvent evt) {
 						DirectoryDialog dialog = new DirectoryDialog(shell);
 						dialog.setText(OpenFuxmlClient.Title);
-						dialog.setMessage("Verzeichnisauswahl für OUTPUT");
+						dialog.setMessage("Verzeichnisauswahl fï¿½r OUTPUT");
 						dialog.setFilterPath(labelOutput.getText());
 						String dirname = dialog.open();
 						if (dirname!=null)
@@ -477,7 +477,7 @@ public class EinstellungenDialog extends Dialog
 			}
 			
 			{
-				// Häkchen für NetzOutput
+				// Hï¿½kchen fï¿½r NetzOutput
 
 				if (properties.getProperty("NetzOutput","0").equals("1"))
 				{
@@ -545,7 +545,7 @@ public class EinstellungenDialog extends Dialog
 				
 			}
 			{
-				// Ermitteln, für welche Dateierweiterungen der AutoDownload gestartet werden soll
+				// Ermitteln, fï¿½r welche Dateierweiterungen der AutoDownload gestartet werden soll
 				String sDownload = properties.getProperty("AutoDownload", "");
 				StringTokenizer st = new StringTokenizer(sDownload, ",");
 				Hashtable<String, String> ht = new Hashtable<String, String>();
@@ -598,7 +598,7 @@ public class EinstellungenDialog extends Dialog
 				}
 				{
 					BtnAendern = new Button(cButtons, SWT.PUSH | SWT.CENTER);
-					BtnAendern.setText("   Ändern   ");
+					BtnAendern.setText("   Ã¤ndern   ");
 					BtnAendern.setEnabled(false);
 					BtnAendern.addSelectionListener(new SelectionAdapter() {
 						public void widgetSelected(SelectionEvent evt) {
@@ -612,7 +612,7 @@ public class EinstellungenDialog extends Dialog
 				}
 				{
 					BtnLoeschen = new Button(cButtons, SWT.PUSH | SWT.CENTER);
-					BtnLoeschen.setText("   Löschen   ");
+					BtnLoeschen.setText("   LÃ¶schen   ");
 					BtnLoeschen.setEnabled(false);
 					BtnLoeschen.addSelectionListener(new SelectionAdapter() {
 						public void widgetSelected(SelectionEvent evt) {
@@ -630,7 +630,7 @@ public class EinstellungenDialog extends Dialog
 	
 	public void btnOK()
 	{
-		// Testen ob Änderungen gemacht wurden, die ein erneutes Login erfordern.
+		// Testen ob ï¿½nderungen gemacht wurden, die ein erneutes Login erfordern.
 		boolean flagLogin = false;
 		
 		if ( (!textBenutzername.getText().equals(properties.getProperty("Benutzername", ""))) ||
@@ -641,7 +641,7 @@ public class EinstellungenDialog extends Dialog
 			flagLogin = true;
 		}
 		
-		// Werte für Properties übernehmen
+		// Werte fï¿½r Properties ï¿½bernehmen
 		// TODO @Andy Plausis
 		properties.setProperty("Benutzername", textBenutzername.getText());
 		properties.setProperty("Kennwort", textKennwort.getText());
@@ -677,7 +677,7 @@ public class EinstellungenDialog extends Dialog
 		properties.setProperty("HTTP-User", tHTTPUser.getText());
 		properties.setProperty("HTTP-Kennwort", tHTTPKennwort.getText());
 
-		// Alle Properties löschen, die mit einem "." beginnen.
+		// Alle Properties lï¿½schen, die mit einem "." beginnen.
 		for (Enumeration e = properties.propertyNames(); e.hasMoreElements();)
 		{
 			String sProperty = e.nextElement().toString();
@@ -687,7 +687,7 @@ public class EinstellungenDialog extends Dialog
 			}
 		}
 		
-		// Alle Einträge von tableAnwendungen als Properties setzen.
+		// Alle Eintrï¿½ge von tableAnwendungen als Properties setzen.
 		String sDownload = "";
 		for (int i=0; i<tableAnwendungen.getItemCount(); i++)
 		{
@@ -727,7 +727,7 @@ public class EinstellungenDialog extends Dialog
 /*	public void btnRegistrieren()
 	{
 		// Beim Registrieren werden die Servereinstellungen automatisch 
-		// in die Properties übernommen.
+		// in die Properties ï¿½bernommen.
 		client.getMyProperties().setProperty("Host", textHost.getText());
 		client.getMyProperties().setProperty("Port", textPort.getText());
 		properties.setProperty("Host", textHost.getText());
@@ -747,7 +747,7 @@ public class EinstellungenDialog extends Dialog
 		AnwendungenDialog dialog = new AnwendungenDialog(shell, false, "", "");
 		String sErg[] = dialog.open();
 		
-		// TODO @Andy Plausi, damit Einträge nicht doppelt vorkommen
+		// TODO @Andy Plausi, damit Eintrï¿½ge nicht doppelt vorkommen
 		
 		TableItem newItem = new TableItem(tableAnwendungen, 0);
 		newItem.setText(new String[] {"Download", sErg[1], sErg[2]});
@@ -759,8 +759,8 @@ public class EinstellungenDialog extends Dialog
 	
 	public void btnAendern()
 	{
-		// Die in der ausgewählten Zeile angezeigte Einstellung
-		// wird geändert.
+		// Die in der ausgewï¿½hlten Zeile angezeigte Einstellung
+		// wird geï¿½ndert.
 		int index = tableAnwendungen.getSelectionIndex();
 		
 		if (index >= 0)
@@ -770,7 +770,7 @@ public class EinstellungenDialog extends Dialog
 			AnwendungenDialog dialog = new AnwendungenDialog(shell, ti.getChecked(), ti.getText(1), ti.getText(2));
 			String sErg[] = dialog.open();
 	
-			// TODO @Andy Plausi, damit Einträge nicht doppelt vorkommen
+			// TODO @Andy Plausi, damit Eintrï¿½ge nicht doppelt vorkommen
 			
 			if (!sErg[1].equals("") && !sErg[2].equals(""))
 			{
@@ -791,7 +791,7 @@ public class EinstellungenDialog extends Dialog
 	
 	public void btnLoeschen()
 	{
-		// Die ausgewählte Zeile wird gelöscht.
+		// Die ausgewï¿½hlte Zeile wird gelï¿½scht.
 		int index = tableAnwendungen.getSelectionIndex();
 		if (index >= 0)
 		{

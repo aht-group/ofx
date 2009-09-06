@@ -1,5 +1,7 @@
 package org.openfuxml.client.gui.swt.factory;
 
+import net.sf.exlp.io.resourceloader.ImageResourceLoader;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
@@ -18,8 +20,6 @@ import org.eclipse.swt.widgets.TableItem;
 import org.openfuxml.client.control.OfxGuiAction;
 import org.openfuxml.client.gui.simple.factory.SimpleLabelFactory;
 import org.openfuxml.model.jaxb.ProducibleEntities;
-
-import de.kisner.util.io.resourceloader.ImageResourceLoader;
 
 public class ProducerEntitiesDisplayFactory
 {
@@ -76,7 +76,7 @@ public class ProducerEntitiesDisplayFactory
 		slf.createLabel("Kurseinheit");
 		slf.createLabel("Lehrtext");
 		slf.createLabel("Einsendeaufgaben");
-		slf.createLabel("Musterlösungen");
+		slf.createLabel("Musterlï¿½sungen");
 		slf.createLabel("Korrekturversion");
 
 		int anzKE = 8;

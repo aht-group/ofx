@@ -137,7 +137,7 @@ public class ProjektComposite extends Composite
 			tiOeffnen.setImage(img);
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
-		tiOeffnen.setText("Öffnen");
+		tiOeffnen.setText("Ã¶ffnen");
 //			oComp = new OeffnenComposite(tabFolder, this);
 //			tiOeffnen.setControl(oComp);
 	}

@@ -31,12 +31,12 @@ public class AbstractProducerComposite extends Composite
 	}
 	
 	/**
-	 * Die Methode fuelleTableProductionEntities füllt die Tabelle
+	 * Die Methode fuelleTableProductionEntities fÃ¼llt die Tabelle
 	 * tableProductionEntities.
-	 * Dabei werden anhand der ausgewählten 3 Auswahlfelder aus der Hashtable 
+	 * Dabei werden anhand der ausgewÃ¤hlten 3 Auswahlfelder aus der Hashtable 
 	 * die producableEntities in Form einer SSIMessage ermittelt.
 	 * Diese werden nach den Elementen Beschreibung, Verzeichnis und Dateiname
-	 * "aufgedröselt" und als neuen Eintrag in die Tabelle eingefügt.
+	 * "aufgedrÃ¶selt" und als neuen Eintrag in die Tabelle eingefÃ¼gt.
 	 */
 	public void entitiesDiscovered()
 	{

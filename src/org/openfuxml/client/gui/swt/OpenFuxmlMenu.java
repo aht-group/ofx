@@ -65,7 +65,7 @@ public class OpenFuxmlMenu
 */			}
 		});
 		
-/* TODO Andy: später wieder in Betrieb nehmen und testen					
+/* TODO Andy: spÃ¤ter wieder in Betrieb nehmen und testen					
 					{
 						menuItemExtrasNeuesProjekt = new MenuItem(menuExtras, SWT.CASCADE);
 						menuItemExtrasNeuesProjekt.setText("Neues Projekt ...");
@@ -87,7 +87,7 @@ public class OpenFuxmlMenu
 		Menu menuHilfe = new Menu(menuItemHilfe);
 
 		MenuItem menuItemHilfeInfoUeber = new MenuItem(menuHilfe, SWT.CASCADE);
-		menuItemHilfeInfoUeber.setText("Info über ...");
+		menuItemHilfeInfoUeber.setText("Info Ã¼ber ...");
 		menuItemHilfeInfoUeber.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent evt) {
 	//				HilfeInfoUeber();

@@ -2,6 +2,8 @@ package org.openfuxml.client.gui.swt;
 
 import java.io.FileNotFoundException;
 
+import net.sf.exlp.io.resourceloader.ImageResourceLoader;
+
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -13,9 +15,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Tray;
 import org.eclipse.swt.widgets.TrayItem;
-import org.openfuxml.client.gui.simple.Client;
 
-import de.kisner.util.io.resourceloader.ImageResourceLoader;
 
 public class OpenFuxmlTray
 {
