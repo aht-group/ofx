@@ -5,8 +5,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import org.apache.log4j.Logger;
-import org.openfuxml.wiki.data.jaxb.Wikicontainer;
-import org.openfuxml.wiki.data.jaxb.Wikireplace;
+import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
+import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 
 import de.kisner.util.LoggerInit;
 

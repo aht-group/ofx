@@ -12,14 +12,14 @@ import net.sf.exlp.io.ConfigLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
+import org.openfuxml.addon.wiki.OpenFuxmlGenerator;
+import org.openfuxml.addon.wiki.WikiTemplates;
+import org.openfuxml.addon.wiki.WikiTextFetcher;
+import org.openfuxml.addon.wiki.model.WikiDefaultModel;
+import org.openfuxml.addon.wiki.processing.WikiProcessor;
+import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
+import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.openfuxml.test.xml.wiki.docbook.DocbookGenerator;
-import org.openfuxml.wiki.OpenFuxmlGenerator;
-import org.openfuxml.wiki.WikiTemplates;
-import org.openfuxml.wiki.WikiTextFetcher;
-import org.openfuxml.wiki.model.WikiDefaultModel;
-import org.openfuxml.wiki.processing.WikiProcessor;
-import org.openfuxml.wiki.processing.XhtmlProcessor;
-import org.openfuxml.wiki.util.WikiContentIO;
 import org.xml.sax.SAXException;
 
 import de.kisner.util.LoggerInit;
