@@ -26,8 +26,9 @@
     <xsd:element name="attribute">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="name" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="name" minOccurs="0" maxOccurs="1" type="xsd:string"/>
                 <xsd:element name="required" maxOccurs="1" type="xsd:boolean"/>
+                <xsd:element name="description" maxOccurs="1" type="xsd:string"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
