@@ -100,37 +100,86 @@ public class JsfTagTransformator
 	{
 		for(Tag tag : taglib.getTag())
 		{
-			Document doc = new Document();
-			doc.setDocType(getDocType());
+			Document docTagTable = createTagTable(tag);
+			File f = new File(baseDir,"tab-"+tag.getName()+".xml");
+			save(docTagTable,f);
 			
-			Element abschnitt = new Element("abschnitt");
-			
-			Element abschnittTitel = new Element("titel");
-			abschnittTitel.setText("Attributes for "+taglib.getShortname()+":"+tag.getName());
-			abschnitt.addContent(abschnittTitel);
-			
-			Element tabelle = new Element("tabelle");
-			tabelle.addContent(getTitel(taglib,tag));
-			
-			Element tgroup = new Element("tgroup");
-			tgroup.setAttribute("cols", "2");
-			tgroup.addContent(getColspec(1, "*"));
-			tgroup.addContent(getColspec(2, "*"));
-			tgroup.addContent(getThead());
-			
-			Element tbody = new Element("tbody");
-			for(Attribute att : tag.getAttribute())
+			f = new File(baseDir,"ab-"+tag.getName()+".xml");
+			if(!f.exists())
 			{
-				tbody.addContent(getAttRow(att));
+				Document docDummy = createDummyAbschnitt(tag);
+				save(docDummy,f);
 			}
-			tgroup.addContent(tbody);
-			
-			tabelle.addContent(tgroup);
-			abschnitt.addContent(tabelle);
-			doc.setRootElement(abschnitt);
-//			debug(doc);
-			save(doc, tag);
 		}
+	}
+	
+	private Document createDummyAbschnitt(Tag tag)
+	{
+		Document doc = new Document();
+		doc.setDocType(getDocType());
+		
+		Element abRoot = new Element("abschnitt");
+		abRoot.setAttribute("id","sec-tags-"+tag.getName());
+		
+		Element titelRoot = new Element("titel");
+		titelRoot.setText(taglib.getShortname()+":"+tag.getName());
+		abRoot.addContent(titelRoot);
+		
+		Element abDescription = new Element("abschnitt");
+		Element titelDescription = new Element("titel");
+		titelDescription.setText("Description and Key Features");
+		abDescription.addContent(titelDescription);
+		abRoot.addContent(abDescription);
+		
+		Element tabAbschnitt = new Element("abschnitt");
+		tabAbschnitt.setAttribute("extern","ja");
+		tabAbschnitt.setAttribute("quelle","tab-"+tag.getName()+".xml");
+		Element titelTab = new Element("titel");
+		titelTab.setText("Table JSF Elements");
+		tabAbschnitt.setContent(titelTab);
+		abRoot.addContent(tabAbschnitt);
+		
+		Element abCreate = new Element("abschnitt");
+		Element titelCreate = new Element("titel");
+		titelCreate.setText("Creating the Component with a Page Tag");
+		abCreate.addContent(titelCreate);
+		abRoot.addContent(abCreate);
+		
+		doc.setRootElement(abRoot);
+		return doc;
+	}
+	
+	private Document createTagTable(Tag tag)
+	{
+		Document doc = new Document();
+		doc.setDocType(getDocType());
+		
+		Element abschnitt = new Element("abschnitt");
+		
+		Element abschnittTitel = new Element("titel");
+		abschnittTitel.setText("Attributes for "+taglib.getShortname()+":"+tag.getName());
+		abschnitt.addContent(abschnittTitel);
+		
+		Element tabelle = new Element("tabelle");
+		tabelle.addContent(getTitel(taglib,tag));
+		
+		Element tgroup = new Element("tgroup");
+		tgroup.setAttribute("cols", "2");
+		tgroup.addContent(getColspec(1, "*"));
+		tgroup.addContent(getColspec(2, "*"));
+		tgroup.addContent(getThead());
+		
+		Element tbody = new Element("tbody");
+		for(Attribute att : tag.getAttribute())
+		{
+			tbody.addContent(getAttRow(att));
+		}
+		tgroup.addContent(tbody);
+		
+		tabelle.addContent(tgroup);
+		abschnitt.addContent(tabelle);
+		doc.setRootElement(abschnitt);
+		return doc;
 	}
 	
 	private Element getTitel(Taglib taglib, Tag tag)
@@ -187,19 +236,19 @@ public class JsfTagTransformator
 		catch (IOException e) {if(useLog4j){logger.error(e);}else{e.printStackTrace();}}
 	}
 	
-	private void save(Document doc,Tag tag)
+	
+	private void save(Document doc, File f)
 	{
 		try
 		{
 			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
-			String fileName="tab-"+tag.getName()+".xml";
-			File f = new File(baseDir,fileName);
+		
 			OutputStream os = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(os,"UTF-8");
 			
 			xmlOut.output( doc, osw );
 			osw.close();os.close();
-			logMsg="Saved: "+fileName;
+			logMsg="Saved: "+f.getName();
 			if(useLog4j){logger.debug(logMsg);}else{System.out.println(logMsg);}
 		} 
 		catch (IOException e) {if(useLog4j){logger.error(e);}else{e.printStackTrace();}}
