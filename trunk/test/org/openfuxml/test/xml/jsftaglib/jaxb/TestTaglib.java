@@ -42,6 +42,9 @@ public class TestTaglib
 		Attribute att = new Attribute();
 		att.setName("myAtt");
 		att.setRequired(false);
+		att.setDescription("xx");
+		tag.getAttribute().add(att);
+		
 		
 		taglib.getTag().add(tag);
 		

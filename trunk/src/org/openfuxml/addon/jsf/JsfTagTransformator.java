@@ -195,6 +195,7 @@ public class JsfTagTransformator
 		Element row = new Element("row");
 		row.addContent(getEntry(1, "Name"));
 		row.addContent(getEntry(2, "Required"));
+		row.addContent(getEntry(3, "Description"));
 		
 		thead.addContent(row);
 		return thead;
@@ -222,6 +223,7 @@ public class JsfTagTransformator
 		Element row = new Element("row");
 		row.addContent(getEntry(1, att.getName()));
 		row.addContent(getEntry(2, att.isRequired()+""));
+		row.addContent(getEntry(3, att.getDescription()));
 		return row;
 	}
 	
