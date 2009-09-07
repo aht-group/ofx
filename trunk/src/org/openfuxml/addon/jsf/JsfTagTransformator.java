@@ -128,7 +128,7 @@ public class JsfTagTransformator
 			tabelle.addContent(tgroup);
 			abschnitt.addContent(tabelle);
 			doc.setRootElement(abschnitt);
-			debug(doc);
+//			debug(doc);
 			save(doc, tag);
 		}
 	}
@@ -176,6 +176,7 @@ public class JsfTagTransformator
 		return row;
 	}
 	
+	@SuppressWarnings("unused")
 	private void debug(Document doc)
 	{	
 		try
@@ -191,13 +192,15 @@ public class JsfTagTransformator
 		try
 		{
 			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
-			
-			File f = new File(baseDir,"tab-"+tag.getName()+".xml");
+			String fileName="tab-"+tag.getName()+".xml";
+			File f = new File(baseDir,fileName);
 			OutputStream os = new FileOutputStream(f);
 			OutputStreamWriter osw = new OutputStreamWriter(os,"UTF-8");
 			
 			xmlOut.output( doc, osw );
 			osw.close();os.close();
+			logMsg="Saved: "+fileName;
+			if(useLog4j){logger.debug(logMsg);}else{System.out.println(logMsg);}
 		} 
 		catch (IOException e) {if(useLog4j){logger.error(e);}else{e.printStackTrace();}}
 	}
