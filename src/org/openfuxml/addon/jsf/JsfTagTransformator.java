@@ -164,9 +164,10 @@ public class JsfTagTransformator
 		tabelle.addContent(getTitel(taglib,tag));
 		
 		Element tgroup = new Element("tgroup");
-		tgroup.setAttribute("cols", "2");
+		tgroup.setAttribute("cols", "3");
 		tgroup.addContent(getColspec(1, "*"));
 		tgroup.addContent(getColspec(2, "*"));
+		tgroup.addContent(getColspec(3, "*"));
 		tgroup.addContent(getThead());
 		
 		Element tbody = new Element("tbody");
