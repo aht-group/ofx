@@ -1,20 +1,17 @@
 package org.openfuxml.test.xml.jsftaglib.jaxb;
 
-import java.io.FileNotFoundException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 
 import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
 import org.apache.log4j.Logger;
+import org.openfuxml.addon.jsf.JsfTagTransformator;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;
 import org.openfuxml.addon.jsf.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
-import org.openfuxml.wiki.data.jaxb.Wikicontainer;
 
 import de.kisner.util.LoggerInit;
 
@@ -52,7 +49,7 @@ public class TestTaglib
 		{
 			JAXBContext context = JAXBContext.newInstance(Taglib.class);
 			Marshaller m = context.createMarshaller(); 
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			m.marshal(taglib, System.out);
 		}
 		catch (JAXBException e) {logger.error(e);}
@@ -60,16 +57,9 @@ public class TestTaglib
 	
 	public void xmlRead(String xmlFile)
 	{
-		MultiResourceLoader mrl = new MultiResourceLoader();
-		Taglib taglib=null;
-		try
-		{
-			JAXBContext jc = JAXBContext.newInstance(Taglib.class);
-			Unmarshaller u = jc.createUnmarshaller();
-			taglib = (Taglib)u.unmarshal(mrl.searchIs(xmlFile));
-		}
-		catch (JAXBException e) {logger.error(e);}
-		catch (FileNotFoundException e) {logger.error(e);}
+		JsfTagTransformator tagTransformator = new JsfTagTransformator();
+		
+		Taglib taglib=tagTransformator.readTaglib(xmlFile);
 		
 		logger.debug("Shortname: "+taglib.getShortname());
 		logger.debug("Info "+taglib.getInfo());

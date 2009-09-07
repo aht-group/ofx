@@ -1,9 +1,12 @@
 package org.openfuxml.addon.jsf;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
@@ -17,6 +20,8 @@ import org.apache.log4j.Logger;
 import org.jdom.DocType;
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;
@@ -33,6 +38,11 @@ public class JsfTagTransformator
 	private String logMsg;
 	private Taglib taglib;
 	
+	public JsfTagTransformator()
+	{
+		
+	}
+	
 	public JsfTagTransformator(File baseDir,int dtdLevel)
 	{
 		this(baseDir,dtdLevel,true);
@@ -47,17 +57,43 @@ public class JsfTagTransformator
 		if(useLog4j){logger.debug(logMsg);}else{System.out.println(logMsg);}
 	}
 	
-	public void readTaglib(String xmlFile)
+	public Taglib readTaglib(String xmlFile)
 	{
 		MultiResourceLoader mrl = new MultiResourceLoader();
 		try
 		{
+			Document doc = new SAXBuilder().build(mrl.searchIs(xmlFile));
+			doc.setDocType(null);
+			Element rootElement = doc.getRootElement();
+			doc.setRootElement(unsetNameSpace(rootElement));
+			
+			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			xmlOut.output( doc, out );
+			InputStream isXML = new ByteArrayInputStream(out.toByteArray());
+			
 			JAXBContext jc = JAXBContext.newInstance(Taglib.class);
 			Unmarshaller u = jc.createUnmarshaller();
-			taglib = (Taglib)u.unmarshal(mrl.searchIs(xmlFile));
+			taglib = (Taglib)u.unmarshal(isXML);
+			logMsg="Taglib read from "+xmlFile;
+			if(useLog4j){logger.debug(logMsg);}else{System.out.println(logMsg);}
 		}
 		catch (JAXBException e) {if(useLog4j){logger.error(e);}else{e.printStackTrace();}}
 		catch (FileNotFoundException e) {if(useLog4j){logger.error(e);}else{e.printStackTrace();}}
+		catch (JDOMException e) {if(useLog4j){logger.error(e);}else{e.printStackTrace();}}
+		catch (IOException e) {if(useLog4j){logger.error(e);}else{e.printStackTrace();}}
+		return taglib;
+	}
+	
+	private Element unsetNameSpace(Element e)
+	{
+		e.setNamespace(null);
+		for(Object o : e.getChildren())
+		{
+			Element eChild = (Element)o;
+			eChild=unsetNameSpace(eChild);
+		}
+		return e;
 	}
 	
 	public void transform()
