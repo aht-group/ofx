@@ -14,8 +14,8 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.openfuxml.wiki.FormattingXMLStreamWriter;
-import org.openfuxml.wiki.util.IgnoreDtdEntityResolver;
+import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
+import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;

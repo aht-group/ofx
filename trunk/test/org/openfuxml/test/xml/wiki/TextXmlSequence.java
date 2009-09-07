@@ -14,8 +14,8 @@ import org.jdom.Text;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
-import org.openfuxml.wiki.WikiTemplates;
-import org.openfuxml.wiki.processing.XhtmlProcessor;
+import org.openfuxml.addon.wiki.WikiTemplates;
+import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
 
 import de.kisner.util.LoggerInit;
 
