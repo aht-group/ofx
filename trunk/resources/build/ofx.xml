@@ -40,10 +40,10 @@
 	
 	<target name="4 - JAXB Class generation" depends="1 - Tasks" description="Compile the source">
 		<echo level="info">Creating JAXB Configuration Class</echo>
-		<xjc schema="${xsd.dir}/ofx-wiki.xsd" package="org.openfuxml.wiki.data.jaxb" destdir="${src.dir}">
+		<xjc schema="${xsd.dir}/ofx-wiki.xsd" package="org.openfuxml.addon.wiki.data.jaxb" destdir="${src.dir}">
 			<arg value="-extension" />
 			<depends dir="${xsd.dir}"><include name="ofx-wiki.xsd"/></depends>
-			<produces dir="${src.dir}/org/openfuxml/wiki/data/jaxb"><include name="*.java"/></produces>
+			<produces dir="${src.dir}/org/openfuxml/addon/wiki/data/jaxb"><include name="*.java"/></produces>
 		</xjc>
 		<xjc schema="${xsd.dir}/jsf-taglib.xsd" package="org.openfuxml.addon.jsf.data.jaxb" destdir="${src.dir}">
 			<arg value="-extension" />
