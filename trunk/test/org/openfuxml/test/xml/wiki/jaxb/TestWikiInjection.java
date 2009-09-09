@@ -22,9 +22,9 @@ public class TestWikiInjection
 	public void xmlConstruct()
 	{
 		Wikiinjection wikiinjection = new Wikiinjection();
-		wikiinjection.setTag("a");
-		wikiinjection.setId("b");
-		wikiinjection.setType("xml");
+		wikiinjection.setWikitag("a");
+		wikiinjection.setOfxtag("b");
+		wikiinjection.setFormat("xml");
 		wikiinjection.setValue("vvvalluuuuuu");
 		
 		Wikicontainer container = new Wikicontainer();

@@ -126,7 +126,7 @@ public class XhtmlProcessor
 		Map<String,Boolean> ofxTags = new Hashtable<String,Boolean>();
 		for(Wikiinjection wikiinjection : wikiInjections)
 		{
-			String tag = wikiinjection.getId();
+			String tag = wikiinjection.getOfxtag();
 			if(!ofxTags.containsKey(tag)){ofxTags.put(tag, false);}
 		}
 		try

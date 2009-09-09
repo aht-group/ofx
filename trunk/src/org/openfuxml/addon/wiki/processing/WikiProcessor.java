@@ -55,7 +55,7 @@ public class WikiProcessor
 			wikiReplaces.addAll(container.getWikireplace());
 			for(Wikiinjection wikiInjection : container.getWikiinjection())
 			{
-				switch (InjectionType.valueOf(wikiInjection.getType()))
+				switch (InjectionType.valueOf(wikiInjection.getFormat()))
 				{
 					case xml: 	wikiInjectionsXml.add(wikiInjection);break;
 					case wiki:	wikiInjectionsWiki.add(wikiInjection);break;
@@ -81,12 +81,12 @@ public class WikiProcessor
 	
 	private void wikiInject(Wikiinjection inject)
 	{
-		while(wikiText.indexOf("<"+inject.getTag()+">")>0)
+		while(wikiText.indexOf("<"+inject.getWikitag()+">")>0)
 		{
 			StringBuffer sbDebug = new StringBuffer();
-			String startTag = "<"+inject.getTag()+">";
+			String startTag = "<"+inject.getWikitag()+">";
 			int from = wikiText.indexOf(startTag);
-			int to = wikiText.indexOf("</"+inject.getTag()+">");
+			int to = wikiText.indexOf("</"+inject.getWikitag()+">");
 			
 			StringBuffer injectionSb = WikiContentIO.toString(inject);
 			logger.debug(injectionSb);
@@ -97,8 +97,8 @@ public class WikiProcessor
 			sbDebug.append(" oldSize="+wikiText.length());
 			StringBuffer sb = new StringBuffer();
 				sb.append(wikiText.substring(0, from-1));
-				if(inject.getId()!=null && inject.getId().length()>0){sb.append(injectionSb);}
-				sb.append(wikiText.substring(to+inject.getTag().length()+3+1,wikiText.length()));
+				if(inject.getOfxtag()!=null && inject.getOfxtag().length()>0){sb.append(injectionSb);}
+				sb.append(wikiText.substring(to+inject.getWikitag().length()+3+1,wikiText.length()));
 			wikiText=sb.toString();
 			sbDebug.append(" newSize="+wikiText.length());
 			logger.debug(sbDebug);
