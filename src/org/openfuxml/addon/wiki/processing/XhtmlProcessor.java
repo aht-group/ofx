@@ -73,7 +73,7 @@ public class XhtmlProcessor
 		xHtmlText=addWellFormed(text);
 		xHtmlText = xHtmlText.replaceAll("&nbsp;", " ");
 		for(Wikireplace replace : xhtmlReplaces){xhtmlReplace(replace);}
-		for(Wikiinjection inject : wikiInjections){repairXml(inject);}
+		repairXml();
 		return this.xHtmlText;
 	}
 	
@@ -99,19 +99,24 @@ public class XhtmlProcessor
 		return text.substring(from,to);
 	}
 	
-	private void repairXml(Wikiinjection inject)
+	private void repairXml()
 	{
-		while(xHtmlText.indexOf("&#60;"+inject.getId()+"&#62;")>0)
+		String startTag="&#60;wikiinjection";
+		String endTag="/&#62;";
+		while(xHtmlText.indexOf(startTag)>0)
 		{
-			StringBuffer sbDebug = new StringBuffer();
-			int from = xHtmlText.indexOf("&#60;"+inject.getId()+"&#62;");
-			int to = xHtmlText.indexOf("&#60;/"+inject.getId()+"&#62;");
+			int from = xHtmlText.indexOf(startTag);
+			int to = xHtmlText.indexOf(endTag);
+			
+			String insideTag = xHtmlText.substring(from+startTag.length(), to);
+			insideTag=insideTag.replaceAll("&#34;", "\"");
+			
 			StringBuffer sb = new StringBuffer();
 				sb.append(xHtmlText.substring(0, from-1));
-				sb.append("<"+inject.getId()+">");
-				sb.append(xHtmlText.substring(from+inject.getId().length()+10, to));
-				sb.append("</"+inject.getId()+">");
-				sb.append(xHtmlText.substring(to+inject.getId().length()+11, xHtmlText.length()));
+				sb.append("<wikiinjection");
+				sb.append(insideTag);
+				sb.append("/>");
+				sb.append(xHtmlText.substring(to+endTag.length(), xHtmlText.length()));
 			xHtmlText=sb.toString();
 		}
 	}

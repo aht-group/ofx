@@ -15,12 +15,12 @@ import org.apache.log4j.Logger;
 import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
+import org.openfuxml.addon.wiki.util.WikiContentIO;
 
 public class WikiProcessor
 {
 	static Logger logger = Logger.getLogger(WikiProcessor.class);
 	public static enum InjectionType {xml,wiki};
-	
 	
 	private List<Wikireplace> wikiReplaces;
 	private List<Wikiinjection> wikiInjectionsXml,wikiInjectionsWiki;
@@ -66,14 +66,6 @@ public class WikiProcessor
 		catch (FileNotFoundException e) {logger.error(e);}
 	}
 	
-	private StringBuffer getInjection(Wikiinjection inject)
-	{
-		StringBuffer sb = new StringBuffer();
-			sb.append("<"+inject.getId()+">");
-			sb.append("</"+inject.getId()+">");
-		return sb;
-	}
-	
 	public String process(String wikiText)
 	{
 		this.wikiText=wikiText;
@@ -92,13 +84,20 @@ public class WikiProcessor
 		while(wikiText.indexOf("<"+inject.getTag()+">")>0)
 		{
 			StringBuffer sbDebug = new StringBuffer();
-			int from = wikiText.indexOf("<"+inject.getTag()+">");
+			String startTag = "<"+inject.getTag()+">";
+			int from = wikiText.indexOf(startTag);
 			int to = wikiText.indexOf("</"+inject.getTag()+">");
+			
+			StringBuffer injectionSb = WikiContentIO.toString(inject);
+			logger.debug(injectionSb);
+			inject.setValue(wikiText.substring(from+startTag.length(), to));
+			WikiContentIO.toFile(inject);
+			
 			sbDebug.append("Injection: "+from+" "+to);
 			sbDebug.append(" oldSize="+wikiText.length());
 			StringBuffer sb = new StringBuffer();
 				sb.append(wikiText.substring(0, from-1));
-				if(inject.getId()!=null && inject.getId().length()>0){sb.append(getInjection(inject));}
+				if(inject.getId()!=null && inject.getId().length()>0){sb.append(injectionSb);}
 				sb.append(wikiText.substring(to+inject.getTag().length()+3+1,wikiText.length()));
 			wikiText=sb.toString();
 			sbDebug.append(" newSize="+wikiText.length());

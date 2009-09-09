@@ -12,12 +12,21 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.StringReader;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+
+import net.sf.exlp.io.StringBufferOutputStream;
+
 import org.apache.log4j.Logger;
 import org.jdom.Document;
+import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
+import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
+import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 
 public class WikiContentIO
 {
@@ -71,4 +80,53 @@ public class WikiContentIO
 		catch (IOException e) {logger.error(e);}
 		return sb.toString();
 	}
+	
+	public synchronized static StringBuffer toString(Wikiinjection injection)
+	{
+		StringBufferOutputStream sbos = new StringBufferOutputStream();
+		try
+		{
+			JAXBContext context = JAXBContext.newInstance(Wikiinjection.class);
+			Marshaller m = context.createMarshaller(); 
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
+			m.marshal(injection, sbos);
+			
+			Reader sr = new StringReader(sbos.getStringBuffer().toString());  
+			Document doc = new SAXBuilder().build(sr);
+			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat() );
+			
+			Element outElement = unsetNameSpace(doc.getRootElement());
+			sbos = new StringBufferOutputStream();
+			xmlOut.output(outElement, sbos);
+		}
+		catch (JAXBException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error(e);}
+		catch (IOException e) {logger.error(e);}
+		return sbos.getStringBuffer();
+	}
+	
+	private synchronized static Element unsetNameSpace(Element e)
+	{
+		e.setNamespace(null);
+		for(Object o : e.getChildren())
+		{
+			Element eChild = (Element)o;
+			eChild=unsetNameSpace(eChild);
+		}
+		return e;
+	}
+	
+	public synchronized static void toFile(Wikiinjection injection)
+	{
+		File f = new File("dist/xx.xml");
+		try
+		{
+			JAXBContext context = JAXBContext.newInstance(Wikiinjection.class);
+			Marshaller m = context.createMarshaller(); 
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
+			m.marshal(injection, f);
+		}
+		catch (JAXBException e) {logger.error(e);}
+	}
+	
 }

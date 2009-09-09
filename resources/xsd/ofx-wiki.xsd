@@ -12,9 +12,13 @@
     </xsd:element>
     <xsd:element name="wikiinjection">
         <xsd:complexType>
-            <xsd:attribute name="type" type="xsd:string"/>
-            <xsd:attribute name="tag" type="xsd:string"/>
-            <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="type" type="xsd:string"/>
+                    <xsd:attribute name="tag" type="xsd:string"/>
+                    <xsd:attribute name="id" type="xsd:string"/>
+                </xsd:extension>
+            </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="wikireplace">
