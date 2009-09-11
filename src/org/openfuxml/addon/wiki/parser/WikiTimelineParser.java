@@ -1,10 +1,12 @@
 package org.openfuxml.addon.wiki.parser;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import net.sf.exlp.event.LogEventHandler;
 import net.sf.exlp.event.handler.EhDebug;
@@ -15,6 +17,9 @@ import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.parser.LogParser;
 
 import org.apache.log4j.Logger;
+import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
+import org.openfuxml.addon.wiki.data.jaxb.Ofxchartcontainer;
+import org.openfuxml.addon.wiki.data.jaxb.Ofxchartdata;
 
 public class WikiTimelineParser extends AbstractLogParser implements LogParser  
 {
@@ -24,8 +29,7 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 	private Section section;
 	private ArrayList<Pattern> alP,alPBarData,alPPlotData;
 	
-	private Map<String,String> mapBarLabel;
-	
+	private Ofxchart ofxChart;
 	private StringBuffer sbParseLine;
 	
 	public WikiTimelineParser(LogEventHandler leh)
@@ -82,7 +86,7 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 			{
 				switch(i)
 				{
-					case 0: mapBarLabel.put(m.group(1), m.group(2));break;	
+					case 0: addChartData(m.group(1), m.group(2),"label");break;	
 				}
 				i=alPBarData.size();
 				unknownPattern=false;
@@ -93,6 +97,31 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 			sbParseLine.append(" UNKNOW ... parsing line!");
 			section = Section.none;
 			parseLine(line);
+		}
+	}
+	
+	private void addChartData(String x, String dataType, String containerType)
+	{
+		Ofxchartdata cs = new Ofxchartdata();
+		cs.setType(dataType);
+		cs.setValue(new Double(x));
+		
+		boolean labelContanerMissing=true;
+		for(Ofxchartcontainer ofxChartContainer : ofxChart.getOfxchartcontainer())
+		{
+			if(ofxChartContainer.getType().equals(containerType))
+			{
+				ofxChartContainer.getOfxchartdata().add(cs);
+				labelContanerMissing = false;
+				break;
+			}
+		}
+		if(labelContanerMissing)
+		{
+			Ofxchartcontainer cc = new Ofxchartcontainer();
+			cc.getOfxchartdata().add(cs);
+			cc.setType(containerType);
+			ofxChart.getOfxchartcontainer().add(cc);
 		}
 	}
 	
@@ -136,21 +165,23 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 	@Override
 	public void parseItem(ArrayList<String> item)
 	{
-		initDataContainer();
+		ofxChart = new Ofxchart();
 		section = Section.none;
 		logger.debug("Item received with "+item.size()+" entries");
 		for(String line : item){parse(line);}
-		debugDataContainer();
+		debug();
 	}
 	
-	private void initDataContainer()
+	private void debug()
 	{
-		mapBarLabel = new Hashtable<String,String>();
-	}
-	
-	private void debugDataContainer()
-	{
-		logger.debug("Barlabel: "+mapBarLabel.size());
+		try
+		{
+			JAXBContext context = JAXBContext.newInstance(Ofxchart.class);
+			Marshaller m = context.createMarshaller(); 
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
+			m.marshal(ofxChart, System.out);
+		}
+		catch (JAXBException e) {logger.error(e);}
 	}
 	
 	public static void main(String args[])

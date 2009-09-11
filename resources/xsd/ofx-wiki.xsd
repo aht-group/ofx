@@ -39,16 +39,17 @@
     <xsd:element name="ofxchart">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="ofxchartdataset" maxOccurs="unbounded"/>
+                <xsd:element ref="ofxchartcontainer" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="type" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="ofxchartdataset">
+    <xsd:element name="ofxchartcontainer">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="ofxchartdata" maxOccurs="unbounded"/>
             </xsd:sequence>
+            <xsd:attribute name="type" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="ofxchartdata">
@@ -56,6 +57,7 @@
             <xsd:simpleContent>
                 <xsd:extension base="xsd:double">
                     <xsd:attribute name="type" type="xsd:string" />
+                    <xsd:attribute name="label" type="xsd:string" />
                 </xsd:extension>
             </xsd:simpleContent>
         </xsd:complexType>
