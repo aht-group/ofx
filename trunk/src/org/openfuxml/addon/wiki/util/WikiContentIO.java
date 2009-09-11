@@ -25,7 +25,7 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
-import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
+import org.openfuxml.addon.wiki.data.jaxb.OfxWikiNsPrefixMapper;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 
 public class WikiContentIO
@@ -116,14 +116,15 @@ public class WikiContentIO
 		return e;
 	}
 	
-	public synchronized static void toFile(Wikiinjection injection)
+	public synchronized static void toFile(Wikiinjection injection,int injectionId,File baseDir)
 	{
-		File f = new File("dist/xx.xml");
+		File f = new File(baseDir,injection.getOfxtag()+"-"+injectionId+".xml");
 		try
 		{
 			JAXBContext context = JAXBContext.newInstance(Wikiinjection.class);
 			Marshaller m = context.createMarshaller(); 
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			m.setProperty("com.sun.xml.bind.namespacePrefixMapper",new OfxWikiNsPrefixMapper());
 			m.marshal(injection, f);
 		}
 		catch (JAXBException e) {logger.error(e);}

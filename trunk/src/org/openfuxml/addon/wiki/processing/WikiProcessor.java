@@ -1,5 +1,6 @@
 package org.openfuxml.addon.wiki.processing;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
+import org.openfuxml.addon.wiki.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
@@ -26,12 +28,20 @@ public class WikiProcessor
 	private List<Wikiinjection> wikiInjectionsXml,wikiInjectionsWiki;
 	
 	private String wikiText;
+	private ObjectFactory of;
+	
+	private File baseDir;
+	private int injectionId;
 	
 	public WikiProcessor(Configuration config)
 	{
 		wikiReplaces = new ArrayList<Wikireplace>();
 		wikiInjectionsXml = new ArrayList<Wikiinjection>();
 		wikiInjectionsWiki = new ArrayList<Wikiinjection>();
+		
+		of = new ObjectFactory();
+		injectionId=1;
+		baseDir = new File("dist");
 		
 		MultiResourceLoader mrl = new MultiResourceLoader();
 		int numberTranslations = config.getStringArray("wikiprocessor/file").length;
@@ -90,8 +100,10 @@ public class WikiProcessor
 			
 			StringBuffer injectionSb = WikiContentIO.toString(inject);
 			logger.debug(injectionSb);
-			inject.setValue(wikiText.substring(from+startTag.length(), to));
-			WikiContentIO.toFile(inject);
+			inject.setWikicontent(of.createWikiinjectionWikicontent());
+			inject.getWikicontent().setValue(wikiText.substring(from+startTag.length(), to));
+			WikiContentIO.toFile(inject,injectionId,baseDir);
+			injectionId++;
 			
 			sbDebug.append("Injection: "+from+" "+to);
 			sbDebug.append(" oldSize="+wikiText.length());
