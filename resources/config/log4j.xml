@@ -33,6 +33,11 @@
 		<level value="DEBUG"/>
 		<appender-ref ref="AppCon"/>
 	</logger>
+	
+	<logger name="net.sf.exlp" additivity="false">
+		<level value="DEBUG"/>
+		<appender-ref ref="AppCon"/>
+	</logger>
 
 	<root>
 		<priority value="INFO"/>

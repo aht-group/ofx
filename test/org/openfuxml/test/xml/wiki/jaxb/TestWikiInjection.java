@@ -5,6 +5,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import org.apache.log4j.Logger;
+import org.openfuxml.addon.wiki.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 
@@ -21,11 +22,14 @@ public class TestWikiInjection
 	
 	public void xmlConstruct()
 	{
+		ObjectFactory of = new ObjectFactory();
+		
 		Wikiinjection wikiinjection = new Wikiinjection();
 		wikiinjection.setWikitag("a");
 		wikiinjection.setOfxtag("b");
 		wikiinjection.setFormat("xml");
-		wikiinjection.setValue("vvvalluuuuuu");
+		wikiinjection.setWikicontent(of.createWikiinjectionWikicontent());
+		wikiinjection.getWikicontent().setValue("vvvalluuuuuu");
 		
 		Wikicontainer container = new Wikicontainer();
 		container.getWikiinjection().add(wikiinjection);
