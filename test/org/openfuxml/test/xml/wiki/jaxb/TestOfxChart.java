@@ -29,11 +29,15 @@ public class TestOfxChart
 		cs.setType("x");
 		cs.setValue(1924);
 		
-		Ofxchartcontainer cc = new Ofxchartcontainer();
-		cc.getOfxchartdata().add(cs);
-		cc.setType("label");
+		Ofxchartcontainer ds = new Ofxchartcontainer();
+		ds.getOfxchartdata().add(cs);
+		ds.setType("dataset");
 		
-		chart.getOfxchartcontainer().add(cc);
+		Ofxchartcontainer s = new Ofxchartcontainer();
+		s.getOfxchartcontainer().add(ds);
+		s.setType("dataseries");
+		
+		chart.getOfxchartcontainer().add(s);
 		
 		try
 		{

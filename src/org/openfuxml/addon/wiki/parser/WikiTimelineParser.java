@@ -62,7 +62,12 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 				switch(i)
 				{
 					case 0: section = Section.bardata;sbParseLine.append(" new-BarData");break;
-					case 1: section = Section.plotdata;sbParseLine.append(" new-PlotData");break;		
+					case 1: section = Section.plotdata;
+							Ofxchartcontainer ds = new Ofxchartcontainer();
+							ds.setType("dataseries");
+							ofxChart.getOfxchartcontainer().add(ds);
+							sbParseLine.append(" new-PlotData");
+							break;		
 				}
 				i=alP.size();
 				unknownPattern=false;
@@ -136,7 +141,7 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 			{
 				switch(i)
 				{
-					case 0: break;	
+					case 0: addPlotData(m);break;	
 				}
 				i=alPPlotData.size();
 				unknownPattern=false;
@@ -147,6 +152,30 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 			section = Section.none;
 			parseLine(line);
 		}
+	}
+	
+	private void addPlotData(Matcher m)
+	{
+		Ofxchartcontainer ofxDataSet = new Ofxchartcontainer();
+		ofxDataSet.setType("dataset");
+		
+		Ofxchartdata dX = new Ofxchartdata();
+		dX.setType("X");
+		dX.setValue(new Double(m.group(1)));
+		ofxDataSet.getOfxchartdata().add(dX);
+		
+		Ofxchartdata dMinY = new Ofxchartdata();
+		dMinY.setType("minY");
+		dMinY.setValue(new Double(m.group(2)));
+		ofxDataSet.getOfxchartdata().add(dMinY);
+	
+		Ofxchartdata dMaxY = new Ofxchartdata();
+		dMaxY.setType("maxY");
+		dMaxY.setValue(new Double(m.group(3)));
+		ofxDataSet.getOfxchartdata().add(dMaxY);
+
+		int index = ofxChart.getOfxchartcontainer().size()-1;
+		ofxChart.getOfxchartcontainer().get(index).getOfxchartcontainer().add(ofxDataSet);
 	}
 	
 	private void parse(String line)
