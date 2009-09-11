@@ -6,8 +6,8 @@ import javax.xml.bind.Marshaller;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
+import org.openfuxml.addon.wiki.data.jaxb.Ofxchartcontainer;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchartdata;
-import org.openfuxml.addon.wiki.data.jaxb.Ofxchartdataset;
 
 import de.kisner.util.LoggerInit;
 
@@ -29,10 +29,11 @@ public class TestOfxChart
 		cs.setType("x");
 		cs.setValue(1924);
 		
-		Ofxchartdataset cDs = new Ofxchartdataset();
-		cDs.getOfxchartdata().add(cs);
+		Ofxchartcontainer cc = new Ofxchartcontainer();
+		cc.getOfxchartdata().add(cs);
+		cc.setType("label");
 		
-		chart.getOfxchartdataset().add(cDs);
+		chart.getOfxchartcontainer().add(cc);
 		
 		try
 		{
