@@ -12,13 +12,19 @@
     </xsd:element>
     <xsd:element name="wikiinjection">
         <xsd:complexType>
-            <xsd:simpleContent>
-                <xsd:extension base="xsd:string">
-                    <xsd:attribute name="format" type="xsd:string"/>
-                    <xsd:attribute name="wikitag" type="xsd:string"/>
-                    <xsd:attribute name="ofxtag" type="xsd:string"/>
-                </xsd:extension>
-            </xsd:simpleContent>
+            <xsd:sequence>
+                <xsd:element name="wikicontent">
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="xsd:string" />
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element ref="ofxchart" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="format" type="xsd:string"/>
+            <xsd:attribute name="wikitag" type="xsd:string"/>
+            <xsd:attribute name="ofxtag" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="wikireplace">
@@ -28,6 +34,30 @@
             </xsd:sequence>
             <xsd:attribute name="from" type="xsd:string"/>
             <xsd:attribute name="to" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ofxchart">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="ofxchartdataset" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="type" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ofxchartdataset">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="ofxchartdata" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ofxchartdata">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:double">
+                    <xsd:attribute name="type" type="xsd:string" />
+                </xsd:extension>
+            </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>
