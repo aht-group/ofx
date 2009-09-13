@@ -86,23 +86,34 @@ public class WikiContentIO
 		StringBufferOutputStream sbos = new StringBufferOutputStream();
 		try
 		{
-			JAXBContext context = JAXBContext.newInstance(Wikiinjection.class);
+			Element element = toElement(injection, Wikiinjection.class);
+			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat() );
+			xmlOut.output(element, sbos);
+		}
+		catch (IOException e) {logger.error(e);}
+		return sbos.getStringBuffer();
+	}
+	
+	public static synchronized Element toElement(Object o, Class<?> c)
+	{
+		Element result = null;
+		try
+		{
+			StringBufferOutputStream sbos = new StringBufferOutputStream();
+			JAXBContext context = JAXBContext.newInstance(c);
 			Marshaller m = context.createMarshaller(); 
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
-			m.marshal(injection, sbos);
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE); 
+			m.marshal(o, sbos);
 			
 			Reader sr = new StringReader(sbos.getStringBuffer().toString());  
 			Document doc = new SAXBuilder().build(sr);
-			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat() );
 			
-			Element outElement = unsetNameSpace(doc.getRootElement());
-			sbos = new StringBufferOutputStream();
-			xmlOut.output(outElement, sbos);
+			result = unsetNameSpace(doc.getRootElement());
 		}
 		catch (JAXBException e) {logger.error(e);}
 		catch (JDOMException e) {logger.error(e);}
 		catch (IOException e) {logger.error(e);}
-		return sbos.getStringBuffer();
+		return result;
 	}
 	
 	private synchronized static Element unsetNameSpace(Element e)
@@ -116,9 +127,9 @@ public class WikiContentIO
 		return e;
 	}
 	
-	public synchronized static void toFile(Wikiinjection injection,int injectionId,File baseDir)
+	public synchronized static void toFile(Wikiinjection injection,File baseDir)
 	{
-		File f = new File(baseDir,injection.getOfxtag()+"-"+injectionId+".xml");
+		File f = new File(baseDir,injection.getId()+"-"+injection.getOfxtag()+".xml");
 		try
 		{
 			JAXBContext context = JAXBContext.newInstance(Wikiinjection.class);
@@ -130,4 +141,13 @@ public class WikiContentIO
 		catch (JAXBException e) {logger.error(e);}
 	}
 	
+	public static synchronized void debugElement(Element e)
+	{
+		try
+		{
+			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
+			xmlOut.output(e, System.out);
+		}
+		catch (IOException e1) {logger.error(e);}
+	}
 }
