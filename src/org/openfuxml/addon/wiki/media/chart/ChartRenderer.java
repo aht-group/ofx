@@ -11,30 +11,37 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.apache.xmlgraphics.java2d.ps.EPSDocumentGraphics2D;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
 import org.openfuxml.addon.wiki.media.chart.factory.BarChartFactory;
+import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 
 public class ChartRenderer
 {
 	private static Logger logger = Logger.getLogger(ChartRenderer.class);
 	
 	private MultiResourceLoader mrl;
+	private Configuration config;
 	
+	private String chartName;
+	
+	public void setChartName(String chartName) {this.chartName = chartName;}
+
 	private Ofxchart ofxChart;
 	private int width,height;
 	
-	public ChartRenderer()
+	public ChartRenderer(Configuration config)
 	{
+		this.config=config;
+		chartName="you-forgot-to-set-a-chart-name";
 		mrl = new MultiResourceLoader();
 		width = 400;
 		height = 300;
@@ -53,6 +60,11 @@ public class ChartRenderer
 		catch (FileNotFoundException e) {logger.error(e);}
 	}
 	
+	public void applyChart(Ofxchart ofxChart)
+	{
+		this.ofxChart=ofxChart;
+	}
+	
 	public void render()
 	{
 		logger.debug(ofxChart.getType());
@@ -63,13 +75,13 @@ public class ChartRenderer
 	
 	private void save(JFreeChart chart)
 	{
-		File baseDir = new File("dist");
-		savePNG(chart,new File(baseDir,"xx.png"));
-		saveEPS(chart,new File(baseDir,"test.eps"));
+		savePNG(chart);
+		saveEPS(chart);
 	}
 	
-	private void savePNG(JFreeChart chart, File f)
+	private void savePNG(JFreeChart chart)
 	{
+		File f = new File(config.getString("/ofx/dir[@type='image-web']")+"/"+chartName+".png");
 		try
 		{
 			OutputStream os = new FileOutputStream(f);
@@ -80,8 +92,9 @@ public class ChartRenderer
 		catch (IOException e) {{logger.error(e);}}
 	}
 	
-	private void saveEPS(JFreeChart chart, File f)
+	private void saveEPS(JFreeChart chart)
 	{	
+		File f = new File(config.getString("/ofx/dir[@type='image-eps']")+"/"+chartName+".eps");
 		try
 		{
 			EPSDocumentGraphics2D g2d = new EPSDocumentGraphics2D(false);
@@ -102,7 +115,11 @@ public class ChartRenderer
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
 		
-		ChartRenderer cr = new ChartRenderer();	
+		ConfigLoader.add("resources/config/wiki/wiki.xml");
+		Configuration config = ConfigLoader.init();
+		WikiConfigChecker.check(config);	
+			
+		ChartRenderer cr = new ChartRenderer(config);	
 		cr.loadChart("resources/data/timeline-ofxchart.xml");
 		cr.render();
 	}

@@ -7,6 +7,9 @@
 		<dir type="wiki">dist/wiki</dir>
 		<dir type="ofx">dist/ofx/content</dir>
 		<dir type="injection">dist/injection</dir>
+		<dir type="image">dist/ofx/bilder</dir>
+		<dir type="image-web">dist/ofx/bilder/web</dir>
+		<dir type="image-eps">dist/ofx/bilder/druck</dir>
 	</ofx>
 	<wikiprocessor>
 		<file>resources/config/wiki/wikireplace.xml</file>

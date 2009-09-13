@@ -15,6 +15,7 @@ import java.io.StringReader;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import net.sf.exlp.io.StringBufferOutputStream;
 
@@ -94,6 +95,19 @@ public class WikiContentIO
 		return sbos.getStringBuffer();
 	}
 	
+	public static synchronized Object loadJAXB(File f, Class<?> c)
+	{
+		Object result = null;
+		try
+		{
+			JAXBContext jc = JAXBContext.newInstance(c);
+			Unmarshaller u = jc.createUnmarshaller();
+			result = u.unmarshal(f);
+		}
+		catch (JAXBException e) {logger.error(e);}
+		return result;
+	}
+	
 	public static synchronized Element toElement(Object o, Class<?> c)
 	{
 		Element result = null;
@@ -130,6 +144,7 @@ public class WikiContentIO
 	public synchronized static void toFile(Wikiinjection injection,File baseDir)
 	{
 		File f = new File(baseDir,injection.getId()+"-"+injection.getOfxtag()+".xml");
+		if(f.exists() && f.isFile()){f.delete();}
 		try
 		{
 			JAXBContext context = JAXBContext.newInstance(Wikiinjection.class);
