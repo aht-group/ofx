@@ -121,24 +121,19 @@ public class XhtmlProcessor
 		}
 	}
 	
-	public String removeOfxElements()
+	public String moveOfxElements()
 	{
-		Map<String,Boolean> ofxTags = new Hashtable<String,Boolean>();
-		for(Wikiinjection wikiinjection : wikiInjections)
-		{
-			String tag = wikiinjection.getOfxtag();
-			if(!ofxTags.containsKey(tag)){ofxTags.put(tag, false);}
-		}
 		try
 		{
 			Reader sr = new StringReader(xHtmlText);  
 			Document doc = new SAXBuilder().build(sr);
 			Element rootElement = doc.getRootElement();
 			rootElement.detach();
-			for(String s :ofxTags.keySet())
-			{
-				rootElement=removeOfxElement(rootElement,s,0);
-			}
+			
+			ArrayList<Element> al = moveOfxElement(rootElement,"wikiinjection",0);
+			if(al.size()>1){logger.warn("Moved Elements has a size>1 !!!");}
+			rootElement=al.get(0);
+				
 			doc.addContent(rootElement);
 			
 			StringBufferOutputStream sbos = new StringBufferOutputStream();
@@ -148,12 +143,14 @@ public class XhtmlProcessor
 		}
 		catch (JDOMException e) {logger.error(e);}
 		catch (IOException e) {logger.error(e);}
+
 		return xHtmlText;
 	}
 	
 	//TODO public here ist only for testing, remove this later!
-	public Element removeOfxElement(Element oldRoot, String tag, int level)
+	public ArrayList<Element> moveOfxElement(Element oldRoot, String tag, int level)
 	{
+		ArrayList<Element> movedElements = new ArrayList<Element>();
 		Element newRoot = new Element(oldRoot.getName());
 		
 		for(Object oAtt : oldRoot.getAttributes())
@@ -181,16 +178,22 @@ public class XhtmlProcessor
 				if(oldChild.getName().equals(tag))
 				{
 					logger.debug("Detaching "+oldChild.getName());
+					oldChild.detach();
+					movedElements.add(oldChild);
 				}
 				else
 				{
-					Element newChild=removeOfxElement(oldChild, tag, level+1);
-					newRoot.addContent(newChild);
+					ArrayList<Element> al =moveOfxElement(oldChild, tag, level+1);
+					newRoot.addContent(al);
 				}
 			}
 			else {logger.warn("Unknown content: "+o.getClass().getName());}
 		}
 		logger.trace(sb);
-		return newRoot;
+		
+		ArrayList<Element> result = new ArrayList<Element>();
+		result.add(newRoot);
+		result.addAll(movedElements);
+		return result;
 	}
 }
