@@ -14,6 +14,7 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.xml.sax.InputSource;
@@ -24,9 +25,11 @@ public class OpenFuxmlGenerator
 {
 	static Logger logger = Logger.getLogger(OpenFuxmlGenerator.class);
 
-	public OpenFuxmlGenerator()
+	private Configuration config;
+	
+	public OpenFuxmlGenerator(Configuration config)
 	{
-		
+		this.config=config;
 	}
 
 	public String create(String xhtmlContent, String footer, String titleText) throws IOException, ParserConfigurationException, XMLStreamException, SAXException
@@ -56,7 +59,7 @@ public class OpenFuxmlGenerator
 		StringWriter out = new StringWriter();
 		XMLStreamWriter writer = createXMLStreamWriter(out);
 
-		HtmlToOpenFuxmlContentHandler contentHandler = new HtmlToOpenFuxmlContentHandler(writer);
+		HtmlToOpenFuxmlContentHandler contentHandler = new HtmlToOpenFuxmlContentHandler(writer,config);
 
 		xmlReader.setContentHandler(contentHandler);
 		xmlReader.parse(inputSource);

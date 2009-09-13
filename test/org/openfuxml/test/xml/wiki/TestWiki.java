@@ -16,6 +16,7 @@ import org.openfuxml.addon.wiki.OpenFuxmlGenerator;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.WikiTextFetcher;
 import org.openfuxml.addon.wiki.model.WikiDefaultModel;
+import org.openfuxml.addon.wiki.processing.InjectionProcessor;
 import org.openfuxml.addon.wiki.processing.WikiProcessor;
 import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
 import org.openfuxml.addon.wiki.util.WikiConfigChecker;
@@ -98,9 +99,12 @@ public class TestWiki
 		
 		xHtml=xhtmlP.removeWellFormed(xHtml);
 		
-		OpenFuxmlGenerator ofxGenerator = new OpenFuxmlGenerator();
+		OpenFuxmlGenerator ofxGenerator = new OpenFuxmlGenerator(config);
     	String htmlFooter = DocbookGenerator.FOOTER;
         
+		InjectionProcessor ip = new InjectionProcessor(config);
+		ip.processInjections();
+    	
 		try
 		{
 			String output = ofxGenerator.create(xHtml, htmlFooter, article);

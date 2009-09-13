@@ -13,7 +13,8 @@ import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.parser.LogParser;
 
 import org.apache.log4j.Logger;
-import org.openfuxml.addon.wiki.event.WikiGalleryEvent;
+import org.openfuxml.addon.wiki.data.jaxb.Ofxgallery;
+import org.openfuxml.addon.wiki.event.WikiImageEvent;
 
 public class WikiGalleryParser extends AbstractLogParser implements LogParser  
 {
@@ -56,7 +57,10 @@ public class WikiGalleryParser extends AbstractLogParser implements LogParser
 	
 	private void event(Matcher m)
 	{
-		WikiGalleryEvent event = new WikiGalleryEvent(m.group(1),m.group(2));
+		Ofxgallery.Ofximage ofxImage = new Ofxgallery.Ofximage();
+		ofxImage.setWikilink(m.group(1));
+		ofxImage.setValue(m.group(2));
+		WikiImageEvent event = new WikiImageEvent(ofxImage);
 		leh.handleEvent(event);
 	}
 
