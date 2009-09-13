@@ -18,7 +18,7 @@ import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.openfuxml.addon.wiki.OpenFuxmlGenerator;
-import org.openfuxml.addon.wiki.TestWiki;
+import org.openfuxml.addon.wiki.OfxWikiEngine;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.model.WikiDefaultModel;
 import org.openfuxml.addon.wiki.processing.WikiProcessor;
@@ -49,7 +49,7 @@ public class TestProcessedJdom
 		Document doc = null;
 		try
 		{
-			File f = new File("dist/"+article+"-"+TestWiki.Status.xhtmlProcessed+".xhtml");
+			File f = new File("dist/"+article+"-"+OfxWikiEngine.Status.xhtmlProcessed+".xhtml");
 			doc = new SAXBuilder().build(f);
 		}
 		catch (JDOMException e) {e.printStackTrace();}
