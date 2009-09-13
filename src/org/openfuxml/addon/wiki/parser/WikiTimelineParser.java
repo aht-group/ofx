@@ -1,5 +1,6 @@
 package org.openfuxml.addon.wiki.parser;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,7 +10,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import net.sf.exlp.event.LogEventHandler;
-import net.sf.exlp.event.handler.EhDebug;
+import net.sf.exlp.event.handler.EhResultContainer;
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerXml;
@@ -20,6 +21,7 @@ import org.apache.log4j.Logger;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchartcontainer;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchartdata;
+import org.openfuxml.addon.wiki.event.WikiChartEvent;
 
 public class WikiTimelineParser extends AbstractLogParser implements LogParser  
 {
@@ -195,12 +197,17 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 	public void parseItem(ArrayList<String> item)
 	{
 		ofxChart = new Ofxchart();
+		ofxChart.setType("bar");
+		
 		section = Section.none;
 		logger.debug("Item received with "+item.size()+" entries");
 		for(String line : item){parse(line);}
-		debug();
+//		debug();
+		WikiChartEvent event = new WikiChartEvent(ofxChart);
+		leh.handleEvent(event);
 	}
 	
+	@SuppressWarnings("unused")
 	private void debug()
 	{
 		try
@@ -219,9 +226,22 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
 			
-		LogEventHandler leh = new EhDebug();
+		LogEventHandler leh = new EhResultContainer();
 		LogParser lp = new WikiTimelineParser(leh);
 		LogListener ll = new LogListenerXml("resources/data/timeline.xml",lp);
 		ll.processMulti("/wikiinjection/wikicontent");
+		EhResultContainer results = (EhResultContainer)leh;
+		logger.debug("Results: "+results.getAlResults().size());
+		WikiChartEvent event = (WikiChartEvent)results.getAlResults().get(0);
+		Ofxchart ofxChart = event.getOfxChart();
+		
+		try
+		{
+			JAXBContext context = JAXBContext.newInstance(Ofxchart.class);
+			Marshaller m = context.createMarshaller(); 
+			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
+			m.marshal(ofxChart, new File("resources/data/timeline-ofxchart.xml"));
+		}
+		catch (JAXBException e) {logger.error(e);}
 	}
 }
