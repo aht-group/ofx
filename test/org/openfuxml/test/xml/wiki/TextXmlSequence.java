@@ -2,6 +2,7 @@ package org.openfuxml.test.xml.wiki;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import net.sf.exlp.io.ConfigLoader;
 
@@ -47,12 +48,14 @@ public class TextXmlSequence
 		catch (IOException e) {logger.error(e);}
 	}
 	
-	public void remove()
+	public void move()
 	{
 		try
 		{
 			XhtmlProcessor xhtmlP = new XhtmlProcessor(config);
-			Element result = xhtmlP.removeOfxElement(doc.getRootElement(), "ofxgallery", 0);
+			ArrayList<Element> al = xhtmlP.moveOfxElement(doc.getRootElement(), "wikiinjection", 0);
+			if(al.size()>1){logger.warn("Moved Elements has a size>1 !!!");}
+			Element result = al.get(0);
 			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat());
 			xmlOut.output(result, System.out);
 		}
@@ -107,7 +110,7 @@ public class TextXmlSequence
 			
 		TextXmlSequence test = new TextXmlSequence(config,"dist");
 		test.load("Bellagio");
-		test.remove();
+		test.move();
 		test.dissect();
     }
 }

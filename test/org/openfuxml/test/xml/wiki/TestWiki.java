@@ -91,7 +91,7 @@ public class TestWiki
 		xHtml = xhtmlP.process(xHtml);
 		WikiContentIO.writeXml(dirName, article+"-"+Status.xhtmlProcessed+".xhtml", xHtml);
 		
-		xHtml = xhtmlP.removeOfxElements();
+		xHtml = xhtmlP.moveOfxElements();
 		WikiContentIO.writeXml(dirName, article+"-"+Status.xhtmlFinal+".xhtml", xHtml);
 		
 		xHtml=xhtmlP.removeWellFormed(xHtml);
