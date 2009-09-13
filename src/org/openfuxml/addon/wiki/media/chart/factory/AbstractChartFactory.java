@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki.chart.factory;
+package org.openfuxml.addon.wiki.media.chart.factory;
 
 import org.apache.log4j.Logger;
 import org.jdom.Document;

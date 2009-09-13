@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki.chart.factory;
+package org.openfuxml.addon.wiki.media.chart.factory;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import org.jfree.chart.renderer.xy.XYBarRenderer;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYIntervalSeries;
 import org.jfree.data.xy.XYIntervalSeriesCollection;
-import org.openfuxml.addon.wiki.chart.ChartXmlUtil;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
+import org.openfuxml.addon.wiki.media.chart.ChartXmlUtil;
 
 public class BarChartFactory extends AbstractChartFactory
 {

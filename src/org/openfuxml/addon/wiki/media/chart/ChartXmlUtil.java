@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki.chart;
+package org.openfuxml.addon.wiki.media.chart;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
