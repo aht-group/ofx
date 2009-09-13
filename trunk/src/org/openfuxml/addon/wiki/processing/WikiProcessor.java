@@ -30,7 +30,7 @@ public class WikiProcessor
 	private String wikiText;
 	private ObjectFactory of;
 	
-	private File baseDir;
+	private File dirInjection;
 	private int injectionId;
 	
 	public WikiProcessor(Configuration config)
@@ -41,7 +41,7 @@ public class WikiProcessor
 		
 		of = new ObjectFactory();
 		injectionId=1;
-		baseDir = new File("dist");
+		dirInjection = new File(config.getString("/ofx/dir[@type='injection']"));
 		
 		MultiResourceLoader mrl = new MultiResourceLoader();
 		int numberTranslations = config.getStringArray("wikiprocessor/file").length;
@@ -102,7 +102,8 @@ public class WikiProcessor
 			logger.debug(injectionSb);
 			inject.setWikicontent(of.createWikiinjectionWikicontent());
 			inject.getWikicontent().setValue(wikiText.substring(from+startTag.length(), to));
-			WikiContentIO.toFile(inject,injectionId,baseDir);
+			inject.setId(""+injectionId);
+			WikiContentIO.toFile(inject,dirInjection);
 			injectionId++;
 			
 			sbDebug.append("Injection: "+from+" "+to);

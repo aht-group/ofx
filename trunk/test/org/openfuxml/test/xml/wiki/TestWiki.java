@@ -18,6 +18,7 @@ import org.openfuxml.addon.wiki.WikiTextFetcher;
 import org.openfuxml.addon.wiki.model.WikiDefaultModel;
 import org.openfuxml.addon.wiki.processing.WikiProcessor;
 import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
+import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.openfuxml.test.xml.wiki.docbook.DocbookGenerator;
 import org.xml.sax.SAXException;
@@ -34,13 +35,14 @@ public class TestWiki
 	private WikiProcessor wikiP;
 	private XhtmlProcessor xhtmlP;
 	
-	private String dirName;
+	private String dirWiki,dirOfx;
 	private Configuration config;
 	
-	public TestWiki(Configuration config,String dirName)
+	public TestWiki(Configuration config)
 	{
 		this.config=config;
-		this.dirName=dirName;
+		dirWiki=config.getString("/ofx/dir[@type='wiki']");
+		dirOfx=config.getString("/ofx/dir[@type='ofx']");
 		wikiP = new WikiProcessor(config);
 		xhtmlP = new XhtmlProcessor(config);
 	}
@@ -50,7 +52,7 @@ public class TestWiki
 		logger.debug("Fetching article: "+article);
 		WikiTextFetcher tw = new WikiTextFetcher();
 		String wikiText = tw.fetchText(article);
-		WikiContentIO.writeTxt("dist", article+"-"+Status.txtFetched+".txt", wikiText);
+		WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtFetched+".txt", wikiText);
 		return wikiText;
 	}
 	
@@ -66,33 +68,33 @@ public class TestWiki
 	public void testOfx()
 	{
 		String article = config.getString("wiki/article");
-		File f = new File(dirName+"/"+article+"-"+Status.txtFetched+".txt");
+		File f = new File(dirWiki+"/"+article+"-"+Status.txtFetched+".txt");
 		String wikiText;
 		
-		delete(new File(dirName,article+"-"+Status.txtFetched+".txt"));
-		delete(new File(dirName,article+"-"+Status.txtProcessed+".txt"));
-		delete(new File(dirName,article+"-"+Status.xhtmlRendered+".xhtml"));
-		delete(new File(dirName,article+"-"+Status.xhtmlFinal+".xhtml"));
-		delete(new File(dirName,article+"-"+Status.ofx+".xml"));
+		delete(new File(dirWiki,article+"-"+Status.txtFetched+".txt"));
+		delete(new File(dirWiki,article+"-"+Status.txtProcessed+".txt"));
+		delete(new File(dirWiki,article+"-"+Status.xhtmlRendered+".xhtml"));
+		delete(new File(dirWiki,article+"-"+Status.xhtmlFinal+".xhtml"));
+		delete(new File(dirWiki,article+"-"+Status.ofx+".xml"));
 		
-		if(f.exists() && f.isFile()){wikiText = WikiContentIO.loadTxt(dirName,article+"-"+Status.txtFetched+".txt");}
+		if(f.exists() && f.isFile()){wikiText = WikiContentIO.loadTxt(dirWiki,article+"-"+Status.txtFetched+".txt");}
 		else{wikiText = fetchTextHttp(article);}
 		
 		wikiText = wikiP.process(wikiText);
-		WikiContentIO.writeTxt("dist", article+"-"+Status.txtProcessed+".txt", wikiText);
+		WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtProcessed+".txt", wikiText);
 		
 		wikiImage="file:///c:/temp/${image}";
 		wikiTitle="file:///c:/temp/${title}";
 		
         WikiModel myWikiModel = new WikiDefaultModel(wikiImage,wikiTitle);
         String xHtml = myWikiModel.render(wikiText);
-        WikiContentIO.writeTxt("dist", article+"-"+Status.xhtmlRendered+".xhtml", xHtml);
+        WikiContentIO.writeTxt(dirWiki, article+"-"+Status.xhtmlRendered+".xhtml", xHtml);
 		
 		xHtml = xhtmlP.process(xHtml);
-		WikiContentIO.writeXml(dirName, article+"-"+Status.xhtmlProcessed+".xhtml", xHtml);
+		WikiContentIO.writeXml(dirWiki, article+"-"+Status.xhtmlProcessed+".xhtml", xHtml);
 		
 		xHtml = xhtmlP.moveOfxElements();
-		WikiContentIO.writeXml(dirName, article+"-"+Status.xhtmlFinal+".xhtml", xHtml);
+		WikiContentIO.writeXml(dirWiki, article+"-"+Status.xhtmlFinal+".xhtml", xHtml);
 		
 		xHtml=xhtmlP.removeWellFormed(xHtml);
 		
@@ -102,7 +104,7 @@ public class TestWiki
 		try
 		{
 			String output = ofxGenerator.create(xHtml, htmlFooter, article);
-			WikiContentIO.writeXml(dirName, article+"-"+Status.ofx+".xml", output);
+			WikiContentIO.writeXml(dirOfx, article+"-"+Status.ofx+".xml", output);
 		}
 		catch (IOException e) {logger.error(e);}
 		catch (ParserConfigurationException e) {logger.error(e);}
@@ -118,10 +120,12 @@ public class TestWiki
 		
 		ConfigLoader.add("resources/config/wiki/wiki.xml");
 		Configuration config = ConfigLoader.init();
-			
+		
+		WikiConfigChecker.check(config);
+		
 		WikiTemplates.init();	
 			
-		TestWiki tw = new TestWiki(config,"dist");
+		TestWiki tw = new TestWiki(config);
 		tw.testOfx();
     }
 }
