@@ -18,12 +18,13 @@ import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.openfuxml.addon.wiki.OpenFuxmlGenerator;
+import org.openfuxml.addon.wiki.TestWiki;
 import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.WikiTextFetcher;
 import org.openfuxml.addon.wiki.model.WikiDefaultModel;
 import org.openfuxml.addon.wiki.processing.WikiProcessor;
 import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
+import org.openfuxml.addon.wiki.util.WikiTextFetcher;
 import org.openfuxml.test.xml.wiki.docbook.DocbookGenerator;
 import org.xml.sax.SAXException;
 

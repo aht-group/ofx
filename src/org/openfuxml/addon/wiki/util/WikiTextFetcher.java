@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki;
+package org.openfuxml.addon.wiki.util;
 
 import java.net.MalformedURLException;
 import java.text.DecimalFormat;
@@ -10,6 +10,7 @@ import net.sourceforge.jwbf.bots.MediaWikiBot;
 import net.sourceforge.jwbf.contentRep.SimpleArticle;
 
 import org.apache.log4j.Logger;
+import org.openfuxml.addon.wiki.WikiTemplates;
 
 import de.kisner.util.LoggerInit;
 

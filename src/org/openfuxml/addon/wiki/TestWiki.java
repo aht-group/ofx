@@ -1,4 +1,4 @@
-package org.openfuxml.test.xml.wiki;
+package org.openfuxml.addon.wiki;
 
 import info.bliki.wiki.model.WikiModel;
 
@@ -12,15 +12,13 @@ import net.sf.exlp.io.ConfigLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
-import org.openfuxml.addon.wiki.OpenFuxmlGenerator;
-import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.WikiTextFetcher;
 import org.openfuxml.addon.wiki.model.WikiDefaultModel;
 import org.openfuxml.addon.wiki.processing.InjectionProcessor;
 import org.openfuxml.addon.wiki.processing.WikiProcessor;
 import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
 import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
+import org.openfuxml.addon.wiki.util.WikiTextFetcher;
 import org.openfuxml.test.xml.wiki.docbook.DocbookGenerator;
 import org.xml.sax.SAXException;
 
