@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<wikiinjection xmlns="http://www.openfuxml.org/wiki" ofxtag="ofxchart" wikitag="timeline" format="xml">
+<wikiinjection xmlns="http://www.openfuxml.org/wiki" ofxtag="ofxchart" id="1" wikitag="timeline" format="xml">
 <wikicontent>
 Colors=
   id:lightgrey value:gray(0.9)

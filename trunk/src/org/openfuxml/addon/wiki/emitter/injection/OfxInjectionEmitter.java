@@ -28,6 +28,7 @@ public class OfxInjectionEmitter extends NestingEmitter
 	{
 		Wikiinjection injection = new Wikiinjection();
 		injection.setFormat(atts.getValue("format"));
+		injection.setId(atts.getValue("id"));
 		injection.setOfxtag(atts.getValue("ofxtag"));
 		injection.setWikitag(atts.getValue("wikitag"));
 		

@@ -93,6 +93,8 @@ public class WikiProcessor
 	{
 		while(wikiText.indexOf("<"+inject.getWikitag()+">")>0)
 		{
+			inject.setId(""+injectionId);injectionId++;
+			
 			StringBuffer sbDebug = new StringBuffer();
 			String startTag = "<"+inject.getWikitag()+">";
 			int from = wikiText.indexOf(startTag);
@@ -102,9 +104,8 @@ public class WikiProcessor
 			logger.debug(injectionSb);
 			inject.setWikicontent(of.createWikiinjectionWikicontent());
 			inject.getWikicontent().setValue(wikiText.substring(from+startTag.length(), to));
-			inject.setId(""+injectionId);
+			
 			WikiContentIO.toFile(inject,dirInjection);
-			injectionId++;
 			
 			sbDebug.append("Injection: "+from+" "+to);
 			sbDebug.append(" oldSize="+wikiText.length());
