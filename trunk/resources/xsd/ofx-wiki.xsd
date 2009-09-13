@@ -24,6 +24,7 @@
                 <xsd:element ref="ofxgallery" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="format" type="xsd:string"/>
+            <xsd:attribute name="article" type="xsd:string"/>
             <xsd:attribute name="id" type="xsd:string"/>
             <xsd:attribute name="wikitag" type="xsd:string"/>
             <xsd:attribute name="ofxtag" type="xsd:string"/>
