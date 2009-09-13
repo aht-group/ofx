@@ -10,6 +10,7 @@
 		<pathelement location="${lib.dir}/${exlp.dir}/${exlp.lib}"/>
 		<pathelement location="${lib.dir}/${commonsconfig.dir}/${commonsconfig.lib}"/>
 		<pathelement location="${lib.dir}/${commonsio.dir}/${commonsio.lib}"/>
+		<pathelement location="${lib.dir}/${commonsxmlgraphics.dir}/${commonsxmlgraphics.lib}"/>
 	<!-- XML  -->
 		<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbapi.lib}"/>
 		<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
@@ -28,6 +29,10 @@
 		<pathelement location="${lib.dir}/${servlet.dir}/${servlet.lib}"/>
 		<pathelement location="${lib.dir}/${jsp.dir}/${jsp-api.lib}"/>
 		<pathelement location="${lib.dir}/${jsf.dir}/${jsf-api.lib}"/>
+	<!-- GUI -->
+		<pathelement location="${lib.dir}/${jcommon.dir}/${jcommon.lib}"/>
+		<pathelement location="${lib.dir}/${jfreechart.dir}/${jfreechart.lib}"/>
+
 	<!-- JBoss  -->
 		<pathelement location="${lib.dir}/${jboss.dir}/${jboss-ejb3.lib}"/>
 		<pathelement location="${lib.dir}/${jboss.dir}/${jboss-javaee.lib}"/>

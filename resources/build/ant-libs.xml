@@ -10,7 +10,12 @@
 	<property name="exlp.dir" value="utils/exlp"/><property name="exlp.lib" value="exlp-${exlp-version}.jar" />
 	<property name="commonsconfig.dir" value="utils/commons/config"/><property name="commonsconfig.lib" value="commons-configuration-${commonsconfig-version}.jar" />
 	<property name="commonsio.dir" value="utils/commons/io"/><property name="commonsio.lib" value="commons-io-${commonsio-version}.jar" />
+	<property name="commonsxmlgraphics.dir" value="utils/commons/xmlgraphics"/><property name="commonsxmlgraphics.lib" value="xmlgraphics-commons-${commonsxmlgraphics-version}.jar" />
 	
+	<!-- GUI -->
+	<property name="jcommon.dir" value="gui/jcommon"/><property name="jcommon.lib" value="jcommon-${jcommon-version}.jar"/>
+	<property name="jfreechart.dir" value="gui/jfreechart"/><property name="jfreechart.lib" value="jfreechart-${jfreechart-version}.jar"/>
+		
 	<!-- Library Definitions: XML -->
 	<property name="jdom.dir" value="xml/jdom"/><property name="jdom.lib" value="jdom-${jdom-version}.jar"/>
 	<property name="jaxb.dir" value="xml/jaxb/${jaxb-version}"/>
@@ -49,6 +54,7 @@
 		<echo level="info">           ${exlp.dir}/${exlp.lib}</echo>
 		<echo level="info">           ${commonsconfig.dir}/${commonsconfig.lib}</echo>
 		<echo level="info">           ${commonsio.dir}/${commonsio.lib}</echo>
+		<echo level="info">           ${commonsxmlgraphics.dir}/${commonsxmlgraphics.lib}</echo>
 		<echo level="info">   XML   : ${jaxb.dir}/${jaxbapi.lib}</echo>
 		<echo level="info">           ${jaxb.dir}/${jaxbimpl.lib}</echo>
 		<echo level="info">           ${jdom.dir}/${jdom.lib}</echo>
@@ -58,6 +64,8 @@
 		<echo level="info">   Net   : ${jsch.dir}/${jsch.lib}</echo>
 		<echo level="info">           ${jmdns.dir}/${jmdns.lib}</echo>
 		<echo level="info">           ${mail.dir}/${mail.lib}</echo>
+		<echo level="info">   GUI   : ${jfreechart.dir}/${jfreechart.lib}</echo>
+		<echo level="info">           ${jcommon.dir}/${jcommon.lib}</echo>
 		<echo level="info">   HTML  : ${servlet.dir}/${servlet.lib}</echo>
 		<echo level="info">           ${jsp.dir}/${jsp-api.lib}</echo>
 		<echo level="info">           ${jstl.dir}/${jstl.lib}</echo>
