@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.wiki.emitter.EmitterFactory;
 import org.openfuxml.addon.wiki.emitter.NestingEmitter;
@@ -26,11 +27,13 @@ public class HtmlToOpenFuxmlContentHandler implements ContentHandler
 	
 	private Map<String, String> acronyms = new HashMap<String, String>();
 	private EmitterFactory ef;
+	private Configuration config;
 
-	public HtmlToOpenFuxmlContentHandler(XMLStreamWriter writer)
+	public HtmlToOpenFuxmlContentHandler(XMLStreamWriter writer,Configuration config)
 	{
 		this.writer=writer;
-		ef = new EmitterFactory(writer);
+		this.config=config;
+		ef = new EmitterFactory(writer,config);
 		sctionEmitter = new OfxSectionEmitter(ef);
 		emitter = sctionEmitter;
 	}

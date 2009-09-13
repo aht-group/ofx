@@ -1,6 +1,5 @@
 package org.openfuxml.addon.wiki.media.image;
 
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,6 +15,7 @@ import net.sourceforge.jwbf.actions.util.ActionException;
 import net.sourceforge.jwbf.actions.util.ProcessException;
 import net.sourceforge.jwbf.bots.MediaWikiBot;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.apache.xmlgraphics.java2d.ps.EPSDocumentGraphics2D;
 
@@ -24,10 +24,11 @@ public class WikiImageProcessor
 	static Logger logger = Logger.getLogger(WikiImageProcessor.class);
 	
 	private BufferedImage image;
+	private Configuration config;
 	
-	public WikiImageProcessor()
+	public WikiImageProcessor(Configuration config)
 	{
-		
+		this.config=config;
 	}
 	
 	public void fetch(String imageName)
@@ -46,26 +47,22 @@ public class WikiImageProcessor
 		catch (IOException e) {logger.error(e);}
 	}
 	
-	public void save()
+	public void save(String fileName)
 	{
-		File baseDir = new File("dist");
-		savePNG(baseDir, "image.png");
-		saveEPS(baseDir, "image.eps");
+		savePNG(fileName);
+		saveEPS(fileName);
 	}
 	
-	private void savePNG(File baseDir, String fileName)
+	private void savePNG(String fileName)
 	{
-		File f = new File(baseDir,fileName);
-		try
-		{
-			ImageIO.write( image, "png", f);
-		}
+		File f = new File(config.getString("/ofx/dir[@type='image-web']")+"/"+fileName+".png");
+		try {ImageIO.write( image, "png", f);}
 		catch (IOException e) {logger.error(e);}
 	}
 	
-	private void saveEPS(File baseDir, String fileName)
+	private void saveEPS(String fileName)
 	{	
-		File f = new File(baseDir,fileName);
+		File f = new File(config.getString("/ofx/dir[@type='image-eps']")+"/"+fileName+".eps");
 		try
 		{
 			EPSDocumentGraphics2D g2d = new EPSDocumentGraphics2D(false);

@@ -1,26 +1,29 @@
 package org.openfuxml.addon.wiki.emitter.injection;
 
-import java.util.Hashtable;
-import java.util.Map;
+import java.io.File;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
-import org.jdom.Element;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
+import org.openfuxml.addon.wiki.data.jaxb.Ofxgallery.Ofximage;
 import org.openfuxml.addon.wiki.emitter.EmitterFactory;
 import org.openfuxml.addon.wiki.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.util.JdomXmlStreamer;
+import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.xml.sax.Attributes;
 
 public class OfxInjectionEmitter extends NestingEmitter
 {
 	private static Logger logger = Logger.getLogger(OfxInjectionEmitter.class);
-
-	public OfxInjectionEmitter(EmitterFactory ef, String... ofxTagNames)
+	private Configuration config;
+	
+	public OfxInjectionEmitter(EmitterFactory ef, Configuration config)
 	{
 		super(ef);
+		this.config=config;
 	}
 
 	@Override
@@ -37,6 +40,20 @@ public class OfxInjectionEmitter extends NestingEmitter
 		{
 			OfxChartEmitter chartEmitter = new OfxChartEmitter(injection);
 			chartEmitter.transform(jdomStreamer);
+		}
+		if(injection.getOfxtag().equals("ofxgallery"))
+		{
+			String injectionDir = config.getString("/ofx/dir[@type='injection']");
+			String injectionName = injection.getId()+"-"+injection.getOfxtag();
+			File f = new File(injectionDir+"/"+injectionName+".xml");
+			injection = (Wikiinjection)WikiContentIO.loadJAXB(f, Wikiinjection.class);
+			int i=0;
+			for(Ofximage image : injection.getOfxgallery().get(0).getOfximage())
+			{
+				i++;
+				OfxImageEmitter imageEmitter = new OfxImageEmitter(image,injectionName+"-"+i);
+				imageEmitter.transform(jdomStreamer);
+			}
 		}
 		else{logger.warn("Unkown ofxtag: "+injection.getOfxtag());}
 		return true;
