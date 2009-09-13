@@ -27,12 +27,10 @@ public class HtmlToOpenFuxmlContentHandler implements ContentHandler
 	
 	private Map<String, String> acronyms = new HashMap<String, String>();
 	private EmitterFactory ef;
-	private Configuration config;
 
 	public HtmlToOpenFuxmlContentHandler(XMLStreamWriter writer,Configuration config)
 	{
 		this.writer=writer;
-		this.config=config;
 		ef = new EmitterFactory(writer,config);
 		sctionEmitter = new OfxSectionEmitter(ef);
 		emitter = sctionEmitter;
