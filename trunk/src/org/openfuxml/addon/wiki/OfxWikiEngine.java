@@ -24,9 +24,9 @@ import org.xml.sax.SAXException;
 
 import de.kisner.util.LoggerInit;
 
-public class TestWiki
+public class OfxWikiEngine
 {
-	static Logger logger = Logger.getLogger(TestWiki.class);
+	static Logger logger = Logger.getLogger(OfxWikiEngine.class);
 	public static enum Status {txtFetched,txtProcessed,xhtmlRendered,xhtmlProcessed,xhtmlFinal,ofx};
 	
 	private String wikiImage,wikiTitle;
@@ -37,7 +37,7 @@ public class TestWiki
 	private String dirWiki,dirOfx;
 	private Configuration config;
 	
-	public TestWiki(Configuration config)
+	public OfxWikiEngine(Configuration config)
 	{
 		this.config=config;
 		dirWiki=config.getString("/ofx/dir[@type='wiki']");
@@ -127,7 +127,7 @@ public class TestWiki
 		
 		WikiTemplates.init();	
 			
-		TestWiki tw = new TestWiki(config);
+		OfxWikiEngine tw = new OfxWikiEngine(config);
 		tw.testOfx();
     }
 }

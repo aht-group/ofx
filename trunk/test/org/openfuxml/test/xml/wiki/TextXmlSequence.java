@@ -15,7 +15,7 @@ import org.jdom.Text;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
-import org.openfuxml.addon.wiki.TestWiki;
+import org.openfuxml.addon.wiki.OfxWikiEngine;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
 
@@ -40,7 +40,7 @@ public class TextXmlSequence
 	{
 		try
 		{
-			File f = new File(dirName+"/"+article+"-"+TestWiki.Status.xhtmlProcessed+".xhtml");
+			File f = new File(dirName+"/"+article+"-"+OfxWikiEngine.Status.xhtmlProcessed+".xhtml");
 			doc = new SAXBuilder().build( f );
 			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat());
 			xmlOut.output(doc, System.out);
