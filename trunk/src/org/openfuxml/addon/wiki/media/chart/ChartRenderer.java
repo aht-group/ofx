@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki.chart;
+package org.openfuxml.addon.wiki.media.chart;
 
 import java.awt.geom.Rectangle2D;
 import java.io.File;
@@ -21,8 +21,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.StandardBarPainter;
-import org.openfuxml.addon.wiki.chart.factory.BarChartFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
+import org.openfuxml.addon.wiki.media.chart.factory.BarChartFactory;
 
 public class ChartRenderer
 {
@@ -82,16 +82,14 @@ public class ChartRenderer
 	
 	private void saveEPS(JFreeChart chart, File f)
 	{	
-        EPSDocumentGraphics2D g2d = new EPSDocumentGraphics2D(false);
-        g2d.setGraphicContext(new org.apache.xmlgraphics.java2d.GraphicContext());
-
 		try
 		{
+			EPSDocumentGraphics2D g2d = new EPSDocumentGraphics2D(false);
+	        g2d.setGraphicContext(new org.apache.xmlgraphics.java2d.GraphicContext());
 			FileOutputStream out = new FileOutputStream(f);
 			g2d.setupDocument(out, width, height);
 	        chart.draw(g2d, new Rectangle2D.Double(0,0,width, height));
 	        g2d.finish();
-	        
 	        out.close();
 		}
 		catch (FileNotFoundException e) {logger.error(e);}

@@ -4,10 +4,10 @@ import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.util.Locale;
 
-import net.sourceforge.jwbf.actions.mw.util.ActionException;
-import net.sourceforge.jwbf.actions.mw.util.ProcessException;
+import net.sourceforge.jwbf.actions.util.ActionException;
+import net.sourceforge.jwbf.actions.util.ProcessException;
 import net.sourceforge.jwbf.bots.MediaWikiBot;
-import net.sourceforge.jwbf.contentRep.mw.SimpleArticle;
+import net.sourceforge.jwbf.contentRep.SimpleArticle;
 
 import org.apache.log4j.Logger;
 
@@ -28,8 +28,8 @@ public class WikiTextFetcher
 	{
 		try
 		{
-			MediaWikiBot b = new MediaWikiBot("http://de.wikipedia.org/w/");
-			SimpleArticle sa = new SimpleArticle(b.readContent(article));
+			MediaWikiBot bot = new MediaWikiBot("http://de.wikipedia.org/w/");
+			SimpleArticle sa = new SimpleArticle(bot.readContent(article));
 		    wikiText = sa.getText();
 		}
 		catch (MalformedURLException e) {logger.error(e);}
