@@ -7,22 +7,21 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.log4j.Logger;
-import org.openfuxml.addon.wiki.HtmlToOpenFuxmlContentHandler;
 import org.xml.sax.Attributes;
 
 
 public class SimpleMappingEmitter extends NestingEmitter
 {
-	private static Logger logger = Logger.getLogger(HtmlToOpenFuxmlContentHandler.class);
+	private static Logger logger = Logger.getLogger(SimpleMappingEmitter.class);
 	
 	private final String[] tags;
 
 	private Map<String, String> attributes;
 
-	public SimpleMappingEmitter(EmitterFactory ef, String... docbookTagNames)
+	public SimpleMappingEmitter(EmitterFactory ef, String... ofxTagNames)
 	{
 		super(ef);
-		tags = docbookTagNames;
+		tags = ofxTagNames;
 	}
 
 	public void setAttribute(String name, String value) {
@@ -30,17 +29,6 @@ public class SimpleMappingEmitter extends NestingEmitter
 			attributes = new TreeMap<String, String>();
 		}
 		attributes.put(name, value);
-	}
-
-	@Override
-	protected boolean localEnd(XMLStreamWriter writer, String htmlElementName) throws XMLStreamException
-	{
-//		logger.debug("localEnd "+tags.length);
-		for (int x = 0; x < tags.length; ++x)
-		{
-			writer.writeEndElement();
-		}
-		return true;
 	}
 
 	@Override
@@ -66,6 +54,17 @@ public class SimpleMappingEmitter extends NestingEmitter
 			{
 				writer.writeAttribute("id", elementId);
 			}
+		}
+		return true;
+	}
+	
+	@Override
+	protected boolean localEnd(XMLStreamWriter writer, String htmlElementName) throws XMLStreamException
+	{
+		logger.trace("localEnd "+tags.length);
+		for (int x = 0; x < tags.length; ++x)
+		{
+			writer.writeEndElement();
 		}
 		return true;
 	}

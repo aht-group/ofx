@@ -3,13 +3,14 @@ package org.openfuxml.addon.wiki.emitter;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.log4j.Logger;
+import org.openfuxml.addon.wiki.emitter.injection.OfxInjectionEmitter;
 
 public class EmitterFactory
 {
 	private static Logger logger = Logger.getLogger(EmitterFactory.class);
 	private XMLStreamWriter writer;
 
-	public static enum HtmlElement {title,p,i,b,strong,ul,li,a,body,sup};
+	public static enum HtmlElement {title,p,i,b,strong,ul,li,a,body,sup,wikiinjection};
 	
 	public EmitterFactory(XMLStreamWriter writer)
 	{
@@ -33,6 +34,7 @@ public class EmitterFactory
 				case a:		return new AnchorEmitter(this);
 				case body:	return new NestingEmitter(this);
 				case title: return new SimpleMappingEmitter(this,"titel");
+				case wikiinjection: return new OfxInjectionEmitter(this,"ofxi");
 			}
 		}
 		catch (IllegalArgumentException e)
