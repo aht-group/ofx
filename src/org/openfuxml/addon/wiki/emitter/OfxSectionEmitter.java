@@ -28,7 +28,7 @@ public class OfxSectionEmitter extends SimpleMappingEmitter
 		if (ok && bookTitle != null)
 		{
 			logger.debug("booktitel");
-			writer.writeStartElement("title");
+			writer.writeStartElement("titel");
 			writer.writeCharacters(bookTitle);
 			writer.writeEndElement();
 		}

@@ -33,7 +33,7 @@ public class EmitterFactory
 				case b:		return new SimpleMappingEmitter(this,"fett");
 				case strong:return new SimpleMappingEmitter(this,"fett");
 				case ul:	return new SimpleMappingEmitter(this,"aufzaehlungsliste");
-				case li:	return new SimpleMappingEmitter(this,"listitem", "absatz");
+				case li:	return new SimpleMappingEmitter(this,"eintrag", "absatz");
 				case a:		return new AnchorEmitter(this);
 				case body:	return new NestingEmitter(this);
 				case title: return new SimpleMappingEmitter(this,"titel");
