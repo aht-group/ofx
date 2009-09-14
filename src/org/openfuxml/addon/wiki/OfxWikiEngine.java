@@ -9,13 +9,17 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 
 import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.util.JDomUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
+import org.jdom.Document;
+import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.model.WikiDefaultModel;
 import org.openfuxml.addon.wiki.processing.InjectionProcessor;
 import org.openfuxml.addon.wiki.processing.WikiProcessor;
 import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
+import org.openfuxml.addon.wiki.processing.XmlProcessor;
 import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.openfuxml.addon.wiki.util.WikiTextFetcher;
@@ -33,6 +37,7 @@ public class OfxWikiEngine
 	
 	private WikiProcessor wikiP;
 	private XhtmlProcessor xhtmlP;
+	private XmlProcessor xmlP;
 	
 	private String dirWiki,dirOfx;
 	private Configuration config;
@@ -46,6 +51,7 @@ public class OfxWikiEngine
 		dirOfx=config.getString("/ofx/dir[@type='ofx']");
 		wikiP = new WikiProcessor(config,article);
 		xhtmlP = new XhtmlProcessor(config);
+		xmlP = new XmlProcessor(config);
 	}
 	
 	private String fetchTextHttp()
@@ -107,7 +113,9 @@ public class OfxWikiEngine
 		try
 		{
 			String output = ofxGenerator.create(xHtml, htmlFooter, article);
-			WikiContentIO.writeXml(dirOfx, article+"-"+Status.ofx+".xml", output);
+			File saveXml = new File(dirOfx,article+"-"+Status.ofx+".xml");
+			Document doc = xmlP.process(output);
+			JDomUtil.save(doc, saveXml, Format.getRawFormat());
 		}
 		catch (IOException e) {logger.error(e);}
 		catch (ParserConfigurationException e) {logger.error(e);}
