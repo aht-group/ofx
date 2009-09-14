@@ -1,34 +1,17 @@
 package org.openfuxml.addon.wiki.processing;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-
-import net.sf.exlp.io.StringBufferOutputStream;
-import net.sf.exlp.io.resourceloader.MultiResourceLoader;
+import net.sf.exlp.util.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
-import org.jdom.Attribute;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.Text;
-import org.jdom.input.SAXBuilder;
-import org.jdom.output.Format;
-import org.jdom.output.XMLOutputter;
 import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
+import org.openfuxml.addon.wiki.processing.xhtml.OfxPushUp;
+import org.openfuxml.addon.wiki.processing.xhtml.XhtmlAHxMerge;
 
 public class XhtmlProcessor
 {
@@ -44,28 +27,25 @@ public class XhtmlProcessor
 		wikiInjections = new ArrayList<Wikiinjection>();
 		xhtmlReplaces = new ArrayList<Wikireplace>();
 		
-		MultiResourceLoader mrl = new MultiResourceLoader();
 		int numberTranslations = config.getStringArray("xhtmlprocessor/file").length;
 		for(int i=1;i<=numberTranslations;i++)
 		{
-			loadWikiContainer(config.getString("xhtmlprocessor/file["+i+"]"),mrl);
+			String xmlFile = config.getString("xhtmlprocessor/file["+i+"]");
+			Wikicontainer container = (Wikicontainer)JaxbUtil.loadJAXB(xmlFile, Wikicontainer.class);
+			wikiInjections.addAll(container.getWikiinjection());
+			xhtmlReplaces.addAll(container.getWikireplace());
 		}
 		logger.debug("Injections loaded: "+wikiInjections.size());
 	}
 	
-	private void loadWikiContainer(String xmlFile,MultiResourceLoader mrl)
+	public String processFinal(String xHtml)
 	{
-		Wikicontainer container=null;
-		try
-		{
-			JAXBContext jc = JAXBContext.newInstance(Wikicontainer.class);
-			Unmarshaller u = jc.createUnmarshaller();
-			container = (Wikicontainer)u.unmarshal(mrl.searchIs(xmlFile));
-			wikiInjections.addAll(container.getWikiinjection());
-			xhtmlReplaces.addAll(container.getWikireplace());
-		}
-		catch (JAXBException e) {logger.error(e);}
-		catch (FileNotFoundException e) {logger.error(e);}
+		OfxPushUp pushUp = new OfxPushUp();
+		XhtmlAHxMerge merger = new XhtmlAHxMerge();
+		
+		xHtml = pushUp.moveOfxElements(xHtml);
+		xHtml = merger.merge(xHtml);
+		return xHtml;
 	}
 	
 	public String process(String text)
@@ -119,81 +99,5 @@ public class XhtmlProcessor
 				sb.append(xHtmlText.substring(to+endTag.length(), xHtmlText.length()));
 			xHtmlText=sb.toString();
 		}
-	}
-	
-	public String moveOfxElements()
-	{
-		try
-		{
-			Reader sr = new StringReader(xHtmlText);  
-			Document doc = new SAXBuilder().build(sr);
-			Element rootElement = doc.getRootElement();
-			rootElement.detach();
-			
-			ArrayList<Element> al = moveOfxElement(rootElement,"wikiinjection",0);
-			if(al.size()>1){logger.warn("Moved Elements has a size>1 !!!");}
-			rootElement=al.get(0);
-				
-			doc.addContent(rootElement);
-			
-			StringBufferOutputStream sbos = new StringBufferOutputStream();
-			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat());
-			xmlOut.output(doc, sbos);
-			xHtmlText=sbos.getStringBuffer().toString();
-		}
-		catch (JDOMException e) {logger.error(e);}
-		catch (IOException e) {logger.error(e);}
-
-		return xHtmlText;
-	}
-	
-	//TODO public here ist only for testing, remove this later!
-	public ArrayList<Element> moveOfxElement(Element oldRoot, String tag, int level)
-	{
-		ArrayList<Element> movedElements = new ArrayList<Element>();
-		Element newRoot = new Element(oldRoot.getName());
-		
-		for(Object oAtt : oldRoot.getAttributes())
-		{
-			Attribute att = (Attribute)oAtt;
-			Attribute newAtt = new Attribute(att.getName(),att.getValue());
-			newRoot.setAttribute(newAtt);
-		}
-		
-		StringBuffer sb = new StringBuffer();
-		sb.append("Tag="+tag+" Level="+level);
-		for(Object o : oldRoot.getContent())
-		{
-			if(org.jdom.Text.class.isInstance(o))
-			{
-				Text txt = (Text)o;
-				Text newText = new Text(txt.getText());
-				newRoot.addContent(newText);
-				sb.append(" txt");
-			}
-			else if(org.jdom.Element.class.isInstance(o))
-			{
-				Element oldChild = (Element)o;
-				sb.append(" "+oldChild.getName());
-				if(oldChild.getName().equals(tag))
-				{
-					logger.debug("Detaching "+oldChild.getName());
-					oldChild.detach();
-					movedElements.add(oldChild);
-				}
-				else
-				{
-					ArrayList<Element> al =moveOfxElement(oldChild, tag, level+1);
-					newRoot.addContent(al);
-				}
-			}
-			else {logger.warn("Unknown content: "+o.getClass().getName());}
-		}
-		logger.trace(sb);
-		
-		ArrayList<Element> result = new ArrayList<Element>();
-		result.add(newRoot);
-		result.addAll(movedElements);
-		return result;
 	}
 }

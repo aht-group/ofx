@@ -1,9 +1,9 @@
 package org.openfuxml.addon.wiki.emitter.injection;
 
-import java.io.File;
-
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
+
+import net.sf.exlp.util.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
@@ -12,7 +12,6 @@ import org.openfuxml.addon.wiki.data.jaxb.Ofxgallery.Ofximage;
 import org.openfuxml.addon.wiki.emitter.EmitterFactory;
 import org.openfuxml.addon.wiki.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.util.JdomXmlStreamer;
-import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.xml.sax.Attributes;
 
 public class OfxInjectionEmitter extends NestingEmitter
@@ -45,8 +44,8 @@ public class OfxInjectionEmitter extends NestingEmitter
 		{
 			String injectionDir = config.getString("/ofx/dir[@type='injection']");
 			String injectionName = injection.getId()+"-"+injection.getOfxtag();
-			File f = new File(injectionDir+"/"+injectionName+".xml");
-			injection = (Wikiinjection)WikiContentIO.loadJAXB(f, Wikiinjection.class);
+			String xmlFile = injectionDir+"/"+injectionName+".xml";
+			injection = (Wikiinjection)JaxbUtil.loadJAXB(xmlFile, Wikiinjection.class);
 			int i=0;
 			for(Ofximage image : injection.getOfxgallery().get(0).getOfximage())
 			{

@@ -12,6 +12,7 @@ import javax.xml.bind.Unmarshaller;
 import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.wiki.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
@@ -22,6 +23,8 @@ import org.openfuxml.addon.wiki.util.WikiContentIO;
 public class WikiProcessor
 {
 	static Logger logger = Logger.getLogger(WikiProcessor.class);
+	private final static String ls = SystemUtils.LINE_SEPARATOR;
+	
 	public static enum InjectionType {xml,wiki};
 	
 	private List<Wikireplace> wikiReplaces;
@@ -32,9 +35,11 @@ public class WikiProcessor
 	
 	private File dirInjection;
 	private int injectionId;
+	private String article;
 	
-	public WikiProcessor(Configuration config)
+	public WikiProcessor(Configuration config,String article)
 	{
+		this.article=article;
 		wikiReplaces = new ArrayList<Wikireplace>();
 		wikiInjectionsXml = new ArrayList<Wikiinjection>();
 		wikiInjectionsWiki = new ArrayList<Wikiinjection>();
@@ -94,6 +99,7 @@ public class WikiProcessor
 		while(wikiText.indexOf("<"+inject.getWikitag()+">")>0)
 		{
 			inject.setId(""+injectionId);injectionId++;
+			inject.setArticle(article);
 			
 			StringBuffer sbDebug = new StringBuffer();
 			String startTag = "<"+inject.getWikitag()+">";
@@ -111,7 +117,12 @@ public class WikiProcessor
 			sbDebug.append(" oldSize="+wikiText.length());
 			StringBuffer sb = new StringBuffer();
 				sb.append(wikiText.substring(0, from-1));
-				if(inject.getOfxtag()!=null && inject.getOfxtag().length()>0){sb.append(injectionSb);}
+				if(inject.getOfxtag()!=null && inject.getOfxtag().length()>0)
+				{
+					
+					sb.append(injectionSb);
+					sb.append(ls);
+				}
 				sb.append(wikiText.substring(to+inject.getWikitag().length()+3+1,wikiText.length()));
 			wikiText=sb.toString();
 			sbDebug.append(" newSize="+wikiText.length());

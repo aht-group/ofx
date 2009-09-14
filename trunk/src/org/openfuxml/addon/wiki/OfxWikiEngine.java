@@ -36,17 +36,19 @@ public class OfxWikiEngine
 	
 	private String dirWiki,dirOfx;
 	private Configuration config;
+	private String article;
 	
-	public OfxWikiEngine(Configuration config)
+	public OfxWikiEngine(Configuration config, String article)
 	{
+		this.article=article;
 		this.config=config;
 		dirWiki=config.getString("/ofx/dir[@type='wiki']");
 		dirOfx=config.getString("/ofx/dir[@type='ofx']");
-		wikiP = new WikiProcessor(config);
+		wikiP = new WikiProcessor(config,article);
 		xhtmlP = new XhtmlProcessor(config);
 	}
 	
-	private String fetchTextHttp(String article)
+	private String fetchTextHttp()
 	{
 		logger.debug("Fetching article: "+article);
 		WikiTextFetcher tw = new WikiTextFetcher();
@@ -64,9 +66,8 @@ public class OfxWikiEngine
 		}
 	}
 	
-	public void testOfx()
+	public void transform()
 	{
-		String article = config.getString("wiki/article");
 		File f = new File(dirWiki+"/"+article+"-"+Status.txtFetched+".txt");
 		String wikiText;
 		
@@ -77,7 +78,7 @@ public class OfxWikiEngine
 		delete(new File(dirWiki,article+"-"+Status.ofx+".xml"));
 		
 		if(f.exists() && f.isFile()){wikiText = WikiContentIO.loadTxt(dirWiki,article+"-"+Status.txtFetched+".txt");}
-		else{wikiText = fetchTextHttp(article);}
+		else{wikiText = fetchTextHttp();}
 		
 		wikiText = wikiP.process(wikiText);
 		WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtProcessed+".txt", wikiText);
@@ -92,7 +93,7 @@ public class OfxWikiEngine
 		xHtml = xhtmlP.process(xHtml);
 		WikiContentIO.writeXml(dirWiki, article+"-"+Status.xhtmlProcessed+".xhtml", xHtml);
 		
-		xHtml = xhtmlP.moveOfxElements();
+		xHtml = xhtmlP.processFinal(xHtml);
 		WikiContentIO.writeXml(dirWiki, article+"-"+Status.xhtmlFinal+".xhtml", xHtml);
 		
 		xHtml=xhtmlP.removeWellFormed(xHtml);
@@ -126,8 +127,9 @@ public class OfxWikiEngine
 		WikiConfigChecker.check(config);
 		
 		WikiTemplates.init();	
-			
-		OfxWikiEngine tw = new OfxWikiEngine(config);
-		tw.testOfx();
+		String article = config.getString("wiki/article");
+		
+		OfxWikiEngine tw = new OfxWikiEngine(config,article);
+		tw.transform();
     }
 }

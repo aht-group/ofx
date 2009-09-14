@@ -2,9 +2,10 @@ package org.openfuxml.addon.wiki.emitter.injection;
 
 import javax.xml.stream.XMLStreamException;
 
+import net.sf.exlp.util.JDomUtil;
+
 import org.apache.log4j.Logger;
 import org.jdom.Element;
-import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxgallery.Ofximage;
 import org.openfuxml.addon.wiki.util.JdomXmlStreamer;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
@@ -55,7 +56,7 @@ public class OfxImageEmitter
 	public void transform(JdomXmlStreamer jdomStreamer)
 	{
 		Element e = createOfxContent();
-		WikiContentIO.debugElement(e);
+		JDomUtil.debugElement(e);
 		try
 		{
 			jdomStreamer.write(e);

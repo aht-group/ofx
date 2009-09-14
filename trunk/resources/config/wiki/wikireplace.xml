@@ -3,5 +3,4 @@
     <wikireplace from="&lt;noinclude&gt;" to=""/>
     <wikireplace from="&lt;/noinclude&gt;" to=""/>
     <wikireplace from="\{\{Belege\}\}" to=""><description>Removes Belege-Box</description></wikireplace>
-    <wikireplace from="\{\{Dieser Artikel\}\}" to=""><description>Removes Belege-Box</description></wikireplace>
 </wikicontainer>

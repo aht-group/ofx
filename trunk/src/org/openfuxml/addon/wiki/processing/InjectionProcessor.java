@@ -9,6 +9,7 @@ import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerXml;
 import net.sf.exlp.parser.LogParser;
+import net.sf.exlp.util.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
@@ -45,7 +46,7 @@ public class InjectionProcessor
 		for(File f : dirInjection.listFiles())
 		{
 			logger.trace(f.getAbsoluteFile());
-			Wikiinjection injection = (Wikiinjection)WikiContentIO.loadJAXB(f, Wikiinjection.class);
+			Wikiinjection injection = (Wikiinjection)JaxbUtil.loadJAXB(f.getAbsolutePath(), Wikiinjection.class);
 			logger.debug(injection.getId()+" "+injection.getOfxtag()+" "+injection.getWikitag());
 			if(injection.getWikitag().equals("timeline")){processTimeline(injection);}
 			else if(injection.getWikitag().equals("gallery")){processGallery(injection);}
