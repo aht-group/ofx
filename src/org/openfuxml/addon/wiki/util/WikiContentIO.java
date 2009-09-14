@@ -3,6 +3,7 @@ package org.openfuxml.addon.wiki.util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,6 +19,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import net.sf.exlp.io.StringBufferOutputStream;
+import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
 import org.apache.log4j.Logger;
 import org.jdom.Document;
@@ -95,19 +97,6 @@ public class WikiContentIO
 		return sbos.getStringBuffer();
 	}
 	
-	public static synchronized Object loadJAXB(File f, Class<?> c)
-	{
-		Object result = null;
-		try
-		{
-			JAXBContext jc = JAXBContext.newInstance(c);
-			Unmarshaller u = jc.createUnmarshaller();
-			result = u.unmarshal(f);
-		}
-		catch (JAXBException e) {logger.error(e);}
-		return result;
-	}
-	
 	public static synchronized Element toElement(Object o, Class<?> c)
 	{
 		Element result = null;
@@ -154,15 +143,5 @@ public class WikiContentIO
 			m.marshal(injection, f);
 		}
 		catch (JAXBException e) {logger.error(e);}
-	}
-	
-	public static synchronized void debugElement(Element e)
-	{
-		try
-		{
-			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
-			xmlOut.output(e, System.out);
-		}
-		catch (IOException e1) {logger.error(e);}
 	}
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.util.JDomUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
@@ -17,26 +18,26 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.openfuxml.addon.wiki.OfxWikiEngine;
 import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
+import org.openfuxml.addon.wiki.processing.xhtml.OfxPushUp;
 
 import de.kisner.util.LoggerInit;
 
-public class TextXmlSequence
+public class TextOfxPushUp
 {
-	static Logger logger = Logger.getLogger(TextXmlSequence.class);
+	static Logger logger = Logger.getLogger(TextOfxPushUp.class);
 	public static enum Status {txtFetched,txtProcessed,xhtmlRendered,xhtmlProcessed,xhtmlFinal,ofx};
 
 	private Configuration config;
 	private String dirName;
 	private Document doc;
 	
-	public TextXmlSequence(Configuration config,String dirName)
+	public TextOfxPushUp(Configuration config,String dirName)
 	{
 		this.config=config;
 		this.dirName=dirName;
 	}
 	
-	public void load(String article)
+	public Document load(String article)
 	{
 		try
 		{
@@ -47,55 +48,21 @@ public class TextXmlSequence
 		}
 		catch (JDOMException e) {logger.error(e);}
 		catch (IOException e) {logger.error(e);}
+		return doc;
 	}
 	
 	public void move()
 	{
 		try
 		{
-			XhtmlProcessor xhtmlP = new XhtmlProcessor(config);
-			ArrayList<Element> al = xhtmlP.moveOfxElement(doc.getRootElement(), "wikiinjection", 0);
+			OfxPushUp ofxPushUp = new OfxPushUp();
+			ArrayList<Element> al = ofxPushUp.moveOfxElement(doc.getRootElement(), "wikiinjection", 0);
 			if(al.size()>1){logger.warn("Moved Elements has a size>1 !!!");}
 			Element result = al.get(0);
 			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat());
 			xmlOut.output(result, System.out);
 		}
 		catch (IOException e) {logger.error(e);}
-	}
-	
-	public void dissect()
-	{
-		Element rootE = doc.getRootElement();
-		logger.debug("RootName="+rootE.getName());
-		
-		for(Object o :rootE.getChildren())
-		{
-			Element e=(Element)o;
-			logger.debug(e.getName());
-			for(Object oContent : e.getContent())
-			{
-		//		logger.debug(oContent.getClass().getName());
-				if(org.jdom.Text.class.isInstance(oContent))
-				{
-					Text txt = (Text)oContent;
-					logger.debug(oContent.getClass().getName()+": "+txt.getText());
-				}
-				else if(org.jdom.Element.class.isInstance(oContent))
-				{
-					Element child = (Element)oContent;
-					logger.debug(oContent.getClass().getName()+": "+child.getName());
-				}
-				else
-				{
-					logger.warn("Unknown content: "+o.getClass().getName());
-				}
-			}
-			logger.debug("----Child");
-			for(Object oChild : e.getChildren())
-			{
-				logger.debug(oChild.getClass().getSimpleName());
-			}
-		}
 	}
 	
 	public static void main(String[] args)
@@ -109,9 +76,9 @@ public class TextXmlSequence
 			
 		WikiTemplates.init();	
 			
-		TextXmlSequence test = new TextXmlSequence(config,"dist");
-		test.load("Bellagio");
+		TextOfxPushUp test = new TextOfxPushUp(config,"dist");
+		Document doc = test.load("Bellagio");
 		test.move();
-		test.dissect();
+		JDomUtil.dissect(doc);
     }
 }

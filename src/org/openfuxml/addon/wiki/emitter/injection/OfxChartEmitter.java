@@ -2,6 +2,8 @@ package org.openfuxml.addon.wiki.emitter.injection;
 
 import javax.xml.stream.XMLStreamException;
 
+import net.sf.exlp.util.JDomUtil;
+
 import org.apache.log4j.Logger;
 import org.jdom.Element;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
@@ -52,7 +54,7 @@ public class OfxChartEmitter
 	public void transform(JdomXmlStreamer jdomStreamer)
 	{
 		Element e = createOfxContent();
-		WikiContentIO.debugElement(e);
+		JDomUtil.debugElement(e);
 		try
 		{
 			jdomStreamer.write(e);
