@@ -13,7 +13,7 @@ public class HeaderEmitter implements Emitter
 {
 	private static Logger logger = Logger.getLogger(HeaderEmitter.class);
 	
-	private Pattern HEADER_ELEM_NAME_PATTERN = Pattern.compile("h(\\d)");
+	private Pattern pHeader = Pattern.compile("h(\\d)");
 
 	private Emitter next;
 	private int nestLevel = 0;
@@ -55,7 +55,7 @@ public class HeaderEmitter implements Emitter
 		if (!dispatching && nestLevel == 1) {openSection(atts);}
 		else
 		{
-			Matcher matcher = HEADER_ELEM_NAME_PATTERN.matcher(htmlElementName);
+			Matcher matcher = pHeader.matcher(htmlElementName);
 			if (matcher.matches()) {
 				int localLevel = Integer.parseInt(matcher.group(1));
 				if (localLevel <= headerLevel) {
@@ -105,7 +105,7 @@ public class HeaderEmitter implements Emitter
 	{
 		sectionOpen = true;
 		ef.getWriter().writeStartElement(sectionName);
-		ef.getWriter().writeStartElement("title");
+		ef.getWriter().writeStartElement("titel");
 
 		String elementId = atts.getValue("id");
 		if (elementId != null)
