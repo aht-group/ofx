@@ -23,7 +23,6 @@ import org.openfuxml.addon.wiki.processing.XmlProcessor;
 import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.openfuxml.addon.wiki.util.WikiTextFetcher;
-import org.openfuxml.test.xml.wiki.docbook.DocbookGenerator;
 import org.xml.sax.SAXException;
 
 import de.kisner.util.LoggerInit;
@@ -105,7 +104,7 @@ public class OfxWikiEngine
 		xHtml=xhtmlP.removeWellFormed(xHtml);
 		
 		OpenFuxmlGenerator ofxGenerator = new OpenFuxmlGenerator(config);
-    	String htmlFooter = DocbookGenerator.FOOTER;
+    	String htmlFooter = "    </body>\n</html>";
         
 		InjectionProcessor ip = new InjectionProcessor(config);
 		ip.processInjections();
