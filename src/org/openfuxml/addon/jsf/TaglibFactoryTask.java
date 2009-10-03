@@ -63,6 +63,10 @@ public class TaglibFactoryTask extends Task
     	doc.getRootElement().setAttribute(attVersion);
     	doc.getRootElement().setAttribute(attSchemaLocation);
     	
+    	doc.setRootElement(JDomUtil.unsetNameSpace(doc.getRootElement(),ns));
+    	JDomUtil.debugDocument(doc);
+    	
+    	
     	File f = new File(tldFile);
     	JDomUtil.save(doc, f, Format.getPrettyFormat());
     	
