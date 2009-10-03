@@ -12,6 +12,13 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="metatag">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="tag" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="tag">
         <xsd:complexType>
             <xsd:sequence>
