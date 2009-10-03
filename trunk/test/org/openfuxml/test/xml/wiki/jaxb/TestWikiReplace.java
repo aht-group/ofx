@@ -1,8 +1,6 @@
 package org.openfuxml.test.xml.wiki.jaxb;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import net.sf.exlp.util.JaxbUtil;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
@@ -12,6 +10,7 @@ import de.kisner.util.LoggerInit;
 
 public class TestWikiReplace
 {
+	@SuppressWarnings("unused")
 	private static Logger logger = Logger.getLogger(TestWikiReplace.class);
 	
 	public TestWikiReplace()
@@ -29,14 +28,7 @@ public class TestWikiReplace
 		Wikicontainer container = new Wikicontainer();
 		container.getWikireplace().add(wikireplace);
 		
-		try
-		{
-			JAXBContext context = JAXBContext.newInstance(Wikicontainer.class);
-			Marshaller m = context.createMarshaller(); 
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
-			m.marshal(container, System.out);
-		}
-		catch (JAXBException e) {logger.error(e);}
+		JaxbUtil.debug(container);
 	}
 	
 	public static void main (String[] args) throws Exception

@@ -1,8 +1,6 @@
 package org.openfuxml.test.xml.wiki.jaxb;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import net.sf.exlp.util.JaxbUtil;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
@@ -39,14 +37,7 @@ public class TestOfxChart
 		
 		chart.getOfxchartcontainer().add(s);
 		
-		try
-		{
-			JAXBContext context = JAXBContext.newInstance(Ofxchart.class);
-			Marshaller m = context.createMarshaller(); 
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
-			m.marshal(chart, System.out);
-		}
-		catch (JAXBException e) {logger.error(e);}
+		JaxbUtil.debug(chart);
 	}
 	
 	public static void main (String[] args) throws Exception
