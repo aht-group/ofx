@@ -1,10 +1,6 @@
 package org.openfuxml.test.xml.jsftaglib.jaxb;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-
-import net.sf.exlp.io.resourceloader.MultiResourceLoader;
+import net.sf.exlp.util.JaxbUtil;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.jsf.JsfTagTransformator;
@@ -48,14 +44,7 @@ public class TestTaglib
 		
 		taglib.getTag().add(tag);
 		
-		try
-		{
-			JAXBContext context = JAXBContext.newInstance(Taglib.class);
-			Marshaller m = context.createMarshaller(); 
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-			m.marshal(taglib, System.out);
-		}
-		catch (JAXBException e) {logger.error(e);}
+		JaxbUtil.debug(taglib);
 	}
 	
 	public void xmlRead(String xmlFile)
