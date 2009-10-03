@@ -14,6 +14,7 @@ import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Namespace;
 import org.jdom.output.Format;
+import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 
@@ -83,8 +84,8 @@ public class TaglibFactoryTask extends Task
 		{
 			String fileName = config.getString(xPathPrefix+"["+i+"]");
 			String dirName = config.getString(xPathPrefix+"["+i+"]/@dir");
-			Tag tag = (Tag)JaxbUtil.loadJAXB(tagBaseDir+"/"+dirName+"/"+fileName, Tag.class);
-			taglib.getTag().add(tag);
+			Metatag metatag = (Metatag)JaxbUtil.loadJAXB(tagBaseDir+"/"+dirName+"/"+fileName, Metatag.class);
+			taglib.getTag().add(metatag.getTag());
 		}
 	}
 	
