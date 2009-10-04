@@ -12,10 +12,26 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="faces-config">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="component" maxOccurs="unbounded"/>
+                <xsd:element name="render-kit" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="renderer" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="metatag">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="tag" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="component" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="renderer" minOccurs="0" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -29,6 +45,23 @@
                 <xsd:element name="body-content" maxOccurs="1" type="xsd:string"/>
                 <xsd:element name="info" maxOccurs="1" type="xsd:string"/>
                 <xsd:element ref="attribute" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="component">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="component-type" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="component-class" maxOccurs="1" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="renderer">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="component-family" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="renderer-type" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="renderer-class" maxOccurs="1" type="xsd:string"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

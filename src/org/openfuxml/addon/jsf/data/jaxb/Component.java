@@ -25,9 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{}tag"/>
- *         &lt;element ref="{}component" minOccurs="0"/>
- *         &lt;element ref="{}renderer" minOccurs="0"/>
+ *         &lt;element name="component-type" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="component-class" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,88 +37,63 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "tag",
-    "component",
-    "renderer"
+    "componentType",
+    "componentClass"
 })
-@XmlRootElement(name = "metatag")
-public class Metatag {
+@XmlRootElement(name = "component")
+public class Component {
 
-    @XmlElement(required = true)
-    protected Tag tag;
-    protected Component component;
-    protected Renderer renderer;
+    @XmlElement(name = "component-type", required = true)
+    protected String componentType;
+    @XmlElement(name = "component-class", required = true)
+    protected String componentClass;
 
     /**
-     * Gets the value of the tag property.
+     * Gets the value of the componentType property.
      * 
      * @return
      *     possible object is
-     *     {@link Tag }
+     *     {@link String }
      *     
      */
-    public Tag getTag() {
-        return tag;
+    public String getComponentType() {
+        return componentType;
     }
 
     /**
-     * Sets the value of the tag property.
+     * Sets the value of the componentType property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Tag }
+     *     {@link String }
      *     
      */
-    public void setTag(Tag value) {
-        this.tag = value;
+    public void setComponentType(String value) {
+        this.componentType = value;
     }
 
     /**
-     * Gets the value of the component property.
+     * Gets the value of the componentClass property.
      * 
      * @return
      *     possible object is
-     *     {@link Component }
+     *     {@link String }
      *     
      */
-    public Component getComponent() {
-        return component;
+    public String getComponentClass() {
+        return componentClass;
     }
 
     /**
-     * Sets the value of the component property.
+     * Sets the value of the componentClass property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Component }
+     *     {@link String }
      *     
      */
-    public void setComponent(Component value) {
-        this.component = value;
-    }
-
-    /**
-     * Gets the value of the renderer property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Renderer }
-     *     
-     */
-    public Renderer getRenderer() {
-        return renderer;
-    }
-
-    /**
-     * Sets the value of the renderer property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Renderer }
-     *     
-     */
-    public void setRenderer(Renderer value) {
-        this.renderer = value;
+    public void setComponentClass(String value) {
+        this.componentClass = value;
     }
 
 }

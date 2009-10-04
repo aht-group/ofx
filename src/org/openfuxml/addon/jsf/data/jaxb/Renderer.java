@@ -25,9 +25,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{}tag"/>
- *         &lt;element ref="{}component" minOccurs="0"/>
- *         &lt;element ref="{}renderer" minOccurs="0"/>
+ *         &lt;element name="component-family" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="renderer-type" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="renderer-class" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,88 +38,90 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "tag",
-    "component",
-    "renderer"
+    "componentFamily",
+    "rendererType",
+    "rendererClass"
 })
-@XmlRootElement(name = "metatag")
-public class Metatag {
+@XmlRootElement(name = "renderer")
+public class Renderer {
 
-    @XmlElement(required = true)
-    protected Tag tag;
-    protected Component component;
-    protected Renderer renderer;
+    @XmlElement(name = "component-family", required = true)
+    protected String componentFamily;
+    @XmlElement(name = "renderer-type", required = true)
+    protected String rendererType;
+    @XmlElement(name = "renderer-class", required = true)
+    protected String rendererClass;
 
     /**
-     * Gets the value of the tag property.
+     * Gets the value of the componentFamily property.
      * 
      * @return
      *     possible object is
-     *     {@link Tag }
+     *     {@link String }
      *     
      */
-    public Tag getTag() {
-        return tag;
+    public String getComponentFamily() {
+        return componentFamily;
     }
 
     /**
-     * Sets the value of the tag property.
+     * Sets the value of the componentFamily property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Tag }
+     *     {@link String }
      *     
      */
-    public void setTag(Tag value) {
-        this.tag = value;
+    public void setComponentFamily(String value) {
+        this.componentFamily = value;
     }
 
     /**
-     * Gets the value of the component property.
+     * Gets the value of the rendererType property.
      * 
      * @return
      *     possible object is
-     *     {@link Component }
+     *     {@link String }
      *     
      */
-    public Component getComponent() {
-        return component;
+    public String getRendererType() {
+        return rendererType;
     }
 
     /**
-     * Sets the value of the component property.
+     * Sets the value of the rendererType property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Component }
+     *     {@link String }
      *     
      */
-    public void setComponent(Component value) {
-        this.component = value;
+    public void setRendererType(String value) {
+        this.rendererType = value;
     }
 
     /**
-     * Gets the value of the renderer property.
+     * Gets the value of the rendererClass property.
      * 
      * @return
      *     possible object is
-     *     {@link Renderer }
+     *     {@link String }
      *     
      */
-    public Renderer getRenderer() {
-        return renderer;
+    public String getRendererClass() {
+        return rendererClass;
     }
 
     /**
-     * Sets the value of the renderer property.
+     * Sets the value of the rendererClass property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Renderer }
+     *     {@link String }
      *     
      */
-    public void setRenderer(Renderer value) {
-        this.renderer = value;
+    public void setRendererClass(String value) {
+        this.rendererClass = value;
     }
 
 }
