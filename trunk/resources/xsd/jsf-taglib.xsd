@@ -39,6 +39,7 @@
                 <xsd:element name="required" minOccurs="0" maxOccurs="1" type="xsd:boolean"/>
                 <xsd:element name="rtexprvalue" minOccurs="0" maxOccurs="1" type="xsd:boolean"/>
                 <xsd:element name="description" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="type" maxOccurs="1" type="xsd:string"/>
                 <xsd:element name="deferred-value" maxOccurs="1">
                     <xsd:complexType>
                         <xsd:sequence>
