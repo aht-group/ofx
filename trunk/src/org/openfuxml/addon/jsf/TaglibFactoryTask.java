@@ -14,8 +14,10 @@ import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Namespace;
 import org.jdom.output.Format;
+import org.openfuxml.addon.jsf.data.jaxb.Component;
+import org.openfuxml.addon.jsf.data.jaxb.FacesConfig;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
-import org.openfuxml.addon.jsf.data.jaxb.Tag;
+import org.openfuxml.addon.jsf.data.jaxb.Renderer;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 
 import de.kisner.util.LoggerInit;
@@ -24,10 +26,13 @@ public class TaglibFactoryTask extends Task
 {
 	private static Logger logger = Logger.getLogger(TaglibFactoryTask.class); 
 	
-	private String tagConfig, xPathPrefix, tagBaseDir, tldFile;
+	private String tagConfig, xPathPrefix, tagBaseDir, tldFile, fcFile;
+
 	private boolean useLog4j;
 
 	private Taglib taglib;
+	private FacesConfig facesconfig;
+	
 	private Configuration config;
 	
 	public TaglibFactoryTask()
@@ -46,11 +51,16 @@ public class TaglibFactoryTask extends Task
 		if(useLog4j){logger.debug(msg);}
 		else{System.out.println(msg);}
     	
-    	addTags();
-    	write();
+		facesconfig = new FacesConfig();
+		FacesConfig.RenderKit rk = new FacesConfig.RenderKit();
+		facesconfig.setRenderKit(rk);
+		
+    	addTagElements();
+    	writeTld();
+    	writeFc();
     }
     
-    private void write()
+    private void writeTld()
     {
     	Namespace ns = Namespace.getNamespace("http://java.sun.com/xml/ns/javaee");
     	Namespace ns1 = Namespace.getNamespace("xsi","http://www.w3.org/2001/XMLSchema-instance");
@@ -69,12 +79,39 @@ public class TaglibFactoryTask extends Task
     	File f = new File(tldFile);
     	JDomUtil.save(doc, f, Format.getPrettyFormat());
     	
-    	String msg = "Written to "+f.getAbsolutePath();
+    	String msg = "Taglib written to "+f.getAbsolutePath();
+		if(useLog4j){logger.debug(msg);}
+		else{System.out.println(msg);}
+    }
+    
+    private void writeFc()
+    {
+    	Namespace ns = Namespace.getNamespace("http://java.sun.com/xml/ns/javaee");
+    	Namespace nsXi = Namespace.getNamespace("xi", "http://www.w3.org/2001/XInclude");
+    	Namespace nsXsi = Namespace.getNamespace("xsi","http://www.w3.org/2001/XMLSchema-instance");
+    	
+    	Attribute attVersion = new Attribute("version", "1.2");
+    	Attribute attSchemaLocation = new Attribute("schemaLocation", "http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd",nsXsi);
+    	
+    	
+    	Document doc = JaxbUtil.toDocument(facesconfig);
+    	doc.getRootElement().setNamespace(ns);
+    	doc.getRootElement().addNamespaceDeclaration(nsXsi);
+    	doc.getRootElement().addNamespaceDeclaration(nsXi);
+    	doc.getRootElement().setAttribute(attVersion);
+    	doc.getRootElement().setAttribute(attSchemaLocation);
+    	
+    	doc.setRootElement(JDomUtil.unsetNameSpace(doc.getRootElement(),ns));
+    	
+    	File f = new File(fcFile);
+    	JDomUtil.save(doc, f, Format.getPrettyFormat());
+    	
+    	String msg = "Facesconfig written to "+f.getAbsolutePath();
 		if(useLog4j){logger.debug(msg);}
 		else{System.out.println(msg);}
     }
 	
-	public void addTags()
+	private void addTagElements()
 	{	
 		int numberTranslations = config.getStringArray(xPathPrefix).length;
 		String msg = "Found "+numberTranslations+" Tags in "+tagConfig;
@@ -86,6 +123,12 @@ public class TaglibFactoryTask extends Task
 			String dirName = config.getString(xPathPrefix+"["+i+"]/@dir");
 			Metatag metatag = (Metatag)JaxbUtil.loadJAXB(tagBaseDir+"/"+dirName+"/"+fileName, Metatag.class);
 			taglib.getTag().add(metatag.getTag());
+			
+			Component component = metatag.getComponent();
+			if(component!=null){facesconfig.getComponent().add(component);}
+			
+			Renderer renderer = metatag.getRenderer();
+			if(renderer!=null){facesconfig.getRenderKit().getRenderer().add(renderer);}
 		}
 	}
 	
@@ -94,6 +137,7 @@ public class TaglibFactoryTask extends Task
 	public void setTagBaseDir(String tagBaseDir) {this.tagBaseDir = tagBaseDir;}
 	public void setTldFile(String tldFile) {this.tldFile = tldFile;}
 	public void setUseLog4j(boolean useLog4j) {this.useLog4j = useLog4j;}
+	public void setFcFile(String fcFile) {this.fcFile = fcFile;}
 	
 	public static void main (String[] args) throws Exception
 	{
@@ -102,10 +146,12 @@ public class TaglibFactoryTask extends Task
 			loggerInit.init();
 		
 		TaglibFactoryTask jtf = new TaglibFactoryTask();
+		jtf.setUseLog4j(true);
 		jtf.setTagConfig(args[0]);
 		jtf.setTagBaseDir(args[1]);
 		jtf.setxPathPrefix(args[2]);
 		jtf.setTldFile(args[3]);
+		jtf.setFcFile(args[4]);
 		jtf.execute();
 	}
 }
