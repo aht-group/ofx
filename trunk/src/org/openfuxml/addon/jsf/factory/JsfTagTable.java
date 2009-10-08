@@ -34,9 +34,9 @@ public class JsfTagTable
 		
 		Element tgroup = new Element("tgroup");
 		tgroup.setAttribute("cols", "3");
-		tgroup.addContent(getColspec(1, "*"));
-		tgroup.addContent(getColspec(2, "*"));
-		tgroup.addContent(getColspec(3, "*"));
+		tgroup.addContent(getColspec(1, "4*"));
+		tgroup.addContent(getColspec(2, "2*"));
+		tgroup.addContent(getColspec(3, "9*"));
 		tgroup.addContent(getThead());
 		
 		Element tbody = new Element("tbody");
@@ -57,7 +57,7 @@ public class JsfTagTable
 		Element colspec = new Element("colspec");
 		colspec.setAttribute("colnum",""+i);
 		colspec.setAttribute("colname","col"+i);
-		colspec.setAttribute("colwidth","*");
+		colspec.setAttribute("colwidth",width);
 		return colspec;
 	}
 	

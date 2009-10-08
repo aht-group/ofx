@@ -46,6 +46,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="name" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="description" maxOccurs="1" type="xsd:string"/>
                 <xsd:element name="tagclass" maxOccurs="1" type="xsd:string"/>
                 <xsd:element name="tag-class" maxOccurs="1" type="xsd:string"/>
                 <xsd:element name="bodycontent" maxOccurs="1" type="xsd:string"/>
