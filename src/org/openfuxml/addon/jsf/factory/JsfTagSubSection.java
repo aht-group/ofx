@@ -38,6 +38,11 @@ public class JsfTagSubSection
 		Element titelDescription = new Element("titel");
 		titelDescription.setText("Description and Key Features");
 		abDescription.addContent(titelDescription);
+		
+		Element abDescAb = new Element("absatz");
+		abDescAb.addContent(tag.getDescription());
+		abDescription.addContent(abDescAb);
+		
 		abRoot.addContent(abDescription);
 		
 		Element tabAbschnitt = new Element("abschnitt");
