@@ -3,9 +3,7 @@ package org.openfuxml.test.xml.jsftaglib.jaxb;
 import net.sf.exlp.util.JaxbUtil;
 
 import org.apache.log4j.Logger;
-import org.openfuxml.addon.jsf.JsfTagTransformator;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;
-import org.openfuxml.addon.jsf.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 
@@ -22,8 +20,6 @@ public class TestTaglib
 	
 	public void xmlConstruct()
 	{	
-		ObjectFactory tagFactory = new ObjectFactory();
-		
 		Taglib taglib = new Taglib();
 		taglib.setTlibversion("1.0");
 		taglib.setJspversion("2.1");
@@ -46,33 +42,15 @@ public class TestTaglib
 		
 		JaxbUtil.debug(taglib);
 	}
-	
-	public void xmlRead(String xmlFile)
-	{
-		JsfTagTransformator tagTransformator = new JsfTagTransformator();
 		
-		Taglib taglib=tagTransformator.readTaglib(xmlFile);
-		
-		logger.debug("Shortname: "+taglib.getShortname());
-		logger.debug("Info "+taglib.getInfo());
-		for(Tag tag : taglib.getTag())
-		{
-			logger.debug("   Tag: "+tag.getName());
-			for(Attribute att : tag.getAttribute())
-			{
-				logger.debug("      Att: "+att.getName());
-			}
-		}
-	}
-	
 	public static void main (String[] args) throws Exception
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
-		
+		logger.debug("Testing XSD Taglib");
+			
 		TestTaglib test = new TestTaglib();
 			test.xmlConstruct();
-			test.xmlRead(args[0]);
 	}
 }
