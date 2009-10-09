@@ -37,7 +37,7 @@ public class TaglibFactoryTask extends Task
 	
 	public TaglibFactoryTask()
 	{
-		useLog4j=false;
+		setUseLog4j(false);
 	}
 	
     public void execute() throws BuildException
@@ -136,7 +136,7 @@ public class TaglibFactoryTask extends Task
 	public void setxPathPrefix(String xPathPrefix) {this.xPathPrefix = xPathPrefix;}
 	public void setTagBaseDir(String tagBaseDir) {this.tagBaseDir = tagBaseDir;}
 	public void setTldFile(String tldFile) {this.tldFile = tldFile;}
-	public void setUseLog4j(boolean useLog4j) {this.useLog4j = useLog4j;}
+	public void setUseLog4j(boolean useLog4j) {JaxbUtil.useLog4j=useLog4j;this.useLog4j = useLog4j;}
 	public void setFcFile(String fcFile) {this.fcFile = fcFile;}
 	
 	public static void main (String[] args) throws Exception
