@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -27,19 +28,21 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/jsf}component" maxOccurs="unbounded"/>
- *         &lt;element name="render-kit">
+ *         &lt;element ref="{http://www.openfuxml.org}grafik" maxOccurs="unbounded"/>
+ *         &lt;element name="objekttitel">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element ref="{http://www.openfuxml.org/jsf}renderer" maxOccurs="unbounded"/>
+ *                   &lt;element ref="{http://www.openfuxml.org}absatz-ohne" maxOccurs="unbounded"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
  *           &lt;/complexType>
  *         &lt;/element>
  *       &lt;/sequence>
+ *       &lt;attribute name="gleiten" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -49,68 +52,120 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "component",
-    "renderKit"
+    "grafik",
+    "objekttitel"
 })
-@XmlRootElement(name = "faces-config")
-public class FacesConfig {
+@XmlRootElement(name = "medienobjekt", namespace = "http://www.openfuxml.org")
+public class Medienobjekt {
 
-    @XmlElement(required = true)
-    protected List<Component> component;
-    @XmlElement(name = "render-kit", required = true)
-    protected FacesConfig.RenderKit renderKit;
+    @XmlElement(namespace = "http://www.openfuxml.org", required = true)
+    protected List<Grafik> grafik;
+    @XmlElement(namespace = "", required = true)
+    protected Medienobjekt.Objekttitel objekttitel;
+    @XmlAttribute
+    protected String gleiten;
+    @XmlAttribute
+    protected String id;
 
     /**
-     * Gets the value of the component property.
+     * Gets the value of the grafik property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the component property.
+     * This is why there is not a <CODE>set</CODE> method for the grafik property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getComponent().add(newItem);
+     *    getGrafik().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Component }
+     * {@link Grafik }
      * 
      * 
      */
-    public List<Component> getComponent() {
-        if (component == null) {
-            component = new ArrayList<Component>();
+    public List<Grafik> getGrafik() {
+        if (grafik == null) {
+            grafik = new ArrayList<Grafik>();
         }
-        return this.component;
+        return this.grafik;
     }
 
     /**
-     * Gets the value of the renderKit property.
+     * Gets the value of the objekttitel property.
      * 
      * @return
      *     possible object is
-     *     {@link FacesConfig.RenderKit }
+     *     {@link Medienobjekt.Objekttitel }
      *     
      */
-    public FacesConfig.RenderKit getRenderKit() {
-        return renderKit;
+    public Medienobjekt.Objekttitel getObjekttitel() {
+        return objekttitel;
     }
 
     /**
-     * Sets the value of the renderKit property.
+     * Sets the value of the objekttitel property.
      * 
      * @param value
      *     allowed object is
-     *     {@link FacesConfig.RenderKit }
+     *     {@link Medienobjekt.Objekttitel }
      *     
      */
-    public void setRenderKit(FacesConfig.RenderKit value) {
-        this.renderKit = value;
+    public void setObjekttitel(Medienobjekt.Objekttitel value) {
+        this.objekttitel = value;
+    }
+
+    /**
+     * Gets the value of the gleiten property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getGleiten() {
+        return gleiten;
+    }
+
+    /**
+     * Sets the value of the gleiten property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setGleiten(String value) {
+        this.gleiten = value;
+    }
+
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setId(String value) {
+        this.id = value;
     }
 
 
@@ -124,7 +179,7 @@ public class FacesConfig {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element ref="{http://www.openfuxml.org/jsf}renderer" maxOccurs="unbounded"/>
+     *         &lt;element ref="{http://www.openfuxml.org}absatz-ohne" maxOccurs="unbounded"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -135,40 +190,40 @@ public class FacesConfig {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "renderer"
+        "absatzOhne"
     })
-    public static class RenderKit {
+    public static class Objekttitel {
 
-        @XmlElement(required = true)
-        protected List<Renderer> renderer;
+        @XmlElement(name = "absatz-ohne", namespace = "http://www.openfuxml.org", required = true)
+        protected List<AbsatzOhne> absatzOhne;
 
         /**
-         * Gets the value of the renderer property.
+         * Gets the value of the absatzOhne property.
          * 
          * <p>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the renderer property.
+         * This is why there is not a <CODE>set</CODE> method for the absatzOhne property.
          * 
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
-         *    getRenderer().add(newItem);
+         *    getAbsatzOhne().add(newItem);
          * </pre>
          * 
          * 
          * <p>
          * Objects of the following type(s) are allowed in the list
-         * {@link Renderer }
+         * {@link AbsatzOhne }
          * 
          * 
          */
-        public List<Renderer> getRenderer() {
-            if (renderer == null) {
-                renderer = new ArrayList<Renderer>();
+        public List<AbsatzOhne> getAbsatzOhne() {
+            if (absatzOhne == null) {
+                absatzOhne = new ArrayList<AbsatzOhne>();
             }
-            return this.renderer;
+            return this.absatzOhne;
         }
 
     }

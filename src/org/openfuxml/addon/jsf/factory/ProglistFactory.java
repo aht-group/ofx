@@ -10,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.jdom.Element;
 import org.openfuxml.addon.jsf.JsfTagTransformator;
+import org.openfuxml.addon.jsf.data.jaxb.Listing;
 
 public class ProglistFactory
 {
@@ -23,17 +24,18 @@ public class ProglistFactory
 		this.fDocBase=fDocBase;
 	}
 	
-	public Element createProglist(String fileName, String title)
+	public Element createProglist(Listing listing)
 	{
+		logger.debug("Creating listing .."+listing.getFile());
 		Element eRoot = new Element("proglist");
 		
 		Element eTitle = new Element("zwischentitel");
-		eTitle.setText(title);
+		eTitle.setText(listing.getTitle());
 		eRoot.addContent(eTitle);
 
 		Element eBuch = new Element("buchstaeblich");
 		Element eSchreib = new Element("schreibmaschine");
-		eSchreib.setText(getListing(fileName));
+		eSchreib.setText(getListing(listing.getFile()));
 		
 		eBuch.addContent(eSchreib);
 		eRoot.addContent(eBuch);
