@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.jdom.Element;
 import org.openfuxml.addon.jsf.data.jaxb.Example;
+import org.openfuxml.addon.jsf.data.jaxb.Listing;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 
 public class TagExampleFactory
@@ -40,8 +41,10 @@ public class TagExampleFactory
 		elTitle.setText(example.getTitle());
 		abExample.addContent(elTitle);
 		
-		abExample.addContent(factoryProglist.createProglist(example.getFile(), "Progtitle"));
-		
+		for(Listing listing : example.getListing())
+		{
+			abExample.addContent(factoryProglist.createProglist(listing));
+		}
 		return abExample;
 	}
 }

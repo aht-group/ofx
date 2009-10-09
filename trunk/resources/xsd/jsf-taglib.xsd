@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema targetNamespace="http://www.openfuxml.org/jsf"
+    xmlns="http://www.openfuxml.org/jsf"
+    xmlns:ofx="http://www.openfuxml.org"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+    <xsd:import namespace="http://www.openfuxml.org" schemaLocation="openfuxml.xsd"/>
     <xsd:element name="taglib">
         <xsd:complexType>
             <xsd:sequence>
@@ -101,8 +107,14 @@
     <xsd:element name="example">
         <xsd:complexType>
             <xsd:sequence>
-                
+                <xsd:element ref="listing" maxOccurs="unbounded"/>
+                <xsd:element ref="ofx:absatz-ohne" maxOccurs="unbounded"/>
             </xsd:sequence>
+            <xsd:attribute name="title" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="listing">
+        <xsd:complexType>
             <xsd:attribute name="file" type="xsd:string"/>
             <xsd:attribute name="title" type="xsd:string"/>
         </xsd:complexType>

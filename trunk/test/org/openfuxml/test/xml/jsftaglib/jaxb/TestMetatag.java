@@ -7,6 +7,7 @@ import javax.xml.bind.Marshaller;
 import net.sf.exlp.util.JaxbUtil;
 
 import org.apache.log4j.Logger;
+import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsf.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
@@ -36,17 +37,17 @@ public class TestMetatag
 			JAXBContext context = JAXBContext.newInstance(ObjectFactory.class);
 			Marshaller m = context.createMarshaller(); 
 			m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE );
-//			m.setProperty("com.sun.xml.bind.namespacePrefixMapper",new JsfNsPrefixMapper());
+			m.setProperty("com.sun.xml.bind.namespacePrefixMapper",new JsfNsPrefixMapper());
 
 			m.marshal(metatag, System.out);
 		}
 		catch (JAXBException e) {logger.debug(e);}
 	}
 		
-	public void load()
+	public void load(String file)
 	{
-		Metatag metatag = (Metatag)JaxbUtil.loadJAXB("../jWAN/resources/jsf/tld/html/link.xml", Metatag.class);
-		JaxbUtil.debug(metatag);
+		Metatag metatag = (Metatag)JaxbUtil.loadJAXB(file, Metatag.class);
+		JaxbUtil.debug(metatag,new JsfNsPrefixMapper());
 	}
 	
 	public static void main (String[] args) throws Exception
@@ -58,6 +59,6 @@ public class TestMetatag
 			
 		TestMetatag test = new TestMetatag();
 		test.xmlConstruct();
-//		test.load();
+		test.load(args[0]);
 	}
 }

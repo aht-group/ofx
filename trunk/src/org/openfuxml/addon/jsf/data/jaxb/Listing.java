@@ -10,7 +10,7 @@ package org.openfuxml.addon.jsf.data.jaxb;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -24,10 +24,8 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="component-type" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="component-class" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
+ *       &lt;attribute name="file" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="title" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -36,64 +34,61 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "componentType",
-    "componentClass"
-})
-@XmlRootElement(name = "component")
-public class Component {
+@XmlType(name = "")
+@XmlRootElement(name = "listing")
+public class Listing {
 
-    @XmlElement(name = "component-type", required = true)
-    protected String componentType;
-    @XmlElement(name = "component-class", required = true)
-    protected String componentClass;
+    @XmlAttribute
+    protected String file;
+    @XmlAttribute
+    protected String title;
 
     /**
-     * Gets the value of the componentType property.
+     * Gets the value of the file property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getComponentType() {
-        return componentType;
+    public String getFile() {
+        return file;
     }
 
     /**
-     * Sets the value of the componentType property.
+     * Sets the value of the file property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setComponentType(String value) {
-        this.componentType = value;
+    public void setFile(String value) {
+        this.file = value;
     }
 
     /**
-     * Gets the value of the componentClass property.
+     * Gets the value of the title property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getComponentClass() {
-        return componentClass;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * Sets the value of the componentClass property.
+     * Sets the value of the title property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setComponentClass(String value) {
-        this.componentClass = value;
+    public void setTitle(String value) {
+        this.title = value;
     }
 
 }
