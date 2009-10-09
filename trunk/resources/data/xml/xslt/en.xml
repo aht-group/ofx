@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<section>
+    <paragraph>a</paragraph>
+	<section>
+		<paragraph>
+			b
+		</paragraph>
+	</section>
+</section>
