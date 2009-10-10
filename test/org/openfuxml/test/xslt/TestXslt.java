@@ -21,8 +21,8 @@ public class TestXslt
 			loggerInit.init();
 		logger.debug("Testing XSD Taglib");
 			
-		Source xmlSource = new StreamSource("resources/data/xml/xslt/en.xml");
-        Source xsltSource = new StreamSource("resources/data/xml/xslt/en2de.xslt");
+		Source xmlSource = new StreamSource("resources/data/xml/en.xml");
+        Source xsltSource = new StreamSource("resources/xslt/en2de.xslt");
 
         TransformerFactory transFact = TransformerFactory.newInstance();
         Transformer trans = transFact.newTransformer(xsltSource);

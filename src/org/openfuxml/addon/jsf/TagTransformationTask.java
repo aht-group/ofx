@@ -11,6 +11,7 @@ public class TagTransformationTask extends Task
 {		
 	private String outputDir,tagDef,baseDir;
 	private String tagDir,docDir;
+	private String xslt;
 
 	private int dtdLevel;
 	private boolean useLog4j;
@@ -29,7 +30,7 @@ public class TagTransformationTask extends Task
     	File fBaseDir = new File(baseDir);
     	File fDocBase = new File(baseDir,docDir);
     	
-    	JsfTagTransformator jtf = new JsfTagTransformator(fOutputDir, fBaseDir, fDocBase, dtdLevel, useLog4j);
+    	JsfTagTransformator jtf = new JsfTagTransformator(fOutputDir, fBaseDir, fDocBase, dtdLevel, useLog4j, xslt);
     	jtf.readTags(tagDef,tagDir);
     	jtf.transform();
     }
@@ -68,6 +69,7 @@ public class TagTransformationTask extends Task
 	public void setTagDir(String tagDir) {this.tagDir = tagDir;}
 	public void setDocDir(String docDir) {this.docDir = docDir;}
 	public void setUseLog4j(boolean useLog4j) {this.useLog4j = useLog4j;}
+	public void setXslt(String xslt) {this.xslt = xslt;}
 	
 	public static void main (String[] args) throws Exception
 	{
@@ -82,6 +84,7 @@ public class TagTransformationTask extends Task
 		ttf.setBaseDir(args[2]);
 		ttf.setTagDir(args[3]);
 		ttf.setDocDir(args[4]);
+		ttf.setXslt(args[5]);
 		ttf.execute();
 	}
 }

@@ -1,8 +1,10 @@
 package org.openfuxml.addon.jsf.data.jaxb;
 
+import net.sf.exlp.util.xml.NsPrefixMapperInterface;
+
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
-public class JsfNsPrefixMapper extends NamespacePrefixMapper
+public class JsfNsPrefixMapper extends NamespacePrefixMapper implements NsPrefixMapperInterface
 {
     public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix)
     {

@@ -4,6 +4,7 @@
 	
 	<xsl:include href="en2de/paragraph.xslt"/>
 	<xsl:include href="en2de/attributes.xslt"/>
+	<xsl:include href="en2de/table.xslt"/>
 	
 	<xsl:output method="xml" version="1.0" encoding="UTF-8"/>
 	
@@ -21,12 +22,6 @@
 	
 	<xsl:template match="ofx:title">
 		<xsl:element name="titel">
-			<xsl:apply-templates select="@*|node()"/>
-		</xsl:element>
-	</xsl:template>
-	
-		<xsl:template match="ofx:table">
-		<xsl:element name="tabelle">
 			<xsl:apply-templates select="@*|node()"/>
 		</xsl:element>
 	</xsl:template>
