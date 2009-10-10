@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <section>
     <paragraph>a</paragraph>
-	<section source="../jsf-doku/tag-introduction.xml" external="true">
+	<section source="filename.xml" external="true">
 		<title>introduction</title>
 		<paragraph>absatz (ohne top)</paragraph>
 		<paragraph top="normal">absatz</paragraph>
