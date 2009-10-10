@@ -1,28 +1,26 @@
 package org.openfuxml.addon.jsf;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.util.JDomUtil;
 import net.sf.exlp.util.JaxbUtil;
+import net.sf.exlp.util.xml.XsltUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.jdom.DocType;
 import org.jdom.Document;
-import org.jdom.Element;
 import org.jdom.output.Format;
-import org.jdom.output.XMLOutputter;
+import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsf.data.jaxb.Section;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
-import org.openfuxml.addon.jsf.factory.JsfTagSection;
-import org.openfuxml.addon.jsf.factory.JsfTagSubSection;
-import org.openfuxml.addon.jsf.factory.JsfTagTable;
-import org.openfuxml.addon.jsf.factory.SectionFactory;
+import org.openfuxml.addon.jsf.factory.TagChapterFactory;
+import org.openfuxml.addon.jsf.factory.TagSectionFactory;
 
 public class JsfTagTransformator
 {
@@ -31,25 +29,26 @@ public class JsfTagTransformator
 	private File outputDir,fTagBase,fDocBase;
 	private int dtdLevel;
 	public static boolean useLog4j;
-	private String logMsg;
+	private String logMsg,xslt;
 	private List<Metatag> lMetaTag;
 	private Taglib taglib;
 	
 	public JsfTagTransformator(File baseDir, int dtdLevel)
 	{
-		this(baseDir,null,null,dtdLevel,true);
+		this(baseDir,null,null,dtdLevel,true,null);
 	}
 	
-	public JsfTagTransformator(File outputDir, File fTagBase, File fDocBase, int dtdLevel,boolean useLog4j)
+	public JsfTagTransformator(File outputDir, File fTagBase, File fDocBase, int dtdLevel,boolean useLog4j,String xslt)
 	{
 		this.outputDir=outputDir;
 		this.fTagBase=fTagBase;
 		this.fDocBase=fDocBase;
 		this.dtdLevel=dtdLevel;
+		this.xslt=xslt;
 		JsfTagTransformator.useLog4j=useLog4j;
 		logMsg="Using baseDir="+outputDir.getAbsolutePath();
 		if(useLog4j){logger.debug(logMsg);}else{System.out.println(logMsg);}
-		lMetaTag = new ArrayList<Metatag>(); 
+		lMetaTag = new ArrayList<Metatag>();
 	}
 	
 	public void readTags(String tagDef,String tagDir)
@@ -77,51 +76,33 @@ public class JsfTagTransformator
 		return (Taglib)JaxbUtil.loadJAXB(xmlFile,Taglib.class);
 	}
 	
-	private Element unsetNameSpace(Element e)
-	{
-		e.setNamespace(null);
-		for(Object o : e.getChildren())
-		{
-			Element eChild = (Element)o;
-			eChild=unsetNameSpace(eChild);
-		}
-		return e;
-	}
-	
 	public void transform()
 	{
-		JsfTagTable jftTagTable = new JsfTagTable(taglib);
-		JsfTagSubSection jftTagSection = new JsfTagSubSection(taglib,fDocBase);
+		TagChapterFactory chapterFactory = new TagChapterFactory(taglib);
+		TagSectionFactory sectionFactory = new TagSectionFactory(taglib);
 		
+		logger.debug("Transforming "+lMetaTag.size());
 		for(Metatag metatag : lMetaTag)
 		{
-			Document docTagTable = jftTagTable.createTagTable(metatag,getDocType());
-			File f = new File(outputDir,"tab-"+metatag.getTag().getName()+".xml");
-			save(docTagTable,f);
-			
-			f = new File(outputDir,"ab-"+metatag.getTag().getName()+".xml");
-			Document docSubTag = jftTagSection.createTagSection(metatag,getDocType());
-			save(docSubTag,f);
+			File fSection = new File(outputDir,"section-"+metatag.getTag().getName()+".xml");
+			Section section = sectionFactory.create(metatag);
+			Document doc = JaxbUtil.toDocument(section);
+			doc = JDomUtil.correctNsPrefixes(doc, new JsfNsPrefixMapper());
+			logger.debug("Debug for "+metatag.getTag().getName());
+			InputStream isXML = JDomUtil.toInputStream(doc, Format.getPrettyFormat());
+			transformSave(isXML, fSection);
 		}
-		JsfTagSection jftSection = new JsfTagSection(taglib);
-		File f = new File(outputDir,"jsf-taglib.xml");
-		Document docTag = jftSection.createTagSection(lMetaTag, getDocType());
-		save(docTag,f);
 		
-		SectionFactory sectionFactory = new SectionFactory(taglib);
-		Section section = sectionFactory.create(lMetaTag);
-		JaxbUtil.debug(section);
+		File fChapter = new File(outputDir,"jsf-taglib.xml");
+		Section section = chapterFactory.create(lMetaTag);
+		InputStream isXML = JaxbUtil.toInputStream(section,null,false);
+		transformSave(isXML, fChapter);
 	}
 	
-	@SuppressWarnings("unused")
-	private void debug(Document doc)
-	{	
-		try
-		{
-			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
-			xmlOut.output( doc, System.out );
-		}
-		catch (IOException e) {if(useLog4j){logger.error(e);}else{e.printStackTrace();}}
+	private void transformSave(InputStream isXML, File f)
+	{
+		InputStream isTransformed = XsltUtil.toInputStream(isXML, xslt);
+		JDomUtil.save(isTransformed, f, Format.getRawFormat(),getDocType());
 	}
 	
 	private void save(Document doc, File f)

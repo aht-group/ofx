@@ -2,17 +2,23 @@ package org.openfuxml.addon.jsf.factory;
 
 import java.util.List;
 
+import net.sf.exlp.util.JaxbUtil;
+
+import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsf.data.jaxb.Section;
+import org.openfuxml.addon.jsf.data.jaxb.Table;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 import org.openfuxml.addon.jsf.data.jaxb.Title;
 
-public class SectionFactory
+import de.kisner.util.LoggerInit;
+
+public class TagChapterFactory
 {
 	private Taglib taglib;
 	
-	public SectionFactory(Taglib taglib)
+	public TagChapterFactory(Taglib taglib)
 	{
 		this.taglib=taglib;
 	}
@@ -30,7 +36,7 @@ public class SectionFactory
 		for(Metatag metatag : lMetatags)
 		{
 			Tag tag = metatag.getTag();
-			section.getSection().add(createExternalSubSection("sec-"+tag.getName()+".xml", tag.getName()));
+			section.getSection().add(createExternalSubSection("section-"+tag.getName()+".xml", tag.getName()));
 		}
 		return section;
 	}
@@ -46,5 +52,22 @@ public class SectionFactory
 		section.setTitle(title);
 		
 		return section;
+	}
+	
+	public static void main (String[] args) throws Exception
+	{
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("resources/config");
+			loggerInit.init();
+		
+		
+		Section section = new Section();
+
+		
+		Title title = new Title();
+		title.setValue("Titel");
+		section.setTitle(title);
+		
+		JaxbUtil.debug(section);
 	}
 }
