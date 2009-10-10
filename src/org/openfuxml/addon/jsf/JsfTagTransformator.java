@@ -17,10 +17,12 @@ import org.jdom.Element;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
+import org.openfuxml.addon.jsf.data.jaxb.Section;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 import org.openfuxml.addon.jsf.factory.JsfTagSection;
 import org.openfuxml.addon.jsf.factory.JsfTagSubSection;
 import org.openfuxml.addon.jsf.factory.JsfTagTable;
+import org.openfuxml.addon.jsf.factory.SectionFactory;
 
 public class JsfTagTransformator
 {
@@ -105,6 +107,10 @@ public class JsfTagTransformator
 		File f = new File(outputDir,"jsf-taglib.xml");
 		Document docTag = jftSection.createTagSection(lMetaTag, getDocType());
 		save(docTag,f);
+		
+		SectionFactory sectionFactory = new SectionFactory(taglib);
+		Section section = sectionFactory.create(lMetaTag);
+		JaxbUtil.debug(section);
 	}
 	
 	@SuppressWarnings("unused")

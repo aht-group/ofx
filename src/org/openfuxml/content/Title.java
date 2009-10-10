@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType(name = "", propOrder = {
     "value"
 })
-@XmlRootElement(name = "absatz-ohne")
-public class AbsatzOhne {
+@XmlRootElement(name = "title")
+public class Title {
 
     @XmlValue
     protected String value;

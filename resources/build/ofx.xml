@@ -50,9 +50,9 @@
 			<depends dir="${xsd.dir}"><include name="jsf-taglib.xsd"/></depends>
 			<produces dir="${src.dir}/org/openfuxml/addon/jsf/data/jaxb"><include name="*.java"/></produces>
 		</xjc>
-		<xjc schema="${xsd.dir}/openfuxml.xsd" package="org.openfuxml.content" destdir="${src.dir}">
+		<xjc schema="${xsd.dir}/ofx.xsd" package="org.openfuxml.content" destdir="${src.dir}">
 			<arg value="-extension" />
-			<depends dir="${xsd.dir}"><include name="openfuxml.xsd"/></depends>
+			<depends dir="${xsd.dir}"><include name="ofx.xsd"/></depends>
 			<produces dir="${src.dir}/org/openfuxml/content"><include name="*.java"/></produces>
 		</xjc>
 	</target>
