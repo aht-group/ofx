@@ -9,7 +9,7 @@ public class JsfNsPrefixMapper extends NamespacePrefixMapper
         if( "http://www.openfuxml.org/jsf".equals(namespaceUri) )
             return "";
          
-        if( "http://www.openfuxml.org".equals(namespaceUri) )
+        if( "http://www.openfuxml.org/ofx".equals(namespaceUri) )
             return "ofx";
             
         return suggestion;

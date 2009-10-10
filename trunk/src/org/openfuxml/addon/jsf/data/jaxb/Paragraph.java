@@ -10,9 +10,10 @@ package org.openfuxml.addon.jsf.data.jaxb;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 
 /**
@@ -22,14 +23,20 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * <pre>
  * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="component-type" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="component-class" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
+ *   &lt;simpleContent>
+ *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+ *       &lt;attribute name="top" use="required">
+ *         &lt;simpleType>
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *             &lt;enumeration value="normal"/>
+ *             &lt;enumeration value="small"/>
+ *             &lt;enumeration value="mini"/>
+ *             &lt;enumeration value="zero"/>
+ *           &lt;/restriction>
+ *         &lt;/simpleType>
+ *       &lt;/attribute>
+ *     &lt;/extension>
+ *   &lt;/simpleContent>
  * &lt;/complexType>
  * </pre>
  * 
@@ -37,63 +44,62 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "componentType",
-    "componentClass"
+    "value"
 })
-@XmlRootElement(name = "component")
-public class Component {
+@XmlRootElement(name = "paragraph", namespace = "http://www.openfuxml.org/ofx")
+public class Paragraph {
 
-    @XmlElement(name = "component-type", required = true)
-    protected String componentType;
-    @XmlElement(name = "component-class", required = true)
-    protected String componentClass;
+    @XmlValue
+    protected String value;
+    @XmlAttribute(required = true)
+    protected String top;
 
     /**
-     * Gets the value of the componentType property.
+     * Gets the value of the value property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getComponentType() {
-        return componentType;
+    public String getValue() {
+        return value;
     }
 
     /**
-     * Sets the value of the componentType property.
+     * Sets the value of the value property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setComponentType(String value) {
-        this.componentType = value;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     /**
-     * Gets the value of the componentClass property.
+     * Gets the value of the top property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getComponentClass() {
-        return componentClass;
+    public String getTop() {
+        return top;
     }
 
     /**
-     * Sets the value of the componentClass property.
+     * Sets the value of the top property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setComponentClass(String value) {
-        this.componentClass = value;
+    public void setTop(String value) {
+        this.top = value;
     }
 
 }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.openfuxml.org/ofx"
+    xmlns="http://www.openfuxml.org/ofx"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="absatz-ohne">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element> 
+    <xsd:element name="paragraph">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="top" use="required">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:enumeration value="normal"/>
+                                <xsd:enumeration value="small"/>
+                                <xsd:enumeration value="mini"/>
+                                <xsd:enumeration value="zero"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:attribute> 
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="medienobjekt">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="grafik" maxOccurs="unbounded"/>
+                <xsd:element name="objekttitel">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="absatz-ohne" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="gleiten" type="xsd:string"/>
+            <xsd:attribute name="id" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="grafik">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="grafik" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="align" type="xsd:string"/>
+            <xsd:attribute name="fileref" type="xsd:string"/>
+            <xsd:attribute name="fliessen" type="xsd:string"/>
+            <xsd:attribute name="width" type="xsd:int"/>
+            <xsd:attribute name="depth" type="xsd:int"/>
+            <xsd:attribute name="scale" type="xsd:double"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="section">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="title" maxOccurs="1"/>
+                <xsd:element ref="paragraph" maxOccurs="unbounded"/>
+                <xsd:element ref="section" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:attribute name="external" type="xsd:boolean"/>
+            <xsd:attribute name="source" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="title">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element> 
+</xsd:schema>
