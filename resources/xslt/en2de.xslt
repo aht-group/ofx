@@ -24,5 +24,11 @@
 			<xsl:apply-templates select="@*|node()"/>
 		</xsl:element>
 	</xsl:template>
+	
+		<xsl:template match="ofx:table">
+		<xsl:element name="tabelle">
+			<xsl:apply-templates select="@*|node()"/>
+		</xsl:element>
+	</xsl:template>
 
 </xsl:stylesheet>

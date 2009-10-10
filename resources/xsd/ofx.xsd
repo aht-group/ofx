@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://www.openfuxml.org/ofx"
     xmlns="http://www.openfuxml.org/ofx"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+    jaxb:extensionBindingPrefixes="xjc" jaxb:version="2.0">
+    <xsd:annotation>
+        <xsd:appinfo>
+            <jaxb:globalBindings generateIsSetMethod="true">
+                <xjc:serializable uid="14"/>
+                <jaxb:javaType name="java.util.Calendar" xmlType="xsd:date"
+                    parseMethod="javax.xml.bind.DatatypeConverter.parseDate"
+                    printMethod="javax.xml.bind.DatatypeConverter.printDate"/>
+            </jaxb:globalBindings>
+        </xsd:appinfo>
+    </xsd:annotation>
     <xsd:element name="absatz-ohne">
         <xsd:complexType>
             <xsd:simpleContent>
@@ -63,6 +76,7 @@
                 <xsd:element ref="title" maxOccurs="1"/>
                 <xsd:element ref="paragraph" maxOccurs="unbounded"/>
                 <xsd:element ref="section" maxOccurs="unbounded"/>
+                <xsd:element ref="table" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
             <xsd:attribute name="external" type="xsd:boolean"/>
@@ -76,5 +90,55 @@
                 </xsd:extension>
             </xsd:simpleContent>
         </xsd:complexType>
-    </xsd:element> 
+    </xsd:element>
+    <xsd:element name="table">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="title" minOccurs="0" maxOccurs="1"/>
+                <xsd:element name="tgroup" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="colspec" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:attribute name="colnum" type="xsd:int"/>
+                                    <xsd:attribute name="colname" type="xsd:string"/>
+                                    <xsd:attribute name="colwidth" type="xsd:string"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="thead" minOccurs="0" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                            <xsd:element ref="row" minOccurs="1" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="tbody" minOccurs="1" maxOccurs="1">
+                                <xsd:complexType>
+                                    <xsd:sequence>
+                                        <xsd:element ref="row" minOccurs="1" maxOccurs="unbounded"/>
+                                    </xsd:sequence>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                        <xsd:attribute name="cols" type="xsd:int"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="row">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="entry" minOccurs="1" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:simpleContent>
+                            <xsd:extension base="xsd:string">
+                                <xsd:attribute name="colname" type="xsd:string"/>
+                            </xsd:extension>
+                        </xsd:simpleContent>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>

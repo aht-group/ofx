@@ -17,6 +17,12 @@
 		</xsl:element>
 	</xsl:template>
 	
+	<xsl:template match="tabelle">
+		<xsl:element name="table">
+			<xsl:apply-templates select="@*|node()"/>
+		</xsl:element>
+	</xsl:template>
+	
 	<xsl:template match="titel">
 		<xsl:element name="title">
 			<xsl:apply-templates select="@*|node()"/>
