@@ -1,6 +1,6 @@
 package org.openfuxml.addon.wiki.processing;
 
-import net.sf.exlp.util.JDomUtil;
+import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;

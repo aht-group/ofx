@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import net.sf.exlp.io.ConfigLoader;
-import net.sf.exlp.util.JDomUtil;
+import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;

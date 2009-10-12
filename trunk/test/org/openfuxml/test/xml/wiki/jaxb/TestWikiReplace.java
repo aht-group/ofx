@@ -1,6 +1,6 @@
 package org.openfuxml.test.xml.wiki.jaxb;
 
-import net.sf.exlp.util.JaxbUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;

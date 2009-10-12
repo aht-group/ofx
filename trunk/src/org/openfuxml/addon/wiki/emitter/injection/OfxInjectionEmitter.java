@@ -3,7 +3,7 @@ package org.openfuxml.addon.wiki.emitter.injection;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import net.sf.exlp.util.JaxbUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;

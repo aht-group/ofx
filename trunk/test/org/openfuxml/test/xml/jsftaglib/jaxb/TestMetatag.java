@@ -4,7 +4,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import net.sf.exlp.util.JaxbUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;

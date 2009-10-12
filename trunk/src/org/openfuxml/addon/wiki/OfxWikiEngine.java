@@ -9,7 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 
 import net.sf.exlp.io.ConfigLoader;
-import net.sf.exlp.util.JDomUtil;
+import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;

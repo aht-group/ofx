@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.exlp.io.ConfigLoader;
-import net.sf.exlp.util.JDomUtil;
-import net.sf.exlp.util.JaxbUtil;
+import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.util.xml.XsltUtil;
 
 import org.apache.commons.configuration.Configuration;

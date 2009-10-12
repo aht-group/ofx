@@ -2,7 +2,7 @@ package org.openfuxml.addon.jsf.factory;
 
 import java.util.List;
 
-import net.sf.exlp.util.JaxbUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;

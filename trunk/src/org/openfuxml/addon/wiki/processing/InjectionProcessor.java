@@ -9,7 +9,7 @@ import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerXml;
 import net.sf.exlp.parser.LogParser;
-import net.sf.exlp.util.JaxbUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
