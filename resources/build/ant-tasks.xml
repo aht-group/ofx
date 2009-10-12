@@ -7,9 +7,9 @@
 	<import file="ant-libs.xml"/>
 	
     <target name="1 - Tasks" description="Task definition">
-    	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+    	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">  	  
     	  <classpath>
-    	    <fileset dir="${lib.dir}/${jaxb.dir}" includes="*.jar"/>
+    	     <fileset dir="${lib.dir}/${jaxb.dir}" includes="*.jar"/>
     	  </classpath>
     	</taskdef>
     </target>

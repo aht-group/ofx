@@ -9,7 +9,7 @@
 	</xsl:template>
 	
 	<xsl:template match="ofx:paragraph/@top"/>
-	<xsl:template match="paragraph[@top='normal']">
+	<xsl:template match="ofx:paragraph[@top='normal']">
 		<xsl:element name="absatz"><xsl:apply-templates select="@*|node()"/></xsl:element>
 	</xsl:template>
 	<xsl:template match="ofx:paragraph[@top='small']">
