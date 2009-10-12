@@ -3,7 +3,7 @@ package org.openfuxml.addon.wiki.processing;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.exlp.util.JaxbUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;

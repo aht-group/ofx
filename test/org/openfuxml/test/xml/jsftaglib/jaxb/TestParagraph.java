@@ -1,7 +1,7 @@
 package org.openfuxml.test.xml.jsftaglib.jaxb;
 
-import net.sf.exlp.util.JDomUtil;
-import net.sf.exlp.util.JaxbUtil;
+import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.log4j.Logger;
 import org.jdom.Document;

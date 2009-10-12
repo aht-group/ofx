@@ -3,8 +3,8 @@ package org.openfuxml.addon.jsf.factory;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.exlp.util.JDomUtil;
-import net.sf.exlp.util.JaxbUtil;
+import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jdom.Document;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;

@@ -2,7 +2,7 @@ package org.openfuxml.addon.wiki.processing.xhtml;
 
 import java.util.ArrayList;
 
-import net.sf.exlp.util.JDomUtil;
+import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.log4j.Logger;
 import org.jdom.Attribute;
