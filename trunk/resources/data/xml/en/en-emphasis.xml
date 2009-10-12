@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://www.openfuxml.org/ofx" id="sec-tags-div">
+	<title>T</title>
+	<paragraph top="normal">
+		Test<emphasis style="normal" italic="true">Schreibmaschine</emphasis>
+	</paragraph>
+    <section>
+        Test<cat a="true" b="false">text1</cat>
+        Test<cat a="true" b="true">text1</cat>
+    </section>
+</section>

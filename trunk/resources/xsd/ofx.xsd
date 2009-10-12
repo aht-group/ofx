@@ -24,19 +24,37 @@
         </xsd:complexType>
     </xsd:element> 
     <xsd:element name="paragraph">
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+                <xsd:element ref="emphasis"/>
+            </xsd:sequence>
+            <xsd:attribute name="top" use="required">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="normal"/>
+                        <xsd:enumeration value="small"/>
+                        <xsd:enumeration value="mini"/>
+                        <xsd:enumeration value="zero"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:attribute> 
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="emphasis">
         <xsd:complexType>
             <xsd:simpleContent>
                 <xsd:extension base="xsd:string">
-                    <xsd:attribute name="top" use="required">
+                    <xsd:attribute name="style" use="required">
                         <xsd:simpleType>
                             <xsd:restriction base="xsd:string">
                                 <xsd:enumeration value="normal"/>
-                                <xsd:enumeration value="small"/>
-                                <xsd:enumeration value="mini"/>
-                                <xsd:enumeration value="zero"/>
+                                <xsd:enumeration value="typewriter"/>
                             </xsd:restriction>
                         </xsd:simpleType>
-                    </xsd:attribute> 
+                    </xsd:attribute>
+                    <xsd:attribute name="bold" type="xsd:boolean"/>
+                    <xsd:attribute name="italic" type="xsd:boolean"/>
+                    <xsd:attribute name="underline" type="xsd:boolean"/>
                 </xsd:extension>
             </xsd:simpleContent>
         </xsd:complexType>

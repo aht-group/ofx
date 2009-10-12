@@ -21,6 +21,7 @@
 	<property name="jaxb.dir" value="xml/jaxb/${jaxb-version}"/>
 		<property name="jaxbapi.lib" value="jaxb-api-${jaxb-version}.jar"/>
 		<property name="jaxbimpl.lib" value="jaxb-impl-${jaxb-version}.jar"/>
+		<property name="jaxbxjc.lib" value="jaxb-xjc-${jaxb-version}.jar"/>
 	<property name="bliki.dir" value="xml/bliki"/><property name="bliki.lib" value="bliki-core-${bliki-version}.jar"/>
 	<property name="jwbf.dir" value="xml/jwbf/${jwbf-version}"/>
 		<property name="jwbf-core.lib" value="jwbf-core-${jwbf-version}.jar"/>

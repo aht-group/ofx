@@ -51,7 +51,7 @@ public class TagSectionFactory
 		if(tag.getDescription()!=null)
 		{
 			Paragraph p = new Paragraph();
-			p.setValue(tag.getDescription().trim());
+			p.getContent().add(tag.getDescription().trim());
 			section.getParagraph().add(p);
 		}
 		

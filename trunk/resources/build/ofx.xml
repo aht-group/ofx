@@ -45,17 +45,30 @@
 			<depends dir="${xsd.dir}"><include name="ofx-wiki.xsd"/></depends>
 			<produces dir="${src.dir}/org/openfuxml/addon/wiki/data/jaxb"><include name="*.java"/></produces>
 		</xjc>
-		<xjc schema="${xsd.dir}/jsf-taglib.xsd" package="org.openfuxml.addon.jsf.data.jaxb" destdir="${src.dir}">
+	    <java classname="com.sun.tools.xjc.XJCFacade"
+	          fork="true" failonerror="true"  maxmemory="128m">
+	         <arg value="-extension"/>
+	    	 <arg value="${xsd.dir}/jsf-taglib.xsd"/>
+	    	 <arg value="-d"/><arg value="${src.dir}"/>
+	    	 <arg value="-p"/><arg value="org.openfuxml.addon.jsf.data.jaxb"/>
+	         <classpath>
+	         	<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
+	         	<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbxjc.lib}"/>
+	         </classpath>
+	      </java>
+		
+<!--	<xjc schema="${xsd.dir}/jsf-taglib.xsd" package="org.openfuxml.addon.jsf.data.jaxb" destdir="${src.dir}">
 			<arg value="-extension" />
 			<depends dir="${xsd.dir}"><include name="jsf-taglib.xsd"/></depends>
 			<produces dir="${src.dir}/org/openfuxml/addon/jsf/data/jaxb"><include name="*.java"/></produces>
 		</xjc>
 		<xjc schema="${xsd.dir}/ofx.xsd" package="org.openfuxml.content" destdir="${src.dir}">
 			<arg value="-extension" />
+			<jvmarg value="-Djava.endorsed.dirs=${lib.dir}/${jaxb.dir}" />
 			<depends dir="${xsd.dir}"><include name="ofx.xsd"/></depends>
 			<produces dir="${src.dir}/org/openfuxml/content"><include name="*.java"/></produces>
 		</xjc>
-	</target>
+-->	</target>
 	
 	<target name="5 - OFX Release" depends="3 - compile">
 		<echo>Create ofx lib: openFuXML-${openfuxml-version}.jar</echo>
