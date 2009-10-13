@@ -1,6 +1,7 @@
 package org.openfuxml.addon.jsf;
 
 import java.io.File;
+import java.util.List;
 
 import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.util.xml.JDomUtil;
@@ -18,6 +19,7 @@ import org.openfuxml.addon.jsf.data.jaxb.Component;
 import org.openfuxml.addon.jsf.data.jaxb.FacesConfig;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsf.data.jaxb.Renderer;
+import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 
 import de.kisner.util.LoggerInit;
@@ -122,6 +124,8 @@ public class TaglibFactoryTask extends Task
 			String fileName = config.getString(xPathPrefix+"["+i+"]");
 			String dirName = config.getString(xPathPrefix+"["+i+"]/@dir");
 			Metatag metatag = (Metatag)JaxbUtil.loadJAXB(tagBaseDir+"/"+dirName+"/"+fileName, Metatag.class);
+			TaglibFactoryTask.fillDescription(metatag.getTag(),config);
+			
 			taglib.getTag().add(metatag.getTag());
 			
 			Component component = metatag.getComponent();
@@ -129,6 +133,20 @@ public class TaglibFactoryTask extends Task
 			
 			Renderer renderer = metatag.getRenderer();
 			if(renderer!=null){facesconfig.getRenderKit().getRenderer().add(renderer);}
+		}
+	}
+	
+	public static void fillDescription(Tag tag, Configuration config)
+	{
+		for(org.openfuxml.addon.jsf.data.jaxb.Attribute att : tag.getAttribute())
+		{
+			logger.debug("Att"+ tag.getName()+" "+att.getName());
+	
+			if(att.getDescription()!=null && att.getDescription().equals("@@@"))
+			{
+				String description = config.getString("descriptions/description[@name='"+att.getName()+"']");
+				att.setDescription(description);
+			}
 		}
 	}
 	
