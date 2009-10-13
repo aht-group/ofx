@@ -66,6 +66,7 @@ public class JsfTagTransformator
 			String fileName = config.getString(xPathPrefix+"["+i+"]");
 			String dirName = config.getString(xPathPrefix+"["+i+"]/@dir");
 			Metatag metatag = (Metatag)JaxbUtil.loadJAXB(dir+"/"+dirName+"/"+fileName, Metatag.class);
+			TaglibFactoryTask.fillDescription(metatag.getTag(),config);
 			lMetaTag.add(metatag);
 		}
 		taglib =readTaglib(dir+"/"+config.getString("taglib"));
