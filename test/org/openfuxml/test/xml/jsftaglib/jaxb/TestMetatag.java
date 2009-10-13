@@ -7,10 +7,13 @@ import javax.xml.bind.Marshaller;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.log4j.Logger;
+import org.openfuxml.addon.jsf.data.jaxb.Example;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsf.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
+import org.openfuxml.content.Paragraph;
+import org.openfuxml.content.Reference;
 
 import de.kisner.util.LoggerInit;
 
@@ -29,7 +32,22 @@ public class TestMetatag
 		
 		Tag tag = new Tag();
 		tag.setName("Testame");
+	
+		Metatag.Examples examples = new Metatag.Examples();
 		
+		Example example = new Example();
+		
+		Reference r = new Reference();
+		r.setTarget("xx3");
+		
+		Paragraph p = new Paragraph();
+		p.getContent().add("Test");
+		p.getContent().add(r);
+		p.getContent().add("dahinter");
+		example.getContent().add(p);
+		
+		examples.getExample().add(example);
+		metatag.setExamples(examples);
 		metatag.setTag(tag);
 		
 		try

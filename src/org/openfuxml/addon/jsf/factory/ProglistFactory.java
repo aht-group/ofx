@@ -30,8 +30,10 @@ public class ProglistFactory
 		org.openfuxml.content.Listing ofxListing = new org.openfuxml.content.Listing();
 		Title title = new Title();
 		title.setValue(jsfListing.getTitle());
+		title.setNumbering(true);
 		ofxListing.setTitle(title);
-		ofxListing.setRaw(getRawListing(jsfListing.getFile()));	
+		ofxListing.setRaw(getRawListing(jsfListing.getFile()));
+		ofxListing.setId(jsfListing.getId());
 		return ofxListing;
 	}
 	
