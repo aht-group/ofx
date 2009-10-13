@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.jdom.Element;
 import org.openfuxml.addon.jsf.JsfTagTransformator;
-import org.openfuxml.addon.jsf.data.jaxb.Listing;
+import org.openfuxml.content.Raw;
+import org.openfuxml.content.Title;
 
 public class ProglistFactory
 {
@@ -24,27 +24,19 @@ public class ProglistFactory
 		this.fDocBase=fDocBase;
 	}
 	
-	public Element createProglist(Listing listing)
+	public org.openfuxml.content.Listing createProglist(org.openfuxml.addon.jsf.data.jaxb.Listing jsfListing)
 	{
-		logger.debug("Creating listing .."+listing.getFile());
-		Element eRoot = new Element("proglist");
-		
-		Element eTitle = new Element("zwischentitel");
-		eTitle.setText(listing.getTitle());
-		eRoot.addContent(eTitle);
-
-		Element eBuch = new Element("buchstaeblich");
-		Element eSchreib = new Element("schreibmaschine");
-		eSchreib.setText(getListing(listing.getFile()));
-		
-		eBuch.addContent(eSchreib);
-		eRoot.addContent(eBuch);
-		
-		return eRoot;
+		logger.debug("Creating listing .."+jsfListing.getFile());
+		org.openfuxml.content.Listing ofxListing = new org.openfuxml.content.Listing();
+		Title title = new Title();
+		title.setValue(jsfListing.getTitle());
+		ofxListing.setTitle(title);
+		ofxListing.setRaw(getRawListing(jsfListing.getFile()));	
+		return ofxListing;
 	}
 	
 	@SuppressWarnings("unchecked")
-	private String getListing(String fileName)
+	private Raw getRawListing(String fileName)
 	{
 		String result = "";
 		File f = new File(fDocBase,fileName);
@@ -69,6 +61,8 @@ public class ProglistFactory
 			logMsg=e.getMessage();
 			if(JsfTagTransformator.useLog4j){logger.debug(logMsg);}else{System.out.println(logMsg);}
 		}
-		return result;
+		Raw raw = new Raw();
+		raw.setValue(result);
+		return raw;
 	}
 }

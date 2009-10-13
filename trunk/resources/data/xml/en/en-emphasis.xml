@@ -2,10 +2,17 @@
 <section xmlns="http://www.openfuxml.org/ofx" id="sec-tags-div">
 	<title>T</title>
 	<paragraph top="normal">
-		Test<emphasis style="normal" italic="true">Schreibmaschine</emphasis>
+		<emphasis style="typewriter" italic="true" bold="true">Schreibmaschine</emphasis>
+		<emphasis style="normal" italic="false" bold="false">Normal f-f</emphasis>
+		<emphasis style="normal" italic="false" bold="true">Normal f-t</emphasis>
+		<emphasis style="normal" italic="true" bold="false">Normal t-f</emphasis>
+		<emphasis style="normal" italic="true" bold="true">Normal t-t</emphasis>
+		<emphasis style="normal" italic="true" underline="true">Normal t-t</emphasis>
 	</paragraph>
-    <section>
-        Test<cat a="true" b="false">text1</cat>
-        Test<cat a="true" b="true">text1</cat>
-    </section>
+	<paragraph top="normal">
+		<emphasis style="normal" bold="true">Normal f-t</emphasis>
+		<emphasis style="normal" italic="true">Normal t-f</emphasis>
+		<emphasis style="normal" italic="true">gg<emphasis style="normal" bold="true">Normal t-t</emphasis></emphasis>
+		<emphasis style="normal" italic="true"><emphasis style="normal" underline="true">Normal t-t</emphasis></emphasis>
+	</paragraph>
 </section>

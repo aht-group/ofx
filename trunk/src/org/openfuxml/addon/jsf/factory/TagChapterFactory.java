@@ -4,13 +4,11 @@ import java.util.List;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
-import org.openfuxml.addon.jsf.data.jaxb.Section;
-import org.openfuxml.addon.jsf.data.jaxb.Table;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
-import org.openfuxml.addon.jsf.data.jaxb.Title;
+import org.openfuxml.content.Section;
+import org.openfuxml.content.Title;
 
 import de.kisner.util.LoggerInit;
 
@@ -30,13 +28,13 @@ public class TagChapterFactory
 		
 		Title title = new Title();
 		title.setValue(taglib.getInfo());
-		section.setTitle(title);
+		section.getContent().add(title);
 		
-		section.getSection().add(createExternalSubSection("../jsf-doku/tag-introduction.xml", "introduction"));
+		section.getContent().add(createExternalSubSection("../jsf-doku/tag-introduction.xml", "introduction"));
 		for(Metatag metatag : lMetatags)
 		{
 			Tag tag = metatag.getTag();
-			section.getSection().add(createExternalSubSection("section-"+tag.getName()+".xml", tag.getName()));
+			section.getContent().add(createExternalSubSection("section-"+tag.getName()+".xml", tag.getName()));
 		}
 		return section;
 	}
@@ -49,7 +47,7 @@ public class TagChapterFactory
 		
 		Title title = new Title();
 		title.setValue(sTitle);
-		section.setTitle(title);
+		section.getContent().add(title);
 		
 		return section;
 	}
@@ -66,7 +64,7 @@ public class TagChapterFactory
 		
 		Title title = new Title();
 		title.setValue("Titel");
-		section.setTitle(title);
+		section.getContent().add(title);
 		
 		JaxbUtil.debug(section);
 	}

@@ -10,10 +10,10 @@ import org.jdom.Document;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
-import org.openfuxml.addon.jsf.data.jaxb.Row;
-import org.openfuxml.addon.jsf.data.jaxb.Section;
-import org.openfuxml.addon.jsf.data.jaxb.Table;
-import org.openfuxml.addon.jsf.data.jaxb.Title;
+import org.openfuxml.content.Row;
+import org.openfuxml.content.Section;
+import org.openfuxml.content.Table;
+import org.openfuxml.content.Title;
 
 import de.kisner.util.LoggerInit;
 
@@ -107,7 +107,7 @@ public class TagTableFactory
 		TagTableFactory ttf = new TagTableFactory();
 		
 		Section section = new Section();
-		section.getTable().add(ttf.create(metatag));
+		section.getContent().add(ttf.create(metatag));
 		
 		Document doc = JaxbUtil.toDocument(section);
 		doc = JDomUtil.correctNsPrefixes(doc, new JsfNsPrefixMapper());

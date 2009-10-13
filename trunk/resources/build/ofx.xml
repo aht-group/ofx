@@ -50,7 +50,7 @@
 	         <arg value="-extension"/>
 	    	 <arg value="${xsd.dir}/jsf-taglib.xsd"/>
 	    	 <arg value="-d"/><arg value="${src.dir}"/>
-	    	 <arg value="-p"/><arg value="org.openfuxml.addon.jsf.data.jaxb"/>
+	    	 <arg value="-b"/><arg value="${xsd.dir}/jsf-taglib.xjb"/>
 	         <classpath>
 	         	<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
 	         	<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbxjc.lib}"/>

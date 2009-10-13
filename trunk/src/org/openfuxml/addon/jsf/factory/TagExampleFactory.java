@@ -1,50 +1,63 @@
 package org.openfuxml.addon.jsf.factory;
 
 import java.io.File;
+import java.io.Serializable;
 
-import org.jdom.Element;
+import org.apache.log4j.Logger;
+import org.openfuxml.addon.jsf.JsfTagTransformator;
 import org.openfuxml.addon.jsf.data.jaxb.Example;
 import org.openfuxml.addon.jsf.data.jaxb.Listing;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
+import org.openfuxml.content.Section;
+import org.openfuxml.content.Title;
 
 public class TagExampleFactory
 {
+	private static Logger logger = Logger.getLogger(JsfTagTransformator.class);
+	
 	private ProglistFactory factoryProglist;
 	
 	public TagExampleFactory(File fDocBase)
 	{
 		factoryProglist = new ProglistFactory(fDocBase);
-	}
-		
+	}	
 	
-	public Element createSecExamples(Metatag.Examples examples)
+	public Section create(Metatag.Examples examples)
 	{
-		Element abRoot = new Element("abschnitt");
+		Section secExamples = new Section();
 		
-		Element elTitle = new Element("titel");
-		elTitle.setText("Example");
-		abRoot.addContent(elTitle);
+		Title title = new Title();
+		title.setValue("Usage examples");
+		secExamples.getContent().add(title);
 		
 		for(Example example : examples.getExample())
 		{
-			abRoot.addContent(createExamples(example));
+			secExamples.getContent().add(createExample(example));
 		}
 		
-		return abRoot;
+		return secExamples;
 	}
 	
-	public Element createExamples(Example example)
+	private Section createExample(Example example)
 	{
-		Element abExample = new Element("abschnitt");
+		Section secExample = new Section();
 		
-		Element elTitle = new Element("titel");
-		elTitle.setText(example.getTitle());
-		abExample.addContent(elTitle);
+		Title title = new Title();
+		title.setValue(example.getTitle());
+		secExample.getContent().add(title);
 		
-		for(Listing listing : example.getListing())
+		for(Object s : example.getContent())
 		{
-			abExample.addContent(factoryProglist.createProglist(listing));
+			if(s instanceof Listing)
+			{
+				secExample.getContent().add(factoryProglist.createProglist((Listing)s));
+			}
+			else
+			{
+				secExample.getContent().add(s);
+			}
 		}
-		return abExample;
+		
+		return secExample;
 	}
 }
