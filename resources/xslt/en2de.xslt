@@ -1,11 +1,12 @@
 <xsl:stylesheet version="1.0"
-	xmlns:ofx="http://www.openfuxml.org/ofx"
+	xmlns:ofx="http://www.openfuxml.org"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	
 	<xsl:include href="en2de/paragraph.xslt"/>
 	<xsl:include href="en2de/attributes.xslt"/>
 	<xsl:include href="en2de/table.xslt"/>
 	<xsl:include href="en2de/emphasis.xslt"/>
+	<xsl:include href="en2de/listing.xslt"/>
 		
 	<xsl:output method="xml" version="1.0" encoding="UTF-8"/>
 	
@@ -23,6 +24,12 @@
 	
 	<xsl:template match="ofx:title">
 		<xsl:element name="titel">
+			<xsl:apply-templates select="@*|node()"/>
+		</xsl:element>
+	</xsl:template>
+	
+	<xsl:template match="ofx:raw">
+		<xsl:element name="buchstaeblich">
 			<xsl:apply-templates select="@*|node()"/>
 		</xsl:element>
 	</xsl:template>

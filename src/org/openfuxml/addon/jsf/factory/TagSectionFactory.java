@@ -1,22 +1,26 @@
 package org.openfuxml.addon.jsf.factory;
 
+import java.io.File;
+
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
-import org.openfuxml.addon.jsf.data.jaxb.Paragraph;
-import org.openfuxml.addon.jsf.data.jaxb.Section;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
-import org.openfuxml.addon.jsf.data.jaxb.Title;
+import org.openfuxml.content.Paragraph;
+import org.openfuxml.content.Section;
+import org.openfuxml.content.Title;
 
 public class TagSectionFactory
 {
 	private static Logger logger = Logger.getLogger(TagSectionFactory.class);
 	
 	private Taglib taglib;
+	private TagExampleFactory factoryExamples;
 	
-	public TagSectionFactory(Taglib taglib)
+	public TagSectionFactory(Taglib taglib, File docBase)
 	{
 		this.taglib=taglib;
+		factoryExamples = new TagExampleFactory(docBase);
 	}
 	
 	public Section create(Metatag metatag)
@@ -28,15 +32,14 @@ public class TagSectionFactory
 		
 		Title title = new Title();
 		title.setValue("Tag "+taglib.getShortname().trim()+":"+tag.getName());
-		section.setTitle(title);
+		section.getContent().add(title);
 		
-		section.getSection().add(getDescription(tag));
-		section.getSection().add(getTagTable(metatag));
+		section.getContent().add(getDescription(tag));
+		section.getContent().add(getTagTable(metatag));
 		
 		if(metatag.getExamples() !=null && metatag.getExamples().getExample().size()>0)
 		{
-			logger.warn("NYI examples");
-//			abRoot.addContent(factoryExamples.createSecExamples(metatag.getExamples()));
+			section.getContent().add(factoryExamples.create(metatag.getExamples()));
 		}
 		
 		return section;
@@ -47,12 +50,12 @@ public class TagSectionFactory
 		Section section = new Section();
 		Title title = new Title();
 		title.setValue("Description and Key Features");
-		section.setTitle(title);
+		section.getContent().add(title);
 		if(tag.getDescription()!=null)
 		{
 			Paragraph p = new Paragraph();
 			p.getContent().add(tag.getDescription().trim());
-			section.getParagraph().add(p);
+			section.getContent().add(p);
 		}
 		
 		return section;
@@ -64,8 +67,8 @@ public class TagSectionFactory
 		Section section = new Section();
 		Title title = new Title();
 		title.setValue("Table JSF Elements");
-		section.setTitle(title);
-		section.getTable().add(ttf.create(metatag));
+		section.getContent().add(title);
+		section.getContent().add(ttf.create(metatag));
 		return section;
 	}
 }

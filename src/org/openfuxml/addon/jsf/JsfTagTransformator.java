@@ -17,10 +17,10 @@ import org.jdom.Document;
 import org.jdom.output.Format;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
-import org.openfuxml.addon.jsf.data.jaxb.Section;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 import org.openfuxml.addon.jsf.factory.TagChapterFactory;
 import org.openfuxml.addon.jsf.factory.TagSectionFactory;
+import org.openfuxml.content.Section;
 
 public class JsfTagTransformator
 {
@@ -79,17 +79,21 @@ public class JsfTagTransformator
 	public void transform()
 	{
 		TagChapterFactory chapterFactory = new TagChapterFactory(taglib);
-		TagSectionFactory sectionFactory = new TagSectionFactory(taglib);
+		TagSectionFactory sectionFactory = new TagSectionFactory(taglib,fDocBase);
 		
 		logger.debug("Transforming "+lMetaTag.size());
 		for(Metatag metatag : lMetaTag)
 		{
 			File fSection = new File(outputDir,"section-"+metatag.getTag().getName()+".xml");
 			Section section = sectionFactory.create(metatag);
+			
+//			File fSectionEn = new File(outputDir,"section-"+metatag.getTag().getName()+"-en.xml");
+//			JaxbUtil.save(fSectionEn, section, new JsfNsPrefixMapper(), true);
+			
 			Document doc = JaxbUtil.toDocument(section);
 			doc = JDomUtil.correctNsPrefixes(doc, new JsfNsPrefixMapper());
 			logger.debug("Debug for "+metatag.getTag().getName());
-			InputStream isXML = JDomUtil.toInputStream(doc, Format.getPrettyFormat());
+			InputStream isXML = JDomUtil.toInputStream(doc, Format.getRawFormat());
 			transformSave(isXML, fSection);
 		}
 		
@@ -103,13 +107,6 @@ public class JsfTagTransformator
 	{
 		InputStream isTransformed = XsltUtil.toInputStream(isXML, xslt);
 		JDomUtil.save(isTransformed, f, Format.getRawFormat(),getDocType());
-	}
-	
-	private void save(Document doc, File f)
-	{
-		JDomUtil.save(doc, f, Format.getRawFormat());
-		logMsg="Saved: "+f.getName();
-		if(useLog4j){logger.debug(logMsg);}else{System.out.println(logMsg);}
 	}
 	
 	private DocType getDocType()

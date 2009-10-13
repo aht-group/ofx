@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema targetNamespace="http://www.openfuxml.org/ofx"
-    xmlns="http://www.openfuxml.org/ofx"
+<xsd:schema targetNamespace="http://www.openfuxml.org"
+    xmlns="http://www.openfuxml.org"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
@@ -59,6 +59,23 @@
             </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="listing">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="title" maxOccurs="1"/>
+                <xsd:element ref="raw" maxOccurs="1"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="raw">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="medienobjekt">
         <xsd:complexType>
             <xsd:sequence>
@@ -89,7 +106,7 @@
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="section">
-        <xsd:complexType>
+        <xsd:complexType mixed="true">
             <xsd:sequence>
                 <xsd:element ref="title" maxOccurs="1"/>
                 <xsd:element ref="paragraph" maxOccurs="unbounded"/>

@@ -11,7 +11,7 @@ public class JsfNsPrefixMapper extends NamespacePrefixMapper implements NsPrefix
         if( "http://www.openfuxml.org/jsf".equals(namespaceUri) )
             return "";
          
-        if( "http://www.openfuxml.org/ofx".equals(namespaceUri) )
+        if( "http://www.openfuxml.org".equals(namespaceUri) )
             return "ofx";
             
         return suggestion;
