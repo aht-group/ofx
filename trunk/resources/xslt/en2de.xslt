@@ -6,7 +6,7 @@
 	<xsl:include href="en2de/attributes.xslt"/>
 	<xsl:include href="en2de/table.xslt"/>
 	<xsl:include href="en2de/emphasis.xslt"/>
-	
+		
 	<xsl:output method="xml" version="1.0" encoding="UTF-8"/>
 	
 	<xsl:template match="@*|node()">
