@@ -26,7 +26,8 @@
     <xsd:element name="paragraph">
         <xsd:complexType mixed="true">
             <xsd:sequence>
-                <xsd:element ref="emphasis"/>
+                <xsd:element ref="emphasis" maxOccurs="unbounded"/>
+                <xsd:element ref="reference" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="top" use="required">
                 <xsd:simpleType>
@@ -57,6 +58,11 @@
                     <xsd:attribute name="underline" type="xsd:boolean"/>
                 </xsd:extension>
             </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="reference">
+        <xsd:complexType>
+            <xsd:attribute name="target" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="listing">
@@ -122,6 +128,7 @@
         <xsd:complexType>
             <xsd:simpleContent>
                 <xsd:extension base="xsd:string">
+                    <xsd:attribute name="numbering" type="xsd:boolean"/>
                 </xsd:extension>
             </xsd:simpleContent>
         </xsd:complexType>
