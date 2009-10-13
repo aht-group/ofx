@@ -2,6 +2,7 @@
 	
 	<xsl:include href="de2en/absatz.xslt"/>
 	<xsl:include href="de2en/attribute.xslt"/>
+	<xsl:include href="de2en/emphasis.xslt"/>
 	
 	<xsl:output method="xml" version="1.0" encoding="UTF-8"/>
 	
