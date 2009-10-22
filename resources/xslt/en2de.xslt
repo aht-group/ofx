@@ -2,6 +2,7 @@
 	xmlns:ofx="http://www.openfuxml.org"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	
+	<xsl:include href="en2de/ofxdoc.xslt"/>
 	<xsl:include href="en2de/title.xslt"/>
 	<xsl:include href="en2de/paragraph.xslt"/>
 	<xsl:include href="en2de/attributes.xslt"/>

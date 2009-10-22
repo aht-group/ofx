@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ofxdoc xmlns="http://www.openfuxml.org">
+	<metadata>
+		
+	</metadata>
+	<content>
+		<section>
+			<title>Main</title>
+			<paragraph>a paragraph</paragraph>
+			<section>
+				<title>The second (non external section)</title>
+				<paragraph>Dummy paragraph</paragraph>
+			</section>
+		</section>
+	</content>
+</ofxdoc>
