@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<section xmlns="http://www.openfuxml.org">
+	<title>Main</title>
+    <paragraph>a</paragraph>
+	<section source="exsection1.xml" external="true"/>
+	<section>
+		<title>The second (non external section)</title>
+		<paragraph>Dummy paragraph</paragraph>
+	</section>
+</section>
