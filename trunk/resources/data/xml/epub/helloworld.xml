@@ -4,8 +4,16 @@
 		
 	</metadata>
 	<content>
+		<section id="sec-chapter1">
+			<title>Chapter 1</title>
+			<paragraph>a paragraph</paragraph>
+			<section>
+				<title>The second (non external section)</title>
+				<paragraph>Dummy paragraph</paragraph>
+			</section>
+		</section>
 		<section>
-			<title>Main</title>
+			<title>Chapter 2</title>
 			<paragraph>a paragraph</paragraph>
 			<section>
 				<title>The second (non external section)</title>
