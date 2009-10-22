@@ -41,6 +41,27 @@
             </xsd:attribute> 
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="ofxdoc">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="metadata" maxOccurs="1"/>
+                <xsd:element ref="content" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="metadata">
+        <xsd:complexType>
+            <xsd:sequence>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="content">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="section" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="emphasis">
         <xsd:complexType>
             <xsd:simpleContent>
