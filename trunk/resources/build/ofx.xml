@@ -46,16 +46,26 @@
 			<produces dir="${src.dir}/org/openfuxml/addon/wiki/data/jaxb"><include name="*.java"/></produces>
 		</xjc>
 	    <java classname="com.sun.tools.xjc.XJCFacade"
-	          fork="true" failonerror="true"  maxmemory="128m">
-	         <arg value="-extension"/>
-	    	 <arg value="${xsd.dir}/jsf-taglib.xsd"/>
-	    	 <arg value="-d"/><arg value="${src.dir}"/>
-	    	 <arg value="-b"/><arg value="${xsd.dir}/jsf-taglib.xjb"/>
-	         <classpath>
-	         	<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
+				fork="true" failonerror="true"  maxmemory="128m">
+			<arg value="-extension"/>
+			<arg value="${xsd.dir}/jsf-taglib.xsd"/>
+			<arg value="-d"/><arg value="${src.dir}"/>
+			<arg value="-b"/><arg value="${xsd.dir}/jsf-taglib.xjb"/>
+			<classpath>
+				<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
 	         	<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbxjc.lib}"/>
-	         </classpath>
-	      </java>
+			</classpath>
+		</java>
+		<xjc schema="${xsd.dir}/epub/container.xsd" package="org.openfuxml.addon.epub.data.jaxb.container" destdir="${src.dir}">
+			<arg value="-extension" />
+			<depends dir="${xsd.dir}"><include name="epub/container.xsd"/></depends>
+			<produces dir="${src.dir}/org/openfuxml/addon/epub/data/jaxb/container"><include name="*.java"/></produces>
+		</xjc>
+		<xjc schema="${xsd.dir}/epub/ncx.xsd" package="org.openfuxml.addon.epub.data.jaxb.ncx" destdir="${src.dir}">
+			<arg value="-extension" />
+			<depends dir="${xsd.dir}"><include name="epub/ncx.xsd"/></depends>
+			<produces dir="${src.dir}/org/openfuxml/addon/epub/data/jaxb/ncx"><include name="*.java"/></produces>
+		</xjc>
 		
 <!--	<xjc schema="${xsd.dir}/jsf-taglib.xsd" package="org.openfuxml.addon.jsf.data.jaxb" destdir="${src.dir}">
 			<arg value="-extension" />
