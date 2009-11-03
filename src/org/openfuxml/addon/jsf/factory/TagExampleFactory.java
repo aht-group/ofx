@@ -1,7 +1,6 @@
 package org.openfuxml.addon.jsf.factory;
 
 import java.io.File;
-import java.io.Serializable;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.jsf.JsfTagTransformator;
@@ -13,7 +12,7 @@ import org.openfuxml.content.Title;
 
 public class TagExampleFactory
 {
-	private static Logger logger = Logger.getLogger(JsfTagTransformator.class);
+	static Logger logger = Logger.getLogger(JsfTagTransformator.class);
 	
 	private ProglistFactory factoryProglist;
 	

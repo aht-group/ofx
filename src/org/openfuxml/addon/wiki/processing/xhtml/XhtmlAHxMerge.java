@@ -1,6 +1,5 @@
 package org.openfuxml.addon.wiki.processing.xhtml;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.sf.exlp.util.xml.JDomUtil;

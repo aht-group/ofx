@@ -9,7 +9,6 @@ import javax.xml.bind.Marshaller;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.client.control.OfxClientControl;
-import org.openfuxml.util.config.jaxb.Openfuxml;
 
 public class AbstractJaxbFactory
 {

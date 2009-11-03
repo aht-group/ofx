@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.openfuxml.producer.postprocessors.HtmlPrettyFormatter;
 import org.openfuxml.producer.postprocessors.HtmlTagSubstitutor;
@@ -18,11 +17,10 @@ public class OfxApp
 	static Logger logger = Logger.getLogger(OfxApp.class);
 	
 	public static String version;
-	Configuration config;
 	
 	public OfxApp()
 	{
-		this.config=config;
+
 	}
 	
 	public void start(String args[])
