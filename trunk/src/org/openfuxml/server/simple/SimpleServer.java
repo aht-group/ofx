@@ -3,7 +3,6 @@ package org.openfuxml.server.simple;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.SocketException;
-import java.util.Date;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
@@ -13,7 +12,6 @@ import org.openfuxml.producer.handler.DirectProducer;
 import org.openfuxml.server.AbstractServer;
 
 import de.kisner.util.ConfigLoader;
-import de.kisner.util.HostCheck;
 import de.kisner.util.LoggerInit;
 
 /**

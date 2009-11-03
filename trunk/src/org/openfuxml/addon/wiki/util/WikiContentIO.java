@@ -3,7 +3,6 @@ package org.openfuxml.addon.wiki.util;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -16,10 +15,8 @@ import java.io.StringReader;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 
 import net.sf.exlp.io.StringBufferOutputStream;
-import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
 import org.apache.log4j.Logger;
 import org.jdom.Document;

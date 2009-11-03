@@ -27,8 +27,6 @@ import org.openfuxml.util.config.OfxPathHelper;
 
 import de.kisner.util.architecture.EnvironmentParameter;
 import de.kisner.util.io.spawn.Spawn;
-import de.kisner.util.xml.XmlElementNotFoundException;
-import de.kisner.util.xml.XmlObject;
 
 /**
  * This class encapsulates the production server which produces output documents 

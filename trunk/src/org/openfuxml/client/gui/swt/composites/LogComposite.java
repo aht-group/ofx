@@ -3,8 +3,6 @@
  */
 package org.openfuxml.client.gui.swt.composites;
 
-import javax.naming.InitialContext;
-
 import org.apache.commons.configuration.Configuration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
