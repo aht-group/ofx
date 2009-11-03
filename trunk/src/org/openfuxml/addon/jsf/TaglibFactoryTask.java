@@ -1,9 +1,9 @@
 package org.openfuxml.addon.jsf;
 
 import java.io.File;
-import java.util.List;
 
 import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -22,7 +22,6 @@ import org.openfuxml.addon.jsf.data.jaxb.Renderer;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 
-import de.kisner.util.LoggerInit;
 
 public class TaglibFactoryTask extends Task
 {
