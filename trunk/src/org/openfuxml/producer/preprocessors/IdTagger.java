@@ -83,7 +83,7 @@ public class IdTagger
 		logger.debug("Testing ExternalMerger");
 		
 		File f = new File("resources/data/xml/exmerge/chapter-1.xml");
-		Document doc = JDomUtil.laod(f);
+		Document doc = JDomUtil.load(f);
 		
 		IdTagger idTagger = new IdTagger();
 		idTagger.tag(doc);
