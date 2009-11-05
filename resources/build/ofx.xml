@@ -56,6 +56,17 @@
 	         	<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbxjc.lib}"/>
 			</classpath>
 		</java>
+	    <java classname="com.sun.tools.xjc.XJCFacade"
+				fork="true" failonerror="true"  maxmemory="128m">
+			<arg value="-extension"/>
+			<arg value="${xsd.dir}/jsf-app.xsd"/>
+			<arg value="-d"/><arg value="${src.dir}"/>
+			<arg value="-b"/><arg value="${xsd.dir}/jsf-app.xjb"/>
+			<classpath>
+				<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
+	         	<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbxjc.lib}"/>
+			</classpath>
+		</java>
 		<xjc schema="${xsd.dir}/epub/container.xsd" package="org.openfuxml.addon.epub.data.jaxb.container" destdir="${src.dir}">
 			<arg value="-extension" />
 			<depends dir="${xsd.dir}"><include name="epub/container.xsd"/></depends>
