@@ -27,7 +27,7 @@ public class ExternalMerger
 	public ExternalMerger(File rootFile)
 	{
 		this.rootFile=rootFile;
-		doc = JDomUtil.laod(rootFile);
+		doc = JDomUtil.load(rootFile);
 		try
 		{
 			ns = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
