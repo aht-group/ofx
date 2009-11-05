@@ -2,8 +2,11 @@ package org.openfuxml.addon.jsfapp;
 
 import java.io.File;
 
+import net.sf.exlp.util.xml.JaxbUtil;
+
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
+import org.openfuxml.addon.jsfapp.data.jaxb.Ofxinjections;
 
 import de.kisner.util.LoggerInit;
 
@@ -23,7 +26,11 @@ public class AppInjectionTask extends Task
     	
     	File fHtmlDir = new File(htmlDir);
     	File fJsfDir = new File(jsfDir);
-    	File fInjectionXml = new File(injectionXml);	
+    	Ofxinjections ofxI = (Ofxinjections)JaxbUtil.loadJAXB(injectionXml, Ofxinjections.class);
+    	
+    	AppInjection ai = new AppInjection(ofxI,useLog4j);
+    	ai.inject(fHtmlDir);
+    	
     }
     
     private void checkParameter()
