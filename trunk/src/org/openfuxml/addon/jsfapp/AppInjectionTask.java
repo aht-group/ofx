@@ -28,7 +28,7 @@ public class AppInjectionTask extends Task
     	File fJsfDir = new File(jsfDir);
     	Ofxinjections ofxI = (Ofxinjections)JaxbUtil.loadJAXB(injectionXml, Ofxinjections.class);
     	
-    	AppInjection ai = new AppInjection(ofxI,useLog4j);
+    	AppInjection ai = new AppInjection(ofxI,fJsfDir,useLog4j);
     	ai.inject(fHtmlDir);
     	
     }

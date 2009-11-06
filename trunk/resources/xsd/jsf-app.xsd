@@ -17,6 +17,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="iframe" maxOccurs="1"/>
+                <xsd:element ref="jsf" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
         </xsd:complexType>
@@ -27,6 +28,11 @@
             <xsd:attribute name="width" type="xsd:int"/>
             <xsd:attribute name="height" type="xsd:int"/>
             <xsd:attribute name="style" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="jsf">
+        <xsd:complexType>
+            <xsd:attribute name="jsfile" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>
