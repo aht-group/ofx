@@ -8,7 +8,7 @@ import java.util.List;
 import net.sf.exlp.io.RecursiveFileFinder;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.util.xml.XpathUtil;
+import net.sf.exlp.util.xml.exception.JDomUtilException;
 
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.HiddenFileFilter;
@@ -17,10 +17,14 @@ import org.apache.log4j.Logger;
 import org.apache.tools.ant.Task;
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.Namespace;
 import org.jdom.output.Format;
+import org.jdom.xpath.XPath;
 import org.openfuxml.addon.jsfapp.data.jaxb.Ofxinjection;
 import org.openfuxml.addon.jsfapp.data.jaxb.Ofxinjections;
 import org.openfuxml.addon.jsfapp.factory.JsfJspxFactory;
+import org.openfuxml.addon.jsfapp.factory.NsFactory;
 
 public class AppInjection extends Task
 {	
@@ -57,38 +61,64 @@ public class AppInjection extends Task
 			else{System.err.println(e.getMessage());}
 		}
 		for(File f : htmlFile)
-		{
-			Document docHtml = JDomUtil.load(f,"ISO-8859-1");
-			idsearch:
-			for(Ofxinjection ofxI : ofxIs.getOfxinjection())
+		{	
+			File fJsf = getJsfFile(f);
+			try
 			{
-				List<?> l = XpathUtil.processXPath("//div[@id=\""+ofxI.getId()+"\"]",docHtml);
-				if(l.size()>0)
+				logger.debug(f.getAbsolutePath());
+				Document docJsf = createJsf(JDomUtil.load(f,"ISO-8859-1"));
+				addJsfView(docJsf);
+				
+				if(ofxIs.isSetGenericinjection())
 				{
-					StringBuffer sb = new StringBuffer();
-					Element element = (Element)l.get(0);
-					if(ofxI.isSetIframe())
+					for(Ofxinjection ofxI : ofxIs.getGenericinjection().getOfxinjection())
 					{
-						sb.append("iframe: ");
-						injectIframe(ofxI, element);
-						JDomUtil.save(docHtml, f, Format.getRawFormat(),"ISO-8859-1");
+						genericInjection(ofxI,docJsf);
 					}
-					else if(ofxI.isSetJsf())
-					{
-						sb.append("jsf: ");
-						injectJsf(ofxI, docHtml,f.getParentFile());
-					}
-					sb.append(f.getName());
-					if(useLog4j){logger.debug(sb);}
-					else{System.out.println(sb.toString());}
-					break idsearch;
 				}
+				
+				idsearch:
+				for(Ofxinjection ofxI : ofxIs.getOfxinjection())
+				{
+					try
+					{
+						XPath xpath = XPath.newInstance("//html:div[@id=\""+ofxI.getId()+"\"]");
+						xpath.addNamespace(NsFactory.getNs("html"));
+						Element element = (Element)xpath.selectSingleNode(docJsf);
+						
+						if(element!=null)
+						{
+							StringBuffer sb = new StringBuffer();
+							if(ofxI.isSetIframe())
+							{
+								sb.append("iframe: ");
+								injectIframe(ofxI, element);
+							}
+							else if(ofxI.isSetJsf())
+							{
+								sb.append("jsf: ");
+								injectJsf(ofxI, docJsf);
+							}
+							sb.append(f.getName());
+							if(useLog4j){logger.debug(sb);}
+							else{System.out.println(sb.toString());}
+							break idsearch;
+						}
+					}
+					catch (JDOMException e) {logger.error(e);}
+				}	
+				JDomUtil.save(docJsf, fJsf, Format.getRawFormat(),"ISO-8859-1");
 			}
+			catch (JDomUtilException e)
+			{
+				if(useLog4j){logger.error(e.getMessage());}else{System.err.println(e.getMessage());}
+			}	
 		}
 	}
 	
 	private void injectIframe(Ofxinjection ofxI, Element element)
 	{
+		logger.debug("Injection iframe");
 		Document d = JaxbUtil.toDocument(ofxI.getIframe());
 		Element eIframe = d.getRootElement();
 		eIframe.detach();
@@ -96,27 +126,80 @@ public class AppInjection extends Task
 		element.addContent(eIframe);
 	}
 	
-	private void injectJsf(Ofxinjection ofxI, Document docHtml, File htmlDir)
+	private void injectJsf(Ofxinjection ofxI, Document docJsf)
 	{
-		Document doc = JsfJspxFactory.createDOMjspx();
-		
-		Element rootJsf = doc.getRootElement();
-		Element rootHtml = docHtml.getRootElement();
-		
-		rootHtml.detach();
-		rootJsf.addContent(rootHtml);
-		
-		Element eHtmlLehrinhalt = XpathUtil.processSingleXPath("//div[@id='lehrinhalt']",doc);
-		eHtmlLehrinhalt.removeContent();
-		
-		File fOrigJsf = new File(jsfDir,ofxI.getJsf().getJsfile());
-		Document docOrigJsf = JDomUtil.load(fOrigJsf);
-		Element eJsfLehrinhalt = XpathUtil.processSingleXPath("//div[@id='lehrinhalt']",docOrigJsf);
-		
-		eHtmlLehrinhalt.addContent(eJsfLehrinhalt.cloneContent());
-	
-		File fInjectJsf = new File(htmlDir,ofxI.getId()+".jspx");
-		JDomUtil.save(doc, fInjectJsf, Format.getRawFormat(),"ISO-8859-1");
+		try
+		{
+			XPath xpathNewJsf = XPath.newInstance("//html:div[@id='lehrinhalt']");
+			xpathNewJsf.addNamespace(NsFactory.getNs("html"));
+			
+			Element eNewJsf = (Element)xpathNewJsf.selectSingleNode(docJsf);
+			
+			File fOrigJsf = new File(jsfDir,ofxI.getJsf().getJsfile());
+			Document docOrigJsf = JDomUtil.load(fOrigJsf);
+			
+			XPath xpathOrigJsf = XPath.newInstance("//f:view");
+			xpathOrigJsf.addNamespace(NsFactory.getNs("f"));
+			Element eOrigJsf = (Element)xpathOrigJsf.selectSingleNode(docOrigJsf);
 
+			eNewJsf.removeContent();
+			eNewJsf.addContent(eOrigJsf.cloneContent());			
+		}
+		catch (JDOMException e) {logger.error(e);}
+	}
+	
+	private File getJsfFile(File fHtml)
+	{
+		File dir = fHtml.getParentFile();
+		String name = fHtml.getName();
+		name=name.substring(0, name.lastIndexOf(".html"))+".jsf";
+		File fJsf = new File(dir,name);
+		return fJsf;
+	}
+	
+	private Document createJsf(Document docHtml)
+	{
+		Namespace htmlNs  = Namespace.getNamespace("http://www.w3.org/1999/xhtml");
+		Element html = (Element)docHtml.getRootElement().clone();
+		JDomUtil.setNameSpaceRecursive(html, htmlNs);
+		Document docJsf = JsfJspxFactory.createDOMjspx();
+		docJsf.getRootElement().addContent(html);		
+		return docJsf;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void addJsfView(Document docJsf)
+	{
+		try
+		{
+			XPath xpath = XPath.newInstance("//html:body");
+			for(Namespace ns : NsFactory.getNs("html","jsp")){xpath.addNamespace(ns);}
+			
+			Element eBody = (Element)xpath.selectSingleNode(docJsf);
+			
+			if(eBody!=null)
+			{
+				List<Element> l = eBody.removeContent();
+				Element eView = new Element("view",NsFactory.getNs("f"));
+				eView.setAttribute("locale", ofxIs.getLocale());
+				eView.addContent(l);
+				eBody.addContent(eView);
+			}
+		}
+		catch (JDOMException e) {logger.error(e);}
+	}
+	
+	private void genericInjection(Ofxinjection ofxI, Document docJsf)
+	{
+		try
+		{
+			XPath xpathNewJsf = XPath.newInstance("//html:div[@id='leiste2']");
+			xpathNewJsf.addNamespace(NsFactory.getNs("html"));
+			
+			Element element = (Element)xpathNewJsf.selectSingleNode(docJsf);
+//			if(element!=null){element.removeContent();}
+					
+		}
+		catch (JDOMException e) {logger.error(e);}
 	}
 }

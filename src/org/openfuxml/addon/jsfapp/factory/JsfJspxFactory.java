@@ -8,22 +8,18 @@ public class JsfJspxFactory
 {
 	public static Document createDOMjspx()
 	{
-		Namespace html  = Namespace.getNamespace("http://www.w3.org/1999/xhtml");
+		Namespace html  = Namespace.getNamespace("http://www.w3.org/1999/xhtml");		
 		Namespace jsp   = Namespace.getNamespace("jsp", "http://java.sun.com/JSP/Page");
-		Namespace f     = Namespace.getNamespace("f","http://java.sun.com/jsf/core");
-		Namespace h     = Namespace.getNamespace("h","http://java.sun.com/jsf/html");
-		Namespace a4j   = Namespace.getNamespace("a4j","http://richfaces.org/a4j");
-		Namespace rich  = Namespace.getNamespace("rich","http://richfaces.org/rich");
 		
 		Document doc    = new Document();
 			
 		Element rootElement = new Element("root");
 		rootElement.setNamespace(jsp);
 		rootElement.addNamespaceDeclaration(html);
-		rootElement.addNamespaceDeclaration(f);
-		rootElement.addNamespaceDeclaration(h);
-		rootElement.addNamespaceDeclaration(a4j);
-		rootElement.addNamespaceDeclaration(rich);
+		for(Namespace ns : NsFactory.getNs("f","h","a4j","rich"))
+		{
+			rootElement.addNamespaceDeclaration(ns);
+		}
 		rootElement.setAttribute("version","2.0");
 		
 		Element output = new Element("output", jsp);
