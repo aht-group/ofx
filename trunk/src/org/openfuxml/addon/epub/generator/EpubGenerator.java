@@ -14,11 +14,18 @@ public class EpubGenerator
 	private static Logger logger = Logger.getLogger(ExternalMerger.class);
 	
 	private NcxGenerator ncxGenerator;
+	private MimetypeFactory mimeFactory;
+	private ContainerFactory containerFactory;
+	private OpfFactory opfFactory;
+	
 	private IdTagger idTagger;
 	
-	public EpubGenerator()
+	public EpubGenerator(File targetDir)
 	{
-		ncxGenerator = new NcxGenerator();
+		ncxGenerator = new NcxGenerator(targetDir);
+		mimeFactory = new MimetypeFactory(targetDir);
+		containerFactory = new ContainerFactory(targetDir);
+		opfFactory = new OpfFactory(targetDir);
 		idTagger = new IdTagger();
 	}
 	
@@ -32,6 +39,13 @@ public class EpubGenerator
 		ncxGenerator.create(doc);
 		ncxGenerator.save();
 		
+		containerFactory.create();
+		containerFactory.save();
+		
+		mimeFactory.save();
+		
+		opfFactory.create();
+		opfFactory.save();
 	}
 	
 	public static void main (String[] args) throws Exception
@@ -42,7 +56,8 @@ public class EpubGenerator
 		logger.debug("Testing ExternalMerger");
 		
 		File f = new File("resources/data/xml/epub/helloworld.xml");
-		EpubGenerator epub = new EpubGenerator();
+		File baseDir = new File("dist");
+		EpubGenerator epub = new EpubGenerator(baseDir);
 		epub.process(f);
 	}
 }
