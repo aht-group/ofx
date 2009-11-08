@@ -24,13 +24,13 @@ public class NcxGenerator
 {
 	static Logger logger = Logger.getLogger(ExternalMerger.class);
 	
-	private File rootDir;
+	private File targetDir;
 	private Ncx ncx;
 	private int playOrder;
 	
-	public NcxGenerator()
+	public NcxGenerator(File targetDir)
 	{
-		rootDir = new File("dist");
+		this.targetDir=targetDir;
 		playOrder=1;
 	}
 	
@@ -45,8 +45,7 @@ public class NcxGenerator
 	
 	public void save()
 	{
-		JaxbUtil.debug(ncx);
-		File f = new File(rootDir,"toc.ncx");
+		File f = new File(targetDir,"toc.ncx");
 		JaxbUtil.save(f, ncx, true);
 	}
 	
