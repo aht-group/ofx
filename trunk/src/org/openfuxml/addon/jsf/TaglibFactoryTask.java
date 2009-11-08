@@ -75,7 +75,7 @@ public class TaglibFactoryTask extends Task
     	doc.getRootElement().setAttribute(attVersion);
     	doc.getRootElement().setAttribute(attSchemaLocation);
     	
-    	doc.setRootElement(JDomUtil.unsetNameSpace(doc.getRootElement(),ns));
+    	doc.setRootElement(JDomUtil.setNameSpaceRecursive(doc.getRootElement(),ns));
     	
     	File f = new File(tldFile);
     	JDomUtil.save(doc, f, Format.getPrettyFormat());
@@ -102,7 +102,7 @@ public class TaglibFactoryTask extends Task
     	doc.getRootElement().setAttribute(attVersion);
     	doc.getRootElement().setAttribute(attSchemaLocation);
     	
-    	doc.setRootElement(JDomUtil.unsetNameSpace(doc.getRootElement(),ns));
+    	doc.setRootElement(JDomUtil.setNameSpaceRecursive(doc.getRootElement(),ns));
     	
     	File f = new File(fcFile);
     	JDomUtil.save(doc, f, Format.getPrettyFormat());

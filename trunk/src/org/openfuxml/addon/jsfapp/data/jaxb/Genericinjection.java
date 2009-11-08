@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -30,9 +29,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{http://www.openfuxml.org/jsfapp}ofxinjection" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/jsfapp}genericinjection"/>
  *       &lt;/sequence>
- *       &lt;attribute name="locale" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -42,21 +39,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "ofxinjection",
-    "genericinjection"
+    "ofxinjection"
 })
-@XmlRootElement(name = "ofxinjections")
-public class Ofxinjections
+@XmlRootElement(name = "genericinjection")
+public class Genericinjection
     implements Serializable
 {
 
     private final static long serialVersionUID = 14L;
     @XmlElement(required = true)
     protected List<Ofxinjection> ofxinjection;
-    @XmlElement(required = true)
-    protected Genericinjection genericinjection;
-    @XmlAttribute
-    protected String locale;
 
     /**
      * Gets the value of the ofxinjection property.
@@ -93,62 +85,6 @@ public class Ofxinjections
 
     public void unsetOfxinjection() {
         this.ofxinjection = null;
-    }
-
-    /**
-     * Gets the value of the genericinjection property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Genericinjection }
-     *     
-     */
-    public Genericinjection getGenericinjection() {
-        return genericinjection;
-    }
-
-    /**
-     * Sets the value of the genericinjection property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Genericinjection }
-     *     
-     */
-    public void setGenericinjection(Genericinjection value) {
-        this.genericinjection = value;
-    }
-
-    public boolean isSetGenericinjection() {
-        return (this.genericinjection!= null);
-    }
-
-    /**
-     * Gets the value of the locale property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getLocale() {
-        return locale;
-    }
-
-    /**
-     * Sets the value of the locale property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLocale(String value) {
-        this.locale = value;
-    }
-
-    public boolean isSetLocale() {
-        return (this.locale!= null);
     }
 
 }

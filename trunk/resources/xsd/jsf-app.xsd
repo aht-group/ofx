@@ -10,6 +10,15 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="ofxinjection" maxOccurs="unbounded"/>
+                <xsd:element ref="genericinjection" maxOccurs="1"/>
+            </xsd:sequence>
+            <xsd:attribute name="locale" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="genericinjection">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="ofxinjection" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
