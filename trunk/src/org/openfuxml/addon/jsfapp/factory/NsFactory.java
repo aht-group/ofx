@@ -37,7 +37,7 @@ public class NsFactory
 		return lNs;
 	}
 	
-	public static synchronized Namespace getNs(String x)
+	public static synchronized Namespace getSingelNs(String x)
 	{
 		Namespace ns = null; 
 		if(mNs==null){init();}
