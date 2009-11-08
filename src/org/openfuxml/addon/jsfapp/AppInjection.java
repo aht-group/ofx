@@ -83,7 +83,7 @@ public class AppInjection extends Task
 					try
 					{
 						XPath xpath = XPath.newInstance("//html:div[@id=\""+ofxI.getId()+"\"]");
-						xpath.addNamespace(NsFactory.getNs("html"));
+						for(Namespace ns : NsFactory.getNs("html")){xpath.addNamespace(ns);}
 						Element element = (Element)xpath.selectSingleNode(docJsf);
 						
 						if(element!=null)
@@ -131,7 +131,7 @@ public class AppInjection extends Task
 		try
 		{
 			XPath xpathNewJsf = XPath.newInstance("//html:div[@id='lehrinhalt']");
-			xpathNewJsf.addNamespace(NsFactory.getNs("html"));
+			for(Namespace ns : NsFactory.getNs("html")){xpathNewJsf.addNamespace(ns);}
 			
 			Element eNewJsf = (Element)xpathNewJsf.selectSingleNode(docJsf);
 			
@@ -139,7 +139,7 @@ public class AppInjection extends Task
 			Document docOrigJsf = JDomUtil.load(fOrigJsf);
 			
 			XPath xpathOrigJsf = XPath.newInstance("//f:view");
-			xpathOrigJsf.addNamespace(NsFactory.getNs("f"));
+			for(Namespace ns : NsFactory.getNs("f")){xpathOrigJsf.addNamespace(ns);}
 			Element eOrigJsf = (Element)xpathOrigJsf.selectSingleNode(docOrigJsf);
 
 			eNewJsf.removeContent();
@@ -152,7 +152,7 @@ public class AppInjection extends Task
 	{
 		File dir = fHtml.getParentFile();
 		String name = fHtml.getName();
-		name=name.substring(0, name.lastIndexOf(".html"))+".jsf";
+		name=name.substring(0, name.lastIndexOf(".html"))+".jspx";
 		File fJsf = new File(dir,name);
 		return fJsf;
 	}
@@ -180,7 +180,7 @@ public class AppInjection extends Task
 			if(eBody!=null)
 			{
 				List<Element> l = eBody.removeContent();
-				Element eView = new Element("view",NsFactory.getNs("f"));
+				Element eView = new Element("view",NsFactory.getSingelNs("f"));
 				eView.setAttribute("locale", ofxIs.getLocale());
 				eView.addContent(l);
 				eBody.addContent(eView);
@@ -193,12 +193,22 @@ public class AppInjection extends Task
 	{
 		try
 		{
-			XPath xpathNewJsf = XPath.newInstance("//html:div[@id='leiste2']");
-			xpathNewJsf.addNamespace(NsFactory.getNs("html"));
+			XPath xpathResultJsf = XPath.newInstance("//html:div[@id='navi1']");
+			xpathResultJsf.addNamespace(NsFactory.getSingelNs("html"));
+			Element element = (Element)xpathResultJsf.selectSingleNode(docJsf);
 			
-			Element element = (Element)xpathNewJsf.selectSingleNode(docJsf);
-//			if(element!=null){element.removeContent();}
-					
+			if(element!=null)
+			{
+				element.removeContent();
+				File fOrigJsf = new File(jsfDir,ofxI.getJsf().getJsfile());
+				Document docOrigJsf = JDomUtil.load(fOrigJsf);
+				XPath xpath = XPath.newInstance(ofxI.getXsrc());
+				for(Namespace ns : NsFactory.getNs("h","jsp")){xpath.addNamespace(ns);}
+				
+				Element eMenu = (Element)xpath.selectSingleNode(docOrigJsf);
+				eMenu.detach();
+				element.addContent(eMenu);
+			}
 		}
 		catch (JDOMException e) {logger.error(e);}
 	}

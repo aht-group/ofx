@@ -29,6 +29,7 @@
                 <xsd:element ref="jsf" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:attribute name="xsrc" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="iframe">
