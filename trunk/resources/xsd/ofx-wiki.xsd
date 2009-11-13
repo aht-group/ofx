@@ -42,9 +42,45 @@
     <xsd:element name="ofxchart">
         <xsd:complexType>
             <xsd:sequence>
+                <xsd:element name="title" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:attribute name="label" type="xsd:string"/>
+                        <xsd:attribute name="key" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="x-axis" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:attribute name="label" type="xsd:string"/>
+                        <xsd:attribute name="key" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="y-axis" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:attribute name="label" type="xsd:string"/>
+                        <xsd:attribute name="key" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="colors" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="color" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
                 <xsd:element ref="ofxchartcontainer" maxOccurs="unbounded"/>
             </xsd:sequence>
+            <xsd:attribute name="height" type="xsd:int"/>
+            <xsd:attribute name="width" type="xsd:int"/>
             <xsd:attribute name="type" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="color">
+        <xsd:complexType>
+            <xsd:attribute name="typ" type="xsd:string"/>
+            <xsd:attribute name="r" type="xsd:int"/>
+            <xsd:attribute name="g" type="xsd:int"/>
+            <xsd:attribute name="b" type="xsd:int"/>
+            <xsd:attribute name="a" type="xsd:int"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="ofxgallery">
