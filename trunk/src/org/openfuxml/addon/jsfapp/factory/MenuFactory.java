@@ -17,7 +17,7 @@ import org.openfuxml.addon.jsfapp.data.jaxb.Menuitem;
 
 public class MenuFactory
 {
-	private static Logger logger = Logger.getLogger(MenuFactory.class);
+	static Logger logger = Logger.getLogger(MenuFactory.class);
 			
 	private Menu menu;
 	
@@ -32,7 +32,7 @@ public class MenuFactory
 		JaxbUtil.save(xmlToc, menu, true);
 	}
 	
-	public void parse(File htmlToc)
+	public void parse(File htmlToc, String prefix, String suffix)
 	{
 		logger.debug("Parsing "+htmlToc.getAbsolutePath());
 		Document docToc = JDomUtil.load(htmlToc,"ISO-8859-1");
@@ -56,12 +56,20 @@ public class MenuFactory
 			
 			Document doc = new Document();
 			doc.setRootElement((Element)eToc.clone());
-			parseA(doc);
+			parseA(doc,prefix,suffix);
 		}
 		catch (JDOMException e) {logger.error(e);}
 	}
 	
-	private void parseA(Document doc)
+	public void addToc(String addMenu)
+	{
+		logger.debug("Adding additional Toc");
+		Menu addMemu = (Menu)JaxbUtil.loadJAXB(addMenu, Menu.class);
+		menu.getMenuitem().addAll(addMemu.getMenuitem());
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void parseA(Document doc, String prefix, String suffix)
 	{	
 		try
 		{
@@ -70,9 +78,12 @@ public class MenuFactory
 			logger.debug(l.size());
 			for(Element element : l)
 			{
+				String link = element.getAttributeValue("href").trim();
+				link = addPrefixSuffix(link,prefix,suffix);
+				
 				Menuitem mi = new Menuitem();
 				mi.setLabel(element.getValue().trim());
-				mi.setLink(element.getAttributeValue("href").trim());
+				mi.setLink(link);
 				String c = element.getAttributeValue("class");
 				
 				int level = new Integer(c.substring(c.length()-1, c.length()));
@@ -94,6 +105,7 @@ public class MenuFactory
 		catch (JDOMException e) {logger.error(e);}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void removeElements(String xPath, Element eRoot)
 	{
 		try
@@ -103,5 +115,11 @@ public class MenuFactory
 			for(Element element : l){element.detach();}
 		}
 		catch (JDOMException e) {logger.error(e);}
-	}	
+	}
+	
+	private String addPrefixSuffix(String link, String prefix, String suffix)
+	{
+		link=prefix+link.replace(".html", "."+suffix);
+		return link;
+	}
 }

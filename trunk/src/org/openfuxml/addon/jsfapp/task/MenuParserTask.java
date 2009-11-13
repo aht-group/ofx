@@ -2,6 +2,7 @@ package org.openfuxml.addon.jsfapp.task;
 
 import java.io.File;
 
+import org.apache.log4j.Logger;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.openfuxml.addon.jsfapp.factory.MenuFactory;
@@ -9,14 +10,17 @@ import org.openfuxml.addon.jsfapp.factory.MenuFactory;
 import de.kisner.util.LoggerInit;
 
 public class MenuParserTask extends Task
-{		
-	private String htmlToc,xmlToc;
-	
+{	
+	static Logger logger = Logger.getLogger(MenuFactory.class);
+	private String htmlToc,addToc,xmlToc, prefix, suffix;
+
 	private boolean useLog4j;
 
 	public MenuParserTask()
 	{
 		useLog4j=false;
+		suffix="html";
+		prefix="";
 	}
 	
     public void execute() throws BuildException
@@ -27,7 +31,10 @@ public class MenuParserTask extends Task
     	File fXmlToc = new File(xmlToc);
     	
     	MenuFactory mf = new MenuFactory();
-    	mf.parse(fHtmlToc);
+    	mf.parse(fHtmlToc,prefix,suffix);
+    	
+    	if(addToc!=null){mf.addToc(addToc);}
+    	
     	mf.save(fXmlToc);
     	
     }
@@ -39,12 +46,20 @@ public class MenuParserTask extends Task
     	if(htmlToc==null){throw new BuildException("htmlToc must be specified.");}
     	File fHtmlToc = new File(htmlToc);
     	if(!fHtmlToc.exists()){throw new BuildException(htmlToc+" does not exist.");}
+    	
+    	if(addToc!=null)
+    	{
+    		File fAddToc = new File(addToc);
+        	if(!fAddToc.exists()){throw new BuildException(addToc+" does not exist.");}
+    	}
     }
-    
 
 	public void setUseLog4j(boolean useLog4j) {this.useLog4j = useLog4j;}
 	public void setHtmlToc(String htmlToc) {this.htmlToc = htmlToc;}
 	public void setXmlToc(String xmlToc) {this.xmlToc = xmlToc;}
+	public void setAddToc(String addToc) {this.addToc = addToc;}
+	public void setSuffix(String suffix) {this.suffix = suffix;}
+	public void setPrefix(String prefix) {this.prefix = prefix;}
 	
 	public static void main (String[] args) throws Exception
 	{
@@ -56,6 +71,9 @@ public class MenuParserTask extends Task
 		mpt.setUseLog4j(true);
 		mpt.setHtmlToc(args[0]);
 		mpt.setXmlToc(args[1]);
+		if(args.length==3){mpt.setAddToc(args[2]);}
+		mpt.setSuffix("jsf");
+		mpt.setSuffix("/sigire");
 		mpt.execute();
 	}
 }

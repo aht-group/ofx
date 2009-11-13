@@ -12,6 +12,19 @@
     	     <fileset dir="${lib.dir}/${jaxb.dir}" includes="*.jar"/>
     	  </classpath>
     	</taskdef>
+    	<taskdef name="tagfac" classname="org.openfuxml.addon.jsf.TaglibFactoryTask">
+    	    		<classpath>
+    	    			<fileset dir="${dist.dir}" includes="openFuXML-1.2.3.jar"/>
+    	    			<fileset dir="${lib.dir}/${jdom.dir}" includes="${jdom.lib}"/>
+    	    			<fileset dir="${lib.dir}/${log4j.dir}" includes="${log4j.lib}"/>
+    	    			<fileset dir="${lib.dir}/${exlp.dir}" includes="${exlp.lib}"/>
+    	    			<fileset dir="${lib.dir}/${commonsconfig.dir}" includes="${commonsconfig.lib}"/>
+    	    			<fileset dir="${lib.dir}/${commonslang.dir}" includes="${commonslang.lib}"/>
+    	    			<fileset dir="${lib.dir}/${commonsjxpath.dir}" includes="${commonsjxpath.lib}"/>
+    	    			<fileset dir="${lib.dir}/${commonslogging.dir}" includes="${commonslogging.lib}"/>
+    	    			<fileset dir="${lib.dir}/${commonscollections.dir}" includes="${commonscollections.lib}"/>
+    	    		</classpath>	
+    	    	</taskdef>
     </target>
 	
 </project>

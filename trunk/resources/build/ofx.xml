@@ -101,4 +101,21 @@
         </jar>
 	</target> 
 	
+    <target name="6 - OFX JSF Taglib" depends="1 - Tasks,5 - OFX Release">
+    	<mkdir dir="${build.dir}/META-INF"/>
+    	<tagfac tagConfig="${rsrc.dir}/config/ofx-tld.xml" xPathPrefix="tag"
+				tagBaseDir="${rsrc.dir}/jsf/tld"
+				tldFile="${rsrc.dir}/jsf/tld/ofx.tld"
+    			fcFile="${rsrc.dir}/jsf/tld/faces-config.xml"/>
+		<copy file="${rsrc.dir}/jsf/tld/ofx.tld" todir="${build.dir}/META-INF"/>
+    	<copy file="${rsrc.dir}/jsf/tld/faces-config.xml" todir="${build.dir}/META-INF"/>
+    	<jar destfile="${dist.dir}/ofx-tld-${openfuxml-version}.jar">
+            <fileset dir="${build.dir}/" includes="org/openfuxml/addon/jsf/tld/**/*.class"/>
+    		<fileset dir="${build.dir}/" includes="META-INF/*.*"/>
+			<manifest>
+				<attribute name="Built-By" value="${user.name}"/>
+			</manifest>        	
+        </jar>
+    	<delete dir="${build.dir}/META-INF"/>
+	</target>
 </project>
