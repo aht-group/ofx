@@ -10,6 +10,9 @@
 	<property name="exlp.dir" value="utils/exlp"/><property name="exlp.lib" value="exlp-${exlp-version}.jar" />
 	<property name="commonsconfig.dir" value="utils/commons/config"/><property name="commonsconfig.lib" value="commons-configuration-${commonsconfig-version}.jar" />
 	<property name="commonsio.dir" value="utils/commons/io"/><property name="commonsio.lib" value="commons-io-${commonsio-version}.jar" />
+	<property name="commonsjxpath.dir" value="utils/commons/jxpath"/><property name="commonsjxpath.lib" value="commons-jxpath-${commonsjxpath-version}.jar" />
+	<property name="commonslogging.dir" value="utils/commons/logging"/><property name="commonslogging.lib" value="commons-logging-${commonslogging-version}.jar" />
+	<property name="commonscollections.dir" value="utils/commons/collections"/><property name="commonscollections.lib" value="commons-collections-${commonscollections-version}.jar" />
 	<property name="commonsxmlgraphics.dir" value="utils/commons/xmlgraphics"/><property name="commonsxmlgraphics.lib" value="xmlgraphics-commons-${commonsxmlgraphics-version}.jar" />
 	
 	<!-- GUI -->
@@ -29,13 +32,9 @@
 	<property name="htmlcleaner.dir" value="xml/html/cleaner"/><property name="htmlcleaner.lib" value="htmlcleaner-${htmlcleaner-version}.jar" />
 	
 	<!-- Library Definitions: HTTP -->
-	<property name="jsf.dir" value="net/http/jsf/${jsf-version}"/>
-		<property name="jsf-api.lib" value="jsf-api-${jsf-version}.jar"/>
-		<property name="jsf-impl.lib" value="jsf-impl-${jsf-version}.jar"/>
-	<property name="servlet.dir" value="net/http/servlet"/><property name="servlet.lib" value="servlet-api-${servlet-version}.jar"/>
+	<property name="jsf.dir" value="net/http/jsf/${jsf-version}"/><property name="jsf-api.lib" value="jsf-api-${jsf-version}.jar"/>
 	<property name="jsp.dir" value="net/http/jsp"/><property name="jsp-api.lib" value="jsp-api-${jsp-version}.jar"/>
-	<property name="jstl.dir" value="net/http/jstl"/><property name="jstl.lib" value="jstl-${jstl-version}.jar" />
-	
+		
 	<!-- Library Definitions: Net-->
 	<property name="jsch.dir" value="net/jsch"/><property name="jsch.lib" value="jsch-${jsch-version}.jar"/>
 	<property name="jmdns.dir" value="net/jmdns"/><property name="jmdns.lib" value="jmdns-${jmdns-version}.jar"/>
@@ -57,6 +56,9 @@
 		<echo level="info">           ${exlp.dir}/${exlp.lib}</echo>
 		<echo level="info">           ${commonsconfig.dir}/${commonsconfig.lib}</echo>
 		<echo level="info">           ${commonsio.dir}/${commonsio.lib}</echo>
+		<echo level="info">           ${commonsjxpath.dir}/${commonsjxpath.lib}</echo>
+		<echo level="info">           ${commonslogging.dir}/${commonslogging.lib}</echo>
+		<echo level="info">           ${commonscollections.dir}/${commonscollections.lib}</echo>
 		<echo level="info">           ${commonsxmlgraphics.dir}/${commonsxmlgraphics.lib}</echo>
 		<echo level="info">   XML   : ${jaxb.dir}/${jaxbapi.lib}</echo>
 		<echo level="info">           ${jaxb.dir}/${jaxbimpl.lib}</echo>
@@ -70,11 +72,8 @@
 		<echo level="info">           ${mail.dir}/${mail.lib}</echo>
 		<echo level="info">   GUI   : ${jfreechart.dir}/${jfreechart.lib}</echo>
 		<echo level="info">           ${jcommon.dir}/${jcommon.lib}</echo>
-		<echo level="info">   HTML  : ${servlet.dir}/${servlet.lib}</echo>
-		<echo level="info">           ${jsp.dir}/${jsp-api.lib}</echo>
-		<echo level="info">           ${jstl.dir}/${jstl.lib}</echo>
+		<echo level="info">   HTML  : ${jsp.dir}/${jsp-api.lib}</echo>
 		<echo level="info">           ${jsf.dir}/${jsf-api.lib}</echo>
-		<echo level="info">           ${jsf.dir}/${jsf-impl.lib}</echo>
 		<echo level="info">   JBoss : ${jboss.dir}/${jboss-ejb3.lib}</echo>
 		<echo level="info">           ${jboss.dir}/${jboss-javaee.lib}</echo>
 		<echo level="info">           ${jboss.dir}/${jboss-stax.lib}</echo>
