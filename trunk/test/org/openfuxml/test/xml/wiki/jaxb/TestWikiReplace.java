@@ -3,7 +3,7 @@ package org.openfuxml.test.xml.wiki.jaxb;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.log4j.Logger;
-import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
+import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 
 import de.kisner.util.LoggerInit;
@@ -25,7 +25,7 @@ public class TestWikiReplace
 		wikireplace.setTo("b");
 		wikireplace.setDescription("Description");
 		
-		Wikicontainer container = new Wikicontainer();
+		Ofx container = new Ofx();
 		container.getWikireplace().add(wikireplace);
 		
 		JaxbUtil.debug(container);

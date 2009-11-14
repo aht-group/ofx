@@ -4,7 +4,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.wiki.data.jaxb.ObjectFactory;
-import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
+import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 
 import de.kisner.util.LoggerInit;
@@ -29,7 +29,7 @@ public class TestWikiInjection
 		wikiinjection.setWikicontent(of.createWikiinjectionWikicontent());
 		wikiinjection.getWikicontent().setValue("vvvalluuuuuu");
 		
-		Wikicontainer container = new Wikicontainer();
+		Ofx container = new Ofx();
 		container.getWikiinjection().add(wikiinjection);
 		
 		JaxbUtil.debug(container);
