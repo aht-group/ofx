@@ -8,6 +8,7 @@
 		<pathelement location="${lib.dir}/${commonslang.dir}/${commonslang.lib}"/>
 		<pathelement location="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}"/>
 		<pathelement location="${lib.dir}/${exlp.dir}/${exlp.lib}"/>
+		<pathelement location="${lib.dir}/${ahtutils.dir}/${ahtutils.lib}"/>
 		<pathelement location="${lib.dir}/${commonsconfig.dir}/${commonsconfig.lib}"/>
 		<pathelement location="${lib.dir}/${commonsio.dir}/${commonsio.lib}"/>
 		<pathelement location="${lib.dir}/${commonsxmlgraphics.dir}/${commonsxmlgraphics.lib}"/>
