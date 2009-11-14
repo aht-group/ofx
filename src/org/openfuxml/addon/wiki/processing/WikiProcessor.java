@@ -15,7 +15,7 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.wiki.data.jaxb.ObjectFactory;
-import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
+import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
@@ -61,12 +61,12 @@ public class WikiProcessor
 	
 	private void loadWikiContainer(String xmlFile,MultiResourceLoader mrl)
 	{
-		Wikicontainer container=null;
+		Ofx container=null;
 		try
 		{
-			JAXBContext jc = JAXBContext.newInstance(Wikicontainer.class);
+			JAXBContext jc = JAXBContext.newInstance(Ofx.class);
 			Unmarshaller u = jc.createUnmarshaller();
-			container = (Wikicontainer)u.unmarshal(mrl.searchIs(xmlFile));
+			container = (Ofx)u.unmarshal(mrl.searchIs(xmlFile));
 			wikiReplaces.addAll(container.getWikireplace());
 			for(Wikiinjection wikiInjection : container.getWikiinjection())
 			{

@@ -7,7 +7,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
-import org.openfuxml.addon.wiki.data.jaxb.Wikicontainer;
+import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 import org.openfuxml.addon.wiki.processing.xhtml.OfxPushUp;
@@ -31,7 +31,7 @@ public class XhtmlProcessor
 		for(int i=1;i<=numberTranslations;i++)
 		{
 			String xmlFile = config.getString("xhtmlprocessor/file["+i+"]");
-			Wikicontainer container = (Wikicontainer)JaxbUtil.loadJAXB(xmlFile, Wikicontainer.class);
+			Ofx container = (Ofx)JaxbUtil.loadJAXB(xmlFile, Ofx.class);
 			wikiInjections.addAll(container.getWikiinjection());
 			xhtmlReplaces.addAll(container.getWikireplace());
 		}
