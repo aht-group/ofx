@@ -74,6 +74,12 @@
                         <xsd:attribute name="width" type="xsd:int"/>
                     </xsd:complexType>
                 </xsd:element>
+                <xsd:element name="grid" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:attribute name="range" type="xsd:boolean"/>
+                        <xsd:attribute name="domain" type="xsd:boolean"/>
+                    </xsd:complexType>
+                </xsd:element>
                 <xsd:element ref="ofxchartcontainer" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="type" type="xsd:string"/>
