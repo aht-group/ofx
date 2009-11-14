@@ -68,10 +68,14 @@
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
+                <xsd:element name="size" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:attribute name="height" type="xsd:int"/>
+                        <xsd:attribute name="width" type="xsd:int"/>
+                    </xsd:complexType>
+                </xsd:element>
                 <xsd:element ref="ofxchartcontainer" maxOccurs="unbounded"/>
             </xsd:sequence>
-            <xsd:attribute name="height" type="xsd:int"/>
-            <xsd:attribute name="width" type="xsd:int"/>
             <xsd:attribute name="type" type="xsd:string"/>
             <xsd:attribute name="id" type="xsd:string"/>
             <xsd:attribute name="legend" type="xsd:boolean"/>
