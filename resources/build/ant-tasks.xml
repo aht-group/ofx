@@ -14,7 +14,7 @@
     	</taskdef>
     	<taskdef name="tagfac" classname="org.openfuxml.addon.jsf.TaglibFactoryTask">
     	    		<classpath>
-    	    			<fileset dir="${dist.dir}" includes="openFuXML-1.2.3.jar"/>
+    	    			<fileset dir="${dist.dir}" includes="openFuXML-1.2.4.jar"/>
     	    			<fileset dir="${lib.dir}/${jdom.dir}" includes="${jdom.lib}"/>
     	    			<fileset dir="${lib.dir}/${log4j.dir}" includes="${log4j.lib}"/>
     	    			<fileset dir="${lib.dir}/${exlp.dir}" includes="${exlp.lib}"/>
