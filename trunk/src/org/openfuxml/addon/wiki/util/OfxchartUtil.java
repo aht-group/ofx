@@ -27,6 +27,16 @@ public class OfxchartUtil
 			String label = translation.translate(ofxchart.getXAxis().getKey(),lang);
 			ofxchart.getXAxis().setLabel(label);
 		}
+		if(ofxchart.isSetYAxis() && ofxchart.getYAxis().isSetKey())
+		{
+			String label = translation.translate(ofxchart.getYAxis().getKey(),lang);
+			ofxchart.getYAxis().setLabel(label);
+		}
+		if(ofxchart.isSetTitle() && ofxchart.getTitle().isSetKey())
+		{
+			String label = translation.translate(ofxchart.getTitle().getKey(),lang);
+			ofxchart.getTitle().setLabel(label);
+		}
 		return ofxchart;
 	}
 }
