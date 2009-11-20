@@ -53,6 +53,7 @@
                     <xsd:complexType>
                         <xsd:attribute name="label" type="xsd:string"/>
                         <xsd:attribute name="key" type="xsd:string"/>
+                        <xsd:attribute name="dateformat" type="xsd:string"/>
                     </xsd:complexType>
                 </xsd:element>
                 <xsd:element name="y-axis" maxOccurs="1">
