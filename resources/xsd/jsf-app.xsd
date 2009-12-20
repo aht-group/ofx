@@ -59,9 +59,11 @@
             <xsd:sequence>
                 <xsd:element ref="menuitem" maxOccurs="unbounded"/>
             </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:int"/>
             <xsd:attribute name="label" type="xsd:string"/>
             <xsd:attribute name="type" type="xsd:string"/>
             <xsd:attribute name="link" type="xsd:string"/>
+            <xsd:attribute name="auth" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>
