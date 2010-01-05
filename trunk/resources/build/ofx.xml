@@ -26,6 +26,7 @@
     </target>
 	
 	<target name="3 - compile" depends="2 - init" description="Compile the source">
+		<echo level="info">Compiling with ${java-version}</echo>
 		<javac	srcdir="${src.dir}"
 				destdir="${build.dir}"
 				debug="true"
@@ -33,6 +34,7 @@
 				deprecation="on"
 				optimize="on"
 				encoding="UTF-8"
+				target="${java-version}"
 				classpathref="classpath">
 			<include name="org/openfuxml/**"/>
 		</javac>
