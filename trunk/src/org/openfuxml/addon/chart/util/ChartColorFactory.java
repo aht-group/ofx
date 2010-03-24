@@ -6,7 +6,8 @@ import org.openfuxml.addon.chart.jaxb.Chart;
 
 public class ChartColorFactory
 {
-	public static enum Area{backgroundChart}
+	public static enum Area{backgroundChart,backgroundPlot,
+							gridRange,gridDomain}
 	
 	public static synchronized Color createColor(Chart ofxChart, Area area)
 	{
@@ -40,6 +41,9 @@ public class ChartColorFactory
 		switch(area)
 		{
 			case backgroundChart: 	result=Color.WHITE;break;
+			case backgroundPlot: 	result=Color.GRAY;break;
+			case gridRange: 		result=Color.LIGHT_GRAY;break;
+			case gridDomain: 		result=Color.LIGHT_GRAY;break;
 			default: 				result=Color.BLACK;
 		}
 		return result;
