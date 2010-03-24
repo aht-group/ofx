@@ -48,10 +48,17 @@ public class TimeSeriesChartRenderer implements OfxChartRenderer
         
         //Colors
 	    chart.setBackgroundPaint(ChartColorFactory.createColor(ofxChart, ChartColorFactory.Area.backgroundChart));
-//	    plot.setBackgroundPaint(ChartColorFactory.createColor(ofxChart, "plot-background", Color.WHITE));
-//	    plot.setRangeGridlinePaint(ChartColorFactory.createColor(ofxChart, "range-grid", Color.LIGHT_GRAY));
-//	    plot.setDomainGridlinePaint(ChartColorFactory.createColor(ofxChart, "domain-grid", Color.LIGHT_GRAY));
-        
+	    plot.setBackgroundPaint(ChartColorFactory.createColor(ofxChart, ChartColorFactory.Area.backgroundPlot));
+	    plot.setRangeGridlinePaint(ChartColorFactory.createColor(ofxChart, ChartColorFactory.Area.gridRange));
+	    plot.setDomainGridlinePaint(ChartColorFactory.createColor(ofxChart, ChartColorFactory.Area.gridDomain));
+	    
+	    //Grids
+	    if(ofxChart.isSetGrid())
+	    {
+		    Chart.Grid grid = ofxChart.getGrid();
+		    if(grid.isSetDomain()){plot.setDomainGridlinesVisible(grid.isDomain());}
+		    if(grid.isSetRange()){plot.setRangeGridlinesVisible(grid.isRange());}
+	    }
         return chart;
 	}
 	

@@ -16,6 +16,7 @@ import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.jaxb.Charttype;
 import org.openfuxml.addon.chart.jaxb.Container;
 import org.openfuxml.addon.chart.jaxb.Data;
+import org.openfuxml.addon.chart.jaxb.Chart.Grid;
 import org.openfuxml.addon.chart.renderer.OFxChartRenderControl;
 import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
@@ -34,9 +35,18 @@ public class TestTimeBarRenderer
 		chart.setLegend(true);
 		
 		chart.setCharttype(getType());
+		chart.setGrid(getGrid());
 		
 		chart.getContainer().add(getX("a"));
 		return chart;
+	}
+	
+	private Chart.Grid getGrid()
+	{
+		Chart.Grid grid = new Chart.Grid();
+		grid.setDomain(false);
+		grid.setRange(false);
+		return grid;
 	}
 	
 	private Charttype getType()
