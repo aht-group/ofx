@@ -40,58 +40,20 @@
 		</javac>
 	</target>
 	
-	<target name="4 - JAXB Class generation" depends="1 - Tasks" description="Compile the source">
-		<echo level="info">Creating JAXB Configuration Class</echo>
-		<xjc schema="${xsd.dir}/ofx-wiki.xsd" package="org.openfuxml.addon.wiki.data.jaxb" destdir="${src.dir}">
-			<arg value="-extension" />
-			<depends dir="${xsd.dir}"><include name="ofx-wiki.xsd"/></depends>
-			<produces dir="${src.dir}/org/openfuxml/addon/wiki/data/jaxb"><include name="*.java"/></produces>
-		</xjc>
-	    <java classname="com.sun.tools.xjc.XJCFacade"
+	<target name="4 - JAXB Class generation" description="Compile the source">
+		<echo level="info">Creating JAXB Configuration Class</echo>		
+		<java classname="com.sun.tools.xjc.XJCFacade"
 				fork="true" failonerror="true"  maxmemory="128m">
 			<arg value="-extension"/>
-			<arg value="${xsd.dir}/jsf-taglib.xsd"/>
+			<arg value="${xsd.dir}/ofx.xsd"/>
 			<arg value="-d"/><arg value="${src.dir}"/>
-			<arg value="-b"/><arg value="${xsd.dir}/jsf-taglib.xjb"/>
+			<arg value="-b"/><arg value="${xsd.dir}/ofx.xjb"/>
 			<classpath>
 				<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
 	         	<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbxjc.lib}"/>
 			</classpath>
 		</java>
-	    <java classname="com.sun.tools.xjc.XJCFacade"
-				fork="true" failonerror="true"  maxmemory="128m">
-			<arg value="-extension"/>
-			<arg value="${xsd.dir}/jsf-app.xsd"/>
-			<arg value="-d"/><arg value="${src.dir}"/>
-			<arg value="-b"/><arg value="${xsd.dir}/jsf-app.xjb"/>
-			<classpath>
-				<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
-	         	<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbxjc.lib}"/>
-			</classpath>
-		</java>
-		<xjc schema="${xsd.dir}/epub/container.xsd" package="org.openfuxml.addon.epub.data.jaxb.container" destdir="${src.dir}">
-			<arg value="-extension" />
-			<depends dir="${xsd.dir}"><include name="epub/container.xsd"/></depends>
-			<produces dir="${src.dir}/org/openfuxml/addon/epub/data/jaxb/container"><include name="*.java"/></produces>
-		</xjc>
-		<xjc schema="${xsd.dir}/epub/ncx.xsd" package="org.openfuxml.addon.epub.data.jaxb.ncx" destdir="${src.dir}">
-			<arg value="-extension" />
-			<depends dir="${xsd.dir}"><include name="epub/ncx.xsd"/></depends>
-			<produces dir="${src.dir}/org/openfuxml/addon/epub/data/jaxb/ncx"><include name="*.java"/></produces>
-		</xjc>
-		
-<!--	<xjc schema="${xsd.dir}/jsf-taglib.xsd" package="org.openfuxml.addon.jsf.data.jaxb" destdir="${src.dir}">
-			<arg value="-extension" />
-			<depends dir="${xsd.dir}"><include name="jsf-taglib.xsd"/></depends>
-			<produces dir="${src.dir}/org/openfuxml/addon/jsf/data/jaxb"><include name="*.java"/></produces>
-		</xjc>
-		<xjc schema="${xsd.dir}/ofx.xsd" package="org.openfuxml.content" destdir="${src.dir}">
-			<arg value="-extension" />
-			<jvmarg value="-Djava.endorsed.dirs=${lib.dir}/${jaxb.dir}" />
-			<depends dir="${xsd.dir}"><include name="ofx.xsd"/></depends>
-			<produces dir="${src.dir}/org/openfuxml/content"><include name="*.java"/></produces>
-		</xjc>
--->	</target>
+	</target>
 	
 	<target name="5 - OFX Release" depends="3 - compile">
 		<echo>Create ofx lib: openFuXML-${openfuxml-version}.jar</echo>

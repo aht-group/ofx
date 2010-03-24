@@ -5,13 +5,12 @@
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
     jaxb:extensionBindingPrefixes="xjc" jaxb:version="2.0">
+    <xsd:import namespace="http://www.openfuxml.org/chart" schemaLocation="ofx-chart.xsd"/>
     <xsd:annotation>
         <xsd:appinfo>
             <jaxb:globalBindings generateIsSetMethod="true">
                 <xjc:serializable uid="14"/>
-                <jaxb:javaType name="java.util.Calendar" xmlType="xsd:date"
-                    parseMethod="javax.xml.bind.DatatypeConverter.parseDate"
-                    printMethod="javax.xml.bind.DatatypeConverter.printDate"/>
+                <jaxb:javaType name="java.util.Calendar" xmlType="xsd:date" parseMethod="javax.xml.bind.DatatypeConverter.parseDate" printMethod="javax.xml.bind.DatatypeConverter.printDate"/>
             </jaxb:globalBindings>
         </xsd:appinfo>
     </xsd:annotation>
