@@ -20,10 +20,11 @@ import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.jaxb.Container;
 import org.openfuxml.addon.chart.jaxb.Data;
 import org.openfuxml.addon.chart.jaxb.Charttype.Timebar;
-import org.openfuxml.addon.chart.util.ChartColorFactory;
+import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
+import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
 
-public class TimeBarRenderer implements OfxChartRenderer
+public class TimeBarRenderer extends XYPlotRenderer implements OfxChartRenderer
 {
 	static Logger logger = Logger.getLogger(TimeBarRenderer.class);
 	
@@ -34,8 +35,9 @@ public class TimeBarRenderer implements OfxChartRenderer
 	
 	public JFreeChart render(Chart ofxChart)
 	{
+		this.ofxChart=ofxChart;
 		Timebar timebar = ofxChart.getCharttype().getTimebar();
-        JFreeChart chart = ChartFactory.createXYBarChart(
+        chart = ChartFactory.createXYBarChart(
         	ChartLabelResolver.getTitle(ofxChart), ChartLabelResolver.getXaxis(ofxChart),
             true,
             ChartLabelResolver.getYaxis(ofxChart),                        // range axis label
@@ -46,22 +48,11 @@ public class TimeBarRenderer implements OfxChartRenderer
             false
         );
 
-        XYPlot plot = (XYPlot) chart.getPlot();
         
-        //Colors
-	    chart.setBackgroundPaint(ChartColorFactory.createColor(ofxChart, ChartColorFactory.Area.backgroundChart));
-	    plot.setBackgroundPaint(ChartColorFactory.createColor(ofxChart, ChartColorFactory.Area.backgroundPlot));
-	    plot.setRangeGridlinePaint(ChartColorFactory.createColor(ofxChart, ChartColorFactory.Area.gridRange));
-	    plot.setDomainGridlinePaint(ChartColorFactory.createColor(ofxChart, ChartColorFactory.Area.gridDomain));
-	    
-	    //Grids
-	    if(ofxChart.isSetGrid())
-	    {
-		    Chart.Grid grid = ofxChart.getGrid();
-		    if(grid.isSetDomain()){plot.setDomainGridlinesVisible(grid.isDomain());}
-		    if(grid.isSetRange()){plot.setRangeGridlinesVisible(grid.isRange());}
-	    }
-	    
+        setColors();
+        setGrid();
+        
+        XYPlot plot = (XYPlot) chart.getPlot();
         ClusteredXYBarRenderer renderer = new ClusteredXYBarRenderer(0.0, false);
         
         if(timebar.isSetShadow()){renderer.setShadowVisible(timebar.isShadow());}

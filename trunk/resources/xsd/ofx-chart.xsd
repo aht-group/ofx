@@ -45,7 +45,8 @@
                 </xsd:element>
                 <xsd:element ref="container" maxOccurs="unbounded"/>
             </xsd:sequence>
-            <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:attribute name="id" type="xsd:int"/>
+            <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="legend" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>

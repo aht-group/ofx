@@ -12,11 +12,11 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.apache.log4j.Logger;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.openfuxml.addon.chart.OFxChartRenderControl;
 import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.jaxb.Charttype;
 import org.openfuxml.addon.chart.jaxb.Container;
 import org.openfuxml.addon.chart.jaxb.Data;
-import org.openfuxml.addon.chart.renderer.OFxChartRenderControl;
 import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class TestOfxBarChartRenderer
