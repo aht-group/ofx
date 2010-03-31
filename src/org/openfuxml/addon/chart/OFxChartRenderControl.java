@@ -1,4 +1,4 @@
-package org.openfuxml.addon.chart.renderer;
+package org.openfuxml.addon.chart;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
@@ -6,6 +6,10 @@ import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.jaxb.Chart;
+import org.openfuxml.addon.chart.renderer.BarChartRenderer;
+import org.openfuxml.addon.chart.renderer.TimeBarRenderer;
+import org.openfuxml.addon.chart.renderer.TimeSeriesChartRenderer;
+import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 
 public class OFxChartRenderControl
