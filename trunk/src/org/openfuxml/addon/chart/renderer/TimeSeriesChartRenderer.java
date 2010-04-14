@@ -14,11 +14,11 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.jaxb.Container;
 import org.openfuxml.addon.chart.jaxb.Data;
-import org.openfuxml.addon.chart.renderer.generic.AbstractChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
+import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
 
-public class TimeSeriesChartRenderer extends AbstractChartRenderer implements OfxChartRenderer
+public class TimeSeriesChartRenderer extends XYPlotRenderer implements OfxChartRenderer
 {
 	static Logger logger = Logger.getLogger(TimeSeriesChartRenderer.class);
 	
@@ -29,6 +29,7 @@ public class TimeSeriesChartRenderer extends AbstractChartRenderer implements Of
 	
 	public JFreeChart render(Chart ofxChart)
 	{
+		this.ofxChart=ofxChart;
         chart = ChartFactory.createTimeSeriesChart(
         		ChartLabelResolver.getTitle(ofxChart), ChartLabelResolver.getXaxis(ofxChart),ChartLabelResolver.getYaxis(ofxChart),
         		createDataset(ofxChart.getContainer()),

@@ -15,17 +15,16 @@ import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.OFxChartRenderControl;
 import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.jaxb.Charttype;
-import org.openfuxml.addon.chart.jaxb.Color;
 import org.openfuxml.addon.chart.jaxb.Container;
 import org.openfuxml.addon.chart.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
-public class TestOfxTimeSeriesChartRenderer
+public class TestTimeSeriesChartRenderer
 {
-	static Logger logger = Logger.getLogger(TestOfxTimeSeriesChartRenderer.class);
+	static Logger logger = Logger.getLogger(TestTimeSeriesChartRenderer.class);
 	
-	public TestOfxTimeSeriesChartRenderer()
+	public TestTimeSeriesChartRenderer()
 	{
 		
 	}
@@ -81,7 +80,7 @@ public class TestOfxTimeSeriesChartRenderer
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
 		
-		TestOfxTimeSeriesChartRenderer test = new TestOfxTimeSeriesChartRenderer();
+		TestTimeSeriesChartRenderer test = new TestTimeSeriesChartRenderer();
 		Chart chart = test.getTimeSeries();
 		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
 			
