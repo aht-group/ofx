@@ -174,10 +174,17 @@ public class DirectProducer extends AbstractProducer implements Producer
 		logger.debug("Ant Home:" + sysprops.getProperty("ant.home"));
 		
 		StringBuffer sbCmd = new StringBuffer(); 
+		/* For working correctly with maven, this comand has changed.
+		
 		sbCmd.append("java ");
 		sbCmd.append(" -Dant.home="+sysprops.getProperty("ant.home"));
 		sbCmd.append(" org.apache.tools.ant.Main ");
 		sbCmd.append("-buildfile "	+ buildfile);
+		*/
+		sbCmd.append("java ");
+		sbCmd.append(" -jar dependency/ant-launcher-1.7.1.jar ");
+		sbCmd.append("-buildfile "	+ buildfile);
+		
 		sbCmd.append(" "+ sbParameters.toString()+ " ");
 		switch (invokeType)
 		{
