@@ -43,7 +43,7 @@
 		            <manifest>
 		              <addClasspath>true</addClasspath>
 		              <classpathPrefix>dependency/</classpathPrefix>
-		              <mainClass>org.openfuxml.client.gui.simple.Client</mainClass>
+		              <mainClass>org.openfuxml.server.simple.SimpleServer</mainClass>
 		            </manifest>
 		          </archive>
 		        </configuration>
@@ -195,13 +195,8 @@
 	</dependency>
 	<dependency>
 		<groupId>ofx</groupId>
-		<artifactId>swt-linux</artifactId>
-		<version>3.5M6</version>	
-	</dependency>
-	<dependency>
-		<groupId>ofx</groupId>
-		<artifactId>swt-osx</artifactId>
-		<version>3.5M6</version>	
+		<artifactId>swt-win</artifactId>
+		<version>3.6M6</version>	
 	</dependency>
 	<dependency>
 		<groupId>ofx</groupId>
@@ -213,11 +208,13 @@
 		  <artifactId>ejb-api</artifactId>
 		  <version>3.0</version>
 	</dependency>
+	<!-- 
 	<dependency>
 		<groupId>org.eclipse.swt</groupId>
 		<artifactId>org.eclipse.swt</artifactId>
 		<version>3.2.0-v3232o</version>	
 	</dependency>
+	 -->
 	<dependency>
 		<groupId>javax.faces</groupId>
 		<artifactId>jsf-api</artifactId>
