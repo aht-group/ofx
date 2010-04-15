@@ -23,8 +23,21 @@
       <includes>
         <include>config/log4j.xml</include>
         <include>properties/ant.properties</include>
+        <include>installer/license.html</include>
+        <include>images/**/*.*</include>
+        <include>config/**/*.*</include>
+        <include>repository/**/*.*</include>
       </includes>
       <outputDirectory>/resources</outputDirectory>
+    </fileSet>
+    <fileSet>
+      <directory>resources/build/maven</directory>
+      <includes>
+        <include>install.xml</include>
+        <include>openFuXML.xml</include>
+        <include>log4j.xml</include>
+      </includes>
+      <outputDirectory>/</outputDirectory>
     </fileSet>
   </fileSets>
   <files>
