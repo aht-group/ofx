@@ -61,8 +61,10 @@ public class OfxClientControl implements OfxGuiAction
 		htDiscoveredEntities = new Hashtable<String, ProducibleEntities>();
 		htSelectedOptions = new Hashtable<String,Hashtable<String,Option>>();
 		
-		DummyServer server = new DummyServer(config);
-		producer = new DirectProducer(config,server.getEnvParameter());
+		initProducer();
+		
+		//DummyServer server = new DummyServer(config);
+		//producer = new DirectProducer(config,server.getEnvParameter());
 		try {producer.getAvailableApplications();}
 		catch (ProductionSystemException e) {logger.error(e);}
 		catch (ProductionHandlerException e) {logger.error(e);}
