@@ -220,7 +220,7 @@
 	</target>
 	
     <target name="00 - TaskDef" description="Task definition">
-    	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+    	<!-- <xtaskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
     	  <classpath>
     	    <fileset dir="${lib.dir}/${jaxb.dir}" includes="*.jar"/>
     	  </classpath>
@@ -231,10 +231,10 @@
     	    <fileset dir="${lib.dir}/${webdavsync.dir}" includes="${webdavsync.lib}"/>
     	  </classpath>
     	</taskdef> 
-    	
+    	-->
     	
     	    	
-    	<taskdef name="izpack" classpath="${lib.dir}/utils/izpack/izpack-4.2.1.jar" classname="com.izforge.izpack.ant.IzPackTask"/>
+    	<taskdef name="izpack" classpath="${lib.dir}/izpack-standalone-compiler-4.2.1.jar" classname="com.izforge.izpack.ant.IzPackTask"/>
     	
     </target>
 	
@@ -939,5 +939,22 @@
 		    </artifact:dependencies>
 		
 		</target>
+		
+		
+		
+		<target name="getMavenAndIzPackLibs" description="Fetch Maven library - needed only the first time.">
+		  <get
+		    src="http://www.apache.org/dist/maven/binaries/maven-ant-tasks-2.1.0.jar"
+		    dest="${lib.dir}/maven-ant-tasks-2.1.0.jar"
+		    verbose="true"
+		    usetimestamp="true"/>
+		     <get
+		    src="http://mirrors.ibiblio.org/pub/mirrors/maven2/org/codehaus/izpack/izpack-standalone-compiler/4.2.1/izpack-standalone-compiler-4.2.1.jar"
+		    dest="${lib.dir}/izpack-standalone-compiler-4.2.1.jar"
+		    verbose="true"
+		    usetimestamp="true"/>
+		</target>
+		
+		
 	
 </project>
