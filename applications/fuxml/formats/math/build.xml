@@ -99,13 +99,21 @@
 		<echo message="copy stylefiles"/>
 		<copy todir="${math.dir}">
 			<fileset dir="${xsltemp.dir}/latexpdf/latex" includes="*"/>
-			<fileset dir="${xsltemp.dir}/math/ht4t_files" includes="tex4ht_fuxml.env"/>
 		</copy>
+		<condition property="isWindows">
+ 			<os family="windows" />
+ 		</condition>
+ 		<condition property="isUnix">
+ 			<os family="unix" />
+ 		</condition>
+		<antcall target="copyTex4htConfig"/>
+		
 		<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 		<echo message="Generation of math images"/>
 		<!-- Make binary files executable after cvs checkout -->
 		<chmod dir="${xsltemp.dir}/math/ht4t_files" perm="+x" includes="*"/>
 		<!-- mount parameters (rw) may not allow script to be executed from mounted drive -->
+		
 		<exec executable="${xsltemp.dir}/math/ht4t_files/htlatex" dir="${math.dir}" failonerror="true" vmlauncher="false" osfamily="unix">
 			<arg value="${masterfile.plain}.tex"/>
 		</exec>
@@ -121,6 +129,16 @@
 			<fileset dir="${html.dir}/math" excludes="*.gif"/>
 		</delete-->
 	</target>
+	<target name="copyTex4htConfig" depends="copyWinEnv,copyUnixEnv">
+	</target>
+	
+	<target name="copyWinEnv" if="isWindows">
+		<copy file="${xsltemp.dir}/math/ht4t_files/tex4ht_win.env" tofile="${math.dir}/tex4ht.env" />
+	</target>
+	<target name="copyUnixEnv" if="isUnix">
+		<copy file="${xsltemp.dir}/math/ht4t_files/tex4ht.env" tofile="${math.dir}/tex4ht.env" />
+	</target>
+	
 	<target name="cvs">
 		<echo message="CVS"/>
 		<cvspass cvsroot=":pserver:steinkam@budweiser.fernuni-hagen.de:/software/cvsroot" password="stardust"/>
