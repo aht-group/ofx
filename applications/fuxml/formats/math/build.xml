@@ -133,7 +133,9 @@
 	</target>
 	
 	<target name="copyWinEnv" if="isWindows">
-		<copy file="${xsltemp.dir}/math/ht4t_files/tex4ht_win.env" tofile="${math.dir}/tex4ht.env" />
+		<!-- Working with texlive 2009, standard configuration of tex4ht works great 
+				<copy file="${xsltemp.dir}/math/ht4t_files/tex4ht_win.env" tofile="${math.dir}/tex4ht.env" />
+				-->
 	</target>
 	<target name="copyUnixEnv" if="isUnix">
 		<copy file="${xsltemp.dir}/math/ht4t_files/tex4ht.env" tofile="${math.dir}/tex4ht.env" />
