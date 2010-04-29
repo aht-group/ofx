@@ -420,7 +420,7 @@
 				<!-- An dieser Stelle wird ein SubHTML oder sonstige Datei als Textdatei in das Designtemplate "einkopiert" .
 					Die dadurch entstandene Webseite im Kurs ist dann in der Regel nicht mehr W3C-Konform, funktioniert
 					aber praktischer Weise trotzdem ;-) -->
-				<xsl:value-of select="unparsed-text(concat($Quellpfad,$filename), $encoding)" disable-output-escaping="yes"/>
+				<xsl:value-of select="unparsed-text(concat('file:///',(concat($Quellpfad,$filename))), $encoding)" disable-output-escaping="yes"/>
 				<xsl:element name="a">
 					<xsl:attribute name="class">backpikto</xsl:attribute>
 					<xsl:attribute name="href">
