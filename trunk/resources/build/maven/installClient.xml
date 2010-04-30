@@ -23,21 +23,23 @@
             <langpack iso3="eng"/>
           </locale>
 
-          <resources>
+            <resources>
             <res id="HTMLLicencePanel.licence" src="resources/installer/license.html"/>
+            <res id="HTMLInfoPanel.info" src="resources/installer/readme.html"/>
             </resources>
 
           <panels>
             <panel classname="HelloPanel"/>
+            <panel classname="HTMLInfoPanel"/>
             <panel classname="HTMLLicencePanel"/>
             <panel classname="TargetPanel"/>
             <panel classname="InstallationGroupPanel"/>
             <panel classname="PacksPanel"/>
             <panel classname="SummaryPanel"/>
             <panel classname="InstallPanel"/>
-            <panel classname="ProcessPanel"/>
             <panel classname="SimpleFinishPanel"/>
           </panels>
+
 
           <listeners>
               <listener installer="SummaryLoggerInstallerListener">
