@@ -166,13 +166,7 @@
 		<pathelement location="${lib.dir}/${jwbf.dir}/${jwbf-mediawiki.lib}"/>
 	</path>
 			
-	<taskdef name="install" classname="org.apache.maven.artifact.ant.InstallTask">
-		<classpath>
-			<fileset dir="${lib.dir}">
-				<include name="*.jar"/>
-			</fileset>
-		</classpath>
-	</taskdef>
+
 	<target name="00 - Classpath" description="Echos Classpath">
 		<echo level="info">Using ${ant.version} in ${ant.home}</echo>
 		<echo level="info">Lib-Info for openFuXML v.${openfuxml-version}</echo>
@@ -232,6 +226,13 @@
     	  </classpath>
     	</taskdef> 
     	-->
+    	<taskdef name="install" classname="org.apache.maven.artifact.ant.InstallTask">
+    		<classpath>
+    			<fileset dir="${lib.dir}">
+    				<include name="*.jar"/>
+    			</fileset>
+    		</classpath>
+    	</taskdef>
     	
     	    	
     	<taskdef name="izpack" classpath="${lib.dir}/izpack-standalone-compiler-4.2.1.jar" classname="com.izforge.izpack.ant.IzPackTask"/>
@@ -943,16 +944,18 @@
 		
 		
 		<target name="getMavenAndIzPackLibs" description="Fetch Maven library - needed only the first time.">
-		  <get
-		    src="http://www.apache.org/dist/maven/binaries/maven-ant-tasks-2.1.0.jar"
-		    dest="${lib.dir}/maven-ant-tasks-2.1.0.jar"
-		    verbose="true"
-		    usetimestamp="true"/>
-		     <get
-		    src="http://mirrors.ibiblio.org/pub/mirrors/maven2/org/codehaus/izpack/izpack-standalone-compiler/4.2.1/izpack-standalone-compiler-4.2.1.jar"
-		    dest="${lib.dir}/izpack-standalone-compiler-4.2.1.jar"
-		    verbose="true"
-		    usetimestamp="true"/>
+			
+			<mkdir dir="${lib.dir}"/>
+			<get
+			    src="http://www.apache.org/dist/maven/binaries/maven-ant-tasks-2.1.0.jar"
+			    dest="${lib.dir}/maven-ant-tasks-2.1.0.jar"
+			    verbose="true"
+			    usetimestamp="true"/>
+			<get
+			    src="http://mirrors.ibiblio.org/pub/mirrors/maven2/org/codehaus/izpack/izpack-standalone-compiler/4.2.1/izpack-standalone-compiler-4.2.1.jar"
+			    dest="${lib.dir}/izpack-standalone-compiler-4.2.1.jar"
+			    verbose="true"
+			    usetimestamp="true"/>
 		</target>
 		
 		
