@@ -12,6 +12,7 @@
 		<pathelement location="${lib.dir}/${commonsconfig.dir}/${commonsconfig.lib}"/>
 		<pathelement location="${lib.dir}/${commonsio.dir}/${commonsio.lib}"/>
 		<pathelement location="${lib.dir}/${commonsxmlgraphics.dir}/${commonsxmlgraphics.lib}"/>
+		<pathelement location="${lib.dir}/${commonslogging.dir}/${commonslogging.lib}"/>
 	<!-- XML  -->
 		<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbapi.lib}"/>
 		<pathelement location="${lib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
@@ -24,6 +25,7 @@
 		<pathelement location="${lib.dir}/${jsch.dir}/${jsch.lib}"/>
 		<pathelement location="${lib.dir}/${jmdns.dir}/${jmdns.lib}"/>
 		<pathelement location="${lib.dir}/${mail.dir}/${mail.lib}"/>
+		<pathelement location="${lib.dir}/${servlet.dir}/${servlet.lib}"/>
 	<!-- HTTP  -->
 		<pathelement location="${lib.dir}/${htmlcleaner.dir}/${htmlcleaner.lib}"/>
 		<pathelement location="${lib.dir}/${jetty.dir}/${jetty.lib}"/>
