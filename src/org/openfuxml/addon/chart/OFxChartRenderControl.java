@@ -1,7 +1,6 @@
 package org.openfuxml.addon.chart;
 
 import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.log4j.Logger;
 import org.jdom.Document;
@@ -21,12 +20,11 @@ public class OFxChartRenderControl
 	
 	public OFxChartRenderControl()
 	{
-		logger.warn("here");
+	
 	}
 	
 	public JFreeChart render(Chart ofxChart)
 	{
-		logger.warn("here");
 		OfxChartRenderer ofxRenderer=null;
 		OfxChartTypeResolver.Type chartType = OfxChartTypeResolver.getType(ofxChart.getCharttype());
 		switch(chartType)

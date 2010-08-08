@@ -3,6 +3,7 @@ package org.openfuxml.addon.jsf.factory;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -14,8 +15,6 @@ import org.openfuxml.content.Row;
 import org.openfuxml.content.Section;
 import org.openfuxml.content.Table;
 import org.openfuxml.content.Title;
-
-import de.kisner.util.LoggerInit;
 
 public class TagTableFactory
 {

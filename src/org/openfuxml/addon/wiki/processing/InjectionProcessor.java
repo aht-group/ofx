@@ -6,6 +6,7 @@ import net.sf.exlp.event.LogEvent;
 import net.sf.exlp.event.LogEventHandler;
 import net.sf.exlp.event.handler.EhResultContainer;
 import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerXml;
 import net.sf.exlp.parser.LogParser;
@@ -24,8 +25,6 @@ import org.openfuxml.addon.wiki.parser.WikiGalleryParser;
 import org.openfuxml.addon.wiki.parser.WikiTimelineParser;
 import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
-
-import de.kisner.util.LoggerInit;
 
 public class InjectionProcessor
 {

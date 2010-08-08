@@ -59,6 +59,7 @@
                         <xsd:attribute name="from" type="xsd:dateTime"/>
                         <xsd:attribute name="to" type="xsd:dateTime"/>
                         <xsd:attribute name="cumulate" type="xsd:boolean"/>
+                        <xsd:attribute name="timePeriod" type="xsd:string"/>
                     </xsd:complexType>
                 </xsd:element>
                 <xsd:element name="timebar" maxOccurs="1">

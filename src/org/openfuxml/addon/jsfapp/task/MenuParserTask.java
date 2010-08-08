@@ -2,12 +2,12 @@ package org.openfuxml.addon.jsfapp.task;
 
 import java.io.File;
 
+import net.sf.exlp.io.LoggerInit;
+
 import org.apache.log4j.Logger;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.openfuxml.addon.jsfapp.factory.MenuFactory;
-
-import de.kisner.util.LoggerInit;
 
 public class MenuParserTask extends Task
 {	

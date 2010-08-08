@@ -1,5 +1,7 @@
 package org.openfuxml.client.gui.simple;
 
+import net.sf.exlp.io.ConfigLoader;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
@@ -23,8 +25,6 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
-
-import de.kisner.util.ConfigLoader;
 
 /**
  * In dem Dialog EinstellungenDialog werden die Einstellungen f�r die
