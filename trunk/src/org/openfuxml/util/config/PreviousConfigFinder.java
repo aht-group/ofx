@@ -6,12 +6,12 @@ import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.io.LoggerInit;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Logger;
-
-import de.kisner.util.ConfigLoader;
-import de.kisner.util.LoggerInit;
 
 public class PreviousConfigFinder
 {

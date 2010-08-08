@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.io.ObjectIO;
 import net.sf.exlp.io.resourceloader.ImageResourceLoader;
 import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
@@ -21,8 +22,6 @@ import org.openfuxml.client.gui.simple.Client;
 import org.openfuxml.client.gui.simple.dialog.HelpAboutDialog;
 import org.openfuxml.client.gui.swt.OpenFuxmlClient;
 import org.openfuxml.util.config.factory.ClientConfFactory;
-
-import de.kisner.util.io.ObjectIO;
 
 public class WsOpenFuXML
 {

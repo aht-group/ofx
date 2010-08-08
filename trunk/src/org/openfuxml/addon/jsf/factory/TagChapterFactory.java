@@ -2,6 +2,7 @@ package org.openfuxml.addon.jsf.factory;
 
 import java.util.List;
 
+import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
@@ -9,8 +10,6 @@ import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 import org.openfuxml.content.Section;
 import org.openfuxml.content.Title;
-
-import de.kisner.util.LoggerInit;
 
 public class TagChapterFactory
 {

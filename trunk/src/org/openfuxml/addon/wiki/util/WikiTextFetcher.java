@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.util.Locale;
 
+import net.sf.exlp.io.LoggerInit;
 import net.sourceforge.jwbf.actions.util.ActionException;
 import net.sourceforge.jwbf.actions.util.ProcessException;
 import net.sourceforge.jwbf.bots.MediaWikiBot;
@@ -11,8 +12,6 @@ import net.sourceforge.jwbf.contentRep.SimpleArticle;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.wiki.WikiTemplates;
-
-import de.kisner.util.LoggerInit;
 
 public class WikiTextFetcher
 {

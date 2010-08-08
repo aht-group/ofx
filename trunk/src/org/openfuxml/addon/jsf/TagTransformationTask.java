@@ -2,10 +2,11 @@ package org.openfuxml.addon.jsf;
 
 import java.io.File;
 
+import net.sf.exlp.io.LoggerInit;
+
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
-import de.kisner.util.LoggerInit;
 
 public class TagTransformationTask extends Task
 {		

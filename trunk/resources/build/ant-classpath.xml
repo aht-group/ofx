@@ -1,12 +1,13 @@
 <?xml version="1.0" ?>
 <project basedir="../..">
+	<property file="resources/properties/user.properties"/>
 	<property file="resources/properties/ant.properties"/>
 	<import file="ant-libs.xml"/>
 	<path id="classpath">
 	<!-- Utils  -->
 		<pathelement location="${lib.dir}/${log4j.dir}/${log4j.lib}"/>
 		<pathelement location="${lib.dir}/${commonslang.dir}/${commonslang.lib}"/>
-		<pathelement location="${lib.dir}/${jmsutils.dir}/${jmsutils.lib}"/>
+		<pathelement location="${locallib.dir}/${jmsutils.dir}/${jmsutils.lib}"/>
 		<pathelement location="${lib.dir}/${exlp.dir}/${exlp.lib}"/>
 		<pathelement location="${lib.dir}/${ahtutils.dir}/${ahtutils.lib}"/>
 		<pathelement location="${lib.dir}/${commonsconfig.dir}/${commonsconfig.lib}"/>

@@ -9,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 
 import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.configuration.Configuration;
@@ -24,8 +25,6 @@ import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.openfuxml.addon.wiki.util.WikiTextFetcher;
 import org.xml.sax.SAXException;
-
-import de.kisner.util.LoggerInit;
 
 public class OfxWikiEngine
 {

@@ -2,14 +2,13 @@ package org.openfuxml.addon.jsfapp.task;
 
 import java.io.File;
 
+import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.openfuxml.addon.jsfapp.AppInjection;
 import org.openfuxml.addon.jsfapp.data.jaxb.Ofxinjections;
-
-import de.kisner.util.LoggerInit;
 
 public class AppInjectionTask extends Task
 {		
