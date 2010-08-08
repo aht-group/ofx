@@ -58,6 +58,7 @@
                         <xsd:attribute name="gap" type="xsd:boolean"/>
                         <xsd:attribute name="from" type="xsd:dateTime"/>
                         <xsd:attribute name="to" type="xsd:dateTime"/>
+                        <xsd:attribute name="cumulate" type="xsd:boolean"/>
                     </xsd:complexType>
                 </xsd:element>
                 <xsd:element name="timebar" maxOccurs="1">

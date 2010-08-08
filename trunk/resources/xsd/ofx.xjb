@@ -10,7 +10,7 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
-   <jxb:bindings schemaLocation="ofx-chart.xsd" node="/xsd:schema">
+   <jxb:bindings schemaLocation="addon/chart.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.openfuxml.addon.chart.jaxb"/>
         </jxb:schemaBindings>
