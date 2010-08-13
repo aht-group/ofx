@@ -53,7 +53,6 @@ public class EpubGenerator
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
-		logger.debug("Testing ExternalMerger");
 		
 		File f = new File("resources/data/xml/epub/helloworld.xml");
 		File baseDir = new File("dist");

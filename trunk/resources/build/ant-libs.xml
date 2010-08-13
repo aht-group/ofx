@@ -23,6 +23,7 @@
 		
 	<!-- Library Definitions: XML -->
 	<property name="jdom.dir" value="xml/jdom"/><property name="jdom.lib" value="jdom-${jdom-version}.jar"/>
+	<property name="jaxen.dir" value="xml/jaxen"/><property name="jaxen.lib" value="jaxen-${jaxen-version}.jar"/>
 	<property name="jaxb.dir" value="xml/jaxb/${jaxb-version}"/>
 		<property name="jaxbapi.lib" value="jaxb-api-${jaxb-version}.jar"/>
 		<property name="jaxbimpl.lib" value="jaxb-impl-${jaxb-version}.jar"/>
@@ -91,6 +92,7 @@
 	
 	<!-- XML -->
 	<property name="m.jdom" value="${metalib.dir}/${jdom.dir}/${jdom.lib}"/>
+	<property name="m.jaxen" value="${metalib.dir}/${jaxen.dir}/${jaxen.lib}"/>
 	<property name="m.htmlcleaner" value="${metalib.dir}/${htmlcleaner.dir}/${htmlcleaner.lib}"/>
 	<property name="m.jaxb.api" value="${metalib.dir}/${jaxb.dir}/${jaxbapi.lib}"/>
 	<property name="m.jaxb.impl" value="${metalib.dir}/${jaxb.dir}/${jaxbimpl.lib}"/>
@@ -103,7 +105,7 @@
 	<property name="m.jwbf" value="${m.jwbf.core} ${m.jwbf.mediawiki}"/>
 	<property name="m.wiki" value="${m.bliki} ${m.jwbf} "/>
 	
-	<property name="m.xml" value="${m.jdom} ${m.wiki} ${m.htmlcleaner} ${m.jaxb}"/>	
+	<property name="m.xml" value="${m.jdom} ${m.jaxen} ${m.wiki} ${m.htmlcleaner} ${m.jaxb}"/>	
 	
 	<property name="mjar.custom" value="${metalib.dir}/${exlp.dir}/${exlp.lib} ${metalib.dir}/${ahtutils.dir}/${ahtutils.lib}"/>
 	<property name="meta.jar" value="${m.utils} ${m.http} ${m.gui} ${m.xml} ${m.net} ${m.jboss}"/>
