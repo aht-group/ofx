@@ -2,7 +2,8 @@ package org.openfuxml.test.xml.wiki.jaxb;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 
@@ -10,8 +11,7 @@ import de.kisner.util.LoggerInit;
 
 public class TestWikiReplace
 {
-	@SuppressWarnings("unused")
-	private static Logger logger = Logger.getLogger(TestWikiReplace.class);
+	static Log logger = LogFactory.getLog(TestWikiReplace.class);
 	
 	public TestWikiReplace()
 	{

@@ -2,7 +2,8 @@ package org.openfuxml.test.xml.jsftaglib.jaxb;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
@@ -11,7 +12,7 @@ import de.kisner.util.LoggerInit;
 
 public class TestTaglib
 {
-	private static Logger logger = Logger.getLogger(TestTaglib.class);
+	static Log logger = LogFactory.getLog(TestTaglib.class);
 	
 	public TestTaglib()
 	{

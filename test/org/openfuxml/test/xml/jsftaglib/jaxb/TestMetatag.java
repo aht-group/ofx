@@ -6,7 +6,8 @@ import javax.xml.bind.Marshaller;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.jsf.data.jaxb.Example;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
@@ -19,7 +20,7 @@ import de.kisner.util.LoggerInit;
 
 public class TestMetatag
 {
-	private static Logger logger = Logger.getLogger(TestMetatag.class);
+	static Log logger = LogFactory.getLog(TestMetatag.class);
 	
 	public TestMetatag()
 	{

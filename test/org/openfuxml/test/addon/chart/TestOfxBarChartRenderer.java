@@ -6,10 +6,10 @@ import java.io.OutputStream;
 import java.util.Random;
 
 import net.sf.exlp.io.LoggerInit;
-import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.OFxChartRenderControl;
@@ -21,7 +21,7 @@ import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class TestOfxBarChartRenderer
 {
-	static Logger logger = Logger.getLogger(TestOfxBarChartRenderer.class);
+	static Log logger = LogFactory.getLog(TestOfxBarChartRenderer.class);
 	
 	public TestOfxBarChartRenderer()
 	{

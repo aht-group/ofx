@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Calendar;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -13,7 +15,7 @@ import org.openfuxml.producer.handler.DirectProducer.ProductionCode;
 
 public class FuXmlLogger
 {
-	static Logger logger = Logger.getLogger(FuXmlLogger.class);
+	static Log logger = LogFactory.getLog(FuXmlLogger.class);
 	
 	public static boolean isInited;
 	public static boolean log4jInited=false;
