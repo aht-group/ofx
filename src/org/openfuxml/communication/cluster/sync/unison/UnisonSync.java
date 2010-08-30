@@ -11,7 +11,8 @@ import java.util.Hashtable;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.communication.cluster.sync.ServerSync;
 import org.openfuxml.communication.cluster.sync.ssh.SshChecker;
 import org.openfuxml.communication.cluster.sync.ssh.SshCheckerException;
@@ -34,7 +35,7 @@ import de.kisner.util.parser.LogParser;
  */
 public class UnisonSync implements ServerSync
 {
-	static Logger logger = Logger.getLogger(UnisonSync.class);
+	static Log logger = LogFactory.getLog(UnisonSync.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	String remoteRepo,remoteOutput;

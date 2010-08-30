@@ -10,7 +10,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.communication.cluster.facade.OpenFuxmlFacade;
 import org.openfuxml.communication.cluster.facade.OpenFuxmlFacadeBean;
@@ -35,7 +36,7 @@ import de.kisner.util.LoggerInit;
  */
 public class EnterpriseServer extends AbstractServer
 {
-	static Logger logger = Logger.getLogger(EnterpriseServer.class);
+	static Log logger = LogFactory.getLog(EnterpriseServer.class);
 	
 	Host host;
 	

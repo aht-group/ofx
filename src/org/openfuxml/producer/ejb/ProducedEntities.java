@@ -14,7 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.openfuxml.communication.cluster.ejb.EjbObject;
@@ -26,7 +27,7 @@ import de.kisner.util.xml.XmlObject;
 @Entity
 public class ProducedEntities implements Serializable,EjbObject
 {
-	static Logger logger = Logger.getLogger(ProducedEntities.class);
+	static Log logger = LogFactory.getLog(ProducedEntities.class);
 	
 	static final long serialVersionUID=1;
 	

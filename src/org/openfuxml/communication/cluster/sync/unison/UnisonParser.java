@@ -5,7 +5,8 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import de.kisner.util.event.handler.EventHandlerInterface;
 import de.kisner.util.parser.AbstractParser;
@@ -13,7 +14,7 @@ import de.kisner.util.parser.LogParser;
 
 public class UnisonParser extends AbstractParser implements LogParser  
 {
-	static Logger logger = Logger.getLogger(UnisonParser.class);
+	static Log logger = LogFactory.getLog(UnisonParser.class);
 	
 	private final static int maxPattern=2;
 	Pattern pattern[] = new Pattern[maxPattern];

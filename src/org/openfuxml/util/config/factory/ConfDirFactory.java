@@ -2,13 +2,14 @@ package org.openfuxml.util.config.factory;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.util.config.jaxb.Dirs;
 import org.openfuxml.util.config.jaxb.Dirs.Dir;
 
 public class ConfDirFactory
 {
-	static Logger logger = Logger.getLogger(ClientConfFactory.class);
+	static Log logger = LogFactory.getLog(ClientConfFactory.class);
 	protected static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Configuration previousConfig;

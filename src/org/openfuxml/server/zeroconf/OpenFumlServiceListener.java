@@ -5,11 +5,12 @@ import javax.jmdns.ServiceEvent;
 import javax.jmdns.ServiceInfo;
 import javax.jmdns.ServiceListener;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public  class OpenFumlServiceListener implements ServiceListener
 {
-	static Logger logger = Logger.getLogger(OpenFumlServiceListener.class);
+	static Log logger = LogFactory.getLog(OpenFumlServiceListener.class);
 	JmDNS jmdns;
 	
 	public OpenFumlServiceListener(JmDNS jmdns)

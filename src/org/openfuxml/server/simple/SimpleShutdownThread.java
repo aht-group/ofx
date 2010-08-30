@@ -3,14 +3,15 @@ package org.openfuxml.server.simple;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author kisner
  */
 public class SimpleShutdownThread  extends Thread {
 
-	static Logger logger = Logger.getLogger(SimpleShutdownThread.class);
+	static Log logger = LogFactory.getLog(SimpleShutdownThread.class);
 	
 	ServerSocket serverSocket;
 	boolean active;

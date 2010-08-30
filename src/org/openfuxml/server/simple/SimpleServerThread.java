@@ -6,7 +6,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.producer.Producer;
@@ -22,7 +23,7 @@ import org.openfuxml.producer.exception.ProductionSystemException;
  */
 public class SimpleServerThread extends Thread
 {
-	static Logger logger = Logger.getLogger(SimpleServerThread.class);
+	static Log logger = LogFactory.getLog(SimpleServerThread.class);
 	
 	private static int anzahlClients = 0;
 	private Socket clientSocket = null;

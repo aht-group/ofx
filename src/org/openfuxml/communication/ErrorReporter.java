@@ -10,11 +10,12 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class ErrorReporter
 {
-	static Logger logger = Logger.getLogger(ErrorReporter.class);
+	static Log logger = LogFactory.getLog(ErrorReporter.class);
 	
 	private static String host;
 	private static boolean report=false;

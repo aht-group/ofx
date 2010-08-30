@@ -10,7 +10,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.communication.cluster.ejb.ApplicationRepository;
 import org.openfuxml.communication.cluster.ejb.EjbObject;
 
@@ -18,7 +19,7 @@ import org.openfuxml.communication.cluster.ejb.EjbObject;
 @Remote(ApplicationRepositoryFacade.class)
 public class ApplicationRepositoryFacadeBean implements ApplicationRepositoryFacade, Serializable
 {
-	static Logger logger = Logger.getLogger(ApplicationRepositoryFacadeBean.class);
+	static Log logger = LogFactory.getLog(ApplicationRepositoryFacadeBean.class);
 	static final long serialVersionUID=10;
 	
 	@PersistenceContext (unitName="openfuxml")

@@ -8,7 +8,8 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.producer.Producer;
@@ -21,7 +22,7 @@ import de.kisner.util.architecture.EnvironmentParameter;
 
 public class SocketProducer extends AbstractProducer implements Producer
 {
-	static Logger logger = Logger.getLogger(SocketProducer.class);
+	static Log logger = LogFactory.getLog(SocketProducer.class);
 	
 	String serverIP;
 	int serverPort;

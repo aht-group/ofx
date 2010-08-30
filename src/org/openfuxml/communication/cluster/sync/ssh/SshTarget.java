@@ -3,14 +3,15 @@
  */
 package org.openfuxml.communication.cluster.sync.ssh;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * @author Thorsten
  */
 public class SshTarget
 {
-	static Logger logger = Logger.getLogger(SshTarget.class);
+	static Log logger = LogFactory.getLog(SshTarget.class);
 	
 	private String user,host,path;
 	

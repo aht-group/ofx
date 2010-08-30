@@ -9,7 +9,8 @@ import java.util.Properties;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.communication.cluster.ejb.Host;
 
 import de.kisner.util.HostCheck;
@@ -19,7 +20,7 @@ import de.kisner.util.io.spawn.Spawn;
 
 public abstract class AbstractServer
 {
-	static Logger logger = Logger.getLogger(AbstractServer.class);
+	static Log logger = LogFactory.getLog(AbstractServer.class);
 	
 	protected static String fs = SystemUtils.FILE_SEPARATOR;
 	

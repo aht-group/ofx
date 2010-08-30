@@ -2,7 +2,8 @@ package org.openfuxml.communication.cluster.sync.ssh;
 
 import java.io.InputStream;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
@@ -12,7 +13,7 @@ import com.jcraft.jsch.Session;
 
 public class SshCreateDir
 {
-	static Logger logger = Logger.getLogger(SshCreateDir.class);
+	static Log logger = LogFactory.getLog(SshCreateDir.class);
 		
 	public static void createDir(String user,String host, String absolutePath)
 	{

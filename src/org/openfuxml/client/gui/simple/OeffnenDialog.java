@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -28,7 +29,7 @@ import org.eclipse.swt.widgets.TableItem;
  */
 public class OeffnenDialog extends Dialog
 {
-	static Logger logger = Logger.getLogger(OeffnenDialog.class);
+	static Log logger = LogFactory.getLog(OeffnenDialog.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Shell shell;

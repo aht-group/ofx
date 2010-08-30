@@ -3,7 +3,8 @@ package org.openfuxml.producer.handler;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.communication.cluster.sync.NoSync;
 import org.openfuxml.communication.cluster.sync.ServerSync;
@@ -20,7 +21,7 @@ import de.kisner.util.architecture.EnvironmentParameter;
 
 public class SyncProducer extends AbstractProducer implements Producer
 {
-	static Logger logger = Logger.getLogger(DirectProducer.class);
+	static Log logger = LogFactory.getLog(DirectProducer.class);
 	
 	private Producer p;
 	private ServerSync unisonSync,noSync;

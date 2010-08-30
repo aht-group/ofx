@@ -5,7 +5,8 @@ import java.net.ServerSocket;
 import java.net.SocketException;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.communication.cluster.ejb.Host;
 import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.handler.DirectProducer;
@@ -24,7 +25,7 @@ import de.kisner.util.LoggerInit;
  */
 public class SimpleServer extends AbstractServer
 {
-	static Logger logger = Logger.getLogger(SimpleServer.class);
+	static Log logger = LogFactory.getLog(SimpleServer.class);
 	
 	public SimpleServer(Configuration config)
 	{
