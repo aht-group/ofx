@@ -13,7 +13,8 @@ import net.sf.exlp.util.xml.exception.JDomUtilException;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.HiddenFileFilter;
 import org.apache.commons.io.filefilter.IOFileFilter;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.tools.ant.Task;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -28,7 +29,7 @@ import org.openfuxml.addon.jsfapp.factory.NsFactory;
 
 public class AppInjection extends Task
 {	
-	private static Logger logger = Logger.getLogger(AppInjection.class);
+	static Log logger = LogFactory.getLog(AppInjection.class);
 	
 	private boolean useLog4j;
 	private RecursiveFileFinder rfi;

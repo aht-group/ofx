@@ -4,7 +4,8 @@ import java.util.regex.Pattern;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -12,7 +13,7 @@ import org.jdom.Text;
 
 public class XhtmlAHxMerge
 {
-	static Logger logger = Logger.getLogger(XhtmlAHxMerge.class);
+	static Log logger = LogFactory.getLog(XhtmlAHxMerge.class);
 	
 	private Pattern p;
 	

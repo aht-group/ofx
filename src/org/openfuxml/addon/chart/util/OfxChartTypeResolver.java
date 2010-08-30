@@ -2,12 +2,13 @@ package org.openfuxml.addon.chart.util;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.chart.jaxb.Charttype;
 
 public class OfxChartTypeResolver
 {
-	static Logger logger = Logger.getLogger(OfxChartTypeResolver.class);
+	static Log logger = LogFactory.getLog(OfxChartTypeResolver.class);
 	
 	public static enum Type{TimeSeries, TimeBar, Bar};
 	

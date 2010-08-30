@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -12,7 +13,7 @@ import org.jdom.Text;
 
 public class OfxPushUp
 {
-	static Logger logger = Logger.getLogger(OfxPushUp.class);
+	static Log logger = LogFactory.getLog(OfxPushUp.class);
 	
 	public OfxPushUp()
 	{

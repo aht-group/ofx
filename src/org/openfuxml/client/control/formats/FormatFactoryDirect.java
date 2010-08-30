@@ -10,14 +10,15 @@ import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.jaxb.Format;
 
 public class FormatFactoryDirect implements FormatFactory
 {
-	static Logger logger = Logger.getLogger(FormatFactoryDirect.class);
+	static Log logger = LogFactory.getLog(FormatFactoryDirect.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Configuration config;

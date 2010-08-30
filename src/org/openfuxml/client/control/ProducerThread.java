@@ -5,7 +5,8 @@ import java.net.URL;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.client.control.log.QueueLogConsumer;
 import org.openfuxml.client.control.log.QueueLogFetcher;
 import org.openfuxml.model.jaxb.ProducibleEntities;
@@ -25,7 +26,7 @@ import org.openfuxml.util.config.OfxPathHelper;
  */
 public class ProducerThread extends Thread
 {
-	static Logger logger = Logger.getLogger(ProducerThread.class);
+	static Log logger = LogFactory.getLog(ProducerThread.class);
 	
 	private OfxClientControl ofxCC;
 	private Configuration config;

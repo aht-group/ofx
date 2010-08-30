@@ -4,12 +4,12 @@ import javax.el.ValueExpression;
 import javax.faces.component.UIComponent;
 import javax.faces.webapp.UIComponentELTag;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class IframeTag extends UIComponentELTag
 {
-	@SuppressWarnings("unused")
-	private static Logger logger = Logger.getLogger(IframeTag.class);
+	static Log logger = LogFactory.getLog(IframeTag.class);
 	
 	private ValueExpression src = null;
 	private ValueExpression width = null;

@@ -4,14 +4,15 @@ import java.io.File;
 
 import net.sf.exlp.io.LoggerInit;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.openfuxml.producer.preprocessors.ExternalMerger;
 import org.openfuxml.producer.preprocessors.IdTagger;
 
 public class EpubGenerator
 {
-	private static Logger logger = Logger.getLogger(ExternalMerger.class);
+	static Log logger = LogFactory.getLog(EpubGenerator.class);
 	
 	private NcxGenerator ncxGenerator;
 	private MimetypeFactory mimeFactory;

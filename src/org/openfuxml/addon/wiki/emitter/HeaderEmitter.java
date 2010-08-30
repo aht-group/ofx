@@ -6,12 +6,13 @@ import java.util.regex.Pattern;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
 
 public class HeaderEmitter implements Emitter
 {
-	private static Logger logger = Logger.getLogger(HeaderEmitter.class);
+	static Log logger = LogFactory.getLog(HeaderEmitter.class);
 	
 	private Pattern pHeader = Pattern.compile("h(\\d)");
 

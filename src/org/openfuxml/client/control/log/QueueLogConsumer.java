@@ -2,12 +2,13 @@ package org.openfuxml.client.control.log;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.client.control.ClientGuiCallback;
 
 public class QueueLogConsumer extends Thread
 {
-	static Logger logger = Logger.getLogger(QueueLogConsumer.class);
+	static Log logger = LogFactory.getLog(QueueLogConsumer.class);
 	
 	private LinkedBlockingQueue<String> q;
 	private ClientGuiCallback guiCallback;

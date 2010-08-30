@@ -8,7 +8,8 @@ import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.jdom.Attribute;
@@ -25,7 +26,7 @@ import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 
 public class TaglibFactoryTask extends Task
 {
-	private static Logger logger = Logger.getLogger(TaglibFactoryTask.class); 
+	static Log logger = LogFactory.getLog(TaglibFactoryTask.class); 
 	
 	private String tagConfig, xPathPrefix, tagBaseDir, tldFile, fcFile;
 

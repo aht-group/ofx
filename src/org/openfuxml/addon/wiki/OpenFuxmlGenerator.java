@@ -15,7 +15,8 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -23,7 +24,7 @@ import org.xml.sax.XMLReader;
 
 public class OpenFuxmlGenerator
 {
-	static Logger logger = Logger.getLogger(OpenFuxmlGenerator.class);
+	static Log logger = LogFactory.getLog(OpenFuxmlGenerator.class);
 
 	private Configuration config;
 	

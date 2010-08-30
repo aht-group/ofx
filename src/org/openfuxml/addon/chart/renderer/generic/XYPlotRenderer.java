@@ -1,13 +1,14 @@
 package org.openfuxml.addon.chart.renderer.generic;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.plot.XYPlot;
 import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 
 public class XYPlotRenderer extends AbstractChartRenderer
 {
-	static Logger logger = Logger.getLogger(XYPlotRenderer.class);
+	static Log logger = LogFactory.getLog(XYPlotRenderer.class);
 	
 	@Override
 	protected void setSpecialColors()

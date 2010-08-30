@@ -5,11 +5,12 @@ import java.io.OutputStream;
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.io.zip.ZipperStream;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class EpubZipper
 {
-	static Logger logger = Logger.getLogger(EpubZipper.class);
+	static Log logger = LogFactory.getLog(EpubZipper.class);
 	
 	public EpubZipper()
 	{

@@ -4,7 +4,8 @@ import javax.xml.stream.XMLStreamException;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.util.JdomXmlStreamer;
@@ -16,7 +17,7 @@ import org.openfuxml.content.fuxml.Medienobjekt.Objekttitel;
 
 public class OfxChartEmitter
 {
-	private static Logger logger = Logger.getLogger(OfxChartEmitter.class);
+	static Log logger = LogFactory.getLog(OfxChartEmitter.class);
 
 	private Wikiinjection injection;
 	

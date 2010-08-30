@@ -16,7 +16,8 @@ import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.xmlgraphics.java2d.ps.EPSDocumentGraphics2D;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -26,7 +27,7 @@ import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 
 public class ChartRenderer
 {
-	private static Logger logger = Logger.getLogger(ChartRenderer.class);
+	static Log logger = LogFactory.getLog(ChartRenderer.class);
 	
 	private MultiResourceLoader mrl;
 	private Configuration config;

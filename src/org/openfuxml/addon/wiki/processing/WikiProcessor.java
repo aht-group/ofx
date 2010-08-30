@@ -13,7 +13,8 @@ import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
@@ -22,7 +23,7 @@ import org.openfuxml.addon.wiki.util.WikiContentIO;
 
 public class WikiProcessor
 {
-	static Logger logger = Logger.getLogger(WikiProcessor.class);
+	static Log logger = LogFactory.getLog(WikiProcessor.class);
 	private final static String ls = SystemUtils.LINE_SEPARATOR;
 	
 	public static enum InjectionType {xml,wiki};

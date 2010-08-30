@@ -6,7 +6,8 @@ import java.util.List;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -17,7 +18,7 @@ import org.openfuxml.addon.jsfapp.data.jaxb.Menuitem;
 
 public class MenuFactory
 {
-	static Logger logger = Logger.getLogger(MenuFactory.class);
+	static Log logger = LogFactory.getLog(MenuFactory.class);
 			
 	private Menu menu;
 	

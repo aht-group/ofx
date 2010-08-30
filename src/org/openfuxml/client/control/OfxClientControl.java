@@ -6,7 +6,8 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.client.control.documents.DocumentFactory;
 import org.openfuxml.client.control.documents.DocumentFactoryDirect;
 import org.openfuxml.client.control.projects.ProjectFactory;
@@ -16,10 +17,10 @@ import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.model.ejb.OfxFormat;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.model.factory.OfxRequestFactory;
+import org.openfuxml.model.jaxb.Format.Options.Option;
 import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
 import org.openfuxml.model.jaxb.Sessionpreferences;
-import org.openfuxml.model.jaxb.Format.Options.Option;
 import org.openfuxml.producer.Producer;
 import org.openfuxml.producer.exception.ProductionHandlerException;
 import org.openfuxml.producer.exception.ProductionSystemException;
@@ -32,7 +33,7 @@ import de.kisner.util.architecture.ArchOpen;
 
 public class OfxClientControl implements OfxGuiAction
 {
-	static Logger logger = Logger.getLogger(OfxClientControl.class);
+	static Log logger = LogFactory.getLog(OfxClientControl.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Configuration config;

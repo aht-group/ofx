@@ -12,13 +12,14 @@ import net.sf.exlp.listener.impl.LogListenerXml;
 import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.parser.LogParser;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxgallery;
 import org.openfuxml.addon.wiki.event.WikiImageEvent;
 
 public class WikiGalleryParser extends AbstractLogParser implements LogParser  
 {
-	private static Logger logger = Logger.getLogger(WikiGalleryParser.class);
+	static Log logger = LogFactory.getLog(WikiGalleryParser.class);
 	
 	private ArrayList<Pattern> alP;
 	

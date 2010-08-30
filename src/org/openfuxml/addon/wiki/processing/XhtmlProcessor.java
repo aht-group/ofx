@@ -6,7 +6,8 @@ import java.util.List;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
@@ -15,7 +16,7 @@ import org.openfuxml.addon.wiki.processing.xhtml.XhtmlAHxMerge;
 
 public class XhtmlProcessor
 {
-	static Logger logger = Logger.getLogger(XhtmlProcessor.class);
+	static Log logger = LogFactory.getLog(XhtmlProcessor.class);
 	
 	private String xHtmlText;
 	

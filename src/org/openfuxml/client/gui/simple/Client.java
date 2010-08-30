@@ -12,7 +12,8 @@ import net.sf.exlp.io.resourceloader.ImageResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
@@ -56,7 +57,7 @@ import org.openfuxml.util.config.factory.ClientConfFactory;
  */
 public class Client extends AbstractProducerComposite implements ClientGuiCallback
 { 
-    static Logger logger = Logger.getLogger(Client.class);
+	static Log logger = LogFactory.getLog(Client.class);
     private static String fs = SystemUtils.FILE_SEPARATOR;
     
     public final static String Version = Client.class.getPackage().getImplementationVersion();

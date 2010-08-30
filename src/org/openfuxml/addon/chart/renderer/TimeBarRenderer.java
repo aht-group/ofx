@@ -5,7 +5,8 @@ import java.util.List;
 
 import net.sf.exlp.util.DateUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
@@ -17,16 +18,16 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.openfuxml.addon.chart.jaxb.Chart;
+import org.openfuxml.addon.chart.jaxb.Charttype.Timebar;
 import org.openfuxml.addon.chart.jaxb.Container;
 import org.openfuxml.addon.chart.jaxb.Data;
-import org.openfuxml.addon.chart.jaxb.Charttype.Timebar;
 import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
 
 public class TimeBarRenderer extends XYPlotRenderer implements OfxChartRenderer
 {
-	static Logger logger = Logger.getLogger(TimeBarRenderer.class);
+	static Log logger = LogFactory.getLog(TimeBarRenderer.class);
 	
 	public TimeBarRenderer()
 	{

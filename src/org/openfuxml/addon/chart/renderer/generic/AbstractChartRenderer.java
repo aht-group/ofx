@@ -1,13 +1,14 @@
 package org.openfuxml.addon.chart.renderer.generic;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 
 public class AbstractChartRenderer
 {
-	static Logger logger = Logger.getLogger(AbstractChartRenderer.class);
+	static Log logger = LogFactory.getLog(AbstractChartRenderer.class);
 	
 	protected JFreeChart chart;
 	protected Chart ofxChart;

@@ -5,7 +5,8 @@ import java.util.List;
 
 import net.sf.exlp.util.DateUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jfree.data.general.SeriesException;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimePeriodAnchor;
@@ -18,7 +19,7 @@ import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 
 public class TimeSeriesCumulativeChartRenderer extends AbstractTimeSeriesChartRenderer implements OfxChartRenderer
 {
-	static Logger logger = Logger.getLogger(TimeSeriesCumulativeChartRenderer.class);
+	static Log logger = LogFactory.getLog(TimeSeriesCumulativeChartRenderer.class);
 	
 	public TimeSeriesCumulativeChartRenderer()
 	{

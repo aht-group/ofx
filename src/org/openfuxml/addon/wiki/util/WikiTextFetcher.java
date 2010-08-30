@@ -10,12 +10,13 @@ import net.sourceforge.jwbf.actions.util.ProcessException;
 import net.sourceforge.jwbf.bots.MediaWikiBot;
 import net.sourceforge.jwbf.contentRep.SimpleArticle;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
 
 public class WikiTextFetcher
 {
-	private static Logger logger = Logger.getLogger(WikiTextFetcher.class);
+	static Log logger = LogFactory.getLog(WikiTextFetcher.class);
 	
 	private String wikiText;
 	
