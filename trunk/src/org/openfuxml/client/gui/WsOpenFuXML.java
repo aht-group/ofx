@@ -11,7 +11,8 @@ import net.sf.exlp.io.resourceloader.MultiResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
@@ -25,7 +26,7 @@ import org.openfuxml.util.config.factory.ClientConfFactory;
 
 public class WsOpenFuXML
 {
-	static Logger logger = Logger.getLogger(WsOpenFuXML.class);
+	static Log logger = LogFactory.getLog(WsOpenFuXML.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Configuration config;

@@ -4,7 +4,8 @@ import net.sf.exlp.io.resourceloader.ImageResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.StackLayout;
@@ -37,7 +38,7 @@ import org.openfuxml.model.jaxb.Format.Options.Option;
  */
 public class ProducerComposite extends AbstractProducerComposite
 {	
-	static Logger logger = Logger.getLogger(ProducerComposite.class);
+	static Log logger = LogFactory.getLog(ProducerComposite.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	final static int MAX_ANZ_KE = 8;

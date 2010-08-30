@@ -12,7 +12,8 @@ import net.sf.exlp.io.resourceloader.ImageResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -48,7 +49,7 @@ import org.openfuxml.util.config.factory.ClientConfFactory;
  */
 public class OpenFuxmlClient extends Composite implements Runnable
 {
-	static Logger logger = Logger.getLogger(OpenFuxmlClient.class);
+	static Log logger = LogFactory.getLog(OpenFuxmlClient.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	public final static String Title = "openFuXML - Client";

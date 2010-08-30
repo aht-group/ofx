@@ -2,7 +2,8 @@ package org.openfuxml.client.gui.swt;
 
 import java.net.URL;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.client.control.ClientGuiCallback;
 import org.openfuxml.client.gui.swt.composites.BrowserComposite;
 import org.openfuxml.client.gui.swt.composites.LogComposite;
@@ -10,7 +11,7 @@ import org.openfuxml.client.gui.swt.composites.ProducerComposite;
 
 public class SwtGuiCallback implements ClientGuiCallback
 {
-	 static Logger logger = Logger.getLogger(SwtGuiCallback.class);
+	static Log logger = LogFactory.getLog(SwtGuiCallback.class);
 	 
 	private ProducerComposite compP;
 	private LogComposite compL;

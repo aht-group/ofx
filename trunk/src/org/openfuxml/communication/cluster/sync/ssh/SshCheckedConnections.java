@@ -1,10 +1,11 @@
 package org.openfuxml.communication.cluster.sync.ssh;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class SshCheckedConnections extends Thread
 {
-	static Logger logger = Logger.getLogger(SshCheckedConnections.class);
+	static Log logger = LogFactory.getLog(SshCheckedConnections.class);
 	
 	int verifiedConnectionLifetime;
 	

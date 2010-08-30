@@ -7,12 +7,13 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.client.control.OfxClientControl;
 
 public class AbstractJaxbFactory
 {
-	static Logger logger = Logger.getLogger(OfxClientControl.class);
+	static Log logger = LogFactory.getLog(OfxClientControl.class);
 	
 	public void writeJaxb(OutputStream os, Object o)
 	{

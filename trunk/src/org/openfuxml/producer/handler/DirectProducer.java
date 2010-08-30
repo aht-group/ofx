@@ -8,7 +8,8 @@ import java.util.Properties;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.client.control.formats.FormatFactory;
 import org.openfuxml.client.control.formats.FormatFactoryDirect;
 import org.openfuxml.communication.cluster.ejb.Host;
@@ -37,7 +38,7 @@ import de.kisner.util.io.spawn.Spawn;
  */
 public class DirectProducer extends AbstractProducer implements Producer
 {
-	static Logger logger = Logger.getLogger(DirectProducer.class);
+	static Log logger = LogFactory.getLog(DirectProducer.class);
 	public static enum Typ {PRODUCE,ENTITIES};
 	
 	private static Properties sysprops = System.getProperties();

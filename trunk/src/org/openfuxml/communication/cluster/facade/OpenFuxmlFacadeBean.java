@@ -11,7 +11,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.communication.cluster.ejb.EjbObject;
 import org.openfuxml.communication.cluster.ejb.Host;
 
@@ -19,7 +20,7 @@ import org.openfuxml.communication.cluster.ejb.Host;
 @Remote(OpenFuxmlFacade.class)
 public class OpenFuxmlFacadeBean implements OpenFuxmlFacade, Serializable
 {
-	static Logger logger = Logger.getLogger(OpenFuxmlFacadeBean.class);
+	static Log logger = LogFactory.getLog(OpenFuxmlFacadeBean.class);
 	static final long serialVersionUID=13;
 	
 	@PersistenceContext (unitName="openfuxml")

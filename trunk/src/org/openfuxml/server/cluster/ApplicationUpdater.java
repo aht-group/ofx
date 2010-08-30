@@ -11,7 +11,8 @@ import java.util.zip.ZipOutputStream;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.communication.cluster.ejb.ApplicationRepository;
 import org.openfuxml.communication.cluster.facade.ApplicationRepositoryFacade;
 import org.openfuxml.communication.cluster.facade.ApplicationRepositoryFacadeBean;
@@ -21,7 +22,7 @@ import de.kisner.util.xml.XmlConfig;
 
 public class ApplicationUpdater
 {
-	static Logger logger = Logger.getLogger(ApplicationUpdater.class);
+	static Log logger = LogFactory.getLog(ApplicationUpdater.class);
 	
 	public static enum Aktion {SAVEINDB, LOADFROMDB};
 	private static String fSep = System.getProperty("file.separator");

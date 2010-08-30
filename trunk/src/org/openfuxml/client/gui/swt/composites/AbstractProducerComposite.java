@@ -2,7 +2,8 @@ package org.openfuxml.client.gui.swt.composites;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -16,7 +17,7 @@ import org.openfuxml.model.jaxb.ProducibleEntities;
 
 public class AbstractProducerComposite extends Composite
 {
-	static Logger logger = Logger.getLogger(AbstractProducerComposite.class);
+	static Log logger = LogFactory.getLog(AbstractProducerComposite.class);
 	
 	protected OfxClientControl ofxCC;
 	protected Combo cboFormats, cboDocuments;

@@ -6,7 +6,8 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.util.config.PreviousConfigFinder;
 import org.openfuxml.util.config.jaxb.Openfuxml;
 import org.openfuxml.util.config.jaxb.Openfuxml.Net;
@@ -16,7 +17,7 @@ import de.kisner.util.LoggerInit;
 
 public class ClientConfFactory extends AbstractConfFactory
 {
-	static Logger logger = Logger.getLogger(ClientConfFactory.class);
+	static Log logger = LogFactory.getLog(ClientConfFactory.class);
 	
 	private Openfuxml openfuxml;
 	private String mainConf;

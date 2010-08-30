@@ -11,7 +11,8 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.communication.cluster.ejb.EjbObject;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxFormat;
@@ -27,7 +28,7 @@ import org.openfuxml.producer.exception.ProductionSystemException;
 @Remote(ProducerFacade.class)
 public class ProducerFacadeBean implements ProducerFacade, Serializable
 {
-	static Logger logger = Logger.getLogger(ProducerFacadeBean.class);
+	static Log logger = LogFactory.getLog(ProducerFacadeBean.class);
 	static final long serialVersionUID=11;
 	
 	public ProducerFacadeBean()

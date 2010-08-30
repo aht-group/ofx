@@ -3,7 +3,8 @@ package org.openfuxml.client.gui.swt.factory;
 import net.sf.exlp.io.resourceloader.ImageResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -23,7 +24,7 @@ import org.openfuxml.model.jaxb.ProducibleEntities;
 
 public class ProducerEntitiesDisplayFactory
 {
-	static Logger logger = Logger.getLogger(ProducerEntitiesDisplayFactory.class);
+	static Log logger = LogFactory.getLog(ProducerEntitiesDisplayFactory.class);
 	
 	private OfxGuiAction ofxAction;
 	private Configuration config;

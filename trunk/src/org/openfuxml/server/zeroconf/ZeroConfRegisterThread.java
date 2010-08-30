@@ -6,11 +6,12 @@ import java.util.Hashtable;
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceInfo;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class ZeroConfRegisterThread extends Thread
 {
-	static Logger logger = Logger.getLogger(ZeroConfRegisterThread.class);
+	static Log logger = LogFactory.getLog(ZeroConfRegisterThread.class);
 	
 	ServiceInfo serviceInfo;
 	

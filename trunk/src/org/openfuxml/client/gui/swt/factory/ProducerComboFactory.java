@@ -1,6 +1,7 @@
 package org.openfuxml.client.gui.swt.factory;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -15,7 +16,7 @@ import org.openfuxml.model.ejb.OfxProject;
 
 public class ProducerComboFactory
 {
-	 static Logger logger = Logger.getLogger(ProducerComboFactory.class);
+	static Log logger = LogFactory.getLog(ProducerComboFactory.class);
 	
 	private Composite composite;
 	private OfxGuiAction ofxAction;

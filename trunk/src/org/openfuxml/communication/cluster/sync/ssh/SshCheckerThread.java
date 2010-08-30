@@ -1,6 +1,7 @@
 package org.openfuxml.communication.cluster.sync.ssh;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
@@ -12,7 +13,7 @@ import com.jcraft.jsch.Session;
  */
 public class SshCheckerThread extends Thread 
 {
-	static Logger logger = Logger.getLogger(SshChecker.class);
+	static Log logger = LogFactory.getLog(SshChecker.class);
 	
 	private SshChecker sshC;
 	private String user,host;

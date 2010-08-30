@@ -6,7 +6,8 @@ package org.openfuxml.client.gui.util;
 import java.util.ArrayList;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
@@ -19,7 +20,7 @@ import de.kisner.util.LoggerInit;
  */
 public class LogSyntaxHighlightner
 {
-	static Logger logger = Logger.getLogger(LogSyntaxHighlightner.class);
+	static Log logger = LogFactory.getLog(LogSyntaxHighlightner.class);
 	
 	private StyledText textLog;
 	private int aktuellerIndex;

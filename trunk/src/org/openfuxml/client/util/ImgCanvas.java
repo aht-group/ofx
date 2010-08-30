@@ -2,7 +2,8 @@ package org.openfuxml.client.util;
 
 import java.io.FileNotFoundException;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
@@ -19,7 +20,7 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
  */
 public class ImgCanvas extends Canvas
 {
-	static Logger logger = Logger.getLogger(ImgCanvas.class);
+	static Log logger = LogFactory.getLog(ImgCanvas.class);
 	
 	public final static int BEGIN  = 0;
 	public final static int CENTER = 1;

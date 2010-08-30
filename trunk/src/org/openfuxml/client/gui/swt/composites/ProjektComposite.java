@@ -3,7 +3,8 @@ package org.openfuxml.client.gui.swt.composites;
 import java.io.FileNotFoundException;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -28,7 +29,7 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
  */
 public class ProjektComposite extends Composite
 {	
-	static Logger logger = Logger.getLogger(ProjektComposite.class);
+	static Log logger = LogFactory.getLog(ProjektComposite.class);
 	
 	private OpenFuxmlClient client;
 	private TabFolder tabFolder;

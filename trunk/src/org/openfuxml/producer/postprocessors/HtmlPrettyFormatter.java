@@ -12,7 +12,8 @@ import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.HiddenFileFilter;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.htmlcleaner.CleanerProperties;
 import org.htmlcleaner.CleanerTransformations;
 import org.htmlcleaner.HtmlCleaner;
@@ -28,7 +29,7 @@ import de.kisner.util.LoggerInit;
 
 public class HtmlPrettyFormatter extends DirectoryWalker
 {
-	static Logger logger = Logger.getLogger(OfxApp.class);
+	static Log logger = LogFactory.getLog(OfxApp.class);
 	
 	private CleanerTransformations ct;
 	

@@ -4,7 +4,8 @@ import java.io.Writer;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
@@ -16,7 +17,7 @@ import de.kisner.util.architecture.EnvironmentParameter;
 
 public abstract class AbstractProducer
 {
-	static Logger logger = Logger.getLogger(AbstractProducer.class);
+	static Log logger = LogFactory.getLog(AbstractProducer.class);
 	protected EnvironmentParameter envP;
 	protected Configuration config;
 	protected Writer w;

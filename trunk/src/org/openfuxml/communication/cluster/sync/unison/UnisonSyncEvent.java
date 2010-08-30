@@ -4,14 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import de.kisner.util.event.AbstractEvent;
 import de.kisner.util.event.EventInterface;
 
 public class UnisonSyncEvent extends AbstractEvent implements EventInterface,Serializable
 {
-	static Logger logger = Logger.getLogger(UnisonSyncEvent.class);
+	static Log logger = LogFactory.getLog(UnisonSyncEvent.class);
 	static final long serialVersionUID=1;
 	
 	public static enum SyncResult {UNDEFINED,NothingToDo,Complete};
