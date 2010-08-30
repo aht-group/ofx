@@ -9,10 +9,10 @@ import org.jdom.Element;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxgallery.Ofximage;
 import org.openfuxml.addon.wiki.util.JdomXmlStreamer;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
-import org.openfuxml.content.AbsatzOhne;
-import org.openfuxml.content.Grafik;
-import org.openfuxml.content.Medienobjekt;
-import org.openfuxml.content.Medienobjekt.Objekttitel;
+import org.openfuxml.content.fuxml.AbsatzOhne;
+import org.openfuxml.content.fuxml.Grafik;
+import org.openfuxml.content.fuxml.Medienobjekt;
+import org.openfuxml.content.fuxml.Medienobjekt.Objekttitel;
 
 public class OfxImageEmitter
 {

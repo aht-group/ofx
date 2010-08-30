@@ -6,7 +6,7 @@
 //
 
 
-package org.openfuxml.content;
+package org.openfuxml.content.ofx;
 
 import java.util.Calendar;
 import javax.xml.bind.annotation.adapters.XmlAdapter;

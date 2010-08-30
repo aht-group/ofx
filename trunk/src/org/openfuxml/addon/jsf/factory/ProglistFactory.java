@@ -9,8 +9,8 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.jsf.JsfTagTransformator;
-import org.openfuxml.content.Raw;
-import org.openfuxml.content.Title;
+import org.openfuxml.content.ofx.Raw;
+import org.openfuxml.content.ofx.Title;
 
 public class ProglistFactory
 {
@@ -24,10 +24,10 @@ public class ProglistFactory
 		this.fDocBase=fDocBase;
 	}
 	
-	public org.openfuxml.content.Listing createProglist(org.openfuxml.addon.jsf.data.jaxb.Listing jsfListing)
+	public org.openfuxml.content.ofx.Listing createProglist(org.openfuxml.addon.jsf.data.jaxb.Listing jsfListing)
 	{
 		logger.debug("Creating listing .."+jsfListing.getFile());
-		org.openfuxml.content.Listing ofxListing = new org.openfuxml.content.Listing();
+		org.openfuxml.content.ofx.Listing ofxListing = new org.openfuxml.content.ofx.Listing();
 		Title title = new Title();
 		title.setValue(jsfListing.getTitle());
 		title.setNumbering(true);

@@ -6,9 +6,9 @@ import org.apache.log4j.Logger;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
-import org.openfuxml.content.Paragraph;
-import org.openfuxml.content.Section;
-import org.openfuxml.content.Title;
+import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.ofx.Section;
+import org.openfuxml.content.ofx.Title;
 
 public class TagSectionFactory
 {

@@ -17,7 +17,7 @@ import org.openfuxml.addon.epub.data.jaxb.ncx.Head;
 import org.openfuxml.addon.epub.data.jaxb.ncx.NavMap;
 import org.openfuxml.addon.epub.data.jaxb.ncx.Ncx;
 import org.openfuxml.addon.epub.util.NcxFactory;
-import org.openfuxml.content.Section;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.producer.preprocessors.ExternalMerger;
 
 public class NcxGenerator

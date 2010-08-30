@@ -6,14 +6,13 @@
 //
 
 
-package org.openfuxml.addon.chart.jaxb;
+package org.openfuxml.content.ofx;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -29,9 +28,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/chart}data" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org}section" maxOccurs="unbounded"/>
  *       &lt;/sequence>
- *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -41,82 +39,52 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "data"
+    "section"
 })
-@XmlRootElement(name = "container")
-public class Container
+@XmlRootElement(name = "content")
+public class Content
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://www.openfuxml.org/chart", required = true)
-    protected List<Data> data;
-    @XmlAttribute
-    protected String label;
+    @XmlElement(required = true)
+    protected List<Section> section;
 
     /**
-     * Gets the value of the data property.
+     * Gets the value of the section property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the data property.
+     * This is why there is not a <CODE>set</CODE> method for the section property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getData().add(newItem);
+     *    getSection().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Data }
+     * {@link Section }
      * 
      * 
      */
-    public List<Data> getData() {
-        if (data == null) {
-            data = new ArrayList<Data>();
+    public List<Section> getSection() {
+        if (section == null) {
+            section = new ArrayList<Section>();
         }
-        return this.data;
+        return this.section;
     }
 
-    public boolean isSetData() {
-        return ((this.data!= null)&&(!this.data.isEmpty()));
+    public boolean isSetSection() {
+        return ((this.section!= null)&&(!this.section.isEmpty()));
     }
 
-    public void unsetData() {
-        this.data = null;
-    }
-
-    /**
-     * Gets the value of the label property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getLabel() {
-        return label;
-    }
-
-    /**
-     * Sets the value of the label property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLabel(String value) {
-        this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
+    public void unsetSection() {
+        this.section = null;
     }
 
 }
