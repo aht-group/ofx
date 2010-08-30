@@ -61,7 +61,7 @@
 		<property name="mjar.custom" value="${metalib.dir}/${exlp.dir}/${exlp.lib}  ${metalib.dir}/${ahtutils.dir}/${ahtutils.lib}"/>
 		<echo level="info">Custom: ${mjar.custom}</echo>
 		<echo level="info">Meta: ${meta.jar}</echo>
-		<echo level="info">Test: ${m.jboss}</echo>
+		<echo level="info">Test: ${m.xml1}</echo>
 		
 		<echo level="info">Creating jars</echo>
 		<jar destfile="${locallib.dir}/custom-libs.jar">

@@ -40,7 +40,9 @@
     </xsd:element>
     <xsd:element name="metadata">
         <xsd:complexType>
-            <xsd:sequence> </xsd:sequence>
+            <xsd:sequence>
+                <xsd:element ref="title" maxOccurs="1"/>
+            </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="content">

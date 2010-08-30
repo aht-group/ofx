@@ -4,9 +4,9 @@ import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
 public class OfxNsPrefixMapper extends NamespacePrefixMapper
 {
-
     public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix)
     {
+    	if("http://www.openfuxml.org".equals(namespaceUri) ){return "ofx";}
         if("http://www.openfuxml.org/chart".equals(namespaceUri) ){return "chart";}
   
         return suggestion;

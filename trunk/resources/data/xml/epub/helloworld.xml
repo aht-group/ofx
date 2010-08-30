@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ofxdoc xmlns="http://www.openfuxml.org">
-	<metadata>
-		
-	</metadata>
+	<metadata/>
 	<content>
 		<section id="sec-chapter1">
 			<title>Chapter 1</title>

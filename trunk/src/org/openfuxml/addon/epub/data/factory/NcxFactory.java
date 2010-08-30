@@ -1,4 +1,4 @@
-package org.openfuxml.addon.epub.util;
+package org.openfuxml.addon.epub.data.factory;
 
 import org.openfuxml.addon.epub.data.jaxb.ncx.DocTitle;
 import org.openfuxml.addon.epub.data.jaxb.ncx.Head;
