@@ -19,7 +19,8 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.openfuxml.content.Paragraph;
+
+import org.openfuxml.content.ofx.Paragraph;
 
 
 /**

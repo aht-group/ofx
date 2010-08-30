@@ -12,8 +12,8 @@ import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsf.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
-import org.openfuxml.content.Paragraph;
-import org.openfuxml.content.Reference;
+import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.ofx.Reference;
 
 import de.kisner.util.LoggerInit;
 

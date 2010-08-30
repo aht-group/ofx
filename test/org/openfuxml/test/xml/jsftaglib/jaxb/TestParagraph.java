@@ -6,8 +6,8 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
-import org.openfuxml.content.Emphasis;
-import org.openfuxml.content.Paragraph;
+import org.openfuxml.content.ofx.Emphasis;
+import org.openfuxml.content.ofx.Paragraph;
 
 import de.kisner.util.LoggerInit;
 

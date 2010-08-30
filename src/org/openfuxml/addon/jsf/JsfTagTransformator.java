@@ -20,7 +20,7 @@ import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 import org.openfuxml.addon.jsf.factory.TagChapterFactory;
 import org.openfuxml.addon.jsf.factory.TagSectionFactory;
-import org.openfuxml.content.Section;
+import org.openfuxml.content.ofx.Section;
 
 public class JsfTagTransformator
 {

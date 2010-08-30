@@ -104,7 +104,7 @@
 		</javac>
 	</target>
 	
-	<target name="4 - JAXB Class generation" description="Compile the source">
+	<target name="4 - JAXB" description="Create JAXB classes">
 		<echo level="info">Creating JAXB Configuration Class</echo>		
 		<java classname="com.sun.tools.xjc.XJCFacade"
 				fork="true" failonerror="true"  maxmemory="128m">

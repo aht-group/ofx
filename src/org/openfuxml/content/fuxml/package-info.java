@@ -5,5 +5,5 @@
 // Generated on: 2010.08.30 at 09:41:11 AM MESZ 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.openfuxml.org/chart")
-package org.openfuxml.addon.chart.jaxb;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.openfuxml.org/fuxml", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+package org.openfuxml.content.fuxml;

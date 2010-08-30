@@ -1,14 +1,15 @@
 package org.openfuxml.addon.jsf.factory;
 
 import java.io.File;
+import java.io.Serializable;
 
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.jsf.JsfTagTransformator;
 import org.openfuxml.addon.jsf.data.jaxb.Example;
 import org.openfuxml.addon.jsf.data.jaxb.Listing;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
-import org.openfuxml.content.Section;
-import org.openfuxml.content.Title;
+import org.openfuxml.content.ofx.Section;
+import org.openfuxml.content.ofx.Title;
 
 public class TagExampleFactory
 {
@@ -53,7 +54,7 @@ public class TagExampleFactory
 			}
 			else
 			{
-				secExample.getContent().add(s);
+				secExample.getContent().add((Serializable)s);
 			}
 		}
 		

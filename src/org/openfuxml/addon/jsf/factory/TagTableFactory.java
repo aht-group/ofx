@@ -11,10 +11,10 @@ import org.jdom.Document;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
-import org.openfuxml.content.Row;
-import org.openfuxml.content.Section;
-import org.openfuxml.content.Table;
-import org.openfuxml.content.Title;
+import org.openfuxml.content.ofx.Row;
+import org.openfuxml.content.ofx.Section;
+import org.openfuxml.content.ofx.Table;
+import org.openfuxml.content.ofx.Title;
 
 public class TagTableFactory
 {
