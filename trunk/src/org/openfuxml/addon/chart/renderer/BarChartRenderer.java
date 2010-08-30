@@ -2,7 +2,8 @@ package org.openfuxml.addon.chart.renderer;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
@@ -16,7 +17,7 @@ import org.openfuxml.addon.chart.util.ChartLabelResolver;
 
 public class BarChartRenderer implements OfxChartRenderer
 {
-	static Logger logger = Logger.getLogger(BarChartRenderer.class);
+	static Log logger = LogFactory.getLog(BarChartRenderer.class);
 	
 	public BarChartRenderer()
 	{

@@ -11,7 +11,8 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.util.xml.XsltUtil;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.DocType;
 import org.jdom.Document;
 import org.jdom.output.Format;
@@ -24,7 +25,7 @@ import org.openfuxml.content.ofx.Section;
 
 public class JsfTagTransformator
 {
-	private static Logger logger = Logger.getLogger(JsfTagTransformator.class);
+	static Log logger = LogFactory.getLog(JsfTagTransformator.class);
 	
 	private File outputDir,fTagBase,fDocBase;
 	private int dtdLevel;

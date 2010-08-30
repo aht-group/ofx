@@ -6,7 +6,8 @@ import net.sf.exlp.io.resourceloader.ImageResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -44,7 +45,7 @@ import org.openfuxml.client.gui.simple.Client;
  */
 public class HelpAboutDialog extends Dialog
 {
-	static Logger logger = Logger.getLogger(HelpAboutDialog.class);
+	static Log logger = LogFactory.getLog(HelpAboutDialog.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 
 	public final static int ABOUT_DIALOG	= 0;

@@ -5,12 +5,13 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Namespace;
 
 public class NsFactory
 {
-	private static Logger logger = Logger.getLogger(NsFactory.class);
+	static Log logger = LogFactory.getLog(NsFactory.class);
 	
 	private static Map<String,Namespace> mNs;
 		

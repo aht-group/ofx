@@ -6,13 +6,13 @@ import java.util.TreeMap;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
-
 
 public class SimpleMappingEmitter extends NestingEmitter
 {
-	private static Logger logger = Logger.getLogger(SimpleMappingEmitter.class);
+	static Log logger = LogFactory.getLog(SimpleMappingEmitter.class);
 	
 	private final String[] tags;
 

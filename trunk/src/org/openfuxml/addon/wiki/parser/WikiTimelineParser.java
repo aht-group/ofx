@@ -17,7 +17,8 @@ import net.sf.exlp.listener.impl.LogListenerXml;
 import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.parser.LogParser;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchartcontainer;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchartdata;
@@ -25,7 +26,7 @@ import org.openfuxml.addon.wiki.event.WikiChartEvent;
 
 public class WikiTimelineParser extends AbstractLogParser implements LogParser  
 {
-	private static Logger logger = Logger.getLogger(WikiTimelineParser.class);
+	static Log logger = LogFactory.getLog(WikiTimelineParser.class);
 	private static enum Section {none,bardata,plotdata};
 	
 	private Section section;

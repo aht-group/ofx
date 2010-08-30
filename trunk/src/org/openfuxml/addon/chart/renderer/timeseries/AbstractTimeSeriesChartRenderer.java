@@ -4,7 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.PeriodAxis;
@@ -24,7 +25,7 @@ import org.openfuxml.addon.chart.util.ChartLabelResolver;
 
 public abstract class AbstractTimeSeriesChartRenderer extends XYPlotRenderer implements OfxChartRenderer
 {
-	static Logger logger = Logger.getLogger(AbstractTimeSeriesChartRenderer.class);
+	static Log logger = LogFactory.getLog(AbstractTimeSeriesChartRenderer.class);
 	
 	public static enum OfxChartTimePeriod {Hour,Day,Month};
 	protected OfxChartTimePeriod ofxTimePeriod;

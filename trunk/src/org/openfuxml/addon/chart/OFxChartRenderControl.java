@@ -2,6 +2,8 @@ package org.openfuxml.addon.chart;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jfree.chart.JFreeChart;
@@ -16,7 +18,7 @@ import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 
 public class OFxChartRenderControl
 {
-	static Logger logger = Logger.getLogger(OFxChartRenderControl.class);
+	static Log logger = LogFactory.getLog(OFxChartRenderControl.class);
 	
 	public OFxChartRenderControl()
 	{

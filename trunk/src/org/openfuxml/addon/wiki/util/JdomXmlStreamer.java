@@ -3,7 +3,8 @@ package org.openfuxml.addon.wiki.util;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.jdom.Text;
@@ -11,7 +12,7 @@ import org.openfuxml.addon.wiki.emitter.injection.OfxInjectionEmitter;
 
 public class JdomXmlStreamer
 {	
-	private static Logger logger = Logger.getLogger(OfxInjectionEmitter.class);
+	static Log logger = LogFactory.getLog(OfxInjectionEmitter.class);
 	
 	private XMLStreamWriter writer;
 	

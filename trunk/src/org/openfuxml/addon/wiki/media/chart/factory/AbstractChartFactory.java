@@ -1,6 +1,7 @@
 package org.openfuxml.addon.wiki.media.chart.factory;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -8,7 +9,7 @@ import org.jdom.xpath.XPath;
 
 public class AbstractChartFactory
 {
-	private static Logger logger = Logger.getLogger(AbstractChartFactory.class);
+	static Log logger = LogFactory.getLog(AbstractChartFactory.class);
 	
 	protected double getChartValue(String xp, String type, Document doc)
 	{

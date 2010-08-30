@@ -18,7 +18,8 @@ import javax.xml.bind.Marshaller;
 
 import net.sf.exlp.io.StringBufferOutputStream;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -30,7 +31,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 
 public class WikiContentIO
 {
-	static Logger logger = Logger.getLogger(WikiContentIO.class);
+	static Log logger = LogFactory.getLog(WikiContentIO.class);
 	
 	public static synchronized void writeTxt(String dirName, String fileName, String content)
 	{

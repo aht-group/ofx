@@ -7,12 +7,13 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.producer.preprocessors.ExternalMerger;
 
 public class MimetypeFactory
 {
-	static Logger logger = Logger.getLogger(ExternalMerger.class);
+	static Log logger = LogFactory.getLog(ExternalMerger.class);
 	
 	private File targetDir;
 	

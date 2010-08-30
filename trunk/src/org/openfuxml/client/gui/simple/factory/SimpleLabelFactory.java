@@ -4,7 +4,8 @@ import net.sf.exlp.io.resourceloader.ImageResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -13,7 +14,7 @@ import org.eclipse.swt.widgets.Label;
 
 public class SimpleLabelFactory
 {
-	 static Logger logger = Logger.getLogger(SimpleLabelFactory.class);
+	static Log logger = LogFactory.getLog(SimpleLabelFactory.class);
 	 
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	private Composite composite;

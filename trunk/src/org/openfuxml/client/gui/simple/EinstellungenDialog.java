@@ -3,7 +3,8 @@ package org.openfuxml.client.gui.simple;
 import net.sf.exlp.io.ConfigLoader;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -34,7 +35,7 @@ import org.eclipse.swt.widgets.Text;
  */
 public class EinstellungenDialog extends Dialog
 {
-	static Logger logger = Logger.getLogger(EinstellungenDialog.class);
+	static Log logger = LogFactory.getLog(EinstellungenDialog.class);
 	
 	private Shell shell;
 

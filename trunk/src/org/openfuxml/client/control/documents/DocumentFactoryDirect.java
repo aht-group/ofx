@@ -6,7 +6,8 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.client.gui.simple.ExtensionFilenameFilter;
 import org.openfuxml.model.ejb.OfxApplication;
 import org.openfuxml.model.ejb.OfxDocument;
@@ -15,7 +16,7 @@ import org.openfuxml.util.config.OfxPathHelper;
 
 public class DocumentFactoryDirect implements DocumentFactory
 {
-	static Logger logger = Logger.getLogger(DocumentFactoryDirect.class);
+	static Log logger = LogFactory.getLog(DocumentFactoryDirect.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Configuration config;

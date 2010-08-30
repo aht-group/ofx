@@ -2,12 +2,13 @@ package org.openfuxml.addon.chart.util;
 
 import java.awt.Color;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.chart.jaxb.Chart;
 
 public class ChartColorFactory
 {
-	static Logger logger = Logger.getLogger(ChartColorFactory.class);
+	static Log logger = LogFactory.getLog(ChartColorFactory.class);
 	
 	public static enum Area{backgroundChart,backgroundPlot,
 							gridRange,gridDomain}

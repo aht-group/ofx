@@ -3,13 +3,14 @@ package org.openfuxml.addon.wiki.processing;
 import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.DocType;
 import org.jdom.Document;
 
 public class XmlProcessor
 {
-	static Logger logger = Logger.getLogger(XmlProcessor.class);
+	static Log logger = LogFactory.getLog(XmlProcessor.class);
 	private Document doc;
 	
 	public XmlProcessor(Configuration config)

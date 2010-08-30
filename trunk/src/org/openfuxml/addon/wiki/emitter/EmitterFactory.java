@@ -3,12 +3,14 @@ package org.openfuxml.addon.wiki.emitter;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.emitter.injection.OfxInjectionEmitter;
 
 public class EmitterFactory
 {
-	private static Logger logger = Logger.getLogger(EmitterFactory.class);
+	static Log logger = LogFactory.getLog(EmitterFactory.class);
+	
 	private XMLStreamWriter writer;
 	private Configuration config;
 	

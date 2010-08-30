@@ -4,14 +4,16 @@ import java.io.File;
 
 import net.sf.exlp.io.LoggerInit;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.openfuxml.addon.jsfapp.factory.MenuFactory;
 
 public class MenuParserTask extends Task
 {	
-	static Logger logger = Logger.getLogger(MenuFactory.class);
+	static Log logger = LogFactory.getLog(MenuParserTask.class);
+	
 	private String htmlToc,addToc,xmlToc, prefix, suffix;
 
 	private boolean useLog4j;

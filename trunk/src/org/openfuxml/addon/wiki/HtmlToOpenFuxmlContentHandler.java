@@ -7,7 +7,8 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.emitter.EmitterFactory;
 import org.openfuxml.addon.wiki.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.emitter.OfxSectionEmitter;
@@ -19,7 +20,7 @@ import org.xml.sax.SAXException;
  
 public class HtmlToOpenFuxmlContentHandler implements ContentHandler
 {
-	private static Logger logger = Logger.getLogger(HtmlToOpenFuxmlContentHandler.class);
+	static Log logger = LogFactory.getLog(HtmlToOpenFuxmlContentHandler.class);
 	
 	private OfxSectionEmitter sctionEmitter;
 	private NestingEmitter emitter;

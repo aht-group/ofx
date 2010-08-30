@@ -2,7 +2,8 @@ package org.openfuxml.addon.wiki.media.chart.factory;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.xpath.XPath;
@@ -20,7 +21,7 @@ import org.openfuxml.addon.wiki.media.chart.ChartXmlUtil;
 
 public class BarChartFactory extends AbstractChartFactory
 {
-	private static Logger logger = Logger.getLogger(BarChartFactory.class);
+	static Log logger = LogFactory.getLog(BarChartFactory.class);
 	
 	public BarChartFactory()
 	{

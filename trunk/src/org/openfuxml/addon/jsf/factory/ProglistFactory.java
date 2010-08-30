@@ -7,14 +7,15 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.jsf.JsfTagTransformator;
 import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.content.ofx.Title;
 
 public class ProglistFactory
 {
-	private static Logger logger = Logger.getLogger(ProglistFactory.class);
+	static Log logger = LogFactory.getLog(ProglistFactory.class);
 	
 	private File fDocBase;
 	private String logMsg;

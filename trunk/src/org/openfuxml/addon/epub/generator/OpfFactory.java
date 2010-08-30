@@ -6,7 +6,8 @@ import java.util.List;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -16,7 +17,7 @@ import org.openfuxml.producer.preprocessors.ExternalMerger;
 
 public class OpfFactory
 {
-	static Logger logger = Logger.getLogger(ExternalMerger.class);
+	static Log logger = LogFactory.getLog(ExternalMerger.class);
 	
 	private File targetDir;
 	private Document doc;

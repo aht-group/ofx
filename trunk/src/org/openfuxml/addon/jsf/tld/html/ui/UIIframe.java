@@ -3,11 +3,12 @@ package org.openfuxml.addon.jsf.tld.html.ui;
 import javax.faces.component.UIOutput;
 import javax.faces.context.FacesContext;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class UIIframe extends UIOutput
 {	
-	private static Logger logger = Logger.getLogger(UIIframe.class);
+	static Log logger = LogFactory.getLog(UIIframe.class);
 	
 	private String content;
 

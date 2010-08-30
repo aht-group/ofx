@@ -16,12 +16,13 @@ import net.sourceforge.jwbf.actions.util.ProcessException;
 import net.sourceforge.jwbf.bots.MediaWikiBot;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.xmlgraphics.java2d.ps.EPSDocumentGraphics2D;
 
 public class WikiImageProcessor
 {
-	static Logger logger = Logger.getLogger(WikiImageProcessor.class);
+	static Log logger = LogFactory.getLog(WikiImageProcessor.class);
 	
 	private BufferedImage image;
 	private Configuration config;

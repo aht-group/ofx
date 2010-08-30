@@ -13,7 +13,8 @@ import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxgallery;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
@@ -28,7 +29,7 @@ import org.openfuxml.addon.wiki.util.WikiContentIO;
 
 public class InjectionProcessor
 {
-	static Logger logger = Logger.getLogger(InjectionProcessor.class);
+	static Log logger = LogFactory.getLog(InjectionProcessor.class);
 	
 	private File dirInjection;
 	private Configuration config;

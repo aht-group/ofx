@@ -1,6 +1,7 @@
 package org.openfuxml.addon.wiki.util;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
 
@@ -8,7 +9,7 @@ import com.aht.util.translation.Translation;
 
 public class OfxchartUtil
 {
-	static Logger logger = Logger.getLogger(OfxchartUtil.class);
+	static Log logger = LogFactory.getLog(OfxchartUtil.class);
 	
 	public static synchronized Ofxchart getChart(Ofx ofx, String id, String type)
 	{

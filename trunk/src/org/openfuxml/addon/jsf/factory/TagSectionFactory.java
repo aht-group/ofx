@@ -2,7 +2,8 @@ package org.openfuxml.addon.jsf.factory;
 
 import java.io.File;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
@@ -12,7 +13,7 @@ import org.openfuxml.content.ofx.Title;
 
 public class TagSectionFactory
 {
-	private static Logger logger = Logger.getLogger(TagSectionFactory.class);
+	static Log logger = LogFactory.getLog(TagSectionFactory.class);
 	
 	private Taglib taglib;
 	private TagExampleFactory factoryExamples;

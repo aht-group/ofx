@@ -6,13 +6,14 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.model.ejb.OfxProject;
 import org.openfuxml.util.config.OfxPathHelper;
 
 public class ProjectFactoryDirect implements ProjectFactory
 {
-	static Logger logger = Logger.getLogger(ProjectFactoryDirect.class);
+	static Log logger = LogFactory.getLog(ProjectFactoryDirect.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Configuration config;

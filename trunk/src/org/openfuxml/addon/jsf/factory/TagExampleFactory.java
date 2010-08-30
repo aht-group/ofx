@@ -3,7 +3,8 @@ package org.openfuxml.addon.jsf.factory;
 import java.io.File;
 import java.io.Serializable;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.jsf.JsfTagTransformator;
 import org.openfuxml.addon.jsf.data.jaxb.Example;
 import org.openfuxml.addon.jsf.data.jaxb.Listing;
@@ -13,7 +14,7 @@ import org.openfuxml.content.ofx.Title;
 
 public class TagExampleFactory
 {
-	static Logger logger = Logger.getLogger(JsfTagTransformator.class);
+	static Log logger = LogFactory.getLog(JsfTagTransformator.class);
 	
 	private ProglistFactory factoryProglist;
 	
