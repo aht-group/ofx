@@ -1,25 +1,25 @@
 package org.openfuxml.addon.epub.generator;
 
 import java.io.File;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdom.Document;
-import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.Namespace;
-import org.jdom.xpath.XPath;
+import org.openfuxml.addon.epub.data.factory.NcxFactory;
+import org.openfuxml.addon.epub.data.jaxb.EpubJaxbXpathLoader;
 import org.openfuxml.addon.epub.data.jaxb.ncx.Head;
 import org.openfuxml.addon.epub.data.jaxb.ncx.NavMap;
+import org.openfuxml.addon.epub.data.jaxb.ncx.NavMap.NavPoint;
 import org.openfuxml.addon.epub.data.jaxb.ncx.Ncx;
-import org.openfuxml.addon.epub.util.NcxFactory;
+import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.content.ofx.Title;
 import org.openfuxml.producer.preprocessors.ExternalMerger;
+import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class NcxGenerator
 {
@@ -29,19 +29,22 @@ public class NcxGenerator
 	private Ncx ncx;
 	private int playOrder;
 	
+	private OfxNsPrefixMapper ofxNsPrefixMapper;
+	
 	public NcxGenerator(File targetDir)
 	{
 		this.targetDir=targetDir;
+		ofxNsPrefixMapper = new OfxNsPrefixMapper();
 		playOrder=1;
 	}
 	
-	public void create(Document doc)
+	public void create(Ofxdoc ofxDoc)
 	{
 		ncx = new Ncx();
 		ncx.setVersion("2005-1");
 		ncx.setHead(getHead());
 		ncx.setDocTitle(NcxFactory.getTitle("Test Title"));
-		ncx.setNavMap(getNavMap(doc));
+		ncx.setNavMap(getNavMap(ofxDoc));
 	}
 	
 	public void save()
@@ -52,6 +55,7 @@ public class NcxGenerator
 	
 	private Head getHead()
 	{
+		logger.debug("Creating Head");
 		Head head = new Head();
 		head.getMeta().add(NcxFactory.getHeadMeta("dtb:uid", "helloWorld"));
 		head.getMeta().add(NcxFactory.getHeadMeta("dtb:depth", "1"));
@@ -60,25 +64,33 @@ public class NcxGenerator
 		return head;
 	}
 	
-	private NavMap getNavMap(Document doc)
+	private NavMap getNavMap(Ofxdoc ofxDoc)
 	{
+		logger.debug("Creating NavMap");
 		NavMap navmap = new NavMap();
 		try
 		{
-			Namespace ns = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
-			XPath xpath = XPath.newInstance("//ofx:ofxdoc/ofx:content/ofx:section");
-			xpath.addNamespace(ns);
+			navmap.getNavPoint().addAll(getSectionNav(ofxDoc));
 			
-			List<?> list = xpath.selectNodes(doc);
-			for (Iterator<?> iter = list.iterator(); iter.hasNext();)
-			{
-				Element childElement = (Element) iter.next();
-				Section section = (Section)JDomUtil.toJaxb(childElement, Section.class);
-				navmap.getNavPoint().add(NcxFactory.getNavPoint(section.getId(), playOrder, "Title Page", "title.xhtml"));
-				playOrder++;
-			}
+//			Document doc = JaxbUtil.toDocument(ofxDoc, ofxNsPrefixMapper);
 		}
 		catch (JDOMException e) {logger.error(e);}
 		return navmap;
+	}
+	
+	private List<NavPoint> getSectionNav(Ofxdoc ofxDoc) throws JDOMException
+	{
+		List<NavPoint> result = new ArrayList<NavPoint>();
+		
+		int secNr=1;
+		for(Section section : ofxDoc.getContent().getSection())
+		{
+			logger.debug("secNo="+secNr+" "+section.getId());
+			Title title = EpubJaxbXpathLoader.getTitle(section);
+			logger.debug(title);
+			result.add(NcxFactory.getNavPoint(section.getId(), playOrder, title.getValue(), "section-"+secNr+".xhtml"));
+			playOrder++;secNr++;
+		}
+		return result;
 	}
 }

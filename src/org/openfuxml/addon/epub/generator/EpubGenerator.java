@@ -3,12 +3,16 @@ package org.openfuxml.addon.epub.generator;
 import java.io.File;
 
 import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
+import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.producer.preprocessors.ExternalMerger;
 import org.openfuxml.producer.preprocessors.IdTagger;
+import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class EpubGenerator
 {
@@ -20,6 +24,7 @@ public class EpubGenerator
 	private OpfFactory opfFactory;
 	
 	private IdTagger idTagger;
+	private OfxNsPrefixMapper ofxNsPrefixMapper;
 	
 	public EpubGenerator(File targetDir)
 	{
@@ -27,27 +32,32 @@ public class EpubGenerator
 		mimeFactory = new MimetypeFactory(targetDir);
 		containerFactory = new ContainerFactory(targetDir);
 		opfFactory = new OpfFactory(targetDir);
+		
 		idTagger = new IdTagger();
+		ofxNsPrefixMapper = new OfxNsPrefixMapper();
 	}
 	
 	public void process(File f)
 	{
 		ExternalMerger exMerger = new ExternalMerger(f);
 		Document doc = exMerger.merge();
-		
 		idTagger.tag(doc);
 		
-		ncxGenerator.create(doc);
+		Ofxdoc ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
+		
+//		JaxbUtil.debug(ofxDoc,ofxNsPrefixMapper);
+		
+		ncxGenerator.create(ofxDoc);
 		ncxGenerator.save();
 		
-		containerFactory.create();
+/*		containerFactory.create();
 		containerFactory.save();
 		
 		mimeFactory.save();
 		
 		opfFactory.create();
 		opfFactory.save();
-	}
+*/	}
 	
 	public static void main (String[] args) throws Exception
 	{
