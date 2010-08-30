@@ -1,38 +1,24 @@
 package org.openfuxml.test.xml.wiki;
 
-import info.bliki.wiki.model.WikiModel;
-
 import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.stream.XMLStreamException;
 
 import net.sf.exlp.io.ConfigLoader;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
-import org.openfuxml.addon.wiki.OpenFuxmlGenerator;
 import org.openfuxml.addon.wiki.OfxWikiEngine;
 import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.model.WikiDefaultModel;
-import org.openfuxml.addon.wiki.processing.WikiProcessor;
-import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
-import org.openfuxml.addon.wiki.util.WikiContentIO;
-import org.openfuxml.addon.wiki.util.WikiTextFetcher;
-import org.openfuxml.test.xml.wiki.docbook.DocbookGenerator;
-import org.xml.sax.SAXException;
 
 import de.kisner.util.LoggerInit;
 
 public class TestProcessedJdom
 {
-	static Logger logger = Logger.getLogger(TestProcessedJdom.class);
+	static Log logger = LogFactory.getLog(TestProcessedJdom.class);
 
 	private String dirName;
 	private Configuration config;

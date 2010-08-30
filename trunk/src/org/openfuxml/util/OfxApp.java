@@ -4,7 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.producer.postprocessors.HtmlPrettyFormatter;
 import org.openfuxml.producer.postprocessors.HtmlTagSubstitutor;
 
@@ -14,7 +15,7 @@ public class OfxApp
 {
 	public static enum Target {HtmlPrettyFormatter, HtmlTagSubstitutor};
 	
-	static Logger logger = Logger.getLogger(OfxApp.class);
+	static Log logger = LogFactory.getLog(OfxApp.class);
 	
 	public static String version;
 	

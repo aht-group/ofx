@@ -3,13 +3,14 @@ package org.openfuxml.test.xml.jsfapp;
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.openfuxml.addon.jsfapp.factory.JsfJspxFactory;
 
 public class TestJsfFactory
 {
-	private static Logger logger = Logger.getLogger(TestJsfFactory.class);
+	static Log logger = LogFactory.getLog(TestJsfFactory.class);
 	
 	public TestJsfFactory()
 	{

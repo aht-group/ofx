@@ -3,13 +3,14 @@ package org.openfuxml.test.xml.jsftaglib.jaxb;
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.jsfapp.data.jaxb.Menu;
 import org.openfuxml.addon.jsfapp.data.jaxb.Menuitem;
 
 public class TestMenu
 {
-	private static Logger logger = Logger.getLogger(TestMenu.class);
+	static Log logger = LogFactory.getLog(TestMenu.class);
 	
 	public TestMenu()
 	{

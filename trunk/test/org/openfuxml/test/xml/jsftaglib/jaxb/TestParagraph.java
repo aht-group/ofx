@@ -3,7 +3,8 @@ package org.openfuxml.test.xml.jsftaglib.jaxb;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.content.ofx.Emphasis;
@@ -13,7 +14,7 @@ import de.kisner.util.LoggerInit;
 
 public class TestParagraph
 {
-	private static Logger logger = Logger.getLogger(TestParagraph.class);
+	static Log logger = LogFactory.getLog(TestParagraph.class);
 	
 	public TestParagraph()
 	{

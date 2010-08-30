@@ -3,14 +3,15 @@ package org.openfuxml.test.xml.jsfapp.jaxb;
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.jsfapp.data.jaxb.Iframe;
 import org.openfuxml.addon.jsfapp.data.jaxb.Ofxinjection;
 import org.openfuxml.addon.jsfapp.data.jaxb.Ofxinjections;
 
 public class TestOfxinjections
 {
-	private static Logger logger = Logger.getLogger(TestOfxinjections.class);
+	static Log logger = LogFactory.getLog(TestOfxinjections.class);
 	
 	public TestOfxinjections()
 	{

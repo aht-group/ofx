@@ -11,11 +11,12 @@ import net.sf.exlp.io.LoggerInit;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class PreviousConfigFinder
 {
-	private static Logger logger = Logger.getLogger(PreviousConfigFinder.class);
+	static Log logger = LogFactory.getLog(PreviousConfigFinder.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Pattern p;

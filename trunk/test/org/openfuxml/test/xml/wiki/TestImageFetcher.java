@@ -1,21 +1,10 @@
 package org.openfuxml.test.xml.wiki;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-
-import javax.imageio.ImageIO;
-
 import net.sf.exlp.io.ConfigLoader;
-import net.sourceforge.jwbf.actions.mediawiki.queries.ImageInfo;
-import net.sourceforge.jwbf.actions.mediawiki.util.VersionException;
-import net.sourceforge.jwbf.actions.util.ActionException;
-import net.sourceforge.jwbf.actions.util.ProcessException;
-import net.sourceforge.jwbf.bots.MediaWikiBot;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.media.image.WikiImageProcessor;
 import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 
@@ -23,7 +12,7 @@ import de.kisner.util.LoggerInit;
 
 public class TestImageFetcher
 {
-	static Logger logger = Logger.getLogger(TestImageFetcher.class);
+	static Log logger = LogFactory.getLog(TestImageFetcher.class);
 	
 	public static void main(String[] args)
     {

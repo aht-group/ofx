@@ -3,12 +3,13 @@ package org.openfuxml.test.xml.epub.jaxb;
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.epub.data.jaxb.container.Container;
 
 public class TestContainer
 {
-	private static Logger logger = Logger.getLogger(TestContainer.class);
+	static Log logger = LogFactory.getLog(TestContainer.class);
 	
 	public TestContainer()
 	{

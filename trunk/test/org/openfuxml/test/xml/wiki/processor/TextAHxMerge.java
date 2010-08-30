@@ -7,7 +7,8 @@ import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
@@ -18,7 +19,7 @@ import de.kisner.util.LoggerInit;
 
 public class TextAHxMerge
 {
-	static Logger logger = Logger.getLogger(TextAHxMerge.class);
+	static Log logger = LogFactory.getLog(TextAHxMerge.class);
 	public static enum Status {txtFetched,txtProcessed,xhtmlRendered,xhtmlProcessed,xhtmlFinal,ofx};
 
 	private Configuration config;
