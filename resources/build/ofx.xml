@@ -7,7 +7,6 @@
 	<property name="src.dir" location="${basedir}/src" />
 	<property name="dist.dir" location="${basedir}/dist/" />
 	<property name="build.dir" location="${dist.dir}/build/" />
-	<property name="lib.dir" location="${basedir}/lib" />
 	<property name="rsrc.dir" location="${basedir}/resources" />
 	<property name="xsd.dir" location="${basedir}/resources/xsd" />
 	
@@ -15,7 +14,72 @@
 	<import file="ant-classpath.xml"/>
 	<import file="ant-tasks.xml"/>
 	
-	<!-- target init -->	
+	<target name="0 - Meta Jar" depends="2 - init">
+		
+		<property name="m.swt" value="${metalib.dir}/${swt.dir}/${swt.lib}"/>
+		<property name="m.jfreechart" value="${metalib.dir}/${jfreechart.dir}/${jfreechart.lib}"/>
+		<property name="m.jcommon" value="${metalib.dir}/${jcommon.dir}/${jcommon.lib}"/>
+		<property name="m.gui" value="${m.swt} ${m.jfreechart} ${m.jcommon}"/>
+		
+		<property name="mjar.log4j" value="${metalib.dir}/${log4j.dir}/${log4j.lib}"/>
+		
+		<property name="m.ant" value="${metalib.dir}/${ant.dir}/${ant.lib}"/>
+		<property name="m.utils.1" value="${mjar.log4j} ${m.ant}"/>
+		
+		<property name="m.commons.xmlgraphics" value="${metalib.dir}/${commonsxmlgraphics.dir}/${commonsxmlgraphics.lib}"/><property name="commonsxmlgraphics.lib" value="xmlgraphics-commons-${commonsxmlgraphics-version}.jar" />
+		<property name="m.commons.1" value="${metalib.dir}/${commonslang.dir}/${commonslang.lib} ${metalib.dir}/${commonslogging.dir}/${commonslogging.lib} ${metalib.dir}/${commonsconfig.dir}/${commonsconfig.lib}"/>
+		<property name="mjar.commons.2" value="${metalib.dir}/${commonsio.dir}/${commonsio.lib} ${metalib.dir}/${commonsjxpath.dir}/${commonsjxpath.lib} ${metalib.dir}/${commonsdigester.dir}/${commonsdigester.lib}"/>
+		<property name="mjar.commons.3" value="${metalib.dir}/${commonsbeanutils.dir}/${commonsbeanutils.lib} ${metalib.dir}/${commonscollections.dir}/${commonscollections.lib}"/>
+		<property name="mjar.commons.4" value="${metalib.dir}/${commonscodec.dir}/${commonscodec.lib} ${metalib.dir}/${commonscli.dir}/${commonscli.lib} ${m.commons.xmlgraphics}"/>
+		<property name="mjar.commons" value="${m.commons.1} ${mjar.commons.2} ${mjar.commons.3} ${mjar.commons.4}"/>
+		<property name="m.utils" value="${m.utils.1} ${mjar.utils2}  ${mjar.utils3} ${mjar.commons}"/>	
+		
+		<property name="m.jsf" value="${metalib.dir}/${jsf.dir}/${jsf-api.lib}"/>
+		<property name="m.jsp" value="${metalib.dir}/${jsp.dir}/${jsp-api.lib}"/>
+		<property name="m.servlet" value="${metalib.dir}/${servlet.dir}/${servlet.lib}"/>
+		<property name="m.http" value="${m.jsf}  ${m.jsp} ${m.servlet}"/>	
+		
+		<property name="m.jboss" value="${metalib.dir}/${jboss.dir}/${jboss-all.lib}"/>		
+
+		<property name="m.jmdns" value="${metalib.dir}/${jmdns.dir}/${jmdns.lib}"/>
+		<property name="m.jsch" value="${metalib.dir}/${jsch.dir}/${jsch.lib}"/>
+		<property name="m.mail" value="${metalib.dir}/${mail.dir}/${mail.lib}"/>
+		<property name="m.net" value="${m.jmdns} ${m.jsch} ${m.mail}"/>
+		
+		<property name="m.jwbf.core" value="${metalib.dir}/${jwbf.dir}/${jwbf-core.lib}"/>
+		<property name="m.jwbf.mediawiki" value="${metalib.dir}/${jwbf.dir}/${jwbf-mediawiki.lib}"/>
+		<property name="m.jwbf" value="${m.jwbf.core} ${m.jwbf.mediawiki}"/>
+		<property name="m.bliki" value="${metalib.dir}/${bliki.dir}/${bliki.lib}"/>
+		<property name="m.jaxb" value="${metalib.dir}/${jaxb.dir}/${jaxbapi.lib} ${metalib.dir}/${jaxb.dir}/${jaxbimpl.lib} ${metalib.dir}/${jaxb.dir}/${jaxbxjc.lib}"/>
+		<property name="m.htmlcleaner" value="${metalib.dir}/${htmlcleaner.dir}/${htmlcleaner.lib}"/>
+		<property name="m.xml1" value="${metalib.dir}/${jdom.dir}/${jdom.lib} ${metalib.dir}/${jaxen.dir}/${jaxen.lib}"/>
+		<property name="m.xml2" value="${m.htmlcleaner} ${m.jwbf} ${m.bliki}"/>
+		
+		<property name="m.xml" value="${m.jaxb} ${m.xml1} ${m.xml2} ${mjar.xml3} ${mjar.xalan}"/>
+		
+		<property name="meta.jar" value="${m.utils} ${m.xml} ${m.gui} ${m.net} ${mjar.db} ${m.jboss} ${m.http}"/>
+		<property name="mjar.custom" value="${metalib.dir}/${exlp.dir}/${exlp.lib}  ${metalib.dir}/${ahtutils.dir}/${ahtutils.lib}"/>
+		<echo level="info">Custom: ${mjar.custom}</echo>
+		<echo level="info">Meta: ${meta.jar}</echo>
+		<echo level="info">Test: ${m.jboss}</echo>
+		
+		<echo level="info">Creating jars</echo>
+		<jar destfile="${locallib.dir}/custom-libs.jar">
+			<manifest>
+				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="Implementation-Version"  value="${ear.version}"/>
+				<attribute name="Class-Path" value="${mjar.custom}"/>
+			</manifest>        	
+		</jar>
+		<jar destfile="${locallib.dir}/meta-libs.jar">
+			<manifest>
+				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="Implementation-Version"  value="${ear.version}"/>
+				<attribute name="Class-Path" value="${meta.jar}"/>
+			</manifest>        	
+		</jar>
+	</target>
+	
     <target name="2 - init" description="Init ...">
     	<mkdir dir="${dist.dir}"/>
 		<mkdir dir="${build.dir}"/>
