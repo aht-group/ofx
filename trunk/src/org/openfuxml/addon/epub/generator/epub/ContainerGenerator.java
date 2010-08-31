@@ -39,6 +39,7 @@ public class ContainerGenerator
 		eContainer.addContent(getRootfiles());
 		
 		doc.setRootElement(eContainer);
+		save();
 	}
 	
 	private Element getRootfiles()
@@ -59,7 +60,7 @@ public class ContainerGenerator
 		return lRootfiles;
 	}
 	
-	public void save()
+	private void save()
 	{
 		File dMetainf = new File(targetDir,"META-INF");
 		dMetainf.mkdir();
