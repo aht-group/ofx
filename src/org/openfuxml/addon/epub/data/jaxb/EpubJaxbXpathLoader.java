@@ -1,6 +1,5 @@
 package org.openfuxml.addon.epub.data.jaxb;
 
-import java.io.Serializable;
 import java.util.NoSuchElementException;
 
 import org.apache.commons.logging.Log;
@@ -18,7 +17,7 @@ public class EpubJaxbXpathLoader
 	
 	public static synchronized Title getTitle(Section section)
 	{
-		for(Serializable s : section.getContent())
+		for(Object s : section.getContent())
 		{
 			if(s instanceof Title){return (Title)s;}
 		}
