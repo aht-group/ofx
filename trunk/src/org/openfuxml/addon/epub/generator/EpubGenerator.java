@@ -4,11 +4,11 @@ import java.io.File;
 
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
+import org.openfuxml.addon.epub.util.EpubZipper;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.producer.preprocessors.ExternalMerger;
 import org.openfuxml.producer.preprocessors.IdTagger;
@@ -19,9 +19,10 @@ public class EpubGenerator
 	static Log logger = LogFactory.getLog(EpubGenerator.class);
 	
 	private NcxGenerator ncxGenerator;
-	private MimetypeFactory mimeFactory;
-	private ContainerFactory containerFactory;
-	private OpfFactory opfFactory;
+	private MimetypeGenerator mimeFactory;
+	private ContainerGenerator containerFactory;
+	private OpfGenerator opfFactory;
+	private EpubZipper epubZipper;
 	
 	private IdTagger idTagger;
 	private OfxNsPrefixMapper ofxNsPrefixMapper;
@@ -29,9 +30,10 @@ public class EpubGenerator
 	public EpubGenerator(File targetDir)
 	{
 		ncxGenerator = new NcxGenerator(targetDir);
-		mimeFactory = new MimetypeFactory(targetDir);
-		containerFactory = new ContainerFactory(targetDir);
-		opfFactory = new OpfFactory(targetDir);
+		mimeFactory = new MimetypeGenerator(targetDir);
+		containerFactory = new ContainerGenerator(targetDir);
+		opfFactory = new OpfGenerator(targetDir);
+		epubZipper = new EpubZipper(targetDir);
 		
 		idTagger = new IdTagger();
 		ofxNsPrefixMapper = new OfxNsPrefixMapper();
@@ -45,19 +47,19 @@ public class EpubGenerator
 		
 		Ofxdoc ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
 		
-//		JaxbUtil.debug(ofxDoc,ofxNsPrefixMapper);
-		
 		ncxGenerator.create(ofxDoc);
 		ncxGenerator.save();
 		
-/*		containerFactory.create();
+		containerFactory.create();
 		containerFactory.save();
 		
 		mimeFactory.save();
 		
-		opfFactory.create();
+		opfFactory.create(ofxDoc);
 		opfFactory.save();
-*/	}
+		
+		epubZipper.zip();
+	}
 	
 	public static void main (String[] args) throws Exception
 	{

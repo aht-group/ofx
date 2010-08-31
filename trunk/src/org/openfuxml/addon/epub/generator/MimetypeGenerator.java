@@ -11,13 +11,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.producer.preprocessors.ExternalMerger;
 
-public class MimetypeFactory
+public class MimetypeGenerator
 {
 	static Log logger = LogFactory.getLog(ExternalMerger.class);
 	
 	private File targetDir;
 	
-	public MimetypeFactory(File targetDir)
+	public MimetypeGenerator(File targetDir)
 	{
 		this.targetDir=targetDir;
 	}

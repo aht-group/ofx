@@ -13,9 +13,15 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
 import org.jdom.output.Format;
+import org.openfuxml.addon.epub.data.factory.NcxFactory;
+import org.openfuxml.addon.epub.data.jaxb.EpubJaxbXpathLoader;
+import org.openfuxml.content.ofx.Metadata;
+import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Section;
+import org.openfuxml.content.ofx.Title;
 import org.openfuxml.producer.preprocessors.ExternalMerger;
 
-public class OpfFactory
+public class OpfGenerator
 {
 	static Log logger = LogFactory.getLog(ExternalMerger.class);
 	
@@ -25,7 +31,7 @@ public class OpfFactory
 	
 	private List<String> spineItemRef;
 	
-	public OpfFactory(File targetDir)
+	public OpfGenerator(File targetDir)
 	{
 		this.targetDir=targetDir;
 		nsXsi = Namespace.getNamespace("xsi","http://www.w3.org/2001/XMLSchema-instance");
@@ -34,7 +40,7 @@ public class OpfFactory
 		spineItemRef = new ArrayList<String>();
 	}
 	
-	public void create()
+	public void create(Ofxdoc ofxDoc)
 	{
 		doc = new Document();
 		
@@ -45,14 +51,14 @@ public class OpfFactory
 		ePackage.addNamespaceDeclaration(nsXsi);
 		ePackage.addNamespaceDeclaration(nsDc);
 		
-		ePackage.addContent(getMetadata());
-		ePackage.addContent(getManifest());
-		ePackage.addContent(getSpine());
+		ePackage.addContent(getMetadata(ofxDoc.getMetadata()));
+		ePackage.addContent(getManifest(ofxDoc));
+		ePackage.addContent(getSpine(ofxDoc));
 		
 		doc.setRootElement(ePackage);
 	}
 	
-	private Element getMetadata()
+	private Element getMetadata(Metadata metadata)
 	{
 		Element eMetadata = new Element("metadata",nsOpf);
 		
@@ -63,7 +69,7 @@ public class OpfFactory
 		eMetadata.addContent(eLanguage);
 		
 		Element eTitle = new Element("title",nsDc);
-		eTitle.addContent("Hello World");
+		eTitle.addContent(metadata.getTitle().getValue());
 		eMetadata.addContent(eTitle);
 		
 		Element eId = new Element("identifier",nsDc);
@@ -74,15 +80,18 @@ public class OpfFactory
 		return eMetadata;
 	}
 	
-	private Element getManifest()
+	private Element getManifest(Ofxdoc ofxDoc)
 	{
 		Element eManifest = new Element("manifest",nsOpf);
 		
 		eManifest.addContent(getItem("ncx","toc.ncx","application/x-dtbncx+xml"));
 		
-		eManifest.addContent(getItem("datei1","inhatl.xhtml","application/xhtml+xml"));
-		spineItemRef.add("datei1");
-		
+		int secNr=1;
+		for(Section section : ofxDoc.getContent().getSection())
+		{
+			eManifest.addContent(getItem(section.getId(),"section-"+secNr+".xhtml","application/xhtml+xml"));
+			secNr++;
+		}
 		return eManifest;
 	}
 	
@@ -95,15 +104,15 @@ public class OpfFactory
 		return item;
 	}
 	
-	private Element getSpine()
+	private Element getSpine(Ofxdoc ofxDoc)
 	{
 		Element eSpine = new Element("spine",nsOpf);
 		eSpine.setAttribute("toc","ncx");
 		
-		for(String ref : spineItemRef)
+		for(Section section : ofxDoc.getContent().getSection())
 		{
 			Element eRef = new Element("itemref",nsOpf);
-			eRef.setAttribute("idref",ref);
+			eRef.setAttribute("idref",section.getId());
 			eSpine.addContent(eRef);
 		}
 		
@@ -114,6 +123,5 @@ public class OpfFactory
 	{
 		File f = new File(targetDir,"inhalt.opf");
 		JDomUtil.save(doc, f, Format.getPrettyFormat());
-		JDomUtil.debug(doc);
 	}
 }

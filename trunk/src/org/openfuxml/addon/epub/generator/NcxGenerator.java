@@ -3,6 +3,7 @@ package org.openfuxml.addon.epub.generator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -43,7 +44,7 @@ public class NcxGenerator
 		ncx = new Ncx();
 		ncx.setVersion("2005-1");
 		ncx.setHead(getHead());
-		ncx.setDocTitle(NcxFactory.getTitle("Test Title"));
+		ncx.setDocTitle(NcxFactory.getTitle(ofxDoc.getMetadata().getTitle().getValue()));
 		ncx.setNavMap(getNavMap(ofxDoc));
 	}
 	
@@ -57,7 +58,7 @@ public class NcxGenerator
 	{
 		logger.debug("Creating Head");
 		Head head = new Head();
-		head.getMeta().add(NcxFactory.getHeadMeta("dtb:uid", "helloWorld"));
+		head.getMeta().add(NcxFactory.getHeadMeta("dtb:uid", UUID.randomUUID().toString()));
 		head.getMeta().add(NcxFactory.getHeadMeta("dtb:depth", "1"));
 		head.getMeta().add(NcxFactory.getHeadMeta("dtb:totalPageCount", "0"));
 		head.getMeta().add(NcxFactory.getHeadMeta("dtb:maxPageNumber", "0"));		
@@ -87,7 +88,6 @@ public class NcxGenerator
 		{
 			logger.debug("secNo="+secNr+" "+section.getId());
 			Title title = EpubJaxbXpathLoader.getTitle(section);
-			logger.debug(title);
 			result.add(NcxFactory.getNavPoint(section.getId(), playOrder, title.getValue(), "section-"+secNr+".xhtml"));
 			playOrder++;secNr++;
 		}

@@ -14,7 +14,7 @@ import org.jdom.Namespace;
 import org.jdom.output.Format;
 import org.openfuxml.producer.preprocessors.ExternalMerger;
 
-public class ContainerFactory
+public class ContainerGenerator
 {
 	static Log logger = LogFactory.getLog(ExternalMerger.class);
 	
@@ -22,7 +22,7 @@ public class ContainerFactory
 	private Document doc;
 	private Namespace nsContainer;
 	
-	public ContainerFactory(File targetDir)
+	public ContainerGenerator(File targetDir)
 	{
 		this.targetDir=targetDir;
 		nsContainer = Namespace.getNamespace("urn:oasis:names:tc:opendocument:xmlns:container");
