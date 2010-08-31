@@ -1,4 +1,4 @@
-package org.openfuxml.addon.epub.generator;
+package org.openfuxml.addon.epub.generator.epub;
 
 import java.io.File;
 import java.util.ArrayList;
