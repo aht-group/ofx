@@ -83,13 +83,13 @@ public class NcxGenerator
 	{
 		List<NavPoint> result = new ArrayList<NavPoint>();
 		
-		int secNr=1;
+		int partNr=1;
 		for(Section section : ofxDoc.getContent().getSection())
 		{
-			logger.debug("secNo="+secNr+" "+section.getId());
+			logger.debug("secNo="+partNr+" "+section.getId());
 			Title title = EpubJaxbXpathLoader.getTitle(section);
-			result.add(NcxFactory.getNavPoint(section.getId(), playOrder, title.getValue(), "section-"+secNr+".xhtml"));
-			playOrder++;secNr++;
+			result.add(NcxFactory.getNavPoint(section.getId(), playOrder, title.getValue(), "part-"+partNr+".xhtml"));
+			playOrder++;partNr++;
 		}
 		return result;
 	}

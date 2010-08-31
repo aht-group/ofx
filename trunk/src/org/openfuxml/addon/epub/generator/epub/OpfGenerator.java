@@ -86,11 +86,11 @@ public class OpfGenerator
 		
 		eManifest.addContent(getItem("ncx","toc.ncx","application/x-dtbncx+xml"));
 		
-		int secNr=1;
+		int partNr=1;
 		for(Section section : ofxDoc.getContent().getSection())
 		{
-			eManifest.addContent(getItem(section.getId(),"section-"+secNr+".xhtml","application/xhtml+xml"));
-			secNr++;
+			eManifest.addContent(getItem(section.getId(),"part-"+partNr+".xhtml","application/xhtml+xml"));
+			partNr++;
 		}
 		return eManifest;
 	}
