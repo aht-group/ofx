@@ -46,9 +46,10 @@ public class NcxGenerator
 		ncx.setHead(getHead());
 		ncx.setDocTitle(NcxFactory.getTitle(ofxDoc.getMetadata().getTitle().getValue()));
 		ncx.setNavMap(getNavMap(ofxDoc));
+		save();
 	}
 	
-	public void save()
+	private void save()
 	{
 		File f = new File(targetDir,"toc.ncx");
 		JaxbUtil.save(f, ncx, true);

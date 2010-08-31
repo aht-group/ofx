@@ -8,6 +8,7 @@ import net.sf.exlp.util.xml.JDomUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
+import org.openfuxml.addon.epub.generator.content.ContentGenerator;
 import org.openfuxml.addon.epub.generator.epub.ContainerGenerator;
 import org.openfuxml.addon.epub.generator.epub.MimetypeGenerator;
 import org.openfuxml.addon.epub.generator.epub.NcxGenerator;
@@ -27,6 +28,7 @@ public class EpubGenerator
 	private ContainerGenerator containerFactory;
 	private OpfGenerator opfFactory;
 	private EpubZipper epubZipper;
+	private ContentGenerator contentGenerator;
 	
 	private IdTagger idTagger;
 	private OfxNsPrefixMapper ofxNsPrefixMapper;
@@ -37,6 +39,7 @@ public class EpubGenerator
 		mimeFactory = new MimetypeGenerator(targetDir);
 		containerFactory = new ContainerGenerator(targetDir);
 		opfFactory = new OpfGenerator(targetDir);
+		contentGenerator = new ContentGenerator(targetDir);
 		epubZipper = new EpubZipper(targetDir);
 		
 		idTagger = new IdTagger();
@@ -52,15 +55,10 @@ public class EpubGenerator
 		Ofxdoc ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
 		
 		ncxGenerator.create(ofxDoc);
-		ncxGenerator.save();
-		
 		containerFactory.create();
-		containerFactory.save();
-		
 		mimeFactory.save();
-		
 		opfFactory.create(ofxDoc);
-		opfFactory.save();
+		contentGenerator.create(ofxDoc);
 		
 		epubZipper.zip();
 	}

@@ -56,6 +56,7 @@ public class OpfGenerator
 		ePackage.addContent(getSpine(ofxDoc));
 		
 		doc.setRootElement(ePackage);
+		save();
 	}
 	
 	private Element getMetadata(Metadata metadata)
@@ -119,7 +120,7 @@ public class OpfGenerator
 		return eSpine;
 	}
 	
-	public void save()
+	private void save()
 	{
 		File f = new File(targetDir,"inhalt.opf");
 		JDomUtil.save(doc, f, Format.getPrettyFormat());

@@ -40,7 +40,7 @@ public class ContentGenerator
 			Element rootElement = partFactory.createPart(section);
 			doc.setRootElement(rootElement);
 			
-			JDomUtil.save(doc, f, Format.getRawFormat());
+			JDomUtil.save(doc, f, Format.getPrettyFormat());
 			partNr++;
 		}
 	}
