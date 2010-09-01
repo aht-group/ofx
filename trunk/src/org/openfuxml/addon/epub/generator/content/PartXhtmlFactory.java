@@ -33,12 +33,23 @@ public class PartXhtmlFactory
 		logger.debug("head");
 		Element head = new Element("head",nsXhtml);
 		
-		Element meta = new Element("meta",nsXhtml);
-		meta.setAttribute("http-equiv", "Content-Type");
-		meta.setAttribute("content", "text/html; charset=UTF-8");
-		head.addContent(meta);
+		Element metaContent = new Element("meta",nsXhtml);
+		metaContent.setAttribute("http-equiv", "Content-Type");
+		metaContent.setAttribute("content", "text/html; charset=UTF-8");
+		head.addContent(metaContent);
+		
+		Element metaName = new Element("meta",nsXhtml);
+		metaName.setAttribute("name", "DC.identifier");
+		metaName.setAttribute("content", "id_Hello_World");
+		head.addContent(metaName);
+		
+		Element link = new Element("link",nsXhtml);
+		link.setAttribute("rel", "schema.DC");
+		link.setAttribute("href", "http://purl.org/dc/elements/1.1/");
+		head.addContent(link);
 		
 		Element title = new Element("title",nsXhtml);
+		title.setText("TestTitle");
 		head.addContent(title);
 		
 		return head;

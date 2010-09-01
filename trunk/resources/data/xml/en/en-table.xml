@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section xmlns="http://www.openfuxml.org/ofx" id="sec-tags-div">
+<section xmlns="http://www.openfuxml.org" id="sec-tags-div">
 	<title>Tag jwan:div</title>
 	<table>
 		<title>TableTitle</title>
