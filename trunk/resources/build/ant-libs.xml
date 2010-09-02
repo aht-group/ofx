@@ -10,6 +10,8 @@
 	<property name="ahtutils.dir" value="utils/aht"/><property name="ahtutils.lib" value="aht-utils-${aht-version}.jar" />
 	<property name="jmsutils.dir" value="utils/jms"/><property name="jmsutils.lib" value="jmsutils-${jmsutils-version}.jar" />
 	<property name="exlp.dir" value="utils/exlp"/><property name="exlp.lib" value="exlp-${exlp-version}.jar" />
+	<property name="loremipsum.dir" value="utils/loremipsum"/><property name="loremipsum.lib" value="loremipsum-${loremipsum-version}.jar" />
+	
 	<property name="commonsconfig.dir" value="utils/commons/config"/><property name="commonsconfig.lib" value="commons-configuration-${commonsconfig-version}.jar" />
 	<property name="commonsio.dir" value="utils/commons/io"/><property name="commonsio.lib" value="commons-io-${commonsio-version}.jar" />
 	<property name="commonsjxpath.dir" value="utils/commons/jxpath"/><property name="commonsjxpath.lib" value="commons-jxpath-${commonsjxpath-version}.jar" />
@@ -88,7 +90,8 @@
 	<!-- Utils -->
 	<property name="m.log4j" value="${metalib.dir}/${log4j.dir}/${log4j.lib}"/>
 	<property name="m.ant" value="${metalib.dir}/${ant.dir}/${ant.lib}"/>
-	<property name="m.utils" value="${m.log4j} ${m.ant} ${m.cm}"/>	
+	<property name="m.loremipsum" value="${metalib.dir}/${loremipsum.dir}/${loremipsum.lib}"/>
+	<property name="m.utils" value="${m.log4j} ${m.ant} ${m.loremipsum} ${m.cm}"/>	
 	
 	<!-- JBoss -->
 	<property name="m.jboss" value="${metalib.dir}/${jboss.dir}/${jboss-all.lib}"/>

@@ -1,5 +1,7 @@
 package org.openfuxml.factory.epub;
 
+import java.io.Serializable;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
@@ -9,7 +11,7 @@ import org.openfuxml.producer.preprocessors.ExternalMerger;
 
 public class EpubParagraphFactory
 {
-	static Log logger = LogFactory.getLog(ExternalMerger.class);
+	static Log logger = LogFactory.getLog(EpubParagraphFactory.class);
 	
 	private Namespace ns;
 	
@@ -21,7 +23,13 @@ public class EpubParagraphFactory
 	public Element createParagraph(Paragraph p)
 	{
 		Element eParagraph = new Element("p",ns);
-				
+		
+		for(Object s : p.getContent())
+		{
+			if(s instanceof String){eParagraph.addContent((String)s);}
+			else {logger.warn("Unknwon Content: "+s.getClass().getSimpleName());}
+		}
+		
 		return eParagraph;
 	}
 }
