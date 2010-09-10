@@ -17,13 +17,11 @@ public class EpubSectionFactory
 {
 	static Log logger = LogFactory.getLog(ExternalMerger.class);
 	
-	private Namespace ns;
 	private EpubTitleFactory titleFactory;
 	private EpubParagraphFactory paragraphFactory;
 	
 	public EpubSectionFactory(EpubTitleFactory titleFactory,Namespace ns)
 	{
-		this.ns=ns;
 		this.titleFactory=titleFactory;
 		paragraphFactory = new EpubParagraphFactory(ns);
 	}
