@@ -1,6 +1,5 @@
 package org.openfuxml.factory.epub;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class EpubSectionFactory
 	{
 		List<Element> result = new ArrayList<Element>();
 		
-		for(Serializable s : section.getContent())
+		for(Object s : section.getContent())
 		{
 			if(s instanceof Title){result.add(titleFactory.createTitle((Title)s));}
 			else if(s instanceof Section){result.addAll(createSection((Section)s, depth++));}

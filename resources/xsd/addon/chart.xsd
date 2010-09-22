@@ -73,12 +73,18 @@
                         <xsd:attribute name="vertical" type="xsd:boolean"/>
                     </xsd:complexType>
                 </xsd:element>
+                <xsd:element name="gantt" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:attribute name="timePeriod" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="color">
         <xsd:complexType>
             <xsd:attribute name="typ" type="xsd:string"/>
+            <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="r" type="xsd:int"/>
             <xsd:attribute name="g" type="xsd:int"/>
             <xsd:attribute name="b" type="xsd:int"/>
@@ -98,6 +104,8 @@
             <xsd:attribute name="x" type="xsd:double"/>
             <xsd:attribute name="y" type="xsd:double"/>
             <xsd:attribute name="record" type="xsd:dateTime"/>
+            <xsd:attribute name="from" type="xsd:dateTime"/>
+            <xsd:attribute name="to" type="xsd:dateTime"/>
             <xsd:attribute name="label" type="xsd:string"/>
             <xsd:attribute name="category" type="xsd:string"/>
         </xsd:complexType>

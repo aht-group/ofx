@@ -11,6 +11,7 @@ import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.jaxb.Charttype;
 import org.openfuxml.addon.chart.renderer.BarChartRenderer;
 import org.openfuxml.addon.chart.renderer.TimeBarRenderer;
+import org.openfuxml.addon.chart.renderer.gantt.GanttChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.renderer.timeseries.TimeSeriesChartRenderer;
 import org.openfuxml.addon.chart.renderer.timeseries.TimeSeriesCumulativeChartRenderer;
@@ -34,6 +35,7 @@ public class OFxChartRenderControl
 			case TimeSeries: ofxRenderer = getTimeSeriesRenderer(ofxChart);break;
 			case TimeBar:    ofxRenderer = new TimeBarRenderer();break;
 			case Bar: 		 ofxRenderer = new BarChartRenderer();break;
+			case Gantt:		 ofxRenderer = new GanttChartRenderer();break;
 			default:	logger.warn("No Renderer available for "+chartType);
 		}
 		
