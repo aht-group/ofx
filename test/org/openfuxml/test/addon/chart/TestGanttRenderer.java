@@ -1,5 +1,6 @@
 package org.openfuxml.test.addon.chart;
 
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -102,7 +103,9 @@ public class TestGanttRenderer
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);
 		
+		Dimension d = ofxRenderer.getOfxRenderer().getSuggestedSize();
+		logger.debug(d);
 		OutputStream os = new FileOutputStream(new File("dist/chart.png"));
-		ChartUtilities.writeChartAsPNG(os,jfreeChart,800,300);
+		ChartUtilities.writeChartAsPNG(os,jfreeChart,800,d.height);
 	}
 }

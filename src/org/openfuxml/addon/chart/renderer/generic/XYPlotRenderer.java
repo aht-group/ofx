@@ -6,16 +6,21 @@ import org.apache.log4j.Logger;
 import org.jfree.chart.axis.PeriodAxis;
 import org.jfree.chart.axis.PeriodAxisLabelInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.time.Day;
+import org.jfree.data.time.Hour;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.Year;
+import org.openfuxml.addon.chart.jaxb.Axis;
+import org.openfuxml.addon.chart.jaxb.Axis.DateTicker;
 import org.openfuxml.addon.chart.jaxb.Chart;
+import org.openfuxml.addon.chart.renderer.generic.AbstractChartRenderer.AxisType;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
+import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
 
 public class XYPlotRenderer extends AbstractChartRenderer
 {
 	static Logger logger = Logger.getLogger(XYPlotRenderer.class);
 	
-	public static enum OfxChartTimePeriod {Hour,Day,Month};
 	protected OfxChartTimePeriod ofxTimePeriod;
 	
 	@Override
@@ -53,8 +58,47 @@ public class XYPlotRenderer extends AbstractChartRenderer
 		}
 	}
 	
+	@Override
+	protected void setAxisRange(Axis axis,AxisType type)
+	{
+		logger.debug("Setting Axis Range");
+		int level = axis.getDateTicker().size();
+		logger.debug("Level: "+level);
+		
+		PeriodAxis pAxis = new PeriodAxis(null);
+		pAxis.setAutoRangeTimePeriodClass(Month.class);
+		pAxis.setMajorTickTimePeriodClass(Month.class);
+	    
+		PeriodAxisLabelInfo[] info = new PeriodAxisLabelInfo[level];
+		
+		int i=0;
+		for(DateTicker dt : axis.getDateTicker())
+		{
+			SimpleDateFormat sdf = new SimpleDateFormat(dt.getFormat());
+			OfxChartTimePeriod ofxTp = OfxChartTimePeriod.valueOf(dt.getTimePeriod());
+			switch(ofxTp)
+			{
+				case Hour:  info[i] = new PeriodAxisLabelInfo(Hour.class,sdf);break;
+				case Day:   info[i] = new PeriodAxisLabelInfo(Day.class,sdf);break;
+				case Month: info[i] = new PeriodAxisLabelInfo(Month.class,sdf);break;
+				case Year:  info[i] = new PeriodAxisLabelInfo(Year.class,sdf);break;
+			}
+			i++;
+		}
+	        
+        pAxis.setLabelInfo(info);
+	        
+        XYPlot plot = (XYPlot) chart.getPlot();
+        switch(type)
+        {
+        	case range:  plot.setRangeAxis(pAxis);break;
+        	case domain: plot.setDomainAxis(pAxis);break;
+        }
+	}
+	
 	protected void setRangeAxis()
 	{
+		logger.warn("setRangeAxis is depreciated!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		switch(ofxTimePeriod)
 		{
 			case Month: setMonthPeriodAxis();break;
@@ -68,15 +112,13 @@ public class XYPlotRenderer extends AbstractChartRenderer
 	  //      domainAxis.setTimeZone(TimeZone.getTimeZone("Pacific/Auckland"));
 	        domainAxis.setAutoRangeTimePeriodClass(Month.class);
 	        domainAxis.setMajorTickTimePeriodClass(Month.class);
-	        PeriodAxisLabelInfo[] info = new PeriodAxisLabelInfo[2];
+/*	        PeriodAxisLabelInfo[] info = new PeriodAxisLabelInfo[2];
 	        info[0] = new PeriodAxisLabelInfo(Month.class,
 	                new SimpleDateFormat("MMM"));//, new RectangleInsets(2, 2, 2, 2),
-	   //             new Font("SansSerif", Font.BOLD, 10), Color.blue, false,
-	    //            new BasicStroke(0.0f), Color.lightGray);
 	        info[1] = new PeriodAxisLabelInfo(Year.class,
 	                new SimpleDateFormat("yyyy"));
 	        domainAxis.setLabelInfo(info);
-//	        plot.setDomainAxis(domainAxis);
-	        plot.setRangeAxis(domainAxis);
+*/	        plot.setDomainAxis(domainAxis);
+//	        plot.setRangeAxis(domainAxis);
 	}
 }

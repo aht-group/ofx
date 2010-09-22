@@ -59,7 +59,7 @@ public class ColorTaskXYBarRenderer extends XYBarRenderer
 	{
 		Paint result = Color.black;
 		if(colorMap.containsKey(description)){result = colorMap.get(description);}
-	    logger.debug(description);
+		else{logger.warn("No color for "+description+". Using black!");}
 	    return result;
 	}
 }

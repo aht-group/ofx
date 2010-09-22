@@ -1,7 +1,7 @@
 package org.openfuxml.addon.chart.renderer.gantt;
 
 import java.awt.Color;
-import java.text.SimpleDateFormat;
+import java.awt.Dimension;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -11,9 +11,6 @@ import net.sf.exlp.util.DateUtil;
 import org.apache.log4j.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.DateAxis;
-import org.jfree.chart.axis.PeriodAxis;
-import org.jfree.chart.axis.PeriodAxisLabelInfo;
 import org.jfree.chart.axis.SymbolAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
@@ -22,9 +19,7 @@ import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.gantt.XYTaskDataset;
-import org.jfree.data.time.Month;
 import org.jfree.data.time.SimpleTimePeriod;
-import org.jfree.data.time.Year;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.jaxb.Container;
@@ -38,8 +33,6 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
 {
 	static Logger logger = Logger.getLogger(GanttChartRenderer.class);
 	
-	public static enum OfxChartTimePeriod {Hour,Day,Month};
-	protected OfxChartTimePeriod ofxTimePeriod;
 	
 	public GanttChartRenderer()
 	{
@@ -52,8 +45,8 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
 		setTimePeriod();
 		
 		IntervalXYDataset dataset;
-		//dataset = new XYTaskDataset(createTasks(ofxChart.getContainer()));
-		dataset = new XYTaskDataset(createTasksDummy());
+		dataset = new XYTaskDataset(createTasks(ofxChart.getContainer()));
+//		dataset = new XYTaskDataset(createTasksDummy());
 		
 		chart = ChartFactory.createXYBarChart(
 				ChartLabelResolver.getTitle(ofxChart),
@@ -67,23 +60,39 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
 
         chart.setBackgroundPaint(Color.white);
         
-        XYPlot plot = (XYPlot) chart.getPlot();
-        SymbolAxis yAxis = new SymbolAxis(ChartLabelResolver.getYaxis(ofxChart), new String[] {"Team A",
-                "Team B", "Team C", "Team D"});
-        yAxis.setGridBandsVisible(false);
-        plot.setDomainAxis(yAxis);
+        setTaskNames();  
         
         Map<String,Color> colorMap = ChartColorFactory.getColorMap(ofxChart.getColors(), "task");
+        XYPlot plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new ColorTaskXYBarRenderer(colorMap));
         XYBarRenderer renderer = (XYBarRenderer) plot.getRenderer();
         renderer.setUseYInterval(true);
         
-        setRangeAxis();
+        setAxis();
         
         setColors();
         setGrid();
         
         return chart;
+	}
+	
+	private void setTaskNames()
+	{
+		 XYPlot plot = (XYPlot) chart.getPlot();
+		 String[] taskNames = new String[ofxChart.getContainer().size()];
+		 
+		 int i=0;
+		 for(Container c : ofxChart.getContainer())
+		 {
+			 taskNames[i] = c.getLabel();
+			 i++;
+		 } 
+		 
+		 SymbolAxis yAxis = new SymbolAxis(ChartLabelResolver.getYaxis(ofxChart),taskNames);
+	     yAxis.setGridBandsVisible(true);
+	     plot.setDomainAxis(yAxis);
+	     
+	     plot.setDomainAxis(yAxis);
 	}
 	
 	private TaskSeriesCollection createTasksDummy()
@@ -92,13 +101,14 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
 		SimpleTimePeriod stp;
         TaskSeriesCollection dataset = new TaskSeriesCollection();
   
-/*        TaskSeries s1 = new TaskSeries("Team A");
-        s1.add(new Task("T1a", new Hour(11, new Day())));
-        s1.add(new Task("T1b", new Hour(14, new Day())));
-        s1.add(new Task("T1c", new Hour(16, new Day())));
+        TaskSeries s1 = new TaskSeries("Team A");
+        from = DateUtil.getDateFromInt(2010, 1, 1);
+		to = DateUtil.getDateFromInt(2010, 1, 15);
+		stp = new SimpleTimePeriod(from,to);
+        s1.add(new Task("na", stp));
         dataset.add(s1);
-        
-        TaskSeries s2 = new TaskSeries("Team B");
+/*   
+               TaskSeries s2 = new TaskSeries("Team B");
         s2.add(new Task("T2a", new Hour(13, new Day())));
         s2.add(new Task("T2b", new Hour(19, new Day())));
         s2.add(new Task("T2c", new Hour(21, new Day())));
@@ -145,5 +155,13 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
 			dataset.add(ts);
 		}
 		return dataset;
+	}
+	
+	@Override
+	public Dimension getSuggestedSize()
+	{
+		Dimension d = new Dimension();
+		d.setSize(0, 75+(ofxChart.getContainer().size()*25));
+		return d;
 	}
 }

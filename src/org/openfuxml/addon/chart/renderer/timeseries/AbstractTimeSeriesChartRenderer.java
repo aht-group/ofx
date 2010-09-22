@@ -43,7 +43,7 @@ public abstract class AbstractTimeSeriesChartRenderer extends XYPlotRenderer imp
 	        );
         setColors();
         setGrid();
-        setRangeAxis();   
+        setAxis();
         
         return chart;
 	}

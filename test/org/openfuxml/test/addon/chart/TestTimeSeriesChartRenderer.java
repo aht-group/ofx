@@ -75,6 +75,12 @@ public class TestTimeSeriesChartRenderer
 		return x;
 	}
 	
+	public Chart load(String fileName)
+	{
+		Chart chart = (Chart)JaxbUtil.loadJAXB(fileName, Chart.class);
+		return chart;
+	}
+	
 	public static void main (String[] args) throws Exception
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
@@ -82,7 +88,10 @@ public class TestTimeSeriesChartRenderer
 			loggerInit.init();
 		
 		TestTimeSeriesChartRenderer test = new TestTimeSeriesChartRenderer();
-		Chart chart = test.getTimeSeries();
+		Chart chart;
+//		chart = test.getTimeSeries();
+		chart = test.load(args[0]);
+		
 		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
