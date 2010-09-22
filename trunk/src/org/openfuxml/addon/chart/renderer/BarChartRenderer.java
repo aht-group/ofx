@@ -1,5 +1,7 @@
 package org.openfuxml.addon.chart.renderer;
 
+import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -12,10 +14,11 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.jaxb.Container;
 import org.openfuxml.addon.chart.jaxb.Data;
+import org.openfuxml.addon.chart.renderer.generic.AbstractChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
 
-public class BarChartRenderer implements OfxChartRenderer
+public class BarChartRenderer extends AbstractChartRenderer implements OfxChartRenderer
 {
 	static Log logger = LogFactory.getLog(BarChartRenderer.class);
 	
@@ -49,4 +52,10 @@ public class BarChartRenderer implements OfxChartRenderer
 		}
         return dataset;
     }
+	
+	public Dimension getSuggestedSize()
+	{
+		logger.fatal("This should be @Overridden");
+		throw new UnsupportedOperationException();
+	}
 }

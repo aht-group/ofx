@@ -5,6 +5,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="charttype" maxOccurs="1"/>
+                <xsd:element ref="axis" maxOccurs="2"/>
                 <xsd:element name="title" maxOccurs="1">
                     <xsd:complexType>
                         <xsd:attribute name="label" type="xsd:string"/>
@@ -48,6 +49,20 @@
             <xsd:attribute name="id" type="xsd:int"/>
             <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="legend" type="xsd:boolean"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="axis">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="dateTicker" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:attribute name="timePeriod" type="xsd:string"/>
+                        <xsd:attribute name="format" type="xsd:string"/>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="code" type="xsd:string"/>
+            <xsd:attribute name="label" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="charttype">

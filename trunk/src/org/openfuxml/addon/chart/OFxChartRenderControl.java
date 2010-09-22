@@ -4,7 +4,6 @@ import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.Logger;
 import org.jdom.Document;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.jaxb.Chart;
@@ -21,6 +20,8 @@ public class OFxChartRenderControl
 {
 	static Log logger = LogFactory.getLog(OFxChartRenderControl.class);
 	
+	private OfxChartRenderer ofxRenderer;
+	
 	public OFxChartRenderControl()
 	{
 	
@@ -28,7 +29,6 @@ public class OFxChartRenderControl
 	
 	public JFreeChart render(Chart ofxChart)
 	{
-		OfxChartRenderer ofxRenderer=null;
 		OfxChartTypeResolver.Type chartType = OfxChartTypeResolver.getType(ofxChart.getCharttype());
 		switch(chartType)
 		{
@@ -57,4 +57,6 @@ public class OFxChartRenderControl
 		Chart ofxChart = (Chart)JDomUtil.toJaxb(doc, Chart.class);
 		return render(ofxChart); 
 	}
+	
+	public OfxChartRenderer getOfxRenderer() {return ofxRenderer;}
 }
