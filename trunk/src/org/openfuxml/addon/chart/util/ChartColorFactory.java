@@ -49,7 +49,7 @@ public class ChartColorFactory
 	
 	public static Color create(org.openfuxml.addon.chart.jaxb.Color color)
 	{
-		return new Color(color.getR(), color.getB(), color.getG(), color.getA());
+		return new Color(color.getR(), color.getG(), color.getB(), color.getA());
 	}
 	
 	public static synchronized Map<String,java.awt.Color> getColorMap(Chart.Colors colors, String typ)
