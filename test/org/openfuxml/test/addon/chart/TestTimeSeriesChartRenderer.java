@@ -89,8 +89,8 @@ public class TestTimeSeriesChartRenderer
 		
 		TestTimeSeriesChartRenderer test = new TestTimeSeriesChartRenderer();
 		Chart chart;
-//		chart = test.getTimeSeries();
-		chart = test.load(args[0]);
+		chart = test.getTimeSeries();
+//		chart = test.load(args[0]);
 		
 		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
 			
