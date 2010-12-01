@@ -44,7 +44,17 @@ public class XYPlotRenderer extends AbstractChartRenderer
 	{
 		if(ofxChart.getCharttype().isSetTimeseries() && ofxChart.getCharttype().getTimeseries().isSetTimePeriod())
 		{
-			ofxTimePeriod = OfxChartTimePeriod.valueOf(ofxChart.getCharttype().getTimeseries().getTimePeriod());
+			logger.debug("checking="+ofxChart.getCharttype().getTimeseries().getTimePeriod());
+			
+			try
+			{
+				ofxTimePeriod = OfxChartTimePeriod.valueOf(ofxChart.getCharttype().getTimeseries().getTimePeriod());
+			}
+			catch(IllegalArgumentException e)
+			{
+				logger.error("timePeriod "+ofxChart.getCharttype().getTimeseries().getTimePeriod()+ " is not valid, using Hour as default");
+				ofxTimePeriod = OfxChartTimePeriod.Hour;
+			}
 		}
 		else if(ofxChart.getCharttype().isSetGantt() && ofxChart.getCharttype().getGantt().isSetTimePeriod())
 		{
