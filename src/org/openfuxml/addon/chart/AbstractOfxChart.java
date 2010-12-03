@@ -44,7 +44,7 @@ public class AbstractOfxChart
 	
 	public void translate(AhtTranslationFacade fTrans,String lang)
 	{
-		if(chart.isSetXAxis() && chart.getXAxis().isSetKey())
+		if(chart!=null && chart.isSetXAxis() && chart.getXAxis().isSetKey())
 		{
 			logger.trace("key="+chart.getXAxis().getKey()+" trans="+fTrans.t(chart.getXAxis().getKey(), lang));
 			chart.getXAxis().setLabel(fTrans.t(chart.getXAxis().getKey(), lang));
