@@ -10,7 +10,7 @@ public class OfxChartTypeResolver
 {
 	static Log logger = LogFactory.getLog(OfxChartTypeResolver.class);
 	
-	public static enum Type{TimeSeries, TimeBar, Bar, Gantt};
+	public static enum Type{TimeSeries, TimeBar, Bar, Gantt, Spline};
 	
 	public synchronized static Type getType(Charttype type)
 	{
@@ -18,6 +18,7 @@ public class OfxChartTypeResolver
 		if(type.isSetBar()){return Type.Bar;}
 		if(type.isSetTimebar()){return Type.TimeBar;}
 		if(type.isSetGantt()){return Type.Gantt;}
+		if(type.isSetSpline()){return Type.Spline;}
 		logger.warn("Unknown Charttype");
 		JaxbUtil.debug(type);
 		return null;

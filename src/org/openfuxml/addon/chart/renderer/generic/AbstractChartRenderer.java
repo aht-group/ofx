@@ -48,7 +48,10 @@ public class AbstractChartRenderer
 			setAxisRange(axis,type);
 		}
 	}
-	protected void setAxisRange(Axis axis,AxisType type){logger.fatal("This should be @Overridden");}
+	protected void setAxisRange(Axis axis,AxisType type)
+	{
+		logger.fatal("This should be @Overridden");
+	}
 	
 	public Dimension getSuggestedSize()
 	{

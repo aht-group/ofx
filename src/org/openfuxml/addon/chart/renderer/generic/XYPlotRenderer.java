@@ -13,7 +13,6 @@ import org.jfree.data.time.Year;
 import org.openfuxml.addon.chart.jaxb.Axis;
 import org.openfuxml.addon.chart.jaxb.Axis.DateTicker;
 import org.openfuxml.addon.chart.jaxb.Chart;
-import org.openfuxml.addon.chart.renderer.generic.AbstractChartRenderer.AxisType;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
 

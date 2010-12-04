@@ -56,7 +56,9 @@ public class TimeSeriesChartRenderer extends AbstractTimeSeriesChartRenderer imp
 						ts.addOrUpdate(rtp, null);
 					}
 			}
-			dataset.addSeries(ts);	
+			dataset.addSeries(ts);
+			
+			logger.info("Add here TS with same color from container");
 		}
 		return dataset;
 	}
