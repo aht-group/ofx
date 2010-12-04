@@ -63,6 +63,7 @@
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="label" type="xsd:string"/>
+            <xsd:attribute name="autoRangIncludeNull" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="charttype">
@@ -93,6 +94,7 @@
                         <xsd:attribute name="timePeriod" type="xsd:string"/>
                     </xsd:complexType>
                 </xsd:element>
+                <xsd:element name="spline" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -110,6 +112,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="data" maxOccurs="unbounded"/>
+                <xsd:element ref="container" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="label" type="xsd:string"/>
         </xsd:complexType>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ofx:chart xmlns:ofx="http://www.openfuxml.org/chart" legend="true">
+    <ofx:charttype>
+        <spline/>
+    </ofx:charttype>
+    <x-axis label="x"/>
+    <y-axis label="x"/>
+    <ofx:axis code="x" autoRangIncludeNull="false"/>
+    <ofx:axis code="y" autoRangIncludeNull="true"/>
+    <title label="test"/>
+    <colors>
+        <ofx:color a="255" b="245" g="245" r="245" typ="backgroundChart"/>
+        <ofx:color a="255" b="255" g="255" r="255" typ="backgroundPlot"/>
+    </colors>
+    <size width="665" height="440"/>
+    <grid domain="false" range="true"/>
+    <ofx:container label="Spline test">
+        <ofx:data x="1" y="10"/>
+        <ofx:data x="2" y="5"/>
+        <ofx:data x="3" y="15"/>
+        <ofx:data x="4" y="2"/>
+    </ofx:container>
+</ofx:chart>

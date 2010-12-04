@@ -14,6 +14,7 @@ import org.openfuxml.addon.chart.renderer.gantt.GanttChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.renderer.timeseries.TimeSeriesChartRenderer;
 import org.openfuxml.addon.chart.renderer.timeseries.TimeSeriesCumulativeChartRenderer;
+import org.openfuxml.addon.chart.renderer.xy.SplineChartRenderer;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 
 public class OFxChartRenderControl
@@ -36,6 +37,7 @@ public class OFxChartRenderControl
 			case TimeBar:    ofxRenderer = new TimeBarRenderer();break;
 			case Bar: 		 ofxRenderer = new BarChartRenderer();break;
 			case Gantt:		 ofxRenderer = new GanttChartRenderer();break;
+			case Spline:	 ofxRenderer = new SplineChartRenderer();break;
 			default:	logger.warn("No Renderer available for "+chartType);
 		}
 		
