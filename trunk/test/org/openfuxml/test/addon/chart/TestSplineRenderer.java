@@ -91,10 +91,9 @@ public class TestSplineRenderer
 		
 		TestSplineRenderer test = new TestSplineRenderer();
 		Chart chart;
-//		chart = test.getTimeSeries();
 		chart = test.load(args[0]);
 		
-		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
+//		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);

@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYSplineRenderer;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Hour;
 import org.jfree.data.time.Month;
@@ -22,10 +21,13 @@ import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.AxisResolver;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
+import org.openfuxml.addon.chart.util.OfxCustomPaintColors;
 
 public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRenderer
 {
 	static Log logger = LogFactory.getLog(SplineChartRenderer.class);
+	
+	private OfxCustomPaintColors ofxColors;
 	
 	public SplineChartRenderer()
 	{
@@ -41,9 +43,13 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
         NumberAxis yAxis = new NumberAxis(ChartLabelResolver.getYaxis(ofxChart));
         yAxis.setAutoRangeIncludesZero(AxisResolver.includeNullInAutoRange(ofxChart,"y"));
 		
-        XYSplineRenderer renderer1 = new XYSplineRenderer();
-        XYPlot plot = new XYPlot(createDataset(ofxChart.getContainer()),
-        		 xAxis, yAxis, renderer1);
+        ofxColors = new OfxCustomPaintColors();
+        XYSeriesCollection xySeriesCollection = createDataset(ofxChart.getContainer());
+        
+        OfxSplineRenderer splineRenderer = new OfxSplineRenderer();
+ //       splineRenderer.setOfxPaintColors(ofxColors);
+        
+        XYPlot plot = new XYPlot(xySeriesCollection, xAxis, yAxis, splineRenderer);
 		
 		chart = new JFreeChart(ChartLabelResolver.getTitle(ofxChart),
                 JFreeChart.DEFAULT_TITLE_FONT, plot,
@@ -83,16 +89,36 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 	{
 		XYSeriesCollection data = new XYSeriesCollection();
 		
+		int colorIndex=0;
+		int seriesIndex=0;
 		for(Container c : lContainer)
 		{
-			XYSeries series = new XYSeries(c.getLabel());
-			for(Data d : c.getData())
+			XYSeries series;
+			if(c.isSetData())
 			{
-				series.add(d.getX(), d.getY());
+				logger.info("Container: index="+seriesIndex);
+				series = new XYSeries(c.getLabel());
+				for(Data d : c.getData()){series.add(d.getX(), d.getY());}
+				data.addSeries(series);
+				ofxColors.addColorMapping(seriesIndex, colorIndex);
+				seriesIndex++;
 			}
-			data.addSeries(series);
+			
+			for(Container c2 : c.getContainer())
+			{
+				if(c2.isSetData())
+				{
+					logger.info(" Sub index="+seriesIndex);
+					series = new XYSeries(c.getLabel()+"-"+c2.getLabel());
+					for(Data d : c2.getData()){series.add(d.getX(), d.getY());}
+					data.addSeries(series);
+					ofxColors.addColorMapping(seriesIndex, colorIndex);
+					seriesIndex++;
+				}
+			}
+			
+			colorIndex++;
 		}
-		
 		
 		return data;
 	}
