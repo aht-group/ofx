@@ -39,9 +39,10 @@ public class TimeBarRenderer extends XYPlotRenderer implements OfxChartRenderer
 		this.ofxChart=ofxChart;
 		Timebar timebar = ofxChart.getCharttype().getTimebar();
         chart = ChartFactory.createXYBarChart(
-        	ChartLabelResolver.getTitle(ofxChart), ChartLabelResolver.getXaxis(ofxChart),
+        	ChartLabelResolver.getTitle(ofxChart),
+        	ChartLabelResolver.getAxisLabelX(ofxChart),
             true,
-            ChartLabelResolver.getYaxis(ofxChart),                        // range axis label
+            ChartLabelResolver.getAxisLabelY(ofxChart),                        // range axis label
             createDataset(ofxChart.getContainer()),                    // data
             PlotOrientation.VERTICAL,
             ofxChart.isLegend(),                       // include legend

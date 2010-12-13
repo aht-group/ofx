@@ -3,10 +3,8 @@
     <ofx:charttype>
         <spline/>
     </ofx:charttype>
-    <x-axis label="x"/>
-    <y-axis label="x"/>
-    <ofx:axis code="x" autoRangIncludeNull="false"/>
-    <ofx:axis code="y" autoRangIncludeNull="true"/>
+    <ofx:axis code="x" label="xLabel" autoRangIncludeNull="false"/>
+    <ofx:axis code="y" label="yLabel" autoRangIncludeNull="true"/>
     <title label="test"/>
     <colors>
         <ofx:color a="255" b="245" g="245" r="245" typ="backgroundChart"/>
