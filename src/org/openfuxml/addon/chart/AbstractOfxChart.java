@@ -49,9 +49,9 @@ public class AbstractOfxChart
 		{
 			for(Axis axis : chart.getAxis())
 			{
-				if(axis.isSetLabelKey())
+				if(axis.isSetLabel() && axis.getLabel().isSetKey())
 				{
-					axis.setLabel(fTrans.t(axis.getLabelKey(),lang));
+					axis.getLabel().setText(fTrans.t(axis.getLabel().getKey(),lang));
 				}
 			}
 		}

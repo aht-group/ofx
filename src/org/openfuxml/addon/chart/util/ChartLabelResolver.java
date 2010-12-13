@@ -28,9 +28,10 @@ public class ChartLabelResolver
 		{
 			for(Axis axis : ofxChart.getAxis())
 			{
-				if(axis.isSetCode() && axis.getCode().equals(code) && axis.isSetLabel())
+				if(axis.isSetCode() && axis.getCode().equals(code) && axis.isSetLabel() && axis.getLabel().isSetText())
 				{
-					result = axis.getLabel();
+					result = axis.getLabel().getText();
+					break;
 				}
 			}
 		}
