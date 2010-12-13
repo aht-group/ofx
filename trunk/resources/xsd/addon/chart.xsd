@@ -12,13 +12,6 @@
                         <xsd:attribute name="key" type="xsd:string"/>
                     </xsd:complexType>
                 </xsd:element>
-                <xsd:element name="x-axis" maxOccurs="1">
-                    <xsd:complexType>
-                        <xsd:attribute name="label" type="xsd:string"/>
-                        <xsd:attribute name="key" type="xsd:string"/>
-                        <xsd:attribute name="dateformat" type="xsd:string"/>
-                    </xsd:complexType>
-                </xsd:element>
                 <xsd:element name="colors" maxOccurs="1">
                     <xsd:complexType>
                         <xsd:sequence>
