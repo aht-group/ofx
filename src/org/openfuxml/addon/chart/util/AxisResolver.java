@@ -5,6 +5,8 @@ import org.openfuxml.addon.chart.jaxb.Chart;
 
 public class AxisResolver
 {	
+	public static enum AxisType{range,domain};
+	
 	public static synchronized boolean includeNullInAutoRange(Chart ofxChart, String code)
 	{
 		boolean result = true;

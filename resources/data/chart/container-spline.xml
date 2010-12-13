@@ -3,10 +3,10 @@
     <ofx:charttype>
         <spline/>
     </ofx:charttype>
-    <ofx:axis code="x" autoRangIncludeNull="false">
+    <ofx:axis code="domain" autoRangIncludeNull="false">
         <ofx:label text="xLabel"/>
     </ofx:axis>
-    <ofx:axis code="y" label="yLabel" autoRangIncludeNull="true">
+    <ofx:axis code="range" label="yLabel" autoRangIncludeNull="true">
         <ofx:label text="yLabel"/>
     </ofx:axis>
     <title label="test"/>

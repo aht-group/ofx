@@ -3,8 +3,12 @@
     <ofx:charttype>
         <timeseries timePeriod="Month" gap="true"/>
     </ofx:charttype>
-    <x-axis key="XX" label="???XX???"/>
-    <y-axis key="YY" label="???YY???"/>
+    <ofx:axis code="domain">
+        <ofx:label text="???x???" key="x"/>
+    </ofx:axis>
+    <ofx:axis code="range">
+        <ofx:label text="???y???" key="y"/>
+    </ofx:axis>
     <colors>
         <ofx:color a="255" b="245" g="245" r="245" typ="backgroundChart"/>
         <ofx:color a="255" b="255" g="255" r="255" typ="backgroundPlot"/>
