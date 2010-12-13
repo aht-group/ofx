@@ -19,12 +19,6 @@
                         <xsd:attribute name="dateformat" type="xsd:string"/>
                     </xsd:complexType>
                 </xsd:element>
-                <xsd:element name="y-axis" maxOccurs="1">
-                    <xsd:complexType>
-                        <xsd:attribute name="label" type="xsd:string"/>
-                        <xsd:attribute name="key" type="xsd:string"/>
-                    </xsd:complexType>
-                </xsd:element>
                 <xsd:element name="colors" maxOccurs="1">
                     <xsd:complexType>
                         <xsd:sequence>
@@ -63,6 +57,8 @@
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="label" type="xsd:string"/>
+            <xsd:attribute name="labelKey" type="xsd:string"/>
+            <xsd:attribute name="dateformat" type="xsd:string"/>
             <xsd:attribute name="autoRangIncludeNull" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>

@@ -13,6 +13,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.chart.jaxb.Axis;
 import org.openfuxml.addon.chart.jaxb.Chart;
 
 import com.aht.util.facade.aht.AhtTranslationFacade;
@@ -44,15 +45,15 @@ public class AbstractOfxChart
 	
 	public void translate(AhtTranslationFacade fTrans,String lang)
 	{
-		if(chart!=null && chart.isSetXAxis() && chart.getXAxis().isSetKey())
+		if(chart!=null)
 		{
-			logger.trace("key="+chart.getXAxis().getKey()+" trans="+fTrans.t(chart.getXAxis().getKey(), lang));
-			chart.getXAxis().setLabel(fTrans.t(chart.getXAxis().getKey(), lang));
-		}
-		if(chart.isSetYAxis() && chart.getYAxis().isSetKey())
-		{
-			logger.trace("key="+chart.getYAxis().getKey()+" trans="+fTrans.t(chart.getYAxis().getKey(), lang));
-			chart.getYAxis().setLabel(fTrans.t(chart.getYAxis().getKey(), lang));
+			for(Axis axis : chart.getAxis())
+			{
+				if(axis.isSetLabelKey())
+				{
+					axis.setLabel(fTrans.t(axis.getLabelKey(),lang));
+				}
+			}
 		}
 	}
 	

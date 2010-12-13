@@ -1,7 +1,6 @@
 package org.openfuxml.addon.chart.renderer;
 
 import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -30,7 +29,9 @@ public class BarChartRenderer extends AbstractChartRenderer implements OfxChartR
 	public JFreeChart render(Chart ofxChart)
 	{
         JFreeChart chart = ChartFactory.createBarChart(
-        		ChartLabelResolver.getTitle(ofxChart), ChartLabelResolver.getXaxis(ofxChart),ChartLabelResolver.getYaxis(ofxChart),
+        		ChartLabelResolver.getTitle(ofxChart),
+        		ChartLabelResolver.getAxisLabelX(ofxChart),
+        		ChartLabelResolver.getAxisLabelY(ofxChart),
         		createDataset(ofxChart.getContainer()),
         		PlotOrientation.VERTICAL,
         		ofxChart.isLegend(),

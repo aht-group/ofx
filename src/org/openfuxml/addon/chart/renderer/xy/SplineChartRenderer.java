@@ -38,9 +38,9 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 	{
 		this.ofxChart=ofxChart;
 		
-		NumberAxis xAxis = new NumberAxis(ChartLabelResolver.getXaxis(ofxChart));
+		NumberAxis xAxis = new NumberAxis(ChartLabelResolver.getAxisLabelX(ofxChart));
         xAxis.setAutoRangeIncludesZero(AxisResolver.includeNullInAutoRange(ofxChart,"x"));
-        NumberAxis yAxis = new NumberAxis(ChartLabelResolver.getYaxis(ofxChart));
+        NumberAxis yAxis = new NumberAxis(ChartLabelResolver.getAxisLabelY(ofxChart));
         yAxis.setAutoRangeIncludesZero(AxisResolver.includeNullInAutoRange(ofxChart,"y"));
 		
         ofxColors = new OfxCustomPaintColors();

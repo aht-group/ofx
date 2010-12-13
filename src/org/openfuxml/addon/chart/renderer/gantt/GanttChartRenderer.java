@@ -33,7 +33,6 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
 {
 	static Logger logger = Logger.getLogger(GanttChartRenderer.class);
 	
-	
 	public GanttChartRenderer()
 	{
 		
@@ -50,9 +49,9 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
 		
 		chart = ChartFactory.createXYBarChart(
 				ChartLabelResolver.getTitle(ofxChart),
-				ChartLabelResolver.getYaxis(ofxChart),
+				ChartLabelResolver.getAxisLabelY(ofxChart),
 				false,
-				ChartLabelResolver.getXaxis(ofxChart),
+				ChartLabelResolver.getAxisLabelX(ofxChart),
 				dataset,
                 PlotOrientation.HORIZONTAL,
                 ofxChart.isLegend(),
@@ -88,7 +87,7 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
 			 i++;
 		 } 
 		 
-		 SymbolAxis yAxis = new SymbolAxis(ChartLabelResolver.getYaxis(ofxChart),taskNames);
+		 SymbolAxis yAxis = new SymbolAxis(ChartLabelResolver.getAxisLabelY(ofxChart),taskNames);
 	     yAxis.setGridBandsVisible(true);
 	     plot.setDomainAxis(yAxis);
 	     
