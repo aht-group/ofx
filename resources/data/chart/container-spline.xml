@@ -76,34 +76,4 @@
             <ofx:data y="16.9" x="12.0"/>
         </ofx:container>
     </ofx:container>
-    <ofx:container label="prec">
-        <ofx:container label="ref">
-            <ofx:data y="0.0" x="1.0"/>
-            <ofx:data y="2.0" x="2.0"/>
-            <ofx:data y="4.0" x="3.0"/>
-            <ofx:data y="29.0" x="4.0"/>
-            <ofx:data y="88.0" x="5.0"/>
-            <ofx:data y="138.0" x="6.0"/>
-            <ofx:data y="253.0" x="7.0"/>
-            <ofx:data y="285.0" x="8.0"/>
-            <ofx:data y="170.0" x="9.0"/>
-            <ofx:data y="37.0" x="10.0"/>
-            <ofx:data y="0.0" x="11.0"/>
-            <ofx:data y="0.0" x="12.0"/>
-        </ofx:container>
-        <ofx:container label="had">
-            <ofx:data y="0.0" x="1.0"/>
-            <ofx:data y="3.0" x="2.0"/>
-            <ofx:data y="5.0" x="3.0"/>
-            <ofx:data y="33.0" x="4.0"/>
-            <ofx:data y="98.0" x="5.0"/>
-            <ofx:data y="154.0" x="6.0"/>
-            <ofx:data y="293.0" x="7.0"/>
-            <ofx:data y="350.0" x="8.0"/>
-            <ofx:data y="193.0" x="9.0"/>
-            <ofx:data y="41.0" x="10.0"/>
-            <ofx:data y="0.0" x="11.0"/>
-            <ofx:data y="0.0" x="12.0"/>
-        </ofx:container>
-    </ofx:container>
 </ofx:chart>
