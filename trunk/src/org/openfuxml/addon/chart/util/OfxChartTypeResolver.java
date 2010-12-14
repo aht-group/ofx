@@ -14,7 +14,7 @@ public class OfxChartTypeResolver
 	public static enum Type{TimeSeries, TimeBar, Bar, Gantt, Spline};
 	
 	public static enum AxisOrientation{range,domain};
-	public static enum ChartAxisType{Nil,Number};
+	public static enum ChartAxisType{Nil,Number,Date};
 	
 	public synchronized static Type getType(Charttype type)
 	{
@@ -33,6 +33,7 @@ public class OfxChartTypeResolver
 		if(type!=null)
 		{
 			if(type.isSetNumber()){return ChartAxisType.Number;}
+			if(type.isSetDate()){return ChartAxisType.Date;}
 		}
 		return ChartAxisType.Nil;
 	}

@@ -42,12 +42,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="axisType" maxOccurs="1"/>
-                <xsd:element name="dateTicker" maxOccurs="unbounded">
-                    <xsd:complexType>
-                        <xsd:attribute name="timePeriod" type="xsd:string"/>
-                        <xsd:attribute name="format" type="xsd:string"/>
-                    </xsd:complexType>
-                </xsd:element>
+                
                 <xsd:element ref="label" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
@@ -63,6 +58,18 @@
                         <xsd:sequence>
                             <xsd:element name="ticker" maxOccurs="unbounded">
                                 <xsd:complexType>
+                                    <xsd:attribute name="format" type="xsd:string"/>
+                                </xsd:complexType>
+                            </xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="date" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ticker" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                    <xsd:attribute name="timePeriod" type="xsd:string"/>
                                     <xsd:attribute name="format" type="xsd:string"/>
                                 </xsd:complexType>
                             </xsd:element>

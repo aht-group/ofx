@@ -98,6 +98,9 @@ public class TestGanttRenderer
 		Chart chart;
 //		chart = test.getGantt();
 		chart = (Chart)JaxbUtil.loadJAXB(args[0],Chart.class);
+		
+		logger.info("Using Chart from "+args[0]);
+		
 		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();

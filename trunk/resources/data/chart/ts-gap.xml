@@ -5,6 +5,11 @@
     </ofx:charttype>
     <ofx:axis code="domain">
         <ofx:label text="???x???" key="x"/>
+        <ofx:axisType>
+            <date>
+                <ticker format="yyyy" timePeriod="Year"/>
+            </date>
+        </ofx:axisType>
     </ofx:axis>
     <ofx:axis code="range">
         <ofx:label text="???y???" key="y"/>
