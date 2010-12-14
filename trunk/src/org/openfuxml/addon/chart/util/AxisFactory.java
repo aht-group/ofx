@@ -10,14 +10,13 @@ import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.NumberAxis;
 import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.jaxb.Label;
+import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 
 public class AxisFactory
 {
 	static Log logger = LogFactory.getLog(AxisFactory.class);
-
-	public static enum AxisType{range,domain};
 	
-	public static synchronized Axis createNumberAxis(Chart ofxChart, AxisType type)
+	public static synchronized Axis createNumberAxis(Chart ofxChart, AxisOrientation type)
 	{
 		org.openfuxml.addon.chart.jaxb.Axis ofxAxis = AxisFactory.getAxis(ofxChart, type);
 		
@@ -64,14 +63,14 @@ public class AxisFactory
 	{
 		String fontFamily = "SansSerif";
 		int fontSize=10;
-		if(ofxLabel.isSetFont()){}
-//		if(ofxLabel.isSetSize()){fontSize=ofxLabel.getSize();}
+		if(ofxLabel.isSetFont()){fontFamily = ofxLabel.getFont();}
+		if(ofxLabel.isSetSize()){fontSize=ofxLabel.getSize();}
 		
 		Font font = new Font(fontFamily, Font.PLAIN, fontSize);
 		return font;
 	}
 	
-	private static synchronized org.openfuxml.addon.chart.jaxb.Axis getAxis(Chart ofxChart, AxisType type)
+	private static synchronized org.openfuxml.addon.chart.jaxb.Axis getAxis(Chart ofxChart, AxisOrientation type)
 	{
 		org.openfuxml.addon.chart.jaxb.Axis axisResult = null;
 		for(org.openfuxml.addon.chart.jaxb.Axis axis : ofxChart.getAxis())

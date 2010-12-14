@@ -12,7 +12,9 @@ public class OfxChartTypeResolver
 	static Log logger = LogFactory.getLog(OfxChartTypeResolver.class);
 	
 	public static enum Type{TimeSeries, TimeBar, Bar, Gantt, Spline};
-	public static enum ChartAxisType{Number};
+	
+	public static enum AxisOrientation{range,domain};
+	public static enum ChartAxisType{Nil,Number};
 	
 	public synchronized static Type getType(Charttype type)
 	{
@@ -32,7 +34,6 @@ public class OfxChartTypeResolver
 		{
 			if(type.isSetNumber()){return ChartAxisType.Number;}
 		}
-		logger.warn("Unknown ChartAxisType");
-		return null;
+		return ChartAxisType.Nil;
 	}
 }

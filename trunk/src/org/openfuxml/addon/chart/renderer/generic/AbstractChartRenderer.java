@@ -7,8 +7,8 @@ import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.jaxb.Axis;
 import org.openfuxml.addon.chart.jaxb.Chart;
-import org.openfuxml.addon.chart.util.AxisFactory.AxisType;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
+import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 
 public class AbstractChartRenderer
 {
@@ -43,11 +43,11 @@ public class AbstractChartRenderer
 	{
 		for(Axis axis : ofxChart.getAxis())
 		{
-			AxisType type = AxisType.valueOf(axis.getCode());
-			setAxisRange(axis,type);
+			AxisOrientation type = AxisOrientation.valueOf(axis.getCode());
+			setAxis(axis,type);
 		}
 	}
-	protected void setAxisRange(Axis axis,AxisType type)
+	protected void setAxis(Axis axis,AxisOrientation type)
 	{
 		logger.fatal("This should be @Overridden");
 	}

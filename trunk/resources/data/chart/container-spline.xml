@@ -4,13 +4,13 @@
         <spline/>
     </ofx:charttype>
     <ofx:axis code="domain" autoRangIncludeNull="false">
-        <ofx:label text="xLabel" size="5"/>
+        <ofx:label text="xLabel" size="9"/>
         <ofx:axisType>
             <number/>
         </ofx:axisType>
     </ofx:axis>
     <ofx:axis code="range" label="yLabel" autoRangIncludeNull="true">
-        <ofx:label text="yLabel"/>
+        <ofx:label text="yLabel" size="9"/>
         <ofx:axisType>
             <number/>
         </ofx:axisType>
