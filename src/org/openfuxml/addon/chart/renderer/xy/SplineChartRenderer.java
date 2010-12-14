@@ -21,6 +21,7 @@ import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.AxisFactory;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
+import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 import org.openfuxml.addon.chart.util.OfxCustomPaintColors;
 
 public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRenderer
@@ -38,8 +39,8 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 	{
 		this.ofxChart=ofxChart;
 		
-		ValueAxis xAxis = (ValueAxis)AxisFactory.createNumberAxis(ofxChart, AxisFactory.AxisType.domain);
-		ValueAxis yAxis = (ValueAxis)AxisFactory.createNumberAxis(ofxChart, AxisFactory.AxisType.range);
+		ValueAxis xAxis = (ValueAxis)AxisFactory.createNumberAxis(ofxChart, OfxChartTypeResolver.AxisOrientation.domain);
+		ValueAxis yAxis = (ValueAxis)AxisFactory.createNumberAxis(ofxChart, OfxChartTypeResolver.AxisOrientation.range);
 		
         ofxColors = new OfxCustomPaintColors();
         XYSeriesCollection xySeriesCollection = createDataset(ofxChart.getContainer());

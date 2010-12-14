@@ -3,7 +3,7 @@ package org.openfuxml.addon.chart.util;
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.chart.jaxb.Axis;
 import org.openfuxml.addon.chart.jaxb.Chart;
-import org.openfuxml.addon.chart.util.AxisFactory.AxisType;
+import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 
 public class ChartLabelResolver
 {	
@@ -16,10 +16,10 @@ public class ChartLabelResolver
 		return result;
 	}
 	
-	public synchronized static String getAxisLabelX(Chart ofxChart){return getAxisLabel(ofxChart, AxisType.domain);}
-	public synchronized static String getAxisLabelY(Chart ofxChart){return getAxisLabel(ofxChart, AxisType.range);}
+	public synchronized static String getAxisLabelX(Chart ofxChart){return getAxisLabel(ofxChart, AxisOrientation.domain);}
+	public synchronized static String getAxisLabelY(Chart ofxChart){return getAxisLabel(ofxChart, AxisOrientation.range);}
 	
-	public synchronized static String getAxisLabel(Chart ofxChart, AxisType type)
+	public synchronized static String getAxisLabel(Chart ofxChart, AxisOrientation type)
 	{
 		String result = null;
 		if(ofxChart!=null)

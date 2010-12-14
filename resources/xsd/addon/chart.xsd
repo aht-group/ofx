@@ -127,8 +127,8 @@
         <xsd:complexType>
             <xsd:attribute name="key" type="xsd:string"/>
             <xsd:attribute name="text" type="xsd:string"/>
-            <xsd:attribute name="size" type="xsd:string"/>
-            <xsd:attribute name="font" type="xsd:dateTime"/>
+            <xsd:attribute name="size" type="xsd:int"/>
+            <xsd:attribute name="font" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="data">
