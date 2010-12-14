@@ -1,18 +1,13 @@
 package org.openfuxml.addon.chart.renderer.generic;
 
-import java.text.SimpleDateFormat;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.log4j.Logger;
 import org.jfree.chart.axis.PeriodAxis;
-import org.jfree.chart.axis.PeriodAxisLabelInfo;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.time.Day;
-import org.jfree.data.time.Hour;
 import org.jfree.data.time.Month;
-import org.jfree.data.time.Year;
 import org.openfuxml.addon.chart.jaxb.Axis;
-import org.openfuxml.addon.chart.jaxb.Axis.DateTicker;
 import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.util.AxisFactory;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
@@ -74,43 +69,12 @@ public class XYPlotRenderer extends AbstractChartRenderer
 	@Override
 	protected void setAxis(Axis ofxAxis,AxisOrientation axisOrientation)
 	{
+		JaxbUtil.debug(ofxAxis);
 		ValueAxis axis=null;
 		switch(OfxChartTypeResolver.getAxisType(ofxAxis.getAxisType()))
 		{
 			case Number: axis = AxisFactory.createNumberAxis(ofxAxis);break;
-		}
-		
-		boolean isDateTicker = ofxAxis.isSetDateTicker();
-		
-		logger.debug("Setting Axis Range: "+isDateTicker);
-		if(isDateTicker)
-		{
-			int level = ofxAxis.getDateTicker().size();
-			logger.debug("Level: "+level);
-			
-			PeriodAxis pAxis = new PeriodAxis(null);
-			pAxis.setAutoRangeTimePeriodClass(Month.class);
-			pAxis.setMajorTickTimePeriodClass(Month.class);
-		    
-			PeriodAxisLabelInfo[] info = new PeriodAxisLabelInfo[level];
-			
-			int i=0;
-			for(DateTicker dt : ofxAxis.getDateTicker())
-			{
-				SimpleDateFormat sdf = new SimpleDateFormat(dt.getFormat());
-				OfxChartTimePeriod ofxTp = OfxChartTimePeriod.valueOf(dt.getTimePeriod());
-				switch(ofxTp)
-				{
-					case Hour:  info[i] = new PeriodAxisLabelInfo(Hour.class,sdf);break;
-					case Day:   info[i] = new PeriodAxisLabelInfo(Day.class,sdf);break;
-					case Month: info[i] = new PeriodAxisLabelInfo(Month.class,sdf);break;
-					case Year:  info[i] = new PeriodAxisLabelInfo(Year.class,sdf);break;
-				}
-				i++;
-			}
-		        
-	        pAxis.setLabelInfo(info);
-		    axis=pAxis;
+			case Date: axis = AxisFactory.createPeriodAxis(ofxAxis);break;
 		}
 		
 		if(axis!=null)
@@ -122,7 +86,6 @@ public class XYPlotRenderer extends AbstractChartRenderer
 	        	case domain: plot.setDomainAxis(axis);break;
 	        }
 		}
-		
 
 	}
 	
