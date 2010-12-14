@@ -35,8 +35,8 @@ public abstract class AbstractTimeSeriesChartRenderer extends XYPlotRenderer imp
 		
         chart = ChartFactory.createTimeSeriesChart(
         		ChartLabelResolver.getTitle(ofxChart),
-        		ChartLabelResolver.getAxisLabelX(ofxChart),
-        		ChartLabelResolver.getAxisLabelY(ofxChart),
+        		null,
+        		null,
         		createDataset(ofxChart.getContainer()),
         		ofxChart.isLegend(),
 	            true,               // generate tooltips?

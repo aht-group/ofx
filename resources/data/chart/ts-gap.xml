@@ -6,7 +6,7 @@
     <ofx:axis code="domain">
         <ofx:label text="???x???" key="x"/>
         <ofx:axisType>
-            <date>
+            <date autoRangeTimePeriod="Year" majorTickTimePeriod="Year">
                 <ticker format="yyyy" timePeriod="Year"/>
             </date>
         </ofx:axisType>

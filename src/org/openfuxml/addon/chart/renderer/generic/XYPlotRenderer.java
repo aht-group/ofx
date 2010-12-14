@@ -3,10 +3,9 @@ package org.openfuxml.addon.chart.renderer.generic;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.log4j.Logger;
-import org.jfree.chart.axis.PeriodAxis;
+import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.time.Month;
 import org.openfuxml.addon.chart.jaxb.Axis;
 import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.util.AxisFactory;
@@ -75,6 +74,7 @@ public class XYPlotRenderer extends AbstractChartRenderer
 		{
 			case Number: axis = AxisFactory.createNumberAxis(ofxAxis);break;
 			case Date: axis = AxisFactory.createPeriodAxis(ofxAxis);break;
+			default: axis = new NumberAxis();AxisFactory.labelAxisAxis(axis, ofxAxis);
 		}
 		
 		if(axis!=null)
@@ -87,22 +87,5 @@ public class XYPlotRenderer extends AbstractChartRenderer
 	        }
 		}
 
-	}
-	
-	protected void setMonthPeriodAxis()
-	{
-		 XYPlot plot = (XYPlot) chart.getPlot();
-	     PeriodAxis domainAxis = new PeriodAxis("");
-	  //      domainAxis.setTimeZone(TimeZone.getTimeZone("Pacific/Auckland"));
-	        domainAxis.setAutoRangeTimePeriodClass(Month.class);
-	        domainAxis.setMajorTickTimePeriodClass(Month.class);
-/*	        PeriodAxisLabelInfo[] info = new PeriodAxisLabelInfo[2];
-	        info[0] = new PeriodAxisLabelInfo(Month.class,
-	                new SimpleDateFormat("MMM"));//, new RectangleInsets(2, 2, 2, 2),
-	        info[1] = new PeriodAxisLabelInfo(Year.class,
-	                new SimpleDateFormat("yyyy"));
-	        domainAxis.setLabelInfo(info);
-*/	        plot.setDomainAxis(domainAxis);
-//	        plot.setRangeAxis(domainAxis);
 	}
 }

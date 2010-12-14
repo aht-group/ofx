@@ -3,8 +3,6 @@ package org.openfuxml.addon.chart.util;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.axis.Axis;
@@ -15,6 +13,7 @@ import org.jfree.data.time.Day;
 import org.jfree.data.time.Hour;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.Year;
+import org.openfuxml.addon.chart.jaxb.AxisType;
 import org.openfuxml.addon.chart.jaxb.AxisType.Date.Ticker;
 import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.jaxb.Label;
@@ -30,8 +29,6 @@ public class AxisFactory
 		org.openfuxml.addon.chart.jaxb.Axis ofxAxis = AxisFactory.getAxis(ofxChart, type);
 		
 		Axis axis = null;
-		
-		JaxbUtil.debug(ofxAxis.getAxisType());
 		switch(OfxChartTypeResolver.getAxisType(ofxAxis.getAxisType()))
 		{
 			case Number: axis = createNumberAxis(ofxAxis);break;
@@ -53,13 +50,23 @@ public class AxisFactory
 	
 	public static synchronized PeriodAxis createPeriodAxis(org.openfuxml.addon.chart.jaxb.Axis ofxAxis)
 	{
-		int level = ofxAxis.getAxisType().getDate().getTicker().size();
+		AxisType.Date ofxDateAxis = ofxAxis.getAxisType().getDate();
+		int level = ofxDateAxis.getTicker().size();
 		logger.debug("Level: "+level);
 		
 		PeriodAxis axis = new PeriodAxis(null);
 		axis.setAutoRangeTimePeriodClass(Month.class);
-		axis.setMajorTickTimePeriodClass(Year.class);
-	    
+		axis.setMajorTickTimePeriodClass(Month.class);
+		
+		if(ofxDateAxis.isSetAutoRangeTimePeriod())
+		{
+			axis.setAutoRangeTimePeriodClass(TimePeriodFactory.getPeriodClass(ofxDateAxis.getAutoRangeTimePeriod()));
+		}
+		if(ofxDateAxis.isSetMajorTickTimePeriod())
+		{
+			axis.setMajorTickTimePeriodClass(TimePeriodFactory.getPeriodClass(ofxDateAxis.getMajorTickTimePeriod()));
+		}
+		
 		PeriodAxisLabelInfo[] info = new PeriodAxisLabelInfo[level];
 		int i=0;
 		for(Ticker dt : ofxAxis.getAxisType().getDate().getTicker())
