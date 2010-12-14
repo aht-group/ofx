@@ -2,13 +2,18 @@ package org.openfuxml.addon.chart.util;
 
 import java.util.Date;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Hour;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.RegularTimePeriod;
+import org.jfree.data.time.Year;
 
 public class TimePeriodFactory
 {	
+	static Log logger = LogFactory.getLog(TimePeriodFactory.class);
+	
 	public static enum OfxChartTimePeriod {Hour,Day,Month,Year};
 	
 	public synchronized static RegularTimePeriod getRtp(OfxChartTimePeriod ofxTimePeriod, Date d)
@@ -22,5 +27,24 @@ public class TimePeriodFactory
 			default: rtp = new Hour(d);break;
 		}
 		return rtp;
+	}
+	
+	public synchronized static Class<?> getPeriodClass(String value)
+	{	
+		Class<?> c = null;
+		switch(getOfxTimePeriod(value))
+		{
+			case Hour: c = Hour.class;break;
+			case Day: c = Day.class;break;
+			case Month: c = Month.class;break;
+			case Year: c = Year.class;break;
+			default: c = Day.class;break;
+		}
+		return c;
+	}
+	
+	private synchronized static OfxChartTimePeriod getOfxTimePeriod(String value)
+	{
+		return OfxChartTimePeriod.valueOf(value);
 	}
 }

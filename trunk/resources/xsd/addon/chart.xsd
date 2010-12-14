@@ -74,6 +74,8 @@
                                 </xsd:complexType>
                             </xsd:element>
                         </xsd:sequence>
+                        <xsd:attribute name="autoRangeTimePeriod" type="xsd:string"/>
+                        <xsd:attribute name="majorTickTimePeriod" type="xsd:string"/>
                     </xsd:complexType>
                 </xsd:element>
             </xsd:sequence>
