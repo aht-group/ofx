@@ -4,6 +4,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.chart.jaxb.AxisType;
 import org.openfuxml.addon.chart.jaxb.Charttype;
 
 public class OfxChartTypeResolver
@@ -11,6 +12,7 @@ public class OfxChartTypeResolver
 	static Log logger = LogFactory.getLog(OfxChartTypeResolver.class);
 	
 	public static enum Type{TimeSeries, TimeBar, Bar, Gantt, Spline};
+	public static enum ChartAxisType{Number};
 	
 	public synchronized static Type getType(Charttype type)
 	{
@@ -21,6 +23,16 @@ public class OfxChartTypeResolver
 		if(type.isSetSpline()){return Type.Spline;}
 		logger.warn("Unknown Charttype");
 		JaxbUtil.debug(type);
+		return null;
+	}
+	
+	public synchronized static ChartAxisType getAxisType(AxisType type)
+	{
+		if(type!=null)
+		{
+			if(type.isSetNumber()){return ChartAxisType.Number;}
+		}
+		logger.warn("Unknown ChartAxisType");
 		return null;
 	}
 }
