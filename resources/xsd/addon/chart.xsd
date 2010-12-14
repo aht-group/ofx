@@ -56,9 +56,9 @@
                 <xsd:element name="number" maxOccurs="1">
                     <xsd:complexType>
                         <xsd:sequence>
-                            <xsd:element name="ticker" maxOccurs="unbounded">
+                            <xsd:element name="ticker" maxOccurs="1">
                                 <xsd:complexType>
-                                    <xsd:attribute name="format" type="xsd:string"/>
+                                    <xsd:attribute name="size" type="xsd:int"/>
                                 </xsd:complexType>
                             </xsd:element>
                         </xsd:sequence>
