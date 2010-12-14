@@ -6,7 +6,7 @@
     <ofx:axis code="domain" autoRangIncludeNull="false">
         <ofx:label text="xLabel" size="9"/>
         <ofx:axisType>
-            <number/>
+            <number><ticker size="1"/></number>
         </ofx:axisType>
     </ofx:axis>
     <ofx:axis code="range" label="yLabel" autoRangIncludeNull="true">

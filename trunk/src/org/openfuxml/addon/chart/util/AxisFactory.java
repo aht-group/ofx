@@ -3,10 +3,13 @@ package org.openfuxml.addon.chart.util;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 
+import net.sf.exlp.util.xml.JaxbUtil;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.axis.PeriodAxis;
 import org.jfree.chart.axis.PeriodAxisLabelInfo;
 import org.jfree.data.time.Day;
@@ -40,12 +43,21 @@ public class AxisFactory
 	
 	public static synchronized NumberAxis createNumberAxis(org.openfuxml.addon.chart.jaxb.Axis ofxAxis)
 	{
-		NumberAxis numAxis = new NumberAxis();
+		JaxbUtil.debug(ofxAxis);
+		AxisType.Number ofxNumberAxis = ofxAxis.getAxisType().getNumber();
+		NumberAxis axis = new NumberAxis();
 		boolean autoRangeIncludesZero = true;
 		if(ofxAxis.isSetAutoRangIncludeNull()){autoRangeIncludesZero = ofxAxis.isAutoRangIncludeNull();}
-		numAxis.setAutoRangeIncludesZero(autoRangeIncludesZero);
-		labelAxisAxis(numAxis, ofxAxis);
-		return numAxis;
+		axis.setAutoRangeIncludesZero(autoRangeIncludesZero);
+		
+		logger.debug("ticker: "+ofxNumberAxis.isSetTicker());
+		if(ofxNumberAxis.isSetTicker() && ofxNumberAxis.getTicker().isSetSize())
+		{
+			logger.debug("size: "+ofxNumberAxis.getTicker().getSize());
+			axis.setTickUnit(new NumberTickUnit(ofxNumberAxis.getTicker().getSize()));
+		}
+		labelAxisAxis(axis, ofxAxis);
+		return axis;
 	}
 	
 	public static synchronized PeriodAxis createPeriodAxis(org.openfuxml.addon.chart.jaxb.Axis ofxAxis)
