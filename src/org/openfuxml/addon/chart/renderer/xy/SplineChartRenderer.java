@@ -46,7 +46,7 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
         XYSeriesCollection xySeriesCollection = createDataset(ofxChart.getContainer());
         
         OfxSplineRenderer splineRenderer = new OfxSplineRenderer();
- //       splineRenderer.setOfxPaintColors(ofxColors);
+        splineRenderer.setOfxPaintColors(ofxColors);
         
         XYPlot plot = new XYPlot(xySeriesCollection, xAxis, yAxis, splineRenderer);
 		
@@ -56,18 +56,7 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 		
 		setColors();
         setGrid();
-//        setAxis();
-/*        chart = ChartFactory.createTimeSeriesChart(
-        		ChartLabelResolver.getTitle(ofxChart),
-        		ChartLabelResolver.getXaxis(ofxChart),ChartLabelResolver.getYaxis(ofxChart),
-        		createDataset(ofxChart.getContainer()),
-        		ofxChart.isLegend(),
-	            true,               // generate tooltips?
-	            false               // generate URLs?
-	        );
-        
-       
- */       
+     
         return chart;
 	}
 	

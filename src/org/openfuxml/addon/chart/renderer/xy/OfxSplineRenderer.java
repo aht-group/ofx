@@ -23,19 +23,13 @@ public class OfxSplineRenderer extends XYSplineRenderer
 	{
 		if(ofxPaintColors!=null)
 		{
-			int colorIndex = ofxPaintColors.getColorIndex(series);
-			if(ofxPaintColors.isCustomColorsPalette())
-			{
-				logger.warn("NYI");
-			}
-			logger.debug("Color: "+series+"->"+colorIndex);
-			return super.getSeriesPaint(colorIndex);
+			return ofxPaintColors.getSeriesPaint(series);
 		}
 		else
 		{
 			return super.getSeriesPaint(series);
 		}
- }
+	}
 	
 	public OfxCustomPaintColors getOfxPaintColors() {return ofxPaintColors;}
 	public void setOfxPaintColors(OfxCustomPaintColors ofxPaintColors) {this.ofxPaintColors = ofxPaintColors;}
