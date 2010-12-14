@@ -3,7 +3,7 @@ package org.openfuxml.addon.chart.util;
 import org.apache.log4j.Logger;
 import org.openfuxml.addon.chart.jaxb.Axis;
 import org.openfuxml.addon.chart.jaxb.Chart;
-import org.openfuxml.addon.chart.util.AxisResolver.AxisType;
+import org.openfuxml.addon.chart.util.AxisFactory.AxisType;
 
 public class ChartLabelResolver
 {	

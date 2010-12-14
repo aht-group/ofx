@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.jaxb.Axis;
 import org.openfuxml.addon.chart.jaxb.Chart;
-import org.openfuxml.addon.chart.util.AxisResolver.AxisType;
+import org.openfuxml.addon.chart.util.AxisFactory.AxisType;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 
 public class AbstractChartRenderer

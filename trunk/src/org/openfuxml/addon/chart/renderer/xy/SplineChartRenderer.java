@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Hour;
@@ -19,7 +19,7 @@ import org.openfuxml.addon.chart.jaxb.Container;
 import org.openfuxml.addon.chart.jaxb.Data;
 import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
-import org.openfuxml.addon.chart.util.AxisResolver;
+import org.openfuxml.addon.chart.util.AxisFactory;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
 import org.openfuxml.addon.chart.util.OfxCustomPaintColors;
 
@@ -38,10 +38,8 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 	{
 		this.ofxChart=ofxChart;
 		
-		NumberAxis xAxis = new NumberAxis(ChartLabelResolver.getAxisLabelX(ofxChart));
-        xAxis.setAutoRangeIncludesZero(AxisResolver.includeNullInAutoRange(ofxChart,"x"));
-        NumberAxis yAxis = new NumberAxis(ChartLabelResolver.getAxisLabelY(ofxChart));
-        yAxis.setAutoRangeIncludesZero(AxisResolver.includeNullInAutoRange(ofxChart,"y"));
+		ValueAxis xAxis = (ValueAxis)AxisFactory.createNumberAxis(ofxChart, AxisFactory.AxisType.domain);
+		ValueAxis yAxis = (ValueAxis)AxisFactory.createNumberAxis(ofxChart, AxisFactory.AxisType.range);
 		
         ofxColors = new OfxCustomPaintColors();
         XYSeriesCollection xySeriesCollection = createDataset(ofxChart.getContainer());
