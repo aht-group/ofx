@@ -82,4 +82,24 @@
             <ofx:data y="16.9" x="12.0"/>
         </ofx:container>
     </ofx:container>
+    <ofx:container label="tmin">
+        <ofx:container label="ref">
+            <ofx:data y="4.7" x="11.0"/>
+            <ofx:data y="6" x="12.0"/>
+        </ofx:container>
+        <ofx:container label="had">
+            <ofx:data y="7" x="1.0"/>
+            <ofx:data y="2" x="2.0"/>
+        </ofx:container>
+    </ofx:container>
+    <ofx:container label="tmin">
+        <ofx:container label="ref">
+            <ofx:data y="4.7" x="5.0"/>
+            <ofx:data y="6" x="6.0"/>
+        </ofx:container>
+        <ofx:container label="had">
+            <ofx:data y="7" x="3.0"/>
+            <ofx:data y="6" x="4.0"/>
+        </ofx:container>
+    </ofx:container>
 </ofx:chart>
