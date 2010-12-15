@@ -58,7 +58,7 @@
             <ofx:data y="18.4" x="11.0"/>
             <ofx:data y="15.7" x="12.0"/>
         </ofx:container>
-        <ofx:container label="prec">
+        <ofx:container label="prec" rangeIndex="1">
             <ofx:data y="0.0" x="1.0"/>
             <ofx:data y="2.0" x="2.0"/>
             <ofx:data y="3.0" x="3.0"/>
@@ -102,7 +102,7 @@
             <ofx:data y="18.6" x="11.0"/>
             <ofx:data y="16.6" x="12.0"/>
         </ofx:container>
-        <ofx:container label="prec">
+        <ofx:container label="prec" rangeIndex="1">
             <ofx:data y="0.0" x="1.0"/>
             <ofx:data y="2.0" x="2.0"/>
             <ofx:data y="5.0" x="3.0"/>
@@ -146,7 +146,7 @@
             <ofx:data y="18.8" x="11.0"/>
             <ofx:data y="16.9" x="12.0"/>
         </ofx:container>
-        <ofx:container label="prec">
+        <ofx:container label="prec" rangeIndex="1">
             <ofx:data y="0.0" x="1.0"/>
             <ofx:data y="3.0" x="2.0"/>
             <ofx:data y="5.0" x="3.0"/>
@@ -190,7 +190,7 @@
             <ofx:data y="15.7" x="11.0"/>
             <ofx:data y="13.4" x="12.0"/>
         </ofx:container>
-        <ofx:container label="prec">
+        <ofx:container label="prec" rangeIndex="1">
             <ofx:data y="0.0" x="1.0"/>
             <ofx:data y="2.0" x="2.0"/>
             <ofx:data y="4.0" x="3.0"/>

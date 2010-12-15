@@ -25,6 +25,7 @@ import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.AxisFactory;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
+import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 import org.openfuxml.addon.chart.util.OfxCustomPaintColors;
 
 public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRenderer
@@ -32,6 +33,8 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 	static Log logger = LogFactory.getLog(SplineChartRenderer.class);
 	
 	private Map<Integer,OfxCustomPaintColors> mapOfxColors;
+	private Map<Integer,XYSeriesCollection> mapXySeriesCollection;
+	private Map<Integer,Integer> mapColorSeriesIndex;
 	
 	public SplineChartRenderer()
 	{
@@ -43,22 +46,21 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 		this.ofxChart=ofxChart;
 		
 		ValueAxis xAxis = (ValueAxis)AxisFactory.createNumberAxis(ofxChart, OfxChartTypeResolver.AxisOrientation.domain);
-        
-        OfxSplineRenderer splineRenderer = new OfxSplineRenderer();
-        splineRenderer.setOfxPaintColors(getOfxPaintColor(0));
-        
+                
         XYPlot plot = new XYPlot();
         plot.setDomainAxis(xAxis);
         
-        plot.setRenderer(0,splineRenderer);
-        plot.setRenderer(1,new OfxSplineRenderer());
-        
         List<XYSeriesCollection> lData = createDataset3(ofxChart.getContainer());
-        
         
         for(int i=0;i<lData.size();i++)
         {
-        	plot.setRangeAxis(i, (ValueAxis)AxisFactory.createNumberAxis(ofxChart, OfxChartTypeResolver.AxisOrientation.range0));
+        	OfxSplineRenderer ofxSplineRenderer = new OfxSplineRenderer();
+        	ofxSplineRenderer.setOfxPaintColors(mapOfxColors.get(i));
+        	plot.setRenderer(i,ofxSplineRenderer);
+        	
+        	String axisCode="range"+i;
+        	AxisOrientation axisOrientation = AxisOrientation.valueOf(axisCode);
+        	plot.setRangeAxis(i, (ValueAxis)AxisFactory.createNumberAxis(ofxChart, axisOrientation));
     		plot.setDataset(i, lData.get(i));
     		plot.mapDatasetToRangeAxis(i, i);
         }
@@ -88,57 +90,48 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 	
 	protected List<XYSeriesCollection> createDataset3(List<Container> lContainer)
 	{
-		List<XYSeriesCollection> lData = new ArrayList<XYSeriesCollection>();
+		mapXySeriesCollection = new Hashtable<Integer,XYSeriesCollection>();
+		mapColorSeriesIndex = new Hashtable<Integer,Integer>();
 		
-		XYSeriesCollection data = new XYSeriesCollection();
-		XYSeriesCollection data2 = new XYSeriesCollection();
-		
-		int colorIndex=0;
-		int seriesIndex=0;
+		int colorIndex=0;	
 		for(Container c : lContainer)
 		{
+			if(!c.isSetRangeIndex()){c.setRangeIndex(0);}
 			XYSeries series;
 			if(c.isSetData())
 			{
-				logger.info("Container: index="+seriesIndex);
+				logger.info("Container: index="+getColorSeriesIndex(c.getRangeIndex()));
 				series = new XYSeries(c.getLabel());
+					
 				for(Data d : c.getData()){series.add(d.getX(), d.getY());}
-				if(c.getLabel().endsWith("prec"))
-				{
-					data2.addSeries(series);
-				}
-				else{data.addSeries(series);}
-				getOfxPaintColor(0).addColorMapping(seriesIndex, colorIndex);
-				seriesIndex++;
+				getXYSeriesCollection(c.getRangeIndex()).addSeries(series);			
+				getOfxPaintColor(c.getRangeIndex()).addColorMapping(getColorSeriesIndex(c.getRangeIndex()), colorIndex);
+				incrementColorSeriesIndex(c.getRangeIndex());
 			}
 			
 			for(Container c2 : c.getContainer())
 			{
+				if(!c2.isSetRangeIndex()){c2.setRangeIndex(0);}
 				if(c2.isSetData())
 				{
-					logger.info(" Sub index="+seriesIndex+" "+c2.getLabel().endsWith("prec"));
+					logger.info(" Sub index="+getColorSeriesIndex(c2.getRangeIndex())+" "+c2.getLabel().endsWith("prec"));
 					series = new XYSeries(c.getLabel()+"-"+c2.getLabel());
 					for(Data d : c2.getData()){series.add(d.getX(), d.getY());}
 					
-					if(c2.getLabel().endsWith("prec"))
-					{
-						data2.addSeries(series);
-					}
-					else
-					{
-						data.addSeries(series);
-					}
-					
-					getOfxPaintColor(0).addColorMapping(seriesIndex, colorIndex);
-					seriesIndex++;
+					getXYSeriesCollection(c2.getRangeIndex()).addSeries(series);			
+					getOfxPaintColor(c2.getRangeIndex()).addColorMapping(getColorSeriesIndex(c2.getRangeIndex()), colorIndex);
+					incrementColorSeriesIndex(c2.getRangeIndex());
 				}
 			}
 			
 			colorIndex++;
 		}
 		
-		lData.add(data);
-		lData.add(data2);
+		List<XYSeriesCollection> lData = new ArrayList<XYSeriesCollection>();
+		for(int i=0;i<mapXySeriesCollection.size();i++)
+		{
+			lData.add(mapXySeriesCollection.get(i));
+		}
 		return lData;
 	}
 	
@@ -146,5 +139,22 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 	{
 		if(!mapOfxColors.containsKey(key)){mapOfxColors.put(key, new OfxCustomPaintColors());}
 		return mapOfxColors.get(key);
+	}
+	
+	private XYSeriesCollection getXYSeriesCollection(int key)
+	{
+		if(!mapXySeriesCollection.containsKey(key)){mapXySeriesCollection.put(key, new XYSeriesCollection());}
+		return mapXySeriesCollection.get(key);
+	}
+	
+	private int getColorSeriesIndex(int key)
+	{
+		if(!mapColorSeriesIndex.containsKey(key)){mapColorSeriesIndex.put(key, 0);}
+		return mapColorSeriesIndex.get(key);
+	}
+	private void incrementColorSeriesIndex(int key)
+	{
+		int index = getColorSeriesIndex(key);
+		mapColorSeriesIndex.put(key,index+1);
 	}
 }
