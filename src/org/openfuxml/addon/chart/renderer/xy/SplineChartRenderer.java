@@ -50,19 +50,21 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
         XYPlot plot = new XYPlot();
         plot.setDomainAxis(xAxis);
         
-        List<XYSeriesCollection> lData = createDataset3(ofxChart.getContainer());
+        createDataset3(ofxChart.getContainer());
         
-        for(int i=0;i<lData.size();i++)
+        for(Integer i : mapXySeriesCollection.keySet())
         {
+        	int index=i;
+        	if(mapXySeriesCollection.size()==1){index=0;}
         	OfxSplineRenderer ofxSplineRenderer = new OfxSplineRenderer();
         	ofxSplineRenderer.setOfxPaintColors(mapOfxColors.get(i));
-        	plot.setRenderer(i,ofxSplineRenderer);
+        	plot.setRenderer(index,ofxSplineRenderer);
         	
         	String axisCode="range"+i;
         	AxisOrientation axisOrientation = AxisOrientation.valueOf(axisCode);
-        	plot.setRangeAxis(i, (ValueAxis)AxisFactory.createNumberAxis(ofxChart, axisOrientation));
-    		plot.setDataset(i, lData.get(i));
-    		plot.mapDatasetToRangeAxis(i, i);
+        	plot.setRangeAxis(index, (ValueAxis)AxisFactory.createNumberAxis(ofxChart, axisOrientation));
+    		plot.setDataset(index, mapXySeriesCollection.get(i));
+    		plot.mapDatasetToRangeAxis(index, index);
         }
 
 		chart = new JFreeChart(ChartLabelResolver.getTitle(ofxChart),
@@ -88,7 +90,7 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 		return rtp;
 	}
 	
-	protected List<XYSeriesCollection> createDataset3(List<Container> lContainer)
+	protected void createDataset3(List<Container> lContainer)
 	{
 		mapXySeriesCollection = new Hashtable<Integer,XYSeriesCollection>();
 		mapColorSeriesIndex = new Hashtable<Integer,Integer>();
@@ -126,13 +128,6 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 			
 			colorIndex++;
 		}
-		
-		List<XYSeriesCollection> lData = new ArrayList<XYSeriesCollection>();
-		for(int i=0;i<mapXySeriesCollection.size();i++)
-		{
-			lData.add(mapXySeriesCollection.get(i));
-		}
-		return lData;
 	}
 	
 	private OfxCustomPaintColors getOfxPaintColor(int key)

@@ -131,6 +131,7 @@
             </xsd:sequence>
             <xsd:attribute name="label" type="xsd:string"/>
             <xsd:attribute name="rangeIndex" type="xsd:int"/>
+            <xsd:attribute name="colorIndex" type="xsd:int"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="label">
