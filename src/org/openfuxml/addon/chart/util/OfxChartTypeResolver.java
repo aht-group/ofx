@@ -13,7 +13,7 @@ public class OfxChartTypeResolver
 	
 	public static enum Type{TimeSeries, TimeBar, Bar, Gantt, Spline};
 	
-	public static enum AxisOrientation{domain,range0};
+	public static enum AxisOrientation{domain,range0,range1};
 	public static enum ChartAxisType{Nil,Number,Date};
 	
 	public synchronized static Type getType(Charttype type)

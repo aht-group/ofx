@@ -130,6 +130,7 @@
                 <xsd:element ref="container" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="label" type="xsd:string"/>
+            <xsd:attribute name="rangeIndex" type="xsd:int"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="label">
