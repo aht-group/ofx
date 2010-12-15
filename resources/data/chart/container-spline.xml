@@ -11,11 +11,17 @@
         </ofx:axisType>
         <ofx:label size="9" text="x"/>
     </ofx:axis>
-    <ofx:axis autoRangIncludeNull="true" code="range">
+    <ofx:axis autoRangIncludeNull="true" code="range0">
         <ofx:axisType>
             <number/>
         </ofx:axisType>
         <ofx:label size="9" text="y"/>
+    </ofx:axis>
+    <ofx:axis autoRangIncludeNull="true" code="range1">
+        <ofx:axisType>
+            <number/>
+        </ofx:axisType>
+        <ofx:label size="9" text="y2"/>
     </ofx:axis>
     <colors>
         <ofx:color a="255" b="245" g="245" r="245" typ="backgroundChart"/>

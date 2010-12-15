@@ -2,7 +2,9 @@ package org.openfuxml.addon.chart.renderer.xy;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -29,11 +31,11 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 {
 	static Log logger = LogFactory.getLog(SplineChartRenderer.class);
 	
-	private OfxCustomPaintColors ofxColors;
+	private Map<Integer,OfxCustomPaintColors> mapOfxColors;
 	
 	public SplineChartRenderer()
 	{
-		
+		mapOfxColors = new Hashtable<Integer,OfxCustomPaintColors>();
 	}
 	
 	public JFreeChart render(Chart ofxChart)
@@ -41,12 +43,9 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 		this.ofxChart=ofxChart;
 		
 		ValueAxis xAxis = (ValueAxis)AxisFactory.createNumberAxis(ofxChart, OfxChartTypeResolver.AxisOrientation.domain);
-		
-        ofxColors = new OfxCustomPaintColors();
-//        XYSeriesCollection xySeriesCollection = createDataset(ofxChart.getContainer());
         
         OfxSplineRenderer splineRenderer = new OfxSplineRenderer();
-        splineRenderer.setOfxPaintColors(ofxColors);
+        splineRenderer.setOfxPaintColors(getOfxPaintColor(0));
         
         XYPlot plot = new XYPlot();
         plot.setDomainAxis(xAxis);
@@ -59,7 +58,7 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
         
         for(int i=0;i<lData.size();i++)
         {
-        	plot.setRangeAxis(i, (ValueAxis)AxisFactory.createNumberAxis(ofxChart, OfxChartTypeResolver.AxisOrientation.range));
+        	plot.setRangeAxis(i, (ValueAxis)AxisFactory.createNumberAxis(ofxChart, OfxChartTypeResolver.AxisOrientation.range0));
     		plot.setDataset(i, lData.get(i));
     		plot.mapDatasetToRangeAxis(i, i);
         }
@@ -87,79 +86,6 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 		return rtp;
 	}
 	
-	protected List<XYSeriesCollection> createDataset(List<Container> lContainer)
-	{
-		List<XYSeriesCollection> lData = new ArrayList<XYSeriesCollection>();
-		for(Container c : lContainer)
-		{
-			XYSeriesCollection data = new XYSeriesCollection();
-			XYSeries series;
-			if(c.isSetData())
-			{
-//				logger.info("Container: index="+seriesIndex);
-				series = new XYSeries(c.getLabel());
-				for(Data d : c.getData()){series.add(d.getX(), d.getY());}
-				data.addSeries(series);
-//				ofxColors.addColorMapping(seriesIndex, colorIndex);
-//				seriesIndex++;
-			}
-			
-			for(Container c2 : c.getContainer())
-			{
-				if(c2.isSetData())
-				{
-//					logger.info(" Sub index="+seriesIndex);
-					series = new XYSeries(c.getLabel()+"-"+c2.getLabel());
-					for(Data d : c2.getData()){series.add(d.getX(), d.getY());}
-					data.addSeries(series);
-//					ofxColors.addColorMapping(seriesIndex, colorIndex);
-//					seriesIndex++;
-				}
-			}
-//			colorIndex++;
-			lData.add(data);
-		}
-		return lData;
-	}
-	
-	protected XYSeriesCollection createDataset2(List<Container> lContainer)
-	{
-		XYSeriesCollection data = new XYSeriesCollection();
-		
-		int colorIndex=0;
-		int seriesIndex=0;
-		for(Container c : lContainer)
-		{
-			XYSeries series;
-			if(c.isSetData())
-			{
-				logger.info("Container: index="+seriesIndex);
-				series = new XYSeries(c.getLabel());
-				for(Data d : c.getData()){series.add(d.getX(), d.getY());}
-				data.addSeries(series);
-				ofxColors.addColorMapping(seriesIndex, colorIndex);
-				seriesIndex++;
-			}
-			
-			for(Container c2 : c.getContainer())
-			{
-				if(c2.isSetData())
-				{
-					logger.info(" Sub index="+seriesIndex);
-					series = new XYSeries(c.getLabel()+"-"+c2.getLabel());
-					for(Data d : c2.getData()){series.add(d.getX(), d.getY());}
-					data.addSeries(series);
-					ofxColors.addColorMapping(seriesIndex, colorIndex);
-					seriesIndex++;
-				}
-			}
-			
-			colorIndex++;
-		}
-		
-		return data;
-	}
-	
 	protected List<XYSeriesCollection> createDataset3(List<Container> lContainer)
 	{
 		List<XYSeriesCollection> lData = new ArrayList<XYSeriesCollection>();
@@ -179,9 +105,10 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 				for(Data d : c.getData()){series.add(d.getX(), d.getY());}
 				if(c.getLabel().endsWith("prec"))
 				{
-					data2.addSeries(series);}
+					data2.addSeries(series);
+				}
 				else{data.addSeries(series);}
-				ofxColors.addColorMapping(seriesIndex, colorIndex);
+				getOfxPaintColor(0).addColorMapping(seriesIndex, colorIndex);
 				seriesIndex++;
 			}
 			
@@ -192,9 +119,17 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 					logger.info(" Sub index="+seriesIndex+" "+c2.getLabel().endsWith("prec"));
 					series = new XYSeries(c.getLabel()+"-"+c2.getLabel());
 					for(Data d : c2.getData()){series.add(d.getX(), d.getY());}
-					if(c2.getLabel().endsWith("prec")){data2.addSeries(series);}
-					else{data.addSeries(series);}
-					ofxColors.addColorMapping(seriesIndex, colorIndex);
+					
+					if(c2.getLabel().endsWith("prec"))
+					{
+						data2.addSeries(series);
+					}
+					else
+					{
+						data.addSeries(series);
+					}
+					
+					getOfxPaintColor(0).addColorMapping(seriesIndex, colorIndex);
 					seriesIndex++;
 				}
 			}
@@ -207,44 +142,9 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 		return lData;
 	}
 	
-	protected List<XYSeriesCollection> createDataset4(List<Container> lContainer)
+	private OfxCustomPaintColors getOfxPaintColor(int key)
 	{
-		List<XYSeriesCollection> lData = new ArrayList<XYSeriesCollection>();
-		
-		XYSeriesCollection data = new XYSeriesCollection();
-		
-		int colorIndex=0;
-		int seriesIndex=0;
-		for(Container c : lContainer)
-		{
-			XYSeries series;
-			if(c.isSetData())
-			{
-				logger.info("Container: index="+seriesIndex);
-				series = new XYSeries(c.getLabel());
-				for(Data d : c.getData()){series.add(d.getX(), d.getY());}
-				data.addSeries(series);
-				ofxColors.addColorMapping(seriesIndex, colorIndex);
-				seriesIndex++;
-			}
-			
-			for(Container c2 : c.getContainer())
-			{
-				if(c2.isSetData())
-				{
-					logger.info(" Sub index="+seriesIndex+" "+c2.getLabel().endsWith("prec"));
-					series = new XYSeries(c.getLabel()+"-"+c2.getLabel());
-					for(Data d : c2.getData()){series.add(d.getX(), d.getY());}
-					data.addSeries(series);
-					ofxColors.addColorMapping(seriesIndex, colorIndex);
-					seriesIndex++;
-				}
-			}
-			
-			colorIndex++;
-		}
-		
-		lData.add(data);
-		return lData;
+		if(!mapOfxColors.containsKey(key)){mapOfxColors.put(key, new OfxCustomPaintColors());}
+		return mapOfxColors.get(key);
 	}
 }
