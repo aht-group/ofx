@@ -4,7 +4,7 @@
         <spline/>
     </ofx:charttype>
     <ofx:axis code="domain" label="xLabel" autoRangIncludeNull="false"/>
-    <ofx:axis code="range" label="yLabel" autoRangIncludeNull="true"/>
+    <ofx:axis code="range0" label="yLabel" autoRangIncludeNull="true"/>
     <title label="test"/>
     <colors>
         <ofx:color a="255" b="245" g="245" r="245" typ="backgroundChart"/>

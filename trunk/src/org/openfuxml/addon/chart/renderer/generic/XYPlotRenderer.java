@@ -82,7 +82,7 @@ public class XYPlotRenderer extends AbstractChartRenderer
 			XYPlot plot = (XYPlot) chart.getPlot();
 	        switch(axisOrientation)
 	        {
-	        	case range:  plot.setRangeAxis(axis);break;
+	        	case range0:  plot.setRangeAxis(axis);break;
 	        	case domain: plot.setDomainAxis(axis);break;
 	        }
 		}

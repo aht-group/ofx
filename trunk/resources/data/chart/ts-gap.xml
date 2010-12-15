@@ -11,7 +11,7 @@
             </date>
         </ofx:axisType>
     </ofx:axis>
-    <ofx:axis code="range">
+    <ofx:axis code="range0">
         <ofx:label text="???y???" key="y"/>
     </ofx:axis>
     <colors>

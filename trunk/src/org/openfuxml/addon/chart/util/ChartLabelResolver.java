@@ -17,7 +17,7 @@ public class ChartLabelResolver
 	}
 	
 	public synchronized static String getAxisLabelX(Chart ofxChart){return getAxisLabel(ofxChart, AxisOrientation.domain);}
-	public synchronized static String getAxisLabelY(Chart ofxChart){return getAxisLabel(ofxChart, AxisOrientation.range);}
+	public synchronized static String getAxisLabelY(Chart ofxChart){return getAxisLabel(ofxChart, AxisOrientation.range0);}
 	
 	public synchronized static String getAxisLabel(Chart ofxChart, AxisOrientation type)
 	{
