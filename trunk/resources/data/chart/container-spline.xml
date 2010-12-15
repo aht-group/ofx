@@ -3,41 +3,116 @@
     <ofx:charttype>
         <spline/>
     </ofx:charttype>
-    <ofx:axis code="domain" autoRangIncludeNull="false">
-        <ofx:label text="xLabel" size="9"/>
+    <ofx:axis autoRangIncludeNull="false" code="domain">
         <ofx:axisType>
-            <number><ticker size="1"/></number>
+            <number>
+                <ticker size="1"/>
+            </number>
         </ofx:axisType>
+        <ofx:label size="9" text="x"/>
     </ofx:axis>
-    <ofx:axis code="range" label="yLabel" autoRangIncludeNull="true">
-        <ofx:label text="yLabel" size="9"/>
+    <ofx:axis autoRangIncludeNull="true" code="range">
         <ofx:axisType>
             <number/>
         </ofx:axisType>
+        <ofx:label size="9" text="y"/>
     </ofx:axis>
-    <title label="test"/>
     <colors>
         <ofx:color a="255" b="245" g="245" r="245" typ="backgroundChart"/>
         <ofx:color a="255" b="255" g="255" r="255" typ="backgroundPlot"/>
     </colors>
-    <size width="665" height="440"/>
+    <size width="950" height="300"/>
     <grid domain="false" range="true"/>
-    <ofx:container label="tmax">
-        <ofx:container label="ref">
-            <ofx:data y="31.7" x="1.0"/>
-            <ofx:data y="34.0" x="2.0"/>
-            <ofx:data y="36.2" x="3.0"/>
-            <ofx:data y="36.8" x="4.0"/>
-            <ofx:data y="34.5" x="5.0"/>
-            <ofx:data y="31.7" x="6.0"/>
-            <ofx:data y="29.4" x="7.0"/>
-            <ofx:data y="28.3" x="8.0"/>
-            <ofx:data y="29.4" x="9.0"/>
-            <ofx:data y="32.3" x="10.0"/>
-            <ofx:data y="32.8" x="11.0"/>
-            <ofx:data y="31.7" x="12.0"/>
+    <ofx:container label="csi">
+        <ofx:container label="tmax">
+            <ofx:data y="33.4" x="1.0"/>
+            <ofx:data y="36.1" x="2.0"/>
+            <ofx:data y="38.5" x="3.0"/>
+            <ofx:data y="38.6" x="4.0"/>
+            <ofx:data y="36.8" x="5.0"/>
+            <ofx:data y="34.0" x="6.0"/>
+            <ofx:data y="32.0" x="7.0"/>
+            <ofx:data y="30.6" x="8.0"/>
+            <ofx:data y="31.8" x="9.0"/>
+            <ofx:data y="34.3" x="10.0"/>
+            <ofx:data y="34.5" x="11.0"/>
+            <ofx:data y="33.6" x="12.0"/>
         </ofx:container>
-        <ofx:container label="had">
+        <ofx:container label="tmin">
+            <ofx:data y="15.6" x="1.0"/>
+            <ofx:data y="18.6" x="2.0"/>
+            <ofx:data y="21.9" x="3.0"/>
+            <ofx:data y="25.7" x="4.0"/>
+            <ofx:data y="24.2" x="5.0"/>
+            <ofx:data y="22.4" x="6.0"/>
+            <ofx:data y="22.0" x="7.0"/>
+            <ofx:data y="21.2" x="8.0"/>
+            <ofx:data y="21.4" x="9.0"/>
+            <ofx:data y="22.7" x="10.0"/>
+            <ofx:data y="18.4" x="11.0"/>
+            <ofx:data y="15.7" x="12.0"/>
+        </ofx:container>
+        <ofx:container label="prec">
+            <ofx:data y="0.0" x="1.0"/>
+            <ofx:data y="2.0" x="2.0"/>
+            <ofx:data y="3.0" x="3.0"/>
+            <ofx:data y="26.0" x="4.0"/>
+            <ofx:data y="79.0" x="5.0"/>
+            <ofx:data y="128.0" x="6.0"/>
+            <ofx:data y="242.0" x="7.0"/>
+            <ofx:data y="265.0" x="8.0"/>
+            <ofx:data y="166.0" x="9.0"/>
+            <ofx:data y="49.0" x="10.0"/>
+            <ofx:data y="0.0" x="11.0"/>
+            <ofx:data y="0.0" x="12.0"/>
+        </ofx:container>
+    </ofx:container>
+    <ofx:container label="ccc">
+        <ofx:container label="tmax">
+            <ofx:data y="34.4" x="1.0"/>
+            <ofx:data y="36.4" x="2.0"/>
+            <ofx:data y="37.6" x="3.0"/>
+            <ofx:data y="39.0" x="4.0"/>
+            <ofx:data y="36.1" x="5.0"/>
+            <ofx:data y="33.2" x="6.0"/>
+            <ofx:data y="30.8" x="7.0"/>
+            <ofx:data y="30.8" x="8.0"/>
+            <ofx:data y="30.6" x="9.0"/>
+            <ofx:data y="33.8" x="10.0"/>
+            <ofx:data y="34.8" x="11.0"/>
+            <ofx:data y="34.4" x="12.0"/>
+        </ofx:container>
+        <ofx:container label="tmin">
+            <ofx:data y="17.2" x="1.0"/>
+            <ofx:data y="19.7" x="2.0"/>
+            <ofx:data y="21.6" x="3.0"/>
+            <ofx:data y="24.5" x="4.0"/>
+            <ofx:data y="24.1" x="5.0"/>
+            <ofx:data y="22.4" x="6.0"/>
+            <ofx:data y="21.6" x="7.0"/>
+            <ofx:data y="21.2" x="8.0"/>
+            <ofx:data y="21.3" x="9.0"/>
+            <ofx:data y="21.3" x="10.0"/>
+            <ofx:data y="18.6" x="11.0"/>
+            <ofx:data y="16.6" x="12.0"/>
+        </ofx:container>
+        <ofx:container label="prec">
+            <ofx:data y="0.0" x="1.0"/>
+            <ofx:data y="2.0" x="2.0"/>
+            <ofx:data y="5.0" x="3.0"/>
+            <ofx:data y="24.0" x="4.0"/>
+            <ofx:data y="86.0" x="5.0"/>
+            <ofx:data y="157.0" x="6.0"/>
+            <ofx:data y="227.0" x="7.0"/>
+            <ofx:data y="290.0" x="8.0"/>
+            <ofx:data y="139.0" x="9.0"/>
+            <ofx:data y="51.0" x="10.0"/>
+            <ofx:data y="0.0" x="11.0"/>
+            <ofx:data y="0.0" x="12.0"/>
+        </ofx:container>
+    </ofx:container>
+    <ofx:container label="had">
+        <ofx:container label="tmax">
             <ofx:data y="35.7" x="1.0"/>
             <ofx:data y="36.4" x="2.0"/>
             <ofx:data y="37.5" x="3.0"/>
@@ -51,23 +126,7 @@
             <ofx:data y="35.8" x="11.0"/>
             <ofx:data y="35.3" x="12.0"/>
         </ofx:container>
-    </ofx:container>
-    <ofx:container label="tmin">
-        <ofx:container label="ref">
-            <ofx:data y="13.9" x="1.0"/>
-            <ofx:data y="13.9" x="2.0"/>
-            <ofx:data y="19.5" x="3.0"/>
-            <ofx:data y="22.3" x="4.0"/>
-            <ofx:data y="22.3" x="5.0"/>
-            <ofx:data y="20.7" x="6.0"/>
-            <ofx:data y="20.1" x="7.0"/>
-            <ofx:data y="19.6" x="8.0"/>
-            <ofx:data y="19.5" x="9.0"/>
-            <ofx:data y="19.0" x="10.0"/>
-            <ofx:data y="15.7" x="11.0"/>
-            <ofx:data y="13.4" x="12.0"/>
-        </ofx:container>
-        <ofx:container label="had">
+        <ofx:container label="tmin">
             <ofx:data y="16.4" x="1.0"/>
             <ofx:data y="19.8" x="2.0"/>
             <ofx:data y="22.9" x="3.0"/>
@@ -81,25 +140,63 @@
             <ofx:data y="18.8" x="11.0"/>
             <ofx:data y="16.9" x="12.0"/>
         </ofx:container>
+        <ofx:container label="prec">
+            <ofx:data y="0.0" x="1.0"/>
+            <ofx:data y="3.0" x="2.0"/>
+            <ofx:data y="5.0" x="3.0"/>
+            <ofx:data y="33.0" x="4.0"/>
+            <ofx:data y="98.0" x="5.0"/>
+            <ofx:data y="154.0" x="6.0"/>
+            <ofx:data y="293.0" x="7.0"/>
+            <ofx:data y="350.0" x="8.0"/>
+            <ofx:data y="193.0" x="9.0"/>
+            <ofx:data y="41.0" x="10.0"/>
+            <ofx:data y="0.0" x="11.0"/>
+            <ofx:data y="0.0" x="12.0"/>
+        </ofx:container>
     </ofx:container>
-    <ofx:container label="tmin">
-        <ofx:container label="ref">
-            <ofx:data y="4.7" x="11.0"/>
-            <ofx:data y="6" x="12.0"/>
+    <ofx:container label="ref">
+        <ofx:container label="tmax">
+            <ofx:data y="31.7" x="1.0"/>
+            <ofx:data y="34.0" x="2.0"/>
+            <ofx:data y="36.2" x="3.0"/>
+            <ofx:data y="36.8" x="4.0"/>
+            <ofx:data y="34.5" x="5.0"/>
+            <ofx:data y="31.7" x="6.0"/>
+            <ofx:data y="29.4" x="7.0"/>
+            <ofx:data y="28.3" x="8.0"/>
+            <ofx:data y="29.4" x="9.0"/>
+            <ofx:data y="32.3" x="10.0"/>
+            <ofx:data y="32.8" x="11.0"/>
+            <ofx:data y="31.7" x="12.0"/>
         </ofx:container>
-        <ofx:container label="had">
-            <ofx:data y="7" x="1.0"/>
-            <ofx:data y="2" x="2.0"/>
+        <ofx:container label="tmin">
+            <ofx:data y="13.9" x="1.0"/>
+            <ofx:data y="13.9" x="2.0"/>
+            <ofx:data y="19.5" x="3.0"/>
+            <ofx:data y="22.3" x="4.0"/>
+            <ofx:data y="22.3" x="5.0"/>
+            <ofx:data y="20.7" x="6.0"/>
+            <ofx:data y="20.1" x="7.0"/>
+            <ofx:data y="19.6" x="8.0"/>
+            <ofx:data y="19.5" x="9.0"/>
+            <ofx:data y="19.0" x="10.0"/>
+            <ofx:data y="15.7" x="11.0"/>
+            <ofx:data y="13.4" x="12.0"/>
         </ofx:container>
-    </ofx:container>
-    <ofx:container label="tmin">
-        <ofx:container label="ref">
-            <ofx:data y="4.7" x="5.0"/>
-            <ofx:data y="6" x="6.0"/>
-        </ofx:container>
-        <ofx:container label="had">
-            <ofx:data y="7" x="3.0"/>
-            <ofx:data y="6" x="4.0"/>
+        <ofx:container label="prec">
+            <ofx:data y="0.0" x="1.0"/>
+            <ofx:data y="2.0" x="2.0"/>
+            <ofx:data y="4.0" x="3.0"/>
+            <ofx:data y="29.0" x="4.0"/>
+            <ofx:data y="88.0" x="5.0"/>
+            <ofx:data y="138.0" x="6.0"/>
+            <ofx:data y="253.0" x="7.0"/>
+            <ofx:data y="285.0" x="8.0"/>
+            <ofx:data y="170.0" x="9.0"/>
+            <ofx:data y="37.0" x="10.0"/>
+            <ofx:data y="0.0" x="11.0"/>
+            <ofx:data y="0.0" x="12.0"/>
         </ofx:container>
     </ofx:container>
 </ofx:chart>
