@@ -43,7 +43,6 @@ public class AxisFactory
 	
 	public static synchronized NumberAxis createNumberAxis(org.openfuxml.addon.chart.jaxb.Axis ofxAxis)
 	{
-		JaxbUtil.debug(ofxAxis);
 		AxisType.Number ofxNumberAxis = ofxAxis.getAxisType().getNumber();
 		NumberAxis axis = new NumberAxis();
 		boolean autoRangeIncludesZero = true;
