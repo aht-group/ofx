@@ -1,6 +1,5 @@
 package org.openfuxml.addon.chart.renderer.xy;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
@@ -107,7 +106,12 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 					
 				for(Data d : c.getData()){series.add(d.getX(), d.getY());}
 				getXYSeriesCollection(c.getRangeIndex()).addSeries(series);			
-				getOfxPaintColor(c.getRangeIndex()).addColorMapping(getColorSeriesIndex(c.getRangeIndex()), colorIndex);
+				
+				int containerColor;
+				if(c.isSetColorIndex()){containerColor = c.getColorIndex();}
+				else{containerColor = colorIndex;}
+				
+				getOfxPaintColor(c.getRangeIndex()).addColorMapping(getColorSeriesIndex(c.getRangeIndex()), containerColor);
 				incrementColorSeriesIndex(c.getRangeIndex());
 			}
 			
@@ -116,12 +120,17 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 				if(!c2.isSetRangeIndex()){c2.setRangeIndex(0);}
 				if(c2.isSetData())
 				{
-					logger.info(" Sub index="+getColorSeriesIndex(c2.getRangeIndex())+" "+c2.getLabel().endsWith("prec"));
 					series = new XYSeries(c.getLabel()+"-"+c2.getLabel());
 					for(Data d : c2.getData()){series.add(d.getX(), d.getY());}
 					
-					getXYSeriesCollection(c2.getRangeIndex()).addSeries(series);			
-					getOfxPaintColor(c2.getRangeIndex()).addColorMapping(getColorSeriesIndex(c2.getRangeIndex()), colorIndex);
+					getXYSeriesCollection(c2.getRangeIndex()).addSeries(series);
+					
+					int containerColor;
+					if(c2.isSetColorIndex()){containerColor = c2.getColorIndex();}
+					else{containerColor = colorIndex;}
+					logger.info("color "+containerColor);
+					
+					getOfxPaintColor(c2.getRangeIndex()).addColorMapping(getColorSeriesIndex(c2.getRangeIndex()), containerColor);
 					incrementColorSeriesIndex(c2.getRangeIndex());
 				}
 			}

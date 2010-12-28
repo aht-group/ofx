@@ -30,7 +30,7 @@
     <size width="950" height="300"/>
     <grid domain="false" range="true"/>
     <ofx:container label="csi">
-       <ofx:container label="prec" rangeIndex="1">
+        <ofx:container label="prec" rangeIndex="1" colorIndex="2">
             <ofx:data y="0.0" x="1.0"/>
             <ofx:data y="2.0" x="2.0"/>
             <ofx:data y="3.0" x="3.0"/>
@@ -46,7 +46,7 @@
         </ofx:container>
     </ofx:container>
     <ofx:container label="ccc">
-      <ofx:container label="prec" rangeIndex="1">
+        <ofx:container label="prec" rangeIndex="1" colorIndex="1">
             <ofx:data y="0.0" x="1.0"/>
             <ofx:data y="2.0" x="2.0"/>
             <ofx:data y="5.0" x="3.0"/>
@@ -62,7 +62,7 @@
         </ofx:container>
     </ofx:container>
     <ofx:container label="had">
-      <ofx:container label="prec" rangeIndex="1">
+        <ofx:container label="prec" rangeIndex="1" colorIndex="1">
             <ofx:data y="0.0" x="1.0"/>
             <ofx:data y="3.0" x="2.0"/>
             <ofx:data y="5.0" x="3.0"/>
@@ -78,7 +78,7 @@
         </ofx:container>
     </ofx:container>
     <ofx:container label="ref">
-      <ofx:container label="prec" rangeIndex="1">
+        <ofx:container label="prec" rangeIndex="1" colorIndex="1">
             <ofx:data y="0.0" x="1.0"/>
             <ofx:data y="2.0" x="2.0"/>
             <ofx:data y="4.0" x="3.0"/>
