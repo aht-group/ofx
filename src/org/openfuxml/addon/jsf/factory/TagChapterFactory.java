@@ -5,6 +5,8 @@ import java.util.List;
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
@@ -13,6 +15,8 @@ import org.openfuxml.content.ofx.Title;
 
 public class TagChapterFactory
 {
+	static Log logger = LogFactory.getLog(TagChapterFactory.class); 
+	
 	private Taglib taglib;
 	
 	public TagChapterFactory(Taglib taglib)
@@ -26,7 +30,8 @@ public class TagChapterFactory
 		section.setId("jsf-taglib");
 		
 		Title title = new Title();
-		title.setValue(taglib.getInfo());
+		logger.warn("Info is disabled"); //TODO Check description
+		title.setValue("Info disabled in XSD");//taglib.getInfo());
 		section.getContent().add(title);
 		
 		section.getContent().add(createExternalSubSection("../jsf-doku/tag-introduction.xml", "introduction"));

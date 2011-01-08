@@ -1,4 +1,4 @@
-package org.openfuxml.test.xml.jsftaglib.jaxb;
+package org.openfuxml.test.addon.jsf;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -22,11 +22,11 @@ public class TestTaglib
 	public void xmlConstruct()
 	{	
 		Taglib taglib = new Taglib();
-		taglib.setTlibversion("1.0");
-		taglib.setJspversion("2.1");
-		taglib.setShortname("jwan");
+		taglib.setTlibVersion("1.0");
+//		taglib.setJspversion("2.1");
+		taglib.setShortName("jwan");
 		taglib.setUri("http://www.openfuxml.org");
-		taglib.setInfo("OpenFuXML");
+//		taglib.setInfo("OpenFuXML");
 		
 		Tag tag = new Tag();
 		tag.setName("myTag");
@@ -35,7 +35,7 @@ public class TestTaglib
 		Attribute att = new Attribute();
 		att.setName("myAtt");
 		att.setRequired(false);
-		att.setDescription("xx");
+//		att.setDescription("xx");
 		tag.getAttribute().add(att);
 		
 		

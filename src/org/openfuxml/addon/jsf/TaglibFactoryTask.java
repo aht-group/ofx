@@ -28,7 +28,7 @@ public class TaglibFactoryTask extends Task
 {
 	static Log logger = LogFactory.getLog(TaglibFactoryTask.class); 
 	
-	private String tagConfig, xPathPrefix, tagBaseDir, tldFile, fcFile;
+	private String tagConfig, xPathPrefix, tagBaseDir, tldFile, fcFile, l4jFile;
 
 	private boolean useLog4j;
 
@@ -42,16 +42,39 @@ public class TaglibFactoryTask extends Task
 		setUseLog4j(false);
 	}
 	
+	private void initLog4j()
+	{
+		int index = l4jFile.lastIndexOf("/");
+		
+		String path = ".";
+		String file = l4jFile;
+		
+		if(index>=0)
+		{
+			path = l4jFile.substring(0, index);
+			file = l4jFile.substring(index+1, l4jFile.length());
+		}
+		
+		LoggerInit loggerInit = new LoggerInit(file);	
+			loggerInit.addAltPath(path);
+			loggerInit.init();	
+			
+		setUseLog4j(true);
+	}
+	
     public void execute() throws BuildException
     {
+    	if(l4jFile==null){setUseLog4j(false);}
+    	else{initLog4j();}
+    	
     	ConfigLoader.add(tagConfig);
 		config = ConfigLoader.init();
 		
     	String fileName = config.getString("taglib");
     	taglib = (Taglib)JaxbUtil.loadJAXB(tagBaseDir+"/"+fileName, Taglib.class);
+
     	String msg = "Taglib: "+tagBaseDir+"/"+fileName;
-		if(useLog4j){logger.debug(msg);}
-		else{System.out.println(msg);}
+		if(useLog4j){logger.debug(msg);}else{System.out.println(msg);}
     	
 		facesconfig = new FacesConfig();
 		FacesConfig.RenderKit rk = new FacesConfig.RenderKit();
@@ -141,13 +164,14 @@ public class TaglibFactoryTask extends Task
 		for(org.openfuxml.addon.jsf.data.jaxb.Attribute att : tag.getAttribute())
 		{
 			logger.debug("Att"+ tag.getName()+" "+att.getName());
-	
-			if(att.getDescription()!=null && att.getDescription().equals("@@@"))
+			logger.warn("Description is disabled"); //TODO Check description
+/*			if(att.getDescription()!=null && att.getDescription().equals("@@@"))
 			{
 				String description = config.getString("descriptions/description[@name='"+att.getName()+"']");
+				
 				att.setDescription(description);
 			}
-		}
+*/		}
 	}
 	
 	public void setTagConfig(String tagConfig) {this.tagConfig = tagConfig;}
@@ -156,6 +180,7 @@ public class TaglibFactoryTask extends Task
 	public void setTldFile(String tldFile) {this.tldFile = tldFile;}
 	public void setUseLog4j(boolean useLog4j) {JaxbUtil.useLog4j=useLog4j;this.useLog4j = useLog4j;}
 	public void setFcFile(String fcFile) {this.fcFile = fcFile;}
+	public void setL4jFile(String l4jFile) {this.l4jFile = l4jFile;}
 	
 	public static void main (String[] args) throws Exception
 	{

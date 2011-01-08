@@ -1,4 +1,4 @@
-package org.openfuxml.test.xml.jsftaglib.jaxb;
+package org.openfuxml.test.addon.jsf;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
