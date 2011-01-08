@@ -5,15 +5,14 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified">
-    <xsd:import namespace="http://www.openfuxml.org" schemaLocation="ofx.xsd"/>
+    <xsd:import namespace="http://www.openfuxml.org" schemaLocation="../ofx.xsd"/>
     <xsd:element name="taglib">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="tlibversion" maxOccurs="1" type="xsd:string"/>
-                <xsd:element name="jspversion" maxOccurs="1" type="xsd:string"/>
-                <xsd:element name="shortname" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="tlib-version" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="short-name" maxOccurs="1" type="xsd:string"/>
                 <xsd:element name="uri" maxOccurs="1" type="xsd:string"/>
-                <xsd:element name="info" maxOccurs="1" type="xsd:string"/>
+                <!-- <xsd:element name="info" maxOccurs="1" type="xsd:string"/> -->
                 <xsd:element ref="tag" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
@@ -52,7 +51,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="name" maxOccurs="1" type="xsd:string"/>
-                <xsd:element name="description" maxOccurs="1" type="xsd:string"/>
+                <!-- <xsd:element name="description" maxOccurs="1" type="xsd:string"/> -->
                 <xsd:element name="tagclass" maxOccurs="1" type="xsd:string"/>
                 <xsd:element name="tag-class" maxOccurs="1" type="xsd:string"/>
                 <xsd:element name="bodycontent" maxOccurs="1" type="xsd:string"/>
@@ -85,7 +84,7 @@
                 <xsd:element name="name" minOccurs="0" maxOccurs="1" type="xsd:string"/>
                 <xsd:element name="required" minOccurs="0" maxOccurs="1" type="xsd:boolean"/>
                 <xsd:element name="rtexprvalue" minOccurs="0" maxOccurs="1" type="xsd:boolean"/>
-                <xsd:element name="description" maxOccurs="1" type="xsd:string"/>
+               <!-- <xsd:element name="description" maxOccurs="1" type="xsd:string"/> -->
                 <xsd:element name="type" maxOccurs="1" type="xsd:string"/>
                 <xsd:element name="deferred-value" maxOccurs="1">
                     <xsd:complexType>

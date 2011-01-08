@@ -7,6 +7,8 @@ import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
@@ -18,6 +20,7 @@ import org.openfuxml.content.ofx.Title;
 
 public class TagTableFactory
 {
+	static Log logger = LogFactory.getLog(TagTableFactory.class);
 	
 	public TagTableFactory()
 	{
@@ -57,7 +60,8 @@ public class TagTableFactory
 			Row row = new Row();
 			row.getEntry().add(getRowEntry(1,att.getName()));
 			row.getEntry().add(getRowEntry(2,att.isRequired()+""));
-			if(att.isSetDescription()){row.getEntry().add(getRowEntry(3,att.getDescription().trim()));}
+			logger.warn("Description is disabled"); //TODO Check description
+//			if(att.isSetDescription()){row.getEntry().add(getRowEntry(3,att.getDescription().trim()));}
 			tbody.getRow().add(row);
 		}
 		return tbody;

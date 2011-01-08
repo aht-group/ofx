@@ -1,4 +1,4 @@
-package org.openfuxml.test.xml.jsftaglib.jaxb;
+package org.openfuxml.test.addon.jsf;
 
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;

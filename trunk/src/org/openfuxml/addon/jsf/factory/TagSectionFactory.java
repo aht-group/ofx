@@ -32,7 +32,8 @@ public class TagSectionFactory
 		section.setId("sec-tags-"+tag.getName());
 		
 		Title title = new Title();
-		title.setValue("Tag "+taglib.getShortname().trim()+":"+tag.getName());
+		title.setValue("Tag "+taglib.getShortName().trim()+":"+tag.getName());
+		title.setValue("Tag "+taglib.getShortName().trim()+":"+tag.getName());
 		section.getContent().add(title);
 		
 		section.getContent().add(getDescription(tag));
@@ -52,13 +53,14 @@ public class TagSectionFactory
 		Title title = new Title();
 		title.setValue("Description and Key Features");
 		section.getContent().add(title);
-		if(tag.getDescription()!=null)
+		logger.warn("Description disabled");//TODO CHeck description
+/*		if(tag.getDescription()!=null)
 		{
 			Paragraph p = new Paragraph();
 			p.getContent().add(tag.getDescription().trim());
 			section.getContent().add(p);
 		}
-		
+*/		
 		return section;
 	}
 	
