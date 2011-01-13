@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.SymbolAxis;
+import org.jfree.chart.labels.StandardXYItemLabelGenerator;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
@@ -66,6 +67,10 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
         plot.setRenderer(new ColorTaskXYBarRenderer(colorMap));
         XYBarRenderer renderer = (XYBarRenderer) plot.getRenderer();
         renderer.setUseYInterval(true);
+        renderer.setShadowVisible(false);
+        renderer.setBarPainter(new ColorTaskGradientXYBarPainter());
+//      renderer.setBaseItemLabelsVisible(true);
+//      renderer.setBaseItemLabelGenerator(new StandardXYItemLabelGenerator());
         
         setAxis();
         
@@ -94,6 +99,7 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
 	     plot.setDomainAxis(yAxis);
 	}
 	
+	@SuppressWarnings("unused")
 	private TaskSeriesCollection createTasksDummy()
 	{
 		Date from,to;

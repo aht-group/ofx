@@ -91,11 +91,11 @@ public class TestGanttRenderer
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("resources/config");
-			loggerInit.init();
-		
-		TestGanttRenderer test = new TestGanttRenderer();
+			loggerInit.init();	
 		
 		Chart chart;
+		
+//		TestGanttRenderer test = new TestGanttRenderer();
 //		chart = test.getGantt();
 		chart = (Chart)JaxbUtil.loadJAXB(args[0],Chart.class);
 		
