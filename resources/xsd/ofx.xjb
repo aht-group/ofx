@@ -27,5 +27,11 @@
             <jxb:package name="org.openfuxml.addon.jsf.data.jaxb"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+    
+    <jxb:bindings schemaLocation="addon/jsf-app.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.addon.jsfapp.data.jaxb"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
 
 </jxb:bindings>
