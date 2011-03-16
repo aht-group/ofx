@@ -18,6 +18,9 @@
 	<property name="commonslogging.dir" value="utils/commons/logging"/><property name="commonslogging.lib" value="commons-logging-${commonslogging-version}.jar" />
 	<property name="commonscollections.dir" value="utils/commons/collections"/><property name="commonscollections.lib" value="commons-collections-${commonscollections-version}.jar" />
 	<property name="commonsxmlgraphics.dir" value="utils/commons/xmlgraphics"/><property name="commonsxmlgraphics.lib" value="xmlgraphics-commons-${commonsxmlgraphics-version}.jar" />
+	<property name="commonshttp.dir" value="utils/commons/httpcomponents/${commonshttp-version}"/>
+		<property name="commonshttp-core.lib" value="httpcore-${commonshttp-version}.jar"/>
+		<property name="commonshttp-client.lib" value="httpclient-${commonshttp-version}.jar"/>
 	
 	<!-- GUI -->
 	<property name="swt.dir" value="gui/swt/${swt-version}"/><property name="swt.lib" value="swt-${os-arch}-${swt-version}.jar"/>
@@ -34,8 +37,9 @@
 		<property name="jaxbxjc.lib" value="jaxb-xjc-${jaxb-version}.jar"/>
 	<property name="bliki.dir" value="xml/bliki"/><property name="bliki.lib" value="bliki-core-${bliki-version}.jar"/>
 	<property name="jwbf.dir" value="xml/jwbf/${jwbf-version}"/>
-		<property name="jwbf-core.lib" value="jwbf-core-${jwbf-version}.jar"/>
-		<property name="jwbf-mediawiki.lib" value="jwbf-mediawiki-${jwbf-version}.jar"/>
+		<property name="jwbf.lib" value="jwbf-${jwbf-version}.jar"/>
+		<property name="jwbf-core.lib" value="jwbf-${jwbf-version}-core.jar"/>
+		<property name="jwbf-mediawiki.lib" value="jwbf-${jwbf-version}-mediawiki.jar"/>
 	<property name="htmlcleaner.dir" value="xml/html/cleaner"/><property name="htmlcleaner.lib" value="htmlcleaner-${htmlcleaner-version}.jar" />
 	
 	<!-- Library Definitions: HTTP -->
@@ -111,12 +115,13 @@
 		<property name="m.cm.config" value="${metalib.dir}/${commonsconfig.dir}/${commonsconfig.lib}"/>
 		<property name="m.cm.collections" value="${metalib.dir}/${commonscollections.dir}/${commonscollections.lib}"/>
 		<property name="m.commons.xmlgraphics" value="${metalib.dir}/${commonsxmlgraphics.dir}/${commonsxmlgraphics.lib}"/><property name="commonsxmlgraphics.lib" value="xmlgraphics-commons-${commonsxmlgraphics-version}.jar" />
+		<property name="m.cm.http" value="${metalib.dir}/${commonshttp.dir}/${commonshttp-core.lib} ${metalib.dir}/${commonshttp.dir}/${commonshttp-client.lib}"/>
 		
 		<property name="m.cm.1" value="${metalib.dir}/${commonslang.dir}/${commonslang.lib} ${metalib.dir}/${commonslogging.dir}/${commonslogging.lib} ${m.cm.config}"/>
 		<property name="m.cm.2" value="${metalib.dir}/${commonsio.dir}/${commonsio.lib} ${metalib.dir}/${commonsjxpath.dir}/${commonsjxpath.lib} ${metalib.dir}/${commonsdigester.dir}/${commonsdigester.lib}"/>
-		<property name="mjar.commons.3" value="${m.cm.collections}"/>
-		<property name="mjar.commons.4" value="${metalib.dir}/${commonscodec.dir}/${commonscodec.lib} ${metalib.dir}/${commonscli.dir}/${commonscli.lib} ${m.commons.xmlgraphics}"/>
-		<property name="m.cm" value="${m.cm.1} ${m.cm.2} ${mjar.commons.3} ${mjar.commons.4}"/>
+		<property name="m.cm.3" value="${m.cm.collections} ${m.cm.http}"/>
+		<property name="m.cm.4" value="${metalib.dir}/${commonscodec.dir}/${commonscodec.lib} ${metalib.dir}/${commonscli.dir}/${commonscli.lib} ${m.commons.xmlgraphics}"/>
+		<property name="m.cm" value="${m.cm.1} ${m.cm.2} ${m.cm.3} ${m.cm.4}"/>
 		<property name="m.utils" value="${m.utils.1} ${mjar.utils2}  ${mjar.utils3} ${m.cm}"/>	
 		
 		<property name="m.jsf" value="${metalib.dir}/${jsf.dir}/${jsf-api.lib}"/>
@@ -131,9 +136,11 @@
 		<property name="m.mail" value="${metalib.dir}/${mail.dir}/${mail.lib}"/>
 		<property name="m.net" value="${m.jmdns} ${m.jsch} ${m.mail}"/>
 		
+		<property name="m.jwbf.lib" value="${metalib.dir}/${jwbf.dir}/${jwbf.lib}"/>
 		<property name="m.jwbf.core" value="${metalib.dir}/${jwbf.dir}/${jwbf-core.lib}"/>
 		<property name="m.jwbf.mediawiki" value="${metalib.dir}/${jwbf.dir}/${jwbf-mediawiki.lib}"/>
-		<property name="m.jwbf" value="${m.jwbf.core} ${m.jwbf.mediawiki}"/>
+		<property name="m.jwbf" value="${m.jwbf.lib} ${m.jwbf.core} ${m.jwbf.mediawiki}"/>
+		
 		<property name="m.bliki" value="${metalib.dir}/${bliki.dir}/${bliki.lib}"/>
 		<property name="m.jaxb" value="${metalib.dir}/${jaxb.dir}/${jaxbapi.lib} ${metalib.dir}/${jaxb.dir}/${jaxbimpl.lib} ${metalib.dir}/${jaxb.dir}/${jaxbxjc.lib}"/>
 		<property name="m.htmlcleaner" value="${metalib.dir}/${htmlcleaner.dir}/${htmlcleaner.lib}"/>
@@ -146,7 +153,7 @@
 		<property name="mjar.custom" value="${metalib.dir}/${exlp.dir}/${exlp.lib}  ${metalib.dir}/${ahtutils.dir}/${ahtutils.lib}"/>
 		<echo level="info">Custom: ${mjar.custom}</echo>
 		<echo level="info">Meta: ${meta.jar}</echo>
-		<echo level="info">Test: ${m.utils}</echo>
+		<echo level="info">Test: ${m.jwbf}</echo>
 		
 		<mkdir dir="${locallib.dir}"/>
 		<echo level="info">Creating jars in ${locallib.dir}</echo>

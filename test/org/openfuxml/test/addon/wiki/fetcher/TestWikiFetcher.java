@@ -24,7 +24,8 @@ public class TestWikiFetcher
 		WikiConfigChecker.check(config);
 			
 		WikiTextFetcher tw = new WikiTextFetcher();
-//		String wikiText = tw.fetchText(article);
+		String wikiText = tw.fetchText("Bellagio");
+		logger.debug(wikiText);
 //		WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtFetched+".txt", wikiText);
     }
 }
