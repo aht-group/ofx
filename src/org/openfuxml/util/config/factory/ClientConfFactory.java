@@ -5,15 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
+import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.io.LoggerInit;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.util.config.PreviousConfigFinder;
 import org.openfuxml.util.config.jaxb.Openfuxml;
 import org.openfuxml.util.config.jaxb.Openfuxml.Net;
-
-import de.kisner.util.ConfigLoader;
-import de.kisner.util.LoggerInit;
 
 public class ClientConfFactory extends AbstractConfFactory
 {

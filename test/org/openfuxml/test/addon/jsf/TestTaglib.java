@@ -1,5 +1,6 @@
 package org.openfuxml.test.addon.jsf;
 
+import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
@@ -7,8 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;
 import org.openfuxml.addon.jsf.data.jaxb.Tag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
-
-import de.kisner.util.LoggerInit;
 
 public class TestTaglib
 {

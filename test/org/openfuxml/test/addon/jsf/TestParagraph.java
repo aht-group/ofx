@@ -1,5 +1,6 @@
 package org.openfuxml.test.addon.jsf;
 
+import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -9,8 +10,6 @@ import org.jdom.Document;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.content.ofx.Emphasis;
 import org.openfuxml.content.ofx.Paragraph;
-
-import de.kisner.util.LoggerInit;
 
 public class TestParagraph
 {

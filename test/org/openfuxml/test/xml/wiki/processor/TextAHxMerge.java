@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.configuration.Configuration;
@@ -14,8 +15,6 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.openfuxml.addon.wiki.OfxWikiEngine;
 import org.openfuxml.addon.wiki.processing.xhtml.XhtmlAHxMerge;
-
-import de.kisner.util.LoggerInit;
 
 public class TextAHxMerge
 {
