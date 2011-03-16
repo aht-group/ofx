@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.configuration.Configuration;
@@ -19,8 +20,6 @@ import org.jdom.output.XMLOutputter;
 import org.openfuxml.addon.wiki.OfxWikiEngine;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.processing.xhtml.OfxPushUp;
-
-import de.kisner.util.LoggerInit;
 
 public class TextOfxPushUp
 {

@@ -6,9 +6,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.log4j.Logger;
+import net.sf.exlp.io.LoggerInit;
 
-import de.kisner.util.LoggerInit;
+import org.apache.log4j.Logger;
 
 public class TestXslt
 {

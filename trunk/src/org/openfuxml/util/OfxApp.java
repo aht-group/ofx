@@ -4,12 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import net.sf.exlp.io.LoggerInit;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.producer.postprocessors.HtmlPrettyFormatter;
 import org.openfuxml.producer.postprocessors.HtmlTagSubstitutor;
-
-import de.kisner.util.LoggerInit;
 
 public class OfxApp
 {

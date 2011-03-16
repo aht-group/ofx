@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import net.sf.exlp.io.resourceloader.MultiResourceLoader;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.util.config.jaxb.Files;
 import org.openfuxml.util.config.jaxb.Files.File;
-
-import de.kisner.util.io.resourceloader.MultiResourceLoader;
 
 public class ConfFileFactory
 {

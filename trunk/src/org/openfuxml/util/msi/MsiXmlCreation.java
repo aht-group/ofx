@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import de.kisner.util.LoggerInit;
+import net.sf.exlp.io.LoggerInit;
 
 public class MsiXmlCreation {
 	

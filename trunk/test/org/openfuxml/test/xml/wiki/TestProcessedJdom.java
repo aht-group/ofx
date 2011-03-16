@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.io.LoggerInit;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
@@ -13,8 +14,6 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.openfuxml.addon.wiki.OfxWikiEngine;
 import org.openfuxml.addon.wiki.WikiTemplates;
-
-import de.kisner.util.LoggerInit;
 
 public class TestProcessedJdom
 {

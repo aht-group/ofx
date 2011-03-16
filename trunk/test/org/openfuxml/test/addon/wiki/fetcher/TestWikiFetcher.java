@@ -1,4 +1,4 @@
-package org.openfuxml.test.xml.wiki;
+package org.openfuxml.test.addon.wiki.fetcher;
 
 import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.io.LoggerInit;
@@ -6,12 +6,12 @@ import net.sf.exlp.io.LoggerInit;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.wiki.media.image.WikiImageProcessor;
 import org.openfuxml.addon.wiki.util.WikiConfigChecker;
+import org.openfuxml.addon.wiki.util.WikiTextFetcher;
 
-public class TestImageFetcher
+public class TestWikiFetcher
 {
-	static Log logger = LogFactory.getLog(TestImageFetcher.class);
+	static Log logger = LogFactory.getLog(TestWikiFetcher.class);
 	
 	public static void main(String[] args)
     {
@@ -23,8 +23,8 @@ public class TestImageFetcher
 		Configuration config = ConfigLoader.init();
 		WikiConfigChecker.check(config);
 			
-		WikiImageProcessor wip = new WikiImageProcessor(config);
-		wip.fetch("Bellagio waterfront.jpg");
-		wip.save("bellagio");
+		WikiTextFetcher tw = new WikiTextFetcher();
+//		String wikiText = tw.fetchText(article);
+//		WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtFetched+".txt", wikiText);
     }
 }
