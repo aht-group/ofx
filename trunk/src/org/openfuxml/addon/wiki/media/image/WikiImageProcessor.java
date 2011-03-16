@@ -9,11 +9,11 @@ import java.net.MalformedURLException;
 
 import javax.imageio.ImageIO;
 
-import net.sourceforge.jwbf.actions.mediawiki.queries.ImageInfo;
-import net.sourceforge.jwbf.actions.mediawiki.util.VersionException;
-import net.sourceforge.jwbf.actions.util.ActionException;
-import net.sourceforge.jwbf.actions.util.ProcessException;
-import net.sourceforge.jwbf.bots.MediaWikiBot;
+import net.sourceforge.jwbf.core.actions.util.ActionException;
+import net.sourceforge.jwbf.core.actions.util.ProcessException;
+import net.sourceforge.jwbf.mediawiki.actions.queries.ImageInfo;
+import net.sourceforge.jwbf.mediawiki.actions.util.VersionException;
+import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;

@@ -5,10 +5,10 @@ import java.text.DecimalFormat;
 import java.util.Locale;
 
 import net.sf.exlp.io.LoggerInit;
-import net.sourceforge.jwbf.actions.util.ActionException;
-import net.sourceforge.jwbf.actions.util.ProcessException;
-import net.sourceforge.jwbf.bots.MediaWikiBot;
-import net.sourceforge.jwbf.contentRep.SimpleArticle;
+import net.sourceforge.jwbf.core.actions.util.ActionException;
+import net.sourceforge.jwbf.core.actions.util.ProcessException;
+import net.sourceforge.jwbf.core.contentRep.SimpleArticle;
+import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,18 +18,24 @@ public class WikiTextFetcher
 {
 	static Log logger = LogFactory.getLog(WikiTextFetcher.class);
 	
-	private String wikiText;
+	private String wikiURL;
+	private String wikiText; 
 	
 	public WikiTextFetcher()
 	{
-		
+		this("http://de.wikipedia.org/w/");
+	}
+	
+	public WikiTextFetcher(String wikiURL)
+	{
+		this.wikiURL=wikiURL;
 	}
 	
 	public String fetchText(String article)
 	{
 		try
 		{
-			MediaWikiBot bot = new MediaWikiBot("http://de.wikipedia.org/w/");
+			MediaWikiBot bot = new MediaWikiBot(wikiURL);
 			SimpleArticle sa = new SimpleArticle(bot.readContent(article));
 		    wikiText = sa.getText();
 		}
