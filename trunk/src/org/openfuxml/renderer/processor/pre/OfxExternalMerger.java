@@ -1,4 +1,4 @@
-package org.openfuxml.producer.preprocessors;
+package org.openfuxml.renderer.processor.pre;
 
 import java.io.File;
 import java.util.Iterator;
@@ -14,10 +14,11 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
+import org.openfuxml.model.ejb.OfxDocument;
 
-public class ExternalMerger
+public class OfxExternalMerger
 {
-	static Log logger = LogFactory.getLog(ExternalMerger.class);
+	static Log logger = LogFactory.getLog(OfxExternalMerger.class);
 	
 	private File rootFile;
 	private Document doc;
@@ -25,7 +26,7 @@ public class ExternalMerger
 	private Namespace ns;
 	private XPath xpath;
 	
-	public ExternalMerger(File rootFile)
+	public OfxExternalMerger(File rootFile)
 	{
 		this.rootFile=rootFile;
 		doc = JDomUtil.load(rootFile);
@@ -39,7 +40,14 @@ public class ExternalMerger
 		xpath.addNamespace(ns);
 	}
 	
-	public Document merge()
+	public OfxDocument mergeToOfx()
+	{
+		Document mergedDoc =  mergeToDoc();
+		OfxDocument ofxDoc = (OfxDocument)JDomUtil.toJaxb(mergedDoc, OfxDocument.class);
+		return ofxDoc;
+	}
+	
+	public Document mergeToDoc()
 	{
 		Element rootElement = doc.getRootElement();
 
@@ -69,7 +77,7 @@ public class ExternalMerger
 				Element childElement = (Element) iter.next();
 				String source =childElement.getAttribute("source").getValue();
 				File childFile = new File(rootFile.getParentFile(),source);
-				ExternalMerger em = new ExternalMerger(childFile);
+				OfxExternalMerger em = new OfxExternalMerger(childFile);
 				Element eEx = em.getExternal();
 				int index = childElement.getParentElement().indexOf(childElement);
 				childElement.getParentElement().setContent(index, eEx);
@@ -88,8 +96,8 @@ public class ExternalMerger
 		logger.debug("Testing ExternalMerger");
 		
 		File f = new File("resources/data/xml/exmerge/chapter-1.xml");
-		ExternalMerger exMerger = new ExternalMerger(f);
-		Document doc = exMerger.merge();
+		OfxExternalMerger exMerger = new OfxExternalMerger(f);
+		Document doc = exMerger.mergeToDoc();
 		JDomUtil.debug(doc);
 	}
 }

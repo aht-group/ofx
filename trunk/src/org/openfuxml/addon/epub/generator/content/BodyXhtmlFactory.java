@@ -7,11 +7,11 @@ import org.jdom.Namespace;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.factory.epub.EpubSectionFactory;
 import org.openfuxml.factory.epub.EpubTitleFactory;
-import org.openfuxml.producer.preprocessors.ExternalMerger;
+import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 
 public class BodyXhtmlFactory
 {
-	static Log logger = LogFactory.getLog(ExternalMerger.class);
+	static Log logger = LogFactory.getLog(OfxExternalMerger.class);
 	
 	private Namespace ns;
 	private EpubSectionFactory sectionFactory;

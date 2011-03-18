@@ -15,8 +15,8 @@ import org.openfuxml.addon.epub.generator.epub.NcxGenerator;
 import org.openfuxml.addon.epub.generator.epub.OpfGenerator;
 import org.openfuxml.addon.epub.util.EpubZipper;
 import org.openfuxml.content.ofx.Ofxdoc;
-import org.openfuxml.producer.preprocessors.ExternalMerger;
 import org.openfuxml.producer.preprocessors.IdTagger;
+import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class EpubGenerator
@@ -48,8 +48,8 @@ public class EpubGenerator
 	
 	public void process(File f)
 	{
-		ExternalMerger exMerger = new ExternalMerger(f);
-		Document doc = exMerger.merge();
+		OfxExternalMerger exMerger = new OfxExternalMerger(f);
+		Document doc = exMerger.mergeToDoc();
 		idTagger.tag(doc);
 		
 		Ofxdoc ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
