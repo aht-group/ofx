@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.openfuxml.org/wiki/cmp"
+    xmlns="http://www.openfuxml.org/wiki/cmp"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="cmp">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="targets" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="targets">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="pdf" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="pdf">
+        <xsd:complexType>
+            <xsd:sequence>
+
+            </xsd:sequence>
+            <xsd:attribute name="code" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

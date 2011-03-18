@@ -9,11 +9,11 @@ import java.io.Writer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.producer.preprocessors.ExternalMerger;
+import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 
 public class MimetypeGenerator
 {
-	static Log logger = LogFactory.getLog(ExternalMerger.class);
+	static Log logger = LogFactory.getLog(OfxExternalMerger.class);
 	
 	private File targetDir;
 	

@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.jdom.Namespace;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.producer.preprocessors.ExternalMerger;
+import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 
 public class EpubParagraphFactory
 {

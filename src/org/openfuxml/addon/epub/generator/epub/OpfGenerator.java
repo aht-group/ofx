@@ -17,11 +17,11 @@ import org.jdom.output.Format;
 import org.openfuxml.content.ofx.Metadata;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.producer.preprocessors.ExternalMerger;
+import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 
 public class OpfGenerator
 {
-	static Log logger = LogFactory.getLog(ExternalMerger.class);
+	static Log logger = LogFactory.getLog(OfxExternalMerger.class);
 	
 	private File targetDir;
 	private Document doc;

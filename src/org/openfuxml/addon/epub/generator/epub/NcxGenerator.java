@@ -20,12 +20,12 @@ import org.openfuxml.addon.epub.data.jaxb.ncx.Ncx;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.producer.preprocessors.ExternalMerger;
+import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class NcxGenerator
 {
-	static Log logger = LogFactory.getLog(ExternalMerger.class);
+	static Log logger = LogFactory.getLog(OfxExternalMerger.class);
 	
 	private File targetDir;
 	private Ncx ncx;
