@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.header;
+package org.openfuxml.renderer.latex.preamble;
 
 import java.util.ArrayList;
 import java.util.List;
