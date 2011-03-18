@@ -35,11 +35,14 @@ public class TxtWriter
 		fileName="TxtWriter.txt";
 	}
 	
-	public void setFile(String dirName,String fileName)
+	public void setTargetDirFile(String dirName,String fileName)
 	{
-		this.dirName=dirName;
-		this.fileName=fileName;
+		setTargetDir(dirName);
+		setTargetFile(fileName);
 	}
+	
+	public void setTargetDir(String dirName){this.dirName=dirName;}
+	public void setTargetFile(String fileName){this.fileName=fileName;}
 	
 	public void debug(List<String> txt)
 	{

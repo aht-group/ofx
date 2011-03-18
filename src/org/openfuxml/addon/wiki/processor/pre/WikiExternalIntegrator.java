@@ -62,12 +62,13 @@ public class WikiExternalIntegrator
 				
 				logger.debug(eChild.getName());
 				Content wikiContent = (Content)JDomUtil.toJaxb(eChild, Content.class);
+				
+				Element eOfx = processWikiContent(wikiContent);
+				wikiContent.setSource(eOfx.getAttributeValue("source"));
 				wikiQueries.add(wikiContent);
 				
-				List<Element> lOfx = processWikiContent(wikiContent);
-				
 				int index = eChild.getParentElement().indexOf(eChild);
-				eChild.getParentElement().addContent(index, lOfx);
+				eChild.getParentElement().addContent(index,eOfx);
 				eChild.detach();
 			}
 		}
@@ -80,11 +81,11 @@ public class WikiExternalIntegrator
 	public List<Content> getWikiQueries() {return wikiQueries;}
 	
 	
-	private List<Element> processWikiContent(Content wikiContent)
+	private Element processWikiContent(Content wikiContent)
 	{
-		List<Element> lElements = new ArrayList<Element>();
-		if(wikiContent.isSetPage()){lElements.add(getSection(wikiContent.getPage()));}
-		return lElements;
+		Element e=null;
+		if(wikiContent.isSetPage()){e=getSection(wikiContent.getPage());}
+		return e;
 	}
 	
 	private Element getSection(Page section)

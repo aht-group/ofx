@@ -28,7 +28,8 @@ public class TestWikiFetcher
 		wbf.setWikiAuth(config.getString("wiki.user"), config.getString("wiki.password"));
 		
 		WikiPageFetcher tw = new WikiPageFetcher(wbf.createBot());
-		String wikiText = tw.fetchText("Category:Use_Case");
+		tw.fetchText("Category:Use_Case");
+		String wikiText = tw.getWikiText();
 		logger.debug(wikiText);
 //		WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtFetched+".txt", wikiText);
     }

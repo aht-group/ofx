@@ -1,6 +1,8 @@
 package org.openfuxml.addon.wiki.processor.net;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import net.sf.exlp.io.LoggerInit;
@@ -13,20 +15,25 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.util.WikiBotFactory;
+import org.openfuxml.renderer.latex.util.TxtWriter;
 
 public class WikiPageFetcher
 {
 	static Log logger = LogFactory.getLog(WikiPageFetcher.class);
 	
 	private MediaWikiBot bot;
-	private String wikiText; 
+	private String wikiText;
+
+	private DecimalFormat df;
 	
 	public WikiPageFetcher(MediaWikiBot bot)
 	{
 		this.bot=bot;
+		df = (DecimalFormat)DecimalFormat.getInstance(Locale.GERMAN);
+		df.applyPattern( "#,###,##0" );
 	}
 	
-	public String fetchText(String article)
+	public void fetchText(String article)
 	{
 		try
 		{	
@@ -37,11 +44,17 @@ public class WikiPageFetcher
 		catch (ActionException e) {logger.error(e);}
 		catch (ProcessException e) {logger.error(e);}
 		
-		DecimalFormat df = (DecimalFormat)DecimalFormat.getInstance(Locale.GERMAN);
-		df.applyPattern( "#,###,##0" );
 		logger.debug("Article "+article+" fetched. "+df.format(wikiText.length())+" characters.");
-		return wikiText;
 	}
+	
+	public void save(TxtWriter txtWriter)
+	{
+		List<String> txt = new ArrayList<String>();
+		txt.add(wikiText);
+		txtWriter.writeFile(txt);
+	}
+	
+	public String getWikiText() {return wikiText;}
 	
 	public static void main(String[] args)
     {
