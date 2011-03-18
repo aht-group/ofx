@@ -5,12 +5,14 @@ import java.util.List;
 
 import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.renderer.latex.document.LatexDocument;
-import org.openfuxml.renderer.latex.header.LatexArticle;
+import org.openfuxml.renderer.latex.preamble.LatexArticle;
 
 public class OfxLatexRenderer
 {
@@ -25,14 +27,19 @@ public class OfxLatexRenderer
 		latexDocument = new LatexDocument();
 	}
 	
-	public void render()
+	public void render(String ofxDocFileName)
 	{
+		Ofxdoc ofxdoc = (Ofxdoc)JaxbUtil.loadJAXB(ofxDocFileName, Ofxdoc.class);
+		
+		latexDocument.render(ofxdoc.getContent());
+		
 		List<String> txt = new ArrayList<String>();
 		txt.addAll(latexHeader.render());
-		txt.addAll(latexDocument.render());
+		txt.addAll(latexDocument.getContent());
 		
 		for(String s : txt)
 		{
+			
 			System.out.println(s);
 		}
 	}
@@ -48,6 +55,6 @@ public class OfxLatexRenderer
 		
 		String ofxDoc = "resources/data/xml/latex/helloworld.xml";
 		OfxLatexRenderer renderer = new OfxLatexRenderer();
-		renderer.render();
+		renderer.render(ofxDoc);
 	}
 }

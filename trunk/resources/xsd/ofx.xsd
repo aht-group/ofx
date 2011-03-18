@@ -50,7 +50,7 @@
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="content">
-        <xsd:complexType>
+        <xsd:complexType mixed="true">
             <xsd:sequence>
                 <xsd:element ref="section" maxOccurs="unbounded"/>
             </xsd:sequence>
