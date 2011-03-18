@@ -1,6 +1,5 @@
 package org.openfuxml.addon.wiki.util;
 
-import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.util.Locale;
 
@@ -18,28 +17,22 @@ public class WikiTextFetcher
 {
 	static Log logger = LogFactory.getLog(WikiTextFetcher.class);
 	
-	private String wikiURL;
+	private MediaWikiBot bot;
 	private String wikiText; 
 	
-	public WikiTextFetcher()
+	public WikiTextFetcher(MediaWikiBot bot)
 	{
-		this("http://de.wikipedia.org/w/");
-	}
-	
-	public WikiTextFetcher(String wikiURL)
-	{
-		this.wikiURL=wikiURL;
+		this.bot=bot;
 	}
 	
 	public String fetchText(String article)
 	{
 		try
-		{
-			MediaWikiBot bot = new MediaWikiBot(wikiURL);
+		{	
 			SimpleArticle sa = new SimpleArticle(bot.readContent(article));
+				
 		    wikiText = sa.getText();
 		}
-		catch (MalformedURLException e) {logger.error(e);}
 		catch (ActionException e) {logger.error(e);}
 		catch (ProcessException e) {logger.error(e);}
 		
@@ -57,7 +50,8 @@ public class WikiTextFetcher
 		
 		WikiTemplates.init();	
 			
-		WikiTextFetcher wtf = new WikiTextFetcher();
+		WikiBotFactory wbf = new WikiBotFactory();
+		WikiTextFetcher wtf = new WikiTextFetcher(wbf.createBot());
 		wtf.fetchText("Bellagio");
     }
 }

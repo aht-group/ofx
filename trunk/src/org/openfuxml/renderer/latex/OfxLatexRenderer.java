@@ -11,9 +11,9 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Ofxdoc;
-import org.openfuxml.renderer.latex.preamble.LatexArticle;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.latex.util.LatexDocument;
+import org.openfuxml.renderer.latex.util.TxtWriter;
 
 public class OfxLatexRenderer
 {
@@ -21,31 +21,30 @@ public class OfxLatexRenderer
 	
 	private LatexPreamble latexPreamble;
 	private LatexDocument latexDocument;
+	private List<String> txt;
 	
 	public OfxLatexRenderer()
 	{
 		latexPreamble = new LatexPreamble();
 		latexDocument = new LatexDocument(latexPreamble);
+		
+		txt = new ArrayList<String>();
 	}
 	
 	public void render(String ofxDocFileName)
 	{
+		logger.debug("Processing: "+ofxDocFileName);
 		Ofxdoc ofxdoc = (Ofxdoc)JaxbUtil.loadJAXB(ofxDocFileName, Ofxdoc.class);
-		
 		
 		latexDocument.render(ofxdoc.getContent());
 		latexPreamble.render();
 		
-		List<String> txt = new ArrayList<String>();
+		
 		txt.addAll(latexPreamble.getContent());
 		txt.addAll(latexDocument.getContent());
-		
-		for(String s : txt)
-		{
-			
-			System.out.println(s);
-		}
 	}
+	
+	public List<String> getContent(){return txt;}
 	
 	public static void main (String[] args) throws Exception
 	{
@@ -53,11 +52,15 @@ public class OfxLatexRenderer
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
 		
-		ConfigLoader.add("resources/config/wiki/wiki.xml");
+		ConfigLoader.add("resources/properties/user.properties");
 		Configuration config = ConfigLoader.init();
 		
-		String ofxDoc = "resources/data/xml/latex/helloworld.xml";
 		OfxLatexRenderer renderer = new OfxLatexRenderer();
-		renderer.render(ofxDoc);
+		renderer.render(config.getString("wiki.xml"));
+		
+		TxtWriter writer = new TxtWriter();
+		writer.setFile(config.getString("wiki.latex.dir"), config.getString("wiki.latex.file"));
+//		writer.debug(renderer.getContent());
+		writer.writeFile(renderer.getContent());
 	}
 }

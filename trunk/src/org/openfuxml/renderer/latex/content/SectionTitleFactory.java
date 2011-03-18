@@ -23,7 +23,7 @@ public class SectionTitleFactory extends AbstractOfxLatexRenderer implements Ofx
 	public void render(Title title)
 	{
 		logger.trace("Render title");
-		logger.warn("Ignoring numbring");
+		if(title.isSetNumbering()){logger.warn("Ignoring numbring");}
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("\\");

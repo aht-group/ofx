@@ -1,6 +1,7 @@
 package org.openfuxml.addon.epub.generator.epub;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -85,12 +86,16 @@ public class NcxGenerator
 		List<NavPoint> result = new ArrayList<NavPoint>();
 		
 		int partNr=1;
-		for(Section section : ofxDoc.getContent().getSection())
+		for(Serializable s : ofxDoc.getContent().getContent())
 		{
-			logger.debug("secNo="+partNr+" "+section.getId());
-			Title title = EpubJaxbXpathLoader.getTitle(section);
-			result.add(NcxFactory.getNavPoint(section.getId(), playOrder, title.getValue(), "part-"+partNr+".xhtml"));
-			playOrder++;partNr++;
+			if(s instanceof Section)
+			{
+				Section section = (Section)s;
+				logger.debug("secNo="+partNr+" "+section.getId());
+				Title title = EpubJaxbXpathLoader.getTitle(section);
+				result.add(NcxFactory.getNavPoint(section.getId(), playOrder, title.getValue(), "part-"+partNr+".xhtml"));
+				playOrder++;partNr++;
+			}
 		}
 		return result;
 	}

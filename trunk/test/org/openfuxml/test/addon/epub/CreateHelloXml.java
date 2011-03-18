@@ -56,7 +56,8 @@ public class CreateHelloXml
 		Content content = new Content();
 		for(int i=0;i<(2+rnd.nextInt(2));i++)
 		{
-			content.getSection().add(createSection());
+			Section section = createSection();
+			content.getContent().add(section);
 		}
 		
 		return content;

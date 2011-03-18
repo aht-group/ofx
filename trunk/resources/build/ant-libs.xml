@@ -12,6 +12,7 @@
 	<property name="exlp.dir" value="utils/exlp"/><property name="exlp.lib" value="exlp-${exlp-version}.jar" />
 	<property name="loremipsum.dir" value="utils/loremipsum"/><property name="loremipsum.lib" value="loremipsum-${loremipsum-version}.jar" />
 	
+	<property name="commonscodec.dir" value="utils/commons/codec"/><property name="commonscodec.lib" value="commons-codec-${commonscodec-version}.jar" />
 	<property name="commonsconfig.dir" value="utils/commons/config"/><property name="commonsconfig.lib" value="commons-configuration-${commonsconfig-version}.jar" />
 	<property name="commonsio.dir" value="utils/commons/io"/><property name="commonsio.lib" value="commons-io-${commonsio-version}.jar" />
 	<property name="commonsjxpath.dir" value="utils/commons/jxpath"/><property name="commonsjxpath.lib" value="commons-jxpath-${commonsjxpath-version}.jar" />
@@ -112,6 +113,7 @@
 		
 		<property name="m.utils.1" value="${mjar.log4j} ${m.ant} ${m.loremipsum}"/>
 		
+		<property name="m.cm.codec" value="${metalib.dir}/${commonscodec.dir}/${commonscodec.lib}"/>
 		<property name="m.cm.config" value="${metalib.dir}/${commonsconfig.dir}/${commonsconfig.lib}"/>
 		<property name="m.cm.collections" value="${metalib.dir}/${commonscollections.dir}/${commonscollections.lib}"/>
 		<property name="m.commons.xmlgraphics" value="${metalib.dir}/${commonsxmlgraphics.dir}/${commonsxmlgraphics.lib}"/><property name="commonsxmlgraphics.lib" value="xmlgraphics-commons-${commonsxmlgraphics-version}.jar" />
@@ -119,7 +121,7 @@
 		
 		<property name="m.cm.1" value="${metalib.dir}/${commonslang.dir}/${commonslang.lib} ${metalib.dir}/${commonslogging.dir}/${commonslogging.lib} ${m.cm.config}"/>
 		<property name="m.cm.2" value="${metalib.dir}/${commonsio.dir}/${commonsio.lib} ${metalib.dir}/${commonsjxpath.dir}/${commonsjxpath.lib} ${metalib.dir}/${commonsdigester.dir}/${commonsdigester.lib}"/>
-		<property name="m.cm.3" value="${m.cm.collections} ${m.cm.http}"/>
+		<property name="m.cm.3" value="${m.cm.collections} ${m.cm.http} ${m.cm.codec}"/>
 		<property name="m.cm.4" value="${metalib.dir}/${commonscodec.dir}/${commonscodec.lib} ${metalib.dir}/${commonscli.dir}/${commonscli.lib} ${m.commons.xmlgraphics}"/>
 		<property name="m.cm" value="${m.cm.1} ${m.cm.2} ${m.cm.3} ${m.cm.4}"/>
 		<property name="m.utils" value="${m.utils.1} ${mjar.utils2}  ${mjar.utils3} ${m.cm}"/>	
@@ -153,7 +155,7 @@
 		<property name="mjar.custom" value="${metalib.dir}/${exlp.dir}/${exlp.lib}  ${metalib.dir}/${ahtutils.dir}/${ahtutils.lib}"/>
 		<echo level="info">Custom: ${mjar.custom}</echo>
 		<echo level="info">Meta: ${meta.jar}</echo>
-		<echo level="info">Test: ${m.jwbf}</echo>
+		<echo level="info">Test: ${m.cm.codec}</echo>
 		
 		<mkdir dir="${locallib.dir}"/>
 		<echo level="info">Creating jars in ${locallib.dir}</echo>

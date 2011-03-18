@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.latex.util.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.latex.util.LatexDocument;
 import org.openfuxml.renderer.latex.util.OfxLatexRenderer;
 
 public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
@@ -31,6 +31,7 @@ public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatex
 		{
 			if(s instanceof Title){renderTitle((Title)s);}
 			if(s instanceof Section){renderSection((Section)s);}
+			if(s instanceof Paragraph){renderParagraph((Paragraph)s);}
 		}
 //		if(section.getContent()logger.debug(getSectionHeader("x"));
 		
@@ -41,6 +42,13 @@ public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatex
 		SectionTitleFactory stf = new SectionTitleFactory(lvl,latexPreamble);
 		stf.render(title);
 		renderer.add(stf);
+	}
+	
+	private void renderParagraph(Paragraph paragraph)
+	{
+		ParagraphFactory pf = new ParagraphFactory();
+		pf.render(paragraph);
+		renderer.add(pf);
 	}
 	
 	private void renderSection(Section section)
