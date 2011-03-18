@@ -86,7 +86,7 @@ public class NcxGenerator
 		List<NavPoint> result = new ArrayList<NavPoint>();
 		
 		int partNr=1;
-		for(Serializable s : ofxDoc.getContent().getContent())
+		for(Object s : ofxDoc.getContent().getContent())
 		{
 			if(s instanceof Section)
 			{

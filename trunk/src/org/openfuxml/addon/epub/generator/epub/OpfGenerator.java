@@ -1,7 +1,6 @@
 package org.openfuxml.addon.epub.generator.epub;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +85,7 @@ public class OpfGenerator
 		eManifest.addContent(getItem("ncx","toc.ncx","application/x-dtbncx+xml"));
 		
 		int partNr=1;
-		for(Serializable s : ofxDoc.getContent().getContent())
+		for(Object s : ofxDoc.getContent().getContent())
 		{
 			if(s instanceof Section)
 			{
@@ -112,7 +111,7 @@ public class OpfGenerator
 		Element eSpine = new Element("spine",nsOpf);
 		eSpine.setAttribute("toc","ncx");
 		
-		for(Serializable s : ofxDoc.getContent().getContent())
+		for(Object s : ofxDoc.getContent().getContent())
 		{
 			if(s instanceof Section)
 			{
