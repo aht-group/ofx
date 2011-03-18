@@ -14,14 +14,14 @@ import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.util.WikiBotFactory;
 
-public class WikiArticleFetcher
+public class WikiPageFetcher
 {
-	static Log logger = LogFactory.getLog(WikiArticleFetcher.class);
+	static Log logger = LogFactory.getLog(WikiPageFetcher.class);
 	
 	private MediaWikiBot bot;
 	private String wikiText; 
 	
-	public WikiArticleFetcher(MediaWikiBot bot)
+	public WikiPageFetcher(MediaWikiBot bot)
 	{
 		this.bot=bot;
 	}
@@ -52,7 +52,7 @@ public class WikiArticleFetcher
 		WikiTemplates.init();	
 			
 		WikiBotFactory wbf = new WikiBotFactory();
-		WikiArticleFetcher wtf = new WikiArticleFetcher(wbf.createBot());
+		WikiPageFetcher wtf = new WikiPageFetcher(wbf.createBot());
 		wtf.fetchText("Bellagio");
     }
 }

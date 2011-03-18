@@ -15,7 +15,7 @@ import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
-import org.openfuxml.addon.wiki.data.jaxb.Section;
+import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.content.ofx.Ofxdoc;
 
 public class WikiExternalIntegrator
@@ -83,11 +83,11 @@ public class WikiExternalIntegrator
 	private List<Element> processWikiContent(Content wikiContent)
 	{
 		List<Element> lElements = new ArrayList<Element>();
-		if(wikiContent.isSetSection()){lElements.add(getSection(wikiContent.getSection()));}
+		if(wikiContent.isSetPage()){lElements.add(getSection(wikiContent.getPage()));}
 		return lElements;
 	}
 	
-	private Element getSection(Section section)
+	private Element getSection(Page section)
 	{
 		org.openfuxml.content.ofx.Section ofxSection = new org.openfuxml.content.ofx.Section();
 		ofxSection.setExternal(true);

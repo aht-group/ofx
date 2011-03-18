@@ -2,12 +2,10 @@ package org.openfuxml.addon.wiki.processor.net;
 
 import java.util.List;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
-import org.openfuxml.addon.wiki.data.jaxb.Section;
+import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.util.WikiBotFactory;
 
 public class WikiContentFetcher
@@ -27,11 +25,11 @@ public class WikiContentFetcher
 		
 		for(Content content : lContent)
 		{
-			if(content.isSetSection()){fetchPage(content.getSection());}
+			if(content.isSetPage()){fetchPage(content.getPage());}
 		}
 	}
 	
-	private void fetchPage(Section section)
+	private void fetchPage(Page section)
 	{
 		
 	}

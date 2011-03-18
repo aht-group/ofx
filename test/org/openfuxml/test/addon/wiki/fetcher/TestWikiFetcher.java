@@ -6,7 +6,7 @@ import net.sf.exlp.io.LoggerInit;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.wiki.processor.net.WikiArticleFetcher;
+import org.openfuxml.addon.wiki.processor.net.WikiPageFetcher;
 import org.openfuxml.addon.wiki.util.WikiBotFactory;
 
 public class TestWikiFetcher
@@ -27,7 +27,7 @@ public class TestWikiFetcher
 		wbf.setHttpDigestAuth(config.getString("wiki.http.user"), config.getString("wiki.http.password"));
 		wbf.setWikiAuth(config.getString("wiki.user"), config.getString("wiki.password"));
 		
-		WikiArticleFetcher tw = new WikiArticleFetcher(wbf.createBot());
+		WikiPageFetcher tw = new WikiPageFetcher(wbf.createBot());
 		String wikiText = tw.fetchText("Category:Use_Case");
 		logger.debug(wikiText);
 //		WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtFetched+".txt", wikiText);

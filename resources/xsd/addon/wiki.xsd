@@ -135,7 +135,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="server" maxOccurs="1"/>
-                <xsd:element ref="section" maxOccurs="1"/>
+                <xsd:element ref="page" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -145,10 +145,10 @@
             <xsd:attribute name="default" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="section">
+    <xsd:element name="page">
         <xsd:complexType>
             <xsd:attribute name="id" type="xsd:string"/>
-            <xsd:attribute name="article" type="xsd:string"/>
+            <xsd:attribute name="name" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>
