@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki.util;
+package org.openfuxml.addon.wiki.processor.net;
 
 import java.text.DecimalFormat;
 import java.util.Locale;
@@ -12,15 +12,16 @@ import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
+import org.openfuxml.addon.wiki.util.WikiBotFactory;
 
-public class WikiTextFetcher
+public class WikiArticleFetcher
 {
-	static Log logger = LogFactory.getLog(WikiTextFetcher.class);
+	static Log logger = LogFactory.getLog(WikiArticleFetcher.class);
 	
 	private MediaWikiBot bot;
 	private String wikiText; 
 	
-	public WikiTextFetcher(MediaWikiBot bot)
+	public WikiArticleFetcher(MediaWikiBot bot)
 	{
 		this.bot=bot;
 	}
@@ -51,7 +52,7 @@ public class WikiTextFetcher
 		WikiTemplates.init();	
 			
 		WikiBotFactory wbf = new WikiBotFactory();
-		WikiTextFetcher wtf = new WikiTextFetcher(wbf.createBot());
+		WikiArticleFetcher wtf = new WikiArticleFetcher(wbf.createBot());
 		wtf.fetchText("Bellagio");
     }
 }

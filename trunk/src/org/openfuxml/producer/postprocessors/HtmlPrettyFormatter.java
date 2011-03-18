@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import net.sf.exlp.io.LoggerInit;
+
 import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
@@ -24,8 +26,6 @@ import org.jdom.Document;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.openfuxml.util.OfxApp;
-
-import de.kisner.util.LoggerInit;
 
 public class HtmlPrettyFormatter extends DirectoryWalker
 {

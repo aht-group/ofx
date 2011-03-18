@@ -6,10 +6,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import net.sf.exlp.io.LoggerInit;
+
 import org.openfuxml.model.jaxb.ProducibleEntities;
 import org.openfuxml.model.jaxb.Productionresult;
-
-import de.kisner.util.LoggerInit;
 
 public class OfxProductionResultFactory extends AbstractJaxbFactory
 {
