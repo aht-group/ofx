@@ -27,7 +27,7 @@ public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatex
 	public void render(Section section)
 	{
 		logger.trace("Render section");
-		for(Serializable s : section.getContent())
+		for(Object s : section.getContent())
 		{
 			if(s instanceof Title){renderTitle((Title)s);}
 			if(s instanceof Section){renderSection((Section)s);}
