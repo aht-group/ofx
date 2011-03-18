@@ -59,7 +59,7 @@ public class OfxLatexRenderer
 		renderer.render(config.getString("wiki.xml"));
 		
 		TxtWriter writer = new TxtWriter();
-		writer.setFile(config.getString("wiki.latex.dir"), config.getString("wiki.latex.file"));
+		writer.setTargetDirFile(config.getString("wiki.latex.dir"), config.getString("wiki.latex.file"));
 //		writer.debug(renderer.getContent());
 		writer.writeFile(renderer.getContent());
 	}

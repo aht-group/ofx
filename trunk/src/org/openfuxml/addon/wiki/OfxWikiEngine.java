@@ -59,7 +59,9 @@ public class OfxWikiEngine
 		logger.debug("Fetching article: "+article);
 		WikiBotFactory wbf = new WikiBotFactory();
 		WikiPageFetcher tw = new WikiPageFetcher(wbf.createBot());
-		String wikiText = tw.fetchText(article);
+		tw.fetchText(article);
+		String wikiText = tw.getWikiText();
+		
 		WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtFetched+".txt", wikiText);
 		return wikiText;
 	}

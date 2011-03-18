@@ -97,6 +97,7 @@ public class OfxRenderer
 		wbf.setWikiAuth(config.getString("wiki.user"), config.getString("wiki.password"));
 		
 		WikiContentFetcher contentFetcher = new WikiContentFetcher(wbf);
+		contentFetcher.setTargetDir(tmpDir);
 		contentFetcher.fetch(wikiExIntegrator.getWikiQueries());
 		
 		return ofxDoc;
