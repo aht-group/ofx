@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.output.Format;
+import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Merge;
@@ -23,11 +24,13 @@ public class OfxRenderer
 {
 	static Log logger = LogFactory.getLog(OfxRenderer.class);
 		
-	public static enum PhaseMerge {initial};
+	public static enum Phase {iniMerge,wikiIntegrate};
 	
 	private Configuration config;
 	private Cmp cmp;
 	int phaseCounter;
+	
+	String tmpDir;
 	
 	public OfxRenderer(Configuration config)
 	{
@@ -38,12 +41,15 @@ public class OfxRenderer
 	private void readConfig(String fName)
 	{
 		cmp = (Cmp)JaxbUtil.loadJAXB(fName, Cmp.class);
+		tmpDir = config.getString("ofx.dir.tmp");
 	}
 	
 	public void chain()
 	{
+		Ofxdoc ofxDoc;
 		readConfig(config.getString("ofx.xml.cmp"));
-		phaseMergeInitial(config.getString("ofx.xml.root"),config.getString("ofx.dir.tmp"));
+		ofxDoc = phaseMergeInitial(config.getString("ofx.xml.root"),tmpDir);
+		phaseWikiExternalIntegrator(ofxDoc, tmpDir, "wiki");
 	}
 	
 	private Ofxdoc phaseMergeInitial(String rootFileName, String tmpDir)
@@ -52,7 +58,7 @@ public class OfxRenderer
 
 		try
 		{
-			Merge merge = CmpJaxbXpathLoader.getMerge(cmp.getPreprocessor().getMerge(), PhaseMerge.initial.toString());
+			Merge merge = CmpJaxbXpathLoader.getMerge(cmp.getPreprocessor().getMerge(), Phase.iniMerge.toString());
 			
 			File f = new File(rootFileName);
 			OfxExternalMerger exMerger = new OfxExternalMerger(f);
@@ -60,9 +66,8 @@ public class OfxRenderer
 			
 			if(merge.isSetWriteIntermediate() && merge.isWriteIntermediate())
 			{
-				File fIntermediate = new File(tmpDir,phaseCounter+"-merge-"+PhaseMerge.initial.toString()+".xml");
+				File fIntermediate = new File(tmpDir,getPhaseXmlFileName(Phase.iniMerge));
 				JDomUtil.save(doc, fIntermediate, Format.getPrettyFormat());
-				phaseCounter++;
 			}
 		}
 		catch (NoSuchElementException e) {logger.debug("No initial merge");}
@@ -73,6 +78,26 @@ public class OfxRenderer
 		return ofxdoc;
 	}
 	
+	private Ofxdoc phaseWikiExternalIntegrator(Ofxdoc ofxDoc, String tmpDir, String subDir)
+	{
+		File dirWiki = new File(tmpDir,subDir);
+		if(!dirWiki.exists()){dirWiki.mkdir();}
+		
+		WikiExternalIntegrator wikiExIntegrator = new WikiExternalIntegrator(subDir);
+		wikiExIntegrator.integrateWikiAsExternal(ofxDoc);
+		ofxDoc = wikiExIntegrator.getResult();
+		
+		JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(Phase.wikiIntegrate)), ofxDoc, true);
+		return ofxDoc;
+	}
+	
+	private String getPhaseXmlFileName(Phase phase)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append(phaseCounter);phaseCounter++;
+		sb.append("-").append(phase.toString()).append(".xml");
+		return sb.toString();
+	}
 	
 	public static void main (String[] args) throws Exception
 	{
