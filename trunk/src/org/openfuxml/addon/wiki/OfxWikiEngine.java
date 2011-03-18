@@ -22,7 +22,7 @@ import org.openfuxml.addon.wiki.processing.InjectionProcessor;
 import org.openfuxml.addon.wiki.processing.WikiProcessor;
 import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processing.XmlProcessor;
-import org.openfuxml.addon.wiki.processor.net.WikiArticleFetcher;
+import org.openfuxml.addon.wiki.processor.net.WikiPageFetcher;
 import org.openfuxml.addon.wiki.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
@@ -58,7 +58,7 @@ public class OfxWikiEngine
 	{
 		logger.debug("Fetching article: "+article);
 		WikiBotFactory wbf = new WikiBotFactory();
-		WikiArticleFetcher tw = new WikiArticleFetcher(wbf.createBot());
+		WikiPageFetcher tw = new WikiPageFetcher(wbf.createBot());
 		String wikiText = tw.fetchText(article);
 		WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtFetched+".txt", wikiText);
 		return wikiText;
