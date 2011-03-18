@@ -1,6 +1,7 @@
 package org.openfuxml.addon.epub.generator.content;
 
 import java.io.File;
+import java.io.Serializable;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
@@ -32,16 +33,20 @@ public class ContentGenerator
 	public void create(Ofxdoc ofxDoc)
 	{
 		int partNr=1;
-		for(Section section : ofxDoc.getContent().getSection())
+		for(Serializable s : ofxDoc.getContent().getContent())
 		{
-			File f = new File(targetDir,"part-"+partNr+".xhtml");
-			Document doc = new Document();
+			if(s instanceof Section)
+			{
+				Section section = (Section)s;
+				File f = new File(targetDir,"part-"+partNr+".xhtml");
+				Document doc = new Document();
 			
-			Element rootElement = partFactory.createPart(section);
-			doc.setRootElement(rootElement);
+				Element rootElement = partFactory.createPart(section);
+				doc.setRootElement(rootElement);
 			
-			JDomUtil.save(doc, f, Format.getPrettyFormat());
-			partNr++;
+				JDomUtil.save(doc, f, Format.getPrettyFormat());
+				partNr++;
+			}
 		}
 	}
 

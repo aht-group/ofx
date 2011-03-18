@@ -1,6 +1,7 @@
 package org.openfuxml.addon.epub.generator.epub;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +14,9 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Namespace;
 import org.jdom.output.Format;
-import org.openfuxml.addon.epub.data.factory.NcxFactory;
-import org.openfuxml.addon.epub.data.jaxb.EpubJaxbXpathLoader;
 import org.openfuxml.content.ofx.Metadata;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.ofx.Title;
 import org.openfuxml.producer.preprocessors.ExternalMerger;
 
 public class OpfGenerator
@@ -88,10 +86,14 @@ public class OpfGenerator
 		eManifest.addContent(getItem("ncx","toc.ncx","application/x-dtbncx+xml"));
 		
 		int partNr=1;
-		for(Section section : ofxDoc.getContent().getSection())
+		for(Serializable s : ofxDoc.getContent().getContent())
 		{
-			eManifest.addContent(getItem(section.getId(),"part-"+partNr+".xhtml","application/xhtml+xml"));
-			partNr++;
+			if(s instanceof Section)
+			{
+				Section section = (Section)s;
+				eManifest.addContent(getItem(section.getId(),"part-"+partNr+".xhtml","application/xhtml+xml"));
+				partNr++;
+			}
 		}
 		return eManifest;
 	}
@@ -110,11 +112,15 @@ public class OpfGenerator
 		Element eSpine = new Element("spine",nsOpf);
 		eSpine.setAttribute("toc","ncx");
 		
-		for(Section section : ofxDoc.getContent().getSection())
+		for(Serializable s : ofxDoc.getContent().getContent())
 		{
-			Element eRef = new Element("itemref",nsOpf);
-			eRef.setAttribute("idref",section.getId());
-			eSpine.addContent(eRef);
+			if(s instanceof Section)
+			{
+				Section section = (Section)s;
+				Element eRef = new Element("itemref",nsOpf);
+				eRef.setAttribute("idref",section.getId());
+				eSpine.addContent(eRef);
+			}
 		}
 		
 		return eSpine;

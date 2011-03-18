@@ -10,20 +10,24 @@ public class LatexPreamble extends AbstractOfxLatexRenderer implements OfxLatexR
 {
 	static Log logger = LogFactory.getLog(LatexPreamble.class);
 	
+	private SectionHeaderNameFactory shnf;
+	private LatexArticle article;
+	
 	public LatexPreamble()
 	{
-		
+		article = new LatexArticle();
+		shnf = article;
 	}
 	
 	public void render()
 	{
 		
-		LatexArticle article = new LatexArticle();
 		renderer.add(article);
 	}
 	
 	public String getSectionHeaderName(int lvl)
 	{
-		return "sectionsxx";
+		
+		return shnf.getSectionHeaderName(lvl);
 	}
 }
