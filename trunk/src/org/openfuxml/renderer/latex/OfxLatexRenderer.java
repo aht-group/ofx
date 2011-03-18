@@ -11,30 +11,33 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Ofxdoc;
-import org.openfuxml.renderer.latex.document.LatexDocument;
 import org.openfuxml.renderer.latex.preamble.LatexArticle;
+import org.openfuxml.renderer.latex.preamble.LatexPreamble;
+import org.openfuxml.renderer.latex.util.LatexDocument;
 
 public class OfxLatexRenderer
 {
 	static Log logger = LogFactory.getLog(OfxLatexRenderer.class);
 	
-	private LatexArticle latexHeader;
+	private LatexPreamble latexPreamble;
 	private LatexDocument latexDocument;
 	
 	public OfxLatexRenderer()
 	{
-		latexHeader = new LatexArticle();
-		latexDocument = new LatexDocument();
+		latexPreamble = new LatexPreamble();
+		latexDocument = new LatexDocument(latexPreamble);
 	}
 	
 	public void render(String ofxDocFileName)
 	{
 		Ofxdoc ofxdoc = (Ofxdoc)JaxbUtil.loadJAXB(ofxDocFileName, Ofxdoc.class);
 		
+		
 		latexDocument.render(ofxdoc.getContent());
+		latexPreamble.render();
 		
 		List<String> txt = new ArrayList<String>();
-		txt.addAll(latexHeader.render());
+		txt.addAll(latexPreamble.getContent());
 		txt.addAll(latexDocument.getContent());
 		
 		for(String s : txt)

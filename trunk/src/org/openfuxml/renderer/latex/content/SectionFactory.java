@@ -6,22 +6,22 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.renderer.latex.document.LatexDocument;
+import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.latex.util.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.util.LatexDocument;
 import org.openfuxml.renderer.latex.util.OfxLatexRenderer;
 
 public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
 	static Log logger = LogFactory.getLog(SectionFactory.class);
 	
+	private LatexPreamble latexPreamble;
 	int lvl;
 	
-	private LatexDocument latexDocument;
-	
-	public SectionFactory(int lvl, LatexDocument latexDocument)
+	public SectionFactory(int lvl, LatexPreamble latexPreamble)
 	{
 		this.lvl=lvl;
-		this.latexDocument=latexDocument;
+		this.latexPreamble=latexPreamble;
 	}
 	
 	public void render(Section section)
@@ -38,14 +38,14 @@ public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatex
 	
 	private void renderTitle(Title title)
 	{
-		SectionTitleFactory stf = new SectionTitleFactory(lvl,latexDocument);
+		SectionTitleFactory stf = new SectionTitleFactory(lvl,latexPreamble);
 		stf.render(title);
 		renderer.add(stf);
 	}
 	
 	private void renderSection(Section section)
 	{
-		SectionFactory sf = new SectionFactory(lvl+1,latexDocument);
+		SectionFactory sf = new SectionFactory(lvl+1,latexPreamble);
 		sf.render(section);
 		renderer.add(sf);
 	}

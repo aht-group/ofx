@@ -3,7 +3,7 @@ package org.openfuxml.renderer.latex.content;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.renderer.latex.document.LatexDocument;
+import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.util.OfxLatexRenderer;
 
@@ -11,10 +11,12 @@ public class SectionTitleFactory extends AbstractOfxLatexRenderer implements Ofx
 {
 	static Log logger = LogFactory.getLog(SectionTitleFactory.class);
 	
+	private LatexPreamble latexPreamble;
 	int lvl;
 	
-	public SectionTitleFactory(int lvl, LatexDocument latexDocument)
+	public SectionTitleFactory(int lvl, LatexPreamble latexPreamble)
 	{
+		this.latexPreamble=latexPreamble;
 		this.lvl=lvl;
 	}
 	
@@ -22,11 +24,12 @@ public class SectionTitleFactory extends AbstractOfxLatexRenderer implements Ofx
 	{
 		logger.trace("Render title");
 		logger.warn("Ignoring numbring");
-		renderTitle(title.getValue());
-	}
-	
-	public void renderTitle(String header)
-	{
-		txt.add("\\section{"+lvl+" "+header+"}");
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("\\");
+		sb.append(latexPreamble.getSectionHeaderName(lvl)).append("{");
+		sb.append(title.getValue());
+		sb.append("}");
+		txt.add(sb.toString());
 	}
 }
