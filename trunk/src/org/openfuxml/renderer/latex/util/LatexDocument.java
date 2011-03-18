@@ -26,7 +26,7 @@ public class LatexDocument extends AbstractOfxLatexRenderer implements OfxLatexR
 		lvl = 0;
 		
 		preTxt.add("\\begin{document}");
-		for(Serializable s : content.getContent())
+		for(Object s : content.getContent())
 		{
 			if(s instanceof Section){renderSection((Section)s);}
 		}
