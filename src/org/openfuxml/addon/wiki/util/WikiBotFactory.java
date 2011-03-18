@@ -22,6 +22,8 @@ public class WikiBotFactory
 	private String httpUsername,httpPassword;
 	private String wikiUsername,wikiPassword;
 	
+	private MediaWikiBot bot;
+
 	public WikiBotFactory()
 	{
 		setUrl("http://de.wikipedia.org/w/");
@@ -43,6 +45,16 @@ public class WikiBotFactory
 	{
 		this.wikiUsername=wikiUsername;
 		this.wikiPassword=wikiPassword;
+	}
+	
+	public MediaWikiBot getBot()
+	{
+		if(bot==null)
+		{
+			logger.debug("Creating MediaWikiBot");
+			bot = createBot();
+		}
+		return bot;
 	}
 	
 	public MediaWikiBot createBot()

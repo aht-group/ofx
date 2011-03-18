@@ -13,7 +13,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.output.Format;
+import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
 import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
+import org.openfuxml.addon.wiki.util.WikiBotFactory;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Merge;
@@ -88,6 +90,15 @@ public class OfxRenderer
 		ofxDoc = wikiExIntegrator.getResult();
 		
 		JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(Phase.wikiIntegrate)), ofxDoc, true);
+		
+		WikiBotFactory wbf = new WikiBotFactory();
+		wbf.setUrl(config.getString("wiki.url"));
+		wbf.setHttpDigestAuth(config.getString("wiki.http.user"), config.getString("wiki.http.password"));
+		wbf.setWikiAuth(config.getString("wiki.user"), config.getString("wiki.password"));
+		
+		WikiContentFetcher contentFetcher = new WikiContentFetcher(wbf);
+		contentFetcher.fetch(wikiExIntegrator.getWikiQueries());
+		
 		return ofxDoc;
 	}
 	

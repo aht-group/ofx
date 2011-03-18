@@ -5,6 +5,8 @@ package org.openfuxml.client.gui.util;
 
 import java.util.ArrayList;
 
+import net.sf.exlp.io.LoggerInit;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,7 +15,6 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Display;
 import org.openfuxml.util.config.factory.ClientConfFactory;
 
-import de.kisner.util.LoggerInit;
 
 /**
  * @author Thorsten Kisner

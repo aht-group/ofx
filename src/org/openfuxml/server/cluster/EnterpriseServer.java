@@ -1,5 +1,5 @@
-// Created on 28.04.2004
 package org.openfuxml.server.cluster;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.SocketException;
@@ -8,6 +8,9 @@ import java.util.List;
 import javax.naming.CommunicationException;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+
+import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.io.LoggerInit;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
@@ -26,9 +29,7 @@ import org.openfuxml.server.AbstractServer;
 import org.openfuxml.server.simple.SimpleServerThread;
 import org.openfuxml.server.simple.SimpleShutdownThread;
 
-import de.kisner.util.ConfigLoader;
 import de.kisner.util.Connector;
-import de.kisner.util.LoggerInit;
 
 /**
  * @author Thorsten

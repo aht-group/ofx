@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.io.LoggerInit;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.FilenameUtils;
@@ -22,9 +25,6 @@ import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 import org.htmlcleaner.TagTransformation;
 import org.openfuxml.util.OfxApp;
-
-import de.kisner.util.ConfigLoader;
-import de.kisner.util.LoggerInit;
 
 public class HtmlTagSubstitutor extends DirectoryWalker
 {
