@@ -14,7 +14,6 @@ import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.output.Format;
 import org.openfuxml.content.ofx.Ofxdoc;
-import org.openfuxml.model.ejb.OfxDocument;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Merge;
 import org.openfuxml.renderer.processor.pre.OfxExternalMerger;

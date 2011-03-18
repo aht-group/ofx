@@ -2,12 +2,14 @@
 <xsd:schema targetNamespace="http://www.openfuxml.org"
     xmlns="http://www.openfuxml.org"
     xmlns:cmp="http://www.openfuxml.org/cmp"
+    xmlns:wiki="http://www.openfuxml.org/wiki"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:extensionBindingPrefixes="xjc"
     jaxb:version="2.0">
     <xsd:import namespace="http://www.openfuxml.org/cmp" schemaLocation="ofx/cmp.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/chart" schemaLocation="addon/chart.xsd"/>
+    <xsd:import namespace="http://www.openfuxml.org/wiki" schemaLocation="addon/wiki.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/jsf" schemaLocation="addon/jsf-taglib.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/jsfapp" schemaLocation="addon/jsf-app.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/fuxml" schemaLocation="ofx/fuxml.xsd"/>
