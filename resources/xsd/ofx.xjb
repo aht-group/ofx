@@ -22,7 +22,7 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
-    <jxb:bindings schemaLocation="addon/cmp.xsd" node="/xsd:schema">
+    <jxb:bindings schemaLocation="ofx/cmp.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.openfuxml.renderer.data.jaxb"/>
         </jxb:schemaBindings>

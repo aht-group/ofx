@@ -1,7 +1,5 @@
 package org.openfuxml.renderer.latex.util;
 
-import java.io.Serializable;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Content;
