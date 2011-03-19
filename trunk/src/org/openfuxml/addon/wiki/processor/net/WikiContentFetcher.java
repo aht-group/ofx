@@ -1,5 +1,6 @@
 package org.openfuxml.addon.wiki.processor.net;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -20,8 +21,7 @@ public class WikiContentFetcher
 	{
 		this.wbf=wbf;
 		txtWriter = new TxtWriter();
-		setTargetDir(".");
-
+		setTargetDir(new File("."));
 	}
 
 	public void fetch(List<Content> lContent)
@@ -44,9 +44,13 @@ public class WikiContentFetcher
 	
 	private void setTargetFile(String ofxSource)
 	{
-		int index = ofxSource.lastIndexOf(".xml");
-		txtWriter.setTargetFile(ofxSource.substring(0,index)+".txt");
+		int indexFrom = ofxSource.lastIndexOf("/");
+		int indexTo = ofxSource.lastIndexOf(".xml");
+		txtWriter.setTargetFile(ofxSource.substring(indexFrom+1,indexTo)+".txt");
 	}
 	
-	public void setTargetDir(String targetDir){txtWriter.setTargetDir(targetDir);}
+	public void setTargetDir(File dstDir)
+	{
+		txtWriter.setTargetDir(dstDir);
+	}
 }

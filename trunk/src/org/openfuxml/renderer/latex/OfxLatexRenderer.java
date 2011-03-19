@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,8 +68,10 @@ public class OfxLatexRenderer
 		OfxLatexRenderer renderer = new OfxLatexRenderer();
 		renderer.render(config.getString("wiki.xml"));
 		
+		File dstDir = new File(config.getString("wiki.latex.dir"));
+		
 		TxtWriter writer = new TxtWriter();
-		writer.setTargetDirFile(config.getString("wiki.latex.dir"), config.getString("wiki.latex.file"));
+		writer.setTargetDirFile(dstDir, config.getString("wiki.latex.file"));
 //		writer.debug(renderer.getContent());
 		writer.writeFile(renderer.getContent());
 	}

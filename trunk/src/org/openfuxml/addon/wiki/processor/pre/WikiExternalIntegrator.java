@@ -26,14 +26,14 @@ public class WikiExternalIntegrator
 	private XPath xpath;
 	
 	private int counter;
-	private String subDir;
+	private String wikiXmlDirName;
 	
 	private Ofxdoc ofxDocWithWikisAsExternal;
 	private List<Content> wikiQueries;
 	
-	public WikiExternalIntegrator(String subDir)
+	public WikiExternalIntegrator(String wikiXmlDirName)
 	{
-		this.subDir=subDir;
+		this.wikiXmlDirName=wikiXmlDirName;
 		try
 		{
 			ns = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
@@ -92,7 +92,7 @@ public class WikiExternalIntegrator
 	{
 		org.openfuxml.content.ofx.Section ofxSection = new org.openfuxml.content.ofx.Section();
 		ofxSection.setExternal(true);
-		ofxSection.setSource(subDir+"/"+counter+".xml");counter++;
+		ofxSection.setSource(wikiXmlDirName+"/"+counter+".xml");counter++;
 		Element eResult = JaxbUtil.toDocument(ofxSection).getRootElement();
 		eResult.detach();
 		return eResult;

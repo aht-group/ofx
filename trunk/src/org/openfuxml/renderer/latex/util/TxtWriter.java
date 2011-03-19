@@ -20,7 +20,8 @@ public class TxtWriter
 	protected String fs;
 	protected String ls;
 
-	protected String dirName,fileName;
+	protected File dstDir;
+	protected String fileName;
 	protected DecimalFormat df;
 	
 	private String encoding;
@@ -31,22 +32,22 @@ public class TxtWriter
 		this.encoding=encoding;
 		this.ls=ls;
 		fs = SystemUtils.FILE_SEPARATOR;
-		dirName=".";
+		dstDir = new File(".");
 		fileName="TxtWriter.txt";
 	}
 	
-	public void setTargetDirFile(String dirName,String fileName)
+	public void setTargetDirFile(File dstDir,String fileName)
 	{
-		setTargetDir(dirName);
+		setTargetDir(dstDir);
 		setTargetFile(fileName);
 	}
 	
-	public void setTargetDir(String dirName){this.dirName=dirName;}
+	public void setTargetDir(File dstDir){this.dstDir=dstDir;}
 	public void setTargetFile(String fileName){this.fileName=fileName;}
 	
 	public void debug(List<String> txt)
 	{
-		logger.debug("Verzeichnis="+dirName+"\tDatei="+fileName);
+		logger.debug("Verzeichnis="+dstDir.getAbsolutePath()+"\tDatei="+fileName);
 		for(String s : txt)
 		{
 			logger.debug(s);
@@ -55,7 +56,7 @@ public class TxtWriter
 	
 	public void writeFile(List<String> txt)
 	{
-		File f = new File(dirName+System.getProperty("file.separator")+fileName);
+		File f = new File(dstDir,fileName);
 		if(f.exists()){f.delete();}
 		logger.info("Writing File: "+f.getAbsolutePath());
 		try

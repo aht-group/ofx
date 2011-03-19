@@ -10,6 +10,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Injections;
 import org.openfuxml.addon.wiki.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
@@ -26,6 +27,8 @@ public class WikiMarkupProcessor
 	public static enum InjectionType {xml,wiki};
 	
 	private Replacements replacements;
+	private File wikiPlainDir,wikiMarkupDir;
+	
 	private List<Wikiinjection> wikiInjectionsXml;
 	
 	private String wikiText;
@@ -37,7 +40,14 @@ public class WikiMarkupProcessor
 	public WikiMarkupProcessor(Replacements replacements, Injections injections) throws OfxConfigurationException
 	{
 		initReplacements(replacements);
-		
+	}
+	
+	public void setDirectories(File wikiPlainDir, File wikiMarkupDir)
+	{
+		this.wikiPlainDir=wikiPlainDir;
+		this.wikiMarkupDir=wikiMarkupDir;
+		logger.debug("Directory Plain:  "+wikiPlainDir.getAbsolutePath());
+		logger.debug("Directory Markup: "+wikiMarkupDir.getAbsolutePath());
 	}
 	
 	private void initReplacements(Replacements replacements) throws OfxConfigurationException
@@ -58,8 +68,16 @@ public class WikiMarkupProcessor
 				throw new OfxConfigurationException(e.getMessage());
 			}
 		}
-		JaxbUtil.debug(replacements);
+//		JaxbUtil.debug(replacements);
 		this.replacements=replacements;
+	}
+	
+	public void process(List<Content> lContent)
+	{
+		for(Content content : lContent)
+		{
+			logger.debug(content.getSource());
+		}
 	}
 	
 	public String process(String wikiText, String article)
