@@ -1,5 +1,7 @@
 package org.openfuxml.test.addon.jsf;
 
+import java.io.FileNotFoundException;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -63,7 +65,7 @@ public class TestMetatag
 		catch (JAXBException e) {logger.debug(e);}
 	}
 		
-	public void load(String file)
+	public void load(String file) throws FileNotFoundException
 	{
 		Metatag metatag = (Metatag)JaxbUtil.loadJAXB(file, Metatag.class);
 		JaxbUtil.debug(metatag,new JsfNsPrefixMapper());

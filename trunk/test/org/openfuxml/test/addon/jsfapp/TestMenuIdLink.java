@@ -1,5 +1,6 @@
 package org.openfuxml.test.addon.jsfapp;
 
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 import net.sf.exlp.io.LoggerInit;
@@ -16,7 +17,7 @@ public class TestMenuIdLink
 	
 	private Menu menu;
 	
-	public TestMenuIdLink(String fileName)
+	public TestMenuIdLink(String fileName) throws FileNotFoundException
 	{
 		menu = (Menu)JaxbUtil.loadJAXB(fileName, Menu.class);
 	}

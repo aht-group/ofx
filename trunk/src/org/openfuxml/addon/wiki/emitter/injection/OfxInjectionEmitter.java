@@ -1,5 +1,7 @@
 package org.openfuxml.addon.wiki.emitter.injection;
 
+import java.io.FileNotFoundException;
+
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
@@ -47,7 +49,15 @@ public class OfxInjectionEmitter extends NestingEmitter
 			String injectionDir = config.getString("/ofx/dir[@type='injection']");
 			String injectionName = injection.getId()+"-"+injection.getOfxtag();
 			String xmlFile = injectionDir+"/"+injectionName+".xml";
-			injection = (Wikiinjection)JaxbUtil.loadJAXB(xmlFile, Wikiinjection.class);
+			try
+			{
+				injection = (Wikiinjection)JaxbUtil.loadJAXB(xmlFile, Wikiinjection.class);
+			}
+			catch (FileNotFoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			int i=0;
 			for(Ofximage image : injection.getOfxgallery().get(0).getOfximage())
 			{

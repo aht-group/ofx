@@ -1,6 +1,7 @@
 package org.openfuxml.addon.jsf;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.io.LoggerInit;
@@ -71,7 +72,15 @@ public class TaglibFactoryTask extends Task
 		config = ConfigLoader.init();
 		
     	String fileName = config.getString("taglib");
-    	taglib = (Taglib)JaxbUtil.loadJAXB(tagBaseDir+"/"+fileName, Taglib.class);
+    	try
+    	{
+			taglib = (Taglib)JaxbUtil.loadJAXB(tagBaseDir+"/"+fileName, Taglib.class);
+		}
+    	catch (FileNotFoundException e)
+    	{
+			// TODO BuildException
+			e.printStackTrace();
+		}
 
     	String msg = "Taglib: "+tagBaseDir+"/"+fileName;
 		if(useLog4j){logger.debug(msg);}else{System.out.println(msg);}
@@ -80,9 +89,16 @@ public class TaglibFactoryTask extends Task
 		FacesConfig.RenderKit rk = new FacesConfig.RenderKit();
 		facesconfig.setRenderKit(rk);
 		
-    	addTagElements();
-    	writeTld();
-    	writeFc();
+    	try
+    	{
+			addTagElements();
+	    	writeTld();
+	    	writeFc();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
     }
     
     private void writeTld()
@@ -136,7 +152,7 @@ public class TaglibFactoryTask extends Task
 		else{System.out.println(msg);}
     }
 	
-	private void addTagElements()
+	private void addTagElements() throws FileNotFoundException
 	{	
 		int numberTranslations = config.getStringArray(xPathPrefix).length;
 		String msg = "Found "+numberTranslations+" Tags in "+tagConfig;

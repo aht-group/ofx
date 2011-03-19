@@ -1,6 +1,7 @@
 package org.openfuxml.addon.jsf;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,7 @@ public class JsfTagTransformator
 		lMetaTag = new ArrayList<Metatag>();
 	}
 	
-	public void readTags(String tagDef,String tagDir)
+	public void readTags(String tagDef,String tagDir) throws FileNotFoundException
 	{
 		String dir = fTagBase.getAbsolutePath()+"/"+tagDir;
 		String xPathPrefix = "tag";
@@ -73,7 +74,7 @@ public class JsfTagTransformator
 		taglib =readTaglib(dir+"/"+config.getString("taglib"));
 	}
 	
-	public Taglib readTaglib(String xmlFile)
+	public Taglib readTaglib(String xmlFile) throws FileNotFoundException
 	{
 		return (Taglib)JaxbUtil.loadJAXB(xmlFile,Taglib.class);
 	}

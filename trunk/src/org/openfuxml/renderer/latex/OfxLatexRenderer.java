@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,15 +34,23 @@ public class OfxLatexRenderer
 	
 	public void render(String ofxDocFileName)
 	{
-		logger.debug("Processing: "+ofxDocFileName);
-		Ofxdoc ofxdoc = (Ofxdoc)JaxbUtil.loadJAXB(ofxDocFileName, Ofxdoc.class);
-		
-		latexDocument.render(ofxdoc.getContent());
-		latexPreamble.render();
-		
-		
-		txt.addAll(latexPreamble.getContent());
-		txt.addAll(latexDocument.getContent());
+		try
+		{
+			logger.debug("Processing: "+ofxDocFileName);
+			Ofxdoc ofxdoc = (Ofxdoc)JaxbUtil.loadJAXB(ofxDocFileName, Ofxdoc.class);
+			
+			latexDocument.render(ofxdoc.getContent());
+			latexPreamble.render();
+			
+			
+			txt.addAll(latexPreamble.getContent());
+			txt.addAll(latexDocument.getContent());
+		}
+		catch (FileNotFoundException e)
+		{
+			// TODO OfxRenderEXception
+			e.printStackTrace();
+		}
 	}
 	
 	public List<String> getContent(){return txt;}

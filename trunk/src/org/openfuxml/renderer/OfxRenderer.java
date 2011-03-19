@@ -1,6 +1,7 @@
 package org.openfuxml.renderer;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -15,13 +16,14 @@ import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
+import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
+import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
 import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
 import org.openfuxml.addon.wiki.util.WikiBotFactory;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Merge;
-import org.openfuxml.renderer.data.jaxb.Wiki;
 import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 import org.openfuxml.util.xml.CmpJaxbXpathLoader;
 
@@ -48,8 +50,17 @@ public class OfxRenderer
 	
 	private void readConfig(String fName)
 	{
-		cmp = (Cmp)JaxbUtil.loadJAXB(fName, Cmp.class);
-		tmpDir = config.getString("ofx.dir.tmp");
+		try
+		{
+			cmp = (Cmp)JaxbUtil.loadJAXB(fName, Cmp.class);
+			tmpDir = config.getString("ofx.dir.tmp");
+		}
+		catch (FileNotFoundException e)
+		{
+			// TODO OFX Render Exception
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void chain()
@@ -115,6 +126,9 @@ public class OfxRenderer
 	private void phaseWikiProcessing(String tmpDir)
 	{
 		JaxbUtil.debug(cmp);
+		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
+		
+		WikiMarkupProcessor wmp = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
 	}
 	
 	private String getPhaseXmlFileName(Phase phase)

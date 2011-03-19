@@ -1,5 +1,6 @@
 package org.openfuxml.addon.wiki.processing;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +33,19 @@ public class XhtmlProcessor
 		for(int i=1;i<=numberTranslations;i++)
 		{
 			String xmlFile = config.getString("xhtmlprocessor/file["+i+"]");
-			Ofx container = (Ofx)JaxbUtil.loadJAXB(xmlFile, Ofx.class);
-			wikiInjections.addAll(container.getWikiinjection());
-			xhtmlReplaces.addAll(container.getWikireplace());
+			try
+			{
+				Ofx container;
+				container = (Ofx)JaxbUtil.loadJAXB(xmlFile, Ofx.class);
+				wikiInjections.addAll(container.getWikiinjection());
+				xhtmlReplaces.addAll(container.getWikireplace());
+			}
+			catch (FileNotFoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 		logger.debug("Injections loaded: "+wikiInjections.size());
 	}

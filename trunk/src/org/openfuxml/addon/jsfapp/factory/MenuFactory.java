@@ -1,6 +1,7 @@
 package org.openfuxml.addon.jsfapp.factory;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import net.sf.exlp.util.xml.JDomUtil;
@@ -62,7 +63,7 @@ public class MenuFactory
 		catch (JDOMException e) {logger.error(e);}
 	}
 	
-	public void addToc(String addMenu)
+	public void addToc(String addMenu) throws FileNotFoundException
 	{
 		logger.debug("Adding additional Toc");
 		Menu addMemu = (Menu)JaxbUtil.loadJAXB(addMenu, Menu.class);

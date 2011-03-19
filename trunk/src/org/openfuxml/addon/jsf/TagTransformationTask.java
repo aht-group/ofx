@@ -1,6 +1,7 @@
 package org.openfuxml.addon.jsf;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import net.sf.exlp.io.LoggerInit;
 
@@ -32,8 +33,17 @@ public class TagTransformationTask extends Task
     	File fDocBase = new File(baseDir,docDir);
     	
     	JsfTagTransformator jtf = new JsfTagTransformator(fOutputDir, fBaseDir, fDocBase, dtdLevel, useLog4j, xslt);
-    	jtf.readTags(tagDef,tagDir);
-    	jtf.transform();
+    	try
+    	{
+			jtf.readTags(tagDef,tagDir);
+			jtf.transform();
+		}
+    	catch (FileNotFoundException e)
+    	{
+			// TODO BuildException
+			e.printStackTrace();
+		}
+    	
     }
     
     private void checkParameter()

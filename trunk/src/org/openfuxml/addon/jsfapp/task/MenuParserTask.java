@@ -1,6 +1,7 @@
 package org.openfuxml.addon.jsfapp.task;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import net.sf.exlp.io.LoggerInit;
 
@@ -35,10 +36,19 @@ public class MenuParserTask extends Task
     	MenuFactory mf = new MenuFactory();
     	mf.parse(fHtmlToc,prefix,suffix);
     	
-    	if(addToc!=null){mf.addToc(addToc);}
-    	
-    	mf.save(fXmlToc);
-    	
+    	if(addToc!=null)
+    	{
+    		try
+    		{
+				mf.addToc(addToc);
+				mf.save(fXmlToc);
+			}
+    		catch (FileNotFoundException e)
+    		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+    	}
     }
     
     private void checkParameter()
