@@ -40,6 +40,15 @@
             <xsd:attribute name="ofxtag" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="replacements">
+     	<xsd:complexType>
+        	<xsd:sequence>
+                <xsd:element ref="wikireplace" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         	<xsd:attribute name="external" type="xsd:boolean"/>
+         	<xsd:attribute name="source" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="wikireplace">
         <xsd:complexType>
             <xsd:sequence>
@@ -166,6 +175,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="injections" maxOccurs="1"/>
+                <xsd:element ref="replacements" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
