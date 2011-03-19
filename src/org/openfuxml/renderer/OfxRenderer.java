@@ -41,7 +41,7 @@ public class OfxRenderer
 	private List<Content> lWikiQueries;
 	
 	int phaseCounter;
-	String tmpDir;
+	private File tmpDir;
 	
 	public OfxRenderer(Configuration config)
 	{
@@ -49,34 +49,43 @@ public class OfxRenderer
 		phaseCounter = 1;
 	}
 	
-	private void readConfig(String fName)
+	private void readConfig(String fNameCmp, String fNameTmp) throws OfxConfigurationException
 	{
-		try
-		{
-			cmp = (Cmp)JaxbUtil.loadJAXB(fName, Cmp.class);
-			tmpDir = config.getString("ofx.dir.tmp");
-		}
-		catch (FileNotFoundException e)
-		{
-			// TODO OFX Render Exception
-			e.printStackTrace();
-		}
+		try {cmp = (Cmp)JaxbUtil.loadJAXB(fNameCmp, Cmp.class);}
+		catch (FileNotFoundException e){throw new OfxConfigurationException("CMP configuration not found: "+fNameCmp);}
 		
+		tmpDir = new File(fNameTmp);
+		if(!tmpDir.exists()){throw new OfxConfigurationException("Temporary directory not available: "+fNameTmp);}
+		if(!tmpDir.isDirectory()){throw new OfxConfigurationException("Temporary directory is a file! ("+fNameTmp+")");}
 	}
 	
-	public void chain()
+
+	
+	public void chain() throws OfxConfigurationException
 	{
-		readConfig(config.getString("ofx.xml.cmp"));
-		phaseMergeInitial(config.getString("ofx.xml.root"),tmpDir);
-		phaseWikiExternalIntegrator(tmpDir, "wiki-plain");
-//		phaseWikiFetcher(tmpDir);
-		phaseWikiProcessing(tmpDir);
+		String fNameCmp = config.getString("ofx.xml.cmp");
+		String fNameTmp = config.getString("ofx.dir.tmp");
+		String ofxRoot = config.getString("ofx.xml.root");
+		
+		chain(fNameCmp, fNameTmp, ofxRoot);
 	}
 	
-	private void phaseMergeInitial(String rootFileName, String tmpDir)
+	public void chain(String fNameCmp, String fNameTmp, String ofxRoot) throws OfxConfigurationException
+	{
+		String wikiXmlDir = "wikiXml";
+		String wikiPlainDir = "wikiPlain";
+		String wikiMarkupDir = "wikiMarkup";
+		
+		readConfig(fNameCmp,fNameTmp);
+		phaseMergeInitial(ofxRoot);
+		phaseWikiExternalIntegrator(wikiXmlDir);
+//		phaseWikiContentFetcher(wikiPlainDir);
+		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir);
+	}
+	
+	private void phaseMergeInitial(String rootFileName)
 	{
 		Document doc = JDomUtil.load(new File(rootFileName));
-
 		try
 		{
 			Merge merge = CmpJaxbXpathLoader.getMerge(cmp.getPreprocessor().getMerge(), Phase.iniMerge.toString());
@@ -92,16 +101,12 @@ public class OfxRenderer
 			}
 		}
 		catch (NoSuchElementException e) {logger.debug("No initial merge");}
-		
 		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
 	}
 	
-	private void phaseWikiExternalIntegrator(String tmpDir, String subDir)
-	{
-		File dirWiki = new File(tmpDir,subDir);
-		if(!dirWiki.exists()){dirWiki.mkdir();}
-		
-		WikiExternalIntegrator wikiExIntegrator = new WikiExternalIntegrator(subDir);
+	private void phaseWikiExternalIntegrator(String wikiXmlDir)
+	{		
+		WikiExternalIntegrator wikiExIntegrator = new WikiExternalIntegrator(wikiXmlDir);
 		wikiExIntegrator.integrateWikiAsExternal(ofxDoc);
 		ofxDoc = wikiExIntegrator.getResult();
 		lWikiQueries = wikiExIntegrator.getWikiQueries();
@@ -109,8 +114,11 @@ public class OfxRenderer
 		JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(Phase.wikiIntegrate)), ofxDoc, true);
 	}
 	
-	private void phaseWikiFetcher(String tmpDir)
+	@SuppressWarnings("unused")
+	private void phaseWikiContentFetcher(String wikiPlainDir)
 	{
+		File dirWikiPlain = createDir(wikiPlainDir);
+		
 		if(lWikiQueries!=null)
 		{
 			WikiBotFactory wbf = new WikiBotFactory();
@@ -119,25 +127,30 @@ public class OfxRenderer
 			wbf.setWikiAuth(config.getString("wiki.user"), config.getString("wiki.password"));
 			
 			WikiContentFetcher contentFetcher = new WikiContentFetcher(wbf);
-			contentFetcher.setTargetDir(tmpDir);
+			contentFetcher.setTargetDir(dirWikiPlain);
 			contentFetcher.fetch(lWikiQueries);
 		}
 	}
 	
-	private void phaseWikiProcessing(String tmpDir)
-	{		
-		try
-		{
-			JaxbUtil.debug(cmp);
-			MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
-			
-			WikiMarkupProcessor wmp = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
-		}
-		catch (OfxConfigurationException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir) throws OfxConfigurationException
+	{	
+		File dirWikiPlain = createDir(wikiPlainDir);
+		File dirWikiMarkup = createDir(wikiMarkupDir);
+
+		JaxbUtil.debug(cmp);
+		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
+		
+		WikiMarkupProcessor wmp = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
+		wmp.setDirectories(dirWikiPlain, dirWikiMarkup);
+		wmp.process(lWikiQueries);
+
+	}
+	
+	private File createDir(String dirName)
+	{
+		File dir = new File(tmpDir,dirName);
+		if(!dir.exists()){dir.mkdir();}
+		return dir;
 	}
 	
 	private String getPhaseXmlFileName(Phase phase)
