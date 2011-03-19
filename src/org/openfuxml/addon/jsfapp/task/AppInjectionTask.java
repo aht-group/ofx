@@ -1,6 +1,7 @@
 package org.openfuxml.addon.jsfapp.task;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -26,11 +27,19 @@ public class AppInjectionTask extends Task
     	
     	File fHtmlDir = new File(htmlDir);
     	File fJsfDir = new File(jsfDir);
-    	Ofxinjections ofxI = (Ofxinjections)JaxbUtil.loadJAXB(injectionXml, Ofxinjections.class);
-    	
-    	AppInjection ai = new AppInjection(ofxI,fJsfDir,useLog4j);
-    	ai.inject(fHtmlDir);
-    	
+    	Ofxinjections ofxI;
+		try
+		{
+			ofxI = (Ofxinjections)JaxbUtil.loadJAXB(injectionXml, Ofxinjections.class);
+			AppInjection ai = new AppInjection(ofxI,fJsfDir,useLog4j);
+	    	ai.inject(fHtmlDir);
+		}
+		catch (FileNotFoundException e)
+		{
+			// TODO BuildException
+			e.printStackTrace();
+		}
+
     }
     
     private void checkParameter()

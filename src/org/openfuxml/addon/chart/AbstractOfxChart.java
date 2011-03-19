@@ -1,5 +1,6 @@
 package org.openfuxml.addon.chart;
 
+import java.io.FileNotFoundException;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class AbstractOfxChart
 		uuid = UUID.randomUUID().toString();
 	}
 		
-	protected void loadXmlChartTemplate(String chartFile)
+	protected void loadXmlChartTemplate(String chartFile) throws FileNotFoundException
 	{
 		logger.trace("Loading: "+chartFile);
 		chart = (Chart)JaxbUtil.loadJAXB(chartFile, Chart.class);

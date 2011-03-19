@@ -1,6 +1,7 @@
 package org.openfuxml.test.addon.chart;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Random;
@@ -75,7 +76,7 @@ public class TestTimeSeriesChartRenderer
 		return x;
 	}
 	
-	public Chart load(String fileName)
+	public Chart load(String fileName) throws FileNotFoundException
 	{
 		Chart chart = (Chart)JaxbUtil.loadJAXB(fileName, Chart.class);
 		return chart;

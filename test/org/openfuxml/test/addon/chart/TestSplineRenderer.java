@@ -1,6 +1,7 @@
 package org.openfuxml.test.addon.chart;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Random;
@@ -20,7 +21,6 @@ import org.openfuxml.addon.chart.jaxb.Container;
 import org.openfuxml.addon.chart.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.TimePeriodFactory;
-import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class TestSplineRenderer
 {
@@ -77,7 +77,7 @@ public class TestSplineRenderer
 		return x;
 	}
 	
-	public Chart load(String fileName)
+	public Chart load(String fileName) throws FileNotFoundException
 	{
 		Chart chart = (Chart)JaxbUtil.loadJAXB(fileName, Chart.class);
 		return chart;

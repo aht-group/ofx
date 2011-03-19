@@ -1,6 +1,7 @@
 package org.openfuxml.addon.wiki.processing;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import net.sf.exlp.event.LogEvent;
 import net.sf.exlp.event.LogEventHandler;
@@ -46,10 +47,19 @@ public class InjectionProcessor
 		for(File f : dirInjection.listFiles())
 		{
 			logger.trace(f.getAbsoluteFile());
-			Wikiinjection injection = (Wikiinjection)JaxbUtil.loadJAXB(f.getAbsolutePath(), Wikiinjection.class);
-			logger.debug(injection.getId()+" "+injection.getOfxtag()+" "+injection.getWikitag());
-			if(injection.getWikitag().equals("timeline")){processTimeline(injection);}
-			else if(injection.getWikitag().equals("gallery")){processGallery(injection);}
+			
+			try
+			{
+				Wikiinjection injection = (Wikiinjection)JaxbUtil.loadJAXB(f.getAbsolutePath(), Wikiinjection.class);
+				logger.debug(injection.getId()+" "+injection.getOfxtag()+" "+injection.getWikitag());
+				if(injection.getWikitag().equals("timeline")){processTimeline(injection);}
+				else if(injection.getWikitag().equals("gallery")){processGallery(injection);}
+			}
+			catch (FileNotFoundException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
