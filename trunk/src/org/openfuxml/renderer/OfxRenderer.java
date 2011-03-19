@@ -1,6 +1,7 @@
 package org.openfuxml.renderer;
 
 import java.io.File;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import net.sf.exlp.io.ConfigLoader;
@@ -13,12 +14,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.output.Format;
+import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
 import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
 import org.openfuxml.addon.wiki.util.WikiBotFactory;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Merge;
+import org.openfuxml.renderer.data.jaxb.Wiki;
 import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 import org.openfuxml.util.xml.CmpJaxbXpathLoader;
 
@@ -30,8 +33,11 @@ public class OfxRenderer
 	
 	private Configuration config;
 	private Cmp cmp;
-	int phaseCounter;
 	
+	private Ofxdoc ofxDoc;
+	private List<Content> lWikiQueries;
+	
+	int phaseCounter;
 	String tmpDir;
 	
 	public OfxRenderer(Configuration config)
@@ -48,13 +54,14 @@ public class OfxRenderer
 	
 	public void chain()
 	{
-		Ofxdoc ofxDoc;
 		readConfig(config.getString("ofx.xml.cmp"));
-		ofxDoc = phaseMergeInitial(config.getString("ofx.xml.root"),tmpDir);
-		phaseWikiExternalIntegrator(ofxDoc, tmpDir, "wiki");
+		phaseMergeInitial(config.getString("ofx.xml.root"),tmpDir);
+		phaseWikiExternalIntegrator(tmpDir, "wiki-plain");
+//		phaseWikiFetcher(tmpDir);
+		phaseWikiProcessing(tmpDir);
 	}
 	
-	private Ofxdoc phaseMergeInitial(String rootFileName, String tmpDir)
+	private void phaseMergeInitial(String rootFileName, String tmpDir)
 	{
 		Document doc = JDomUtil.load(new File(rootFileName));
 
@@ -74,13 +81,10 @@ public class OfxRenderer
 		}
 		catch (NoSuchElementException e) {logger.debug("No initial merge");}
 		
-		Ofxdoc ofxdoc;
-//		ofxdoc = (Ofxdoc)JaxbUtil.loadJAXB(ofxDocFileName, Ofxdoc.class);
-		ofxdoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
-		return ofxdoc;
+		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
 	}
 	
-	private Ofxdoc phaseWikiExternalIntegrator(Ofxdoc ofxDoc, String tmpDir, String subDir)
+	private void phaseWikiExternalIntegrator(String tmpDir, String subDir)
 	{
 		File dirWiki = new File(tmpDir,subDir);
 		if(!dirWiki.exists()){dirWiki.mkdir();}
@@ -88,19 +92,29 @@ public class OfxRenderer
 		WikiExternalIntegrator wikiExIntegrator = new WikiExternalIntegrator(subDir);
 		wikiExIntegrator.integrateWikiAsExternal(ofxDoc);
 		ofxDoc = wikiExIntegrator.getResult();
+		lWikiQueries = wikiExIntegrator.getWikiQueries();
 		
 		JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(Phase.wikiIntegrate)), ofxDoc, true);
-		
-		WikiBotFactory wbf = new WikiBotFactory();
-		wbf.setUrl(config.getString("wiki.url"));
-		wbf.setHttpDigestAuth(config.getString("wiki.http.user"), config.getString("wiki.http.password"));
-		wbf.setWikiAuth(config.getString("wiki.user"), config.getString("wiki.password"));
-		
-		WikiContentFetcher contentFetcher = new WikiContentFetcher(wbf);
-		contentFetcher.setTargetDir(tmpDir);
-		contentFetcher.fetch(wikiExIntegrator.getWikiQueries());
-		
-		return ofxDoc;
+	}
+	
+	private void phaseWikiFetcher(String tmpDir)
+	{
+		if(lWikiQueries!=null)
+		{
+			WikiBotFactory wbf = new WikiBotFactory();
+			wbf.setUrl(config.getString("wiki.url"));
+			wbf.setHttpDigestAuth(config.getString("wiki.http.user"), config.getString("wiki.http.password"));
+			wbf.setWikiAuth(config.getString("wiki.user"), config.getString("wiki.password"));
+			
+			WikiContentFetcher contentFetcher = new WikiContentFetcher(wbf);
+			contentFetcher.setTargetDir(tmpDir);
+			contentFetcher.fetch(lWikiQueries);
+		}
+	}
+	
+	private void phaseWikiProcessing(String tmpDir)
+	{
+		JaxbUtil.debug(cmp);
 	}
 	
 	private String getPhaseXmlFileName(Phase phase)

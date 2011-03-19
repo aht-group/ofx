@@ -153,4 +153,9 @@
             <xsd:attribute name="name" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="preprocessor">
+        <xsd:complexType>
+            
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>
