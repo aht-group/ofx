@@ -11,6 +11,15 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="injections">
+     	<xsd:complexType>
+        	<xsd:sequence>
+                <xsd:element ref="wikiinjection" maxOccurs="unbounded"/>
+            </xsd:sequence>
+         	<xsd:attribute name="external" type="xsd:boolean"/>
+         	<xsd:attribute name="source" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="wikiinjection">
         <xsd:complexType>
             <xsd:sequence>
@@ -155,7 +164,9 @@
     </xsd:element>
     <xsd:element name="preprocessor">
         <xsd:complexType>
-            
+            <xsd:sequence>
+                <xsd:element ref="injections" maxOccurs="1"/>
+            </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>
