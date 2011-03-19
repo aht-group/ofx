@@ -47,7 +47,7 @@
     <xsd:element name="wiki">
         <xsd:complexType>
             <xsd:sequence>
-                 <xsd:element ref="wiki:preprocessor" maxOccurs="1"/>
+                 <xsd:element ref="wiki:markupProcessor" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

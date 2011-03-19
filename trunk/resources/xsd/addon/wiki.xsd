@@ -171,7 +171,7 @@
             <xsd:attribute name="name" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="preprocessor">
+    <xsd:element name="markupProcessor">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="injections" maxOccurs="1"/>
