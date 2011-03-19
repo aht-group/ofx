@@ -21,6 +21,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
 
+@Deprecated
 public class WikiProcessor
 {
 	static Log logger = LogFactory.getLog(WikiProcessor.class);

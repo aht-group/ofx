@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://www.openfuxml.org/cmp"
-    xmlns="http://www.openfuxml.org/cmp"
+    xmlns:cmp="http://www.openfuxml.org/cmp"
+    xmlns:wiki="http://www.openfuxml.org/wiki"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.openfuxml.org/wiki" schemaLocation="../addon/wiki.xsd"/>
     <xsd:element name="cmp">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="targets" maxOccurs="1"/>
-                <xsd:element ref="preprocessor" maxOccurs="1"/>
+                <xsd:element ref="cmp:targets" maxOccurs="1"/>
+                <xsd:element ref="cmp:preprocessor" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="targets">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="pdf" maxOccurs="unbounded"/>
+                <xsd:element ref="cmp:pdf" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="preprocessor">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="merge" maxOccurs="unbounded"/>
+                <xsd:element ref="cmp:merge" maxOccurs="unbounded"/>
+                <xsd:element ref="cmp:wiki" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -41,5 +44,11 @@
             <xsd:attribute name="writeIntermediate" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
-    
+    <xsd:element name="wiki">
+        <xsd:complexType>
+            <xsd:sequence>
+                 <xsd:element ref="wiki:preprocessor" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>

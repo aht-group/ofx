@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.openfuxml.addon.wiki.data.jaxb.Preprocessor;
 
 
 /**
@@ -26,8 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/cmp}targets"/>
- *         &lt;element ref="{http://www.openfuxml.org/cmp}preprocessor"/>
+ *         &lt;element ref="{http://www.openfuxml.org/wiki}preprocessor"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,47 +38,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "targets",
     "preprocessor"
 })
-@XmlRootElement(name = "cmp")
-public class Cmp
+@XmlRootElement(name = "wiki")
+public class Wiki
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(required = true)
-    protected Targets targets;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.openfuxml.org/wiki", required = true)
     protected Preprocessor preprocessor;
-
-    /**
-     * Gets the value of the targets property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Targets }
-     *     
-     */
-    public Targets getTargets() {
-        return targets;
-    }
-
-    /**
-     * Sets the value of the targets property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Targets }
-     *     
-     */
-    public void setTargets(Targets value) {
-        this.targets = value;
-    }
-
-    public boolean isSetTargets() {
-        return (this.targets!= null);
-    }
 
     /**
      * Gets the value of the preprocessor property.
