@@ -22,6 +22,7 @@ import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
 import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
 import org.openfuxml.addon.wiki.util.WikiBotFactory;
 import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Merge;
 import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
@@ -124,11 +125,19 @@ public class OfxRenderer
 	}
 	
 	private void phaseWikiProcessing(String tmpDir)
-	{
-		JaxbUtil.debug(cmp);
-		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
-		
-		WikiMarkupProcessor wmp = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
+	{		
+		try
+		{
+			JaxbUtil.debug(cmp);
+			MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
+			
+			WikiMarkupProcessor wmp = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
+		}
+		catch (OfxConfigurationException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private String getPhaseXmlFileName(Phase phase)

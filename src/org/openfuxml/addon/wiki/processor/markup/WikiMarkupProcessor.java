@@ -16,6 +16,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Replacements;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
+import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 
 public class WikiMarkupProcessor
 {
@@ -24,7 +25,7 @@ public class WikiMarkupProcessor
 	
 	public static enum InjectionType {xml,wiki};
 	
-	private List<Wikireplace> lReplaces;
+	private Replacements replacements;
 	private List<Wikiinjection> wikiInjectionsXml;
 	
 	private String wikiText;
@@ -33,39 +34,38 @@ public class WikiMarkupProcessor
 	private File dirInjection;
 	private int injectionId;
 	
-	public WikiMarkupProcessor(Replacements replacements, Injections injections)
+	public WikiMarkupProcessor(Replacements replacements, Injections injections) throws OfxConfigurationException
 	{
 		initReplacements(replacements);
 		
 	}
 	
-	private void initReplacements(Replacements replacements)
+	private void initReplacements(Replacements replacements) throws OfxConfigurationException
 	{
-		lReplaces = new ArrayList<Wikireplace>();
 		if(replacements.isSetExternal() && replacements.isExternal())
 		{
-			
 			try
 			{
 				if(replacements.isSetSource())
 				{
 					replacements = (Replacements)JaxbUtil.loadJAXB(replacements.getSource(), Replacements.class);
 				}
-				else {logger.error("Throw Exception here!");}
+				else {throw new OfxConfigurationException("Replacement is set to external, but no source definded");}
 			}
 			catch (FileNotFoundException e)
 			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//TODO nested exception
+				throw new OfxConfigurationException(e.getMessage());
 			}
 		}
-		
+		JaxbUtil.debug(replacements);
+		this.replacements=replacements;
 	}
 	
 	public String process(String wikiText, String article)
 	{
 		this.wikiText=wikiText;
-		for(Wikireplace replace : lReplaces){processReplacements(replace);}
+		for(Wikireplace replace : replacements.getWikireplace()){processReplacements(replace);}
 //		for(Wikiinjection inject : wikiInjectionsXml){wikiInject(inject,article);}
 		return this.wikiText;
 	}
