@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki;
+package org.openfuxml.addon.wiki.processor.ofx;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +8,7 @@ import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.emitter.EmitterFactory;
 import org.openfuxml.addon.wiki.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.emitter.OfxSectionEmitter;
@@ -17,9 +18,9 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
  
-public class HtmlToOpenFuxmlContentHandler implements ContentHandler
+public class OfxHtmlContentHandler implements ContentHandler
 {
-	static Log logger = LogFactory.getLog(HtmlToOpenFuxmlContentHandler.class);
+	static Log logger = LogFactory.getLog(OfxHtmlContentHandler.class);
 	
 	private OfxSectionEmitter sctionEmitter;
 	private NestingEmitter emitter;
@@ -28,7 +29,7 @@ public class HtmlToOpenFuxmlContentHandler implements ContentHandler
 	private Map<String, String> acronyms = new HashMap<String, String>();
 	private EmitterFactory ef;
 
-	public HtmlToOpenFuxmlContentHandler(XMLStreamWriter writer,String injectionDir)
+	public OfxHtmlContentHandler(XMLStreamWriter writer,String injectionDir)
 	{
 		this.writer=writer;
 		ef = new EmitterFactory(writer,injectionDir);

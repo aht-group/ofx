@@ -17,6 +17,7 @@ import javax.xml.stream.XMLStreamWriter;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.wiki.processor.ofx.OfxHtmlContentHandler;
 import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -63,7 +64,7 @@ public class OpenFuxmlGenerator
 		StringWriter out = new StringWriter();
 		XMLStreamWriter writer = createXMLStreamWriter(out);
 
-		HtmlToOpenFuxmlContentHandler contentHandler = new HtmlToOpenFuxmlContentHandler(writer,".");
+		OfxHtmlContentHandler contentHandler = new OfxHtmlContentHandler(writer,".");
 
 		xmlReader.setContentHandler(contentHandler);
 		xmlReader.parse(inputSource);

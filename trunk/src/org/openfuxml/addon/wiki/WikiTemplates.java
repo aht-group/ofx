@@ -3,7 +3,7 @@ package org.openfuxml.addon.wiki;
 public class WikiTemplates
 {
 	public static String xmlDoctype, htmlDoctype;
-	public static String htmlHeader;
+	public static String htmlHeader,htmlFooter;
 	
 	public WikiTemplates()
 	{
@@ -24,5 +24,8 @@ public class WikiTemplates
 			+ "<head></head>\n"
 			+ "    <body>"
 			+ "<title>{0}</title>";
+		
+		
+		htmlFooter="</body>\n</html>";
 	}
 }
