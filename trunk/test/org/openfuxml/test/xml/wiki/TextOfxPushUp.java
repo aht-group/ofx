@@ -19,7 +19,7 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.openfuxml.addon.wiki.OfxWikiEngine;
 import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.processing.xhtml.OfxPushUp;
+import org.openfuxml.addon.wiki.processor.xhtml.mods.OfxPushUp;
 
 public class TextOfxPushUp
 {

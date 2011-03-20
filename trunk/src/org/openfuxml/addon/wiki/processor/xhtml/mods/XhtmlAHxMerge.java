@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki.processing.xhtml;
+package org.openfuxml.addon.wiki.processor.xhtml.mods;
 
 import java.util.regex.Pattern;
 

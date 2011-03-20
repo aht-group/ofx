@@ -14,7 +14,7 @@ import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.openfuxml.addon.wiki.OfxWikiEngine;
-import org.openfuxml.addon.wiki.processing.xhtml.XhtmlAHxMerge;
+import org.openfuxml.addon.wiki.processor.xhtml.mods.XhtmlAHxMerge;
 
 public class TextAHxMerge
 {
