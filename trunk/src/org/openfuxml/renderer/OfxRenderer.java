@@ -17,7 +17,9 @@ import org.jdom.Document;
 import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
+import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
+import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
 import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
 import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
@@ -58,9 +60,7 @@ public class OfxRenderer
 		if(!tmpDir.exists()){throw new OfxConfigurationException("Temporary directory not available: "+fNameTmp);}
 		if(!tmpDir.isDirectory()){throw new OfxConfigurationException("Temporary directory is a file! ("+fNameTmp+")");}
 	}
-	
 
-	
 	public void chain() throws OfxConfigurationException
 	{
 		String fNameCmp = config.getString("ofx.xml.cmp");
@@ -75,12 +75,13 @@ public class OfxRenderer
 		String wikiXmlDir = "wikiXml";
 		String wikiPlainDir = "wikiPlain";
 		String wikiMarkupDir = "wikiMarkup";
+		String wikiModelDir = "wikiModel";
 		
 		readConfig(fNameCmp,fNameTmp);
 		phaseMergeInitial(ofxRoot);
 		phaseWikiExternalIntegrator(wikiXmlDir);
 //		phaseWikiContentFetcher(wikiPlainDir);
-		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir);
+		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir);
 	}
 	
 	private void phaseMergeInitial(String rootFileName)
@@ -132,18 +133,24 @@ public class OfxRenderer
 		}
 	}
 	
-	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir) throws OfxConfigurationException
+	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir, String wikiModelDir) throws OfxConfigurationException
 	{	
 		File dirWikiPlain = createDir(wikiPlainDir);
 		File dirWikiMarkup = createDir(wikiMarkupDir);
+		File dirWikiModel = createDir(wikiModelDir);
 
 		JaxbUtil.debug(cmp);
 		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
 		
-		WikiMarkupProcessor wmp = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
-		wmp.setDirectories(dirWikiPlain, dirWikiMarkup);
-		wmp.process(lWikiQueries);
-
+		WikiMarkupProcessor wMaP = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
+		wMaP.setDirectories(dirWikiPlain, dirWikiMarkup);
+		wMaP.process(lWikiQueries);
+		
+		WikiModelProcessor wMoP = new WikiModelProcessor();
+		wMoP.setDirectories(dirWikiMarkup, dirWikiModel);
+		wMoP.process(lWikiQueries);
+		
+		XhtmlProcessor xhtmlP = new XhtmlProcessor(config);
 	}
 	
 	private File createDir(String dirName)
