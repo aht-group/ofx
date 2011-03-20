@@ -1,34 +1,32 @@
 package org.openfuxml.addon.wiki.processor.xhtml;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
-import org.openfuxml.addon.wiki.processing.xhtml.OfxPushUp;
-import org.openfuxml.addon.wiki.processing.xhtml.XhtmlAHxMerge;
+import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlSourceLoader;
+import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 
-@Deprecated
 public class XhtmlReplaceProcessor
 {
 	static Log logger = LogFactory.getLog(XhtmlReplaceProcessor.class);
+	
+	private Replacements replacements;
 	
 	private String xHtmlText;
 	
 	private List<Wikiinjection> wikiInjections;
 	private List<Wikireplace> xhtmlReplaces;
 	
-	public XhtmlReplaceProcessor(Replacements replacements)
+	public XhtmlReplaceProcessor(Replacements replacements) throws OfxConfigurationException
 	{
-		
+		this.replacements = WikiConfigXmlSourceLoader.initReplacements(replacements);
+		JaxbUtil.debug(this.replacements);
 	}
 	
 	public String process(String text)

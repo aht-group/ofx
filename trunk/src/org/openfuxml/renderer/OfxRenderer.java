@@ -17,12 +17,13 @@ import org.jdom.Document;
 import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
-import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
+import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
 import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
 import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
+import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
@@ -138,8 +139,7 @@ public class OfxRenderer
 		File dirWikiPlain = createDir(wikiPlainDir);
 		File dirWikiMarkup = createDir(wikiMarkupDir);
 		File dirWikiModel = createDir(wikiModelDir);
-
-		JaxbUtil.debug(cmp);
+		
 		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
 		
 		WikiMarkupProcessor wMaP = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
@@ -150,7 +150,8 @@ public class OfxRenderer
 		wMoP.setDirectories(dirWikiMarkup, dirWikiModel);
 		wMoP.process(lWikiQueries);
 		
-		XhtmlProcessor xhtmlP = new XhtmlProcessor(config);
+		XhtmlProcessor xpXml = cmp.getPreprocessor().getWiki().getXhtmlProcessor();
+		XhtmlReplaceProcessor xhtmlP = new XhtmlReplaceProcessor(xpXml.getReplacements());
 	}
 	
 	private File createDir(String dirName)

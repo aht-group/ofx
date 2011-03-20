@@ -171,6 +171,13 @@
             <xsd:attribute name="name" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="xhtmlProcessor">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="replacements" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="markupProcessor">
         <xsd:complexType>
             <xsd:sequence>
