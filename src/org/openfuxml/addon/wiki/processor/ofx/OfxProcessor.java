@@ -23,7 +23,6 @@ import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
-import org.openfuxml.addon.wiki.HtmlToOpenFuxmlContentHandler;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.processing.XmlProcessor;
@@ -72,21 +71,16 @@ public class OfxProcessor extends AbstractWikiInOutProcessor implements WikiInOu
 
 	public String process(String xhtmlContent, String titleText) throws IOException, ParserConfigurationException, XMLStreamException, SAXException
 	{
-		String footer = "</body>\n</html>";
 		
 		Object[] objects = new Object[2];
 		objects[0] = titleText;
 		
-		logger.debug(WikiTemplates.htmlHeader);
-		
 		String header = MessageFormat.format(WikiTemplates.htmlHeader, objects);
-
-		logger.debug("Header ist: "+header);
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append(header);
 		sb.append(xhtmlContent);
-		sb.append(footer);
+		sb.append(WikiTemplates.htmlFooter);
 		logger.debug("Parsing: "+sb.length()+" characters");
 
 		InputSource inputSource = new InputSource(new StringReader(sb.toString()));
@@ -103,7 +97,7 @@ public class OfxProcessor extends AbstractWikiInOutProcessor implements WikiInOu
 		XMLStreamWriter writer = createXMLStreamWriter(out);
 
 		logger.warn("Using dummy String injectionDir");
-		HtmlToOpenFuxmlContentHandler contentHandler = new HtmlToOpenFuxmlContentHandler(writer,".");
+		OfxHtmlContentHandler contentHandler = new OfxHtmlContentHandler(writer,".");
 
 		xmlReader.setContentHandler(contentHandler);
 		xmlReader.parse(inputSource);
