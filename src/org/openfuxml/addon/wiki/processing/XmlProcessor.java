@@ -13,7 +13,7 @@ public class XmlProcessor
 	static Log logger = LogFactory.getLog(XmlProcessor.class);
 	private Document doc;
 	
-	public XmlProcessor(Configuration config)
+	public XmlProcessor()
 	{
 		
 	}

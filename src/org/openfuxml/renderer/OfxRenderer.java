@@ -21,6 +21,7 @@ import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
 import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
+import org.openfuxml.addon.wiki.processor.ofx.OfxProcessor;
 import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlFinalProcessor;
@@ -80,12 +81,13 @@ public class OfxRenderer
 		String wikiModelDir = "wikiModel";
 		String xhtmlReplaceDir = "xhtmlReplace";
 		String xhtmlFinalDir = "xhtmlFinal";
+		String ofxXmlDir = "ofxXml";
 		
 		readConfig(fNameCmp,fNameTmp);
 		phaseMergeInitial(ofxRoot);
 		phaseWikiExternalIntegrator(wikiXmlDir);
 //		phaseWikiContentFetcher(wikiPlainDir);
-		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir);
+		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir);
 	}
 	
 	private void phaseMergeInitial(String rootFileName)
@@ -137,13 +139,14 @@ public class OfxRenderer
 		}
 	}
 	
-	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir, String wikiModelDir, String xhtmlReplace, String xhtmlFinal) throws OfxConfigurationException
+	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir, String wikiModelDir, String xhtmlReplace, String xhtmlFinal, String xmlOfx) throws OfxConfigurationException
 	{	
 		File dirWikiPlain = createDir(wikiPlainDir);
 		File dirWikiMarkup = createDir(wikiMarkupDir);
 		File dirWikiModel = createDir(wikiModelDir);
 		File dirXhtmlReplace = createDir(xhtmlReplace);
 		File dirXhtmlFinal = createDir(xhtmlFinal);
+		File dirXmlOfx = createDir(xmlOfx);
 		
 		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
 		
@@ -163,6 +166,10 @@ public class OfxRenderer
 		XhtmlFinalProcessor xhtmlFinalP = new XhtmlFinalProcessor();
 		xhtmlFinalP.setDirectories(dirXhtmlReplace, dirXhtmlFinal);
 		xhtmlFinalP.process(lWikiQueries);
+		
+		OfxProcessor ofxP = new OfxProcessor();
+		ofxP.setDirectories(dirXhtmlFinal, dirXmlOfx);
+		ofxP.process(lWikiQueries);
 	}
 	
 	private File createDir(String dirName)
