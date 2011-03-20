@@ -15,6 +15,7 @@ import org.openfuxml.addon.wiki.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
+import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlSourceLoader;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 
@@ -38,8 +39,8 @@ public class WikiMarkupProcessor
 	
 	public WikiMarkupProcessor(Replacements replacements, Injections injections) throws OfxConfigurationException
 	{
-		initReplacements(replacements);
-		initInjections(injections);
+		this.replacements = WikiConfigXmlSourceLoader.initReplacements(replacements);
+		this.injections = WikiConfigXmlSourceLoader.initInjections(injections);;
 	}
 	
 	public void setDirectories(File wikiPlainDir, File wikiMarkupDir)
@@ -48,50 +49,6 @@ public class WikiMarkupProcessor
 		this.wikiMarkupDir=wikiMarkupDir;
 		logger.debug("Directory Plain:  "+wikiPlainDir.getAbsolutePath());
 		logger.debug("Directory Markup: "+wikiMarkupDir.getAbsolutePath());
-	}
-	
-	private void initReplacements(Replacements replacements) throws OfxConfigurationException
-	{
-		if(replacements.isSetExternal() && replacements.isExternal())
-		{
-			try
-			{
-				if(replacements.isSetSource())
-				{
-					replacements = (Replacements)JaxbUtil.loadJAXB(replacements.getSource(), Replacements.class);
-				}
-				else {throw new OfxConfigurationException("Replacement is set to external, but no source definded");}
-			}
-			catch (FileNotFoundException e)
-			{
-				//TODO nested exception
-				throw new OfxConfigurationException(e.getMessage());
-			}
-		}
-//		JaxbUtil.debug(replacements);
-		this.replacements=replacements;
-	}
-	
-	private void initInjections(Injections injections) throws OfxConfigurationException
-	{
-		if(injections.isSetExternal() && injections.isExternal())
-		{
-			try
-			{
-				if(injections.isSetSource())
-				{
-					injections = (Injections)JaxbUtil.loadJAXB(injections.getSource(), Injections.class);
-				}
-				else {throw new OfxConfigurationException("Replacement is set to external, but no source definded");}
-			}
-			catch (FileNotFoundException e)
-			{
-				//TODO nested exception
-				throw new OfxConfigurationException(e.getMessage());
-			}
-		}
-		JaxbUtil.debug(injections);
-		this.injections=injections;
 	}
 	
 	public void process(List<Content> lContent)
