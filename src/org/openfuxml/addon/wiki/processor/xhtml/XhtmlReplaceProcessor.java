@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki.processing;
+package org.openfuxml.addon.wiki.processor.xhtml;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -10,54 +10,25 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofx;
+import org.openfuxml.addon.wiki.data.jaxb.Replacements;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 import org.openfuxml.addon.wiki.processing.xhtml.OfxPushUp;
 import org.openfuxml.addon.wiki.processing.xhtml.XhtmlAHxMerge;
 
 @Deprecated
-public class XhtmlProcessor
+public class XhtmlReplaceProcessor
 {
-	static Log logger = LogFactory.getLog(XhtmlProcessor.class);
+	static Log logger = LogFactory.getLog(XhtmlReplaceProcessor.class);
 	
 	private String xHtmlText;
 	
 	private List<Wikiinjection> wikiInjections;
 	private List<Wikireplace> xhtmlReplaces;
 	
-	public XhtmlProcessor(Configuration config)
+	public XhtmlReplaceProcessor(Replacements replacements)
 	{
-		wikiInjections = new ArrayList<Wikiinjection>();
-		xhtmlReplaces = new ArrayList<Wikireplace>();
 		
-		int numberTranslations = config.getStringArray("xhtmlprocessor/file").length;
-		for(int i=1;i<=numberTranslations;i++)
-		{
-			String xmlFile = config.getString("xhtmlprocessor/file["+i+"]");
-			try
-			{
-				Ofx container;
-				container = (Ofx)JaxbUtil.loadJAXB(xmlFile, Ofx.class);
-				wikiInjections.addAll(container.getWikiinjection());
-				xhtmlReplaces.addAll(container.getWikireplace());
-			}
-			catch (FileNotFoundException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		logger.debug("Injections loaded: "+wikiInjections.size());
-	}
-	
-	public String processFinal(String xHtml)
-	{
-		OfxPushUp pushUp = new OfxPushUp();
-		XhtmlAHxMerge merger = new XhtmlAHxMerge();
-		
-		xHtml = pushUp.moveOfxElements(xHtml);
-		xHtml = merger.merge(xHtml);
-		return xHtml;
 	}
 	
 	public String process(String text)
@@ -82,13 +53,6 @@ public class XhtmlProcessor
 		sb.append(text);
 		sb.append("</wiki>");
 		return sb.toString();
-	}
-	
-	public String removeWellFormed(String text)
-	{
-		int from = text.indexOf("<wiki>")+6;
-		int to = text.lastIndexOf("</wiki>");
-		return text.substring(from,to);
 	}
 	
 	private void repairXml()

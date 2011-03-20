@@ -26,9 +26,8 @@ public class WikiMarkupProcessor
 	public static enum InjectionType {xml,wiki};
 	
 	private Replacements replacements;
+	private Injections injections;
 	private File wikiPlainDir,wikiMarkupDir;
-	
-	private List<Wikiinjection> wikiInjectionsXml;
 	
 	private String wikiText;
 	private ObjectFactory of;
@@ -40,6 +39,7 @@ public class WikiMarkupProcessor
 	public WikiMarkupProcessor(Replacements replacements, Injections injections) throws OfxConfigurationException
 	{
 		initReplacements(replacements);
+		initInjections(injections);
 	}
 	
 	public void setDirectories(File wikiPlainDir, File wikiMarkupDir)
@@ -72,6 +72,28 @@ public class WikiMarkupProcessor
 		this.replacements=replacements;
 	}
 	
+	private void initInjections(Injections injections) throws OfxConfigurationException
+	{
+		if(injections.isSetExternal() && injections.isExternal())
+		{
+			try
+			{
+				if(injections.isSetSource())
+				{
+					injections = (Injections)JaxbUtil.loadJAXB(injections.getSource(), Injections.class);
+				}
+				else {throw new OfxConfigurationException("Replacement is set to external, but no source definded");}
+			}
+			catch (FileNotFoundException e)
+			{
+				//TODO nested exception
+				throw new OfxConfigurationException(e.getMessage());
+			}
+		}
+		JaxbUtil.debug(injections);
+		this.injections=injections;
+	}
+	
 	public void process(List<Content> lContent)
 	{
 		for(Content content : lContent)
@@ -87,7 +109,7 @@ public class WikiMarkupProcessor
 	{
 		this.wikiText=wikiText;
 		for(Wikireplace replace : replacements.getWikireplace()){processReplacements(replace);}
-//		for(Wikiinjection inject : wikiInjectionsXml){wikiInject(inject,article);}
+		for(Wikiinjection inject : injections.getWikiinjection()){wikiInject(inject,article);}
 		return this.wikiText;
 	}
 
@@ -100,6 +122,7 @@ public class WikiMarkupProcessor
 	{
 		while(wikiText.indexOf("<"+inject.getWikitag()+">")>0)
 		{
+			logger.warn("Injection should start, but currentl NYI");
 			inject.setId(""+injectionId);injectionId++;
 			inject.setArticle(article);
 			
