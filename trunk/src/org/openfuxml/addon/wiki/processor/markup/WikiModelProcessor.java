@@ -17,7 +17,6 @@ public class WikiModelProcessor
 	
 	private File wikiMarkupDir,wikiModelDir;
 	
-	
 	public WikiModelProcessor()
 	{
 
