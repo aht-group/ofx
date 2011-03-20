@@ -20,7 +20,7 @@ import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
 import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
-import org.openfuxml.addon.wiki.util.WikiBotFactory;
+import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 import org.openfuxml.renderer.data.jaxb.Cmp;

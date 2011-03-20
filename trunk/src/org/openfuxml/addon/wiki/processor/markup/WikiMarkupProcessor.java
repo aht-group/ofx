@@ -2,7 +2,6 @@ package org.openfuxml.addon.wiki.processor.markup;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -34,6 +33,7 @@ public class WikiMarkupProcessor
 	private String wikiText;
 	private ObjectFactory of;
 	
+	@Deprecated
 	private File dirInjection;
 	private int injectionId;
 	
@@ -76,7 +76,10 @@ public class WikiMarkupProcessor
 	{
 		for(Content content : lContent)
 		{
-			logger.debug(content.getSource());
+			String fName = org.openfuxml.addon.wiki.processor.util.WikiContentIO.getFileFromSource(content.getSource(), "txt");
+			String txt = org.openfuxml.addon.wiki.processor.util.WikiContentIO.loadTxt(wikiPlainDir, fName);
+			String result = process(txt, "article ... req?");
+			org.openfuxml.addon.wiki.processor.util.WikiContentIO.writeTxt(wikiMarkupDir, fName, result);
 		}
 	}
 	

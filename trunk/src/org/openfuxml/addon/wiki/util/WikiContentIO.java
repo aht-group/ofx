@@ -33,18 +33,6 @@ public class WikiContentIO
 {
 	static Log logger = LogFactory.getLog(WikiContentIO.class);
 	
-	public static synchronized void writeTxt(String dirName, String fileName, String content)
-	{
-		logger.debug("Writing Txt to "+dirName+"/"+fileName);
-		try
-		{
-			BufferedWriter bw = new BufferedWriter(new FileWriter(new File(dirName+"/"+fileName)));
-			bw.write(content);
-			bw.close();
-		}
-		catch (IOException e) {logger.error(e);}
-	}
-	
 	public static synchronized void writeXml(String dirName, String fileName, String content)
 	{
 		logger.debug("Writing Xml to "+dirName+"/"+fileName);

@@ -7,7 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
-import org.openfuxml.addon.wiki.util.WikiBotFactory;
+import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.renderer.latex.util.TxtWriter;
 
 public class WikiContentFetcher
@@ -44,9 +44,7 @@ public class WikiContentFetcher
 	
 	private void setTargetFile(String ofxSource)
 	{
-		int indexFrom = ofxSource.lastIndexOf("/");
-		int indexTo = ofxSource.lastIndexOf(".xml");
-		txtWriter.setTargetFile(ofxSource.substring(indexFrom+1,indexTo)+".txt");
+		txtWriter.setTargetFile(org.openfuxml.addon.wiki.processor.util.WikiContentIO.getFileFromSource(ofxSource, ".txt"));
 	}
 	
 	public void setTargetDir(File dstDir)
