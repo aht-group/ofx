@@ -23,7 +23,7 @@ import org.openfuxml.addon.wiki.processing.WikiProcessor;
 import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processing.XmlProcessor;
 import org.openfuxml.addon.wiki.processor.net.WikiPageFetcher;
-import org.openfuxml.addon.wiki.util.WikiBotFactory;
+import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.xml.sax.SAXException;
@@ -62,7 +62,7 @@ public class OfxWikiEngine
 		tw.fetchText(article);
 		String wikiText = tw.getWikiText();
 		
-		WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtFetched+".txt", wikiText);
+		org.openfuxml.addon.wiki.processor.util.WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtFetched+".txt", wikiText);
 		return wikiText;
 	}
 	
@@ -90,14 +90,14 @@ public class OfxWikiEngine
 		else{wikiText = fetchTextHttp();}
 		
 		wikiText = wikiP.process(wikiText);
-		WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtProcessed+".txt", wikiText);
+		org.openfuxml.addon.wiki.processor.util.WikiContentIO.writeTxt(dirWiki, article+"-"+Status.txtProcessed+".txt", wikiText);
 		
 		wikiImage="file:///c:/temp/${image}";
 		wikiTitle="file:///c:/temp/${title}";
 		
         WikiModel myWikiModel = new WikiDefaultModel(wikiImage,wikiTitle);
         String xHtml = myWikiModel.render(wikiText);
-        WikiContentIO.writeTxt(dirWiki, article+"-"+Status.xhtmlRendered+".xhtml", xHtml);
+        org.openfuxml.addon.wiki.processor.util.WikiContentIO.writeTxt(dirWiki, article+"-"+Status.xhtmlRendered+".xhtml", xHtml);
 		
 		xHtml = xhtmlP.process(xHtml);
 		WikiContentIO.writeXml(dirWiki, article+"-"+Status.xhtmlProcessed+".xhtml", xHtml);

@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki.util;
+package org.openfuxml.addon.wiki.processor.util;
 
 import java.net.MalformedURLException;
 import java.net.URL;
