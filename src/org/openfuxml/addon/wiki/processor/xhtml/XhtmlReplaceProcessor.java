@@ -6,13 +6,16 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
-import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
+import org.openfuxml.addon.wiki.processor.util.AbstractWikiInOutProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlSourceLoader;
+import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
+import org.openfuxml.addon.wiki.processor.util.WikiInOutProcessor;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 
-public class XhtmlReplaceProcessor
+public class XhtmlReplaceProcessor extends AbstractWikiInOutProcessor implements WikiInOutProcessor
 {
 	static Log logger = LogFactory.getLog(XhtmlReplaceProcessor.class);
 	
@@ -20,20 +23,28 @@ public class XhtmlReplaceProcessor
 	
 	private String xHtmlText;
 	
-	private List<Wikiinjection> wikiInjections;
-	private List<Wikireplace> xhtmlReplaces;
-	
 	public XhtmlReplaceProcessor(Replacements replacements) throws OfxConfigurationException
 	{
 		this.replacements = WikiConfigXmlSourceLoader.initReplacements(replacements);
 		JaxbUtil.debug(this.replacements);
 	}
 	
+	public void process(List<Content> lContent)
+	{
+		for(Content content : lContent)
+		{
+			String fNameXhtml = WikiContentIO.getFileFromSource(content.getSource(), "xhtml");
+			String txtMarkup = WikiContentIO.loadTxt(srcDir, fNameXhtml);
+			String result = process(txtMarkup);
+			WikiContentIO.writeTxt(dstDir, fNameXhtml, result);
+		}
+	}
+	
 	public String process(String text)
 	{
 		xHtmlText=addWellFormed(text);
 		xHtmlText = xHtmlText.replaceAll("&nbsp;", " ");
-		for(Wikireplace replace : xhtmlReplaces){xhtmlReplace(replace);}
+		for(Wikireplace replace : replacements.getWikireplace()){xhtmlReplace(replace);}
 		repairXml();
 		return this.xHtmlText;
 	}

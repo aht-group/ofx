@@ -77,12 +77,13 @@ public class OfxRenderer
 		String wikiPlainDir = "wikiPlain";
 		String wikiMarkupDir = "wikiMarkup";
 		String wikiModelDir = "wikiModel";
+		String xhtmlReplaceDir = "xhtmlReplace";
 		
 		readConfig(fNameCmp,fNameTmp);
 		phaseMergeInitial(ofxRoot);
 		phaseWikiExternalIntegrator(wikiXmlDir);
 //		phaseWikiContentFetcher(wikiPlainDir);
-		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir);
+		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir);
 	}
 	
 	private void phaseMergeInitial(String rootFileName)
@@ -134,11 +135,12 @@ public class OfxRenderer
 		}
 	}
 	
-	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir, String wikiModelDir) throws OfxConfigurationException
+	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir, String wikiModelDir, String xhtmlReplace) throws OfxConfigurationException
 	{	
 		File dirWikiPlain = createDir(wikiPlainDir);
 		File dirWikiMarkup = createDir(wikiMarkupDir);
 		File dirWikiModel = createDir(wikiModelDir);
+		File dirXhtmlReplace = createDir(xhtmlReplace);
 		
 		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
 		
@@ -152,6 +154,8 @@ public class OfxRenderer
 		
 		XhtmlProcessor xpXml = cmp.getPreprocessor().getWiki().getXhtmlProcessor();
 		XhtmlReplaceProcessor xhtmlP = new XhtmlReplaceProcessor(xpXml.getReplacements());
+		xhtmlP.setDirectories(dirWikiModel, dirXhtmlReplace);
+		xhtmlP.process(lWikiQueries);
 	}
 	
 	private File createDir(String dirName)
