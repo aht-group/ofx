@@ -1,10 +1,12 @@
-package org.openfuxml.addon.wiki;
+package org.openfuxml.addon.wiki.processor.ofx;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.text.MessageFormat;
+import java.util.List;
 
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
@@ -14,32 +16,69 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.apache.commons.configuration.Configuration;
+import net.sf.exlp.util.xml.JDomUtil;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jdom.Document;
+import org.jdom.output.Format;
+import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
+import org.openfuxml.addon.wiki.HtmlToOpenFuxmlContentHandler;
+import org.openfuxml.addon.wiki.WikiTemplates;
+import org.openfuxml.addon.wiki.data.jaxb.Content;
+import org.openfuxml.addon.wiki.processing.XmlProcessor;
+import org.openfuxml.addon.wiki.processor.util.AbstractWikiInOutProcessor;
+import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
+import org.openfuxml.addon.wiki.processor.util.WikiInOutProcessor;
 import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-@Deprecated
-public class OpenFuxmlGenerator
+public class OfxProcessor extends AbstractWikiInOutProcessor implements WikiInOutProcessor
 {
-	static Log logger = LogFactory.getLog(OpenFuxmlGenerator.class);
+	static Log logger = LogFactory.getLog(OfxProcessor.class);
 
-	private Configuration config;
+	private XmlProcessor xmlP;
 	
-	public OpenFuxmlGenerator(Configuration config)
+	public OfxProcessor()
 	{
-		this.config=config;
+		WikiTemplates.init();
+		xmlP = new XmlProcessor();
+	}
+	
+	public void process(List<Content> lContent)
+	{
+		for(Content content : lContent)
+		{
+			try
+			{
+				String srcName = WikiContentIO.getFileFromSource(content.getSource(), "xhtml");
+				String dstName = WikiContentIO.getFileFromSource(content.getSource(), "xml");
+				String txtMarkup = WikiContentIO.loadTxt(srcDir, srcName);
+				String result = process(txtMarkup, "title");
+
+				File fDst = new File(dstDir, dstName);
+				Document doc = xmlP.process(result);
+				JDomUtil.save(doc, fDst, Format.getRawFormat());
+			}
+			catch (IOException e) {logger.error(e);}
+			catch (ParserConfigurationException e) {logger.error(e);}
+			catch (XMLStreamException e) {logger.error(e);}
+			catch (SAXException e) {logger.error(e);}
+			
+		}
 	}
 
-	public String create(String xhtmlContent, String titleText) throws IOException, ParserConfigurationException, XMLStreamException, SAXException
+	public String process(String xhtmlContent, String titleText) throws IOException, ParserConfigurationException, XMLStreamException, SAXException
 	{
-		String footer = "    </body>\n</html>";
+		String footer = "</body>\n</html>";
 		
 		Object[] objects = new Object[2];
 		objects[0] = titleText;
+		
+		logger.debug(WikiTemplates.htmlHeader);
+		
 		String header = MessageFormat.format(WikiTemplates.htmlHeader, objects);
 
 		logger.debug("Header ist: "+header);
@@ -63,6 +102,7 @@ public class OpenFuxmlGenerator
 		StringWriter out = new StringWriter();
 		XMLStreamWriter writer = createXMLStreamWriter(out);
 
+		logger.warn("Using dummy String injectionDir");
 		HtmlToOpenFuxmlContentHandler contentHandler = new HtmlToOpenFuxmlContentHandler(writer,".");
 
 		xmlReader.setContentHandler(contentHandler);

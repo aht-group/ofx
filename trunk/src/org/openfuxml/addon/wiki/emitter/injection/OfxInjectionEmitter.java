@@ -7,7 +7,6 @@ import javax.xml.stream.XMLStreamWriter;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxgallery.Ofximage;
@@ -21,12 +20,12 @@ public class OfxInjectionEmitter extends NestingEmitter
 {
 	static Log logger = LogFactory.getLog(OfxInjectionEmitter.class);
 	
-	private Configuration config;
+	private String injectionDir;
 	
-	public OfxInjectionEmitter(EmitterFactory ef, Configuration config)
+	public OfxInjectionEmitter(EmitterFactory ef, String injectionDir)
 	{
 		super(ef);
-		this.config=config;
+		this.injectionDir=injectionDir;
 	}
 
 	@Override
@@ -46,7 +45,6 @@ public class OfxInjectionEmitter extends NestingEmitter
 		}
 		if(injection.getOfxtag().equals("ofxgallery"))
 		{
-			String injectionDir = config.getString("/ofx/dir[@type='injection']");
 			String injectionName = injection.getId()+"-"+injection.getOfxtag();
 			String xmlFile = injectionDir+"/"+injectionName+".xml";
 			try

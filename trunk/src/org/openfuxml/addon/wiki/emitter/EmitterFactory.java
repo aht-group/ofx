@@ -2,7 +2,6 @@ package org.openfuxml.addon.wiki.emitter;
 
 import javax.xml.stream.XMLStreamWriter;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.emitter.injection.OfxInjectionEmitter;
@@ -12,14 +11,14 @@ public class EmitterFactory
 	static Log logger = LogFactory.getLog(EmitterFactory.class);
 	
 	private XMLStreamWriter writer;
-	private Configuration config;
+	private String injectionDir;
 	
 	public static enum HtmlElement {title,p,i,b,strong,ul,li,a,body,sup,wikiinjection};
 	
-	public EmitterFactory(XMLStreamWriter writer,Configuration config)
+	public EmitterFactory(XMLStreamWriter writer,String injectionDir)
 	{
 		this.writer=writer;
-		this.config=config;
+		this.injectionDir=injectionDir;
 	}
 	
 	public synchronized Emitter getEmitter(String elementName)
@@ -39,7 +38,7 @@ public class EmitterFactory
 				case a:		return new AnchorEmitter(this);
 				case body:	return new NestingEmitter(this);
 				case title: return new SimpleMappingEmitter(this,"titel");
-				case wikiinjection: return new OfxInjectionEmitter(this,config);
+				case wikiinjection: return new OfxInjectionEmitter(this,injectionDir);
 			}
 		}
 		catch (IllegalArgumentException e)

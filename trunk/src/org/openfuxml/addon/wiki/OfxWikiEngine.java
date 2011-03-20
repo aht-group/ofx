@@ -51,7 +51,7 @@ public class OfxWikiEngine
 		dirOfx=config.getString("/ofx/dir[@type='ofx']");
 		wikiP = new WikiProcessor(config,article);
 		xhtmlP = new XhtmlProcessor(config);
-		xmlP = new XmlProcessor(config);
+		xmlP = new XmlProcessor();
 	}
 	
 	private String fetchTextHttp()
@@ -108,14 +108,14 @@ public class OfxWikiEngine
 		xHtml=xhtmlP.removeWellFormed(xHtml);
 		
 		OpenFuxmlGenerator ofxGenerator = new OpenFuxmlGenerator(config);
-    	String htmlFooter = "    </body>\n</html>";
+    	
         
 		InjectionProcessor ip = new InjectionProcessor(config);
 		ip.processInjections();
     	
 		try
 		{
-			String output = ofxGenerator.create(xHtml, htmlFooter, article);
+			String output = ofxGenerator.create(xHtml, article);
 			File saveXml = new File(dirOfx,article+"-"+Status.ofx+".xml");
 			Document doc = xmlP.process(output);
 			JDomUtil.save(doc, saveXml, Format.getRawFormat());
