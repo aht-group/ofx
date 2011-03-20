@@ -12,8 +12,8 @@ import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
-import org.openfuxml.addon.wiki.processing.xhtml.OfxPushUp;
-import org.openfuxml.addon.wiki.processing.xhtml.XhtmlAHxMerge;
+import org.openfuxml.addon.wiki.processor.xhtml.mods.OfxPushUp;
+import org.openfuxml.addon.wiki.processor.xhtml.mods.XhtmlAHxMerge;
 
 @Deprecated
 public class XhtmlProcessor
