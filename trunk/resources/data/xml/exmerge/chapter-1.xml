@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<section xmlns="http://www.openfuxml.org">
-	<title>Main</title>
-    <paragraph>a</paragraph>
-	<section source="exsection1.xml" external="true"/>
-	<section id="sec-2int">
-		<title>The second (non external section)</title>
-		<paragraph>Dummy paragraph</paragraph>
-	</section>
-	<section id="">
-		<title>The third (non external section)</title>
-		<paragraph>Dummy paragraph</paragraph>
-	</section>
-</section>
+<ofx:section xmlns:ofx="http://www.openfuxml.org">
+	<ofx:title>Main</ofx:title>
+    <ofx:paragraph>a</ofx:paragraph>
+	<ofx:section source="exsection1.xml" external="true"/>
+	<ofx:section id="sec-2int">
+		<ofx:title>The second (non external section)</ofx:title>
+		<ofx:paragraph>Dummy paragraph</ofx:paragraph>
+	</ofx:section>
+	<ofx:section id="">
+		<ofx:title>The third (non external section)</ofx:title>
+		<ofx:paragraph>Dummy paragraph</ofx:paragraph>
+	</ofx:section>
+</ofx:section>
