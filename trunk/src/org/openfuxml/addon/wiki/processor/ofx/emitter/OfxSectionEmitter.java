@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki.emitter;
+package org.openfuxml.addon.wiki.processor.ofx.emitter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +9,7 @@ import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
 import org.xml.sax.Attributes;
 
 public class OfxSectionEmitter extends SimpleMappingEmitter
@@ -19,7 +20,7 @@ public class OfxSectionEmitter extends SimpleMappingEmitter
 	
 	public OfxSectionEmitter(EmitterFactory ef)
 	{
-		super(ef,"abschnitt");
+		super(ef,"ofx:section");
 	}
 
 	@Override

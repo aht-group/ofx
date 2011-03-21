@@ -1,10 +1,17 @@
-package org.openfuxml.addon.wiki.emitter;
+package org.openfuxml.addon.wiki.processor.ofx;
 
 import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.wiki.emitter.AnchorEmitter;
+import org.openfuxml.addon.wiki.emitter.Emitter;
+import org.openfuxml.addon.wiki.emitter.GlosstermEmitter;
+import org.openfuxml.addon.wiki.emitter.HeaderEmitter;
+import org.openfuxml.addon.wiki.emitter.ImageEmitter;
+import org.openfuxml.addon.wiki.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.emitter.injection.OfxInjectionEmitter;
+import org.openfuxml.addon.wiki.processor.ofx.emitter.SimpleMappingEmitter;
 
 public class EmitterFactory
 {
@@ -29,7 +36,7 @@ public class EmitterFactory
 			switch (htmlElement)
 			{
 				case sup:	return new SimpleMappingEmitter(this,"hochgestellt");
-				case p:		return new SimpleMappingEmitter(this,"absatz");
+				case p:		return new SimpleMappingEmitter(this,"ofx:paragraph");
 				case i:		return new SimpleMappingEmitter(this,"kursiv");
 				case b:		return new SimpleMappingEmitter(this,"fett");
 				case strong:return new SimpleMappingEmitter(this,"fett");
@@ -37,7 +44,7 @@ public class EmitterFactory
 				case li:	return new SimpleMappingEmitter(this,"eintrag", "absatz");
 				case a:		return new AnchorEmitter(this);
 				case body:	return new NestingEmitter(this);
-				case title: return new SimpleMappingEmitter(this,"titel");
+				case title: return new SimpleMappingEmitter(this,"ofx:title");
 				case wikiinjection: return new OfxInjectionEmitter(this,injectionDir);
 			}
 		}

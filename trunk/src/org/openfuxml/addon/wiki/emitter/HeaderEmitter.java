@@ -8,6 +8,7 @@ import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
 import org.xml.sax.Attributes;
 
 public class HeaderEmitter implements Emitter
@@ -28,7 +29,7 @@ public class HeaderEmitter implements Emitter
 	{
 		this.ef=ef;
 		this.headerLevel = headerLevel;
-		sectionName = "abschnitt";
+		sectionName = "ofx:section";
 		logger.debug("inited sectionName:"+sectionName);
 	}
 
