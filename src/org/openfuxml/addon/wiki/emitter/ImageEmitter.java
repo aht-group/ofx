@@ -3,6 +3,8 @@ package org.openfuxml.addon.wiki.emitter;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
+import org.openfuxml.addon.wiki.processor.ofx.emitter.SimpleMappingEmitter;
 import org.xml.sax.Attributes;
 
 public class ImageEmitter extends SimpleMappingEmitter

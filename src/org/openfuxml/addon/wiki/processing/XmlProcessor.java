@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jdom.DocType;
 import org.jdom.Document;
 
+@Deprecated
 public class XmlProcessor
 {
 	static Log logger = LogFactory.getLog(XmlProcessor.class);

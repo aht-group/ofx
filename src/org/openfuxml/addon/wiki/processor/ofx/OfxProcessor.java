@@ -25,7 +25,6 @@ import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
-import org.openfuxml.addon.wiki.processing.XmlProcessor;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiInOutProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiInOutProcessor;
@@ -37,13 +36,10 @@ import org.xml.sax.XMLReader;
 public class OfxProcessor extends AbstractWikiInOutProcessor implements WikiInOutProcessor
 {
 	static Log logger = LogFactory.getLog(OfxProcessor.class);
-
-	private XmlProcessor xmlP;
 	
 	public OfxProcessor()
 	{
 		WikiTemplates.init();
-		xmlP = new XmlProcessor();
 	}
 	
 	public void process(List<Content> lContent)
@@ -56,9 +52,9 @@ public class OfxProcessor extends AbstractWikiInOutProcessor implements WikiInOu
 				String dstName = WikiContentIO.getFileFromSource(content.getSource(), "xml");
 				String txtMarkup = WikiContentIO.loadTxt(srcDir, srcName);
 				String result = process(txtMarkup, "title");
-
+				
 				File fDst = new File(dstDir, dstName);
-				Document doc = xmlP.process(result);
+				Document doc = JDomUtil.txtToDoc(result);
 				JDomUtil.save(doc, fDst, Format.getRawFormat());
 			}
 			catch (IOException e) {logger.error(e);}
@@ -104,7 +100,25 @@ public class OfxProcessor extends AbstractWikiInOutProcessor implements WikiInOu
 
 		writer.close();
 
-		return out.toString();
+		String result = out.toString();
+		result = addNS(result);
+//		logger.debug(result);
+		return result;
+	}
+	
+	private String addNS(String xml)
+	{
+		int indexXml = xml.indexOf(">");
+		int indexRoot = xml.substring(indexXml+1, xml.length()).indexOf(">");
+		
+//		logger.debug(xml.substring(indexXml+indexRoot+1));
+		StringBuffer sb = new StringBuffer();
+		sb.append(xml.substring(0,indexXml+indexRoot+1));
+		sb.append(" xmlns:ofx=\"http://www.openfuxml.org\" xmlns:wiki=\"http://www.openfuxml.org/wiki\"");
+		sb.append(xml.substring(indexXml+indexRoot+1,xml.length()));
+//		logger.debug(sb);
+		
+		return sb.toString();
 	}
 
 	protected XMLStreamWriter createXMLStreamWriter(Writer out)
