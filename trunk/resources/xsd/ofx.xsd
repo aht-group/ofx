@@ -57,6 +57,7 @@
         <xsd:complexType mixed="true">
             <xsd:sequence>
                 <xsd:element ref="section" maxOccurs="unbounded"/>
+                <xsd:element ref="sections" maxOccurs="unbounded"/>
                 <xsd:element ref="wiki:content" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
@@ -101,6 +102,13 @@
             </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="sections">
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+                <xsd:element ref="section" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="section">
         <xsd:complexType mixed="true">
             <xsd:sequence>
@@ -108,6 +116,7 @@
                 <xsd:element ref="wiki:content" maxOccurs="unbounded"/>
                 <xsd:element ref="paragraph" maxOccurs="unbounded"/>
                 <xsd:element ref="section" maxOccurs="unbounded"/>
+                <xsd:element ref="sections" maxOccurs="unbounded"/>
                 <xsd:element ref="table" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
