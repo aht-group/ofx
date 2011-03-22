@@ -100,7 +100,7 @@ public class OfxExternalMerger
 			loggerInit.init();
 		logger.debug("Testing ExternalMerger");
 		
-		String fName = "resources/data/xml/exmerge/chapter-1.xml";
+		String fName = "resources/data/xml/preprocessor/exmerge/chapter-1.xml";
 		if(args.length == 1 ){fName = args[0];}
 		
 		File f = new File(fName);
