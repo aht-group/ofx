@@ -17,6 +17,7 @@ import org.jdom.xpath.XPath;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 
 public class WikiExternalIntegrator
 {
@@ -47,7 +48,7 @@ public class WikiExternalIntegrator
 		wikiQueries = new ArrayList<Content>();
 	}
 	
-	public void integrateWikiAsExternal(Ofxdoc ofxDoc)
+	public void integrateWikiAsExternal(Ofxdoc ofxDoc) throws OfxAuthoringException
 	{
 		Document doc = JaxbUtil.toDocument(ofxDoc);
 		
@@ -81,14 +82,15 @@ public class WikiExternalIntegrator
 	public List<Content> getWikiQueries() {return wikiQueries;}
 	
 	
-	private Element processWikiContent(Content wikiContent)
+	private Element processWikiContent(Content wikiContent) throws OfxAuthoringException
 	{
 		Element e=null;
 		if(wikiContent.isSetPage()){e=getSection(wikiContent.getPage());}
+		else {throw new OfxAuthoringException("Element wiki:content has no known child");}
 		return e;
 	}
 	
-	private Element getSection(Page section)
+	private Element getSection(Page page)
 	{
 		org.openfuxml.content.ofx.Section ofxSection = new org.openfuxml.content.ofx.Section();
 		ofxSection.setExternal(true);
@@ -96,6 +98,5 @@ public class WikiExternalIntegrator
 		Element eResult = JaxbUtil.toDocument(ofxSection).getRootElement();
 		eResult.detach();
 		return eResult;
-		
 	}
 }

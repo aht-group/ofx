@@ -27,12 +27,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/wiki}server"/>
- *         &lt;element ref="{http://www.openfuxml.org/wiki}page"/>
- *         &lt;element ref="{http://www.openfuxml.org/wiki}category"/>
+ *         &lt;element name="table" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
+ *         &lt;element name="section" type="{http://www.w3.org/2001/XMLSchema}anyType"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="source" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -42,108 +41,78 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "server",
-    "page",
-    "category"
+    "table",
+    "section"
 })
-@XmlRootElement(name = "content")
-public class Content implements Serializable
+@XmlRootElement(name = "category")
+public class Category
+    implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(required = true)
-    protected Server server;
-    @XmlElement(required = true)
-    protected Page page;
-    @XmlElement(required = true)
-    protected Category category;
+    @XmlElement(namespace = "", required = true)
+    protected Object table;
+    @XmlElement(namespace = "", required = true)
+    protected Object section;
     @XmlAttribute
     protected String id;
     @XmlAttribute
-    protected String source;
+    protected String name;
 
     /**
-     * Gets the value of the server property.
+     * Gets the value of the table property.
      * 
      * @return
      *     possible object is
-     *     {@link Server }
+     *     {@link Object }
      *     
      */
-    public Server getServer() {
-        return server;
+    public Object getTable() {
+        return table;
     }
 
     /**
-     * Sets the value of the server property.
+     * Sets the value of the table property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Server }
+     *     {@link Object }
      *     
      */
-    public void setServer(Server value) {
-        this.server = value;
+    public void setTable(Object value) {
+        this.table = value;
     }
 
-    public boolean isSetServer() {
-        return (this.server!= null);
+    public boolean isSetTable() {
+        return (this.table!= null);
     }
 
     /**
-     * Gets the value of the page property.
+     * Gets the value of the section property.
      * 
      * @return
      *     possible object is
-     *     {@link Page }
+     *     {@link Object }
      *     
      */
-    public Page getPage() {
-        return page;
+    public Object getSection() {
+        return section;
     }
 
     /**
-     * Sets the value of the page property.
+     * Sets the value of the section property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Page }
+     *     {@link Object }
      *     
      */
-    public void setPage(Page value) {
-        this.page = value;
+    public void setSection(Object value) {
+        this.section = value;
     }
 
-    public boolean isSetPage() {
-        return (this.page!= null);
-    }
-
-    /**
-     * Gets the value of the category property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Category }
-     *     
-     */
-    public Category getCategory() {
-        return category;
-    }
-
-    /**
-     * Sets the value of the category property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Category }
-     *     
-     */
-    public void setCategory(Category value) {
-        this.category = value;
-    }
-
-    public boolean isSetCategory() {
-        return (this.category!= null);
+    public boolean isSetSection() {
+        return (this.section!= null);
     }
 
     /**
@@ -175,31 +144,31 @@ public class Content implements Serializable
     }
 
     /**
-     * Gets the value of the source property.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getSource() {
-        return source;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Sets the value of the source property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setSource(String value) {
-        this.source = value;
+    public void setName(String value) {
+        this.name = value;
     }
 
-    public boolean isSetSource() {
-        return (this.source!= null);
+    public boolean isSetName() {
+        return (this.name!= null);
     }
 
 }
