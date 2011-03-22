@@ -14,7 +14,6 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -31,8 +30,6 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{http://www.openfuxml.org}section" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org}sections" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/wiki}content" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -45,17 +42,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "content"
 })
-@XmlRootElement(name = "content")
-public class Content
-    implements Serializable
+@XmlRootElement(name = "sections")
+public class Sections implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElementRefs({
-        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = org.openfuxml.addon.wiki.data.jaxb.Content.class),
-        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class)
-    })
+    @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class)
     @XmlMixed
     protected List<Object> content;
 
@@ -77,10 +69,8 @@ public class Content
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Sections }
-     * {@link org.openfuxml.addon.wiki.data.jaxb.Content }
-     * {@link String }
      * {@link Section }
+     * {@link String }
      * 
      * 
      */
