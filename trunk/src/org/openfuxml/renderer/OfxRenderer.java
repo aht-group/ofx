@@ -33,6 +33,7 @@ import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Merge;
 import org.openfuxml.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.util.TxtWriter;
+import org.openfuxml.renderer.processor.pre.OfxContainerMerger;
 import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 import org.openfuxml.util.xml.CmpJaxbXpathLoader;
 import org.openfuxml.util.xml.OfxNsPrefixMapper;
@@ -41,7 +42,7 @@ public class OfxRenderer
 {
 	static Log logger = LogFactory.getLog(OfxRenderer.class);
 		
-	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge};
+	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge};
 	
 	private Configuration config;
 	private Cmp cmp;
@@ -96,7 +97,8 @@ public class OfxRenderer
 //		phaseWikiContentFetcher(wikiPlainDir);
 		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir);
 		phaseMerge(fNameTmp, Phase.wikiMerge);
-		phaseLatex();
+		phaseContainerMerge(fNameTmp, Phase.wikiMerge, Phase.containerMerge);
+		phaseLatex(Phase.containerMerge);
 	}
 	
 	private void phaseMergeInitial(String rootFileName)
@@ -124,6 +126,7 @@ public class OfxRenderer
 	
 	private void phaseMerge(String fNameTmp, Phase phase)
 	{
+		logger.warn("hardcoded filename!!!");
 		File f = new File(fNameTmp,"2-wikiIntegrate.xml");
 		Document doc = JDomUtil.load(f);
 		try
@@ -137,6 +140,28 @@ public class OfxRenderer
 		catch (NoSuchElementException e) {logger.debug("No initial merge");}
 		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
 		JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(phase)), ofxDoc, nsPrefixMapper, true);
+	}
+	
+	private void phaseContainerMerge(String fNameTmp, Phase phaseLoad, Phase phaseSave)
+	{
+		File f = new File(fNameTmp,getPhaseXmlFileName(phaseLoad));
+		
+		try
+		{
+			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(f.getAbsolutePath(), Ofxdoc.class);
+			
+			OfxContainerMerger containerMerger = new OfxContainerMerger();
+			ofxDoc = containerMerger.merge(ofxDoc);
+			
+			JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(phaseSave)), ofxDoc, nsPrefixMapper, true);
+		}
+		catch (FileNotFoundException e)
+		{
+			logger.warn("OfxPreprocessorException");//TODO new exception
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	private void phaseWikiExternalIntegrator(String wikiXmlDir) throws OfxAuthoringException
@@ -200,10 +225,10 @@ public class OfxRenderer
 		ofxP.process(lWikiQueries);
 	}
 	
-	private void phaseLatex()
+	private void phaseLatex(Phase phaseLoad)
 	{
 		OfxLatexRenderer renderer = new OfxLatexRenderer();
-		renderer.render(new File(tmpDir,getPhaseXmlFileName(Phase.wikiMerge)).getAbsolutePath());
+		renderer.render(new File(tmpDir,getPhaseXmlFileName(phaseLoad)).getAbsolutePath());
 		
 		File dstDir = new File(config.getString("wiki.latex.dir"));
 		
