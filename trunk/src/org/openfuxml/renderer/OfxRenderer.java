@@ -27,6 +27,7 @@ import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlFinalProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;
 import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Merge;
@@ -59,7 +60,11 @@ public class OfxRenderer
 	
 	private void readConfig(String fNameCmp, String fNameTmp) throws OfxConfigurationException
 	{
-		try {cmp = (Cmp)JaxbUtil.loadJAXB(fNameCmp, Cmp.class);}
+		try
+		{
+			cmp = (Cmp)JaxbUtil.loadJAXB(fNameCmp, Cmp.class);
+//			JaxbUtil.debug(cmp);
+		}
 		catch (FileNotFoundException e){throw new OfxConfigurationException("CMP configuration not found: "+fNameCmp);}
 		
 		tmpDir = new File(fNameTmp);
@@ -67,7 +72,7 @@ public class OfxRenderer
 		if(!tmpDir.isDirectory()){throw new OfxConfigurationException("Temporary directory is a file! ("+fNameTmp+")");}
 	}
 
-	public void chain() throws OfxConfigurationException
+	public void chain() throws OfxConfigurationException, OfxAuthoringException
 	{
 		String fNameCmp = config.getString("ofx.xml.cmp");
 		String fNameTmp = config.getString("ofx.dir.tmp");
@@ -76,7 +81,7 @@ public class OfxRenderer
 		chain(fNameCmp, fNameTmp, ofxRoot);
 	}
 	
-	public void chain(String fNameCmp, String fNameTmp, String ofxRoot) throws OfxConfigurationException
+	public void chain(String fNameCmp, String fNameTmp, String ofxRoot) throws OfxConfigurationException, OfxAuthoringException
 	{
 		String wikiPlainDir = "wikiPlain";
 		String wikiMarkupDir = "wikiMarkup";
@@ -114,6 +119,7 @@ public class OfxRenderer
 		catch (NoSuchElementException e) {logger.debug("No initial merge");}
 		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
 		JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(Phase.wikiIntegrate)), ofxDoc, nsPrefixMapper, true);
+		JaxbUtil.debug(ofxDoc, nsPrefixMapper);
 	}
 	
 	private void phaseMerge(String fNameTmp, Phase phase)
@@ -133,7 +139,7 @@ public class OfxRenderer
 		JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(phase)), ofxDoc, nsPrefixMapper, true);
 	}
 	
-	private void phaseWikiExternalIntegrator(String wikiXmlDir)
+	private void phaseWikiExternalIntegrator(String wikiXmlDir) throws OfxAuthoringException
 	{		
 		WikiExternalIntegrator wikiExIntegrator = new WikiExternalIntegrator(wikiXmlDir);
 		wikiExIntegrator.integrateWikiAsExternal(ofxDoc);
