@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki.processor.net;
+package org.openfuxml.addon.wiki.processor.net.fetcher;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

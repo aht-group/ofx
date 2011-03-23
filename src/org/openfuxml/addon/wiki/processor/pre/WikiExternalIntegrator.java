@@ -61,7 +61,7 @@ public class WikiExternalIntegrator
 			{
 				Element eChild = (Element) iter.next();
 				
-				logger.debug(eChild.getName());
+				logger.trace(eChild.getName());
 				Content wikiContent = (Content)JDomUtil.toJaxb(eChild, Content.class);
 				
 				Element eOfx = processWikiContent(wikiContent);
@@ -85,12 +85,23 @@ public class WikiExternalIntegrator
 	private Element processWikiContent(Content wikiContent) throws OfxAuthoringException
 	{
 		Element e=null;
-		if(wikiContent.isSetPage()){e=getSection(wikiContent.getPage());}
+		if     (wikiContent.isSetPage()){e=getSection(wikiContent);}
+		else if(wikiContent.isSetCategory()){e=getCategory(wikiContent);}
 		else {throw new OfxAuthoringException("Element wiki:content has no known child");}
 		return e;
 	}
 	
-	private Element getSection(Page page)
+	private Element getCategory(Content wikiContent)
+	{
+		org.openfuxml.content.ofx.Sections ofxSections = new org.openfuxml.content.ofx.Sections();
+		ofxSections.setExternal(true);
+		ofxSections.setSource(wikiXmlDirName+"/"+counter+".xml");counter++;
+		Element eResult = JaxbUtil.toDocument(ofxSections).getRootElement();
+		eResult.detach();
+		return eResult;
+	}
+	
+	private Element getSection(Content wikiContent)
 	{
 		org.openfuxml.content.ofx.Section ofxSection = new org.openfuxml.content.ofx.Section();
 		ofxSection.setExternal(true);
