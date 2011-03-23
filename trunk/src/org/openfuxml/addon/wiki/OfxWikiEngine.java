@@ -22,7 +22,7 @@ import org.openfuxml.addon.wiki.processing.InjectionProcessor;
 import org.openfuxml.addon.wiki.processing.WikiProcessor;
 import org.openfuxml.addon.wiki.processing.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processing.XmlProcessor;
-import org.openfuxml.addon.wiki.processor.net.WikiPageFetcher;
+import org.openfuxml.addon.wiki.processor.net.fetcher.WikiPageFetcher;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 import org.openfuxml.addon.wiki.util.WikiContentIO;

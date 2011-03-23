@@ -6,7 +6,7 @@ import net.sf.exlp.io.LoggerInit;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.wiki.processor.net.WikiPageFetcher;
+import org.openfuxml.addon.wiki.processor.net.fetcher.WikiPageFetcher;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 
 public class TestWikiFetcher

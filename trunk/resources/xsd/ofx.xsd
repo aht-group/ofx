@@ -107,6 +107,8 @@
             <xsd:sequence>
                 <xsd:element ref="section" maxOccurs="unbounded"/>
             </xsd:sequence>
+             <xsd:attribute name="external" type="xsd:boolean"/>
+            <xsd:attribute name="source" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="section">

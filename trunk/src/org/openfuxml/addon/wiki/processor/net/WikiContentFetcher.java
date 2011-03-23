@@ -5,9 +5,14 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
+import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
+import org.openfuxml.addon.wiki.processor.net.fetcher.WikiCategoryFetcher;
+import org.openfuxml.addon.wiki.processor.net.fetcher.WikiPageFetcher;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
+import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.renderer.latex.util.TxtWriter;
 
 public class WikiContentFetcher
@@ -16,39 +21,50 @@ public class WikiContentFetcher
 	
 	private WikiBotFactory wbf;
 	private TxtWriter txtWriter;
+	private File dirXmlOfx;
 
 	public WikiContentFetcher(WikiBotFactory wbf)
 	{
 		this.wbf=wbf;
 		txtWriter = new TxtWriter();
-		setTargetDir(new File("."));
+		File currentDir = new File(".");
+		setTargetDirs(currentDir,currentDir);
 	}
 
-	public void fetch(List<Content> lContent)
+	public void fetch(List<Content> lContent) throws OfxWikiException
 	{
 		logger.debug("Fetching "+lContent.size()+" content elements");
 		
 		for(Content content : lContent)
 		{
-			setTargetFile(content.getSource());
-			if(content.isSetPage()){fetchPage(content.getPage());}
+			if(content.isSetPage()){fetchPage(content);}
+			else if(content.isSetCategory()){fetchCategory(content);}
+			else {throw new OfxWikiException("No "+WikiContentFetcher.class.getSimpleName()+" available for this element");}
 		}
 	}
 	
-	private void fetchPage(Page page)
+	private void fetchPage(Content content)
 	{
+		txtWriter.setTargetFile(WikiContentIO.getFileFromSource(content.getSource(), "txt"));
+		Page page = content.getPage();
 		WikiPageFetcher wpf = new WikiPageFetcher(wbf.getBot());
 		wpf.fetchText(page.getName());
 		wpf.save(txtWriter);
 	}
 	
-	private void setTargetFile(String ofxSource)
+	private void fetchCategory(Content content)
 	{
-		txtWriter.setTargetFile(org.openfuxml.addon.wiki.processor.util.WikiContentIO.getFileFromSource(ofxSource, ".txt"));
+		Category category = content.getCategory();
+		WikiCategoryFetcher wcf = new WikiCategoryFetcher(wbf.getBot());
+		wcf.fetchCategory(category.getName());
+		wcf.setTargetFilePrefix(WikiContentIO.getFileFromSource(content.getSource(), ""));
+		wcf.fetchArticles(txtWriter);
+		wcf.createExternalXml(dirXmlOfx);
 	}
 	
-	public void setTargetDir(File dstDir)
+	public void setTargetDirs(File dirWikiPlain, File dirXmlOfx)
 	{
-		txtWriter.setTargetDir(dstDir);
+		txtWriter.setTargetDir(dirWikiPlain);
+		this.dirXmlOfx=dirXmlOfx;
 	}
 }
