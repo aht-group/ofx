@@ -6,6 +6,7 @@ import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
+import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Injections;
 import org.openfuxml.addon.wiki.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
@@ -42,8 +43,9 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 	}
 	
 	@Override
-	protected void processCategory(Category category)
+	protected void processCategory(Content content)
 	{
+		Category category = content.getCategory();
 		for(Page page : category.getPage())
 		{
 			processPage(page);
@@ -51,11 +53,18 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 	}
 	
 	@Override
+	protected void processPage(Content content)
+	{
+		Page page = content.getPage();
+		processPage(page);
+	}
+	
 	protected void processPage(Page page)
 	{
-		String txt = org.openfuxml.addon.wiki.processor.util.WikiContentIO.loadTxt(srcDir, page.getWikiPlain());
+		String fName = page.getFile()+"."+WikiProcessor.WikiFileExtension.txt;
+		String txt = org.openfuxml.addon.wiki.processor.util.WikiContentIO.loadTxt(srcDir, fName);
 		String result = process(txt, "article ... req?");
-		org.openfuxml.addon.wiki.processor.util.WikiContentIO.writeTxt(dstDir, page.getWikiPlain(), result);
+		org.openfuxml.addon.wiki.processor.util.WikiContentIO.writeTxt(dstDir, fName, result);
 	}
 	
 	public String process(String wikiText, String article)
