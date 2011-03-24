@@ -7,10 +7,10 @@ import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.emitter.AnchorEmitter;
 import org.openfuxml.addon.wiki.emitter.Emitter;
 import org.openfuxml.addon.wiki.emitter.GlosstermEmitter;
-import org.openfuxml.addon.wiki.emitter.HeaderEmitter;
 import org.openfuxml.addon.wiki.emitter.ImageEmitter;
 import org.openfuxml.addon.wiki.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.emitter.injection.OfxInjectionEmitter;
+import org.openfuxml.addon.wiki.processor.ofx.emitter.HeaderEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.SimpleMappingEmitter;
 
 public class EmitterFactory

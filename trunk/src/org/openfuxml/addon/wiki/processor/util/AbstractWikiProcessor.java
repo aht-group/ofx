@@ -8,6 +8,7 @@ import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
+import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 
 public abstract class AbstractWikiProcessor
 {
@@ -23,7 +24,7 @@ public abstract class AbstractWikiProcessor
 		if(dstDir!=null){logger.debug("Directory Dst: "+dstDir.getAbsolutePath());}
 	}
 	
-	public void process(Contents wikiQueries) throws OfxWikiException
+	public void process(Contents wikiQueries) throws OfxWikiException, OfxAuthoringException
 	{
 		for(Content content : wikiQueries.getContent())
 		{
@@ -33,6 +34,6 @@ public abstract class AbstractWikiProcessor
 		}
 	}
 	
-	protected void processPage(Content content){logger.warn("Must be Overridden!");}
-	protected void processCategory(Content content){logger.warn("Must be Overridden!");}
+	protected void processPage(Content content) throws OfxAuthoringException {logger.warn("Must be Overridden!");}
+	protected void processCategory(Content content) throws OfxAuthoringException {logger.warn("Must be Overridden!");}
 }

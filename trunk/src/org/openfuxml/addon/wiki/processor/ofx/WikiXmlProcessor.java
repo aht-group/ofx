@@ -33,6 +33,7 @@ import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Sections;
+import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.util.xml.OfxNsPrefixMapper;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -51,7 +52,7 @@ public class WikiXmlProcessor extends AbstractWikiProcessor implements WikiProce
 	}
 	
 	@Override
-	protected void processCategory(Content content)
+	protected void processCategory(Content content) throws OfxAuthoringException
 	{
 		Sections sections = new Sections();
 		Category category = content.getCategory();
@@ -70,20 +71,22 @@ public class WikiXmlProcessor extends AbstractWikiProcessor implements WikiProce
 	}
 	
 	@Override
-	protected void processPage(Content content)
+	protected void processPage(Content content) throws OfxAuthoringException
 	{
 		Page page = content.getPage();
 		processPage(page);
 	}
 	
-	public void processPage(Page page)
+	public void processPage(Page page) throws OfxAuthoringException
 	{
+		checkPageConfig(page);
+		
 		try
 		{
 			String srcName =  page.getFile()+"."+WikiProcessor.WikiFileExtension.xhtml;
 			String dstName = page.getFile()+"."+WikiProcessor.WikiFileExtension.xml;
 			String txtMarkup = WikiContentIO.loadTxt(srcDir, srcName);
-			String result = process(txtMarkup, "title");
+			String result = process(txtMarkup, page.getName());
 			
 			File fDst = new File(dstDir, dstName);
 			Document doc = JDomUtil.txtToDoc(result);
@@ -161,5 +164,14 @@ public class WikiXmlProcessor extends AbstractWikiProcessor implements WikiProce
 		catch (XMLStreamException e1) {throw new IllegalStateException(e1);}
 		catch (FactoryConfigurationError e1) {throw new IllegalStateException(e1);}
 		return new FormattingXMLStreamWriter(writer);
+	}
+	
+	private void checkPageConfig(Page page) throws OfxAuthoringException
+	{
+		boolean sSection = page.isSetSection();
+		boolean sSections = page.isSetSections();
+		
+		if(sSection && sSections){throw new OfxAuthoringException("Both <section> and <sections> are selected!");}
+		if(!sSection && !sSections){throw new OfxAuthoringException("None of <section> or <sections> are selected!");}
 	}
 }
