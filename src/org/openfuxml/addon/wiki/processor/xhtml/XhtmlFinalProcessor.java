@@ -4,14 +4,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
-import org.openfuxml.addon.wiki.processor.util.AbstractWikiInOutProcessor;
+import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
-import org.openfuxml.addon.wiki.processor.util.WikiInOutProcessor;
+import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.mods.OfxPushUp;
 import org.openfuxml.addon.wiki.processor.xhtml.mods.XhtmlAHxMerge;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 
-public class XhtmlFinalProcessor extends AbstractWikiInOutProcessor implements WikiInOutProcessor
+public class XhtmlFinalProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
 	static Log logger = LogFactory.getLog(XhtmlFinalProcessor.class);
 	

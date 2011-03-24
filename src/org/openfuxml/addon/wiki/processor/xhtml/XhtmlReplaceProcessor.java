@@ -8,13 +8,13 @@ import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
-import org.openfuxml.addon.wiki.processor.util.AbstractWikiInOutProcessor;
+import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlSourceLoader;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
-import org.openfuxml.addon.wiki.processor.util.WikiInOutProcessor;
+import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 
-public class XhtmlReplaceProcessor extends AbstractWikiInOutProcessor implements WikiInOutProcessor
+public class XhtmlReplaceProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
 	static Log logger = LogFactory.getLog(XhtmlReplaceProcessor.class);
 	

@@ -2,6 +2,8 @@ package org.openfuxml.renderer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import net.sf.exlp.io.ConfigLoader;
@@ -24,6 +26,7 @@ import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
 import org.openfuxml.addon.wiki.processor.ofx.OfxProcessor;
 import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
+import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlFinalProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;
 import org.openfuxml.content.ofx.Ofxdoc;
@@ -216,9 +219,14 @@ public class OfxRenderer
 		
 		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
 		
-		WikiMarkupProcessor wMaP = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
-		wMaP.setDirectories(dirWikiPlain, dirWikiMarkup);
-		wMaP.process(wikiQueries);
+		List<WikiProcessor> lWikiProcessors = new ArrayList<WikiProcessor>();
+		lWikiProcessors.add(new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections()));
+		
+		for(WikiProcessor wikiProcessor : lWikiProcessors)
+		{
+			wikiProcessor.setDirectories(dirWikiPlain, dirWikiMarkup);
+			wikiProcessor.process(wikiQueries);
+		}	
 		
 		WikiModelProcessor wMoP = new WikiModelProcessor();
 		wMoP.setDirectories(dirWikiMarkup, dirWikiModel);

@@ -25,15 +25,15 @@ import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
-import org.openfuxml.addon.wiki.processor.util.AbstractWikiInOutProcessor;
+import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
-import org.openfuxml.addon.wiki.processor.util.WikiInOutProcessor;
+import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-public class OfxProcessor extends AbstractWikiInOutProcessor implements WikiInOutProcessor
+public class OfxProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
 	static Log logger = LogFactory.getLog(OfxProcessor.class);
 	
