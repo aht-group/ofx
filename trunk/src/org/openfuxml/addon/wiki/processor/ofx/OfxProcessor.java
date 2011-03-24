@@ -6,7 +6,6 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.text.MessageFormat;
-import java.util.List;
 
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
@@ -25,6 +24,7 @@ import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
+import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiInOutProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiInOutProcessor;
@@ -42,9 +42,9 @@ public class OfxProcessor extends AbstractWikiInOutProcessor implements WikiInOu
 		WikiTemplates.init();
 	}
 	
-	public void process(List<Content> lContent)
+	public void process(Contents wikiQueries)
 	{
-		for(Content content : lContent)
+		for(Content content : wikiQueries.getContent())
 		{
 			try
 			{

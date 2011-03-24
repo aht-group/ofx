@@ -1,6 +1,5 @@
 package org.openfuxml.addon.wiki.processor.pre;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
-import org.openfuxml.addon.wiki.data.jaxb.Page;
+import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 
@@ -30,7 +29,7 @@ public class WikiExternalIntegrator
 	private String wikiXmlDirName;
 	
 	private Ofxdoc ofxDocWithWikisAsExternal;
-	private List<Content> wikiQueries;
+	private Contents wikiQueries;
 	
 	public WikiExternalIntegrator(String wikiXmlDirName)
 	{
@@ -45,7 +44,7 @@ public class WikiExternalIntegrator
 		catch (JDOMException e) {logger.error(e);}
 		xpath.addNamespace(ns);
 		counter = 1;
-		wikiQueries = new ArrayList<Content>();
+		wikiQueries = new Contents();
 	}
 	
 	public void integrateWikiAsExternal(Ofxdoc ofxDoc) throws OfxAuthoringException
@@ -66,7 +65,7 @@ public class WikiExternalIntegrator
 				
 				Element eOfx = processWikiContent(wikiContent);
 				wikiContent.setSource(eOfx.getAttributeValue("source"));
-				wikiQueries.add(wikiContent);
+				wikiQueries.getContent().add(wikiContent);
 				
 				int index = eChild.getParentElement().indexOf(eChild);
 				eChild.getParentElement().addContent(index,eOfx);
@@ -79,7 +78,7 @@ public class WikiExternalIntegrator
 	}
 	
 	public Ofxdoc getResult() {return ofxDocWithWikisAsExternal;}
-	public List<Content> getWikiQueries() {return wikiQueries;}
+	public Contents getWikiQueries() {return wikiQueries;}
 	
 	
 	private Element processWikiContent(Content wikiContent) throws OfxAuthoringException

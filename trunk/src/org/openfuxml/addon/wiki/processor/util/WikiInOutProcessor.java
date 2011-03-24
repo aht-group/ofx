@@ -1,12 +1,11 @@
 package org.openfuxml.addon.wiki.processor.util;
 
 import java.io.File;
-import java.util.List;
 
-import org.openfuxml.addon.wiki.data.jaxb.Content;
+import org.openfuxml.addon.wiki.data.jaxb.Contents;
 
 public interface WikiInOutProcessor
 {
 	void setDirectories(File srcDir, File dstDir);
-	void process(List<Content> lContent);
+	void process(Contents wikiQueries);
 }

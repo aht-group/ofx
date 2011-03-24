@@ -3,11 +3,11 @@ package org.openfuxml.addon.wiki.processor.markup;
 import info.bliki.wiki.model.WikiModel;
 
 import java.io.File;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
+import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.model.WikiDefaultModel;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 
@@ -30,9 +30,9 @@ public class WikiModelProcessor
 		logger.debug("Directory Model:  "+wikiModelDir.getAbsolutePath());
 	}
 	
-	public void process(List<Content> lContent)
+	public void process(Contents wikiQueries)
 	{
-		for(Content content : lContent)
+		for(Content content : wikiQueries.getContent())
 		{
 			String fNameMarkup = WikiContentIO.getFileFromSource(content.getSource(), "txt");
 			String fNameModel = WikiContentIO.getFileFromSource(content.getSource(), "xhtml");
