@@ -85,6 +85,8 @@ public class OfxRenderer
 	
 	public void chain(String fNameCmp, String fNameTmp, String ofxRoot) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
 	{
+		readConfig(fNameCmp,fNameTmp);
+		
 		String wikiPlainDir = "wikiPlain";
 		File dirWikiPlain = createDir(wikiPlainDir);
 		
@@ -94,10 +96,9 @@ public class OfxRenderer
 		String xhtmlFinalDir = "xhtmlFinal";
 		String ofxXmlDir = "ofxXml";
 		
-		readConfig(fNameCmp,fNameTmp);
 		phaseMergeInitial(ofxRoot);
 		phaseWikiExternalIntegrator(ofxXmlDir);
-		phaseWikiContentFetcher(false,dirWikiPlain,ofxXmlDir);
+		phaseWikiContentFetcher(true,dirWikiPlain);
 		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir);
 		phaseMerge(fNameTmp, Phase.wikiMerge);
 		phaseContainerMerge(fNameTmp, Phase.wikiMerge, Phase.containerMerge);
@@ -175,9 +176,8 @@ public class OfxRenderer
 		JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(Phase.wikiIntegrate)), ofxDoc, true);
 	}
 	
-	private void phaseWikiContentFetcher(boolean netConnection, File dirWikiPlain, String xmlOfx) throws OfxRenderingException, OfxInternalProcessingException
+	private void phaseWikiContentFetcher(boolean netConnection, File dirWikiPlain) throws OfxRenderingException, OfxInternalProcessingException
 	{
-		File dirXmlOfx = createDir(xmlOfx);
 		File fContents = new File(tmpDir,"contens.xml");
 		if(netConnection)
 		{
@@ -189,10 +189,10 @@ public class OfxRenderer
 				wbf.setWikiAuth(config.getString("wiki.user"), config.getString("wiki.password"));
 				
 				WikiContentFetcher contentFetcher = new WikiContentFetcher(wbf);
-				contentFetcher.setTargetDirs(dirWikiPlain,dirXmlOfx);
+				contentFetcher.setDirectories(null,dirWikiPlain);
 				try
 				{
-					contentFetcher.fetch(wikiQueries);
+					contentFetcher.process(wikiQueries);
 					JaxbUtil.save(fContents, wikiQueries, nsPrefixMapper, true);
 				}
 				catch (OfxWikiException e)

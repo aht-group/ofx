@@ -17,6 +17,7 @@ import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
+import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.renderer.latex.util.TxtWriter;
 
 public class WikiCategoryFetcher
@@ -50,13 +51,6 @@ public class WikiCategoryFetcher
 		catch (ProcessException e) {logger.error(e);}
 	}
 	
-	public void createExternalXml(File dirXmlOfx)
-	{
-		logger.warn("This MUST be Implemented");
-		logger.debug("Using dir: "+dirXmlOfx);
-		try {Thread.sleep(5000);} catch (InterruptedException e) {logger.error(e);}
-	}
-	
 	public void fetchArticles(TxtWriter txtWriter, Category category)
 	{
 		WikiPageFetcher wpf = new WikiPageFetcher(bot);
@@ -64,8 +58,8 @@ public class WikiCategoryFetcher
 		{
 			Page page = new Page();
 			page.setName(articleNames.get(i));
-			page.setWikiPlain(targetFilePrefix+i+".txt");
-			txtWriter.setTargetFile(page.getWikiPlain());
+			page.setFile(targetFilePrefix+i);
+			txtWriter.setTargetFile(page.getFile()+"."+WikiProcessor.WikiFileExtension.txt);
 			wpf.fetchText(page.getName());
 			wpf.save(txtWriter);
 			category.getPage().add(page);
