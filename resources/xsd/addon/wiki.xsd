@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://www.openfuxml.org/wiki"
     xmlns="http://www.openfuxml.org/wiki"
+    xmlns:ofx="http://www.openfuxml.org"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.openfuxml.org" schemaLocation="../ofx.xsd"/>
     <xsd:element name="ofx">
         <xsd:complexType>
             <xsd:sequence>
@@ -175,6 +177,10 @@
     </xsd:element>
     <xsd:element name="page">
         <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="ofx:section" maxOccurs="1"/>
+                <xsd:element ref="ofx:sections" maxOccurs="1"/>
+            </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
             <xsd:attribute name="name" type="xsd:string"/>
             <xsd:attribute name="file" type="xsd:string"/>
