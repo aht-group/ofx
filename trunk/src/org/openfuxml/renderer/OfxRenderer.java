@@ -194,6 +194,11 @@ public class OfxRenderer
 			try
 			{
 				contentFetcher.fetch(lWikiQueries);
+				
+				for(Content content : lWikiQueries)
+				{
+					JaxbUtil.debug(content);
+				}
 			}
 			catch (OfxWikiException e)
 			{

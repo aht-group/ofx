@@ -170,6 +170,7 @@
         <xsd:complexType>
             <xsd:attribute name="id" type="xsd:string"/>
             <xsd:attribute name="name" type="xsd:string"/>
+            <xsd:attribute name="wikiPlain" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="category">
@@ -177,6 +178,7 @@
             <xsd:sequence>
                 <xsd:element name="table" maxOccurs="1"/>
                 <xsd:element name="section" maxOccurs="1"/>
+                <xsd:element ref="page" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
             <xsd:attribute name="name" type="xsd:string"/>
