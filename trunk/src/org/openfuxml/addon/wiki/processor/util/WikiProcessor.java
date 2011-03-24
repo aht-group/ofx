@@ -2,10 +2,11 @@ package org.openfuxml.addon.wiki.processor.util;
 
 import java.io.File;
 
+import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 
-public interface WikiInOutProcessor
+public interface WikiProcessor
 {
 	void setDirectories(File srcDir, File dstDir);
-	void process(Contents wikiQueries);
+	void process(Contents wikiQueries) throws OfxWikiException;
 }

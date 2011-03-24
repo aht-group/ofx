@@ -5,22 +5,20 @@ import java.io.File;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
-import org.openfuxml.addon.wiki.data.jaxb.Content;
-import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.data.jaxb.Injections;
 import org.openfuxml.addon.wiki.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
-import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
+import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlSourceLoader;
+import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 
-public class WikiMarkupProcessor
+public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
 	static Log logger = LogFactory.getLog(WikiMarkupProcessor.class);
 	private final static String ls = SystemUtils.LINE_SEPARATOR;
@@ -29,7 +27,6 @@ public class WikiMarkupProcessor
 	
 	private Replacements replacements;
 	private Injections injections;
-	private File wikiPlainDir,wikiMarkupDir;
 	
 	private String wikiText;
 	private ObjectFactory of;
@@ -44,25 +41,8 @@ public class WikiMarkupProcessor
 		this.injections = WikiConfigXmlSourceLoader.initInjections(injections);;
 	}
 	
-	public void setDirectories(File wikiPlainDir, File wikiMarkupDir)
-	{
-		this.wikiPlainDir=wikiPlainDir;
-		this.wikiMarkupDir=wikiMarkupDir;
-		logger.debug("Directory Plain:  "+wikiPlainDir.getAbsolutePath());
-		logger.debug("Directory Markup: "+wikiMarkupDir.getAbsolutePath());
-	}
-	
-	public void process(Contents wikiQueries) throws OfxWikiException
-	{
-		for(Content content : wikiQueries.getContent())
-		{
-			if(content.isSetPage()){processPage(content.getPage());}
-			else if(content.isSetCategory()){processCategory(content.getCategory());}
-			else {throw new OfxWikiException("No "+WikiMarkupProcessor.class.getSimpleName()+" available for this element");}
-		}
-	}
-	
-	private void processCategory(Category category)
+	@Override
+	protected void processCategory(Category category)
 	{
 		for(Page page : category.getPage())
 		{
@@ -70,11 +50,12 @@ public class WikiMarkupProcessor
 		}
 	}
 	
-	private void processPage(Page page)
+	@Override
+	protected void processPage(Page page)
 	{
-		String txt = org.openfuxml.addon.wiki.processor.util.WikiContentIO.loadTxt(wikiPlainDir, page.getWikiPlain());
+		String txt = org.openfuxml.addon.wiki.processor.util.WikiContentIO.loadTxt(srcDir, page.getWikiPlain());
 		String result = process(txt, "article ... req?");
-		org.openfuxml.addon.wiki.processor.util.WikiContentIO.writeTxt(wikiMarkupDir, page.getWikiPlain(), result);
+		org.openfuxml.addon.wiki.processor.util.WikiContentIO.writeTxt(dstDir, page.getWikiPlain(), result);
 	}
 	
 	public String process(String wikiText, String article)
