@@ -16,6 +16,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -134,10 +135,9 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 	
 	private void checkPageConfig(Page page) throws OfxAuthoringException
 	{
+		JaxbUtil.debug(page);
 		boolean sSection = page.isSetSection();
-		boolean sSections = page.isSetSections();
 		
-		if(sSection && sSections){throw new OfxAuthoringException("Both <section> and <sections> are selected!");}
-		if(!sSection && !sSections){throw new OfxAuthoringException("None of <section> or <sections> are selected!");}
+		if(!sSection){throw new OfxAuthoringException("None of <section>  selected!");}
 	}
 }
