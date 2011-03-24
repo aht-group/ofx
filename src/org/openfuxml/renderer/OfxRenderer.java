@@ -2,7 +2,6 @@ package org.openfuxml.renderer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import net.sf.exlp.io.ConfigLoader;
@@ -16,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
-import org.openfuxml.addon.wiki.data.jaxb.Content;
+import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
 import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
@@ -30,6 +29,7 @@ import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
+import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.data.exception.OfxRenderingException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Merge;
@@ -51,7 +51,7 @@ public class OfxRenderer
 	
 	private OfxNsPrefixMapper nsPrefixMapper;
 	private Ofxdoc ofxDoc;
-	private List<Content> lWikiQueries;
+	private Contents wikiQueries;
 	
 	private File tmpDir;
 	
@@ -63,11 +63,7 @@ public class OfxRenderer
 	
 	private void readConfig(String fNameCmp, String fNameTmp) throws OfxConfigurationException
 	{
-		try
-		{
-			cmp = (Cmp)JaxbUtil.loadJAXB(fNameCmp, Cmp.class);
-//			JaxbUtil.debug(cmp);
-		}
+		try {cmp = (Cmp)JaxbUtil.loadJAXB(fNameCmp, Cmp.class);}
 		catch (FileNotFoundException e){throw new OfxConfigurationException("CMP configuration not found: "+fNameCmp);}
 		
 		tmpDir = new File(fNameTmp);
@@ -75,7 +71,7 @@ public class OfxRenderer
 		if(!tmpDir.isDirectory()){throw new OfxConfigurationException("Temporary directory is a file! ("+fNameTmp+")");}
 	}
 
-	public void chain() throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException
+	public void chain() throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
 	{
 		String fNameCmp = config.getString("ofx.xml.cmp");
 		String fNameTmp = config.getString("ofx.dir.tmp");
@@ -84,9 +80,11 @@ public class OfxRenderer
 		chain(fNameCmp, fNameTmp, ofxRoot);
 	}
 	
-	public void chain(String fNameCmp, String fNameTmp, String ofxRoot) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException
+	public void chain(String fNameCmp, String fNameTmp, String ofxRoot) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
 	{
 		String wikiPlainDir = "wikiPlain";
+		File dirWikiPlain = createDir(wikiPlainDir);
+		
 		String wikiMarkupDir = "wikiMarkup";
 		String wikiModelDir = "wikiModel";
 		String xhtmlReplaceDir = "xhtmlReplace";
@@ -96,7 +94,7 @@ public class OfxRenderer
 		readConfig(fNameCmp,fNameTmp);
 		phaseMergeInitial(ofxRoot);
 		phaseWikiExternalIntegrator(ofxXmlDir);
-		phaseWikiContentFetcher(wikiPlainDir,ofxXmlDir);
+		phaseWikiContentFetcher(false,dirWikiPlain,ofxXmlDir);
 		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir);
 		phaseMerge(fNameTmp, Phase.wikiMerge);
 		phaseContainerMerge(fNameTmp, Phase.wikiMerge, Phase.containerMerge);
@@ -162,8 +160,6 @@ public class OfxRenderer
 			logger.warn("OfxPreprocessorException");//TODO new exception
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	private void phaseWikiExternalIntegrator(String wikiXmlDir) throws OfxAuthoringException
@@ -171,43 +167,45 @@ public class OfxRenderer
 		WikiExternalIntegrator wikiExIntegrator = new WikiExternalIntegrator(wikiXmlDir);
 		wikiExIntegrator.integrateWikiAsExternal(ofxDoc);
 		ofxDoc = wikiExIntegrator.getResult();
-		lWikiQueries = wikiExIntegrator.getWikiQueries();
+		wikiQueries = wikiExIntegrator.getWikiQueries();
 		
 		JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(Phase.wikiIntegrate)), ofxDoc, true);
 	}
 	
-	@SuppressWarnings("unused")
-	private void phaseWikiContentFetcher(String wikiPlainDir, String xmlOfx) throws OfxRenderingException
+	private void phaseWikiContentFetcher(boolean netConnection, File dirWikiPlain, String xmlOfx) throws OfxRenderingException, OfxInternalProcessingException
 	{
-		File dirWikiPlain = createDir(wikiPlainDir);
 		File dirXmlOfx = createDir(xmlOfx);
-		
-		if(lWikiQueries!=null)
+		File fContents = new File(tmpDir,"contens.xml");
+		if(netConnection)
 		{
-			WikiBotFactory wbf = new WikiBotFactory();
-			wbf.setUrl(config.getString("wiki.url"));
-			wbf.setHttpDigestAuth(config.getString("wiki.http.user"), config.getString("wiki.http.password"));
-			wbf.setWikiAuth(config.getString("wiki.user"), config.getString("wiki.password"));
-			
-			WikiContentFetcher contentFetcher = new WikiContentFetcher(wbf);
-			contentFetcher.setTargetDirs(dirWikiPlain,dirXmlOfx);
-			try
+			if(wikiQueries.isSetContent())
 			{
-				contentFetcher.fetch(lWikiQueries);
+				WikiBotFactory wbf = new WikiBotFactory();
+				wbf.setUrl(config.getString("wiki.url"));
+				wbf.setHttpDigestAuth(config.getString("wiki.http.user"), config.getString("wiki.http.password"));
+				wbf.setWikiAuth(config.getString("wiki.user"), config.getString("wiki.password"));
 				
-				for(Content content : lWikiQueries)
+				WikiContentFetcher contentFetcher = new WikiContentFetcher(wbf);
+				contentFetcher.setTargetDirs(dirWikiPlain,dirXmlOfx);
+				try
 				{
-					JaxbUtil.debug(content);
+					contentFetcher.fetch(wikiQueries);
+					JaxbUtil.save(fContents, wikiQueries, nsPrefixMapper, true);
+				}
+				catch (OfxWikiException e)
+				{
+					throw new OfxRenderingException(e.getMessage());
 				}
 			}
-			catch (OfxWikiException e)
-			{
-				throw new OfxRenderingException(e.getMessage());
-			}
+		}
+		else
+		{
+			try {wikiQueries = (Contents)JaxbUtil.loadJAXB(fContents.getAbsolutePath(), Contents.class);}
+			catch (FileNotFoundException e) {throw new OfxInternalProcessingException(e.getMessage());}
 		}
 	}
 	
-	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir, String wikiModelDir, String xhtmlReplace, String xhtmlFinal, String xmlOfx) throws OfxConfigurationException
+	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir, String wikiModelDir, String xhtmlReplace, String xhtmlFinal, String xmlOfx) throws OfxConfigurationException, OfxWikiException
 	{	
 		File dirWikiPlain = createDir(wikiPlainDir);
 		File dirWikiMarkup = createDir(wikiMarkupDir);
@@ -220,24 +218,24 @@ public class OfxRenderer
 		
 		WikiMarkupProcessor wMaP = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
 		wMaP.setDirectories(dirWikiPlain, dirWikiMarkup);
-		wMaP.process(lWikiQueries);
+		wMaP.process(wikiQueries);
 		
 		WikiModelProcessor wMoP = new WikiModelProcessor();
 		wMoP.setDirectories(dirWikiMarkup, dirWikiModel);
-		wMoP.process(lWikiQueries);
+		wMoP.process(wikiQueries);
 		
 		XhtmlProcessor xpXml = cmp.getPreprocessor().getWiki().getXhtmlProcessor();
 		XhtmlReplaceProcessor xhtmlReplaceP = new XhtmlReplaceProcessor(xpXml.getReplacements());
 		xhtmlReplaceP.setDirectories(dirWikiModel, dirXhtmlReplace);
-		xhtmlReplaceP.process(lWikiQueries);
+		xhtmlReplaceP.process(wikiQueries);
 		
 		XhtmlFinalProcessor xhtmlFinalP = new XhtmlFinalProcessor();
 		xhtmlFinalP.setDirectories(dirXhtmlReplace, dirXhtmlFinal);
-		xhtmlFinalP.process(lWikiQueries);
+		xhtmlFinalP.process(wikiQueries);
 		
 		OfxProcessor ofxP = new OfxProcessor();
 		ofxP.setDirectories(dirXhtmlFinal, dirXmlOfx);
-		ofxP.process(lWikiQueries);
+		ofxP.process(wikiQueries);
 	}
 	
 	private void phaseLatex(Phase phaseLoad)

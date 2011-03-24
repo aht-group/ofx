@@ -1,13 +1,13 @@
 package org.openfuxml.addon.wiki.processor.net;
 
 import java.io.File;
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
+import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.net.fetcher.WikiCategoryFetcher;
 import org.openfuxml.addon.wiki.processor.net.fetcher.WikiPageFetcher;
@@ -31,11 +31,11 @@ public class WikiContentFetcher
 		setTargetDirs(currentDir,currentDir);
 	}
 
-	public void fetch(List<Content> lContent) throws OfxWikiException
+	public void fetch(Contents wikiQueries) throws OfxWikiException
 	{
-		logger.debug("Fetching "+lContent.size()+" content elements");
+		logger.debug("Fetching "+wikiQueries.getContent().size()+" content elements");
 		
-		for(Content content : lContent)
+		for(Content content : wikiQueries.getContent())
 		{
 			if(content.isSetPage()){fetchPage(content);}
 			else if(content.isSetCategory()){fetchCategory(content);}

@@ -1,12 +1,11 @@
 package org.openfuxml.addon.wiki.processor.xhtml;
 
-import java.util.List;
-
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
+import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiInOutProcessor;
@@ -29,9 +28,9 @@ public class XhtmlReplaceProcessor extends AbstractWikiInOutProcessor implements
 		JaxbUtil.debug(this.replacements);
 	}
 	
-	public void process(List<Content> lContent)
+	public void process(Contents wikiQueries)
 	{
-		for(Content content : lContent)
+		for(Content content : wikiQueries.getContent())
 		{
 			String fNameXhtml = WikiContentIO.getFileFromSource(content.getSource(), "xhtml");
 			String txtMarkup = WikiContentIO.loadTxt(srcDir, fNameXhtml);
