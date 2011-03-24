@@ -16,6 +16,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,12 +24,16 @@ import org.jdom.Document;
 import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
 import org.openfuxml.addon.wiki.WikiTemplates;
+import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
-import org.openfuxml.addon.wiki.data.jaxb.Contents;
+import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
+import org.openfuxml.content.ofx.Section;
+import org.openfuxml.content.ofx.Sections;
+import org.openfuxml.util.xml.OfxNsPrefixMapper;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -37,32 +42,57 @@ public class WikiXmlProcessor extends AbstractWikiProcessor implements WikiProce
 {
 	static Log logger = LogFactory.getLog(WikiXmlProcessor.class);
 	
+	private OfxNsPrefixMapper nsPrefixMapper;
+	
 	public WikiXmlProcessor()
 	{
 		WikiTemplates.init();
+		nsPrefixMapper = new OfxNsPrefixMapper();
 	}
 	
-	public void process(Contents wikiQueries)
+	@Override
+	protected void processCategory(Content content)
 	{
-		for(Content content : wikiQueries.getContent())
+		Sections sections = new Sections();
+		Category category = content.getCategory();
+		for(Page page : category.getPage())
 		{
-			try
-			{
-				String srcName = WikiContentIO.getFileFromSource(content.getSource(), "xhtml");
-				String dstName = WikiContentIO.getFileFromSource(content.getSource(), "xml");
-				String txtMarkup = WikiContentIO.loadTxt(srcDir, srcName);
-				String result = process(txtMarkup, "title");
-				
-				File fDst = new File(dstDir, dstName);
-				Document doc = JDomUtil.txtToDoc(result);
-				JDomUtil.save(doc, fDst, Format.getRawFormat());
-			}
-			catch (IOException e) {logger.error(e);}
-			catch (ParserConfigurationException e) {logger.error(e);}
-			catch (XMLStreamException e) {logger.error(e);}
-			catch (SAXException e) {logger.error(e);}
-			
+			Section section = new Section();
+			section.setExternal(true);
+			section.setSource(dstDir.getName()+"/"+page.getFile()+"."+WikiProcessor.WikiFileExtension.xml);
+			sections.getContent().add(section);
+			processPage(page);
 		}
+		String fName = WikiContentIO.getFileFromSource(content.getSource())+"."+WikiProcessor.WikiFileExtension.xml;
+		File f = new File(dstDir,fName);
+		logger.debug("Writing categories external XML: "+f.getAbsolutePath());
+		JaxbUtil.save(f, sections, nsPrefixMapper,true);
+	}
+	
+	@Override
+	protected void processPage(Content content)
+	{
+		Page page = content.getPage();
+		processPage(page);
+	}
+	
+	public void processPage(Page page)
+	{
+		try
+		{
+			String srcName =  page.getFile()+"."+WikiProcessor.WikiFileExtension.xhtml;
+			String dstName = page.getFile()+"."+WikiProcessor.WikiFileExtension.xml;
+			String txtMarkup = WikiContentIO.loadTxt(srcDir, srcName);
+			String result = process(txtMarkup, "title");
+			
+			File fDst = new File(dstDir, dstName);
+			Document doc = JDomUtil.txtToDoc(result);
+			JDomUtil.save(doc, fDst, Format.getRawFormat());
+		}
+		catch (IOException e) {logger.error(e);}
+		catch (ParserConfigurationException e) {logger.error(e);}
+		catch (XMLStreamException e) {logger.error(e);}
+		catch (SAXException e) {logger.error(e);}
 	}
 
 	public String process(String xhtmlContent, String titleText) throws IOException, ParserConfigurationException, XMLStreamException, SAXException
