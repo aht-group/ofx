@@ -2,44 +2,49 @@ package org.openfuxml.addon.wiki.processor.markup;
 
 import info.bliki.wiki.model.WikiModel;
 
-import java.io.File;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
-import org.openfuxml.addon.wiki.data.jaxb.Contents;
+import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.model.WikiDefaultModel;
+import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
+import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 
-public class WikiModelProcessor
+public class WikiModelProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
 	static Log logger = LogFactory.getLog(WikiModelProcessor.class);
-	
-	private File wikiMarkupDir,wikiModelDir;
 	
 	public WikiModelProcessor()
 	{
 
 	}
 	
-	public void setDirectories(File wikiMarkupDir, File wikiModelDir)
+	@Override
+	protected void processCategory(Content content)
 	{
-		this.wikiMarkupDir=wikiMarkupDir;
-		this.wikiModelDir=wikiModelDir;
-		logger.debug("Directory Markup: "+wikiMarkupDir.getAbsolutePath());
-		logger.debug("Directory Model:  "+wikiModelDir.getAbsolutePath());
+		Category category = content.getCategory();
+		for(Page page : category.getPage())
+		{
+			processPage(page);
+		}
 	}
 	
-	public void process(Contents wikiQueries)
+	@Override
+	protected void processPage(Content content)
 	{
-		for(Content content : wikiQueries.getContent())
-		{
-			String fNameMarkup = WikiContentIO.getFileFromSource(content.getSource(), "txt");
-			String fNameModel = WikiContentIO.getFileFromSource(content.getSource(), "xhtml");
-			String txtMarkup = WikiContentIO.loadTxt(wikiMarkupDir, fNameMarkup);
-			String result = process(txtMarkup);
-			WikiContentIO.writeTxt(wikiModelDir, fNameModel, result);
-		}
+		Page page = content.getPage();
+		processPage(page);
+	}
+	
+	private void processPage(Page page)
+	{
+		String fNameMarkup = page.getFile()+"."+WikiProcessor.WikiFileExtension.txt;
+		String fNameModel = page.getFile()+"."+WikiProcessor.WikiFileExtension.xhtml;
+		String txtMarkup = WikiContentIO.loadTxt(srcDir, fNameMarkup);
+		String result = process(txtMarkup);
+		WikiContentIO.writeTxt(dstDir, fNameModel, result);
 	}
 	
 	private String process(String txtMarkup)
