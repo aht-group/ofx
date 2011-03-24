@@ -2,8 +2,9 @@ package org.openfuxml.addon.wiki.processor.xhtml;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
-import org.openfuxml.addon.wiki.data.jaxb.Contents;
+import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
@@ -20,15 +21,29 @@ public class XhtmlFinalProcessor extends AbstractWikiProcessor implements WikiPr
 		
 	}
 	
-	public void process(Contents wikiQueries)
+	@Override
+	protected void processCategory(Content content)
 	{
-		for(Content content : wikiQueries.getContent())
+		Category category = content.getCategory();
+		for(Page page : category.getPage())
 		{
-			String fNameXhtml = WikiContentIO.getFileFromSource(content.getSource(), "xhtml");
-			String txtMarkup = WikiContentIO.loadTxt(srcDir, fNameXhtml);
-			String result = process(txtMarkup);
-			WikiContentIO.writeTxt(dstDir, fNameXhtml, result);
+			processPage(page);
 		}
+	}
+	
+	@Override
+	protected void processPage(Content content)
+	{
+		Page page = content.getPage();
+		processPage(page);
+	}
+	
+	public void processPage(Page page)
+	{
+		String fNameXhtml = page.getFile()+"."+WikiProcessor.WikiFileExtension.xhtml;
+		String txtMarkup = WikiContentIO.loadTxt(srcDir, fNameXhtml);
+		String result = process(txtMarkup);
+		WikiContentIO.writeTxt(dstDir, fNameXhtml, result);
 	}
 	
 	public String process(String xHtml)

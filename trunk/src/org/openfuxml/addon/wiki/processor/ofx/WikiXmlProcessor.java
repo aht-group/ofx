@@ -33,11 +33,11 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-public class OfxProcessor extends AbstractWikiProcessor implements WikiProcessor
+public class WikiXmlProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
-	static Log logger = LogFactory.getLog(OfxProcessor.class);
+	static Log logger = LogFactory.getLog(WikiXmlProcessor.class);
 	
-	public OfxProcessor()
+	public WikiXmlProcessor()
 	{
 		WikiTemplates.init();
 	}

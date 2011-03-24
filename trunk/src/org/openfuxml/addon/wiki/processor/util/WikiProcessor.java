@@ -7,7 +7,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Contents;
 
 public interface WikiProcessor
 {
-	public static enum WikiFileExtension {txt}
+	public static enum WikiFileExtension {txt,xhtml}
 	
 	void setDirectories(File srcDir, File dstDir);
 	void process(Contents wikiQueries) throws OfxWikiException;

@@ -23,7 +23,7 @@ import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
 import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
-import org.openfuxml.addon.wiki.processor.ofx.OfxProcessor;
+import org.openfuxml.addon.wiki.processor.ofx.WikiXmlProcessor;
 import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
@@ -98,7 +98,7 @@ public class OfxRenderer
 		
 		phaseMergeInitial(ofxRoot);
 		phaseWikiExternalIntegrator(ofxXmlDir);
-		phaseWikiContentFetcher(true,dirWikiPlain);
+		phaseWikiContentFetcher(false,dirWikiPlain);
 		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir);
 		phaseMerge(fNameTmp, Phase.wikiMerge);
 		phaseContainerMerge(fNameTmp, Phase.wikiMerge, Phase.containerMerge);
@@ -218,30 +218,34 @@ public class OfxRenderer
 		File dirXmlOfx = createDir(xmlOfx);
 		
 		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
+		XhtmlProcessor xpXml = cmp.getPreprocessor().getWiki().getXhtmlProcessor();
 		
 		List<WikiProcessor> lWikiProcessors = new ArrayList<WikiProcessor>();
-		lWikiProcessors.add(new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections()));
+		
+		WikiProcessor wpMarkup = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
+		wpMarkup.setDirectories(dirWikiPlain, dirWikiMarkup);
+		lWikiProcessors.add(wpMarkup);
+		
+		WikiProcessor wpModel = new WikiModelProcessor();
+		wpModel.setDirectories(dirWikiMarkup, dirWikiModel);
+		lWikiProcessors.add(wpModel);
+		
+		WikiProcessor wpXhtmlR = new XhtmlReplaceProcessor(xpXml.getReplacements());
+		wpXhtmlR.setDirectories(dirWikiModel, dirXhtmlReplace);
+		lWikiProcessors.add(wpXhtmlR);
+		
+		WikiProcessor wpXhtmlF = new XhtmlFinalProcessor();
+		wpXhtmlF.setDirectories(dirXhtmlReplace, dirXhtmlFinal);
+		lWikiProcessors.add(wpXhtmlF);
 		
 		for(WikiProcessor wikiProcessor : lWikiProcessors)
 		{
-			wikiProcessor.setDirectories(dirWikiPlain, dirWikiMarkup);
 			wikiProcessor.process(wikiQueries);
 		}	
 		
-		WikiModelProcessor wMoP = new WikiModelProcessor();
-		wMoP.setDirectories(dirWikiMarkup, dirWikiModel);
-		wMoP.process(wikiQueries);
 		
-		XhtmlProcessor xpXml = cmp.getPreprocessor().getWiki().getXhtmlProcessor();
-		XhtmlReplaceProcessor xhtmlReplaceP = new XhtmlReplaceProcessor(xpXml.getReplacements());
-		xhtmlReplaceP.setDirectories(dirWikiModel, dirXhtmlReplace);
-		xhtmlReplaceP.process(wikiQueries);
 		
-		XhtmlFinalProcessor xhtmlFinalP = new XhtmlFinalProcessor();
-		xhtmlFinalP.setDirectories(dirXhtmlReplace, dirXhtmlFinal);
-		xhtmlFinalP.process(wikiQueries);
-		
-		OfxProcessor ofxP = new OfxProcessor();
+		WikiXmlProcessor ofxP = new WikiXmlProcessor();
 		ofxP.setDirectories(dirXhtmlFinal, dirXmlOfx);
 		ofxP.process(wikiQueries);
 	}
