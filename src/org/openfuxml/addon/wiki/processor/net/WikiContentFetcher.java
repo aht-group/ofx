@@ -45,8 +45,9 @@ public class WikiContentFetcher
 	
 	private void fetchPage(Content content)
 	{
-		txtWriter.setTargetFile(WikiContentIO.getFileFromSource(content.getSource(), "txt"));
 		Page page = content.getPage();
+		page.setWikiPlain(WikiContentIO.getFileFromSource(content.getSource(), "txt"));
+		txtWriter.setTargetFile(page.getWikiPlain());
 		WikiPageFetcher wpf = new WikiPageFetcher(wbf.getBot());
 		wpf.fetchText(page.getName());
 		wpf.save(txtWriter);
@@ -58,7 +59,7 @@ public class WikiContentFetcher
 		WikiCategoryFetcher wcf = new WikiCategoryFetcher(wbf.getBot());
 		wcf.fetchCategory(category.getName());
 		wcf.setTargetFilePrefix(WikiContentIO.getFileFromSource(content.getSource(), ""));
-		wcf.fetchArticles(txtWriter);
+		wcf.fetchArticles(txtWriter,category);
 		wcf.createExternalXml(dirXmlOfx);
 	}
 	

@@ -14,6 +14,8 @@ import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
+import org.openfuxml.addon.wiki.data.jaxb.Category;
+import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.renderer.latex.util.TxtWriter;
 
@@ -55,15 +57,18 @@ public class WikiCategoryFetcher
 		try {Thread.sleep(5000);} catch (InterruptedException e) {logger.error(e);}
 	}
 	
-	public void fetchArticles(TxtWriter txtWriter)
+	public void fetchArticles(TxtWriter txtWriter, Category category)
 	{
 		WikiPageFetcher wpf = new WikiPageFetcher(bot);
 		for(int i=0;i<articleNames.size();i++)
 		{
-			String articleName = articleNames.get(i);
-			txtWriter.setTargetFile(targetFilePrefix+i+".txt");
-			wpf.fetchText(articleName);
+			Page page = new Page();
+			page.setName(articleNames.get(i));
+			page.setWikiPlain(targetFilePrefix+i+".txt");
+			txtWriter.setTargetFile(page.getWikiPlain());
+			wpf.fetchText(page.getName());
 			wpf.save(txtWriter);
+			category.getPage().add(page);
 		}
 	}
 	
