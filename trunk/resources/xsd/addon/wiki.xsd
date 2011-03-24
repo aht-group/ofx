@@ -179,7 +179,6 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="ofx:section" maxOccurs="1"/>
-                <xsd:element ref="ofx:sections" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
             <xsd:attribute name="name" type="xsd:string"/>
