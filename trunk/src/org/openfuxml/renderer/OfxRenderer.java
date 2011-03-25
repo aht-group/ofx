@@ -89,6 +89,7 @@ public class OfxRenderer
 		
 		String wikiPlainDir = "wikiPlain";
 		File dirWikiPlain = createDir(wikiPlainDir);
+		File dirWikiTemplate = createDir(WikiProcessor.WikiDir.wikiTemplate.toString());
 		
 		String wikiMarkupDir = "wikiMarkup";
 		String wikiModelDir = "wikiModel";
@@ -99,7 +100,7 @@ public class OfxRenderer
 		phaseMergeInitial(ofxRoot);
 		phaseWikiExternalIntegrator(ofxXmlDir);
 		phaseWikiContentFetcher(false,dirWikiPlain);
-		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir);
+		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir, dirWikiTemplate);
 		phaseMerge(fNameTmp, Phase.wikiMerge);
 		phaseContainerMerge(fNameTmp, Phase.wikiMerge, Phase.containerMerge);
 		phaseExternalMerge(fNameTmp, Phase.containerMerge, Phase.mergeFinal);
@@ -230,7 +231,7 @@ public class OfxRenderer
 		}
 	}
 	
-	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir, String wikiModelDir, String xhtmlReplace, String xhtmlFinal, String xmlOfx) throws OfxConfigurationException, OfxWikiException, OfxAuthoringException, OfxInternalProcessingException
+	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir, String wikiModelDir, String xhtmlReplace, String xhtmlFinal, String xmlOfx, File dirWikiTemplate) throws OfxConfigurationException, OfxWikiException, OfxAuthoringException, OfxInternalProcessingException
 	{	
 		File dirWikiPlain = createDir(wikiPlainDir);
 		File dirWikiMarkup = createDir(wikiMarkupDir);
@@ -246,6 +247,7 @@ public class OfxRenderer
 		
 		WikiProcessor wpMarkup = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
 		wpMarkup.setDirectories(dirWikiPlain, dirWikiMarkup);
+		wpMarkup.setDirectory(WikiProcessor.WikiDir.wikiTemplate, dirWikiTemplate);
 		lWikiProcessors.add(wpMarkup);
 		
 		WikiProcessor wpModel = new WikiModelProcessor();

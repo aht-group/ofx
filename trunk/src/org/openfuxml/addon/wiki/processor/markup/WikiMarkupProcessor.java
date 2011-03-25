@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.io.LoggerInit;
-import net.sf.exlp.io.StringBufferOutputStream;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
@@ -27,6 +26,7 @@ import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlSourceLoader;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
+import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 
 public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiProcessor
@@ -42,6 +42,7 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 	private String wikiText;
 	private ObjectFactory of;
 	
+	private int templateCounter;
 	private static String templateStartDelemiter = "{{";
 	private static String templateEndDelemiter = "}}";
 	
@@ -57,13 +58,12 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 	public WikiMarkupProcessor(Replacements replacements, Injections injections) throws OfxConfigurationException
 	{
 		this.replacements = WikiConfigXmlSourceLoader.initReplacements(replacements);
-		this.injections = WikiConfigXmlSourceLoader.initInjections(injections);;
+		this.injections = WikiConfigXmlSourceLoader.initInjections(injections);
+		templateCounter=0;
 	}
 	
-	
-	
 	@Override
-	protected void processCategory(Content content)
+	protected void processCategory(Content content) throws OfxInternalProcessingException
 	{
 		Category category = content.getCategory();
 		for(Page page : category.getPage())
@@ -73,13 +73,13 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 	}
 	
 	@Override
-	protected void processPage(Content content)
+	protected void processPage(Content content) throws OfxInternalProcessingException
 	{
 		Page page = content.getPage();
 		processPage(page);
 	}
 	
-	protected void processPage(Page page)
+	protected void processPage(Page page) throws OfxInternalProcessingException
 	{
 		logger.debug("Processing: "+page.getName());
 		String fName = page.getFile()+"."+WikiProcessor.WikiFileExtension.txt;
@@ -88,7 +88,7 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 		org.openfuxml.addon.wiki.processor.util.WikiContentIO.writeTxt(dstDir, fName, result);
 	}
 	
-	public String process(String wikiText, String article)
+	public String process(String wikiText, String article) throws OfxInternalProcessingException
 	{
 		this.wikiText=wikiText;
 		for(Wikireplace replace : replacements.getWikireplace()){processReplacements(replace);}
@@ -102,7 +102,7 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 		wikiText = wikiText.replaceAll(replace.getFrom(), replace.getTo());
 	}
 	
-	private void processTempalte(Template template)
+	private void processTempalte(Template template) throws OfxInternalProcessingException
 	{
 		int beginIndex=-1;
 		while((beginIndex=wikiText.indexOf(templateStartDelemiter+template.getName()))>=0)
@@ -116,12 +116,17 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 		}
 	}
 	
-	private String createExternalTemplate(Template templateDef, String templateMarkup)
+	private String createExternalTemplate(Template templateDef, String templateMarkup) throws OfxInternalProcessingException
 	{	
 		Template template = new Template();
-		template.setId(UUID.randomUUID().toString());
+		template.setName(templateDef.getName());
+		template.setId(getNextTemplateId());
+		template.setUuid(UUID.randomUUID().toString());
 		template.setMarkup(new Markup());
 		template.getMarkup().setValue(templateMarkup);
+		
+		File f = new File(this.getDir(WikiProcessor.WikiDir.wikiTemplate), template.getId()+"."+WikiProcessor.WikiFileExtension.xml);
+		JaxbUtil.save(f, template, nsPrefixMapper, true);
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append(SystemUtils.LINE_SEPARATOR);
@@ -166,6 +171,12 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 			sbDebug.append(" newSize="+wikiText.length());
 			logger.debug(sbDebug);
 		}
+	}
+	
+	private String getNextTemplateId()
+	{
+		templateCounter++;
+		return ""+templateCounter;
 	}
 	
 	public static void main (String[] args) throws Exception
