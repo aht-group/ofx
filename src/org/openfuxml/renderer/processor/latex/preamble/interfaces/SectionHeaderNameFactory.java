@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.preamble.interfaces;
+package org.openfuxml.renderer.processor.latex.preamble.interfaces;
 
 public interface SectionHeaderNameFactory
 {

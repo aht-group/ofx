@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.util;
+package org.openfuxml.renderer.processor.latex.util;
 
 import java.io.BufferedWriter;
 import java.io.File;

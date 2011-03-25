@@ -15,7 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
-import org.openfuxml.renderer.latex.util.TxtWriter;
+import org.openfuxml.renderer.processor.latex.util.TxtWriter;
 
 public class WikiPageFetcher
 {

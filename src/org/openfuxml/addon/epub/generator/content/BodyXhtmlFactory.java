@@ -5,8 +5,8 @@ import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.jdom.Namespace;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.factory.epub.EpubSectionFactory;
-import org.openfuxml.factory.epub.EpubTitleFactory;
+import org.openfuxml.renderer.processor.epub.factory.EpubSectionFactory;
+import org.openfuxml.renderer.processor.epub.factory.EpubTitleFactory;
 import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 
 public class BodyXhtmlFactory

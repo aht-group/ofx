@@ -1,11 +1,11 @@
-package org.openfuxml.renderer.latex.content;
+package org.openfuxml.renderer.processor.latex.content;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.renderer.latex.preamble.LatexPreamble;
-import org.openfuxml.renderer.latex.util.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.latex.util.OfxLatexRenderer;
+import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
+import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 
 public class SectionTitleFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
