@@ -15,7 +15,9 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
+import org.jfree.chart.title.Title;
 import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 
@@ -37,6 +39,10 @@ public class OfxContainerMerger
 			XPath xpSections  = XPath.newInstance("//ofx:sections");
 			xpSections.addNamespace(nsOfx); xpSections.addNamespace(nsWiki);
 			lXpath.add(xpSections);
+			
+			XPath xpSectionTransparent  = XPath.newInstance("//ofx:section[@transparent='true']");
+			xpSectionTransparent.addNamespace(nsOfx); xpSectionTransparent.addNamespace(nsWiki);
+			lXpath.add(xpSectionTransparent);
 		}
 		catch (JDOMException e) {logger.error(e);}
 	}
@@ -70,10 +76,8 @@ public class OfxContainerMerger
 				int index = e.getParentElement().indexOf(e);
 				List<Element> lChilds = new ArrayList<Element>();
 				
-				if(e.getName().equalsIgnoreCase(Sections.class.getSimpleName()))
-				{
-					lChilds = processSections(e.getChildren());
-				}
+				if     (e.getName().equalsIgnoreCase(Sections.class.getSimpleName())){lChilds = processSections(e.getChildren());}
+				else if(e.getName().equalsIgnoreCase(Section.class.getSimpleName())){lChilds = processSection(e.getChildren());}
 				else {throw new OfxInternalProcessingException("Root element <"+e.getName()+"> of Wiki.Processing not expected");}
 				
 				e.getParentElement().addContent(index, lChilds);
@@ -89,8 +93,22 @@ public class OfxContainerMerger
 		List<Element> lSection = new ArrayList<Element>();
 		for(Object o : lChilds)
 		{
-			Element eSection = (Element)o;				
-			lSection.add(eSection);
+			Element e = (Element)o;				
+			lSection.add(e);
+		}
+		for(Element e : lSection){e.detach();}
+		return lSection;
+	}
+	
+	private List<Element> processSection(List<?> lChilds)
+	{
+		List<Element> lSection = new ArrayList<Element>();
+		for(Object o : lChilds)
+		{
+			Element e = (Element)o;
+			boolean add = true;
+			if(e.getName().equalsIgnoreCase(Title.class.getSimpleName())){add=false;}
+			if(add){lSection.add(e);}
 		}
 		for(Element e : lSection){e.detach();}
 		return lSection;
@@ -103,7 +121,9 @@ public class OfxContainerMerger
 			loggerInit.init();
 		logger.debug("Testing ExternalMerger");
 		
-		String fName = "resources/data/xml/preprocessor/sections.xml";
+		String fName;
+//		fName = "resources/data/xml/preprocessor/merge/container/sections.xml";
+		fName = "resources/data/xml/preprocessor/merge/container/transparent.xml";
 		if(args.length == 1 ){fName = args[0];}
 		
 		Ofxdoc ofxDocOriginal = (Ofxdoc)JaxbUtil.loadJAXB(fName, Ofxdoc.class);
