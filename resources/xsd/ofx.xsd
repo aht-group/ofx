@@ -120,6 +120,7 @@
                 <xsd:element ref="section" maxOccurs="unbounded"/>
                 <xsd:element ref="sections" maxOccurs="unbounded"/>
                 <xsd:element ref="table" maxOccurs="unbounded"/>
+                <xsd:element ref="wiki:template" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
             <xsd:attribute name="external" type="xsd:boolean"/>
