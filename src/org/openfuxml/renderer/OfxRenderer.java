@@ -147,7 +147,7 @@ public class OfxRenderer
 		JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(phase)), ofxDoc, nsPrefixMapper, true);
 	}
 	
-	private void phaseContainerMerge(String fNameTmp, Phase phaseLoad, Phase phaseSave)
+	private void phaseContainerMerge(String fNameTmp, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException
 	{
 		File f = new File(fNameTmp,getPhaseXmlFileName(phaseLoad));
 		
@@ -230,7 +230,7 @@ public class OfxRenderer
 		}
 	}
 	
-	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir, String wikiModelDir, String xhtmlReplace, String xhtmlFinal, String xmlOfx) throws OfxConfigurationException, OfxWikiException, OfxAuthoringException
+	private void phaseWikiProcessing(String wikiPlainDir, String wikiMarkupDir, String wikiModelDir, String xhtmlReplace, String xhtmlFinal, String xmlOfx) throws OfxConfigurationException, OfxWikiException, OfxAuthoringException, OfxInternalProcessingException
 	{	
 		File dirWikiPlain = createDir(wikiPlainDir);
 		File dirWikiMarkup = createDir(wikiMarkupDir);
