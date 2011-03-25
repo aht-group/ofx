@@ -457,7 +457,8 @@ public class WikiDefaultModel extends WikiModel
 		TagNode.addAllowedAttribute("style");
 	}
 
-	public WikiDefaultModel(String imageBaseURL, String linkBaseURL) {
+	public WikiDefaultModel(String imageBaseURL, String linkBaseURL)
+	{
 		this(Locale.ENGLISH, imageBaseURL, linkBaseURL);
 	}
 
@@ -541,12 +542,14 @@ public class WikiDefaultModel extends WikiModel
 	 * Set the German image namespace
 	 */
 	@Override
-	public String getImageNamespace() {
+	public String getImageNamespace()
+	{
 		return "Bild";
 	}
 
 	@Override
-	public boolean isImageNamespace(String name) {
+	public boolean isImageNamespace(String name)
+	{
 		return super.isImageNamespace(name) || name.equals(getImageNamespace());
 	}
 

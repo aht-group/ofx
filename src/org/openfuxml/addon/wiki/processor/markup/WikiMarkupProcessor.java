@@ -63,7 +63,7 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 	{
 		String fName = page.getFile()+"."+WikiProcessor.WikiFileExtension.txt;
 		String txt = org.openfuxml.addon.wiki.processor.util.WikiContentIO.loadTxt(srcDir, fName);
-		String result = process(txt, "article ... req?");
+		String result = process(txt, page.getName());
 		org.openfuxml.addon.wiki.processor.util.WikiContentIO.writeTxt(dstDir, fName, result);
 	}
 	
