@@ -29,6 +29,7 @@
                 <xsd:element ref="markup" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:attribute name="uuid" type="xsd:string"/>
             <xsd:attribute name="name" type="xsd:string"/>
             <xsd:attribute name="external" type="xsd:boolean"/>
          	<xsd:attribute name="source" type="xsd:string"/>

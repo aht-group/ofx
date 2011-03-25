@@ -14,13 +14,14 @@ import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
+import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 
 public class TestMarkupProcessor
 {
 	static Log logger = LogFactory.getLog(TestMarkupProcessor.class);
 	
-	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException
+	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
     {
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("resources/config");

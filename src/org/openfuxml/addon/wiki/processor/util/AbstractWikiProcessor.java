@@ -1,6 +1,8 @@
 package org.openfuxml.addon.wiki.processor.util;
 
 import java.io.File;
+import java.util.Hashtable;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -8,6 +10,7 @@ import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
+import org.openfuxml.addon.wiki.processor.util.WikiProcessor.WikiDir;
 import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 import org.openfuxml.util.xml.OfxNsPrefixMapper;
@@ -18,10 +21,24 @@ public abstract class AbstractWikiProcessor
 	
 	protected File srcDir,dstDir;
 	protected OfxNsPrefixMapper nsPrefixMapper;
+	private Map<WikiDir,File> mDirs;
 	
 	public AbstractWikiProcessor()
 	{
 		nsPrefixMapper = new OfxNsPrefixMapper();
+		mDirs = new Hashtable<WikiDir,File>();
+	}
+	
+	public void setDirectory(WikiDir type, File dir) throws OfxInternalProcessingException
+	{
+		if(mDirs.containsKey(type)){throw new OfxInternalProcessingException("Dir Definition for "+type+" exists!");}
+		mDirs.put(type, dir);
+	}
+	
+	protected File getDir(WikiDir type) throws OfxInternalProcessingException
+	{
+		if(!mDirs.containsKey(type)){throw new OfxInternalProcessingException("No Dir Definition for "+type);}
+		return mDirs.get(type);
 	}
 	
 	public void setDirectories(File srcDir, File dstDir)
