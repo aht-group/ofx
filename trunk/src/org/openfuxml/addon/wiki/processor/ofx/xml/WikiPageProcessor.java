@@ -34,6 +34,7 @@ import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.renderer.processor.post.OfxContentTrimmer;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -42,9 +43,11 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 {
 	static Log logger = LogFactory.getLog(WikiPageProcessor.class);
 	
+	private OfxContentTrimmer ofxContentTrimmer;
+	
 	public WikiPageProcessor()
 	{
-		
+		ofxContentTrimmer = new OfxContentTrimmer();
 	}
 	
 	public void processPage(Page page) throws OfxAuthoringException, OfxInternalProcessingException
@@ -61,6 +64,7 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 			File fDst = new File(dstDir, dstName);
 			Document doc = JDomUtil.txtToDoc(result);
 			doc = checkTransparent(doc, page.getSection());
+			doc = ofxContentTrimmer.trim(doc);
 			JDomUtil.save(doc, fDst, Format.getRawFormat());
 		}
 		catch (IOException e) {logger.error(e);}
