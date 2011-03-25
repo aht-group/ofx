@@ -21,8 +21,8 @@ public abstract class AbstractWikiProcessor
 	{
 		this.srcDir=srcDir;
 		this.dstDir=dstDir;
-		if(srcDir!=null){logger.debug("Directory Src: "+srcDir.getAbsolutePath());}
-		if(dstDir!=null){logger.debug("Directory Dst: "+dstDir.getAbsolutePath());}
+		if(srcDir!=null){logger.trace("Directory Src: "+srcDir.getAbsolutePath());}
+		if(dstDir!=null){logger.trace("Directory Dst: "+dstDir.getAbsolutePath());}
 	}
 	
 	public void process(Contents wikiQueries) throws OfxWikiException, OfxAuthoringException, OfxInternalProcessingException

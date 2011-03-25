@@ -11,6 +11,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Injections;
 import org.openfuxml.addon.wiki.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
+import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
@@ -61,6 +62,7 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 	
 	protected void processPage(Page page)
 	{
+		logger.debug("Processing: "+page.getName());
 		String fName = page.getFile()+"."+WikiProcessor.WikiFileExtension.txt;
 		String txt = org.openfuxml.addon.wiki.processor.util.WikiContentIO.loadTxt(srcDir, fName);
 		String result = process(txt, page.getName());
@@ -72,12 +74,18 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 		this.wikiText=wikiText;
 		for(Wikireplace replace : replacements.getWikireplace()){processReplacements(replace);}
 		for(Wikiinjection inject : injections.getWikiinjection()){wikiInject(inject,article);}
+		for(Template template : injections.getTemplate()){processTempalte(template);}
 		return this.wikiText;
 	}
 
 	private void processReplacements(Wikireplace replace)
 	{
 		wikiText = wikiText.replaceAll(replace.getFrom(), replace.getTo());
+	}
+	
+	private void processTempalte(Template template)
+	{
+		logger.debug(template.getName());
 	}
 	
 	private void wikiInject(Wikiinjection inject, String article)

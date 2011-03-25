@@ -17,9 +17,28 @@
      	<xsd:complexType>
         	<xsd:sequence>
                 <xsd:element ref="wikiinjection" maxOccurs="unbounded"/>
+                <xsd:element ref="template" maxOccurs="unbounded"/>
             </xsd:sequence>
          	<xsd:attribute name="external" type="xsd:boolean"/>
          	<xsd:attribute name="source" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="template">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="markup" maxOccurs="1"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:attribute name="name" type="xsd:string"/>
+            <xsd:attribute name="external" type="xsd:boolean"/>
+         	<xsd:attribute name="source" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="markup">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string" />
+            </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="wikiinjection">
