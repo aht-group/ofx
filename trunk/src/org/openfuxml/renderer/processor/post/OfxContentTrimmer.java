@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
+
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
@@ -11,6 +17,8 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
+import org.openfuxml.addon.wiki.processor.post.WikiTemplateCorrector;
+import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 
 public class OfxContentTrimmer
@@ -56,10 +64,34 @@ public class OfxContentTrimmer
 			for (Iterator<?> iter = list.iterator(); iter.hasNext();)
 			{
 				Element e = (Element) iter.next();
-				e.setText(e.getTextTrim());
+				boolean noChilds = (e.getChildren().size()==0);
+				boolean noContent = (e.getText().length()==0);
+				logger.trace(e.getName()+" "+e.getChildren().size()+" "+e.getText().length());
+				if(noChilds && noContent){e.detach();}
+				else{e.setText(e.getTextTrim());}
 			}
 		}
 		catch (JDOMException e) {logger.error(e);}
 		return rootElement;
+	}
+	
+	public static void main (String[] args) throws Exception
+	{
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("resources/config");
+			loggerInit.init();
+		
+		String propFile = "resources/properties/user.properties";
+		if(args.length==1){propFile=args[0];}
+			
+		ConfigLoader.add(propFile);
+		Configuration config = ConfigLoader.init();
+			
+		String fnOfx = config.getString("wiki.processor.test.contenttrimmer");
+		Document doc = JDomUtil.load(fnOfx);
+		
+		OfxContentTrimmer test = new OfxContentTrimmer();
+		test.trim(doc);
+		JDomUtil.debug(doc);
 	}
 }

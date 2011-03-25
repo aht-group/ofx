@@ -121,7 +121,6 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 		Template template = new Template();
 		template.setName(templateDef.getName());
 		template.setId(getNextTemplateId());
-		template.setUuid(UUID.randomUUID().toString());
 		template.setMarkup(new Markup());
 		template.getMarkup().setValue(templateMarkup);
 		
@@ -130,7 +129,9 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append(SystemUtils.LINE_SEPARATOR);
+		sb.append("<wiki:injection id=\"");
 		sb.append(template.getId());
+		sb.append("\"/>");
 		sb.append(SystemUtils.LINE_SEPARATOR);
 		
 		return sb.toString();
