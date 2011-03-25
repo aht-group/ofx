@@ -21,6 +21,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
+import org.jdom.Element;
 import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
 import org.openfuxml.addon.wiki.WikiTemplates;
@@ -30,7 +31,9 @@ import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.renderer.data.exception.OfxAuthoringException;
+import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -44,7 +47,7 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 		
 	}
 	
-	public void processPage(Page page) throws OfxAuthoringException
+	public void processPage(Page page) throws OfxAuthoringException, OfxInternalProcessingException
 	{
 		checkPageConfig(page);
 		
@@ -57,12 +60,28 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 			
 			File fDst = new File(dstDir, dstName);
 			Document doc = JDomUtil.txtToDoc(result);
+			doc = checkTransparent(doc, page.getSection());
 			JDomUtil.save(doc, fDst, Format.getRawFormat());
 		}
 		catch (IOException e) {logger.error(e);}
 		catch (ParserConfigurationException e) {logger.error(e);}
 		catch (XMLStreamException e) {logger.error(e);}
 		catch (SAXException e) {logger.error(e);}
+	}
+	
+	private Document checkTransparent(Document doc, Section section) throws OfxInternalProcessingException
+	{
+		if(section.isSetTransparent() && section.isTransparent())
+		{
+			Element rootElement = doc.getRootElement();
+			if(rootElement.getName().equalsIgnoreCase(Section.class.getSimpleName()))
+			{
+				rootElement.setAttribute("transparent", "true");
+				logger.debug(rootElement.getName());
+			}
+			else {throw new OfxInternalProcessingException("Root element <"+rootElement.getName()+"> of Wiki.Processing not expected");}
+		}
+		return doc;
 	}
 
 	public String process(String xhtmlContent, String titleText) throws IOException, ParserConfigurationException, XMLStreamException, SAXException

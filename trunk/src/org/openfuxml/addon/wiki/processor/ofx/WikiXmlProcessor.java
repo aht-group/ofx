@@ -1,23 +1,16 @@
 package org.openfuxml.addon.wiki.processor.ofx;
 
-import java.io.File;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.ofx.xml.WikiCategoryProcessor;
 import org.openfuxml.addon.wiki.processor.ofx.xml.WikiPageProcessor;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
-import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
-import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.renderer.data.exception.OfxAuthoringException;
+import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class WikiXmlProcessor extends AbstractWikiProcessor implements WikiProcessor
@@ -36,13 +29,13 @@ public class WikiXmlProcessor extends AbstractWikiProcessor implements WikiProce
 	}
 	
 	@Override
-	protected void processCategory(Content content) throws OfxAuthoringException
+	protected void processCategory(Content content) throws OfxAuthoringException, OfxInternalProcessingException
 	{
 		getCategoryProcessor().processCategory(content);
 	}
 	
 	@Override
-	protected void processPage(Content content) throws OfxAuthoringException
+	protected void processPage(Content content) throws OfxAuthoringException, OfxInternalProcessingException
 	{
 		Page page = content.getPage();
 		getPageProcessor().processPage(page);

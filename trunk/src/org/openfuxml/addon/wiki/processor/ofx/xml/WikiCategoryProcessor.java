@@ -15,6 +15,7 @@ import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.renderer.data.exception.OfxAuthoringException;
+import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class WikiCategoryProcessor extends AbstractWikiProcessor
@@ -30,7 +31,7 @@ public class WikiCategoryProcessor extends AbstractWikiProcessor
 		nsPrefixMapper = new OfxNsPrefixMapper();
 	}
 	
-	public void processCategory(Content content) throws OfxAuthoringException
+	public void processCategory(Content content) throws OfxAuthoringException, OfxInternalProcessingException
 	{
 		Category category = content.getCategory();
 		Sections sections = new Sections();

@@ -16,61 +16,84 @@ import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
 import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Sections;
+import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 
 public class OfxContainerMerger
 {
 	static Log logger = LogFactory.getLog(OfxContainerMerger.class);
 	
-	private XPath xpathSections;
+	private List<XPath> lXpath;
+	
 	
 	public OfxContainerMerger()
 	{
+		lXpath = new ArrayList<XPath>();
 		try
 		{
-			xpathSections = XPath.newInstance("//ofx:sections");
-			xpathSections.addNamespace(Namespace.getNamespace("ofx", "http://www.openfuxml.org"));
-			xpathSections.addNamespace(Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki"));
+			Namespace nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
+			Namespace nsWiki = Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki");
+			
+			XPath xpSections  = XPath.newInstance("//ofx:sections");
+			xpSections.addNamespace(nsOfx); xpSections.addNamespace(nsWiki);
+			lXpath.add(xpSections);
 		}
 		catch (JDOMException e) {logger.error(e);}
 	}
 	
-	public Ofxdoc merge(Ofxdoc ofxDoc)
+	public Ofxdoc merge(Ofxdoc ofxDoc) throws OfxInternalProcessingException
 	{
 		Document doc = JaxbUtil.toDocument(ofxDoc);
 
-		Element result = mergeRecursive(doc.getRootElement());
-		result.detach();
-		doc.setRootElement(result);
+		for(XPath xpath : lXpath)
+		{
+			Element result = mergeRecursive(doc.getRootElement(),xpath);
+			result.detach();
+			doc.setRootElement(result);
+		}
 		
 		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
 		return ofxDoc;
 	}
 	
-	private Element mergeRecursive(Element rootElement)
+	private Element mergeRecursive(Element rootElement, XPath xpath) throws OfxInternalProcessingException
 	{
 		try
 		{
-			List<?> list = xpathSections.selectNodes(rootElement);
+			List<?> list = xpath.selectNodes(rootElement);
 			logger.debug(list.size()+" sections");
 			
 			for (Iterator<?> iter = list.iterator(); iter.hasNext();)
 			{
-				Element sectionsElement = (Element) iter.next();
+				Element e = (Element) iter.next();
 				
-				int index = sectionsElement.getParentElement().indexOf(sectionsElement);
-				List<Element> lSection = new ArrayList<Element>();
-				for(Object o : sectionsElement.getChildren())
+				int index = e.getParentElement().indexOf(e);
+				List<Element> lChilds = new ArrayList<Element>();
+				
+				if(e.getName().equalsIgnoreCase(Sections.class.getSimpleName()))
 				{
-					Element eSection = (Element)o;					
-					lSection.add(eSection);
+					lChilds = processSections(e.getChildren());
 				}
-				for(Element e : lSection){e.detach();}
-				sectionsElement.getParentElement().addContent(index, lSection);
+				else {throw new OfxInternalProcessingException("Root element <"+e.getName()+"> of Wiki.Processing not expected");}
 				
+				e.getParentElement().addContent(index, lChilds);
+				e.getParentElement().removeContent(e);
 			}
 		}
 		catch (JDOMException e) {logger.error(e);}
 		return rootElement;
+	}
+	
+	private List<Element> processSections(List<?> lChilds)
+	{
+		List<Element> lSection = new ArrayList<Element>();
+		for(Object o : lChilds)
+		{
+			Element eSection = (Element)o;				
+			lSection.add(eSection);
+		}
+		for(Element e : lSection){e.detach();}
+		return lSection;
 	}
 			
 	public static void main (String[] args) throws Exception
