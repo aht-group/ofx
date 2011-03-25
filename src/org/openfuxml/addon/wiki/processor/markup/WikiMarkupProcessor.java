@@ -1,13 +1,21 @@
 package org.openfuxml.addon.wiki.processor.markup;
 
 import java.io.File;
+import java.util.UUID;
 
+import net.sf.exlp.io.ConfigLoader;
+import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.io.StringBufferOutputStream;
+import net.sf.exlp.util.xml.JaxbUtil;
+
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Injections;
+import org.openfuxml.addon.wiki.data.jaxb.Markup;
 import org.openfuxml.addon.wiki.data.jaxb.ObjectFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
@@ -19,6 +27,7 @@ import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlSourceLoader;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
+import org.openfuxml.renderer.data.jaxb.Cmp;
 
 public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
@@ -33,15 +42,25 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 	private String wikiText;
 	private ObjectFactory of;
 	
+	private static String templateStartDelemiter = "{{";
+	private static String templateEndDelemiter = "}}";
+	
 	@Deprecated
 	private File dirInjection;
 	private int injectionId;
+	
+	public WikiMarkupProcessor(Cmp cmp) throws OfxConfigurationException
+	{
+		this(cmp.getPreprocessor().getWiki().getMarkupProcessor().getReplacements(),cmp.getPreprocessor().getWiki().getMarkupProcessor().getInjections());
+	}
 	
 	public WikiMarkupProcessor(Replacements replacements, Injections injections) throws OfxConfigurationException
 	{
 		this.replacements = WikiConfigXmlSourceLoader.initReplacements(replacements);
 		this.injections = WikiConfigXmlSourceLoader.initInjections(injections);;
 	}
+	
+	
 	
 	@Override
 	protected void processCategory(Content content)
@@ -85,7 +104,31 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 	
 	private void processTempalte(Template template)
 	{
-		logger.debug(template.getName());
+		int beginIndex=-1;
+		while((beginIndex=wikiText.indexOf(templateStartDelemiter+template.getName()))>=0)
+		{
+			int endIndex = wikiText.indexOf(templateEndDelemiter);
+			StringBuffer sb = new StringBuffer();
+			sb.append(wikiText.substring(0, beginIndex));
+			sb.append(createExternalTemplate(template,wikiText.substring(beginIndex+templateStartDelemiter.length()+template.getName().length(), endIndex)));
+			sb.append(wikiText.substring(endIndex+templateEndDelemiter.length(), wikiText.length()));
+			wikiText = sb.toString();
+		}
+	}
+	
+	private String createExternalTemplate(Template templateDef, String templateMarkup)
+	{	
+		Template template = new Template();
+		template.setId(UUID.randomUUID().toString());
+		template.setMarkup(new Markup());
+		template.getMarkup().setValue(templateMarkup);
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append(SystemUtils.LINE_SEPARATOR);
+		sb.append(template.getId());
+		sb.append(SystemUtils.LINE_SEPARATOR);
+		
+		return sb.toString();
 	}
 	
 	private void wikiInject(Wikiinjection inject, String article)
@@ -123,5 +166,34 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 			sbDebug.append(" newSize="+wikiText.length());
 			logger.debug(sbDebug);
 		}
+	}
+	
+	public static void main (String[] args) throws Exception
+	{
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("resources/config");
+			loggerInit.init();
+		
+		String propFile = "resources/properties/user.properties";
+		if(args.length==1){propFile=args[0];}
+			
+		ConfigLoader.add(propFile);
+		Configuration config = ConfigLoader.init();
+			
+		String fnCmp = config.getString("ofx.xml.cmp");
+		String fnWikiTxt = config.getString("wiki.processor.test.markup");
+		
+		logger.debug("Cmp:  "+fnCmp);
+		logger.debug("Wiki: "+fnWikiTxt);
+		
+		Cmp cmp = (Cmp)JaxbUtil.loadJAXB(fnCmp, Cmp.class);
+		WikiMarkupProcessor wpMarkup = new WikiMarkupProcessor(cmp);
+		
+		String wikiText = org.openfuxml.addon.wiki.processor.util.WikiContentIO.loadTxt(fnWikiTxt);
+		logger.debug("Wiki (Before): "+wikiText);
+		
+		wikiText=wpMarkup.process(wikiText, "test");
+		logger.debug("Wiki (After): "+wikiText);
+		
 	}
 }

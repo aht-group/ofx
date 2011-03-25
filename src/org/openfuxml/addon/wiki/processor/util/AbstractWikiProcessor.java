@@ -10,12 +10,19 @@ import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public abstract class AbstractWikiProcessor
 {
 	static Log logger = LogFactory.getLog(AbstractWikiProcessor.class);
 	
 	protected File srcDir,dstDir;
+	protected OfxNsPrefixMapper nsPrefixMapper;
+	
+	public AbstractWikiProcessor()
+	{
+		nsPrefixMapper = new OfxNsPrefixMapper();
+	}
 	
 	public void setDirectories(File srcDir, File dstDir)
 	{

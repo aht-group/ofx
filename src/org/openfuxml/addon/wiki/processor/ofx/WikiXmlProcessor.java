@@ -11,13 +11,10 @@ import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
-import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class WikiXmlProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
 	static Log logger = LogFactory.getLog(WikiXmlProcessor.class);
-	
-	private OfxNsPrefixMapper nsPrefixMapper;
 	
 	private WikiPageProcessor pageProcessor;
 	private WikiCategoryProcessor categoryProcessor;
@@ -25,7 +22,6 @@ public class WikiXmlProcessor extends AbstractWikiProcessor implements WikiProce
 	public WikiXmlProcessor()
 	{
 		WikiTemplates.init();
-		nsPrefixMapper = new OfxNsPrefixMapper();
 	}
 	
 	@Override

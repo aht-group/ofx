@@ -30,6 +30,7 @@ public class WikiContentIO
 	}
 	
 	public static synchronized String loadTxt(File fDir, String fileName){return loadTxt(new File(fDir,fileName));}
+	public static synchronized String loadTxt(String fileName){return loadTxt(new File(fileName));}
 	public static synchronized String loadTxt(File f)
 	{
 		logger.trace("Reading Txt from "+f.getAbsolutePath());

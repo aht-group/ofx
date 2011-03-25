@@ -1,8 +1,10 @@
 package org.openfuxml.util.xml;
 
+import net.sf.exlp.util.xml.NsPrefixMapperInterface;
+
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
-public class OfxNsPrefixMapper extends NamespacePrefixMapper
+public class OfxNsPrefixMapper extends NamespacePrefixMapper implements NsPrefixMapperInterface
 {
     public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix)
     {
