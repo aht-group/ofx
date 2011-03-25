@@ -1,11 +1,11 @@
-package org.openfuxml.renderer.latex.util;
+package org.openfuxml.renderer.processor.latex.util;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.renderer.latex.content.SectionFactory;
+import org.openfuxml.renderer.processor.latex.content.SectionFactory;
 
 public class AbstractOfxLatexRenderer
 {

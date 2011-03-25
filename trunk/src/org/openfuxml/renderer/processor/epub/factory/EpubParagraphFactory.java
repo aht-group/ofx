@@ -1,4 +1,4 @@
-package org.openfuxml.factory.epub;
+package org.openfuxml.renderer.processor.epub.factory;
 
 import java.io.Serializable;
 

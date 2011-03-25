@@ -18,7 +18,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
-import org.openfuxml.renderer.latex.util.TxtWriter;
+import org.openfuxml.renderer.processor.latex.util.TxtWriter;
 
 public class WikiCategoryFetcher
 {
