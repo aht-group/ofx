@@ -126,7 +126,7 @@ public class OfxRenderer
 		catch (NoSuchElementException e) {logger.debug("No initial merge");}
 		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
 		JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(Phase.wikiIntegrate)), ofxDoc, nsPrefixMapper, true);
-		JaxbUtil.debug(ofxDoc, nsPrefixMapper);
+//		JaxbUtil.debug(ofxDoc, nsPrefixMapper);
 	}
 	
 	private void phaseMerge(String fNameTmp, Phase phase)

@@ -2,4 +2,5 @@
 <wiki:injections xmlns:wiki="http://www.openfuxml.org/wiki">
     <wiki:wikiinjection format="xml" wikitag="gallery" ofxtag="ofxgallery"/>
     <wiki:wikiinjection format="xml" wikitag="timeline" ofxtag="ofxchart"/>
+    <wiki:template name="UseCase"/>
 </wiki:injections>

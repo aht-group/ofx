@@ -19,7 +19,7 @@ public class WikiContentIO
 	public static synchronized void writeTxt(File fDir, String fileName, String content){writeTxt(new File(fDir,fileName), content);}
 	public static synchronized void writeTxt(File f, String content)
 	{
-		logger.debug("Writing Txt to "+f.getAbsolutePath());
+		logger.trace("Writing Txt to "+f.getAbsolutePath());
 		try
 		{
 			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
@@ -32,7 +32,7 @@ public class WikiContentIO
 	public static synchronized String loadTxt(File fDir, String fileName){return loadTxt(new File(fDir,fileName));}
 	public static synchronized String loadTxt(File f)
 	{
-		logger.debug("Reading Txt from "+f.getAbsolutePath());
+		logger.trace("Reading Txt from "+f.getAbsolutePath());
 		StringBuffer sb = new StringBuffer();
 		try
 		{
