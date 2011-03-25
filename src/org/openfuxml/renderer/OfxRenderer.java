@@ -24,6 +24,7 @@ import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
 import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
 import org.openfuxml.addon.wiki.processor.ofx.WikiXmlProcessor;
+import org.openfuxml.addon.wiki.processor.post.WikiTemplateCorrector;
 import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
@@ -47,7 +48,7 @@ public class OfxRenderer
 {
 	static Log logger = LogFactory.getLog(OfxRenderer.class);
 		
-	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,mergeFinal};
+	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,mergeFinal,phaseTemplate};
 	
 	private Configuration config;
 	private Cmp cmp;
@@ -104,7 +105,8 @@ public class OfxRenderer
 		phaseMerge(fNameTmp, Phase.wikiMerge);
 		phaseContainerMerge(fNameTmp, Phase.wikiMerge, Phase.containerMerge);
 		phaseExternalMerge(fNameTmp, Phase.containerMerge, Phase.mergeFinal);
-		phaseLatex(Phase.mergeFinal);
+		phaseTemplate(fNameTmp, Phase.mergeFinal, Phase.phaseTemplate);
+		phaseLatex(Phase.phaseTemplate);
 	}
 	
 	private void phaseMergeInitial(String rootFileName)
@@ -179,6 +181,26 @@ public class OfxRenderer
 			OfxExternalMerger exMerger = new OfxExternalMerger(f);
 			Document doc = exMerger.mergeToDoc();
 			ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
+			
+			JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(phaseSave)), ofxDoc, nsPrefixMapper, true);
+		}
+		catch (FileNotFoundException e)
+		{
+			logger.warn("OfxPreprocessorException");//TODO new exception
+			e.printStackTrace();
+		}
+	}
+	
+	private void phaseTemplate(String fNameTmp, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException
+	{
+		File f = new File(fNameTmp,getPhaseXmlFileName(phaseLoad));
+		
+		try
+		{
+			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(f.getAbsolutePath(), Ofxdoc.class);
+			
+			WikiTemplateCorrector templateCorrector = new WikiTemplateCorrector();
+			ofxDoc = templateCorrector.correctTemplateInjections(ofxDoc);
 			
 			JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(phaseSave)), ofxDoc, nsPrefixMapper, true);
 		}
