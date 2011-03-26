@@ -10,7 +10,7 @@ import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 public interface WikiProcessor
 {
 	public static enum WikiFileExtension {txt,xhtml,xml}
-	public static enum WikiDir{wikiTemplate}
+	public static enum WikiDir{wikiTemplate, ofxTemplate}
 	
 	void setDirectory(WikiDir type, File dir) throws OfxInternalProcessingException;
 	void setDirectories(File srcDir, File dstDir);

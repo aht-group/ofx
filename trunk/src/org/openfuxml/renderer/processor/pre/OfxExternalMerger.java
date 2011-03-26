@@ -15,6 +15,7 @@ import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
 import org.openfuxml.model.ejb.OfxDocument;
+import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 
 public class OfxExternalMerger
 {
@@ -25,10 +26,11 @@ public class OfxExternalMerger
 	
 	private XPath xpath;
 	
-	public OfxExternalMerger(File rootFile)
+	public OfxExternalMerger(File rootFile) throws OfxInternalProcessingException
 	{
 		this.rootFile=rootFile;
 		doc = JDomUtil.load(rootFile);
+		if(doc==null){throw new OfxInternalProcessingException("FileNoteFound: "+rootFile.getAbsolutePath());}
 		try
 		{
 			
@@ -43,14 +45,14 @@ public class OfxExternalMerger
 		catch (JDOMException e) {logger.error(e);}
 	}
 	
-	public OfxDocument mergeToOfx()
+	public OfxDocument mergeToOfx() throws OfxInternalProcessingException
 	{
 		Document mergedDoc =  mergeToDoc();
 		OfxDocument ofxDoc = (OfxDocument)JDomUtil.toJaxb(mergedDoc, OfxDocument.class);
 		return ofxDoc;
 	}
 	
-	public Document mergeToDoc()
+	public Document mergeToDoc() throws OfxInternalProcessingException
 	{
 		Element rootElement = doc.getRootElement();
 
@@ -61,7 +63,7 @@ public class OfxExternalMerger
 		return doc;
 	}
 	
-	public Element getExternal()
+	public Element getExternal() throws OfxInternalProcessingException
 	{
 		Element rootElement = doc.getRootElement();
 		rootElement.detach();
@@ -69,7 +71,7 @@ public class OfxExternalMerger
 		return mergeRecursive(rootElement);
 	}
 	
-	private Element mergeRecursive(Element rootElement)
+	private Element mergeRecursive(Element rootElement) throws OfxInternalProcessingException
 	{
 		try
 		{
