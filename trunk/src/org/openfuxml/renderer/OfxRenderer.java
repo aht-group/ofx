@@ -67,7 +67,11 @@ public class OfxRenderer
 	
 	private void readConfig(String fNameCmp, String fNameTmp) throws OfxConfigurationException
 	{
-		try {cmp = (Cmp)JaxbUtil.loadJAXB(fNameCmp, Cmp.class);}
+		try
+		{
+			cmp = (Cmp)JaxbUtil.loadJAXB(fNameCmp, Cmp.class);
+			JaxbUtil.debug(cmp);
+		}
 		catch (FileNotFoundException e){throw new OfxConfigurationException("CMP configuration not found: "+fNameCmp);}
 		
 		tmpDir = new File(fNameTmp);
