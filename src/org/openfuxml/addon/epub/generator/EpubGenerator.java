@@ -18,7 +18,6 @@ import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.producer.preprocessors.IdTagger;
 import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
-import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class EpubGenerator
 {
@@ -32,7 +31,6 @@ public class EpubGenerator
 	private ContentGenerator contentGenerator;
 	
 	private IdTagger idTagger;
-	private OfxNsPrefixMapper ofxNsPrefixMapper;
 	
 	public EpubGenerator(File targetDir)
 	{
@@ -44,7 +42,6 @@ public class EpubGenerator
 		epubZipper = new EpubZipper(targetDir);
 		
 		idTagger = new IdTagger();
-		ofxNsPrefixMapper = new OfxNsPrefixMapper();
 	}
 	
 	public void process(File f) throws OfxInternalProcessingException
