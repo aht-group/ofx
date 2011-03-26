@@ -52,9 +52,6 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 		Document doc = transformToElement(ofxDoc);
 		doc = exchangeParagraphByTemplate(doc);
 		
-//		OfxContentTrimmer test = new OfxContentTrimmer();
-//		doc = test.trim(doc);
-		
 		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
 		return ofxDoc;
 	}
@@ -92,11 +89,23 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 				Element parent = eTemplate.getParentElement().getParentElement();
 				eTemplate.detach();
 				parent.removeContent(index);
-				parent.addContent(index, eTemplate);
+				parent.addContent(index, createExternalTemplate(eTemplate));
 			}
 		}
 		catch (JDOMException e) {logger.error(e);}
 		return rootElement;
+	}
+	
+	private Element createExternalTemplate(Element eTemplate)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("../");
+		sb.append(WikiProcessor.WikiDir.ofxTemplate.toString());
+		sb.append("/").append(eTemplate.getAttributeValue("id")).append(".xml");
+		
+		eTemplate.setAttribute("external", "true");
+		eTemplate.setAttribute("source",sb.toString());
+		return eTemplate;
 	}
 	
 	private Document transformToElement(Ofxdoc ofxDoc)

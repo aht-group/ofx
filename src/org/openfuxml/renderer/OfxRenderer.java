@@ -48,7 +48,7 @@ public class OfxRenderer
 {
 	static Log logger = LogFactory.getLog(OfxRenderer.class);
 		
-	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,mergeFinal,phaseTemplate};
+	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
 	
 	private Configuration config;
 	private Cmp cmp;
@@ -91,6 +91,7 @@ public class OfxRenderer
 		String wikiPlainDir = "wikiPlain";
 		File dirWikiPlain = createDir(wikiPlainDir);
 		File dirWikiTemplate = createDir(WikiProcessor.WikiDir.wikiTemplate.toString());
+		File dirOfxTemplate = createDir(WikiProcessor.WikiDir.ofxTemplate.toString());
 		
 		String wikiMarkupDir = "wikiMarkup";
 		String wikiModelDir = "wikiModel";
@@ -104,12 +105,13 @@ public class OfxRenderer
 		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir, dirWikiTemplate);
 		phaseMerge(fNameTmp, Phase.wikiMerge);
 		phaseContainerMerge(fNameTmp, Phase.wikiMerge, Phase.containerMerge);
-		phaseExternalMerge(fNameTmp, Phase.containerMerge, Phase.mergeFinal);
-		phaseTemplate(fNameTmp, Phase.mergeFinal, Phase.phaseTemplate);
-		phaseLatex(Phase.phaseTemplate);
+		phaseExternalMerge(fNameTmp, Phase.containerMerge, Phase.externalMerge);
+		phaseTemplate(fNameTmp, dirWikiTemplate, dirOfxTemplate, Phase.externalMerge, Phase.phaseTemplate);
+		phaseExternalMerge(fNameTmp, Phase.phaseTemplate, Phase.mergeTemplate);
+		phaseLatex(Phase.mergeTemplate);
 	}
 	
-	private void phaseMergeInitial(String rootFileName)
+	private void phaseMergeInitial(String rootFileName) throws OfxInternalProcessingException
 	{
 		Document doc = JDomUtil.load(new File(rootFileName));
 		try
@@ -132,7 +134,7 @@ public class OfxRenderer
 //		JaxbUtil.debug(ofxDoc, nsPrefixMapper);
 	}
 	
-	private void phaseMerge(String fNameTmp, Phase phase)
+	private void phaseMerge(String fNameTmp, Phase phase) throws OfxInternalProcessingException
 	{
 		logger.warn("hardcoded filename!!!");
 		File f = new File(fNameTmp,"2-wikiIntegrate.xml");
@@ -170,7 +172,7 @@ public class OfxRenderer
 		}
 	}
 	
-	private void phaseExternalMerge(String fNameTmp, Phase phaseLoad, Phase phaseSave)
+	private void phaseExternalMerge(String fNameTmp, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException
 	{
 		File f = new File(fNameTmp,getPhaseXmlFileName(phaseLoad));
 		
@@ -191,24 +193,19 @@ public class OfxRenderer
 		}
 	}
 	
-	private void phaseTemplate(String fNameTmp, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException
+	private void phaseTemplate(String fNameTmp, File dirWikiTemplate, File dirOfxTemplate, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException
 	{
 		File f = new File(fNameTmp,getPhaseXmlFileName(phaseLoad));
 		
 		try
 		{
 			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(f.getAbsolutePath(), Ofxdoc.class);
-			
 			WikiTemplateCorrector templateCorrector = new WikiTemplateCorrector();
+			templateCorrector.setDirectory(WikiProcessor.WikiDir.wikiTemplate, dirWikiTemplate);
 			ofxDoc = templateCorrector.correctTemplateInjections(ofxDoc);
-			
 			JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(phaseSave)), ofxDoc, nsPrefixMapper, true);
 		}
-		catch (FileNotFoundException e)
-		{
-			logger.warn("OfxPreprocessorException");//TODO new exception
-			e.printStackTrace();
-		}
+		catch (FileNotFoundException e){throw new OfxInternalProcessingException(e.getMessage());}
 	}
 	
 	private void phaseWikiExternalIntegrator(String wikiXmlDir) throws OfxAuthoringException
