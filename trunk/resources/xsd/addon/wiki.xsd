@@ -37,6 +37,7 @@
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
             <xsd:attribute name="name" type="xsd:string"/>
+            <xsd:attribute name="class" type="xsd:string"/>
             <xsd:attribute name="external" type="xsd:boolean"/>
          	<xsd:attribute name="source" type="xsd:string"/>
         </xsd:complexType>

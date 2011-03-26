@@ -19,6 +19,7 @@ import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
+import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
@@ -26,6 +27,7 @@ import org.openfuxml.addon.wiki.processor.net.WikiContentFetcher;
 import org.openfuxml.addon.wiki.processor.ofx.WikiXmlProcessor;
 import org.openfuxml.addon.wiki.processor.pre.WikiExternalIntegrator;
 import org.openfuxml.addon.wiki.processor.template.WikiTemplateCorrector;
+import org.openfuxml.addon.wiki.processor.template.WikiTemplateProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlFinalProcessor;
@@ -208,6 +210,10 @@ public class OfxRenderer
 			templateCorrector.setDirectory(WikiProcessor.WikiDir.wikiTemplate, dirWikiTemplate);
 			ofxDoc = templateCorrector.correctTemplateInjections(ofxDoc);
 			JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(phaseSave)), ofxDoc, nsPrefixMapper, true);
+			
+			WikiTemplateProcessor wtp = new WikiTemplateProcessor();
+			wtp.setDirectory(WikiProcessor.WikiDir.wikiTemplate, dirWikiTemplate);
+			wtp.process(new Templates());
 		}
 		catch (FileNotFoundException e){throw new OfxInternalProcessingException(e.getMessage());}
 	}
