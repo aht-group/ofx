@@ -17,7 +17,7 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
-import org.openfuxml.addon.wiki.processor.post.WikiTemplateCorrector;
+import org.openfuxml.addon.wiki.processor.template.WikiTemplateCorrector;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 

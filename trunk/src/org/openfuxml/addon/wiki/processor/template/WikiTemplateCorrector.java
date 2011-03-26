@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki.processor.post;
+package org.openfuxml.addon.wiki.processor.template;
 
 import java.util.Iterator;
 import java.util.List;
