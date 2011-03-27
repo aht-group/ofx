@@ -22,7 +22,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
-import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlSourceLoader;
+import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlXpathHelper;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
@@ -57,8 +57,8 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 	
 	public WikiMarkupProcessor(Replacements replacements, Injections injections) throws OfxConfigurationException
 	{
-		this.replacements = WikiConfigXmlSourceLoader.initReplacements(replacements);
-		this.injections = WikiConfigXmlSourceLoader.initInjections(injections);
+		this.replacements = WikiConfigXmlXpathHelper.initReplacements(replacements);
+		this.injections = WikiConfigXmlXpathHelper.initInjections(injections);
 		templateCounter=0;
 	}
 	

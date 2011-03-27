@@ -10,7 +10,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
-import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlSourceLoader;
+import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlXpathHelper;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
@@ -25,7 +25,7 @@ public class XhtmlReplaceProcessor extends AbstractWikiProcessor implements Wiki
 	
 	public XhtmlReplaceProcessor(Replacements replacements) throws OfxConfigurationException
 	{
-		this.replacements = WikiConfigXmlSourceLoader.initReplacements(replacements);
+		this.replacements = WikiConfigXmlXpathHelper.initReplacements(replacements);
 		JaxbUtil.debug(this.replacements);
 	}
 	

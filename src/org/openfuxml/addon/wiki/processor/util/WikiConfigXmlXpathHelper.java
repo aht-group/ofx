@@ -2,21 +2,45 @@ package org.openfuxml.addon.wiki.processor.util;
 
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.tools.ant.Project;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.Namespace;
+import org.jdom.xpath.XPath;
 import org.openfuxml.addon.wiki.data.jaxb.Injections;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
-import org.openfuxml.renderer.OfxRenderer;
+import org.openfuxml.addon.wiki.data.jaxb.Template;
+import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 
-public class WikiConfigXmlSourceLoader
+public class WikiConfigXmlXpathHelper
 {
-	static Log logger = LogFactory.getLog(WikiConfigXmlSourceLoader.class);
+	static Log logger = LogFactory.getLog(WikiConfigXmlXpathHelper.class);
+	
+	public static synchronized Template getTemplate(Templates templates, String name) throws OfxConfigurationException 
+	{
+		Template result = new Template();
+		try
+		{
+			XPath xpath = XPath.newInstance( "//wiki:template[@name='"+name+"']" );
+			xpath.addNamespace(Namespace.getNamespace("ofx", "http://www.openfuxml.org"));
+			xpath.addNamespace(Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki"));
+			
+			Document doc = JaxbUtil.toDocument(templates);
+			Element e = (Element)xpath.selectSingleNode(doc);
+			if(e!=null){result = (Template)JDomUtil.toJaxb(e, Template.class);}
+			else{throw new OfxConfigurationException("No template definition for templateName="+name);}
+		}
+		catch (JDOMException e) {logger.error(e);}
+        return result;
+	}
 	
 	public static synchronized Replacements initReplacements(Replacements replacements) throws OfxConfigurationException
 	{

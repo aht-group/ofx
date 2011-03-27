@@ -99,7 +99,7 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 	private Element createExternalTemplate(Element eTemplate)
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("../");
+//		sb.append("../");
 		sb.append(WikiProcessor.WikiDir.ofxTemplate.toString());
 		sb.append("/").append(eTemplate.getAttributeValue("id")).append(".xml");
 		
