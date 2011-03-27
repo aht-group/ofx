@@ -199,7 +199,7 @@ public class OfxRenderer
 		}
 	}
 	
-	private void phaseTemplate(String fNameTmp, File dirWikiTemplate, File dirOfxTemplate, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException
+	private void phaseTemplate(String fNameTmp, File dirWikiTemplate, File dirOfxTemplate, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException, OfxConfigurationException
 	{
 		File f = new File(fNameTmp,getPhaseXmlFileName(phaseLoad));
 		
@@ -211,9 +211,10 @@ public class OfxRenderer
 			ofxDoc = templateCorrector.correctTemplateInjections(ofxDoc);
 			JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(phaseSave)), ofxDoc, nsPrefixMapper, true);
 			
-			WikiTemplateProcessor wtp = new WikiTemplateProcessor();
+			WikiTemplateProcessor wtp = new WikiTemplateProcessor(cmp.getPreprocessor().getWiki().getTemplates());
 			wtp.setDirectory(WikiProcessor.WikiDir.wikiTemplate, dirWikiTemplate);
-			wtp.process(new Templates());
+			wtp.setDirectory(WikiProcessor.WikiDir.ofxTemplate, dirOfxTemplate);
+			wtp.process();
 		}
 		catch (FileNotFoundException e){throw new OfxInternalProcessingException(e.getMessage());}
 	}
