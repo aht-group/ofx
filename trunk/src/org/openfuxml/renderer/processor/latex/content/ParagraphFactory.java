@@ -28,5 +28,6 @@ public class ParagraphFactory extends AbstractOfxLatexRenderer implements OfxLat
 	private void addString(String s)
 	{
 		txt.add(s);
+		txt.add("");
 	}
 }

@@ -13,6 +13,7 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.renderer.data.jaxb.Pdf;
 import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.processor.latex.util.LatexDocument;
 import org.openfuxml.renderer.processor.latex.util.TxtWriter;
@@ -25,10 +26,10 @@ public class OfxLatexRenderer
 	private LatexDocument latexDocument;
 	private List<String> txt;
 	
-	public OfxLatexRenderer()
+	public OfxLatexRenderer(Pdf pdf)
 	{
 		latexPreamble = new LatexPreamble();
-		latexDocument = new LatexDocument(latexPreamble);
+		latexDocument = new LatexDocument(pdf,latexPreamble);
 		
 		txt = new ArrayList<String>();
 	}
@@ -65,7 +66,7 @@ public class OfxLatexRenderer
 		ConfigLoader.add("resources/properties/user.properties");
 		Configuration config = ConfigLoader.init();
 		
-		OfxLatexRenderer renderer = new OfxLatexRenderer();
+		OfxLatexRenderer renderer = new OfxLatexRenderer(null);
 		renderer.render(config.getString("wiki.xml"));
 		
 		File dstDir = new File(config.getString("wiki.latex.dir"));
