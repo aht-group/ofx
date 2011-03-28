@@ -1,45 +1,51 @@
 package org.openfuxml.addon.wiki.processor.template.exlp.parser;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.sf.exlp.event.LogEvent;
 import net.sf.exlp.event.LogEventHandler;
+import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.parser.LogParser;
 
+import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.wiki.data.model.WikiTemplateKeyValue;
+import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
 
 public class WikiKeyValueParser extends AbstractLogParser implements LogParser  
 {
 	static Log logger = LogFactory.getLog(WikiKeyValueParser.class);
-
-	private final static int maxP=1;
-	Pattern p[] = new Pattern[maxP];
+	
+	private WikiTemplateKeyValue wikiKV;
 	
 	public WikiKeyValueParser(LogEventHandler leh)
 	{
 		super(leh);
-		int i=0;
-		p[i] = Pattern.compile("(.*)");i++;
-		logger.debug(p[0].toString());
+		pattern.add(Pattern.compile("^$"));
+		pattern.add(Pattern.compile("^\\|([a-zA-Z]*)=(.*)"));
+		pattern.add(Pattern.compile("(.*)"));
+		logger.debug("Pattern defined: "+pattern.size());
 	}
 
 	public void parseLine(String line)
 	{
 		allLines++;
 		boolean unknownPattern = true;
-		for(int i=0;i<maxP;i++)
+		for(int i=0;i<pattern.size();i++)
 		{
-			Matcher m=p[i].matcher(line);
+			Matcher m=pattern.get(i).matcher(line);
 			if(m.matches())
 			{
 				switch(i)
 				{
-					case 0: event(m);break;		
+					case 0: blank();break;
+					case 1: key(m);break;
+					case 2: value(m);break;
 				}
-				i=maxP;
+				i=pattern.size();
 				unknownPattern=false;
 			}
 		}
@@ -50,14 +56,68 @@ public class WikiKeyValueParser extends AbstractLogParser implements LogParser
 		}
 	}
 	
-	@Override
-	public void parseItem(ArrayList<String> item)
+	private void blank()
 	{
-		logger.debug("Item received with "+item.size()+" entries");
+		if(wikiKV!=null)
+		{
+			
+		}
 	}
 	
-	public void event(Matcher m)
+	private void key(Matcher m)
 	{
-		logger.debug(m.group(0));
+		if(wikiKV!=null){event();}
+		
+		wikiKV = new WikiTemplateKeyValue();
+		wikiKV.setKey(m.group(1));
+		wikiKV.setValueMarkup(m.group(2));
+	}
+	
+	public void value(Matcher m)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append(wikiKV.getValueMarkup());
+		sb.append(SystemUtils.LINE_SEPARATOR);
+		sb.append(m.group(0));
+		wikiKV.setValueMarkup(sb.toString());
+	}
+	
+	@Override
+	public void close()
+	{
+		if(wikiKV!=null){event();};
+	}
+	
+	public void event()
+	{
+		LogEvent event = new WikiKeyValueEvent(wikiKV);
+		leh.handleEvent(event);
+	}
+	
+	public static void main(String args[])
+	{
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("resources/config");
+			loggerInit.init();
+			
+		logger.warn("This is only a pattern test-class!");
+		
+		String sPattern = "^\\|([a-zA-Z]*)=(.*)";
+		String sTest    = "|Goal=blabla bla blablub";
+		
+		logger.debug("Pattern: "+sPattern);
+		logger.debug("Test:    "+sTest);
+		
+		Pattern p = Pattern.compile(sPattern);
+		Matcher m = p.matcher(sTest);
+		logger.debug(m.matches());
+		if(m.matches())
+		{
+			logger.debug("Group Count "+m.groupCount());
+			for(int i=0;i<=m.groupCount();i++)
+			{
+				logger.debug(i+" "+m.group(i));
+			}
+		}
 	}
 }
