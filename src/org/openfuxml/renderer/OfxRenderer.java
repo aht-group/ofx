@@ -114,7 +114,12 @@ public class OfxRenderer
 		phaseExternalMerge(fNameTmp, Phase.containerMerge, Phase.externalMerge);
 		phaseTemplate(fNameTmp, dirWikiTemplate, dirOfxTemplate, Phase.externalMerge, Phase.phaseTemplate);
 		phaseExternalMerge(fNameTmp, Phase.phaseTemplate, Phase.mergeTemplate);
-		phaseLatex(Phase.mergeTemplate);
+		
+		if(cmp.isSetTargets())
+		{
+			if(cmp.getTargets().isSetPdf()){phaseLatex(Phase.mergeTemplate);}
+		}
+		
 	}
 	
 	private void phaseMergeInitial(String rootFileName) throws OfxInternalProcessingException
@@ -304,7 +309,7 @@ public class OfxRenderer
 	
 	private void phaseLatex(Phase phaseLoad)
 	{
-		OfxLatexRenderer renderer = new OfxLatexRenderer();
+		OfxLatexRenderer renderer = new OfxLatexRenderer(cmp.getTargets().getPdf().get(0));
 		renderer.render(new File(tmpDir,getPhaseXmlFileName(phaseLoad)).getAbsolutePath());
 		
 		File dstDir = new File(config.getString("wiki.latex.dir"));

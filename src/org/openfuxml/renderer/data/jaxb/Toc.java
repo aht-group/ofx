@@ -12,7 +12,6 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -27,9 +26,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/cmp}toc"/>
  *       &lt;/sequence>
- *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="print" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -38,74 +36,46 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "toc"
-})
-@XmlRootElement(name = "pdf")
-public class Pdf
+@XmlType(name = "")
+@XmlRootElement(name = "toc")
+public class Toc
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(required = true)
-    protected Toc toc;
     @XmlAttribute
-    protected String code;
+    protected Boolean print;
 
     /**
-     * Gets the value of the toc property.
+     * Gets the value of the print property.
      * 
      * @return
      *     possible object is
-     *     {@link Toc }
+     *     {@link Boolean }
      *     
      */
-    public Toc getToc() {
-        return toc;
+    public boolean isPrint() {
+        return print;
     }
 
     /**
-     * Sets the value of the toc property.
+     * Sets the value of the print property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Toc }
+     *     {@link Boolean }
      *     
      */
-    public void setToc(Toc value) {
-        this.toc = value;
+    public void setPrint(boolean value) {
+        this.print = value;
     }
 
-    public boolean isSetToc() {
-        return (this.toc!= null);
+    public boolean isSetPrint() {
+        return (this.print!= null);
     }
 
-    /**
-     * Gets the value of the code property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCode() {
-        return code;
-    }
-
-    /**
-     * Sets the value of the code property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCode(String value) {
-        this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
+    public void unsetPrint() {
+        this.print = null;
     }
 
 }

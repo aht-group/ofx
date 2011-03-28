@@ -30,9 +30,17 @@
     <xsd:element name="pdf">
         <xsd:complexType>
             <xsd:sequence>
-
+				<xsd:element ref="cmp:toc" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="toc">
+        <xsd:complexType>
+            <xsd:sequence>
+
+            </xsd:sequence>
+            <xsd:attribute name="print" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="merge">
