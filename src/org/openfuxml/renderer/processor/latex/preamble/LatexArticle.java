@@ -13,15 +13,9 @@ public class LatexArticle extends AbstractOfxLatexRenderer implements OfxLatexRe
 	public LatexArticle()
 	{		
 		txt.add("\\documentclass[12pt]{article}");
-		addPackages();		
+		super.addPackages();		
 		txt.add("\\title{\\LaTeX}");
 		txt.add("\\date{}");
-	}
-	
-	private void addPackages()
-	{
-		txt.add("\\usepackage{amsmath}");
-		txt.add("\\usepackage{hyperref}");
 	}
 	
 	// http://en.wikibooks.org/wiki/LaTeX/Document_Structure
