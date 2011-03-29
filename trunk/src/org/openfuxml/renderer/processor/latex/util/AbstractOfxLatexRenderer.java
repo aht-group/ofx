@@ -25,6 +25,16 @@ public class AbstractOfxLatexRenderer
 		renderer = new ArrayList<OfxLatexRenderer>();
 	}
 	
+	protected void addPackages()
+	{
+		txt.add("");
+		txt.add("%% Packages");
+		txt.add("\\usepackage{amsmath}");
+		txt.add("\\usepackage{hyperref}");
+		txt.add("\\usepackage{array}");
+		txt.add("");
+	}
+	
 	public List<String> getContent()
 	{
 		if(txt.size()!=0 && renderer.size()!=0){logger.warn("txt and renderer have content!!");}
