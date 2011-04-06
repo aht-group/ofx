@@ -26,8 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org}title" minOccurs="0"/>
- *         &lt;element ref="{http://www.openfuxml.org}tableGroup"/>
+ *         &lt;element ref="{http://www.openfuxml.org}tableRow"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,72 +37,43 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "title",
-    "tableGroup"
+    "tableRow"
 })
-@XmlRootElement(name = "table")
-public class Table implements Serializable
+@XmlRootElement(name = "tableHead")
+public class TableHead
+    implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    protected Title title;
     @XmlElement(required = true)
-    protected TableGroup tableGroup;
+    protected TableRow tableRow;
 
     /**
-     * Gets the value of the title property.
+     * Gets the value of the tableRow property.
      * 
      * @return
      *     possible object is
-     *     {@link Title }
+     *     {@link TableRow }
      *     
      */
-    public Title getTitle() {
-        return title;
+    public TableRow getTableRow() {
+        return tableRow;
     }
 
     /**
-     * Sets the value of the title property.
+     * Sets the value of the tableRow property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Title }
+     *     {@link TableRow }
      *     
      */
-    public void setTitle(Title value) {
-        this.title = value;
+    public void setTableRow(TableRow value) {
+        this.tableRow = value;
     }
 
-    public boolean isSetTitle() {
-        return (this.title!= null);
-    }
-
-    /**
-     * Gets the value of the tableGroup property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TableGroup }
-     *     
-     */
-    public TableGroup getTableGroup() {
-        return tableGroup;
-    }
-
-    /**
-     * Sets the value of the tableGroup property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TableGroup }
-     *     
-     */
-    public void setTableGroup(TableGroup value) {
-        this.tableGroup = value;
-    }
-
-    public boolean isSetTableGroup() {
-        return (this.tableGroup!= null);
+    public boolean isSetTableRow() {
+        return (this.tableRow!= null);
     }
 
 }

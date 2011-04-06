@@ -11,9 +11,10 @@ package org.openfuxml.content.ofx;
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 
 /**
@@ -23,14 +24,11 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * <pre>
  * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org}title" minOccurs="0"/>
- *         &lt;element ref="{http://www.openfuxml.org}tableGroup"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
+ *   &lt;simpleContent>
+ *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+ *       &lt;attribute name="colname" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *     &lt;/extension>
+ *   &lt;/simpleContent>
  * &lt;/complexType>
  * </pre>
  * 
@@ -38,72 +36,73 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "title",
-    "tableGroup"
+    "value"
 })
-@XmlRootElement(name = "table")
-public class Table implements Serializable
+@XmlRootElement(name = "tableEntry")
+public class TableEntry
+    implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    protected Title title;
-    @XmlElement(required = true)
-    protected TableGroup tableGroup;
+    @XmlValue
+    protected String value;
+    @XmlAttribute
+    protected String colname;
 
     /**
-     * Gets the value of the title property.
+     * Gets the value of the value property.
      * 
      * @return
      *     possible object is
-     *     {@link Title }
+     *     {@link String }
      *     
      */
-    public Title getTitle() {
-        return title;
+    public String getValue() {
+        return value;
     }
 
     /**
-     * Sets the value of the title property.
+     * Sets the value of the value property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Title }
+     *     {@link String }
      *     
      */
-    public void setTitle(Title value) {
-        this.title = value;
+    public void setValue(String value) {
+        this.value = value;
     }
 
-    public boolean isSetTitle() {
-        return (this.title!= null);
+    public boolean isSetValue() {
+        return (this.value!= null);
     }
 
     /**
-     * Gets the value of the tableGroup property.
+     * Gets the value of the colname property.
      * 
      * @return
      *     possible object is
-     *     {@link TableGroup }
+     *     {@link String }
      *     
      */
-    public TableGroup getTableGroup() {
-        return tableGroup;
+    public String getColname() {
+        return colname;
     }
 
     /**
-     * Sets the value of the tableGroup property.
+     * Sets the value of the colname property.
      * 
      * @param value
      *     allowed object is
-     *     {@link TableGroup }
+     *     {@link String }
      *     
      */
-    public void setTableGroup(TableGroup value) {
-        this.tableGroup = value;
+    public void setColname(String value) {
+        this.colname = value;
     }
 
-    public boolean isSetTableGroup() {
-        return (this.tableGroup!= null);
+    public boolean isSetColname() {
+        return (this.colname!= null);
     }
 
 }
