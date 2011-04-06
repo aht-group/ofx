@@ -20,6 +20,13 @@ import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
 import org.openfuxml.addon.wiki.processor.template.exlp.parser.WikiKeyValueParser;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
+import org.openfuxml.content.ofx.Section;
+import org.openfuxml.content.ofx.Table;
+import org.openfuxml.content.ofx.TableBody;
+import org.openfuxml.content.ofx.TableGroup;
+import org.openfuxml.content.ofx.TableHead;
+import org.openfuxml.content.ofx.Title;
+import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class WikiTemplateKeyValueTransformator extends AbstractWikiProcessor implements WikiProcessor
 {
@@ -27,9 +34,11 @@ public class WikiTemplateKeyValueTransformator extends AbstractWikiProcessor imp
 	
 	private final Namespace nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
 	
+	private OfxNsPrefixMapper nsPrefixMapper;
+	
 	public WikiTemplateKeyValueTransformator() 
 	{
-		
+		nsPrefixMapper = new OfxNsPrefixMapper();
 	}
 	
 	public Element transform(String wikiMarkup)
@@ -46,6 +55,10 @@ public class WikiTemplateKeyValueTransformator extends AbstractWikiProcessor imp
 		e.setAttribute("transparent","true");
 		e.setText("This is the content!!");
 		
+		Section section = new Section();
+		section.setTransparent(true);
+		
+		Table table = getTable();
 		for(LogEvent logEvent : leh.getAlResults())
 		{
 			WikiKeyValueEvent kvEvent= (WikiKeyValueEvent)logEvent;
@@ -55,7 +68,40 @@ public class WikiTemplateKeyValueTransformator extends AbstractWikiProcessor imp
 			e.addContent(eKv);
 		}
 		
-		return e;
+		section.getContent().add(table);
+		Element result = JaxbUtil.toDocument(section, nsPrefixMapper).getRootElement();
+		result.detach();
+		return result;
+	}
+	
+	private Table getTable()
+	{
+		Table table = new Table();
+		table.setTitle(getTitle());
+		table.setTableGroup(getTableGroup());
+		return table;
+	}
+	
+	private Title getTitle()
+	{
+		Title title = new Title();
+		title.setValue("TestTitel");
+		return title;
+	}
+	
+	private TableGroup getTableGroup()
+	{
+		TableGroup tgroup = new TableGroup();
+		tgroup.setTableHead(getTableHead());
+		tgroup.setTableBody(new TableBody());
+		return tgroup;
+	}
+	
+	private TableHead getTableHead()
+	{
+		TableHead thead = new TableHead();
+		
+		return thead;
 	}
 	
 	public static void main (String[] args) throws Exception

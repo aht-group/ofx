@@ -13,9 +13,14 @@ import org.jdom.Document;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
-import org.openfuxml.content.ofx.Row;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Table;
+import org.openfuxml.content.ofx.TableBody;
+import org.openfuxml.content.ofx.TableColSpec;
+import org.openfuxml.content.ofx.TableEntry;
+import org.openfuxml.content.ofx.TableGroup;
+import org.openfuxml.content.ofx.TableHead;
+import org.openfuxml.content.ofx.TableRow;
 import org.openfuxml.content.ofx.Title;
 
 public class TagTableFactory
@@ -31,62 +36,61 @@ public class TagTableFactory
 		Table table = new Table();
 		table.setTitle(getTitel());
 		
-		Table.Tgroup tgroup = new Table.Tgroup();
-		tgroup.setCols(3);
-		tgroup.getColspec().addAll(getColSpecs());
-		tgroup.setThead(getThead());
-		tgroup.setTbody(getBody(metatag));
+		TableGroup tgroup = new TableGroup();
+		tgroup.getTableColSpec().addAll(getColSpecs());
+		tgroup.setTableHead(getThead());
+		tgroup.setTableBody(getBody(metatag));
 		
-		table.setTgroup(tgroup);
+		table.setTableGroup(tgroup);
 		return table;
 	}
 	
-	private Table.Tgroup.Thead getThead()
+	private TableHead getThead()
 	{
-		Table.Tgroup.Thead thead = new Table.Tgroup.Thead();
-		Row row = new Row();
-		row.getEntry().add(getRowEntry(1,"Name"));
-		row.getEntry().add(getRowEntry(2,"Required"));
-		row.getEntry().add(getRowEntry(3,"Description"));
-		thead.setRow(row);
+		TableHead thead = new TableHead();
+		TableRow row = new TableRow();
+		row.getTableEntry().add(getRowEntry(1,"Name"));
+		row.getTableEntry().add(getRowEntry(2,"Required"));
+		row.getTableEntry().add(getRowEntry(3,"Description"));
+		thead.setTableRow(row);
 		return thead;
 	}
 	
-	private Table.Tgroup.Tbody getBody(Metatag metatag)
+	private TableBody getBody(Metatag metatag)
 	{
-		Table.Tgroup.Tbody tbody = new Table.Tgroup.Tbody();
+		TableBody tbody = new TableBody();
 		for(Attribute att : metatag.getTag().getAttribute())
 		{
-			Row row = new Row();
-			row.getEntry().add(getRowEntry(1,att.getName()));
-			row.getEntry().add(getRowEntry(2,att.isRequired()+""));
+			TableRow row = new TableRow();
+			row.getTableEntry().add(getRowEntry(1,att.getName()));
+			row.getTableEntry().add(getRowEntry(2,att.isRequired()+""));
 			logger.warn("Description is disabled"); //TODO Check description
 //			if(att.isSetDescription()){row.getEntry().add(getRowEntry(3,att.getDescription().trim()));}
-			tbody.getRow().add(row);
+			tbody.getTableRow().add(row);
 		}
 		return tbody;
 	}
 	
-	private Row.Entry getRowEntry(int num, String value)
+	private TableEntry getRowEntry(int num, String value)
 	{
-		Row.Entry row = new Row.Entry();
+		TableEntry row = new TableEntry();
 		row.setColname("col"+num);
 		row.setValue(value);
 		return row;
 	}
 	
-	private List<Table.Tgroup.Colspec> getColSpecs()
+	private List<TableColSpec> getColSpecs()
 	{
-		List<Table.Tgroup.Colspec> lColSpecs = new ArrayList<Table.Tgroup.Colspec>();
+		List<TableColSpec> lColSpecs = new ArrayList<TableColSpec>();
 		lColSpecs.add(getcolSpec(1, "4*"));
 		lColSpecs.add(getcolSpec(2, "2*"));
 		lColSpecs.add(getcolSpec(3, "9*"));
 		return lColSpecs;
 	}
 	
-	private Table.Tgroup.Colspec getcolSpec(int num, String width)
+	private TableColSpec getcolSpec(int num, String width)
 	{
-		Table.Tgroup.Colspec colspec = new Table.Tgroup.Colspec();
+		TableColSpec colspec = new TableColSpec();
 		colspec.setColnum(num);
 		colspec.setColname("col"+num);
 		colspec.setColwidth(width);

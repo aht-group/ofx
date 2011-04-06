@@ -141,50 +141,54 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="title" minOccurs="0" maxOccurs="1"/>
-                <xsd:element name="tgroup" minOccurs="1" maxOccurs="1">
-                    <xsd:complexType>
-                        <xsd:sequence>
-                            <xsd:element name="colspec" minOccurs="0" maxOccurs="unbounded">
-                                <xsd:complexType>
-                                    <xsd:attribute name="colnum" type="xsd:int"/>
-                                    <xsd:attribute name="colname" type="xsd:string"/>
-                                    <xsd:attribute name="colwidth" type="xsd:string"/>
-                                </xsd:complexType>
-                            </xsd:element>
-                            <xsd:element name="thead" minOccurs="0" maxOccurs="1">
-                                <xsd:complexType>
-                                    <xsd:sequence>
-                                        <xsd:element ref="row" minOccurs="1" maxOccurs="1"/>
-                                    </xsd:sequence>
-                                </xsd:complexType>
-                            </xsd:element>
-                            <xsd:element name="tbody" minOccurs="1" maxOccurs="1">
-                                <xsd:complexType>
-                                    <xsd:sequence>
-                                        <xsd:element ref="row" minOccurs="1" maxOccurs="unbounded"/>
-                                    </xsd:sequence>
-                                </xsd:complexType>
-                            </xsd:element>
-                        </xsd:sequence>
-                        <xsd:attribute name="cols" type="xsd:int"/>
-                    </xsd:complexType>
-                </xsd:element>
+                <xsd:element ref="tableGroup" minOccurs="1" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="row">
+    <xsd:element name="tableGroup">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="entry" minOccurs="1" maxOccurs="unbounded">
-                    <xsd:complexType>
-                        <xsd:simpleContent>
-                            <xsd:extension base="xsd:string">
-                                <xsd:attribute name="colname" type="xsd:string"/>
-                            </xsd:extension>
-                        </xsd:simpleContent>
-                    </xsd:complexType>
-                </xsd:element>
+                <xsd:element ref="tableColSpec" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="tableHead" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="tableBody" minOccurs="1" maxOccurs="1"/>
             </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="tableColSpec">
+        <xsd:complexType>
+            <xsd:attribute name="colnum" type="xsd:int"/>
+            <xsd:attribute name="colname" type="xsd:string"/>
+            <xsd:attribute name="colwidth" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="tableHead">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="tableRow" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="tableBody">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="tableRow" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="tableRow">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="tableEntry" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="tableEntry">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="colname" type="xsd:string"/>
+                </xsd:extension>
+            </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>
