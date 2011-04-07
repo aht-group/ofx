@@ -1,10 +1,5 @@
 package org.openfuxml.addon.jsf.factory;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.text.TableView.TableRow;
-
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -18,9 +13,8 @@ import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Body;
-import org.openfuxml.content.ofx.table.ColSpec;
+import org.openfuxml.content.ofx.table.Content;
 import org.openfuxml.content.ofx.table.Entry;
-import org.openfuxml.content.ofx.table.Group;
 import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.content.ofx.table.Table;
@@ -38,12 +32,12 @@ public class TagTableFactory
 		Table table = new Table();
 		table.setTitle(getTitel());
 		
-		Group tgroup = new Group();
-		tgroup.getColSpec().addAll(getColSpecs());
+		Content tgroup = new Content();
+//		table.(getColSpecs());
 		tgroup.setHead(getThead());
-		tgroup.setBody(getBody(metatag));
+		tgroup.getBody().add(getBody(metatag));
 		
-		table.setGroup(tgroup);
+		table.setContent(tgroup);
 		return table;
 	}
 	
@@ -54,7 +48,7 @@ public class TagTableFactory
 		row.getEntry().add(getEntry(1,"Name"));
 		row.getEntry().add(getEntry(2,"Required"));
 		row.getEntry().add(getEntry(3,"Description"));
-		thead.setRow(row);
+		thead.getRow().add(row);
 		return thead;
 	}
 	
@@ -81,7 +75,7 @@ public class TagTableFactory
 		return row;
 	}
 	
-	private List<ColSpec> getColSpecs()
+/*	private List<ColSpec> getColSpecs()
 	{
 		List<ColSpec> lColSpecs = new ArrayList<ColSpec>();
 		lColSpecs.add(getcolSpec(1, "4*"));
@@ -98,7 +92,7 @@ public class TagTableFactory
 		colspec.setColwidth(width);
 		return colspec;
 	}
-	
+*/	
 	private Title getTitel()
 	{
 		Title title = new Title();

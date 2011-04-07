@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/table}entry" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org/table}row" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -39,52 +39,52 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "entry"
+    "row"
 })
-@XmlRootElement(name = "row")
-public class Row
+@XmlRootElement(name = "foot")
+public class Foot
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<Entry> entry;
+    protected List<Row> row;
 
     /**
-     * Gets the value of the entry property.
+     * Gets the value of the row property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the entry property.
+     * This is why there is not a <CODE>set</CODE> method for the row property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getEntry().add(newItem);
+     *    getRow().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Entry }
+     * {@link Row }
      * 
      * 
      */
-    public List<Entry> getEntry() {
-        if (entry == null) {
-            entry = new ArrayList<Entry>();
+    public List<Row> getRow() {
+        if (row == null) {
+            row = new ArrayList<Row>();
         }
-        return this.entry;
+        return this.row;
     }
 
-    public boolean isSetEntry() {
-        return ((this.entry!= null)&&(!this.entry.isEmpty()));
+    public boolean isSetRow() {
+        return ((this.row!= null)&&(!this.row.isEmpty()));
     }
 
-    public void unsetEntry() {
-        this.entry = null;
+    public void unsetRow() {
+        this.row = null;
     }
 
 }

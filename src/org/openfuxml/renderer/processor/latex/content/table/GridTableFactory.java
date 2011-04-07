@@ -4,8 +4,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Body;
+import org.openfuxml.content.ofx.table.Content;
 import org.openfuxml.content.ofx.table.Entry;
-import org.openfuxml.content.ofx.table.Group;
 import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.content.ofx.table.Table;
@@ -24,7 +24,7 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 	public void render(Table table)
 	{	
 		renderPre();
-		renderTabular(table.getGroup());
+		renderTabular(table.getContent());
 		renderPost(table.getTitle());
 	}
 	
@@ -45,11 +45,13 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 		postTxt.add("\\end{table}");
 	}
 	
-	private void renderTabular(Group tgroup)
+	private void renderTabular(Content tgroup)
 	{
 		renderTableSpec(tgroup.getHead());
 		renderTableHeader(tgroup.getHead());
-		renderBody(tgroup.getBody());
+		
+		logger.warn("Only one body");
+		renderBody(tgroup.getBody().get(0));
 		
 		txt.add("\\hline");
 		txt.add("\\end{tabular}");
