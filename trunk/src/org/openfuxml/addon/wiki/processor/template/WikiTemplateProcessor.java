@@ -58,7 +58,7 @@ public class WikiTemplateProcessor extends AbstractWikiProcessor
 		Document doc = new Document();
 		
 		Template templateDef = WikiConfigXmlXpathHelper.getTemplate(templates, template.getName());
-		Element e = kvTransformator.transform(template.getId(),templateDef.getClazz(),template.getMarkup().getValue());
+		Element e = kvTransformator.transform(templateDef,template);
 		doc.setRootElement(e);
 		return doc;
 	}

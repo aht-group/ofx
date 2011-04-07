@@ -1,5 +1,6 @@
 package org.openfuxml.addon.wiki.processor.template.transformator;
 
+import net.sf.exlp.event.LogEvent;
 import net.sf.exlp.event.handler.EhResultContainer;
 import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.io.LoggerInit;
@@ -16,12 +17,11 @@ import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.jdom.Namespace;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
+import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
 import org.openfuxml.addon.wiki.processor.template.exlp.parser.WikiKeyValueParser;
-import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
-import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
-public class WikiTemplateKeyValueTransformator extends AbstractWikiProcessor implements WikiProcessor
+public class WikiTemplateKeyValueTransformator
 {
 	static Log logger = LogFactory.getLog(WikiTemplateKeyValueTransformator.class);
 	
@@ -34,17 +34,26 @@ public class WikiTemplateKeyValueTransformator extends AbstractWikiProcessor imp
 		nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
 	}
 	
-	public Element transform(String templateId, String transformationClass, String wikiMarkup)
+	public Element transform(Template templateDef, Template template)
 	{
 		EhResultContainer leh = new EhResultContainer();
 		LogParser lp = new WikiKeyValueParser(leh);
-		LogListener ll = new LogListenerString(wikiMarkup,lp);
+		LogListener ll = new LogListenerString(template.getMarkup().getValue(),lp);
 		ll.processSingle();
 		
+		for(LogEvent logEvent : leh.getAlResults())
+		{
+			WikiKeyValueEvent kvEvent= (WikiKeyValueEvent)logEvent;
+			template.getTemplateKv().add(kvEvent.getKv());
+		}
 		
-		
+		return transformWithClass(templateDef, template);
+	}
+	
+	private Element transformWithClass(Template templateDef, Template template)
+	{
 		WikiTemplateGenericTable genericTable = new WikiTemplateGenericTable(nsPrefixMapper);
-		Element e = genericTable.transform(wikiMarkup);
+		Element e = genericTable.transform(template);
 		return e;
 	}
 	
@@ -63,8 +72,11 @@ public class WikiTemplateKeyValueTransformator extends AbstractWikiProcessor imp
 		String fnTemplate = config.getString("wiki.processor.test.template.kv");
 		Template template = (Template)JaxbUtil.loadJAXB(fnTemplate, Template.class);
 		
+		Template templateDef = new Template();
+		templateDef.setClazz("xx");
+		
 		WikiTemplateKeyValueTransformator kvTransformator = new WikiTemplateKeyValueTransformator();
-		Element e = kvTransformator.transform("MyTemplateId", "test", template.getMarkup().getValue());
+		Element e = kvTransformator.transform(templateDef,template);
 		JDomUtil.debug(e);
 	}
 }
