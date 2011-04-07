@@ -1,12 +1,12 @@
 package org.openfuxml.renderer.processor.latex.content;
 
-import java.io.Serializable;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.ofx.table.Table;
+import org.openfuxml.renderer.processor.latex.content.table.TableFactory;
 import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
@@ -29,9 +29,12 @@ public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatex
 		logger.trace("Render section");
 		for(Object s : section.getContent())
 		{
-			if(s instanceof Title){renderTitle((Title)s);}
-			if(s instanceof Section){renderSection((Section)s);}
-			if(s instanceof Paragraph){renderParagraph((Paragraph)s);}
+			if     (s instanceof String){}
+			else if(s instanceof Title){renderTitle((Title)s);}
+			else if(s instanceof Section){renderSection((Section)s);}
+			else if(s instanceof Paragraph){renderParagraph((Paragraph)s);}
+			else if(s instanceof Table){renderTable((Table)s);}
+			else {logger.warn("No Renderer for "+s.getClass().getSimpleName());}
 		}
 //		if(section.getContent()logger.debug(getSectionHeader("x"));
 		
@@ -49,6 +52,13 @@ public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatex
 		ParagraphFactory pf = new ParagraphFactory();
 		pf.render(paragraph);
 		renderer.add(pf);
+	}
+	
+	private void renderTable(Table table)
+	{
+		TableFactory f = new TableFactory();
+		f.render(table);
+		renderer.add(f);
 	}
 	
 	private void renderSection(Section section)
