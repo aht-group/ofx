@@ -34,12 +34,21 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="markup" maxOccurs="1"/>
+                <xsd:element ref="templateKv" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
             <xsd:attribute name="name" type="xsd:string"/>
             <xsd:attribute name="class" type="xsd:string"/>
             <xsd:attribute name="external" type="xsd:boolean"/>
          	<xsd:attribute name="source" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="templateKv">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="markup" maxOccurs="1"/>
+            </xsd:sequence>
+             <xsd:attribute name="key" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="markup">

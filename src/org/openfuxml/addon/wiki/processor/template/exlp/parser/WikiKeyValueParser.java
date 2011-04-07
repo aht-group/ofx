@@ -12,14 +12,15 @@ import net.sf.exlp.parser.LogParser;
 import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.wiki.data.model.WikiTemplateKeyValue;
+import org.openfuxml.addon.wiki.data.jaxb.Markup;
+import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
 
 public class WikiKeyValueParser extends AbstractLogParser implements LogParser  
 {
 	static Log logger = LogFactory.getLog(WikiKeyValueParser.class);
 	
-	private WikiTemplateKeyValue wikiKV;
+	private TemplateKv wikiKV;
 	
 	public WikiKeyValueParser(LogEventHandler leh)
 	{
@@ -68,18 +69,19 @@ public class WikiKeyValueParser extends AbstractLogParser implements LogParser
 	{
 		if(wikiKV!=null){event();}
 		
-		wikiKV = new WikiTemplateKeyValue();
+		wikiKV = new TemplateKv();
 		wikiKV.setKey(m.group(1));
-		wikiKV.setValueMarkup(m.group(2));
+		wikiKV.setMarkup(new Markup());
+		wikiKV.getMarkup().setValue(m.group(2));
 	}
 	
 	public void value(Matcher m)
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append(wikiKV.getValueMarkup());
+		sb.append(wikiKV.getMarkup().getValue());
 		sb.append(SystemUtils.LINE_SEPARATOR);
 		sb.append(m.group(0));
-		wikiKV.setValueMarkup(sb.toString());
+		wikiKV.getMarkup().setValue(sb.toString());
 	}
 	
 	@Override

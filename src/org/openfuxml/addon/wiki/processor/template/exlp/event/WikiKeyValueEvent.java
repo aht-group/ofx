@@ -5,16 +5,16 @@ import net.sf.exlp.event.LogEvent;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.wiki.data.model.WikiTemplateKeyValue;
+import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 
 public class WikiKeyValueEvent extends AbstractEvent implements LogEvent
 {
 	static Log logger = LogFactory.getLog(WikiKeyValueEvent.class);
 	static final long serialVersionUID=1;
 	
-	private WikiTemplateKeyValue kv;
+	private TemplateKv kv;
 
-	public WikiKeyValueEvent(WikiTemplateKeyValue kv)
+	public WikiKeyValueEvent(TemplateKv kv)
 	{
 		this.kv=kv;
 	}
@@ -23,8 +23,8 @@ public class WikiKeyValueEvent extends AbstractEvent implements LogEvent
 	{
 		super.debug();
 		logger.debug("Key: "+kv.getKey());
-		logger.debug("Value: "+kv.getValueMarkup());
+		logger.debug("Value: "+kv.getMarkup().getValue());
 	}
 	
-	public WikiTemplateKeyValue getKv() {return kv;}
+	public TemplateKv getKv() {return kv;}
 }
