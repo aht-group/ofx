@@ -17,6 +17,8 @@ public class TableFactory extends AbstractOfxLatexRenderer implements OfxLatexRe
 	
 	public void render(Table table)
 	{	
-		
+		GridTableFactory gtf = new GridTableFactory();
+		gtf.render(table);
+		renderer.add(gtf);
 	}
 }

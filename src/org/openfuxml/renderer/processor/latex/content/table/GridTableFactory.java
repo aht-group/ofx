@@ -4,11 +4,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Body;
+import org.openfuxml.content.ofx.table.Column;
 import org.openfuxml.content.ofx.table.Content;
 import org.openfuxml.content.ofx.table.Entry;
 import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
+import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
+import org.openfuxml.renderer.processor.latex.content.table.util.LatexTabluar;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 
@@ -24,7 +27,7 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 	public void render(Table table)
 	{	
 		renderPre();
-		renderTabular(table.getContent());
+		renderTabular(table.getSpecification(),table.getContent());
 		renderPost(table.getTitle());
 	}
 	
@@ -45,9 +48,9 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 		postTxt.add("\\end{table}");
 	}
 	
-	private void renderTabular(Content tgroup)
+	private void renderTabular(Specification specification, Content tgroup)
 	{
-		renderTableSpec(tgroup.getHead());
+		renderSpecification(specification);
 		renderTableHeader(tgroup.getHead());
 		
 		logger.warn("Only one body");
@@ -57,9 +60,17 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 		txt.add("\\end{tabular}");
 	}
 	
-	private void renderTableSpec(Head thead)
+	private void renderSpecification(Specification spec)
 	{
-		txt.add("\\begin{tabular}{|l|l|}");
+		StringBuffer sb = new StringBuffer();
+		sb.append("\\begin{tabular}");
+		sb.append("{");
+		for(Column column : spec.getColumns().getColumn())
+		{
+			sb.append(LatexTabluar.getTableAlignment(column.getAlignment()));
+		}
+		sb.append("}");
+		txt.add(sb.toString());
 	}
 	
 	private void renderTableHeader(Head thead)
