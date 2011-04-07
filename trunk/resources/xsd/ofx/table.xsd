@@ -12,34 +12,42 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="ofx:title" minOccurs="0" maxOccurs="1"/>
-                <xsd:element ref="group" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="specification" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="content" minOccurs="1" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="group">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="colSpec" minOccurs="0" maxOccurs="unbounded"/>
-                <xsd:element ref="head" minOccurs="0" maxOccurs="1"/>
-                <xsd:element ref="body" minOccurs="1" maxOccurs="1"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="colSpec">
+    <xsd:element name="specification">
         <xsd:complexType>
             <xsd:attribute name="colnum" type="xsd:int"/>
             <xsd:attribute name="colname" type="xsd:string"/>
             <xsd:attribute name="colwidth" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="content">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="head" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="body" minOccurs="1" maxOccurs="unbounded"/>
+                <xsd:element ref="foot" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="head">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="row" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="row" minOccurs="1" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="body">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="row" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="foot">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="row" minOccurs="1" maxOccurs="unbounded"/>
