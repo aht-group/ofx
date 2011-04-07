@@ -6,11 +6,13 @@
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
     jaxb:extensionBindingPrefixes="xjc"
     jaxb:version="2.0">
-    <xsd:simpleType name="alignment">
-  		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="left"/>
-			<xsd:enumeration value="center"/>
-			<xsd:enumeration value="right"/>
-		</xsd:restriction>
-	</xsd:simpleType>
+    <xsd:element name="alignment">
+		<xsd:simpleType>
+	  		<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="left"/>
+				<xsd:enumeration value="center"/>
+				<xsd:enumeration value="right"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+    </xsd:element>
 </xsd:schema>

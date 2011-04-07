@@ -14,10 +14,12 @@ import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Body;
+import org.openfuxml.content.ofx.table.Columns;
 import org.openfuxml.content.ofx.table.Content;
 import org.openfuxml.content.ofx.table.Entry;
 import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
+import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
 
 public class WikiTemplateGenericTable implements WikiTemplateTransformator
@@ -52,6 +54,16 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 		table.setTitle(getTitle());
 		table.setContent(getTableContent(listKv));
 		return table;
+	}
+	
+	private Specification getSpecification()
+	{
+		Specification specification = new Specification();
+		
+		Columns columns = new Columns();
+//		columns.getColumn(
+		
+		return specification;
 	}
 	
 	private Title getTitle()

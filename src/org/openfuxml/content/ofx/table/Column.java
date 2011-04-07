@@ -11,6 +11,7 @@ package org.openfuxml.content.ofx.table;
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/table}columns" minOccurs="0"/>
+ *         &lt;element ref="{http://www.openfuxml.org/layout}alignment" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,42 +37,43 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "columns"
+    "alignment"
 })
-@XmlRootElement(name = "specification")
-public class Specification
+@XmlRootElement(name = "column")
+public class Column
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    protected Columns columns;
+    @XmlElement(namespace = "http://www.openfuxml.org/layout")
+    protected String alignment;
 
     /**
-     * Gets the value of the columns property.
+     * Gets the value of the alignment property.
      * 
      * @return
      *     possible object is
-     *     {@link Columns }
+     *     {@link String }
      *     
      */
-    public Columns getColumns() {
-        return columns;
+    public String getAlignment() {
+        return alignment;
     }
 
     /**
-     * Sets the value of the columns property.
+     * Sets the value of the alignment property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Columns }
+     *     {@link String }
      *     
      */
-    public void setColumns(Columns value) {
-        this.columns = value;
+    public void setAlignment(String value) {
+        this.alignment = value;
     }
 
-    public boolean isSetColumns() {
-        return (this.columns!= null);
+    public boolean isSetAlignment() {
+        return (this.alignment!= null);
     }
 
 }
