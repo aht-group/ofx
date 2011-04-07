@@ -9,11 +9,11 @@ public class ColumnFactory
 {
 	static Log logger = LogFactory.getLog(ColumnFactory.class);
 	
-	public static synchronized Column create(String alignment) 
+	public static synchronized Column create(Alignment alignment) 
 	{
 		Column column = new Column();
 		
-		column.setAlignment(Alignment.LEFT.toString());
+		column.setAlignment(alignment.toString().toLowerCase());
 		
 		return column;
 	}
