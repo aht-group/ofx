@@ -25,6 +25,7 @@ public class SectionTitleFactory extends AbstractOfxLatexRenderer implements Ofx
 		logger.trace("Render title");
 		if(title.isSetNumbering()){logger.warn("Ignoring numbring");}
 		
+		txt.add("");
 		StringBuffer sb = new StringBuffer();
 		sb.append("\\");
 		sb.append(latexPreamble.getSectionHeaderName(lvl)).append("{");
