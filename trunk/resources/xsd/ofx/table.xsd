@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.openfuxml.org/table"
+	xmlns="http://www.openfuxml.org/table"
+	xmlns:ofx="http://www.openfuxml.org"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+    jaxb:extensionBindingPrefixes="xjc"
+    jaxb:version="2.0">
+    <xsd:import namespace="http://www.openfuxml.org" schemaLocation="../ofx.xsd"/>
+    <xsd:element name="table">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="ofx:title" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="group" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="group">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="colSpec" minOccurs="0" maxOccurs="unbounded"/>
+                <xsd:element ref="head" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="body" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="colSpec">
+        <xsd:complexType>
+            <xsd:attribute name="colnum" type="xsd:int"/>
+            <xsd:attribute name="colname" type="xsd:string"/>
+            <xsd:attribute name="colwidth" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="head">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="row" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="body">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="row" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="row">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="entry" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="entry">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="colname" type="xsd:string"/>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

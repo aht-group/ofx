@@ -3,6 +3,8 @@ package org.openfuxml.addon.jsf.factory;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.TableView.TableRow;
+
 import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -14,14 +16,14 @@ import org.openfuxml.addon.jsf.data.jaxb.Attribute;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.ofx.Table;
-import org.openfuxml.content.ofx.TableBody;
-import org.openfuxml.content.ofx.TableColSpec;
-import org.openfuxml.content.ofx.TableEntry;
-import org.openfuxml.content.ofx.TableGroup;
-import org.openfuxml.content.ofx.TableHead;
-import org.openfuxml.content.ofx.TableRow;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.ofx.table.Body;
+import org.openfuxml.content.ofx.table.ColSpec;
+import org.openfuxml.content.ofx.table.Entry;
+import org.openfuxml.content.ofx.table.Group;
+import org.openfuxml.content.ofx.table.Head;
+import org.openfuxml.content.ofx.table.Row;
+import org.openfuxml.content.ofx.table.Table;
 
 public class TagTableFactory
 {
@@ -36,61 +38,61 @@ public class TagTableFactory
 		Table table = new Table();
 		table.setTitle(getTitel());
 		
-		TableGroup tgroup = new TableGroup();
-		tgroup.getTableColSpec().addAll(getColSpecs());
-		tgroup.setTableHead(getThead());
-		tgroup.setTableBody(getBody(metatag));
+		Group tgroup = new Group();
+		tgroup.getColSpec().addAll(getColSpecs());
+		tgroup.setHead(getThead());
+		tgroup.setBody(getBody(metatag));
 		
-		table.setTableGroup(tgroup);
+		table.setGroup(tgroup);
 		return table;
 	}
 	
-	private TableHead getThead()
+	private Head getThead()
 	{
-		TableHead thead = new TableHead();
-		TableRow row = new TableRow();
-		row.getTableEntry().add(getRowEntry(1,"Name"));
-		row.getTableEntry().add(getRowEntry(2,"Required"));
-		row.getTableEntry().add(getRowEntry(3,"Description"));
-		thead.setTableRow(row);
+		Head thead = new Head();
+		Row row = new Row();
+		row.getEntry().add(getEntry(1,"Name"));
+		row.getEntry().add(getEntry(2,"Required"));
+		row.getEntry().add(getEntry(3,"Description"));
+		thead.setRow(row);
 		return thead;
 	}
 	
-	private TableBody getBody(Metatag metatag)
+	private Body getBody(Metatag metatag)
 	{
-		TableBody tbody = new TableBody();
+		Body tbody = new Body();
 		for(Attribute att : metatag.getTag().getAttribute())
 		{
-			TableRow row = new TableRow();
-			row.getTableEntry().add(getRowEntry(1,att.getName()));
-			row.getTableEntry().add(getRowEntry(2,att.isRequired()+""));
+			Row row = new Row();
+			row.getEntry().add(getEntry(1,att.getName()));
+			row.getEntry().add(getEntry(2,att.isRequired()+""));
 			logger.warn("Description is disabled"); //TODO Check description
 //			if(att.isSetDescription()){row.getEntry().add(getRowEntry(3,att.getDescription().trim()));}
-			tbody.getTableRow().add(row);
+			tbody.getRow().add(row);
 		}
 		return tbody;
 	}
 	
-	private TableEntry getRowEntry(int num, String value)
+	private Entry getEntry(int num, String value)
 	{
-		TableEntry row = new TableEntry();
+		Entry row = new Entry();
 		row.setColname("col"+num);
 		row.setValue(value);
 		return row;
 	}
 	
-	private List<TableColSpec> getColSpecs()
+	private List<ColSpec> getColSpecs()
 	{
-		List<TableColSpec> lColSpecs = new ArrayList<TableColSpec>();
+		List<ColSpec> lColSpecs = new ArrayList<ColSpec>();
 		lColSpecs.add(getcolSpec(1, "4*"));
 		lColSpecs.add(getcolSpec(2, "2*"));
 		lColSpecs.add(getcolSpec(3, "9*"));
 		return lColSpecs;
 	}
 	
-	private TableColSpec getcolSpec(int num, String width)
+	private ColSpec getcolSpec(int num, String width)
 	{
-		TableColSpec colspec = new TableColSpec();
+		ColSpec colspec = new ColSpec();
 		colspec.setColnum(num);
 		colspec.setColname("col"+num);
 		colspec.setColwidth(width);

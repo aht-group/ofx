@@ -12,13 +12,13 @@ import org.jdom.Namespace;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.ofx.Table;
-import org.openfuxml.content.ofx.TableBody;
-import org.openfuxml.content.ofx.TableEntry;
-import org.openfuxml.content.ofx.TableGroup;
-import org.openfuxml.content.ofx.TableHead;
-import org.openfuxml.content.ofx.TableRow;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.ofx.table.Body;
+import org.openfuxml.content.ofx.table.Entry;
+import org.openfuxml.content.ofx.table.Group;
+import org.openfuxml.content.ofx.table.Head;
+import org.openfuxml.content.ofx.table.Row;
+import org.openfuxml.content.ofx.table.Table;
 
 public class WikiTemplateGenericTable implements WikiTemplateTransformator
 {
@@ -50,7 +50,7 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 	{
 		Table table = new Table();
 		table.setTitle(getTitle());
-		table.setTableGroup(getTableGroup(listKv));
+		table.setGroup(getTableGroup(listKv));
 		return table;
 	}
 	
@@ -61,44 +61,44 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 		return title;
 	}
 	
-	private TableGroup getTableGroup(List<TemplateKv> listKv)
+	private Group getTableGroup(List<TemplateKv> listKv)
 	{
-		TableGroup tgroup = new TableGroup();
-		tgroup.setTableHead(getTableHead());
-		tgroup.setTableBody(getTableBody(listKv));
+		Group tgroup = new Group();
+		tgroup.setHead(getTableHead());
+		tgroup.setBody(getTableBody(listKv));
 		return tgroup;
 	}
 	
-	private TableHead getTableHead()
+	private Head getTableHead()
 	{
-		TableHead thead = new TableHead();
+		Head thead = new Head();
 		
 		return thead;
 	}
 	
-	private TableBody getTableBody(List<TemplateKv> listKv)
+	private Body getTableBody(List<TemplateKv> listKv)
 	{
-		TableBody tbody = new TableBody();
+		Body tbody = new Body();
 		
 		for(TemplateKv kv : listKv)
 		{
-			tbody.getTableRow().add(getRow(kv));
+			tbody.getRow().add(getRow(kv));
 		}
 		
 		return tbody;
 	}
 	
-	private TableRow getRow(TemplateKv kv)
+	private Row getRow(TemplateKv kv)
 	{
-		TableRow row = new TableRow();
+		Row row = new Row();
 		
-		TableEntry teKey = new TableEntry();
+		Entry teKey = new Entry();
 		teKey.setValue(kv.getKey());
-		row.getTableEntry().add(teKey);
+		row.getEntry().add(teKey);
 		
-		TableEntry teValue = new TableEntry();
+		Entry teValue = new Entry();
 		teValue.setValue(kv.getMarkup().getValue());
-		row.getTableEntry().add(teValue);
+		row.getEntry().add(teValue);
 		
 		return row;
 	}

@@ -17,7 +17,8 @@ public class ParagraphFactory extends AbstractOfxLatexRenderer implements OfxLat
 	
 	public void render(Paragraph paragraph)
 	{
-		if(paragraph.isSetTop()){logger.warn("Top spacing ignored");}
+		//TODO manage paragraph top spacing
+		//if(paragraph.isSetTop()){logger.warn("Top spacing ignored");}
 		for(Object o : paragraph.getContent())
 		{
 			if(o instanceof String){addString((String)o);}
