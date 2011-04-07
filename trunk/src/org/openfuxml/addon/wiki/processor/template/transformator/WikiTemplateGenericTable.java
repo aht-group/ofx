@@ -11,8 +11,10 @@ import org.jdom.Element;
 import org.jdom.Namespace;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
+import org.openfuxml.content.factory.ofx.table.ColumnFactory;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.ofx.layout.Alignment;
 import org.openfuxml.content.ofx.table.Body;
 import org.openfuxml.content.ofx.table.Columns;
 import org.openfuxml.content.ofx.table.Content;
@@ -52,6 +54,7 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 	{
 		Table table = new Table();
 		table.setTitle(getTitle());
+		table.setSpecification(getSpecification());
 		table.setContent(getTableContent(listKv));
 		return table;
 	}
@@ -61,8 +64,10 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 		Specification specification = new Specification();
 		
 		Columns columns = new Columns();
-//		columns.getColumn(
+		columns.getColumn().add(ColumnFactory.create(Alignment.LEFT));
+		columns.getColumn().add(ColumnFactory.create(Alignment.LEFT));
 		
+		specification.setColumns(columns);
 		return specification;
 	}
 	
@@ -83,9 +88,20 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 	
 	private Head getTableHead()
 	{
-		Head thead = new Head();
+		Head head = new Head();
 		
-		return thead;
+		Row row = new Row();
+		
+		Entry teKey = new Entry();
+		teKey.setValue("Key");
+		row.getEntry().add(teKey);
+		
+		Entry teValue = new Entry();
+		teValue.setValue("Value");
+		row.getEntry().add(teValue);
+		
+		head.getRow().add(row);
+		return head;
 	}
 	
 	private Body getTableBody(List<TemplateKv> listKv)
