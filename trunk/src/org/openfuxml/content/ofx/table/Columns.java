@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/table}columns" minOccurs="0"/>
+ *         &lt;element ref="{http://www.openfuxml.org/table}column" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,42 +36,42 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "columns"
+    "column"
 })
-@XmlRootElement(name = "specification")
-public class Specification
+@XmlRootElement(name = "columns")
+public class Columns
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    protected Columns columns;
+    protected Column column;
 
     /**
-     * Gets the value of the columns property.
+     * Gets the value of the column property.
      * 
      * @return
      *     possible object is
-     *     {@link Columns }
+     *     {@link Column }
      *     
      */
-    public Columns getColumns() {
-        return columns;
+    public Column getColumn() {
+        return column;
     }
 
     /**
-     * Sets the value of the columns property.
+     * Sets the value of the column property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Columns }
+     *     {@link Column }
      *     
      */
-    public void setColumns(Columns value) {
-        this.columns = value;
+    public void setColumn(Column value) {
+        this.column = value;
     }
 
-    public boolean isSetColumns() {
-        return (this.columns!= null);
+    public boolean isSetColumn() {
+        return (this.column!= null);
     }
 
 }

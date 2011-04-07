@@ -21,9 +21,23 @@
     </xsd:element>
     <xsd:element name="specification">
         <xsd:complexType>
-            <xsd:attribute name="colnum" type="xsd:int"/>
-            <xsd:attribute name="colname" type="xsd:string"/>
-            <xsd:attribute name="colwidth" type="xsd:string"/>
+            <xsd:sequence>
+                <xsd:element ref="columns" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="columns">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="column" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="column">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="layout:alignment" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="content">
