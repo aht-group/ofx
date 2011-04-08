@@ -4,13 +4,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Body;
-import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.content.ofx.table.Column;
 import org.openfuxml.content.ofx.table.Content;
 import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
+import org.openfuxml.renderer.processor.latex.content.StringRenderer;
 import org.openfuxml.renderer.processor.latex.content.table.util.LatexTabluar;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
@@ -56,8 +56,8 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 		logger.warn("Only one body");
 		renderBody(tgroup.getBody().get(0));
 		
-		txt.add("\\hline");
-		txt.add("\\end{tabular}");
+		renderer.add(new StringRenderer("\\hline"));
+		renderer.add(new StringRenderer("\\end{tabular}"));
 	}
 	
 	private void renderSpecification(Specification spec)
@@ -70,29 +70,22 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 			sb.append(LatexTabluar.getTableAlignment(column.getAlignment()));
 		}
 		sb.append("}");
-		txt.add(sb.toString());
+		renderer.add(new StringRenderer(sb.toString()));
 	}
 	
 	private void renderTableHeader(Head thead)
 	{
-		txt.add("\\hline Key &  Value \\\\");
-		txt.add("\\hline \\hline");
+		renderer.add(new StringRenderer("\\hline Key &  Value \\\\"));
+		renderer.add(new StringRenderer("\\hline \\hline"));
 	}
 	
 	private void renderBody(Body tbody)
 	{
 		for(Row row : tbody.getRow())
 		{
-			StringBuffer sb = new StringBuffer();
-			for(Cell cell : row.getCell())
-			{
-				sb.append("xx");
-				sb.append(" & ");
-			}
-			sb.delete(sb.length()-2, sb.length());
-			sb.append("\\\\");
-			
-			txt.add(sb.toString());
+			RowFactory f = new RowFactory();
+			f.render(row);
+			renderer.add(f);
 		}
 	}
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.renderer.processor.latex.content.ParagraphFactory;
 import org.openfuxml.renderer.processor.latex.content.SectionFactory;
 
 public class AbstractOfxLatexRenderer
@@ -50,5 +52,12 @@ public class AbstractOfxLatexRenderer
 		resultTxt.addAll(postTxt);
 		
 		return resultTxt;
+	}
+	
+	protected void paragraphRenderer(Paragraph paragraph)
+	{
+		ParagraphFactory f = new ParagraphFactory();
+		f.render(paragraph);
+		renderer.add(f);
 	}
 }

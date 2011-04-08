@@ -14,6 +14,7 @@ import org.openfuxml.addon.wiki.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 import org.openfuxml.content.factory.ofx.table.ColumnFactory;
+import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.layout.Alignment;
@@ -124,8 +125,11 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 	{
 		Row row = new Row();
 		
+		Paragraph p = new Paragraph();
+		p.getContent().add(kv.getKey());
+		
 		Cell cellKey = new Cell();
-		cellKey.getContent().add(kv.getKey());
+		cellKey.getContent().add(p);
 		row.getCell().add(cellKey);
 		
 		Cell cellValue = new Cell();
