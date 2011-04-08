@@ -12,7 +12,7 @@ public class ParagraphFactory extends AbstractOfxLatexRenderer implements OfxLat
 	
 	public ParagraphFactory()
 	{
-
+		preTxt.add("");
 	}
 	
 	public void render(Paragraph paragraph)
@@ -29,6 +29,5 @@ public class ParagraphFactory extends AbstractOfxLatexRenderer implements OfxLat
 	private void addString(String s)
 	{
 		txt.add(s);
-		txt.add("");
 	}
 }
