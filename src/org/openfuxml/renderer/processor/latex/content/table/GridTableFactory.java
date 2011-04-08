@@ -4,9 +4,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Body;
+import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.content.ofx.table.Column;
 import org.openfuxml.content.ofx.table.Content;
-import org.openfuxml.content.ofx.table.Entry;
 import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.content.ofx.table.Specification;
@@ -84,9 +84,9 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 		for(Row row : tbody.getRow())
 		{
 			StringBuffer sb = new StringBuffer();
-			for(Entry entry : row.getEntry())
+			for(Cell cell : row.getCell())
 			{
-				sb.append(entry.getValue());
+				sb.append("xx");
 				sb.append(" & ");
 			}
 			sb.delete(sb.length()-2, sb.length());

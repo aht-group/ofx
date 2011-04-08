@@ -73,17 +73,15 @@
     <xsd:element name="row">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="entry" minOccurs="1" maxOccurs="unbounded"/>
+                <xsd:element ref="cell" minOccurs="1" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="entry">
-        <xsd:complexType>
-            <xsd:simpleContent>
-                <xsd:extension base="xsd:string">
-                    <xsd:attribute name="colname" type="xsd:string"/>
-                </xsd:extension>
-            </xsd:simpleContent>
+    <xsd:element name="cell">
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+                <xsd:element ref="ofx:paragraph" maxOccurs="unbounded"/>
+            </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>

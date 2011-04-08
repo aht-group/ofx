@@ -1,5 +1,6 @@
 package org.openfuxml.addon.wiki.processor.template.transformator;
 
+import java.io.Serializable;
 import java.util.List;
 
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -17,13 +18,14 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.layout.Alignment;
 import org.openfuxml.content.ofx.table.Body;
+import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.content.ofx.table.Columns;
 import org.openfuxml.content.ofx.table.Content;
-import org.openfuxml.content.ofx.table.Entry;
 import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
+import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 
 public class WikiTemplateGenericTable implements WikiTemplateTransformator
 {
@@ -94,13 +96,13 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 		
 		Row row = new Row();
 		
-		Entry teKey = new Entry();
-		teKey.setValue("Key");
-		row.getEntry().add(teKey);
+		Cell cellKey = new Cell();
+		cellKey.getContent().add("Key");
+		row.getCell().add(cellKey);
 		
-		Entry teValue = new Entry();
-		teValue.setValue("Value");
-		row.getEntry().add(teValue);
+		Cell teValue = new Cell();
+		teValue.getContent().add("Value");
+		row.getCell().add(teValue);
 		
 		head.getRow().add(row);
 		return head;
@@ -122,13 +124,24 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 	{
 		Row row = new Row();
 		
-		Entry teKey = new Entry();
-		teKey.setValue(kv.getKey());
-		row.getEntry().add(teKey);
+		Cell cellKey = new Cell();
+		cellKey.getContent().add(kv.getKey());
+		row.getCell().add(cellKey);
 		
-		Entry teValue = new Entry();
-		teValue.setValue(kv.getMarkup().getValue());
-		row.getEntry().add(teValue);
+		Cell cellValue = new Cell();
+		
+		try
+		{
+			Section section = wikiInlineProcessor.toOfx(kv.getMarkup().getValue());
+			for(Object s : section.getContent())
+			{
+				cellValue.getContent().add((Serializable)s);
+			}
+			
+		}
+		catch (OfxInternalProcessingException e) {logger.error(e);}
+		
+		row.getCell().add(cellValue);
 		
 		return row;
 	}
