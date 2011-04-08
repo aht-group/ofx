@@ -34,6 +34,7 @@ public class AbstractOfxLatexRenderer
 		txt.add("\\usepackage{amsmath}");
 		txt.add("\\usepackage{hyperref}");
 		txt.add("\\usepackage{array}");
+		txt.add("\\usepackage{ifthen}");
 		txt.add("");
 	}
 	
