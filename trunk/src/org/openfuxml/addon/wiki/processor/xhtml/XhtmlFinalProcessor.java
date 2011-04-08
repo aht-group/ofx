@@ -10,13 +10,12 @@ import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.mods.OfxPushUp;
 import org.openfuxml.addon.wiki.processor.xhtml.mods.XhtmlAHxMerge;
-import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 
 public class XhtmlFinalProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
 	static Log logger = LogFactory.getLog(XhtmlFinalProcessor.class);
 	
-	public XhtmlFinalProcessor() throws OfxConfigurationException
+	public XhtmlFinalProcessor()
 	{
 		
 	}
@@ -59,8 +58,16 @@ public class XhtmlFinalProcessor extends AbstractWikiProcessor implements WikiPr
 	
 	public String removeWellFormed(String text)
 	{
-		int from = text.indexOf("<wiki>")+6;
-		int to = text.lastIndexOf("</wiki>");
-		return text.substring(from,to);
+		int testIndex = text.indexOf("<wiki />");
+		if(testIndex>0)
+		{
+			return "";
+		}
+		else
+		{
+			int from = text.indexOf("<wiki>")+6;
+			int to = text.lastIndexOf("</wiki>");
+			return text.substring(from,to);
+		}
 	}
 }

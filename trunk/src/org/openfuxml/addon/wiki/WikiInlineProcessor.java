@@ -20,6 +20,7 @@ import org.openfuxml.addon.wiki.processor.ofx.xml.WikiPageProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlFinalProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.renderer.data.exception.OfxConfigurationException;
 import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
@@ -46,7 +47,7 @@ public class WikiInlineProcessor
 		ofxP = new WikiPageProcessor();
 	}
 	
-	public void toOfx(String wikiPlain) throws OfxInternalProcessingException
+	public Section toOfx(String wikiPlain) throws OfxInternalProcessingException
 	{
 		logger.debug("wikiPlain: "+wikiPlain);
 		String wikiMarkup = wpMarkup.process(wikiPlain, "ARTICLE ... ");
@@ -58,7 +59,8 @@ public class WikiInlineProcessor
 		String xhtmlFinal = wpXhtmlF.process(xhtmlReplace);
 		logger.debug("xhtmlFinal: "+xhtmlFinal);
 		Element xml = ofxP.process(xhtmlFinal);
-		JDomUtil.debug(xml);		
+		Section section = (Section)JDomUtil.toJaxb(xml, Section.class);
+		return section;		
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException

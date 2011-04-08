@@ -16,6 +16,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.output.Format;
+import org.openfuxml.addon.wiki.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
@@ -207,6 +208,8 @@ public class OfxRenderer
 	{
 		File f = new File(fNameTmp,getPhaseXmlFileName(phaseLoad));
 		
+		WikiInlineProcessor wikiInlineProcessor = new WikiInlineProcessor(cmp);
+		
 		try
 		{
 			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(f.getAbsolutePath(), Ofxdoc.class);
@@ -215,7 +218,7 @@ public class OfxRenderer
 			ofxDoc = templateCorrector.correctTemplateInjections(ofxDoc);
 			JaxbUtil.save(new File(tmpDir,getPhaseXmlFileName(phaseSave)), ofxDoc, nsPrefixMapper, true);
 			
-			WikiTemplateProcessor wtp = new WikiTemplateProcessor(cmp.getPreprocessor().getWiki().getTemplates());
+			WikiTemplateProcessor wtp = new WikiTemplateProcessor(wikiInlineProcessor,cmp.getPreprocessor().getWiki().getTemplates());
 			wtp.setDirectory(WikiProcessor.WikiDir.wikiTemplate, dirWikiTemplate);
 			wtp.setDirectory(WikiProcessor.WikiDir.ofxTemplate, dirOfxTemplate);
 			wtp.process();

@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.output.Format;
+import org.openfuxml.addon.wiki.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.addon.wiki.processor.template.transformator.WikiTemplateKeyValueTransformator;
@@ -28,10 +29,10 @@ public class WikiTemplateProcessor extends AbstractWikiProcessor
 	
 	private WikiTemplateKeyValueTransformator kvTransformator;
 	
-	public WikiTemplateProcessor(Templates templates) 
+	public WikiTemplateProcessor(WikiInlineProcessor wikiInlineProcessor, Templates templates) 
 	{
 		this.templates=templates;
-		kvTransformator = new WikiTemplateKeyValueTransformator();
+		kvTransformator = new WikiTemplateKeyValueTransformator(wikiInlineProcessor);
 	}
 	
 	public void process() throws OfxInternalProcessingException, OfxConfigurationException

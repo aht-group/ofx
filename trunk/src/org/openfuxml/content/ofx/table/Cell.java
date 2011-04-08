@@ -13,9 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.openfuxml.content.ofx.Paragraph;
 
 
 /**
@@ -28,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/table}cell" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org}paragraph" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -39,52 +41,54 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "cell"
+    "content"
 })
-@XmlRootElement(name = "row")
-public class Row
+@XmlRootElement(name = "cell")
+public class Cell
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(required = true)
-    protected List<Cell> cell;
+    @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class)
+    @XmlMixed
+    protected List<Serializable> content;
 
     /**
-     * Gets the value of the cell property.
+     * Gets the value of the content property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cell property.
+     * This is why there is not a <CODE>set</CODE> method for the content property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCell().add(newItem);
+     *    getContent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Cell }
+     * {@link String }
+     * {@link Paragraph }
      * 
      * 
      */
-    public List<Cell> getCell() {
-        if (cell == null) {
-            cell = new ArrayList<Cell>();
+    public List<Serializable> getContent() {
+        if (content == null) {
+            content = new ArrayList<Serializable>();
         }
-        return this.cell;
+        return this.content;
     }
 
-    public boolean isSetCell() {
-        return ((this.cell!= null)&&(!this.cell.isEmpty()));
+    public boolean isSetContent() {
+        return ((this.content!= null)&&(!this.content.isEmpty()));
     }
 
-    public void unsetCell() {
-        this.cell = null;
+    public void unsetContent() {
+        this.content = null;
     }
 
 }

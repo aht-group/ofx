@@ -16,9 +16,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.jdom.Namespace;
+import org.openfuxml.addon.wiki.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
 import org.openfuxml.addon.wiki.processor.template.exlp.parser.WikiKeyValueParser;
+import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class WikiTemplateKeyValueTransformator
@@ -27,9 +29,11 @@ public class WikiTemplateKeyValueTransformator
 	
 	private Namespace nsOfx;
 	private NsPrefixMapperInterface nsPrefixMapper;
+	private WikiInlineProcessor wikiInlineProcessor;
 	
-	public WikiTemplateKeyValueTransformator() 
+	public WikiTemplateKeyValueTransformator(WikiInlineProcessor wikiInlineProcessor) 
 	{
+		this.wikiInlineProcessor=wikiInlineProcessor;
 		nsPrefixMapper = new OfxNsPrefixMapper();
 		nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
 	}
@@ -53,6 +57,7 @@ public class WikiTemplateKeyValueTransformator
 	private Element transformWithClass(Template templateDef, Template template)
 	{
 		WikiTemplateGenericTable genericTable = new WikiTemplateGenericTable(nsPrefixMapper);
+		genericTable.setWikiInlineProcessor(wikiInlineProcessor);
 		Element e = genericTable.transform(template);
 		return e;
 	}
@@ -65,17 +70,20 @@ public class WikiTemplateKeyValueTransformator
 		
 		String propFile = "resources/properties/user.properties";
 		if(args.length==1){propFile=args[0];}
-			
 		ConfigLoader.add(propFile);
 		Configuration config = ConfigLoader.init();
 			
+		String fNameCmp = config.getString("ofx.xml.cmp");
+		Cmp cmp = (Cmp)JaxbUtil.loadJAXB(fNameCmp, Cmp.class);
+		WikiInlineProcessor wikiInline = new WikiInlineProcessor(cmp);
+		
 		String fnTemplate = config.getString("wiki.processor.test.template.kv");
 		Template template = (Template)JaxbUtil.loadJAXB(fnTemplate, Template.class);
 		
 		Template templateDef = new Template();
 		templateDef.setClazz("xx");
 		
-		WikiTemplateKeyValueTransformator kvTransformator = new WikiTemplateKeyValueTransformator();
+		WikiTemplateKeyValueTransformator kvTransformator = new WikiTemplateKeyValueTransformator(wikiInline);
 		Element e = kvTransformator.transform(templateDef,template);
 		JDomUtil.debug(e);
 	}

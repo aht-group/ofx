@@ -10,11 +10,12 @@ import org.jdom.Document;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
+import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Body;
+import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.content.ofx.table.Content;
-import org.openfuxml.content.ofx.table.Entry;
 import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.content.ofx.table.Table;
@@ -45,9 +46,9 @@ public class TagTableFactory
 	{
 		Head thead = new Head();
 		Row row = new Row();
-		row.getEntry().add(getEntry(1,"Name"));
-		row.getEntry().add(getEntry(2,"Required"));
-		row.getEntry().add(getEntry(3,"Description"));
+		row.getCell().add(getCell(1,"Name"));
+		row.getCell().add(getCell(2,"Required"));
+		row.getCell().add(getCell(3,"Description"));
 		thead.getRow().add(row);
 		return thead;
 	}
@@ -58,8 +59,8 @@ public class TagTableFactory
 		for(Attribute att : metatag.getTag().getAttribute())
 		{
 			Row row = new Row();
-			row.getEntry().add(getEntry(1,att.getName()));
-			row.getEntry().add(getEntry(2,att.isRequired()+""));
+			row.getCell().add(getCell(1,att.getName()));
+			row.getCell().add(getCell(2,att.isRequired()+""));
 			logger.warn("Description is disabled"); //TODO Check description
 //			if(att.isSetDescription()){row.getEntry().add(getRowEntry(3,att.getDescription().trim()));}
 			tbody.getRow().add(row);
@@ -67,12 +68,14 @@ public class TagTableFactory
 		return tbody;
 	}
 	
-	private Entry getEntry(int num, String value)
+	private Cell getCell(int num, String value)
 	{
-		Entry row = new Entry();
-		row.setColname("col"+num);
-		row.setValue(value);
-		return row;
+		Paragraph p = new Paragraph();
+		p.getContent().add(value);
+		
+		Cell cell = new Cell();
+		cell.getContent().add(p);
+		return cell;
 	}
 	
 /*	private List<ColSpec> getColSpecs()
