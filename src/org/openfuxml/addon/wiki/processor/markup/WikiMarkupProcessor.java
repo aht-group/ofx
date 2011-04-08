@@ -1,7 +1,6 @@
 package org.openfuxml.addon.wiki.processor.markup;
 
 import java.io.File;
-import java.util.UUID;
 
 import net.sf.exlp.io.ConfigLoader;
 import net.sf.exlp.io.LoggerInit;

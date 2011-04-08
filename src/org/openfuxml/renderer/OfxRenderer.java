@@ -19,7 +19,6 @@ import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
-import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
