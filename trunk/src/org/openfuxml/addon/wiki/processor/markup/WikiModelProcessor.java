@@ -47,7 +47,7 @@ public class WikiModelProcessor extends AbstractWikiProcessor implements WikiPro
 		WikiContentIO.writeTxt(dstDir, fNameModel, result);
 	}
 	
-	private String process(String txtMarkup)
+	public String process(String txtMarkup)
 	{
 		logger.warn("Check image and title");
 		String wikiImage="file:///c:/temp/${image}";

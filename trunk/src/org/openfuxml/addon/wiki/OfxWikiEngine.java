@@ -109,7 +109,6 @@ public class OfxWikiEngine
 		
 		OpenFuxmlGenerator ofxGenerator = new OpenFuxmlGenerator(config);
     	
-        
 		InjectionProcessor ip = new InjectionProcessor(config);
 		ip.processInjections();
     	

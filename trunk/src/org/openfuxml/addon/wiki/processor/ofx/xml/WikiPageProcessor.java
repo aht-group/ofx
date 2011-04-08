@@ -47,6 +47,7 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 	
 	public WikiPageProcessor()
 	{
+		WikiTemplates.init();
 		ofxContentTrimmer = new OfxContentTrimmer();
 	}
 	
@@ -87,10 +88,29 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 		}
 		return doc;
 	}
+	
+	public Element process(String xhtmlContent)
+	{
+		Element result = null;
+		try
+		{
+			String xml = process(xhtmlContent, "dummy");
+			Document doc = JDomUtil.txtToDoc(xml);
+			result = doc.getRootElement();
+			result.detach();
+			Element eTitle = (Element)result.getChildren().get(0);
+			eTitle.detach();
+			result.setAttribute("transparent", "true");
+		}
+		catch (IOException e) {logger.error(e);}
+		catch (ParserConfigurationException e) {logger.error(e);}
+		catch (XMLStreamException e) {logger.error(e);}
+		catch (SAXException e) {logger.error(e);}
+		return result;
+	}
 
 	public String process(String xhtmlContent, String titleText) throws IOException, ParserConfigurationException, XMLStreamException, SAXException
 	{
-		
 		Object[] objects = new Object[2];
 		objects[0] = titleText;
 		

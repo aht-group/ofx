@@ -88,9 +88,9 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 		org.openfuxml.addon.wiki.processor.util.WikiContentIO.writeTxt(dstDir, fName, result);
 	}
 	
-	public String process(String wikiText, String article) throws OfxInternalProcessingException
+	public String process(String wikiPlain, String article) throws OfxInternalProcessingException
 	{
-		this.wikiText=wikiText;
+		this.wikiText=wikiPlain;
 		for(Wikireplace replace : replacements.getWikireplace()){processReplacements(replace);}
 		for(Wikiinjection inject : injections.getWikiinjection()){wikiInject(inject,article);}
 		for(Template template : injections.getTemplate()){processTempalte(template);}
