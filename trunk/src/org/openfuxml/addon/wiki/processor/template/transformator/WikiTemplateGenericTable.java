@@ -69,8 +69,8 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 		Specification specification = new Specification();
 		
 		Columns columns = new Columns();
-		columns.getColumn().add(ColumnFactory.create(Alignment.LEFT));
-		columns.getColumn().add(ColumnFactory.create(Alignment.LEFT));
+		columns.getColumn().add(ColumnFactory.create(Alignment.LEFT,1));
+		columns.getColumn().add(ColumnFactory.create(Alignment.LEFT,3));
 		
 		specification.setColumns(columns);
 		return specification;
