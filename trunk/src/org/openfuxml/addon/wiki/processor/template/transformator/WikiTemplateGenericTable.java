@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.jdom.Namespace;
+import org.openfuxml.addon.wiki.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 import org.openfuxml.content.factory.ofx.table.ColumnFactory;
@@ -31,6 +32,7 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 	private final Namespace nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
 	
 	private NsPrefixMapperInterface nsPrefixMapper;
+	private WikiInlineProcessor wikiInlineProcessor;
 	
 	public WikiTemplateGenericTable(NsPrefixMapperInterface nsPrefixMapper) 
 	{
@@ -133,4 +135,7 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 
 	@Override
 	public void setNsPrefixMapperInterface(NsPrefixMapperInterface nsPrefixMapper) {}
+
+	@Override
+	public void setWikiInlineProcessor(WikiInlineProcessor wikiInlineProcessor) {this.wikiInlineProcessor=wikiInlineProcessor;}
 }
