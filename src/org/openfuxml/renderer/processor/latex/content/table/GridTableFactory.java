@@ -4,7 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Body;
-import org.openfuxml.content.ofx.table.Column;
 import org.openfuxml.content.ofx.table.Content;
 import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
@@ -62,12 +61,16 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 	
 	private void renderSpecification(Specification spec)
 	{
+		LatexTabluar latexTabular = new LatexTabluar(spec.getColumns());
+		
+		renderer.add(new StringRenderer(latexTabular.getLatexLengthCalculations()));
+		
 		StringBuffer sb = new StringBuffer();
 		sb.append("\\begin{tabular}");
 		sb.append("{");
-		for(Column column : spec.getColumns().getColumn())
+		for(int i=0;i<spec.getColumns().getColumn().size();i++)
 		{
-			sb.append(LatexTabluar.getTableAlignment(column.getAlignment()));
+			sb.append(latexTabular.getColDefinition(i));
 		}
 		sb.append("}");
 		renderer.add(new StringRenderer(sb.toString()));

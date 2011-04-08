@@ -11,18 +11,23 @@ public class StringRenderer implements OfxLatexRenderer
 {
 	static Log logger = LogFactory.getLog(StringRenderer.class);
 	
-	private String s;
+	private List<String> result;
 	
-	public StringRenderer(String s)
+	public StringRenderer(String string)
 	{
-		this.s=s;
+		result = new ArrayList<String>();
+		result.add(string);
+	}
+	
+	public StringRenderer(List<String> strings)
+	{
+		result = new ArrayList<String>();
+		result.addAll(strings);
 	}
 
 	@Override
 	public List<String> getContent()
 	{
-		List<String> result = new ArrayList<String>();
-		result.add(s);
 		return result;
 	}
 	
