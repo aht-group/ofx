@@ -9,6 +9,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.renderer.data.jaxb.Pdf;
 import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.processor.latex.util.LatexDocument;
@@ -29,7 +30,7 @@ public class OfxLatexRenderer
 		txt = new ArrayList<String>();
 	}
 	
-	public void render(String ofxDocFileName)
+	public void render(String ofxDocFileName) throws OfxAuthoringException
 	{
 		try
 		{

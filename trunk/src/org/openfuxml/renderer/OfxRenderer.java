@@ -309,7 +309,7 @@ public class OfxRenderer
 		ofxP.process(wikiQueries);
 	}
 	
-	private void phaseLatex(Phase phaseLoad)
+	private void phaseLatex(Phase phaseLoad) throws OfxAuthoringException
 	{
 		OfxLatexRenderer renderer = new OfxLatexRenderer(cmp.getTargets().getPdf().get(0));
 		renderer.render(new File(tmpDir,getPhaseXmlFileName(phaseLoad)).getAbsolutePath());

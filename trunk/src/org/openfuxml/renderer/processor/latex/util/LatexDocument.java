@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Content;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Pdf;
 import org.openfuxml.renderer.processor.latex.content.SectionFactory;
@@ -23,7 +24,7 @@ public class LatexDocument extends AbstractOfxLatexRenderer implements OfxLatexR
 		this.pdf=pdf;
 	}
 	
-	public void render(Content content)
+	public void render(Content content) throws OfxAuthoringException
 	{
 		lvl = 0;
 		
@@ -38,7 +39,7 @@ public class LatexDocument extends AbstractOfxLatexRenderer implements OfxLatexR
 		postTxt.add("\\end{document}");
 	}
 	
-	private void renderSection(Section section)
+	private void renderSection(Section section) throws OfxAuthoringException
 	{
 		SectionFactory sf = new SectionFactory(lvl+1,latexPreamble);
 		sf.render(section);
