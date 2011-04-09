@@ -15,13 +15,17 @@ public class OfxListEmitter extends NestingEmitter
 {
 	static Log logger = LogFactory.getLog(OfxListEmitter.class);
 
+	public static enum Ordering {ordered,unordered}
+	
 	private Map<String, String> attributes;
-
+	private Ordering ordering;
+	
 	private final static String tag = "list:list";
 	
-	public OfxListEmitter(EmitterFactory ef)
+	public OfxListEmitter(EmitterFactory ef, Ordering ordering)
 	{
 		super(ef);
+		this.ordering=ordering;
 	}
 
 	public void setAttribute(String name, String value)
@@ -38,6 +42,12 @@ public class OfxListEmitter extends NestingEmitter
 	{
 		writer.writeStartElement(tag);
 
+		switch(ordering)
+		{
+			case ordered: typeOrdered(writer);break;
+			case unordered: typeUnordered(writer);break;
+		}
+		
 		boolean hasId = false;
 		if (attributes != null)
 		{
@@ -63,5 +73,19 @@ public class OfxListEmitter extends NestingEmitter
 	{
 		writer.writeEndElement();
 		return true;
+	}
+	
+	private void typeOrdered(XMLStreamWriter writer) throws XMLStreamException
+	{
+		writer.writeStartElement("list:type");
+		writer.writeAttribute("ordering", "ordered");
+		writer.writeEndElement();
+	}
+	
+	private void typeUnordered(XMLStreamWriter writer) throws XMLStreamException
+	{
+		writer.writeStartElement("list:type");
+		writer.writeAttribute("ordering", "unordered");
+		writer.writeEndElement();
 	}
 }

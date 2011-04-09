@@ -43,10 +43,31 @@ public class ListFactory extends AbstractOfxLatexRenderer implements OfxLatexRen
 		switch(ordering)
 		{
 			case unordered: setUnordered(parent);break;
+			case ordered: setOrdered(parent);break;
 			default: logger.warn("No Ordering defined NYI");break;
 		}
 	}
 	
+	// Ordered List
+	private void setOrdered(OfxLatexRenderer parent)
+	{
+		if   (parent instanceof CellFactory){setOrderedCompactNum();}
+		else {setOrderedEnumerate();}
+	}
+	
+	private void setOrderedEnumerate()
+	{
+		preTxt.add("\\begin{enumerate}");
+		postTxt.add("\\end{enumerate}");
+	}
+	
+	private void setOrderedCompactNum()
+	{
+		preTxt.add("\\begin{compactenum}");
+		postTxt.add("\\end{compactenum}");
+	}
+	
+	// Unordered List
 	private void setUnordered(OfxLatexRenderer parent)
 	{
 		if   (parent instanceof CellFactory){setUnorderedCompactItem();}
