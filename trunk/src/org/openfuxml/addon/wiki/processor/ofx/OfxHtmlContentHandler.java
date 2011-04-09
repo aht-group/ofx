@@ -9,7 +9,7 @@ import javax.xml.stream.XMLStreamWriter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.emitter.NestingEmitter;
+import org.openfuxml.addon.wiki.processor.ofx.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.OfxSectionEmitter;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;

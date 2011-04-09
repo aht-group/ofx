@@ -157,7 +157,11 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 //		logger.debug(xml.substring(indexXml+indexRoot+1));
 		StringBuffer sb = new StringBuffer();
 		sb.append(xml.substring(0,indexXml+indexRoot+1));
-		sb.append(" xmlns:ofx=\"http://www.openfuxml.org\" xmlns:wiki=\"http://www.openfuxml.org/wiki\"");
+		sb.append(" xmlns:ofx=\"http://www.openfuxml.org\"");
+		sb.append(" xmlns:list=\"http://www.openfuxml.org/list\"");
+		sb.append(" xmlns:table=\"http://www.openfuxml.org/table\"");
+		sb.append(" xmlns:layout=\"http://www.openfuxml.org/layout\"");
+		sb.append(" xmlns:wiki=\"http://www.openfuxml.org/wiki\"");
 		sb.append(xml.substring(indexXml+indexRoot+1,xml.length()));
 //		logger.debug(sb);
 		
