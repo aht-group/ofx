@@ -10,9 +10,9 @@ public class ParagraphFactory extends AbstractOfxLatexRenderer implements OfxLat
 {
 	static Log logger = LogFactory.getLog(ParagraphFactory.class);
 	
-	public ParagraphFactory()
+	public ParagraphFactory(boolean preBlankLine)
 	{
-		preTxt.add("");
+		if(preBlankLine){preTxt.add("");}
 	}
 	
 	public void render(Paragraph paragraph)

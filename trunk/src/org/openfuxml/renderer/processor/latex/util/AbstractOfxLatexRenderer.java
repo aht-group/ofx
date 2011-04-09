@@ -55,9 +55,9 @@ public class AbstractOfxLatexRenderer
 		return resultTxt;
 	}
 	
-	protected void paragraphRenderer(Paragraph paragraph)
+	protected void paragraphRenderer(Paragraph paragraph, boolean preBlankLine)
 	{
-		ParagraphFactory f = new ParagraphFactory();
+		ParagraphFactory f = new ParagraphFactory(preBlankLine);
 		f.render(paragraph);
 		renderer.add(f);
 	}

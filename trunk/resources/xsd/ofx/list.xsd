@@ -31,7 +31,7 @@
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="item">
-        <xsd:complexType>
+        <xsd:complexType mixed="true">
             <xsd:sequence>
                 <xsd:element ref="ofx:paragraph" minOccurs="0" maxOccurs="unbounded"/>
             </xsd:sequence>
