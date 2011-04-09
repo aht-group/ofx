@@ -28,6 +28,7 @@ public class ListFactory extends AbstractOfxLatexRenderer implements OfxLatexRen
 			renderer.add(f);
 		}
 		
+		postTxt.add("");
 		postTxt.add("\\end{itemize}");
 	}
 }

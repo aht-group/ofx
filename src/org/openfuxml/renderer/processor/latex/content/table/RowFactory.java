@@ -35,7 +35,7 @@ public class RowFactory extends AbstractOfxLatexRenderer implements OfxLatexRend
 		for(Object s : cell.getContent())
 		{
 			if     (s instanceof String){}
-			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s);}
+			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,true);}
 			else {logger.warn("No Renderer for "+s.getClass().getSimpleName());}
 		}
 	}

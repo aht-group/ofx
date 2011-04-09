@@ -34,7 +34,7 @@ public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatex
 			if     (s instanceof String){}
 			else if(s instanceof Title){renderTitle((Title)s);}
 			else if(s instanceof Section){renderSection((Section)s);}
-			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s);}
+			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,true);}
 			else if(s instanceof Table){renderTable((Table)s);}
 			else if(s instanceof List){renderList((List)s);}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
