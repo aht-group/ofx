@@ -7,7 +7,7 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.list.List;
 import org.openfuxml.content.ofx.table.Table;
-import org.openfuxml.renderer.processor.latex.content.list.ListFactory;
+import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.table.TableFactory;
 import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
@@ -26,7 +26,7 @@ public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatex
 		this.latexPreamble=latexPreamble;
 	}
 	
-	public void render(Section section)
+	public void render(Section section) throws OfxAuthoringException
 	{
 		logger.trace("Render section");
 		for(Object s : section.getContent())
@@ -36,7 +36,7 @@ public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatex
 			else if(s instanceof Section){renderSection((Section)s);}
 			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,true);}
 			else if(s instanceof Table){renderTable((Table)s);}
-			else if(s instanceof List){renderList((List)s);}
+			else if(s instanceof List){renderList((List)s,this);}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
 		}
 //		if(section.getContent()logger.debug(getSectionHeader("x"));
@@ -50,21 +50,14 @@ public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatex
 		renderer.add(stf);
 	}
 	
-	private void renderTable(Table table)
+	private void renderTable(Table table) throws OfxAuthoringException
 	{
 		TableFactory f = new TableFactory();
 		f.render(table);
 		renderer.add(f);
 	}
 	
-	private void renderList(List list)
-	{
-		ListFactory f = new ListFactory();
-		f.render(list);
-		renderer.add(f);
-	}
-	
-	private void renderSection(Section section)
+	private void renderSection(Section section) throws OfxAuthoringException
 	{
 		SectionFactory sf = new SectionFactory(lvl+1,latexPreamble);
 		sf.render(section);

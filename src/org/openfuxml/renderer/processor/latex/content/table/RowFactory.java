@@ -2,9 +2,9 @@ package org.openfuxml.renderer.processor.latex.content.table;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.content.ofx.table.Row;
+import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.StringRenderer;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
@@ -18,7 +18,7 @@ public class RowFactory extends AbstractOfxLatexRenderer implements OfxLatexRend
 		postTxt.add("\\\\");
 	}
 	
-	public void render(Row row)
+	public void render(Row row) throws OfxAuthoringException
 	{	
 		boolean addCell=false;
 		
@@ -26,17 +26,10 @@ public class RowFactory extends AbstractOfxLatexRenderer implements OfxLatexRend
 		{
 			if(addCell){renderer.add(new StringRenderer("&"));}
 			addCell = true;
-			renderCell(cell);
-		}
-	}
-	
-	private void renderCell(Cell cell)
-	{
-		for(Object s : cell.getContent())
-		{
-			if     (s instanceof String){}
-			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,true);}
-			else {logger.warn("No Renderer for "+s.getClass().getSimpleName());}
+			
+			CellFactory f = new CellFactory();
+			f.render(cell);
+			renderer.add(f);
 		}
 	}
 }

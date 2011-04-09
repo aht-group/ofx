@@ -6,8 +6,10 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.ParagraphFactory;
 import org.openfuxml.renderer.processor.latex.content.SectionFactory;
+import org.openfuxml.renderer.processor.latex.content.list.ListFactory;
 
 public class AbstractOfxLatexRenderer
 {
@@ -35,6 +37,7 @@ public class AbstractOfxLatexRenderer
 		txt.add("\\usepackage{hyperref}");
 		txt.add("\\usepackage{array}");
 		txt.add("\\usepackage{ifthen}");
+		txt.add("\\usepackage{paralist}");
 		txt.add("");
 	}
 	
@@ -59,6 +62,13 @@ public class AbstractOfxLatexRenderer
 	{
 		ParagraphFactory f = new ParagraphFactory(preBlankLine);
 		f.render(paragraph);
+		renderer.add(f);
+	}
+	
+	protected void renderList(org.openfuxml.content.ofx.list.List list,OfxLatexRenderer parent) throws OfxAuthoringException
+	{
+		ListFactory f = new ListFactory();
+		f.render(list,parent);
 		renderer.add(f);
 	}
 }

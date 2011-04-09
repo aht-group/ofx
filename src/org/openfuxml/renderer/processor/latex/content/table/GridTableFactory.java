@@ -9,6 +9,7 @@ import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
+import org.openfuxml.renderer.data.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.StringRenderer;
 import org.openfuxml.renderer.processor.latex.content.table.util.LatexTabluar;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
@@ -23,7 +24,7 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 
 	}
 	
-	public void render(Table table)
+	public void render(Table table) throws OfxAuthoringException
 	{	
 		renderPre();
 		renderTabular(table.getSpecification(),table.getContent());
@@ -47,7 +48,7 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 		postTxt.add("\\end{table}");
 	}
 	
-	private void renderTabular(Specification specification, Content tgroup)
+	private void renderTabular(Specification specification, Content tgroup) throws OfxAuthoringException
 	{
 		renderSpecification(specification);
 		renderTableHeader(tgroup.getHead());
@@ -82,7 +83,7 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 		renderer.add(new StringRenderer("\\hline \\hline"));
 	}
 	
-	private void renderBody(Body tbody)
+	private void renderBody(Body tbody) throws OfxAuthoringException
 	{
 		for(Row row : tbody.getRow())
 		{

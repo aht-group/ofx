@@ -30,7 +30,7 @@ public class TstLatexRenderer
 		Cmp cmp = (Cmp)JaxbUtil.loadJAXB(fNameCmp, Cmp.class);
 		
 		OfxLatexRenderer renderer = new OfxLatexRenderer(cmp.getTargets().getPdf().get(0));
-		renderer.render("resources/data/xml/latex/1.xml");
+		renderer.render("resources/data/xml/latex/2.xml");
 		
 		File dstDir = new File(config.getString("wiki.latex.dir"));
 		
