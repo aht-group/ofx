@@ -59,6 +59,7 @@ public class WikiInlineProcessor
 		String xhtmlFinal = wpXhtmlF.process(xhtmlReplace);
 		logger.debug("xhtmlFinal: "+xhtmlFinal);
 		Element xml = ofxP.process(xhtmlFinal);
+		JDomUtil.debug(xml);
 		Section section = (Section)JDomUtil.toJaxb(xml, Section.class);
 		return section;		
 	}
@@ -74,13 +75,14 @@ public class WikiInlineProcessor
 		ConfigLoader.add(propFile);
 		Configuration config = ConfigLoader.init();
 			
-		File f = new File("resources/data/wiki/2.txt");
+		File f = new File("resources/data/wiki/wikiPlain/1.txt");
 		String wikiTxt = WikiContentIO.loadTxt(f);
 		
 		String fNameCmp = config.getString("ofx.xml.cmp");
 		Cmp cmp = (Cmp)JaxbUtil.loadJAXB(fNameCmp, Cmp.class);
 		
 		WikiInlineProcessor wikiInline = new WikiInlineProcessor(cmp);
-		wikiInline.toOfx(wikiTxt);
+		Section section = wikiInline.toOfx(wikiTxt);
+		JaxbUtil.debug(section);
     }
 }
