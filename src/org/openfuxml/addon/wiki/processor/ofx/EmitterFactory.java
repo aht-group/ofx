@@ -41,8 +41,8 @@ public class EmitterFactory
 				case i:		return new SimpleMappingEmitter(this,"kursiv");
 				case b:		return new SimpleMappingEmitter(this,"fett");
 				case strong:return new SimpleMappingEmitter(this,"fett");
-				case ul:	return new OfxListEmitter(this);
-				case ol:	return new OfxListEmitter(this);
+				case ul:	return new OfxListEmitter(this,OfxListEmitter.Ordering.unordered);
+				case ol:	return new OfxListEmitter(this,OfxListEmitter.Ordering.ordered);
 				case li:	return new SimpleMappingEmitter(this,"list:item", "ofx:paragraph");
 				case a:		return new AnchorEmitter(this);
 				case body:	return new NestingEmitter(this);
