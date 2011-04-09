@@ -29,6 +29,8 @@ public class WikiInlineProcessor
 {
 	static Log logger = LogFactory.getLog(WikiInlineProcessor.class);
 	
+	public static boolean debugOutput = false;
+	
 	private WikiMarkupProcessor wpMarkup;
 	private WikiModelProcessor wpModel;
 	private XhtmlReplaceProcessor wpXhtmlR;
@@ -49,15 +51,15 @@ public class WikiInlineProcessor
 	
 	public Section toOfx(String wikiPlain) throws OfxInternalProcessingException
 	{
-		logger.debug("wikiPlain: "+wikiPlain);
+		if(debugOutput){logger.debug("wikiPlain: "+wikiPlain);}
 		String wikiMarkup = wpMarkup.process(wikiPlain, "ARTICLE ... ");
-		logger.debug("wikiMarkup: "+wikiMarkup);
+		if(debugOutput){logger.debug("wikiMarkup: "+wikiMarkup);}
 		String xhtmlModel = wpModel.process(wikiMarkup);
-		logger.debug("xhtmlModel: "+xhtmlModel);
+		if(debugOutput){logger.debug("xhtmlModel: "+xhtmlModel);}
 		String xhtmlReplace = wpXhtmlR.process(xhtmlModel);
-		logger.debug("xhtmlReplace: "+xhtmlReplace);
+		if(debugOutput){logger.debug("xhtmlReplace: "+xhtmlReplace);}
 		String xhtmlFinal = wpXhtmlF.process(xhtmlReplace);
-		logger.debug("xhtmlFinal: "+xhtmlFinal);
+		if(debugOutput){logger.debug("xhtmlFinal: "+xhtmlFinal);}
 		Element xml = ofxP.process(xhtmlFinal);
 		JDomUtil.debug(xml);
 		Section section = (Section)JDomUtil.toJaxb(xml, Section.class);

@@ -8,9 +8,10 @@ import org.openfuxml.addon.wiki.emitter.AnchorEmitter;
 import org.openfuxml.addon.wiki.emitter.Emitter;
 import org.openfuxml.addon.wiki.emitter.GlosstermEmitter;
 import org.openfuxml.addon.wiki.emitter.ImageEmitter;
-import org.openfuxml.addon.wiki.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.emitter.injection.OfxInjectionEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.HeaderEmitter;
+import org.openfuxml.addon.wiki.processor.ofx.emitter.NestingEmitter;
+import org.openfuxml.addon.wiki.processor.ofx.emitter.OfxListEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.SimpleMappingEmitter;
 
 public class EmitterFactory
@@ -20,7 +21,7 @@ public class EmitterFactory
 	private XMLStreamWriter writer;
 	private String injectionDir;
 	
-	public static enum HtmlElement {title,p,i,b,strong,ul,li,a,body,sup,wikiinjection};
+	public static enum HtmlElement {title,p,i,b,strong,ol,ul,li,a,body,sup,wikiinjection};
 	
 	public EmitterFactory(XMLStreamWriter writer,String injectionDir)
 	{
@@ -40,8 +41,9 @@ public class EmitterFactory
 				case i:		return new SimpleMappingEmitter(this,"kursiv");
 				case b:		return new SimpleMappingEmitter(this,"fett");
 				case strong:return new SimpleMappingEmitter(this,"fett");
-				case ul:	return new SimpleMappingEmitter(this,"aufzaehlungsliste");
-				case li:	return new SimpleMappingEmitter(this,"eintrag", "absatz");
+				case ul:	return new OfxListEmitter(this);
+				case ol:	return new OfxListEmitter(this);
+				case li:	return new SimpleMappingEmitter(this,"list:item", "ofx:paragraph");
 				case a:		return new AnchorEmitter(this);
 				case body:	return new NestingEmitter(this);
 				case title: return new SimpleMappingEmitter(this,"ofx:title");
@@ -58,7 +60,6 @@ public class EmitterFactory
 		logger.debug("Unknown element \""+elementName+"\" using default structure");
 		if ("acronym".equals(elementName)) {return new GlosstermEmitter(this);} 
 		else if ("img".equals(elementName)) {return new ImageEmitter(this);}
-		else if ("ol".equals(elementName)) {return new SimpleMappingEmitter(this,"orderedlist");}
 		else if ("em".equals(elementName)) {return new SimpleMappingEmitter(this,"emphasis");}
 		else if ("cite".equals(elementName)) {return new SimpleMappingEmitter(this,"citation");}
 		else if ("code".equals(elementName)) {return new SimpleMappingEmitter(this,"code");}

@@ -11,18 +11,17 @@ import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
 import org.xml.sax.Attributes;
 
-public class SimpleMappingEmitter extends NestingEmitter
+public class OfxListEmitter extends NestingEmitter
 {
-	static Log logger = LogFactory.getLog(SimpleMappingEmitter.class);
-	
-	private final String[] tags;
+	static Log logger = LogFactory.getLog(OfxListEmitter.class);
 
 	private Map<String, String> attributes;
 
-	public SimpleMappingEmitter(EmitterFactory ef, String... ofxTagNames)
+	private final static String tag = "list:list";
+	
+	public OfxListEmitter(EmitterFactory ef)
 	{
 		super(ef);
-		tags = ofxTagNames;
 	}
 
 	public void setAttribute(String name, String value)
@@ -37,10 +36,8 @@ public class SimpleMappingEmitter extends NestingEmitter
 	@Override
 	protected boolean localStart(XMLStreamWriter writer, String htmlElementName, Attributes atts) throws XMLStreamException
 	{
-		for (String tag : tags)
-		{
-			writer.writeStartElement(tag);
-		}
+		writer.writeStartElement(tag);
+
 		boolean hasId = false;
 		if (attributes != null)
 		{
@@ -64,11 +61,7 @@ public class SimpleMappingEmitter extends NestingEmitter
 	@Override
 	protected boolean localEnd(XMLStreamWriter writer, String htmlElementName) throws XMLStreamException
 	{
-		logger.trace("localEnd "+tags.length);
-		for (int x = 0; x < tags.length; ++x)
-		{
-			writer.writeEndElement();
-		}
+		writer.writeEndElement();
 		return true;
 	}
 }

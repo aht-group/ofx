@@ -1,8 +1,9 @@
-package org.openfuxml.addon.wiki.emitter;
+package org.openfuxml.addon.wiki.processor.ofx.emitter;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.openfuxml.addon.wiki.emitter.Emitter;
 import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
 import org.xml.sax.Attributes;
 
