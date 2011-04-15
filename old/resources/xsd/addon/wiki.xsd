@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Do not modify, class migrated to ofx-wiki -->
 <xsd:schema targetNamespace="http://www.openfuxml.org/wiki"
     xmlns="http://www.openfuxml.org/wiki"
     xmlns:ofx="http://www.openfuxml.org"
