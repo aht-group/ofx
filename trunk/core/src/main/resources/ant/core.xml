@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 
-<project name="OFX-Wiki"  basedir="../../../..">
+<project name="OFX-Core"  basedir="../../../..">
 
 	<property name="src.dir" location="${basedir}/src/main/java" />
 	<property name="rsrc.dir" location="${basedir}/src/main/resources" />
@@ -22,8 +22,7 @@
 				<pathelement location="../../AHT-Lib/libs/xml/jaxb/2.2/jaxb-api-2.2.jar"/>
 			</classpath>
 		</java>
-		<delete dir="${src.dir}/org/openfuxml/renderer"/>
-		<delete dir="${src.dir}/org/openfuxml/content"/>
+		<delete dir="${src.dir}/org/openfuxml/addon/chart"/>
 	</target>
 			
 </project>
