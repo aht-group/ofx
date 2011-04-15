@@ -53,6 +53,7 @@
 		<module>core</module>
 		<module>wiki</module>
 		<module>chart</module>
+		<module>xml</module>
 	</modules>
  
 	<dependencyManagement>
