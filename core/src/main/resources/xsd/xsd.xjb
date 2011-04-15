@@ -4,36 +4,41 @@
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:com.fnf="http://www.fnf.com/xes">
     
-   <jxb:bindings schemaLocation="wiki.xsd" node="/xsd:schema">
-        <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.addon.wiki.data.jaxb"/>
-        </jxb:schemaBindings>
-    </jxb:bindings>
-    
-    <jxb:bindings schemaLocation="../../../../../core/src/main/resources/xsd/ofx.xsd" node="/xsd:schema">
+    <jxb:bindings schemaLocation="ofx.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.openfuxml.content.ofx"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
-    <jxb:bindings schemaLocation="../../../../../core/src/main/resources/xsd/content/table.xsd" node="/xsd:schema">
+    <jxb:bindings schemaLocation="content/table.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.openfuxml.content.ofx.table"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
-    <jxb:bindings schemaLocation="../../../../../core/src/main/resources/xsd/content/list.xsd" node="/xsd:schema">
+    <jxb:bindings schemaLocation="content/list.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.openfuxml.content.ofx.list"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
-	<jxb:bindings schemaLocation="../../../../../core/src/main/resources/xsd/content/layout.xsd" node="/xsd:schema">
+   <jxb:bindings schemaLocation="content/layout.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.openfuxml.content.ofx.layout"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-
-
+    
+	<jxb:bindings schemaLocation="../../../../../wiki/src/main/resources/xsd/wiki.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.addon.chart.jaxb"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <jxb:bindings schemaLocation="renderer/cmp.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.renderer.data.jaxb"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+   
 
 </jxb:bindings>
