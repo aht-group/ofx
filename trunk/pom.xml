@@ -50,7 +50,7 @@
 	</issueManagement>
 
 	<modules>
-		
+		<module>core</module>
 	</modules>
  
 	<dependencyManagement>
