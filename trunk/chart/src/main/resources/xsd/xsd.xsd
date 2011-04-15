@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.openfuxml.org/xsd/chart"
+    xmlns="http://www.openfuxml.org/xsd/chart"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:extensionBindingPrefixes="xjc"
+    jaxb:version="2.0">
+    <xsd:import namespace="http://www.openfuxml.org/chart" schemaLocation="chart.xsd"/>
+    <xsd:annotation>
+        <xsd:appinfo>
+            <jaxb:globalBindings generateIsSetMethod="true">
+                <xjc:serializable uid="1"/>
+            </jaxb:globalBindings>
+        </xsd:appinfo>
+    </xsd:annotation>
+</xsd:schema>

@@ -30,7 +30,7 @@
     
 	<jxb:bindings schemaLocation="../../../../../wiki/src/main/resources/xsd/wiki.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.addon.chart.jaxb"/>
+            <jxb:package name="org.openfuxml.addon.wiki.data.jaxb"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
