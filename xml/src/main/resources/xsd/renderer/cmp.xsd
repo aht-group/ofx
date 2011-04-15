@@ -3,7 +3,7 @@
     xmlns:cmp="http://www.openfuxml.org/cmp"
     xmlns:wiki="http://www.openfuxml.org/wiki"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://www.openfuxml.org/wiki" schemaLocation="../../../../../../wiki/src/main/resources/xsd/wiki.xsd"/>
+    <xsd:import namespace="http://www.openfuxml.org/wiki" schemaLocation="../addon/wiki.xsd"/>
     <xsd:element name="cmp">
         <xsd:complexType>
             <xsd:sequence>

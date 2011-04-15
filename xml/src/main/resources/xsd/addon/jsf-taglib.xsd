@@ -5,7 +5,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     elementFormDefault="qualified"
     attributeFormDefault="unqualified">
-    <xsd:import namespace="http://www.openfuxml.org" schemaLocation="../ofx.xsd"/>
+    <xsd:import namespace="http://www.openfuxml.org" schemaLocation="../content/ofx.xsd"/>
     <xsd:element name="taglib">
         <xsd:complexType>
             <xsd:sequence>
