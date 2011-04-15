@@ -30,5 +30,19 @@
 	
 	<dependencies>
       	
+		<dependency>
+			<groupId>org.openfuxml</groupId>
+			<artifactId>ofx-chart</artifactId>
+			<version>0.1.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openfuxml</groupId>
+			<artifactId>ofx-wiki</artifactId>
+			<version>0.1.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 </project>
