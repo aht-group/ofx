@@ -9,9 +9,9 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.chart.jaxb.Charttype;
-import org.openfuxml.addon.chart.jaxb.Container;
-import org.openfuxml.addon.chart.jaxb.Data;
+import org.openfuxml.addon.chart.data.jaxb.Charttype;
+import org.openfuxml.addon.chart.data.jaxb.Container;
+import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
 
 public class TimeSeriesGapNullifier

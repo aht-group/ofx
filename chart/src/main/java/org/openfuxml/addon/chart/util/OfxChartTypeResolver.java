@@ -4,8 +4,8 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.chart.jaxb.AxisType;
-import org.openfuxml.addon.chart.jaxb.Charttype;
+import org.openfuxml.addon.chart.data.jaxb.AxisType;
+import org.openfuxml.addon.chart.data.jaxb.Charttype;
 
 public class OfxChartTypeResolver
 {

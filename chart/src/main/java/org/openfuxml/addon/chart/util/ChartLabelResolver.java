@@ -1,8 +1,8 @@
 package org.openfuxml.addon.chart.util;
 
 import org.apache.log4j.Logger;
-import org.openfuxml.addon.chart.jaxb.Axis;
-import org.openfuxml.addon.chart.jaxb.Chart;
+import org.openfuxml.addon.chart.data.jaxb.Axis;
+import org.openfuxml.addon.chart.data.jaxb.Chart;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 
 public class ChartLabelResolver
