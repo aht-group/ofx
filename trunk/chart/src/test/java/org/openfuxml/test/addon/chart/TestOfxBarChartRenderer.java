@@ -17,6 +17,7 @@ import org.openfuxml.addon.chart.data.jaxb.Chart;
 import org.openfuxml.addon.chart.data.jaxb.Charttype;
 import org.openfuxml.addon.chart.data.jaxb.Container;
 import org.openfuxml.addon.chart.data.jaxb.Data;
+import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
 public class TestOfxBarChartRenderer
 {

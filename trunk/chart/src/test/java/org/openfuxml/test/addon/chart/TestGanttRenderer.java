@@ -20,6 +20,7 @@ import org.openfuxml.addon.chart.data.jaxb.Color;
 import org.openfuxml.addon.chart.data.jaxb.Container;
 import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
+import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
 public class TestGanttRenderer
 {

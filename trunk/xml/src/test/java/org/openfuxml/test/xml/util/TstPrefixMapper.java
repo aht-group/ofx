@@ -41,7 +41,8 @@ public class TstPrefixMapper
 	
 	public void debug()
 	{
-		logger.debug(JaxbUtil.toString(chart));
+		JaxbUtil.debug2(this.getClass(),chart,nsPrefixMapper);
+		JaxbUtil.debug2(this.getClass(),ofxDoc,nsPrefixMapper);
 	}
 	
 	public void directDebug()
@@ -75,6 +76,7 @@ public class TstPrefixMapper
 			loggerInit.init();
 		
 		TstPrefixMapper test = new TstPrefixMapper();
-		test.directDebug();
+		test.debug();
+//		test.directDebug();
 	}
 }

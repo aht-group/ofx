@@ -17,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.OFxChartRenderControl;
-import org.openfuxml.addon.chart.jaxb.Chart;
+import org.openfuxml.addon.chart.data.jaxb.Chart;
 
 public class OfxChart extends HttpServlet
 {

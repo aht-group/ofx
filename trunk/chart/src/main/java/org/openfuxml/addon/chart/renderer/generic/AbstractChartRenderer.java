@@ -5,8 +5,8 @@ import java.awt.Dimension;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.JFreeChart;
-import org.openfuxml.addon.chart.jaxb.Axis;
-import org.openfuxml.addon.chart.jaxb.Chart;
+import org.openfuxml.addon.chart.data.jaxb.Axis;
+import org.openfuxml.addon.chart.data.jaxb.Chart;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 

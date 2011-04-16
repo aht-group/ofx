@@ -6,6 +6,10 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Random;
 
+import net.sf.exlp.util.DateUtil;
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartUtilities;
@@ -16,6 +20,7 @@ import org.openfuxml.addon.chart.data.jaxb.Charttype;
 import org.openfuxml.addon.chart.data.jaxb.Container;
 import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
+import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
 public class TestTimeSeriesChartRenderer
 {

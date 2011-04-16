@@ -10,8 +10,8 @@ import org.apache.commons.logging.LogFactory;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
-import org.openfuxml.addon.chart.jaxb.Container;
-import org.openfuxml.addon.chart.jaxb.Data;
+import org.openfuxml.addon.chart.data.jaxb.Container;
+import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
 

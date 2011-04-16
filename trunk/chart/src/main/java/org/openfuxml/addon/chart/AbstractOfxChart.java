@@ -14,10 +14,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.chart.jaxb.Axis;
-import org.openfuxml.addon.chart.jaxb.Chart;
-
-import com.aht.util.facade.aht.AhtTranslationFacade;
+import org.openfuxml.addon.chart.data.jaxb.Chart;
 
 public class AbstractOfxChart
 {
@@ -44,7 +41,7 @@ public class AbstractOfxChart
 		chart = (Chart)JaxbUtil.loadJAXB(chartFile, Chart.class);
 	}
 	
-	public void translate(AhtTranslationFacade fTrans,String lang)
+/*	public void translate(AhtTranslationFacade fTrans,String lang)
 	{
 		if(chart!=null)
 		{
@@ -57,7 +54,7 @@ public class AbstractOfxChart
 			}
 		}
 	}
-	
+*/	
 	public String getUuid() {return uuid;}
 	
 	public Chart getChart() {return chart;}
@@ -73,10 +70,5 @@ public class AbstractOfxChart
 		mCharts.put(uuid, chart);
 		session.removeAttribute("charts");
 		session.setAttribute("charts", mCharts);
-	}
-	
-	private void addTranslations(AhtTranslationFacade fTrans)
-	{
-		logger.warn("NYI addTranslations");
 	}
 }

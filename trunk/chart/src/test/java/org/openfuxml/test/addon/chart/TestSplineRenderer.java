@@ -6,6 +6,10 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Random;
 
+import net.sf.exlp.util.DateUtil;
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartUtilities;
