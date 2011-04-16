@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.chart.jaxb.Chart;
+import org.openfuxml.addon.chart.data.jaxb.Chart;
 
 public class ChartColorFactory
 {
@@ -19,7 +19,7 @@ public class ChartColorFactory
 	{
 		if(ofxChart.isSetColors()  && ofxChart.getColors().isSetColor())
 		{
-			for(org.openfuxml.addon.chart.jaxb.Color c : ofxChart.getColors().getColor())
+			for(org.openfuxml.addon.chart.data.jaxb.Color c : ofxChart.getColors().getColor())
 			{
 				if(c.getTyp().equals(area.toString()))
 				{
@@ -30,16 +30,16 @@ public class ChartColorFactory
 		return getDefault(area);
 	}
 	
-	public static synchronized org.openfuxml.addon.chart.jaxb.Color create(int r, int g, int b, int a,Area area)
+	public static synchronized org.openfuxml.addon.chart.data.jaxb.Color create(int r, int g, int b, int a,Area area)
 	{
-		org.openfuxml.addon.chart.jaxb.Color color = create(r, g, b, a);
+		org.openfuxml.addon.chart.data.jaxb.Color color = create(r, g, b, a);
 		color.setTyp(area.toString());
 		return color;
 	}
 	
-	public static synchronized org.openfuxml.addon.chart.jaxb.Color create(int r, int g, int b, int a)
+	public static synchronized org.openfuxml.addon.chart.data.jaxb.Color create(int r, int g, int b, int a)
 	{
-		org.openfuxml.addon.chart.jaxb.Color color = new org.openfuxml.addon.chart.jaxb.Color();
+		org.openfuxml.addon.chart.data.jaxb.Color color = new org.openfuxml.addon.chart.data.jaxb.Color();
 		color.setR(r);
 		color.setG(g);
 		color.setB(b);
@@ -47,7 +47,7 @@ public class ChartColorFactory
 		return color;
 	}
 	
-	public static Color create(org.openfuxml.addon.chart.jaxb.Color color)
+	public static Color create(org.openfuxml.addon.chart.data.jaxb.Color color)
 	{
 		return new Color(color.getR(), color.getG(), color.getB(), color.getA());
 	}
@@ -55,7 +55,7 @@ public class ChartColorFactory
 	public static synchronized Map<String,java.awt.Color> getColorMap(Chart.Colors colors, String typ)
 	{
 		Map<String,java.awt.Color> map = new Hashtable<String,java.awt.Color>();
-		for(org.openfuxml.addon.chart.jaxb.Color color : colors.getColor())
+		for(org.openfuxml.addon.chart.data.jaxb.Color color : colors.getColor())
 		{
 			if(color.getTyp().equals(typ))
 			{

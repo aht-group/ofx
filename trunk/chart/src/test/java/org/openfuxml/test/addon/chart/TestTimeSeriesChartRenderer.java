@@ -6,28 +6,22 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Random;
 
-import net.sf.exlp.io.LoggerInit;
-import net.sf.exlp.util.DateUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.OFxChartRenderControl;
-import org.openfuxml.addon.chart.jaxb.Chart;
-import org.openfuxml.addon.chart.jaxb.Charttype;
-import org.openfuxml.addon.chart.jaxb.Container;
-import org.openfuxml.addon.chart.jaxb.Data;
+import org.openfuxml.addon.chart.data.jaxb.Chart;
+import org.openfuxml.addon.chart.data.jaxb.Charttype;
+import org.openfuxml.addon.chart.data.jaxb.Container;
+import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
-import org.openfuxml.addon.chart.util.TimePeriodFactory;
-import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
-public class TestTimeSeriesGapFiller
+public class TestTimeSeriesChartRenderer
 {
-	static Log logger = LogFactory.getLog(TestTimeSeriesGapFiller.class);
+	static Log logger = LogFactory.getLog(TestTimeSeriesChartRenderer.class);
 	
-	public TestTimeSeriesGapFiller()
+	public TestTimeSeriesChartRenderer()
 	{
 		
 	}
@@ -41,7 +35,7 @@ public class TestTimeSeriesGapFiller
 		chart.setColors(getColors());
 		
 		chart.getContainer().add(getX("a"));
-//		chart.getContainer().add(getX("b"));
+		chart.getContainer().add(getX("b"));
 		return chart;
 	}
 	
@@ -50,7 +44,6 @@ public class TestTimeSeriesGapFiller
 		Charttype type = new Charttype();
 		Charttype.Timeseries tsType = new Charttype.Timeseries();
 		tsType.setGap(true);
-		tsType.setTimePeriod(TimePeriodFactory.OfxChartTimePeriod.Day.toString());
 		type.setTimeseries(tsType);
 		return type;
 	}
@@ -90,10 +83,10 @@ public class TestTimeSeriesGapFiller
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
 		
-		TestTimeSeriesGapFiller test = new TestTimeSeriesGapFiller();
+		TestTimeSeriesChartRenderer test = new TestTimeSeriesChartRenderer();
 		Chart chart;
-//		chart = test.getTimeSeries();
-		chart = test.load(args[0]);
+		chart = test.getTimeSeries();
+//		chart = test.load(args[0]);
 		
 		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
 			
