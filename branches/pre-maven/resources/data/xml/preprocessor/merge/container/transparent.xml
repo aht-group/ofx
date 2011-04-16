@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ofx:ofxdoc xmlns:ofx="http://www.openfuxml.org" xmlns:wiki="http://www.openfuxml.org/wiki">
+	<ofx:metadata>
+		<ofx:title>OFX-Latex HelloWorld</ofx:title>
+	</ofx:metadata>
+	<ofx:content>
+		<ofx:section>
+			<ofx:title>Section 1</ofx:title>
+			<ofx:paragraph>Common Paragraph</ofx:paragraph>
+			<ofx:section transparent="true">
+				<ofx:title>This title should never appear</ofx:title>
+				<ofx:paragraph>Paragraph in section@transparent</ofx:paragraph>
+			</ofx:section>
+		</ofx:section>
+		<ofx:section>
+			<ofx:title>Section 3</ofx:title>
+		</ofx:section>
+	</ofx:content>
+</ofx:ofxdoc>
+

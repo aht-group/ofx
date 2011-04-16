@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Do not modify, class migrated to ofx-core -->
+<xsd:schema targetNamespace="http://www.openfuxml.org/jsf"
+    xmlns="http://www.openfuxml.org/jsf"
+    xmlns:ofx="http://www.openfuxml.org"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+    <xsd:import namespace="http://www.openfuxml.org" schemaLocation="../ofx.xsd"/>
+    <xsd:element name="taglib">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="tlib-version" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="short-name" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="uri" maxOccurs="1" type="xsd:string"/>
+                <!-- <xsd:element name="info" maxOccurs="1" type="xsd:string"/> -->
+                <xsd:element ref="tag" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="faces-config">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="component" maxOccurs="unbounded"/>
+                <xsd:element name="render-kit" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="renderer" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="metatag">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="tag" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="component" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="renderer" minOccurs="0" maxOccurs="1"/>
+                <xsd:element name="examples" minOccurs="0" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="example" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="tag">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="name" maxOccurs="1" type="xsd:string"/>
+                <!-- <xsd:element name="description" maxOccurs="1" type="xsd:string"/> -->
+                <xsd:element name="tagclass" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="tag-class" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="bodycontent" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="body-content" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="info" maxOccurs="1" type="xsd:string"/>
+                <xsd:element ref="attribute" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="component">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="component-type" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="component-class" maxOccurs="1" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="renderer">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="component-family" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="renderer-type" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="renderer-class" maxOccurs="1" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="attribute">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="name" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="required" minOccurs="0" maxOccurs="1" type="xsd:boolean"/>
+                <xsd:element name="rtexprvalue" minOccurs="0" maxOccurs="1" type="xsd:boolean"/>
+               <!-- <xsd:element name="description" maxOccurs="1" type="xsd:string"/> -->
+                <xsd:element name="type" maxOccurs="1" type="xsd:string"/>
+                <xsd:element name="deferred-value" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="type" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="deferred-method" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="method-signature" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="example">
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+                <xsd:element ref="listing" maxOccurs="unbounded"/>
+                <xsd:element ref="ofx:paragraph" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="title" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="listing">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:attribute name="file" type="xsd:string"/>
+            <xsd:attribute name="title" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

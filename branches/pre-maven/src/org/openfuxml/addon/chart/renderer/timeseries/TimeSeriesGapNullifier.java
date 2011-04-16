@@ -1,0 +1,93 @@
+package org.openfuxml.addon.chart.renderer.timeseries;
+
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.List;
+
+import net.sf.exlp.util.DateUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.openfuxml.addon.chart.jaxb.Charttype;
+import org.openfuxml.addon.chart.jaxb.Container;
+import org.openfuxml.addon.chart.jaxb.Data;
+import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
+
+public class TimeSeriesGapNullifier
+{
+	static Log logger = LogFactory.getLog(TimeSeriesGapNullifier.class);
+	
+	int gapUnit;
+	
+	public TimeSeriesGapNullifier(OfxChartTimePeriod timePeriod)
+	{
+		switch(timePeriod)
+		{
+			case Day: gapUnit=GregorianCalendar.DAY_OF_MONTH;break;
+			case Month: gapUnit=GregorianCalendar.MONTH;break;
+			default: logger.warn("No gapUnit ... app will crash");
+		}
+	}
+	
+	public Container nullifyGapsInContainer(Container container)
+	{
+		List<Data> lData = new ArrayList<Data>();
+		
+		int index=0;
+		int datasetSize=container.getData().size();
+		GregorianCalendar gcBegin;
+		GregorianCalendar gcEnd;
+		
+		logger.warn("Check size of data.array");
+		gcBegin=container.getData().get(0).getRecord().toGregorianCalendar();
+		gcEnd=container.getData().get(datasetSize-1).getRecord().toGregorianCalendar();
+		
+		while(gcBegin.before(gcEnd))
+		{
+			if(index<datasetSize)
+			{
+				Data currentData = container.getData().get(index);
+				GregorianCalendar gcCurrent= currentData.getRecord().toGregorianCalendar();
+				int compare = gcCurrent.compareTo(gcBegin); 
+				if(compare==0)
+				{
+					lData.add(currentData);
+					index++;
+				}
+				else{lData.add(createNullData(gcBegin));}
+//				logger.debug(DateUtil.tmj(gcBegin)+"-"+DateUtil.sm(gcBegin)+" "+DateUtil.tmj(gcEnd)+" "+DateUtil.tmj(gcCurrent)+ "\t"+compare+ "\t"+gcBegin.getTimeInMillis()+"<"+gcCurrent.getTimeInMillis());
+			}
+			gcBegin.add(gapUnit, 1);
+		}
+		
+		container.getData().clear();
+		container.getData().addAll(lData);
+		return container;
+	}
+	
+	private Data createNullData(GregorianCalendar gc)
+	{
+		Data d = new Data();
+		d.setRecord(DateUtil.getXmlGc4D(gc.getTime()));
+//		JaxbUtil.debug(d);
+		return d;
+	}
+	
+	public static synchronized boolean gapNullerActivated(Charttype.Timeseries chartTimeSeries)
+	{
+		if(chartTimeSeries.isSetGap())
+		{
+			if(chartTimeSeries.isSetTimePeriod())
+			{
+				return chartTimeSeries.isGap();
+			}
+			else
+			{
+				logger.warn("chart/charttype/timeseries/@timePeriod is not set!! No GapNulling");
+				return false;
+			}
+		}
+		else {return false;}
+	}
+}
