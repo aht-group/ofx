@@ -5,25 +5,25 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
-import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.util.DateUtil;
+import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.OFxChartRenderControl;
-import org.openfuxml.addon.chart.jaxb.Chart;
-import org.openfuxml.addon.chart.jaxb.Charttype;
-import org.openfuxml.addon.chart.jaxb.Color;
-import org.openfuxml.addon.chart.jaxb.Container;
-import org.openfuxml.addon.chart.jaxb.Data;
+import org.openfuxml.addon.chart.data.jaxb.Chart;
+import org.openfuxml.addon.chart.data.jaxb.Charttype;
+import org.openfuxml.addon.chart.data.jaxb.Color;
+import org.openfuxml.addon.chart.data.jaxb.Container;
+import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
-import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class TestGanttRenderer
 {
-	static Logger logger = Logger.getLogger(TestGanttRenderer.class);
+	static Log logger = LogFactory.getLog(TestGanttRenderer.class);
 	
 	public TestGanttRenderer()
 	{
