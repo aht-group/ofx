@@ -1,11 +1,11 @@
 package org.openfuxml.addon.wiki.processor.net.fetcher;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import net.sourceforge.jwbf.core.actions.util.ActionException;
 import net.sourceforge.jwbf.core.actions.util.ProcessException;
 import net.sourceforge.jwbf.mediawiki.actions.queries.CategoryMembersSimple;
@@ -18,7 +18,6 @@ import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
-import org.openfuxml.renderer.processor.latex.util.TxtWriter;
 
 public class WikiCategoryFetcher
 {
@@ -51,7 +50,7 @@ public class WikiCategoryFetcher
 		catch (ProcessException e) {logger.error(e);}
 	}
 	
-	public void fetchArticles(TxtWriter txtWriter, Category category)
+	public void fetchArticles(ExlpTxtWriter txtWriter, Category category)
 	{
 		WikiPageFetcher wpf = new WikiPageFetcher(bot);
 		for(int i=0;i<articleNames.size();i++)
@@ -59,7 +58,7 @@ public class WikiCategoryFetcher
 			Page page = new Page();
 			page.setName(articleNames.get(i));
 			page.setFile(targetFilePrefix+i);
-			txtWriter.setTargetFile(page.getFile()+"."+WikiProcessor.WikiFileExtension.txt);
+			txtWriter.setFileName(page.getFile()+"."+WikiProcessor.WikiFileExtension.txt);
 			wpf.fetchText(page.getName());
 			wpf.save(txtWriter);
 			category.getPage().add(page);

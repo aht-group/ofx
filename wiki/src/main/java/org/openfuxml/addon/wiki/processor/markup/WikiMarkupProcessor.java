@@ -24,8 +24,8 @@ import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlXpathHelper;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
-import org.openfuxml.renderer.data.exception.OfxConfigurationException;
-import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 
 public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiProcessor

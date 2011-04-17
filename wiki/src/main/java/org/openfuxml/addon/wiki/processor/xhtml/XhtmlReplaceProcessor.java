@@ -13,7 +13,7 @@ import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlXpathHelper;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
-import org.openfuxml.renderer.data.exception.OfxConfigurationException;
+import org.openfuxml.exception.OfxConfigurationException;
 
 public class XhtmlReplaceProcessor extends AbstractWikiProcessor implements WikiProcessor
 {

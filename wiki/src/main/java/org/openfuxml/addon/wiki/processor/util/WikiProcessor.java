@@ -4,8 +4,8 @@ import java.io.File;
 
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
-import org.openfuxml.renderer.data.exception.OfxAuthoringException;
-import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxInternalProcessingException;
 
 public interface WikiProcessor
 {

@@ -11,8 +11,8 @@ import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor.WikiDir;
-import org.openfuxml.renderer.data.exception.OfxAuthoringException;
-import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
 public abstract class AbstractWikiProcessor

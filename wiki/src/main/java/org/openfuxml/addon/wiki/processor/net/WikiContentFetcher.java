@@ -2,6 +2,8 @@ package org.openfuxml.addon.wiki.processor.net;
 
 import java.io.File;
 
+import net.sf.exlp.util.io.txt.ExlpTxtWriter;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
@@ -13,26 +15,25 @@ import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
-import org.openfuxml.renderer.processor.latex.util.TxtWriter;
 
 public class WikiContentFetcher extends AbstractWikiProcessor implements WikiProcessor
 {
 	static Log logger = LogFactory.getLog(WikiContentFetcher.class);
 	
 	private WikiBotFactory wbf;
-	private TxtWriter txtWriter;
+	private ExlpTxtWriter txtWriter;
 
 	public WikiContentFetcher(WikiBotFactory wbf)
 	{
 		this.wbf=wbf;
-		txtWriter = new TxtWriter();
+		txtWriter = new ExlpTxtWriter();
 	}
 	
 	@Override
 	public void setDirectories(File srcDir, File dstDir)
 	{
 		super.setDirectories(srcDir, dstDir);
-		txtWriter.setTargetDir(dstDir);
+		txtWriter.setDirName(dstDir.getAbsolutePath());
 	}
 	
 	@Override
@@ -40,7 +41,7 @@ public class WikiContentFetcher extends AbstractWikiProcessor implements WikiPro
 	{
 		Page page = content.getPage();
 		page.setFile(WikiContentIO.getFileFromSource(content.getSource()));
-		txtWriter.setTargetFile(page.getFile()+".txt");
+		txtWriter.setFileName(page.getFile()+".txt");
 		WikiPageFetcher wpf = new WikiPageFetcher(wbf.getBot());
 		wpf.fetchText(page.getName());
 		wpf.save(txtWriter);

@@ -9,8 +9,8 @@ import org.openfuxml.addon.wiki.processor.ofx.xml.WikiCategoryProcessor;
 import org.openfuxml.addon.wiki.processor.ofx.xml.WikiPageProcessor;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
-import org.openfuxml.renderer.data.exception.OfxAuthoringException;
-import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxInternalProcessingException;
 
 public class WikiXmlProcessor extends AbstractWikiProcessor implements WikiProcessor
 {

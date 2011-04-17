@@ -16,7 +16,7 @@ import org.jdom.xpath.XPath;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.content.ofx.Ofxdoc;
-import org.openfuxml.renderer.data.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxAuthoringException;
 
 public class WikiExternalIntegrator
 {

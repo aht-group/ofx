@@ -14,8 +14,8 @@ import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Sections;
-import org.openfuxml.renderer.data.exception.OfxAuthoringException;
-import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
 public class WikiCategoryProcessor extends AbstractWikiProcessor
