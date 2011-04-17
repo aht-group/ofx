@@ -4,7 +4,7 @@
 	<parent>
     	<groupId>org.openfuxml</groupId>
     	<artifactId>ofx</artifactId>
-    	<version>1.3.0</version>
+    	<version>1.3.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
 	</parent>
 	
@@ -12,7 +12,7 @@
 	<groupId>org.openfuxml</groupId>
     <artifactId>ofx-xml</artifactId>
     <packaging>jar</packaging>
-    <version>0.1.0</version>
+    <version>1.3.0-SNAPSHOT</version>
     <name>openFuXML XML</name>
     
 	<build>
