@@ -3,8 +3,8 @@ package org.openfuxml.test.addon.wiki;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.io.ConfigLoader;
-import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.io.ConfigLoader;
+import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
@@ -13,13 +13,13 @@ import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
-import org.openfuxml.renderer.data.exception.OfxConfigurationException;
-import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 
-public class TestMarkupProcessor
+public class TstMarkupProcessor
 {
-	static Log logger = LogFactory.getLog(TestMarkupProcessor.class);
+	static Log logger = LogFactory.getLog(TstMarkupProcessor.class);
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
     {

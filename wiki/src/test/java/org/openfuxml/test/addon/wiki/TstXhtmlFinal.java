@@ -2,14 +2,14 @@ package org.openfuxml.test.addon.wiki;
 
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.io.LoggerInit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlFinalProcessor;
-import org.openfuxml.renderer.data.exception.OfxConfigurationException;
-import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.exception.OfxInternalProcessingException;
 
 public class TstXhtmlFinal
 {
