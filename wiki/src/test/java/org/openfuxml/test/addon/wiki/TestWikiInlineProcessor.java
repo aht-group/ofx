@@ -11,6 +11,10 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.junit.Before;
 import org.openfuxml.addon.wiki.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.content.ofx.Section;
@@ -27,10 +31,19 @@ public class TestWikiInlineProcessor extends TestCase
 		
 	}
 	
-	public void testDummy()
+	@Before
+	public void initx()
+	{
+		System.out.println("Test");
+		Logger root = Logger.getRootLogger();
+		root.addAppender(new ConsoleAppender(
+		    new PatternLayout(PatternLayout.TTCC_CONVERSION_PATTERN)));
+	}
+	
+	public void testDummy() throws Exception
 	{
 		int variable =0;
-		assertTrue(variable == 0);
+		assertTrue(variable == 1);
 	}
 	
 	
