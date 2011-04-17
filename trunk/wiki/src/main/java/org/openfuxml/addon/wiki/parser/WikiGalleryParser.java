@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import net.sf.exlp.event.LogEventHandler;
 import net.sf.exlp.event.handler.EhDebug;
-import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerXml;
 import net.sf.exlp.parser.AbstractLogParser;

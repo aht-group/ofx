@@ -13,7 +13,6 @@ import org.jdom.Namespace;
 import org.openfuxml.addon.wiki.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
-import org.openfuxml.content.factory.ofx.table.ColumnFactory;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
@@ -26,7 +25,8 @@ import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
-import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.factory.ofx.table.ColumnFactory;
 
 public class WikiTemplateGenericTable implements WikiTemplateTransformator
 {
@@ -69,8 +69,8 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 		Specification specification = new Specification();
 		
 		Columns columns = new Columns();
-		columns.getColumn().add(ColumnFactory.create(Alignment.LEFT,2));
-		columns.getColumn().add(ColumnFactory.create(Alignment.LEFT,4));
+		columns.getColumn().add(ColumnFactory.create("left",2));
+		columns.getColumn().add(ColumnFactory.create("left",4));
 		
 		specification.setColumns(columns);
 		return specification;

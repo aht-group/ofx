@@ -2,13 +2,12 @@ package org.openfuxml.addon.wiki.processor.util;
 
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.tools.ant.Project;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -18,7 +17,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Injections;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.Templates;
-import org.openfuxml.renderer.data.exception.OfxConfigurationException;
+import org.openfuxml.exception.OfxConfigurationException;
 
 public class WikiConfigXmlXpathHelper
 {

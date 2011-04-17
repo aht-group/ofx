@@ -2,11 +2,11 @@ package org.openfuxml.addon.wiki.processor.template.transformator;
 
 import net.sf.exlp.event.LogEvent;
 import net.sf.exlp.event.handler.EhResultContainer;
-import net.sf.exlp.io.ConfigLoader;
-import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerString;
 import net.sf.exlp.parser.LogParser;
+import net.sf.exlp.util.io.ConfigLoader;
+import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.util.xml.NsPrefixMapperInterface;
@@ -21,7 +21,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
 import org.openfuxml.addon.wiki.processor.template.exlp.parser.WikiKeyValueParser;
 import org.openfuxml.renderer.data.jaxb.Cmp;
-import org.openfuxml.util.xml.OfxNsPrefixMapper;
+import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
 public class WikiTemplateKeyValueTransformator
 {

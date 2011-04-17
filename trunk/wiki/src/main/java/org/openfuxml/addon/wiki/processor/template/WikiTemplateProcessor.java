@@ -18,8 +18,8 @@ import org.openfuxml.addon.wiki.processor.template.transformator.WikiTemplateKey
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlXpathHelper;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
-import org.openfuxml.renderer.data.exception.OfxConfigurationException;
-import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.exception.OfxInternalProcessingException;
 
 public class WikiTemplateProcessor extends AbstractWikiProcessor
 {

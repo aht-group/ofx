@@ -2,6 +2,7 @@ package org.openfuxml.addon.wiki.parser;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,11 +12,11 @@ import javax.xml.bind.Marshaller;
 
 import net.sf.exlp.event.LogEventHandler;
 import net.sf.exlp.event.handler.EhResultContainer;
-import net.sf.exlp.io.LoggerInit;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerXml;
 import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.parser.LogParser;
+import net.sf.exlp.util.io.LoggerInit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -195,7 +196,7 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 	}
 	
 	@Override
-	public void parseItem(ArrayList<String> item)
+	public void parseItem(List<String> item)
 	{
 		ofxChart = new Ofxchart();
 		ofxChart.setType("bar");

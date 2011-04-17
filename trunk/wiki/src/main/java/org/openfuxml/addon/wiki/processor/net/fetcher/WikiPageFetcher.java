@@ -1,11 +1,10 @@
 package org.openfuxml.addon.wiki.processor.net.fetcher;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
-import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import net.sourceforge.jwbf.core.actions.util.ActionException;
 import net.sourceforge.jwbf.core.actions.util.ProcessException;
 import net.sourceforge.jwbf.core.contentRep.SimpleArticle;
@@ -15,7 +14,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
-import org.openfuxml.renderer.processor.latex.util.TxtWriter;
 
 public class WikiPageFetcher
 {
@@ -47,11 +45,10 @@ public class WikiPageFetcher
 		logger.debug("Article "+article+" fetched. "+df.format(wikiText.length())+" characters.");
 	}
 	
-	public void save(TxtWriter txtWriter)
+	public void save(ExlpTxtWriter txtWriter)
 	{
-		List<String> txt = new ArrayList<String>();
-		txt.add(wikiText);
-		txtWriter.writeFile(txt);
+		txtWriter.add(wikiText);
+		txtWriter.write();
 	}
 	
 	public String getWikiText() {return wikiText;}

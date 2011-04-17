@@ -4,8 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
-
-import com.aht.util.translation.Translation;
+import org.openfuxml.util.translation.DoubleMapTranslation;
 
 public class OfxchartUtil
 {
@@ -21,7 +20,7 @@ public class OfxchartUtil
 		return null;
 	}
 	
-	public static synchronized Ofxchart translate(Ofxchart ofxchart, Translation translation, String lang)
+	public static synchronized Ofxchart translate(Ofxchart ofxchart, DoubleMapTranslation translation, String lang)
 	{
 		if(ofxchart.isSetXAxis() && ofxchart.getXAxis().isSetKey())
 		{
