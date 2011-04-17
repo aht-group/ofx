@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.list.Item;
 import org.openfuxml.content.ofx.list.List;
 import org.openfuxml.content.ofx.list.Type;
-import org.openfuxml.renderer.data.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.table.CellFactory;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;

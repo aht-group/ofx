@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.renderer.data.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.ParagraphFactory;
 import org.openfuxml.renderer.processor.latex.content.SectionFactory;
 import org.openfuxml.renderer.processor.latex.content.list.ListFactory;
