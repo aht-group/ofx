@@ -21,13 +21,12 @@ import org.openfuxml.addon.chart.data.jaxb.Container;
 import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.TimePeriodFactory;
-import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
-public class TestTimeSeriesGapFiller
+public class TstSplineRenderer
 {
-	static Log logger = LogFactory.getLog(TestTimeSeriesGapFiller.class);
+	static Log logger = LogFactory.getLog(TstSplineRenderer.class);
 	
-	public TestTimeSeriesGapFiller()
+	public TstSplineRenderer()
 	{
 		
 	}
@@ -90,12 +89,11 @@ public class TestTimeSeriesGapFiller
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
 		
-		TestTimeSeriesGapFiller test = new TestTimeSeriesGapFiller();
+		TstSplineRenderer test = new TstSplineRenderer();
 		Chart chart;
-//		chart = test.getTimeSeries();
 		chart = test.load(args[0]);
 		
-		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
+//		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);

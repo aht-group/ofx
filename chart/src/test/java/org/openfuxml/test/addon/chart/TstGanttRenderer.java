@@ -22,11 +22,11 @@ import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
-public class TestGanttRenderer
+public class TstGanttRenderer
 {
-	static Log logger = LogFactory.getLog(TestGanttRenderer.class);
+	static Log logger = LogFactory.getLog(TstGanttRenderer.class);
 	
-	public TestGanttRenderer()
+	public TstGanttRenderer()
 	{
 		
 	}
