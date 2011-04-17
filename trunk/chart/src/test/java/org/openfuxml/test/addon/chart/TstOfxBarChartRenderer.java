@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Random;
 
-import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -20,11 +19,11 @@ import org.openfuxml.addon.chart.data.jaxb.Container;
 import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
-public class TestTimeBarRenderer
+public class TstOfxBarChartRenderer
 {
-	static Log logger = LogFactory.getLog(TestTimeBarRenderer.class);
+	static Log logger = LogFactory.getLog(TstOfxBarChartRenderer.class);
 	
-	public TestTimeBarRenderer()
+	public TstOfxBarChartRenderer()
 	{
 		
 	}
@@ -35,27 +34,18 @@ public class TestTimeBarRenderer
 		chart.setLegend(true);
 		
 		chart.setCharttype(getType());
-		chart.setGrid(getGrid());
 		
 		chart.getContainer().add(getX("a"));
+//		chart.getContainer().add(getX("b"));
 		return chart;
-	}
-	
-	private Chart.Grid getGrid()
-	{
-		Chart.Grid grid = new Chart.Grid();
-		grid.setDomain(false);
-		grid.setRange(false);
-		return grid;
 	}
 	
 	private Charttype getType()
 	{
 		Charttype type = new Charttype();
-		Charttype.Timebar tBar = new Charttype.Timebar();
-		tBar.setShadow(false);
-		tBar.setGradient(false);
-		type.setTimebar(tBar);
+		Charttype.Bar tBar = new Charttype.Bar();
+		tBar.setVertical(true);
+		type.setBar(tBar);
 		return type;
 	}
 	
@@ -64,12 +54,12 @@ public class TestTimeBarRenderer
 		Random rnd = new Random();
 		Container x = new Container();
 		x.setLabel(label);
-		for(int i=1;i<5;i++)
+		for(int i=1;i<20;i++)
 		{
 			Data data = new Data();
-			data.setRecord(DateUtil.getXmlGc4D(DateUtil.getDateFromInt(2010, 1, i)));
-			data.setY(1+rnd.nextInt(i));
-			if(rnd.nextInt(100)<70){x.getData().add(data);}
+			data.setY(rnd.nextInt(i));
+			data.setCategory("cat"+rnd.nextInt(3));
+			x.getData().add(data);
 		}
 		return x;
 	}
@@ -80,8 +70,10 @@ public class TestTimeBarRenderer
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
 		
-		TestTimeBarRenderer test = new TestTimeBarRenderer();
-		Chart chart = test.getTimeSeries();
+		TstOfxBarChartRenderer test = new TstOfxBarChartRenderer();
+		Chart chart = null;
+		
+		chart = test.getTimeSeries();
 		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();

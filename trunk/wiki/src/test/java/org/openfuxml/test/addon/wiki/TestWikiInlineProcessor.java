@@ -3,6 +3,7 @@ package org.openfuxml.test.addon.wiki;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import junit.framework.TestCase;
 import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -17,9 +18,21 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 
-public class TstWikiInlineProcessor
+public class TestWikiInlineProcessor extends TestCase
 {
-	static Log logger = LogFactory.getLog(TstWikiInlineProcessor.class);
+	static Log logger = LogFactory.getLog(TestWikiInlineProcessor.class);
+	
+	public TestWikiInlineProcessor()
+	{
+		
+	}
+	
+	public void testDummy()
+	{
+		int variable =0;
+		assertTrue(variable == 0);
+	}
+	
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
     {

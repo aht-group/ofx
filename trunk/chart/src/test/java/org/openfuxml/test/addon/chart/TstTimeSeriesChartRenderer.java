@@ -22,11 +22,11 @@ import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
-public class TestTimeSeriesChartRenderer
+public class TstTimeSeriesChartRenderer
 {
-	static Log logger = LogFactory.getLog(TestTimeSeriesChartRenderer.class);
+	static Log logger = LogFactory.getLog(TstTimeSeriesChartRenderer.class);
 	
-	public TestTimeSeriesChartRenderer()
+	public TstTimeSeriesChartRenderer()
 	{
 		
 	}
@@ -88,7 +88,7 @@ public class TestTimeSeriesChartRenderer
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
 		
-		TestTimeSeriesChartRenderer test = new TestTimeSeriesChartRenderer();
+		TstTimeSeriesChartRenderer test = new TstTimeSeriesChartRenderer();
 		Chart chart;
 		chart = test.getTimeSeries();
 //		chart = test.load(args[0]);
