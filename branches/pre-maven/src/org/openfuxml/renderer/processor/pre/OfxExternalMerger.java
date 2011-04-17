@@ -45,13 +45,6 @@ public class OfxExternalMerger
 		catch (JDOMException e) {logger.error(e);}
 	}
 	
-	public OfxDocument mergeToOfx() throws OfxInternalProcessingException
-	{
-		Document mergedDoc =  mergeToDoc();
-		OfxDocument ofxDoc = (OfxDocument)JDomUtil.toJaxb(mergedDoc, OfxDocument.class);
-		return ofxDoc;
-	}
-	
 	public Document mergeToDoc() throws OfxInternalProcessingException
 	{
 		Element rootElement = doc.getRootElement();
