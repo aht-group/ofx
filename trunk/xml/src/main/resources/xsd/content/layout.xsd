@@ -7,13 +7,17 @@
     jaxb:extensionBindingPrefixes="xjc"
     jaxb:version="2.0">
     <xsd:element name="alignment">
-		<xsd:simpleType>
-	  		<xsd:restriction base="xsd:string">
-				<xsd:enumeration value="left"/>
-				<xsd:enumeration value="center"/>
-				<xsd:enumeration value="right"/>
-			</xsd:restriction>
-		</xsd:simpleType>
+    	<xsd:complexType>
+	    	<xsd:attribute name="horizontal">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="left"/>
+						<xsd:enumeration value="center"/>
+						<xsd:enumeration value="right"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+    	</xsd:complexType>
     </xsd:element>
     <xsd:element name="width">
 		 <xsd:complexType>
