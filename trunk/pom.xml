@@ -54,6 +54,7 @@
 		<module>wiki</module>
 		<module>chart</module>
 		<module>xml</module>
+		<module>util</module>
 	</modules>
  
 	<dependencyManagement>
