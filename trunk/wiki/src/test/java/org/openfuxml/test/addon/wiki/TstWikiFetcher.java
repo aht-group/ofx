@@ -1,7 +1,7 @@
 package org.openfuxml.test.addon.wiki;
 
-import net.sf.exlp.io.ConfigLoader;
-import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.io.ConfigLoader;
+import net.sf.exlp.util.io.LoggerInit;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
@@ -9,9 +9,9 @@ import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.processor.net.fetcher.WikiPageFetcher;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 
-public class TestWikiFetcher
+public class TstWikiFetcher
 {
-	static Log logger = LogFactory.getLog(TestWikiFetcher.class);
+	static Log logger = LogFactory.getLog(TstWikiFetcher.class);
 	
 	public static void main(String[] args)
     {
