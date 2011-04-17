@@ -1,9 +1,7 @@
-package org.openfuxml.util.xml;
+package org.openfuxml.xml.util.xpath;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

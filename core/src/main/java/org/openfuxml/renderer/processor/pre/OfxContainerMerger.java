@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -19,7 +19,7 @@ import org.jfree.chart.title.Title;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Sections;
-import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.exception.OfxInternalProcessingException;
 
 public class OfxContainerMerger
 {

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import net.sf.exlp.io.ConfigLoader;
-import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.io.ConfigLoader;
+import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -33,18 +33,18 @@ import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlFinalProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;
 import org.openfuxml.content.ofx.Ofxdoc;
-import org.openfuxml.renderer.data.exception.OfxAuthoringException;
-import org.openfuxml.renderer.data.exception.OfxConfigurationException;
-import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
-import org.openfuxml.renderer.data.exception.OfxRenderingException;
+import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.exception.OfxRenderingException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Merge;
 import org.openfuxml.renderer.processor.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.TxtWriter;
 import org.openfuxml.renderer.processor.pre.OfxContainerMerger;
 import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
-import org.openfuxml.util.xml.CmpJaxbXpathLoader;
-import org.openfuxml.util.xml.OfxNsPrefixMapper;
+import org.openfuxml.xml.util.OfxNsPrefixMapper;
+import org.openfuxml.xml.util.xpath.CmpJaxbXpathLoader;
 
 public class OfxRenderer
 {

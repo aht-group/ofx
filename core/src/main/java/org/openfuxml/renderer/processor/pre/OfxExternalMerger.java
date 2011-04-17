@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.logging.Log;
@@ -14,8 +14,7 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
-import org.openfuxml.model.ejb.OfxDocument;
-import org.openfuxml.renderer.data.exception.OfxInternalProcessingException;
+import org.openfuxml.exception.OfxInternalProcessingException;
 
 public class OfxExternalMerger
 {
@@ -43,13 +42,6 @@ public class OfxExternalMerger
 			
 		}
 		catch (JDOMException e) {logger.error(e);}
-	}
-	
-	public OfxDocument mergeToOfx() throws OfxInternalProcessingException
-	{
-		Document mergedDoc =  mergeToDoc();
-		OfxDocument ofxDoc = (OfxDocument)JDomUtil.toJaxb(mergedDoc, OfxDocument.class);
-		return ofxDoc;
 	}
 	
 	public Document mergeToDoc() throws OfxInternalProcessingException

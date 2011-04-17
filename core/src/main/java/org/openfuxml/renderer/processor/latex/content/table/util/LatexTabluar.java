@@ -100,14 +100,16 @@ public class LatexTabluar
 	
 	public static String getTableAlignment(String sAlignment)
 	{
-		Alignment alignment = Alignment.valueOf(sAlignment.toUpperCase());
+		logger.warn("NYI");
+		System.exit(-1);
+/*		Alignment alignment = Alignment.valueOf(sAlignment.toUpperCase());
 		switch(alignment)
 		{
 			case LEFT: return "l";
 			case RIGHT: return "r";
 			case CENTER: return "c";
 		}
-		
+*/		
 		return "l";
 	}
 	
