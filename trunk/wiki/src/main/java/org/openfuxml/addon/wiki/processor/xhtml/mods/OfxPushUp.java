@@ -9,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.Text;
 
 public class OfxPushUp
@@ -22,7 +23,9 @@ public class OfxPushUp
 	
 	public String moveOfxElements(String xHtmlText)
 	{
-		Document doc = JDomUtil.txtToDoc(xHtmlText);
+		Document doc = null;
+		try {doc = JDomUtil.txtToDoc(xHtmlText);}
+		catch (JDOMException e) {logger.error(e);}
 	
 		Element rootElement = doc.getRootElement();
 		rootElement.detach();
