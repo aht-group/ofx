@@ -124,7 +124,9 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 			sb.append(txt.substring(beginIndex+startDelimiter.length()+id.length()+endDelimiter.length()));
 			txt = sb.toString();
 		}
-		Document doc = JDomUtil.txtToDoc(txt);
+		Document doc = null;
+		try {doc = JDomUtil.txtToDoc(txt);}
+		catch (JDOMException e) {logger.error(e);}
 		return doc;
 	}
 	

@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.DocType;
 import org.jdom.Document;
+import org.jdom.JDOMException;
 
 @Deprecated
 public class XmlProcessor
@@ -20,7 +21,12 @@ public class XmlProcessor
 	
 	public Document process(String xHtml)
 	{
-		doc = JDomUtil.txtToDoc(xHtml);
+		try {
+			doc = JDomUtil.txtToDoc(xHtml);
+		} catch (JDOMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setDocType(1);
 		return doc;
 	}

@@ -22,6 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
 import org.openfuxml.addon.wiki.WikiTemplates;
@@ -75,6 +76,7 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 		catch (ParserConfigurationException e) {logger.error(e);}
 		catch (XMLStreamException e) {logger.error(e);}
 		catch (SAXException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error(e);}
 	}
 	
 	private Document checkTransparent(Document doc, Section section) throws OfxInternalProcessingException
@@ -109,6 +111,7 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 		catch (ParserConfigurationException e) {logger.error(e);}
 		catch (XMLStreamException e) {logger.error(e);}
 		catch (SAXException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error(e);}
 		return result;
 	}
 
