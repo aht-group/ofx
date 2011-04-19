@@ -16,7 +16,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
-import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
 public class OfxRenderConfiguration
 {
@@ -53,17 +52,36 @@ public class OfxRenderConfiguration
 		return cmp;
 	}
 	
-	
 	public File getDir(Dirs dirs, String dirCode) throws OfxConfigurationException
 	{
 		File f = null;
+		Dir dir = null;
 		try
 		{
-			Dir dir = IoXpath.getDir(dirs, dirCode);
+			dir = IoXpath.getDir(dirs, dirCode);
+			if(!dir.isSetName()){throw new OfxConfigurationException("No @name definined for <dir code=\""+dirCode+"\"/>");}
 			f = new File(FilenameUtils.normalize(fCmpParent.getAbsolutePath()+SystemUtils.FILE_SEPARATOR+dir.getName()));
 		}
 		catch (ExlpXpathNotFoundException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
 		catch (ExlpXpathNotUniqueException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
+		
+		//TODO Test this
+		logger.warn("Untested code!");
+		if(!f.exists())
+		{
+			if(dir.isSetAllowCreate() && dir.isAllowCreate())
+			{
+				
+				f.mkdirs();
+			}
+			else
+			{
+				logger.info("You may set allowCreate=\"true\" in <dir code=\""+dirCode+"\"/>");
+				throw new OfxConfigurationException("Directory <dir code=\""+dirCode+"\"/> not available: "+f.getAbsolutePath());
+			}
+		}
+		if(!f.isDirectory()){throw new OfxConfigurationException("Something exists for <dir code=\""+dirCode+"\"/>, but it's not a directory: "+f.getAbsolutePath());}
+		
 		return f;
 	}
 	
