@@ -53,7 +53,11 @@ public class WikiConfigXmlXpathHelper
 				}
 				else {throw new OfxConfigurationException("Replacement is set to external, but no source definded");}
 			}
-			catch (FileNotFoundException e){throw new OfxConfigurationException(e.getMessage());}
+			catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+				throw new OfxConfigurationException(e.getMessage());
+			}
 		}
 		return replacements;
 	}
