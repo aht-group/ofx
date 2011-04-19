@@ -63,5 +63,11 @@
             <jxb:package name="org.openfuxml.content.fuxml"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+    
+    <jxb:bindings schemaLocation="../../../../../../exlp/xml/src/main/resources/xsd/util/io.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="net.sf.exlp.xml.io"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
    
 </jxb:bindings>
