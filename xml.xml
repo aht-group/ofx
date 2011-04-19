@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<project name="OFX-XML"  basedir="../../../..">
+
+	<property name="src.dir" location="${basedir}/src/main/java" />
+	<property name="rsrc.dir" location="${basedir}/src/main/resources" />
+	<property name="xsd.dir" location="${rsrc.dir}/xsd" />
+	
+	<target name="JAXB Class generation" description="Compiles all JAXB classes">
+		<echo level="info">Creating JAXB</echo>
+		<echo level="info">basedir = ${basedir}</echo>
+		<echo level="info">src.dir = ${src.dir}</echo>
+		<echo level="info">xsd.dir = ${xsd.dir}</echo>
+	    <java classname="com.sun.tools.xjc.XJCFacade" fork="true" failonerror="true"  maxmemory="128m">
+			<arg value="-extension"/>
+			<arg value="${xsd.dir}/xsd.xsd"/>
+			<arg value="-d"/><arg value="${src.dir}"/>
+			<arg value="-b"/><arg value="${xsd.dir}/xsd.xjb"/>
+			<classpath>
+				<pathelement location="../../AHT-Lib/libs/xml/jaxb/2.2/jaxb-impl-2.2.jar"/>
+				<pathelement location="../../AHT-Lib/libs/xml/jaxb/2.2/jaxb-xjc-2.2.jar"/>
+				<pathelement location="../../AHT-Lib/libs/xml/jaxb/2.2/jaxb-api-2.2.jar"/>
+			</classpath>
+		</java>
+	</target>	
+</project>

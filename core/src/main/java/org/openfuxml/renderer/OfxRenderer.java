@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import net.sf.exlp.util.io.ConfigLoader;
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -43,6 +41,7 @@ import org.openfuxml.renderer.processor.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.TxtWriter;
 import org.openfuxml.renderer.processor.pre.OfxContainerMerger;
 import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
+import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.xml.util.OfxNsPrefixMapper;
 import org.openfuxml.xml.util.xpath.CmpJaxbXpathLoader;
 
@@ -52,6 +51,7 @@ public class OfxRenderer
 		
 	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
 	
+	private OfxRenderConfiguration cmpConfigUtil;
 	private Configuration config;
 	private Cmp cmp;
 	
@@ -66,34 +66,23 @@ public class OfxRenderer
 		this.config=config;
 		nsPrefixMapper = new OfxNsPrefixMapper();
 	}
-	
-	private void readConfig(String fNameCmp, String fNameTmp) throws OfxConfigurationException
-	{
-		try
-		{
-			cmp = (Cmp)JaxbUtil.loadJAXB(fNameCmp, Cmp.class);
-			JaxbUtil.debug(cmp);
-		}
-		catch (FileNotFoundException e){throw new OfxConfigurationException("CMP configuration not found: "+fNameCmp);}
-		
-		tmpDir = new File(fNameTmp);
-		if(!tmpDir.exists()){throw new OfxConfigurationException("Temporary directory not available: "+fNameTmp);}
-		if(!tmpDir.isDirectory()){throw new OfxConfigurationException("Temporary directory is a file! ("+fNameTmp+")");}
-	}
 
 	public void chain() throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
 	{
-		String fNameCmp = config.getString("ofx.xml.cmp");
-		String fNameTmp = config.getString("ofx.dir.tmp");
-		String ofxRoot = config.getString("ofx.xml.root");
+		cmpConfigUtil = new OfxRenderConfiguration();
+		cmp = cmpConfigUtil.readCmp(config.getString("ofx.xml.cmp"));
+		File fOfxRoot = cmpConfigUtil.getfOfxRoot();
 		
-		chain(fNameCmp, fNameTmp, ofxRoot);
+		String fNameTmp = config.getString("ofx.dir.tmp");
+		tmpDir = new File(fNameTmp);
+		if(!tmpDir.exists()){throw new OfxConfigurationException("Temporary directory not available: "+fNameTmp);}
+		if(!tmpDir.isDirectory()){throw new OfxConfigurationException("Temporary directory is a file! ("+fNameTmp+")");}
+		
+		chain(fNameTmp, fOfxRoot);
 	}
 	
-	public void chain(String fNameCmp, String fNameTmp, String ofxRoot) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
+	public void chain(String fNameTmp, File fOfxRoot) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
 	{
-		readConfig(fNameCmp,fNameTmp);
-		
 		String wikiPlainDir = "wikiPlain";
 		File dirWikiPlain = createDir(wikiPlainDir);
 		File dirWikiTemplate = createDir(WikiProcessor.WikiDir.wikiTemplate.toString());
@@ -105,7 +94,7 @@ public class OfxRenderer
 		String xhtmlFinalDir = "xhtmlFinal";
 		String ofxXmlDir = "ofxXml";
 		
-		phaseMergeInitial(ofxRoot);
+		phaseMergeInitial(fOfxRoot);
 		phaseWikiExternalIntegrator(ofxXmlDir);
 		phaseWikiContentFetcher(false,dirWikiPlain);
 		phaseWikiProcessing(wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir, dirWikiTemplate);
@@ -115,22 +104,22 @@ public class OfxRenderer
 		phaseTemplate(fNameTmp, dirWikiTemplate, dirOfxTemplate, Phase.externalMerge, Phase.phaseTemplate);
 		phaseExternalMerge(fNameTmp, Phase.phaseTemplate, Phase.mergeTemplate);
 		
-		if(cmp.isSetTargets())
-		{
-			if(cmp.getTargets().isSetPdf()){phaseLatex(Phase.mergeTemplate);}
-		}
-		
+		if(cmp.isSetTargets()){renderTargets();}
 	}
 	
-	private void phaseMergeInitial(String rootFileName) throws OfxInternalProcessingException
+	private void renderTargets() throws OfxAuthoringException
 	{
-		Document doc = JDomUtil.load(new File(rootFileName));
+		if(cmp.getTargets().isSetPdf()){phaseLatex(Phase.mergeTemplate);}
+	}
+	
+	private void phaseMergeInitial(File fOfxRoot) throws OfxInternalProcessingException
+	{
+		Document doc = JDomUtil.load(fOfxRoot);
 		try
 		{
 			Merge merge = CmpJaxbXpathLoader.getMerge(cmp.getPreprocessor().getMerge(), Phase.iniMerge.toString());
 			
-			File f = new File(rootFileName);
-			OfxExternalMerger exMerger = new OfxExternalMerger(f);
+			OfxExternalMerger exMerger = new OfxExternalMerger(fOfxRoot);
 			doc = exMerger.mergeToDoc();
 			
 			if(merge.isSetWriteIntermediate() && merge.isWriteIntermediate())
@@ -336,22 +325,5 @@ public class OfxRenderer
 		sb.append(phase.ordinal()+1);
 		sb.append("-").append(phase.toString()).append(".xml");
 		return sb.toString();
-	}
-	
-	public static void main (String[] args) throws Exception
-	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("resources/config");
-			loggerInit.init();
-		
-		String propFile = "resources/properties/user.properties";
-			
-		if(args.length==1){propFile=args[0];}
-			
-		ConfigLoader.add(propFile);
-		Configuration config = ConfigLoader.init();
-		
-		OfxRenderer renderer = new OfxRenderer(config);
-		renderer.chain();
 	}
 }
