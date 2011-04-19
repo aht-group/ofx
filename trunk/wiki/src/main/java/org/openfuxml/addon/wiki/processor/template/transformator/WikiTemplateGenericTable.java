@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.util.xml.NsPrefixMapperInterface;
+import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
