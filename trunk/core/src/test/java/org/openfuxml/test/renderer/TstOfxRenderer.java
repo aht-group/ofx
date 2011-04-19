@@ -17,7 +17,7 @@ public class TstOfxRenderer
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("src/test/resources/config");
 			loggerInit.init();
-		
+
 		String propFile = "src/test/resources/properties/user.properties";
 			
 		if(args.length==1){propFile=args[0];}
