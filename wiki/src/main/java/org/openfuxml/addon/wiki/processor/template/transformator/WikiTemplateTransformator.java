@@ -1,6 +1,6 @@
 package org.openfuxml.addon.wiki.processor.template.transformator;
 
-import net.sf.exlp.util.xml.NsPrefixMapperInterface;
+import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 import org.jdom.Element;
 import org.openfuxml.addon.wiki.WikiInlineProcessor;

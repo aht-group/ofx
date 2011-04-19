@@ -37,8 +37,6 @@ import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.exception.OfxRenderingException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Merge;
-import org.openfuxml.renderer.processor.latex.OfxLatexRenderer;
-import org.openfuxml.renderer.processor.latex.util.TxtWriter;
 import org.openfuxml.renderer.processor.pre.OfxContainerMerger;
 import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
@@ -72,13 +70,18 @@ public class OfxRenderer
 		cmpConfigUtil = new OfxRenderConfiguration();
 		cmp = cmpConfigUtil.readCmp(config.getString("ofx.xml.cmp"));
 		File fOfxRoot = cmpConfigUtil.getfOfxRoot();
-		
 		String fNameTmp = config.getString("ofx.dir.tmp");
 		tmpDir = new File(fNameTmp);
 		if(!tmpDir.exists()){throw new OfxConfigurationException("Temporary directory not available: "+fNameTmp);}
 		if(!tmpDir.isDirectory()){throw new OfxConfigurationException("Temporary directory is a file! ("+fNameTmp+")");}
 		
-		chain(fNameTmp, fOfxRoot);
+//		chain(fNameTmp, fOfxRoot);
+		
+		if(cmp.isSetTargets())
+		{
+			OfxTargetRenderer targetRenderer = new OfxTargetRenderer(cmpConfigUtil);
+			targetRenderer.renderTargets();
+		}
 	}
 	
 	public void chain(String fNameTmp, File fOfxRoot) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
@@ -103,13 +106,6 @@ public class OfxRenderer
 		phaseExternalMerge(fNameTmp, Phase.containerMerge, Phase.externalMerge);
 		phaseTemplate(fNameTmp, dirWikiTemplate, dirOfxTemplate, Phase.externalMerge, Phase.phaseTemplate);
 		phaseExternalMerge(fNameTmp, Phase.phaseTemplate, Phase.mergeTemplate);
-		
-		if(cmp.isSetTargets()){renderTargets();}
-	}
-	
-	private void renderTargets() throws OfxAuthoringException
-	{
-		if(cmp.getTargets().isSetPdf()){phaseLatex(Phase.mergeTemplate);}
 	}
 	
 	private void phaseMergeInitial(File fOfxRoot) throws OfxInternalProcessingException
@@ -297,20 +293,6 @@ public class OfxRenderer
 		ofxP.setDirectories(dirXhtmlFinal, dirXmlOfx);
 		ofxP.process(wikiQueries);
 	}
-	
-	private void phaseLatex(Phase phaseLoad) throws OfxAuthoringException
-	{
-		OfxLatexRenderer renderer = new OfxLatexRenderer(cmp.getTargets().getPdf().get(0));
-		renderer.render(new File(tmpDir,getPhaseXmlFileName(phaseLoad)).getAbsolutePath());
-		
-		File dstDir = new File(config.getString("wiki.latex.dir"));
-		
-		TxtWriter writer = new TxtWriter();
-		writer.setTargetDirFile(dstDir, config.getString("wiki.latex.file"));
-//		writer.debug(renderer.getContent());
-		writer.writeFile(renderer.getContent());
-	}
-	
 	
 	private File createDir(String dirName)
 	{

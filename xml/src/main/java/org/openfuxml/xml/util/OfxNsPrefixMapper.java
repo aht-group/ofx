@@ -1,6 +1,6 @@
 package org.openfuxml.xml.util;
 
-import net.sf.exlp.util.xml.NsPrefixMapperInterface;
+import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 

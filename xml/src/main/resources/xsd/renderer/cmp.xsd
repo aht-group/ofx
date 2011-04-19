@@ -40,6 +40,7 @@
         <xsd:complexType>
             <xsd:sequence>
 				<xsd:element ref="cmp:toc" maxOccurs="1"/>
+                <xsd:element ref="io:dirs" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
         </xsd:complexType>
