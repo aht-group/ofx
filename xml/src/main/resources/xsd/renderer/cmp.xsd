@@ -2,8 +2,10 @@
 <xsd:schema targetNamespace="http://www.openfuxml.org/cmp"
     xmlns:cmp="http://www.openfuxml.org/cmp"
     xmlns:wiki="http://www.openfuxml.org/wiki"
+    xmlns:io="http://exlp.sf.net/io"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="http://www.openfuxml.org/wiki" schemaLocation="../addon/wiki.xsd"/>
+    <xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../../exlp/xml/src/main/resources/xsd/util/io.xsd"/>
     <xsd:element name="cmp">
         <xsd:complexType>
             <xsd:sequence>
@@ -28,6 +30,7 @@
     <xsd:element name="preprocessor">
         <xsd:complexType>
             <xsd:sequence>
+                <xsd:element ref="io:dirs" maxOccurs="1"/>
                 <xsd:element ref="cmp:merge" maxOccurs="unbounded"/>
                 <xsd:element ref="cmp:wiki" maxOccurs="1"/>
             </xsd:sequence>

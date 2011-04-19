@@ -29,7 +29,7 @@ public class OfxRenderConfiguration
 		try
 		{
 			cmp = (Cmp)JaxbUtil.loadJAXB(fCmp.getAbsolutePath(), Cmp.class);
-//			JaxbUtil.debug(this.getClass(),cmp);
+//			JaxbUtil.debug(cmp, new OfxNsPrefixMapper());
 		}
 		catch (FileNotFoundException e){throw new OfxConfigurationException("CMP configuration not found: "+fCmp.getAbsolutePath());}
 		logger.info("Using CMP configuration: "+fCmp.getAbsolutePath());
