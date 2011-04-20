@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex;
+package org.openfuxml.renderer.processor.html;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -14,15 +14,15 @@ import org.openfuxml.renderer.data.jaxb.Pdf;
 import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.processor.latex.util.LatexDocument;
 
-public class OfxLatexRenderer
+public class OfxHtmlRenderer
 {
-	static Log logger = LogFactory.getLog(OfxLatexRenderer.class);
+	static Log logger = LogFactory.getLog(OfxHtmlRenderer.class);
 	
 	private LatexPreamble latexPreamble;
 	private LatexDocument latexDocument;
 	private List<String> txt;
 	
-	public OfxLatexRenderer(Pdf pdf)
+	public OfxHtmlRenderer(Pdf pdf)
 	{
 		latexPreamble = new LatexPreamble();
 		latexDocument = new LatexDocument(pdf,latexPreamble);
