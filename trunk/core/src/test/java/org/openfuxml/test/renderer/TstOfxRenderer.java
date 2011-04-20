@@ -25,7 +25,10 @@ public class TstOfxRenderer
 		ConfigLoader.add(propFile);
 		Configuration config = ConfigLoader.init();
 		
-		OfxRenderer renderer = new OfxRenderer(config);
-		renderer.chain();
+		OfxRenderer ofx = new OfxRenderer();
+		ofx.initCmpUtil(config.getString("ofx.xml.cmp"));
+		
+//		ofx.preProcessor(config);
+		ofx.renderTarget();
 	}
 }

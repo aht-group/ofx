@@ -16,6 +16,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
+import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
 public class OfxRenderConfiguration
 {
@@ -24,7 +25,6 @@ public class OfxRenderConfiguration
 	private Cmp cmp;
 	
 	private File fCmpParent;
-	private File fOfxRoot;
 
 	public OfxRenderConfiguration()
 	{
@@ -41,13 +41,10 @@ public class OfxRenderConfiguration
 		}
 		catch (FileNotFoundException e){throw new OfxConfigurationException("CMP configuration not found: "+fCmp.getAbsolutePath());}
 		logger.info("Using CMP configuration: "+fCmp.getAbsolutePath());
-		
 		fCmpParent = fCmp.getParentFile();
 		
-		if(!cmp.isSetSource() || !cmp.getSource().isSetRootXml()){throw new OfxConfigurationException("No source defined in: "+fCmp.getAbsolutePath());}
-		fOfxRoot = new File(fCmpParent,cmp.getSource().getRootXml());
-		if(!fOfxRoot.exists()){throw new OfxConfigurationException("rootXml does not exist: "+fOfxRoot.getAbsolutePath());}
-		logger.info("Using rootXML: "+fOfxRoot.getAbsolutePath());
+		if(!cmp.isSetSource()){throw new OfxConfigurationException("No <source/> defined in "+fCmp.getAbsolutePath());}
+		if(!cmp.getSource().isSetDirs()){throw new OfxConfigurationException("No <source><dirs/></source> defined in "+fCmp.getAbsolutePath());}
 		
 		return cmp;
 	}
@@ -65,13 +62,10 @@ public class OfxRenderConfiguration
 		catch (ExlpXpathNotFoundException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
 		catch (ExlpXpathNotUniqueException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
 		
-		//TODO Test this
-		logger.warn("Untested code!");
 		if(!f.exists())
 		{
 			if(dir.isSetAllowCreate() && dir.isAllowCreate())
 			{
-				
 				f.mkdirs();
 			}
 			else
@@ -102,5 +96,4 @@ public class OfxRenderConfiguration
 	
 	public Cmp getCmp() {return cmp;}
 	public File getfCmpParent() {return fCmpParent;}
-	public File getfOfxRoot() {return fOfxRoot;}
 }

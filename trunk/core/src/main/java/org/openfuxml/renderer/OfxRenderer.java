@@ -1,9 +1,15 @@
 package org.openfuxml.renderer;
 
-import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.OptionBuilder;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.PosixParser;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,27 +25,35 @@ import org.openfuxml.renderer.util.OfxRenderConfiguration;
 public class OfxRenderer
 {
 	static Log logger = LogFactory.getLog(OfxRenderer.class);
-		
+	public static final String exeName = "OfxRenderer";
+	
 	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
 	
-	private OfxRenderConfiguration cmpConfigUtil;
-	private Configuration config;
-	private Cmp cmp;
-
+	private Options options;
 	
-	public OfxRenderer(Configuration config)
+	private OfxRenderConfiguration cmpConfigUtil;
+	private Cmp cmp;
+	
+	public OfxRenderer()
 	{
-		this.config=config;
+		
 	}
 
-	public void chain() throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
+	public void initCmpUtil(String fileName) throws OfxConfigurationException
 	{
 		cmpConfigUtil = new OfxRenderConfiguration();
-		cmp = cmpConfigUtil.readCmp(config.getString("ofx.xml.cmp"));
-		
+		cmp = cmpConfigUtil.readCmp(fileName);
+	}
+	
+	public void preProcessor(Configuration config) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
+	{
+
 		OfxPreProcessor preProcessor = new OfxPreProcessor(cmpConfigUtil,config);
-		preProcessor.chain();
-		
+		preProcessor.chain();		
+	}
+	
+	public void renderTarget() throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
+	{	
 		if(cmp.isSetTargets())
 		{
 			OfxTargetRenderer targetRenderer = new OfxTargetRenderer(cmpConfigUtil);
@@ -47,14 +61,72 @@ public class OfxRenderer
 		}
 	}
 	
-	public static void main (String[] args) throws Exception
+	public void parseArguments(String args[]) throws ParseException, OfxConfigurationException
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();
+		options = createOptions();
+		CommandLineParser parser = new PosixParser();
+		CommandLine line = null;
+	    line = parser.parse(options , args); 
+	            
+        if(line.hasOption("help")) {printHelp();}
+        
+        if(line.hasOption("debug")) {initLogger("log4j.debug.xml");}
+        else{initLogger("log4j.xml");}
+        
+        if(!line.hasOption("cmp")) {printHelp();}
+        else{initCmpUtil(line.getOptionValue("cmp"));}
+        
+	}
+	
+	@SuppressWarnings("static-access")
+	private Options createOptions()
+	{
+		Option oHelp = new Option("help", "Print this message" );
+		Option oDebug = new Option("debug", "Debug output");
+		Option oPre = new Option("pre", "Do PreProcessing");
 		
-		MultiResourceLoader mrl = new MultiResourceLoader();
-		logger.debug(mrl.isAvailable("config/cmp/wiki/replacementsWiki.xml"));
+		Option oConfigWiki  = OptionBuilder.withArgName("FILENAME")
+						  .hasArg()
+						  .withDescription( "Use wiki configuration file FILENAME (optional)")
+						  .create("wiki");
+		
+		Option oConfigCmp  = OptionBuilder.withArgName("FILENAME")
+						  .hasArg()
+						  .withDescription( "Use cmp configuration file FILENAME (required)")
+						  .create("cmp"); 
+		
+		Options options = new Options();
+		options.addOption(oHelp);
+		options.addOption(oPre);
+		options.addOption(oDebug);
+		options.addOption(oConfigWiki);
+		options.addOption(oConfigCmp);
+		
+		return options;
+	}
+	
+	private void printHelp()
+	{
+		HelpFormatter formatter = new HelpFormatter();
+		formatter.printHelp( "java -jar "+exeName, options );
+		System.exit(0);
+	}
+	
+	private void initLogger(String logConfig)
+	{
+		LoggerInit loggerInit = new LoggerInit(logConfig);	
+		loggerInit.addAltPath("src/main/resources/config");
+		loggerInit.addAltPath("config");
+		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
+		loggerInit.init();
+	}
+	
+	public static void main (String[] args) throws Exception
+	{		
+		OfxRenderer ofxRenderer = new OfxRenderer();	
+		try {ofxRenderer.parseArguments(args);}
+		catch (ParseException e) {logger.error(e.getMessage());ofxRenderer.printHelp();}
+		catch (OfxConfigurationException e) {logger.error(e.getMessage());ofxRenderer.printHelp();}
 			
 	}
 }
