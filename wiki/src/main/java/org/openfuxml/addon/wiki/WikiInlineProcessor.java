@@ -15,7 +15,7 @@ import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.renderer.data.jaxb.Cmp;
+import org.openfuxml.xml.renderer.cmp.Cmp;
 
 public class WikiInlineProcessor
 {
