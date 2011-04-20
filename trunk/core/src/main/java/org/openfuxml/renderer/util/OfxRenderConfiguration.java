@@ -15,7 +15,7 @@ import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.exception.OfxConfigurationException;
-import org.openfuxml.renderer.data.jaxb.Cmp;
+import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
 public class OfxRenderConfiguration

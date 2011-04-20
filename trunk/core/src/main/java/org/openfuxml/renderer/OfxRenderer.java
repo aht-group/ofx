@@ -18,9 +18,9 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.exception.OfxRenderingException;
-import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.processor.pre.OfxPreProcessor;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
+import org.openfuxml.xml.renderer.cmp.Cmp;
 
 public class OfxRenderer
 {

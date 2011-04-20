@@ -35,10 +35,10 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.exception.OfxRenderingException;
-import org.openfuxml.renderer.data.jaxb.Cmp;
-import org.openfuxml.renderer.data.jaxb.Merge;
-import org.openfuxml.renderer.data.jaxb.Preprocessor;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
+import org.openfuxml.xml.renderer.cmp.Cmp;
+import org.openfuxml.xml.renderer.cmp.Merge;
+import org.openfuxml.xml.renderer.cmp.Preprocessor;
 import org.openfuxml.xml.util.OfxNsPrefixMapper;
 import org.openfuxml.xml.util.xpath.CmpJaxbXpathLoader;
 

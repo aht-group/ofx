@@ -15,7 +15,7 @@ import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.renderer.data.jaxb.Cmp;
+import org.openfuxml.xml.renderer.cmp.Cmp;
 
 public class TstMarkupProcessor
 {

@@ -6,14 +6,15 @@
 //
 
 
-package org.openfuxml.xml.renderer.html;
+package org.openfuxml.xml.renderer.cmp;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import net.sf.exlp.xml.io.Dirs;
 
 
 /**
@@ -26,8 +27,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element ref="{http://exlp.sf.net/io}dirs"/>
  *       &lt;/sequence>
- *       &lt;attribute name="className" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -36,42 +37,44 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-@XmlRootElement(name = "renderer")
-public class Renderer
+@XmlType(name = "", propOrder = {
+    "dirs"
+})
+@XmlRootElement(name = "source")
+public class Source
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlAttribute(name = "className")
-    protected String className;
+    @XmlElement(namespace = "http://exlp.sf.net/io", required = true)
+    protected Dirs dirs;
 
     /**
-     * Gets the value of the className property.
+     * Gets the value of the dirs property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Dirs }
      *     
      */
-    public String getClassName() {
-        return className;
+    public Dirs getDirs() {
+        return dirs;
     }
 
     /**
-     * Sets the value of the className property.
+     * Sets the value of the dirs property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Dirs }
      *     
      */
-    public void setClassName(String value) {
-        this.className = value;
+    public void setDirs(Dirs value) {
+        this.dirs = value;
     }
 
-    public boolean isSetClassName() {
-        return (this.className!= null);
+    public boolean isSetDirs() {
+        return (this.dirs!= null);
     }
 
 }

@@ -10,9 +10,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.data.jaxb.Pdf;
 import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.processor.latex.util.LatexDocument;
+import org.openfuxml.xml.renderer.cmp.Pdf;
 
 public class OfxLatexRenderer
 {
