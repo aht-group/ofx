@@ -40,7 +40,7 @@ import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.openfuxml.xml.renderer.cmp.Merge;
 import org.openfuxml.xml.renderer.cmp.Preprocessor;
-import org.openfuxml.xml.xpath.CmpJaxbXpathLoader;
+import org.openfuxml.xml.xpath.cmp.CmpJaxbXpathLoader;
 
 public class OfxPreProcessor
 {
