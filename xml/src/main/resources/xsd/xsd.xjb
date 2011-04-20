@@ -46,6 +46,12 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
+    <jxb:bindings schemaLocation="renderer/html.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.xml.renderer.html"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
 	<jxb:bindings schemaLocation="addon/jsf-taglib.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.openfuxml.addon.jsf.data.jaxb"/>
