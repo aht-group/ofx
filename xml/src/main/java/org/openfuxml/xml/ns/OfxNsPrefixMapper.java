@@ -1,4 +1,4 @@
-package org.openfuxml.xml.util;
+package org.openfuxml.xml.ns;
 
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 

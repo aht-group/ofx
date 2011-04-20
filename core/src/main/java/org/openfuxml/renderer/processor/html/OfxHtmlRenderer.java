@@ -1,50 +1,56 @@
 package org.openfuxml.renderer.processor.html;
 
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 
+import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jdom.Document;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
-import org.openfuxml.renderer.processor.latex.util.LatexDocument;
-import org.openfuxml.xml.renderer.cmp.Pdf;
+import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.renderer.util.OfxRenderConfiguration;
+import org.openfuxml.xml.renderer.cmp.Html;
+import org.openfuxml.xml.renderer.html.Template;
 
 public class OfxHtmlRenderer
 {
 	static Log logger = LogFactory.getLog(OfxHtmlRenderer.class);
 	
-	private LatexPreamble latexPreamble;
-	private LatexDocument latexDocument;
-	private List<String> txt;
+	public static enum HtmlDir {template};
 	
-	public OfxHtmlRenderer(Pdf pdf)
+	private Html html;
+	private OfxRenderConfiguration cmpConfigUtil;
+	
+	public OfxHtmlRenderer(OfxRenderConfiguration cmpConfigUtil, Html html)
 	{
-		latexPreamble = new LatexPreamble();
-		latexDocument = new LatexDocument(pdf,latexPreamble);
-		
-		txt = new ArrayList<String>();
+		this.html=html;
+		this.cmpConfigUtil=cmpConfigUtil;
 	}
 	
-	public void render(String ofxDocFileName) throws OfxAuthoringException
+	public void render(String ofxDocFileName) throws OfxAuthoringException, OfxConfigurationException
 	{
 		try
 		{
 			logger.debug("Processing: "+ofxDocFileName);
 			Ofxdoc ofxdoc = (Ofxdoc)JaxbUtil.loadJAXB(ofxDocFileName, Ofxdoc.class);
 			
-			latexDocument.render(ofxdoc.getContent());
-			latexPreamble.render();
+			for(Template template : html.getTemplate())
+			{
+				File fTemplate = cmpConfigUtil.getFile(html.getDirs(), HtmlDir.template.toString(), template.getFileCode());
+				processTemplate(template, fTemplate);
+			}
 			
-			txt.addAll(latexPreamble.getContent());
-			txt.addAll(latexDocument.getContent());
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
 	}
 	
-	public List<String> getContent(){return txt;}
+	private void processTemplate(Template template, File fTemplate)
+	{
+		Document doc = JDomUtil.load(fTemplate);
+		JDomUtil.debug(doc);
+	}
 }

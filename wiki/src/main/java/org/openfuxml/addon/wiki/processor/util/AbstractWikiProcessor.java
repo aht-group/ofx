@@ -13,7 +13,7 @@ import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor.WikiDir;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.xml.util.OfxNsPrefixMapper;
+import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public abstract class AbstractWikiProcessor
 {

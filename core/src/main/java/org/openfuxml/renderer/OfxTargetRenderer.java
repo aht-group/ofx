@@ -8,11 +8,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.renderer.processor.html.OfxHtmlRenderer;
 import org.openfuxml.renderer.processor.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.processor.pre.OfxPreProcessor.DirCode;
 import org.openfuxml.renderer.processor.pre.OfxPreProcessor.FileCode;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.xml.renderer.cmp.Cmp;
+import org.openfuxml.xml.renderer.cmp.Html;
 import org.openfuxml.xml.renderer.cmp.Pdf;
 
 public class OfxTargetRenderer
@@ -35,7 +37,8 @@ public class OfxTargetRenderer
 	
 	public void renderTargets() throws OfxAuthoringException
 	{
-		if(cmp.getTargets().isSetPdf())
+		boolean dev = false;
+		if(cmp.getTargets().isSetPdf() && dev)
 		{
 			int i=0;
 			for(Pdf pdf : cmp.getTargets().getPdf())
@@ -49,6 +52,26 @@ public class OfxTargetRenderer
 				i++;
 			}	
 		}
+		if(cmp.getTargets().isSetHtml())
+		{
+			int i=0;
+			for(Html html : cmp.getTargets().getHtml())
+			{
+				try
+				{
+					if(!html.isSetCode()){html.setCode(""+i);}
+					renderHtml(html, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString()));
+				}
+				catch (OfxConfigurationException e){logger.error(e);}
+				i++;
+			}	
+		}
+	}
+	
+	public void renderHtml(Html html, File fSrc) throws OfxAuthoringException, OfxConfigurationException
+	{
+		OfxHtmlRenderer htmlRenderer = new OfxHtmlRenderer(cmpConfigUtil,html);
+		htmlRenderer.render(fSrc.getAbsolutePath());
 	}
 	
 	private void phaseLatex(Pdf pdf, File fSrc) throws OfxAuthoringException, OfxConfigurationException

@@ -16,7 +16,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.xml.renderer.cmp.Cmp;
-import org.openfuxml.xml.util.OfxNsPrefixMapper;
 
 public class OfxRenderConfiguration
 {
@@ -88,6 +87,8 @@ public class OfxRenderConfiguration
 			
 			File dir = getDir(dirs, dirCode);
 			f = new File(FilenameUtils.normalize(dir.getAbsolutePath()+SystemUtils.FILE_SEPARATOR+file.getName()));
+			
+			if(!f.exists()){throw new OfxConfigurationException("File (code="+fileCode+"does not exist: "+f.getAbsolutePath());}
 		}
 		catch (ExlpXpathNotFoundException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
 		catch (ExlpXpathNotUniqueException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
