@@ -46,7 +46,8 @@ public class OfxPreProcessor
 {
 	static Log logger = LogFactory.getLog(OfxPreProcessor.class);
 		
-	public static enum Dir {working};
+	public static enum DirCode {working,content};
+	public static enum FileCode {root,target};
 	
 	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
 	
@@ -73,9 +74,9 @@ public class OfxPreProcessor
 	{
 		xmlPreProcessor = cmpConfigUtil.getCmp().getPreprocessor();
 		cmp = cmpConfigUtil.getCmp();
-		File fOfxRoot = cmpConfigUtil.getfOfxRoot();
+		File fOfxRoot = cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.root.toString());
 		
-		File dWorking = cmpConfigUtil.getDir(xmlPreProcessor.getDirs(), Dir.working.toString());
+		File dWorking = cmpConfigUtil.getDir(xmlPreProcessor.getDirs(), DirCode.working.toString());
 		logger.debug("Working Dir: "+dWorking.getAbsolutePath());
 		
 		chain(dWorking, fOfxRoot);
@@ -100,9 +101,9 @@ public class OfxPreProcessor
 		phaseWikiProcessing(dWorking,wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir, dirWikiTemplate);
 		phaseMerge(dWorking, Phase.wikiMerge);
 		phaseContainerMerge(dWorking, Phase.wikiMerge, Phase.containerMerge);
-		phaseExternalMerge(dWorking, Phase.containerMerge, Phase.externalMerge);
+		phaseExternalMerge(dWorking, Phase.containerMerge, new File(dWorking,getPhaseXmlFileName(Phase.externalMerge)));
 		phaseTemplate(dWorking, dirWikiTemplate, dirOfxTemplate, Phase.externalMerge, Phase.phaseTemplate);
-		phaseExternalMerge(dWorking, Phase.phaseTemplate, Phase.mergeTemplate);
+		phaseExternalMerge(dWorking, Phase.phaseTemplate, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString()));
 	}
 	
 	private void phaseMergeInitial(File dWorking, File fOfxRoot) throws OfxInternalProcessingException
@@ -165,7 +166,7 @@ public class OfxPreProcessor
 		}
 	}
 	
-	private void phaseExternalMerge(File dWorking, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException
+	private void phaseExternalMerge(File dWorking, Phase phaseLoad, File dstFile) throws OfxInternalProcessingException
 	{
 		File f = new File(dWorking,getPhaseXmlFileName(phaseLoad));
 		
@@ -177,7 +178,7 @@ public class OfxPreProcessor
 			Document doc = exMerger.mergeToDoc();
 			ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
 			
-			JaxbUtil.save(new File(dWorking,getPhaseXmlFileName(phaseSave)), ofxDoc, nsPrefixMapper, true);
+			JaxbUtil.save(dstFile, ofxDoc, nsPrefixMapper, true);
 		}
 		catch (FileNotFoundException e)
 		{

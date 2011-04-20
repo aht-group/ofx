@@ -17,7 +17,9 @@
     </xsd:element>
     <xsd:element name="source">
         <xsd:complexType>
-            <xsd:attribute name="rootXml" type="xsd:string"/>
+            <xsd:sequence>
+                <xsd:element ref="io:dirs" maxOccurs="1"/>
+            </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="targets">

@@ -11,6 +11,8 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.data.jaxb.Cmp;
 import org.openfuxml.renderer.data.jaxb.Pdf;
 import org.openfuxml.renderer.processor.latex.OfxLatexRenderer;
+import org.openfuxml.renderer.processor.pre.OfxPreProcessor.DirCode;
+import org.openfuxml.renderer.processor.pre.OfxPreProcessor.FileCode;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
 
 public class OfxTargetRenderer
@@ -41,23 +43,18 @@ public class OfxTargetRenderer
 				try
 				{
 					if(!pdf.isSetCode()){pdf.setCode(""+i);}
-					phaseLatex(pdf, Phase.mergeTemplate);
+					phaseLatex(pdf, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString()));
 				}
-				catch (OfxConfigurationException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				catch (OfxConfigurationException e){logger.error(e);}
 				i++;
 			}	
 		}
 	}
 	
-	private void phaseLatex(Pdf pdf,Phase phaseLoad) throws OfxAuthoringException, OfxConfigurationException
+	private void phaseLatex(Pdf pdf, File fSrc) throws OfxAuthoringException, OfxConfigurationException
 	{
-		
 		OfxLatexRenderer renderer = new OfxLatexRenderer(cmp.getTargets().getPdf().get(0));
-//		renderer.render(new File(tmpDir,getPhaseXmlFileName(phaseLoad)).getAbsolutePath());
+  		renderer.render(fSrc.getAbsolutePath());
 		
 		File dstFile = cmpConfigUtil.getFile(pdf.getDirs(), PdfDir.latex.toString(), PdfFile.latex.toString());
 		
