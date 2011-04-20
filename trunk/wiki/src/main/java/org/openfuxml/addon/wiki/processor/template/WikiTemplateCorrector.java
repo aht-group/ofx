@@ -20,7 +20,7 @@ import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.xml.util.OfxNsPrefixMapper;
+import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public class WikiTemplateCorrector extends AbstractWikiProcessor implements WikiProcessor
 {

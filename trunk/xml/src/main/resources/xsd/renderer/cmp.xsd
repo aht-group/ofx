@@ -80,6 +80,8 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="io:dirs" maxOccurs="1"/>
+                <xsd:element ref="html:renderer" maxOccurs="unbounded"/>
+                <xsd:element ref="html:template" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
         </xsd:complexType>

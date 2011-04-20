@@ -21,7 +21,7 @@ import org.openfuxml.addon.chart.data.jaxb.Container;
 import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.TimePeriodFactory;
-import org.openfuxml.xml.util.OfxNsPrefixMapper;
+import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public class TstTimeSeriesGapFiller
 {

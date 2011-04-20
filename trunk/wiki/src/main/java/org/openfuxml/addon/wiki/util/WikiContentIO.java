@@ -25,7 +25,7 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
-import org.openfuxml.xml.util.OfxNsPrefixMapper;
+import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public class WikiContentIO
 {

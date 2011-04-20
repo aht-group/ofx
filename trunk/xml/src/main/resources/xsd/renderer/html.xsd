@@ -12,5 +12,13 @@
             <xsd:attribute name="className" type="xsd:string"/>  
         </xsd:complexType>
     </xsd:element>
- 
+    <xsd:element name="template">
+        <xsd:complexType>
+            <xsd:sequence>
+                
+            </xsd:sequence>
+            <xsd:attribute name="code" type="xsd:string"/>
+            <xsd:attribute name="fileCode" type="xsd:string"/> 
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>

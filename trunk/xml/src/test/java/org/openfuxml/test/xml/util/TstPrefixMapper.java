@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.chart.data.jaxb.Chart;
 import org.openfuxml.content.ofx.Metadata;
 import org.openfuxml.content.ofx.Ofxdoc;
-import org.openfuxml.xml.util.OfxNsPrefixMapper;
+import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public class TstPrefixMapper
 {

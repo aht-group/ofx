@@ -36,11 +36,11 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.exception.OfxRenderingException;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
+import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.openfuxml.xml.renderer.cmp.Merge;
 import org.openfuxml.xml.renderer.cmp.Preprocessor;
-import org.openfuxml.xml.util.OfxNsPrefixMapper;
-import org.openfuxml.xml.util.xpath.CmpJaxbXpathLoader;
+import org.openfuxml.xml.xpath.CmpJaxbXpathLoader;
 
 public class OfxPreProcessor
 {
