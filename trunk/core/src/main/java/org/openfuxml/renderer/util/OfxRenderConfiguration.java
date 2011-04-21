@@ -16,6 +16,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.xml.renderer.cmp.Cmp;
+import org.openfuxml.xml.renderer.cmp.Html;
+import org.openfuxml.xml.renderer.html.Renderer;
+import org.openfuxml.xml.xpath.cmp.HtmlXpath;
 
 public class OfxRenderConfiguration
 {
@@ -93,6 +96,20 @@ public class OfxRenderConfiguration
 		catch (ExlpXpathNotFoundException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
 		catch (ExlpXpathNotUniqueException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
 		return f;
+	}
+	
+	public Renderer getHtmlRenderer(Html html, Renderer renderer) throws OfxConfigurationException
+	{
+		if(renderer.isSetCode())
+		{
+			try
+			{
+				renderer = HtmlXpath.getRenderer(html, renderer.getCode());
+			}
+			catch (ExlpXpathNotFoundException e){throw new OfxConfigurationException("No Renderer configured for code="+renderer.getCode()+" ("+e.getMessage()+")");}
+			catch (ExlpXpathNotUniqueException e){throw new OfxConfigurationException("More than one Renderer configured for code="+renderer.getCode()+" ("+e.getMessage()+")");}
+		}
+		return renderer;
 	}
 	
 	public Cmp getCmp() {return cmp;}

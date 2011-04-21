@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.exception.OfxImplementationException;
 import org.openfuxml.renderer.processor.html.OfxHtmlRenderer;
 import org.openfuxml.renderer.processor.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.processor.pre.OfxPreProcessor.DirCode;
@@ -35,7 +36,7 @@ public class OfxTargetRenderer
 		cmp = cmpConfigUtil.getCmp();
 	}
 	
-	public void renderTargets() throws OfxAuthoringException
+	public void renderTargets() throws OfxAuthoringException, OfxImplementationException
 	{
 		boolean dev = false;
 		if(cmp.getTargets().isSetPdf() && dev)
@@ -68,7 +69,7 @@ public class OfxTargetRenderer
 		}
 	}
 	
-	public void renderHtml(Html html, File fSrc) throws OfxAuthoringException, OfxConfigurationException
+	public void renderHtml(Html html, File fSrc) throws OfxAuthoringException, OfxConfigurationException, OfxImplementationException
 	{
 		OfxHtmlRenderer htmlRenderer = new OfxHtmlRenderer(cmpConfigUtil,html);
 		htmlRenderer.render(fSrc.getAbsolutePath());
