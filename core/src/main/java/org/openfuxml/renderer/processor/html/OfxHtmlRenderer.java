@@ -2,6 +2,7 @@ package org.openfuxml.renderer.processor.html;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import net.sf.exlp.util.xml.JDomUtil;
@@ -17,6 +18,8 @@ import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.exception.OfxImplementationException;
+import org.openfuxml.renderer.processor.html.navigation.OfxNavigationRenderer;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.xml.renderer.cmp.Html;
 import org.openfuxml.xml.renderer.html.Renderer;
@@ -37,7 +40,7 @@ public class OfxHtmlRenderer
 		this.cmpConfigUtil=cmpConfigUtil;
 	}
 	
-	public void render(String ofxDocFileName) throws OfxAuthoringException, OfxConfigurationException
+	public void render(String ofxDocFileName) throws OfxAuthoringException, OfxConfigurationException, OfxImplementationException
 	{
 		try
 		{
@@ -46,33 +49,47 @@ public class OfxHtmlRenderer
 			
 			for(Template template : html.getTemplate())
 			{
-				File fTemplate = cmpConfigUtil.getFile(html.getDirs(), HtmlDir.template.toString(), template.getFileCode());
 				for(Object o : ofxdoc.getContent().getContent())
 				{
-					if(o instanceof Section){processTemplate((Section)o, ofxdoc, template, fTemplate);}
+					if(o instanceof Section){processTemplate((Section)o, ofxdoc, template);}
 				}
 			}
 		}
 		catch (FileNotFoundException e) {logger.error(e);}
 	}
 	
-	private void processTemplate(Section section, Ofxdoc ofxdoc, Template template, File fTemplate)
+	private void processTemplate(Section section, Ofxdoc ofxdoc, Template template) throws OfxConfigurationException, OfxImplementationException
 	{
+		File fTemplate = cmpConfigUtil.getFile(html.getDirs(), HtmlDir.template.toString(), template.getFileCode());
 		Document doc = JDomUtil.load(fTemplate);
 		try
 		{
 			XPath xpath = XPath.newInstance( "//ofx:renderer");
 			List<Object> list = xpath.selectNodes(doc);
-			logger.debug(list.size()+" Elements found");
+			logger.trace(list.size()+" Elements found");
 			for(Object o : list)
 			{
-				Element e = (Element)o;
-				Renderer r = (Renderer)JDomUtil.toJaxb(e, Renderer.class);
-				logger.debug(e.getAttribute("code"));
-				JaxbUtil.debug(r);
-				JaxbUtil.debug(section);
+				Element element = (Element)o;
+				Renderer r = (Renderer)JDomUtil.toJaxb(element, Renderer.class);
+				r =  cmpConfigUtil.getHtmlRenderer(html, r);
+				
+				
+				try
+				{
+					Class cl = Class.forName(r.getClassName());
+					OfxNavigationRenderer navRendere = (OfxNavigationRenderer)cl.getConstructor().newInstance();
+					logger.debug("Rendering with class: "+r.getClassName());
+				}
+				catch (ClassNotFoundException e) {throw new OfxConfigurationException("Renderer class not found: "+e.getMessage());}
+				catch (IllegalArgumentException e) {logger.error(e);}
+				catch (SecurityException e) {logger.error(e);}
+				catch (InstantiationException e) {logger.error(e);}
+				catch (IllegalAccessException e) {logger.error(e);}
+				catch (InvocationTargetException e) {logger.error(e);}
+				catch (NoSuchMethodException e) {throw new OfxImplementationException("Renderer implementation does not have a empty constructor: "+r.getClassName());}
 			}
 		}
 		catch (JDOMException e) {logger.error(e);}
+		
 	}
 }

@@ -16,6 +16,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.exception.OfxImplementationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.exception.OfxRenderingException;
 import org.openfuxml.renderer.processor.pre.OfxPreProcessor;
@@ -52,7 +53,7 @@ public class OfxRenderer
 		preProcessor.chain();		
 	}
 	
-	public void renderTarget() throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
+	public void renderTarget() throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException, OfxImplementationException
 	{	
 		if(cmp.isSetTargets())
 		{
