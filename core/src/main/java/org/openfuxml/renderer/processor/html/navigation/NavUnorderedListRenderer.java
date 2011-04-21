@@ -1,7 +1,5 @@
 package org.openfuxml.renderer.processor.html.navigation;
 
-import java.util.NoSuchElementException;
-
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 
 import org.apache.commons.logging.Log;
@@ -18,7 +16,7 @@ public class NavUnorderedListRenderer implements OfxNavigationRenderer
 	
 	public NavUnorderedListRenderer()
 	{
-		logger.debug("That's me!");
+
 	}
 	
 	public Element render(Ofxdoc ofxDoc, Section actualSection)

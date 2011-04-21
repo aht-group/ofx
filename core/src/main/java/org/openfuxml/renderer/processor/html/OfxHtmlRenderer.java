@@ -10,6 +10,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -19,6 +20,7 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxImplementationException;
+import org.openfuxml.renderer.processor.html.header.OfxHeaderRenderer;
 import org.openfuxml.renderer.processor.html.navigation.OfxNavigationRenderer;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.xml.renderer.cmp.Html;
@@ -66,7 +68,7 @@ public class OfxHtmlRenderer
 		{
 			XPath xpath = XPath.newInstance( "//ofx:renderer");
 			List<Object> list = xpath.selectNodes(doc);
-			logger.trace(list.size()+" Elements found");
+			logger.debug(list.size()+" Elements found");
 			for(Object o : list)
 			{
 				Element eRenderer = (Element)o;
@@ -77,14 +79,9 @@ public class OfxHtmlRenderer
 				try
 				{
 					Class cl = Class.forName(r.getClassName());
-					OfxNavigationRenderer navRenderer = (OfxNavigationRenderer)cl.getConstructor().newInstance();
-					logger.debug("Rendering with class: "+r.getClassName());
-					
-					Element renderedElement = navRenderer.render(ofxDoc, section);
-					int index = eRenderer.getParentElement().indexOf(eRenderer);
-					eRenderer.getParentElement().setContent(index, renderedElement);
-					eRenderer.detach();
-
+					Object oRendere = cl.getConstructor().newInstance();
+					if     (oRendere instanceof OfxNavigationRenderer) {renderNav(eRenderer,(OfxNavigationRenderer)oRendere,ofxDoc, section);}
+					else if(oRendere instanceof OfxHeaderRenderer) {renderHeader(eRenderer,(OfxHeaderRenderer)oRendere,ofxDoc, section);}
 				}
 				catch (ClassNotFoundException e) {throw new OfxConfigurationException("Renderer class not found: "+e.getMessage());}
 				catch (IllegalArgumentException e) {logger.error(e);}
@@ -97,5 +94,21 @@ public class OfxHtmlRenderer
 		}
 		catch (JDOMException e) {logger.error(e);}
 		JDomUtil.debug(doc);
+	}
+	
+	private void renderNav(Element eRenderer, OfxNavigationRenderer navRenderer, Ofxdoc ofxDoc, Section section)
+	{
+		Element renderedElement = navRenderer.render(ofxDoc, section);
+		int index = eRenderer.getParentElement().indexOf(eRenderer);
+		eRenderer.getParentElement().setContent(index, renderedElement);
+		eRenderer.detach();
+	}
+	
+	private void renderHeader(Element eRenderer, OfxHeaderRenderer headerRenderer, Ofxdoc ofxDoc, Section section)
+	{
+		Content content = headerRenderer.render(section);
+		int index = eRenderer.getParentElement().indexOf(eRenderer);
+		eRenderer.getParentElement().setContent(index, content);
+		eRenderer.detach();
 	}
 }
