@@ -38,7 +38,7 @@ public class OfxTargetRenderer
 	
 	public void renderTargets() throws OfxAuthoringException, OfxImplementationException
 	{
-		boolean dev = false;
+		boolean dev = true;
 		if(cmp.getTargets().isSetPdf() && dev)
 		{
 			int i=0;

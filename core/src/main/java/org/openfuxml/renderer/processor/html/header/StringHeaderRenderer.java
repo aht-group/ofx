@@ -6,6 +6,7 @@ import org.jdom.Content;
 import org.jdom.Text;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.renderer.processor.html.interfaces.OfxHeaderRenderer;
 import org.openfuxml.xml.xpath.content.SectionXpath;
 
 public class StringHeaderRenderer implements OfxHeaderRenderer

@@ -20,8 +20,9 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxImplementationException;
-import org.openfuxml.renderer.processor.html.header.OfxHeaderRenderer;
-import org.openfuxml.renderer.processor.html.navigation.OfxNavigationRenderer;
+import org.openfuxml.renderer.processor.html.interfaces.OfxHeaderRenderer;
+import org.openfuxml.renderer.processor.html.interfaces.OfxNavigationRenderer;
+import org.openfuxml.renderer.processor.html.interfaces.OfxSectionRenderer;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.xml.renderer.cmp.Html;
 import org.openfuxml.xml.renderer.html.Renderer;
@@ -82,6 +83,7 @@ public class OfxHtmlRenderer
 					Object oRendere = cl.getConstructor().newInstance();
 					if     (oRendere instanceof OfxNavigationRenderer) {renderNav(eRenderer,(OfxNavigationRenderer)oRendere,ofxDoc, section);}
 					else if(oRendere instanceof OfxHeaderRenderer) {renderHeader(eRenderer,(OfxHeaderRenderer)oRendere,ofxDoc, section);}
+					else if(oRendere instanceof OfxSectionRenderer) {renderSection(eRenderer,(OfxSectionRenderer)oRendere,ofxDoc, section);}
 				}
 				catch (ClassNotFoundException e) {throw new OfxConfigurationException("Renderer class not found: "+e.getMessage());}
 				catch (IllegalArgumentException e) {logger.error(e);}
@@ -109,6 +111,14 @@ public class OfxHtmlRenderer
 		Content content = headerRenderer.render(section);
 		int index = eRenderer.getParentElement().indexOf(eRenderer);
 		eRenderer.getParentElement().setContent(index, content);
+		eRenderer.detach();
+	}
+	
+	private void renderSection(Element eRenderer, OfxSectionRenderer sectionRenderer, Ofxdoc ofxDoc, Section section)
+	{
+		List<Content> contents = sectionRenderer.render(section);
+		int index = eRenderer.getParentElement().indexOf(eRenderer);
+		eRenderer.getParentElement().setContent(index, contents);
 		eRenderer.detach();
 	}
 }
