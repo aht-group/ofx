@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.html.navigation;
+package org.openfuxml.renderer.processor.html.interfaces;
 
 import org.jdom.Element;
 import org.openfuxml.content.ofx.Ofxdoc;
