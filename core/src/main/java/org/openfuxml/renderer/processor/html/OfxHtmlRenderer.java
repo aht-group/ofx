@@ -58,7 +58,7 @@ public class OfxHtmlRenderer
 		catch (FileNotFoundException e) {logger.error(e);}
 	}
 	
-	private void processTemplate(Section section, Ofxdoc ofxdoc, Template template) throws OfxConfigurationException, OfxImplementationException
+	private void processTemplate(Section section, Ofxdoc ofxDoc, Template template) throws OfxConfigurationException, OfxImplementationException
 	{
 		File fTemplate = cmpConfigUtil.getFile(html.getDirs(), HtmlDir.template.toString(), template.getFileCode());
 		Document doc = JDomUtil.load(fTemplate);
@@ -69,16 +69,22 @@ public class OfxHtmlRenderer
 			logger.trace(list.size()+" Elements found");
 			for(Object o : list)
 			{
-				Element element = (Element)o;
-				Renderer r = (Renderer)JDomUtil.toJaxb(element, Renderer.class);
+				Element eRenderer = (Element)o;
+				Renderer r = (Renderer)JDomUtil.toJaxb(eRenderer, Renderer.class);
 				r =  cmpConfigUtil.getHtmlRenderer(html, r);
 				
 				
 				try
 				{
 					Class cl = Class.forName(r.getClassName());
-					OfxNavigationRenderer navRendere = (OfxNavigationRenderer)cl.getConstructor().newInstance();
+					OfxNavigationRenderer navRenderer = (OfxNavigationRenderer)cl.getConstructor().newInstance();
 					logger.debug("Rendering with class: "+r.getClassName());
+					
+					Element renderedElement = navRenderer.render(ofxDoc, section);
+					int index = eRenderer.getParentElement().indexOf(eRenderer);
+					eRenderer.getParentElement().setContent(index, renderedElement);
+					eRenderer.detach();
+
 				}
 				catch (ClassNotFoundException e) {throw new OfxConfigurationException("Renderer class not found: "+e.getMessage());}
 				catch (IllegalArgumentException e) {logger.error(e);}
@@ -90,6 +96,6 @@ public class OfxHtmlRenderer
 			}
 		}
 		catch (JDOMException e) {logger.error(e);}
-		
+		JDomUtil.debug(doc);
 	}
 }
