@@ -42,6 +42,8 @@ public class WikiModelProcessor extends AbstractWikiProcessor implements WikiPro
 	{
 		String fNameMarkup = page.getFile()+"."+WikiProcessor.WikiFileExtension.txt;
 		String fNameModel = page.getFile()+"."+WikiProcessor.WikiFileExtension.xhtml;
+		logger.debug("ProcessingPage: "+srcDir+"/"+fNameMarkup+" -> "+dstDir+"/"+fNameModel);
+		
 		String txtMarkup = WikiContentIO.loadTxt(srcDir, fNameMarkup);
 		String result = process(txtMarkup);
 		WikiContentIO.writeTxt(dstDir, fNameModel, result);
