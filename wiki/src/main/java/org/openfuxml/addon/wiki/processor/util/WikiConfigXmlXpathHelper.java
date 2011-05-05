@@ -81,7 +81,7 @@ public class WikiConfigXmlXpathHelper
 				throw new OfxConfigurationException(e.getMessage());
 			}
 		}
-		JaxbUtil.debug(injections);
+		logger.debug(JaxbUtil.toString(injections));
 		return injections;
 	}
 	
@@ -95,6 +95,6 @@ public class WikiConfigXmlXpathHelper
 			
 		Injections injections = (Injections)JaxbUtil.loadJAXB(fnInjections, Injections.class);
 		
-		JaxbUtil.debug(injections);
+		logger.debug(JaxbUtil.toString(injections));
 	}
 }

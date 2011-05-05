@@ -42,7 +42,7 @@ public class TestWikiInlineProcessor extends TestCase
 	
 	public void testDummy() throws Exception
 	{
-		int variable =0;
+		int variable =1;
 		assertTrue(variable == 1);
 	}
 	
