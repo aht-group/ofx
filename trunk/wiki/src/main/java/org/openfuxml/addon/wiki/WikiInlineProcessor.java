@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
+import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
@@ -33,8 +34,9 @@ public class WikiInlineProcessor
 	{
 		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
 		XhtmlProcessor  xpXml = cmp.getPreprocessor().getWiki().getXhtmlProcessor();
+		Templates   templates = cmp.getPreprocessor().getWiki().getTemplates();
 		
-		wpMarkup = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
+		wpMarkup = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections(),templates);
 		wpModel = new WikiModelProcessor();
 		wpXhtmlR = new XhtmlReplaceProcessor(xpXml.getReplacements());
 		wpXhtmlF = new XhtmlFinalProcessor();

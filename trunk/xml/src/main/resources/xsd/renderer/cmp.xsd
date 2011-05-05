@@ -75,6 +75,7 @@
                 <xsd:element ref="wiki:templates" maxOccurs="1"/>
                 <xsd:element ref="wiki:servers" maxOccurs="1"/>
             </xsd:sequence>
+            <xsd:attribute name="fetchArticle" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="html">
