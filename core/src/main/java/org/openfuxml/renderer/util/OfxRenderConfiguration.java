@@ -81,7 +81,7 @@ public class OfxRenderConfiguration
 		return f;
 	}
 	
-	public File getFile(Dirs dirs, String dirCode, String fileCode) throws OfxConfigurationException
+	public File getFile(Dirs dirs, String dirCode, String fileCode, boolean createFile) throws OfxConfigurationException
 	{
 		File f = null;
 		try
@@ -91,7 +91,7 @@ public class OfxRenderConfiguration
 			File dir = getDir(dirs, dirCode);
 			f = new File(FilenameUtils.normalize(dir.getAbsolutePath()+SystemUtils.FILE_SEPARATOR+file.getName()));
 			
-			if(!f.exists()){throw new OfxConfigurationException("File (code="+fileCode+"does not exist: "+f.getAbsolutePath());}
+			if(!createFile && !f.exists()){throw new OfxConfigurationException("File (code="+fileCode+"does not exist: "+f.getAbsolutePath());}
 		}
 		catch (ExlpXpathNotFoundException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
 		catch (ExlpXpathNotUniqueException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}

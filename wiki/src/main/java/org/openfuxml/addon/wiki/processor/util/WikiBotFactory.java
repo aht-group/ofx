@@ -13,6 +13,8 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.openfuxml.addon.wiki.data.jaxb.Server;
+import org.openfuxml.addon.wiki.data.jaxb.Servers;
 
 public class WikiBotFactory
 {
@@ -27,6 +29,13 @@ public class WikiBotFactory
 	public WikiBotFactory()
 	{
 		setUrl("http://de.wikipedia.org/w/");
+	}
+	
+	public WikiBotFactory(Servers wikiServers)
+	{
+		Server wikiServer = wikiServers.getServer().get(0); 
+		try{url = new URL(wikiServer.getUrl());}
+		catch (MalformedURLException e) {}
 	}
 	
 	public void setUrl(String wikiURL)

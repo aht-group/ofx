@@ -205,12 +205,6 @@
             <xsd:attribute name="source" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="server">
-        <xsd:complexType>
-            <xsd:attribute name="id" type="xsd:string"/>
-            <xsd:attribute name="default" type="xsd:boolean"/>
-        </xsd:complexType>
-    </xsd:element>
     <xsd:element name="page">
         <xsd:complexType>
             <xsd:sequence>
@@ -245,6 +239,21 @@
                 <xsd:element ref="injections" maxOccurs="1"/>
                 <xsd:element ref="replacements" maxOccurs="1"/>
             </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="servers">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="server" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="server">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:attribute name="default" type="xsd:boolean"/>
+            <xsd:attribute name="name" type="xsd:string"/>
+            <xsd:attribute name="url" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>

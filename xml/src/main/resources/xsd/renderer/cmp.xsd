@@ -70,9 +70,10 @@
     <xsd:element name="wiki">
         <xsd:complexType>
             <xsd:sequence>
-                 <xsd:element ref="wiki:markupProcessor" maxOccurs="1"/>
-                 <xsd:element ref="wiki:xhtmlProcessor" maxOccurs="1"/>
-                 <xsd:element ref="wiki:templates" maxOccurs="1"/>
+                <xsd:element ref="wiki:markupProcessor" maxOccurs="1"/>
+                <xsd:element ref="wiki:xhtmlProcessor" maxOccurs="1"/>
+                <xsd:element ref="wiki:templates" maxOccurs="1"/>
+                <xsd:element ref="wiki:servers" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

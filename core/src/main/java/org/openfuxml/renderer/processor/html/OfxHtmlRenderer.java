@@ -63,7 +63,7 @@ public class OfxHtmlRenderer
 	
 	private void processTemplate(Section section, Ofxdoc ofxDoc, Template template) throws OfxConfigurationException, OfxImplementationException
 	{
-		File fTemplate = cmpConfigUtil.getFile(html.getDirs(), HtmlDir.template.toString(), template.getFileCode());
+		File fTemplate = cmpConfigUtil.getFile(html.getDirs(), HtmlDir.template.toString(), template.getFileCode(),false);
 		Document doc = JDomUtil.load(fTemplate);
 		try
 		{
