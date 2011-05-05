@@ -11,6 +11,7 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
+import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -32,8 +33,9 @@ public class TstMarkupProcessor
 			
 		Cmp cmp = (Cmp)JaxbUtil.loadJAXB(config.getString("ofx.xml.cmp"), Cmp.class);
 		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
+		Templates   templates = cmp.getPreprocessor().getWiki().getTemplates();
 		
-		WikiMarkupProcessor wmp = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
+		WikiMarkupProcessor wmp = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections(), templates);
 			
 		File f = new File("resources/data/wiki/1.txt");
 		String txt = WikiContentIO.loadTxt(f);

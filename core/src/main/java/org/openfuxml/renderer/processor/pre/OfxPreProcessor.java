@@ -18,6 +18,7 @@ import org.openfuxml.addon.wiki.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
+import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
@@ -40,6 +41,7 @@ import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.openfuxml.xml.renderer.cmp.Merge;
 import org.openfuxml.xml.renderer.cmp.Preprocessor;
+import org.openfuxml.xml.renderer.cmp.Wiki;
 import org.openfuxml.xml.xpath.cmp.CmpJaxbXpathLoader;
 
 public class OfxPreProcessor
@@ -96,7 +98,7 @@ public class OfxPreProcessor
 		
 		phaseMergeInitial(dWorking,fOfxRoot);
 		phaseWikiExternalIntegrator(dWorking,ofxXmlDir);
-		phaseWikiContentFetcher(dWorking,true,dirWikiPlain);
+		phaseWikiContentFetcher(dWorking,dirWikiPlain);
 		phaseWikiProcessing(dWorking,wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir, dirWikiTemplate);
 		phaseMerge(dWorking, Phase.wikiMerge);
 		phaseContainerMerge(dWorking, Phase.wikiMerge, Phase.containerMerge);
@@ -218,14 +220,20 @@ public class OfxPreProcessor
 		JaxbUtil.save(new File(dWorking,getPhaseXmlFileName(Phase.wikiIntegrate)), ofxDoc, true);
 	}
 	
-	private void phaseWikiContentFetcher(File dWorking, boolean netConnection, File dirWikiPlain) throws OfxRenderingException, OfxInternalProcessingException, OfxAuthoringException
+	private void phaseWikiContentFetcher(File dWorking, File dirWikiPlain) throws OfxRenderingException, OfxInternalProcessingException, OfxAuthoringException, OfxConfigurationException
 	{
+		Wiki wiki = cmp.getPreprocessor().getWiki();
+		if(!wiki.isSetFetchArticle())
+		{
+			throw new OfxConfigurationException("Attribute <wiki fetchArticle=true|false not set");
+		}
+		
 		File fContents = new File(dWorking,"contens.xml");
-		if(netConnection)
+		if(wiki.isFetchArticle())
 		{
 			if(wikiQueries.isSetContent())
 			{
-				WikiBotFactory wbf = new WikiBotFactory(cmp.getPreprocessor().getWiki().getServers());
+				WikiBotFactory wbf = new WikiBotFactory(wiki.getServers());
 				
 				//TODO Integrate AUTH in WBF
 				logger.warn("NYI AUTH");
@@ -263,10 +271,11 @@ public class OfxPreProcessor
 		
 		MarkupProcessor mpXml = xmlPreProcessor.getWiki().getMarkupProcessor();
 		XhtmlProcessor xpXml = xmlPreProcessor.getWiki().getXhtmlProcessor();
+		Templates templates = xmlPreProcessor.getWiki().getTemplates();
 		
 		List<WikiProcessor> lWikiProcessors = new ArrayList<WikiProcessor>();
 		
-		WikiProcessor wpMarkup = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections());
+		WikiProcessor wpMarkup = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections(), templates);
 		wpMarkup.setDirectories(dirWikiPlain, dirWikiMarkup);
 		wpMarkup.setDirectory(WikiProcessor.WikiDir.wikiTemplate, dirWikiTemplate);
 		lWikiProcessors.add(wpMarkup);
