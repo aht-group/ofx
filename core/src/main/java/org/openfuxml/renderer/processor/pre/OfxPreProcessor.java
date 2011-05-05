@@ -96,7 +96,11 @@ public class OfxPreProcessor
 		String xhtmlFinalDir = "xhtmlFinal";
 		String ofxXmlDir = "ofxXml";
 		
+		
 		phaseMergeInitial(dWorking,fOfxRoot);
+		
+		// These steps are documented in 
+		// https://sourceforge.net/apps/mediawiki/openfuxml/index.php?title=Wiki_Transformation_Guide
 		phaseWikiExternalIntegrator(dWorking,ofxXmlDir);
 		phaseWikiContentFetcher(dWorking,dirWikiPlain);
 		phaseWikiProcessing(dWorking,wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir, dirWikiTemplate);
