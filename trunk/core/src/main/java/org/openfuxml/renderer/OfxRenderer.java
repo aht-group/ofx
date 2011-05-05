@@ -48,7 +48,6 @@ public class OfxRenderer
 	
 	public void preProcessor(Configuration config) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
 	{
-
 		OfxPreProcessor preProcessor = new OfxPreProcessor(cmpConfigUtil,config);
 		preProcessor.chain();		
 	}
@@ -62,7 +61,7 @@ public class OfxRenderer
 		}
 	}
 	
-	public void parseArguments(String args[]) throws ParseException, OfxConfigurationException
+	public void parseArguments(String args[]) throws ParseException, OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException, OfxImplementationException
 	{
 		options = createOptions();
 		CommandLineParser parser = new PosixParser();
@@ -77,6 +76,7 @@ public class OfxRenderer
         if(!line.hasOption("cmp")) {printHelp();}
         else{initCmpUtil(line.getOptionValue("cmp"));}
         
+        renderTarget();
 	}
 	
 	@SuppressWarnings("static-access")
@@ -85,11 +85,6 @@ public class OfxRenderer
 		Option oHelp = new Option("help", "Print this message" );
 		Option oDebug = new Option("debug", "Debug output");
 		Option oPre = new Option("pre", "Do PreProcessing");
-		
-		Option oConfigWiki  = OptionBuilder.withArgName("FILENAME")
-						  .hasArg()
-						  .withDescription( "Use wiki configuration file FILENAME (optional)")
-						  .create("wiki");
 		
 		Option oConfigCmp  = OptionBuilder.withArgName("FILENAME")
 						  .hasArg()
@@ -100,7 +95,6 @@ public class OfxRenderer
 		options.addOption(oHelp);
 		options.addOption(oPre);
 		options.addOption(oDebug);
-		options.addOption(oConfigWiki);
 		options.addOption(oConfigCmp);
 		
 		return options;

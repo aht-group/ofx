@@ -28,7 +28,7 @@ public class TstOfxRenderer
 		OfxRenderer ofx = new OfxRenderer();
 		ofx.initCmpUtil(config.getString("ofx.xml.cmp"));
 		
-//		ofx.preProcessor(config);
+		ofx.preProcessor(config);
 		ofx.renderTarget();
 	}
 }

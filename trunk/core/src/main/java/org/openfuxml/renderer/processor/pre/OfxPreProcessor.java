@@ -54,7 +54,6 @@ public class OfxPreProcessor
 	private OfxRenderConfiguration cmpConfigUtil;
 	private Configuration config;
 	
-	//TODO Cmp should not be a class varialbe
 	private Cmp cmp;
 	private Preprocessor xmlPreProcessor;
 	
@@ -74,7 +73,7 @@ public class OfxPreProcessor
 	{
 		xmlPreProcessor = cmpConfigUtil.getCmp().getPreprocessor();
 		cmp = cmpConfigUtil.getCmp();
-		File fOfxRoot = cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.root.toString());
+		File fOfxRoot = cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.root.toString(),false);
 		
 		File dWorking = cmpConfigUtil.getDir(xmlPreProcessor.getDirs(), DirCode.working.toString());
 		logger.debug("Working Dir: "+dWorking.getAbsolutePath());
@@ -97,13 +96,13 @@ public class OfxPreProcessor
 		
 		phaseMergeInitial(dWorking,fOfxRoot);
 		phaseWikiExternalIntegrator(dWorking,ofxXmlDir);
-		phaseWikiContentFetcher(dWorking,false,dirWikiPlain);
+		phaseWikiContentFetcher(dWorking,true,dirWikiPlain);
 		phaseWikiProcessing(dWorking,wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir, dirWikiTemplate);
 		phaseMerge(dWorking, Phase.wikiMerge);
 		phaseContainerMerge(dWorking, Phase.wikiMerge, Phase.containerMerge);
 		phaseExternalMerge(dWorking, Phase.containerMerge, new File(dWorking,getPhaseXmlFileName(Phase.externalMerge)));
 		phaseTemplate(dWorking, dirWikiTemplate, dirOfxTemplate, Phase.externalMerge, Phase.phaseTemplate);
-		phaseExternalMerge(dWorking, Phase.phaseTemplate, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString()));
+		phaseExternalMerge(dWorking, Phase.phaseTemplate, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString(),false));
 	}
 	
 	private void phaseMergeInitial(File dWorking, File fOfxRoot) throws OfxInternalProcessingException
@@ -226,10 +225,12 @@ public class OfxPreProcessor
 		{
 			if(wikiQueries.isSetContent())
 			{
-				WikiBotFactory wbf = new WikiBotFactory();
-				wbf.setUrl(config.getString("wiki.url"));
-				wbf.setHttpDigestAuth(config.getString("wiki.http.user"), config.getString("wiki.http.password"));
-				wbf.setWikiAuth(config.getString("wiki.user"), config.getString("wiki.password"));
+				WikiBotFactory wbf = new WikiBotFactory(cmp.getPreprocessor().getWiki().getServers());
+				
+				//TODO Integrate AUTH in WBF
+				logger.warn("NYI AUTH");
+//				wbf.setHttpDigestAuth(config.getString("wiki.http.user"), config.getString("wiki.http.password"));
+//				wbf.setWikiAuth(config.getString("wiki.user"), config.getString("wiki.password"));
 				
 				WikiContentFetcher contentFetcher = new WikiContentFetcher(wbf);
 				contentFetcher.setDirectories(null,dirWikiPlain);

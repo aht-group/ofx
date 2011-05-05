@@ -47,9 +47,9 @@ public class OfxTargetRenderer
 				try
 				{
 					if(!pdf.isSetCode()){pdf.setCode(""+i);}
-					phaseLatex(pdf, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString()));
+					phaseLatex(pdf, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString(),false));
 				}
-				catch (OfxConfigurationException e){logger.error(e);}
+				catch (OfxConfigurationException e){logger.error(e);e.printStackTrace();}
 				i++;
 			}	
 		}
@@ -61,7 +61,7 @@ public class OfxTargetRenderer
 				try
 				{
 					if(!html.isSetCode()){html.setCode(""+i);}
-					renderHtml(html, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString()));
+					renderHtml(html, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString(),false));
 				}
 				catch (OfxConfigurationException e){logger.error(e);}
 				i++;
@@ -80,7 +80,7 @@ public class OfxTargetRenderer
 		OfxLatexRenderer renderer = new OfxLatexRenderer(cmp.getTargets().getPdf().get(0));
   		renderer.render(fSrc.getAbsolutePath());
 		
-		File dstFile = cmpConfigUtil.getFile(pdf.getDirs(), PdfDir.latex.toString(), PdfFile.latex.toString());
+		File dstFile = cmpConfigUtil.getFile(pdf.getDirs(), PdfDir.latex.toString(), PdfFile.latex.toString(),true);
 		
 		logger.debug("pdf."+pdf.getCode()+" dstFile="+dstFile.getAbsolutePath());
 		
