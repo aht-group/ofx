@@ -4,19 +4,20 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
 import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
@@ -25,12 +26,42 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 
+@RunWith(Parameterized.class)
 public class TestMarkupProcessor
 {
 	static Log logger = LogFactory.getLog(TestMarkupProcessor.class);
 	
 	private WikiMarkupProcessor wmp;
+	
+	private static final String srcDirName = "src/test/resources/data/wiki/plain";
+	private static final String dstDirName = "src/test/resources/data/wiki/markup";
+	
+	private File fTest;
+	private File fRef;
 
+	public TestMarkupProcessor(File fTest)
+	{
+		this.fTest = fTest;
+		String name = fTest.getName().substring(0, fTest.getName().length()-4);
+		fRef = new File(dstDirName,name+".txt");
+	}
+	
+	@Parameterized.Parameters
+	public static Collection<Object[]> initFileNames()
+	{
+		Collection<Object[]> c = new ArrayList<Object[]>();
+		File srcDir = new File(srcDirName);
+		for(File f : srcDir.listFiles())
+		{
+			if(f.getName().endsWith(".txt"))
+			{
+				Object[] o = new Object[] {f};
+				c.add(o);
+			}
+		}
+		return c;
+	}
+	
 	@BeforeClass
     public static void initLogger()
 	{
@@ -40,7 +71,7 @@ public class TestMarkupProcessor
     }
 	
 	@Before
-	public void initTest() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
+	public void initWmp() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{
 		Cmp cmp = (Cmp)JaxbUtil.loadJAXB("src/test/resources/config/cmp.xml", Cmp.class);
 		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
@@ -49,53 +80,49 @@ public class TestMarkupProcessor
 		wmp = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections(), templates);
 	}
 	
-    @Test
-    public void testFor()
-    {
-        assertEquals("0","0");
-    }
+	@After
+	public void closeWmp()
+	{
+		wmp = null;
+	}
     
     @Test
-    public void testFor2()
+    public void testPlainToMarkup() throws OfxInternalProcessingException
     {
-        assertEquals("0","0");
+    	logger.debug(fTest.getAbsoluteFile());
+    	wikiPlainToMarkup(false);
     }
 	
-	public void scanSrcDir(String srcName) throws OfxInternalProcessingException
+	private void wikiPlainToMarkup(boolean saveReference) throws OfxInternalProcessingException
 	{
-		File srcDir = new File(srcName);
-		logger.debug(srcDir.getAbsolutePath());
-		for(File f : srcDir.listFiles())
+		String plainTxt = WikiContentIO.loadTxt(fTest);
+		String markupTxt = wmp.process(plainTxt, "article ... req?");
+		if(saveReference)
 		{
-			if(f.getName().endsWith(".txt"))
-			{
-				wikiPlainToMarkup(f);
-			}
+			WikiContentIO.writeTxt(fRef, markupTxt);
 		}
-	}
-	
-	private void wikiPlainToMarkup(File srcFile) throws OfxInternalProcessingException
-	{
-		logger.debug(srcFile.getAbsolutePath());
-		String txt = WikiContentIO.loadTxt(srcFile);
-		String result = wmp.process(txt, "article ... req?");
-		
-		logger.debug(txt);
-		logger.debug(result);
+		else
+		{
+			String markupRefTxt = WikiContentIO.loadTxt(fRef);
+			assertEquals(markupRefTxt,markupTxt);
+		}	
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
     {
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();
+			loggerInit.init();	
 		
-//		ConfigLoader.add("resources/properties/user.properties");
-//		Configuration config = ConfigLoader.init();			
-		
-		TestMarkupProcessor test = new TestMarkupProcessor();
-		
-		test.initTest();
-		test.scanSrcDir("src/test/resources/data/wiki/plain");
+		for(Object[] o : TestMarkupProcessor.initFileNames())
+		{
+			File fTest = (File)o[0];
+			logger.debug(fTest);
+			
+			TestMarkupProcessor test = new TestMarkupProcessor(fTest);
+			test.initWmp();
+			test.wikiPlainToMarkup(true);
+			test.closeWmp();
+		}
     }
 }
