@@ -2,6 +2,7 @@ package org.openfuxml.renderer.processor.pre;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -10,6 +11,7 @@ import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
@@ -49,7 +51,7 @@ public class OfxPreProcessor
 	static Log logger = LogFactory.getLog(OfxPreProcessor.class);
 		
 	public static enum DirCode {working,content};
-	public static enum FileCode {root,idsGenerated,target};
+	public static enum FileCode {root,idsGenerated,target,ofxPreFinished};
 	
 	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
 	
@@ -96,6 +98,7 @@ public class OfxPreProcessor
 		String xhtmlFinalDir = "xhtmlFinal";
 		String ofxXmlDir = "ofxXml";
 		
+		File actualVersion;
 		
 		phaseMergeInitial(dWorking,fOfxRoot);
 		
@@ -109,22 +112,28 @@ public class OfxPreProcessor
 		phaseExternalMerge(dWorking, Phase.containerMerge, new File(dWorking,getPhaseXmlFileName(Phase.externalMerge)));
 		phaseTemplate(dWorking, dirWikiTemplate, dirOfxTemplate, Phase.externalMerge, Phase.phaseTemplate);
 		
-		phaseExternalMerge(dWorking, Phase.phaseTemplate, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString(),false));
-		
-		
-		idGenerator();
+		actualVersion = phaseExternalMerge(dWorking, Phase.phaseTemplate, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString(),false));
+		actualVersion = idGenerator(actualVersion);
+		finalCopy(actualVersion);
 	}
 	
-	private File idGenerator() throws OfxConfigurationException
+	private File idGenerator(File srcFile) throws OfxConfigurationException, OfxInternalProcessingException
 	{
-		
 		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), FileCode.idsGenerated.toString(),true);
-		logger.debug(dstFile);
-		System.exit(-1);
+		logger.info("ID Generator: "+dstFile);
+		
+		OfxIdGenerator idCreator = new OfxIdGenerator();
+		idCreator.createIds(srcFile, dstFile);
 		return dstFile;
 	}
 	
-	
+	private void finalCopy(File srcFile) throws OfxConfigurationException, OfxInternalProcessingException
+	{
+		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), FileCode.ofxPreFinished.toString(),true);
+		try{FileUtils.copyFile(srcFile, dstFile);}
+		catch (IOException e) {throw new OfxInternalProcessingException(e.getMessage());}
+		logger.info("PreProcessing Finished: "+dstFile);
+	}
 	
 	private void phaseMergeInitial(File dWorking, File fOfxRoot) throws OfxInternalProcessingException
 	{
@@ -186,7 +195,7 @@ public class OfxPreProcessor
 		}
 	}
 	
-	private void phaseExternalMerge(File dWorking, Phase phaseLoad, File dstFile) throws OfxInternalProcessingException
+	private File phaseExternalMerge(File dWorking, Phase phaseLoad, File dstFile) throws OfxInternalProcessingException
 	{
 		File f = new File(dWorking,getPhaseXmlFileName(phaseLoad));
 		
@@ -205,6 +214,7 @@ public class OfxPreProcessor
 			logger.warn("OfxPreprocessorException");//TODO new exception
 			e.printStackTrace();
 		}
+		return dstFile;
 	}
 	
 	private void phaseTemplate(File dWorking, File dirWikiTemplate, File dirOfxTemplate, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException, OfxConfigurationException
