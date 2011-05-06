@@ -55,7 +55,7 @@ public class WikiInlineProcessor
 		String xhtmlFinal = wpXhtmlF.process(xhtmlReplace);
 		if(debugOutput){logger.debug("xhtmlFinal: "+xhtmlFinal);}
 		Element xml = ofxP.process(xhtmlFinal);
-		JDomUtil.debug(xml);
+//		JDomUtil.debug(xml);
 		Section section = (Section)JDomUtil.toJaxb(xml, Section.class);
 		return section;		
 	}

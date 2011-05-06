@@ -39,7 +39,7 @@ public class NavUnorderedListRenderer implements OfxNavigationRenderer
 		try
 		{
 			Title title = SectionXpath.getTitle(section);
-			a.setAttribute("href", "xxx.html");
+			a.setAttribute("href", section.getId()+".html");
 			a.setText(title.getValue());
 		}
 		catch (ExlpXpathNotFoundException e)
