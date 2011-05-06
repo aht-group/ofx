@@ -38,8 +38,7 @@ public class OfxTargetRenderer
 	
 	public void renderTargets() throws OfxAuthoringException, OfxImplementationException
 	{
-		boolean dev = true;
-		if(cmp.getTargets().isSetPdf() && dev)
+		if(cmp.getTargets().isSetPdf())
 		{
 			int i=0;
 			for(Pdf pdf : cmp.getTargets().getPdf())
@@ -47,6 +46,7 @@ public class OfxTargetRenderer
 				try
 				{
 					if(!pdf.isSetCode()){pdf.setCode(""+i);}
+					logger.info("Rendering PDF ("+pdf.getCode()+")");
 					phaseLatex(pdf, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString(),false));
 				}
 				catch (OfxConfigurationException e){logger.error(e);e.printStackTrace();}
@@ -61,6 +61,7 @@ public class OfxTargetRenderer
 				try
 				{
 					if(!html.isSetCode()){html.setCode(""+i);}
+					logger.info("Rendering HTML ("+html.getCode()+")");
 					renderHtml(html, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString(),false));
 				}
 				catch (OfxConfigurationException e){logger.error(e);}

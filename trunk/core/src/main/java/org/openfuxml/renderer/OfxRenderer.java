@@ -54,8 +54,10 @@ public class OfxRenderer
 	
 	public void renderTarget() throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException, OfxImplementationException
 	{	
+		logger.debug("Rendering Targets: "+cmp.isSetTargets());
 		if(cmp.isSetTargets())
 		{
+			logger.info("Rendering Target");
 			OfxTargetRenderer targetRenderer = new OfxTargetRenderer(cmpConfigUtil);
 			targetRenderer.renderTargets();
 		}

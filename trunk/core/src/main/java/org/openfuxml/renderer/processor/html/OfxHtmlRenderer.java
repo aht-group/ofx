@@ -14,6 +14,7 @@ import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
+import org.jdom.output.Format;
 import org.jdom.xpath.XPath;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.content.ofx.Section;
@@ -32,7 +33,7 @@ public class OfxHtmlRenderer
 {
 	static Log logger = LogFactory.getLog(OfxHtmlRenderer.class);
 	
-	public static enum HtmlDir {template};
+	public static enum HtmlDir {template,web};
 	
 	private Html html;
 	private OfxRenderConfiguration cmpConfigUtil;
@@ -54,6 +55,8 @@ public class OfxHtmlRenderer
 			{
 				for(Object o : ofxdoc.getContent().getContent())
 				{
+					//TODO Flexible Template Processing
+					//All Templates are processed for all Sections
 					if(o instanceof Section){processTemplate((Section)o, ofxdoc, template);}
 				}
 			}
@@ -69,21 +72,20 @@ public class OfxHtmlRenderer
 		{
 			XPath xpath = XPath.newInstance( "//ofx:renderer");
 			List<Object> list = xpath.selectNodes(doc);
-			logger.debug(list.size()+" Elements found");
+			logger.debug(list.size()+" <ofx:renderer/> Elements found in template");
 			for(Object o : list)
 			{
 				Element eRenderer = (Element)o;
 				Renderer r = (Renderer)JDomUtil.toJaxb(eRenderer, Renderer.class);
 				r =  cmpConfigUtil.getHtmlRenderer(html, r);
 				
-				
 				try
 				{
 					Class cl = Class.forName(r.getClassName());
-					Object oRendere = cl.getConstructor().newInstance();
-					if     (oRendere instanceof OfxNavigationRenderer) {renderNav(eRenderer,(OfxNavigationRenderer)oRendere,ofxDoc, section);}
-					else if(oRendere instanceof OfxHeaderRenderer) {renderHeader(eRenderer,(OfxHeaderRenderer)oRendere,ofxDoc, section);}
-					else if(oRendere instanceof OfxSectionRenderer) {renderSection(eRenderer,(OfxSectionRenderer)oRendere,ofxDoc, section);}
+					Object oRenderer = cl.getConstructor().newInstance();
+					if     (oRenderer instanceof OfxNavigationRenderer) {renderNav(eRenderer,(OfxNavigationRenderer)oRenderer,ofxDoc, section);}
+					else if(oRenderer instanceof OfxHeaderRenderer) {renderHeader(eRenderer,(OfxHeaderRenderer)oRenderer,ofxDoc, section);}
+					else if(oRenderer instanceof OfxSectionRenderer) {renderSection(eRenderer,(OfxSectionRenderer)oRenderer,ofxDoc, section);}
 				}
 				catch (ClassNotFoundException e) {throw new OfxConfigurationException("Renderer class not found: "+e.getMessage());}
 				catch (IllegalArgumentException e) {logger.error(e);}
@@ -95,7 +97,10 @@ public class OfxHtmlRenderer
 			}
 		}
 		catch (JDOMException e) {logger.error(e);}
-		JDomUtil.debug(doc);
+		File fWeb = cmpConfigUtil.getDir(html.getDirs(), HtmlDir.web.toString());
+		File fHtml = new File(fWeb,section.getId()+".html");
+//		JDomUtil.debug(doc);
+		JDomUtil.save(doc, fHtml, Format.getRawFormat());
 	}
 	
 	private void renderNav(Element eRenderer, OfxNavigationRenderer navRenderer, Ofxdoc ofxDoc, Section section)
