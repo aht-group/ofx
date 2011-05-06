@@ -1,21 +1,3 @@
-== Phase : External Integrator ==
+== Section Header ==
 
-Wiki Elements are defined inside <wiki:content/> tags.
-
-
-This is transformed to an external ofx:section
-
-
-== phaseWikiContentFetcher ==
-
-== phaseWikiProcessing ==
-
-== phaseMerge ==
-
-== phaseContainerMerge ==
-
-== phaseExternalMerge ==
-
-== phaseTemplate ==
-
-== phaseExternalMerge ==
+Test body

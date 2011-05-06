@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,32 +16,29 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
-import org.openfuxml.addon.wiki.data.jaxb.Templates;
-import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
+import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.xml.renderer.cmp.Cmp;
 
 @RunWith(Parameterized.class)
-public class TestMarkupProcessor
+public class TestModelProcessor
 {
 	static Log logger = LogFactory.getLog(TestMarkupProcessor.class);
 	
-	private WikiMarkupProcessor wmp;
+	private WikiModelProcessor wmp;
 	
-	private static final String srcDirName = "src/test/resources/data/wiki/plain";
-	private static final String dstDirName = "src/test/resources/data/wiki/markup";
+	private static final String srcDirName = "src/test/resources/data/wiki/markup";
+	private static final String dstDirName = "src/test/resources/data/xhtml/model";
 	
 	private File fTest;
 	private File fRef;
 
-	public TestMarkupProcessor(File fTest)
+	public TestModelProcessor(File fTest)
 	{
 		this.fTest = fTest;
 		String name = fTest.getName().substring(0, fTest.getName().length()-4);
-		fRef = new File(dstDirName,name+".txt");
+		fRef = new File(dstDirName,name+".xhtml");
 	}
 	
 	@Parameterized.Parameters
@@ -71,12 +67,8 @@ public class TestMarkupProcessor
 	
 	@Before
 	public void initWmp() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
-	{
-		Cmp cmp = (Cmp)JaxbUtil.loadJAXB("src/test/resources/config/cmp.xml", Cmp.class);
-		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
-		Templates   templates = cmp.getPreprocessor().getWiki().getTemplates();
-		
-		wmp = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections(), templates);
+	{	
+		wmp = new WikiModelProcessor();
 	}
 	
 	@After
@@ -94,16 +86,16 @@ public class TestMarkupProcessor
 	
 	private void wikiPlainToMarkup(boolean saveReference) throws OfxInternalProcessingException
 	{
-		String plainTxt = WikiContentIO.loadTxt(fTest);
-		String markupTxt = wmp.process(plainTxt, "article ... req?");
+		String markupTxt = WikiContentIO.loadTxt(fTest);
+		String modelXhtml = wmp.process(markupTxt);
 		if(saveReference)
 		{
-			WikiContentIO.writeTxt(fRef, markupTxt);
+			WikiContentIO.writeTxt(fRef, modelXhtml);
 		}
 		else
 		{
-			String markupRefTxt = WikiContentIO.loadTxt(fRef);
-			Assert.assertEquals(markupRefTxt,markupTxt);
+			String xhtmlRef = WikiContentIO.loadTxt(fRef);
+			Assert.assertEquals(xhtmlRef,modelXhtml);
 		}	
 	}
 	
@@ -113,15 +105,32 @@ public class TestMarkupProcessor
 			loggerInit.addAltPath("src/test/resources/config");
 			loggerInit.init();	
 		
-		for(Object[] o : TestMarkupProcessor.initFileNames())
+		boolean genRefFiles = false;
+		int testFileId = 4;
+		
+		if(testFileId>0)
 		{
-			File fTest = (File)o[0];
-			logger.debug(fTest);
+			File fTest = new File(srcDirName,testFileId+".txt");
+			String markupTxt = WikiContentIO.loadTxt(fTest);
 			
-			TestMarkupProcessor test = new TestMarkupProcessor(fTest);
-			test.initWmp();
-			test.wikiPlainToMarkup(true);
-			test.closeWmp();
+			WikiModelProcessor wmp = new WikiModelProcessor();
+			System.out.println(wmp.process(markupTxt));
 		}
+		
+		if(genRefFiles)
+		{
+			for(Object[] o : TestMarkupProcessor.initFileNames())
+			{
+				File fTest = (File)o[0];
+				logger.debug(fTest);
+				
+				TestModelProcessor test = new TestModelProcessor(fTest);
+				test.initWmp();
+				test.wikiPlainToMarkup(true);
+				test.closeWmp();
+			}
+		}
+		
+		
     }
 }
