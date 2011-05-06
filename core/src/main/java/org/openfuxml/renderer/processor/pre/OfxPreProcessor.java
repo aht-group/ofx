@@ -49,7 +49,7 @@ public class OfxPreProcessor
 	static Log logger = LogFactory.getLog(OfxPreProcessor.class);
 		
 	public static enum DirCode {working,content};
-	public static enum FileCode {root,target};
+	public static enum FileCode {root,idsGenerated,target};
 	
 	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
 	
@@ -108,8 +108,23 @@ public class OfxPreProcessor
 		phaseContainerMerge(dWorking, Phase.wikiMerge, Phase.containerMerge);
 		phaseExternalMerge(dWorking, Phase.containerMerge, new File(dWorking,getPhaseXmlFileName(Phase.externalMerge)));
 		phaseTemplate(dWorking, dirWikiTemplate, dirOfxTemplate, Phase.externalMerge, Phase.phaseTemplate);
+		
 		phaseExternalMerge(dWorking, Phase.phaseTemplate, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString(),false));
+		
+		
+		idGenerator();
 	}
+	
+	private File idGenerator() throws OfxConfigurationException
+	{
+		
+		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), FileCode.idsGenerated.toString(),true);
+		logger.debug(dstFile);
+		System.exit(-1);
+		return dstFile;
+	}
+	
+	
 	
 	private void phaseMergeInitial(File dWorking, File fOfxRoot) throws OfxInternalProcessingException
 	{
