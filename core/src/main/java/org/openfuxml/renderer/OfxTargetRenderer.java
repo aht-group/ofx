@@ -36,20 +36,17 @@ public class OfxTargetRenderer
 		cmp = cmpConfigUtil.getCmp();
 	}
 	
-	public void renderTargets() throws OfxAuthoringException, OfxImplementationException
+	public void renderTargets() throws OfxAuthoringException, OfxImplementationException, OfxConfigurationException
 	{
+		File fPreProcessingFinished = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), FileCode.ofxPreFinished.toString(),false);
 		if(cmp.getTargets().isSetPdf())
 		{
 			int i=0;
 			for(Pdf pdf : cmp.getTargets().getPdf())
 			{
-				try
-				{
-					if(!pdf.isSetCode()){pdf.setCode(""+i);}
-					logger.info("Rendering PDF ("+pdf.getCode()+")");
-					phaseLatex(pdf, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString(),false));
-				}
-				catch (OfxConfigurationException e){logger.error(e);e.printStackTrace();}
+				if(!pdf.isSetCode()){pdf.setCode(""+i);}
+				logger.info("Rendering PDF ("+pdf.getCode()+")");
+				phaseLatex(pdf, fPreProcessingFinished);
 				i++;
 			}	
 		}
@@ -58,13 +55,9 @@ public class OfxTargetRenderer
 			int i=0;
 			for(Html html : cmp.getTargets().getHtml())
 			{
-				try
-				{
-					if(!html.isSetCode()){html.setCode(""+i);}
-					logger.info("Rendering HTML ("+html.getCode()+")");
-					renderHtml(html, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString(),false));
-				}
-				catch (OfxConfigurationException e){logger.error(e);}
+				if(!html.isSetCode()){html.setCode(""+i);}
+				logger.info("Rendering HTML ("+html.getCode()+")");
+				renderHtml(html, fPreProcessingFinished);
 				i++;
 			}	
 		}
