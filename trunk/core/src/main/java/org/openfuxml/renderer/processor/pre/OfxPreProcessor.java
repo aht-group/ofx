@@ -5,17 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
-import org.jdom.output.Format;
 import org.openfuxml.addon.wiki.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
@@ -41,22 +38,19 @@ import org.openfuxml.exception.OfxRenderingException;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 import org.openfuxml.xml.renderer.cmp.Cmp;
-import org.openfuxml.xml.renderer.cmp.Merge;
 import org.openfuxml.xml.renderer.cmp.Preprocessor;
 import org.openfuxml.xml.renderer.cmp.Wiki;
-import org.openfuxml.xml.xpath.cmp.CmpJaxbXpathLoader;
 
 public class OfxPreProcessor
 {
 	static Log logger = LogFactory.getLog(OfxPreProcessor.class);
 		
 	public static enum DirCode {working,content};
-	public static enum FileCode {root,lastMerge,idsGenerated,ofxPreFinished};
+	public static enum FileCode {root,external1,wikiIntegrate,external2,container1,template,external3,container2,idsGenerated,ofxPreFinished};
 	
 	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
 	
 	private OfxRenderConfiguration cmpConfigUtil;
-	private Configuration config;
 	
 	private Cmp cmp;
 	private Preprocessor xmlPreProcessor;
@@ -66,10 +60,9 @@ public class OfxPreProcessor
 	private Contents wikiQueries;
 
 	
-	public OfxPreProcessor(OfxRenderConfiguration cmpConfigUtil, Configuration config)
+	public OfxPreProcessor(OfxRenderConfiguration cmpConfigUtil)
 	{
 		this.cmpConfigUtil=cmpConfigUtil;
-		this.config=config;
 		nsPrefixMapper = new OfxNsPrefixMapper();
 	}
 
@@ -85,7 +78,7 @@ public class OfxPreProcessor
 		chain(dWorking, fOfxRoot);
 	}
 	
-	public void chain(File dWorking, File fOfxRoot) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
+	public void chain(File dWorking, File actualVersion) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
 	{
 		String wikiPlainDir = "wikiPlain";
 		File dirWikiPlain = createDir(dWorking,wikiPlainDir);
@@ -98,22 +91,20 @@ public class OfxPreProcessor
 		String xhtmlFinalDir = "xhtmlFinal";
 		String ofxXmlDir = "ofxXml";
 		
-		File actualVersion;
-		
-		phaseMergeInitial(dWorking,fOfxRoot);
+		actualVersion = phaseExternalMerge(actualVersion, FileCode.external1);
 		
 		// These steps are documented in 
 		// https://sourceforge.net/apps/mediawiki/openfuxml/index.php?title=Wiki_Transformation_Guide
-		phaseWikiExternalIntegrator(dWorking,ofxXmlDir);
+		actualVersion = phaseWikiExternalIntegrator(actualVersion,FileCode.wikiIntegrate,ofxXmlDir);
 		phaseWikiContentFetcher(dWorking,dirWikiPlain);
 		phaseWikiProcessing(dWorking,wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir, dirWikiTemplate);
 		
-		phaseMerge(dWorking, Phase.wikiMerge);
+		actualVersion = phaseExternalMerge(actualVersion, FileCode.external2);
+		actualVersion = phaseContainerMerge(actualVersion,FileCode.container1);
+		actualVersion = phaseTemplate(actualVersion, FileCode.template, dirWikiTemplate, dirOfxTemplate);
 		
-		actualVersion = phaseContainerMerge(dWorking, Phase.wikiMerge, Phase.containerMerge);
-		actualVersion = phaseExternalMerge(actualVersion, new File(dWorking,getPhaseXmlFileName(Phase.externalMerge)));
-		actualVersion = phaseTemplate(dWorking, dirWikiTemplate, dirOfxTemplate, Phase.externalMerge, Phase.phaseTemplate);
-		actualVersion = phaseExternalMerge(actualVersion, cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), FileCode.lastMerge.toString(),true));
+		actualVersion = phaseExternalMerge(actualVersion, FileCode.external3);
+		actualVersion = phaseContainerMerge(actualVersion,FileCode.container2);
 		actualVersion = idGenerator(actualVersion);
 		finalCopy(actualVersion);
 	}
@@ -136,36 +127,32 @@ public class OfxPreProcessor
 		logger.info("PreProcessing Finished: "+dstFile);
 	}
 	
-	private void phaseMergeInitial(File dWorking, File fOfxRoot) throws OfxInternalProcessingException
+	private File phaseExternalMerge(File srcFile, FileCode code) throws OfxInternalProcessingException, OfxConfigurationException
 	{
-		Document doc = JDomUtil.load(fOfxRoot);
+		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), code.toString(),true);
 		try
 		{
-			Merge merge = CmpJaxbXpathLoader.getMerge(xmlPreProcessor.getMerge(), Phase.iniMerge.toString());
+			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
 			
-			OfxExternalMerger exMerger = new OfxExternalMerger(fOfxRoot);
-			doc = exMerger.mergeToDoc();
+			OfxExternalMerger exMerger = new OfxExternalMerger();
+			ofxDoc = exMerger.mergeToOfxDoc(srcFile);
 			
-			if(merge.isSetWriteIntermediate() && merge.isWriteIntermediate())
-			{
-				File fIntermediate = new File(dWorking,getPhaseXmlFileName(Phase.iniMerge));
-				JDomUtil.save(doc, fIntermediate, Format.getPrettyFormat());
-			}
+			JaxbUtil.save(dstFile, ofxDoc, nsPrefixMapper, true);
 		}
-		catch (NoSuchElementException e) {logger.debug("No initial merge");}
-		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
-		JaxbUtil.save(new File(dWorking,getPhaseXmlFileName(Phase.wikiIntegrate)), ofxDoc, nsPrefixMapper, true);
-//		JaxbUtil.debug(ofxDoc, nsPrefixMapper);
+		catch (FileNotFoundException e)
+		{
+			logger.warn("OfxPreprocessorException");//TODO new exception
+			e.printStackTrace();
+		}
+		return dstFile;
 	}
 	
-	private File phaseContainerMerge(File dWorking, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException
-	{
-		File f = new File(dWorking,getPhaseXmlFileName(phaseLoad));
-		File dstFile = new File(dWorking,getPhaseXmlFileName(phaseSave));
-		
+	private File phaseContainerMerge(File srcFile, FileCode code) throws OfxInternalProcessingException, OfxConfigurationException
+	{		
+		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), code.toString(),true);
 		try
 		{
-			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(f.getAbsolutePath(), Ofxdoc.class);
+			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
 			
 			OfxContainerMerger containerMerger = new OfxContainerMerger();
 			ofxDoc = containerMerger.merge(ofxDoc);
@@ -180,45 +167,9 @@ public class OfxPreProcessor
 		return dstFile;
 	}
 	
-	private void phaseMerge(File dWorking, Phase phase) throws OfxInternalProcessingException
+	private File phaseTemplate(File srcFile, FileCode code, File dirWikiTemplate, File dirOfxTemplate) throws OfxInternalProcessingException, OfxConfigurationException
 	{
-		logger.warn("hardcoded filename!!!");
-		File f = new File(dWorking,"2-wikiIntegrate.xml");
-		Document doc = JDomUtil.load(f);
-		try
-		{			
-			OfxExternalMerger exMerger = new OfxExternalMerger(f);
-			doc = exMerger.mergeToDoc();
-		}
-		catch (NoSuchElementException e) {logger.debug("No initial merge");}
-		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
-		JaxbUtil.save(new File(dWorking,getPhaseXmlFileName(phase)), ofxDoc, nsPrefixMapper, true);
-	}
-	
-	private File phaseExternalMerge(File srcFile, File dstFile) throws OfxInternalProcessingException
-	{
-		try
-		{
-			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
-			
-			OfxExternalMerger exMerger = new OfxExternalMerger(srcFile);
-			Document doc = exMerger.mergeToDoc();
-			ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
-			
-			JaxbUtil.save(dstFile, ofxDoc, nsPrefixMapper, true);
-		}
-		catch (FileNotFoundException e)
-		{
-			logger.warn("OfxPreprocessorException");//TODO new exception
-			e.printStackTrace();
-		}
-		return dstFile;
-	}
-	
-	private File phaseTemplate(File dWorking, File dirWikiTemplate, File dirOfxTemplate, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException, OfxConfigurationException
-	{
-		File srcFile = new File(dWorking,getPhaseXmlFileName(phaseLoad));
-		File dstFile = new File(dWorking,getPhaseXmlFileName(phaseSave));
+		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), code.toString(),true);
 		
 		WikiInlineProcessor wikiInlineProcessor = new WikiInlineProcessor(cmp);
 		
@@ -239,14 +190,21 @@ public class OfxPreProcessor
 		return dstFile;
 	}
 	
-	private void phaseWikiExternalIntegrator(File dWorking,String wikiXmlDir) throws OfxAuthoringException
+	private File phaseWikiExternalIntegrator(File srcFile, FileCode code, String wikiXmlDir) throws OfxAuthoringException, OfxInternalProcessingException, OfxConfigurationException
 	{		
-		WikiExternalIntegrator wikiExIntegrator = new WikiExternalIntegrator(wikiXmlDir);
-		wikiExIntegrator.integrateWikiAsExternal(ofxDoc);
-		ofxDoc = wikiExIntegrator.getResult();
-		wikiQueries = wikiExIntegrator.getWikiQueries();
-		
-		JaxbUtil.save(new File(dWorking,getPhaseXmlFileName(Phase.wikiIntegrate)), ofxDoc, true);
+		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), code.toString(),true);
+		try
+		{
+			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
+			WikiExternalIntegrator wikiExIntegrator = new WikiExternalIntegrator(wikiXmlDir);
+			wikiExIntegrator.integrateWikiAsExternal(ofxDoc);
+			ofxDoc = wikiExIntegrator.getResult();
+			wikiQueries = wikiExIntegrator.getWikiQueries();
+			
+			JaxbUtil.save(dstFile, ofxDoc, true);
+		}
+		catch (FileNotFoundException e){throw new OfxInternalProcessingException(e.getMessage());}
+		return dstFile;
 	}
 	
 	private void phaseWikiContentFetcher(File dWorking, File dirWikiPlain) throws OfxRenderingException, OfxInternalProcessingException, OfxAuthoringException, OfxConfigurationException

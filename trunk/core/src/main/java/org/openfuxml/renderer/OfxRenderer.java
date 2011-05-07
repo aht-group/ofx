@@ -46,9 +46,9 @@ public class OfxRenderer
 		cmp = cmpConfigUtil.readCmp(fileName);
 	}
 	
-	public void preProcessor(Configuration config) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
+	public void preProcessor() throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
 	{
-		OfxPreProcessor preProcessor = new OfxPreProcessor(cmpConfigUtil,config);
+		OfxPreProcessor preProcessor = new OfxPreProcessor(cmpConfigUtil);
 		preProcessor.chain();		
 	}
 	
