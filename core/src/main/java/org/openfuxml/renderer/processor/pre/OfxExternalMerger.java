@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.logging.Log;
@@ -14,51 +14,61 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
+import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.exception.OfxInternalProcessingException;
 
 public class OfxExternalMerger
 {
 	static Log logger = LogFactory.getLog(OfxExternalMerger.class);
 	
+	private RelativePathFactory rpf;
 	private File rootFile;
 	private Document doc;
 	
 	private XPath xpath;
 	
-	public OfxExternalMerger(File rootFile) throws OfxInternalProcessingException
+	public OfxExternalMerger()
 	{
-		this.rootFile=rootFile;
-		doc = JDomUtil.load(rootFile);
-		if(doc==null){throw new OfxInternalProcessingException("FileNoteFound: "+rootFile.getAbsolutePath());}
+		rpf = new RelativePathFactory();
 		try
 		{
-			
 			xpath = XPath.newInstance("//*[@external='true']");
 			xpath.addNamespace(Namespace.getNamespace("ofx", "http://www.openfuxml.org"));
-			xpath.addNamespace(Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki"));
-			
-//			List<?> list = xpath.selectNodes(doc.getRootElement());
-//			logger.debug(list.size()+" hits");
-			
+			xpath.addNamespace(Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki"));		
 		}
 		catch (JDOMException e) {logger.error(e);}
 	}
 	
-	public Document mergeToDoc() throws OfxInternalProcessingException
+	private void loadRoot(File rootFile) throws OfxInternalProcessingException
 	{
+		this.rootFile=rootFile;
+		doc = JDomUtil.load(rootFile);
+		if(doc==null){throw new OfxInternalProcessingException("FileNoteFound: "+rootFile.getAbsolutePath());}
+		logger.trace("Loaded: "+rootFile.getAbsolutePath());
+	}
+	
+	public Ofxdoc mergeToOfxDoc(File rootFile) throws OfxInternalProcessingException
+	{
+		Document doc = mergeToDoc(rootFile);
+		Ofxdoc ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
+		return ofxDoc;
+	}
+	
+	public Document mergeToDoc(File rootFile) throws OfxInternalProcessingException
+	{
+		loadRoot(rootFile);
+		
 		Element rootElement = doc.getRootElement();
-
-//		rootElement.detach();
 		Element result = mergeRecursive(rootElement);
 		result.detach();
 		doc.setRootElement(result);
 		return doc;
 	}
 	
-	public Element getExternal() throws OfxInternalProcessingException
+	public Element getExternal(File rootFile) throws OfxInternalProcessingException
 	{
+		loadRoot(rootFile);
 		Element rootElement = doc.getRootElement();
-		rootElement.detach();
 		
 		return mergeRecursive(rootElement);
 	}
@@ -67,17 +77,18 @@ public class OfxExternalMerger
 	{
 		try
 		{
-//			logger.debug(xpath.getXPath());
 			List<?> list = xpath.selectNodes(rootElement);
-			logger.debug(list.size()+" external sources in "+rootElement.getName()+" "+rootFile.getAbsolutePath());
+			logger.debug(list.size()+" external sources in "+rootElement.getName()+" in "+rootFile.getAbsolutePath());
 			
 			for (Iterator<?> iter = list.iterator(); iter.hasNext();)
 			{
 				Element childElement = (Element) iter.next();
 				String source =childElement.getAttribute("source").getValue();
 				File childFile = new File(rootFile.getParentFile(),source);
-				OfxExternalMerger em = new OfxExternalMerger(childFile);
-				Element eEx = em.getExternal();
+				logger.trace("Found external in "+rpf.relativate(rootFile.getParentFile(), childFile));
+				OfxExternalMerger em = new OfxExternalMerger();
+				Element eEx = em.getExternal(childFile);
+				eEx.detach();
 				int index = childElement.getParentElement().indexOf(childElement);
 				childElement.getParentElement().setContent(index, eEx);
 				childElement.detach();
@@ -85,21 +96,5 @@ public class OfxExternalMerger
 		}
 		catch (JDOMException e) {logger.error(e);}
 		return rootElement;
-	}
-			
-	public static void main (String[] args) throws Exception
-	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("resources/config");
-			loggerInit.init();
-		logger.debug("Testing ExternalMerger");
-		
-		String fName = "resources/data/xml/preprocessor/exmerge/chapter-1.xml";
-		if(args.length == 1 ){fName = args[0];}
-		
-		File f = new File(fName);
-		OfxExternalMerger exMerger = new OfxExternalMerger(f);
-		Document doc = exMerger.mergeToDoc();
-		JDomUtil.debug(doc);
 	}
 }
