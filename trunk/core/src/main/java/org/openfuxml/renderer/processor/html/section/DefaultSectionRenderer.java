@@ -43,7 +43,8 @@ public class DefaultSectionRenderer implements OfxSectionRenderer
 		}
 
 		if(eHeader!=null){list.add(eHeader);}
-		list.add(divParagraph);
+		
+		if(divParagraph.getContentSize()>0){list.add(divParagraph);}
 		list.addAll(subsections);
 		
 		return list;

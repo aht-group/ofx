@@ -51,7 +51,7 @@ public class OfxPreProcessor
 	static Log logger = LogFactory.getLog(OfxPreProcessor.class);
 		
 	public static enum DirCode {working,content};
-	public static enum FileCode {root,idsGenerated,target,ofxPreFinished};
+	public static enum FileCode {root,lastMerge,idsGenerated,ofxPreFinished};
 	
 	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
 	
@@ -107,12 +107,13 @@ public class OfxPreProcessor
 		phaseWikiExternalIntegrator(dWorking,ofxXmlDir);
 		phaseWikiContentFetcher(dWorking,dirWikiPlain);
 		phaseWikiProcessing(dWorking,wikiPlainDir,wikiMarkupDir,wikiModelDir,xhtmlReplaceDir,xhtmlFinalDir,ofxXmlDir, dirWikiTemplate);
-		phaseMerge(dWorking, Phase.wikiMerge);
-		phaseContainerMerge(dWorking, Phase.wikiMerge, Phase.containerMerge);
-		phaseExternalMerge(dWorking, Phase.containerMerge, new File(dWorking,getPhaseXmlFileName(Phase.externalMerge)));
-		phaseTemplate(dWorking, dirWikiTemplate, dirOfxTemplate, Phase.externalMerge, Phase.phaseTemplate);
 		
-		actualVersion = phaseExternalMerge(dWorking, Phase.phaseTemplate, cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.target.toString(),false));
+		phaseMerge(dWorking, Phase.wikiMerge);
+		
+		actualVersion = phaseContainerMerge(dWorking, Phase.wikiMerge, Phase.containerMerge);
+		actualVersion = phaseExternalMerge(actualVersion, new File(dWorking,getPhaseXmlFileName(Phase.externalMerge)));
+		actualVersion = phaseTemplate(dWorking, dirWikiTemplate, dirOfxTemplate, Phase.externalMerge, Phase.phaseTemplate);
+		actualVersion = phaseExternalMerge(actualVersion, cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), FileCode.lastMerge.toString(),true));
 		actualVersion = idGenerator(actualVersion);
 		finalCopy(actualVersion);
 	}
@@ -157,27 +158,10 @@ public class OfxPreProcessor
 //		JaxbUtil.debug(ofxDoc, nsPrefixMapper);
 	}
 	
-	private void phaseMerge(File dWorking, Phase phase) throws OfxInternalProcessingException
-	{
-		logger.warn("hardcoded filename!!!");
-		File f = new File(dWorking,"2-wikiIntegrate.xml");
-		Document doc = JDomUtil.load(f);
-		try
-		{
-			Merge merge = CmpJaxbXpathLoader.getMerge(xmlPreProcessor.getMerge(), Phase.iniMerge.toString());
-			
-			OfxExternalMerger exMerger = new OfxExternalMerger(f);
-			doc = exMerger.mergeToDoc();
-			
-		}
-		catch (NoSuchElementException e) {logger.debug("No initial merge");}
-		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
-		JaxbUtil.save(new File(dWorking,getPhaseXmlFileName(phase)), ofxDoc, nsPrefixMapper, true);
-	}
-	
-	private void phaseContainerMerge(File dWorking, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException
+	private File phaseContainerMerge(File dWorking, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException
 	{
 		File f = new File(dWorking,getPhaseXmlFileName(phaseLoad));
+		File dstFile = new File(dWorking,getPhaseXmlFileName(phaseSave));
 		
 		try
 		{
@@ -186,24 +170,38 @@ public class OfxPreProcessor
 			OfxContainerMerger containerMerger = new OfxContainerMerger();
 			ofxDoc = containerMerger.merge(ofxDoc);
 			
-			JaxbUtil.save(new File(dWorking,getPhaseXmlFileName(phaseSave)), ofxDoc, nsPrefixMapper, true);
+			JaxbUtil.save(dstFile, ofxDoc, nsPrefixMapper, true);
 		}
 		catch (FileNotFoundException e)
 		{
 			logger.warn("OfxPreprocessorException");//TODO new exception
 			e.printStackTrace();
 		}
+		return dstFile;
 	}
 	
-	private File phaseExternalMerge(File dWorking, Phase phaseLoad, File dstFile) throws OfxInternalProcessingException
+	private void phaseMerge(File dWorking, Phase phase) throws OfxInternalProcessingException
 	{
-		File f = new File(dWorking,getPhaseXmlFileName(phaseLoad));
-		
+		logger.warn("hardcoded filename!!!");
+		File f = new File(dWorking,"2-wikiIntegrate.xml");
+		Document doc = JDomUtil.load(f);
+		try
+		{			
+			OfxExternalMerger exMerger = new OfxExternalMerger(f);
+			doc = exMerger.mergeToDoc();
+		}
+		catch (NoSuchElementException e) {logger.debug("No initial merge");}
+		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
+		JaxbUtil.save(new File(dWorking,getPhaseXmlFileName(phase)), ofxDoc, nsPrefixMapper, true);
+	}
+	
+	private File phaseExternalMerge(File srcFile, File dstFile) throws OfxInternalProcessingException
+	{
 		try
 		{
-			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(f.getAbsolutePath(), Ofxdoc.class);
+			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
 			
-			OfxExternalMerger exMerger = new OfxExternalMerger(f);
+			OfxExternalMerger exMerger = new OfxExternalMerger(srcFile);
 			Document doc = exMerger.mergeToDoc();
 			ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
 			
@@ -217,19 +215,20 @@ public class OfxPreProcessor
 		return dstFile;
 	}
 	
-	private void phaseTemplate(File dWorking, File dirWikiTemplate, File dirOfxTemplate, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException, OfxConfigurationException
+	private File phaseTemplate(File dWorking, File dirWikiTemplate, File dirOfxTemplate, Phase phaseLoad, Phase phaseSave) throws OfxInternalProcessingException, OfxConfigurationException
 	{
-		File f = new File(dWorking,getPhaseXmlFileName(phaseLoad));
+		File srcFile = new File(dWorking,getPhaseXmlFileName(phaseLoad));
+		File dstFile = new File(dWorking,getPhaseXmlFileName(phaseSave));
 		
 		WikiInlineProcessor wikiInlineProcessor = new WikiInlineProcessor(cmp);
 		
 		try
 		{
-			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(f.getAbsolutePath(), Ofxdoc.class);
+			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
 			WikiTemplateCorrector templateCorrector = new WikiTemplateCorrector();
 			templateCorrector.setDirectory(WikiProcessor.WikiDir.wikiTemplate, dirWikiTemplate);
 			ofxDoc = templateCorrector.correctTemplateInjections(ofxDoc);
-			JaxbUtil.save(new File(dWorking,getPhaseXmlFileName(phaseSave)), ofxDoc, nsPrefixMapper, true);
+			JaxbUtil.save(dstFile, ofxDoc, nsPrefixMapper, true);
 			
 			WikiTemplateProcessor wtp = new WikiTemplateProcessor(wikiInlineProcessor,xmlPreProcessor.getWiki().getTemplates());
 			wtp.setDirectory(WikiProcessor.WikiDir.wikiTemplate, dirWikiTemplate);
@@ -237,6 +236,7 @@ public class OfxPreProcessor
 			wtp.process();
 		}
 		catch (FileNotFoundException e){throw new OfxInternalProcessingException(e.getMessage());}
+		return dstFile;
 	}
 	
 	private void phaseWikiExternalIntegrator(File dWorking,String wikiXmlDir) throws OfxAuthoringException
