@@ -26,7 +26,7 @@ public class XhtmlReplaceProcessor extends AbstractWikiProcessor implements Wiki
 	public XhtmlReplaceProcessor(Replacements replacements) throws OfxConfigurationException
 	{
 		this.replacements = WikiConfigXmlXpathHelper.initReplacements(replacements);
-		JaxbUtil.debug(this.replacements);
+		logger.debug(JaxbUtil.toString(this.replacements));
 	}
 	
 	@Override

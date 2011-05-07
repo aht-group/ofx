@@ -72,7 +72,7 @@ public class TestMarkupProcessor
 	@Before
 	public void initWmp() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{
-		Cmp cmp = (Cmp)JaxbUtil.loadJAXB("src/test/resources/config/cmp.xml", Cmp.class);
+		Cmp cmp = (Cmp)JaxbUtil.loadJAXB("src/test/resources/config/cmp/wiki.xml", Cmp.class);
 		MarkupProcessor mpXml = cmp.getPreprocessor().getWiki().getMarkupProcessor();
 		Templates   templates = cmp.getPreprocessor().getWiki().getTemplates();
 		

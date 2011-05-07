@@ -90,12 +90,12 @@ public class TestModelProcessor
 		String modelXhtml = wmp.process(markupTxt);
 		if(saveReference)
 		{
-			WikiContentIO.writeTxt(fRef, modelXhtml);
+			WikiContentIO.writeTxt(fRef, modelXhtml.trim());
 		}
 		else
 		{
 			String xhtmlRef = WikiContentIO.loadTxt(fRef);
-			Assert.assertEquals(xhtmlRef,modelXhtml);
+			Assert.assertEquals(xhtmlRef.trim(),modelXhtml.trim());
 		}	
 	}
 	
@@ -105,7 +105,7 @@ public class TestModelProcessor
 			loggerInit.addAltPath("src/test/resources/config");
 			loggerInit.init();	
 		
-		boolean genRefFiles = false;
+		boolean genRefFiles = true;
 		int testFileId = 4;
 		
 		if(testFileId>0)
@@ -130,7 +130,5 @@ public class TestModelProcessor
 				test.closeWmp();
 			}
 		}
-		
-		
     }
 }

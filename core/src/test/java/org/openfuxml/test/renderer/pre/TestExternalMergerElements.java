@@ -20,7 +20,7 @@ import org.junit.runners.Parameterized;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
-import org.openfuxml.test.renderer.AbstractFileProcessingTest;
+import org.openfuxml.test.AbstractFileProcessingTest;
 
 @RunWith(Parameterized.class)
 public class TestExternalMergerElements extends AbstractFileProcessingTest

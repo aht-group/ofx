@@ -1,6 +1,7 @@
 package org.openfuxml.addon.wiki;
 
 import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -55,7 +56,8 @@ public class WikiInlineProcessor
 		String xhtmlFinal = wpXhtmlF.process(xhtmlReplace);
 		if(debugOutput){logger.debug("xhtmlFinal: "+xhtmlFinal);}
 		Element xml = ofxP.process(xhtmlFinal);
-//		JDomUtil.debug(xml);
+		if(debugOutput){logger.debug(JaxbUtil.toString(xml));}
+//		;
 		Section section = (Section)JDomUtil.toJaxb(xml, Section.class);
 		return section;		
 	}
