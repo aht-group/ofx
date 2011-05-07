@@ -23,7 +23,7 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.processor.html.section.DefaultSectionRenderer;
-import org.openfuxml.test.renderer.AbstractFileProcessingTest;
+import org.openfuxml.test.AbstractFileProcessingTest;
 
 @RunWith(Parameterized.class)
 public class TestDefaultSectionRenderer extends AbstractFileProcessingTest

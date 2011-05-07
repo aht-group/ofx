@@ -1,4 +1,4 @@
-package org.openfuxml.test.renderer;
+package org.openfuxml.test;
 
 import java.io.File;
 import java.util.ArrayList;

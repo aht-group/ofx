@@ -19,7 +19,7 @@
 				<wiki:injections external="true" source="../core/src/main/resources/config/cmp/wiki/injectionsWiki.xml"/>
 			</wiki:markupProcessor>
 			<wiki:xhtmlProcessor>
-				<wiki:replacements external="true" source="config/cmp/wiki/replacementsXhtml.xml"/>
+				<wiki:replacements external="true" source="../core/src/main/resources/config/cmp/wiki/replacementsXhtml.xml"/>
 			</wiki:xhtmlProcessor>
 			<wiki:templates>
 				<wiki:template name="Requirement" class="com.aht.x"/>
