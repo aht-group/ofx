@@ -24,7 +24,7 @@ import org.openfuxml.exception.OfxInternalProcessingException;
 @RunWith(Parameterized.class)
 public class TestModelProcessor
 {
-	static Log logger = LogFactory.getLog(TestMarkupProcessor.class);
+	static Log logger = LogFactory.getLog(TestModelProcessor.class);
 	
 	private WikiModelProcessor wmp;
 	
