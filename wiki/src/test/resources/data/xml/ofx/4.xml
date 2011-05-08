@@ -12,22 +12,22 @@
 			<list:type ordering="unordered" />
 			<list:item>
 				<ofx:paragraph>
-					<link linkend="Section_Header_1">Section Header 1</link>
+					<ofx:reference target="#Section_Header_1">Section Header 1</ofx:reference>
 				</ofx:paragraph>
 			</list:item>
 			<list:item>
 				<ofx:paragraph>
-					<link linkend="Section_Header_2">Section Header 2</link>
+					<ofx:reference target="#Section_Header_2">Section Header 2</ofx:reference>
 				</ofx:paragraph>
 			</list:item>
 			<list:item>
 				<ofx:paragraph>
-					<link linkend="Section_Header_3">Section Header 3</link>
+					<ofx:reference target="#Section_Header_3">Section Header 3</ofx:reference>
 				</ofx:paragraph>
 			</list:item>
 			<list:item>
 				<ofx:paragraph>
-					<link linkend="Section_Header_4">Section Header 4</link>
+					<ofx:reference target="#Section_Header_4">Section Header 4</ofx:reference>
 				</ofx:paragraph>
 			</list:item>
 		</list:list>

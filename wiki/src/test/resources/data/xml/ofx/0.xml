@@ -4,7 +4,7 @@
     
 	
 	<ofx:paragraph>This is a link with additional Text 
-		<ulink url="http://openfuxml.sourceforge.net">openFuXML</ulink>
+		<ofx:reference target="http://openfuxml.sourceforge.net">openFuXML</ofx:reference>
 	</ofx:paragraph>
 
 </ofx:section>

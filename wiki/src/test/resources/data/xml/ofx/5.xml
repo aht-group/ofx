@@ -12,42 +12,42 @@
 			<list:type ordering="unordered" />
 			<list:item>
 				<ofx:paragraph>
-					<link linkend="Phase_:_External_Integrator">Phase : External Integrator</link>
+					<ofx:reference target="#Phase_:_External_Integrator">Phase : External Integrator</ofx:reference>
 				</ofx:paragraph>
 			</list:item>
 			<list:item>
 				<ofx:paragraph>
-					<link linkend="phaseWikiContentFetcher">phaseWikiContentFetcher</link>
+					<ofx:reference target="#phaseWikiContentFetcher">phaseWikiContentFetcher</ofx:reference>
 				</ofx:paragraph>
 			</list:item>
 			<list:item>
 				<ofx:paragraph>
-					<link linkend="phaseWikiProcessing">phaseWikiProcessing</link>
+					<ofx:reference target="#phaseWikiProcessing">phaseWikiProcessing</ofx:reference>
 				</ofx:paragraph>
 			</list:item>
 			<list:item>
 				<ofx:paragraph>
-					<link linkend="phaseMerge">phaseMerge</link>
+					<ofx:reference target="#phaseMerge">phaseMerge</ofx:reference>
 				</ofx:paragraph>
 			</list:item>
 			<list:item>
 				<ofx:paragraph>
-					<link linkend="phaseContainerMerge">phaseContainerMerge</link>
+					<ofx:reference target="#phaseContainerMerge">phaseContainerMerge</ofx:reference>
 				</ofx:paragraph>
 			</list:item>
 			<list:item>
 				<ofx:paragraph>
-					<link linkend="phaseExternalMerge">phaseExternalMerge</link>
+					<ofx:reference target="#phaseExternalMerge">phaseExternalMerge</ofx:reference>
 				</ofx:paragraph>
 			</list:item>
 			<list:item>
 				<ofx:paragraph>
-					<link linkend="phaseTemplate">phaseTemplate</link>
+					<ofx:reference target="#phaseTemplate">phaseTemplate</ofx:reference>
 				</ofx:paragraph>
 			</list:item>
 			<list:item>
 				<ofx:paragraph>
-					<link linkend="phaseExternalMerge">phaseExternalMerge</link>
+					<ofx:reference target="#phaseExternalMerge">phaseExternalMerge</ofx:reference>
 				</ofx:paragraph>
 			</list:item>
 		</list:list>

@@ -1,16 +1,21 @@
-package org.openfuxml.addon.wiki.emitter;
+package org.openfuxml.addon.wiki.processor.ofx.emitter;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
-import org.openfuxml.addon.wiki.processor.ofx.emitter.NestingEmitter;
 import org.xml.sax.Attributes;
 
 public class AnchorEmitter extends NestingEmitter
 {
+	static Log logger = LogFactory.getLog(AnchorEmitter.class);
+	
 	private boolean openTag = false;
 
+	private static final String tag = "ofx:reference";
+	
 	public AnchorEmitter(EmitterFactory ef)
 	{
 		super(ef);
@@ -26,36 +31,17 @@ public class AnchorEmitter extends NestingEmitter
 			href = atts.getValue("href");
 			name = atts.getValue("name");
 		}
-		if (name != null && name.length() > 0)
+		
+		logger.debug("href: "+href);
+		logger.debug("name: "+name);
+		
+		if (href != null)
 		{
 			openTag = true;
-			writer.writeStartElement("phrase");
-			writer.writeAttribute("id", name);
+			writer.writeStartElement(tag);
+			writer.writeAttribute("target", href);
 		}
-		else if (href != null)
-		{
-			if (href.startsWith("#"))
-			{
-				if (href.length() > 1) {
-					openTag = true;
-					writer.writeStartElement("link");
-					writer.writeAttribute("linkend", href.substring(1));
-				}
-			}
-			else
-			{
-				if(href.startsWith("file"))
-				{
-					
-				}
-				else
-				{
-					openTag = true;
-					writer.writeStartElement("ulink");
-					writer.writeAttribute("url", href);
-				}
-			}
-		}
+		else {logger.warn("HREF==null");}
 		return true;
 	}
 

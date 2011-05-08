@@ -73,7 +73,21 @@
     </xsd:element>
     <xsd:element name="reference">
         <xsd:complexType>
-            <xsd:attribute name="target" type="xsd:string"/>
+        	<xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="type" use="required">
+		                <xsd:simpleType>
+		                    <xsd:restriction base="xsd:string">
+		                        <xsd:enumeration value="internal"/>
+		                        <xsd:enumeration value="external"/>
+		                    </xsd:restriction>
+		                </xsd:simpleType>
+		            </xsd:attribute>
+		            <xsd:attribute name="target" type="xsd:string"/>
+		            <xsd:attribute name="name" type="xsd:string"/>
+		            <xsd:attribute name="prefix" type="xsd:string"/>
+                </xsd:extension>
+            </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="listing">
