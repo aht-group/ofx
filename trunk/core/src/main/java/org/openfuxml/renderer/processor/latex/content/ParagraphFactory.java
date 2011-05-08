@@ -22,7 +22,7 @@ public class ParagraphFactory extends AbstractOfxLatexRenderer implements OfxLat
 		for(Object o : paragraph.getContent())
 		{
 			if(o instanceof String){addString((String)o);}
-			else {logger.warn("Unknown object");}
+			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
 	}
 	

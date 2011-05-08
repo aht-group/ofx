@@ -12,8 +12,11 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.renderer.processor.html.interfaces.OfxSectionRenderer;
+import org.openfuxml.renderer.processor.html.interfaces.OfxTableRenderer;
 import org.openfuxml.renderer.processor.html.structure.ReferenceRenderer;
+import org.openfuxml.renderer.processor.html.table.DefaultTableRenderer;
 
 public class DefaultSectionRenderer implements OfxSectionRenderer
 {
@@ -41,6 +44,7 @@ public class DefaultSectionRenderer implements OfxSectionRenderer
 			else if(o instanceof Title){createHeader((Title)o);}
 			else if(o instanceof Paragraph){addParagrah((Paragraph)o);}
 			else if(o instanceof Section){addSection((Section)o);}
+			else if(o instanceof Table){OfxTableRenderer r = new DefaultTableRenderer();divParagraph.addContent(r.render((Table)o));}
 			else {logger.warn("Unknown content: "+o.getClass().getSimpleName());}
 		}
 
@@ -54,15 +58,9 @@ public class DefaultSectionRenderer implements OfxSectionRenderer
 	
 	private void addParagrah(Paragraph ofxParagraph)
 	{
-		Element p = new Element("p");
-		
-		for(Object o : ofxParagraph.getContent())
-		{
-			if(o instanceof String){p.addContent(new Text((String)o));}
-			else if(o instanceof Reference){ReferenceRenderer r = new ReferenceRenderer();p.addContent(r.render((Reference)o));}
-			else {logger.warn("Unknown content: "+o.getClass().getSimpleName());}
-		}
-		divParagraph.addContent(p);
+		ParagraphRenderer pR = new ParagraphRenderer();
+		Content c = pR.render(ofxParagraph);
+		divParagraph.addContent(c);
 	}
 	
 	private void addSection(Section section)
@@ -104,6 +102,7 @@ public class DefaultSectionRenderer implements OfxSectionRenderer
 				if(o instanceof String){}
 				else if(o instanceof Title){createHeader((Title)o);}
 				else if(o instanceof Paragraph){addParagrah((Paragraph)o);}
+				else if(o instanceof Table){OfxTableRenderer r = new DefaultTableRenderer();divParagraph.addContent(r.render((Table)o));}
 				else {logger.warn("Unknown content: "+o.getClass().getSimpleName());}
 			}			
 			return divParagraph;
