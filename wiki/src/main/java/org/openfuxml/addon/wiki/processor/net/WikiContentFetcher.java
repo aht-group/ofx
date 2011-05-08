@@ -39,6 +39,7 @@ public class WikiContentFetcher extends AbstractWikiProcessor implements WikiPro
 	@Override
 	protected void processPage(Content content)
 	{
+		txtWriter.clear();
 		Page page = content.getPage();
 		page.setFile(WikiContentIO.getFileFromSource(content.getSource()));
 		txtWriter.setFileName(page.getFile()+".txt");
