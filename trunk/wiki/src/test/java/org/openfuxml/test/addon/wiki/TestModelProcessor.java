@@ -2,7 +2,6 @@ package org.openfuxml.test.addon.wiki;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import net.sf.exlp.util.io.LoggerInit;
@@ -12,7 +11,6 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -20,11 +18,12 @@ import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.test.AbstractFileProcessingTest;
 
 @RunWith(Parameterized.class)
-public class TestModelProcessor
+public class TestModelProcessor extends AbstractFileProcessingTest
 {
-	static Log logger = LogFactory.getLog(TestModelProcessor.class);
+	static Log logger = LogFactory.getLog(TestWikiInlineProcessor.class);
 	
 	private WikiModelProcessor wmp;
 	
@@ -42,37 +41,16 @@ public class TestModelProcessor
 	}
 	
 	@Parameterized.Parameters
-	public static Collection<Object[]> initFileNames()
-	{
-		Collection<Object[]> c = new ArrayList<Object[]>();
-		File srcDir = new File(srcDirName);
-		for(File f : srcDir.listFiles())
-		{
-			if(f.getName().endsWith(".txt"))
-			{
-				Object[] o = new Object[] {f};
-				c.add(o);
-			}
-		}
-		return c;
-	}
-	
-	@BeforeClass
-    public static void initLogger()
-	{
-		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("src/test/resources/config");
-		loggerInit.init();
-    }
+	public static Collection<Object[]> initFileNames() {return initFileNames(srcDirName, ".txt");}
 	
 	@Before
-	public void initWmp() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
+	public void init() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{	
 		wmp = new WikiModelProcessor();
 	}
 	
 	@After
-	public void closeWmp()
+	public void close()
 	{
 		wmp = null;
 	}
@@ -105,30 +83,23 @@ public class TestModelProcessor
 			loggerInit.addAltPath("src/test/resources/config");
 			loggerInit.init();	
 		
-		boolean genRefFiles = true;
-		int testFileId = 4;
+		boolean saveReference = true;
+		int id = -1;
+		int index = 0;
 		
-		if(testFileId>0)
+		TestWikiInlineProcessor.initCmp();
+		for(Object[] o : TestModelProcessor.initFileNames())
 		{
-			File fTest = new File(srcDirName,testFileId+".txt");
-			String markupTxt = WikiContentIO.loadTxt(fTest);
-			
-			WikiModelProcessor wmp = new WikiModelProcessor();
-			System.out.println(wmp.process(markupTxt));
-		}
-		
-		if(genRefFiles)
-		{
-			for(Object[] o : TestMarkupProcessor.initFileNames())
+			if(id<0 | id==index)
 			{
 				File fTest = (File)o[0];
-				logger.debug(fTest);
-				
 				TestModelProcessor test = new TestModelProcessor(fTest);
-				test.initWmp();
-				test.wikiPlainToMarkup(true);
-				test.closeWmp();
-			}
+				test.init();
+				logger.trace(id+" "+index);
+				test.wikiPlainToMarkup(saveReference);
+				test.close();
+			}			
+			index++;
 		}
     }
 }
