@@ -31,7 +31,8 @@ public class WikiContentIO
 	
 	public static synchronized String loadTxt(File fDir, String fileName){return loadTxt(new File(fDir,fileName));}
 	public static synchronized String loadTxt(String fileName){return loadTxt(new File(fileName));}
-	public static synchronized String loadTxt(File f)
+	public static synchronized String loadTxt(File f){return loadTxt(f,true);}
+	public static synchronized String loadTxt(File f,boolean ls)
 	{
 		logger.trace("Reading Txt from "+f.getAbsolutePath());
 		StringBuffer sb = new StringBuffer();
@@ -41,7 +42,7 @@ public class WikiContentIO
 			while(bw.ready())
 			{
 				sb.append(bw.readLine());
-				sb.append(SystemUtils.LINE_SEPARATOR);
+				if(ls){sb.append(SystemUtils.LINE_SEPARATOR);}
 			}
 			bw.close();
 		}
