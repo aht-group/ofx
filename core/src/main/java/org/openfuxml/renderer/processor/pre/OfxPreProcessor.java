@@ -6,13 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdom.Document;
 import org.openfuxml.addon.wiki.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
@@ -47,8 +45,6 @@ public class OfxPreProcessor
 		
 	public static enum DirCode {working,content};
 	public static enum FileCode {root,external1,wikiIntegrate,external2,container1,template,external3,container2,idsGenerated,ofxPreFinished};
-	
-	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
 	
 	private OfxRenderConfiguration cmpConfigUtil;
 	
@@ -294,13 +290,5 @@ public class OfxPreProcessor
 		File dir = new File(dWorking,dirName);
 		if(!dir.exists()){dir.mkdir();}
 		return dir;
-	}
-	
-	private String getPhaseXmlFileName(Phase phase)
-	{
-		StringBuffer sb = new StringBuffer();
-		sb.append(phase.ordinal()+1);
-		sb.append("-").append(phase.toString()).append(".xml");
-		return sb.toString();
 	}
 }
