@@ -55,6 +55,7 @@ public class WikiCategoryFetcher
 		WikiPageFetcher wpf = new WikiPageFetcher(bot);
 		for(int i=0;i<articleNames.size();i++)
 		{
+			txtWriter.clear();
 			Page page = new Page();
 			page.setName(articleNames.get(i));
 			page.setFile(targetFilePrefix+i);

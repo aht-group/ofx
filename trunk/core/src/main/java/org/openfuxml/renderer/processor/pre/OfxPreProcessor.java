@@ -197,7 +197,7 @@ public class OfxPreProcessor
 			ofxDoc = wikiExIntegrator.getResult();
 			wikiQueries = wikiExIntegrator.getWikiQueries();
 			
-			JaxbUtil.save(dstFile, ofxDoc, true);
+			JaxbUtil.save(dstFile, ofxDoc, nsPrefixMapper, true);
 		}
 		catch (FileNotFoundException e){throw new OfxInternalProcessingException(e.getMessage());}
 		return dstFile;
