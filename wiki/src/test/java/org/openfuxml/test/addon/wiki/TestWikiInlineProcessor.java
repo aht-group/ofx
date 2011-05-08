@@ -18,7 +18,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openfuxml.addon.wiki.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
-import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
