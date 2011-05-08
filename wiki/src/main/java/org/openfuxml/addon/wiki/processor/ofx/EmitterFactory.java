@@ -11,6 +11,7 @@ import org.openfuxml.addon.wiki.emitter.ImageEmitter;
 import org.openfuxml.addon.wiki.emitter.injection.OfxInjectionEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.HeaderEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.NestingEmitter;
+import org.openfuxml.addon.wiki.processor.ofx.emitter.OfxEmphasisEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.OfxListEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.SimpleMappingEmitter;
 
@@ -39,7 +40,8 @@ public class EmitterFactory
 				case sup:	return new SimpleMappingEmitter(this,"hochgestellt");
 				case p:		return new SimpleMappingEmitter(this,"ofx:paragraph");
 				case i:		return new SimpleMappingEmitter(this,"kursiv");
-				case b:		return new SimpleMappingEmitter(this,"fett");
+//				case b:		return new SimpleMappingEmitter(this,"fett");
+				case b:		return new OfxEmphasisEmitter(this,OfxEmphasisEmitter.Emphasis.bold);
 				case strong:return new SimpleMappingEmitter(this,"fett");
 				case ul:	return new OfxListEmitter(this,OfxListEmitter.Ordering.unordered);
 				case ol:	return new OfxListEmitter(this,OfxListEmitter.Ordering.ordered);
