@@ -3,8 +3,8 @@
 
     
 	
-	<ofx:paragraph>This is a test for 
-		<ofx:emphasis bold="true">bold</ofx:emphasis> and ...
+	<ofx:paragraph>This is a link with additional Text 
+		<ulink url="http://openfuxml.sourceforge.net">openFuXML</ulink>
 	</ofx:paragraph>
 
 </ofx:section>
