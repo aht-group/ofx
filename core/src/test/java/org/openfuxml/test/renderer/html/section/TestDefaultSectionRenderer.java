@@ -91,8 +91,8 @@ public class TestDefaultSectionRenderer extends AbstractFileProcessingTest
 			loggerInit.addAltPath("src/test/resources/config");
 			loggerInit.init();	
 		
-		boolean saveReference = false;
-		int id = -1;
+		boolean saveReference = true;
+		int id = 3;
 		int index = 0;
 		
 		for(Object[] o : TestDefaultSectionRenderer.initFileNames())

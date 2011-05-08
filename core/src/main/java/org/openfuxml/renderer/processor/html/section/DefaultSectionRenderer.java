@@ -9,9 +9,11 @@ import org.jdom.Content;
 import org.jdom.Element;
 import org.jdom.Text;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.renderer.processor.html.interfaces.OfxSectionRenderer;
+import org.openfuxml.renderer.processor.html.structure.ReferenceRenderer;
 
 public class DefaultSectionRenderer implements OfxSectionRenderer
 {
@@ -57,6 +59,7 @@ public class DefaultSectionRenderer implements OfxSectionRenderer
 		for(Object o : ofxParagraph.getContent())
 		{
 			if(o instanceof String){p.addContent(new Text((String)o));}
+			else if(o instanceof Reference){ReferenceRenderer r = new ReferenceRenderer();p.addContent(r.render((Reference)o));}
 			else {logger.warn("Unknown content: "+o.getClass().getSimpleName());}
 		}
 		divParagraph.addContent(p);
@@ -113,6 +116,7 @@ public class DefaultSectionRenderer implements OfxSectionRenderer
 			for(Object o : ofxParagraph.getContent())
 			{
 				if(o instanceof String){p.addContent(new Text((String)o));}
+				else if(o instanceof Reference){ReferenceRenderer r = new ReferenceRenderer();p.addContent(r.render((Reference)o));}
 				else {logger.warn("Unknown content: "+o.getClass().getSimpleName());}
 			}
 			divParagraph.addContent(p);
