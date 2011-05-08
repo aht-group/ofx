@@ -90,7 +90,7 @@ public class TestWikiXmlProcessor extends AbstractFileProcessingTest
 			loggerInit.init();	
 		
 		boolean saveReference = true;
-		int id = 0;
+		int id = -1;
 		int index = 0;
 		
 		for(Object[] o : TestWikiXmlProcessor.initFileNames())

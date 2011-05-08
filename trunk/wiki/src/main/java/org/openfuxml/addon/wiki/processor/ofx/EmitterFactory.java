@@ -4,11 +4,11 @@ import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.wiki.emitter.AnchorEmitter;
 import org.openfuxml.addon.wiki.emitter.Emitter;
 import org.openfuxml.addon.wiki.emitter.GlosstermEmitter;
 import org.openfuxml.addon.wiki.emitter.ImageEmitter;
 import org.openfuxml.addon.wiki.emitter.injection.OfxInjectionEmitter;
+import org.openfuxml.addon.wiki.processor.ofx.emitter.AnchorEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.HeaderEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.OfxEmphasisEmitter;
