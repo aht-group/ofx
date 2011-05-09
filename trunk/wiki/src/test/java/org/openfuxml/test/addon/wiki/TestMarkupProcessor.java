@@ -107,12 +107,8 @@ public class TestMarkupProcessor
 		}	
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
-    {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();	
-		
+	public static void chain() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
+	{
 		for(Object[] o : TestMarkupProcessor.initFileNames())
 		{
 			File fTest = (File)o[0];
@@ -123,5 +119,14 @@ public class TestMarkupProcessor
 			test.wikiPlainToMarkup(true);
 			test.closeWmp();
 		}
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
+    {
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("src/test/resources/config");
+			loggerInit.init();	
+		
+		TestMarkupProcessor.chain();
     }
 }

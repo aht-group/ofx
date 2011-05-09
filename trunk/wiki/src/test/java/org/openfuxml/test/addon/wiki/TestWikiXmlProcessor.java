@@ -83,16 +83,9 @@ public class TestWikiXmlProcessor extends AbstractFileProcessingTest
 		}	
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
-    {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();	
-		
-		boolean saveReference = true;
-		int id = -1;
+	public static void chain(int id, boolean saveReference) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
+	{
 		int index = 0;
-		
 		for(Object[] o : TestWikiXmlProcessor.initFileNames())
 		{
 			if(id<0 | id==index)
@@ -106,5 +99,17 @@ public class TestWikiXmlProcessor extends AbstractFileProcessingTest
 			}			
 			index++;
 		}
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
+    {
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("src/test/resources/config");
+			loggerInit.init();	
+		
+		boolean saveReference = true;
+		int id = -1;
+		
+		TestWikiXmlProcessor.chain(id,saveReference);
     }
 }

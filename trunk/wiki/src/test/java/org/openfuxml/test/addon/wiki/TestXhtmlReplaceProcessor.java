@@ -16,7 +16,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -89,16 +88,9 @@ public class TestXhtmlReplaceProcessor extends AbstractFileProcessingTest
 		}	
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
-    {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();	
-		
-		boolean saveReference = true;
-		int id = -1;
+	public static void chain(int id, boolean saveReference) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
+	{
 		int index = 0;
-		
 		TestXhtmlReplaceProcessor.initCmp();
 		for(Object[] o : TestXhtmlReplaceProcessor.initFileNames())
 		{
@@ -113,5 +105,17 @@ public class TestXhtmlReplaceProcessor extends AbstractFileProcessingTest
 			}			
 			index++;
 		}
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
+    {
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("src/test/resources/config");
+			loggerInit.init();	
+		
+		boolean saveReference = true;
+		int id = -1;
+
+		TestXhtmlReplaceProcessor.chain(id,saveReference);
     }
 }
