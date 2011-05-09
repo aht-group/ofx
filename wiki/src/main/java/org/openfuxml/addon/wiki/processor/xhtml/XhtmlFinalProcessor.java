@@ -2,6 +2,7 @@ package org.openfuxml.addon.wiki.processor.xhtml;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jdom.JDOMException;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
@@ -10,6 +11,7 @@ import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.mods.OfxPushUp;
 import org.openfuxml.addon.wiki.processor.xhtml.mods.XhtmlAHxMerge;
+import org.openfuxml.addon.wiki.processor.xhtml.mods.XhtmlCodePreMover;
 
 public class XhtmlFinalProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
@@ -49,9 +51,21 @@ public class XhtmlFinalProcessor extends AbstractWikiProcessor implements WikiPr
 	{
 		OfxPushUp pushUp = new OfxPushUp();
 		XhtmlAHxMerge merger = new XhtmlAHxMerge();
+		XhtmlCodePreMover moveCodePre = new XhtmlCodePreMover();
 		
 		xHtml = pushUp.moveOfxElements(xHtml);
 		xHtml = merger.merge(xHtml);
+		try
+		{
+			xHtml = moveCodePre.move(xHtml);
+		}
+		catch (JDOMException e)
+		{
+			//TODO Exception Handling
+			e.printStackTrace();
+		}
+		
+		
 		xHtml = removeWellFormed(xHtml);
 		return xHtml;
 	}
