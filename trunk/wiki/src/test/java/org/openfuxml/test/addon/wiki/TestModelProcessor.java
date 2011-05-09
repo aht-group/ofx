@@ -102,7 +102,7 @@ public class TestModelProcessor extends AbstractFileProcessingTest
 			loggerInit.init();	
 		
 		boolean saveReference = true;
-		int id = -1;
+		int id = 6;
 		
 		TestModelProcessor.chain(id,saveReference);
     }

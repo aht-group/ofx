@@ -114,7 +114,7 @@ public class TestXhtmlReplaceProcessor extends AbstractFileProcessingTest
 			loggerInit.init();	
 		
 		boolean saveReference = true;
-		int id = -1;
+		int id = 6;
 
 		TestXhtmlReplaceProcessor.chain(id,saveReference);
     }
