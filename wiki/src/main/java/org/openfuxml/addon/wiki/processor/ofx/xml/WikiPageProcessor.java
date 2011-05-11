@@ -15,6 +15,7 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -29,13 +30,11 @@ import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.ofx.OfxHtmlContentHandler;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
-import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -61,7 +60,7 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 		{
 			String srcName =  page.getFile()+"."+WikiProcessor.WikiFileExtension.xhtml;
 			String dstName = page.getFile()+"."+WikiProcessor.WikiFileExtension.xml;
-			String txtMarkup = WikiContentIO.loadTxt(srcDir, srcName);
+			String txtMarkup = StringIO.loadTxt(srcDir, srcName);
 			String result = process(txtMarkup, page.getName());
 			
 			File fDst = new File(dstDir, dstName);

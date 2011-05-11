@@ -4,6 +4,7 @@ import java.io.File;
 
 import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
@@ -87,9 +88,9 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 	{
 		logger.debug("Processing Page: "+page.getName());
 		String fName = page.getFile()+"."+WikiProcessor.WikiFileExtension.txt;
-		String txt = org.openfuxml.addon.wiki.processor.util.WikiContentIO.loadTxt(srcDir, fName);
+		String txt = StringIO.loadTxt(srcDir, fName);
 		String result = process(txt, page.getName());
-		org.openfuxml.addon.wiki.processor.util.WikiContentIO.writeTxt(dstDir, fName, result);
+		StringIO.writeTxt(dstDir, fName, result);
 	}
 	
 	
@@ -209,7 +210,7 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 		Cmp cmp = (Cmp)JaxbUtil.loadJAXB(fnCmp, Cmp.class);
 		WikiMarkupProcessor wpMarkup = new WikiMarkupProcessor(cmp);
 		
-		String wikiText = org.openfuxml.addon.wiki.processor.util.WikiContentIO.loadTxt(fnWikiTxt);
+		String wikiText = StringIO.loadTxt(fnWikiTxt);
 		logger.debug("Wiki (Before): "+wikiText);
 		
 		wikiText=wpMarkup.process(wikiText, "test");

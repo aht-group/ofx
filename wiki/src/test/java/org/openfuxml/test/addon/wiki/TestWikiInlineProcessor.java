@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
@@ -17,7 +18,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openfuxml.addon.wiki.WikiInlineProcessor;
-import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
@@ -74,7 +74,7 @@ public class TestWikiInlineProcessor extends AbstractFileProcessingTest
 	private void test(boolean saveReference) throws FileNotFoundException, OfxInternalProcessingException
 	{
 		logger.debug(fTest.getAbsoluteFile());
-		String wikiTxt = WikiContentIO.loadTxt(fTest);
+		String wikiTxt = StringIO.loadTxt(fTest);
 		
 		Section section = wikiInline.toOfx(wikiTxt);
 		if(saveReference)

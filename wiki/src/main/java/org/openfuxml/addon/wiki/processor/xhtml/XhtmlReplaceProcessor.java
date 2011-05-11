@@ -1,12 +1,10 @@
 package org.openfuxml.addon.wiki.processor.xhtml;
 
-import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdom.Document;
-import org.jdom.JDOMException;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
@@ -14,7 +12,6 @@ import org.openfuxml.addon.wiki.data.jaxb.Replacements;
 import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlXpathHelper;
-import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 
@@ -52,9 +49,9 @@ public class XhtmlReplaceProcessor extends AbstractWikiProcessor implements Wiki
 	public void processPage(Page page)
 	{
 		String fNameModel = page.getFile()+"."+WikiProcessor.WikiFileExtension.xhtml;
-		String txtMarkup = WikiContentIO.loadTxt(srcDir, fNameModel);
+		String txtMarkup = StringIO.loadTxt(srcDir, fNameModel);
 		String result = process(txtMarkup);
-		WikiContentIO.writeTxt(dstDir, fNameModel, result);
+		StringIO.writeTxt(dstDir, fNameModel, result);
 	}
 	
 	public String process(String text)

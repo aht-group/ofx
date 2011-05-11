@@ -1,6 +1,7 @@
 package org.openfuxml.addon.wiki.processor.markup;
 
 import info.bliki.wiki.model.WikiModel;
+import net.sf.exlp.util.io.StringIO;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,7 +10,6 @@ import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.model.WikiDefaultModel;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
-import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 
 public class WikiModelProcessor extends AbstractWikiProcessor implements WikiProcessor
@@ -44,9 +44,9 @@ public class WikiModelProcessor extends AbstractWikiProcessor implements WikiPro
 		String fNameModel = page.getFile()+"."+WikiProcessor.WikiFileExtension.xhtml;
 		logger.debug("ProcessingPage: "+srcDir+"/"+fNameMarkup+" -> "+dstDir+"/"+fNameModel);
 		
-		String txtMarkup = WikiContentIO.loadTxt(srcDir, fNameMarkup);
+		String txtMarkup = StringIO.loadTxt(srcDir, fNameMarkup);
 		String result = process(txtMarkup);
-		WikiContentIO.writeTxt(dstDir, fNameModel, result);
+		StringIO.writeTxt(dstDir, fNameModel, result);
 	}
 	
 	public String process(String txtMarkup)
