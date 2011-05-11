@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.StringIO;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,7 +16,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
-import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
@@ -64,15 +64,15 @@ public class TestModelProcessor extends AbstractFileProcessingTest
 	
 	private void wikiPlainToMarkup(boolean saveReference) throws OfxInternalProcessingException
 	{
-		String markupTxt = WikiContentIO.loadTxt(fTest);
+		String markupTxt = StringIO.loadTxt(fTest);
 		String modelXhtml = wmp.process(markupTxt);
 		if(saveReference)
 		{
-			WikiContentIO.writeTxt(fRef, modelXhtml.trim());
+			StringIO.writeTxt(fRef, modelXhtml.trim());
 		}
 		else
 		{
-			String xhtmlRef = WikiContentIO.loadTxt(fRef);
+			String xhtmlRef = StringIO.loadTxt(fRef);
 			Assert.assertEquals(xhtmlRef.trim(),modelXhtml.trim());
 		}	
 	}

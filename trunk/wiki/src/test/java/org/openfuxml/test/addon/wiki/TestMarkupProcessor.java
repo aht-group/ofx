@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
@@ -20,7 +21,6 @@ import org.junit.runners.Parameterized;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
 import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
-import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.xml.renderer.cmp.Cmp;
@@ -94,15 +94,15 @@ public class TestMarkupProcessor
 	
 	private void wikiPlainToMarkup(boolean saveReference) throws OfxInternalProcessingException
 	{
-		String plainTxt = WikiContentIO.loadTxt(fTest);
+		String plainTxt = StringIO.loadTxt(fTest);
 		String markupTxt = wmp.process(plainTxt, "article ... req?");
 		if(saveReference)
 		{
-			WikiContentIO.writeTxt(fRef, markupTxt);
+			StringIO.writeTxt(fRef, markupTxt);
 		}
 		else
 		{
-			String markupRefTxt = WikiContentIO.loadTxt(fRef);
+			String markupRefTxt = StringIO.loadTxt(fRef);
 			Assert.assertEquals(markupRefTxt,markupTxt);
 		}	
 	}

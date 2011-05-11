@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
@@ -16,7 +17,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
@@ -75,15 +75,15 @@ public class TestXhtmlReplaceProcessor extends AbstractFileProcessingTest
 	
 	private void test(boolean saveReference) throws OfxInternalProcessingException
 	{
-		String inTxt = WikiContentIO.loadTxt(fTest);
+		String inTxt = StringIO.loadTxt(fTest);
 		String outTxt = xhtmlP.process(inTxt);
 		if(saveReference)
 		{
-			WikiContentIO.writeTxt(fRef, outTxt.trim());
+			StringIO.writeTxt(fRef, outTxt.trim());
 		}
 		else
 		{
-			String refTxt = WikiContentIO.loadTxt(fRef);
+			String refTxt = StringIO.loadTxt(fRef);
 			Assert.assertEquals(refTxt.trim(),outTxt.trim());
 		}	
 	}
