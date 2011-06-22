@@ -1,6 +1,6 @@
-package org.openfuxml.addon.jsf.factory;
+package org.openfuxml.addon.jsftld.ofx;
 
-import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -8,7 +8,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.openfuxml.addon.jsf.data.jaxb.Attribute;
-import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
@@ -19,6 +18,7 @@ import org.openfuxml.content.ofx.table.Content;
 import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.content.ofx.table.Table;
+import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public class TagTableFactory
 {
@@ -116,7 +116,7 @@ public class TagTableFactory
 		section.getContent().add(ttf.create(metatag));
 		
 		Document doc = JaxbUtil.toDocument(section);
-		doc = JDomUtil.correctNsPrefixes(doc, new JsfNsPrefixMapper());
+		doc = JDomUtil.correctNsPrefixes(doc, new OfxNsPrefixMapper());
 		JDomUtil.debug(doc);
 	}
 }

@@ -1,14 +1,14 @@
-package org.openfuxml.addon.jsf.factory;
+package org.openfuxml.addon.jsftld.ofx;
 
 import java.io.File;
 import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.jsf.JsfTagTransformator;
 import org.openfuxml.addon.jsf.data.jaxb.Example;
 import org.openfuxml.addon.jsf.data.jaxb.Listing;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
+import org.openfuxml.addon.jsftld.JsfTagTransformator;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 
