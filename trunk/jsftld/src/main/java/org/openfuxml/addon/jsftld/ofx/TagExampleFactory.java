@@ -5,12 +5,12 @@ import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.jsf.data.jaxb.Example;
-import org.openfuxml.addon.jsf.data.jaxb.Listing;
-import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsftld.JsfTagTransformator;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.xml.addon.jsftld.Example;
+import org.openfuxml.xml.addon.jsftld.Listing;
+import org.openfuxml.xml.addon.jsftld.Metatag;
 
 public class TagExampleFactory
 {

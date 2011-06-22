@@ -4,12 +4,12 @@ import java.io.File;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.jsf.data.jaxb.Metatag;
-import org.openfuxml.addon.jsf.data.jaxb.Tag;
-import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.xml.addon.jsftld.Metatag;
+import org.openfuxml.xml.addon.jsftld.Tag;
+import org.openfuxml.xml.addon.jsftld.Taglib;
 
 public class TagSectionFactory
 {

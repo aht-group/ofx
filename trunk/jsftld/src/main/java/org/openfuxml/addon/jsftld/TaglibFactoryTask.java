@@ -17,12 +17,12 @@ import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Namespace;
 import org.jdom.output.Format;
-import org.openfuxml.addon.jsf.data.jaxb.Component;
-import org.openfuxml.addon.jsf.data.jaxb.FacesConfig;
-import org.openfuxml.addon.jsf.data.jaxb.Metatag;
-import org.openfuxml.addon.jsf.data.jaxb.Renderer;
-import org.openfuxml.addon.jsf.data.jaxb.Tag;
-import org.openfuxml.addon.jsf.data.jaxb.Taglib;
+import org.openfuxml.xml.addon.jsftld.Component;
+import org.openfuxml.xml.addon.jsftld.FacesConfig;
+import org.openfuxml.xml.addon.jsftld.Metatag;
+import org.openfuxml.xml.addon.jsftld.Renderer;
+import org.openfuxml.xml.addon.jsftld.Tag;
+import org.openfuxml.xml.addon.jsftld.Taglib;
 
 public class TaglibFactoryTask extends Task
 {
@@ -66,6 +66,8 @@ public class TaglibFactoryTask extends Task
     {
     	if(l4jFile==null){setUseLog4j(false);}
     	else{initLog4j();}
+    
+    	checkParameter();
     	
     	ConfigLoader.add(tldConfig);
 		config = ConfigLoader.init();
@@ -171,7 +173,7 @@ public class TaglibFactoryTask extends Task
 	
 	public static void fillDescription(Tag tag, Configuration config)
 	{
-		for(org.openfuxml.addon.jsf.data.jaxb.Attribute att : tag.getAttribute())
+		for(org.openfuxml.xml.addon.jsftld.Attribute att : tag.getAttribute())
 		{
 			logger.debug("Att"+ tag.getName()+" "+att.getName());
 			logger.warn("Description is disabled"); //TODO Check description

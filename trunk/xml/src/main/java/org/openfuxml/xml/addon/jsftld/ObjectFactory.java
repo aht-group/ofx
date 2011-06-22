@@ -6,7 +6,7 @@
 //
 
 
-package org.openfuxml.addon.jsf.data.jaxb;
+package org.openfuxml.xml.addon.jsftld;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

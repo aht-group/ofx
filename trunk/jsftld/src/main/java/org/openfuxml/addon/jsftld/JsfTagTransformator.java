@@ -17,11 +17,11 @@ import org.apache.commons.logging.LogFactory;
 import org.jdom.DocType;
 import org.jdom.Document;
 import org.jdom.output.Format;
-import org.openfuxml.addon.jsf.data.jaxb.Metatag;
-import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 import org.openfuxml.addon.jsftld.ofx.TagChapterFactory;
 import org.openfuxml.addon.jsftld.ofx.TagSectionFactory;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.xml.addon.jsftld.Metatag;
+import org.openfuxml.xml.addon.jsftld.Taglib;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public class JsfTagTransformator

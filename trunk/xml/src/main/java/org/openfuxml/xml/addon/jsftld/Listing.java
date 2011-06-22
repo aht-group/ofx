@@ -6,7 +6,7 @@
 //
 
 
-package org.openfuxml.addon.jsf.data.jaxb;
+package org.openfuxml.xml.addon.jsftld;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
