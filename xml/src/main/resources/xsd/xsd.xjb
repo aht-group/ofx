@@ -54,7 +54,7 @@
     
 	<jxb:bindings schemaLocation="addon/jsf-taglib.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.addon.jsf.data.jaxb"/>
+            <jxb:package name="org.openfuxml.xml.addon.jsftld"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
