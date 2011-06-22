@@ -28,7 +28,7 @@ public class TaglibFactoryTask extends Task
 {
 	static Log logger = LogFactory.getLog(TaglibFactoryTask.class); 
 	
-	private String tagConfig, xPathPrefix, tagBaseDir, tldFile, fcFile, l4jFile;
+	private String tldConfig, tagRoot, tld, facesConfig, l4jFile;
 
 	private boolean useLog4j;
 
@@ -67,21 +67,17 @@ public class TaglibFactoryTask extends Task
     	if(l4jFile==null){setUseLog4j(false);}
     	else{initLog4j();}
     	
-    	ConfigLoader.add(tagConfig);
+    	ConfigLoader.add(tldConfig);
 		config = ConfigLoader.init();
 		
     	String fileName = config.getString("taglib");
     	try
     	{
-			taglib = (Taglib)JaxbUtil.loadJAXB(tagBaseDir+"/"+fileName, Taglib.class);
+			taglib = (Taglib)JaxbUtil.loadJAXB(tagRoot+"/"+fileName, Taglib.class);
 		}
-    	catch (FileNotFoundException e)
-    	{
-			// TODO BuildException
-			e.printStackTrace();
-		}
+    	catch (FileNotFoundException e) {throw new BuildException(e.getMessage());}
 
-    	String msg = "Taglib: "+tagBaseDir+"/"+fileName;
+    	String msg = "Using Taglib: "+tagRoot+"/"+fileName;
 		if(useLog4j){logger.debug(msg);}else{System.out.println(msg);}
     	
 		facesconfig = new FacesConfig();
@@ -93,10 +89,8 @@ public class TaglibFactoryTask extends Task
 			addTagElements();
 	    	writeTld();
 	    	writeFc();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+    	catch (FileNotFoundException e) {throw new BuildException(e.getMessage());}
 
     }
     
@@ -116,7 +110,7 @@ public class TaglibFactoryTask extends Task
     	
     	doc.setRootElement(JDomUtil.setNameSpaceRecursive(doc.getRootElement(),ns));
     	
-    	File f = new File(tldFile);
+    	File f = new File(tld);
     	JDomUtil.save(doc, f, Format.getPrettyFormat());
     	
     	String msg = "Taglib written to "+f.getAbsolutePath();
@@ -143,7 +137,7 @@ public class TaglibFactoryTask extends Task
     	
     	doc.setRootElement(JDomUtil.setNameSpaceRecursive(doc.getRootElement(),ns));
     	
-    	File f = new File(fcFile);
+    	File f = new File(facesConfig);
     	JDomUtil.save(doc, f, Format.getPrettyFormat());
     	
     	String msg = "Facesconfig written to "+f.getAbsolutePath();
@@ -153,15 +147,16 @@ public class TaglibFactoryTask extends Task
 	
 	private void addTagElements() throws FileNotFoundException
 	{	
-		int numberTranslations = config.getStringArray(xPathPrefix).length;
-		String msg = "Found "+numberTranslations+" Tags in "+tagConfig;
+		String xPath = "tag";
+		int numberTranslations = config.getStringArray(xPath).length;
+		String msg = "Found "+numberTranslations+" Tags in "+tldConfig;
 		if(useLog4j){logger.debug(msg);}
 		else{System.out.println(msg);}
 		for(int i=1;i<=numberTranslations;i++)
 		{
-			String fileName = config.getString(xPathPrefix+"["+i+"]");
-			String dirName = config.getString(xPathPrefix+"["+i+"]/@dir");
-			Metatag metatag = (Metatag)JaxbUtil.loadJAXB(tagBaseDir+"/"+dirName+"/"+fileName, Metatag.class);
+			String fileName = config.getString(xPath+"["+i+"]");
+			String dirName = config.getString(xPath+"["+i+"]/@dir");
+			Metatag metatag = (Metatag)JaxbUtil.loadJAXB(tagRoot+"/"+dirName+"/"+fileName, Metatag.class);
 			TaglibFactoryTask.fillDescription(metatag.getTag(),config);
 			
 			taglib.getTag().add(metatag.getTag());
@@ -189,27 +184,32 @@ public class TaglibFactoryTask extends Task
 */		}
 	}
 	
-	public void setTagConfig(String tagConfig) {this.tagConfig = tagConfig;}
-	public void setxPathPrefix(String xPathPrefix) {this.xPathPrefix = xPathPrefix;}
-	public void setTagBaseDir(String tagBaseDir) {this.tagBaseDir = tagBaseDir;}
-	public void setTldFile(String tldFile) {this.tldFile = tldFile;}
+	public void setTldConfig(String tldConfig) {this.tldConfig = tldConfig;}
+	public void setTagRoot(String tagRoot) {this.tagRoot = tagRoot;}
+	
+	public void setTld(String tld) {this.tld = tld;}
 	public void setUseLog4j(boolean useLog4j) {JaxbUtil.useLog4j=useLog4j;this.useLog4j = useLog4j;}
-	public void setFcFile(String fcFile) {this.fcFile = fcFile;}
+	public void setFacesConfig(String facesConfig) {this.facesConfig = facesConfig;}
 	public void setL4jFile(String l4jFile) {this.l4jFile = l4jFile;}
 	
-	public static void main (String[] args) throws Exception
-	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("resources/config");
-			loggerInit.init();
-		
-		TaglibFactoryTask jtf = new TaglibFactoryTask();
-		jtf.setUseLog4j(true);
-		jtf.setTagConfig(args[0]);
-		jtf.setTagBaseDir(args[1]);
-		jtf.setxPathPrefix(args[2]);
-		jtf.setTldFile(args[3]);
-		jtf.setFcFile(args[4]);
-		jtf.execute();
-	}
+	public void checkParameter() throws BuildException
+    {
+    	if(tldConfig==null){throw new BuildException("fileTldConfig must be specified.");}
+    	File fTldConfig = new File(tldConfig);
+    	if(!fTldConfig.exists()){throw new BuildException("File "+tldConfig+" does not exist.");}
+    	if(!fTldConfig.isFile()){throw new BuildException(fTldConfig+" not a file.");}
+        	
+    	if(tagRoot==null){throw new BuildException("tagRoot must be specified.");}
+    	File fTagRoot = new File(tagRoot);
+    	if(!fTagRoot.exists()){throw new BuildException("Directory "+tagRoot+" does not exist.");}
+    	if(!fTagRoot.isDirectory()){throw new BuildException(tagRoot+" not a directory.");}
+    	
+    	if(tld==null){throw new BuildException("tld must be specified.");}
+    	File fTld = new File(tld);
+    	if(!fTld.getParentFile().exists()){throw new BuildException("Parent Directory for "+tld+" does not exist.");}
+    	
+    	if(facesConfig==null){throw new BuildException("facesConfig must be specified.");}
+    	File fFacesConfig = new File(facesConfig);
+    	if(!fFacesConfig.getParentFile().exists()){throw new BuildException("Parent Directory for "+facesConfig+" does not exist.");}
+    }
 }

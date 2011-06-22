@@ -19,7 +19,10 @@ import org.jdom.Document;
 import org.jdom.output.Format;
 import org.openfuxml.addon.jsf.data.jaxb.Metatag;
 import org.openfuxml.addon.jsf.data.jaxb.Taglib;
+import org.openfuxml.addon.jsftld.ofx.TagChapterFactory;
+import org.openfuxml.addon.jsftld.ofx.TagSectionFactory;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public class JsfTagTransformator
 {
@@ -91,7 +94,7 @@ public class JsfTagTransformator
 //			JaxbUtil.save(fSectionEn, section, new JsfNsPrefixMapper(), true);
 			
 			Document doc = JaxbUtil.toDocument(section);
-			doc = JDomUtil.correctNsPrefixes(doc, new JsfNsPrefixMapper());
+			doc = JDomUtil.correctNsPrefixes(doc, new OfxNsPrefixMapper());
 			logger.debug("Debug for "+metatag.getTag().getName());
 			InputStream isXML = JDomUtil.toInputStream(doc, Format.getRawFormat());
 			transformSave(isXML, fSection);

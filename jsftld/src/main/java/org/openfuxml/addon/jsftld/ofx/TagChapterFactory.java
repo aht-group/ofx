@@ -1,8 +1,8 @@
-package org.openfuxml.addon.jsf.factory;
+package org.openfuxml.addon.jsftld.ofx;
 
 import java.util.List;
 
-import net.sf.exlp.io.LoggerInit;
+import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;

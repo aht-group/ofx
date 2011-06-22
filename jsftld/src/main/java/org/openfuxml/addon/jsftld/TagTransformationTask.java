@@ -8,7 +8,6 @@ import net.sf.exlp.util.io.LoggerInit;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
-
 public class TagTransformationTask extends Task
 {		
 	private String outputDir,tagDef,baseDir;
@@ -46,7 +45,7 @@ public class TagTransformationTask extends Task
     	
     }
     
-    private void checkParameter()
+    public void checkParameter()
     {
     	if(outputDir==null){throw new BuildException("targetDir must be specified.");}
     	File fOutputDir = new File(outputDir);
