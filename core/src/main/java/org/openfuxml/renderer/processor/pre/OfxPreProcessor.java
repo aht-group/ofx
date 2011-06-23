@@ -66,9 +66,9 @@ public class OfxPreProcessor
 	{
 		xmlPreProcessor = cmpConfigUtil.getCmp().getPreprocessor();
 		cmp = cmpConfigUtil.getCmp();
-		File fOfxRoot = cmpConfigUtil.getFile(cmp.getSource().getDirs(), DirCode.content.toString(), FileCode.root.toString(),false);
+		File fOfxRoot = cmpConfigUtil.getFile(cmp.getSource().getDir(), DirCode.content.toString(), FileCode.root.toString(),false);
 		
-		File dWorking = cmpConfigUtil.getDir(xmlPreProcessor.getDirs(), DirCode.working.toString());
+		File dWorking = cmpConfigUtil.getDir(xmlPreProcessor.getDir(), DirCode.working.toString());
 		logger.debug("Working Dir: "+dWorking.getAbsolutePath());
 		
 		chain(dWorking, fOfxRoot);
@@ -107,7 +107,7 @@ public class OfxPreProcessor
 	
 	private File idGenerator(File srcFile) throws OfxConfigurationException, OfxInternalProcessingException
 	{
-		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), FileCode.idsGenerated.toString(),true);
+		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDir(), DirCode.working.toString(), FileCode.idsGenerated.toString(),true);
 		logger.info("ID Generator: "+dstFile);
 		
 		OfxIdGenerator idCreator = new OfxIdGenerator();
@@ -117,7 +117,7 @@ public class OfxPreProcessor
 	
 	private void finalCopy(File srcFile) throws OfxConfigurationException, OfxInternalProcessingException
 	{
-		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), FileCode.ofxPreFinished.toString(),true);
+		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDir(), DirCode.working.toString(), FileCode.ofxPreFinished.toString(),true);
 		try{FileUtils.copyFile(srcFile, dstFile);}
 		catch (IOException e) {throw new OfxInternalProcessingException(e.getMessage());}
 		logger.info("PreProcessing Finished: "+dstFile);
@@ -125,7 +125,7 @@ public class OfxPreProcessor
 	
 	private File phaseExternalMerge(File srcFile, FileCode code) throws OfxInternalProcessingException, OfxConfigurationException
 	{
-		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), code.toString(),true);
+		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDir(), DirCode.working.toString(), code.toString(),true);
 		try
 		{
 			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
@@ -145,7 +145,7 @@ public class OfxPreProcessor
 	
 	private File phaseContainerMerge(File srcFile, FileCode code) throws OfxInternalProcessingException, OfxConfigurationException
 	{		
-		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), code.toString(),true);
+		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDir(), DirCode.working.toString(), code.toString(),true);
 		try
 		{
 			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
@@ -165,7 +165,7 @@ public class OfxPreProcessor
 	
 	private File phaseTemplate(File srcFile, FileCode code, File dirWikiTemplate, File dirOfxTemplate) throws OfxInternalProcessingException, OfxConfigurationException
 	{
-		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), code.toString(),true);
+		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDir(), DirCode.working.toString(), code.toString(),true);
 		
 		WikiInlineProcessor wikiInlineProcessor = new WikiInlineProcessor(cmp);
 		
@@ -188,7 +188,7 @@ public class OfxPreProcessor
 	
 	private File phaseWikiExternalIntegrator(File srcFile, FileCode code, String wikiXmlDir) throws OfxAuthoringException, OfxInternalProcessingException, OfxConfigurationException
 	{		
-		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), code.toString(),true);
+		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDir(), DirCode.working.toString(), code.toString(),true);
 		try
 		{
 			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
