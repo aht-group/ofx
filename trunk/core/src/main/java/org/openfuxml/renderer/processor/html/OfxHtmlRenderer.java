@@ -66,7 +66,7 @@ public class OfxHtmlRenderer
 	
 	private void processTemplate(Section section, Ofxdoc ofxDoc, Template template) throws OfxConfigurationException, OfxImplementationException
 	{
-		File fTemplate = cmpConfigUtil.getFile(html.getDirs(), HtmlDir.template.toString(), template.getFileCode(),false);
+		File fTemplate = cmpConfigUtil.getFile(html.getDir(), HtmlDir.template.toString(), template.getFileCode(),false);
 		Document doc = JDomUtil.load(fTemplate);
 		try
 		{
@@ -97,7 +97,7 @@ public class OfxHtmlRenderer
 			}
 		}
 		catch (JDOMException e) {logger.error(e);}
-		File fWeb = cmpConfigUtil.getDir(html.getDirs(), HtmlDir.web.toString());
+		File fWeb = cmpConfigUtil.getDir(html.getDir(), HtmlDir.web.toString());
 		File fHtml = new File(fWeb,section.getId()+".html");
 //		JDomUtil.debug(doc);
 		JDomUtil.save(doc, fHtml, Format.getRawFormat());

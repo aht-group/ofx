@@ -38,7 +38,7 @@ public class OfxTargetRenderer
 	
 	public void renderTargets() throws OfxAuthoringException, OfxImplementationException, OfxConfigurationException
 	{
-		File fPreProcessingFinished = cmpConfigUtil.getFile(cmp.getPreprocessor().getDirs(), DirCode.working.toString(), FileCode.ofxPreFinished.toString(),false);
+		File fPreProcessingFinished = cmpConfigUtil.getFile(cmp.getPreprocessor().getDir(), DirCode.working.toString(), FileCode.ofxPreFinished.toString(),false);
 		if(cmp.getTargets().isSetPdf())
 		{
 			int i=0;
@@ -74,7 +74,7 @@ public class OfxTargetRenderer
 		OfxLatexRenderer renderer = new OfxLatexRenderer(cmp.getTargets().getPdf().get(0));
   		renderer.render(fSrc.getAbsolutePath());
 		
-		File dstFile = cmpConfigUtil.getFile(pdf.getDirs(), PdfDir.latex.toString(), PdfFile.latex.toString(),true);
+		File dstFile = cmpConfigUtil.getFile(pdf.getDir(), PdfDir.latex.toString(), PdfFile.latex.toString(),true);
 		
 		logger.debug("pdf."+pdf.getCode()+" dstFile="+dstFile.getAbsolutePath());
 		

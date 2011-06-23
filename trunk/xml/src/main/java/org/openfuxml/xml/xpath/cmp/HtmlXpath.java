@@ -6,7 +6,7 @@ import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.io.Dirs;
+import net.sf.exlp.xml.io.Dir;
 import net.sf.exlp.xml.io.File;
 
 import org.apache.commons.logging.Log;
@@ -43,7 +43,7 @@ public class HtmlXpath
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static synchronized File getFile(Dirs dirs, String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
+	public static synchronized File getFile(Dir dirs, String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		File file = null;
 		try

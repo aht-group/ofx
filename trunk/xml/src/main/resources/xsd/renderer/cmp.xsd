@@ -20,7 +20,7 @@
     <xsd:element name="source">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="io:dirs" maxOccurs="1"/>
+                <xsd:element ref="io:dir" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -35,7 +35,7 @@
     <xsd:element name="preprocessor">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="io:dirs" maxOccurs="1"/>
+                <xsd:element ref="io:dir" maxOccurs="unbounded"/>
                 <xsd:element ref="cmp:merge" maxOccurs="unbounded"/>
                 <xsd:element ref="cmp:wiki" maxOccurs="1"/>
             </xsd:sequence>
@@ -44,7 +44,7 @@
     <xsd:element name="pdf">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="io:dirs" maxOccurs="1"/>
+                <xsd:element ref="io:dir" maxOccurs="unbounded"/>
 				<xsd:element ref="cmp:toc" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
@@ -81,7 +81,7 @@
     <xsd:element name="html">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="io:dirs" maxOccurs="1"/>
+                <xsd:element ref="io:dir" maxOccurs="unbounded"/>
                 <xsd:element ref="html:renderer" maxOccurs="unbounded"/>
                 <xsd:element ref="html:template" maxOccurs="unbounded"/>
             </xsd:sequence>

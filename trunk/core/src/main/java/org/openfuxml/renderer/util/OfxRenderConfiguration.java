@@ -2,12 +2,12 @@ package org.openfuxml.renderer.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.io.Dir;
-import net.sf.exlp.xml.io.Dirs;
 import net.sf.exlp.xml.xpath.IoXpath;
 
 import org.apache.commons.io.FilenameUtils;
@@ -46,13 +46,16 @@ public class OfxRenderConfiguration
 		fCmpParent = fCmp.getParentFile();
 		
 		if(!cmp.isSetSource()){throw new OfxConfigurationException("No <source/> defined in "+fCmp.getAbsolutePath());}
-		if(!cmp.getSource().isSetDirs()){throw new OfxConfigurationException("No <source><dirs/></source> defined in "+fCmp.getAbsolutePath());}
+		if(!cmp.getSource().isSetDir()){throw new OfxConfigurationException("No <source><dir/></source> defined in "+fCmp.getAbsolutePath());}
 		
 		return cmp;
 	}
 	
-	public File getDir(Dirs dirs, String dirCode) throws OfxConfigurationException
+	public File getDir(List<Dir> listDirs, String dirCode) throws OfxConfigurationException
 	{
+		Dir dirs = new Dir();
+		dirs.getDir().addAll(listDirs);
+		
 		File f = null;
 		Dir dir = null;
 		try
@@ -81,14 +84,17 @@ public class OfxRenderConfiguration
 		return f;
 	}
 	
-	public File getFile(Dirs dirs, String dirCode, String fileCode, boolean createFile) throws OfxConfigurationException
+	public File getFile(List<Dir> listDirs, String dirCode, String fileCode, boolean createFile) throws OfxConfigurationException
 	{
+		Dir dirs = new Dir();
+		dirs.getDir().addAll(listDirs);
+		
 		File f = null;
 		try
 		{
 			net.sf.exlp.xml.io.File file = IoXpath.getFile(dirs, fileCode);
 			
-			File dir = getDir(dirs, dirCode);
+			File dir = getDir(listDirs, dirCode);
 			f = new File(FilenameUtils.normalize(dir.getAbsolutePath()+SystemUtils.FILE_SEPARATOR+file.getName()));
 			
 			if(!createFile && !f.exists()){throw new OfxConfigurationException("File (code="+fileCode+"does not exist: "+f.getAbsolutePath());}
