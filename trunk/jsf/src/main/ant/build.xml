@@ -17,7 +17,7 @@
     <target name="0 Task" description="Task definition">
     	<taskdef name="tagfac" classname="org.openfuxml.addon.jsf.factory.TaglibFactoryTask">
     		<classpath>
-    			<fileset dir="${lib.dir}/org/openfuxml/ofx-jsftld/${ofx.version}" includes="ofx-jsftld-${ofx.version}.jar"/>
+    			<fileset dir="${lib.dir}/org/openfuxml/ofx-jsf/${ofx.version}" includes="ofx-jsf-${ofx.version}.jar"/>
     			<fileset dir="${lib.dir}/org/openfuxml/ofx-xml/${ofx.version}" includes="ofx-xml-${ofx.version}.jar"/>
     			<fileset dir="${lib.dir}/commons-logging/commons-logging/${commons-logging.version}" includes="commons-logging-${commons-logging.version}.jar"/>
     			<fileset dir="${lib.dir}/commons-configuration/commons-configuration/${commons-config.version}" includes="commons-configuration-${commons-config.version}.jar"/>
