@@ -6,7 +6,7 @@
     elementFormDefault="qualified"
     attributeFormDefault="unqualified">
     <xsd:import namespace="http://www.openfuxml.org" schemaLocation="../content/ofx.xsd"/>
-    <xsd:element name="taglib">
+    <xsd:element name="facelet-taglib">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="tlib-version" maxOccurs="1" type="xsd:string"/>
