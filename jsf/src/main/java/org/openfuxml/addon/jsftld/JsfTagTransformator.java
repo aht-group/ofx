@@ -20,8 +20,8 @@ import org.jdom.output.Format;
 import org.openfuxml.addon.jsftld.ofx.TagChapterFactory;
 import org.openfuxml.addon.jsftld.ofx.TagSectionFactory;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.xml.addon.jsftld.Metatag;
-import org.openfuxml.xml.addon.jsftld.Taglib;
+import org.openfuxml.xml.addon.jsf.tld.Metatag;
+import org.openfuxml.xml.addon.jsf.tld.Taglib;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public class JsfTagTransformator

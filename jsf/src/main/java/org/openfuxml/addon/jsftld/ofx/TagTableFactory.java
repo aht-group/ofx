@@ -16,8 +16,8 @@ import org.openfuxml.content.ofx.table.Content;
 import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.content.ofx.table.Table;
-import org.openfuxml.xml.addon.jsftld.Attribute;
-import org.openfuxml.xml.addon.jsftld.Metatag;
+import org.openfuxml.xml.addon.jsf.tld.Attribute;
+import org.openfuxml.xml.addon.jsf.tld.Metatag;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public class TagTableFactory

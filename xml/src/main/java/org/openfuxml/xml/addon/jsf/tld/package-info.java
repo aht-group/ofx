@@ -6,4 +6,4 @@
 //
 
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.openfuxml.org/jsf", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package org.openfuxml.xml.addon.jsftld;
+package org.openfuxml.xml.addon.jsf.tld;

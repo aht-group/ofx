@@ -8,9 +8,9 @@ import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.jsftld.JsfTagTransformator;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.xml.addon.jsftld.Example;
-import org.openfuxml.xml.addon.jsftld.Listing;
-import org.openfuxml.xml.addon.jsftld.Metatag;
+import org.openfuxml.xml.addon.jsf.tld.Example;
+import org.openfuxml.xml.addon.jsf.tld.Listing;
+import org.openfuxml.xml.addon.jsf.tld.Metatag;
 
 public class TagExampleFactory
 {
