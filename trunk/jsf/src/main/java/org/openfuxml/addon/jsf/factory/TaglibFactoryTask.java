@@ -22,7 +22,7 @@ import org.openfuxml.xml.addon.jsf.tld.FacesConfig;
 import org.openfuxml.xml.addon.jsf.tld.Metatag;
 import org.openfuxml.xml.addon.jsf.tld.Renderer;
 import org.openfuxml.xml.addon.jsf.tld.Tag;
-import org.openfuxml.xml.addon.jsf.tld.Taglib;
+import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
 
 public class TaglibFactoryTask extends Task
 {
@@ -32,7 +32,7 @@ public class TaglibFactoryTask extends Task
 
 	private boolean useLog4j;
 
-	private Taglib taglib;
+	private FaceletTaglib taglib;
 	private FacesConfig facesconfig;
 	
 	private Configuration config;
@@ -75,7 +75,7 @@ public class TaglibFactoryTask extends Task
     	String fileName = config.getString("taglib");
     	try
     	{
-			taglib = (Taglib)JaxbUtil.loadJAXB(tagRoot+"/"+fileName, Taglib.class);
+			taglib = (FaceletTaglib)JaxbUtil.loadJAXB(tagRoot+"/"+fileName, FaceletTaglib.class);
 		}
     	catch (FileNotFoundException e) {throw new BuildException(e.getMessage());}
 
