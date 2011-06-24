@@ -1,4 +1,4 @@
-package org.openfuxml.addon.jsftld.ofx;
+package org.openfuxml.addon.jsf.factory.ofx;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,7 +9,7 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.addon.jsftld.JsfTagTransformator;
+import org.openfuxml.addon.jsf.factory.JsfTagTransformator;
 import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.content.ofx.Title;
 

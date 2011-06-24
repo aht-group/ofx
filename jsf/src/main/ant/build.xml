@@ -15,7 +15,7 @@
 	<property name="commons-collections.version" value="3.2.1"/>
 		
     <target name="0 Task" description="Task definition">
-    	<taskdef name="tagfac" classname="org.openfuxml.addon.jsftld.TaglibFactoryTask">
+    	<taskdef name="tagfac" classname="org.openfuxml.addon.jsf.factory.TaglibFactoryTask">
     		<classpath>
     			<fileset dir="${lib.dir}/org/openfuxml/ofx-jsftld/${ofx.version}" includes="ofx-jsftld-${ofx.version}.jar"/>
     			<fileset dir="${lib.dir}/org/openfuxml/ofx-xml/${ofx.version}" includes="ofx-xml-${ofx.version}.jar"/>

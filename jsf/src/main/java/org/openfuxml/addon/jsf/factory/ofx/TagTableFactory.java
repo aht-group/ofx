@@ -1,4 +1,4 @@
-package org.openfuxml.addon.jsftld.ofx;
+package org.openfuxml.addon.jsf.factory.ofx;
 
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;

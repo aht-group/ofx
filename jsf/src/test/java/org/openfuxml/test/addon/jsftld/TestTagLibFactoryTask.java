@@ -11,7 +11,7 @@ import org.apache.tools.ant.BuildException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openfuxml.addon.jsftld.TaglibFactoryTask;
+import org.openfuxml.addon.jsf.factory.TaglibFactoryTask;
 import org.openfuxml.test.AbstractJsfTldTest;
 
 public class TestTagLibFactoryTask extends AbstractJsfTldTest

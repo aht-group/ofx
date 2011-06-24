@@ -1,4 +1,4 @@
-package org.openfuxml.addon.jsftld.ofx;
+package org.openfuxml.addon.jsf.factory.ofx;
 
 import java.io.File;
 
