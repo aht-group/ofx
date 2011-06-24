@@ -50,7 +50,7 @@
 	</issueManagement>
 
 	<modules>
-		<module>jsftld</module>
+		<module>jsf</module>
 		<module>core</module>
 		<module>wiki</module>
 		<module>chart</module>
