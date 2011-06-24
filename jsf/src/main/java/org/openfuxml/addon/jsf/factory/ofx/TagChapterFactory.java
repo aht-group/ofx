@@ -11,15 +11,15 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.xml.addon.jsf.tld.Metatag;
 import org.openfuxml.xml.addon.jsf.tld.Tag;
-import org.openfuxml.xml.addon.jsf.tld.Taglib;
+import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
 
 public class TagChapterFactory
 {
 	static Log logger = LogFactory.getLog(TagChapterFactory.class); 
 	
-	private Taglib taglib;
+	private FaceletTaglib taglib;
 	
-	public TagChapterFactory(Taglib taglib)
+	public TagChapterFactory(FaceletTaglib taglib)
 	{
 		this.taglib=taglib;
 	}

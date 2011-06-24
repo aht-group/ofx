@@ -21,7 +21,7 @@ import org.openfuxml.addon.jsf.factory.ofx.TagChapterFactory;
 import org.openfuxml.addon.jsf.factory.ofx.TagSectionFactory;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.xml.addon.jsf.tld.Metatag;
-import org.openfuxml.xml.addon.jsf.tld.Taglib;
+import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public class JsfTagTransformator
@@ -33,7 +33,7 @@ public class JsfTagTransformator
 	public static boolean useLog4j;
 	private String logMsg,xslt;
 	private List<Metatag> lMetaTag;
-	private Taglib taglib;
+	private FaceletTaglib taglib;
 	
 	public JsfTagTransformator(File baseDir, int dtdLevel)
 	{
@@ -74,9 +74,9 @@ public class JsfTagTransformator
 		taglib =readTaglib(dir+"/"+config.getString("taglib"));
 	}
 	
-	public Taglib readTaglib(String xmlFile) throws FileNotFoundException
+	public FaceletTaglib readTaglib(String xmlFile) throws FileNotFoundException
 	{
-		return (Taglib)JaxbUtil.loadJAXB(xmlFile,Taglib.class);
+		return (FaceletTaglib)JaxbUtil.loadJAXB(xmlFile,FaceletTaglib.class);
 	}
 	
 	public void transform()

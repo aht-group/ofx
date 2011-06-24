@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.test.xml.AbstractOfxXmlTest;
-import org.openfuxml.xml.addon.jsf.tld.Taglib;
+import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public class TestTaglib extends AbstractOfxXmlTest
@@ -32,22 +32,22 @@ public class TestTaglib extends AbstractOfxXmlTest
     @Test
     public void testLang() throws FileNotFoundException
     {
-    	Taglib test = createTaglib();
-    	Taglib ref = (Taglib)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Taglib.class);
+    	FaceletTaglib test = createTaglib();
+    	FaceletTaglib ref = (FaceletTaglib)JaxbUtil.loadJAXB(fXml.getAbsolutePath(), FaceletTaglib.class);
     	Assert.assertEquals(JaxbUtil.toString(test),JaxbUtil.toString(ref));
     }
  
     public void save()
     {
     	logger.debug("Saving Reference XML");
-    	Taglib lang = createTaglib();
+    	FaceletTaglib lang = createTaglib();
     	JaxbUtil.debug2(this.getClass(),lang, nsPrefixMapper);
     	JaxbUtil.save(fXml, lang, nsPrefixMapper, true);
     }
    
-    public static Taglib createTaglib()
+    public static FaceletTaglib createTaglib()
     {
-    	Taglib xml = new Taglib();
+    	FaceletTaglib xml = new FaceletTaglib();
     	xml.setTlibVersion("1.1");
     	return xml;
     }
