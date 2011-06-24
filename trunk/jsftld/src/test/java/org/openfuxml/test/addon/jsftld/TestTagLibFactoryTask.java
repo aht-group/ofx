@@ -18,7 +18,7 @@ public class TestTagLibFactoryTask extends AbstractJsfTldTest
 {
 	static Log logger = LogFactory.getLog(TestTagLibFactoryTask.class);
 	
-	private static final String rootTest = "src/main/resources";
+	private static final String rootTest = "src/main/tld";
 	public static boolean useLogging;
 	
 	private static File fileTldConfig, fileTld, fileFacesConfig;
@@ -28,8 +28,8 @@ public class TestTagLibFactoryTask extends AbstractJsfTldTest
 	
 	@BeforeClass public static void initTest()
 	{
-		fileTldConfig = new File(rootTest,"config/tldConfig.xml");
-		dirTagRoot = new File(rootTest,"tld");
+		fileTldConfig = new File(rootTest,"tldConfig.xml");
+		dirTagRoot = new File(rootTest);
 		fileTld = new File("target","test.tld");
 		fileFacesConfig = new File("target","faces-config.xml");
 		useLogging = false;
