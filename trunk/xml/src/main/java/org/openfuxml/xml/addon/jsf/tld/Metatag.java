@@ -6,7 +6,7 @@
 //
 
 
-package org.openfuxml.xml.addon.jsftld;
+package org.openfuxml.xml.addon.jsf.tld;
 
 import java.io.Serializable;
 import java.util.ArrayList;

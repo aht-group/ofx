@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.test.xml.AbstractOfxXmlTest;
-import org.openfuxml.xml.addon.jsftld.Taglib;
+import org.openfuxml.xml.addon.jsf.tld.Taglib;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 
 public class TestTaglib extends AbstractOfxXmlTest

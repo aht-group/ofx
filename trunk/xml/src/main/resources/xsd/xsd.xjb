@@ -52,9 +52,9 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
-	<jxb:bindings schemaLocation="addon/jsf-taglib.xsd" node="/xsd:schema">
+	<jxb:bindings schemaLocation="addon/jsf-tld.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.xml.addon.jsftld"/>
+            <jxb:package name="org.openfuxml.xml.addon.jsf.tld"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
