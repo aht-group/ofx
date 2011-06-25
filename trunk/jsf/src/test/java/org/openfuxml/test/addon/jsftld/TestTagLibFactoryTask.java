@@ -4,10 +4,15 @@ import java.io.File;
 
 import junit.framework.Assert;
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tools.ant.BuildException;
+import org.jdom.Attribute;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.Namespace;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,7 +37,7 @@ public class TestTagLibFactoryTask extends AbstractJsfTldTest
 		dirTagRoot = new File(rootTest);
 		fileTld = new File("target","test.tld");
 		fileFacesConfig = new File("target","faces-config.xml");
-		useLogging = false;
+		useLogging = true;
 	}
 	
 	@Before
@@ -63,6 +68,27 @@ public class TestTagLibFactoryTask extends AbstractJsfTldTest
     {
     	setParameter();
     	tlFactory.execute();
+    }
+    
+    @Test
+    public void testTldRootElement()
+    {
+    	setParameter();
+    	tlFactory.execute();
+    	Document doc = JDomUtil.load(fileTld);
+    	Element root = doc.getRootElement();
+    	
+    	Namespace nsDefault = root.getNamespace();
+    	Namespace nsXsi = root.getNamespace("xsi");
+
+    	Attribute aSchemaLocation = root.getAttribute("schemaLocation", nsXsi);
+    	Attribute aVersion = root.getAttribute("version");
+    	
+    	Assert.assertEquals(TaglibFactoryTask.ftNsDefault,nsDefault.getURI());
+    	Assert.assertEquals(TaglibFactoryTask.ftNsXsi,nsXsi.getURI());
+    	Assert.assertEquals(TaglibFactoryTask.ftAttSchemaLocation,aSchemaLocation.getValue());
+    	Assert.assertEquals(TaglibFactoryTask.ftAttVersion,aVersion.getValue());
+
     }
     
     @Test(expected=BuildException.class)
@@ -116,6 +142,8 @@ public class TestTagLibFactoryTask extends AbstractJsfTldTest
 		TestTagLibFactoryTask test = new TestTagLibFactoryTask();
 		test.init();
 		test.testParameter();
-		test.execute();
+		
+//		test.execute();
+		test.testTldRootElement();
     }
 }

@@ -26,7 +26,12 @@ import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
 
 public class TaglibFactoryTask extends Task
 {
-	static Log logger = LogFactory.getLog(TaglibFactoryTask.class); 
+	static Log logger = LogFactory.getLog(TaglibFactoryTask.class);
+	
+	public static String ftNsDefault = "http://java.sun.com/xml/ns/javaee";
+	public static String ftNsXsi = "http://www.w3.org/2001/XMLSchema-instance";
+	public static String ftAttSchemaLocation = "http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibary_2_0.xsd";
+	public static String ftAttVersion = "2.0";
 	
 	private String tldConfig, tagRoot, tld, facesConfig, l4jFile;
 
@@ -98,15 +103,15 @@ public class TaglibFactoryTask extends Task
     
     private void writeTld()
     {
-    	Namespace ns = Namespace.getNamespace("http://java.sun.com/xml/ns/javaee");
-    	Namespace ns1 = Namespace.getNamespace("xsi","http://www.w3.org/2001/XMLSchema-instance");
+    	Namespace ns = Namespace.getNamespace(ftNsDefault);
+    	Namespace nsXsi = Namespace.getNamespace("xsi",ftNsXsi);
     	
-    	Attribute attVersion = new Attribute("version", "2.1");
-    	Attribute attSchemaLocation = new Attribute("schemaLocation", "http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd",ns1);
+    	Attribute attVersion = new Attribute("version", ftAttVersion);
+    	Attribute attSchemaLocation = new Attribute("schemaLocation", ftAttSchemaLocation, nsXsi);
     	
     	Document doc = JaxbUtil.toDocument(taglib);
     	doc.getRootElement().setNamespace(ns);
-    	doc.getRootElement().addNamespaceDeclaration(ns1);
+    	doc.getRootElement().addNamespaceDeclaration(nsXsi);
     	doc.getRootElement().setAttribute(attVersion);
     	doc.getRootElement().setAttribute(attSchemaLocation);
     	
