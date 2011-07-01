@@ -44,10 +44,14 @@ public class OfxTargetRenderer
 			int i=0;
 			for(Pdf pdf : cmp.getTargets().getPdf())
 			{
-				if(!pdf.isSetCode()){pdf.setCode(""+i);}
-				logger.info("Rendering PDF ("+pdf.getCode()+")");
-				phaseLatex(pdf, fPreProcessingFinished);
-				i++;
+				if(!pdf.isSetActive()){throw new OfxConfigurationException("No @active set for <pdf>");}
+				if(pdf.isActive())
+				{
+					if(!pdf.isSetCode()){pdf.setCode(""+i);}
+					logger.info("Rendering PDF ("+pdf.getCode()+")");
+					phaseLatex(pdf, fPreProcessingFinished);
+					i++;
+				}
 			}	
 		}
 		if(cmp.getTargets().isSetHtml())
@@ -55,10 +59,14 @@ public class OfxTargetRenderer
 			int i=0;
 			for(Html html : cmp.getTargets().getHtml())
 			{
-				if(!html.isSetCode()){html.setCode(""+i);}
-				logger.info("Rendering HTML ("+html.getCode()+")");
-				renderHtml(html, fPreProcessingFinished);
-				i++;
+				if(!html.isSetActive()){throw new OfxConfigurationException("No @active set for <html>");}
+				if(html.isActive())
+				{
+					if(!html.isSetCode()){html.setCode(""+i);}
+					logger.info("Rendering HTML ("+html.getCode()+")");
+					renderHtml(html, fPreProcessingFinished);
+					i++;
+				}
 			}	
 		}
 	}

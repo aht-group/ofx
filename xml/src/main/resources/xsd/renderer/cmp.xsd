@@ -48,6 +48,7 @@
 				<xsd:element ref="cmp:toc" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
+            <xsd:attribute name="active" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="toc">
@@ -86,6 +87,7 @@
                 <xsd:element ref="html:template" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
+            <xsd:attribute name="active" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>

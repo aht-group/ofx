@@ -123,7 +123,6 @@ public class OfxRenderer
 		OfxRenderer ofxRenderer = new OfxRenderer();	
 		try {ofxRenderer.parseArguments(args);}
 		catch (ParseException e) {logger.error(e.getMessage());ofxRenderer.printHelp();}
-		catch (OfxConfigurationException e) {logger.error(e.getMessage());ofxRenderer.printHelp();}
-			
+		catch (OfxConfigurationException e) {e.printStackTrace();logger.error(e.getMessage());ofxRenderer.printHelp();}
 	}
 }
