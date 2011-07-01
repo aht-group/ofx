@@ -99,8 +99,8 @@ public class OfxRenderConfiguration
 			
 			if(!createFile && !f.exists()){throw new OfxConfigurationException("File (code="+fileCode+"does not exist: "+f.getAbsolutePath());}
 		}
-		catch (ExlpXpathNotFoundException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
-		catch (ExlpXpathNotUniqueException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
+		catch (ExlpXpathNotFoundException e){throw new OfxConfigurationException("Directory not configured for dir.code="+dirCode+" ("+e.getMessage()+")");}
+		catch (ExlpXpathNotUniqueException e){throw new OfxConfigurationException("Directory not configured for dir.code="+dirCode+" ("+e.getMessage()+")");}
 		return f;
 	}
 	
