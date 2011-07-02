@@ -4,17 +4,17 @@
 	
 	<parent>
     	<groupId>org.openfuxml</groupId>
-    	<artifactId>ofx</artifactId>
+    	<artifactId>ofx-archetypes</artifactId>
     	<version>1.3.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
 	</parent>
 	
 	<groupId>org.openfuxml</groupId>
- 	<artifactId>ofx-archetypes</artifactId>
+ 	<artifactId>ofx-archetype-wiki</artifactId>
 	<version>1.3.0-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 
-	<name>ofx-archetype-wiki</name>
+	<name>openFuXML Arcehtype Wiki</name>
 
   <build>
     <extensions>
