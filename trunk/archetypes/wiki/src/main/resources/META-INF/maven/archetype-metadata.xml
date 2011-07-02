@@ -4,15 +4,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <fileSets>
     <fileSet encoding="UTF-8">
-      <directory>.settings</directory>
+      <directory>src</directory>
       <includes>
-        <include>**/*.prefs</include>
-      </includes>
-    </fileSet>
-    <fileSet filtered="true" encoding="UTF-8">
-      <directory></directory>
-      <includes>
-        <include>.project</include>
+        <include>**/*</include>
       </includes>
     </fileSet>
   </fileSets>
