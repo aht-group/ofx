@@ -1,4 +1,4 @@
-package org.openfuxml.addon.jsfapp.factory;
+package org.openfuxml.addon.jsf.factory.jsf;
 
 import java.io.File;
 import java.io.FileNotFoundException;

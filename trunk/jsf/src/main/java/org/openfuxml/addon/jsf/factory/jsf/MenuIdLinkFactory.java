@@ -1,4 +1,4 @@
-package org.openfuxml.addon.jsfapp.factory;
+package org.openfuxml.addon.jsf.factory.jsf;
 
 import java.util.Hashtable;
 import java.util.Map;
