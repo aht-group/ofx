@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://www.openfuxml.org/list"
-	xmlns="http://www.openfuxml.org/list"
+	xmlns:l="http://www.openfuxml.org/list"
 	xmlns:ofx="http://www.openfuxml.org"
 	xmlns:layout="http://www.openfuxml.org/layout"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -13,8 +13,8 @@
     <xsd:element name="list">
         <xsd:complexType>
             <xsd:sequence>
-				<xsd:element ref="type" minOccurs="1" maxOccurs="1"/>
-                <xsd:element ref="item" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="l:type" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="l:item" minOccurs="0" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
