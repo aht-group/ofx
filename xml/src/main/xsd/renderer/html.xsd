@@ -3,7 +3,7 @@
     xmlns:html="http://www.openfuxml.org/renderer/html"
     xmlns:io="http://exlp.sf.net/io"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../../exlp/xml/src/main/resources/xsd/util/io.xsd"/>
+    <xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../exlp/xml/src/main/xsd/util/io.xsd"/>
     <xsd:element name="renderer">
         <xsd:complexType>
             <xsd:sequence>
