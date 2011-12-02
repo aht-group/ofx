@@ -1,4 +1,4 @@
-package org.openfuxml.test.addon.wiki;
+package org.openfuxml.addon.wiki.processor.xhtml;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -103,7 +103,8 @@ public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
 			loggerInit.init();	
 		
 		boolean saveReference = true;
-		int id = 6;
+		
+		int id = 0;
 		
 		TestXhtmlFinalProcessor.chain(id,saveReference);
     }
