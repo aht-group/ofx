@@ -1,4 +1,4 @@
-package org.openfuxml.test.addon.wiki;
+package org.openfuxml.addon.wiki.processor.ofx.xml;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +26,7 @@ import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
 
 @RunWith(Parameterized.class)
-public class TestWikiXmlProcessor extends AbstractFileProcessingTest
+public class TestWikiPageProcessor extends AbstractFileProcessingTest
 {
 	static Log logger = LogFactory.getLog(TestWikiInlineProcessor.class);
 	
@@ -38,7 +38,7 @@ public class TestWikiXmlProcessor extends AbstractFileProcessingTest
 	private File fTest;
 	private File fRef;
 
-	public TestWikiXmlProcessor(File fTest)
+	public TestWikiPageProcessor(File fTest)
 	{
 		this.fTest = fTest;
 		String name = fTest.getName().substring(0, fTest.getName().length()-6);
@@ -87,12 +87,12 @@ public class TestWikiXmlProcessor extends AbstractFileProcessingTest
 	public static void chain(int id, boolean saveReference) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{
 		int index = 0;
-		for(Object[] o : TestWikiXmlProcessor.initFileNames())
+		for(Object[] o : TestWikiPageProcessor.initFileNames())
 		{
 			if(id<0 | id==index)
 			{
 				File fTest = (File)o[0];
-				TestWikiXmlProcessor test = new TestWikiXmlProcessor(fTest);
+				TestWikiPageProcessor test = new TestWikiPageProcessor(fTest);
 				test.init();
 				logger.trace(id+" "+index);
 				test.test(saveReference);
@@ -111,6 +111,6 @@ public class TestWikiXmlProcessor extends AbstractFileProcessingTest
 		boolean saveReference = true;
 		int id = -1;
 		
-		TestWikiXmlProcessor.chain(id,saveReference);
+		TestWikiPageProcessor.chain(id,saveReference);
     }
 }
