@@ -3,7 +3,7 @@
 <project name="OFX-XML"  basedir="../../..">
 
 	<property name="src.dir" location="${basedir}/src/main/java" />
-	<property name="rsrc.dir" location="${basedir}/src/main/resources" />
+	<property name="rsrc.dir" location="${basedir}/src/main" />
 	<property name="xsd.dir" location="${rsrc.dir}/xsd" />
 	
 	<property name="jaxb.version" value="2.2.2"/>
@@ -24,7 +24,7 @@
 			<arg value="-extension"/>
 			<arg value="${xsd.dir}/xsd.xsd"/>
 			<arg value="-d"/><arg value="${src.dir}"/>
-			<arg value="-b"/><arg value="${xsd.dir}/xsd.xjb"/>
+			<arg value="-b"/><arg value="${rsrc.dir}/ant/xsd.xjb"/>
 			<classpath>
 				<pathelement location="${jaxb-api.lib}"/>
 				<pathelement location="${jaxb-impl.lib}"/>

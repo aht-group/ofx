@@ -1,8 +1,11 @@
 package org.openfuxml.renderer.processor.latex.content;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
@@ -25,10 +28,18 @@ public class StringRenderer implements OfxLatexRenderer
 		result.addAll(strings);
 	}
 
-	@Override
-	public List<String> getContent()
+	@Override public List<String> getContent()
 	{
 		return result;
+	}
+	
+	@Override public void write(Writer w) throws IOException
+	{
+		for(String s : getContent())
+		{
+			w.write(s+SystemUtils.LINE_SEPARATOR);
+		}
+		w.flush();
 	}
 	
 }
