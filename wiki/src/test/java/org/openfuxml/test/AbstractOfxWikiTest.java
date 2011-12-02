@@ -1,17 +1,16 @@
 package org.openfuxml.test;
 
-
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.BeforeClass;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AbstractOfxWikiTest
 {
-	static Log logger = LogFactory.getLog(AbstractOfxWikiTest.class);	
+	final static Logger logger = LoggerFactory.getLogger(AbstractOfxWikiTest.class);
 	
 	protected static NsPrefixMapperInterface nsPrefixMapper;
 	

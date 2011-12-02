@@ -4,14 +4,14 @@ import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.processor.net.fetcher.WikiPageFetcher;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TstWikiFetcher
 {
-	static Log logger = LogFactory.getLog(TstWikiFetcher.class);
+	final static Logger logger = LoggerFactory.getLogger(TstWikiFetcher.class);
 	
 	public static void main(String[] args)
     {

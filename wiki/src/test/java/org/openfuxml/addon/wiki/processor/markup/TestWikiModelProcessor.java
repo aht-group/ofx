@@ -99,7 +99,7 @@ public class TestWikiModelProcessor extends AbstractFileProcessingTest
 		OfxWikiTstBootstrap.init();	
 		
 		boolean saveReference = true;
-		int id = 6;
+		int id = -1;
 		
 		TestWikiModelProcessor.chain(id,saveReference);
     }
