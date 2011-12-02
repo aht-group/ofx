@@ -24,7 +24,7 @@ public class LatexItemFactory extends AbstractOfxLatexRenderer implements OfxLat
 		StringBuffer sb = new StringBuffer();
 		sb.append("\\item");
 		
-		if(lt==ListType.list.description)
+		if(lt==LatexListFactory.ListType.description)
 		{
 			if(!item.isSetName()){throw new OfxAuthoringException("<description.list> needss a item@name");}
 			sb.append(" [").append(item.getName()).append("]");
