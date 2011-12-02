@@ -29,7 +29,7 @@ public class OfxExternalMerger
 	
 	public OfxExternalMerger()
 	{
-		rpf = new RelativePathFactory();
+		rpf = new RelativePathFactory(RelativePathFactory.PathSeparator.CURRENT);
 		try
 		{
 			xpath = XPath.newInstance("//*[@external='true']");

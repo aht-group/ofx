@@ -1,14 +1,14 @@
 package org.openfuxml.factory.ofx.table;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.layout.Alignment;
 import org.openfuxml.content.ofx.layout.Width;
 import org.openfuxml.content.ofx.table.Column;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ColumnFactory
 {
-	static Log logger = LogFactory.getLog(ColumnFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(ColumnFactory.class);
 	
 	public static synchronized Column create(String alignmentHorizontal) 
 	{

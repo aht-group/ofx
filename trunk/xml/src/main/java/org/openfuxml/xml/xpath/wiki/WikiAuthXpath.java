@@ -2,13 +2,14 @@ package org.openfuxml.xml.xpath.wiki;
 
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Auth;
+import org.openfuxml.xml.xpath.cmp.HtmlXpath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiAuthXpath
 {
-	static Log logger = LogFactory.getLog(WikiAuthXpath.class);
+	final static Logger logger = LoggerFactory.getLogger(HtmlXpath.class);
 	
 	public static synchronized Auth getAuth(String serverId, String authType) throws ExlpXpathNotFoundException
 	{

@@ -3,13 +3,13 @@ package org.openfuxml.xml.xpath.cmp;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.xml.renderer.cmp.Merge;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CmpJaxbXpathLoader
 {
-	static Log logger = LogFactory.getLog(CmpJaxbXpathLoader.class);
+	final static Logger logger = LoggerFactory.getLogger(CmpJaxbXpathLoader.class);
 	
 	public static synchronized Merge getMerge(List<Merge> list, String code)
 	{

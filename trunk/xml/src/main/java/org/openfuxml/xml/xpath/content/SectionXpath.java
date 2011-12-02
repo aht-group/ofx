@@ -2,14 +2,15 @@ package org.openfuxml.xml.xpath.content;
 
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.xml.xpath.cmp.HtmlXpath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SectionXpath
 {
-	static Log logger = LogFactory.getLog(SectionXpath.class);
+	final static Logger logger = LoggerFactory.getLogger(HtmlXpath.class);
 	
 	public static synchronized Title getTitle(Section section) throws ExlpXpathNotFoundException
 	{
