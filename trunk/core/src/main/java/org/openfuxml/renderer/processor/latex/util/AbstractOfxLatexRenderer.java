@@ -12,7 +12,7 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.ParagraphFactory;
 import org.openfuxml.renderer.processor.latex.content.SectionFactory;
-import org.openfuxml.renderer.processor.latex.content.list.ListFactory;
+import org.openfuxml.renderer.processor.latex.content.list.LatexListFactory;
 
 public class AbstractOfxLatexRenderer
 {
@@ -79,7 +79,7 @@ public class AbstractOfxLatexRenderer
 	
 	protected void renderList(org.openfuxml.xml.content.list.List list,OfxLatexRenderer parent) throws OfxAuthoringException
 	{
-		ListFactory f = new ListFactory();
+		LatexListFactory f = new LatexListFactory();
 		f.render(list,parent);
 		renderer.add(f);
 	}
