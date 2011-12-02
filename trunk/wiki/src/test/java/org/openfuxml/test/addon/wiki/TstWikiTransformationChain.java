@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openfuxml.addon.wiki.processor.markup.TestWikiMarkupProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 
@@ -25,7 +26,7 @@ public class TstWikiTransformationChain
 		int id = 6;
 		boolean saveReference=true;
 			
-		TestMarkupProcessor.chain();
+//		TestWikiMarkupProcessor.chain();
 		TestModelProcessor.chain(id,saveReference);
 		TestXhtmlReplaceProcessor.chain(id,saveReference);
 		TestXhtmlFinalProcessor.chain(id,saveReference);
