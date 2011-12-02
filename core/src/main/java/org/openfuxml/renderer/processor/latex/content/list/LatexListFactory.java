@@ -10,14 +10,16 @@ import org.openfuxml.xml.content.list.Item;
 import org.openfuxml.xml.content.list.List;
 import org.openfuxml.xml.content.list.Type;
 
-public class ListFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexListFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	static Log logger = LogFactory.getLog(ListFactory.class);
+	static Log logger = LogFactory.getLog(LatexListFactory.class);
 
 	private static enum Ordering {ordered,unordered}
-	private static enum Type1 {bullet,description}
+	public static enum ListType {description,list}
 	
-	public ListFactory()
+	private ListType listType;
+	
+	public LatexListFactory()
 	{
 
 	}
@@ -30,23 +32,34 @@ public class ListFactory extends AbstractOfxLatexRenderer implements OfxLatexRen
 		for(Item item : list.getItem())
 		{
 			LatexItemFactory f = new LatexItemFactory();
-			f.render(item);
+			f.render(listType,item);
 			renderer.add(f);
 		}
 	}
 	
-	private void setEnvironment(Type xmlType, OfxLatexRenderer parent)
+	private void setEnvironment(Type xmlType, OfxLatexRenderer parent) throws OfxAuthoringException
 	{
 		preTxt.add("");
 		postTxt.add("");
-		
-		Ordering ordering = Ordering.valueOf(xmlType.getOrdering());
-		switch(ordering)
+		if(xmlType.isSetDescription() && xmlType.isDescription())
 		{
-			case unordered: setUnordered(parent);break;
-			case ordered: setOrdered(parent);break;
-			default: logger.warn("No Ordering defined NYI");break;
+			listType = ListType.description;
+			if(xmlType.isSetOrdering()){throw new OfxAuthoringException("<type> is a description, but ordering is set!");}
+			setDescription();
 		}
+		else if(xmlType.isSetOrdering())
+		{
+			listType = ListType.list;
+			
+			Ordering ordering = Ordering.valueOf(xmlType.getOrdering());
+			switch(ordering)
+			{
+				case unordered: setUnordered(parent);break;
+				case ordered: setOrdered(parent);break;
+				default: logger.warn("No Ordering defined NYI");break;
+			}
+		}
+		else {throw new OfxAuthoringException("<type> is not a description, but no ordering defined");}
 	}
 	
 	// Ordered List
@@ -85,5 +98,12 @@ public class ListFactory extends AbstractOfxLatexRenderer implements OfxLatexRen
 	{
 		preTxt.add("\\begin{compactitem}");
 		postTxt.add("\\end{compactitem}");
+	}
+	
+	// Description
+	private void setDescription()
+	{
+		preTxt.add("\\begin{description}");
+		postTxt.add("\\end{description}");
 	}
 }

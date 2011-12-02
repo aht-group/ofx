@@ -6,8 +6,8 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.addon.wiki.data.jaxb.Auth;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.test.OfxCoreTstBootstrap;
 import org.openfuxml.xml.content.list.Item;
 import org.slf4j.Logger;
@@ -29,34 +29,42 @@ public class TestLatexItemFactory extends AbstractLatexListTest
 	
 	@After public void close(){renderer=null;}
 	
-	public Item createItem()
+	public static Item createItem(){return createItem(null);}
+	public static Item createItem(String name)
 	{
 		Paragraph p = new Paragraph();
 		p.getContent().add(li.getWords(10));
 		
 		Item item = new Item();
-		item.setName("name");
+		item.setName(name);
 		item.getContent().add(p);
 		return item;
 	}
 	
     @Test
-    public void render() throws IOException
+    public void itemize() throws IOException, OfxAuthoringException
     {
     	f = new File(rootDir,dir+"/"+Key.itemize+".txt");
-    	renderer.render(createItem());
+    	renderer.render(LatexListFactory.ListType.list,createItem());
     	debug(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
-   
-    public static Auth create()
+    
+    @Test(expected=OfxAuthoringException.class)
+    public void descriptionNoItemName() throws IOException, OfxAuthoringException
     {
-    	Auth xml = new Auth();
-    	xml.setType("wiki");
-    	xml.setName("name");
-    	xml.setPassword("xyz");
-    	return xml;
+    	renderer.render(LatexListFactory.ListType.description,createItem());
+    }
+    
+    @Test
+    public void description() throws IOException, OfxAuthoringException
+    {
+    	f = new File(rootDir,dir+"/"+Key.description+".txt");
+    	renderer.render(LatexListFactory.ListType.description,createItem(li.getWords(1)));
+    	debug(renderer);
+    	save(renderer,f);
+    	assertText(renderer,f);
     }
     
     public static void main(String[] args) throws Exception
@@ -66,8 +74,9 @@ public class TestLatexItemFactory extends AbstractLatexListTest
     	TestLatexItemFactory.initLoremIpsum();
     	TestLatexItemFactory test = new TestLatexItemFactory();
     	test.setSaveReference(true);
-    	test.initRenderer();
-		test.render();
+    	
+ //   	test.initRenderer();test.itemize();
+//    	test.initRenderer();test.description();
     }
    
 }
