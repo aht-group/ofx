@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openfuxml.addon.wiki.processor.markup.TestWikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.TestWikiModelProcessor;
+import org.openfuxml.addon.wiki.processor.xhtml.TestXhtmlFinalProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 
