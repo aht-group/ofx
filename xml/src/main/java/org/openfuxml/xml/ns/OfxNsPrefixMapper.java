@@ -13,6 +13,7 @@ public class OfxNsPrefixMapper extends NamespacePrefixMapper implements NsPrefix
         if("http://www.openfuxml.org/chart".equals(namespaceUri) ){return "chart";}
         if("http://www.openfuxml.org/table".equals(namespaceUri) ){return "table";}
         if("http://www.openfuxml.org/layout".equals(namespaceUri) ){return "layout";}
+        if("http://www.openfuxml.org/list".equals(namespaceUri) ){return "l";}
         
         if("http://exlp.sf.net/io".equals(namespaceUri) ){return "io";}
   

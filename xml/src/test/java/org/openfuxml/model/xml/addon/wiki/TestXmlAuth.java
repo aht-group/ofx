@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.addon.wiki.data.jaxb.Auth;
@@ -22,9 +21,9 @@ public class TestXmlAuth extends AbstractXmlWikiTest
     @Test
     public void testAuth() throws FileNotFoundException
     {
-    	Auth test = create();
-    	Auth ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Auth.class);
-    	Assert.assertEquals(JaxbUtil.toString(ref),JaxbUtil.toString(test));
+    	Auth actual = create();
+    	Auth expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Auth.class);
+    	assertJaxbEquals(expected, actual);
     }
    
     public static Auth create()
@@ -36,7 +35,7 @@ public class TestXmlAuth extends AbstractXmlWikiTest
     	return xml;
     }
     
-    public void save() {save(create(),fXml);}
+    public void save() {save(create(),fXml,true);}
 	
 	public static void main(String[] args)
     {

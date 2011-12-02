@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.test.OfxXmlTstBootstrap;
@@ -23,9 +22,9 @@ public class TestTaglib extends AbstractXmlJsfTldTest
     @Test
     public void testLang() throws FileNotFoundException
     {
-    	FaceletTaglib test = create();
-    	FaceletTaglib ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), FaceletTaglib.class);
-    	Assert.assertEquals(JaxbUtil.toString(test),JaxbUtil.toString(ref));
+    	FaceletTaglib actual = create();
+    	FaceletTaglib expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), FaceletTaglib.class);
+    	assertJaxbEquals(expected, actual);
     }
    
     public static FaceletTaglib create()
@@ -35,7 +34,7 @@ public class TestTaglib extends AbstractXmlJsfTldTest
     	return xml;
     }
     
-    public void save() {save(create(),fXml);}
+    public void save() {save(create(),fXml,true);}
 	
 	public static void main(String[] args)
     {
