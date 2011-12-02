@@ -195,7 +195,7 @@ public class TaglibFactoryTask extends Task
 	public void setTagRoot(String tagRoot) {this.tagRoot = tagRoot;}
 	
 	public void setTld(String tld) {this.tld = tld;}
-	public void setUseLog4j(boolean useLog4j) {JaxbUtil.useLog4j=useLog4j;this.useLog4j = useLog4j;}
+	public void setUseLog4j(boolean useLog4j) {this.useLog4j = useLog4j;}
 	public void setFacesConfig(String facesConfig) {this.facesConfig = facesConfig;}
 	public void setL4jFile(String l4jFile) {this.l4jFile = l4jFile;}
 	

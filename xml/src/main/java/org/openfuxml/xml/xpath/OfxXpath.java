@@ -2,14 +2,14 @@ package org.openfuxml.xml.xpath;
 
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Namespace;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxXpath
 {
-	static Log logger = LogFactory.getLog(OfxXpath.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxXpath.class);
 	
 	public static synchronized Namespace getNsHtml()
 	{

@@ -12,27 +12,11 @@
     <artifactId>ofx-core</artifactId>
     <packaging>jar</packaging>
     <name>openFuXML Core</name>
-   
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<inherited>true</inherited>
-				<version>${maven-compiler-plugin.version}</version>
-				<configuration>
-					<source>${compiler-source.version}</source>
-					<target>${compiler-target.version}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 	
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-util</artifactId>
-			<version>${exlp.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -77,6 +61,14 @@
 			<version>${commons-cli.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
 		</dependency>
 	</dependencies>
 </project>

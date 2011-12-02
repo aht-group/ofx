@@ -9,8 +9,6 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.io.Dir;
 import net.sf.exlp.xml.io.File;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -18,10 +16,12 @@ import org.jdom.xpath.XPath;
 import org.openfuxml.xml.renderer.cmp.Html;
 import org.openfuxml.xml.renderer.html.Renderer;
 import org.openfuxml.xml.xpath.OfxXpath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HtmlXpath
 {
-	static Log logger = LogFactory.getLog(HtmlXpath.class);
+	final static Logger logger = LoggerFactory.getLogger(HtmlXpath.class);
 	
 	@SuppressWarnings("unchecked")
 	public static synchronized Renderer getRenderer(Html html, String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
@@ -38,7 +38,7 @@ public class HtmlXpath
 			Element e = (Element)list.get(0);
 			result = (Renderer)JDomUtil.toJaxb(e, Renderer.class);
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
         return result;
 	}
 	
@@ -56,7 +56,7 @@ public class HtmlXpath
 			Element e = (Element)list.get(0);
 			file = (File)JDomUtil.toJaxb(e, File.class);
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
         return file;
 	}
 }
