@@ -4,7 +4,18 @@
     
 	
 	<ofx:paragraph>Currently only a command line interface is available.</ofx:paragraph>
-	<code>usage: java -jar xxx.jar-config &lt;FILENAME&gt;   Use configuration file FILENAME (optional, default is properties.txt)</code>
-	<ofx:paragraph />
+
+	<ofx:paragraph>
+		<code />
+	</ofx:paragraph>
+
+	<literallayout>
+usage: java -jar xxx.jar
+-config &lt;FILENAME&gt;   Use configuration file FILENAME (optional, default is properties.txt)
+</literallayout>
+
+	<ofx:paragraph>
+</ofx:paragraph>
+
 
 </ofx:section>

@@ -5,15 +5,19 @@
 	
 	<list:list>
 		<list:type ordering="ordered" />
+
 		<list:item>
 			<ofx:paragraph>user clicks link for language (English, Swahili)</ofx:paragraph>
 		</list:item>
+
 		<list:item>
 			<ofx:paragraph>on the server side, the Locale for the current session is updated</ofx:paragraph>
 		</list:item>
+
 		<list:item>
 			<ofx:paragraph>the web page is displayed in the selected language</ofx:paragraph>
 		</list:item>
 	</list:list>
+
 
 </ofx:section>

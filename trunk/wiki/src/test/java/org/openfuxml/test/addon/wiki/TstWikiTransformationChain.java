@@ -10,7 +10,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openfuxml.addon.wiki.processor.markup.TestWikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.markup.TestWikiModelProcessor;
+import org.openfuxml.addon.wiki.processor.ofx.xml.TestWikiPageProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.TestXhtmlFinalProcessor;
+import org.openfuxml.addon.wiki.processor.xhtml.TestXhtmlReplaceProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 
@@ -32,6 +34,6 @@ public class TstWikiTransformationChain
 		TestWikiModelProcessor.chain(id,saveReference);
 		TestXhtmlReplaceProcessor.chain(id,saveReference);
 		TestXhtmlFinalProcessor.chain(id,saveReference);
-		TestWikiXmlProcessor.chain(id,saveReference);
+		TestWikiPageProcessor.chain(id,saveReference);
     }
 }
