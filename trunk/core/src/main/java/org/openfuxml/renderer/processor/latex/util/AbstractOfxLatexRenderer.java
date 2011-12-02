@@ -1,8 +1,11 @@
 package org.openfuxml.renderer.processor.latex.util;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Paragraph;
@@ -58,6 +61,15 @@ public class AbstractOfxLatexRenderer
 		return resultTxt;
 	}
 	
+	public void write(Writer w) throws IOException
+	{
+		for(String s : getContent())
+		{
+			w.write(s+SystemUtils.LINE_SEPARATOR);
+		}
+		w.flush();
+	}
+	
 	protected void paragraphRenderer(Paragraph paragraph, boolean preBlankLine)
 	{
 		ParagraphFactory f = new ParagraphFactory(preBlankLine);
@@ -65,7 +77,7 @@ public class AbstractOfxLatexRenderer
 		renderer.add(f);
 	}
 	
-	protected void renderList(org.openfuxml.content.ofx.list.List list,OfxLatexRenderer parent) throws OfxAuthoringException
+	protected void renderList(org.openfuxml.xml.content.list.List list,OfxLatexRenderer parent) throws OfxAuthoringException
 	{
 		ListFactory f = new ListFactory();
 		f.render(list,parent);

@@ -2,19 +2,20 @@ package org.openfuxml.renderer.processor.latex.content.list;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.content.ofx.list.Item;
-import org.openfuxml.content.ofx.list.List;
-import org.openfuxml.content.ofx.list.Type;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.table.CellFactory;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
+import org.openfuxml.xml.content.list.Item;
+import org.openfuxml.xml.content.list.List;
+import org.openfuxml.xml.content.list.Type;
 
 public class ListFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
 	static Log logger = LogFactory.getLog(ListFactory.class);
 
 	private static enum Ordering {ordered,unordered}
+	private static enum Type1 {bullet,description}
 	
 	public ListFactory()
 	{
@@ -28,18 +29,18 @@ public class ListFactory extends AbstractOfxLatexRenderer implements OfxLatexRen
 		
 		for(Item item : list.getItem())
 		{
-			ItemFactory f = new ItemFactory();
+			LatexItemFactory f = new LatexItemFactory();
 			f.render(item);
 			renderer.add(f);
 		}
 	}
 	
-	private void setEnvironment(Type type, OfxLatexRenderer parent)
+	private void setEnvironment(Type xmlType, OfxLatexRenderer parent)
 	{
 		preTxt.add("");
 		postTxt.add("");
 		
-		Ordering ordering = Ordering.valueOf(type.getOrdering());
+		Ordering ordering = Ordering.valueOf(xmlType.getOrdering());
 		switch(ordering)
 		{
 			case unordered: setUnordered(parent);break;

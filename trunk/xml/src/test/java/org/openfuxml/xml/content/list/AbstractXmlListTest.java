@@ -1,4 +1,4 @@
-package org.openfuxml.model.xml.content.ofx.list;
+package org.openfuxml.xml.content.list;
 
 import java.io.File;
 

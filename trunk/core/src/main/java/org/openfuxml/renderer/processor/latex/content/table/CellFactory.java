@@ -3,11 +3,11 @@ package org.openfuxml.renderer.processor.latex.content.table;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.list.List;
 import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
+import org.openfuxml.xml.content.list.List;
 
 public class CellFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {

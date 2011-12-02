@@ -1,32 +1,45 @@
 package org.openfuxml.test;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
 
-import javax.xml.datatype.XMLGregorianCalendar;
-
-import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.RelativePathFactory;
+import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.svenjacobs.loremipsum.LoremIpsum;
 
 public class AbstractOfxCoreTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxCoreTest.class);
 	
 	protected static NsPrefixMapperInterface nsPrefixMapper;
-	
+	protected static LoremIpsum li;
+	private boolean saveReference = false;
+	protected File f;
+
 	@BeforeClass
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("src/test/resources/config");
+		loggerInit.addAltPath("ofx-core.test");
 		loggerInit.init();
+    }
+	
+	@BeforeClass
+    public static void initLoremIpsum()
+	{
+		li = new LoremIpsum();
     }
 	
 	@BeforeClass
@@ -40,15 +53,40 @@ public class AbstractOfxCoreTest
 		Assert.assertEquals("XML-ref differes from XML-test",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
 	}
 	
-	protected void save(Object xml, File f)
+	protected void save(OfxLatexRenderer renderer, File f) throws IOException
 	{
-		logger.debug("Saving Reference XML");
-		JaxbUtil.debug2(this.getClass(),xml, nsPrefixMapper);
-    	JaxbUtil.save(f, xml, nsPrefixMapper, true);
+		if(saveReference)
+		{
+			RelativePathFactory rpf = new RelativePathFactory(new File("src/test/resources"),RelativePathFactory.PathSeparator.CURRENT);
+			logger.debug("Saving Reference to "+rpf.relativate(f));
+			StringWriter actual = new StringWriter();
+			renderer.write(actual);
+			StringIO.writeTxt(f, actual.toString());
+		}
 	}
 	
-	protected static XMLGregorianCalendar getDefaultXmlDate()
+	protected void assertText(OfxLatexRenderer renderer, File f) throws IOException
 	{
-		return DateUtil.getXmlGc4D(DateUtil.getDateFromInt(2011, 11, 11, 11, 11, 11));
+		StringWriter actual = new StringWriter();
+		renderer.write(actual);
+		
+		String expected = StringIO.loadTxt(f);
+		Assert.assertEquals(expected, actual.toString());
 	}
+	
+	protected void  debug(OfxLatexRenderer renderer)
+	{
+		if(logger.isDebugEnabled())
+		{
+			logger.debug("Debugging "+renderer.getClass().getSimpleName());
+			System.out.println("************************************");
+			for(String s : renderer.getContent())
+			{
+				System.out.println(s);
+			}
+			System.out.println("************************************");
+		}
+	}
+	
+	public void setSaveReference(boolean saveReference) {this.saveReference = saveReference;}
 }

@@ -3,15 +3,15 @@ package org.openfuxml.renderer.processor.latex.content.list;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.list.Item;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
+import org.openfuxml.xml.content.list.Item;
 
-public class ItemFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexItemFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	static Log logger = LogFactory.getLog(ItemFactory.class);
+	static Log logger = LogFactory.getLog(LatexItemFactory.class);
 	
-	public ItemFactory()
+	public LatexItemFactory()
 	{
 		
 	}
