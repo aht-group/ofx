@@ -5,8 +5,6 @@
 	
 	<ofx:paragraph>This is a link with additional Text 
 		<ofx:reference target="http://openfuxml.sourceforge.net">openFuXML</ofx:reference>
-
 	</ofx:paragraph>
-
 
 </ofx:section>

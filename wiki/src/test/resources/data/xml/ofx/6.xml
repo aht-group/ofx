@@ -14,8 +14,4 @@ usage: java -jar xxx.jar
 -config &lt;FILENAME&gt;   Use configuration file FILENAME (optional, default is properties.txt)
 </literallayout>
 
-	<ofx:paragraph>
-</ofx:paragraph>
-
-
 </ofx:section>

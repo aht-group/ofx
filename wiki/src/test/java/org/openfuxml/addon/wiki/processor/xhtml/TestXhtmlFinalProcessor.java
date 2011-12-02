@@ -104,7 +104,7 @@ public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
 		
 		boolean saveReference = true;
 		
-		int id = 0;
+		int id = -1;
 		
 		TestXhtmlFinalProcessor.chain(id,saveReference);
     }
