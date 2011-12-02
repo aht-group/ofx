@@ -7,9 +7,7 @@
 		<ofx:title>Section Header</ofx:title>
 
 
-		<ofx:paragraph>Test body
-</ofx:paragraph>
-
+		<ofx:paragraph>Test body</ofx:paragraph>
 	</ofx:section>
 
 </ofx:section>
