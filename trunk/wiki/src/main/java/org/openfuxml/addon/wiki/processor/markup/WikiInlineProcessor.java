@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki;
+package org.openfuxml.addon.wiki.processor.markup;
 
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -9,8 +9,6 @@ import org.jdom.Element;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
 import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;
-import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
-import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
 import org.openfuxml.addon.wiki.processor.ofx.xml.WikiPageProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlFinalProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;

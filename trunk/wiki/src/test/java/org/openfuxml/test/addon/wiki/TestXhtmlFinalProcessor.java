@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openfuxml.addon.wiki.processor.markup.TestWikiInlineProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlFinalProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
