@@ -1,10 +1,9 @@
-package org.openfuxml.test.addon.wiki;
+package org.openfuxml.addon.wiki.processor.markup;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.StringIO;
 
 import org.apache.commons.logging.Log;
@@ -15,14 +14,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openfuxml.addon.wiki.processor.markup.TestWikiInlineProcessor;
-import org.openfuxml.addon.wiki.processor.markup.WikiModelProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
+import org.openfuxml.test.OfxWikiTstBootstrap;
 
 @RunWith(Parameterized.class)
-public class TestModelProcessor extends AbstractFileProcessingTest
+public class TestWikiModelProcessor extends AbstractFileProcessingTest
 {
 	static Log logger = LogFactory.getLog(TestWikiInlineProcessor.class);
 	
@@ -34,7 +32,7 @@ public class TestModelProcessor extends AbstractFileProcessingTest
 	private File fTest;
 	private File fRef;
 
-	public TestModelProcessor(File fTest)
+	public TestWikiModelProcessor(File fTest)
 	{
 		this.fTest = fTest;
 		String name = fTest.getName().substring(0, fTest.getName().length()-4);
@@ -81,12 +79,12 @@ public class TestModelProcessor extends AbstractFileProcessingTest
 	public static void chain(int id, boolean saveReference) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{
 		int index = 0;
-		for(Object[] o : TestModelProcessor.initFileNames())
+		for(Object[] o : TestWikiModelProcessor.initFileNames())
 		{
 			if(id<0 | id==index)
 			{
 				File fTest = (File)o[0];
-				TestModelProcessor test = new TestModelProcessor(fTest);
+				TestWikiModelProcessor test = new TestWikiModelProcessor(fTest);
 				test.init();
 				logger.trace(id+" "+index);
 				test.wikiPlainToMarkup(saveReference);
@@ -98,13 +96,11 @@ public class TestModelProcessor extends AbstractFileProcessingTest
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
     {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();	
+		OfxWikiTstBootstrap.init();	
 		
 		boolean saveReference = true;
 		int id = 6;
 		
-		TestModelProcessor.chain(id,saveReference);
+		TestWikiModelProcessor.chain(id,saveReference);
     }
 }
