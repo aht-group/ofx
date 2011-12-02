@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.addon.wiki.data.jaxb.Server;
@@ -22,9 +21,9 @@ public class TestXmlServer extends AbstractXmlWikiTest
     @Test
     public void testServer() throws FileNotFoundException
     {
-    	Server test = create(true);
-    	Server ref = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Server.class);
-    	Assert.assertEquals(JaxbUtil.toString(ref),JaxbUtil.toString(test));
+    	Server actual = create(true);
+    	Server expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Server.class);
+    	assertJaxbEquals(expected, actual);
     }
    
     private static Server create() {return create(true);}
@@ -42,7 +41,7 @@ public class TestXmlServer extends AbstractXmlWikiTest
     	return xml;
     }
 	
-    public void save() {save(create(),fXml);}
+    public void save() {save(create(),fXml,true);}
     
 	public static void main(String[] args)
     {
