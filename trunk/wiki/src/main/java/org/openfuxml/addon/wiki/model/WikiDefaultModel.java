@@ -8,8 +8,13 @@ import info.bliki.wiki.model.WikiModel;
 import java.util.Locale;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class WikiDefaultModel extends WikiModel
 {
+	final static Logger logger = LoggerFactory.getLogger(WikiDefaultModel.class);
+	
 	public final static String TL = "{{[[Template:{{{1}}}|{{{1}}}]]}}<noinclude>\n" + "{{pp-template|small=yes}}\n"
 			+ "{{documentation}}\n" + "</noinclude>";
 	public final static String PRON_ENG = "#REDIRECT [[Template:Pron-en]]";
@@ -484,9 +489,13 @@ public class WikiDefaultModel extends WikiModel
 			return result;
 		}
 		String name = encodeTitleToUrl(articleName, true);
-		if (isTemplateNamespace(namespace)) {
-			if (MagicWord.isMagicWord(articleName)) {
-				return MagicWord.processMagicWord(articleName, this);
+		if (isTemplateNamespace(namespace))
+		{
+			if (MagicWord.isMagicWord(articleName))
+			{
+				logger.warn("API of BLIKI has changed, this needs to be cheked!");
+				//TODO OFX-14
+				//return MagicWord.processMagicWord(articleName, this);
 			}
 			if (name.equals("Reflist")) {
 				return REFLIST_TEXT;
