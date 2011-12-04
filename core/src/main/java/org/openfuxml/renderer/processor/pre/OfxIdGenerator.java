@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.logging.Log;

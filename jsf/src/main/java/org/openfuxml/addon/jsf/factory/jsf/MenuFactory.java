@@ -30,7 +30,7 @@ public class MenuFactory
 	
 	public void save(File xmlToc)
 	{
-		JaxbUtil.debug(menu);
+		JaxbUtil.debug(this.getClass(),menu);
 		JaxbUtil.save(xmlToc, menu, true);
 	}
 	

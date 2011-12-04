@@ -16,7 +16,6 @@ import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.content.ofx.layout.Alignment;
 import org.openfuxml.content.ofx.table.Body;
 import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.content.ofx.table.Columns;

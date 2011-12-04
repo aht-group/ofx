@@ -24,7 +24,7 @@ public class OfxChartTypeResolver
 		if(type.isSetGantt()){return Type.Gantt;}
 		if(type.isSetSpline()){return Type.Spline;}
 		logger.warn("Unknown Charttype");
-		JaxbUtil.debug(type);
+		JaxbUtil.debug(OfxChartTypeResolver.class,type);
 		return null;
 	}
 	

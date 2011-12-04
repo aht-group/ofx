@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.content.ofx.layout.Alignment;
 import org.openfuxml.content.ofx.table.Column;
 import org.openfuxml.content.ofx.table.Columns;
 

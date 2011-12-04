@@ -187,7 +187,7 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 	
 	private void checkPageConfig(Page page) throws OfxAuthoringException
 	{
-		JaxbUtil.debug(page);
+		JaxbUtil.debug(this.getClass(),page);
 		boolean sSection = page.isSetSection();
 		
 		if(!sSection){throw new OfxAuthoringException("None of <section>  selected!");}
