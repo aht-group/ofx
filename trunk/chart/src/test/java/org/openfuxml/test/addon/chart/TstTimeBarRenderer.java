@@ -82,7 +82,7 @@ public class TstTimeBarRenderer
 		
 		TstTimeBarRenderer test = new TstTimeBarRenderer();
 		Chart chart = test.getTimeSeries();
-		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
+		JaxbUtil.debug2(TstTimeBarRenderer.class,chart, new OfxNsPrefixMapper());
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);

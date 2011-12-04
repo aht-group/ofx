@@ -127,10 +127,10 @@ public class OfxContainerMerger
 		if(args.length == 1 ){fName = args[0];}
 		
 		Ofxdoc ofxDocOriginal = (Ofxdoc)JaxbUtil.loadJAXB(fName, Ofxdoc.class);
-		JaxbUtil.debug(ofxDocOriginal);
+		JaxbUtil.debug(OfxContainerMerger.class,ofxDocOriginal);
 		
 		OfxContainerMerger containerMerger = new OfxContainerMerger();
 		Ofxdoc ofxDocContainer = containerMerger.merge(ofxDocOriginal);
-		JaxbUtil.debug(ofxDocContainer);
+		JaxbUtil.debug(OfxContainerMerger.class,ofxDocContainer);
 	}
 }

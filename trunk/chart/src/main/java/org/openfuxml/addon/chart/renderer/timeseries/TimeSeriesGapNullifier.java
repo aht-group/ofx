@@ -5,7 +5,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import net.sf.exlp.util.DateUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
