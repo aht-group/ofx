@@ -35,13 +35,6 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.openfuxml</groupId>
-			<artifactId>ofx-wiki</artifactId>
-			<version>${project.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
 			<version>${jaxen.version}</version>
