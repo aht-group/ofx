@@ -49,21 +49,18 @@
 		<dependency>
 			<groupId>org.openfuxml</groupId>
 			<artifactId>ofx-xml</artifactId>
-			<version>${project.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>jfree</groupId>
 			<artifactId>jfreechart</artifactId>
-			<version>1.0.12</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-core</artifactId>
-			<version>${exlp.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -83,7 +80,6 @@
 		<dependency>
 			<groupId>org.openfuxml</groupId>
 			<artifactId>ofx-util</artifactId>
-			<version>${project.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -109,7 +105,6 @@
 		<dependency>
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
-			<version>${jaxen.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

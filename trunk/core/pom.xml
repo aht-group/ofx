@@ -23,14 +23,12 @@
 		<dependency>
 			<groupId>org.openfuxml</groupId>
 			<artifactId>ofx-xml</artifactId>
-			<version>${project.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.openfuxml</groupId>
 			<artifactId>ofx-util</artifactId>
-			<version>${project.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -38,8 +36,7 @@
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
 			<version>${jaxen.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-cli</groupId>
