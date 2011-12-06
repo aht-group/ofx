@@ -133,6 +133,7 @@
 	</issueManagement>
 
 	<modules>
+		<module>client</module>
 		<module>jsf</module>
 		<module>core</module>
 		<module>wiki</module>
