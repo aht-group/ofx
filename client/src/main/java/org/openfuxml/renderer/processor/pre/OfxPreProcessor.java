@@ -31,6 +31,8 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.exception.OfxRenderingException;
+import org.openfuxml.renderer.OfxRenderProcessor.DirCode;
+import org.openfuxml.renderer.OfxRenderProcessor.FileCode;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 import org.openfuxml.xml.renderer.cmp.Cmp;
@@ -43,9 +45,6 @@ public class OfxPreProcessor
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxPreProcessor.class);
 		
-	public static enum DirCode {working,content};
-	public static enum FileCode {root,external1,wikiIntegrate,external2,container1,template,external3,container2,idsGenerated,ofxPreFinished};
-	
 	private OfxRenderConfiguration cmpConfigUtil;
 	
 	private Cmp cmp;
