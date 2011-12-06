@@ -5,8 +5,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
@@ -26,10 +24,12 @@ import org.openfuxml.addon.chart.util.ChartLabelResolver;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 import org.openfuxml.addon.chart.util.OfxCustomPaintColors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRenderer
 {
-	static Log logger = LogFactory.getLog(SplineChartRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(SplineChartRenderer.class);
 	
 	private Map<Integer,OfxCustomPaintColors> mapOfxColors;
 	private Map<Integer,XYSeriesCollection> mapXySeriesCollection;

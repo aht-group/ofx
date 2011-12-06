@@ -2,17 +2,17 @@ package org.openfuxml.addon.chart.renderer.generic;
 
 import java.awt.Dimension;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.data.jaxb.Axis;
 import org.openfuxml.addon.chart.data.jaxb.Chart;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AbstractChartRenderer
 {
-	static Log logger = LogFactory.getLog(AbstractChartRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractChartRenderer.class);
 	
 	protected JFreeChart chart;
 	protected Chart ofxChart;
@@ -28,7 +28,7 @@ public class AbstractChartRenderer
 		chart.getPlot().setBackgroundPaint(ChartColorFactory.createColor(ofxChart, ChartColorFactory.Area.backgroundPlot));
 		setSpecialColors();
 	}
-	protected void setSpecialColors(){logger.fatal("This should be @Overridden");}
+	protected void setSpecialColors(){logger.error("This should be @Overridden");}
 	
 	protected void setGrid()
 	{
@@ -37,7 +37,7 @@ public class AbstractChartRenderer
 			 setSpecialGrid();
 		 }
 	}
-	protected void setSpecialGrid(){logger.fatal("This should be @Overridden");}
+	protected void setSpecialGrid(){logger.error("This should be @Overridden");}
 	
 	protected void setAxis()
 	{
@@ -49,12 +49,12 @@ public class AbstractChartRenderer
 	}
 	protected void setAxis(Axis axis,AxisOrientation type)
 	{
-		logger.fatal("This should be @Overridden");
+		logger.error("This should be @Overridden");
 	}
 	
 	public Dimension getSuggestedSize()
 	{
-		logger.fatal("This should be @Overridden");
+		logger.error("This should be @Overridden");
 		throw new UnsupportedOperationException();
 	}
 }

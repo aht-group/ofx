@@ -2,8 +2,6 @@ package org.openfuxml.addon.chart;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.data.jaxb.Chart;
@@ -16,10 +14,12 @@ import org.openfuxml.addon.chart.renderer.timeseries.TimeSeriesChartRenderer;
 import org.openfuxml.addon.chart.renderer.timeseries.TimeSeriesCumulativeChartRenderer;
 import org.openfuxml.addon.chart.renderer.xy.SplineChartRenderer;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OFxChartRenderControl
 {
-	static Log logger = LogFactory.getLog(OFxChartRenderControl.class);
+	final static Logger logger = LoggerFactory.getLogger(OFxChartRenderControl.class);
 	
 	private OfxChartRenderer ofxRenderer;
 	

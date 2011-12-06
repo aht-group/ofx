@@ -13,7 +13,7 @@ import org.openfuxml.content.ofx.Paragraph;
 
 public class TestParagraph
 {
-	static Log logger = LogFactory.getLog(TestParagraph.class);
+	final static Logger logger = LoggerFactory.getLogger(TestParagraph.class);
 	
 	public TestParagraph()
 	{

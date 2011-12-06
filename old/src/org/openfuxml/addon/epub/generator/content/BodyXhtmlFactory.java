@@ -11,7 +11,7 @@ import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 
 public class BodyXhtmlFactory
 {
-	static Log logger = LogFactory.getLog(OfxExternalMerger.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxExternalMerger.class);
 	
 	private Namespace ns;
 	private EpubSectionFactory sectionFactory;

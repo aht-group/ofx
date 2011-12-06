@@ -20,7 +20,7 @@ import org.openfuxml.communication.cluster.ejb.Host;
 @Remote(OpenFuxmlFacade.class)
 public class OpenFuxmlFacadeBean implements OpenFuxmlFacade, Serializable
 {
-	static Log logger = LogFactory.getLog(OpenFuxmlFacadeBean.class);
+	final static Logger logger = LoggerFactory.getLogger(OpenFuxmlFacadeBean.class);
 	static final long serialVersionUID=13;
 	
 	@PersistenceContext (unitName="openfuxml")

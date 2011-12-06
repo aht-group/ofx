@@ -1,17 +1,17 @@
 package org.openfuxml.renderer.processor.html.section;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Content;
 import org.jdom.Element;
 import org.jdom.Text;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.renderer.processor.html.structure.ReferenceRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ParagraphRenderer
 {
-	static Log logger = LogFactory.getLog(ParagraphRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(ParagraphRenderer.class);
 	
 	public ParagraphRenderer()
 	{

@@ -8,8 +8,6 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,16 +16,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openfuxml.addon.wiki.processor.markup.TestWikiInlineProcessor;
-import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
 import org.openfuxml.xml.renderer.cmp.Cmp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RunWith(Parameterized.class)
 public class TestXhtmlReplaceProcessor extends AbstractFileProcessingTest
 {
-	static Log logger = LogFactory.getLog(TestWikiInlineProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(TestWikiInlineProcessor.class);
 	
 	private XhtmlReplaceProcessor xhtmlP;
 	
@@ -70,7 +69,7 @@ public class TestXhtmlReplaceProcessor extends AbstractFileProcessingTest
     @Test
     public void test() throws OfxInternalProcessingException
     {
-    	logger.debug(fTest.getAbsoluteFile());
+    	logger.debug(fTest.getAbsolutePath());
     	test(false);
     }
 	

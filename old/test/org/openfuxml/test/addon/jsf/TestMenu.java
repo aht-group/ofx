@@ -10,7 +10,7 @@ import org.openfuxml.addon.jsfapp.data.jaxb.Menuitem;
 
 public class TestMenu
 {
-	static Log logger = LogFactory.getLog(TestMenu.class);
+	final static Logger logger = LoggerFactory.getLogger(TestMenu.class);
 	
 	public TestMenu()
 	{

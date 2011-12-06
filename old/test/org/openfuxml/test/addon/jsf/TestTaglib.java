@@ -11,7 +11,7 @@ import org.openfuxml.addon.jsf.data.jaxb.Taglib;
 
 public class TestTaglib
 {
-	static Log logger = LogFactory.getLog(TestTaglib.class);
+	final static Logger logger = LoggerFactory.getLogger(TestTaglib.class);
 	
 	public TestTaglib()
 	{

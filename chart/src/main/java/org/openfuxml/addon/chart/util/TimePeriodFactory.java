@@ -2,17 +2,17 @@ package org.openfuxml.addon.chart.util;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Hour;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.Year;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TimePeriodFactory
 {	
-	static Log logger = LogFactory.getLog(TimePeriodFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TimePeriodFactory.class);
 	
 	public static enum OfxChartTimePeriod {Hour,Day,Month,Year};
 	

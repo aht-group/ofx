@@ -1,17 +1,17 @@
 package org.openfuxml.renderer.processor.latex.content.list;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.list.LatexListFactory.ListType;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.openfuxml.xml.content.list.Item;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LatexItemFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	static Log logger = LogFactory.getLog(LatexItemFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexItemFactory.class);
 	
 	public LatexItemFactory()
 	{

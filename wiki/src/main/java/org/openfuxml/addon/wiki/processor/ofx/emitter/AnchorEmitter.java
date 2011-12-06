@@ -3,14 +3,14 @@ package org.openfuxml.addon.wiki.processor.ofx.emitter;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
 public class AnchorEmitter extends NestingEmitter
 {
-	static Log logger = LogFactory.getLog(AnchorEmitter.class);
+	final static Logger logger = LoggerFactory.getLogger(AnchorEmitter.class);
 	
 	private boolean openTag = false;
 

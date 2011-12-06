@@ -9,8 +9,6 @@ import java.util.List;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
@@ -38,10 +36,12 @@ import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.openfuxml.xml.renderer.cmp.Preprocessor;
 import org.openfuxml.xml.renderer.cmp.Wiki;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxPreProcessor
 {
-	static Log logger = LogFactory.getLog(OfxPreProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxPreProcessor.class);
 		
 	public static enum DirCode {working,content};
 	public static enum FileCode {root,external1,wikiIntegrate,external2,container1,template,external3,container2,idsGenerated,ofxPreFinished};

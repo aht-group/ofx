@@ -14,7 +14,7 @@ import org.openfuxml.util.config.jaxb.Files.File;
 
 public class ConfFileFactory
 {
-	static Log logger = LogFactory.getLog(ConfFileFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(ConfFileFactory.class);
 	
 	private Properties properties;
 	
@@ -29,7 +29,7 @@ public class ConfFileFactory
 			properties.load(is);
 		}
 		catch (FileNotFoundException e) {logger.warn("This should only happen in Developing Environments",e);}
-		catch (IOException e) {logger.error(e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 	
 	public Files getFiles()

@@ -11,7 +11,7 @@ import org.jdom.Namespace;
 
 public class NsFactory
 {
-	static Log logger = LogFactory.getLog(NsFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(NsFactory.class);
 	
 	private static Map<String,Namespace> mNs;
 		

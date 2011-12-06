@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class ErrorReporter
 {
-	static Log logger = LogFactory.getLog(ErrorReporter.class);
+	final static Logger logger = LoggerFactory.getLogger(ErrorReporter.class);
 	
 	private static String host;
 	private static boolean report=false;

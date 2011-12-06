@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.TrayItem;
 
 public class OpenFuxmlTray
 {
-	static Log logger = LogFactory.getLog(OpenFuxmlTray.class);
+	final static Logger logger = LoggerFactory.getLogger(OpenFuxmlTray.class);
 	public final static String IMG_FUXICON_KLEIN	= "/swt/images/FuXML-Icon-klein.gif";
 	
 	private Composite parent;
@@ -71,7 +71,7 @@ public class OpenFuxmlTray
 				Image img = irl.search(this.getClass().getClassLoader(), IMG_FUXICON_KLEIN, of.getDisplay());
 				item.setImage(img);
 			}
-			catch (FileNotFoundException e) {logger.error(e);}
+			catch (FileNotFoundException e) {logger.error("",e);}
 		}
 	}
 	

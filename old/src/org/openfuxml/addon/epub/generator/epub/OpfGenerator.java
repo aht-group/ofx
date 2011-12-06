@@ -20,7 +20,7 @@ import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 
 public class OpfGenerator
 {
-	static Log logger = LogFactory.getLog(OfxExternalMerger.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxExternalMerger.class);
 	
 	private File targetDir;
 	private Document doc;

@@ -20,7 +20,7 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
  */
 public class ImgCanvas extends Canvas
 {
-	static Log logger = LogFactory.getLog(ImgCanvas.class);
+	final static Logger logger = LoggerFactory.getLogger(ImgCanvas.class);
 	
 	public final static int BEGIN  = 0;
 	public final static int CENTER = 1;

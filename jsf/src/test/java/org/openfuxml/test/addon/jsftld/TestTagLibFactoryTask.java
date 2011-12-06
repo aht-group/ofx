@@ -6,8 +6,6 @@ import junit.framework.Assert;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.tools.ant.BuildException;
 import org.jdom.Attribute;
 import org.jdom.Document;
@@ -18,10 +16,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.addon.jsf.factory.TaglibFactoryTask;
 import org.openfuxml.test.AbstractJsfTldTest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestTagLibFactoryTask extends AbstractJsfTldTest
 {
-	static Log logger = LogFactory.getLog(TestTagLibFactoryTask.class);
+	final static Logger logger = LoggerFactory.getLogger(TestTagLibFactoryTask.class);
 	
 	private static final String rootTest = "src/main/tld";
 	public static boolean useLogging;

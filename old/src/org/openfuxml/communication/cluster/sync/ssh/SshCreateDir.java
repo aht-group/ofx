@@ -13,7 +13,7 @@ import com.jcraft.jsch.Session;
 
 public class SshCreateDir
 {
-	static Log logger = LogFactory.getLog(SshCreateDir.class);
+	final static Logger logger = LoggerFactory.getLogger(SshCreateDir.class);
 		
 	public static void createDir(String user,String host, String absolutePath)
 	{

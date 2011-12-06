@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.Text;
  */
 public class EinstellungenDialog extends Dialog
 {
-	static Log logger = LogFactory.getLog(EinstellungenDialog.class);
+	final static Logger logger = LoggerFactory.getLogger(EinstellungenDialog.class);
 	
 	private Shell shell;
 

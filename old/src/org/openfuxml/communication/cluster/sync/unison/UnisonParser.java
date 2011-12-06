@@ -14,7 +14,7 @@ import de.kisner.util.parser.LogParser;
 
 public class UnisonParser extends AbstractParser implements LogParser  
 {
-	static Log logger = LogFactory.getLog(UnisonParser.class);
+	final static Logger logger = LoggerFactory.getLogger(UnisonParser.class);
 	
 	private final static int maxPattern=2;
 	Pattern pattern[] = new Pattern[maxPattern];

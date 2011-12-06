@@ -9,7 +9,7 @@ import org.openfuxml.util.config.jaxb.Dirs.Dir;
 
 public class ConfDirFactory
 {
-	static Log logger = LogFactory.getLog(ClientConfFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(ClientConfFactory.class);
 	protected static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Configuration previousConfig;

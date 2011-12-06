@@ -15,10 +15,10 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.processor.ofx.OfxHtmlContentHandler;
 import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -26,7 +26,7 @@ import org.xml.sax.XMLReader;
 @Deprecated
 public class OpenFuxmlGenerator
 {
-	static Log logger = LogFactory.getLog(OpenFuxmlGenerator.class);
+	final static Logger logger = LoggerFactory.getLogger(OpenFuxmlGenerator.class);
 
 	private Configuration config;
 	

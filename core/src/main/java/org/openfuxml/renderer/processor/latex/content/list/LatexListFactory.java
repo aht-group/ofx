@@ -1,7 +1,5 @@
 package org.openfuxml.renderer.processor.latex.content.list;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.table.CellFactory;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
@@ -9,10 +7,12 @@ import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.openfuxml.xml.content.list.Item;
 import org.openfuxml.xml.content.list.List;
 import org.openfuxml.xml.content.list.Type;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LatexListFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	static Log logger = LogFactory.getLog(LatexListFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexListFactory.class);
 
 	private static enum Ordering {ordered,unordered}
 	public static enum ListType {description,list}

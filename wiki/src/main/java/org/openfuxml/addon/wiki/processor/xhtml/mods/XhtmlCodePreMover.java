@@ -5,16 +5,16 @@ import java.util.List;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.xpath.XPath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class XhtmlCodePreMover
 {
-	static Log logger = LogFactory.getLog(XhtmlCodePreMover.class);
+	final static Logger logger = LoggerFactory.getLogger(XhtmlCodePreMover.class);
 	
 	private XPath xpathCode, xpParent, xpathPre;
 	private Element rootElement;
@@ -29,7 +29,7 @@ public class XhtmlCodePreMover
 //			xpath.addNamespace(Namespace.getNamespace("ofx", "http://www.openfuxml.org"));
 //			xpath.addNamespace(Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki"));		
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	public String move(String xHtmlText) throws JDOMException
@@ -76,7 +76,7 @@ public class XhtmlCodePreMover
 							
 							Element eCodeGrandParent = eCode.getParentElement().getParentElement();
 							int iCodeParent = eCodeGrandParent.indexOf(eCode.getParentElement());
-							logger.debug(iCodeParent);
+							logger.debug(iCodeParent+"");
 							eCode.detach();
 							eCodeGrandParent.removeContent(iCodeParent);
 							eCodeGrandParent.addContent(iCodeParent, eCode);

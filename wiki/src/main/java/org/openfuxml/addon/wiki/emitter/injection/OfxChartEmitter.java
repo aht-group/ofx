@@ -4,8 +4,6 @@ import javax.xml.stream.XMLStreamException;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.util.JdomXmlStreamer;
@@ -14,10 +12,12 @@ import org.openfuxml.content.fuxml.AbsatzOhne;
 import org.openfuxml.content.fuxml.Grafik;
 import org.openfuxml.content.fuxml.Medienobjekt;
 import org.openfuxml.content.fuxml.Medienobjekt.Objekttitel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxChartEmitter
 {
-	static Log logger = LogFactory.getLog(OfxChartEmitter.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxChartEmitter.class);
 
 	private Wikiinjection injection;
 	
@@ -60,6 +60,6 @@ public class OfxChartEmitter
 		{
 			jdomStreamer.write(e);
 		}
-		catch (XMLStreamException e1) {logger.error(e);}
+		catch (XMLStreamException e1) {logger.error("",e);}
 	}
 }

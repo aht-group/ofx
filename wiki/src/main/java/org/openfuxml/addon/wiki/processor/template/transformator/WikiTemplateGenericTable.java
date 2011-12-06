@@ -6,8 +6,6 @@ import java.util.List;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.jdom.Namespace;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
@@ -26,10 +24,12 @@ import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.factory.ofx.table.ColumnFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiTemplateGenericTable implements WikiTemplateTransformator
 {
-	static Log logger = LogFactory.getLog(WikiTemplateGenericTable.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiTemplateGenericTable.class);
 	
 	private final Namespace nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
 	
@@ -142,7 +142,7 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 			}
 			
 		}
-		catch (OfxInternalProcessingException e) {logger.error(e);}
+		catch (OfxInternalProcessingException e) {logger.error("",e);}
 		
 		row.getCell().add(cellValue);
 		

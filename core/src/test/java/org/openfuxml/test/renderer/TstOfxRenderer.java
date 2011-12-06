@@ -4,13 +4,13 @@ import net.sf.exlp.util.io.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.renderer.OfxRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TstOfxRenderer
 {
-	static Log logger = LogFactory.getLog(TstOfxRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TstOfxRenderer.class);
 	
 	public static void main (String[] args) throws Exception
 	{

@@ -45,7 +45,7 @@ import org.openfuxml.client.gui.simple.Client;
  */
 public class HelpAboutDialog extends Dialog
 {
-	static Log logger = LogFactory.getLog(HelpAboutDialog.class);
+	final static Logger logger = LoggerFactory.getLogger(HelpAboutDialog.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 
 	public final static int ABOUT_DIALOG	= 0;

@@ -29,7 +29,7 @@ import org.openfuxml.addon.jsfapp.factory.NsFactory;
 
 public class AppInjection extends Task
 {	
-	static Log logger = LogFactory.getLog(AppInjection.class);
+	final static Logger logger = LoggerFactory.getLogger(AppInjection.class);
 	
 	private boolean useLog4j;
 	private RecursiveFileFinder rfi;
@@ -106,7 +106,7 @@ public class AppInjection extends Task
 							break idsearch;
 						}
 					}
-					catch (JDOMException e) {logger.error(e);}
+					catch (JDOMException e) {logger.error("",e);}
 				}	
 				JDomUtil.save(docJsf, fJsf, Format.getRawFormat(),"ISO-8859-1");
 			}
@@ -146,7 +146,7 @@ public class AppInjection extends Task
 			eNewJsf.removeContent();
 			eNewJsf.addContent(eOrigJsf.cloneContent());			
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	private File getJsfFile(File fHtml)
@@ -187,7 +187,7 @@ public class AppInjection extends Task
 				eBody.addContent(eView);
 			}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	private void genericInjection(Ofxinjection ofxI, Document docJsf)
@@ -211,6 +211,6 @@ public class AppInjection extends Task
 				element.addContent(eMenu);
 			}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 }

@@ -16,13 +16,13 @@ import net.sourceforge.jwbf.mediawiki.actions.util.VersionException;
 import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.xmlgraphics.java2d.ps.EPSDocumentGraphics2D;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiImageProcessor
 {
-	static Log logger = LogFactory.getLog(WikiImageProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiImageProcessor.class);
 	
 	private BufferedImage image;
 	private Configuration config;
@@ -41,11 +41,11 @@ public class WikiImageProcessor
 			logger.debug(wikiImage.getUrlAsString());
 			image = wikiImage.getAsImage();
 		} 
-		catch (MalformedURLException e) {logger.error(e);}
-		catch (VersionException e) {logger.error(e);}
-		catch (ProcessException e) {logger.error(e);}
-		catch (ActionException e) {logger.error(e);}
-		catch (IOException e) {logger.error(e);}
+		catch (MalformedURLException e) {logger.error("",e);}
+		catch (VersionException e) {logger.error("",e);}
+		catch (ProcessException e) {logger.error("",e);}
+		catch (ActionException e) {logger.error("",e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 	
 	public void save(String fileName)
@@ -58,7 +58,7 @@ public class WikiImageProcessor
 	{
 		File f = new File(config.getString("/ofx/dir[@type='image-web']")+"/"+fileName+".png");
 		try {ImageIO.write( image, "png", f);}
-		catch (IOException e) {logger.error(e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 	
 	private void saveEPS(String fileName)
@@ -74,7 +74,7 @@ public class WikiImageProcessor
 	        g2d.finish();
 	        out.close();
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
-		catch (IOException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 }

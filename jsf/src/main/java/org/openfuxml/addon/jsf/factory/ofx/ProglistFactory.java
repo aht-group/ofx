@@ -7,15 +7,15 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.jsf.factory.JsfTagTransformator;
 import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.content.ofx.Title;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProglistFactory
 {
-	static Log logger = LogFactory.getLog(ProglistFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(ProglistFactory.class);
 	
 	private File fDocBase;
 	private String logMsg;
@@ -38,12 +38,11 @@ public class ProglistFactory
 		return ofxListing;
 	}
 	
-	@SuppressWarnings("unchecked")
 	private Raw getRawListing(String fileName)
 	{
 		String result = "";
 		File f = new File(fDocBase,fileName);
-		logger.debug(f.getAbsoluteFile());
+		logger.debug(f.getAbsoluteFile().getAbsolutePath());
 		try
 		{
 			List<String> lLines = IOUtils.readLines(new FileInputStream(f), "UTF8");

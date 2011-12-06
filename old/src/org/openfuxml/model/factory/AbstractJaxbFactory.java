@@ -13,7 +13,7 @@ import org.openfuxml.client.control.OfxClientControl;
 
 public class AbstractJaxbFactory
 {
-	static Log logger = LogFactory.getLog(OfxClientControl.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxClientControl.class);
 	
 	public void writeJaxb(OutputStream os, Object o)
 	{
@@ -25,7 +25,7 @@ public class AbstractJaxbFactory
 			m.marshal( o , os);
 			os.close();
 		}
-		catch (JAXBException e) {logger.error(e);}
-		catch (IOException e) {logger.error(e);}
+		catch (JAXBException e) {logger.error("",e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 }

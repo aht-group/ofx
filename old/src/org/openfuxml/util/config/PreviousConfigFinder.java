@@ -16,7 +16,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class PreviousConfigFinder
 {
-	static Log logger = LogFactory.getLog(PreviousConfigFinder.class);
+	final static Logger logger = LoggerFactory.getLogger(PreviousConfigFinder.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Pattern p;

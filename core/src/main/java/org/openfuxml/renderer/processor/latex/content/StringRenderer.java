@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.SystemUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class StringRenderer implements OfxLatexRenderer
 {
-	static Log logger = LogFactory.getLog(StringRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(StringRenderer.class);
 	
 	private List<String> result;
 	

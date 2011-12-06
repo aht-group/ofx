@@ -38,7 +38,7 @@ import de.kisner.util.io.spawn.Spawn;
  */
 public class DirectProducer extends AbstractProducer implements Producer
 {
-	static Log logger = LogFactory.getLog(DirectProducer.class);
+	final static Logger logger = LoggerFactory.getLogger(DirectProducer.class);
 	public static enum Typ {PRODUCE,ENTITIES};
 	
 	private static Properties sysprops = System.getProperties();

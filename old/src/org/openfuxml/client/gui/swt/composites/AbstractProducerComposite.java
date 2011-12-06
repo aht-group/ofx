@@ -17,7 +17,7 @@ import org.openfuxml.model.jaxb.ProducibleEntities;
 
 public class AbstractProducerComposite extends Composite
 {
-	static Log logger = LogFactory.getLog(AbstractProducerComposite.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractProducerComposite.class);
 	
 	protected OfxClientControl ofxCC;
 	protected Combo cboFormats, cboDocuments;

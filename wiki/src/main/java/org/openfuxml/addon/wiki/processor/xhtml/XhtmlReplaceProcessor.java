@@ -3,8 +3,6 @@ package org.openfuxml.addon.wiki.processor.xhtml;
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
@@ -14,10 +12,12 @@ import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlXpathHelper;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class XhtmlReplaceProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
-	static Log logger = LogFactory.getLog(XhtmlReplaceProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(XhtmlReplaceProcessor.class);
 	
 	private Replacements replacements;
 	

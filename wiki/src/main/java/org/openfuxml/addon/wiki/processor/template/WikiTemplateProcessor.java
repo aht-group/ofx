@@ -6,8 +6,6 @@ import java.io.FileNotFoundException;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.output.Format;
@@ -20,10 +18,12 @@ import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlXpathHelper;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiTemplateProcessor extends AbstractWikiProcessor
 {
-	static Log logger = LogFactory.getLog(WikiTemplateProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiTemplateProcessor.class);
 	
 	private Templates templates;
 	

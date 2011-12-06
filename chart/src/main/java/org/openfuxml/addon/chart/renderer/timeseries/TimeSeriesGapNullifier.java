@@ -6,16 +6,16 @@ import java.util.List;
 
 import net.sf.exlp.util.DateUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.chart.data.jaxb.Charttype;
 import org.openfuxml.addon.chart.data.jaxb.Container;
 import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TimeSeriesGapNullifier
 {
-	static Log logger = LogFactory.getLog(TimeSeriesGapNullifier.class);
+	final static Logger logger = LoggerFactory.getLogger(TimeSeriesGapNullifier.class);
 	
 	int gapUnit;
 	

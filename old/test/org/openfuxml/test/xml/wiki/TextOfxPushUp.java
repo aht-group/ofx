@@ -23,7 +23,7 @@ import org.openfuxml.addon.wiki.processor.xhtml.mods.OfxPushUp;
 
 public class TextOfxPushUp
 {
-	static Log logger = LogFactory.getLog(TextOfxPushUp.class);
+	final static Logger logger = LoggerFactory.getLogger(TextOfxPushUp.class);
 	public static enum Status {txtFetched,txtProcessed,xhtmlRendered,xhtmlProcessed,xhtmlFinal,ofx};
 
 	private Configuration config;
@@ -45,8 +45,8 @@ public class TextOfxPushUp
 			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat());
 			xmlOut.output(doc, System.out);
 		}
-		catch (JDOMException e) {logger.error(e);}
-		catch (IOException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
+		catch (IOException e) {logger.error("",e);}
 		return doc;
 	}
 	
@@ -61,7 +61,7 @@ public class TextOfxPushUp
 			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat());
 			xmlOut.output(result, System.out);
 		}
-		catch (IOException e) {logger.error(e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 	
 	public static void main(String[] args)

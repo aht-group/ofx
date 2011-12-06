@@ -5,8 +5,6 @@ import java.util.List;
 
 import net.sf.exlp.util.DateUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
@@ -24,10 +22,12 @@ import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TimeBarRenderer extends XYPlotRenderer implements OfxChartRenderer
 {
-	static Log logger = LogFactory.getLog(TimeBarRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TimeBarRenderer.class);
 	
 	public TimeBarRenderer()
 	{

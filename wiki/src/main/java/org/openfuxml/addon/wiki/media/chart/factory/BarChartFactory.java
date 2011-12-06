@@ -2,8 +2,6 @@ package org.openfuxml.addon.wiki.media.chart.factory;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.xpath.XPath;
@@ -18,11 +16,13 @@ import org.jfree.data.xy.XYIntervalSeries;
 import org.jfree.data.xy.XYIntervalSeriesCollection;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
 import org.openfuxml.addon.wiki.media.chart.ChartXmlUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Deprecated
 public class BarChartFactory extends AbstractChartFactory
 {
-	static Log logger = LogFactory.getLog(BarChartFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(BarChartFactory.class);
 	
 	public BarChartFactory()
 	{
@@ -69,7 +69,7 @@ public class BarChartFactory extends AbstractChartFactory
 				}
 			}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
         return dataset;
     }
 	

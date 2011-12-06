@@ -22,7 +22,7 @@ import de.kisner.util.architecture.EnvironmentParameter;
 
 public class SocketProducer extends AbstractProducer implements Producer
 {
-	static Log logger = LogFactory.getLog(SocketProducer.class);
+	final static Logger logger = LoggerFactory.getLogger(SocketProducer.class);
 	
 	String serverIP;
 	int serverPort;

@@ -17,7 +17,7 @@ import de.kisner.util.io.resourceloader.MultiResourceLoader;
 
 public abstract class AbstractConfFactory extends AbstractJaxbFactory
 {
-	static Log logger = LogFactory.getLog(AbstractConfFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractConfFactory.class);
 	
 	protected static String fs = SystemUtils.FILE_SEPARATOR;
 	public static enum StartUpEnv {DEVELOPER,PRODUCTION}
@@ -66,7 +66,7 @@ public abstract class AbstractConfFactory extends AbstractJaxbFactory
 				openFuxmlVersion = versionProperties.getProperty("openfuxml-version");
 			}
 			catch (FileNotFoundException e) {logger.error("File is missing! "+propName);}
-			catch (IOException e) {logger.error(e);}
+			catch (IOException e) {logger.error("",e);}
 		}
 		else {startupenv = StartUpEnv.PRODUCTION;}
 //		startupenv = StartUpEnv.PRODUCTION;

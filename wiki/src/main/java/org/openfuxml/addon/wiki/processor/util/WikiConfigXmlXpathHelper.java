@@ -6,8 +6,6 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -18,10 +16,12 @@ import org.openfuxml.addon.wiki.data.jaxb.Replacements;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiConfigXmlXpathHelper
 {
-	static Log logger = LogFactory.getLog(WikiConfigXmlXpathHelper.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiConfigXmlXpathHelper.class);
 	
 	public static synchronized Template getTemplate(Templates templates, String name) throws OfxConfigurationException 
 	{
@@ -37,7 +37,7 @@ public class WikiConfigXmlXpathHelper
 			if(e!=null){result = (Template)JDomUtil.toJaxb(e, Template.class);}
 			else{throw new OfxConfigurationException("No template definition for templateName="+name);}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
         return result;
 	}
 	

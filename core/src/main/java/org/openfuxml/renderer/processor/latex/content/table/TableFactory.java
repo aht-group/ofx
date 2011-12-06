@@ -1,15 +1,15 @@
 package org.openfuxml.renderer.processor.latex.content.table;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TableFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	static Log logger = LogFactory.getLog(TableFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TableFactory.class);
 	
 	public TableFactory()
 	{

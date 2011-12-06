@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class ZeroConfRegisterThread extends Thread
 {
-	static Log logger = LogFactory.getLog(ZeroConfRegisterThread.class);
+	final static Logger logger = LoggerFactory.getLogger(ZeroConfRegisterThread.class);
 	
 	ServiceInfo serviceInfo;
 	

@@ -33,7 +33,7 @@ import de.kisner.util.architecture.ArchOpen;
 
 public class OfxClientControl implements OfxGuiAction
 {
-	static Log logger = LogFactory.getLog(OfxClientControl.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxClientControl.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Configuration config;
@@ -67,8 +67,8 @@ public class OfxClientControl implements OfxGuiAction
 		//DummyServer server = new DummyServer(config);
 		//producer = new DirectProducer(config,server.getEnvParameter());
 		try {producer.getAvailableApplications();}
-		catch (ProductionSystemException e) {logger.error(e);}
-		catch (ProductionHandlerException e) {logger.error(e);}
+		catch (ProductionSystemException e) {logger.error("",e);}
+		catch (ProductionHandlerException e) {logger.error("",e);}
 	}
 	
 	public void initProducer()
@@ -106,8 +106,8 @@ public class OfxClientControl implements OfxGuiAction
 		{
 			lOfxF = producer.getAvailableFormats(selectedOfxA);
 		}
-		catch (ProductionSystemException e) {logger.error(e);}
-		catch (ProductionHandlerException e) {logger.error(e);}
+		catch (ProductionSystemException e) {logger.error("",e);}
+		catch (ProductionHandlerException e) {logger.error("",e);}
 		return lOfxF;
 	}
 	

@@ -13,7 +13,7 @@ import org.openfuxml.util.config.OfxPathHelper;
 
 public class ProjectFactoryDirect implements ProjectFactory
 {
-	static Log logger = LogFactory.getLog(ProjectFactoryDirect.class);
+	final static Logger logger = LoggerFactory.getLogger(ProjectFactoryDirect.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Configuration config;

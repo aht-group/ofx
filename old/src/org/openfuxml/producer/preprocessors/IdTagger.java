@@ -19,7 +19,7 @@ import org.jdom.xpath.XPath;
 
 public class IdTagger
 {
-	static Log logger = LogFactory.getLog(IdTagger.class);
+	final static Logger logger = LoggerFactory.getLogger(IdTagger.class);
 		
 	private Namespace ns;
 	private XPath xpath;
@@ -44,7 +44,7 @@ public class IdTagger
 				xpath.addNamespace(ns);
 				idTag(doc.getRootElement(), eName);
 			}
-			catch (JDOMException e) {logger.error(e);}
+			catch (JDOMException e) {logger.error("",e);}
 		}
 		
 	}
@@ -66,7 +66,7 @@ public class IdTagger
 				else if(att==null){addId(childElement, idPrefix);}
 			}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 		logger.debug(idCounter+" ids generated for "+idPrefix);
 	}
 	

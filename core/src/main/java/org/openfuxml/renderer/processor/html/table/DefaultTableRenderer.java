@@ -1,7 +1,5 @@
 package org.openfuxml.renderer.processor.html.table;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.jdom.Text;
 import org.openfuxml.content.ofx.Paragraph;
@@ -13,10 +11,12 @@ import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.renderer.processor.html.interfaces.OfxTableRenderer;
 import org.openfuxml.renderer.processor.html.section.ParagraphRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DefaultTableRenderer implements OfxTableRenderer
 {
-	static Log logger = LogFactory.getLog(DefaultTableRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(DefaultTableRenderer.class);
 	
 	private Element table;
 	private ParagraphRenderer paragraphRenderer;

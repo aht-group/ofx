@@ -17,7 +17,7 @@ import org.openfuxml.addon.wiki.WikiTemplates;
 
 public class TestProcessedJdom
 {
-	static Log logger = LogFactory.getLog(TestProcessedJdom.class);
+	final static Logger logger = LoggerFactory.getLogger(TestProcessedJdom.class);
 
 	private String dirName;
 	private Configuration config;
@@ -38,7 +38,7 @@ public class TestProcessedJdom
 			doc = new SAXBuilder().build(f);
 		}
 		catch (JDOMException e) {e.printStackTrace();}
-		catch (IOException e) {logger.error(e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 		
 	

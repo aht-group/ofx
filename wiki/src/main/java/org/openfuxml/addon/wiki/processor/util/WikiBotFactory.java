@@ -7,18 +7,18 @@ import net.sourceforge.jwbf.core.actions.HttpActionClient;
 import net.sourceforge.jwbf.core.actions.util.ActionException;
 import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.openfuxml.addon.wiki.data.jaxb.Server;
 import org.openfuxml.addon.wiki.data.jaxb.Servers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiBotFactory
 {
-	static Log logger = LogFactory.getLog(WikiBotFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiBotFactory.class);
 	
 	private URL url;
 	private String httpUsername,httpPassword;
@@ -75,8 +75,8 @@ public class WikiBotFactory
 			if(httpUsername!=null && httpPassword!=null){bot.setConnection(createActionClient());}
 			if(wikiUsername!=null && wikiPassword!=null){bot.login(wikiUsername, wikiPassword);}
 		}
-		catch (MalformedURLException e) {logger.error(e);}
-		catch (ActionException e) {logger.error(e);}
+		catch (MalformedURLException e) {logger.error("",e);}
+		catch (ActionException e) {logger.error("",e);}
 		return bot;
 	}
 	

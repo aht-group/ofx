@@ -6,14 +6,14 @@ import java.util.TreeMap;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
 public class OfxEmphasisEmitter extends NestingEmitter
 {
-	static Log logger = LogFactory.getLog(OfxEmphasisEmitter.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxEmphasisEmitter.class);
 
 	public static enum Style {normal,typewriter}
 	public static enum Emphasis {bold,italic,unterline}

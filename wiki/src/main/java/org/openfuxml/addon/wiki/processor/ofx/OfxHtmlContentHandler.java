@@ -6,11 +6,11 @@ import java.util.Map;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.OfxSectionEmitter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
@@ -19,7 +19,7 @@ import org.xml.sax.SAXException;
  
 public class OfxHtmlContentHandler implements ContentHandler
 {
-	static Log logger = LogFactory.getLog(OfxHtmlContentHandler.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxHtmlContentHandler.class);
 	
 	private OfxSectionEmitter sctionEmitter;
 	private NestingEmitter emitter;

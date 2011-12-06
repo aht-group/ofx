@@ -9,8 +9,6 @@ import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -21,10 +19,12 @@ import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiTemplateCorrector extends AbstractWikiProcessor implements WikiProcessor
 {
-	static Log logger = LogFactory.getLog(WikiTemplateCorrector.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiTemplateCorrector.class);
 	
 	private final String startDelimiter = "&lt;wiki:injection id=&quot;";
 	private final String endDelimiter = "&quot;/&gt;";
@@ -44,7 +44,7 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 			xpath = XPath.newInstance("//wiki:template");
 			xpath.addNamespace(nsOfx); xpath.addNamespace(nsWiki);
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	public Ofxdoc correctTemplateInjections(Ofxdoc ofxDoc) throws OfxInternalProcessingException
@@ -71,7 +71,7 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 			result.detach();
 			doc.setRootElement(result);
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 		return doc;
 	}
 	
@@ -92,7 +92,7 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 				parent.addContent(index, createExternalTemplate(eTemplate));
 			}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 		return rootElement;
 	}
 	
@@ -126,7 +126,7 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 		}
 		Document doc = null;
 		try {doc = JDomUtil.txtToDoc(txt);}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 		return doc;
 	}
 	

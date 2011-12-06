@@ -5,20 +5,20 @@ import java.util.regex.Pattern;
 
 import net.sf.exlp.event.LogEvent;
 import net.sf.exlp.event.LogEventHandler;
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.parser.LogParser;
+import net.sf.exlp.util.io.LoggerInit;
 
 import org.apache.commons.lang.SystemUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Markup;
 import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiKeyValueParser extends AbstractLogParser implements LogParser  
 {
-	static Log logger = LogFactory.getLog(WikiKeyValueParser.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiKeyValueParser.class);
 	
 	private TemplateKv wikiKV;
 	
@@ -112,7 +112,7 @@ public class WikiKeyValueParser extends AbstractLogParser implements LogParser
 		
 		Pattern p = Pattern.compile(sPattern);
 		Matcher m = p.matcher(sTest);
-		logger.debug(m.matches());
+		logger.debug(""+m.matches());
 		if(m.matches())
 		{
 			logger.debug("Group Count "+m.groupCount());

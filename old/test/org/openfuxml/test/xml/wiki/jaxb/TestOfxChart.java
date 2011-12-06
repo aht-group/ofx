@@ -11,7 +11,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Ofxchartdata;
 
 public class TestOfxChart
 {
-	static Log logger = LogFactory.getLog(TestOfxChart.class);
+	final static Logger logger = LoggerFactory.getLogger(TestOfxChart.class);
 	
 	public TestOfxChart()
 	{

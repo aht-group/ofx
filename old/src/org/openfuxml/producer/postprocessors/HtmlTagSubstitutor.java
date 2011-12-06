@@ -28,7 +28,7 @@ import org.openfuxml.util.OfxApp;
 
 public class HtmlTagSubstitutor extends DirectoryWalker
 {
-	static Log logger = LogFactory.getLog(OfxApp.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxApp.class);
 	
 	private Configuration config;
 	private int anzElements;
@@ -106,7 +106,7 @@ public class HtmlTagSubstitutor extends DirectoryWalker
 			  fw = new FileWriter(f); 
 			  fw.write(s); 
 			} 
-			catch ( IOException e ) {logger.error(e);} 
+			catch ( IOException e ) {logger.error("",e);} 
 			finally
 			{
 				if (fw != null) 
@@ -115,7 +115,7 @@ public class HtmlTagSubstitutor extends DirectoryWalker
 			
 			results.add(f.getAbsoluteFile());
 		}
-		catch (IOException e) {logger.error(e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 	
 	public void start(File startDir, Collection results, String xmlFileName)
@@ -130,7 +130,7 @@ public class HtmlTagSubstitutor extends DirectoryWalker
 			logger.info("HtmlTagSubstitute elements="+anzElements);
 			
 			try {walk(startDir,results);}
-			catch (IOException e) {logger.error(e);}
+			catch (IOException e) {logger.error("",e);}
 			logger.debug("Processed files: "+results.size());
 		}
 	}

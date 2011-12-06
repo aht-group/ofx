@@ -4,12 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractFileProcessingTest extends AbstractOfxCoreTest
 {
-	static Log logger = LogFactory.getLog(AbstractFileProcessingTest.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractFileProcessingTest.class);
 	
 	public static String srcDirName;
 	

@@ -6,20 +6,20 @@ import java.util.regex.Pattern;
 
 import net.sf.exlp.event.LogEventHandler;
 import net.sf.exlp.event.handler.EhDebug;
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerXml;
 import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.parser.LogParser;
+import net.sf.exlp.util.io.LoggerInit;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxgallery;
 import org.openfuxml.addon.wiki.event.WikiImageEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiGalleryParser extends AbstractLogParser implements LogParser  
 {
-	static Log logger = LogFactory.getLog(WikiGalleryParser.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiGalleryParser.class);
 	
 	private ArrayList<Pattern> alP;
 	

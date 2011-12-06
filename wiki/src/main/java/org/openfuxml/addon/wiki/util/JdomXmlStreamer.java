@@ -3,16 +3,15 @@ package org.openfuxml.addon.wiki.util;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.jdom.Text;
-import org.openfuxml.addon.wiki.emitter.injection.OfxInjectionEmitter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JdomXmlStreamer
 {	
-	static Log logger = LogFactory.getLog(OfxInjectionEmitter.class);
+	final static Logger logger = LoggerFactory.getLogger(JdomXmlStreamer.class);
 	
 	private XMLStreamWriter writer;
 	

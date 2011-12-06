@@ -22,7 +22,7 @@ import de.kisner.util.xml.XmlConfig;
 
 public class ApplicationUpdater
 {
-	static Log logger = LogFactory.getLog(ApplicationUpdater.class);
+	final static Logger logger = LoggerFactory.getLogger(ApplicationUpdater.class);
 	
 	public static enum Aktion {SAVEINDB, LOADFROMDB};
 	private static String fSep = System.getProperty("file.separator");

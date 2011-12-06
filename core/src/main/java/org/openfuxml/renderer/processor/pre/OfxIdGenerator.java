@@ -6,8 +6,6 @@ import java.util.List;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -15,10 +13,12 @@ import org.jdom.Namespace;
 import org.jdom.output.Format;
 import org.jdom.xpath.XPath;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxIdGenerator
 {
-	static Log logger = LogFactory.getLog(OfxIdGenerator.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxIdGenerator.class);
 	
 	private Document doc;
 	private XPath xpath;
@@ -38,7 +38,7 @@ public class OfxIdGenerator
 //			logger.debug(list.size()+" hits");
 			
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	public void createIds(File srcFile, File dstFile) throws OfxInternalProcessingException
@@ -54,7 +54,7 @@ public class OfxIdGenerator
 		}
 		catch (JDOMException e)
 		{
-			logger.error(e);
+			logger.error("",e);
 		}
 	}
 	

@@ -11,7 +11,7 @@ import org.openfuxml.addon.wiki.util.WikiConfigChecker;
 
 public class TestImageFetcher
 {
-	static Log logger = LogFactory.getLog(TestImageFetcher.class);
+	final static Logger logger = LoggerFactory.getLogger(TestImageFetcher.class);
 	
 	public static void main(String[] args)
     {

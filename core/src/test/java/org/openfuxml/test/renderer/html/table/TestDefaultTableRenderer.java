@@ -8,8 +8,6 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.output.Format;
@@ -25,11 +23,13 @@ import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.processor.html.interfaces.OfxTableRenderer;
 import org.openfuxml.renderer.processor.html.table.DefaultTableRenderer;
 import org.openfuxml.test.AbstractFileProcessingTest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RunWith(Parameterized.class)
 public class TestDefaultTableRenderer extends AbstractFileProcessingTest
 {
-	static Log logger = LogFactory.getLog(TestDefaultTableRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TestDefaultTableRenderer.class);
 	
 	private OfxTableRenderer renderer;
 	
@@ -66,7 +66,7 @@ public class TestDefaultTableRenderer extends AbstractFileProcessingTest
 	
 	private void render(boolean saveReference) throws FileNotFoundException
 	{
-		logger.debug(fTest.getAbsoluteFile());
+		logger.debug(fTest.getAbsolutePath());
 		Table table = (Table)JaxbUtil.loadJAXB(fTest.getAbsolutePath(), Table.class);
 
 		Element html = new Element("html");

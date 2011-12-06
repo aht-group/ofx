@@ -16,7 +16,7 @@ import org.openfuxml.util.config.OfxPathHelper;
 
 public class DocumentFactoryDirect implements DocumentFactory
 {
-	static Log logger = LogFactory.getLog(DocumentFactoryDirect.class);
+	final static Logger logger = LoggerFactory.getLogger(DocumentFactoryDirect.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Configuration config;

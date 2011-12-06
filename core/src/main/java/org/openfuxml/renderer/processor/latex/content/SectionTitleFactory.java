@@ -1,15 +1,15 @@
 package org.openfuxml.renderer.processor.latex.content;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SectionTitleFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	static Log logger = LogFactory.getLog(SectionTitleFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(SectionTitleFactory.class);
 	
 	private LatexPreamble latexPreamble;
 	int lvl;

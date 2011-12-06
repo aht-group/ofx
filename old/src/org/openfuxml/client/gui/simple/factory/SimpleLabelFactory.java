@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Label;
 
 public class SimpleLabelFactory
 {
-	static Log logger = LogFactory.getLog(SimpleLabelFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(SimpleLabelFactory.class);
 	 
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	private Composite composite;
@@ -81,7 +81,7 @@ public class SimpleLabelFactory
 			catch (Exception e)
 			{
 				labelImage.setText("ERROR");
-				logger.error(e);
+				logger.error("",e);
 				labelImage.setForeground(composite.getDisplay().getSystemColor(SWT.COLOR_RED));
 			}
 			labelImage.setLayoutData(data);

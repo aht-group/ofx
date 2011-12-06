@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
@@ -14,10 +12,12 @@ import org.openfuxml.addon.wiki.processor.util.WikiProcessor.WikiDir;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractWikiProcessor
 {
-	static Log logger = LogFactory.getLog(AbstractWikiProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractWikiProcessor.class);
 	
 	protected File srcDir,dstDir;
 	protected OfxNsPrefixMapper nsPrefixMapper;

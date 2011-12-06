@@ -29,7 +29,7 @@ import org.eclipse.swt.widgets.TableItem;
  */
 public class OeffnenDialog extends Dialog
 {
-	static Log logger = LogFactory.getLog(OeffnenDialog.class);
+	final static Logger logger = LoggerFactory.getLogger(OeffnenDialog.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Shell shell;

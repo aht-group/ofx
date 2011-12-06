@@ -7,12 +7,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import javax.faces.render.Renderer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class IframeRenderer extends Renderer
 {
-	static Log logger = LogFactory.getLog(IframeRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(IframeRenderer.class);
 	
 	public boolean getRendersChildren(){return false;}
 	

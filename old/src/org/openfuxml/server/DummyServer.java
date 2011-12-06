@@ -6,7 +6,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class DummyServer extends AbstractServer
 {
-	static Log logger = LogFactory.getLog(DummyServer.class);
+	final static Logger logger = LoggerFactory.getLogger(DummyServer.class);
 	
 	public DummyServer(Configuration config)
 	{

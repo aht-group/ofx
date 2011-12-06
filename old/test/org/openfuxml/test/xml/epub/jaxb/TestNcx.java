@@ -12,7 +12,7 @@ import org.openfuxml.addon.epub.data.jaxb.ncx.Ncx;
 
 public class TestNcx
 {
-	static Log logger = LogFactory.getLog(TestNcx.class);
+	final static Logger logger = LoggerFactory.getLogger(TestNcx.class);
 	
 	public TestNcx()
 	{

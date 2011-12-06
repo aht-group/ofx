@@ -8,8 +8,6 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.output.Format;
@@ -20,15 +18,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openfuxml.addon.wiki.processor.markup.TestWikiInlineProcessor;
-import org.openfuxml.addon.wiki.processor.ofx.xml.WikiPageProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RunWith(Parameterized.class)
 public class TestWikiPageProcessor extends AbstractFileProcessingTest
 {
-	static Log logger = LogFactory.getLog(TestWikiInlineProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(TestWikiInlineProcessor.class);
 	
 	private WikiPageProcessor xmlP;
 	
@@ -63,7 +62,7 @@ public class TestWikiPageProcessor extends AbstractFileProcessingTest
     @Test
     public void test() throws OfxInternalProcessingException
     {
-    	logger.debug(fTest.getAbsoluteFile());
+    	logger.debug(fTest.getAbsolutePath());
     	test(false);
     }
 	

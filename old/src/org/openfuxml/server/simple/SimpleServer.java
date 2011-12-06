@@ -25,7 +25,7 @@ import org.openfuxml.server.AbstractServer;
  */
 public class SimpleServer extends AbstractServer
 {
-	static Log logger = LogFactory.getLog(SimpleServer.class);
+	final static Logger logger = LoggerFactory.getLogger(SimpleServer.class);
 	
 	public SimpleServer(Configuration config)
 	{

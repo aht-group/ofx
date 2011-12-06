@@ -6,17 +6,17 @@ import java.util.List;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.processor.latex.util.LatexDocument;
 import org.openfuxml.xml.renderer.cmp.Pdf;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxLatexRenderer
 {
-	static Log logger = LogFactory.getLog(OfxLatexRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxLatexRenderer.class);
 	
 	private LatexPreamble latexPreamble;
 	private LatexDocument latexDocument;
@@ -43,7 +43,7 @@ public class OfxLatexRenderer
 			txt.addAll(latexPreamble.getContent());
 			txt.addAll(latexDocument.getContent());
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
 	}
 	
 	public List<String> getContent(){return txt;}

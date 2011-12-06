@@ -18,7 +18,7 @@ import org.openfuxml.addon.wiki.processor.xhtml.mods.XhtmlAHxMerge;
 
 public class TextAHxMerge
 {
-	static Log logger = LogFactory.getLog(TextAHxMerge.class);
+	final static Logger logger = LoggerFactory.getLogger(TextAHxMerge.class);
 	public static enum Status {txtFetched,txtProcessed,xhtmlRendered,xhtmlProcessed,xhtmlFinal,ofx};
 
 	private Configuration config;
@@ -47,8 +47,8 @@ public class TextAHxMerge
 			File f = new File(dirWiki+"/"+article+"-"+OfxWikiEngine.Status.xhtmlFinal+".xhtml");
 			doc = new SAXBuilder().build( f );
 		}
-		catch (JDOMException e) {logger.error(e);}
-		catch (IOException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
+		catch (IOException e) {logger.error("",e);}
 		logger.debug("Doc loaded ...");
 		return doc;
 	}

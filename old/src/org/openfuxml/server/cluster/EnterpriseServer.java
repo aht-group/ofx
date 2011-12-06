@@ -37,7 +37,7 @@ import de.kisner.util.Connector;
  */
 public class EnterpriseServer extends AbstractServer
 {
-	static Log logger = LogFactory.getLog(EnterpriseServer.class);
+	final static Logger logger = LoggerFactory.getLogger(EnterpriseServer.class);
 	
 	Host host;
 	

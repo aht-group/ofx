@@ -15,7 +15,7 @@ import org.openfuxml.producer.handler.DirectProducer.ProductionCode;
 
 public class FuXmlLogger
 {
-	static Log logger = LogFactory.getLog(FuXmlLogger.class);
+	final static Logger logger = LoggerFactory.getLogger(FuXmlLogger.class);
 	
 	public static boolean isInited;
 	public static boolean log4jInited=false;

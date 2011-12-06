@@ -1,11 +1,11 @@
 package org.openfuxml.addon.wiki.processor.util;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiContentIO
 {
-	static Log logger = LogFactory.getLog(WikiContentIO.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiContentIO.class);
 	
 	public static synchronized String getFileFromSource(String ofxSource)
 	{

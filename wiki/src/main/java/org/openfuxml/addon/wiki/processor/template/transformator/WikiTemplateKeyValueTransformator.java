@@ -12,8 +12,6 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.jdom.Namespace;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
@@ -22,10 +20,12 @@ import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
 import org.openfuxml.addon.wiki.processor.template.exlp.parser.WikiKeyValueParser;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 import org.openfuxml.xml.renderer.cmp.Cmp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiTemplateKeyValueTransformator
 {
-	static Log logger = LogFactory.getLog(WikiTemplateKeyValueTransformator.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiTemplateKeyValueTransformator.class);
 	
 	private Namespace nsOfx;
 	private NsPrefixMapperInterface nsPrefixMapper;

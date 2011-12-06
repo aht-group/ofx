@@ -1,7 +1,5 @@
 package org.openfuxml.renderer.processor.latex.content.table;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Body;
 import org.openfuxml.content.ofx.table.Content;
@@ -14,10 +12,12 @@ import org.openfuxml.renderer.processor.latex.content.StringRenderer;
 import org.openfuxml.renderer.processor.latex.content.table.util.LatexTabluar;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	static Log logger = LogFactory.getLog(GridTableFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(GridTableFactory.class);
 	
 	public GridTableFactory()
 	{

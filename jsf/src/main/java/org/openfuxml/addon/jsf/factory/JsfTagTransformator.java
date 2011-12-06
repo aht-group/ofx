@@ -12,21 +12,21 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.util.xml.XsltUtil;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.DocType;
 import org.jdom.Document;
 import org.jdom.output.Format;
 import org.openfuxml.addon.jsf.factory.ofx.TagChapterFactory;
 import org.openfuxml.addon.jsf.factory.ofx.TagSectionFactory;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.xml.addon.jsf.tld.Metatag;
 import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
+import org.openfuxml.xml.addon.jsf.tld.Metatag;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JsfTagTransformator
 {
-	static Log logger = LogFactory.getLog(JsfTagTransformator.class);
+	final static Logger logger = LoggerFactory.getLogger(JsfTagTransformator.class);
 	
 	private File outputDir,fTagBase,fDocBase;
 	private int dtdLevel;

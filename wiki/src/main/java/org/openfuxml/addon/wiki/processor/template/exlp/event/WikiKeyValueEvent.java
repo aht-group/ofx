@@ -3,13 +3,13 @@ package org.openfuxml.addon.wiki.processor.template.exlp.event;
 import net.sf.exlp.event.AbstractEvent;
 import net.sf.exlp.event.LogEvent;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiKeyValueEvent extends AbstractEvent implements LogEvent
 {
-	static Log logger = LogFactory.getLog(WikiKeyValueEvent.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiKeyValueEvent.class);
 	static final long serialVersionUID=1;
 	
 	private TemplateKv kv;

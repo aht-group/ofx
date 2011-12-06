@@ -3,8 +3,6 @@ package org.openfuxml.addon.chart.util;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
@@ -19,10 +17,12 @@ import org.openfuxml.addon.chart.data.jaxb.Chart;
 import org.openfuxml.addon.chart.data.jaxb.Label;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AxisFactory
 {
-	static Log logger = LogFactory.getLog(AxisFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(AxisFactory.class);
 	
 	public static synchronized Axis createNumberAxis(Chart ofxChart, AxisOrientation type)
 	{

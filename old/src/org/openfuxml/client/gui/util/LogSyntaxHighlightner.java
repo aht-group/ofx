@@ -21,7 +21,7 @@ import org.openfuxml.util.config.factory.ClientConfFactory;
  */
 public class LogSyntaxHighlightner
 {
-	static Log logger = LogFactory.getLog(LogSyntaxHighlightner.class);
+	final static Logger logger = LoggerFactory.getLogger(LogSyntaxHighlightner.class);
 	
 	private StyledText textLog;
 	private int aktuellerIndex;

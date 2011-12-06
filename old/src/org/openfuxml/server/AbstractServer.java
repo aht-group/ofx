@@ -20,7 +20,7 @@ import de.kisner.util.io.spawn.Spawn;
 
 public abstract class AbstractServer
 {
-	static Log logger = LogFactory.getLog(AbstractServer.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractServer.class);
 	
 	protected static String fs = SystemUtils.FILE_SEPARATOR;
 	

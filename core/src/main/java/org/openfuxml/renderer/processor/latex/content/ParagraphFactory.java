@@ -1,14 +1,14 @@
 package org.openfuxml.renderer.processor.latex.content;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ParagraphFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	static Log logger = LogFactory.getLog(ParagraphFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(ParagraphFactory.class);
 	
 	public ParagraphFactory(boolean preBlankLine)
 	{

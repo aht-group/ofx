@@ -11,7 +11,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 
 public class TestWikiInjection
 {
-	static Log logger = LogFactory.getLog(TestWikiInjection.class);
+	final static Logger logger = LoggerFactory.getLogger(TestWikiInjection.class);
 	
 	public TestWikiInjection()
 	{

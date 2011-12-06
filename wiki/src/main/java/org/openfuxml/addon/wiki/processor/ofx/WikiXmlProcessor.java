@@ -1,7 +1,5 @@
 package org.openfuxml.addon.wiki.processor.ofx;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
@@ -11,10 +9,12 @@ import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiXmlProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
-	static Log logger = LogFactory.getLog(WikiXmlProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiXmlProcessor.class);
 	
 	private WikiPageProcessor pageProcessor;
 	private WikiCategoryProcessor categoryProcessor;
