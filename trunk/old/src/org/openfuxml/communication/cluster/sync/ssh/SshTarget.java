@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SshTarget
 {
-	static Log logger = LogFactory.getLog(SshTarget.class);
+	final static Logger logger = LoggerFactory.getLogger(SshTarget.class);
 	
 	private String user,host,path;
 	

@@ -10,14 +10,14 @@ import net.sourceforge.jwbf.core.actions.util.ProcessException;
 import net.sourceforge.jwbf.core.contentRep.SimpleArticle;
 import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiPageFetcher
 {
-	static Log logger = LogFactory.getLog(WikiPageFetcher.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiPageFetcher.class);
 	
 	private MediaWikiBot bot;
 	private String wikiText;
@@ -39,8 +39,8 @@ public class WikiPageFetcher
 				
 		    wikiText = sa.getText();
 		}
-		catch (ActionException e) {logger.error(e);}
-		catch (ProcessException e) {logger.error(e);}
+		catch (ActionException e) {logger.error("",e);}
+		catch (ProcessException e) {logger.error("",e);}
 		
 		logger.debug("Article "+article+" fetched. "+df.format(wikiText.length())+" characters.");
 	}

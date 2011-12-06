@@ -26,7 +26,7 @@ import org.openfuxml.util.config.factory.ClientConfFactory;
 
 public class WsOpenFuXML
 {
-	static Log logger = LogFactory.getLog(WsOpenFuXML.class);
+	final static Logger logger = LoggerFactory.getLogger(WsOpenFuXML.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Configuration config;
@@ -76,7 +76,7 @@ public class WsOpenFuXML
 				zipFile.deleteOnExit();
 			}
 		}
-		catch (IOException e){logger.error(e);}
+		catch (IOException e){logger.error("",e);}
 	}
 	
 	public void initSimpleGui()

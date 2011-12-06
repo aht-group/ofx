@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.chart.data.jaxb.Chart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ChartColorFactory
 {
-	static Log logger = LogFactory.getLog(ChartColorFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(ChartColorFactory.class);
 	
 	public static enum Area{backgroundChart,backgroundPlot,
 							gridRange,gridDomain}

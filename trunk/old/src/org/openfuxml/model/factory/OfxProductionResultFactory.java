@@ -27,7 +27,7 @@ public class OfxProductionResultFactory extends AbstractJaxbFactory
 			Unmarshaller u = jc.createUnmarshaller();
 			result = (ProducibleEntities)u.unmarshal(fResult);
 		}
-		catch (JAXBException e) {logger.error(e);}
+		catch (JAXBException e) {logger.error("",e);}
 		return result;
 	}
 	
@@ -40,7 +40,7 @@ public class OfxProductionResultFactory extends AbstractJaxbFactory
 			Unmarshaller u = jc.createUnmarshaller();
 			result = (Productionresult)u.unmarshal(fResult);
 		}
-		catch (JAXBException e) {logger.error(e);}
+		catch (JAXBException e) {logger.error("",e);}
 		return result;
 	}
 	

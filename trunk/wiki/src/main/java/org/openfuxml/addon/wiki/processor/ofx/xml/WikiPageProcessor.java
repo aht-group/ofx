@@ -19,8 +19,6 @@ import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -35,13 +33,15 @@ import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 public class WikiPageProcessor extends AbstractWikiProcessor
 {
-	static Log logger = LogFactory.getLog(WikiPageProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiPageProcessor.class);
 	
 //	private OfxContentTrimmer ofxContentTrimmer;
 //	import org.openfuxml.renderer.processor.post.OfxContentTrimmer;
@@ -71,11 +71,11 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 //			doc = ofxContentTrimmer.trim(doc);
 			JDomUtil.save(doc, fDst, Format.getRawFormat());
 		}
-		catch (IOException e) {logger.error(e);}
-		catch (ParserConfigurationException e) {logger.error(e);}
-		catch (XMLStreamException e) {logger.error(e);}
-		catch (SAXException e) {logger.error(e);}
-		catch (JDOMException e) {logger.error(e);}
+		catch (IOException e) {logger.error("",e);}
+		catch (ParserConfigurationException e) {logger.error("",e);}
+		catch (XMLStreamException e) {logger.error("",e);}
+		catch (SAXException e) {logger.error("",e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	private Document checkTransparent(Document doc, Section section) throws OfxInternalProcessingException
@@ -106,11 +106,11 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 			eTitle.detach();
 			result.setAttribute("transparent", "true");
 		}
-		catch (IOException e) {logger.error(e);}
-		catch (ParserConfigurationException e) {logger.error(e);}
-		catch (XMLStreamException e) {logger.error(e);}
-		catch (SAXException e) {logger.error(e);}
-		catch (JDOMException e) {logger.error(e);}
+		catch (IOException e) {logger.error("",e);}
+		catch (ParserConfigurationException e) {logger.error("",e);}
+		catch (XMLStreamException e) {logger.error("",e);}
+		catch (SAXException e) {logger.error("",e);}
+		catch (JDOMException e) {logger.error("",e);}
 		return result;
 	}
 

@@ -15,7 +15,7 @@ import org.openfuxml.renderer.processor.latex.util.TxtWriter;
 
 public class TstLatexRenderer
 {
-	static Log logger = LogFactory.getLog(TstLatexRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TstLatexRenderer.class);
 	
 	public static void main (String[] args) throws Exception
 	{

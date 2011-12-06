@@ -8,8 +8,6 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,18 +15,19 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 import org.openfuxml.xml.renderer.cmp.Cmp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RunWith(Parameterized.class)
 public class TestWikiInlineProcessor extends AbstractFileProcessingTest
 {
-	static Log logger = LogFactory.getLog(TestWikiInlineProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(TestWikiInlineProcessor.class);
 	
 	private WikiInlineProcessor wikiInline;
 	
@@ -73,7 +72,7 @@ public class TestWikiInlineProcessor extends AbstractFileProcessingTest
 	
 	private void test(boolean saveReference) throws FileNotFoundException, OfxInternalProcessingException
 	{
-		logger.debug(fTest.getAbsoluteFile());
+		logger.debug(fTest.getAbsolutePath());
 		String wikiTxt = StringIO.loadTxt(fTest);
 		
 		Section section = wikiInline.toOfx(wikiTxt);

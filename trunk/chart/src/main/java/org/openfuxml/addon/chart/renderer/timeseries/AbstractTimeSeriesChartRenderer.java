@@ -3,8 +3,6 @@ package org.openfuxml.addon.chart.renderer.timeseries;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.time.Day;
@@ -17,10 +15,12 @@ import org.openfuxml.addon.chart.data.jaxb.Container;
 import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractTimeSeriesChartRenderer extends XYPlotRenderer implements OfxChartRenderer
 {
-	static Log logger = LogFactory.getLog(AbstractTimeSeriesChartRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractTimeSeriesChartRenderer.class);
 	
 	public AbstractTimeSeriesChartRenderer()
 	{

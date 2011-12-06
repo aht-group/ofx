@@ -11,17 +11,17 @@ import net.sourceforge.jwbf.core.actions.util.ProcessException;
 import net.sourceforge.jwbf.mediawiki.actions.queries.CategoryMembersSimple;
 import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiCategoryFetcher
 {
-	static Log logger = LogFactory.getLog(WikiCategoryFetcher.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiCategoryFetcher.class);
 	
 	private MediaWikiBot bot;
 	private List<String> articleNames;
@@ -46,8 +46,8 @@ public class WikiCategoryFetcher
 				articleNames.add(wikiArticles.next());
 			}
 		}
-		catch (ActionException e) {logger.error(e);}
-		catch (ProcessException e) {logger.error(e);}
+		catch (ActionException e) {logger.error("",e);}
+		catch (ProcessException e) {logger.error("",e);}
 	}
 	
 	public void fetchArticles(ExlpTxtWriter txtWriter, Category category)

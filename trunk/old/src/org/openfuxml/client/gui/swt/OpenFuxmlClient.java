@@ -49,7 +49,7 @@ import org.openfuxml.util.config.factory.ClientConfFactory;
  */
 public class OpenFuxmlClient extends Composite implements Runnable
 {
-	static Log logger = LogFactory.getLog(OpenFuxmlClient.class);
+	final static Logger logger = LoggerFactory.getLogger(OpenFuxmlClient.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	public final static String Title = "openFuXML - Client";
@@ -259,7 +259,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 					Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 					tabItem.setImage(img);
 				}
-				catch (FileNotFoundException e) {logger.error(e);}
+				catch (FileNotFoundException e) {logger.error("",e);}
 				tabItem.setText(ofxProject.getName());
 				ProjektComposite pComp = new ProjektComposite(tfProjekte, this, ofxProject,config);
 				tabItem.setControl(pComp);
@@ -418,7 +418,7 @@ public class OpenFuxmlClient extends Composite implements Runnable
 		for (int i=0; i<anzImages; i++)
 		{
 	        try{img[i] = irl.search(this.getClass().getClassLoader(), Dateinamen[i], getDisplay());}
-	        catch (FileNotFoundException e) {logger.error(e);}
+	        catch (FileNotFoundException e) {logger.error("",e);}
 		}
         return img;		
 	}

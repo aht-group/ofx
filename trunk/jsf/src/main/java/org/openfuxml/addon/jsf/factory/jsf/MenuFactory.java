@@ -7,8 +7,6 @@ import java.util.List;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -16,10 +14,12 @@ import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
 import org.openfuxml.addon.jsfapp.data.jaxb.Menu;
 import org.openfuxml.addon.jsfapp.data.jaxb.Menuitem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MenuFactory
 {
-	static Log logger = LogFactory.getLog(MenuFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(MenuFactory.class);
 			
 	private Menu menu;
 	
@@ -60,7 +60,7 @@ public class MenuFactory
 			doc.setRootElement((Element)eToc.clone());
 			parseA(doc,prefix,suffix);
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	public void addToc(String addMenu) throws FileNotFoundException
@@ -77,7 +77,7 @@ public class MenuFactory
 		{
 			XPath xpath = XPath.newInstance("//a");
 			List<Element> l = xpath.selectNodes(doc);
-			logger.debug(l.size());
+			logger.debug("Size: "+l.size());
 			for(Element element : l)
 			{
 				String link = element.getAttributeValue("href").trim();
@@ -104,7 +104,7 @@ public class MenuFactory
 		//		element.detach();
 			}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -116,7 +116,7 @@ public class MenuFactory
 			List<Element> l = xpath.selectNodes(eRoot);
 			for(Element element : l){element.detach();}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	private String addPrefixSuffix(String link, String prefix, String suffix)

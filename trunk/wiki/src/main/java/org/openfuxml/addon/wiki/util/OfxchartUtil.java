@@ -1,14 +1,14 @@
 package org.openfuxml.addon.wiki.util;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
 import org.openfuxml.util.translation.DoubleMapTranslation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxchartUtil
 {
-	static Log logger = LogFactory.getLog(OfxchartUtil.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxchartUtil.class);
 	
 	public static synchronized Ofxchart getChart(Ofx ofx, String id, String type)
 	{

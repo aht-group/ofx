@@ -8,8 +8,6 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.output.Format;
@@ -24,11 +22,13 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.processor.html.section.DefaultSectionRenderer;
 import org.openfuxml.test.AbstractFileProcessingTest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RunWith(Parameterized.class)
 public class TestDefaultSectionRenderer extends AbstractFileProcessingTest
 {
-	static Log logger = LogFactory.getLog(TestDefaultSectionRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TestDefaultSectionRenderer.class);
 	
 	private DefaultSectionRenderer renderer;
 	
@@ -65,7 +65,7 @@ public class TestDefaultSectionRenderer extends AbstractFileProcessingTest
 	
 	private void render(boolean saveReference) throws FileNotFoundException
 	{
-		logger.debug(fTest.getAbsoluteFile());
+		logger.debug(fTest.getAbsolutePath());
 		Section section = (Section)JaxbUtil.loadJAXB(fTest.getAbsolutePath(), Section.class);
 
 		Element html = new Element("html");

@@ -18,7 +18,7 @@ import org.openfuxml.model.jaxb.Format;
 
 public class FormatFactoryDirect implements FormatFactory
 {
-	static Log logger = LogFactory.getLog(FormatFactoryDirect.class);
+	final static Logger logger = LoggerFactory.getLogger(FormatFactoryDirect.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	private Configuration config;
@@ -60,7 +60,7 @@ public class FormatFactoryDirect implements FormatFactory
 			format = (Format)u.unmarshal(fFormat);
 			logger.debug(format.getOutputformat()+" "+format.getDescription());
 		}
-		catch (JAXBException e) {logger.error(e);}
+		catch (JAXBException e) {logger.error("",e);}
 		return format;
 	}
 }

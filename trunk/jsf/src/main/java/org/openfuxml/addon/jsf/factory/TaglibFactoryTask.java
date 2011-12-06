@@ -9,8 +9,6 @@ import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.jdom.Attribute;
@@ -18,15 +16,17 @@ import org.jdom.Document;
 import org.jdom.Namespace;
 import org.jdom.output.Format;
 import org.openfuxml.xml.addon.jsf.tld.Component;
+import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
 import org.openfuxml.xml.addon.jsf.tld.FacesConfig;
 import org.openfuxml.xml.addon.jsf.tld.Metatag;
 import org.openfuxml.xml.addon.jsf.tld.Renderer;
 import org.openfuxml.xml.addon.jsf.tld.Tag;
-import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TaglibFactoryTask extends Task
 {
-	static Log logger = LogFactory.getLog(TaglibFactoryTask.class);
+	final static Logger logger = LoggerFactory.getLogger(TaglibFactoryTask.class);
 	
 	public static String ftNsDefault = "http://java.sun.com/xml/ns/javaee";
 	public static String ftNsXsi = "http://www.w3.org/2001/XMLSchema-instance";

@@ -2,17 +2,17 @@ package org.openfuxml.addon.jsf.factory.ofx;
 
 import java.io.File;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
 import org.openfuxml.xml.addon.jsf.tld.Metatag;
 import org.openfuxml.xml.addon.jsf.tld.Tag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TagSectionFactory
 {
-	static Log logger = LogFactory.getLog(TagSectionFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TagSectionFactory.class);
 	
 	private FaceletTaglib taglib;
 	private TagExampleFactory factoryExamples;

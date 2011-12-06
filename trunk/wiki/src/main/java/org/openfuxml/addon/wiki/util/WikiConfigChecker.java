@@ -3,12 +3,12 @@ package org.openfuxml.addon.wiki.util;
 import java.io.File;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiConfigChecker
 {
-	static Log logger = LogFactory.getLog(WikiConfigChecker.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiConfigChecker.class);
 	
 	public static synchronized void check(Configuration config)
 	{

@@ -10,7 +10,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Wikireplace;
 
 public class TestWikiReplace
 {
-	static Log logger = LogFactory.getLog(TestWikiReplace.class);
+	final static Logger logger = LoggerFactory.getLogger(TestWikiReplace.class);
 	
 	public TestWikiReplace()
 	{

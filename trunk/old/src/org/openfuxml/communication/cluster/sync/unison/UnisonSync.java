@@ -35,7 +35,7 @@ import de.kisner.util.parser.LogParser;
  */
 public class UnisonSync implements ServerSync
 {
-	static Log logger = LogFactory.getLog(UnisonSync.class);
+	final static Logger logger = LoggerFactory.getLogger(UnisonSync.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	String remoteRepo,remoteOutput;

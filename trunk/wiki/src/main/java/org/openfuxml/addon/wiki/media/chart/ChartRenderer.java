@@ -16,18 +16,18 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.xmlgraphics.java2d.ps.EPSDocumentGraphics2D;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
 import org.openfuxml.addon.wiki.media.chart.factory.BarChartFactory;
 import org.openfuxml.addon.wiki.util.WikiConfigChecker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ChartRenderer
 {
-	static Log logger = LogFactory.getLog(ChartRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(ChartRenderer.class);
 	
 	private MultiResourceLoader mrl;
 	private Configuration config;
@@ -57,8 +57,8 @@ public class ChartRenderer
 			Unmarshaller u = jc.createUnmarshaller();
 			ofxChart = (Ofxchart)u.unmarshal(mrl.searchIs(fileName));
 		}
-		catch (JAXBException e) {logger.error(e);}
-		catch (FileNotFoundException e) {logger.error(e);}
+		catch (JAXBException e) {logger.error("",e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
 	}
 	
 	public void applyChart(Ofxchart ofxChart)
@@ -89,8 +89,8 @@ public class ChartRenderer
 			ChartUtilities.writeChartAsPNG(os,chart,width,height);
 			os.close();
 		}
-		catch (FileNotFoundException e) {{logger.error(e);}}
-		catch (IOException e) {{logger.error(e);}}
+		catch (FileNotFoundException e) {logger.error("",e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 	
 	private void saveEPS(JFreeChart chart)
@@ -106,8 +106,8 @@ public class ChartRenderer
 	        g2d.finish();
 	        out.close();
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
-		catch (IOException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 	
 	public static void main(String args[])

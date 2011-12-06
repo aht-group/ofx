@@ -4,8 +4,6 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
@@ -19,10 +17,12 @@ import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.xml.addon.jsf.tld.Attribute;
 import org.openfuxml.xml.addon.jsf.tld.Metatag;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TagTableFactory
 {
-	static Log logger = LogFactory.getLog(TagTableFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TagTableFactory.class);
 	
 	public TagTableFactory()
 	{

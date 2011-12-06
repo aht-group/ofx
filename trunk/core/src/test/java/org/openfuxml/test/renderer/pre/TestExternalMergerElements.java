@@ -7,8 +7,6 @@ import java.util.Collection;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.output.Format;
 import org.junit.After;
@@ -21,11 +19,13 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 import org.openfuxml.test.AbstractFileProcessingTest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RunWith(Parameterized.class)
 public class TestExternalMergerElements extends AbstractFileProcessingTest
 {
-	static Log logger = LogFactory.getLog(TestExternalMergerElements.class);
+	final static Logger logger = LoggerFactory.getLogger(TestExternalMergerElements.class);
 	
 	private OfxExternalMerger exMerger;
 	
@@ -62,7 +62,7 @@ public class TestExternalMergerElements extends AbstractFileProcessingTest
 	
 	private void render(boolean saveReference) throws FileNotFoundException, OfxInternalProcessingException
 	{
-		logger.debug(fTest.getAbsoluteFile());
+		logger.debug(fTest.getAbsolutePath());
 		
 		Document doc = exMerger.mergeToDoc(fTest);
 		

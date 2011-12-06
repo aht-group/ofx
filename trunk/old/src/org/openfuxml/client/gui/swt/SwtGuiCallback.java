@@ -11,7 +11,7 @@ import org.openfuxml.client.gui.swt.composites.ProducerComposite;
 
 public class SwtGuiCallback implements ClientGuiCallback
 {
-	static Log logger = LogFactory.getLog(SwtGuiCallback.class);
+	final static Logger logger = LoggerFactory.getLogger(SwtGuiCallback.class);
 	 
 	private ProducerComposite compP;
 	private LogComposite compL;

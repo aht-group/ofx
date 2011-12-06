@@ -8,8 +8,6 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -20,10 +18,12 @@ import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxContainerMerger
 {
-	static Log logger = LogFactory.getLog(OfxContainerMerger.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxContainerMerger.class);
 	
 	private List<XPath> lXpath;
 	
@@ -44,7 +44,7 @@ public class OfxContainerMerger
 			xpSectionTransparent.addNamespace(nsOfx); xpSectionTransparent.addNamespace(nsWiki);
 			lXpath.add(xpSectionTransparent);
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	public Ofxdoc merge(Ofxdoc ofxDoc) throws OfxInternalProcessingException
@@ -84,7 +84,7 @@ public class OfxContainerMerger
 				e.getParentElement().removeContent(e);
 			}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 		return rootElement;
 	}
 	

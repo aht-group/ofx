@@ -38,7 +38,7 @@ import org.openfuxml.model.jaxb.Format.Options.Option;
  */
 public class ProducerComposite extends AbstractProducerComposite
 {	
-	static Log logger = LogFactory.getLog(ProducerComposite.class);
+	final static Logger logger = LoggerFactory.getLogger(ProducerComposite.class);
 	private static String fs = SystemUtils.FILE_SEPARATOR;
 	
 	final static int MAX_ANZ_KE = 8;

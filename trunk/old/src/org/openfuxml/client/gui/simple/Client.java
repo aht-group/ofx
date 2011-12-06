@@ -57,7 +57,7 @@ import org.openfuxml.util.config.factory.ClientConfFactory;
  */
 public class Client extends AbstractProducerComposite implements ClientGuiCallback
 { 
-	static Log logger = LogFactory.getLog(Client.class);
+	final static Logger logger = LoggerFactory.getLogger(Client.class);
     private static String fs = SystemUtils.FILE_SEPARATOR;
     
     public final static String Version = Client.class.getPackage().getImplementationVersion();

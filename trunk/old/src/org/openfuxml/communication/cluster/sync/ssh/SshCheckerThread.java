@@ -13,7 +13,7 @@ import com.jcraft.jsch.Session;
  */
 public class SshCheckerThread extends Thread 
 {
-	static Log logger = LogFactory.getLog(SshChecker.class);
+	final static Logger logger = LoggerFactory.getLogger(SshChecker.class);
 	
 	private SshChecker sshC;
 	private String user,host;

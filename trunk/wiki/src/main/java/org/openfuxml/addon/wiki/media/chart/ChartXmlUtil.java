@@ -9,17 +9,17 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ChartXmlUtil
 {
-	static Log logger = LogFactory.getLog(ChartXmlUtil.class);
+	final static Logger logger = LoggerFactory.getLogger(ChartXmlUtil.class);
 	
 	public static synchronized Document loadChart(Ofxchart ofxChart)
 	{
@@ -39,9 +39,9 @@ public class ChartXmlUtil
 //			XMLOutputter xmlOut = new XMLOutputter(Format.getPrettyFormat());
 //			xmlOut.output(doc, System.out);
 		}
-		catch (JAXBException e) {logger.error(e);}
-		catch (JDOMException e) {logger.error(e);}
-		catch (IOException e) {logger.error(e);}
+		catch (JAXBException e) {logger.error("",e);}
+		catch (JDOMException e) {logger.error("",e);}
+		catch (IOException e) {logger.error("",e);}
 		return doc;
 	}
 	

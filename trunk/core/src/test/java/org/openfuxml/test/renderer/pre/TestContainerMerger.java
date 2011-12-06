@@ -7,8 +7,6 @@ import java.util.Collection;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,11 +19,13 @@ import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.processor.pre.OfxContainerMerger;
 import org.openfuxml.test.AbstractFileProcessingTest;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RunWith(Parameterized.class)
 public class TestContainerMerger extends AbstractFileProcessingTest
 {
-	static Log logger = LogFactory.getLog(TestContainerMerger.class);
+	final static Logger logger = LoggerFactory.getLogger(TestContainerMerger.class);
 	
 	private OfxContainerMerger containerMerger;
 	
@@ -62,7 +62,7 @@ public class TestContainerMerger extends AbstractFileProcessingTest
 	
 	private void render(boolean saveReference) throws FileNotFoundException, OfxInternalProcessingException
 	{
-		logger.debug(fTest.getAbsoluteFile());
+		logger.debug(fTest.getAbsolutePath());
 		Ofxdoc ofxSrc = (Ofxdoc)JaxbUtil.loadJAXB(fTest.getAbsolutePath(), Ofxdoc.class);
 
 		Ofxdoc ofxDst = containerMerger.merge(ofxSrc);

@@ -17,7 +17,7 @@ import org.openfuxml.util.config.jaxb.Openfuxml.Net;
 
 public class ClientConfFactory extends AbstractConfFactory
 {
-	static Log logger = LogFactory.getLog(ClientConfFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(ClientConfFactory.class);
 	
 	private Openfuxml openfuxml;
 	private String mainConf;
@@ -55,7 +55,7 @@ public class ClientConfFactory extends AbstractConfFactory
 				writeConfig(fos);
 			}
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
 	}
 	
 	private Net getNet()

@@ -2,13 +2,13 @@ package org.openfuxml.test;
 
 import net.sf.exlp.util.io.LoggerInit;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.BeforeClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AbstractJsfTldTest
 {
-	static Log logger = LogFactory.getLog(AbstractJsfTldTest.class);	
+	final static Logger logger = LoggerFactory.getLogger(AbstractJsfTldTest.class);	
 	
 	@BeforeClass
     public static void initLogger()

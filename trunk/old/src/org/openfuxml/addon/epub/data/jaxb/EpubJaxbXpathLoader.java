@@ -11,7 +11,7 @@ import com.aht.util.data.jaxb.AhtNsPrefixMapper;
 
 public class EpubJaxbXpathLoader
 {
-	static Log logger = LogFactory.getLog(EpubJaxbXpathLoader.class);
+	final static Logger logger = LoggerFactory.getLogger(EpubJaxbXpathLoader.class);
 	
 	static AhtNsPrefixMapper prefixMapper = new AhtNsPrefixMapper();
 	

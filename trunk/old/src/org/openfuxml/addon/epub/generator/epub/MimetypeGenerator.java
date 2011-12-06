@@ -13,7 +13,7 @@ import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 
 public class MimetypeGenerator
 {
-	static Log logger = LogFactory.getLog(OfxExternalMerger.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxExternalMerger.class);
 	
 	private File targetDir;
 	
@@ -32,6 +32,6 @@ public class MimetypeGenerator
 			w.write("application/epub+zip");
 			w.close();os.close();
 		}
-		catch (IOException e) {logger.error(e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 }

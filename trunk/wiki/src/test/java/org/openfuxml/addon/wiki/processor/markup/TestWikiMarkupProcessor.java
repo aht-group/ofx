@@ -8,8 +8,6 @@ import java.util.Collection;
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,11 +21,13 @@ import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractOfxWikiTest;
 import org.openfuxml.test.OfxWikiTstBootstrap;
 import org.openfuxml.xml.renderer.cmp.Cmp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RunWith(Parameterized.class)
 public class TestWikiMarkupProcessor extends AbstractOfxWikiTest
 {
-	static Log logger = LogFactory.getLog(TestWikiMarkupProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(TestWikiMarkupProcessor.class);
 	
 	private WikiMarkupProcessor wmp;
 	
@@ -79,7 +79,7 @@ public class TestWikiMarkupProcessor extends AbstractOfxWikiTest
     @Test
     public void testPlainToMarkup() throws OfxInternalProcessingException
     {
-    	logger.debug(fTest.getAbsoluteFile());
+    	logger.debug(fTest.getAbsolutePath());
     	wikiPlainToMarkup(false);
     }
 	
@@ -105,7 +105,7 @@ public class TestWikiMarkupProcessor extends AbstractOfxWikiTest
 		for(Object[] o : TestWikiMarkupProcessor.initFileNames())
 		{
 			File fTest = (File)o[0];
-			logger.debug(fTest);
+			logger.debug(fTest.getAbsolutePath());
 			
 			TestWikiMarkupProcessor test = new TestWikiMarkupProcessor(fTest);
 			test.initWmp();

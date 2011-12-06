@@ -21,7 +21,7 @@ import com.aht.util.facade.aht.AhtTranslationFacade;
 
 public class AbstractOfxChart
 {
-	private static Log logger = LogFactory.getLog(AbstractOfxChart.class);
+	private final static Logger logger = LoggerFactory.getLogger(AbstractOfxChart.class);
 	
 	public static enum RenderTarget {web,pdf};
 	

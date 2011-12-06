@@ -7,18 +7,18 @@ import javax.xml.stream.XMLStreamWriter;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxgallery.Ofximage;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.util.JdomXmlStreamer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
 public class OfxInjectionEmitter extends NestingEmitter
 {
-	static Log logger = LogFactory.getLog(OfxInjectionEmitter.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxInjectionEmitter.class);
 	
 	private String injectionDir;
 	

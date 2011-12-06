@@ -12,16 +12,16 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.OFxChartRenderControl;
 import org.openfuxml.addon.chart.data.jaxb.Chart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxChart extends HttpServlet
 {
-	static Log logger = LogFactory.getLog(OfxChart.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxChart.class);
 	
 	private static final long serialVersionUID = 1;
 	

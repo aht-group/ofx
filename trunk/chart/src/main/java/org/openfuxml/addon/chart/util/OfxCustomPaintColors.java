@@ -7,12 +7,12 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxCustomPaintColors
 {
-	static Log logger = LogFactory.getLog(OfxCustomPaintColors.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxCustomPaintColors.class);
 	
 	private Map<Integer,Integer> mapColorIndex;
 	private List<Color> colors;

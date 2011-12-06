@@ -17,7 +17,7 @@ import de.kisner.util.architecture.EnvironmentParameter;
 
 public abstract class AbstractProducer
 {
-	static Log logger = LogFactory.getLog(AbstractProducer.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractProducer.class);
 	protected EnvironmentParameter envP;
 	protected Configuration config;
 	protected Writer w;

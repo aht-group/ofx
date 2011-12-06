@@ -8,8 +8,6 @@ import java.util.List;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Content;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -28,10 +26,12 @@ import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.xml.renderer.cmp.Html;
 import org.openfuxml.xml.renderer.html.Renderer;
 import org.openfuxml.xml.renderer.html.Template;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxHtmlRenderer
 {
-	static Log logger = LogFactory.getLog(OfxHtmlRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxHtmlRenderer.class);
 	
 	public static enum HtmlDir {template,web};
 	
@@ -61,7 +61,7 @@ public class OfxHtmlRenderer
 				}
 			}
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
 	}
 	
 	private void processTemplate(Section section, Ofxdoc ofxDoc, Template template) throws OfxConfigurationException, OfxImplementationException
@@ -88,15 +88,15 @@ public class OfxHtmlRenderer
 					else if(oRenderer instanceof OfxSectionRenderer) {renderSection(eRenderer,(OfxSectionRenderer)oRenderer,ofxDoc, section);}
 				}
 				catch (ClassNotFoundException e) {throw new OfxConfigurationException("Renderer class not found: "+e.getMessage());}
-				catch (IllegalArgumentException e) {logger.error(e);}
-				catch (SecurityException e) {logger.error(e);}
-				catch (InstantiationException e) {logger.error(e);}
-				catch (IllegalAccessException e) {logger.error(e);}
-				catch (InvocationTargetException e) {logger.error(e);}
+				catch (IllegalArgumentException e) {logger.error("",e);}
+				catch (SecurityException e) {logger.error("",e);}
+				catch (InstantiationException e) {logger.error("",e);}
+				catch (IllegalAccessException e) {logger.error("",e);}
+				catch (InvocationTargetException e) {logger.error("",e);}
 				catch (NoSuchMethodException e) {throw new OfxImplementationException("Renderer implementation does not have a empty constructor: "+r.getClassName());}
 			}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 		File fWeb = cmpConfigUtil.getDir(html.getDir(), HtmlDir.web.toString());
 		File fHtml = new File(fWeb,section.getId()+".html");
 //		JDomUtil.debug(doc);

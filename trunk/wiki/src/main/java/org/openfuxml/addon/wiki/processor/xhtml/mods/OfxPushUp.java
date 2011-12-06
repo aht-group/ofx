@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxPushUp
 {
-	static Log logger = LogFactory.getLog(OfxPushUp.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxPushUp.class);
 	
 	public OfxPushUp()
 	{
@@ -25,7 +25,7 @@ public class OfxPushUp
 	{
 		Document doc = null;
 		try {doc = JDomUtil.txtToDoc(xHtmlText);}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	
 		Element rootElement = doc.getRootElement();
 		rootElement.detach();
@@ -81,7 +81,7 @@ public class OfxPushUp
 			}
 			else {logger.warn("Unknown content: "+o.getClass().getName());}
 		}
-		logger.trace(sb);
+		logger.trace(sb.toString());
 		
 		ArrayList<Element> result = new ArrayList<Element>();
 		result.add(newRoot);

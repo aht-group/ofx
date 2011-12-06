@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class SshCheckedConnections extends Thread
 {
-	static Log logger = LogFactory.getLog(SshCheckedConnections.class);
+	final static Logger logger = LoggerFactory.getLogger(SshCheckedConnections.class);
 	
 	int verifiedConnectionLifetime;
 	

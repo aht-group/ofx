@@ -22,7 +22,7 @@ import org.openfuxml.content.ofx.Reference;
 
 public class TestMetatag
 {
-	static Log logger = LogFactory.getLog(TestMetatag.class);
+	final static Logger logger = LoggerFactory.getLogger(TestMetatag.class);
 	
 	public TestMetatag()
 	{

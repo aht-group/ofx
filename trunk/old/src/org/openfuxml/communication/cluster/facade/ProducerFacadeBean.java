@@ -28,7 +28,7 @@ import org.openfuxml.producer.exception.ProductionSystemException;
 @Remote(ProducerFacade.class)
 public class ProducerFacadeBean implements ProducerFacade, Serializable
 {
-	static Log logger = LogFactory.getLog(ProducerFacadeBean.class);
+	final static Logger logger = LoggerFactory.getLogger(ProducerFacadeBean.class);
 	static final long serialVersionUID=11;
 	
 	public ProducerFacadeBean()

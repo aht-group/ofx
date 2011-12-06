@@ -4,8 +4,6 @@ import java.io.File;
 
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
@@ -15,10 +13,12 @@ import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiContentFetcher extends AbstractWikiProcessor implements WikiProcessor
 {
-	static Log logger = LogFactory.getLog(WikiContentFetcher.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiContentFetcher.class);
 	
 	private WikiBotFactory wbf;
 	private ExlpTxtWriter txtWriter;

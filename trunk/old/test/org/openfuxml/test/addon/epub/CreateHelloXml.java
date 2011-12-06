@@ -20,7 +20,7 @@ import de.svenjacobs.loremipsum.LoremIpsum;
 
 public class CreateHelloXml
 {
-	static Log logger = LogFactory.getLog(CreateHelloXml.class);
+	final static Logger logger = LoggerFactory.getLogger(CreateHelloXml.class);
 	
 	private LoremIpsum li;
 	private Random rnd;

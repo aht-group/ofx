@@ -13,7 +13,7 @@ import org.openfuxml.addon.jsfapp.factory.MenuFactory;
 
 public class MenuParserTask extends Task
 {	
-	static Log logger = LogFactory.getLog(MenuParserTask.class);
+	final static Logger logger = LoggerFactory.getLogger(MenuParserTask.class);
 	
 	private String htmlToc,addToc,xmlToc, prefix, suffix;
 

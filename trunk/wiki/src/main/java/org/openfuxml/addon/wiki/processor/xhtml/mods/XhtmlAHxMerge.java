@@ -4,17 +4,17 @@ import java.util.regex.Pattern;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class XhtmlAHxMerge
 {
-	static Log logger = LogFactory.getLog(XhtmlAHxMerge.class);
+	final static Logger logger = LoggerFactory.getLogger(XhtmlAHxMerge.class);
 	
 	private Pattern p;
 	
@@ -27,7 +27,7 @@ public class XhtmlAHxMerge
 	{
 		Document doc = null;
 		try {doc = JDomUtil.txtToDoc(xHtmlText);}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 		Element rootElement = doc.getRootElement();	
 		rootElement.detach();
 		

@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.SystemUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.ParagraphFactory;
 import org.openfuxml.renderer.processor.latex.content.SectionFactory;
 import org.openfuxml.renderer.processor.latex.content.list.LatexListFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AbstractOfxLatexRenderer
 {
-	static Log logger = LogFactory.getLog(SectionFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(SectionFactory.class);
 	
 	protected List<String> preTxt;
 	protected List<String> txt;

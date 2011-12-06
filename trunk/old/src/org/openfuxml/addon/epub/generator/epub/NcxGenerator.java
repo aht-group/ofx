@@ -25,7 +25,7 @@ import org.openfuxml.util.xml.OfxNsPrefixMapper;
 
 public class NcxGenerator
 {
-	static Log logger = LogFactory.getLog(OfxExternalMerger.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxExternalMerger.class);
 	
 	private File targetDir;
 	private Ncx ncx;
@@ -77,7 +77,7 @@ public class NcxGenerator
 			
 //			Document doc = JaxbUtil.toDocument(ofxDoc, ofxNsPrefixMapper);
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 		return navmap;
 	}
 	

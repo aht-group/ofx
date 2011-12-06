@@ -16,7 +16,7 @@ import org.openfuxml.model.ejb.OfxProject;
 
 public class ProducerComboFactory
 {
-	static Log logger = LogFactory.getLog(ProducerComboFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(ProducerComboFactory.class);
 	
 	private Composite composite;
 	private OfxGuiAction ofxAction;

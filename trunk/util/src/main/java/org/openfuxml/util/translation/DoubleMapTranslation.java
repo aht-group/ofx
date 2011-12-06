@@ -1,11 +1,11 @@
 package org.openfuxml.util.translation;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DoubleMapTranslation
 {
-	static Log logger = LogFactory.getLog(DoubleMapTranslation.class);
+	final static Logger logger = LoggerFactory.getLogger(DoubleMapTranslation.class);
 	
 	public String translate(String key, String lang)
 	{

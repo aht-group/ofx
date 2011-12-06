@@ -7,8 +7,6 @@ import java.util.List;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -16,10 +14,12 @@ import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxExternalMerger
 {
-	static Log logger = LogFactory.getLog(OfxExternalMerger.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxExternalMerger.class);
 	
 	private RelativePathFactory rpf;
 	private File rootFile;
@@ -36,7 +36,7 @@ public class OfxExternalMerger
 			xpath.addNamespace(Namespace.getNamespace("ofx", "http://www.openfuxml.org"));
 			xpath.addNamespace(Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki"));		
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	private void loadRoot(File rootFile) throws OfxInternalProcessingException
@@ -94,7 +94,7 @@ public class OfxExternalMerger
 				childElement.detach();
 			}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 		return rootElement;
 	}
 }

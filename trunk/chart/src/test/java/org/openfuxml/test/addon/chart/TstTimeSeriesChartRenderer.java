@@ -10,8 +10,6 @@ import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.OFxChartRenderControl;
@@ -21,10 +19,12 @@ import org.openfuxml.addon.chart.data.jaxb.Container;
 import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TstTimeSeriesChartRenderer
 {
-	static Log logger = LogFactory.getLog(TstTimeSeriesChartRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TstTimeSeriesChartRenderer.class);
 	
 	public TstTimeSeriesChartRenderer()
 	{

@@ -3,8 +3,6 @@ package org.openfuxml.renderer.processor.html.section;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Content;
 import org.jdom.Element;
 import org.jdom.Text;
@@ -17,10 +15,12 @@ import org.openfuxml.renderer.processor.html.interfaces.OfxSectionRenderer;
 import org.openfuxml.renderer.processor.html.interfaces.OfxTableRenderer;
 import org.openfuxml.renderer.processor.html.structure.ReferenceRenderer;
 import org.openfuxml.renderer.processor.html.table.DefaultTableRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DefaultSectionRenderer implements OfxSectionRenderer
 {
-	static Log logger = LogFactory.getLog(DefaultSectionRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(DefaultSectionRenderer.class);
 	
 	private List<Content> list;
 	private List<Content> subsections;

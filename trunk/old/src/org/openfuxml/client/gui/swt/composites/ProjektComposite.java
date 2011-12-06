@@ -29,7 +29,7 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
  */
 public class ProjektComposite extends Composite
 {	
-	static Log logger = LogFactory.getLog(ProjektComposite.class);
+	final static Logger logger = LoggerFactory.getLogger(ProjektComposite.class);
 	
 	private OpenFuxmlClient client;
 	private TabFolder tabFolder;
@@ -122,7 +122,7 @@ public class ProjektComposite extends Composite
 			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			tiProduzieren.setImage(img);
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
 		tiProduzieren.setText("Produzieren");
 			pComp = new ProducerComposite(tabFolder, ofxA, ofxP, ofxCC, config);
 			tiProduzieren.setControl(pComp);
@@ -137,7 +137,7 @@ public class ProjektComposite extends Composite
 			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			tiOeffnen.setImage(img);
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
 		tiOeffnen.setText("öffnen");
 //			oComp = new OeffnenComposite(tabFolder, this);
 //			tiOeffnen.setControl(oComp);
@@ -153,7 +153,7 @@ public class ProjektComposite extends Composite
 			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			ti.setImage(img);
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
 		ti.setText("Browser");
 		compBrowser = new BrowserComposite(tabFolder, config);
 		ti.setControl(compBrowser);
@@ -168,7 +168,7 @@ public class ProjektComposite extends Composite
 			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			tiLogView.setImage(img);
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
 		tiLogView.setText("Log");
 		compLog = new LogComposite(tabFolder,config);
 		tiLogView.setControl(compLog);
@@ -183,7 +183,7 @@ public class ProjektComposite extends Composite
 			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			tiBenutzer.setImage(img);
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
 		tiBenutzer.setText("Benutzer");
 //			benutzerComp = new BenutzerComposite(tabFolder, this,myProjectUi);
 //			tiBenutzer.setControl(benutzerComp);
@@ -198,7 +198,7 @@ public class ProjektComposite extends Composite
 			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			tiDoc.setImage(img);
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
 		tiDoc.setText("Dokumente");
 //			docComp = new DocComposite(tabFolder, this);
 //			tiDoc.setControl(docComp);
@@ -213,7 +213,7 @@ public class ProjektComposite extends Composite
 			Image img = irl.search(this.getClass().getClassLoader(), res, getDisplay());
 			tiEinst.setImage(img);
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
 		tiEinst.setText("Einstellungen");
 //			einstComp = new EinstellungenComposite(tabFolder, this);
 //			tiEinst.setControl(einstComp);

@@ -16,7 +16,7 @@ import org.openfuxml.renderer.processor.latex.content.table.util.LatexTabluar;
 
 public class TstLatexTabular
 {
-	static Log logger = LogFactory.getLog(TstLatexTabular.class);
+	final static Logger logger = LoggerFactory.getLogger(TstLatexTabular.class);
 	
 	private LatexTabluar latexTabular;
 	

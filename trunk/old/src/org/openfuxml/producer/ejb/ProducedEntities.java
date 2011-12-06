@@ -27,7 +27,7 @@ import de.kisner.util.xml.XmlObject;
 @Entity
 public class ProducedEntities implements Serializable,EjbObject
 {
-	static Log logger = LogFactory.getLog(ProducedEntities.class);
+	final static Logger logger = LoggerFactory.getLogger(ProducedEntities.class);
 	
 	static final long serialVersionUID=1;
 	

@@ -21,7 +21,7 @@ import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 
 public class EpubGenerator
 {
-	static Log logger = LogFactory.getLog(EpubGenerator.class);
+	final static Logger logger = LoggerFactory.getLogger(EpubGenerator.class);
 	
 	private NcxGenerator ncxGenerator;
 	private MimetypeGenerator mimeFactory;

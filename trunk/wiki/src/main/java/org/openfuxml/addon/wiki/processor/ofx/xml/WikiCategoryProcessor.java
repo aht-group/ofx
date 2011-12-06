@@ -4,8 +4,6 @@ import java.io.File;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
@@ -17,10 +15,12 @@ import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiCategoryProcessor extends AbstractWikiProcessor
 {
-	static Log logger = LogFactory.getLog(WikiCategoryProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiCategoryProcessor.class);
 	
 	private OfxNsPrefixMapper nsPrefixMapper;
 	private WikiPageProcessor pageProcessor;

@@ -6,8 +6,6 @@ import java.util.List;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -17,10 +15,12 @@ import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiExternalIntegrator
 {
-	static Log logger = LogFactory.getLog(WikiExternalIntegrator.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiExternalIntegrator.class);
 	
 	private Namespace ns;
 	private XPath xpath;
@@ -41,7 +41,7 @@ public class WikiExternalIntegrator
 			xpath = XPath.newInstance("//wiki:content");
 			xpath.addNamespace(ns);
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 		xpath.addNamespace(ns);
 		counter = 1;
 		wikiQueries = new Contents();
@@ -72,7 +72,7 @@ public class WikiExternalIntegrator
 				eChild.detach();
 			}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 
 		ofxDocWithWikisAsExternal = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
 	}

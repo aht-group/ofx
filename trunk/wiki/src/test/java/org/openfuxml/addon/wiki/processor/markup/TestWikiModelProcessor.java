@@ -6,8 +6,6 @@ import java.util.Collection;
 
 import net.sf.exlp.util.io.StringIO;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,11 +16,13 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
 import org.openfuxml.test.OfxWikiTstBootstrap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RunWith(Parameterized.class)
 public class TestWikiModelProcessor extends AbstractFileProcessingTest
 {
-	static Log logger = LogFactory.getLog(TestWikiInlineProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(TestWikiInlineProcessor.class);
 	
 	private WikiModelProcessor wmp;
 	
@@ -57,7 +57,7 @@ public class TestWikiModelProcessor extends AbstractFileProcessingTest
     @Test
     public void testPlainToMarkup() throws OfxInternalProcessingException
     {
-    	logger.debug(fTest.getAbsoluteFile());
+    	logger.debug(fTest.getAbsolutePath());
     	wikiPlainToMarkup(false);
     }
 	

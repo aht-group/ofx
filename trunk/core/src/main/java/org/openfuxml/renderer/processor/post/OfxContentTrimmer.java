@@ -9,18 +9,18 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.xpath.XPath;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxContentTrimmer
 {
-	static Log logger = LogFactory.getLog(OfxContentTrimmer.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxContentTrimmer.class);
 	
 	private List<XPath> lXpath;
 	
@@ -37,7 +37,7 @@ public class OfxContentTrimmer
 			xpSections.addNamespace(nsOfx); xpSections.addNamespace(nsWiki);
 			lXpath.add(xpSections);
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	public Document trim(Document doc) throws OfxInternalProcessingException
@@ -68,7 +68,7 @@ public class OfxContentTrimmer
 				else{e.setText(e.getTextTrim());}
 			}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 		return rootElement;
 	}
 	

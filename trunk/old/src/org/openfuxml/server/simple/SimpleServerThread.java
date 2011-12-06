@@ -23,7 +23,7 @@ import org.openfuxml.producer.exception.ProductionSystemException;
  */
 public class SimpleServerThread extends Thread
 {
-	static Log logger = LogFactory.getLog(SimpleServerThread.class);
+	final static Logger logger = LoggerFactory.getLogger(SimpleServerThread.class);
 	
 	private static int anzahlClients = 0;
 	private Socket clientSocket = null;

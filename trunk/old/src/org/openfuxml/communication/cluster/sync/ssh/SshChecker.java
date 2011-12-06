@@ -20,7 +20,7 @@ import com.jcraft.jsch.JSchException;
  */
 public class SshChecker
 {
-	static Log logger = LogFactory.getLog(SshChecker.class);
+	final static Logger logger = LoggerFactory.getLogger(SshChecker.class);
 	
 	private SshCheckedConnections checkedConnections;
 	private int threadCounter;

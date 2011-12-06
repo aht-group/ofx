@@ -26,7 +26,7 @@ import org.openfuxml.util.config.OfxPathHelper;
  */
 public class ProducerThread extends Thread
 {
-	static Log logger = LogFactory.getLog(ProducerThread.class);
+	final static Logger logger = LoggerFactory.getLogger(ProducerThread.class);
 	
 	private OfxClientControl ofxCC;
 	private Configuration config;
@@ -117,7 +117,7 @@ public class ProducerThread extends Thread
 			logger.debug(url);
 			guiCallback.openUrl(url);
 		}
-		catch (MalformedURLException e) {logger.error(e);}
+		catch (MalformedURLException e) {logger.error("",e);}
     	
     }
     

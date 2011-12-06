@@ -18,16 +18,16 @@ import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.util.io.LoggerInit;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchartcontainer;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchartdata;
 import org.openfuxml.addon.wiki.event.WikiChartEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiTimelineParser extends AbstractLogParser implements LogParser  
 {
-	static Log logger = LogFactory.getLog(WikiTimelineParser.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiTimelineParser.class);
 	private static enum Section {none,bardata,plotdata};
 	
 	private Section section;
@@ -192,7 +192,7 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 			case bardata: parseBarData(line);break;
 			case plotdata: parsePlotData(line);break;
 		}
-		logger.trace(sbParseLine);
+		logger.trace(sbParseLine.toString());
 	}
 	
 	@Override
@@ -219,7 +219,7 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
 			m.marshal(ofxChart, System.out);
 		}
-		catch (JAXBException e) {logger.error(e);}
+		catch (JAXBException e) {logger.error("",e);}
 	}
 	
 	public static void main(String args[])
@@ -244,6 +244,6 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
 			m.marshal(ofxChart, new File("resources/data/timeline-ofxchart.xml"));
 		}
-		catch (JAXBException e) {logger.error(e);}
+		catch (JAXBException e) {logger.error("",e);}
 	}
 }

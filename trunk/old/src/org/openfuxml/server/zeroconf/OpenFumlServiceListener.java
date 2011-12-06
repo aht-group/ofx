@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 public  class OpenFumlServiceListener implements ServiceListener
 {
-	static Log logger = LogFactory.getLog(OpenFumlServiceListener.class);
+	final static Logger logger = LoggerFactory.getLogger(OpenFumlServiceListener.class);
 	JmDNS jmdns;
 	
 	public OpenFumlServiceListener(JmDNS jmdns)

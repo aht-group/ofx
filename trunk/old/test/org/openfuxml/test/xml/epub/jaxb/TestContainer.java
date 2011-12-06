@@ -9,7 +9,7 @@ import org.openfuxml.addon.epub.data.jaxb.container.Container;
 
 public class TestContainer
 {
-	static Log logger = LogFactory.getLog(TestContainer.class);
+	final static Logger logger = LoggerFactory.getLogger(TestContainer.class);
 	
 	public TestContainer()
 	{

@@ -15,7 +15,7 @@ public class OfxApp
 {
 	public static enum Target {HtmlPrettyFormatter, HtmlTagSubstitutor};
 	
-	static Log logger = LogFactory.getLog(OfxApp.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxApp.class);
 	
 	public static String version;
 	

@@ -3,14 +3,14 @@ package org.openfuxml.addon.jsf.factory.jsf;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.jsfapp.data.jaxb.Menu;
 import org.openfuxml.addon.jsfapp.data.jaxb.Menuitem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MenuIdLinkFactory
 {
-	static Log logger = LogFactory.getLog(MenuIdLinkFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(MenuIdLinkFactory.class);
 	
 	Map<String,String> resultLinkId;
 	

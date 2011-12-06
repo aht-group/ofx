@@ -10,7 +10,7 @@ import org.openfuxml.addon.jsfapp.factory.JsfJspxFactory;
 
 public class TestJsfFactory
 {
-	static Log logger = LogFactory.getLog(TestJsfFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TestJsfFactory.class);
 	
 	public TestJsfFactory()
 	{

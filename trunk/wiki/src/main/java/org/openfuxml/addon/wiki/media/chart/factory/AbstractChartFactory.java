@@ -1,16 +1,16 @@
 package org.openfuxml.addon.wiki.media.chart.factory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.xpath.XPath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Deprecated
 public class AbstractChartFactory
 {
-	static Log logger = LogFactory.getLog(AbstractChartFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractChartFactory.class);
 	
 	protected double getChartValue(String xp, String type, Document doc)
 	{
@@ -21,7 +21,7 @@ public class AbstractChartFactory
 			Element element = (Element)xPath.selectSingleNode(doc);
 			value = new Double(element.getTextTrim());
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 		return value;
 	}
 }

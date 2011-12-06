@@ -2,18 +2,18 @@ package org.openfuxml.renderer.processor.html.navigation;
 
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.renderer.processor.html.interfaces.OfxNavigationRenderer;
 import org.openfuxml.xml.xpath.content.SectionXpath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NavUnorderedListRenderer implements OfxNavigationRenderer
 {
-	static Log logger = LogFactory.getLog(NavUnorderedListRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(NavUnorderedListRenderer.class);
 	
 	public NavUnorderedListRenderer()
 	{
@@ -44,7 +44,7 @@ public class NavUnorderedListRenderer implements OfxNavigationRenderer
 		}
 		catch (ExlpXpathNotFoundException e)
 		{
-			logger.debug(e);
+			logger.debug("",e);
 		}
 		Element li = new Element("li");
 		li.setContent(a);

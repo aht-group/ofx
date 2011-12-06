@@ -11,7 +11,7 @@ import org.openfuxml.addon.jsfapp.data.jaxb.Ofxinjections;
 
 public class TestOfxinjections
 {
-	static Log logger = LogFactory.getLog(TestOfxinjections.class);
+	final static Logger logger = LoggerFactory.getLogger(TestOfxinjections.class);
 	
 	public TestOfxinjections()
 	{

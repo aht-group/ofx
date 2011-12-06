@@ -16,8 +16,6 @@ import javax.xml.bind.Marshaller;
 
 import net.sf.exlp.util.io.StringBufferOutputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -26,10 +24,12 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiContentIO
 {
-	static Log logger = LogFactory.getLog(WikiContentIO.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiContentIO.class);
 	
 	public static synchronized void writeXml(String dirName, String fileName, String content)
 	{
@@ -47,8 +47,8 @@ public class WikiContentIO
 			xmlOut.output( doc, osw );
 			osw.close();os.close();
 		} 
-		catch (JDOMException e) {logger.error(e);}
-		catch (IOException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 	
 	public static synchronized String loadTxt(String dirName, String fileName)
@@ -64,7 +64,7 @@ public class WikiContentIO
 			}
 			bw.close();
 		}
-		catch (IOException e) {logger.error(e);}
+		catch (IOException e) {logger.error("",e);}
 		return sb.toString();
 	}
 	
@@ -77,7 +77,7 @@ public class WikiContentIO
 			XMLOutputter xmlOut = new XMLOutputter(Format.getRawFormat() );
 			xmlOut.output(element, sbos);
 		}
-		catch (IOException e) {logger.error(e);}
+		catch (IOException e) {logger.error("",e);}
 		return sbos.getStringBuffer();
 	}
 	
@@ -97,9 +97,9 @@ public class WikiContentIO
 			
 			result = unsetNameSpace(doc.getRootElement());
 		}
-		catch (JAXBException e) {logger.error(e);}
-		catch (JDOMException e) {logger.error(e);}
-		catch (IOException e) {logger.error(e);}
+		catch (JAXBException e) {logger.error("",e);}
+		catch (JDOMException e) {logger.error("",e);}
+		catch (IOException e) {logger.error("",e);}
 		return result;
 	}
 	
@@ -126,6 +126,6 @@ public class WikiContentIO
 			m.setProperty("com.sun.xml.bind.namespacePrefixMapper",new OfxNsPrefixMapper());
 			m.marshal(injection, f);
 		}
-		catch (JAXBException e) {logger.error(e);}
+		catch (JAXBException e) {logger.error("",e);}
 	}
 }

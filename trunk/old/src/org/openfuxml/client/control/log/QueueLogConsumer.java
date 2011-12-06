@@ -8,7 +8,7 @@ import org.openfuxml.client.control.ClientGuiCallback;
 
 public class QueueLogConsumer extends Thread
 {
-	static Log logger = LogFactory.getLog(QueueLogConsumer.class);
+	final static Logger logger = LoggerFactory.getLogger(QueueLogConsumer.class);
 	
 	private LinkedBlockingQueue<String> q;
 	private ClientGuiCallback guiCallback;
@@ -30,7 +30,7 @@ public class QueueLogConsumer extends Thread
 				String s = q.take();
 				guiCallback.addLogline(s);
 			}
-			catch (InterruptedException e) {logger.error(e);}
+			catch (InterruptedException e) {logger.error("",e);}
 		}
 	}
 }

@@ -12,7 +12,7 @@ import de.kisner.util.event.EventInterface;
 
 public class UnisonSyncEvent extends AbstractEvent implements EventInterface,Serializable
 {
-	static Log logger = LogFactory.getLog(UnisonSyncEvent.class);
+	final static Logger logger = LoggerFactory.getLogger(UnisonSyncEvent.class);
 	static final long serialVersionUID=1;
 	
 	public static enum SyncResult {UNDEFINED,NothingToDo,Complete};

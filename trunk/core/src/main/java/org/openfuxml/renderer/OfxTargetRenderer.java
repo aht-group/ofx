@@ -4,8 +4,6 @@ import java.io.File;
 
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxImplementationException;
@@ -17,13 +15,15 @@ import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.openfuxml.xml.renderer.cmp.Html;
 import org.openfuxml.xml.renderer.cmp.Pdf;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxTargetRenderer
 {
 	public static enum PdfDir {latex};
 	public static enum PdfFile {latex};
 	
-	static Log logger = LogFactory.getLog(OfxTargetRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxTargetRenderer.class);
 		
 	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
 	

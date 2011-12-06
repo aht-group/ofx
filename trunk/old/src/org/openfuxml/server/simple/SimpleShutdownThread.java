@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SimpleShutdownThread  extends Thread {
 
-	static Log logger = LogFactory.getLog(SimpleShutdownThread.class);
+	final static Logger logger = LoggerFactory.getLogger(SimpleShutdownThread.class);
 	
 	ServerSocket serverSocket;
 	boolean active;

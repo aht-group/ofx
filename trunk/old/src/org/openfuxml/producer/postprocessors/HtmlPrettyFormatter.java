@@ -29,7 +29,7 @@ import org.openfuxml.util.OfxApp;
 
 public class HtmlPrettyFormatter extends DirectoryWalker
 {
-	static Log logger = LogFactory.getLog(OfxApp.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxApp.class);
 	
 	private CleanerTransformations ct;
 	
@@ -84,13 +84,13 @@ public class HtmlPrettyFormatter extends DirectoryWalker
 //			sbResult.append(outputter.outputString(myJDom));
 			results.add(f.getAbsoluteFile());
 		}
-		catch (IOException e) {logger.error(e);}
+		catch (IOException e) {logger.error("",e);}
 	}
 	
 	public void start(File startDir, Collection results)
 	{
 		try{walk(startDir,results);}
-		catch (IOException e) {logger.error(e);}
+		catch (IOException e) {logger.error("",e);}
 		logger.debug("Processed files: "+results.size());
 	}
 	

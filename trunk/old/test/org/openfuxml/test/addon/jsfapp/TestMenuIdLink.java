@@ -13,7 +13,7 @@ import org.openfuxml.addon.jsfapp.factory.MenuIdLinkFactory;
 
 public class TestMenuIdLink
 {
-	static Log logger = LogFactory.getLog(TestMenuIdLink.class);
+	final static Logger logger = LoggerFactory.getLogger(TestMenuIdLink.class);
 	
 	private Menu menu;
 	

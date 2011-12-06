@@ -12,17 +12,17 @@ import net.sf.exlp.xml.xpath.IoXpath;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.SystemUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.openfuxml.xml.renderer.cmp.Html;
 import org.openfuxml.xml.renderer.html.Renderer;
 import org.openfuxml.xml.xpath.cmp.HtmlXpath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxRenderConfiguration
 {
-	static Log logger = LogFactory.getLog(OfxRenderConfiguration.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxRenderConfiguration.class);
 	
 	private Cmp cmp;
 	

@@ -3,8 +3,6 @@ package org.openfuxml.addon.chart.renderer;
 import java.awt.Dimension;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
@@ -16,10 +14,12 @@ import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.renderer.generic.AbstractChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BarChartRenderer extends AbstractChartRenderer implements OfxChartRenderer
 {
-	static Log logger = LogFactory.getLog(BarChartRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(BarChartRenderer.class);
 	
 	public BarChartRenderer()
 	{
@@ -56,7 +56,7 @@ public class BarChartRenderer extends AbstractChartRenderer implements OfxChartR
 	
 	public Dimension getSuggestedSize()
 	{
-		logger.fatal("This should be @Overridden");
+		logger.error("This should be @Overridden");
 		throw new UnsupportedOperationException();
 	}
 }

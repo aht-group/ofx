@@ -32,7 +32,7 @@ import de.kisner.util.io.resourceloader.ImageResourceLoader;
 
 public class BrowserComposite extends Composite
 {
-	static Log logger = LogFactory.getLog(ProjektComposite.class);
+	final static Logger logger = LoggerFactory.getLogger(ProjektComposite.class);
 	
 	private Image imgBtnBack,imgBtnForward,imgBtnRefresh,imgBtnStop;		
 	
@@ -79,7 +79,7 @@ public class BrowserComposite extends Composite
 			imgBtnStop = new Image(null, img.getImageData(), img.getImageData().getTransparencyMask()); 
 			
 		}
-		catch (FileNotFoundException e) {logger.error(e);}
+		catch (FileNotFoundException e) {logger.error("",e);}
 			
 		{
 			GridLayout layout = new GridLayout();

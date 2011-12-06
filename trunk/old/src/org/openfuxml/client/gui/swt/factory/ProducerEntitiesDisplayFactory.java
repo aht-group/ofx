@@ -24,7 +24,7 @@ import org.openfuxml.model.jaxb.ProducibleEntities;
 
 public class ProducerEntitiesDisplayFactory
 {
-	static Log logger = LogFactory.getLog(ProducerEntitiesDisplayFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(ProducerEntitiesDisplayFactory.class);
 	
 	private OfxGuiAction ofxAction;
 	private Configuration config;

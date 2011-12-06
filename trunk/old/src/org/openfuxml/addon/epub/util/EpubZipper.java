@@ -19,7 +19,7 @@ import org.jdom.xpath.XPath;
 
 public class EpubZipper
 {
-	static Log logger = LogFactory.getLog(EpubZipper.class);
+	final static Logger logger = LoggerFactory.getLogger(EpubZipper.class);
 	
 	private File targetDir;
 	
@@ -52,7 +52,7 @@ public class EpubZipper
 				zs.addFile(href, targetDir.getAbsolutePath()+"/"+href);
 			}
 		}
-		catch (JDOMException e) {logger.error(e);}
+		catch (JDOMException e) {logger.error("",e);}
 
 		
 		OutputStream os = zs.getZipStream();

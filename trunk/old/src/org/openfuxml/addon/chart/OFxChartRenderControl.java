@@ -19,7 +19,7 @@ import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 
 public class OFxChartRenderControl
 {
-	static Log logger = LogFactory.getLog(OFxChartRenderControl.class);
+	final static Logger logger = LoggerFactory.getLogger(OFxChartRenderControl.class);
 	
 	private OfxChartRenderer ofxRenderer;
 	

@@ -21,7 +21,7 @@ import de.kisner.util.architecture.EnvironmentParameter;
 
 public class SyncProducer extends AbstractProducer implements Producer
 {
-	static Log logger = LogFactory.getLog(DirectProducer.class);
+	final static Logger logger = LoggerFactory.getLogger(DirectProducer.class);
 	
 	private Producer p;
 	private ServerSync unisonSync,noSync;

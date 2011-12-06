@@ -9,8 +9,6 @@ import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.OFxChartRenderControl;
@@ -21,10 +19,12 @@ import org.openfuxml.addon.chart.data.jaxb.Container;
 import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TstGanttRenderer
 {
-	static Log logger = LogFactory.getLog(TstGanttRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TstGanttRenderer.class);
 	
 	public TstGanttRenderer()
 	{
@@ -108,7 +108,7 @@ public class TstGanttRenderer
 		JFreeChart jfreeChart = ofxRenderer.render(chart);
 		
 		Dimension d = ofxRenderer.getOfxRenderer().getSuggestedSize();
-		logger.debug(d);
+		logger.debug(d.toString());
 		OutputStream os = new FileOutputStream(new File("dist/chart.png"));
 		ChartUtilities.writeChartAsPNG(os,jfreeChart,800,d.height);
 	}

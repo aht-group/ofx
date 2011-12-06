@@ -3,8 +3,6 @@ package org.openfuxml.addon.wiki.processor.markup;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jdom.Element;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
 import org.openfuxml.addon.wiki.data.jaxb.Templates;
@@ -16,10 +14,12 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.xml.renderer.cmp.Cmp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WikiInlineProcessor
 {
-	static Log logger = LogFactory.getLog(WikiInlineProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(WikiInlineProcessor.class);
 	
 	public static boolean debugOutput = false;
 	

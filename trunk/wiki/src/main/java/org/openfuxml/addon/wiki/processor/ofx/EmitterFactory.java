@@ -2,8 +2,6 @@ package org.openfuxml.addon.wiki.processor.ofx;
 
 import javax.xml.stream.XMLStreamWriter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.emitter.Emitter;
 import org.openfuxml.addon.wiki.emitter.GlosstermEmitter;
 import org.openfuxml.addon.wiki.emitter.ImageEmitter;
@@ -14,10 +12,12 @@ import org.openfuxml.addon.wiki.processor.ofx.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.OfxEmphasisEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.OfxListEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.SimpleMappingEmitter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EmitterFactory
 {
-	static Log logger = LogFactory.getLog(EmitterFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(EmitterFactory.class);
 	
 	private XMLStreamWriter writer;
 	private String injectionDir;
