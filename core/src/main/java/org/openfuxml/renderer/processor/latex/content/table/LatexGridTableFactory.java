@@ -27,6 +27,7 @@ public class LatexGridTableFactory extends AbstractOfxLatexRenderer implements O
 	public void render(Table table) throws OfxAuthoringException
 	{	
 		if(!table.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
+		if(!table.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
 		renderPre();
 		renderTabular(table.getSpecification(),table.getContent());
 		renderPost(table.getTitle());
@@ -52,9 +53,9 @@ public class LatexGridTableFactory extends AbstractOfxLatexRenderer implements O
 	private void renderTabular(Specification specification, Content tgroup) throws OfxAuthoringException
 	{
 		renderSpecification(specification);
-		renderTableHeader(tgroup.getHead());
+		if(tgroup.isSetHead()){renderTableHeader(tgroup.getHead());}
 		
-		logger.warn("Only one body");
+		if(tgroup.getBody().size()!=1){throw new OfxAuthoringException("<content> must exactly have 1 body!");}
 		renderBody(tgroup.getBody().get(0));
 		
 		renderer.add(new StringRenderer("\\hline"));
