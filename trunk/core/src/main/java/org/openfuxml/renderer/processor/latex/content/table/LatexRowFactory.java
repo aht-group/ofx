@@ -9,23 +9,23 @@ import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RowFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexRowFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(RowFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexRowFactory.class);
 	
-	public RowFactory()
+	public LatexRowFactory()
 	{
 		postTxt.add("\\\\");
 	}
 	
 	public void render(Row row) throws OfxAuthoringException
 	{	
-		boolean addCell=false;
+		boolean firstCell=true;
 		
 		for(Cell cell : row.getCell())
 		{
-			if(addCell){renderer.add(new StringRenderer("&"));}
-			addCell = true;
+			if(!firstCell){renderer.add(new StringRenderer("&"));}
+			firstCell = false;
 			
 			LatexCellFactory f = new LatexCellFactory();
 			f.render(cell);
