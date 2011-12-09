@@ -4,12 +4,9 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.processor.latex.content.table.LatexCellFactory;
 import org.openfuxml.test.OfxCoreTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

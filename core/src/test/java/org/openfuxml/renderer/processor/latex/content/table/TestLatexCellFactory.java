@@ -6,7 +6,6 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.TestLatexParagraphFactory;
@@ -32,17 +31,18 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
 	
 	@After public void close(){renderer=null;}
 	
+	public static Cell create()
+	{
+		Cell cell = new Cell();
+    	cell.getContent().add(TestLatexParagraphFactory.create());
+    	return cell;
+	}
+	
     @Test
     public void paragraph() throws IOException, OfxAuthoringException
-    {
-    	Paragraph p = new Paragraph();
-    	p.getContent().add(li.getWords(10));
-    	
-    	Cell cell = new Cell();
-    	cell.getContent().add(TestLatexParagraphFactory.create());
-    	
+    {    	    	
     	f = new File(rootDir,dir+"/"+Key.string+".txt");
-    	renderer.render(cell);
+    	renderer.render(create());
     	debug(renderer);
     	save(renderer,f);
     	assertText(renderer,f);

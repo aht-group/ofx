@@ -87,7 +87,7 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 	{
 		for(Row row : tbody.getRow())
 		{
-			RowFactory f = new RowFactory();
+			LatexRowFactory f = new LatexRowFactory();
 			f.render(row);
 			renderer.add(f);
 		}
