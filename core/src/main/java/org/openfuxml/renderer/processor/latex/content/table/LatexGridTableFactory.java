@@ -9,23 +9,24 @@ import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.StringRenderer;
-import org.openfuxml.renderer.processor.latex.content.table.util.LatexTabluar;
+import org.openfuxml.renderer.processor.latex.content.table.util.LatexTabluarUtil;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexGridTableFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(GridTableFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexGridTableFactory.class);
 	
-	public GridTableFactory()
+	public LatexGridTableFactory()
 	{
 
 	}
 	
 	public void render(Table table) throws OfxAuthoringException
 	{	
+		if(!table.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
 		renderPre();
 		renderTabular(table.getSpecification(),table.getContent());
 		renderPost(table.getTitle());
@@ -62,7 +63,7 @@ public class GridTableFactory extends AbstractOfxLatexRenderer implements OfxLat
 	
 	private void renderSpecification(Specification spec)
 	{
-		LatexTabluar latexTabular = new LatexTabluar(spec.getColumns());
+		LatexTabluarUtil latexTabular = new LatexTabluarUtil(spec.getColumns());
 		
 		renderer.add(new StringRenderer(latexTabular.getLatexLengthCalculations()));
 		

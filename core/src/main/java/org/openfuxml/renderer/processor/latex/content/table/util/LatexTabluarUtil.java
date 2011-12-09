@@ -8,23 +8,23 @@ import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.ofx.table.Column;
 import org.openfuxml.content.ofx.table.Columns;
 
-public class LatexTabluar
+public class LatexTabluarUtil
 {
-	static Log logger = LogFactory.getLog(LatexTabluar.class);
+	static Log logger = LogFactory.getLog(LatexTabluarUtil.class);
 	
-	private final static int muliplier = 1000000;
+	protected final static int muliplier = 1000;
 	
 	private Columns columns;
 	private List<String> listLatexCalculations;
 	
-	public LatexTabluar(Columns columns)
+	public LatexTabluarUtil(Columns columns)
 	{
 		this.columns=columns;
 		listLatexCalculations = new ArrayList<String>();
-		createCalculations();
+		calculate();
 	}
 	
-	private void createCalculations()
+	private void calculate()
 	{
 		listLatexCalculations.add("");
 		for(int i=0;i<columns.getColumn().size();i++)
@@ -54,33 +54,25 @@ public class LatexTabluar
 			listLatexCalculations.add(sb.toString());
 		}
 		
-		double relativeSum=0;
-		for(int i=0;i<columns.getColumn().size();i++)
-		{			
-			Column col = columns.getColumn().get(i);
-			relativeSum=relativeSum+col.getWidth().getValue();
-		}
-		relativeSum=relativeSum*muliplier;
+		int relativeSum = getDivide();
 		
 		listLatexCalculations.add("");
 		for(int i=0;i<columns.getColumn().size();i++)
 		{	
 			byte[] b = {(byte)(i+65)};
-			Column col = columns.getColumn().get(i);
 			
-			int mul = (int)(col.getWidth().getValue()*muliplier);
 			
 			StringBuffer sb = new StringBuffer();
 			sb.append("\\divide");
 			sb.append("\\tabLen").append(new String(b));
-			sb.append(" by ").append((int)relativeSum);
+			sb.append(" by ").append(relativeSum);
 
 			listLatexCalculations.add(sb.toString());
 			
 			sb = new StringBuffer();
 			sb.append("\\multiply");
 			sb.append("\\tabLen").append(new String(b));
-			sb.append(" by ").append(mul);
+			sb.append(" by ").append(getMultiplier(i));
 			listLatexCalculations.add(sb.toString());
 		}
 	}
@@ -99,17 +91,24 @@ public class LatexTabluar
 	
 	public static String getTableAlignment(String sAlignment)
 	{
-		logger.warn("NYI");
-		System.exit(-1);
-/*		Alignment alignment = Alignment.valueOf(sAlignment.toUpperCase());
-		switch(alignment)
-		{
-			case LEFT: return "l";
-			case RIGHT: return "r";
-			case CENTER: return "c";
-		}
-*/		
+		logger.warn("NYI OFX-26");	
 		return "l";
+	}
+	
+	protected int getDivide()
+	{
+		double relativeSum=0;
+		for(int i=0;i<columns.getColumn().size();i++)
+		{			
+			Column col = columns.getColumn().get(i);
+			relativeSum=relativeSum+col.getWidth().getValue();
+		}
+		return (int)relativeSum*muliplier;
+	}
+	
+	protected int getMultiplier(int i)
+	{
+		return (int)(columns.getColumn().get(i).getWidth().getValue()*muliplier);
 	}
 	
 	public List<String> getLatexLengthCalculations(){return listLatexCalculations;}

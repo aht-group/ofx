@@ -18,7 +18,7 @@ public class TableFactory extends AbstractOfxLatexRenderer implements OfxLatexRe
 	
 	public void render(Table table) throws OfxAuthoringException
 	{	
-		GridTableFactory gtf = new GridTableFactory();
+		LatexGridTableFactory gtf = new LatexGridTableFactory();
 		gtf.render(table);
 		renderer.add(gtf);
 	}

@@ -55,7 +55,5 @@ public class TestLatexRowFactory extends AbstractLatexTableTest
     	
  //   	test.initRenderer();test.paragraph();
     	test.initRenderer();test.standard();
-
     }
-   
 }
