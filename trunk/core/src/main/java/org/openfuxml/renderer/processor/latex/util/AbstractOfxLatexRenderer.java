@@ -8,7 +8,7 @@ import java.util.List;
 import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.processor.latex.content.ParagraphFactory;
+import org.openfuxml.renderer.processor.latex.content.LatexParagraphFactory;
 import org.openfuxml.renderer.processor.latex.content.SectionFactory;
 import org.openfuxml.renderer.processor.latex.content.list.LatexListFactory;
 import org.slf4j.Logger;
@@ -72,7 +72,7 @@ public class AbstractOfxLatexRenderer
 	
 	protected void paragraphRenderer(Paragraph paragraph, boolean preBlankLine)
 	{
-		ParagraphFactory f = new ParagraphFactory(preBlankLine);
+		LatexParagraphFactory f = new LatexParagraphFactory(preBlankLine);
 		f.render(paragraph);
 		renderer.add(f);
 	}

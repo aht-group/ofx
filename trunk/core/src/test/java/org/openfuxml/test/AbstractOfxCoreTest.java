@@ -74,7 +74,7 @@ public class AbstractOfxCoreTest
 		Assert.assertEquals(expected, actual.toString());
 	}
 	
-	protected void  debug(OfxLatexRenderer renderer)
+	protected void debug(OfxLatexRenderer renderer)
 	{
 		if(logger.isDebugEnabled())
 		{
@@ -86,6 +86,13 @@ public class AbstractOfxCoreTest
 			}
 			System.out.println("************************************");
 		}
+	}
+	
+	protected void renderTest(OfxLatexRenderer renderer, File f) throws IOException
+	{
+		debug(renderer);
+    	save(renderer,f);
+    	assertText(renderer,f);
 	}
 	
 	public void setSaveReference(boolean saveReference) {this.saveReference = saveReference;}

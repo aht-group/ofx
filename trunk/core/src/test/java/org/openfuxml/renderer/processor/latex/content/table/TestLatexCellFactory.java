@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.renderer.processor.latex.content.TestLatexParagraphFactory;
 import org.openfuxml.renderer.processor.latex.content.list.TestLatexListFactory;
 import org.openfuxml.test.OfxCoreTstBootstrap;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
     	p.getContent().add(li.getWords(10));
     	
     	Cell cell = new Cell();
-    	cell.getContent().add(p);
+    	cell.getContent().add(TestLatexParagraphFactory.create());
     	
     	f = new File(rootDir,dir+"/"+Key.string+".txt");
     	renderer.render(cell);
