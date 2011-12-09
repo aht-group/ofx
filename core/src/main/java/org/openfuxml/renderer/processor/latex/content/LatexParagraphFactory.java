@@ -6,11 +6,11 @@ import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ParagraphFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexParagraphFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(ParagraphFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexParagraphFactory.class);
 	
-	public ParagraphFactory(boolean preBlankLine)
+	public LatexParagraphFactory(boolean preBlankLine)
 	{
 		if(preBlankLine){preTxt.add("");}
 	}
