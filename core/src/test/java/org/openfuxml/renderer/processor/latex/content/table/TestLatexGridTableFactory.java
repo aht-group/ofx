@@ -3,11 +3,8 @@ package org.openfuxml.renderer.processor.latex.content.table;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.content.ofx.table.Body;
 import org.openfuxml.content.ofx.table.Content;

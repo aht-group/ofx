@@ -7,10 +7,9 @@ import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.content.ofx.layout.Width;
-import org.openfuxml.content.ofx.table.Column;
 import org.openfuxml.content.ofx.table.Columns;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.table.OfxColumnFactory;
 import org.openfuxml.test.AbstractOfxCoreTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,20 +30,10 @@ public class TestLatexTabularUtil extends AbstractOfxCoreTest
 	{
 		Columns cols = new Columns();
 		
-		cols.getColumn().add(createCol(10));
-		cols.getColumn().add(createCol(20));
+		cols.getColumn().add(OfxColumnFactory.createCol(10));
+		cols.getColumn().add(OfxColumnFactory.createCol(20));
 		
 		return cols;
-	}
-	
-	public static Column createCol(int relative)
-	{
-		Width width = new Width();
-		width.setValue(relative);
-		Column col = new Column();
-		col.setWidth(width);
-		
-		return col;
 	}
 	
     @Test
