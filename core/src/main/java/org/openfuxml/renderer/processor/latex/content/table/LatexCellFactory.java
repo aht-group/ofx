@@ -9,11 +9,11 @@ import org.openfuxml.xml.content.list.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CellFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexCellFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(CellFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexCellFactory.class);
 	
-	public CellFactory()
+	public LatexCellFactory()
 	{
 		
 	}

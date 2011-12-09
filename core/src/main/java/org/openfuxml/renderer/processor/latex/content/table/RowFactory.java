@@ -27,7 +27,7 @@ public class RowFactory extends AbstractOfxLatexRenderer implements OfxLatexRend
 			if(addCell){renderer.add(new StringRenderer("&"));}
 			addCell = true;
 			
-			CellFactory f = new CellFactory();
+			LatexCellFactory f = new LatexCellFactory();
 			f.render(cell);
 			renderer.add(f);
 		}

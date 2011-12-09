@@ -35,7 +35,7 @@ public class TestLatexListFactory extends AbstractLatexListTest
 	
 	@After public void close(){renderer=null;}
 	
-	public List createList()
+	public static List createList()
 	{
 		Type type = new Type();
 		type.setOrdering("unordered");
