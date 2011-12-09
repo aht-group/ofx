@@ -3,13 +3,18 @@ package org.openfuxml.renderer.processor.latex.content.table;
 import java.io.File;
 import java.io.IOException;
 
+import net.sf.exlp.util.xml.JaxbUtil;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openfuxml.content.ofx.table.Body;
+import org.openfuxml.content.ofx.table.Content;
 import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.renderer.processor.latex.content.table.util.TestLatexTabularUtil;
 import org.openfuxml.test.OfxCoreTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,10 +39,18 @@ public class TestLatexGridTableFactory extends AbstractLatexTableTest
 	public static Table createTable()
 	{
 		Specification specification = new Specification();
+		specification.setColumns(TestLatexTabularUtil.createColumns());
+
+		Body body = new Body();
+		body.getRow().add(TestLatexRowFactory.create());
+		body.getRow().add(TestLatexRowFactory.create());
+		
+		Content content = new Content();
+		content.getBody().add(body);
 		
 		Table table = new Table();
 		table.setSpecification(specification);
-
+		table.setContent(content);
 		return table;
 	}
 	
@@ -46,15 +59,31 @@ public class TestLatexGridTableFactory extends AbstractLatexTableTest
     {
     	Table table = createTable();
     	table.setSpecification(null);
-    	renderer.render(createTable());
+    	renderer.render(table);
     }
-	
-    @Ignore("specification incomplete OFX-25")
+    
+    @Test(expected=OfxAuthoringException.class)
+    public void withoutContent() throws IOException, OfxAuthoringException
+    {
+    	Table table = createTable();
+    	table.setContent(null);
+    	renderer.render(table);
+    }
+    
+    @Test(expected=OfxAuthoringException.class)
+    public void withoutBody() throws IOException, OfxAuthoringException
+    {
+    	Table table = createTable();
+    	table.getContent().unsetBody();
+    	renderer.render(table);
+    }
+
     @Test
     public void standard() throws IOException, OfxAuthoringException
     {
+    	Table table = createTable();
     	f = new File(rootDir,dir+"/"+Key.standard+".txt");
-    	renderer.render(createTable());
+    	renderer.render(table);
     	renderTest(renderer,f);
     }
     
