@@ -20,7 +20,6 @@
 		<my.build.directory>target</my.build.directory>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     	<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
-    	<exlp.version>0.1.5-SNAPSHOT</exlp.version>
     	<jaxb.version>2.2.2</jaxb.version>
     	<junit.version>4.10</junit.version>
     	<jaxen.version>1.1.1</jaxen.version>
@@ -88,17 +87,17 @@
     	   	<dependency>
 				<groupId>net.sf.exlp</groupId>
 				<artifactId>exlp-util</artifactId>
-				<version>0.1.5-SNAPSHOT</version>
+				<version>0.1.5</version>
 			</dependency>
 			<dependency>
 				<groupId>net.sf.exlp</groupId>
 				<artifactId>exlp-xml</artifactId>
-				<version>0.1.5-SNAPSHOT</version>
+				<version>0.1.5</version>
 			</dependency>
 			<dependency>
 				<groupId>net.sf.exlp</groupId>
 				<artifactId>exlp-core</artifactId>
-				<version>0.1.5-SNAPSHOT</version>
+				<version>0.1.5</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
