@@ -7,18 +7,18 @@ import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TableFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(TableFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexTableRenderer.class);
 	
-	public TableFactory()
+	public LatexTableRenderer()
 	{
 
 	}
 	
 	public void render(Table table) throws OfxAuthoringException
 	{	
-		LatexGridTableFactory gtf = new LatexGridTableFactory();
+		LatexGridTableRenderer gtf = new LatexGridTableRenderer();
 		gtf.render(table);
 		renderer.add(gtf);
 	}

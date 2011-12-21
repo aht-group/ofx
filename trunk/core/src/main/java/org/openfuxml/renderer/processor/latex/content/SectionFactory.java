@@ -5,7 +5,7 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.processor.latex.content.table.TableFactory;
+import org.openfuxml.renderer.processor.latex.content.table.LatexTableRenderer;
 import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
@@ -52,7 +52,7 @@ public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatex
 	
 	private void renderTable(Table table) throws OfxAuthoringException
 	{
-		TableFactory f = new TableFactory();
+		LatexTableRenderer f = new LatexTableRenderer();
 		f.render(table);
 		renderer.add(f);
 	}

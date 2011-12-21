@@ -1,7 +1,7 @@
 package org.openfuxml.renderer.processor.latex.content.list;
 
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.processor.latex.content.table.LatexCellFactory;
+import org.openfuxml.renderer.processor.latex.content.table.LatexCellRenderer;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.openfuxml.xml.content.list.Item;
@@ -65,7 +65,7 @@ public class LatexListFactory extends AbstractOfxLatexRenderer implements OfxLat
 	// Ordered List
 	private void setOrdered(OfxLatexRenderer parent)
 	{
-		if   (parent instanceof LatexCellFactory){setOrderedCompactNum();}
+		if   (parent instanceof LatexCellRenderer){setOrderedCompactNum();}
 		else {setOrderedEnumerate();}
 	}
 	
@@ -84,7 +84,7 @@ public class LatexListFactory extends AbstractOfxLatexRenderer implements OfxLat
 	// Unordered List
 	private void setUnordered(OfxLatexRenderer parent)
 	{
-		if   (parent instanceof LatexCellFactory){setUnorderedCompactItem();}
+		if   (parent instanceof LatexCellRenderer){setUnorderedCompactItem();}
 		else {setUnorderedItemize();}
 	}
 	

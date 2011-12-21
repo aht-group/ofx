@@ -9,11 +9,11 @@ import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LatexRowFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexRowRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(LatexRowFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexRowRenderer.class);
 	
-	public LatexRowFactory()
+	public LatexRowRenderer()
 	{
 		postTxt.add("\\\\");
 	}
@@ -27,7 +27,7 @@ public class LatexRowFactory extends AbstractOfxLatexRenderer implements OfxLate
 			if(!firstCell){renderer.add(new StringRenderer("&"));}
 			firstCell = false;
 			
-			LatexCellFactory f = new LatexCellFactory();
+			LatexCellRenderer f = new LatexCellRenderer();
 			f.render(cell);
 			renderer.add(f);
 		}

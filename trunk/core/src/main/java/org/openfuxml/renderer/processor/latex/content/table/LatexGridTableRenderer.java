@@ -15,11 +15,11 @@ import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LatexGridTableFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexGridTableRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(LatexGridTableFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexGridTableRenderer.class);
 	
-	public LatexGridTableFactory()
+	public LatexGridTableRenderer()
 	{
 
 	}
@@ -53,12 +53,11 @@ public class LatexGridTableFactory extends AbstractOfxLatexRenderer implements O
 	private void renderTabular(Specification specification, Content tgroup) throws OfxAuthoringException
 	{
 		renderSpecification(specification);
-		if(tgroup.isSetHead()){renderTableHeader(tgroup.getHead());}
+		renderTableHeader(tgroup.getHead());
 		
 		if(tgroup.getBody().size()!=1){throw new OfxAuthoringException("<content> must exactly have 1 body!");}
 		renderBody(tgroup.getBody().get(0));
 		
-		renderer.add(new StringRenderer("\\hline"));
 		renderer.add(new StringRenderer("\\end{tabular}"));
 	}
 	
@@ -70,28 +69,40 @@ public class LatexGridTableFactory extends AbstractOfxLatexRenderer implements O
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("\\begin{tabular}");
-		sb.append("{");
+		sb.append("{|");
 		for(int i=0;i<spec.getColumns().getColumn().size();i++)
 		{
 			sb.append(latexTabular.getColDefinition(i));
+			sb.append("|");
 		}
 		sb.append("}");
 		renderer.add(new StringRenderer(sb.toString()));
 	}
 	
-	private void renderTableHeader(Head thead)
+	private void renderTableHeader(Head head) throws OfxAuthoringException
 	{
-		renderer.add(new StringRenderer("\\hline Key &  Value \\\\"));
-		renderer.add(new StringRenderer("\\hline \\hline"));
+		renderer.add(new StringRenderer("\\hline"));
+		if(head!=null)
+		{
+			for(Row row : head.getRow())
+			{
+				LatexRowRenderer f = new LatexRowRenderer();
+				f.render(row);
+				renderer.add(f);
+				renderer.add(new StringRenderer("\\hline"));
+			}
+			renderer.add(new StringRenderer("\\hline"));
+		}
 	}
 	
 	private void renderBody(Body tbody) throws OfxAuthoringException
 	{
 		for(Row row : tbody.getRow())
 		{
-			LatexRowFactory f = new LatexRowFactory();
+			LatexRowRenderer f = new LatexRowRenderer();
 			f.render(row);
 			renderer.add(f);
+			renderer.add(new StringRenderer("\\hline"));
 		}
 	}
 }
