@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.table.Body;
 import org.openfuxml.content.ofx.table.Content;
+import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -20,15 +21,15 @@ public class TestLatexGridTableFactory extends AbstractLatexTableTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexGridTableFactory.class);
 	
-	private static enum Key {standard}
+	private static enum Key {table,tableWithHead}
 	
-	private LatexGridTableFactory renderer;
+	private LatexGridTableRenderer renderer;
 	private String dir = "grid";
 	
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexGridTableFactory();
+		renderer = new LatexGridTableRenderer();
 	}
 	
 	@After public void close(){renderer=null;}
@@ -49,6 +50,13 @@ public class TestLatexGridTableFactory extends AbstractLatexTableTest
 		table.setSpecification(specification);
 		table.setContent(content);
 		return table;
+	}
+	
+	public static Head createTableHead()
+	{
+		Head head = new Head();
+		head.getRow().add(TestLatexRowFactory.create());
+		return head;
 	}
 	
     @Test(expected=OfxAuthoringException.class)
@@ -76,10 +84,20 @@ public class TestLatexGridTableFactory extends AbstractLatexTableTest
     }
 
     @Test
-    public void standard() throws IOException, OfxAuthoringException
+    public void table() throws IOException, OfxAuthoringException
     {
     	Table table = createTable();
-    	f = new File(rootDir,dir+"/"+Key.standard+".txt");
+    	f = new File(rootDir,dir+"/"+Key.table+".tex");
+    	renderer.render(table);
+    	renderTest(renderer,f);
+    }
+    
+    @Test
+    public void withHead() throws IOException, OfxAuthoringException
+    {
+    	Table table = createTable();
+    	table.getContent().setHead(createTableHead());
+    	f = new File(rootDir,dir+"/"+Key.tableWithHead+".tex");
     	renderer.render(table);
     	renderTest(renderer,f);
     }
@@ -93,6 +111,7 @@ public class TestLatexGridTableFactory extends AbstractLatexTableTest
     	test.setSaveReference(true);
     	
 //    	test.initRenderer();test.withoutSpecification();
-    	test.initRenderer();test.standard();
+//    	test.initRenderer();test.table();
+    	test.initRenderer();test.withHead();
     }
 }

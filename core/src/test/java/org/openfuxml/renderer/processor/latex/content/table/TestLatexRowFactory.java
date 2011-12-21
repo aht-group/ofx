@@ -18,13 +18,13 @@ public class TestLatexRowFactory extends AbstractLatexTableTest
 	
 	private static enum Key {standard}
 	
-	private LatexRowFactory renderer;
+	private LatexRowRenderer renderer;
 	private String dir = "row";
 	
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexRowFactory();
+		renderer = new LatexRowRenderer();
 	}
 	
 	@After public void close(){renderer=null;}

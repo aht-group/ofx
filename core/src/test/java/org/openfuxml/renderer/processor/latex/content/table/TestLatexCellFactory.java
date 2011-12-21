@@ -20,13 +20,13 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
 	
 	private static enum Key {string,list}
 	
-	private LatexCellFactory renderer;
+	private LatexCellRenderer renderer;
 	private String dir = "cell";
 	
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexCellFactory();
+		renderer = new LatexCellRenderer();
 	}
 	
 	@After public void close(){renderer=null;}
