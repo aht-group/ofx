@@ -4,6 +4,7 @@
     xmlns:ofx="http://www.openfuxml.org"
     xmlns:table="http://www.openfuxml.org/table"
     xmlns:list="http://www.openfuxml.org/list"
+    xmlns:graph="http://www.openfuxml.org/graph"
     xmlns:layout="http://www.openfuxml.org/layout"
     xmlns:cmp="http://www.openfuxml.org/cmp"
     xmlns:wiki="http://www.openfuxml.org/wiki"
@@ -17,6 +18,7 @@
     <xsd:import namespace="http://www.openfuxml.org/table" schemaLocation="content/table.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/cmp" schemaLocation="renderer/cmp.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/chart" schemaLocation="addon/chart.xsd"/>
+    <xsd:import namespace="http://www.openfuxml.org/graph" schemaLocation="addon/graph.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/jsf" schemaLocation="addon/jsf-tld.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/jsfapp" schemaLocation="addon/jsf-app.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/fuxml" schemaLocation="addon/fuxml.xsd"/>
