@@ -16,6 +16,17 @@
 	<description>openFuXML</description>
 	<url>http://sourceforge.net/projects/openfuxml</url>
 
+	<modules>
+		<module>addon</module>
+		<module>client</module>
+		<module>jsf</module>
+		<module>core</module>
+		<module>wiki</module>
+		<module>chart</module>
+		<module>xml</module>
+		<module>util</module>
+	</modules>
+
 	<properties>
 		<my.build.directory>target</my.build.directory>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -175,16 +186,6 @@
 
 	<issueManagement>
 	</issueManagement>
-
-	<modules>
-		<module>client</module>
-		<module>jsf</module>
-		<module>core</module>
-		<module>wiki</module>
-		<module>chart</module>
-		<module>xml</module>
-		<module>util</module>
-	</modules>
 	
 	<repositories>
 		<repository>
