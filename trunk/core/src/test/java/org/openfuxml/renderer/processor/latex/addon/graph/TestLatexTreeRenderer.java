@@ -16,7 +16,7 @@ public class TestLatexTreeRenderer extends AbstractLatexGraphTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexTreeRenderer.class);
 	
-	private static enum Key {simple,oneLevel,twoLevel}
+	private static enum Key {simple,oneLevel,twoLevel,rootWithoutLabel}
 	
 	private LatexTreeRenderer renderer;
 	private String dir = "tree";
@@ -71,6 +71,19 @@ public class TestLatexTreeRenderer extends AbstractLatexGraphTest
     	renderTest(renderer,f);
     }
     
+    @Test
+    public void rootWithoutLabel() throws IOException, OfxAuthoringException
+    {
+    	f = new File(rootDir,dir+"/"+Key.rootWithoutLabel+".tex");
+    	Tree tree = createTable();
+    	tree.getNode().setLabel(null);
+    	tree.getNode().getNode().add(TestLatexTreeNodeRenderer.createNode("A"));
+    	tree.getNode().getNode().add(TestLatexTreeNodeRenderer.createNode("B"));
+    	tree.getNode().getNode().add(TestLatexTreeNodeRenderer.createNode("C"));
+    	renderer.render(tree);
+    	renderTest(renderer,f);
+    }
+    
     public static void main(String[] args) throws Exception
     {
     	OfxCoreTstBootstrap.init();
@@ -82,5 +95,6 @@ public class TestLatexTreeRenderer extends AbstractLatexGraphTest
     	test.initRenderer();test.rootNode();
     	test.initRenderer();test.oneLevel();
     	test.initRenderer();test.twoLevel();
+    	test.initRenderer();test.rootWithoutLabel();
     }
 }
