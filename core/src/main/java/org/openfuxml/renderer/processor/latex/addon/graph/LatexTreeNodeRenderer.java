@@ -18,7 +18,16 @@ public class LatexTreeNodeRenderer extends AbstractOfxLatexRenderer implements O
 	
 	public void render(Node node) throws OfxAuthoringException
 	{	
-		preTxt.add(" [.{"+node.getLabel()+"} ");
+		StringBuffer sb = new StringBuffer();
+		sb.append(" [");
+		if(node.isSetLabel())
+		{
+			sb.append(".{");
+			sb.append(node.getLabel());
+			sb.append("}" );
+		}
+		
+		preTxt.add(sb.toString());
 		for(Node child : node.getNode())
 		{
 			LatexTreeNodeRenderer childRenderer = new LatexTreeNodeRenderer();
