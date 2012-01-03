@@ -5,6 +5,7 @@ import org.openfuxml.content.ofx.table.Cell;
 
 public class OfxCellFactory
 {
+	public static Cell createParagraphCell(int text){return createParagraphCell(""+text);}
 	public static Cell createParagraphCell(String text)
 	{
 		Paragraph p = new Paragraph();
