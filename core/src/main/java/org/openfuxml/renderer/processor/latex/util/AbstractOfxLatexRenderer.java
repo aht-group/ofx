@@ -70,7 +70,7 @@ public class AbstractOfxLatexRenderer
 		w.flush();
 	}
 	
-	protected void paragraphRenderer(Paragraph paragraph, boolean preBlankLine)
+	protected void paragraphRenderer(Paragraph paragraph, boolean preBlankLine) throws OfxAuthoringException
 	{
 		LatexParagraphFactory f = new LatexParagraphFactory(preBlankLine);
 		f.render(paragraph);
