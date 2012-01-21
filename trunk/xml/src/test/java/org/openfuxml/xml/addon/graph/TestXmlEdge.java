@@ -35,6 +35,7 @@ public class TestXmlEdge extends AbstractXmlGraphTest
     	xml.setId(123);
     	xml.setFrom(1);
     	xml.setTo(2);	
+    	xml.setType("myType");
     	return xml;
     }
     
