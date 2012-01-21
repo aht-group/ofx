@@ -46,6 +46,7 @@
             <xsd:attribute name="id" type="xsd:long"/>
             <xsd:attribute name="from" type="xsd:long"/>
             <xsd:attribute name="to" type="xsd:long"/>
+            <xsd:attribute name="type" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>
