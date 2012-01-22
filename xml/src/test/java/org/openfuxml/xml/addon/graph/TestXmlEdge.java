@@ -34,7 +34,8 @@ public class TestXmlEdge extends AbstractXmlGraphTest
     	Edge xml = new Edge();
     	xml.setId(123);
     	xml.setFrom(1);
-    	xml.setTo(2);	
+    	xml.setTo(2);
+    	xml.setDirected(true);
     	xml.setType("myType");
     	return xml;
     }

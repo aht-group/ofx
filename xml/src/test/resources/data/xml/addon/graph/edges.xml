@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><edges xmlns="http://www.openfuxml.org/graph"><edge id="123" from="1" to="2" type="myType"/><edge id="123" from="1" to="2" type="myType"/></edges>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><edges xmlns="http://www.openfuxml.org/graph"><edge id="123" from="1" to="2" directed="true" type="myType"/><edge id="123" from="1" to="2" directed="true" type="myType"/></edges>
