@@ -1,7 +1,10 @@
 package org.openfuxml.addon.graph;
 
+import java.io.File;
 import java.util.Hashtable;
 import java.util.Map;
+
+import net.sf.exlp.util.io.StringIO;
 
 import org.openfuxml.xml.addon.graph.Edge;
 import org.openfuxml.xml.addon.graph.Graph;
@@ -53,5 +56,10 @@ public class GraphDotConverter
 		
 		sb.append("}").append(ls);
 		return sb.toString();	
+	}
+	
+	public void save(File f)
+	{
+		StringIO.writeTxt(f, sb.toString());
 	}
 }
