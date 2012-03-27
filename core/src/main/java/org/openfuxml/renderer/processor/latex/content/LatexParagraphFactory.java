@@ -4,6 +4,7 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
+import org.openfuxml.renderer.processor.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +33,6 @@ public class LatexParagraphFactory extends AbstractOfxLatexRenderer implements O
 	
 	private void addString(String s)
 	{
-		txt.add(s);
+		txt.add(TexSpecialChars.replace(s));
 	}
 }
