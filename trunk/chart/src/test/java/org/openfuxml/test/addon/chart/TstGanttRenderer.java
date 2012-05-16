@@ -102,7 +102,7 @@ public class TstGanttRenderer
 		
 		logger.info("Using Chart from "+args[0]);
 		
-		JaxbUtil.debug2(TstGanttRenderer.class,chart, new OfxNsPrefixMapper());
+		JaxbUtil.debug(TstGanttRenderer.class,chart, new OfxNsPrefixMapper());
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);

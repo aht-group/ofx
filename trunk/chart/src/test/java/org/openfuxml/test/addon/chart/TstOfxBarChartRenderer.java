@@ -74,7 +74,7 @@ public class TstOfxBarChartRenderer
 		Chart chart = null;
 		
 		chart = test.getTimeSeries();
-		JaxbUtil.debug2(TstOfxBarChartRenderer.class,chart, new OfxNsPrefixMapper());
+		JaxbUtil.debug(TstOfxBarChartRenderer.class,chart, new OfxNsPrefixMapper());
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);
