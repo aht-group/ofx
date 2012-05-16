@@ -51,6 +51,7 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
+		 
 		<dependency>
 			<groupId>javax.faces</groupId>
 			<artifactId>jsf-api</artifactId>
@@ -58,6 +59,7 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
+		 
 	</dependencies>
 	
 </project>
