@@ -16,20 +16,39 @@
     <dependencyManagement>
         <dependencies>
         	<dependency>
-				<groupId>org.openfuxml</groupId>
-				<artifactId>ofx-chart</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openfuxml</groupId>
-				<artifactId>ofx-xml</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.openfuxml</groupId>
-				<artifactId>ofx-core</artifactId>
-				<version>${project.version}</version>
-			</dependency>		  
+        		<groupId>org.openfuxml</groupId>
+        		<artifactId>ofx-xml</artifactId>
+        		<version>${project.version}</version>
+        	</dependency>
+        	<dependency>
+        		<groupId>org.openfuxml</groupId>
+        		<artifactId>ofx-util</artifactId>
+        		<version>${project.version}</version>
+        	</dependency>
+        	<dependency>
+        		<groupId>org.openfuxml</groupId>
+        		<artifactId>ofx-wiki</artifactId>
+        		<version>${project.version}</version>
+        	</dependency>
+        	<dependency>
+        		<groupId>org.openfuxml</groupId>
+        		<artifactId>ofx-core</artifactId>
+        		<version>${project.version}</version>
+        	</dependency>
+        	<dependency>
+        		<groupId>org.openfuxml</groupId>
+        		<artifactId>ofx-chart</artifactId>
+        		<version>${project.version}</version>
+        	</dependency>
+        	
+        	
+        	<dependency>
+        		<groupId>net.sf.exlp</groupId>
+        		<artifactId>exlp-bom</artifactId>
+        		<version>0.1.7-SNAPSHOT</version>
+        		<type>pom</type>
+        		<scope>import</scope>
+        	</dependency>
         </dependencies>
     </dependencyManagement>
 </project>
