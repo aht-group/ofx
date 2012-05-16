@@ -11,21 +11,18 @@
     <artifactId>ofx-jsf</artifactId>
     <packaging>jar</packaging>
     <name>openFuXML JSF Taglib</name>
-   
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<inherited>true</inherited>
-				<version>${maven-compiler-plugin.version}</version>
-				<configuration>
-					<source>${compiler-source.version}</source>
-					<target>${compiler-target.version}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+   	
+	<dependencyManagement>
+		<dependencies>      	         
+			<dependency>
+				<groupId>org.openfuxml</groupId>
+				<artifactId>ofx-bom</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	
 	<dependencies>
 		<dependency>

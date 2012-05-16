@@ -13,6 +13,18 @@
     <packaging>jar</packaging>
     <name>openFuXML Util</name>
 	
+	<dependencyManagement>
+		<dependencies>      	         
+			<dependency>
+				<groupId>org.openfuxml</groupId>
+				<artifactId>ofx-bom</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 	<dependencies>
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
