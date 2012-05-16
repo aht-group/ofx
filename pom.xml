@@ -18,6 +18,7 @@
 
 	<modules>
 		<module>addon</module>
+		<module>bom</module>
 		<module>client</module>
 		<module>jsf</module>
 		<module>core</module>
