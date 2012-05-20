@@ -70,6 +70,6 @@ public class TagChapterFactory
 		title.setValue("Titel");
 		section.getContent().add(title);
 		
-		JaxbUtil.debug(TagChapterFactory.class,section);
+		JaxbUtil.debug(section);
 	}
 }

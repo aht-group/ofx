@@ -68,7 +68,7 @@ public class XYPlotRenderer extends AbstractChartRenderer
 	@Override
 	protected void setAxis(Axis ofxAxis,AxisOrientation axisOrientation)
 	{
-		JaxbUtil.debug(this.getClass(),ofxAxis);
+		JaxbUtil.debug(ofxAxis);
 		ValueAxis axis=null;
 		switch(OfxChartTypeResolver.getAxisType(ofxAxis.getAxisType()))
 		{
