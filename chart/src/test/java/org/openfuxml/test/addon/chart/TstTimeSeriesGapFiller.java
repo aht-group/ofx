@@ -95,7 +95,7 @@ public class TstTimeSeriesGapFiller
 //		chart = test.getTimeSeries();
 		chart = test.load(args[0]);
 		
-		JaxbUtil.debug(TstTimeSeriesGapFiller.class,chart, new OfxNsPrefixMapper());
+		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);
