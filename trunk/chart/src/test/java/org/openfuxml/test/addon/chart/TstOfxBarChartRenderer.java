@@ -69,12 +69,13 @@ public class TstOfxBarChartRenderer
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
-		
+		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
+			
 		TstOfxBarChartRenderer test = new TstOfxBarChartRenderer();
 		Chart chart = null;
 		
 		chart = test.getTimeSeries();
-		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
+		JaxbUtil.debug(chart);
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);

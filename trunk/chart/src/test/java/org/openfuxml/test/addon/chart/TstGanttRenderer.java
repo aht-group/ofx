@@ -93,7 +93,8 @@ public class TstGanttRenderer
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();	
-		
+		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
+			
 		Chart chart;
 		
 //		TestGanttRenderer test = new TestGanttRenderer();
@@ -102,7 +103,7 @@ public class TstGanttRenderer
 		
 		logger.info("Using Chart from "+args[0]);
 		
-		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
+		JaxbUtil.debug(chart);
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);

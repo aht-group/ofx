@@ -89,13 +89,14 @@ public class TstTimeSeriesGapFiller
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("resources/config");
 			loggerInit.init();
+		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
 		
 		TstTimeSeriesGapFiller test = new TstTimeSeriesGapFiller();
 		Chart chart;
 //		chart = test.getTimeSeries();
 		chart = test.load(args[0]);
 		
-		JaxbUtil.debug(chart, new OfxNsPrefixMapper());
+		JaxbUtil.debug(chart);
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);

@@ -14,7 +14,6 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,13 +21,11 @@ public class WikiCategoryProcessor extends AbstractWikiProcessor
 {
 	final static Logger logger = LoggerFactory.getLogger(WikiCategoryProcessor.class);
 	
-	private OfxNsPrefixMapper nsPrefixMapper;
 	private WikiPageProcessor pageProcessor;
 	
 	public WikiCategoryProcessor(WikiPageProcessor pageProcessor)
 	{
 		this.pageProcessor=pageProcessor;
-		nsPrefixMapper = new OfxNsPrefixMapper();
 	}
 	
 	public void processCategory(Content content) throws OfxAuthoringException, OfxInternalProcessingException
@@ -48,6 +45,6 @@ public class WikiCategoryProcessor extends AbstractWikiProcessor
 		String fName = WikiContentIO.getFileFromSource(content.getSource())+"."+WikiProcessor.WikiFileExtension.xml;
 		File f = new File(dstDir,fName);
 		logger.debug("Writing categories external XML: "+f.getAbsolutePath());
-		JaxbUtil.save(f, sections, nsPrefixMapper,true);
+		JaxbUtil.save(f, sections,true);
 	}
 }

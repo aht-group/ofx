@@ -11,7 +11,6 @@ import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor.WikiDir;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,12 +19,10 @@ public abstract class AbstractWikiProcessor
 	final static Logger logger = LoggerFactory.getLogger(AbstractWikiProcessor.class);
 	
 	protected File srcDir,dstDir;
-	protected OfxNsPrefixMapper nsPrefixMapper;
 	private Map<WikiDir,File> mDirs;
 	
 	public AbstractWikiProcessor()
 	{
-		nsPrefixMapper = new OfxNsPrefixMapper();
 		mDirs = new Hashtable<WikiDir,File>();
 	}
 	

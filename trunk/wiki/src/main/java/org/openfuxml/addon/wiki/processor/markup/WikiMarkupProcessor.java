@@ -135,7 +135,7 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 		template.getMarkup().setValue(templateMarkup);
 		
 		File f = new File(this.getDir(WikiProcessor.WikiDir.wikiTemplate), template.getId()+"."+WikiProcessor.WikiFileExtension.xml);
-		JaxbUtil.save(f, template, nsPrefixMapper, true);
+		JaxbUtil.save(f, template, true);
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append(SystemUtils.LINE_SEPARATOR);
