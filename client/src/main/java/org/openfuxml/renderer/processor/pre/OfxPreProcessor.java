@@ -34,7 +34,6 @@ import org.openfuxml.exception.OfxRenderingException;
 import org.openfuxml.renderer.OfxRenderProcessor.DirCode;
 import org.openfuxml.renderer.OfxRenderProcessor.FileCode;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
-import org.openfuxml.xml.ns.OfxNsPrefixMapper;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.openfuxml.xml.renderer.cmp.Preprocessor;
 import org.openfuxml.xml.renderer.cmp.Wiki;
@@ -49,8 +48,7 @@ public class OfxPreProcessor
 	
 	private Cmp cmp;
 	private Preprocessor xmlPreProcessor;
-	
-	private OfxNsPrefixMapper nsPrefixMapper;
+
 	private Ofxdoc ofxDoc;
 	private Contents wikiQueries;
 
@@ -58,7 +56,6 @@ public class OfxPreProcessor
 	public OfxPreProcessor(OfxRenderConfiguration cmpConfigUtil)
 	{
 		this.cmpConfigUtil=cmpConfigUtil;
-		nsPrefixMapper = new OfxNsPrefixMapper();
 	}
 
 	public void chain() throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
@@ -132,7 +129,7 @@ public class OfxPreProcessor
 			OfxExternalMerger exMerger = new OfxExternalMerger();
 			ofxDoc = exMerger.mergeToOfxDoc(srcFile);
 			
-			JaxbUtil.save(dstFile, ofxDoc, nsPrefixMapper, true);
+			JaxbUtil.save(dstFile, ofxDoc, true);
 		}
 		catch (FileNotFoundException e)
 		{
@@ -152,7 +149,7 @@ public class OfxPreProcessor
 			OfxContainerMerger containerMerger = new OfxContainerMerger();
 			ofxDoc = containerMerger.merge(ofxDoc);
 			
-			JaxbUtil.save(dstFile, ofxDoc, nsPrefixMapper, true);
+			JaxbUtil.save(dstFile, ofxDoc, true);
 		}
 		catch (FileNotFoundException e)
 		{
@@ -174,7 +171,7 @@ public class OfxPreProcessor
 			WikiTemplateCorrector templateCorrector = new WikiTemplateCorrector();
 			templateCorrector.setDirectory(WikiProcessor.WikiDir.wikiTemplate, dirWikiTemplate);
 			ofxDoc = templateCorrector.correctTemplateInjections(ofxDoc);
-			JaxbUtil.save(dstFile, ofxDoc, nsPrefixMapper, true);
+			JaxbUtil.save(dstFile, ofxDoc, true);
 			
 			WikiTemplateProcessor wtp = new WikiTemplateProcessor(wikiInlineProcessor,xmlPreProcessor.getWiki().getTemplates());
 			wtp.setDirectory(WikiProcessor.WikiDir.wikiTemplate, dirWikiTemplate);
@@ -196,7 +193,7 @@ public class OfxPreProcessor
 			ofxDoc = wikiExIntegrator.getResult();
 			wikiQueries = wikiExIntegrator.getWikiQueries();
 			
-			JaxbUtil.save(dstFile, ofxDoc, nsPrefixMapper, true);
+			JaxbUtil.save(dstFile, ofxDoc, true);
 		}
 		catch (FileNotFoundException e){throw new OfxInternalProcessingException(e.getMessage());}
 		return dstFile;
@@ -227,7 +224,7 @@ public class OfxPreProcessor
 				try
 				{
 					contentFetcher.process(wikiQueries);
-					JaxbUtil.save(fContents, wikiQueries, nsPrefixMapper, true);
+					JaxbUtil.save(fContents, wikiQueries, true);
 				}
 				catch (OfxWikiException e)
 				{

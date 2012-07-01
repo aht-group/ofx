@@ -69,7 +69,7 @@ public class TestContainerMerger extends AbstractFileProcessingTest
 		
 		if(saveReference)
 		{
-			JaxbUtil.save(fRef, ofxDst, new OfxNsPrefixMapper(), true);
+			JaxbUtil.save(fRef, ofxDst, true);
 		}
 		else
 		{
@@ -83,7 +83,8 @@ public class TestContainerMerger extends AbstractFileProcessingTest
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("src/test/resources/config");
 			loggerInit.init();	
-		
+		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
+			
 		boolean saveReference = false;
 		int id = -1;
 		int index = 0;

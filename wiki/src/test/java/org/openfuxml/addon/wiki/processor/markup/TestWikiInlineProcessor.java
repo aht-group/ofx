@@ -78,7 +78,7 @@ public class TestWikiInlineProcessor extends AbstractFileProcessingTest
 		Section section = wikiInline.toOfx(wikiTxt);
 		if(saveReference)
 		{
-			JaxbUtil.save(fRef, section, new OfxNsPrefixMapper(), true);
+			JaxbUtil.save(fRef, section, true);
 		}
 		else
 		{
@@ -92,7 +92,8 @@ public class TestWikiInlineProcessor extends AbstractFileProcessingTest
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("src/test/resources/config");
 			loggerInit.init();	
-		
+		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
+			
 		boolean saveReference = true;
 		int id = -1;
 		int index = 0;

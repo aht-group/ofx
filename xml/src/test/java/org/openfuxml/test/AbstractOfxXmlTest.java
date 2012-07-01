@@ -7,7 +7,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -19,8 +18,6 @@ public class AbstractOfxXmlTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
-	protected static NsPrefixMapperInterface nsPrefixMapper;
-	
 	@BeforeClass
     public static void initLogger()
 	{
@@ -28,6 +25,12 @@ public class AbstractOfxXmlTest
 		loggerInit.addAltPath("ofx-xml.test");
 		loggerInit.init();
     }
+	
+	@BeforeClass
+	public static void initPrefixMapper()
+	{
+		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
+	}
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
 	{
@@ -38,21 +41,12 @@ public class AbstractOfxXmlTest
 	{
 		logger.debug("Saving Reference XML");
 		
-		JaxbUtil.debug(xml, getPrefixMapper());
-    	JaxbUtil.save(f, xml, nsPrefixMapper, formattedOutput);
+		JaxbUtil.debug(xml);
+    	JaxbUtil.save(f, xml, formattedOutput);
 	}
 	
 	protected static XMLGregorianCalendar getDefaultXmlDate()
 	{
 		return DateUtil.getXmlGc4D(DateUtil.getDateFromInt(2011, 11, 11, 11, 11, 11));
-	}
-	
-	private NsPrefixMapperInterface getPrefixMapper()
-	{
-		if(nsPrefixMapper==null)
-		{
-			nsPrefixMapper = new OfxNsPrefixMapper();
-		}
-		return nsPrefixMapper;
 	}
 }

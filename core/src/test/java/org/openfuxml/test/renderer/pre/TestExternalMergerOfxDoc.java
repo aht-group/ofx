@@ -67,7 +67,7 @@ public class TestExternalMergerOfxDoc extends AbstractFileProcessingTest
 		
 		if(saveReference)
 		{
-			JaxbUtil.save(fRef, ofxDocDst, new OfxNsPrefixMapper(), true);
+			JaxbUtil.save(fRef, ofxDocDst, true);
 		}
 		else
 		{
@@ -82,6 +82,8 @@ public class TestExternalMergerOfxDoc extends AbstractFileProcessingTest
 			loggerInit.addAltPath("src/test/resources/config");
 			loggerInit.init();	
 		
+		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
+			
 		boolean saveReference = true;
 		int id = -1;
 		int index = 0;
