@@ -40,6 +40,11 @@
         		<artifactId>ofx-chart</artifactId>
         		<version>${project.version}</version>
         	</dependency>
+        	        	<dependency>
+        		<groupId>org.openfuxml</groupId>
+        		<artifactId>ofx-jsf</artifactId>
+        		<version>${project.version}</version>
+        	</dependency>
         	
         	<!-- Managed BOMs -->
         	<dependency>
