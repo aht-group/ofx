@@ -19,7 +19,7 @@ import org.openfuxml.addon.chart.data.jaxb.Container;
 import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.TimePeriodFactory;
-import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

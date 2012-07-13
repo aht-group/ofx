@@ -23,7 +23,7 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
-import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

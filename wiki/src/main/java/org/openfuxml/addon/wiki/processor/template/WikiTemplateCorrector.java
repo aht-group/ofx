@@ -18,7 +18,7 @@ import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

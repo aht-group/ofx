@@ -13,7 +13,7 @@ import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
-import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
