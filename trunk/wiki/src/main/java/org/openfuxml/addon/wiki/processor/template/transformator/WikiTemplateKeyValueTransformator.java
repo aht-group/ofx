@@ -18,7 +18,7 @@ import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
 import org.openfuxml.addon.wiki.processor.template.exlp.parser.WikiKeyValueParser;
-import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -22,6 +22,12 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
+    <jxb:bindings schemaLocation="../xsd/../xsd/content/text.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.xml.content.text"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
    <jxb:bindings schemaLocation="../xsd/content/layout.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.openfuxml.content.ofx.layout"/>

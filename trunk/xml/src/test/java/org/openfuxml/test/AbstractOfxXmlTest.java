@@ -10,7 +10,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.openfuxml.xml.ns.OfxNsPrefixMapper;
+import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +41,7 @@ public class AbstractOfxXmlTest
 	{
 		logger.debug("Saving Reference XML");
 		
-		JaxbUtil.debug(xml);
+		JaxbUtil.info(xml);
     	JaxbUtil.save(f, xml, formattedOutput);
 	}
 	

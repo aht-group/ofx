@@ -1,4 +1,4 @@
-package org.openfuxml.xml.ns;
+package org.openfuxml.xml;
 
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
@@ -14,6 +14,7 @@ public class OfxNsPrefixMapper extends NamespacePrefixMapper implements NsPrefix
         if("http://www.openfuxml.org/table".equals(namespaceUri) ){return "table";}
         if("http://www.openfuxml.org/layout".equals(namespaceUri) ){return "layout";}
         if("http://www.openfuxml.org/list".equals(namespaceUri) ){return "l";}
+        if("http://www.openfuxml.org/text".equals(namespaceUri) ){return "text";}
         
         if("http://exlp.sf.net/io".equals(namespaceUri) ){return "io";}
   
