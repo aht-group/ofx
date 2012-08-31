@@ -5,7 +5,7 @@ import net.sf.exlp.event.handler.EhResultContainer;
 import net.sf.exlp.listener.LogListener;
 import net.sf.exlp.listener.impl.LogListenerString;
 import net.sf.exlp.parser.LogParser;
-import net.sf.exlp.util.io.ConfigLoader;
+import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
