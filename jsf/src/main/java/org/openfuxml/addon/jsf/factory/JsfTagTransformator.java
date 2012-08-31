@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.exlp.util.io.ConfigLoader;
+import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.util.xml.XsltUtil;

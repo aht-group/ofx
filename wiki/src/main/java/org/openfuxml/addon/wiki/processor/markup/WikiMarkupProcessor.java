@@ -2,7 +2,7 @@ package org.openfuxml.addon.wiki.processor.markup;
 
 import java.io.File;
 
-import net.sf.exlp.util.io.ConfigLoader;
+import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;

@@ -3,7 +3,7 @@ package org.openfuxml.addon.jsf.factory;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.io.ConfigLoader;
+import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
