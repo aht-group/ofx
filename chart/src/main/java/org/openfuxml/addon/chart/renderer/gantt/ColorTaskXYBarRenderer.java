@@ -6,7 +6,6 @@ import java.awt.Paint;
 import java.awt.geom.Rectangle2D;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotRenderingInfo;
@@ -18,10 +17,12 @@ import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.gantt.XYTaskDataset;
 import org.jfree.data.xy.XYDataset;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ColorTaskXYBarRenderer extends XYBarRenderer
 {
-	static Logger logger = Logger.getLogger(ColorTaskXYBarRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(ColorTaskXYBarRenderer.class);
 	   
 	private static final long serialVersionUID=1;
 	protected XYDataset dataset;

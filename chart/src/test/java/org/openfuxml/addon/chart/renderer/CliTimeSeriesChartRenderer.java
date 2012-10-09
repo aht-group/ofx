@@ -1,6 +1,7 @@
-package org.openfuxml.test.addon.chart;
+package org.openfuxml.addon.chart.renderer;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Random;
@@ -16,47 +17,41 @@ import org.openfuxml.addon.chart.data.jaxb.Chart;
 import org.openfuxml.addon.chart.data.jaxb.Charttype;
 import org.openfuxml.addon.chart.data.jaxb.Container;
 import org.openfuxml.addon.chart.data.jaxb.Data;
+import org.openfuxml.addon.chart.factory.chart.TimeSeriesChartFactory;
+import org.openfuxml.addon.chart.test.OfxChartTestBootstrap;
+import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TstTimeBarRenderer
+public class CliTimeSeriesChartRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(TstTimeBarRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(CliTimeSeriesChartRenderer.class);
 	
-	public TstTimeBarRenderer()
+	public CliTimeSeriesChartRenderer()
 	{
 		
 	}
 	
 	public Chart getTimeSeries()
 	{
-		Chart chart = new Chart();
-		chart.setLegend(true);
+		Chart chart = TimeSeriesChartFactory.build(true,false);
 		
-		chart.setCharttype(getType());
-		chart.setGrid(getGrid());
+//		chart.setColors(getColors());
 		
 		chart.getContainer().add(getX("a"));
+		chart.getContainer().add(getX("b"));
 		return chart;
 	}
 	
-	private Chart.Grid getGrid()
-	{
-		Chart.Grid grid = new Chart.Grid();
-		grid.setDomain(false);
-		grid.setRange(false);
-		return grid;
-	}
 	
-	private Charttype getType()
+	
+	private Chart.Colors getColors()
 	{
-		Charttype type = new Charttype();
-		Charttype.Timebar tBar = new Charttype.Timebar();
-		tBar.setShadow(false);
-		tBar.setGradient(false);
-		type.setTimebar(tBar);
-		return type;
+		Chart.Colors colors = new Chart.Colors();
+		colors.getColor().add(ChartColorFactory.create(255, 255, 255, 255, ChartColorFactory.Area.backgroundChart));
+		
+		return colors;
 	}
 	
 	private Container getX(String label)
@@ -64,31 +59,37 @@ public class TstTimeBarRenderer
 		Random rnd = new Random();
 		Container x = new Container();
 		x.setLabel(label);
-		for(int i=1;i<5;i++)
+		for(int i=1;i<20;i++)
 		{
 			Data data = new Data();
 			data.setRecord(DateUtil.getXmlGc4D(DateUtil.getDateFromInt(2010, 1, i)));
-			data.setY(1+rnd.nextInt(i));
+			data.setY(rnd.nextInt(i));
 			if(rnd.nextInt(100)<70){x.getData().add(data);}
 		}
 		return x;
 	}
 	
+	public Chart load(String fileName) throws FileNotFoundException
+	{
+		Chart chart = (Chart)JaxbUtil.loadJAXB(fileName, Chart.class);
+		return chart;
+	}
+	
 	public static void main (String[] args) throws Exception
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("resources/config");
-			loggerInit.init();
-		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
+		OfxChartTestBootstrap.init();
+			
+		CliTimeSeriesChartRenderer test = new CliTimeSeriesChartRenderer();
+		Chart chart;
+		chart = test.getTimeSeries();
+//		chart = test.load(args[0]);
 		
-		TstTimeBarRenderer test = new TstTimeBarRenderer();
-		Chart chart = test.getTimeSeries();
-		JaxbUtil.debug(chart);
+		JaxbUtil.info(chart);
 			
 		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);
 		
-		OutputStream os = new FileOutputStream(new File("dist/chart.png"));
+		OutputStream os = new FileOutputStream(new File("target/chart.png"));
 		ChartUtilities.writeChartAsPNG(os,jfreeChart,800,300);
 	}
 }

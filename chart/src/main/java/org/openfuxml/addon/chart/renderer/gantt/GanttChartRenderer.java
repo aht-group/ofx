@@ -8,7 +8,6 @@ import java.util.Map;
 
 import net.sf.exlp.util.DateUtil;
 
-import org.apache.log4j.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.SymbolAxis;
@@ -28,10 +27,12 @@ import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRenderer
 {
-	static Logger logger = Logger.getLogger(GanttChartRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(GanttChartRenderer.class);
 	
 	public GanttChartRenderer()
 	{
