@@ -1,13 +1,14 @@
 package org.openfuxml.addon.chart.renderer.gantt;
 
-import org.apache.log4j.Logger;
 import org.jfree.chart.renderer.xy.GradientXYBarPainter;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ColorTaskGradientXYBarPainter extends GradientXYBarPainter
 {
-	static Logger logger = Logger.getLogger(ColorTaskGradientXYBarPainter.class);
-	   
+	final static Logger logger = LoggerFactory.getLogger(ColorTaskGradientXYBarPainter.class);   
+	
 	private static final long serialVersionUID=1;
 	 
 	public ColorTaskGradientXYBarPainter()

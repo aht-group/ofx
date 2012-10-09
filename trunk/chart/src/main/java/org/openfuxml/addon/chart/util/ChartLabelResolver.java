@@ -1,13 +1,14 @@
 package org.openfuxml.addon.chart.util;
 
-import org.apache.log4j.Logger;
 import org.openfuxml.addon.chart.data.jaxb.Axis;
 import org.openfuxml.addon.chart.data.jaxb.Chart;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ChartLabelResolver
 {	
-	static Logger logger = Logger.getLogger(ChartLabelResolver.class);
+	final static Logger logger = LoggerFactory.getLogger(ChartLabelResolver.class);
 	
 	public synchronized static String getTitle(Chart ofxChart)
 	{

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import net.sf.exlp.util.DateUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jfree.data.general.SeriesException;
 import org.jfree.data.time.RegularTimePeriod;
@@ -38,8 +39,9 @@ public class TimeSeriesCumulativeChartRenderer extends AbstractTimeSeriesChartRe
 			TimeSeries ts = new TimeSeries(container.getLabel());
 			for(Data data : container.getData())
 			{
+				JaxbUtil.info(data);
 					double value = 0;
-					Date d = DateUtil.getDateFromInt(data.getRecord().getYear(), data.getRecord().getMonth(), data.getRecord().getDay());
+					Date d = data.getRecord().toGregorianCalendar().getTime();
 					RegularTimePeriod rtp = getRtp(d);
 					try
 					{
@@ -49,7 +51,9 @@ public class TimeSeriesCumulativeChartRenderer extends AbstractTimeSeriesChartRe
 					}
 					catch (SeriesException e)
 					{
+						e.printStackTrace();
 						TimeSeriesDataItem di = ts.getDataItem(rtp);
+						
 						value = data.getY();
 						ts.addOrUpdate(rtp, value+di.getValue().doubleValue());
 					}
