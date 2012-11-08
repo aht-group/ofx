@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.html.section;
+package org.openfuxml.renderer.html.section;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,21 +13,22 @@ import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.renderer.processor.html.interfaces.OfxSectionRenderer;
 import org.openfuxml.renderer.processor.html.interfaces.OfxTableRenderer;
+import org.openfuxml.renderer.processor.html.section.ParagraphRenderer;
 import org.openfuxml.renderer.processor.html.structure.ReferenceRenderer;
 import org.openfuxml.renderer.processor.html.table.DefaultTableRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DefaultSectionRenderer implements OfxSectionRenderer
+public class SectionRenderer implements OfxSectionRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(DefaultSectionRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(SectionRenderer.class);
 	
 	private List<Content> list;
 	private List<Content> subsections;
 	private Element divParagraph;
 	private Element eHeader;
 	
-	public DefaultSectionRenderer()
+	public SectionRenderer()
 	{
 		list = new ArrayList<Content>();
 		subsections = new ArrayList<Content>();

@@ -12,7 +12,7 @@ public class OfxCoreTstBootstrap
 	public static void init()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.addAltPath("ofx-core.test");
+		loggerInit.addAltPath("src/test/resources/config.ofx-core.test");
 		loggerInit.init();		
 	}
 }
