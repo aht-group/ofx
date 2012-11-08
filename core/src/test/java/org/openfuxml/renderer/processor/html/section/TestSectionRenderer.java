@@ -1,10 +1,9 @@
-package org.openfuxml.test.renderer.html.section;
+package org.openfuxml.renderer.processor.html.section;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -20,22 +19,23 @@ import org.junit.runners.Parameterized;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.renderer.processor.html.section.DefaultSectionRenderer;
+import org.openfuxml.renderer.html.section.SectionRenderer;
 import org.openfuxml.test.AbstractFileProcessingTest;
+import org.openfuxml.test.OfxCoreTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RunWith(Parameterized.class)
-public class TestDefaultSectionRenderer extends AbstractFileProcessingTest
+public class TestSectionRenderer extends AbstractFileProcessingTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestDefaultSectionRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TestSectionRenderer.class);
 	
-	private DefaultSectionRenderer renderer;
+	private SectionRenderer renderer;
 	
 	public static String srcDirName = "src/test/resources/data/html/section/ofx";
 	public static final String dstDirName = "src/test/resources/data/html/section/web";
 	
-	public TestDefaultSectionRenderer(File fTest)
+	public TestSectionRenderer(File fTest)
 	{
 		this.fTest = fTest;
 		String name = fTest.getName().substring(0, fTest.getName().length()-4);
@@ -48,7 +48,7 @@ public class TestDefaultSectionRenderer extends AbstractFileProcessingTest
 	@Before
 	public void init() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{	
-		renderer = new DefaultSectionRenderer();
+		renderer = new SectionRenderer();
 	}
 	
 	@After
@@ -87,19 +87,17 @@ public class TestDefaultSectionRenderer extends AbstractFileProcessingTest
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
     {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();	
+		OfxCoreTstBootstrap.init();
 		
 		boolean saveReference = true;
 		int id = 3;
 		int index = 0;
 		
-		for(Object[] o : TestDefaultSectionRenderer.initFileNames())
+		for(Object[] o : TestSectionRenderer.initFileNames())
 		{
 			File fTest = (File)o[0];
 		
-			TestDefaultSectionRenderer test = new TestDefaultSectionRenderer(fTest);
+			TestSectionRenderer test = new TestSectionRenderer(fTest);
 			test.init();
 			logger.trace(id+" "+index);
 			if(id<0 | id==index){test.render(saveReference);}

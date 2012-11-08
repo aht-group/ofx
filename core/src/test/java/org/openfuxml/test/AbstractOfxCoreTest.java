@@ -32,7 +32,7 @@ public class AbstractOfxCoreTest
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("ofx-core.test");
+		loggerInit.addAltPath("config.ofx-core.test");
 		loggerInit.init();
     }
 	
