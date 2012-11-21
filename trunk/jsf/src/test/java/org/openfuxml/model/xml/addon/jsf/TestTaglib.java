@@ -8,7 +8,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.test.OfxJsfTestBootstrap;
-import org.openfuxml.xml.addon.jsf.FaceletTaglib;
+import org.openfuxml.xml.addon.jsf.Attribute;
 
 public class TestTaglib extends AbstractXmlJsfTest
 {
@@ -16,21 +16,23 @@ public class TestTaglib extends AbstractXmlJsfTest
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,FaceletTaglib.class.getSimpleName()+".xml");
+		fXml = new File(rootDir,Attribute.class.getSimpleName()+".xml");
 	}
     
     @Test
     public void testLang() throws FileNotFoundException
     {
-    	FaceletTaglib actual = create();
-    	FaceletTaglib expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), FaceletTaglib.class);
+    	Attribute actual = create();
+    	Attribute expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Attribute.class);
     	assertJaxbEquals(expected, actual);
     }
    
-    public static FaceletTaglib create()
+    public static Attribute create()
     {
-    	FaceletTaglib xml = new FaceletTaglib();
-    	xml.setTlibVersion("1.1");
+    	Attribute xml = new Attribute();
+    	xml.setId(1);
+    	xml.setCode("myCode");
+    	xml.setRequired(true);
     	return xml;
     }
     
