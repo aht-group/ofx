@@ -64,15 +64,9 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
-	<jxb:bindings schemaLocation="../xsd/addon/jsf-tld.xsd" node="/xsd:schema">
+	<jxb:bindings schemaLocation="../xsd/addon/jsf.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.xml.addon.jsf.tld"/>
-        </jxb:schemaBindings>
-    </jxb:bindings>
-    
-    <jxb:bindings schemaLocation="../xsd/addon/jsf-app.xsd" node="/xsd:schema">
-        <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.addon.jsfapp.data.jaxb"/>
+            <jxb:package name="org.openfuxml.xml.addon.jsf"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     

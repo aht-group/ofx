@@ -15,12 +15,12 @@ import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Namespace;
 import org.jdom.output.Format;
-import org.openfuxml.xml.addon.jsf.tld.Component;
-import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
-import org.openfuxml.xml.addon.jsf.tld.FacesConfig;
-import org.openfuxml.xml.addon.jsf.tld.Metatag;
-import org.openfuxml.xml.addon.jsf.tld.Renderer;
-import org.openfuxml.xml.addon.jsf.tld.Tag;
+import org.openfuxml.xml.addon.jsf.Component;
+import org.openfuxml.xml.addon.jsf.FaceletTaglib;
+import org.openfuxml.xml.addon.jsf.FacesConfig;
+import org.openfuxml.xml.addon.jsf.Metatag;
+import org.openfuxml.xml.addon.jsf.Renderer;
+import org.openfuxml.xml.addon.jsf.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -178,7 +178,7 @@ public class TaglibFactoryTask extends Task
 	
 	public static void fillDescription(Tag tag, Configuration config)
 	{
-		for(org.openfuxml.xml.addon.jsf.tld.Attribute att : tag.getAttribute())
+		for(org.openfuxml.xml.addon.jsf.Attribute att : tag.getAttribute())
 		{
 			logger.debug("Att"+ tag.getName()+" "+att.getName());
 			logger.warn("Description is disabled"); //TODO Check description
