@@ -30,9 +30,9 @@ public class TestTaglib extends AbstractXmlJsfTest
     public static Attribute create()
     {
     	Attribute xml = new Attribute();
-    	xml.setId(1);
-    	xml.setCode("myCode");
+    	xml.setName("myName");
     	xml.setRequired(true);
+    	xml.setDefault("myDefault");
     	return xml;
     }
     

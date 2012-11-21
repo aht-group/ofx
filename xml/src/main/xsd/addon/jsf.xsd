@@ -7,8 +7,8 @@
     attributeFormDefault="unqualified">
     <xsd:element name="attribute">
         <xsd:complexType>
-            <xsd:attribute name="id" type="xsd:long"/>
-            <xsd:attribute name="code" type="xsd:string"/>
+            <xsd:attribute name="name" type="xsd:string"/>
+            <xsd:attribute name="default" type="xsd:string"/>
             <xsd:attribute name="required" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
