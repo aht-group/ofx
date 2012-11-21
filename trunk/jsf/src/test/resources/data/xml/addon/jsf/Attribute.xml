@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<attribute xmlns="http://www.openfuxml.org/jsf" id="1" code="myCode" required="true"/>
+<attribute xmlns="http://www.openfuxml.org/jsf" name="myName" default="myDefault" required="true"/>
