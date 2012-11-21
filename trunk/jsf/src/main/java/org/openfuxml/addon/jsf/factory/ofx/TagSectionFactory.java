@@ -4,9 +4,9 @@ import java.io.File;
 
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
-import org.openfuxml.xml.addon.jsf.tld.Metatag;
-import org.openfuxml.xml.addon.jsf.tld.Tag;
+import org.openfuxml.xml.addon.jsf.FaceletTaglib;
+import org.openfuxml.xml.addon.jsf.Metatag;
+import org.openfuxml.xml.addon.jsf.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

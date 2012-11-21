@@ -6,9 +6,9 @@ import java.io.Serializable;
 import org.openfuxml.addon.jsf.factory.JsfTagTransformator;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.xml.addon.jsf.tld.Example;
-import org.openfuxml.xml.addon.jsf.tld.Listing;
-import org.openfuxml.xml.addon.jsf.tld.Metatag;
+import org.openfuxml.xml.addon.jsf.Example;
+import org.openfuxml.xml.addon.jsf.Listing;
+import org.openfuxml.xml.addon.jsf.Metatag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

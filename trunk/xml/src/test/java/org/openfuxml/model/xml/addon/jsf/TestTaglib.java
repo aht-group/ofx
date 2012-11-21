@@ -1,4 +1,4 @@
-package org.openfuxml.model.xml.addon.jsftld;
+package org.openfuxml.model.xml.addon.jsf;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,9 +8,9 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.test.OfxXmlTstBootstrap;
-import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
+import org.openfuxml.xml.addon.jsf.FaceletTaglib;
 
-public class TestTaglib extends AbstractXmlJsfTldTest
+public class TestTaglib extends AbstractXmlJsfTest
 {
 	
 	@BeforeClass

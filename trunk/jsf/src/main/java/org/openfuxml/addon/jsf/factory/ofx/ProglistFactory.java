@@ -25,7 +25,7 @@ public class ProglistFactory
 		this.fDocBase=fDocBase;
 	}
 	
-	public org.openfuxml.content.ofx.Listing createProglist(org.openfuxml.xml.addon.jsf.tld.Listing jsfListing)
+	public org.openfuxml.content.ofx.Listing createProglist(org.openfuxml.xml.addon.jsf.Listing jsfListing)
 	{
 		logger.debug("Creating listing .."+jsfListing.getFile());
 		org.openfuxml.content.ofx.Listing ofxListing = new org.openfuxml.content.ofx.Listing();

@@ -19,8 +19,8 @@ import org.openfuxml.addon.jsf.factory.ofx.TagChapterFactory;
 import org.openfuxml.addon.jsf.factory.ofx.TagSectionFactory;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.xml.OfxNsPrefixMapper;
-import org.openfuxml.xml.addon.jsf.tld.FaceletTaglib;
-import org.openfuxml.xml.addon.jsf.tld.Metatag;
+import org.openfuxml.xml.addon.jsf.FaceletTaglib;
+import org.openfuxml.xml.addon.jsf.Metatag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
