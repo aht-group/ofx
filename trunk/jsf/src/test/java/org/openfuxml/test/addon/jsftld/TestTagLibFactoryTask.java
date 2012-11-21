@@ -15,11 +15,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.addon.jsf.factory.TaglibFactoryTask;
-import org.openfuxml.test.AbstractJsfTldTest;
+import org.openfuxml.test.AbstractJsfTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestTagLibFactoryTask extends AbstractJsfTldTest
+public class TestTagLibFactoryTask extends AbstractJsfTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestTagLibFactoryTask.class);
 	
