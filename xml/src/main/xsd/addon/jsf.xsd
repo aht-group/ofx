@@ -12,4 +12,11 @@
             <xsd:attribute name="required" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="component">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="attribute" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>

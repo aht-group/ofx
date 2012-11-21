@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.openfuxml.test.OfxJsfTestBootstrap;
 import org.openfuxml.xml.addon.jsf.Attribute;
 
-public class TestTaglib extends AbstractXmlJsfTest
+public class TestXmlAttribute extends AbstractXmlJsfTest
 {
 	
 	@BeforeClass
@@ -20,7 +20,7 @@ public class TestTaglib extends AbstractXmlJsfTest
 	}
     
     @Test
-    public void testLang() throws FileNotFoundException
+    public void xml() throws FileNotFoundException
     {
     	Attribute actual = create();
     	Attribute expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Attribute.class);
@@ -42,8 +42,8 @@ public class TestTaglib extends AbstractXmlJsfTest
     {
 		OfxJsfTestBootstrap.init();		
 			
-		TestTaglib.initFiles();	
-		TestTaglib test = new TestTaglib();
+		TestXmlAttribute.initFiles();	
+		TestXmlAttribute test = new TestXmlAttribute();
 		test.save();
     }
 }
