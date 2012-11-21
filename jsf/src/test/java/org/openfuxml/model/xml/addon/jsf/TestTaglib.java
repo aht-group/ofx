@@ -7,7 +7,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxJsfTestBootstrap;
 import org.openfuxml.xml.addon.jsf.FaceletTaglib;
 
 public class TestTaglib extends AbstractXmlJsfTest
@@ -16,7 +16,7 @@ public class TestTaglib extends AbstractXmlJsfTest
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,"taglib.xml");
+		fXml = new File(rootDir,FaceletTaglib.class.getSimpleName()+".xml");
 	}
     
     @Test
@@ -34,11 +34,11 @@ public class TestTaglib extends AbstractXmlJsfTest
     	return xml;
     }
     
-    public void save() {save(create(),fXml,true);}
+    public void save() {save(create(),fXml);}
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();		
+		OfxJsfTestBootstrap.init();		
 			
 		TestTaglib.initFiles();	
 		TestTaglib test = new TestTaglib();
