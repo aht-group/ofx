@@ -22,12 +22,12 @@ public class TestXmlAttribute extends AbstractXmlJsfTest
     @Test
     public void xml() throws FileNotFoundException
     {
-    	Attribute actual = create();
+    	Attribute actual = create(true);
     	Attribute expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Attribute.class);
     	assertJaxbEquals(expected, actual);
     }
    
-    public static Attribute create()
+    public static Attribute create(boolean withChilds)
     {
     	Attribute xml = new Attribute();
     	xml.setName("myName");
@@ -36,7 +36,7 @@ public class TestXmlAttribute extends AbstractXmlJsfTest
     	return xml;
     }
     
-    public void save() {save(create(),fXml);}
+    public void save() {save(create(true),fXml);}
 	
 	public static void main(String[] args)
     {
