@@ -33,8 +33,8 @@ public class TestXmlComponent extends AbstractXmlJsfTest
     	
     	if(withChilds)
     	{
-    		xml.getAttribute().add(TestXmlAttribute.create());
-    		xml.getAttribute().add(TestXmlAttribute.create());
+    		xml.getAttribute().add(TestXmlAttribute.create(false));
+    		xml.getAttribute().add(TestXmlAttribute.create(false));
     	}
     	
     	return xml;
