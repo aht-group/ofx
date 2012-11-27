@@ -33,6 +33,7 @@ public class TestXmlAttribute extends AbstractXmlJsfTest
     	xml.setName("myName");
     	xml.setRequired(true);
     	xml.setDefault("myDefault");
+    	xml.setShortDescription("myShortDescription");
     	return xml;
     }
     

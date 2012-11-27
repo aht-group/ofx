@@ -47,10 +47,8 @@ public class JsfComponentFactory
 	private void read(String resourceName) throws FileNotFoundException, JDOMException
 	{
 		MultiResourceLoader mrl = new MultiResourceLoader();
-		logger.info("MRL: "+mrl.isAvailable(resourceName));
+		logger.trace("MRL: "+mrl.isAvailable(resourceName));
 		InputStream is = mrl.searchIs(resourceName);
-		
-		
 		
 		Document doc = JDomUtil.load(is,"UTF-8");
 		JDomUtil.debug(doc);
@@ -58,7 +56,7 @@ public class JsfComponentFactory
 		XPath xpath = XPath.newInstance("//composite:attribute");
 		xpath.addNamespace("composite", "http://java.sun.com/jsf/composite");
 		List<Element> results = xpath.selectNodes(doc);
-		logger.info("Results: "+results.size());
+		logger.trace("Results: "+results.size());
 		for(Element e : results)
 		{	
 			addAttribute(e);
@@ -79,6 +77,10 @@ public class JsfComponentFactory
 		attribute = e.getAttribute("default");
 		if(attribute!=null){sDefault=attribute.getValue();}
 		
-		component.getAttribute().add(XmlAttributeFactory.create(name,required,sDefault));
+		String sDescription = null;
+		attribute = e.getAttribute("shortDescription");
+		if(attribute!=null){sDescription=attribute.getValue();}
+
+		component.getAttribute().add(XmlAttributeFactory.create(name,required,sDefault,sDescription));
 	}
 }
