@@ -14,7 +14,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.openfuxml.addon.chart.OFxChartRenderControl;
+import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.xml.addon.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public class OfxChart extends HttpServlet
 			
 //			JaxbUtil.debug(chart, new MwiNsPrefixMapper());
 			
-			OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
+			OfxChartRenderer ofxRenderer = new OfxChartRenderer();
 			JFreeChart jfreeChart = ofxRenderer.render(JaxbUtil.toDocument(chart));
 
 			response.setContentType("image/png");

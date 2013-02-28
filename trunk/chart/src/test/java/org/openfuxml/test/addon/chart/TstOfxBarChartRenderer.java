@@ -10,11 +10,11 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.openfuxml.addon.chart.OFxChartRenderControl;
+import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.openfuxml.xml.addon.chart.Chart;
 import org.openfuxml.xml.addon.chart.Charttype;
-import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ public class TstOfxBarChartRenderer
 		
 		chart.setCharttype(getType());
 		
-		chart.getContainer().add(getX("a"));
+		chart.getDataSet().add(getX("a"));
 //		chart.getContainer().add(getX("b"));
 		return chart;
 	}
@@ -49,10 +49,10 @@ public class TstOfxBarChartRenderer
 		return type;
 	}
 	
-	private Container getX(String label)
+	private DataSet getX(String label)
 	{
 		Random rnd = new Random();
-		Container x = new Container();
+		DataSet x = new DataSet();
 		x.setLabel(label);
 		for(int i=1;i<20;i++)
 		{
@@ -77,7 +77,7 @@ public class TstOfxBarChartRenderer
 		chart = test.getTimeSeries();
 		JaxbUtil.debug(chart);
 			
-		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
+		OfxChartRenderer ofxRenderer = new OfxChartRenderer();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);
 		
 		OutputStream os = new FileOutputStream(new File("dist/chart.png"));

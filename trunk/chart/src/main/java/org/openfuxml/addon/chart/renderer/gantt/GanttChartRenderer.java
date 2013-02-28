@@ -20,17 +20,17 @@ import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.gantt.XYTaskDataset;
 import org.jfree.data.time.SimpleTimePeriod;
 import org.jfree.data.xy.IntervalXYDataset;
-import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
+import org.openfuxml.addon.chart.interfaces.ChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRenderer
+public class GanttChartRenderer extends XYPlotRenderer implements ChartRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(GanttChartRenderer.class);
 	
@@ -45,7 +45,7 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
 		setTimePeriod();
 		
 		IntervalXYDataset dataset;
-		dataset = new XYTaskDataset(createTasks(ofxChart.getContainer()));
+		dataset = new XYTaskDataset(createTasks(ofxChart.getDataSet()));
 //		dataset = new XYTaskDataset(createTasksDummy());
 		
 		chart = ChartFactory.createXYBarChart(
@@ -83,10 +83,10 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
 	private void setTaskNames()
 	{
 		 XYPlot plot = (XYPlot) chart.getPlot();
-		 String[] taskNames = new String[ofxChart.getContainer().size()];
+		 String[] taskNames = new String[ofxChart.getDataSet().size()];
 		 
 		 int i=0;
-		 for(Container c : ofxChart.getContainer())
+		 for(DataSet c : ofxChart.getDataSet())
 		 {
 			 taskNames[i] = c.getLabel();
 			 i++;
@@ -142,11 +142,11 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
         return dataset;
     }
 	
-	private TaskSeriesCollection createTasks(List<Container> container)
+	private TaskSeriesCollection createTasks(List<DataSet> container)
 	{
 		TaskSeriesCollection dataset = new TaskSeriesCollection();
 		
-		for(Container c: container)
+		for(DataSet c: container)
 		{	
 			TaskSeries ts = new TaskSeries(c.getLabel());
 			for(Data d : c.getData())
@@ -166,7 +166,7 @@ public class GanttChartRenderer extends XYPlotRenderer implements OfxChartRender
 	public Dimension getSuggestedSize()
 	{
 		Dimension d = new Dimension();
-		d.setSize(0, 75+(ofxChart.getContainer().size()*25));
+		d.setSize(0, 75+(ofxChart.getDataSet().size()*25));
 		return d;
 	}
 }

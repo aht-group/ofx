@@ -27,7 +27,7 @@
                         <xsd:attribute name="domain" type="xsd:boolean"/>
                     </xsd:complexType>
                 </xsd:element>
-                <xsd:element ref="container" maxOccurs="unbounded"/>
+            	<xsd:element ref="dataSet" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:int"/>
             <xsd:attribute name="code" type="xsd:string"/>
@@ -124,11 +124,11 @@
             <xsd:attribute name="a" type="xsd:int"/>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="container">
+    <xsd:element name="dataSet">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="data" maxOccurs="unbounded"/>
-                <xsd:element ref="container" maxOccurs="unbounded"/>
+            		<xsd:element ref="dataSet" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="label" type="xsd:string"/>
             <xsd:attribute name="rangeIndex" type="xsd:int"/>

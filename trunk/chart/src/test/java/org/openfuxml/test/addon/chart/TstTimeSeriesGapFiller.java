@@ -12,13 +12,13 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.openfuxml.addon.chart.OFxChartRenderControl;
+import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.TimePeriodFactory;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.openfuxml.xml.addon.chart.Chart;
 import org.openfuxml.xml.addon.chart.Charttype;
-import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +40,7 @@ public class TstTimeSeriesGapFiller
 		chart.setCharttype(getType());
 		chart.setColors(getColors());
 		
-		chart.getContainer().add(getX("a"));
+		chart.getDataSet().add(getX("a"));
 //		chart.getContainer().add(getX("b"));
 		return chart;
 	}
@@ -63,10 +63,10 @@ public class TstTimeSeriesGapFiller
 		return colors;
 	}
 	
-	private Container getX(String label)
+	private DataSet getX(String label)
 	{
 		Random rnd = new Random();
-		Container x = new Container();
+		DataSet x = new DataSet();
 		x.setLabel(label);
 		for(int i=1;i<20;i++)
 		{
@@ -98,7 +98,7 @@ public class TstTimeSeriesGapFiller
 		
 		JaxbUtil.debug(chart);
 			
-		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
+		OfxChartRenderer ofxRenderer = new OfxChartRenderer();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);
 		
 		OutputStream os = new FileOutputStream(new File("dist/chart.png"));

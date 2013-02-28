@@ -14,7 +14,7 @@ import org.jfree.data.time.Month;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
+import org.openfuxml.addon.chart.interfaces.ChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.AxisFactory;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
@@ -22,12 +22,12 @@ import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 import org.openfuxml.addon.chart.util.OfxCustomPaintColors;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRenderer
+public class SplineChartRenderer extends XYPlotRenderer implements ChartRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(SplineChartRenderer.class);
 	
@@ -49,7 +49,7 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
         XYPlot plot = new XYPlot();
         plot.setDomainAxis(xAxis);
         
-        createDataset3(ofxChart.getContainer());
+        createDataset3(ofxChart.getDataSet());
         
         for(Integer i : mapXySeriesCollection.keySet())
         {
@@ -89,13 +89,13 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 		return rtp;
 	}
 	
-	protected void createDataset3(List<Container> lContainer)
+	protected void createDataset3(List<DataSet> lContainer)
 	{
 		mapXySeriesCollection = new Hashtable<Integer,XYSeriesCollection>();
 		mapColorSeriesIndex = new Hashtable<Integer,Integer>();
 		
 		int colorIndex=0;	
-		for(Container c : lContainer)
+		for(DataSet c : lContainer)
 		{
 			if(!c.isSetRangeIndex()){c.setRangeIndex(0);}
 			XYSeries series;
@@ -115,7 +115,7 @@ public class SplineChartRenderer extends XYPlotRenderer implements OfxChartRende
 				incrementColorSeriesIndex(c.getRangeIndex());
 			}
 			
-			for(Container c2 : c.getContainer())
+			for(DataSet c2 : c.getDataSet())
 			{
 				if(!c2.isSetRangeIndex()){c2.setRangeIndex(0);}
 				if(c2.isSetData())

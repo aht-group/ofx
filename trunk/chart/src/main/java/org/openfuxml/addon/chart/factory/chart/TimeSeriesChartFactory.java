@@ -5,7 +5,17 @@ import org.openfuxml.xml.addon.chart.Charttype;
 
 public class TimeSeriesChartFactory
 {
-	public static Chart build(boolean legend,boolean cumulative)
+	private boolean withLegend, cumulateValues, withGaps;
+	
+	public TimeSeriesChartFactory()
+	{
+		withLegend = false;
+		cumulateValues = false;
+		withGaps = false;
+	}
+	
+	
+	public Chart build(boolean legend,boolean cumulative)
 	{
 		Chart chart = new Chart();
 		chart.setLegend(true);
@@ -23,4 +33,8 @@ public class TimeSeriesChartFactory
 		type.setTimeseries(tsType);
 		return type;
 	}
+	
+	public void setWithLegend(boolean withLegend) {this.withLegend = withLegend;}
+	public void setCumulateValues(boolean cumulateValues) {this.cumulateValues = cumulateValues;}
+	public void setWithGaps(boolean withGaps) {this.withGaps = withGaps;}
 }

@@ -12,14 +12,14 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.openfuxml.addon.chart.OFxChartRenderControl;
+import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.addon.chart.factory.chart.TimeSeriesChartFactory;
 import org.openfuxml.addon.chart.test.OfxChartTestBootstrap;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.openfuxml.xml.addon.chart.Chart;
 import org.openfuxml.xml.addon.chart.Charttype;
-import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,16 +35,15 @@ public class CliTimeSeriesChartRenderer
 	
 	public Chart getTimeSeries()
 	{
-		Chart chart = TimeSeriesChartFactory.build(true,false);
+		TimeSeriesChartFactory cf = new TimeSeriesChartFactory();
+		Chart chart = cf.build(true,false);
 		
 //		chart.setColors(getColors());
 		
-		chart.getContainer().add(getX("a"));
-		chart.getContainer().add(getX("b"));
+		chart.getDataSet().add(getX("a"));
+		chart.getDataSet().add(getX("b"));
 		return chart;
 	}
-	
-	
 	
 	private Chart.Colors getColors()
 	{
@@ -54,19 +53,19 @@ public class CliTimeSeriesChartRenderer
 		return colors;
 	}
 	
-	private Container getX(String label)
+	private DataSet getX(String label)
 	{
 		Random rnd = new Random();
-		Container x = new Container();
-		x.setLabel(label);
+		DataSet dataSet = new DataSet();
+		dataSet.setLabel(label);
 		for(int i=1;i<20;i++)
 		{
 			Data data = new Data();
 			data.setRecord(DateUtil.getXmlGc4D(DateUtil.getDateFromInt(2010, 1, i)));
 			data.setY(rnd.nextInt(i));
-			if(rnd.nextInt(100)<70){x.getData().add(data);}
+			if(rnd.nextInt(100)<70){dataSet.getData().add(data);}
 		}
-		return x;
+		return dataSet;
 	}
 	
 	public Chart load(String fileName) throws FileNotFoundException
@@ -80,13 +79,11 @@ public class CliTimeSeriesChartRenderer
 		OfxChartTestBootstrap.init();
 			
 		CliTimeSeriesChartRenderer test = new CliTimeSeriesChartRenderer();
-		Chart chart;
-		chart = test.getTimeSeries();
-//		chart = test.load(args[0]);
+		Chart chart = test.getTimeSeries();
 		
 		JaxbUtil.info(chart);
 			
-		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
+		OfxChartRenderer ofxRenderer = new OfxChartRenderer();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);
 		
 		OutputStream os = new FileOutputStream(new File("target/chart.png"));

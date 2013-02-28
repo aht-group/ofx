@@ -15,17 +15,17 @@ import org.jfree.data.time.Hour;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.IntervalXYDataset;
-import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
+import org.openfuxml.addon.chart.interfaces.ChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.openfuxml.xml.addon.chart.Charttype.Timebar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TimeBarRenderer extends XYPlotRenderer implements OfxChartRenderer
+public class TimeBarRenderer extends XYPlotRenderer implements ChartRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(TimeBarRenderer.class);
 	
@@ -43,7 +43,7 @@ public class TimeBarRenderer extends XYPlotRenderer implements OfxChartRenderer
         	ChartLabelResolver.getAxisLabelX(ofxChart),
             true,
             ChartLabelResolver.getAxisLabelY(ofxChart),                        // range axis label
-            createDataset(ofxChart.getContainer()),                    // data
+            createDataset(ofxChart.getDataSet()),                    // data
             PlotOrientation.VERTICAL,
             ofxChart.isLegend(),                       // include legend
             true,
@@ -68,10 +68,10 @@ public class TimeBarRenderer extends XYPlotRenderer implements OfxChartRenderer
         return chart;
 	}
 
-	private IntervalXYDataset createDataset(List<Container> lContainer)
+	private IntervalXYDataset createDataset(List<DataSet> lContainer)
 	{
 		TimeSeriesCollection dataset = new TimeSeriesCollection();
-		for(Container container : lContainer)
+		for(DataSet container : lContainer)
 		{
 			TimeSeries ts = new TimeSeries(container.getLabel());
 			for(Data data : container.getData())

@@ -10,15 +10,15 @@ import org.jfree.data.time.Hour;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeriesCollection;
-import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
+import org.openfuxml.addon.chart.interfaces.ChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.DataSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractTimeSeriesChartRenderer extends XYPlotRenderer implements OfxChartRenderer
+public abstract class AbstractTimeSeriesChartRenderer extends XYPlotRenderer implements ChartRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractTimeSeriesChartRenderer.class);
 	
@@ -37,7 +37,7 @@ public abstract class AbstractTimeSeriesChartRenderer extends XYPlotRenderer imp
         		ChartLabelResolver.getTitle(ofxChart),
         		null,
         		null,
-        		createDataset(ofxChart.getContainer()),
+        		createDataset(ofxChart.getDataSet()),
         		ofxChart.isLegend(),
 	            true,               // generate tooltips?
 	            false               // generate URLs?
@@ -62,7 +62,7 @@ public abstract class AbstractTimeSeriesChartRenderer extends XYPlotRenderer imp
 		return rtp;
 	}
 	
-	protected TimeSeriesCollection createDataset(List<Container> lContainer)
+	protected TimeSeriesCollection createDataset(List<DataSet> lContainer)
 	{
 		logger.warn("This method must be @overridden");
 		return null;
