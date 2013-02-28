@@ -16,7 +16,7 @@ import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.TimePeriodFactory;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Charttype;
+import org.openfuxml.xml.addon.chart.Renderer;
 import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ public class TstSplineRenderer
 		Chart chart = new Chart();
 		chart.setLegend(true);
 		
-		chart.setCharttype(getType());
+		chart.setRenderer(getType());
 		chart.setColors(getColors());
 		
 		chart.getDataSet().add(getX("a"));
@@ -44,10 +44,10 @@ public class TstSplineRenderer
 		return chart;
 	}
 	
-	private Charttype getType()
+	private Renderer getType()
 	{
-		Charttype type = new Charttype();
-		Charttype.Timeseries tsType = new Charttype.Timeseries();
+		Renderer type = new Renderer();
+		Renderer.Timeseries tsType = new Renderer.Timeseries();
 		tsType.setGap(true);
 		tsType.setTimePeriod(TimePeriodFactory.OfxChartTimePeriod.Day.toString());
 		type.setTimeseries(tsType);

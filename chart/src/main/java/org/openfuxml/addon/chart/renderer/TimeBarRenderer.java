@@ -21,7 +21,7 @@ import org.openfuxml.addon.chart.util.ChartLabelResolver;
 import org.openfuxml.xml.addon.chart.Chart;
 import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
-import org.openfuxml.xml.addon.chart.Charttype.Timebar;
+import org.openfuxml.xml.addon.chart.Renderer.Timebar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +37,7 @@ public class TimeBarRenderer extends XYPlotRenderer implements ChartRenderer
 	public JFreeChart render(Chart ofxChart)
 	{
 		this.ofxChart=ofxChart;
-		Timebar timebar = ofxChart.getCharttype().getTimebar();
+		Timebar timebar = ofxChart.getRenderer().getTimebar();
         chart = ChartFactory.createXYBarChart(
         	ChartLabelResolver.getTitle(ofxChart),
         	ChartLabelResolver.getAxisLabelX(ofxChart),

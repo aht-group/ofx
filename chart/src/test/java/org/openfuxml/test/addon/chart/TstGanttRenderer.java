@@ -15,7 +15,7 @@ import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Charttype;
+import org.openfuxml.xml.addon.chart.Renderer;
 import org.openfuxml.xml.addon.chart.Color;
 import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
@@ -36,7 +36,7 @@ public class TstGanttRenderer
 		Chart chart = new Chart();
 		chart.setLegend(true);
 		chart.setColors(getColors());
-		chart.setCharttype(getType());
+		chart.setRenderer(getType());
 		chart.setGrid(getGrid());
 		
 		chart.getDataSet().add(getX("Person A"));
@@ -66,10 +66,10 @@ public class TstGanttRenderer
 		return colors;
 	}
 	
-	private Charttype getType()
+	private Renderer getType()
 	{
-		Charttype type = new Charttype();
-		Charttype.Gantt tGantt = new Charttype.Gantt();
+		Renderer type = new Renderer();
+		Renderer.Gantt tGantt = new Renderer.Gantt();
 		type.setGantt(tGantt);
 		return type;
 	}

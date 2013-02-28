@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.util.Random;
 
 import net.sf.exlp.util.DateUtil;
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jfree.chart.ChartUtilities;
@@ -16,11 +15,9 @@ import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.addon.chart.factory.chart.TimeSeriesChartFactory;
 import org.openfuxml.addon.chart.test.OfxChartTestBootstrap;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
-import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Charttype;
-import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
+import org.openfuxml.xml.addon.chart.DataSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +33,8 @@ public class CliTimeSeriesChartRenderer
 	public Chart getTimeSeries()
 	{
 		TimeSeriesChartFactory cf = new TimeSeriesChartFactory();
-		Chart chart = cf.build(true,false);
+//		cf.setWithGaps(true);
+		Chart chart = cf.build();
 		
 //		chart.setColors(getColors());
 		

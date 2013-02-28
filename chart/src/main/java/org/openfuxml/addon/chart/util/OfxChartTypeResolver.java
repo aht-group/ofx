@@ -3,7 +3,7 @@ package org.openfuxml.addon.chart.util;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.openfuxml.xml.addon.chart.AxisType;
-import org.openfuxml.xml.addon.chart.Charttype;
+import org.openfuxml.xml.addon.chart.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,7 @@ public class OfxChartTypeResolver
 	public static enum AxisOrientation{domain,range0,range1};
 	public static enum ChartAxisType{Nil,Number,Date};
 	
-	public synchronized static Type getType(Charttype type)
+	public synchronized static Type getType(Renderer type)
 	{
 		if(type.isSetTimeseries()){return Type.TimeSeries;}
 		if(type.isSetBar()){return Type.Bar;}

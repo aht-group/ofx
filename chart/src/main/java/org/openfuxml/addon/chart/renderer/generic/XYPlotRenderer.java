@@ -40,23 +40,23 @@ public class XYPlotRenderer extends AbstractChartRenderer
 	
 	protected void setTimePeriod()
 	{
-		if(ofxChart.getCharttype().isSetTimeseries() && ofxChart.getCharttype().getTimeseries().isSetTimePeriod())
+		if(ofxChart.getRenderer().isSetTimeseries() && ofxChart.getRenderer().getTimeseries().isSetTimePeriod())
 		{
-			logger.debug("checking="+ofxChart.getCharttype().getTimeseries().getTimePeriod());
+			logger.debug("checking="+ofxChart.getRenderer().getTimeseries().getTimePeriod());
 			
 			try
 			{
-				ofxTimePeriod = OfxChartTimePeriod.valueOf(ofxChart.getCharttype().getTimeseries().getTimePeriod());
+				ofxTimePeriod = OfxChartTimePeriod.valueOf(ofxChart.getRenderer().getTimeseries().getTimePeriod());
 			}
 			catch(IllegalArgumentException e)
 			{
-				logger.error("timePeriod "+ofxChart.getCharttype().getTimeseries().getTimePeriod()+ " is not valid, using Hour as default");
+				logger.error("timePeriod "+ofxChart.getRenderer().getTimeseries().getTimePeriod()+ " is not valid, using Hour as default");
 				ofxTimePeriod = OfxChartTimePeriod.Hour;
 			}
 		}
-		else if(ofxChart.getCharttype().isSetGantt() && ofxChart.getCharttype().getGantt().isSetTimePeriod())
+		else if(ofxChart.getRenderer().isSetGantt() && ofxChart.getRenderer().getGantt().isSetTimePeriod())
 		{
-			ofxTimePeriod = OfxChartTimePeriod.valueOf(ofxChart.getCharttype().getGantt().getTimePeriod());
+			ofxTimePeriod = OfxChartTimePeriod.valueOf(ofxChart.getRenderer().getGantt().getTimePeriod());
 		}
 		else
 		{

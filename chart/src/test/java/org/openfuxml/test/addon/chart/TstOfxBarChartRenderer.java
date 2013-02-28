@@ -13,7 +13,7 @@ import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Charttype;
+import org.openfuxml.xml.addon.chart.Renderer;
 import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
@@ -33,17 +33,17 @@ public class TstOfxBarChartRenderer
 		Chart chart = new Chart();
 		chart.setLegend(true);
 		
-		chart.setCharttype(getType());
+		chart.setRenderer(getType());
 		
 		chart.getDataSet().add(getX("a"));
 //		chart.getContainer().add(getX("b"));
 		return chart;
 	}
 	
-	private Charttype getType()
+	private Renderer getType()
 	{
-		Charttype type = new Charttype();
-		Charttype.Bar tBar = new Charttype.Bar();
+		Renderer type = new Renderer();
+		Renderer.Bar tBar = new Renderer.Bar();
 		tBar.setVertical(true);
 		type.setBar(tBar);
 		return type;

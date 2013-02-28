@@ -1,7 +1,7 @@
 package org.openfuxml.addon.chart.factory.chart;
 
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Charttype;
+import org.openfuxml.xml.addon.chart.Renderer;
 
 public class TimeSeriesChartFactory
 {
@@ -15,21 +15,21 @@ public class TimeSeriesChartFactory
 	}
 	
 	
-	public Chart build(boolean legend,boolean cumulative)
+	public Chart build()
 	{
 		Chart chart = new Chart();
-		chart.setLegend(true);
-		chart.setCharttype(getType(cumulative));
+		chart.setLegend(withLegend);
+		chart.setRenderer(buildRenderer());
 		
 		return chart;
 	}
 	
-	private static Charttype getType(boolean cumulative)
+	private Renderer buildRenderer()
 	{
-		Charttype type = new Charttype();
-		Charttype.Timeseries tsType = new Charttype.Timeseries();
-		tsType.setGap(true);
-		tsType.setCumulate(cumulative);
+		Renderer type = new Renderer();
+		Renderer.Timeseries tsType = new Renderer.Timeseries();
+		tsType.setGap(withGaps);
+		tsType.setCumulate(cumulateValues);
 		type.setTimeseries(tsType);
 		return type;
 	}
