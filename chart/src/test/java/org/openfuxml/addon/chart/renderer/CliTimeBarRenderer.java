@@ -10,11 +10,11 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.openfuxml.addon.chart.OFxChartRenderControl;
+import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.addon.chart.test.OfxChartTestBootstrap;
 import org.openfuxml.xml.addon.chart.Chart;
 import org.openfuxml.xml.addon.chart.Charttype;
-import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,7 @@ public class CliTimeBarRenderer
 		chart.setCharttype(getType());
 		chart.setGrid(getGrid());
 		
-		chart.getContainer().add(getX("a"));
+		chart.getDataSet().add(getX("a"));
 		return chart;
 	}
 	
@@ -58,10 +58,10 @@ public class CliTimeBarRenderer
 		return type;
 	}
 	
-	private Container getX(String label)
+	private DataSet getX(String label)
 	{
 		Random rnd = new Random();
-		Container x = new Container();
+		DataSet x = new DataSet();
 		x.setLabel(label);
 		for(int i=1;i<5;i++)
 		{
@@ -81,7 +81,7 @@ public class CliTimeBarRenderer
 		Chart chart = test.getTimeSeries();
 		JaxbUtil.info(chart);
 			
-		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
+		OfxChartRenderer ofxRenderer = new OfxChartRenderer();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);
 		
 		OutputStream os = new FileOutputStream(new File("target/chart.png"));

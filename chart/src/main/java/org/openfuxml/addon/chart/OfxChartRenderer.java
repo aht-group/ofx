@@ -4,12 +4,11 @@ import net.sf.exlp.util.xml.JDomUtil;
 
 import org.jdom.Document;
 import org.jfree.chart.JFreeChart;
+import org.openfuxml.addon.chart.interfaces.ChartRenderer;
 import org.openfuxml.addon.chart.renderer.BarChartRenderer;
 import org.openfuxml.addon.chart.renderer.TimeBarRenderer;
 import org.openfuxml.addon.chart.renderer.gantt.GanttChartRenderer;
-import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.renderer.timeseries.TimeSeriesChartRenderer;
-import org.openfuxml.addon.chart.renderer.timeseries.TimeSeriesCumulativeChartRenderer;
 import org.openfuxml.addon.chart.renderer.xy.SplineChartRenderer;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 import org.openfuxml.xml.addon.chart.Chart;
@@ -17,13 +16,13 @@ import org.openfuxml.xml.addon.chart.Charttype;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OFxChartRenderControl
+public class OfxChartRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(OFxChartRenderControl.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxChartRenderer.class);
 	
-	private OfxChartRenderer ofxRenderer;
+	private ChartRenderer ofxRenderer;
 	
-	public OFxChartRenderControl()
+	public OfxChartRenderer()
 	{
 	
 	}
@@ -33,7 +32,7 @@ public class OFxChartRenderControl
 		OfxChartTypeResolver.Type chartType = OfxChartTypeResolver.getType(ofxChart.getCharttype());
 		switch(chartType)
 		{
-			case TimeSeries: ofxRenderer = getTimeSeriesRenderer(ofxChart);break;
+			case TimeSeries: ofxRenderer = new TimeSeriesChartRenderer();break;
 			case TimeBar:    ofxRenderer = new TimeBarRenderer();break;
 			case Bar: 		 ofxRenderer = new BarChartRenderer();break;
 			case Gantt:		 ofxRenderer = new GanttChartRenderer();break;
@@ -45,20 +44,11 @@ public class OFxChartRenderControl
 		return jfreeChart;
 	}
 	
-	private OfxChartRenderer getTimeSeriesRenderer(Chart ofxChart)
-	{
-		OfxChartRenderer result;
-		Charttype.Timeseries timeseries = ofxChart.getCharttype().getTimeseries();
-		if(timeseries.isSetCumulate() && timeseries.isCumulate()){result = new TimeSeriesCumulativeChartRenderer();}
-		else {result = new TimeSeriesChartRenderer();}
-		return result;
-	}
-	
 	public JFreeChart render(Document doc)
 	{
 		Chart ofxChart = (Chart)JDomUtil.toJaxb(doc, Chart.class);
 		return render(ofxChart); 
 	}
 	
-	public OfxChartRenderer getOfxRenderer() {return ofxRenderer;}
+	public ChartRenderer getOfxRenderer() {return ofxRenderer;}
 }

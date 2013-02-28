@@ -8,14 +8,15 @@ import net.sf.exlp.util.DateUtil;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
-import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
+import org.openfuxml.addon.chart.interfaces.ChartRenderer;
+import org.openfuxml.addon.chart.processor.TimeSeriesGapNullifier;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
-import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TimeSeriesChartRenderer extends AbstractTimeSeriesChartRenderer implements OfxChartRenderer
+public class TimeSeriesChartRenderer extends AbstractTimeSeriesChartRenderer implements ChartRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(TimeSeriesChartRenderer.class);
 	
@@ -26,7 +27,7 @@ public class TimeSeriesChartRenderer extends AbstractTimeSeriesChartRenderer imp
 	}
 	
 	@Override
-	protected TimeSeriesCollection createDataset(List<Container> lContainer)
+	protected TimeSeriesCollection createDataset(List<DataSet> dataSets)
 	{
 		TimeSeriesGapNullifier gapNuller=null;
 		boolean nullifyGaps = TimeSeriesGapNullifier.gapNullerActivated(ofxChart.getCharttype().getTimeseries());
@@ -37,23 +38,23 @@ public class TimeSeriesChartRenderer extends AbstractTimeSeriesChartRenderer imp
 		}
 		
 		TimeSeriesCollection dataset = new TimeSeriesCollection();
-		for(Container container : lContainer)
+		for(DataSet dataSet : dataSets)
 		{
-			if(nullifyGaps){container = gapNuller.nullifyGapsInContainer(container);}
-			TimeSeries ts = new TimeSeries(container.getLabel());
+			if(nullifyGaps){dataSet = gapNuller.nullifyGapsInContainer(dataSet);}
+			TimeSeries ts = new TimeSeries(dataSet.getLabel());
 			
-			for(Data data : container.getData())
+			for(Data data : dataSet.getData())
 			{
-					Date d = DateUtil.getDateFromInt(data.getRecord().getYear(), data.getRecord().getMonth(), data.getRecord().getDay());
-					RegularTimePeriod rtp = getRtp(d);
-					if(data.isSetY())
-					{
-						ts.addOrUpdate(rtp, data.getY());
-					}
-					else
-					{
-						ts.addOrUpdate(rtp, null);
-					}
+				Date d = DateUtil.getDateFromInt(data.getRecord().getYear(), data.getRecord().getMonth(), data.getRecord().getDay());
+				RegularTimePeriod rtp = getRtp(d);
+				if(data.isSetY())
+				{
+					ts.addOrUpdate(rtp, data.getY());
+				}
+				else
+				{
+					ts.addOrUpdate(rtp, null);
+				}
 			}
 			dataset.addSeries(ts);
 			

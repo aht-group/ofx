@@ -11,13 +11,13 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.openfuxml.addon.chart.OFxChartRenderControl;
+import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.openfuxml.xml.addon.chart.Chart;
 import org.openfuxml.xml.addon.chart.Charttype;
 import org.openfuxml.xml.addon.chart.Color;
-import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class TstGanttRenderer
 		chart.setCharttype(getType());
 		chart.setGrid(getGrid());
 		
-		chart.getContainer().add(getX("Person A"));
+		chart.getDataSet().add(getX("Person A"));
 		return chart;
 	}
 	
@@ -74,9 +74,9 @@ public class TstGanttRenderer
 		return type;
 	}
 	
-	private Container getX(String label)
+	private DataSet getX(String label)
 	{
-		Container c = new Container();
+		DataSet c = new DataSet();
 		c.setLabel(label);
 		
 		Data d1 = new Data();
@@ -105,7 +105,7 @@ public class TstGanttRenderer
 		
 		JaxbUtil.debug(chart);
 			
-		OFxChartRenderControl ofxRenderer = new OFxChartRenderControl();
+		OfxChartRenderer ofxRenderer = new OfxChartRenderer();
 		JFreeChart jfreeChart = ofxRenderer.render(chart);
 		
 		Dimension d = ofxRenderer.getOfxRenderer().getSuggestedSize();

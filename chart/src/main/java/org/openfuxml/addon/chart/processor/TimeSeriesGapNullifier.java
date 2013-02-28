@@ -1,4 +1,4 @@
-package org.openfuxml.addon.chart.renderer.timeseries;
+package org.openfuxml.addon.chart.processor;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -8,7 +8,7 @@ import net.sf.exlp.util.DateUtil;
 
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
 import org.openfuxml.xml.addon.chart.Charttype;
-import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class TimeSeriesGapNullifier
 		}
 	}
 	
-	public Container nullifyGapsInContainer(Container container)
+	public DataSet nullifyGapsInContainer(DataSet container)
 	{
 		List<Data> lData = new ArrayList<Data>();
 		
