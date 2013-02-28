@@ -52,7 +52,7 @@ public class OfxChart extends HttpServlet
 			JFreeChart jfreeChart = ofxRenderer.render(JaxbUtil.toDocument(chart));
 
 			response.setContentType("image/png");
-			ChartUtilities.writeChartAsPNG(out,jfreeChart,chart.getSize().getWidth(),chart.getSize().getHeight());
+			ChartUtilities.writeChartAsPNG(out,jfreeChart,chart.getDimension().getWidth(),chart.getDimension().getHeight());
 		}
 		catch (IOException e) {e.printStackTrace();}
 	}
