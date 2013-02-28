@@ -13,7 +13,7 @@ import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.addon.chart.test.OfxChartTestBootstrap;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Charttype;
+import org.openfuxml.xml.addon.chart.Renderer;
 import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
@@ -33,7 +33,7 @@ public class CliTimeBarRenderer
 		Chart chart = new Chart();
 		chart.setLegend(true);
 		
-		chart.setCharttype(getType());
+		chart.setRenderer(getType());
 		chart.setGrid(getGrid());
 		
 		chart.getDataSet().add(getX("a"));
@@ -48,10 +48,10 @@ public class CliTimeBarRenderer
 		return grid;
 	}
 	
-	private Charttype getType()
+	private Renderer getType()
 	{
-		Charttype type = new Charttype();
-		Charttype.Timebar tBar = new Charttype.Timebar();
+		Renderer type = new Renderer();
+		Renderer.Timebar tBar = new Renderer.Timebar();
 		tBar.setShadow(false);
 		tBar.setGradient(false);
 		type.setTimebar(tBar);

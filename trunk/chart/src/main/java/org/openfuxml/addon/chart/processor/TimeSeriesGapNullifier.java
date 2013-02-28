@@ -7,7 +7,7 @@ import java.util.List;
 import net.sf.exlp.util.DateUtil;
 
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
-import org.openfuxml.xml.addon.chart.Charttype;
+import org.openfuxml.xml.addon.chart.Renderer;
 import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
@@ -73,7 +73,7 @@ public class TimeSeriesGapNullifier
 		return d;
 	}
 	
-	public static synchronized boolean gapNullerActivated(Charttype.Timeseries chartTimeSeries)
+	public static synchronized boolean gapNullerActivated(Renderer.Timeseries chartTimeSeries)
 	{
 		if(chartTimeSeries.isSetGap())
 		{

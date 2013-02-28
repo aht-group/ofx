@@ -5,12 +5,19 @@ import java.util.List;
 
 import net.sf.exlp.util.DateUtil;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.time.Day;
+import org.jfree.data.time.Hour;
+import org.jfree.data.time.Month;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.openfuxml.addon.chart.interfaces.ChartRenderer;
 import org.openfuxml.addon.chart.processor.TimeSeriesGapNullifier;
+import org.openfuxml.addon.chart.util.ChartLabelResolver;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
+import org.openfuxml.xml.addon.chart.Chart;
 import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
@@ -30,10 +37,10 @@ public class TimeSeriesChartRenderer extends AbstractTimeSeriesChartRenderer imp
 	protected TimeSeriesCollection createDataset(List<DataSet> dataSets)
 	{
 		TimeSeriesGapNullifier gapNuller=null;
-		boolean nullifyGaps = TimeSeriesGapNullifier.gapNullerActivated(ofxChart.getCharttype().getTimeseries());
+		boolean nullifyGaps = TimeSeriesGapNullifier.gapNullerActivated(ofxChart.getRenderer().getTimeseries());
 		if(nullifyGaps)
 		{
-			OfxChartTimePeriod timePeriod = OfxChartTimePeriod.valueOf(ofxChart.getCharttype().getTimeseries().getTimePeriod());
+			OfxChartTimePeriod timePeriod = OfxChartTimePeriod.valueOf(ofxChart.getRenderer().getTimeseries().getTimePeriod());
 			gapNuller = new TimeSeriesGapNullifier(timePeriod);
 		}
 		

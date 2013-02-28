@@ -5,7 +5,7 @@
     <xsd:element name="chart">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="charttype" maxOccurs="1"/>
+                <xsd:element ref="renderer" maxOccurs="1"/>
                 <xsd:element ref="axis" maxOccurs="2"/>
                 <xsd:element ref="title" maxOccurs="1"/>
                 <xsd:element name="colors" maxOccurs="1">
@@ -82,7 +82,7 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="charttype">
+    <xsd:element name="renderer">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element name="timeseries" maxOccurs="1">
