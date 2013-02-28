@@ -1,7 +1,7 @@
 package org.openfuxml.addon.chart.factory.chart;
 
-import org.openfuxml.addon.chart.data.jaxb.Chart;
-import org.openfuxml.addon.chart.data.jaxb.Charttype;
+import org.openfuxml.xml.addon.chart.Chart;
+import org.openfuxml.xml.addon.chart.Charttype;
 
 public class TimeSeriesChartFactory
 {

@@ -2,7 +2,7 @@ package org.openfuxml.addon.chart.factory.xml;
 
 import net.sf.exlp.util.DateUtil;
 
-import org.openfuxml.addon.chart.data.jaxb.Data;
+import org.openfuxml.xml.addon.chart.Data;
 
 public class XmlDataFactory
 {

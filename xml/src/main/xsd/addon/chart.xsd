@@ -43,7 +43,6 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="axisType" maxOccurs="1"/>
-                
                 <xsd:element ref="label" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>

@@ -2,8 +2,8 @@ package org.openfuxml.addon.chart.util;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.openfuxml.addon.chart.data.jaxb.AxisType;
-import org.openfuxml.addon.chart.data.jaxb.Charttype;
+import org.openfuxml.xml.addon.chart.AxisType;
+import org.openfuxml.xml.addon.chart.Charttype;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

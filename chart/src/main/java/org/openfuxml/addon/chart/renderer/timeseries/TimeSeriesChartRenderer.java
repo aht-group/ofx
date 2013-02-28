@@ -8,10 +8,10 @@ import net.sf.exlp.util.DateUtil;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
-import org.openfuxml.addon.chart.data.jaxb.Container;
-import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
+import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

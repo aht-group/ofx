@@ -15,7 +15,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.OFxChartRenderControl;
-import org.openfuxml.addon.chart.data.jaxb.Chart;
+import org.openfuxml.xml.addon.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

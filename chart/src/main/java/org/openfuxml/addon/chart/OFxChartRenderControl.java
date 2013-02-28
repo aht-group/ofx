@@ -4,8 +4,6 @@ import net.sf.exlp.util.xml.JDomUtil;
 
 import org.jdom.Document;
 import org.jfree.chart.JFreeChart;
-import org.openfuxml.addon.chart.data.jaxb.Chart;
-import org.openfuxml.addon.chart.data.jaxb.Charttype;
 import org.openfuxml.addon.chart.renderer.BarChartRenderer;
 import org.openfuxml.addon.chart.renderer.TimeBarRenderer;
 import org.openfuxml.addon.chart.renderer.gantt.GanttChartRenderer;
@@ -14,6 +12,8 @@ import org.openfuxml.addon.chart.renderer.timeseries.TimeSeriesChartRenderer;
 import org.openfuxml.addon.chart.renderer.timeseries.TimeSeriesCumulativeChartRenderer;
 import org.openfuxml.addon.chart.renderer.xy.SplineChartRenderer;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
+import org.openfuxml.xml.addon.chart.Chart;
+import org.openfuxml.xml.addon.chart.Charttype;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

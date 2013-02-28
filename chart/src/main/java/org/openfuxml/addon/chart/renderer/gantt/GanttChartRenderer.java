@@ -20,13 +20,13 @@ import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.gantt.XYTaskDataset;
 import org.jfree.data.time.SimpleTimePeriod;
 import org.jfree.data.xy.IntervalXYDataset;
-import org.openfuxml.addon.chart.data.jaxb.Chart;
-import org.openfuxml.addon.chart.data.jaxb.Container;
-import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.renderer.generic.OfxChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
+import org.openfuxml.xml.addon.chart.Chart;
+import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
