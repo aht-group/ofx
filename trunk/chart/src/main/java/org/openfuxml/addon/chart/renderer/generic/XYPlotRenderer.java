@@ -5,13 +5,13 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.openfuxml.addon.chart.data.jaxb.Axis;
-import org.openfuxml.addon.chart.data.jaxb.Chart;
 import org.openfuxml.addon.chart.util.AxisFactory;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
+import org.openfuxml.xml.addon.chart.Axis;
+import org.openfuxml.xml.addon.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

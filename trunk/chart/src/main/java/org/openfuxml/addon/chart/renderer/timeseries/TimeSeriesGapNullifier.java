@@ -6,10 +6,10 @@ import java.util.List;
 
 import net.sf.exlp.util.DateUtil;
 
-import org.openfuxml.addon.chart.data.jaxb.Charttype;
-import org.openfuxml.addon.chart.data.jaxb.Container;
-import org.openfuxml.addon.chart.data.jaxb.Data;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
+import org.openfuxml.xml.addon.chart.Charttype;
+import org.openfuxml.xml.addon.chart.Container;
+import org.openfuxml.xml.addon.chart.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

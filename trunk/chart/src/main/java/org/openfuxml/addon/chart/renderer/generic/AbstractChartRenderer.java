@@ -3,10 +3,10 @@ package org.openfuxml.addon.chart.renderer.generic;
 import java.awt.Dimension;
 
 import org.jfree.chart.JFreeChart;
-import org.openfuxml.addon.chart.data.jaxb.Axis;
-import org.openfuxml.addon.chart.data.jaxb.Chart;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
+import org.openfuxml.xml.addon.chart.Axis;
+import org.openfuxml.xml.addon.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
