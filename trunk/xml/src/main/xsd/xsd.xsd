@@ -21,7 +21,6 @@
     <xsd:import namespace="http://www.openfuxml.org/cmp" schemaLocation="renderer/cmp.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/chart" schemaLocation="addon/chart.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/graph" schemaLocation="addon/graph.xsd"/>
-    <xsd:import namespace="http://www.openfuxml.org/jsf" schemaLocation="addon/jsf.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/fuxml" schemaLocation="addon/fuxml.xsd"/>
     <xsd:annotation>
         <xsd:appinfo>

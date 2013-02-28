@@ -64,12 +64,6 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
-	<jxb:bindings schemaLocation="../xsd/addon/jsf.xsd" node="/xsd:schema">
-        <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.xml.addon.jsf"/>
-        </jxb:schemaBindings>
-    </jxb:bindings>
-    
 	<jxb:bindings schemaLocation="../xsd/addon/fuxml.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.openfuxml.content.fuxml"/>
