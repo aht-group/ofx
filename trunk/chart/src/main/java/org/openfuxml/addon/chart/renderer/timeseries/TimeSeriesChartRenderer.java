@@ -37,10 +37,10 @@ public class TimeSeriesChartRenderer extends AbstractTimeSeriesChartRenderer imp
 	protected TimeSeriesCollection createDataset(List<DataSet> dataSets)
 	{
 		TimeSeriesGapNullifier gapNuller=null;
-		boolean nullifyGaps = TimeSeriesGapNullifier.gapNullerActivated(ofxChart.getRenderer().getTimeseries());
+		boolean nullifyGaps = TimeSeriesGapNullifier.gapNullerActivated(ofxChart.getRenderer().getRendererTimeseries());
 		if(nullifyGaps)
 		{
-			OfxChartTimePeriod timePeriod = OfxChartTimePeriod.valueOf(ofxChart.getRenderer().getTimeseries().getTimePeriod());
+			OfxChartTimePeriod timePeriod = OfxChartTimePeriod.valueOf(ofxChart.getRenderer().getRendererTimeseries().getTimePeriod());
 			gapNuller = new TimeSeriesGapNullifier(timePeriod);
 		}
 		

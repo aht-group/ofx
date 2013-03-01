@@ -2,6 +2,7 @@ package org.openfuxml.addon.chart.factory.chart;
 
 import org.openfuxml.xml.addon.chart.Chart;
 import org.openfuxml.xml.addon.chart.Renderer;
+import org.openfuxml.xml.addon.chart.RendererTimeseries;
 
 public class TimeSeriesChartFactory
 {
@@ -27,10 +28,10 @@ public class TimeSeriesChartFactory
 	private Renderer buildRenderer()
 	{
 		Renderer type = new Renderer();
-		Renderer.Timeseries tsType = new Renderer.Timeseries();
+		RendererTimeseries tsType = new RendererTimeseries();
 		tsType.setGap(withGaps);
 		tsType.setCumulate(cumulateValues);
-		type.setTimeseries(tsType);
+		type.setRendererTimeseries(tsType);
 		return type;
 	}
 	

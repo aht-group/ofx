@@ -16,9 +16,10 @@ import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.TimePeriodFactory;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Renderer;
-import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.Data;
+import org.openfuxml.xml.addon.chart.DataSet;
+import org.openfuxml.xml.addon.chart.Renderer;
+import org.openfuxml.xml.addon.chart.RendererTimeseries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,10 +48,10 @@ public class TstSplineRenderer
 	private Renderer getType()
 	{
 		Renderer type = new Renderer();
-		Renderer.Timeseries tsType = new Renderer.Timeseries();
+		RendererTimeseries tsType = new RendererTimeseries();
 		tsType.setGap(true);
 		tsType.setTimePeriod(TimePeriodFactory.OfxChartTimePeriod.Day.toString());
-		type.setTimeseries(tsType);
+		type.setRendererTimeseries(tsType);
 		return type;
 	}
 	

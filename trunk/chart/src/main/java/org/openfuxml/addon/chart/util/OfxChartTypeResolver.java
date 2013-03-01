@@ -18,7 +18,7 @@ public class OfxChartTypeResolver
 	
 	public synchronized static Type getType(Renderer type)
 	{
-		if(type.isSetTimeseries()){return Type.TimeSeries;}
+		if(type.isSetRendererTimeseries()){return Type.TimeSeries;}
 		if(type.isSetBar()){return Type.Bar;}
 		if(type.isSetTimebar()){return Type.TimeBar;}
 		if(type.isSetGantt()){return Type.Gantt;}
