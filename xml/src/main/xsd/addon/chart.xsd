@@ -88,15 +88,7 @@
     <xsd:element name="renderer">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element name="timeseries" maxOccurs="1">
-                    <xsd:complexType>
-                        <xsd:attribute name="gap" type="xsd:boolean"/>
-                        <xsd:attribute name="from" type="xsd:dateTime"/>
-                        <xsd:attribute name="to" type="xsd:dateTime"/>
-                        <xsd:attribute name="cumulate" type="xsd:boolean"/>
-                        <xsd:attribute name="timePeriod" type="xsd:string"/>
-                    </xsd:complexType>
-                </xsd:element>
+            	<xsd:element ref="rendererTimeseries" maxOccurs="1"/>
                 <xsd:element name="timebar" maxOccurs="1">
                     <xsd:complexType>
                         <xsd:attribute name="shadow" type="xsd:boolean"/>
@@ -117,6 +109,15 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+	<xsd:element name="rendererTimeseries">
+		<xsd:complexType>
+			<xsd:attribute name="gap" type="xsd:boolean"/>
+			<xsd:attribute name="from" type="xsd:dateTime"/>
+			<xsd:attribute name="to" type="xsd:dateTime"/>
+			<xsd:attribute name="cumulate" type="xsd:boolean"/>
+			<xsd:attribute name="timePeriod" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
     <xsd:element name="color">
         <xsd:complexType>
             <xsd:attribute name="typ" type="xsd:string"/>
