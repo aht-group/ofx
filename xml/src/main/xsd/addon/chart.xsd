@@ -16,12 +16,7 @@
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
-                <xsd:element name="grid" maxOccurs="1">
-                    <xsd:complexType>
-                        <xsd:attribute name="range" type="xsd:boolean"/>
-                        <xsd:attribute name="domain" type="xsd:boolean"/>
-                    </xsd:complexType>
-                </xsd:element>
+                <xsd:element ref="grid" maxOccurs="1"/>      
             	<xsd:element ref="dataSet" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:int"/>
@@ -29,6 +24,12 @@
             <xsd:attribute name="legend" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
+	<xsd:element name="grid">
+		<xsd:complexType>
+			<xsd:attribute name="range" type="xsd:boolean"/>
+			<xsd:attribute name="domain" type="xsd:boolean"/>
+		</xsd:complexType>
+	</xsd:element>
 	<xsd:element name="dimension">
 		<xsd:complexType>
 			<xsd:attribute name="height" type="xsd:int"/>
