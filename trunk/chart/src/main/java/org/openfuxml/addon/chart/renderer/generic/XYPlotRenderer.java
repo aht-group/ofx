@@ -11,7 +11,7 @@ import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
 import org.openfuxml.xml.addon.chart.Axis;
-import org.openfuxml.xml.addon.chart.Chart;
+import org.openfuxml.xml.addon.chart.Grid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +33,7 @@ public class XYPlotRenderer extends AbstractChartRenderer
 	protected void setSpecialGrid()
 	{
 		XYPlot plot = (XYPlot) chart.getPlot();
-		Chart.Grid grid = ofxChart.getGrid();
+		Grid grid = ofxChart.getGrid();
 	    if(grid.isSetDomain()){plot.setDomainGridlinesVisible(grid.isDomain());}
 	    if(grid.isSetRange()){plot.setRangeGridlinesVisible(grid.isRange());}
 	}
