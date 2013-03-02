@@ -62,7 +62,6 @@ public class TimeSeriesDateSummer
 		}
 		dataSet.getData().clear();
 		dataSet.getData().addAll(result);
-		logger.info("active: "+activated);
 		return dataSet;
 	}
 }
