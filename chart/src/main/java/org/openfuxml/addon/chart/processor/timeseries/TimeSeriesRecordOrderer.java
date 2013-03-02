@@ -3,8 +3,6 @@ package org.openfuxml.addon.chart.processor.timeseries;
 import java.util.Collections;
 import java.util.Comparator;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.openfuxml.xml.addon.chart.Data;
 import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.RendererTimeseries;
@@ -41,10 +39,7 @@ public class TimeSeriesRecordOrderer
 	public DataSet process(DataSet dataSet)
 	{
 		if(!activated){return dataSet;}
-		
-		JaxbUtil.info(dataSet);
 		Collections.sort(dataSet.getData(), new RecordComparator());
-		JaxbUtil.info(dataSet);
 		return dataSet;
 	}
 	

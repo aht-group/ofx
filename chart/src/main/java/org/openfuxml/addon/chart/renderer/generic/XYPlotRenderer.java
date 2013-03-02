@@ -70,7 +70,7 @@ public class XYPlotRenderer extends AbstractChartRenderer
 	protected void setAxis(Axis ofxAxis,AxisOrientation axisOrientation)
 	{
 		logger.info("Setting axis");
-		JaxbUtil.info(ofxAxis);
+		JaxbUtil.trace(ofxAxis);
 		ValueAxis axis=null;
 		switch(OfxChartTypeResolver.getAxisType(ofxAxis.getAxisType()))
 		{
