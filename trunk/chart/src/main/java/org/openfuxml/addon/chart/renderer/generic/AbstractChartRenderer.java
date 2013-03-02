@@ -43,8 +43,8 @@ public class AbstractChartRenderer
 	{
 		for(Axis axis : ofxChart.getAxis())
 		{
-			AxisOrientation type = AxisOrientation.valueOf(axis.getCode());
-			setAxis(axis,type);
+			AxisOrientation code = AxisOrientation.valueOf(axis.getCode());
+			setAxis(axis,code);
 		}
 	}
 	protected void setAxis(Axis axis,AxisOrientation type)

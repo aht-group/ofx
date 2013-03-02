@@ -34,6 +34,8 @@ public class TestXmlRendererTimeseries extends AbstractXmlChartTest
     	RendererTimeseries xml = new RendererTimeseries();
     	xml.setCumulate(true);
     	xml.setGap(true);
+    	xml.setSumDate(true);
+    	xml.setOrderRecords(true);
     	xml.setTimePeriod("myTimePeriod");
     	xml.setFrom(TestXmlRendererTimeseries.getDefaultXmlDate());
     	xml.setTo(TestXmlRendererTimeseries.getDefaultXmlDate());

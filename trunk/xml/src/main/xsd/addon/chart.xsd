@@ -116,6 +116,8 @@
 			<xsd:attribute name="to" type="xsd:dateTime"/>
 			<xsd:attribute name="cumulate" type="xsd:boolean"/>
 			<xsd:attribute name="timePeriod" type="xsd:string"/>
+			<xsd:attribute name="orderRecords" type="xsd:boolean"/>
+			<xsd:attribute name="sumDate" type="xsd:boolean"/>
 		</xsd:complexType>
 	</xsd:element>
     <xsd:element name="color">
