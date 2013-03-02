@@ -69,22 +69,25 @@ public class XYPlotRenderer extends AbstractChartRenderer
 	@Override
 	protected void setAxis(Axis ofxAxis,AxisOrientation axisOrientation)
 	{
-		JaxbUtil.debug(ofxAxis);
+		logger.info("Setting axis");
+		JaxbUtil.info(ofxAxis);
 		ValueAxis axis=null;
 		switch(OfxChartTypeResolver.getAxisType(ofxAxis.getAxisType()))
 		{
 			case Number: axis = AxisFactory.createNumberAxis(ofxAxis);break;
 			case Date: axis = AxisFactory.createPeriodAxis(ofxAxis);break;
-			default: axis = new NumberAxis();AxisFactory.labelAxisAxis(axis, ofxAxis);
+			default: 	logger.warn("You should specify a type, defaulting to number");
+						axis = new NumberAxis();AxisFactory.labelAxisAxis(axis, ofxAxis);
 		}
 		
 		if(axis!=null)
 		{
 			XYPlot plot = (XYPlot) chart.getPlot();
-	        switch(axisOrientation)
+	        switch(AxisOrientation.valueOf(ofxAxis.getCode()))
 	        {
-	        	case range0:  plot.setRangeAxis(axis);break;
 	        	case domain: plot.setDomainAxis(axis);break;
+	        	case range0:  plot.setRangeAxis(axis);break;
+	        	default: logger.warn("NYI");
 	        }
 		}
 
