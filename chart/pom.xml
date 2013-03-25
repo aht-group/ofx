@@ -79,11 +79,6 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>net.sf.ahtutils</groupId>
-			<artifactId>ahtutils-interfaces</artifactId>
-			<version>0.2.2-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 	
 </project>
