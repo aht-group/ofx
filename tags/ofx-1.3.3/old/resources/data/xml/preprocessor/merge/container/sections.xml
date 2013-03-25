@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ofx:ofxdoc xmlns:ofx="http://www.openfuxml.org" xmlns:wiki="http://www.openfuxml.org/wiki">
+	<ofx:metadata>
+		<ofx:title>OFX-Latex HelloWorld</ofx:title>
+	</ofx:metadata>
+	<ofx:content>
+		<ofx:section>
+			<ofx:title>Section 1</ofx:title>
+			<ofx:paragraph>Introduction Text</ofx:paragraph>
+		</ofx:section>
+		<ofx:section>
+			<ofx:title>Section 2</ofx:title>
+			<ofx:sections>
+				<ofx:section>
+					<ofx:title>Section 2.1</ofx:title>
+				</ofx:section>
+				<ofx:section>
+					<ofx:title>Section 2.2</ofx:title>
+					<ofx:sections>
+						<ofx:section>
+							<ofx:title>Section 2.2.1</ofx:title>
+						</ofx:section>
+						<ofx:section>
+							<ofx:title>Section 2.2.2</ofx:title>
+						</ofx:section>
+					</ofx:sections>
+				</ofx:section>
+				<ofx:section>
+					<ofx:title>Section 2.3</ofx:title>
+				</ofx:section>
+			</ofx:sections>
+		</ofx:section>
+		<ofx:section>
+			<ofx:title>Section 3</ofx:title>
+		</ofx:section>
+	</ofx:content>
+</ofx:ofxdoc>
+
