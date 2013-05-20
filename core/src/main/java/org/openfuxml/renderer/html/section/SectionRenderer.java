@@ -3,9 +3,9 @@ package org.openfuxml.renderer.html.section;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jdom.Content;
-import org.jdom.Element;
-import org.jdom.Text;
+import org.jdom2.Content;
+import org.jdom2.Element;
+import org.jdom2.Text;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.ofx.Section;

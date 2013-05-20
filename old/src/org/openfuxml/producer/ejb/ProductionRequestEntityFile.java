@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.jdom.Element;
+import org.jdom2.Element;
 import org.openfuxml.communication.cluster.ejb.EjbObject;
 
 @Entity

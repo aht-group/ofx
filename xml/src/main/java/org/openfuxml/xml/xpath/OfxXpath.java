@@ -2,7 +2,7 @@ package org.openfuxml.xml.xpath;
 
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
-import org.jdom.Namespace;
+import org.jdom2.Namespace;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

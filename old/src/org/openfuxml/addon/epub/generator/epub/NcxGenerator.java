@@ -10,7 +10,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdom.JDOMException;
+import org.jdom2.JDOMException;
 import org.openfuxml.addon.epub.data.factory.NcxFactory;
 import org.openfuxml.addon.epub.data.jaxb.EpubJaxbXpathLoader;
 import org.openfuxml.addon.epub.data.jaxb.ncx.Head;

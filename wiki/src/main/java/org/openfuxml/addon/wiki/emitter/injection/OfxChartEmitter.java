@@ -4,7 +4,7 @@ import javax.xml.stream.XMLStreamException;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.jdom.Element;
+import org.jdom2.Element;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.util.JdomXmlStreamer;
 import org.openfuxml.addon.wiki.util.WikiContentIO;

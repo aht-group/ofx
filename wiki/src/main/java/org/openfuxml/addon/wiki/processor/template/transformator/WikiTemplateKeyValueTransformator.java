@@ -12,8 +12,8 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 import org.apache.commons.configuration.Configuration;
-import org.jdom.Element;
-import org.jdom.Namespace;
+import org.jdom2.Element;
+import org.jdom2.Namespace;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;

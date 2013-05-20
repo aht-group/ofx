@@ -16,8 +16,8 @@ import javax.persistence.OneToMany;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdom.Document;
-import org.jdom.Element;
+import org.jdom2.Document;
+import org.jdom2.Element;
 import org.openfuxml.communication.cluster.ejb.EjbObject;
 import org.openfuxml.producer.ejb.ProductionRequest.Typ;
 

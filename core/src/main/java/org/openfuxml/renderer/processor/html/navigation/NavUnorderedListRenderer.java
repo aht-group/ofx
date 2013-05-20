@@ -2,7 +2,7 @@ package org.openfuxml.renderer.processor.html.navigation;
 
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 
-import org.jdom.Element;
+import org.jdom2.Element;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;

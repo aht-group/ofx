@@ -3,7 +3,7 @@ package org.openfuxml.addon.wiki.processor.markup;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.jdom.Element;
+import org.jdom2.Element;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
 import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;

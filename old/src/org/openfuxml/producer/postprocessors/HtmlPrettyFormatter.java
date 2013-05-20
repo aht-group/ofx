@@ -22,9 +22,9 @@ import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.JDomSerializer;
 import org.htmlcleaner.TagNode;
 import org.htmlcleaner.TagTransformation;
-import org.jdom.Document;
-import org.jdom.output.Format;
-import org.jdom.output.XMLOutputter;
+import org.jdom2.Document;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.openfuxml.util.OfxApp;
 
 public class HtmlPrettyFormatter extends DirectoryWalker

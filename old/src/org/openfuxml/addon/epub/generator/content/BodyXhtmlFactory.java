@@ -2,8 +2,8 @@ package org.openfuxml.addon.epub.generator.content;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdom.Element;
-import org.jdom.Namespace;
+import org.jdom2.Element;
+import org.jdom2.Namespace;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.renderer.processor.epub.factory.EpubSectionFactory;
 import org.openfuxml.renderer.processor.epub.factory.EpubTitleFactory;

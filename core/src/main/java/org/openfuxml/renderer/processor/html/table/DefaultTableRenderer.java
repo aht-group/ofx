@@ -1,7 +1,7 @@
 package org.openfuxml.renderer.processor.html.table;
 
-import org.jdom.Element;
-import org.jdom.Text;
+import org.jdom2.Element;
+import org.jdom2.Text;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.table.Body;
 import org.openfuxml.content.ofx.table.Cell;

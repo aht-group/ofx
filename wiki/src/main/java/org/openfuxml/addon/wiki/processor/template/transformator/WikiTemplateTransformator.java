@@ -2,7 +2,7 @@ package org.openfuxml.addon.wiki.processor.template.transformator;
 
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
-import org.jdom.Element;
+import org.jdom2.Element;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 
