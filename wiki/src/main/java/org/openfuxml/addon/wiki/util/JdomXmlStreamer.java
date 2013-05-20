@@ -30,12 +30,12 @@ public class JdomXmlStreamer
 		}
 		for(Object o : rootElement.getContent())
 		{
-			if(org.jdom.Text.class.isInstance(o))
+			if(org.jdom2.Text.class.isInstance(o))
 			{
 				Text txt = (Text)o;
 				writer.writeCharacters(txt.getText());
 			}
-			else if(org.jdom.Element.class.isInstance(o))
+			else if(org.jdom2.Element.class.isInstance(o))
 			{
 				Element child = (Element)o;
 				write(child);

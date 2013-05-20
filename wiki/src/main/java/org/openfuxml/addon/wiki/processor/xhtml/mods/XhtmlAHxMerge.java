@@ -52,14 +52,14 @@ public class XhtmlAHxMerge
 		
 		for(Object o : oldRoot.getContent())
 		{
-			if(org.jdom.Text.class.isInstance(o))
+			if(org.jdom2.Text.class.isInstance(o))
 			{
 				if(prevChild!=null){newRoot.addContent(prevChild);prevChild = null;}
 				Text txt = (Text)o;
 				Text newText = new Text(txt.getText());
 				newRoot.addContent(newText);
 			}
-			else if(org.jdom.Element.class.isInstance(o))
+			else if(org.jdom2.Element.class.isInstance(o))
 			{
 				Element oldChild = (Element)o;
 				Element newChild = null;

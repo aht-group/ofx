@@ -57,14 +57,14 @@ public class OfxPushUp
 		sb.append("Tag="+tag+" Level="+level);
 		for(Object o : oldRoot.getContent())
 		{
-			if(org.jdom.Text.class.isInstance(o))
+			if(org.jdom2.Text.class.isInstance(o))
 			{
 				Text txt = (Text)o;
 				Text newText = new Text(txt.getText());
 				newRoot.addContent(newText);
 				sb.append(" txt");
 			}
-			else if(org.jdom.Element.class.isInstance(o))
+			else if(org.jdom2.Element.class.isInstance(o))
 			{
 				Element oldChild = (Element)o;
 				sb.append(" "+oldChild.getName());
