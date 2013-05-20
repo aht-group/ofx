@@ -4,11 +4,11 @@ import java.util.regex.Pattern;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.jdom.Attribute;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.Text;
+import org.jdom2.Attribute;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

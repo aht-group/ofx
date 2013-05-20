@@ -8,12 +8,13 @@ import java.util.List;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.jdom.Content;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.output.Format;
-import org.jdom.xpath.XPath;
+import org.jdom2.Content;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.filter.Filters;
+import org.jdom2.output.Format;
+import org.jdom2.xpath.XPathExpression;
+import org.jdom2.xpath.XPathFactory;
 import org.openfuxml.content.ofx.Ofxdoc;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -68,14 +69,13 @@ public class OfxHtmlRenderer
 	{
 		File fTemplate = cmpConfigUtil.getFile(html.getDir(), HtmlDir.template.toString(), template.getFileCode(),false);
 		Document doc = JDomUtil.load(fTemplate);
-		try
+
 		{
-			XPath xpath = XPath.newInstance( "//ofx:renderer");
-			List<Object> list = xpath.selectNodes(doc);
+			XPathExpression<Element> xpath = XPathFactory.instance().compile("//ofx:renderer", Filters.element());
+			List<Element> list = xpath.evaluate(doc);
 			logger.debug(list.size()+" <ofx:renderer/> Elements found in template");
-			for(Object o : list)
+			for (Element eRenderer : list)
 			{
-				Element eRenderer = (Element)o;
 				Renderer r = (Renderer)JDomUtil.toJaxb(eRenderer, Renderer.class);
 				r =  cmpConfigUtil.getHtmlRenderer(html, r);
 				
@@ -96,7 +96,6 @@ public class OfxHtmlRenderer
 				catch (NoSuchMethodException e) {throw new OfxImplementationException("Renderer implementation does not have a empty constructor: "+r.getClassName());}
 			}
 		}
-		catch (JDOMException e) {logger.error("",e);}
 		File fWeb = cmpConfigUtil.getDir(html.getDir(), HtmlDir.web.toString());
 		File fHtml = new File(fWeb,section.getId()+".html");
 //		JDomUtil.debug(doc);

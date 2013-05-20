@@ -3,9 +3,9 @@ package org.openfuxml.addon.wiki.util;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.jdom.Attribute;
-import org.jdom.Element;
-import org.jdom.Text;
+import org.jdom2.Attribute;
+import org.jdom2.Element;
+import org.jdom2.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
