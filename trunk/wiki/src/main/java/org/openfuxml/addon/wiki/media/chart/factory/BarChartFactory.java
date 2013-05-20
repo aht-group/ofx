@@ -2,9 +2,9 @@ package org.openfuxml.addon.wiki.media.chart.factory;
 
 import java.util.List;
 
-import org.jdom.Document;
-import org.jdom.JDOMException;
-import org.jdom.xpath.XPath;
+import org.jdom2.Document;
+import org.jdom2.JDOMException;
+import org.jdom2.xpath.XPath;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;

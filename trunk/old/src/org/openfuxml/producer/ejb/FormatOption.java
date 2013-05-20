@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.jdom.Element;
+import org.jdom2.Element;
 
 @Entity
 public class FormatOption implements Serializable

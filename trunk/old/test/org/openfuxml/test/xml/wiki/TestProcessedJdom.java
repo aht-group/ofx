@@ -9,9 +9,9 @@ import net.sf.exlp.io.LoggerInit;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdom.Document;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
+import org.jdom2.Document;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 import org.openfuxml.addon.wiki.OfxWikiEngine;
 import org.openfuxml.addon.wiki.WikiTemplates;
 

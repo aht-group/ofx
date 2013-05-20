@@ -2,7 +2,7 @@ package org.openfuxml.addon.chart;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.jdom.Document;
+import org.jdom2.Document;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.interfaces.ChartRenderer;
 import org.openfuxml.addon.chart.renderer.BarChartRenderer;

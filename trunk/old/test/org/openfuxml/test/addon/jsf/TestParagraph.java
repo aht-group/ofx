@@ -6,7 +6,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdom.Document;
+import org.jdom2.Document;
 import org.openfuxml.addon.jsf.data.jaxb.JsfNsPrefixMapper;
 import org.openfuxml.content.ofx.Emphasis;
 import org.openfuxml.content.ofx.Paragraph;

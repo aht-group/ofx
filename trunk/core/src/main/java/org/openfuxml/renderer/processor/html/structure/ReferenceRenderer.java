@@ -1,7 +1,7 @@
 package org.openfuxml.renderer.processor.html.structure;
 
-import org.jdom.Content;
-import org.jdom.Element;
+import org.jdom2.Content;
+import org.jdom2.Element;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.renderer.processor.html.interfaces.OfxReferenceRenderer;
 

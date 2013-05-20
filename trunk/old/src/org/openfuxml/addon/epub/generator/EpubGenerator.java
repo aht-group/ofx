@@ -7,7 +7,7 @@ import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdom.Document;
+import org.jdom2.Document;
 import org.openfuxml.addon.epub.generator.content.ContentGenerator;
 import org.openfuxml.addon.epub.generator.epub.ContainerGenerator;
 import org.openfuxml.addon.epub.generator.epub.MimetypeGenerator;

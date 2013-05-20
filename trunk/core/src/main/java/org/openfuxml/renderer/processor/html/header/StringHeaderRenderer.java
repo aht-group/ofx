@@ -2,8 +2,8 @@ package org.openfuxml.renderer.processor.html.header;
 
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 
-import org.jdom.Content;
-import org.jdom.Text;
+import org.jdom2.Content;
+import org.jdom2.Text;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.renderer.processor.html.interfaces.OfxHeaderRenderer;

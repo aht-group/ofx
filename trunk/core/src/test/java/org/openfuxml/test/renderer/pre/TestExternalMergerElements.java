@@ -7,8 +7,8 @@ import java.util.Collection;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.jdom.Document;
-import org.jdom.output.Format;
+import org.jdom2.Document;
+import org.jdom2.output.Format;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

@@ -5,7 +5,7 @@ import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdom.Document;
+import org.jdom2.Document;
 import org.openfuxml.addon.jsfapp.factory.JsfJspxFactory;
 
 public class TestJsfFactory

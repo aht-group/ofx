@@ -7,11 +7,13 @@ import java.util.List;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.jdom.DataConversionException;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.xpath.XPath;
+import org.jdom2.DataConversionException;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.filter.Filters;
+import org.jdom2.xpath.XPathExpression;
+import org.jdom2.xpath.XPathFactory;
 import org.openfuxml.addon.jsf.controller.factory.xml.XmlAttributeFactory;
 import org.openfuxml.xml.addon.jsf.Component;
 import org.slf4j.Logger;
@@ -53,11 +55,9 @@ public class JsfComponentFactory
 		Document doc = JDomUtil.load(is,"UTF-8");
 		JDomUtil.debug(doc);
 		
-		XPath xpath = XPath.newInstance("//composite:attribute");
-		xpath.addNamespace("composite", "http://java.sun.com/jsf/composite");
-		List<Element> results = xpath.selectNodes(doc);
-		logger.trace("Results: "+results.size());
-		for(Element e : results)
+		XPathExpression<Element> xpath = XPathFactory.instance().compile("//composite:attribute", Filters.element());
+		List<Element> elements = xpath.evaluate(doc);
+		for (Element e : elements)
 		{	
 			addAttribute(e);
 		}
@@ -65,7 +65,7 @@ public class JsfComponentFactory
 	
 	private void addAttribute(Element e) throws DataConversionException
 	{
-		org.jdom.Attribute attribute;
+		org.jdom2.Attribute attribute;
 	
 		String name = e.getAttributeValue("name");
 		

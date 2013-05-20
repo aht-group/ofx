@@ -4,7 +4,7 @@ import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdom.Document;
+import org.jdom2.Document;
 import org.jfree.chart.JFreeChart;
 import org.openfuxml.addon.chart.jaxb.Chart;
 import org.openfuxml.addon.chart.jaxb.Charttype;
