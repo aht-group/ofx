@@ -2,7 +2,7 @@ package org.openfuxml.addon.wiki.processor.xhtml;
 
 import net.sf.exlp.util.io.StringIO;
 
-import org.jdom.JDOMException;
+import org.jdom2.JDOMException;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Page;
