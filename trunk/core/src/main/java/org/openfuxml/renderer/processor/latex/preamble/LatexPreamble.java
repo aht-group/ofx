@@ -27,7 +27,6 @@ public class LatexPreamble extends AbstractOfxLatexRenderer implements OfxLatexR
 	
 	public String getSectionHeaderName(int lvl)
 	{
-		
 		return shnf.getSectionHeaderName(lvl);
 	}
 }

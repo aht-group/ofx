@@ -35,7 +35,7 @@ public class OfxLatexRenderer
 		try
 		{
 			logger.debug("Processing: "+ofxDocFileName);
-			Ofxdoc ofxdoc = (Ofxdoc)JaxbUtil.loadJAXB(ofxDocFileName, Ofxdoc.class);
+			Ofxdoc ofxdoc = JaxbUtil.loadJAXB(ofxDocFileName, Ofxdoc.class);
 			
 			latexDocument.render(ofxdoc.getContent());
 			latexPreamble.render();
