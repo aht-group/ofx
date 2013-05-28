@@ -12,10 +12,12 @@ public class LatexParagraphFactory extends AbstractOfxLatexRenderer implements O
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexParagraphFactory.class);
 	
+	
 	public LatexParagraphFactory(boolean preBlankLine)
 	{
 		if(preBlankLine){preTxt.add("");}
 	}
+	
 	
 	public void render(Paragraph paragraph) throws OfxAuthoringException
 	{
