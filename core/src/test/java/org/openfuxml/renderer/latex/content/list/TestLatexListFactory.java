@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex.content.list;
+package org.openfuxml.renderer.latex.content.list;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +9,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.SectionFactory;
+import org.openfuxml.renderer.processor.latex.content.list.LatexListFactory;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.openfuxml.test.OfxCoreTstBootstrap;
 import org.openfuxml.xml.content.list.List;

@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex.content.list;
+package org.openfuxml.renderer.latex.content.list;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.renderer.processor.latex.content.list.LatexItemFactory;
+import org.openfuxml.renderer.processor.latex.content.list.LatexListFactory;
+import org.openfuxml.renderer.processor.latex.content.list.LatexListFactory.ListType;
 import org.openfuxml.test.OfxCoreTstBootstrap;
 import org.openfuxml.xml.content.list.Item;
 import org.slf4j.Logger;
@@ -75,7 +78,7 @@ public class TestLatexItemFactory extends AbstractLatexListTest
     	TestLatexItemFactory test = new TestLatexItemFactory();
     	test.setSaveReference(true);
     	
- //   	test.initRenderer();test.itemize();
+   	test.initRenderer();test.itemize();
 //    	test.initRenderer();test.description();
     }
    

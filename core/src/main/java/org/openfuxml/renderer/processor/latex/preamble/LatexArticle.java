@@ -13,7 +13,10 @@ public class LatexArticle extends AbstractOfxLatexRenderer implements OfxLatexRe
 	public LatexArticle()
 	{		
 		txt.add("\\documentclass[12pt]{article}");
-		super.addPackages();		
+		
+		LatexPackages renderPackages = new LatexPackages();
+		renderer.add(renderPackages);		
+		
 		txt.add("\\title{\\LaTeX}");
 		txt.add("\\date{}");
 	}
