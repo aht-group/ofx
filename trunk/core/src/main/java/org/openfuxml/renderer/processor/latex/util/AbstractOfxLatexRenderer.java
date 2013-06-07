@@ -32,16 +32,9 @@ public class AbstractOfxLatexRenderer
 		renderer = new ArrayList<OfxLatexRenderer>();
 	}
 	
-	protected void addPackages()
+	protected void addPackages9()
 	{
-		txt.add("");
-		txt.add("%% Packages");
-		txt.add("\\usepackage{amsmath}");
-		txt.add("\\usepackage{hyperref}");
-		txt.add("\\usepackage{array}");
-		txt.add("\\usepackage{ifthen}");
-		txt.add("\\usepackage{paralist}");
-		txt.add("");
+		
 	}
 	
 	public List<String> getContent()
