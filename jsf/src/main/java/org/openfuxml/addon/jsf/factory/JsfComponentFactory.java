@@ -11,6 +11,7 @@ import org.jdom2.DataConversionException;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
+import org.jdom2.Namespace;
 import org.jdom2.filter.Filters;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
@@ -24,10 +25,11 @@ public class JsfComponentFactory
 	final static Logger logger = LoggerFactory.getLogger(JsfComponentFactory.class);
 	
 	private Component component;
+	private Namespace ns;
 	
 	public JsfComponentFactory()
 	{
-		
+		ns = Namespace.getNamespace("composite", "http://java.sun.com/jsf/composite");
 	}
 	
 	public Component buildComponent(String resourceName)
@@ -35,13 +37,8 @@ public class JsfComponentFactory
 		component = new Component();
 		
 		try {read(resourceName);}
-		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JDOMException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		catch (FileNotFoundException e) {e.printStackTrace();}
+		catch (JDOMException e) {e.printStackTrace();}
 		
 		return component;
 	}
@@ -53,10 +50,12 @@ public class JsfComponentFactory
 		InputStream is = mrl.searchIs(resourceName);
 		
 		Document doc = JDomUtil.load(is,"UTF-8");
-		JDomUtil.debug(doc);
-		
-		XPathExpression<Element> xpath = XPathFactory.instance().compile("//composite:attribute", Filters.element());
-		List<Element> elements = xpath.evaluate(doc);
+//		JDomUtil.debug(doc);
+
+		String xpath = "//composite:attribute";
+		XPathExpression<Element> xpe = XPathFactory.instance().compile(xpath,Filters.element(), null,ns);
+
+		List<Element> elements = xpe.evaluate(doc);
 		for (Element e : elements)
 		{	
 			addAttribute(e);
