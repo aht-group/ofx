@@ -1,11 +1,11 @@
 package org.openfuxml.addon.jsf.factory;
 
-import junit.framework.Assert;
 import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
+import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.test.AbstractJsfTest;
 import org.openfuxml.xml.addon.jsf.Attribute;
@@ -27,16 +27,16 @@ public class TestJsfComponentFactory extends AbstractJsfTest
 		jcf = new JsfComponentFactory();
 	}
 	
-	@Test @Ignore
+	@Test
 	public void testInit()
 	{
 		Assert.assertNotNull(jcf);
 		Component actual = jcf.buildComponent(componentXhtml);
 		Assert.assertNotNull(actual);
-//		JaxbUtil.debug(actual);
+		JaxbUtil.debug(actual);
 	}
 	
-	@Test  @Ignore
+	@Test
 	public void value() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		Component xml = jcf.buildComponent(componentXhtml);
@@ -44,7 +44,6 @@ public class TestJsfComponentFactory extends AbstractJsfTest
 		Assert.assertEquals(true, actual.isRequired());
 		Assert.assertEquals("value", actual.getName());
 		Assert.assertEquals("myDefault", actual.getDefault());
-		Assert.assertEquals("myDescription", actual.getShortDescription());
-		
+		Assert.assertEquals("myDescription", actual.getShortDescription());		
 	}
 }
