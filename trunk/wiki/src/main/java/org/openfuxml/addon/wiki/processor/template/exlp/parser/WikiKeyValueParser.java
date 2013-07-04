@@ -3,10 +3,10 @@ package org.openfuxml.addon.wiki.processor.template.exlp.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.exlp.event.LogEvent;
-import net.sf.exlp.event.LogEventHandler;
+import net.sf.exlp.interfaces.LogEvent;
+import net.sf.exlp.interfaces.LogEventHandler;
+import net.sf.exlp.interfaces.LogParser;
 import net.sf.exlp.parser.AbstractLogParser;
-import net.sf.exlp.parser.LogParser;
 import net.sf.exlp.util.io.LoggerInit;
 
 import org.apache.commons.lang.SystemUtils;
