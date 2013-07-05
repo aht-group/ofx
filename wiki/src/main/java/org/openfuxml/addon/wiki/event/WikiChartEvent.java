@@ -1,6 +1,6 @@
 package org.openfuxml.addon.wiki.event;
 
-import net.sf.exlp.event.AbstractEvent;
+import net.sf.exlp.core.event.AbstractEvent;
 import net.sf.exlp.interfaces.LogEvent;
 
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;

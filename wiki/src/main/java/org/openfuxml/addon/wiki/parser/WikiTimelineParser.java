@@ -10,12 +10,12 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import net.sf.exlp.event.handler.EhResultContainer;
+import net.sf.exlp.core.handler.EhResultContainer;
+import net.sf.exlp.core.listener.LogListenerXml;
+import net.sf.exlp.core.parser.AbstractLogParser;
 import net.sf.exlp.interfaces.LogEventHandler;
+import net.sf.exlp.interfaces.LogListener;
 import net.sf.exlp.interfaces.LogParser;
-import net.sf.exlp.listener.LogListener;
-import net.sf.exlp.listener.impl.LogListenerXml;
-import net.sf.exlp.parser.AbstractLogParser;
 import net.sf.exlp.util.io.LoggerInit;
 
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
