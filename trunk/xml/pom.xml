@@ -26,6 +26,38 @@
 	</dependencyManagement>
    	
 	<dependencies>
+		<!-- JAXB-XML -->
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-xml</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	
+		<!-- ExLP -->
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-interfaces</artifactId>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-util</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- XML -->
+		<dependency>
+			<groupId>commons-jxpath</groupId>
+			<artifactId>commons-jxpath</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
    	   		<artifactId>jaxb-api</artifactId>
@@ -34,29 +66,23 @@
    	   	<dependency>
    	   		<groupId>com.sun.xml.bind</groupId>
    	   		<artifactId>jaxb-impl</artifactId>
+   	   		<scope>provided</scope>
    	   	</dependency>
    	   	<dependency>
    	   		<groupId>com.sun.xml.bind</groupId>
    	   		<artifactId>jaxb-xjc</artifactId>
    	   		<scope>provided</scope>
    	   	</dependency>
-		<dependency>
-			<groupId>net.sf.exlp</groupId>
-			<artifactId>exlp-util</artifactId>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.exlp</groupId>
-			<artifactId>exlp-xml</artifactId>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
+		
+		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
