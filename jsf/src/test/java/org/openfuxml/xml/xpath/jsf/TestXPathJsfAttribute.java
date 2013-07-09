@@ -1,7 +1,7 @@
 package org.openfuxml.xml.xpath.jsf;
 
-import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 import org.junit.Assert;
 import org.junit.Before;

@@ -3,8 +3,8 @@ package org.openfuxml.xml.xpath;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.util.exception.ExlpXpathNotUniqueException;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 import org.openfuxml.xml.addon.jsf.Attribute;
 import org.openfuxml.xml.addon.jsf.Component;

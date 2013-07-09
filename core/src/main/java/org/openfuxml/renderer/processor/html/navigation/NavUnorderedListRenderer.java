@@ -1,6 +1,6 @@
 package org.openfuxml.renderer.processor.html.navigation;
 
-import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 import org.jdom2.Element;
 import org.openfuxml.content.ofx.Ofxdoc;

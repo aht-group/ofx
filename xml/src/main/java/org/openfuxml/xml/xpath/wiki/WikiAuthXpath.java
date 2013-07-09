@@ -1,6 +1,6 @@
 package org.openfuxml.xml.xpath.wiki;
 
-import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 import org.openfuxml.addon.wiki.data.jaxb.Auth;
 import org.openfuxml.xml.xpath.cmp.HtmlXpath;

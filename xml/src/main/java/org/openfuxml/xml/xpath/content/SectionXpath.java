@@ -1,6 +1,6 @@
 package org.openfuxml.xml.xpath.content;
 
-import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
