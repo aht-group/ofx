@@ -2,7 +2,7 @@ package org.openfuxml.model.xml.xpath;
 
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 import org.junit.Test;

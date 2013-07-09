@@ -1,6 +1,6 @@
 package org.openfuxml.renderer.processor.html.header;
 
-import net.sf.exlp.util.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 import org.jdom2.Content;
 import org.jdom2.Text;
