@@ -30,6 +30,10 @@ public class OutputText extends UIPanel
 		boolean bold = ComponentAttribute.getBoolean("bold", false, context, this);
 		boolean italic = ComponentAttribute.getBoolean("italic", false, context, this);
 		
+//		logger.info("******************");
+//		logger.info("bold: "+bold);
+//		logger.info("italic "+italic);
+		
 		if(bold){sb.append(" ofxBold");}
 		if(italic){sb.append(" ofxItalic");}
 		
