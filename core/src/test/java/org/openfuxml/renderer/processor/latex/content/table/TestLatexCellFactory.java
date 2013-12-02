@@ -10,7 +10,7 @@ import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.content.list.TestLatexListFactory;
 import org.openfuxml.renderer.processor.latex.content.TestLatexParagraphFactory;
-import org.openfuxml.test.OfxCoreTstBootstrap;
+import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,7 +63,7 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTstBootstrap.init();
+    	OfxCoreTestBootstrap.init();
 			
     	TestLatexCellFactory.initLoremIpsum();
     	TestLatexCellFactory test = new TestLatexCellFactory();

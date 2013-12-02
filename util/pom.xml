@@ -11,7 +11,7 @@
 	
     <artifactId>ofx-util</artifactId>
     <packaging>jar</packaging>
-    <name>openFuXML Util</name>
+    <name>OFX - Util</name>
 	
 	<dependencyManagement>
 		<dependencies>      	         

@@ -11,7 +11,7 @@
 	
     <artifactId>ofx-chart</artifactId>
     <packaging>jar</packaging>
-    <name>openFuXML Chart</name>
+    <name>OFX - Chart</name>
    	
 	<dependencyManagement>
 		<dependencies>      	         

@@ -21,7 +21,7 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.html.section.SectionRenderer;
 import org.openfuxml.test.AbstractFileProcessingTest;
-import org.openfuxml.test.OfxCoreTstBootstrap;
+import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -87,7 +87,7 @@ public class TestSectionRenderer extends AbstractFileProcessingTest
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
     {
-		OfxCoreTstBootstrap.init();
+		OfxCoreTestBootstrap.init();
 		
 		boolean saveReference = true;
 		int id = 3;

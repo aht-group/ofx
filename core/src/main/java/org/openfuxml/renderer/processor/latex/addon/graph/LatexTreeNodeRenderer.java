@@ -1,7 +1,7 @@
 package org.openfuxml.renderer.processor.latex.addon.graph;
 
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.processor.latex.util.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.openfuxml.xml.addon.graph.Node;
 import org.slf4j.Logger;

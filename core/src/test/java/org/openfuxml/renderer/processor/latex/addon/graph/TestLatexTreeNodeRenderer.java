@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.test.OfxCoreTstBootstrap;
+import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.xml.addon.graph.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +58,7 @@ public class TestLatexTreeNodeRenderer extends AbstractLatexGraphTest
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTstBootstrap.init();
+    	OfxCoreTestBootstrap.init();
 			
     	TestLatexTreeNodeRenderer.initLoremIpsum();
     	TestLatexTreeNodeRenderer test = new TestLatexTreeNodeRenderer();

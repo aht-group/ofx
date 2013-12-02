@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.test.OfxCoreTstBootstrap;
+import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +47,7 @@ public class TestLatexRowFactory extends AbstractLatexTableTest
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTstBootstrap.init();
+    	OfxCoreTestBootstrap.init();
 			
     	TestLatexRowFactory.initLoremIpsum();
     	TestLatexRowFactory test = new TestLatexRowFactory();
