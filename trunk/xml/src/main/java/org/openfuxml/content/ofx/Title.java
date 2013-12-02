@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlValue;
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
  *       &lt;attribute name="numbering" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>
@@ -40,6 +41,8 @@ public class Title implements Serializable
     protected String value;
     @XmlAttribute(name = "numbering")
     protected Boolean numbering;
+    @XmlAttribute(name = "lang")
+    protected String lang;
 
     /**
      * Gets the value of the value property.
@@ -99,6 +102,34 @@ public class Title implements Serializable
 
     public void unsetNumbering() {
         this.numbering = null;
+    }
+
+    /**
+     * Gets the value of the lang property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getLang() {
+        return lang;
+    }
+
+    /**
+     * Sets the value of the lang property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLang(String value) {
+        this.lang = value;
+    }
+
+    public boolean isSetLang() {
+        return (this.lang!= null);
     }
 
 }

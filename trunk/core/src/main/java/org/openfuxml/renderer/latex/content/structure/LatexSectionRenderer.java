@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.content;
+package org.openfuxml.renderer.latex.content.structure;
 
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
@@ -7,20 +7,21 @@ import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.SectionTitleFactory;
 import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.xml.content.list.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(SectionFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexSectionRenderer.class);
 	
 	private LatexPreamble latexPreamble;
 	int lvl;
 	
-	public SectionFactory(int lvl, LatexPreamble latexPreamble)
+	public LatexSectionRenderer(int lvl, LatexPreamble latexPreamble)
 	{
 		this.lvl=lvl;
 		this.latexPreamble=latexPreamble;
@@ -59,7 +60,7 @@ public class SectionFactory extends AbstractOfxLatexRenderer implements OfxLatex
 	
 	private void renderSection(Section section) throws OfxAuthoringException
 	{
-		SectionFactory sf = new SectionFactory(lvl+1,latexPreamble);
+		LatexSectionRenderer sf = new LatexSectionRenderer(lvl+1,latexPreamble);
 		sf.render(section);
 		renderer.add(sf);
 	}

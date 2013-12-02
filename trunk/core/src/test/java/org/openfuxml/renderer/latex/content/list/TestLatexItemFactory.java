@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.latex.content.list.LatexListFactory.ListType;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.xml.content.list.Item;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.content;
+package org.openfuxml.renderer.latex.content.structure;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,17 +7,18 @@ import org.junit.After;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestLatexParagraphFactory extends AbstractLatexContentTest
+public class TestLatexParagraphRenderer extends AbstractLatexContentTest
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	
 	private static enum Key {withBlank,withoutBlank}
 	
-	private LatexParagraphFactory renderer;
+	private LatexParagraphRenderer renderer;
 	private String dir = "paragraph";
 	
 	@After public void close(){renderer=null;}
@@ -32,7 +33,7 @@ public class TestLatexParagraphFactory extends AbstractLatexContentTest
     @Test
     public void withBlank() throws IOException, OfxAuthoringException
     {
-    	renderer = new LatexParagraphFactory(true);
+    	renderer = new LatexParagraphRenderer(true);
     	
     	f = new File(rootDir,dir+"/"+Key.withBlank+".txt");
     	renderer.render(create());
@@ -42,7 +43,7 @@ public class TestLatexParagraphFactory extends AbstractLatexContentTest
     @Test
     public void withoutBlank() throws IOException, OfxAuthoringException
     {
-    	renderer = new LatexParagraphFactory(false);
+    	renderer = new LatexParagraphRenderer(false);
     	
     	f = new File(rootDir,dir+"/"+Key.withoutBlank+".txt");
     	renderer.render(create());
@@ -53,8 +54,8 @@ public class TestLatexParagraphFactory extends AbstractLatexContentTest
     {
     	OfxCoreTestBootstrap.init();
 			
-    	TestLatexParagraphFactory.initLoremIpsum();
-    	TestLatexParagraphFactory test = new TestLatexParagraphFactory();
+    	TestLatexParagraphRenderer.initLoremIpsum();
+    	TestLatexParagraphRenderer test = new TestLatexParagraphRenderer();
     	test.setSaveReference(true);
     	
  //   	test.withBlank();

@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.content;
+package org.openfuxml.renderer.latex.content.structure;
 
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -8,12 +8,12 @@ import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LatexParagraphFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(LatexParagraphFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexParagraphRenderer.class);
 	
 	
-	public LatexParagraphFactory(boolean preBlankLine)
+	public LatexParagraphRenderer(boolean preBlankLine)
 	{
 		if(preBlankLine){preTxt.add("");}
 	}

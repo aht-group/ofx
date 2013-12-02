@@ -8,7 +8,6 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -23,7 +22,6 @@ public class AbstractOfxCoreTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxCoreTest.class);
 	
-	protected static NsPrefixMapperInterface nsPrefixMapper;
 	protected static LoremIpsum li;
 	private boolean saveReference = false;
 	protected File f;
@@ -45,7 +43,7 @@ public class AbstractOfxCoreTest
 	@BeforeClass
 	public static void initPrefixMapper()
 	{
-		nsPrefixMapper = new OfxNsPrefixMapper();
+		JaxbUtil.setNsPrefixMapper( new OfxNsPrefixMapper());
 	}
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
