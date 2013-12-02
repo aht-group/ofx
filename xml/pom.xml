@@ -81,6 +81,13 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.ahtutils</groupId>
+			<artifactId>ahtutils-test</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+			<version>0.2.5-SNAPSHOT</version>
+		</dependency>
 		
 		<!-- Logging -->
 		<dependency>

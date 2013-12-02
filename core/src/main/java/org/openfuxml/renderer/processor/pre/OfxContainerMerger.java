@@ -8,12 +8,11 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.Namespace;
 import org.jdom2.xpath.XPath;
-import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.content.ofx.Title;
@@ -47,9 +46,9 @@ public class OfxContainerMerger
 		catch (JDOMException e) {logger.error("",e);}
 	}
 	
-	public Ofxdoc merge(Ofxdoc ofxDoc) throws OfxInternalProcessingException
+	public Document merge(Document ofxDoc) throws OfxInternalProcessingException
 	{
-		Document doc = JaxbUtil.toDocument(ofxDoc);
+		org.jdom2.Document doc = JaxbUtil.toDocument(ofxDoc);
 
 		for(XPath xpath : lXpath)
 		{
@@ -58,7 +57,7 @@ public class OfxContainerMerger
 			doc.setRootElement(result);
 		}
 		
-		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
+		ofxDoc = (Document)JDomUtil.toJaxb(doc, Document.class);
 		return ofxDoc;
 	}
 	
@@ -126,11 +125,11 @@ public class OfxContainerMerger
 		fName = "resources/data/xml/preprocessor/merge/container/transparent.xml";
 		if(args.length == 1 ){fName = args[0];}
 		
-		Ofxdoc ofxDocOriginal = (Ofxdoc)JaxbUtil.loadJAXB(fName, Ofxdoc.class);
+		Document ofxDocOriginal = JaxbUtil.loadJAXB(fName, Document.class);
 		JaxbUtil.debug(ofxDocOriginal);
 		
 		OfxContainerMerger containerMerger = new OfxContainerMerger();
-		Ofxdoc ofxDocContainer = containerMerger.merge(ofxDocOriginal);
+		Document ofxDocContainer = containerMerger.merge(ofxDocOriginal);
 		JaxbUtil.debug(ofxDocContainer);
 	}
 }

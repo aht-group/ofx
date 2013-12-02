@@ -3,7 +3,7 @@ package org.openfuxml.renderer.processor.html.navigation;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 import org.jdom2.Element;
-import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.renderer.processor.html.interfaces.OfxNavigationRenderer;
@@ -20,7 +20,7 @@ public class NavUnorderedListRenderer implements OfxNavigationRenderer
 
 	}
 	
-	public Element render(Ofxdoc ofxDoc, Section actualSection)
+	public Element render(Document ofxDoc, Section actualSection)
 	{
 		Element rootElement = new Element("ul");
 		

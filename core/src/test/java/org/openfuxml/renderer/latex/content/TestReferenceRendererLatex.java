@@ -5,7 +5,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.test.AbstractOfxCoreTest;
@@ -20,7 +20,7 @@ public class TestReferenceRendererLatex extends AbstractOfxCoreTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestReferenceRendererLatex.class);
 
-	private Ofxdoc ofxDocument;
+	private Document ofxDocument;
 	private Pdf pdfSettings;
 	
 	@Before

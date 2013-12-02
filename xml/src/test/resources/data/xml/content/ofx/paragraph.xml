@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns6:paragraph xmlns:ns2="http://www.openfuxml.org/wiki" xmlns:ns3="http://www.openfuxml.org/list" xmlns:ns4="http://www.openfuxml.org/layout" xmlns:ns5="http://www.openfuxml.org/table" xmlns:ns6="http://www.openfuxml.org"/>
+<ofx:paragraph xmlns:ofx="http://www.openfuxml.org" xmlns:wiki="http://www.openfuxml.org/wiki" xmlns:layout="http://www.openfuxml.org/layout" xmlns:table="http://www.openfuxml.org/table" xmlns:l="http://www.openfuxml.org/list"/>

@@ -7,12 +7,11 @@ import java.util.List;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.Namespace;
 import org.jdom2.xpath.XPath;
-import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +22,7 @@ public class OfxExternalMerger
 	
 	private RelativePathFactory rpf;
 	private File rootFile;
-	private Document doc;
+	private org.jdom2.Document doc;
 	
 	private XPath xpath;
 	
@@ -47,14 +46,14 @@ public class OfxExternalMerger
 		logger.trace("Loaded: "+rootFile.getAbsolutePath());
 	}
 	
-	public Ofxdoc mergeToOfxDoc(File rootFile) throws OfxInternalProcessingException
+	public Document mergeToOfxDoc(File rootFile) throws OfxInternalProcessingException
 	{
-		Document doc = mergeToDoc(rootFile);
-		Ofxdoc ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
+		org.jdom2.Document doc = mergeToDoc(rootFile);
+		Document ofxDoc = (Document)JDomUtil.toJaxb(doc, Document.class);
 		return ofxDoc;
 	}
 	
-	public Document mergeToDoc(File rootFile) throws OfxInternalProcessingException
+	public org.jdom2.Document mergeToDoc(File rootFile) throws OfxInternalProcessingException
 	{
 		loadRoot(rootFile);
 		

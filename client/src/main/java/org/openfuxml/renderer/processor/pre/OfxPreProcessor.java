@@ -26,7 +26,7 @@ import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlFinalProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;
-import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
@@ -49,7 +49,7 @@ public class OfxPreProcessor
 	private Cmp cmp;
 	private Preprocessor xmlPreProcessor;
 
-	private Ofxdoc ofxDoc;
+	private Document ofxDoc;
 	private Contents wikiQueries;
 
 	
@@ -124,7 +124,7 @@ public class OfxPreProcessor
 		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDir(), DirCode.working.toString(), code.toString(),true);
 		try
 		{
-			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
+			ofxDoc = JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Document.class);
 			
 			OfxExternalMerger exMerger = new OfxExternalMerger();
 			ofxDoc = exMerger.mergeToOfxDoc(srcFile);
@@ -144,7 +144,7 @@ public class OfxPreProcessor
 		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDir(), DirCode.working.toString(), code.toString(),true);
 		try
 		{
-			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
+			ofxDoc = JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Document.class);
 			
 			OfxContainerMerger containerMerger = new OfxContainerMerger();
 			ofxDoc = containerMerger.merge(ofxDoc);
@@ -167,7 +167,7 @@ public class OfxPreProcessor
 		
 		try
 		{
-			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
+			ofxDoc = JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Document.class);
 			WikiTemplateCorrector templateCorrector = new WikiTemplateCorrector();
 			templateCorrector.setDirectory(WikiProcessor.WikiDir.wikiTemplate, dirWikiTemplate);
 			ofxDoc = templateCorrector.correctTemplateInjections(ofxDoc);
@@ -187,7 +187,7 @@ public class OfxPreProcessor
 		File dstFile = cmpConfigUtil.getFile(cmp.getPreprocessor().getDir(), DirCode.working.toString(), code.toString(),true);
 		try
 		{
-			ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Ofxdoc.class);
+			ofxDoc = JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Document.class);
 			WikiExternalIntegrator wikiExIntegrator = new WikiExternalIntegrator(wikiXmlDir);
 			wikiExIntegrator.integrateWikiAsExternal(ofxDoc);
 			ofxDoc = wikiExIntegrator.getResult();

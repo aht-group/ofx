@@ -9,13 +9,12 @@ import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jdom2.Content;
-import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.filter.Filters;
 import org.jdom2.output.Format;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
-import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -50,7 +49,7 @@ public class OfxHtmlRenderer
 		try
 		{
 			logger.debug("Processing: "+ofxDocFileName);
-			Ofxdoc ofxdoc = (Ofxdoc)JaxbUtil.loadJAXB(ofxDocFileName, Ofxdoc.class);
+			Document ofxdoc = JaxbUtil.loadJAXB(ofxDocFileName, Document.class);
 			
 			for(Template template : html.getTemplate())
 			{
@@ -65,10 +64,10 @@ public class OfxHtmlRenderer
 		catch (FileNotFoundException e) {logger.error("",e);}
 	}
 	
-	private void processTemplate(Section section, Ofxdoc ofxDoc, Template template) throws OfxConfigurationException, OfxImplementationException
+	private void processTemplate(Section section, Document ofxDoc, Template template) throws OfxConfigurationException, OfxImplementationException
 	{
 		File fTemplate = cmpConfigUtil.getFile(html.getDir(), HtmlDir.template.toString(), template.getFileCode(),false);
-		Document doc = JDomUtil.load(fTemplate);
+		org.jdom2.Document doc = JDomUtil.load(fTemplate);
 
 		{
 			XPathExpression<Element> xpath = XPathFactory.instance().compile("//ofx:renderer", Filters.element());
@@ -102,7 +101,7 @@ public class OfxHtmlRenderer
 		JDomUtil.save(doc, fHtml, Format.getRawFormat());
 	}
 	
-	private void renderNav(Element eRenderer, OfxNavigationRenderer navRenderer, Ofxdoc ofxDoc, Section section)
+	private void renderNav(Element eRenderer, OfxNavigationRenderer navRenderer, Document ofxDoc, Section section)
 	{
 		Element renderedElement = navRenderer.render(ofxDoc, section);
 		int index = eRenderer.getParentElement().indexOf(eRenderer);
@@ -110,7 +109,7 @@ public class OfxHtmlRenderer
 		eRenderer.detach();
 	}
 	
-	private void renderHeader(Element eRenderer, OfxHeaderRenderer headerRenderer, Ofxdoc ofxDoc, Section section)
+	private void renderHeader(Element eRenderer, OfxHeaderRenderer headerRenderer, Document ofxDoc, Section section)
 	{
 		Content content = headerRenderer.render(section);
 		int index = eRenderer.getParentElement().indexOf(eRenderer);
@@ -118,7 +117,7 @@ public class OfxHtmlRenderer
 		eRenderer.detach();
 	}
 	
-	private void renderSection(Element eRenderer, OfxSectionRenderer sectionRenderer, Ofxdoc ofxDoc, Section section)
+	private void renderSection(Element eRenderer, OfxSectionRenderer sectionRenderer, Document ofxDoc, Section section)
 	{
 		List<Content> contents = sectionRenderer.render(section);
 		int index = eRenderer.getParentElement().indexOf(eRenderer);

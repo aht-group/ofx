@@ -9,14 +9,13 @@ import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
-import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.Namespace;
 import org.jdom2.xpath.XPath;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
-import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
@@ -47,16 +46,16 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 		catch (JDOMException e) {logger.error("",e);}
 	}
 	
-	public Ofxdoc correctTemplateInjections(Ofxdoc ofxDoc) throws OfxInternalProcessingException
+	public Document correctTemplateInjections(Document ofxDoc) throws OfxInternalProcessingException
 	{
-		Document doc = transformToElement(ofxDoc);
+		org.jdom2.Document doc = transformToElement(ofxDoc);
 		doc = exchangeParagraphByTemplate(doc);
 		
-		ofxDoc = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
+		ofxDoc = (Document)JDomUtil.toJaxb(doc, Document.class);
 		return ofxDoc;
 	}
 	
-	private Document exchangeParagraphByTemplate(Document doc)
+	private org.jdom2.Document exchangeParagraphByTemplate(org.jdom2.Document doc)
 	{
 		try
 		{
@@ -108,7 +107,7 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 		return eTemplate;
 	}
 	
-	private Document transformToElement(Ofxdoc ofxDoc)
+	private org.jdom2.Document transformToElement(Document ofxDoc)
 	{
 		String txt = JaxbUtil.toString(ofxDoc, nsPrefixMapper, true);
 		int beginIndex=-1;
@@ -124,7 +123,7 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 			sb.append(txt.substring(beginIndex+startDelimiter.length()+id.length()+endDelimiter.length()));
 			txt = sb.toString();
 		}
-		Document doc = null;
+		org.jdom2.Document doc = null;
 		try {doc = JDomUtil.txtToDoc(txt);}
 		catch (JDOMException e) {logger.error("",e);}
 		return doc;
@@ -152,7 +151,7 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 		Configuration config = ConfigLoader.init();
 			
 		String fnOfx = config.getString("wiki.processor.test.template.correct");
-		Ofxdoc ofxDoc = (Ofxdoc)JaxbUtil.loadJAXB(fnOfx, Ofxdoc.class);
+		Document ofxDoc = JaxbUtil.loadJAXB(fnOfx, Document.class);
 		
 		WikiTemplateCorrector templateCorrector = new WikiTemplateCorrector();
 		templateCorrector.correctTemplateInjections(ofxDoc);
