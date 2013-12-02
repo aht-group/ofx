@@ -45,6 +45,11 @@
    	   		<artifactId>jaxb-impl</artifactId>
    	   		<scope>provided</scope>
    	   	</dependency>
+   	   	<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<scope>provided</scope>
+		</dependency>
    	   	
 		<dependency>
 			<groupId>junit</groupId>

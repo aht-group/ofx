@@ -36,6 +36,7 @@ import org.openfuxml.content.ofx.table.Table;
  *         &lt;element ref="{http://www.openfuxml.org/wiki}template" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="external" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="source" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="transparent" type="{http://www.w3.org/2001/XMLSchema}boolean" />
@@ -56,19 +57,21 @@ public class Section implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
-        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.xml.content.list.List.class),
-        @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class),
-        @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
         @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
-        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
         @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
+        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
+        @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
+        @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class),
+        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.xml.content.list.List.class),
         @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class)
     })
     @XmlMixed
     protected java.util.List<Serializable> content;
     @XmlAttribute(name = "id")
     protected String id;
+    @XmlAttribute(name = "lang")
+    protected String lang;
     @XmlAttribute(name = "external")
     protected Boolean external;
     @XmlAttribute(name = "source")
@@ -94,14 +97,14 @@ public class Section implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Content }
-     * {@link org.openfuxml.xml.content.list.List }
-     * {@link Title }
-     * {@link Table }
      * {@link Template }
-     * {@link Sections }
-     * {@link String }
      * {@link Section }
+     * {@link Content }
+     * {@link Sections }
+     * {@link Table }
+     * {@link Title }
+     * {@link String }
+     * {@link org.openfuxml.xml.content.list.List }
      * {@link Paragraph }
      * 
      * 
@@ -147,6 +150,34 @@ public class Section implements Serializable
 
     public boolean isSetId() {
         return (this.id!= null);
+    }
+
+    /**
+     * Gets the value of the lang property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getLang() {
+        return lang;
+    }
+
+    /**
+     * Sets the value of the lang property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLang(String value) {
+        this.lang = value;
+    }
+
+    public boolean isSetLang() {
+        return (this.lang!= null);
     }
 
     /**

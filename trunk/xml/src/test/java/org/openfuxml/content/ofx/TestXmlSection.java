@@ -33,6 +33,7 @@ public class TestXmlSection extends AbstractXmlOfxTest
     public static Section create(boolean withChilds)
     {
     	Section xml = new Section();
+    	xml.setLang("myLang");
     	
     	logger.warn("Not fully implemented");
     	if(withChilds)

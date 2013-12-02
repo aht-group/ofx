@@ -8,4 +8,11 @@ public class XmlSectionFactory
 	{
 		return new Section();
 	}
+	
+	public static Section build(String lang)
+	{
+		Section xml = new Section();
+		xml.setLang(lang);
+		return xml;
+	}
 }
