@@ -16,7 +16,7 @@ public class AbstractOfxUtilTest
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("config.ofx-core.test");
+		loggerInit.addAltPath("config.ofx-util.test");
 		loggerInit.init();
     }
 	

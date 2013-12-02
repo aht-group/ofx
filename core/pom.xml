@@ -10,7 +10,7 @@
 	</parent>
 	
     <artifactId>ofx-core</artifactId>
-    <packaging>jar</packaging>
+    <packaging>ejb</packaging>
     <name>OFX - Core</name>
 	
 	<dependencyManagement>
