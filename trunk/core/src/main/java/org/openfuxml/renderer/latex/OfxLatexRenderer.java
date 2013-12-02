@@ -8,8 +8,8 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
-import org.openfuxml.renderer.processor.latex.util.LatexDocument;
+import org.openfuxml.renderer.latex.preamble.LatexPreamble;
+import org.openfuxml.renderer.latex.util.LatexDocument;
 import org.openfuxml.xml.renderer.cmp.Pdf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

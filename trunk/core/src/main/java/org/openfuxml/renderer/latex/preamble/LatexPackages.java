@@ -1,7 +1,7 @@
-package org.openfuxml.renderer.processor.latex.preamble;
+package org.openfuxml.renderer.latex.preamble;
 
+import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex.content;
+package org.openfuxml.renderer.latex.content;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.SystemUtils;
-import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
+import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

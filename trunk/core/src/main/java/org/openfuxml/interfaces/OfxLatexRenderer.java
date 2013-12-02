@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex.util;
+package org.openfuxml.interfaces;
 
 import java.io.IOException;
 import java.io.Writer;

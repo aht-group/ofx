@@ -2,9 +2,9 @@ package org.openfuxml.renderer.latex.content.listing;
 
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
-import org.openfuxml.renderer.processor.latex.util.TexSpecialChars;
+import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

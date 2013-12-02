@@ -1,11 +1,12 @@
-package org.openfuxml.renderer.processor.latex.util;
+package org.openfuxml.renderer.latex.util;
 
 import org.openfuxml.content.ofx.Content;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.processor.latex.content.SectionFactory;
-import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
+import org.openfuxml.renderer.latex.content.SectionFactory;
+import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.xml.renderer.cmp.Pdf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
