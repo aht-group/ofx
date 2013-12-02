@@ -1,4 +1,4 @@
-package org.openfuxml.model.xml.content.ofx;
+package org.openfuxml.content.ofx;
 
 import java.io.FileNotFoundException;
 
