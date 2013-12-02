@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ofx:ofxdoc xmlns:ofx="http://www.openfuxml.org" xmlns:list="http://www.openfuxml.org/list">
+<ofx:document xmlns:ofx="http://www.openfuxml.org" xmlns:list="http://www.openfuxml.org/list">
     <ofx:metadata>
         <ofx:title>Lorem ipsum dolor sit amet,</ofx:title>
     </ofx:metadata>
@@ -24,4 +24,4 @@
 			</list:list>    
         </ofx:section>
     </ofx:content>
-</ofx:ofxdoc>
+</ofx:document>

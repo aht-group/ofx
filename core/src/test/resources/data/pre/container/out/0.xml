@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ofx:ofxdoc xmlns:ofx="http://www.openfuxml.org" xmlns:wiki="http://www.openfuxml.org/wiki" xmlns:ns3="http://www.openfuxml.org/list" xmlns:layout="http://www.openfuxml.org/layout" xmlns:table="http://www.openfuxml.org/table">
+<ofx:document xmlns:ofx="http://www.openfuxml.org" xmlns:wiki="http://www.openfuxml.org/wiki" xmlns:ns3="http://www.openfuxml.org/list" xmlns:layout="http://www.openfuxml.org/layout" xmlns:table="http://www.openfuxml.org/table">
     <ofx:metadata>
         <ofx:title>Title</ofx:title>
     </ofx:metadata>
@@ -14,4 +14,4 @@
     			</ofx:paragraph>
     	</ofx:section>
     </ofx:content>
-</ofx:ofxdoc>
+</ofx:document>
