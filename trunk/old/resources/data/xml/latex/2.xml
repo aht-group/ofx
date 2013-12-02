@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ofx:ofxdoc xmlns:ofx="http://www.openfuxml.org" xmlns:list="http://www.openfuxml.org/list" xmlns:table="http://www.openfuxml.org/table" xmlns:layout="http://www.openfuxml.org/layout">
+<ofx:document xmlns:ofx="http://www.openfuxml.org" xmlns:list="http://www.openfuxml.org/list" xmlns:table="http://www.openfuxml.org/table" xmlns:layout="http://www.openfuxml.org/layout">
     <ofx:metadata>
         <ofx:title>Lorem ipsum dolor sit amet,</ofx:title>
     </ofx:metadata>
@@ -76,4 +76,4 @@
 			</table:table>
         </ofx:section>
     </ofx:content>
-</ofx:ofxdoc>
+</ofx:document>

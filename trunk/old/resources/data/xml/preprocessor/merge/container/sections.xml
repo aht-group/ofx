@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ofx:ofxdoc xmlns:ofx="http://www.openfuxml.org" xmlns:wiki="http://www.openfuxml.org/wiki">
+<ofx:document xmlns:ofx="http://www.openfuxml.org" xmlns:wiki="http://www.openfuxml.org/wiki">
 	<ofx:metadata>
 		<ofx:title>OFX-Latex HelloWorld</ofx:title>
 	</ofx:metadata>
@@ -34,5 +34,5 @@
 			<ofx:title>Section 3</ofx:title>
 		</ofx:section>
 	</ofx:content>
-</ofx:ofxdoc>
+</ofx:document>
 
