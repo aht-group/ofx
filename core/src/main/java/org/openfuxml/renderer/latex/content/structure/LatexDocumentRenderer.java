@@ -1,25 +1,24 @@
-package org.openfuxml.renderer.latex.util;
+package org.openfuxml.renderer.latex.content.structure;
 
 import org.openfuxml.content.ofx.Content;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.latex.content.SectionFactory;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.xml.renderer.cmp.Pdf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LatexDocument extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexDocumentRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(LatexDocument.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexDocumentRenderer.class);
 	
 	private int lvl;
 	private LatexPreamble latexPreamble;
 	private Pdf pdf;
 	
-	public LatexDocument(Pdf pdf, LatexPreamble latexPreamble)
+	public LatexDocumentRenderer(Pdf pdf, LatexPreamble latexPreamble)
 	{
 		this.latexPreamble=latexPreamble;
 		this.pdf=pdf;
@@ -42,7 +41,7 @@ public class LatexDocument extends AbstractOfxLatexRenderer implements OfxLatexR
 	
 	private void renderSection(Section section) throws OfxAuthoringException
 	{
-		SectionFactory sf = new SectionFactory(lvl+1,latexPreamble);
+		LatexSectionRenderer sf = new LatexSectionRenderer(lvl+1,latexPreamble);
 		sf.render(section);
 		renderer.add(sf);
 	}

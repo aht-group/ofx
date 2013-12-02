@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.latex.content.TestLatexParagraphFactory;
 import org.openfuxml.renderer.latex.content.list.TestLatexListFactory;
+import org.openfuxml.renderer.latex.content.structure.TestLatexParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
 	public static Cell create()
 	{
 		Cell cell = new Cell();
-    	cell.getContent().add(TestLatexParagraphFactory.create());
+    	cell.getContent().add(TestLatexParagraphRenderer.create());
     	return cell;
 	}
 	

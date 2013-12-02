@@ -118,7 +118,7 @@
     <xsd:element name="section">
         <xsd:complexType mixed="true">
             <xsd:sequence>
-                <xsd:element ref="title" maxOccurs="1"/>
+                <xsd:element ref="title" maxOccurs="unbounded"/>
                 <xsd:element ref="wiki:content" maxOccurs="unbounded"/>
                 <xsd:element ref="paragraph" maxOccurs="unbounded"/>
                 <xsd:element ref="section" maxOccurs="unbounded"/>
@@ -138,6 +138,7 @@
             <xsd:simpleContent>
                 <xsd:extension base="xsd:string">
                     <xsd:attribute name="numbering" type="xsd:boolean"/>
+                    <xsd:attribute name="lang" type="xsd:string"/>
                 </xsd:extension>
             </xsd:simpleContent>
         </xsd:complexType>

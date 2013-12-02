@@ -9,15 +9,15 @@ import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
-import org.openfuxml.renderer.latex.content.LatexParagraphFactory;
-import org.openfuxml.renderer.latex.content.SectionFactory;
 import org.openfuxml.renderer.latex.content.list.LatexListFactory;
+import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
+import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AbstractOfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(SectionFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexSectionRenderer.class);
 	
 	protected List<String> preTxt;
 	protected List<String> txt;
@@ -65,7 +65,7 @@ public class AbstractOfxLatexRenderer
 	
 	protected void paragraphRenderer(Paragraph paragraph, boolean preBlankLine) throws OfxAuthoringException
 	{
-		LatexParagraphFactory f = new LatexParagraphFactory(preBlankLine);
+		LatexParagraphRenderer f = new LatexParagraphRenderer(preBlankLine);
 		f.render(paragraph);
 		renderer.add(f);
 	}

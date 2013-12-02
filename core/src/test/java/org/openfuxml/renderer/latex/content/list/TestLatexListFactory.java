@@ -9,7 +9,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
-import org.openfuxml.renderer.latex.content.SectionFactory;
+import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.xml.content.list.List;
 import org.openfuxml.xml.content.list.Type;
@@ -30,7 +30,7 @@ public class TestLatexListFactory extends AbstractLatexListTest
 	public void initRenderer()
 	{
 		renderer = new LatexListFactory();
-		parentSection = new SectionFactory(0,null);
+		parentSection = new LatexSectionRenderer(0,null);
 	}
 	
 	@After public void close(){renderer=null;}

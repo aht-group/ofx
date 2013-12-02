@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.test.AbstractOfxCoreTest;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.util.reference.OfxReferenceDocumentBuilder;

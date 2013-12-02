@@ -8,8 +8,8 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.renderer.latex.content.structure.LatexDocumentRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
-import org.openfuxml.renderer.latex.util.LatexDocument;
 import org.openfuxml.xml.renderer.cmp.Pdf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +19,13 @@ public class OfxLatexRenderer
 	final static Logger logger = LoggerFactory.getLogger(OfxLatexRenderer.class);
 	
 	private LatexPreamble latexPreamble;
-	private LatexDocument latexDocument;
+	private LatexDocumentRenderer rDocument;
 	private List<String> txt;
 	
 	public OfxLatexRenderer(Pdf pdf)
 	{
 		latexPreamble = new LatexPreamble();
-		latexDocument = new LatexDocument(pdf,latexPreamble);
+		rDocument = new LatexDocumentRenderer(pdf,latexPreamble);
 		
 		txt = new ArrayList<String>();
 	}
@@ -47,11 +47,11 @@ public class OfxLatexRenderer
 		{
 			throw new OfxAuthoringException("No content available");
 		}
-		latexDocument.render(ofxdoc.getContent());
+		rDocument.render(ofxdoc.getContent());
 		latexPreamble.render();
 		
 		txt.addAll(latexPreamble.getContent());
-		txt.addAll(latexDocument.getContent());		
+		txt.addAll(rDocument.getContent());		
 	}
 	
 	public List<String> getContent(){return txt;}
