@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.content;
+package org.openfuxml.renderer.latex;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 

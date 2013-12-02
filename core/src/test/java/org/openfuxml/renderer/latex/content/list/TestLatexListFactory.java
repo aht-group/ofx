@@ -9,7 +9,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.SectionFactory;
-import org.openfuxml.renderer.processor.latex.content.list.LatexListFactory;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.xml.content.list.List;

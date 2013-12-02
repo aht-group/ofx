@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex.content.table;
+package org.openfuxml.renderer.latex.content.table;
 
 import org.openfuxml.test.AbstractOfxCoreTest;
 

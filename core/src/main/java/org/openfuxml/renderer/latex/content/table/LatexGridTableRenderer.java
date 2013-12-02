@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex.content.table;
+package org.openfuxml.renderer.latex.content.table;
 
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Body;
@@ -9,8 +9,8 @@ import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.table.util.LatexTabluarUtil;
 import org.openfuxml.renderer.processor.latex.content.StringRenderer;
-import org.openfuxml.renderer.processor.latex.content.table.util.LatexTabluarUtil;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex.content.table;
+package org.openfuxml.renderer.latex.content.table;
 
 import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.content.ofx.table.Row;
