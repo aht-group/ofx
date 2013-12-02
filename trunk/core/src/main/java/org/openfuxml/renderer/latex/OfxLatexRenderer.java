@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex;
+package org.openfuxml.renderer.latex;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -36,14 +36,22 @@ public class OfxLatexRenderer
 		{
 			logger.debug("Processing: "+ofxDocFileName);
 			Ofxdoc ofxdoc = JaxbUtil.loadJAXB(ofxDocFileName, Ofxdoc.class);
-			
-			latexDocument.render(ofxdoc.getContent());
-			latexPreamble.render();
-			
-			txt.addAll(latexPreamble.getContent());
-			txt.addAll(latexDocument.getContent());
+			render(ofxdoc);
 		}
 		catch (FileNotFoundException e) {logger.error("",e);}
+	}
+	
+	public void render(Ofxdoc ofxdoc) throws OfxAuthoringException
+	{
+		if(!ofxdoc.isSetContent())
+		{
+			throw new OfxAuthoringException("No content available");
+		}
+		latexDocument.render(ofxdoc.getContent());
+		latexPreamble.render();
+		
+		txt.addAll(latexPreamble.getContent());
+		txt.addAll(latexDocument.getContent());		
 	}
 	
 	public List<String> getContent(){return txt;}

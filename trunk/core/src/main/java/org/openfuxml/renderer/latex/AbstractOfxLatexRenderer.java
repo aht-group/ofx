@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex.util;
+package org.openfuxml.renderer.latex;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -11,6 +11,7 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.LatexParagraphFactory;
 import org.openfuxml.renderer.processor.latex.content.SectionFactory;
 import org.openfuxml.renderer.processor.latex.content.list.LatexListFactory;
+import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +40,6 @@ public class AbstractOfxLatexRenderer
 	
 	public List<String> getContent()
 	{
-		if(txt.size()!=0 && renderer.size()!=0){logger.warn("txt and renderer have content!!");}
 		List<String> resultTxt = new ArrayList<String>();
 		resultTxt.addAll(preTxt);
 		

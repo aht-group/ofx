@@ -11,7 +11,7 @@
 	
     <artifactId>ofx-client</artifactId>
     <packaging>jar</packaging>
-    <name>openFuXML Client</name>
+    <name>OFX - Client</name>
 	
 	<dependencyManagement>
 		<dependencies>      	         

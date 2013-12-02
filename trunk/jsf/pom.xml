@@ -10,7 +10,7 @@
 	
     <artifactId>ofx-jsf</artifactId>
     <packaging>jar</packaging>
-    <name>openFuXML JSF Taglib</name>
+    <name>OFX - JSF Taglib</name>
    	
 	<dependencyManagement>
 		<dependencies>      	         

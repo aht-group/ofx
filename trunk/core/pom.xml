@@ -11,7 +11,7 @@
 	
     <artifactId>ofx-core</artifactId>
     <packaging>jar</packaging>
-    <name>openFuXML Core</name>
+    <name>OFX - Core</name>
 	
 	<dependencyManagement>
 		<dependencies>      	         

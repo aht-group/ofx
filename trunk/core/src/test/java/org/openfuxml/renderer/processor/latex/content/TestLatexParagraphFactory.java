@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.test.OfxCoreTstBootstrap;
+import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,7 +51,7 @@ public class TestLatexParagraphFactory extends AbstractLatexContentTest
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTstBootstrap.init();
+    	OfxCoreTestBootstrap.init();
 			
     	TestLatexParagraphFactory.initLoremIpsum();
     	TestLatexParagraphFactory test = new TestLatexParagraphFactory();

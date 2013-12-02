@@ -11,7 +11,7 @@
 	
     <artifactId>ofx-wiki</artifactId>
     <packaging>jar</packaging>
-    <name>openFuXML Wiki</name>
+    <name>OFX - Wiki</name>
 	
 	<dependencyManagement>
 		<dependencies>      	         

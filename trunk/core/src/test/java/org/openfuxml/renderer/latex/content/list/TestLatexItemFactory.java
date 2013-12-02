@@ -11,7 +11,7 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.content.list.LatexItemFactory;
 import org.openfuxml.renderer.processor.latex.content.list.LatexListFactory;
 import org.openfuxml.renderer.processor.latex.content.list.LatexListFactory.ListType;
-import org.openfuxml.test.OfxCoreTstBootstrap;
+import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.xml.content.list.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +72,7 @@ public class TestLatexItemFactory extends AbstractLatexListTest
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTstBootstrap.init();
+    	OfxCoreTestBootstrap.init();
 			
     	TestLatexItemFactory.initLoremIpsum();
     	TestLatexItemFactory test = new TestLatexItemFactory();
