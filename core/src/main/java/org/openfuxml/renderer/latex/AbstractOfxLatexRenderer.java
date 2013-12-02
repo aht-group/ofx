@@ -8,10 +8,10 @@ import java.util.List;
 import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.OfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.LatexParagraphFactory;
+import org.openfuxml.renderer.latex.content.SectionFactory;
 import org.openfuxml.renderer.latex.content.list.LatexListFactory;
-import org.openfuxml.renderer.processor.latex.content.LatexParagraphFactory;
-import org.openfuxml.renderer.processor.latex.content.SectionFactory;
-import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

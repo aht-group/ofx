@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.renderer.latex.content.graph.LatexTreeRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.xml.addon.graph.Tree;
 import org.slf4j.Logger;
