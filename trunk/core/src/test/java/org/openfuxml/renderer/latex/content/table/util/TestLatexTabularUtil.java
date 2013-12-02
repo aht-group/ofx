@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex.content.table.util;
+package org.openfuxml.renderer.latex.content.table.util;
 
 import java.io.IOException;
 import java.util.List;

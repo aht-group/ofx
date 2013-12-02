@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex.content.listing;
+package org.openfuxml.renderer.latex.content.listing;
 
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;

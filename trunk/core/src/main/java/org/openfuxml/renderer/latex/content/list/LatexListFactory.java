@@ -1,8 +1,8 @@
-package org.openfuxml.renderer.processor.latex.content.list;
+package org.openfuxml.renderer.latex.content.list;
 
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.processor.latex.content.table.LatexCellRenderer;
+import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
 import org.openfuxml.renderer.processor.latex.util.OfxLatexRenderer;
 import org.openfuxml.xml.content.list.Item;
 import org.openfuxml.xml.content.list.List;

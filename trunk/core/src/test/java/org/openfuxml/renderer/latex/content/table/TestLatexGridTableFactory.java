@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.latex.content.table;
+package org.openfuxml.renderer.latex.content.table;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.processor.latex.content.table.util.TestLatexTabularUtil;
+import org.openfuxml.renderer.latex.content.table.util.TestLatexTabularUtil;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
