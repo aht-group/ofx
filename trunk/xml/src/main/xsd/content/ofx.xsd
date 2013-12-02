@@ -10,6 +10,14 @@
     <xsd:import namespace="http://www.openfuxml.org/list" schemaLocation="list.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/layout" schemaLocation="layout.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/wiki" schemaLocation="../addon/wiki.xsd"/>
+    <xsd:element name="document">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="metadata" maxOccurs="1"/>
+                <xsd:element ref="content" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="paragraph">
         <xsd:complexType mixed="true">
             <xsd:sequence>
@@ -26,14 +34,6 @@
                     </xsd:restriction>
                 </xsd:simpleType>
             </xsd:attribute>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="ofxdoc">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="metadata" maxOccurs="1"/>
-                <xsd:element ref="content" maxOccurs="1"/>
-            </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="metadata">

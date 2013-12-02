@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.renderer.processor.pre.OfxContainerMerger;
@@ -63,9 +63,9 @@ public class TestContainerMerger extends AbstractFileProcessingTest
 	private void render(boolean saveReference) throws FileNotFoundException, OfxInternalProcessingException
 	{
 		logger.debug(fTest.getAbsolutePath());
-		Ofxdoc ofxSrc = (Ofxdoc)JaxbUtil.loadJAXB(fTest.getAbsolutePath(), Ofxdoc.class);
+		Document ofxSrc = JaxbUtil.loadJAXB(fTest.getAbsolutePath(), Document.class);
 
-		Ofxdoc ofxDst = containerMerger.merge(ofxSrc);
+		Document ofxDst = containerMerger.merge(ofxSrc);
 		
 		if(saveReference)
 		{
@@ -73,7 +73,7 @@ public class TestContainerMerger extends AbstractFileProcessingTest
 		}
 		else
 		{
-			Ofxdoc ofxRef = (Ofxdoc)JaxbUtil.loadJAXB(fRef.getAbsolutePath(), Ofxdoc.class);
+			Document ofxRef = JaxbUtil.loadJAXB(fRef.getAbsolutePath(), Document.class);
 			Assert.assertEquals(JaxbUtil.toString(ofxRef),JaxbUtil.toString(ofxDst));
 		}	
 	}

@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.processor.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.processor.latex.util.LatexDocument;
@@ -35,13 +35,13 @@ public class OfxLatexRenderer
 		try
 		{
 			logger.debug("Processing: "+ofxDocFileName);
-			Ofxdoc ofxdoc = JaxbUtil.loadJAXB(ofxDocFileName, Ofxdoc.class);
+			Document ofxdoc = JaxbUtil.loadJAXB(ofxDocFileName, Document.class);
 			render(ofxdoc);
 		}
 		catch (FileNotFoundException e) {logger.error("",e);}
 	}
 	
-	public void render(Ofxdoc ofxdoc) throws OfxAuthoringException
+	public void render(Document ofxdoc) throws OfxAuthoringException
 	{
 		if(!ofxdoc.isSetContent())
 		{

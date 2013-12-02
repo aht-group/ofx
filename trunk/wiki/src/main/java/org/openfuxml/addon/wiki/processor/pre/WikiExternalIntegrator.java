@@ -6,14 +6,13 @@ import java.util.List;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.Namespace;
 import org.jdom2.xpath.XPath;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
-import org.openfuxml.content.ofx.Ofxdoc;
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,7 @@ public class WikiExternalIntegrator
 	private int counter;
 	private String wikiXmlDirName;
 	
-	private Ofxdoc ofxDocWithWikisAsExternal;
+	private Document ofxDocWithWikisAsExternal;
 	private Contents wikiQueries;
 	
 	public WikiExternalIntegrator(String wikiXmlDirName)
@@ -47,9 +46,9 @@ public class WikiExternalIntegrator
 		wikiQueries = new Contents();
 	}
 	
-	public void integrateWikiAsExternal(Ofxdoc ofxDoc) throws OfxAuthoringException
+	public void integrateWikiAsExternal(Document ofxDoc) throws OfxAuthoringException
 	{
-		Document doc = JaxbUtil.toDocument(ofxDoc);
+		org.jdom2.Document doc = JaxbUtil.toDocument(ofxDoc);
 		
 		try
 		{
@@ -74,10 +73,10 @@ public class WikiExternalIntegrator
 		}
 		catch (JDOMException e) {logger.error("",e);}
 
-		ofxDocWithWikisAsExternal = (Ofxdoc)JDomUtil.toJaxb(doc, Ofxdoc.class);
+		ofxDocWithWikisAsExternal = (Document)JDomUtil.toJaxb(doc, Document.class);
 	}
 	
-	public Ofxdoc getResult() {return ofxDocWithWikisAsExternal;}
+	public Document getResult() {return ofxDocWithWikisAsExternal;}
 	public Contents getWikiQueries() {return wikiQueries;}
 	
 	
