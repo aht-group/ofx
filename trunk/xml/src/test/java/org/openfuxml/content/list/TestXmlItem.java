@@ -1,4 +1,4 @@
-package org.openfuxml.xml.content.list;
+package org.openfuxml.content.list;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openfuxml.model.xml.content.ofx.TestXmlParagraph;
+import org.openfuxml.content.ofx.TestXmlParagraph;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.openfuxml.xml.content.list.Item;
 import org.slf4j.Logger;
