@@ -24,6 +24,7 @@
                 <xsd:element ref="emphasis" maxOccurs="unbounded"/>
                 <xsd:element ref="reference" maxOccurs="unbounded"/>
             </xsd:sequence>
+            <xsd:attribute name="lang" type="xsd:string"/>
             <xsd:attribute name="top" use="required">
                 <xsd:simpleType>
                     <xsd:restriction base="xsd:string">

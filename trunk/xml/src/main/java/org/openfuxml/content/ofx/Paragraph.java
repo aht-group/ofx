@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{http://www.openfuxml.org}emphasis" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org}reference" maxOccurs="unbounded"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="top" use="required">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -59,6 +60,8 @@ public class Paragraph implements Serializable
     })
     @XmlMixed
     protected List<Serializable> content;
+    @XmlAttribute(name = "lang")
+    protected String lang;
     @XmlAttribute(name = "top", required = true)
     protected String top;
 
@@ -80,9 +83,9 @@ public class Paragraph implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
      * {@link Reference }
      * {@link Emphasis }
+     * {@link String }
      * 
      * 
      */
@@ -99,6 +102,34 @@ public class Paragraph implements Serializable
 
     public void unsetContent() {
         this.content = null;
+    }
+
+    /**
+     * Gets the value of the lang property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getLang() {
+        return lang;
+    }
+
+    /**
+     * Sets the value of the lang property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLang(String value) {
+        this.lang = value;
+    }
+
+    public boolean isSetLang() {
+        return (this.lang!= null);
     }
 
     /**

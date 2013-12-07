@@ -48,7 +48,7 @@
    	   	<dependency>
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
    	   	
 		<dependency>

@@ -63,8 +63,8 @@ public class Section implements Serializable
         @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
         @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
         @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class),
-        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.xml.content.list.List.class),
-        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class)
+        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
+        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.xml.content.list.List.class)
     })
     @XmlMixed
     protected java.util.List<Serializable> content;
@@ -100,10 +100,10 @@ public class Section implements Serializable
      * {@link Template }
      * {@link Section }
      * {@link Content }
+     * {@link String }
      * {@link Sections }
      * {@link Table }
      * {@link Title }
-     * {@link String }
      * {@link org.openfuxml.xml.content.list.List }
      * {@link Paragraph }
      * 
