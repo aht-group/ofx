@@ -21,7 +21,6 @@ public class LatexPreamble extends AbstractOfxLatexRenderer implements OfxLatexR
 	
 	public void render()
 	{
-		
 		renderer.add(article);
 	}
 	

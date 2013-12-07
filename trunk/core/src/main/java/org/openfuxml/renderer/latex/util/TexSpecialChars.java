@@ -14,6 +14,8 @@ public class TexSpecialChars extends AbstractOfxLatexRenderer implements OfxLate
 		s=s.replaceAll("#", "\\\\#");
 		s=s.replaceAll("∞","\\$ \\\\inf \\$");
 		s=s.replaceAll("&", "\\&");
+        s=s.replaceAll("\\\\", "/");
+        s=s.replaceAll("_", "\\\\_");
 		return s;
 
 	}

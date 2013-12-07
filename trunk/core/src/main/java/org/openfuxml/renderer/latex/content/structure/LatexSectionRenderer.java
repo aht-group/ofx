@@ -7,7 +7,6 @@ import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.latex.content.SectionTitleFactory;
 import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.xml.content.list.List;
@@ -33,7 +32,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		for(Object s : section.getContent())
 		{
 			if     (s instanceof String){}
-			else if(s instanceof Title){renderTitle((Title)s);}
+			else if(s instanceof Title){renderTitle(section,(Title)s);}
 			else if(s instanceof Section){renderSection((Section)s);}
 			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,true);}
 			else if(s instanceof Table){renderTable((Table)s);}
@@ -44,10 +43,10 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		
 	}
 	
-	private void renderTitle(Title title)
+	private void renderTitle(Section section,Title title)
 	{
-		SectionTitleFactory stf = new SectionTitleFactory(lvl,latexPreamble);
-		stf.render(title);
+		LatexSectionTitleRenderer stf = new LatexSectionTitleRenderer(lvl,latexPreamble);
+		stf.render(section,title);
 		renderer.add(stf);
 	}
 	
