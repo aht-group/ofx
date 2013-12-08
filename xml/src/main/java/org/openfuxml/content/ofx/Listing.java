@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{http://www.openfuxml.org}raw"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="codeLang" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -37,8 +38,7 @@ import javax.xml.bind.annotation.XmlType;
     "raw"
 })
 @XmlRootElement(name = "listing")
-public class Listing
-    implements Serializable
+public class Listing implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
@@ -48,6 +48,8 @@ public class Listing
     protected Raw raw;
     @XmlAttribute(name = "id")
     protected String id;
+    @XmlAttribute(name = "codeLang")
+    protected String codeLang;
 
     /**
      * Gets the value of the title property.
@@ -131,6 +133,34 @@ public class Listing
 
     public boolean isSetId() {
         return (this.id!= null);
+    }
+
+    /**
+     * Gets the value of the codeLang property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCodeLang() {
+        return codeLang;
+    }
+
+    /**
+     * Sets the value of the codeLang property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCodeLang(String value) {
+        this.codeLang = value;
+    }
+
+    public boolean isSetCodeLang() {
+        return (this.codeLang!= null);
     }
 
 }

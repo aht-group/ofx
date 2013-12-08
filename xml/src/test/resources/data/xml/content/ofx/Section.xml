@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ofx:section xmlns:wiki="http://www.openfuxml.org/wiki" xmlns:ofx="http://www.openfuxml.org" xmlns:layout="http://www.openfuxml.org/layout" xmlns:table="http://www.openfuxml.org/table" xmlns:l="http://www.openfuxml.org/list" lang="myLang">
+<ofx:section xmlns:ofx="http://www.openfuxml.org" xmlns:wiki="http://www.openfuxml.org/wiki" xmlns:l="http://www.openfuxml.org/list" xmlns:layout="http://www.openfuxml.org/layout" xmlns:table="http://www.openfuxml.org/table" lang="myLang">
     <ofx:title numbering="true" lang="myLang">myTitle</ofx:title>
     <ofx:title numbering="true" lang="myLang">myTitle</ofx:title>
     <ofx:paragraph/>
+    <ofx:listing id="myId" codeLang="myCodeLang"/>
 </ofx:section>

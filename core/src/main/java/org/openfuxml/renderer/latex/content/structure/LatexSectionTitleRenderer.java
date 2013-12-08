@@ -30,10 +30,8 @@ public class LatexSectionTitleRenderer extends AbstractOfxLatexRenderer implemen
 		txt.add("");
 
 		StringBuffer sb = new StringBuffer();
-		sb.append("\\");
-		sb.append(latexPreamble.getSectionHeaderName(lvl)).append("{");
-		sb.append(title.getValue());
-		sb.append("}");
+		sb.append("\\").append(latexPreamble.getSectionHeaderName(lvl));
+        sb.append("{").append(title.getValue()).append("}");
 		txt.add(sb.toString());
 
         if(section!=null && section.isSetId())

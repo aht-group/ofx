@@ -12,6 +12,7 @@ import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.list.LatexListFactory;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
+import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,4 +77,9 @@ public class AbstractOfxLatexRenderer
 		f.render(list,parent);
 		renderer.add(f);
 	}
+
+    protected void addString(String s)
+    {
+        txt.add(TexSpecialChars.replace(s));
+    }
 }

@@ -12,49 +12,40 @@ import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlSection extends AbstractXmlOfxTest
+public class TestXmlRaw extends AbstractXmlOfxTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		setXmlFile(dirSuffix, Section.class);
+		setXmlFile(dirSuffix, Raw.class);
 	}
     
     @Ignore @Test
     public void jaxbStructure() throws FileNotFoundException
     {
-    	Section actual = create(true);
-    	Section expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Section.class);
+        Raw actual = create();
+        Raw expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Raw.class);
     	assertJaxbEquals(expected, actual);
     }
    
-    public static Section create(boolean withChilds)
+    public static Raw create()
     {
-    	Section xml = new Section();
-    	xml.setLang("myLang");
-    	
-    	logger.warn("Not fully implemented");
-    	if(withChilds)
-    	{
-    		xml.getContent().add(TestXmlTitle.create(false));
-    		xml.getContent().add(TestXmlTitle.create(false));
-    		xml.getContent().add(TestXmlParagraph.create(false));
-            xml.getContent().add(TestXmlListing.create(false));
-    	}
+        Raw xml = new Raw();
+    	xml.setValue("myValue");
     	
     	return xml;
     }
     
-    public void save() {save(create(true),fXml,false);}
+    public void save() {save(create(),fXml,false);}
 	
 	public static void main(String[] args)
     {
 		OfxXmlTstBootstrap.init();
 			
-		TestXmlSection.initFiles();	
-		TestXmlSection test = new TestXmlSection();
+		TestXmlRaw.initFiles();
+		TestXmlRaw test = new TestXmlRaw();
 		test.save();
     }
 }

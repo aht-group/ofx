@@ -30,6 +30,7 @@ import org.openfuxml.content.ofx.table.Table;
  *         &lt;element ref="{http://www.openfuxml.org/wiki}content" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org}paragraph" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org}section" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org}listing" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org}sections" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org/table}table" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org/list}list" maxOccurs="unbounded"/>
@@ -57,14 +58,15 @@ public class Section implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
-        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
-        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
+        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
         @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
+        @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
         @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class),
+        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.xml.content.list.List.class),
+        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
         @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
-        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.xml.content.list.List.class)
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
+        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class)
     })
     @XmlMixed
     protected java.util.List<Serializable> content;
@@ -97,14 +99,15 @@ public class Section implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link Listing }
+     * {@link Table }
      * {@link Template }
-     * {@link Section }
-     * {@link Content }
+     * {@link org.openfuxml.xml.content.list.List }
+     * {@link Title }
      * {@link String }
      * {@link Sections }
-     * {@link Table }
-     * {@link Title }
-     * {@link org.openfuxml.xml.content.list.List }
+     * {@link Section }
+     * {@link Content }
      * {@link Paragraph }
      * 
      * 
