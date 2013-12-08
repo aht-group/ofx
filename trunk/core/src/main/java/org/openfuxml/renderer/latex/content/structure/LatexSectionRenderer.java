@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.structure;
 
+import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
@@ -7,6 +8,7 @@ import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.listing.LatexListingRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.xml.content.list.List;
@@ -37,6 +39,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,true);}
 			else if(s instanceof Table){renderTable((Table)s);}
 			else if(s instanceof List){renderList((List)s,this);}
+            else if(s instanceof Listing){renderListing((Listing)s);}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
 		}
 //		if(section.getContent()logger.debug(getSectionHeader("x"));
@@ -63,4 +66,11 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		sf.render(section);
 		renderer.add(sf);
 	}
+
+    private void renderListing(Listing listing) throws OfxAuthoringException
+    {
+        LatexListingRenderer r = new LatexListingRenderer();
+        r.render(listing);
+        renderer.add(r);
+    }
 }

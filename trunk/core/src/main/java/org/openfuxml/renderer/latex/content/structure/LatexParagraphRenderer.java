@@ -4,7 +4,6 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,10 +30,5 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 			if(o instanceof String){addString((String)o);}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
-	}
-	
-	private void addString(String s)
-	{
-		txt.add(TexSpecialChars.replace(s));
 	}
 }

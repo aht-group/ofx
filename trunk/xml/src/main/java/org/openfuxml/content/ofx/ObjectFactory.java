@@ -86,6 +86,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Listing }
+     * 
+     */
+    public Listing createListing() {
+        return new Listing();
+    }
+
+    /**
      * Create an instance of {@link Sections }
      * 
      */
@@ -107,14 +115,6 @@ public class ObjectFactory {
      */
     public Metadata createMetadata() {
         return new Metadata();
-    }
-
-    /**
-     * Create an instance of {@link Listing }
-     * 
-     */
-    public Listing createListing() {
-        return new Listing();
     }
 
 }
