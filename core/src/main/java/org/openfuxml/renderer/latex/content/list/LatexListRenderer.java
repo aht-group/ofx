@@ -1,6 +1,7 @@
 package org.openfuxml.renderer.latex.content.list;
 
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.xml.ofx.list.XmlListFactory;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
@@ -10,16 +11,15 @@ import org.openfuxml.xml.content.list.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LatexListFactory extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(LatexListFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexListRenderer.class);
 
-	private static enum Ordering {ordered,unordered}
 	public static enum ListType {description,list}
 	
 	private ListType listType;
 	
-	public LatexListFactory()
+	public LatexListRenderer()
 	{
 
 	}
@@ -51,7 +51,7 @@ public class LatexListFactory extends AbstractOfxLatexRenderer implements OfxLat
 		{
 			listType = ListType.list;
 			
-			Ordering ordering = Ordering.valueOf(xmlType.getOrdering());
+			XmlListFactory.Ordering ordering = XmlListFactory.Ordering.valueOf(xmlType.getOrdering());
 			switch(ordering)
 			{
 				case unordered: setUnordered(parent);break;

@@ -45,7 +45,7 @@ public class TestLatexItemFactory extends AbstractLatexListTest
     public void itemize() throws IOException, OfxAuthoringException
     {
     	f = new File(rootDir,dir+"/"+Key.itemize+".txt");
-    	renderer.render(LatexListFactory.ListType.list,createItem());
+    	renderer.render(LatexListRenderer.ListType.list,createItem());
     	debug(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
@@ -54,14 +54,14 @@ public class TestLatexItemFactory extends AbstractLatexListTest
     @Test(expected=OfxAuthoringException.class)
     public void descriptionNoItemName() throws IOException, OfxAuthoringException
     {
-    	renderer.render(LatexListFactory.ListType.description,createItem());
+    	renderer.render(LatexListRenderer.ListType.description,createItem());
     }
     
     @Test
     public void description() throws IOException, OfxAuthoringException
     {
     	f = new File(rootDir,dir+"/"+Key.description+".txt");
-    	renderer.render(LatexListFactory.ListType.description,createItem(li.getWords(1)));
+    	renderer.render(LatexListRenderer.ListType.description,createItem(li.getWords(1)));
     	debug(renderer);
     	save(renderer,f);
     	assertText(renderer,f);

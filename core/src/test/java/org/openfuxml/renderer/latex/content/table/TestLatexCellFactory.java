@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.latex.content.list.TestLatexListFactory;
+import org.openfuxml.renderer.latex.content.list.TestLatexListRenderer;
 import org.openfuxml.renderer.latex.content.structure.TestLatexParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
@@ -52,7 +52,7 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
     public void list() throws IOException, OfxAuthoringException
     {    	
     	Cell cell = new Cell();
-    	cell.getContent().add(TestLatexListFactory.createList());
+    	cell.getContent().add(TestLatexListRenderer.createList());
     	
     	f = new File(rootDir,dir+"/"+Key.list+".txt");
     	renderer.render(cell);
