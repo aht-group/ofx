@@ -3,6 +3,8 @@ package org.openfuxml.renderer.latex.content.list;
 import java.io.File;
 import java.io.IOException;
 
+import net.sf.exlp.util.xml.JaxbUtil;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -16,20 +18,20 @@ import org.openfuxml.xml.content.list.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestLatexListFactory extends AbstractLatexListTest
+public class TestLatexListRenderer extends AbstractLatexListTest
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestLatexListFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TestLatexListRenderer.class);
 	
 	private static enum Key {ordered,unordered,description}
 	private String dir = "list";
 	
-	private LatexListFactory renderer;
+	private LatexListRenderer renderer;
 	private OfxLatexRenderer parentSection;
 	
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexListFactory();
+		renderer = new LatexListRenderer();
 		parentSection = new LatexSectionRenderer(0,null);
 	}
 	
@@ -87,6 +89,7 @@ public class TestLatexListFactory extends AbstractLatexListTest
     	f = new File(rootDir,dir+"/"+Key.unordered+".txt");
     	List list = createList();
     	list.getItem().add(TestLatexItemFactory.createItem());
+    	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
     	debug(renderer);
     	save(renderer,f);
@@ -100,6 +103,7 @@ public class TestLatexListFactory extends AbstractLatexListTest
     	List list = createList();
     	list.getType().setOrdering("ordered");
     	list.getItem().add(TestLatexItemFactory.createItem());
+    	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
     	debug(renderer);
     	save(renderer,f);
@@ -125,13 +129,13 @@ public class TestLatexListFactory extends AbstractLatexListTest
     {
     	OfxCoreTestBootstrap.init();
 			
-    	TestLatexListFactory.initLoremIpsum();
-    	TestLatexListFactory test = new TestLatexListFactory();
-    	test.setSaveReference(true);
+    	TestLatexListRenderer.initLoremIpsum();
+    	TestLatexListRenderer test = new TestLatexListRenderer();
+    	test.setSaveReference(false);
     	
-//    	test.initRenderer();test.unordered();   	
+    	test.initRenderer();test.unordered();   	
 //    	test.initRenderer();test.ordered();
-    	test.initRenderer();test.description();
+//    	test.initRenderer();test.description();
     	
     }
    

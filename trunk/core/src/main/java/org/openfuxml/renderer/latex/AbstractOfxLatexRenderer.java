@@ -9,7 +9,7 @@ import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
-import org.openfuxml.renderer.latex.content.list.LatexListFactory;
+import org.openfuxml.renderer.latex.content.list.LatexListRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;
@@ -73,7 +73,7 @@ public class AbstractOfxLatexRenderer
 	
 	protected void renderList(org.openfuxml.xml.content.list.List list,OfxLatexRenderer parent) throws OfxAuthoringException
 	{
-		LatexListFactory f = new LatexListFactory();
+		LatexListRenderer f = new LatexListRenderer();
 		f.render(list,parent);
 		renderer.add(f);
 	}

@@ -4,7 +4,7 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.latex.content.list.LatexListFactory.ListType;
+import org.openfuxml.renderer.latex.content.list.LatexListRenderer.ListType;
 import org.openfuxml.xml.content.list.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class LatexItemFactory extends AbstractOfxLatexRenderer implements OfxLat
 		StringBuffer sb = new StringBuffer();
 		sb.append("\\item");
 		
-		if(lt==LatexListFactory.ListType.description)
+		if(lt==LatexListRenderer.ListType.description)
 		{
 			if(!item.isSetName()){throw new OfxAuthoringException("<description.list> needss a item@name");}
 			sb.append(" [").append(item.getName()).append("]");
