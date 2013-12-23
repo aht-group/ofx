@@ -10,6 +10,7 @@ import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.content.structure.LatexDocumentRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
+import org.openfuxml.renderer.util.OfxDocumentStructureVerifier;
 import org.openfuxml.xml.renderer.cmp.Pdf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,13 +42,10 @@ public class OfxLatexRenderer
 		catch (FileNotFoundException e) {logger.error("",e);}
 	}
 	
-	public void render(Document ofxdoc) throws OfxAuthoringException
+	public void render(Document ofxDocument) throws OfxAuthoringException
 	{
-		if(!ofxdoc.isSetContent())
-		{
-			throw new OfxAuthoringException("No content available");
-		}
-		rDocument.render(ofxdoc.getContent());
+		OfxDocumentStructureVerifier.checkForContent(ofxDocument);
+		rDocument.render(ofxDocument.getContent());
 		latexPreamble.render();
 		
 		txt.addAll(latexPreamble.getContent());
