@@ -94,11 +94,7 @@
 			<artifactId>jsf-api</artifactId>
 			<version>2.1.14</version>
 		</dependency>
-		<dependency>
-			<groupId>net.sf.ahtutils</groupId>
-			<artifactId>ahtutils-jsf</artifactId>
-			<version>0.2.5-SNAPSHOT</version>
-		</dependency>
+
 	</dependencies>
 	
 </project>
