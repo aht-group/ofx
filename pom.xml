@@ -68,9 +68,9 @@
 	</licenses>
 
 	<scm>
-    	<connection>scm:svn:https://openfuxml.svn.sourceforge.net/svnroot/openfuxml/trunk</connection>
-    	<developerConnection>scm:svn:https://openfuxml.svn.sourceforge.net/svnroot/openfuxml/trunk</developerConnection>
-    	<url>https://openfuxml.svn.sourceforge.net/svnroot/openfuxml/trunk/</url>
+    	<connection>scm:svn:https://svn.code.sf.net/p/openfuxml/code/trunk</connection>
+    	<developerConnection>scm:svn:https://svn.code.sf.net/p/openfuxml/code/trunk</developerConnection>
+    	<url>https://svn.code.sf.net/p/openfuxml/code/trunk/</url>
 	</scm>
 	
 	<developers>
