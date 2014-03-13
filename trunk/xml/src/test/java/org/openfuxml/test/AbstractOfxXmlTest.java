@@ -1,6 +1,5 @@
 package org.openfuxml.test;
 
-import net.sf.ahtutils.test.AbstractAhtUtilsXmlTest;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 

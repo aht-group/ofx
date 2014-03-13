@@ -8,8 +8,6 @@ import javax.faces.component.UIPanel;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import net.sf.ahtutils.jsf.util.ComponentAttribute;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +25,9 @@ public class OutputText extends UIPanel
 		
 		StringBuffer sb = new StringBuffer();
 		
-		boolean bold = ComponentAttribute.getBoolean("bold", false, context, this);
-		boolean italic = ComponentAttribute.getBoolean("italic", false, context, this);
+		logger.warn("Attributes corrently disables");
+		boolean bold = false;//ComponentAttribute.getBoolean("bold", false, context, this);
+		boolean italic = false;//ComponentAttribute.getBoolean("italic", false, context, this);
 		
 //		logger.info("******************");
 //		logger.info("bold: "+bold);
