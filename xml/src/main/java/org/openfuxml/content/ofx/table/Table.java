@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Title;
 
 
@@ -23,6 +24,7 @@ import org.openfuxml.content.ofx.Title;
  *         &lt;element ref="{http://www.openfuxml.org}title" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org/table}specification" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org/table}content"/>
+ *         &lt;element ref="{http://www.openfuxml.org}comment" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +37,8 @@ import org.openfuxml.content.ofx.Title;
 @XmlType(name = "", propOrder = {
     "title",
     "specification",
-    "content"
+    "content",
+    "comment"
 })
 @XmlRootElement(name = "table")
 public class Table implements Serializable
@@ -47,6 +50,8 @@ public class Table implements Serializable
     protected Specification specification;
     @XmlElement(required = true)
     protected Content content;
+    @XmlElement(namespace = "http://www.openfuxml.org")
+    protected Comment comment;
 
     /**
      * Gets the value of the title property.
@@ -130,6 +135,34 @@ public class Table implements Serializable
 
     public boolean isSetContent() {
         return (this.content!= null);
+    }
+
+    /**
+     * Gets the value of the comment property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Comment }
+     *     
+     */
+    public Comment getComment() {
+        return comment;
+    }
+
+    /**
+     * Sets the value of the comment property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Comment }
+     *     
+     */
+    public void setComment(Comment value) {
+        this.comment = value;
+    }
+
+    public boolean isSetComment() {
+        return (this.comment!= null);
     }
 
 }
