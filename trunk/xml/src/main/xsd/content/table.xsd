@@ -18,6 +18,7 @@
                 <xsd:element ref="ofx:title" minOccurs="0" maxOccurs="1"/>
                 <xsd:element ref="t:specification" minOccurs="0" maxOccurs="1"/>
                 <xsd:element ref="t:content" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="ofx:comment" minOccurs="0" maxOccurs="1"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
