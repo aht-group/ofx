@@ -61,5 +61,4 @@ public class TestLatexParagraphRenderer extends AbstractLatexContentTest
  //   	test.withBlank();
     	test.withoutBlank();
     }
-   
 }

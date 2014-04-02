@@ -1,5 +1,8 @@
 package org.openfuxml.renderer.latex.content.table;
 
+import net.sf.exlp.util.xml.JaxbUtil;
+
+import org.openfuxml.content.ofx.Emphasis;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Body;
 import org.openfuxml.content.ofx.table.Content;
@@ -16,13 +19,13 @@ import org.openfuxml.renderer.latex.util.OfxLatexComment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LatexGridTableRenderer extends AbstractOfxLatexRenderer implements OfxLatexTableRenderer
+public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements OfxLatexTableRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(LatexGridTableRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexLineTableRenderer.class);
 	
-	public LatexGridTableRenderer()
+	public LatexLineTableRenderer()
 	{
-		logger.info("PostConstruct");
+		logger.trace("PostConstruct");
 	}
 	
 	public void render(Table table) throws OfxAuthoringException
@@ -37,7 +40,10 @@ public class LatexGridTableRenderer extends AbstractOfxLatexRenderer implements 
 	private void renderPre()
 	{
 		preTxt.add("");
+		preTxt.addAll(OfxLatexComment.line());
 		preTxt.addAll(OfxLatexComment.comment("Rendering a Latex table with: "+this.getClass().getSimpleName()));
+		
+		preTxt.add("");
 		preTxt.add("\\begin{table}[htb]");
 		preTxt.add("\\centering");
 	}
@@ -54,16 +60,16 @@ public class LatexGridTableRenderer extends AbstractOfxLatexRenderer implements 
 	
 	private void renderTabular(Specification specification, Content tgroup) throws OfxAuthoringException
 	{
-		renderSpecification(specification);
+		openTablular(specification);
 		renderTableHeader(tgroup.getHead());
 		
 		if(tgroup.getBody().size()!=1){throw new OfxAuthoringException("<content> must exactly have 1 body!");}
 		renderBody(tgroup.getBody().get(0));
 		
-		renderer.add(new StringRenderer("\\end{tabular}"));
+		closeTablular();
 	}
 	
-	private void renderSpecification(Specification spec)
+	private void openTablular(Specification spec)
 	{
 		LatexTabluarUtil latexTabular = new LatexTabluarUtil(spec.getColumns());
 		
@@ -71,30 +77,39 @@ public class LatexGridTableRenderer extends AbstractOfxLatexRenderer implements 
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("\\begin{tabular}");
-		sb.append("{|");
+		sb.append("{");
 		for(int i=0;i<spec.getColumns().getColumn().size();i++)
 		{
 			sb.append(latexTabular.getColDefinition(i));
-			sb.append("|");
+			sb.append("");
 		}
 		sb.append("}");
 		renderer.add(new StringRenderer(sb.toString()));
 	}
 	
-	private void renderTableHeader(Head head) throws OfxAuthoringException
+	private void closeTablular()
 	{
-		renderer.add(new StringRenderer("\\hline"));
+		renderer.add(new StringRenderer("\\bottomrule"));
+		renderer.add(new StringRenderer("\\end{tabular}"));
+	}
+	
+	private void renderTableHeader(Head head) throws OfxAuthoringException
+	{	
+		Emphasis emphasis = new Emphasis();
+		emphasis.setBold(true);
+		
+		renderer.add(new StringRenderer("\\toprule"));
 		if(head!=null)
 		{
+			JaxbUtil.info(head);
 			for(Row row : head.getRow())
 			{
-				LatexRowRenderer f = new LatexRowRenderer();
+				LatexRowRenderer f = new LatexRowRenderer(emphasis);
 				f.render(row);
 				renderer.add(f);
-				renderer.add(new StringRenderer("\\hline"));
 			}
-			renderer.add(new StringRenderer("\\hline"));
 		}
+		renderer.add(new StringRenderer("\\midrule"));
 	}
 	
 	private void renderBody(Body tbody) throws OfxAuthoringException
@@ -104,7 +119,6 @@ public class LatexGridTableRenderer extends AbstractOfxLatexRenderer implements 
 			LatexRowRenderer f = new LatexRowRenderer();
 			f.render(row);
 			renderer.add(f);
-			renderer.add(new StringRenderer("\\hline"));
 		}
 	}
 }
