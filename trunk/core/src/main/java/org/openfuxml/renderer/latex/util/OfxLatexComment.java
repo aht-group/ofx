@@ -10,6 +10,8 @@ public class OfxLatexComment
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxLatexComment.class);
 	
+	public static List<String> line(){return comment("******************************************",false);}
+	public static List<String> comment(String comment){return comment(comment,false);}
 	public static List<String> comment(String comment, boolean postLine)
 	{
 		List<String> result = new ArrayList<String>();

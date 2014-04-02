@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.table;
 
+import org.openfuxml.content.ofx.Emphasis;
 import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -13,8 +14,12 @@ public class LatexRowRenderer extends AbstractOfxLatexRenderer implements OfxLat
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexRowRenderer.class);
 	
-	public LatexRowRenderer()
+	private Emphasis emphasisOverride;
+	
+	public LatexRowRenderer(){this(null);}
+	public LatexRowRenderer(Emphasis emphasis)
 	{
+		this.emphasisOverride=emphasis;
 		postTxt.add("\\\\");
 	}
 	
@@ -27,7 +32,7 @@ public class LatexRowRenderer extends AbstractOfxLatexRenderer implements OfxLat
 			if(!firstCell){renderer.add(new StringRenderer("&"));}
 			firstCell = false;
 			
-			LatexCellRenderer f = new LatexCellRenderer();
+			LatexCellRenderer f = new LatexCellRenderer(emphasisOverride);
 			f.render(cell);
 			renderer.add(f);
 		}

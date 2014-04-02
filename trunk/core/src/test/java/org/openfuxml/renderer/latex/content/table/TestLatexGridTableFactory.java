@@ -111,7 +111,7 @@ public class TestLatexGridTableFactory extends AbstractLatexTableTest
     	test.setSaveReference(true);
     	
 //    	test.initRenderer();test.withoutSpecification();
-//    	test.initRenderer();test.table();
+    	test.initRenderer();test.table();
     	test.initRenderer();test.withHead();
     }
 }
