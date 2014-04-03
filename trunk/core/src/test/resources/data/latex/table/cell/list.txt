@@ -1,6 +1,6 @@
 
 \begin{compactitem}
-% ******************************************
+% ******************************************************
 % Rendering a (list) List with: LatexListRenderer
-
 \end{compactitem}
+
