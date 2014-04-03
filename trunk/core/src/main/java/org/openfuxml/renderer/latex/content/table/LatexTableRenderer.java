@@ -22,9 +22,6 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 	
 	public void render(Table table) throws OfxAuthoringException
 	{	
-		
-		
-		
 		OfxLatexTableRenderer tableRenderer;
 		Type type = Type.line;
 		
@@ -35,7 +32,7 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		}
 		
 		preTxt.add("");
-		preTxt.addAll(LatexCommentRenderer.line());
+		preTxt.addAll(LatexCommentRenderer.stars());
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a Latex table with: "+tableRenderer.getClass().getSimpleName()));
 		if(table.isSetComment())
 		{

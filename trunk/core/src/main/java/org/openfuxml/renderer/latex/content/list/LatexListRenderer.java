@@ -27,10 +27,11 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	public void render(List list, OfxLatexRenderer parent) throws OfxAuthoringException
 	{	
+		preTxt.add("");
 		if(!list.isSetType()){throw new OfxAuthoringException("<type> not defined for <list>");}
 		setEnvironment(list.getType(),parent);
 		
-		preTxt.addAll(LatexCommentRenderer.line());
+		preTxt.addAll(LatexCommentRenderer.stars());
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a ("+listType+") List with: "+this.getClass().getSimpleName()));
 		if(list.isSetComment())
 		{
@@ -45,13 +46,11 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 			f.render(listType,item);
 			renderer.add(f);
 		}
+		postTxt.add("");
 	}
 	
 	private void setEnvironment(Type xmlType, OfxLatexRenderer parent) throws OfxAuthoringException
 	{
-		preTxt.add("");
-		postTxt.add("");
-		
 		if(xmlType.isSetDescription() && xmlType.isDescription())
 		{
 			listType = ListType.description;

@@ -28,7 +28,7 @@ public class LatexCommentRenderer extends AbstractOfxLatexRenderer implements Of
 		}
 	}
 	
-	public static List<String> line(){return comment("******************************************",false);}
+	public static List<String> stars(){return comment("******************************************************",false);}
 	public static List<String> comment(String comment){return comment(comment,false);}
 	public static List<String> comment(String comment, boolean postLine)
 	{
