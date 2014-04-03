@@ -4,6 +4,7 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.list.XmlListFactory;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.LatexCommentRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
 import org.openfuxml.xml.content.list.Item;
 import org.openfuxml.xml.content.list.List;
@@ -29,6 +30,15 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		if(!list.isSetType()){throw new OfxAuthoringException("<type> not defined for <list>");}
 		setEnvironment(list.getType(),parent);
 		
+		preTxt.addAll(LatexCommentRenderer.line());
+		preTxt.addAll(LatexCommentRenderer.comment("Rendering a ("+listType+") List with: "+this.getClass().getSimpleName()));
+		if(list.isSetComment())
+		{
+			LatexCommentRenderer rComment = new LatexCommentRenderer();
+			rComment.render(list.getComment());
+			renderer.add(rComment);
+		}
+		
 		for(Item item : list.getItem())
 		{
 			LatexItemFactory f = new LatexItemFactory();
@@ -41,6 +51,7 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	{
 		preTxt.add("");
 		postTxt.add("");
+		
 		if(xmlType.isSetDescription() && xmlType.isDescription())
 		{
 			listType = ListType.description;

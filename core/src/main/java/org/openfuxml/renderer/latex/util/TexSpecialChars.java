@@ -10,11 +10,11 @@ public class TexSpecialChars extends AbstractOfxLatexRenderer implements OfxLate
 	final static Logger logger = LoggerFactory.getLogger(TexSpecialChars.class);
 	
 	public static String replace(String s)
-	{
+	{		
+//		s=s.replaceAll("\\\\", "/");
 		s=s.replaceAll("#", "\\\\#");
 		s=s.replaceAll("∞","\\$ \\\\inf \\$");
-		s=s.replaceAll("&", "\\&");
-        s=s.replaceAll("\\\\", "/");
+		s=s.replaceAll("&", "\\\\&");
         s=s.replaceAll("_", "\\\\_");
 		return s;
 

@@ -1,4 +1,4 @@
-package org.openfuxml.content.table;
+package org.openfuxml.content.list;
 
 import java.io.FileNotFoundException;
 
@@ -7,38 +7,39 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.content.ofx.TestXmlComment;
-import org.openfuxml.content.ofx.table.Table;
-import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.xml.content.list.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlTable extends AbstractXmlTableTest
+public class TestXmlList extends AbstractXmlListTest
 {	
-	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlList.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		setXmlFile(dirSuffix, Table.class);
+		setXmlFile(dirSuffix, List.class);
 	}
     
     @Test
-    public void jaxbStructure() throws FileNotFoundException
+    public void testXml() throws FileNotFoundException
     {
-    	Table actual = create(true);
-    	Table expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Table.class);
+    	List actual = create(true);
+    	List expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), List.class);
     	assertJaxbEquals(expected, actual);
     }
    
-    public static Table create(boolean withChilds)
+    public static List create(boolean withChilds)
     {
-    	Table xml = new Table();
-    	xml.setId("myId");
+    	List xml = new List();
     	
     	if(withChilds)
     	{
     		xml.setComment(TestXmlComment.create(false));
+    		xml.setType(TestXmlType.create(false));
+    		
+    		xml.getItem().add(TestXmlItem.create(false));xml.getItem().add(TestXmlItem.create(false));
     	}
     	
     	return xml;
@@ -50,8 +51,8 @@ public class TestXmlTable extends AbstractXmlTableTest
     {
 		OfxXmlTstBootstrap.init();
 			
-		TestXmlTable.initFiles();	
-		TestXmlTable test = new TestXmlTable();
+		TestXmlList.initFiles();	
+		TestXmlList test = new TestXmlList();
 		test.save();
     }
 }

@@ -23,6 +23,7 @@ public class AbstractOfxXmlTest extends AbstractAhtUtilsXmlTest
 	@BeforeClass
 	public static void initPrefixMapper()
 	{
+		logger.warn("Init "+OfxNsPrefixMapper.class.getSimpleName());
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
 	}
 }

@@ -54,6 +54,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Comment }
+     * 
+     */
+    public Comment createComment() {
+        return new Comment();
+    }
+
+    /**
      * Create an instance of {@link Raw }
      * 
      */
@@ -99,14 +107,6 @@ public class ObjectFactory {
      */
     public Sections createSections() {
         return new Sections();
-    }
-
-    /**
-     * Create an instance of {@link Comment }
-     * 
-     */
-    public Comment createComment() {
-        return new Comment();
     }
 
     /**
