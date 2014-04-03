@@ -1,6 +1,5 @@
 package org.openfuxml.content.list;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -19,7 +18,7 @@ public class TestXmlType extends AbstractXmlListTest
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,"type.xml");
+		setXmlFile(dirSuffix, Type.class);
 	}
     
     @Test

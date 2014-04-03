@@ -4,6 +4,7 @@ import org.openfuxml.content.ofx.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,10 +22,10 @@ public class LatexEmphasisRenderer extends AbstractOfxLatexRenderer implements O
 	public void render(Emphasis emphasis) throws OfxAuthoringException
 	{
 		StringBuffer sb = new StringBuffer();
-		if(emphasis.isBold()) {preTxt.add("\\textbf{");}
-		sb.append(emphasis.getValue());
-		if(emphasis.isBold()){postTxt.add("}");}
+		if(emphasis.isBold()) {sb.append("\\textbf{");}
+		sb.append(TexSpecialChars.replace(emphasis.getValue()));
+		if(emphasis.isBold()){sb.append("}");}
 		
-		addString(sb.toString());
+		txt.add(sb.toString());
 	}
 }

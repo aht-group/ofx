@@ -1,9 +1,6 @@
 package org.openfuxml.renderer.latex.content.table;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.openfuxml.content.ofx.Emphasis;
-import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Body;
 import org.openfuxml.content.ofx.table.Content;
 import org.openfuxml.content.ofx.table.Head;
@@ -15,7 +12,6 @@ import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.StringRenderer;
 import org.openfuxml.renderer.latex.content.table.util.LatexTabluarUtil;
-import org.openfuxml.renderer.latex.util.OfxLatexComment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,27 +30,20 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 		if(!table.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
 		renderPre();
 		renderTabular(table.getSpecification(),table.getContent());
-		renderPost(table.getTitle());
+		renderPost(table);
 	}
 	
 	private void renderPre()
-	{
-		preTxt.add("");
-		preTxt.addAll(OfxLatexComment.line());
-		preTxt.addAll(OfxLatexComment.comment("Rendering a Latex table with: "+this.getClass().getSimpleName()));
-		
+	{		
 		preTxt.add("");
 		preTxt.add("\\begin{table}[htb]");
 		preTxt.add("\\centering");
 	}
 	
-	private void renderPost(Title title)
+	private void renderPost(Table table)
 	{
-		if(title!=null)
-		{
-			postTxt.add("\\caption{"+title.getValue()+"}");
-			postTxt.add("\\label{tab:xx}");
-		}
+		if(table.isSetTitle()) {postTxt.add("\\caption{"+table.getTitle().getValue()+"}");}
+		if(table.isSetId())    {postTxt.add("\\label{"+table.getId()+"}");}
 		postTxt.add("\\end{table}");
 	}
 	
@@ -101,7 +90,6 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 		renderer.add(new StringRenderer("\\toprule"));
 		if(head!=null)
 		{
-			JaxbUtil.info(head);
 			for(Row row : head.getRow())
 			{
 				LatexRowRenderer f = new LatexRowRenderer(emphasis);

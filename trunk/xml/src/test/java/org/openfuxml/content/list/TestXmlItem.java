@@ -1,6 +1,5 @@
 package org.openfuxml.content.list;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -20,7 +19,7 @@ public class TestXmlItem extends AbstractXmlListTest
 	@BeforeClass
 	public static void initFiles()
 	{
-		fXml = new File(rootDir,"item.xml");
+		setXmlFile(dirSuffix, Item.class);
 	}
     
     @Test
@@ -28,6 +27,8 @@ public class TestXmlItem extends AbstractXmlListTest
     {
     	Item actual = create();
     	Item expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Item.class);
+    	System.out.println(JaxbUtil.toString(actual));
+    	System.out.println(JaxbUtil.toString(expected));
     	assertJaxbEquals(expected, actual);
     }
    
@@ -36,7 +37,7 @@ public class TestXmlItem extends AbstractXmlListTest
     {
     	Item xml = new Item();
     	xml.setName("myName");
-    	
+    	xml.getContent().add("myMixed");
     	if(withChilds)
     	{
     		xml.getContent().add(TestXmlParagraph.create(false));

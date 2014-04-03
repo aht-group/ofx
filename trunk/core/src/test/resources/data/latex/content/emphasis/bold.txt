@@ -1,5 +1,3 @@
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-\textbf{
-Lorem ipsum dolor
-}
+\textbf{Lorem ipsum dolor}

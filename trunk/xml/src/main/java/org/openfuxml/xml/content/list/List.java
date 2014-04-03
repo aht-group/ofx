@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.openfuxml.content.ofx.Comment;
 
 
 /**
@@ -22,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element ref="{http://www.openfuxml.org/list}type"/>
  *         &lt;element ref="{http://www.openfuxml.org/list}item" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.openfuxml.org}comment" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,7 +35,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "type",
-    "item"
+    "item",
+    "comment"
 })
 @XmlRootElement(name = "list")
 public class List implements Serializable
@@ -43,6 +46,8 @@ public class List implements Serializable
     @XmlElement(required = true)
     protected Type type;
     protected java.util.List<Item> item;
+    @XmlElement(namespace = "http://www.openfuxml.org")
+    protected Comment comment;
 
     /**
      * Gets the value of the type property.
@@ -107,6 +112,34 @@ public class List implements Serializable
 
     public void unsetItem() {
         this.item = null;
+    }
+
+    /**
+     * Gets the value of the comment property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Comment }
+     *     
+     */
+    public Comment getComment() {
+        return comment;
+    }
+
+    /**
+     * Sets the value of the comment property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Comment }
+     *     
+     */
+    public void setComment(Comment value) {
+        this.comment = value;
+    }
+
+    public boolean isSetComment() {
+        return (this.comment!= null);
     }
 
 }

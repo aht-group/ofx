@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.content.list.TestLatexListRenderer;
@@ -18,7 +19,7 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexCellFactory.class);
 	
-	private static enum Key {string,list}
+	private static enum Key {string,list,specialChar}
 	
 	private LatexCellRenderer renderer;
 	private String dir = "cell";
@@ -61,6 +62,22 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
     	assertText(renderer,f);
     }
     
+    @Test
+    public void specialChar() throws IOException, OfxAuthoringException
+    {
+    	Paragraph p = new Paragraph();
+    	p.getContent().add("Monitoring & Evaluation");
+    	
+    	Cell cell = new Cell();
+    	cell.getContent().add(p);
+    	
+    	f = new File(rootDir,dir+"/"+Key.specialChar+".txt");
+    	renderer.render(cell);
+    	debug(renderer);
+    	save(renderer,f);
+    	assertText(renderer,f);
+    }
+    
     public static void main(String[] args) throws Exception
     {
     	OfxCoreTestBootstrap.init();
@@ -69,8 +86,9 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
     	TestLatexCellFactory test = new TestLatexCellFactory();
     	test.setSaveReference(true);
     	
- //   	test.initRenderer();test.paragraph();
+    	test.initRenderer();test.paragraph();
     	test.initRenderer();test.list();
+    	test.initRenderer();test.specialChar();
 
     }
    
