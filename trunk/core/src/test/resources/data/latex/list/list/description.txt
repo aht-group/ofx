@@ -1,5 +1,7 @@
 
 \begin{description}
+% ******************************************
+% Rendering a (description) List with: LatexListRenderer
 
 \item [Lorem]
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
