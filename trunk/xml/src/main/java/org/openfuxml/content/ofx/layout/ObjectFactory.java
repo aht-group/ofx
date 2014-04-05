@@ -45,4 +45,20 @@ public class ObjectFactory {
         return new Width();
     }
 
+    /**
+     * Create an instance of {@link Layout }
+     * 
+     */
+    public Layout createLayout() {
+        return new Layout();
+    }
+
+    /**
+     * Create an instance of {@link Line }
+     * 
+     */
+    public Line createLine() {
+        return new Line();
+    }
+
 }
