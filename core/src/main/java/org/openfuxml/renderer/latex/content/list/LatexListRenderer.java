@@ -27,19 +27,25 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	public void render(List list, OfxLatexRenderer parent) throws OfxAuthoringException
 	{	
-		preTxt.add("");
 		if(!list.isSetType()){throw new OfxAuthoringException("<type> not defined for <list>");}
-		setEnvironment(list.getType(),parent);
+		estimateType(list.getType());
 		
+		String debugType=null;
+		if(list.getType().isSetDescription() && list.getType().isDescription()){debugType=ListType.description.toString()+" "+List.class.getSimpleName();}
+		else{debugType = "("+listType+") "+List.class.getSimpleName();}
+		
+		preTxt.add("");
 		preTxt.addAll(LatexCommentRenderer.stars());
-		preTxt.addAll(LatexCommentRenderer.comment("Rendering a ("+listType+") List with: "+this.getClass().getSimpleName()));
+		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+debugType+" with: "+this.getClass().getSimpleName()));
 		if(list.isSetComment())
 		{
 			LatexCommentRenderer rComment = new LatexCommentRenderer();
 			rComment.render(list.getComment());
 			renderer.add(rComment);
 		}
+		preTxt.add("");
 		
+		setEnvironment(list.getType(),parent);
 		for(Item item : list.getItem())
 		{
 			LatexItemFactory f = new LatexItemFactory();
@@ -49,18 +55,28 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		postTxt.add("");
 	}
 	
-	private void setEnvironment(Type xmlType, OfxLatexRenderer parent) throws OfxAuthoringException
+	private void estimateType(Type xmlType) throws OfxAuthoringException
 	{
 		if(xmlType.isSetDescription() && xmlType.isDescription())
 		{
 			listType = ListType.description;
 			if(xmlType.isSetOrdering()){throw new OfxAuthoringException("<type> is a description, but ordering is set!");}
-			setDescription();
 		}
 		else if(xmlType.isSetOrdering())
 		{
 			listType = ListType.list;
-			
+		}
+		else {throw new OfxAuthoringException("<type> is not a description, but no ordering defined");}
+	}
+	
+	private void setEnvironment(Type xmlType, OfxLatexRenderer parent) throws OfxAuthoringException
+	{
+		if(listType.equals(ListType.description))
+		{
+			setDescription();
+		}
+		else if(listType.equals(ListType.list))
+		{
 			XmlListFactory.Ordering ordering = XmlListFactory.Ordering.valueOf(xmlType.getOrdering());
 			switch(ordering)
 			{
@@ -69,7 +85,6 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 				default: logger.warn("No Ordering defined NYI");break;
 			}
 		}
-		else {throw new OfxAuthoringException("<type> is not a description, but no ordering defined");}
 	}
 	
 	// Ordered List
@@ -82,12 +97,14 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	private void setOrderedEnumerate()
 	{
 		preTxt.add("\\begin{enumerate}");
+		postTxt.add("");
 		postTxt.add("\\end{enumerate}");
 	}
 	
 	private void setOrderedCompactNum()
 	{
 		preTxt.add("\\begin{compactenum}");
+		postTxt.add("");
 		postTxt.add("\\end{compactenum}");
 	}
 	
@@ -101,19 +118,21 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	private void setUnorderedItemize()
 	{
 		preTxt.add("\\begin{itemize}");
+		postTxt.add("");
 		postTxt.add("\\end{itemize}");
 	}
 	
 	private void setUnorderedCompactItem()
 	{
 		preTxt.add("\\begin{compactitem}");
+		postTxt.add("");
 		postTxt.add("\\end{compactitem}");
 	}
 	
-	// Description
 	private void setDescription()
 	{
 		preTxt.add("\\begin{description}");
+		postTxt.add("");
 		postTxt.add("\\end{description}");
 	}
 }

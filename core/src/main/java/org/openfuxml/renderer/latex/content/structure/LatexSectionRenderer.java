@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.structure;
 
+import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
@@ -8,6 +9,7 @@ import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.LatexCommentRenderer;
 import org.openfuxml.renderer.latex.content.listing.LatexListingRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
@@ -30,6 +32,19 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	public void render(Section section) throws OfxAuthoringException
 	{
+		preTxt.addAll(LatexCommentRenderer.stars());
+		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Section.class.getSimpleName()+" with: "+this.getClass().getSimpleName()));
+		
+		for(Object s : section.getContent())
+		{
+			if (s instanceof Comment)
+			{
+				LatexCommentRenderer rComment = new LatexCommentRenderer();
+				rComment.render((Comment)s);
+				renderer.add(rComment);
+			}
+		}
+		
 		logger.trace("Render section");
 		for(Object s : section.getContent())
 		{
@@ -40,6 +55,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 			else if(s instanceof Table){renderTable((Table)s);}
 			else if(s instanceof List){renderList((List)s,this);}
             else if(s instanceof Listing){renderListing((Listing)s);}
+            else if(s instanceof Comment){}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
 		}
 //		if(section.getContent()logger.debug(getSectionHeader("x"));

@@ -23,17 +23,17 @@ public class OfxMultilangFilter
 		this.lang=lang;
 	}
 	
-	public void filterLang(Document ofxDocument)
-	{
-		org.jdom2.Document j2Doc = JaxbUtil.toDocument(ofxDocument);
-		filterLang(j2Doc);
-	}
-	
 	public Section filterLang(Section section)
 	{
 		org.jdom2.Document j2Doc = JaxbUtil.toDocument(section);
 		filterLang(j2Doc);
 		return (Section)JDomUtil.toJaxb(j2Doc, Section.class);
+	}
+	
+	public void filterLang(Document ofxDocument)
+	{
+		org.jdom2.Document j2Doc = JaxbUtil.toDocument(ofxDocument);
+		filterLang(j2Doc);
 	}
 	
 	private void filterLang(org.jdom2.Document j2Doc)

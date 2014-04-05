@@ -36,6 +36,7 @@ public class TestXmlItem extends AbstractXmlListTest
     public static Item create(boolean withChilds)
     {
     	Item xml = new Item();
+    	xml.setLang("myLang");
     	xml.setName("myName");
     	xml.getContent().add("myMixed");
     	if(withChilds)

@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlType;
     "raw"
 })
 @XmlRootElement(name = "comment")
-public class Comment
-    implements Serializable
+public class Comment implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
