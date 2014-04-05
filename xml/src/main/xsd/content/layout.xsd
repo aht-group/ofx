@@ -6,6 +6,13 @@
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
     jaxb:extensionBindingPrefixes="xjc"
     jaxb:version="2.0">
+    <xsd:element name="layout">
+        <xsd:complexType>
+            <xsd:sequence>
+				<xsd:element ref="line" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="alignment">
     	<xsd:complexType>
 	    	<xsd:attribute name="horizontal">
@@ -31,5 +38,19 @@
                 </xsd:extension>
             </xsd:simpleContent>
         </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="line">
+    	<xsd:complexType>
+	    	<xsd:attribute name="orientation">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="top"/>
+						<xsd:enumeration value="bottom"/>
+						<xsd:enumeration value="left"/>
+						<xsd:enumeration value="right"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+    	</xsd:complexType>
     </xsd:element>
 </xsd:schema>

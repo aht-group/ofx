@@ -58,15 +58,15 @@ public class Section implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
-        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
         @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
         @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
+        @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class),
         @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.xml.content.list.List.class),
         @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
-        @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class),
-        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class)
+        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
+        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
+        @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class)
     })
     @XmlMixed
     protected java.util.List<Serializable> content;
@@ -99,16 +99,16 @@ public class Section implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Template }
-     * {@link Paragraph }
+     * {@link Content }
+     * {@link Table }
      * {@link String }
      * {@link Section }
-     * {@link Table }
-     * {@link Listing }
-     * {@link org.openfuxml.xml.content.list.List }
-     * {@link Content }
-     * {@link Sections }
      * {@link Title }
+     * {@link org.openfuxml.xml.content.list.List }
+     * {@link Listing }
+     * {@link Paragraph }
+     * {@link Sections }
+     * {@link Template }
      * 
      * 
      */

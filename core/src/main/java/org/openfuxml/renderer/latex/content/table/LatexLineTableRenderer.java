@@ -1,6 +1,9 @@
 package org.openfuxml.renderer.latex.content.table;
 
+import net.sf.exlp.util.xml.JaxbUtil;
+
 import org.openfuxml.content.ofx.Emphasis;
+import org.openfuxml.content.ofx.layout.Line;
 import org.openfuxml.content.ofx.table.Body;
 import org.openfuxml.content.ofx.table.Content;
 import org.openfuxml.content.ofx.table.Head;
@@ -26,6 +29,7 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 	
 	public void render(Table table) throws OfxAuthoringException
 	{	
+		JaxbUtil.info(table);
 		if(!table.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
 		if(!table.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
 		renderPre();
@@ -49,10 +53,10 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 	
 	private void renderTabular(Specification specification, Content tgroup) throws OfxAuthoringException
 	{
+		if(tgroup.getBody().size()!=1){throw new OfxAuthoringException("<content> must exactly have 1 body!");}
+		
 		openTablular(specification);
 		renderTableHeader(tgroup.getHead());
-		
-		if(tgroup.getBody().size()!=1){throw new OfxAuthoringException("<content> must exactly have 1 body!");}
 		renderBody(tgroup.getBody().get(0));
 		
 		closeTablular();
@@ -97,13 +101,21 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 				renderer.add(f);
 			}
 		}
-		renderer.add(new StringRenderer("\\midrule"));
+		renderer.add(new StringRenderer("\\toprule"));
 	}
 	
 	private void renderBody(Body tbody) throws OfxAuthoringException
 	{
 		for(Row row : tbody.getRow())
 		{
+			if(row.isSetLayout())
+			{
+				for(Line line : row.getLayout().getLine())
+				{
+					renderer.add(new StringRenderer("\\midrule"));
+				}
+			}
+			
 			LatexRowRenderer f = new LatexRowRenderer();
 			f.render(row);
 			renderer.add(f);
