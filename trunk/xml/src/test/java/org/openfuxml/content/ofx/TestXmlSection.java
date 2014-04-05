@@ -38,6 +38,7 @@ public class TestXmlSection extends AbstractXmlOfxTest
     	logger.warn("Not fully implemented");
     	if(withChilds)
     	{
+    		xml.getContent().add(TestXmlComment.create(false));
     		xml.getContent().add(TestXmlTitle.create(false));
     		xml.getContent().add(TestXmlTitle.create(false));
     		xml.getContent().add(TestXmlParagraph.create(false));
