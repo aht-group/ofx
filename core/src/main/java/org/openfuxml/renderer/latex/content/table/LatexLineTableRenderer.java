@@ -1,7 +1,5 @@
 package org.openfuxml.renderer.latex.content.table;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.openfuxml.content.ofx.Emphasis;
 import org.openfuxml.content.ofx.layout.Line;
 import org.openfuxml.content.ofx.table.Body;
@@ -29,7 +27,6 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 	
 	public void render(Table table) throws OfxAuthoringException
 	{	
-		JaxbUtil.info(table);
 		if(!table.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
 		if(!table.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
 		renderPre();
@@ -104,6 +101,7 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 		renderer.add(new StringRenderer("\\toprule"));
 	}
 	
+	@SuppressWarnings("unused")
 	private void renderBody(Body tbody) throws OfxAuthoringException
 	{
 		for(Row row : tbody.getRow())
