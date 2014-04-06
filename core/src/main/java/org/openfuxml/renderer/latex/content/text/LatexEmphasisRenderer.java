@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.content.structure;
+package org.openfuxml.renderer.latex.content.text;
 
 import org.openfuxml.content.ofx.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -21,10 +21,15 @@ public class LatexEmphasisRenderer extends AbstractOfxLatexRenderer implements O
 	
 	public void render(Emphasis emphasis) throws OfxAuthoringException
 	{
+		boolean bold = emphasis.isSetBold() && emphasis.isBold();
+		boolean italic = emphasis.isSetItalic() && emphasis.isSetItalic();
+		
 		StringBuffer sb = new StringBuffer();
-		if(emphasis.isBold()) {sb.append("\\textbf{");}
+		if(bold) {sb.append("\\textbf{");}
+		if(italic) {sb.append("\\textit{");}
 		sb.append(TexSpecialChars.replace(emphasis.getValue()));
-		if(emphasis.isBold()){sb.append("}");}
+		if(bold){sb.append("}");}
+		if(italic){sb.append("}");}
 		
 		txt.add(sb.toString());
 	}
