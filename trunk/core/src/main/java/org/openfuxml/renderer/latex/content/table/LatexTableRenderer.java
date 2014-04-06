@@ -5,7 +5,7 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.latex.content.LatexCommentRenderer;
+import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

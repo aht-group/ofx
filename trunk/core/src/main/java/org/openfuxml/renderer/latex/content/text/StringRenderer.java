@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.content;
+package org.openfuxml.renderer.latex.content.text;
 
 import java.io.IOException;
 import java.io.Writer;
