@@ -14,14 +14,16 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 	final static Logger logger = LoggerFactory.getLogger(LatexTableRenderer.class);
 	
 	public static enum Type {grid,line}
+	boolean preBlankLine;
 	
-	public LatexTableRenderer()
+	public LatexTableRenderer(){this(true);}
+	public LatexTableRenderer(boolean preBlankLine)
 	{
-
+		this.preBlankLine=preBlankLine;
 	}
 	
 	public void render(Table table) throws OfxAuthoringException
-	{	
+	{		
 		OfxLatexTableRenderer tableRenderer;
 		Type type = Type.line;
 		
@@ -31,7 +33,7 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 			default: tableRenderer = new LatexGridTableRenderer();break;
 		}
 		
-		preTxt.add("");
+		if(preBlankLine){preTxt.add("");}
 		preTxt.addAll(LatexCommentRenderer.stars());
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a Latex table with: "+tableRenderer.getClass().getSimpleName()));
 		if(table.isSetComment())
