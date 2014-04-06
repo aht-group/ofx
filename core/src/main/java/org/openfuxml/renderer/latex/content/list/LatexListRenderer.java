@@ -19,10 +19,12 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	public static enum ListType {description,list}
 	
 	private ListType listType;
+	private boolean preBlankLine;
 	
-	public LatexListRenderer()
+	public LatexListRenderer(){this(true);}
+	public LatexListRenderer(boolean preBlankLine)
 	{
-
+		this.preBlankLine=preBlankLine;
 	}
 	
 	public void render(List list, OfxLatexRenderer parent) throws OfxAuthoringException
@@ -34,14 +36,14 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		if(list.getType().isSetDescription() && list.getType().isDescription()){debugType=ListType.description.toString()+" "+List.class.getSimpleName();}
 		else{debugType = "("+listType+") "+List.class.getSimpleName();}
 		
-		preTxt.add("");
+		if(preBlankLine){preTxt.add("");}
 		preTxt.addAll(LatexCommentRenderer.stars());
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+debugType+" with: "+this.getClass().getSimpleName()));
 		if(list.isSetComment())
 		{
 			LatexCommentRenderer rComment = new LatexCommentRenderer();
 			rComment.render(list.getComment());
-			renderer.add(rComment);
+			preTxt.addAll(rComment.getContent());
 		}
 		preTxt.add("");
 		
