@@ -1,4 +1,4 @@
-package org.openfuxml.util;
+package org.openfuxml.util.filter;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,6 +10,7 @@ import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.test.AbstractOfxUtilTest;
+import org.openfuxml.util.filter.OfxLangFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +40,7 @@ public class TestOfxMultilangFilter extends AbstractOfxUtilTest
 	public void sectionWithTitles() throws OfxAuthoringException, OfxInternalProcessingException
 	{
 		Assert.assertEquals(2, sectionTitle.getContent().size());
-		OfxMultilangFilter mlf = new OfxMultilangFilter("de");
+		OfxLangFilter mlf = new OfxLangFilter("de");
 		sectionTitle = mlf.filterLang(sectionTitle);
 		Assert.assertEquals(1, sectionTitle.getContent().size());
 	}
@@ -48,7 +49,7 @@ public class TestOfxMultilangFilter extends AbstractOfxUtilTest
 	public void sectionWithSections()
 	{
 		Assert.assertEquals(2, sectionSection.getContent().size());
-		OfxMultilangFilter mlf = new OfxMultilangFilter("de");
+		OfxLangFilter mlf = new OfxLangFilter("de");
 		sectionSection = mlf.filterLang(sectionSection);
 		Assert.assertEquals(1, sectionSection.getContent().size());
 	}
@@ -57,7 +58,7 @@ public class TestOfxMultilangFilter extends AbstractOfxUtilTest
 	public void sectionWithParagraphs()
 	{
 		Assert.assertEquals(2, sectionParagraph.getContent().size());
-		OfxMultilangFilter mlf = new OfxMultilangFilter("de");
+		OfxLangFilter mlf = new OfxLangFilter("de");
 		sectionParagraph = mlf.filterLang(sectionParagraph);
 		Assert.assertEquals(1, sectionParagraph.getContent().size());
 	}

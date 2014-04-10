@@ -15,4 +15,13 @@ public class XmlSectionFactory
 		xml.setLang(lang);
 		return xml;
 	}
+	
+	public static Section build(String id, String lang, String classifier)
+	{
+		Section xml = new Section();
+		xml.setId(id);
+		xml.setLang(lang);
+		xml.setClassifier(classifier);
+		return xml;
+	}
 }

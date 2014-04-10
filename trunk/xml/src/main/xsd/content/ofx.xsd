@@ -132,6 +132,7 @@
                 <xsd:element ref="wiki:template" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:attribute name="classifier" type="xsd:string"/><!-- Can be used for global content filters -->
             <xsd:attribute name="lang" type="xsd:string"/>
             <xsd:attribute name="external" type="xsd:boolean"/>
             <xsd:attribute name="source" type="xsd:string"/>

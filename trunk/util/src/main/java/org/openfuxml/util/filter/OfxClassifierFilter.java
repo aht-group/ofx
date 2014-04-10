@@ -1,4 +1,4 @@
-package org.openfuxml.util;
+package org.openfuxml.util.filter;
 
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -12,15 +12,15 @@ import org.openfuxml.content.ofx.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OfxMultilangFilter
+public class OfxClassifierFilter
 {
-	final static Logger logger = LoggerFactory.getLogger(OfxMultilangFilter.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxClassifierFilter.class);
 
-	private String lang;
+	private String[] classifiers;
 	
-	public OfxMultilangFilter(String lang)
+	public OfxClassifierFilter(String... classifiers)
 	{
-		this.lang=lang;
+		this.classifiers=classifiers;
 	}
 	
 	public Section filterLang(Section section)
@@ -39,13 +39,18 @@ public class OfxMultilangFilter
 	private void filterLang(org.jdom2.Document j2Doc)
 	{
 		XPathFactory xpfac = XPathFactory.instance();
-		XPathExpression<Attribute> xp = xpfac.compile("//*/@lang", Filters.attribute());
+		XPathExpression<Attribute> xp = xpfac.compile("//*/@classifier", Filters.attribute());
 		for (Attribute att : xp.evaluate(j2Doc))
 		{
-			if(!att.getValue().equals(lang))
+			boolean remove = true;
+			for(String classifier : classifiers)
 			{
-				att.getParent().detach();
+				if(att.getValue().equals(classifier))
+				{
+					remove = false;
+				}
 			}
+			if(remove){att.getParent().detach();}
 		}
 	}
 }
