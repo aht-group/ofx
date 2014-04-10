@@ -38,6 +38,7 @@ import org.openfuxml.content.ofx.table.Table;
  *         &lt;element ref="{http://www.openfuxml.org/wiki}template" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="classifier" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="external" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="source" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -59,21 +60,23 @@ public class Section implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "comment", namespace = "http://www.openfuxml.org", type = Comment.class),
-        @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class),
-        @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
-        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
-        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
-        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
         @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
-        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.xml.content.list.List.class),
+        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
+        @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
         @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
-        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class)
+        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
+        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
+        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
+        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.xml.content.list.List.class),
+        @XmlElementRef(name = "comment", namespace = "http://www.openfuxml.org", type = Comment.class),
+        @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class)
     })
     @XmlMixed
     protected java.util.List<Serializable> content;
     @XmlAttribute(name = "id")
     protected String id;
+    @XmlAttribute(name = "classifier")
+    protected String classifier;
     @XmlAttribute(name = "lang")
     protected String lang;
     @XmlAttribute(name = "external")
@@ -101,17 +104,17 @@ public class Section implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link Template }
+     * {@link Paragraph }
+     * {@link Content }
+     * {@link Table }
+     * {@link Sections }
+     * {@link org.openfuxml.xml.content.list.List }
+     * {@link Listing }
+     * {@link Section }
      * {@link Comment }
      * {@link Title }
      * {@link String }
-     * {@link Listing }
-     * {@link Table }
-     * {@link Paragraph }
-     * {@link Sections }
-     * {@link Template }
-     * {@link org.openfuxml.xml.content.list.List }
-     * {@link Section }
-     * {@link Content }
      * 
      * 
      */
@@ -156,6 +159,34 @@ public class Section implements Serializable
 
     public boolean isSetId() {
         return (this.id!= null);
+    }
+
+    /**
+     * Gets the value of the classifier property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getClassifier() {
+        return classifier;
+    }
+
+    /**
+     * Sets the value of the classifier property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setClassifier(String value) {
+        this.classifier = value;
+    }
+
+    public boolean isSetClassifier() {
+        return (this.classifier!= null);
     }
 
     /**
