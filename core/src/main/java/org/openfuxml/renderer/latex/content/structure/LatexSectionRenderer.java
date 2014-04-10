@@ -46,6 +46,10 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		}
 		
 		logger.trace("Render section");
+		
+		if(!section.isSetTransparent()){section.setTransparent(false);}
+		if(section.isTransparent()){lvl=lvl-1;}
+		
 		for(Object s : section.getContent())
 		{
 			if     (s instanceof String){}
@@ -64,9 +68,12 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	private void renderTitle(Section section,Title title)
 	{
-		LatexSectionTitleRenderer stf = new LatexSectionTitleRenderer(lvl,latexPreamble);
-		stf.render(section,title);
-		renderer.add(stf);
+		if(!section.isTransparent())
+		{
+			LatexSectionTitleRenderer stf = new LatexSectionTitleRenderer(lvl,latexPreamble);
+			stf.render(section,title);
+			renderer.add(stf);
+		}
 	}
 	
 	private void renderTable(Table table) throws OfxAuthoringException
