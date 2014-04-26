@@ -1,14 +1,14 @@
 package org.openfuxml.renderer.latex.content.list;
 
+import org.openfuxml.content.list.Item;
+import org.openfuxml.content.list.List;
+import org.openfuxml.content.list.Type;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.list.XmlListFactory;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
-import org.openfuxml.xml.content.list.Item;
-import org.openfuxml.xml.content.list.List;
-import org.openfuxml.xml.content.list.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

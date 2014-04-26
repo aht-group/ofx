@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.structure;
 
+import org.openfuxml.content.list.List;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.content.ofx.Paragraph;
@@ -13,7 +14,6 @@ import org.openfuxml.renderer.latex.content.listing.LatexListingRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
-import org.openfuxml.xml.content.list.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

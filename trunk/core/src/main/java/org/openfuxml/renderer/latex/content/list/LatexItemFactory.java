@@ -1,11 +1,11 @@
 package org.openfuxml.renderer.latex.content.list;
 
+import org.openfuxml.content.list.Item;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.list.LatexListRenderer.ListType;
-import org.openfuxml.xml.content.list.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

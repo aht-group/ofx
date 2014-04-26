@@ -1,5 +1,5 @@
 
-package org.openfuxml.xml.content.list;
+package org.openfuxml.content.media;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the org.openfuxml.xml.content.list package. 
+ * generated in the org.openfuxml.content.media package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -23,34 +23,18 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.openfuxml.xml.content.list
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.openfuxml.content.media
      * 
      */
     public ObjectFactory() {
     }
 
     /**
-     * Create an instance of {@link Item }
+     * Create an instance of {@link Image }
      * 
      */
-    public Item createItem() {
-        return new Item();
-    }
-
-    /**
-     * Create an instance of {@link List }
-     * 
-     */
-    public List createList() {
-        return new List();
-    }
-
-    /**
-     * Create an instance of {@link Type }
-     * 
-     */
-    public Type createType() {
-        return new Type();
+    public Image createImage() {
+        return new Image();
     }
 
 }

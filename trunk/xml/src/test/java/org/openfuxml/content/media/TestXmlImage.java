@@ -1,4 +1,4 @@
-package org.openfuxml.content.list;
+package org.openfuxml.content.media;
 
 import java.io.FileNotFoundException;
 
@@ -7,38 +7,37 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.content.ofx.TestXmlComment;
+import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlList extends AbstractXmlListTest
+public class TestXmlImage extends AbstractXmlMediaTest
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestXmlList.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		setXmlFile(dirSuffix, List.class);
+		setXmlFile(dirSuffix, Image.class);
 	}
     
     @Test
-    public void testXml() throws FileNotFoundException
+    public void jaxbStructure() throws FileNotFoundException
     {
-    	List actual = create(true);
-    	List expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), List.class);
+    	Image actual = create(true);
+    	Image expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Image.class);
     	assertJaxbEquals(expected, actual);
     }
    
-    public static List create(boolean withChilds)
+    public static Image create(boolean withChilds)
     {
-    	List xml = new List();
+    	Image xml = new Image();
+    	xml.setId("myId");
     	
     	if(withChilds)
     	{
     		xml.setComment(TestXmlComment.create(false));
-    		xml.setType(TestXmlType.create(false));
-    		
-    		xml.getItem().add(TestXmlItem.create(false));xml.getItem().add(TestXmlItem.create(false));
     	}
     	
     	return xml;
@@ -50,8 +49,8 @@ public class TestXmlList extends AbstractXmlListTest
     {
 		OfxXmlTstBootstrap.init();
 			
-		TestXmlList.initFiles();	
-		TestXmlList test = new TestXmlList();
+		TestXmlImage.initFiles();	
+		TestXmlImage test = new TestXmlImage();
 		test.save();
     }
 }

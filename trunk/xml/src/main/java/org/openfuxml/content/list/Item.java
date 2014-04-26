@@ -1,5 +1,5 @@
 
-package org.openfuxml.xml.content.list;
+package org.openfuxml.content.list;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -71,8 +71,8 @@ public class Item
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Paragraph }
      * {@link String }
+     * {@link Paragraph }
      * 
      * 
      */

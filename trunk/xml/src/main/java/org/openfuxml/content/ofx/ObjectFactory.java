@@ -30,38 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Paragraph }
-     * 
-     */
-    public Paragraph createParagraph() {
-        return new Paragraph();
-    }
-
-    /**
-     * Create an instance of {@link Emphasis }
-     * 
-     */
-    public Emphasis createEmphasis() {
-        return new Emphasis();
-    }
-
-    /**
-     * Create an instance of {@link Reference }
-     * 
-     */
-    public Reference createReference() {
-        return new Reference();
-    }
-
-    /**
-     * Create an instance of {@link Comment }
-     * 
-     */
-    public Comment createComment() {
-        return new Comment();
-    }
-
-    /**
      * Create an instance of {@link Raw }
      * 
      */
@@ -86,11 +54,43 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Comment }
+     * 
+     */
+    public Comment createComment() {
+        return new Comment();
+    }
+
+    /**
      * Create an instance of {@link Title }
      * 
      */
     public Title createTitle() {
         return new Title();
+    }
+
+    /**
+     * Create an instance of {@link Paragraph }
+     * 
+     */
+    public Paragraph createParagraph() {
+        return new Paragraph();
+    }
+
+    /**
+     * Create an instance of {@link Emphasis }
+     * 
+     */
+    public Emphasis createEmphasis() {
+        return new Emphasis();
+    }
+
+    /**
+     * Create an instance of {@link Reference }
+     * 
+     */
+    public Reference createReference() {
+        return new Reference();
     }
 
     /**

@@ -71,7 +71,7 @@ public class AbstractOfxLatexRenderer
 		renderer.add(f);
 	}
 	
-	protected void renderList(org.openfuxml.xml.content.list.List list,OfxLatexRenderer parent) throws OfxAuthoringException
+	protected void renderList(org.openfuxml.content.list.List list,OfxLatexRenderer parent) throws OfxAuthoringException
 	{
 		LatexListRenderer f = new LatexListRenderer();
 		f.render(list,parent);

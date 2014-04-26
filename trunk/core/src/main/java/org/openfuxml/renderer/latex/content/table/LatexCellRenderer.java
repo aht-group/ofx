@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.table;
 
+import org.openfuxml.content.list.List;
 import org.openfuxml.content.ofx.Emphasis;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.table.Cell;
@@ -7,7 +8,6 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.content.OfxEmphasisFactory;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.xml.content.list.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
