@@ -7,6 +7,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openfuxml.content.media.TestXmlImage;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
@@ -45,6 +46,7 @@ public class TestXmlSection extends AbstractXmlOfxTest
     		xml.getContent().add(TestXmlTitle.create(false));
     		xml.getContent().add(TestXmlParagraph.create(false));
             xml.getContent().add(TestXmlListing.create(false));
+            xml.getContent().add(TestXmlImage.create(false));
     	}
     	
     	return xml;

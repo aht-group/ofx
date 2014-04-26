@@ -24,7 +24,7 @@
     
     <jxb:bindings schemaLocation="../xsd/../xsd/content/list.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.xml.content.list"/>
+            <jxb:package name="org.openfuxml.content.list"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     

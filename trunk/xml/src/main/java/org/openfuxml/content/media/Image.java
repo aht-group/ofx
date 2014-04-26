@@ -39,8 +39,7 @@ import org.openfuxml.content.ofx.Title;
     "comment"
 })
 @XmlRootElement(name = "image")
-public class Image
-    implements Serializable
+public class Image implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
