@@ -1,7 +1,7 @@
 package org.openfuxml.factory.xml.ofx.list;
 
+import org.openfuxml.content.list.Item;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.xml.content.list.Item;
 
 public class XmlListItemFactory
 {	
