@@ -11,11 +11,12 @@ import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 import org.apache.commons.io.IOUtils;
 import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.CrossMediaTranscoder;
 import org.openfuxml.media.cross.LatexCrossMediaManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Pdf2PdfTranscoder
+public class Pdf2PdfTranscoder implements CrossMediaTranscoder
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexCrossMediaManager.class);
 	
@@ -28,6 +29,7 @@ public class Pdf2PdfTranscoder
 		mrl = new MultiResourceLoader();
 	}
 	
+	@Override
 	public void transcode(Media media) throws OfxAuthoringException
 	{
 		File file = new File(dir,media.getDst()+".pdf");

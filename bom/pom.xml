@@ -60,6 +60,13 @@
         		<scope>import</scope>
         	</dependency>
         	
+        	<!-- Images -->
+        	<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-transcoder</artifactId>
+				<version>1.7</version>
+			</dependency>
+        	
 			<dependency>
 	    		<groupId>de.sven-jacobs</groupId>
 	    		<artifactId>loremipsum</artifactId>
