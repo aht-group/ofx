@@ -11,4 +11,6 @@ public class NoOpCrossMediaManager implements CrossMediaManager
 		return imageMedia.getSrc();
 	}
 
+	@Override public void transcode() {}
+
 }
