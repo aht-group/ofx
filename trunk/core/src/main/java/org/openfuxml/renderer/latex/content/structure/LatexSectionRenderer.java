@@ -105,7 +105,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	private void renderSection(Section section) throws OfxAuthoringException
 	{
-		LatexSectionRenderer sf = new LatexSectionRenderer(lvl+1,latexPreamble);
+		LatexSectionRenderer sf = new LatexSectionRenderer(cmm,lvl+1,latexPreamble);
 		sf.render(section);
 		renderer.add(sf);
 	}

@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.media;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -35,7 +36,8 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
 	@Before
 	public void initRenderer()
 	{
-		cmm = new LatexCrossMediaManager("base");
+		File fTarget = new File("target");
+		cmm = new LatexCrossMediaManager(fTarget,"base");
 		
         rSection = new LatexSectionRenderer(cmm,1, new LatexPreamble());
         rImage = new LatexImageRenderer();
