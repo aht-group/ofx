@@ -11,7 +11,10 @@ import org.junit.Test;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
+import org.openfuxml.factory.xml.media.XmlMediaFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
+import org.openfuxml.media.cross.LatexCrossMediaManager;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.util.OfxContentDebugger;
@@ -23,6 +26,7 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexImageRenderer.class);
 	
+	private LatexCrossMediaManager cmm;
     private LatexSectionRenderer rSection;
     private LatexImageRenderer rImage;
     
@@ -31,13 +35,16 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
 	@Before
 	public void initRenderer()
 	{
-        rSection = new LatexSectionRenderer(1, new LatexPreamble());
+		cmm = new LatexCrossMediaManager("base");
+		
+        rSection = new LatexSectionRenderer(cmm,1, new LatexPreamble());
         rImage = new LatexImageRenderer();
         
         image = new Image();
         image.setId("my.id");
- 
+        image.setAlignment(XmlAlignmentFactory.buildHorizontal(XmlAlignmentFactory.Horizontal.center));
         image.setTitle(XmlTitleFactory.build("My Test Title"));
+        image.setMedia(XmlMediaFactory.build("mSrc.pdf", "mDst.pdf"));   
         
         JaxbUtil.info(image);
 	}
@@ -72,6 +79,6 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
     	
     	test.initRenderer();
     	test.direct();
-//		test.section();
+		test.section();
     }
 }

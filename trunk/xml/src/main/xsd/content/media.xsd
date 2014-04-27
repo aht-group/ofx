@@ -15,8 +15,17 @@
             <xsd:sequence>
                 <xsd:element ref="ofx:title" minOccurs="0" maxOccurs="1"/>
                 <xsd:element ref="ofx:comment" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="layout:alignment" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="media:media" minOccurs="1" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="media">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:attribute name="src" type="xsd:string"/>
+            <xsd:attribute name="dst" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>

@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.ofx.layout.Alignment;
 
 
 /**
@@ -24,6 +25,8 @@ import org.openfuxml.content.ofx.Title;
  *       &lt;sequence>
  *         &lt;element ref="{http://www.openfuxml.org}title" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org}comment" minOccurs="0"/>
+ *         &lt;element ref="{http://www.openfuxml.org/layout}alignment" minOccurs="0"/>
+ *         &lt;element ref="{http://www.openfuxml.org/media}media"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
@@ -36,7 +39,9 @@ import org.openfuxml.content.ofx.Title;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "title",
-    "comment"
+    "comment",
+    "alignment",
+    "media"
 })
 @XmlRootElement(name = "image")
 public class Image implements Serializable
@@ -47,6 +52,10 @@ public class Image implements Serializable
     protected Title title;
     @XmlElement(namespace = "http://www.openfuxml.org")
     protected Comment comment;
+    @XmlElement(namespace = "http://www.openfuxml.org/layout")
+    protected Alignment alignment;
+    @XmlElement(required = true)
+    protected Media media;
     @XmlAttribute(name = "id")
     protected String id;
 
@@ -104,6 +113,62 @@ public class Image implements Serializable
 
     public boolean isSetComment() {
         return (this.comment!= null);
+    }
+
+    /**
+     * Gets the value of the alignment property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Alignment }
+     *     
+     */
+    public Alignment getAlignment() {
+        return alignment;
+    }
+
+    /**
+     * Sets the value of the alignment property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Alignment }
+     *     
+     */
+    public void setAlignment(Alignment value) {
+        this.alignment = value;
+    }
+
+    public boolean isSetAlignment() {
+        return (this.alignment!= null);
+    }
+
+    /**
+     * Gets the value of the media property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Media }
+     *     
+     */
+    public Media getMedia() {
+        return media;
+    }
+
+    /**
+     * Sets the value of the media property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Media }
+     *     
+     */
+    public void setMedia(Media value) {
+        this.media = value;
+    }
+
+    public boolean isSetMedia() {
+        return (this.media!= null);
     }
 
     /**
