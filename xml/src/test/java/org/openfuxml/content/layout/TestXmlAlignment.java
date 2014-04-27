@@ -1,4 +1,4 @@
-package org.openfuxml.content.media;
+package org.openfuxml.content.layout;
 
 import java.io.FileNotFoundException;
 
@@ -6,43 +6,38 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openfuxml.content.layout.TestXmlAlignment;
-import org.openfuxml.content.ofx.TestXmlComment;
-import org.openfuxml.content.ofx.TestXmlTitle;
+import org.openfuxml.content.ofx.layout.Alignment;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlImage extends AbstractXmlMediaTest
+public class TestXmlAlignment extends AbstractXmlLayoutTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		setXmlFile(dirSuffix, Image.class);
+		setXmlFile(dirSuffix, Alignment.class);
 	}
     
     @Test
     public void jaxbStructure() throws FileNotFoundException
     {
-    	Image actual = create(true);
-    	Image expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Image.class);
+    	Alignment actual = create(true);
+    	Alignment expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Alignment.class);
     	assertJaxbEquals(expected, actual);
     }
    
-    public static Image create(boolean withChilds)
+    public static Alignment create(boolean withChilds)
     {
-    	Image xml = new Image();
-    	xml.setId("myId");
+    	Alignment xml = new Alignment();
+    	xml.setHorizontal("center");
     	
     	if(withChilds)
     	{
-    		xml.setTitle(TestXmlTitle.create(false));
-    		xml.setAlignment(TestXmlAlignment.create(false));
-    		xml.setComment(TestXmlComment.create(false));
-    		xml.setMedia(TestXmlMedia.create(false));
+    		
     	}
     	
     	return xml;
@@ -54,8 +49,8 @@ public class TestXmlImage extends AbstractXmlMediaTest
     {
 		OfxXmlTstBootstrap.init();
 			
-		TestXmlImage.initFiles();	
-		TestXmlImage test = new TestXmlImage();
+		TestXmlAlignment.initFiles();	
+		TestXmlAlignment test = new TestXmlAlignment();
 		test.save();
     }
 }

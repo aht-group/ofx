@@ -37,4 +37,12 @@ public class ObjectFactory {
         return new Image();
     }
 
+    /**
+     * Create an instance of {@link Media }
+     * 
+     */
+    public Media createMedia() {
+        return new Media();
+    }
+
 }

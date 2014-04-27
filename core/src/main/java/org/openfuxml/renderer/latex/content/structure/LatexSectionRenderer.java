@@ -9,7 +9,9 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.CrossMediaManager;
 import org.openfuxml.interfaces.OfxLatexRenderer;
+import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.listing.LatexListingRenderer;
 import org.openfuxml.renderer.latex.content.media.LatexImageRenderer;
@@ -23,11 +25,19 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexSectionRenderer.class);
 	
+	private CrossMediaManager cmm;
 	private LatexPreamble latexPreamble;
 	int lvl;
 	
+	@Deprecated
 	public LatexSectionRenderer(int lvl, LatexPreamble latexPreamble)
 	{
+		this(new NoOpCrossMediaManager(),lvl,latexPreamble);
+	}
+	
+	public LatexSectionRenderer(CrossMediaManager cmm, int lvl, LatexPreamble latexPreamble)
+	{
+		this.cmm=cmm;
 		this.lvl=lvl;
 		this.latexPreamble=latexPreamble;
 	}
@@ -88,7 +98,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	private void renderImage(Image image) throws OfxAuthoringException
 	{
-		LatexImageRenderer f = new LatexImageRenderer();
+		LatexImageRenderer f = new LatexImageRenderer(cmm);
 		f.render(image);
 		renderer.add(f);
 	}
