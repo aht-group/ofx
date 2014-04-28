@@ -20,6 +20,7 @@
 		<module>addon</module>
 		<module>bom</module>
 		<module>client</module>
+		<module>interfaces</module>
 		<module>jsf</module>
 		<module>core</module>
 		<module>wiki</module>
