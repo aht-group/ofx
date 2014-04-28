@@ -11,7 +11,8 @@ import org.openfuxml.interfaces.CrossMediaManager;
 import org.openfuxml.interfaces.CrossMediaTranscoder;
 import org.openfuxml.media.transcode.Pdf2PdfTranscoder;
 import org.openfuxml.media.transcode.Svg2PdfTranscoder;
-import org.openfuxml.util.media.MediaFileExtensionUtil;
+import org.openfuxml.util.media.CrossMediaFileUtil;
+import org.openfuxml.util.media.MediaSourceModificationTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,10 +25,17 @@ public class LatexCrossMediaManager implements CrossMediaManager
 	private String imageBaseDir;
 	private List<Media> listMedia;
 	
+	private MediaSourceModificationTracker msmt;
+	
 	public LatexCrossMediaManager(File texBase, String imageBaseDir)
+	{
+		this(texBase,imageBaseDir,null);
+	}
+	public LatexCrossMediaManager(File texBase, String imageBaseDir,MediaSourceModificationTracker msmt)
 	{
 		this.texBase=texBase;
 		this.imageBaseDir=imageBaseDir;
+		this.msmt=msmt;
 		listMedia = new ArrayList<Media>();
 	}
 	
@@ -47,17 +55,26 @@ public class LatexCrossMediaManager implements CrossMediaManager
 	{
 		logger.info("Transcoding "+listMedia.size());
 		
+		File fImage = new File(texBase,imageBaseDir);
 		CrossMediaTranscoder transcoder = null;
 		
 		for(Media media : listMedia)
 		{
-			switch(MediaFileExtensionUtil.getFormat(media.getSrc()))
+			switch(CrossMediaFileUtil.getFormat(media.getSrc()))
 			{
-				case PDF:	transcoder = new Pdf2PdfTranscoder(new File(texBase,imageBaseDir));break;
-				case SVG:	transcoder = new Svg2PdfTranscoder(new File(texBase,imageBaseDir));break;
+				case PDF:	transcoder = new Pdf2PdfTranscoder(fImage);break;
+				case SVG:	transcoder = new Svg2PdfTranscoder(fImage);break;
 			}
-			
-			transcoder.transcode(media);
+			if(isSourceChanged(media) || !transcoder.isTargetExisting(media))
+			{
+				transcoder.transcode(media);
+			}
 		}
+	}
+	
+	private boolean isSourceChanged(Media media)
+	{
+		if(msmt==null){return true;}
+		else {return msmt.isChanged(media);}
 	}
 }
