@@ -8,7 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.content.layout.TestXmlLayout;
 import org.openfuxml.content.ofx.TestXmlComment;
-import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;

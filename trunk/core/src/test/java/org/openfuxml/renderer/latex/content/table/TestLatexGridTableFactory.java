@@ -6,13 +6,12 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.content.ofx.table.Body;
-import org.openfuxml.content.ofx.table.Content;
-import org.openfuxml.content.ofx.table.Head;
-import org.openfuxml.content.ofx.table.Specification;
-import org.openfuxml.content.ofx.table.Table;
+import org.openfuxml.content.table.Body;
+import org.openfuxml.content.table.Content;
+import org.openfuxml.content.table.Head;
+import org.openfuxml.content.table.Specification;
+import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.latex.content.table.util.TestLatexTabularUtil;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +36,7 @@ public class TestLatexGridTableFactory extends AbstractLatexTableTest
 	public static Table createTable()
 	{
 		Specification specification = new Specification();
-		specification.setColumns(TestLatexTabularUtil.createColumns());
+		specification.setColumns(TestLatexTabularWidthCalculator.createColumns());
 
 		Body body = new Body();
 		body.getRow().add(TestLatexRowFactory.create());

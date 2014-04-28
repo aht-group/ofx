@@ -1,7 +1,7 @@
 package org.openfuxml.factory.table;
 
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.table.Cell;
+import org.openfuxml.content.table.Cell;
 
 public class OfxCellFactory
 {

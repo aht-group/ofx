@@ -1,12 +1,11 @@
 
-package org.openfuxml.content.ofx.table;
+package org.openfuxml.content.table;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -21,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/table}row" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org/table}column" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,52 +31,51 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "row"
+    "column"
 })
-@XmlRootElement(name = "foot")
-public class Foot
+@XmlRootElement(name = "columns")
+public class Columns
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(required = true)
-    protected List<Row> row;
+    protected List<Column> column;
 
     /**
-     * Gets the value of the row property.
+     * Gets the value of the column property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the row property.
+     * This is why there is not a <CODE>set</CODE> method for the column property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getRow().add(newItem);
+     *    getColumn().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Row }
+     * {@link Column }
      * 
      * 
      */
-    public List<Row> getRow() {
-        if (row == null) {
-            row = new ArrayList<Row>();
+    public List<Column> getColumn() {
+        if (column == null) {
+            column = new ArrayList<Column>();
         }
-        return this.row;
+        return this.column;
     }
 
-    public boolean isSetRow() {
-        return ((this.row!= null)&&(!this.row.isEmpty()));
+    public boolean isSetColumn() {
+        return ((this.column!= null)&&(!this.column.isEmpty()));
     }
 
-    public void unsetRow() {
-        this.row = null;
+    public void unsetColumn() {
+        this.column = null;
     }
 
 }
