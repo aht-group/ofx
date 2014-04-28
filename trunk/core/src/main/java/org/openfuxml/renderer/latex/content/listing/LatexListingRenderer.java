@@ -28,13 +28,21 @@ public class LatexListingRenderer extends AbstractOfxLatexRenderer implements Of
         sb.append(",frame=none");
         sb.append(",backgroundcolor=\\color{lgrau}");
         sb.append(",numbers=none}");
-
 		txt.add(sb.toString());
-        txt.add("\\begin{lstlisting}");
-
-        txt.add(listing.getRaw().getValue());
-
-        txt.add("\\end{lstlisting}");
-
+		
+		if(listing.isSetExternal())
+		{
+			StringBuffer sbInput = new StringBuffer();
+			sbInput.append("\\lstinputlisting{");
+			sbInput.append(listing.getExternal());
+			sbInput.append("}");
+			txt.add(sbInput.toString());
+		}
+		else
+		{
+			txt.add("\\begin{lstlisting}");
+	        txt.add(listing.getRaw().getValue());
+	        txt.add("\\end{lstlisting}");
+		}
 	}
 }
