@@ -83,6 +83,7 @@
                 <xsd:element ref="raw" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:string"/>
+            <xsd:attribute name="external" type="xsd:string"/>
 	        <xsd:attribute name="codeLang" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>

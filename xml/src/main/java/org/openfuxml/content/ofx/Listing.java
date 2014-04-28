@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{http://www.openfuxml.org}raw"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="external" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="codeLang" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -48,6 +49,8 @@ public class Listing implements Serializable
     protected Raw raw;
     @XmlAttribute(name = "id")
     protected String id;
+    @XmlAttribute(name = "external")
+    protected String external;
     @XmlAttribute(name = "codeLang")
     protected String codeLang;
 
@@ -133,6 +136,34 @@ public class Listing implements Serializable
 
     public boolean isSetId() {
         return (this.id!= null);
+    }
+
+    /**
+     * Gets the value of the external property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getExternal() {
+        return external;
+    }
+
+    /**
+     * Sets the value of the external property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setExternal(String value) {
+        this.external = value;
+    }
+
+    public boolean isSetExternal() {
+        return (this.external!= null);
     }
 
     /**
