@@ -28,59 +28,18 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 	{	
 		if(!table.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
 		if(!table.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
-		renderPre();
+		
 		renderTabular(table.getSpecification(),table.getContent());
-		renderPost(table);
-	}
-	
-	private void renderPre()
-	{		
-		preTxt.add("");
-		preTxt.add("\\begin{table}[htb]");
-		preTxt.add("\\centering");
-	}
-	
-	private void renderPost(Table table)
-	{
-		if(table.isSetTitle()) {postTxt.add("\\caption{"+table.getTitle().getValue()+"}");}
-		if(table.isSetId())    {postTxt.add("\\label{"+table.getId()+"}");}
-		postTxt.add("\\end{table}");
 	}
 	
 	private void renderTabular(Specification specification, Content tgroup) throws OfxAuthoringException
 	{
 		if(tgroup.getBody().size()!=1){throw new OfxAuthoringException("<content> must exactly have 1 body!");}
 		
-		openTablular(specification);
 		renderTableHeader(tgroup.getHead());
 		renderBody(tgroup.getBody().get(0));
-		
-		closeTablular();
 	}
-	
-	private void openTablular(Specification spec)
-	{
-		LatexTabluarWidthCalculator latexTabular = new LatexTabluarWidthCalculator(spec.getColumns());
-		
-		renderer.add(new StringRenderer(latexTabular.getLatexLengthCalculations()));
-		
-		StringBuffer sb = new StringBuffer();
-		sb.append("\\begin{tabularx}{\\textwidth}");
-		sb.append("{");
-		for(int i=0;i<spec.getColumns().getColumn().size();i++)
-		{
-			sb.append(latexTabular.getColDefinition(i));
-			sb.append("");
-		}
-		sb.append("}");
-		renderer.add(new StringRenderer(sb.toString()));
-	}
-	
-	private void closeTablular()
-	{
-		renderer.add(new StringRenderer("\\bottomrule"));
-		renderer.add(new StringRenderer("\\end{tabularx}"));
-	}
+
 	
 	private void renderTableHeader(Head head) throws OfxAuthoringException
 	{	
@@ -117,5 +76,20 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 			f.render(row);
 			renderer.add(f);
 		}
+		renderer.add(new StringRenderer("\\bottomrule"));
+	}
+	
+	@Override
+	public String buildTabularCols(LatexTabluarWidthCalculator tabularWidthCalculator, Specification spec)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("{");
+		for(int i=1;i<=spec.getColumns().getColumn().size();i++)
+		{
+			sb.append(tabularWidthCalculator.getColDefinition(i));
+			sb.append("");
+		}
+		sb.append("}");
+		return sb.toString();
 	}
 }

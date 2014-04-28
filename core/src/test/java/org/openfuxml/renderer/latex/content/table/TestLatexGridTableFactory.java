@@ -22,13 +22,13 @@ public class TestLatexGridTableFactory extends AbstractLatexTableTest
 	
 	private static enum Key {table,tableWithHead}
 	
-	private LatexGridTableRenderer renderer;
+	private LatexTableRenderer renderer;
 	private String dir = "grid";
 	
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexGridTableRenderer();
+		renderer = new LatexTableRenderer();
 	}
 	
 	@After public void close(){renderer=null;}
@@ -46,6 +46,7 @@ public class TestLatexGridTableFactory extends AbstractLatexTableTest
 		content.getBody().add(body);
 		
 		Table table = new Table();
+
 		table.setSpecification(specification);
 		table.setContent(content);
 		return table;
