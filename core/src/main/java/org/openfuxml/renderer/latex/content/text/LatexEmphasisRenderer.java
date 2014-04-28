@@ -1,6 +1,6 @@
 package org.openfuxml.renderer.latex.content.text;
 
-import org.openfuxml.content.ofx.Emphasis;
+import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
