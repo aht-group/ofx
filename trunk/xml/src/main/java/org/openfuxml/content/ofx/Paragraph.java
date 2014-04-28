@@ -84,9 +84,9 @@ public class Paragraph implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Reference }
      * {@link String }
      * {@link Emphasis }
+     * {@link Reference }
      * 
      * 
      */

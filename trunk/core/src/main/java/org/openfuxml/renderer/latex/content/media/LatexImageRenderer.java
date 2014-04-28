@@ -2,8 +2,8 @@ package org.openfuxml.renderer.latex.content.media;
 
 import javax.print.attribute.standard.Media;
 
+import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.media.Image;
-import org.openfuxml.content.ofx.layout.Alignment;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.interfaces.CrossMediaManager;

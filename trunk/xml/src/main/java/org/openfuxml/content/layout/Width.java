@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.ofx.layout;
+package org.openfuxml.content.layout;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -25,6 +25,12 @@ import javax.xml.bind.annotation.XmlValue;
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
+ *       &lt;attribute name="flex" use="required">
+ *         &lt;simpleType>
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}boolean">
+ *           &lt;/restriction>
+ *         &lt;/simpleType>
+ *       &lt;/attribute>
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>
@@ -46,6 +52,8 @@ public class Width
     protected double value;
     @XmlAttribute(name = "unit", required = true)
     protected String unit;
+    @XmlAttribute(name = "flex", required = true)
+    protected boolean flex;
 
     /**
      * Gets the value of the value property.
@@ -93,6 +101,26 @@ public class Width
 
     public boolean isSetUnit() {
         return (this.unit!= null);
+    }
+
+    /**
+     * Gets the value of the flex property.
+     * 
+     */
+    public boolean isFlex() {
+        return flex;
+    }
+
+    /**
+     * Sets the value of the flex property.
+     * 
+     */
+    public void setFlex(boolean value) {
+        this.flex = value;
+    }
+
+    public boolean isSetFlex() {
+        return true;
     }
 
 }

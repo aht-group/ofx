@@ -11,32 +11,34 @@ import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlLayout extends AbstractXmlLayoutTest
+public class TestXmlWidth extends AbstractXmlLayoutTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
 	@BeforeClass
 	public static void initFiles()
 	{
-		setXmlFile(dirSuffix, Layout.class);
+		setXmlFile(dirSuffix, Width.class);
 	}
     
     @Test
-    public void jaxbStructure() throws FileNotFoundException
+    public void xml() throws FileNotFoundException
     {
-    	Layout actual = create(true);
-    	Layout expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Layout.class);
+    	Width actual = create(true);
+    	Width expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Width.class);
     	assertJaxbEquals(expected, actual);
     }
    
-    public static Layout create(boolean withChilds)
+    public static Width create(boolean withChilds)
     {
-    	Layout xml = new Layout();
-    	
+    	Width xml = new Width();
+    	xml.setValue(12.3);
+    	xml.setFlex(false);
+    	xml.setUnit("pt");
     	
     	if(withChilds)
     	{
-    		xml.getLine().add(TestXmlLine.create(false));xml.getLine().add(TestXmlLine.create(false));
+    		
     	}
     	
     	return xml;
@@ -48,8 +50,8 @@ public class TestXmlLayout extends AbstractXmlLayoutTest
     {
 		OfxXmlTstBootstrap.init();
 			
-		TestXmlLayout.initFiles();	
-		TestXmlLayout test = new TestXmlLayout();
+		TestXmlWidth.initFiles();	
+		TestXmlWidth test = new TestXmlWidth();
 		test.save();
     }
 }
