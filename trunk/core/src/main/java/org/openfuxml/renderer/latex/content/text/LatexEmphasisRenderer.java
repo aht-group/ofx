@@ -12,7 +12,6 @@ public class LatexEmphasisRenderer extends AbstractOfxLatexRenderer implements O
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexEmphasisRenderer.class);
 	
-	
 	public LatexEmphasisRenderer()
 	{
 		
@@ -21,15 +20,18 @@ public class LatexEmphasisRenderer extends AbstractOfxLatexRenderer implements O
 	
 	public void render(Emphasis emphasis) throws OfxAuthoringException
 	{
+		boolean typewriter = emphasis.isSetStyle() && emphasis.getStyle().equals("typewriter");
 		boolean bold = emphasis.isSetBold() && emphasis.isBold();
 		boolean italic = emphasis.isSetItalic() && emphasis.isSetItalic();
 		
 		StringBuffer sb = new StringBuffer();
+		if(typewriter){sb.append("\\texttt{");}
 		if(bold) {sb.append("\\textbf{");}
 		if(italic) {sb.append("\\textit{");}
 		sb.append(TexSpecialChars.replace(emphasis.getValue()));
 		if(bold){sb.append("}");}
 		if(italic){sb.append("}");}
+		if(typewriter){sb.append("}");}
 		
 		txt.add(sb.toString());
 	}
