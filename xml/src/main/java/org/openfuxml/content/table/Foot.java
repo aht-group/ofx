@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.ofx.table;
+package org.openfuxml.content.table;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "row"
 })
-@XmlRootElement(name = "body")
-public class Body
+@XmlRootElement(name = "foot")
+public class Foot
     implements Serializable
 {
 

@@ -1,7 +1,7 @@
 package org.openfuxml.factory.table;
 
 import org.openfuxml.content.layout.Width;
-import org.openfuxml.content.ofx.table.Column;
+import org.openfuxml.content.table.Column;
 
 public class OfxColumnFactory
 {

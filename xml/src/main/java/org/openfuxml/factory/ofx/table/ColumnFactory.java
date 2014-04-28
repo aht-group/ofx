@@ -2,7 +2,7 @@ package org.openfuxml.factory.ofx.table;
 
 import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.layout.Width;
-import org.openfuxml.content.ofx.table.Column;
+import org.openfuxml.content.table.Column;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

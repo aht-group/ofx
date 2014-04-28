@@ -7,7 +7,7 @@ import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.content.ofx.table.Table;
+import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.CrossMediaManager;
 import org.openfuxml.interfaces.OfxLatexRenderer;

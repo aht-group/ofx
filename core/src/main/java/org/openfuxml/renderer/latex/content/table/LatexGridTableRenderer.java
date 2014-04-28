@@ -1,16 +1,15 @@
 package org.openfuxml.renderer.latex.content.table;
 
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.content.ofx.table.Body;
-import org.openfuxml.content.ofx.table.Content;
-import org.openfuxml.content.ofx.table.Head;
-import org.openfuxml.content.ofx.table.Row;
-import org.openfuxml.content.ofx.table.Specification;
-import org.openfuxml.content.ofx.table.Table;
+import org.openfuxml.content.table.Body;
+import org.openfuxml.content.table.Content;
+import org.openfuxml.content.table.Head;
+import org.openfuxml.content.table.Row;
+import org.openfuxml.content.table.Specification;
+import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.latex.content.table.util.LatexTabluarUtil;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.openfuxml.renderer.latex.content.text.StringRenderer;
 import org.slf4j.Logger;
@@ -65,7 +64,7 @@ public class LatexGridTableRenderer extends AbstractOfxLatexRenderer implements 
 	
 	private void renderSpecification(Specification spec)
 	{
-		LatexTabluarUtil latexTabular = new LatexTabluarUtil(spec.getColumns());
+		LatexTabluarWidthCalculator latexTabular = new LatexTabluarWidthCalculator(spec.getColumns());
 		
 		renderer.add(new StringRenderer(latexTabular.getLatexLengthCalculations()));
 		

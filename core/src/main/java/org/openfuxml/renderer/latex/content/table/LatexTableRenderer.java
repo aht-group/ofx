@@ -1,6 +1,6 @@
 package org.openfuxml.renderer.latex.content.table;
 
-import org.openfuxml.content.ofx.table.Table;
+import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;

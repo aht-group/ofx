@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.table.Cell;
+import org.openfuxml.content.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.content.list.TestLatexListRenderer;
 import org.openfuxml.renderer.latex.content.structure.TestLatexParagraphRenderer;

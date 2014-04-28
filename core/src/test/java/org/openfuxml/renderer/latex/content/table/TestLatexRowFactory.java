@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.content.ofx.table.Row;
+import org.openfuxml.content.table.Row;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;

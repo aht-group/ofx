@@ -10,7 +10,7 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.content.ofx.table.Table;
+import org.openfuxml.content.table.Table;
 import org.openfuxml.renderer.processor.html.interfaces.OfxSectionRenderer;
 import org.openfuxml.renderer.processor.html.interfaces.OfxTableRenderer;
 import org.openfuxml.renderer.processor.html.section.ParagraphRenderer;

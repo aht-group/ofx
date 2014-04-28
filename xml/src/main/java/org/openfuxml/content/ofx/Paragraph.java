@@ -56,8 +56,8 @@ public class Paragraph implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class),
-        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class)
+        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
+        @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class)
     })
     @XmlMixed
     protected List<Serializable> content;

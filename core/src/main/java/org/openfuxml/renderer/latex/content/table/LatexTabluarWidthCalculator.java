@@ -1,23 +1,23 @@
-package org.openfuxml.renderer.latex.content.table.util;
+package org.openfuxml.renderer.latex.content.table;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openfuxml.content.ofx.table.Column;
-import org.openfuxml.content.ofx.table.Columns;
+import org.openfuxml.content.table.Column;
+import org.openfuxml.content.table.Columns;
 
-public class LatexTabluarUtil
+public class LatexTabluarWidthCalculator
 {
-	static Log logger = LogFactory.getLog(LatexTabluarUtil.class);
+	static Log logger = LogFactory.getLog(LatexTabluarWidthCalculator.class);
 	
 	protected final static int muliplier = 1000;
 	
 	private Columns columns;
 	private List<String> listLatexCalculations;
 	
-	public LatexTabluarUtil(Columns columns)
+	public LatexTabluarWidthCalculator(Columns columns)
 	{
 		this.columns=columns;
 		listLatexCalculations = new ArrayList<String>();

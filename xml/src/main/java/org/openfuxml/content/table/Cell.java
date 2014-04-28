@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.ofx.table;
+package org.openfuxml.content.table;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,8 +44,8 @@ public class Cell
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class),
-        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class)
+        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
+        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class)
     })
     @XmlMixed
     protected java.util.List<Serializable> content;
