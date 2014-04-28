@@ -1,6 +1,6 @@
 package org.openfuxml.factory.content;
 
-import org.openfuxml.content.ofx.Emphasis;
+import org.openfuxml.content.text.Emphasis;
 
 public class OfxEmphasisFactory
 {

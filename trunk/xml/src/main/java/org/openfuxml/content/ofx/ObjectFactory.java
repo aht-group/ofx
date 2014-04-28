@@ -78,14 +78,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Emphasis }
-     * 
-     */
-    public Emphasis createEmphasis() {
-        return new Emphasis();
-    }
-
-    /**
      * Create an instance of {@link Reference }
      * 
      */

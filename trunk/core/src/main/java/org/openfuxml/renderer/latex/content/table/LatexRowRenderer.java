@@ -1,8 +1,8 @@
 package org.openfuxml.renderer.latex.content.table;
 
-import org.openfuxml.content.ofx.Emphasis;
 import org.openfuxml.content.ofx.table.Cell;
 import org.openfuxml.content.ofx.table.Row;
+import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;

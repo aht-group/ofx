@@ -1,6 +1,5 @@
 package org.openfuxml.renderer.latex.content.table;
 
-import org.openfuxml.content.ofx.Emphasis;
 import org.openfuxml.content.ofx.layout.Line;
 import org.openfuxml.content.ofx.table.Body;
 import org.openfuxml.content.ofx.table.Content;
@@ -8,6 +7,7 @@ import org.openfuxml.content.ofx.table.Head;
 import org.openfuxml.content.ofx.table.Row;
 import org.openfuxml.content.ofx.table.Specification;
 import org.openfuxml.content.ofx.table.Table;
+import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;

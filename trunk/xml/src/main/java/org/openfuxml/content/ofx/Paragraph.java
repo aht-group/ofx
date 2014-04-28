@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.openfuxml.content.text.Emphasis;
 
 
 /**
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org}emphasis" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org/text}emphasis" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org}reference" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -56,7 +57,7 @@ public class Paragraph implements Serializable
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
         @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
-        @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org", type = Emphasis.class)
+        @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class)
     })
     @XmlMixed
     protected List<Serializable> content;
