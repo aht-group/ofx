@@ -13,6 +13,7 @@ import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.CrossMediaTranscoder;
 import org.openfuxml.media.cross.LatexCrossMediaManager;
+import org.openfuxml.util.media.CrossMediaFileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,8 +33,8 @@ public class Pdf2PdfTranscoder implements CrossMediaTranscoder
 	@Override
 	public void transcode(Media media) throws OfxAuthoringException
 	{
-		File file = new File(dir,media.getDst()+".pdf");
-		createParentDir(file);
+		File file = buildTarget(media);
+		CrossMediaFileUtil.createParentDirs(file);
 		logger.info("Transcoding to :"+file.getAbsolutePath());
 		
 		try
@@ -48,8 +49,18 @@ public class Pdf2PdfTranscoder implements CrossMediaTranscoder
 //		FileIO.writeFileIfDiffers(bytes, fTarget);
 	}
 	
-	private void createParentDir(File file)
+
+
+	@Override
+	public boolean isTargetExisting(Media media)
 	{
-		if(!file.getParentFile().exists()){file.getParentFile().mkdirs();}
+		File file = buildTarget(media);
+		return file.exists() && file.isFile();
+	}
+
+	@Override
+	public File buildTarget(Media media)
+	{
+		return new File(dir,media.getDst()+".pdf");
 	}
 }
