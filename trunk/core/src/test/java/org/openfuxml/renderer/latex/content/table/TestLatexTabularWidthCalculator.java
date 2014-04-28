@@ -39,8 +39,8 @@ public class TestLatexTabularWidthCalculator extends AbstractOfxCoreTest
     public void getColDefinition() throws IOException, OfxAuthoringException
     {    	    	
     	LatexTabluarWidthCalculator tabUtil = new LatexTabluarWidthCalculator(createColumns());
-    	Assert.assertEquals("p{\\tabLenA}", tabUtil.getColDefinition(0));
-    	Assert.assertEquals("p{\\tabLenB}", tabUtil.getColDefinition(1));
+    	Assert.assertEquals("p{\\tabLenA}", tabUtil.getColDefinition(1));
+    	Assert.assertEquals("p{\\tabLenB}", tabUtil.getColDefinition(2));
     }
     
     @Test
@@ -67,5 +67,13 @@ public class TestLatexTabularWidthCalculator extends AbstractOfxCoreTest
     	LatexTabluarWidthCalculator tabUtil = new LatexTabluarWidthCalculator(createColumns());
     	List<String> list = tabUtil.getLatexLengthCalculations();
     	for(String s : list){logger.debug(s);}
+    }
+    
+    @Test
+    public void decimalFormat()
+    {
+    	LatexTabluarWidthCalculator twc = new LatexTabluarWidthCalculator(createColumns());
+    	String expected ="0.25";
+    	Assert.assertEquals(expected, twc.precentage(25));
     }
 }

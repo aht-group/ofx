@@ -1,33 +1,30 @@
 
-% Rendering a Latex table with: LatexGridTableRenderer
+% ******************************************************
+% Rendering a Latex table with: LatexLineTableRenderer
+
 \begin{table}[htb]
-\centering
 
-\ifthenelse{\isundefined{\tabLenA}}{\newlength{\tabLenA}}{}
-\ifthenelse{\isundefined{\tabLenB}}{\newlength{\tabLenB}}{}
+\ifthenelse{\isundefined{\tabLenA}}{\newlength{\tabLenA\tabLenA}}{}
+\ifthenelse{\isundefined{\tabLenB}}{\newlength{\tabLenB\tabLenB}}{}
 
-\setlength{\tabLenA}{\textwidth}
-\setlength{\tabLenB}{\textwidth}
+\setlength{\tabLenA}{0.10\textwidth}
+\setlength{\tabLenB}{0.20\textwidth}
 
-\divide\tabLenA by 30000
-\multiply\tabLenA by 10000
-\divide\tabLenB by 30000
-\multiply\tabLenB by 20000
-\begin{tabular}{|p{\tabLenA}|p{\tabLenB}|}
-\hline
+\begin{tabularx}{\textwidth}{p{\tabLenA}p{\tabLenB}}
+\toprule
+\toprule
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
 &
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
 \\
-\hline
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
 &
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
 \\
-\hline
-\end{tabular}
+\bottomrule
+\end{tabularx}
 \end{table}
