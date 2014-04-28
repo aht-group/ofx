@@ -1,6 +1,6 @@
 package org.openfuxml.renderer.latex.content.table;
 
-import org.openfuxml.content.ofx.layout.Line;
+import org.openfuxml.content.layout.Line;
 import org.openfuxml.content.ofx.table.Body;
 import org.openfuxml.content.ofx.table.Content;
 import org.openfuxml.content.ofx.table.Head;
@@ -66,7 +66,7 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 		renderer.add(new StringRenderer(latexTabular.getLatexLengthCalculations()));
 		
 		StringBuffer sb = new StringBuffer();
-		sb.append("\\begin{tabular}");
+		sb.append("\\begin{tabularx}{\\textwidth}");
 		sb.append("{");
 		for(int i=0;i<spec.getColumns().getColumn().size();i++)
 		{
@@ -80,7 +80,7 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 	private void closeTablular()
 	{
 		renderer.add(new StringRenderer("\\bottomrule"));
-		renderer.add(new StringRenderer("\\end{tabular}"));
+		renderer.add(new StringRenderer("\\end{tabularx}"));
 	}
 	
 	private void renderTableHeader(Head head) throws OfxAuthoringException

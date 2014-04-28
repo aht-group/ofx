@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.ofx.layout;
+package org.openfuxml.content.layout;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,11 +18,12 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="horizontal">
+ *       &lt;attribute name="orientation">
  *         &lt;simpleType>
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *             &lt;enumeration value="top"/>
+ *             &lt;enumeration value="bottom"/>
  *             &lt;enumeration value="left"/>
- *             &lt;enumeration value="center"/>
  *             &lt;enumeration value="right"/>
  *           &lt;/restriction>
  *         &lt;/simpleType>
@@ -36,41 +37,41 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-@XmlRootElement(name = "alignment")
-public class Alignment
+@XmlRootElement(name = "line")
+public class Line
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlAttribute(name = "horizontal")
-    protected String horizontal;
+    @XmlAttribute(name = "orientation")
+    protected String orientation;
 
     /**
-     * Gets the value of the horizontal property.
+     * Gets the value of the orientation property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getHorizontal() {
-        return horizontal;
+    public String getOrientation() {
+        return orientation;
     }
 
     /**
-     * Sets the value of the horizontal property.
+     * Sets the value of the orientation property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setHorizontal(String value) {
-        this.horizontal = value;
+    public void setOrientation(String value) {
+        this.orientation = value;
     }
 
-    public boolean isSetHorizontal() {
-        return (this.horizontal!= null);
+    public boolean isSetOrientation() {
+        return (this.orientation!= null);
     }
 
 }

@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.ofx.layout;
 
-import org.openfuxml.content.ofx.layout.Layout;
+import org.openfuxml.content.layout.Layout;
 
 public class XmlLayoutFactory
 {
