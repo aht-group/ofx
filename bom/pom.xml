@@ -32,6 +32,11 @@
         	</dependency>
         	<dependency>
         		<groupId>org.openfuxml</groupId>
+        		<artifactId>ofx-interfaces</artifactId>
+        		<version>${project.version}</version>
+        	</dependency>
+        	<dependency>
+        		<groupId>org.openfuxml</groupId>
         		<artifactId>ofx-core</artifactId>
         		<version>${project.version}</version>
         	</dependency>

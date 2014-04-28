@@ -27,6 +27,18 @@
 	
 	<dependencies>
 		<dependency>
+			<groupId>org.openfuxml</groupId>
+			<artifactId>ofx-interfaces</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openfuxml</groupId>
+			<artifactId>ofx-xml</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-util</artifactId>
 			<type>jar</type>
@@ -37,12 +49,6 @@
 					<groupId>commons-codec</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.openfuxml</groupId>
-			<artifactId>ofx-xml</artifactId>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.openfuxml</groupId>

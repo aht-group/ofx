@@ -1,8 +1,8 @@
-package org.openfuxml.media.cross;
+package org.openfuxml.util.media;
 
 import org.openfuxml.interfaces.CrossMediaManager;
 
-public class CrossMediaManagerUtil
+public class MediaFileExtensionUtil
 {
 	public static CrossMediaManager.Format getFormat(String fileName)
 	{
