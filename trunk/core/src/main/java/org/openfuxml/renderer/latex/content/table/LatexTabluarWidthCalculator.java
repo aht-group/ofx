@@ -47,27 +47,53 @@ public class LatexTabluarWidthCalculator
 	
 	private void calculate()
 	{
-		for(int i=1;i<=columns.getColumn().size();i++)
+		double sumFlex=0;
+		for(Column column : columns.getColumn())
+		{
+			Width width = column.getWidth();
+			
+			if(width.isSetFlex() && width.isFlex() && width.isSetValue())
+			{
+				sumFlex=sumFlex+width.getValue();
+			}
+		}
+		
+		logger.info("SumFlex: "+sumFlex);
+		
+		int index=0;
+		for(Column column : columns.getColumn())
 		{	
-			Width width = columns.getColumn().get(i-1).getWidth();
+			index++;
+			Width width = column.getWidth();
 			if(!width.isSetUnit()){width.setUnit("percentage");}
 			
-			byte[] b = {(byte)(i+64)};
+			byte[] b = {(byte)(index+64)};
 			String var = "\\tabLen"+(new String(b));
 			
 			boolean flex = width.isSetFlex() && width.isFlex();
 			
 			if(flex)
 			{
-				mapCol.put(i, "X");
+				logger.info("Width?" +(width.isSetValue()));
+				StringBuffer sb = new StringBuffer();
+				if(width.isSetValue())
+				{
+					double thisFlex = width.getValue()/sumFlex;
+					sb.append(">{\\hsize=").append(df.format(thisFlex)).append("\\hsize}X");
+				}
+				else
+				{
+					sb.append("X");
+				}
+				mapCol.put(index, sb.toString());
+				
 			}
 			else
 			{
 				StringBuffer sbDef = new StringBuffer();
 				sbDef.append("\\ifthenelse");
 				sbDef.append("{\\isundefined{").append(var).append("}}");
-				sbDef.append("{\\newlength{").append(var);
-				sbDef.append("\\tabLen").append(new String(b)).append("}}");
+				sbDef.append("{\\newlength{").append(var).append("}}");
 				sbDef.append("{}");
 				listDefinition.add(sbDef.toString());
 				
@@ -79,14 +105,14 @@ public class LatexTabluarWidthCalculator
 					sbValue.append("\\setlength{").append(var).append("}");
 					sbValue.append("{").append(df.format(colWidth)).append("\\textwidth}");
 					listValue.add(sbValue.toString());
-					mapCol.put(i, "p{"+var+"}");
+					mapCol.put(index, "p{"+var+"}");
 				}
 				else
 				{
 					logger.warn("NYI unit "+width.getUnit());
 				}
 			}
-			logger.info(i+" "+getColDefinition(i));
+			logger.trace(index+" "+getColDefinition(index));
 		}
 	}
 	

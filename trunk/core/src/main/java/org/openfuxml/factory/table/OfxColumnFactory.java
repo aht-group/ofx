@@ -13,4 +13,33 @@ public class OfxColumnFactory
 		col.setWidth(width);
 		return col;
 	}
+	
+	public static Column flex()
+	{
+		Width width = new Width();
+		width.setFlex(true);
+		Column col = new Column();
+		col.setWidth(width);
+		return col;
+	}
+	
+	public static Column flex(double value)
+	{
+		Width width = new Width();
+		width.setFlex(true);
+		width.setValue(value);
+		Column col = new Column();
+		col.setWidth(width);
+		return col;
+	}
+	
+	public static Column percentage(double value)
+	{
+		Width width = new Width();
+		width.setUnit("percentage");
+		width.setValue(value);
+		Column col = new Column();
+		col.setWidth(width);
+		return col;
+	}
 }
