@@ -51,8 +51,8 @@
     <xsd:element name="content">
         <xsd:complexType mixed="true">
             <xsd:sequence>
+            	<xsd:element ref="sections" maxOccurs="unbounded"/>
                 <xsd:element ref="section" maxOccurs="unbounded"/>
-                <xsd:element ref="sections" maxOccurs="unbounded"/>
                 <xsd:element ref="wiki:content" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
@@ -121,8 +121,11 @@
             <xsd:attribute name="id" type="xsd:string"/>
             <xsd:attribute name="classifier" type="xsd:string"/><!-- Can be used for global content filters -->
             <xsd:attribute name="lang" type="xsd:string"/>
-            <xsd:attribute name="external" type="xsd:boolean"/>
-            <xsd:attribute name="source" type="xsd:string"/>
+            
+            <xsd:attribute name="external" type="xsd:boolean"/><!-- Deprecated, use include -->
+            <xsd:attribute name="source" type="xsd:string"/><!-- Deprecated, use include -->
+            
+            <xsd:attribute name="include" type="xsd:string"/>
             <xsd:attribute name="transparent" type="xsd:boolean"/><!-- true: Not rendered as a section, only as a container -->
         </xsd:complexType>
     </xsd:element>

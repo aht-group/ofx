@@ -2,5 +2,5 @@
 <ofx:section xmlns:ofx="http://www.openfuxml.org">
 	<ofx:title>Sub Section</ofx:title>
     <ofx:paragraph>paragraph</ofx:paragraph>
-    <ofx:section source="exsection1.1.xml" external="true"/>
+    <ofx:section include="exsection1.1.xml" source="exsection1.1.xml" external="true"/>
 </ofx:section>

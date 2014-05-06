@@ -3,18 +3,23 @@ package org.openfuxml.processor.pre;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
+import java.util.List;
 
+import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.xml.JDomUtil;
 
 import org.apache.commons.io.FilenameUtils;
 import org.jdom2.Document;
+import org.jdom2.Element;
 import org.jdom2.output.Format;
+import org.jdom2.xpath.XPathExpression;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
@@ -27,14 +32,17 @@ public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestExternalContentEagerLoader.class);
 	
-	private ExternalContentEagerLoader exMerger;
+	private ExternalContentEagerLoader ecel;
+	int expectedExternals;
 	
-	public static String srcDirName = "src/test/resources/data/pre/external/elements/in";
-	public static final String dstDirName = "src/test/resources/data/pre/external/elements/out";
+	public static String srcDir = "src/test/resources";
+	public static String srcDirName = srcDir+"/data/pre/external/elements/in";
+	public static final String dstDirName = srcDir+"/data/pre/external/elements/out";
 	
 	public TestExternalContentEagerLoader(File fTest)
 	{
 		this.fTest = fTest;
+		expectedExternals = new Integer(FilenameUtils.removeExtension(fTest.getName()));
 		String name = FilenameUtils.removeExtension(fTest.getName());
 		fRef = new File(dstDirName,name+".xml");
 	}
@@ -43,41 +51,74 @@ public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
 	public static Collection<Object[]> initFileNames() {return initFileNames(srcDirName, ".xml");}
 	
 	@Before
-	public void init() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
+	public void init()
 	{	
-		exMerger = new ExternalContentEagerLoader();
+		ecel = new ExternalContentEagerLoader();
 	}
 	
 	@After
 	public void close()
 	{
-		exMerger = null;
+		ecel = null;
 	}
-    
-    @Test
-    public void render() throws OfxInternalProcessingException, FileNotFoundException
+	
+	@Test
+    public void xpathWithDocument() throws OfxInternalProcessingException, FileNotFoundException
     {
-    	render(false);
+    	Document doc = JDomUtil.load(fTest);
+    	XPathExpression<Element> xpe = ecel.build();
+
+    	List<Element> list = xpe.evaluate(doc);
+    	Assert.assertEquals(expectedExternals,list.size());
     }
 	
-	private void render(boolean saveReference) throws FileNotFoundException, OfxInternalProcessingException
+    @Test
+    public void xpathWithRootElement() throws OfxInternalProcessingException, FileNotFoundException
+    {
+    	Document doc = JDomUtil.load(fTest);
+    	XPathExpression<Element> xpe = ecel.build();
+
+    	List<Element> list = xpe.evaluate(doc.getRootElement());
+    	Assert.assertEquals(expectedExternals,list.size());
+    }
+	
+    
+    @Test
+    public void loadFromFile() throws FileNotFoundException, OfxAuthoringException
+    {
+    	render(fTest.getAbsolutePath(),false);
+    }
+    
+    @Test
+    public void loadFromResource() throws FileNotFoundException, OfxAuthoringException
+    {
+    	RelativePathFactory rpf = new RelativePathFactory(new File(srcDir));
+    	String relativeResource = rpf.relativate(fTest.getAbsoluteFile());
+    	logger.info(relativeResource);
+    	render(relativeResource,false);
+    }
+	
+    private void render(boolean saveReference) throws FileNotFoundException, OfxAuthoringException
+    {
+    	render(fTest.getAbsolutePath(),saveReference);
+    }
+    
+	private void render(String fileName, boolean saveReference) throws FileNotFoundException, OfxAuthoringException
 	{
-		logger.debug(fTest.getAbsolutePath());
-		
-		Document doc = exMerger.mergeToDoc(fTest);
+		Document docActual = ecel.load(fileName);
 		
 		if(saveReference)
 		{
-			JDomUtil.save(doc, fRef, Format.getRawFormat());
+			JDomUtil.save(docActual, fRef, Format.getRawFormat());
 		}
 		else
 		{
-			Document docRef = JDomUtil.load(fRef);
-			Assert.assertEquals(JDomUtil.toString(docRef),JDomUtil.toString(doc));
+			Document docExcepcted = JDomUtil.load(fRef);
+			Assert.assertEquals(JDomUtil.toString(docExcepcted),JDomUtil.toString(docActual));
 		}	
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
+	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxAuthoringException
     {
 		OfxCoreTestBootstrap.init();
 		
