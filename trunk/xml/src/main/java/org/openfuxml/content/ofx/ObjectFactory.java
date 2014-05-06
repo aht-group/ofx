@@ -46,6 +46,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Sections }
+     * 
+     */
+    public Sections createSections() {
+        return new Sections();
+    }
+
+    /**
      * Create an instance of {@link Section }
      * 
      */
@@ -91,14 +99,6 @@ public class ObjectFactory {
      */
     public Listing createListing() {
         return new Listing();
-    }
-
-    /**
-     * Create an instance of {@link Sections }
-     * 
-     */
-    public Sections createSections() {
-        return new Sections();
     }
 
     /**

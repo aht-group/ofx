@@ -37,6 +37,7 @@ public class TestXmlSection extends AbstractXmlOfxTest
     	xml.setId("myId");
     	xml.setLang("myLang");
     	xml.setClassifier("myClassifier");
+    	xml.setInclude("myInclude");
     	
     	logger.warn("Not fully implemented");
     	if(withChilds)

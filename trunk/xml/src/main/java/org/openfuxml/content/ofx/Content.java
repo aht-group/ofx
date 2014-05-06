@@ -23,8 +23,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org}section" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org}sections" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org}section" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org/wiki}content" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -45,8 +45,8 @@ public class Content
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = org.openfuxml.addon.wiki.data.jaxb.Content.class),
         @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = org.openfuxml.addon.wiki.data.jaxb.Content.class),
         @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class)
     })
     @XmlMixed
@@ -71,8 +71,8 @@ public class Content
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * {@link org.openfuxml.addon.wiki.data.jaxb.Content }
      * {@link Sections }
+     * {@link org.openfuxml.addon.wiki.data.jaxb.Content }
      * {@link Section }
      * 
      * 

@@ -44,6 +44,7 @@ import org.openfuxml.content.table.Table;
  *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="external" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="source" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="include" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="transparent" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -62,16 +63,16 @@ public class Section implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
-        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
-        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
         @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
+        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
+        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
+        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class),
+        @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
         @XmlElementRef(name = "comment", namespace = "http://www.openfuxml.org", type = Comment.class),
         @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
         @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
-        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class),
         @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class)
     })
     @XmlMixed
@@ -86,6 +87,8 @@ public class Section implements Serializable
     protected Boolean external;
     @XmlAttribute(name = "source")
     protected String source;
+    @XmlAttribute(name = "include")
+    protected String include;
     @XmlAttribute(name = "transparent")
     protected Boolean transparent;
 
@@ -107,18 +110,18 @@ public class Section implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Image }
-     * {@link Template }
+     * {@link Table }
      * {@link Listing }
      * {@link String }
      * {@link Content }
      * {@link Sections }
-     * {@link Table }
+     * {@link Image }
+     * {@link Template }
+     * {@link org.openfuxml.content.list.List }
      * {@link Paragraph }
      * {@link Comment }
      * {@link Section }
      * {@link Title }
-     * {@link org.openfuxml.content.list.List }
      * 
      * 
      */
@@ -279,6 +282,34 @@ public class Section implements Serializable
 
     public boolean isSetSource() {
         return (this.source!= null);
+    }
+
+    /**
+     * Gets the value of the include property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getInclude() {
+        return include;
+    }
+
+    /**
+     * Sets the value of the include property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setInclude(String value) {
+        this.include = value;
+    }
+
+    public boolean isSetInclude() {
+        return (this.include!= null);
     }
 
     /**
