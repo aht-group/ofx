@@ -24,9 +24,10 @@ public class OfxCoreTestBootstrap
 	
 	public static Configuration init(String configFile)
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+		LoggerInit loggerInit = new LoggerInit("log4j.xml");
 			loggerInit.addAltPath("config.ofx-core.test");
 			loggerInit.init();
+
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
 		
 		try

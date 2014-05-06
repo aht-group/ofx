@@ -3,5 +3,4 @@
 	<ofx:title>Root Section</ofx:title>
     <ofx:paragraph>paragraph</ofx:paragraph>
     <ofx:section source="external/exsection0.xml" external="true"/>
-    <ofx:section source="external/exsection1.xml" external="true"/>
 </ofx:section>
