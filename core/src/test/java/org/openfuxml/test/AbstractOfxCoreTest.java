@@ -29,9 +29,12 @@ public class AbstractOfxCoreTest
 	@BeforeClass
     public static void initLogger()
 	{
-		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("config.ofx-core.test");
-		loggerInit.init();
+		if(!LoggerInit.isLog4jInited())
+		{
+			LoggerInit loggerInit = new LoggerInit("log4j.xml");	
+			loggerInit.addAltPath("config.ofx-core.test");
+			loggerInit.init();
+		}
     }
 	
 	@BeforeClass

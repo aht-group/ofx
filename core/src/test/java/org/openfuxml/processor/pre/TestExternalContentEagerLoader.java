@@ -1,12 +1,12 @@
-package org.openfuxml.test.renderer.pre;
+package org.openfuxml.processor.pre;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
+import org.apache.commons.io.FilenameUtils;
 import org.jdom2.Document;
 import org.jdom2.output.Format;
 import org.junit.After;
@@ -17,25 +17,25 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
 import org.openfuxml.test.AbstractFileProcessingTest;
+import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RunWith(Parameterized.class)
-public class TestExternalMergerElements extends AbstractFileProcessingTest
+public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestExternalMergerElements.class);
+	final static Logger logger = LoggerFactory.getLogger(TestExternalContentEagerLoader.class);
 	
-	private OfxExternalMerger exMerger;
+	private ExternalContentEagerLoader exMerger;
 	
 	public static String srcDirName = "src/test/resources/data/pre/external/elements/in";
 	public static final String dstDirName = "src/test/resources/data/pre/external/elements/out";
 	
-	public TestExternalMergerElements(File fTest)
+	public TestExternalContentEagerLoader(File fTest)
 	{
 		this.fTest = fTest;
-		String name = fTest.getName().substring(0, fTest.getName().length()-4);
+		String name = FilenameUtils.removeExtension(fTest.getName());
 		fRef = new File(dstDirName,name+".xml");
 	}
 	
@@ -45,7 +45,7 @@ public class TestExternalMergerElements extends AbstractFileProcessingTest
 	@Before
 	public void init() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{	
-		exMerger = new OfxExternalMerger();
+		exMerger = new ExternalContentEagerLoader();
 	}
 	
 	@After
@@ -79,19 +79,17 @@ public class TestExternalMergerElements extends AbstractFileProcessingTest
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
     {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
-			loggerInit.init();	
+		OfxCoreTestBootstrap.init();
 		
 		boolean saveReference = true;
 		int id = -1;
 		int index = 0;
 		
-		for(Object[] o : TestExternalMergerElements.initFileNames())
+		for(Object[] o : TestExternalContentEagerLoader.initFileNames())
 		{
 			File fTest = (File)o[0];
 		
-			TestExternalMergerElements test = new TestExternalMergerElements(fTest);
+			TestExternalContentEagerLoader test = new TestExternalContentEagerLoader(fTest);
 			test.init();
 			logger.trace(id+" "+index);
 			if(id<0 | id==index){test.render(saveReference);}

@@ -31,6 +31,7 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.exception.OfxRenderingException;
+import org.openfuxml.processor.pre.ExternalContentEagerLoader;
 import org.openfuxml.renderer.OfxRenderProcessor.DirCode;
 import org.openfuxml.renderer.OfxRenderProcessor.FileCode;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
@@ -126,7 +127,7 @@ public class OfxPreProcessor
 		{
 			ofxDoc = JaxbUtil.loadJAXB(srcFile.getAbsolutePath(), Document.class);
 			
-			OfxExternalMerger exMerger = new OfxExternalMerger();
+			ExternalContentEagerLoader exMerger = new ExternalContentEagerLoader();
 			ofxDoc = exMerger.mergeToOfxDoc(srcFile);
 			
 			JaxbUtil.save(dstFile, ofxDoc, true);

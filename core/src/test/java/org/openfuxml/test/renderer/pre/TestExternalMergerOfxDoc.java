@@ -16,7 +16,7 @@ import org.junit.runners.Parameterized;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
+import org.openfuxml.processor.pre.ExternalContentEagerLoader;
 import org.openfuxml.test.AbstractFileProcessingTest;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
@@ -27,7 +27,7 @@ public class TestExternalMergerOfxDoc extends AbstractFileProcessingTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestExternalMergerOfxDoc.class);
 	
-	private OfxExternalMerger exMerger;
+	private ExternalContentEagerLoader exMerger;
 	
 	public static String srcDirName = "src/test/resources/data/pre/external/ofxdoc/in";
 	public static final String dstDirName = "src/test/resources/data/pre/external/ofxdoc/out";
@@ -45,7 +45,7 @@ public class TestExternalMergerOfxDoc extends AbstractFileProcessingTest
 	@Before
 	public void init() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{	
-		exMerger = new OfxExternalMerger();
+		exMerger = new ExternalContentEagerLoader();
 	}
 	
 	@After

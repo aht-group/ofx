@@ -8,13 +8,13 @@ import org.jdom2.Namespace;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.renderer.processor.pre.OfxExternalMerger;
+import org.openfuxml.processor.pre.ExternalContentEagerLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EpubSectionFactory
 {
-	final static Logger logger = LoggerFactory.getLogger(OfxExternalMerger.class);
+	final static Logger logger = LoggerFactory.getLogger(ExternalContentEagerLoader.class);
 	
 	private EpubTitleFactory titleFactory;
 	private EpubParagraphFactory paragraphFactory;
