@@ -1,9 +1,7 @@
 package org.openfuxml.renderer.latex.content.graph;
 
-import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.xml.addon.graph.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +13,7 @@ public class LatexTreeNodeRenderer extends AbstractOfxLatexRenderer implements O
 	{
 		
 	}
-	
+/*	
 	public void render(Node node) throws OfxAuthoringException
 	{	
 		StringBuffer sb = new StringBuffer();
@@ -36,4 +34,5 @@ public class LatexTreeNodeRenderer extends AbstractOfxLatexRenderer implements O
 		}
 		postTxt.add("]");
 	}
+	*/
 }
