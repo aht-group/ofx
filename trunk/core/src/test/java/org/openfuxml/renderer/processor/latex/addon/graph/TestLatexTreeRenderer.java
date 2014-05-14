@@ -1,15 +1,8 @@
 package org.openfuxml.renderer.processor.latex.addon.graph;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
-import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.content.graph.LatexTreeRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.xml.addon.graph.Tree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +22,7 @@ public class TestLatexTreeRenderer extends AbstractLatexGraphTest
 	}
 	
 	@After public void close(){renderer=null;}
-	
+/*
 	public static Tree createTable()
 	{
 		Tree tree = new Tree();
@@ -98,4 +91,5 @@ public class TestLatexTreeRenderer extends AbstractLatexGraphTest
     	test.initRenderer();test.twoLevel();
     	test.initRenderer();test.rootWithoutLabel();
     }
+    */
 }
