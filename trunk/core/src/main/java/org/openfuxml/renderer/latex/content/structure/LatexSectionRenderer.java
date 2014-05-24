@@ -44,7 +44,23 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	public void render(Section section) throws OfxAuthoringException
 	{
+		if(!section.isSetContainer()){section.setContainer(false);}
+		if(section.isContainer()){lvl=lvl-1;}
+		
 		preTxt.addAll(LatexCommentRenderer.stars());
+		if(section.isContainer() && section.isSetInclude())
+		{
+			if(section.getContent().size()>0)
+			{
+				preTxt.addAll(LatexCommentRenderer.comment("All content of "+Section.class.getSimpleName()+" will be ignored because of inlcude"));
+			}
+			
+			LatexIncludeRenderer rComment = new LatexIncludeRenderer();
+			rComment.render(Section.class,section.getInclude());
+			renderer.add(rComment);
+			return;
+		}
+
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Section.class.getSimpleName()+" with: "+this.getClass().getSimpleName()));
 		
 		for(Object s : section.getContent())
@@ -59,8 +75,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		
 		logger.trace("Render section");
 		
-		if(!section.isSetContainer()){section.setContainer(false);}
-		if(section.isContainer()){lvl=lvl-1;}
+		
 		
 		for(Object s : section.getContent())
 		{
