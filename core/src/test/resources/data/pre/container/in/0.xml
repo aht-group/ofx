@@ -6,12 +6,12 @@
     <ofx:content>
     	<ofx:section>
     		<ofx:title>Section</ofx:title>
-    		<ofx:section transparent="true">
+    		<ofx:section container="true">
 				<ofx:paragraph>
 					Para1
     			</ofx:paragraph>
             </ofx:section>
-            <ofx:section transparent="true">
+            <ofx:section container="true">
                <ofx:paragraph>
     				Para2
     			</ofx:paragraph>

@@ -44,7 +44,7 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 	public Element transform(Template template)
 	{
 		Section section = new Section();
-		section.setTransparent(true);
+		section.setContainer(true);
 		
 		Table table = getTable(template.getTemplateKv());	
 		section.getContent().add(table);

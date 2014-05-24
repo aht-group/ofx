@@ -45,9 +45,9 @@ public class Content
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
+        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
         @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = org.openfuxml.addon.wiki.data.jaxb.Content.class),
-        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class)
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = org.openfuxml.addon.wiki.data.jaxb.Content.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -70,8 +70,8 @@ public class Content
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
      * {@link Sections }
+     * {@link String }
      * {@link org.openfuxml.addon.wiki.data.jaxb.Content }
      * {@link Section }
      * 

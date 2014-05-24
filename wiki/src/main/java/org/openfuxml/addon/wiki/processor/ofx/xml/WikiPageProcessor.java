@@ -80,7 +80,7 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 	
 	private Document checkTransparent(Document doc, Section section) throws OfxInternalProcessingException
 	{
-		if(section.isSetTransparent() && section.isTransparent())
+		if(section.isSetContainer() && section.isContainer())
 		{
 			Element rootElement = doc.getRootElement();
 			if(rootElement.getName().equalsIgnoreCase(Section.class.getSimpleName()))

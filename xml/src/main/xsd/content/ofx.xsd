@@ -126,7 +126,7 @@
             <xsd:attribute name="source" type="xsd:string"/><!-- Deprecated, use include -->
             
             <xsd:attribute name="include" type="xsd:string"/>
-            <xsd:attribute name="transparent" type="xsd:boolean"/><!-- true: Not rendered as a section, only as a container -->
+            <xsd:attribute name="container" type="xsd:boolean"/><!-- true: Not rendered as a section, only as a container -->
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="title">
