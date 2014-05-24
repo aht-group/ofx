@@ -16,13 +16,14 @@ public class LatexIncludeRenderer extends AbstractOfxLatexRenderer implements Of
 		
 	}
 	
-	public void render(Class<?> parent, String include) throws OfxAuthoringException
+	public void render(Class<?> parent, String include, boolean postBlankLine) throws OfxAuthoringException
 	{
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+parent.getSimpleName()+" with: "+this.getClass().getSimpleName()));
 		
 		StringBuffer sb = new StringBuffer();
-		sb.append("\\include{").append(include).append("}");
+		sb.append("\\input{").append(include).append("}");
 		
 		txt.add(sb.toString());
+		if(postBlankLine){txt.add("");}
 	}
 }
