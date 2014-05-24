@@ -59,8 +59,8 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		
 		logger.trace("Render section");
 		
-		if(!section.isSetTransparent()){section.setTransparent(false);}
-		if(section.isTransparent()){lvl=lvl-1;}
+		if(!section.isSetContainer()){section.setContainer(false);}
+		if(section.isContainer()){lvl=lvl-1;}
 		
 		for(Object s : section.getContent())
 		{
@@ -81,7 +81,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	private void renderTitle(Section section,Title title)
 	{
-		if(!section.isTransparent())
+		if(!section.isContainer())
 		{
 			LatexSectionTitleRenderer stf = new LatexSectionTitleRenderer(lvl,latexPreamble);
 			stf.render(section,title);

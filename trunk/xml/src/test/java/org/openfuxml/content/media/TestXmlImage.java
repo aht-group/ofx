@@ -18,11 +18,7 @@ public class TestXmlImage extends AbstractXmlMediaTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		setXmlFile(dirSuffix, Image.class);
-	}
+	@BeforeClass public static void initFiles() {setXmlFile(dirSuffix, Image.class);}
     
     @Test
     public void jaxbStructure() throws FileNotFoundException

@@ -45,7 +45,7 @@ import org.openfuxml.content.table.Table;
  *       &lt;attribute name="external" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="source" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="include" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="transparent" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       &lt;attribute name="container" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -63,17 +63,17 @@ public class Section implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
-        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
-        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
         @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class),
-        @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
-        @XmlElementRef(name = "comment", namespace = "http://www.openfuxml.org", type = Comment.class),
-        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
         @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
-        @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class)
+        @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
+        @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class),
+        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
+        @XmlElementRef(name = "comment", namespace = "http://www.openfuxml.org", type = Comment.class),
+        @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
+        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
+        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
+        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class)
     })
     @XmlMixed
     protected java.util.List<Serializable> content;
@@ -89,8 +89,8 @@ public class Section implements Serializable
     protected String source;
     @XmlAttribute(name = "include")
     protected String include;
-    @XmlAttribute(name = "transparent")
-    protected Boolean transparent;
+    @XmlAttribute(name = "container")
+    protected Boolean container;
 
     /**
      * Gets the value of the content property.
@@ -110,18 +110,18 @@ public class Section implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Table }
-     * {@link Listing }
-     * {@link String }
-     * {@link Content }
-     * {@link Sections }
      * {@link Image }
-     * {@link Template }
-     * {@link org.openfuxml.content.list.List }
-     * {@link Paragraph }
-     * {@link Comment }
+     * {@link Table }
      * {@link Section }
      * {@link Title }
+     * {@link String }
+     * {@link Comment }
+     * {@link Paragraph }
+     * {@link Template }
+     * {@link Sections }
+     * {@link Content }
+     * {@link Listing }
+     * {@link org.openfuxml.content.list.List }
      * 
      * 
      */
@@ -313,35 +313,35 @@ public class Section implements Serializable
     }
 
     /**
-     * Gets the value of the transparent property.
+     * Gets the value of the container property.
      * 
      * @return
      *     possible object is
      *     {@link Boolean }
      *     
      */
-    public boolean isTransparent() {
-        return transparent;
+    public boolean isContainer() {
+        return container;
     }
 
     /**
-     * Sets the value of the transparent property.
+     * Sets the value of the container property.
      * 
      * @param value
      *     allowed object is
      *     {@link Boolean }
      *     
      */
-    public void setTransparent(boolean value) {
-        this.transparent = value;
+    public void setContainer(boolean value) {
+        this.container = value;
     }
 
-    public boolean isSetTransparent() {
-        return (this.transparent!= null);
+    public boolean isSetContainer() {
+        return (this.container!= null);
     }
 
-    public void unsetTransparent() {
-        this.transparent = null;
+    public void unsetContainer() {
+        this.container = null;
     }
 
 }

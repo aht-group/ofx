@@ -39,7 +39,7 @@ public class OfxContainerMerger
 			xpSections.addNamespace(nsOfx); xpSections.addNamespace(nsWiki);
 			lXpath.add(xpSections);
 			
-			XPath xpSectionTransparent  = XPath.newInstance("//ofx:section[@transparent='true']");
+			XPath xpSectionTransparent  = XPath.newInstance("//ofx:section[@container='true']");
 			xpSectionTransparent.addNamespace(nsOfx); xpSectionTransparent.addNamespace(nsWiki);
 			lXpath.add(xpSectionTransparent);
 		}
