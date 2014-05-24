@@ -54,9 +54,8 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 			{
 				preTxt.addAll(LatexCommentRenderer.comment("All content of "+Section.class.getSimpleName()+" will be ignored because of inlcude"));
 			}
-			
 			LatexIncludeRenderer rComment = new LatexIncludeRenderer();
-			rComment.render(Section.class,section.getInclude());
+			rComment.render(Section.class,section.getInclude(),true);
 			renderer.add(rComment);
 			return;
 		}
