@@ -71,7 +71,7 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
     	renderer.render(section);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
-        Assert.assertEquals(3, content.size());
+        Assert.assertEquals(4, content.size());
     }
 	
 	@Test public void sectionIncludeWithContent() throws OfxAuthoringException
@@ -82,7 +82,7 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
     	renderer.render(section);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
-        Assert.assertEquals(4, content.size());
+        Assert.assertEquals(5, content.size());
     }
     
     public static void main(String[] args) throws Exception

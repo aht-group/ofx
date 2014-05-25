@@ -32,7 +32,7 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		
 		if(!table.getSpecification().isSetFloat() || !table.getSpecification().getFloat().isSetValue())
 		{
-			table.getSpecification().setFloat(XmlFloatFactory.build(false));
+			table.getSpecification().setFloat(XmlFloatFactory.build(true));
 		}
 		
 		OfxLatexTableRenderer tableRenderer = getRendererForType();
