@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.openfuxml.content.layout.Alignment;
+import org.openfuxml.content.layout.Float;
 import org.openfuxml.content.layout.Width;
 
 
@@ -24,6 +25,7 @@ import org.openfuxml.content.layout.Width;
  *         &lt;element ref="{http://www.openfuxml.org/table}columns" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org/layout}alignment" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org/layout}width" minOccurs="0"/>
+ *         &lt;element ref="{http://www.openfuxml.org/layout}float" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,7 +38,8 @@ import org.openfuxml.content.layout.Width;
 @XmlType(name = "", propOrder = {
     "columns",
     "alignment",
-    "width"
+    "width",
+    "_float"
 })
 @XmlRootElement(name = "specification")
 public class Specification
@@ -49,6 +52,8 @@ public class Specification
     protected Alignment alignment;
     @XmlElement(namespace = "http://www.openfuxml.org/layout")
     protected Width width;
+    @XmlElement(name = "float", namespace = "http://www.openfuxml.org/layout")
+    protected Float _float;
 
     /**
      * Gets the value of the columns property.
@@ -132,6 +137,34 @@ public class Specification
 
     public boolean isSetWidth() {
         return (this.width!= null);
+    }
+
+    /**
+     * Gets the value of the float property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Float }
+     *     
+     */
+    public Float getFloat() {
+        return _float;
+    }
+
+    /**
+     * Sets the value of the float property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Float }
+     *     
+     */
+    public void setFloat(Float value) {
+        this._float = value;
+    }
+
+    public boolean isSetFloat() {
+        return (this._float!= null);
     }
 
 }

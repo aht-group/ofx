@@ -11,43 +11,36 @@ import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlWidth extends AbstractXmlLayoutTest
+public class TestXmlFloat extends AbstractXmlLayoutTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
-	@BeforeClass public static void initFiles() {setXmlFile(dirSuffix, Width.class);}
+	@BeforeClass public static void initFiles() {setXmlFile(dirSuffix, Float.class);}
     
     @Test
     public void xml() throws FileNotFoundException
     {
-    	Width actual = create(true);
-    	Width expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Width.class);
+    	Float actual = create();
+    	Float expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Float.class);
     	assertJaxbEquals(expected, actual);
     }
    
-    public static Width create(boolean withChilds)
+    public static Float create()
     {
-    	Width xml = new Width();
-    	xml.setValue(12.3);
-    	xml.setFlex(false);
-    	xml.setUnit("pt");
-    	
-    	if(withChilds)
-    	{
-    		
-    	}
+    	Float xml = new Float();
+    	xml.setValue(true);
     	
     	return xml;
     }
     
-    public void save() {save(create(true),fXml,false);}
+    public void save() {save(create(),fXml,false);}
 	
 	public static void main(String[] args)
     {
 		OfxXmlTstBootstrap.init();
 			
-		TestXmlWidth.initFiles();	
-		TestXmlWidth test = new TestXmlWidth();
+		TestXmlFloat.initFiles();	
+		TestXmlFloat test = new TestXmlFloat();
 		test.save();
     }
 }

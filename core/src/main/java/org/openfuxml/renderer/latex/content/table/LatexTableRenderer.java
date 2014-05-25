@@ -3,6 +3,7 @@ package org.openfuxml.renderer.latex.content.table;
 import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.xml.layout.XmlFloatFactory;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -29,6 +30,11 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		if(!table.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
 		if(!table.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
 		
+		if(!table.getSpecification().isSetFloat() || !table.getSpecification().getFloat().isSetValue())
+		{
+			table.getSpecification().setFloat(XmlFloatFactory.build(false));
+		}
+		
 		OfxLatexTableRenderer tableRenderer = getRendererForType();
 		
 		if(preBlankLine){preTxt.add("");}
@@ -41,7 +47,9 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 			renderer.add(rComment);
 		}
 		
-		renderPre(table);
+		boolean floating = table.getSpecification().getFloat().isValue();
+		
+		renderPre(table,floating);
 		tableRenderer.render(table);
 		
 		LatexTabluarWidthCalculator tabularWidthCalculator = new LatexTabluarWidthCalculator(table.getSpecification().getColumns());
@@ -57,21 +65,32 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		renderer.add(tableRenderer);
 		renderer.add(new StringRenderer("\\end{tabularx}"));
 		
-		renderPost(table);
+		renderPost(table,floating);
 	}
 	
-	private void renderPre(Table table)
+	private void renderPre(Table table,boolean floating)
 	{
 		preTxt.add("");
-		preTxt.add("\\begin{table}[htb]");
+		
+		if(floating){preTxt.add("\\begin{table}[htb]");}
+		else{preTxt.add("\\begin{center}");}
+		
 		alignment(table.getSpecification());
 	}
 	
-	private void renderPost(Table table)
+	private void renderPost(Table table,boolean floating)
 	{
-		if(table.isSetTitle()) {postTxt.add("\\caption{"+table.getTitle().getValue()+"}");}
-		if(table.isSetId())    {postTxt.add("\\label{"+table.getId()+"}");}
-		postTxt.add("\\end{table}");
+		if(table.isSetTitle()) 
+		{
+			if(floating){postTxt.add("\\caption{"+table.getTitle().getValue()+"}");}
+			else{postTxt.add("\\captionof{table}{"+table.getTitle().getValue()+"}");}
+		}
+		
+		if(table.isSetId()) {postTxt.add("\\label{"+table.getId()+"}");}
+		
+		if(floating){postTxt.add("\\end{table}");}
+		else{postTxt.add("\\end{center}");}
+		
 	}
 	
 	private OfxLatexTableRenderer getRendererForType()

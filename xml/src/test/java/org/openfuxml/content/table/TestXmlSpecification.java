@@ -7,6 +7,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.content.layout.TestXmlAlignment;
+import org.openfuxml.content.layout.TestXmlFloat;
 import org.openfuxml.content.layout.TestXmlWidth;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
@@ -17,11 +18,7 @@ public class TestXmlSpecification extends AbstractXmlTableTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		setXmlFile(dirSuffix, Specification.class);
-	}
+	@BeforeClass public static void initFiles() {setXmlFile(dirSuffix, Specification.class);}
     
     @Test
     public void xml() throws FileNotFoundException
@@ -41,6 +38,7 @@ public class TestXmlSpecification extends AbstractXmlTableTest
     		xml.setAlignment(TestXmlAlignment.create(false));
     		xml.setWidth(TestXmlWidth.create(false));
     		xml.setColumns(TestXmlColumns.create(false));
+    		xml.setFloat(TestXmlFloat.create());
     	}
     	
     	return xml;

@@ -1,6 +1,5 @@
 package org.openfuxml.renderer.latex.content.table;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.junit.After;
@@ -12,18 +11,18 @@ import org.openfuxml.content.table.Head;
 import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.xml.layout.XmlFloatFactory;
+import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
+import org.openfuxml.renderer.util.OfxContentDebugger;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestLatexGridTableFactory extends AbstractLatexTableTest
+public class TestLatexTableRenderer extends AbstractLatexTableTest
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestLatexGridTableFactory.class);
-	
-	private static enum Key {table,tableWithHead}
-	
+	final static Logger logger = LoggerFactory.getLogger(TestLatexTableRenderer.class);
+		
 	private LatexTableRenderer renderer;
-	private String dir = "grid";
 	
 	@Before
 	public void initRenderer()
@@ -46,7 +45,7 @@ public class TestLatexGridTableFactory extends AbstractLatexTableTest
 		content.getBody().add(body);
 		
 		Table table = new Table();
-
+		table.setTitle(XmlTitleFactory.build("TestTitle"));
 		table.setSpecification(specification);
 		table.setContent(content);
 		return table;
@@ -82,36 +81,26 @@ public class TestLatexGridTableFactory extends AbstractLatexTableTest
     	table.getContent().unsetBody();
     	renderer.render(table);
     }
-
-    @Test
-    public void table() throws IOException, OfxAuthoringException
-    {
-    	Table table = createTable();
-    	f = new File(rootDir,dir+"/"+Key.table+".tex");
-    	renderer.render(table);
-    	renderTest(renderer,f);
-    }
     
     @Test
-    public void withHead() throws IOException, OfxAuthoringException
+    public void floatObject() throws OfxAuthoringException
     {
-    	Table table = createTable();
-    	table.getContent().setHead(createTableHead());
-    	f = new File(rootDir,dir+"/"+Key.tableWithHead+".tex");
+    	Table table = TestLatexTableRenderer.createTable();
+    	table.getSpecification().setFloat(XmlFloatFactory.build(false));
     	renderer.render(table);
-    	renderTest(renderer,f);
+    	OfxContentDebugger.debug(renderer.getContent());
     }
     
     public static void main(String[] args) throws Exception
     {
     	OfxCoreTestBootstrap.init();
 			
-    	TestLatexGridTableFactory.initLoremIpsum();
-    	TestLatexGridTableFactory test = new TestLatexGridTableFactory();
+    	TestLatexTableRenderer.initLoremIpsum();
+    	TestLatexTableRenderer test = new TestLatexTableRenderer();
     	test.setSaveReference(true);
     	
 //    	test.initRenderer();test.withoutSpecification();
-    	test.initRenderer();test.table();
-    	test.initRenderer();test.withHead();
+    	test.initRenderer();test.floatObject();
+
     }
 }

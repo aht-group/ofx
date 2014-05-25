@@ -46,6 +46,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Float }
+     * 
+     */
+    public Float createFloat() {
+        return new Float();
+    }
+
+    /**
      * Create an instance of {@link Layout }
      * 
      */
