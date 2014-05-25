@@ -3,4 +3,5 @@
     <table:columns/>
     <layout:alignment horizontal="center"/>
     <layout:width unit="pt" flex="false">12.3</layout:width>
+    <layout:float>true</layout:float>
 </table:specification>
