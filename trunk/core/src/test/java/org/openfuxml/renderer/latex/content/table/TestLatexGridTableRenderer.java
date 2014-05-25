@@ -57,8 +57,7 @@ public class TestLatexGridTableRenderer extends AbstractLatexTableTest
     	TestLatexGridTableRenderer test = new TestLatexGridTableRenderer();
     	test.setSaveReference(true);
     	
-//    	test.initRenderer();test.withoutSpecification();
-//    	test.initRenderer();test.table();
+    	test.initRenderer();test.table();
     	test.initRenderer();test.withHead();
     }
 }
