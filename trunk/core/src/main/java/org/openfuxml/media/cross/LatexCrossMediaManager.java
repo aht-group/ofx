@@ -70,6 +70,7 @@ public class LatexCrossMediaManager implements CrossMediaManager
 				transcoder.transcode(media);
 			}
 		}
+		if(msmt!=null){msmt.persist();}
 	}
 	
 	private boolean isSourceChanged(Media media)
