@@ -3,5 +3,6 @@
     <ofx:title numbering="true" lang="myLang">myTitle</ofx:title>
     <ofx:comment/>
     <layout:alignment horizontal="center"/>
+    <layout:width unit="pt" flex="false">12.3</layout:width>
     <media:media id="myId" src="mySrc" dst="myDst"/>
 </media:image>

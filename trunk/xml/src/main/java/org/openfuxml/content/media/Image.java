@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.openfuxml.content.layout.Alignment;
+import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Title;
 
@@ -26,6 +27,7 @@ import org.openfuxml.content.ofx.Title;
  *         &lt;element ref="{http://www.openfuxml.org}title" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org}comment" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org/layout}alignment" minOccurs="0"/>
+ *         &lt;element ref="{http://www.openfuxml.org/layout}width" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org/media}media"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -41,6 +43,7 @@ import org.openfuxml.content.ofx.Title;
     "title",
     "comment",
     "alignment",
+    "width",
     "media"
 })
 @XmlRootElement(name = "image")
@@ -54,6 +57,8 @@ public class Image implements Serializable
     protected Comment comment;
     @XmlElement(namespace = "http://www.openfuxml.org/layout")
     protected Alignment alignment;
+    @XmlElement(namespace = "http://www.openfuxml.org/layout")
+    protected Width width;
     @XmlElement(required = true)
     protected Media media;
     @XmlAttribute(name = "id")
@@ -141,6 +146,34 @@ public class Image implements Serializable
 
     public boolean isSetAlignment() {
         return (this.alignment!= null);
+    }
+
+    /**
+     * Gets the value of the width property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Width }
+     *     
+     */
+    public Width getWidth() {
+        return width;
+    }
+
+    /**
+     * Sets the value of the width property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Width }
+     *     
+     */
+    public void setWidth(Width value) {
+        this.width = value;
+    }
+
+    public boolean isSetWidth() {
+        return (this.width!= null);
     }
 
     /**

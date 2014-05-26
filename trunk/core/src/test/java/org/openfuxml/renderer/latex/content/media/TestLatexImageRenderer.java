@@ -81,6 +81,6 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
     	
     	test.initRenderer();
     	test.direct();
-		test.section();
+//		test.section();
     }
 }

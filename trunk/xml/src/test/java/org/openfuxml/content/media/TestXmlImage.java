@@ -7,6 +7,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.content.layout.TestXmlAlignment;
+import org.openfuxml.content.layout.TestXmlWidth;
 import org.openfuxml.content.ofx.TestXmlComment;
 import org.openfuxml.content.ofx.TestXmlTitle;
 import org.openfuxml.test.AbstractOfxXmlTest;
@@ -21,7 +22,7 @@ public class TestXmlImage extends AbstractXmlMediaTest
 	@BeforeClass public static void initFiles() {setXmlFile(dirSuffix, Image.class);}
     
     @Test
-    public void jaxbStructure() throws FileNotFoundException
+    public void xml() throws FileNotFoundException
     {
     	Image actual = create(true);
     	Image expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Image.class);
@@ -39,6 +40,7 @@ public class TestXmlImage extends AbstractXmlMediaTest
     		xml.setAlignment(TestXmlAlignment.create(false));
     		xml.setComment(TestXmlComment.create(false));
     		xml.setMedia(TestXmlMedia.create(false));
+    		xml.setWidth(TestXmlWidth.create(false));
     	}
     	
     	return xml;
