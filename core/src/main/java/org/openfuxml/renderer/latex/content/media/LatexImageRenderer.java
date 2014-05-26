@@ -3,6 +3,7 @@ package org.openfuxml.renderer.latex.content.media;
 import javax.print.attribute.standard.Media;
 
 import org.openfuxml.content.layout.Alignment;
+import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
@@ -40,7 +41,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		
 		StringBuffer sbIncludeGraphics = new StringBuffer();
 		sbIncludeGraphics.append("  \\includegraphics");
-		sbIncludeGraphics.append(layout());
+		sbIncludeGraphics.append(imageArguments(image));
 		sbIncludeGraphics.append("{").append(cmm.getImageRef(image.getMedia())).append("}");
 		txt.add(sbIncludeGraphics.toString());
 		
@@ -59,7 +60,6 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 			renderer.add(rComment);
 		}
 
-		preTxt.add("");
 		preTxt.add("\\begin{figure}");
 	}
 	
@@ -70,10 +70,23 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		postTxt.add("\\end{figure}");
 	}
 	
-	private String layout()
+	private String imageArguments(Image image) throws OfxAuthoringException
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("[width=12cm]");
+		sb.append("[");
+		
+		if(image.isSetWidth())
+		{
+			Width width = image.getWidth();
+			if(!width.isSetValue()){throw new OfxAuthoringException("No width given");}
+			
+			sb.append("width=").append(width.getValue());
+			if(width.isSetUnit()){sb.append(width.getUnit());}
+			else {sb.append("cm");}
+		}
+		else {sb.append("width=12cm");}
+				
+		sb.append("]");
 		return sb.toString();
 	}
 	
