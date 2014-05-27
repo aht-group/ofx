@@ -3,7 +3,6 @@ package org.openfuxml.renderer.latex.content.media;
 import javax.print.attribute.standard.Media;
 
 import org.openfuxml.content.layout.Alignment;
-import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
@@ -12,6 +11,7 @@ import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
+import org.openfuxml.renderer.latex.util.LatexWidthCalculator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,6 +68,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		if(image.isSetTitle()) {postTxt.add("  \\caption{"+image.getTitle().getValue()+"}");}
 		if(image.isSetId())    {postTxt.add("  \\label{"+image.getId()+"}");}
 		postTxt.add("\\end{figure}");
+		postTxt.add("");
 	}
 	
 	private String imageArguments(Image image) throws OfxAuthoringException
@@ -77,12 +78,9 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		
 		if(image.isSetWidth())
 		{
-			Width width = image.getWidth();
-			if(!width.isSetValue()){throw new OfxAuthoringException("No width given");}
-			
-			sb.append("width=").append(width.getValue());
-			if(width.isSetUnit()){sb.append(width.getUnit());}
-			else {sb.append("cm");}
+			sb.append("width=");
+			LatexWidthCalculator lwc = new LatexWidthCalculator();
+			sb.append(lwc.buildWidth(image.getWidth()));
 		}
 		else {sb.append("width=12cm");}
 				
