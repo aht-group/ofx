@@ -10,6 +10,7 @@ public class CrossMediaFileUtil
 	{
 		if(fileName.endsWith(".pdf")){return CrossMediaManager.Format.PDF;}
 		if(fileName.endsWith(".svg")){return CrossMediaManager.Format.SVG;}
+		if(fileName.endsWith(".png")){return CrossMediaManager.Format.PNG;}
 		return null;
 	}
 	
