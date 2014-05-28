@@ -10,6 +10,7 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.CrossMediaManager;
 import org.openfuxml.interfaces.CrossMediaTranscoder;
 import org.openfuxml.media.transcode.Pdf2PdfTranscoder;
+import org.openfuxml.media.transcode.Png2PngTranscoder;
 import org.openfuxml.media.transcode.Svg2PdfTranscoder;
 import org.openfuxml.util.media.CrossMediaFileUtil;
 import org.openfuxml.util.media.MediaSourceModificationTracker;
@@ -46,7 +47,7 @@ public class LatexCrossMediaManager implements CrossMediaManager
 		StringBuffer sb = new StringBuffer();
 		sb.append(imageBaseDir).append(SystemUtils.FILE_SEPARATOR);
 		sb.append(imageMedia.getDst());
-		sb.append(".pdf");
+//		sb.append(".pdf");
 		return sb.toString();
 	}
 
@@ -60,10 +61,13 @@ public class LatexCrossMediaManager implements CrossMediaManager
 		
 		for(Media media : listMedia)
 		{
-			switch(CrossMediaFileUtil.getFormat(media.getSrc()))
+			CrossMediaManager.Format format = CrossMediaFileUtil.getFormat(media.getSrc());
+			switch(format)
 			{
 				case PDF:	transcoder = new Pdf2PdfTranscoder(fImage);break;
 				case SVG:	transcoder = new Svg2PdfTranscoder(fImage);break;
+				case PNG:	transcoder = new Png2PngTranscoder(fImage);break;
+				default:	logger.warn("Format "+format+" Not Implemented");break;
 			}
 			if(isSourceChanged(media) || !transcoder.isTargetExisting(media))
 			{

@@ -74,7 +74,7 @@ public class LatexTabluarWidthCalculator
 			
 			if(flex)
 			{
-				logger.info("Width?" +(width.isSetValue()));
+				logger.trace("Width?" +(width.isSetValue()));
 				StringBuffer sb = new StringBuffer();
 				if(width.isSetValue())
 				{
