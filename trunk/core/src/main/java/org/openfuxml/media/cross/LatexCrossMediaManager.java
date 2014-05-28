@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.CrossMediaManager;
@@ -43,9 +42,12 @@ public class LatexCrossMediaManager implements CrossMediaManager
 	@Override
 	public String getImageRef(Media imageMedia)
 	{
-		listMedia.add(imageMedia);
+		if(imageMedia.isSetSrc())
+		{
+			listMedia.add(imageMedia);
+		}
 		StringBuffer sb = new StringBuffer();
-		sb.append(imageBaseDir).append(SystemUtils.FILE_SEPARATOR);
+//		sb.append(imageBaseDir).append(SystemUtils.FILE_SEPARATOR);
 		sb.append(imageMedia.getDst());
 //		sb.append(".pdf");
 		return sb.toString();
