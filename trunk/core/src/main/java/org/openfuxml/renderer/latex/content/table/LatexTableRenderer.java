@@ -22,14 +22,12 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 	boolean preBlankLine;
 	public void setPreBlankLine(boolean preBlankLine) {this.preBlankLine = preBlankLine;}
 	
-	@Deprecated public LatexTableRenderer(){}
+	@Deprecated private LatexTableRenderer(){}
 	
 	public LatexTableRenderer(CrossMediaManager cmm)
 	{
 		super(cmm);
 	}
-	
-	
 	
 	public void render(Table table) throws OfxAuthoringException
 	{		
@@ -106,8 +104,8 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		
 		switch(type)
 		{
-			case line: tableRenderer = new LatexLineTableRenderer();break;
-			default: tableRenderer = new LatexGridTableRenderer();break;
+			case line: tableRenderer = new LatexLineTableRenderer(cmm);break;
+			default: tableRenderer = new LatexGridTableRenderer(cmm);break;
 		}
 		return tableRenderer;
 	}

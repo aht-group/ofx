@@ -83,7 +83,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 			else if(s instanceof Table){renderTable((Table)s);}
 			else if(s instanceof List){renderList((List)s,this);}
             else if(s instanceof Listing){renderListing((Listing)s);}
-            else if(s instanceof Image){renderImage(cmm,(Image)s);}
+            else if(s instanceof Image){renderImage((Image)s);}
             else if(s instanceof Comment){}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
 		}

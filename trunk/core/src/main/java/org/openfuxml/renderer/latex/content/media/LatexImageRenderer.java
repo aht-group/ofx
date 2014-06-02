@@ -9,6 +9,7 @@ import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.interfaces.CrossMediaManager;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.openfuxml.renderer.latex.util.LatexWidthCalculator;
 import org.slf4j.Logger;
@@ -18,17 +19,17 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexImageRenderer.class);
 		
-	public LatexImageRenderer()
-	{
-		
-	}
+	private boolean inFigure;
+	
 	public LatexImageRenderer(CrossMediaManager cmm)
 	{	
 		super(cmm);
 	}
 	
-	public void render(Image image) throws OfxAuthoringException
+	public void render(Object parent, Image image) throws OfxAuthoringException
 	{
+		setEnvironment(parent);
+		
 		if(!image.isSetMedia()){throw new OfxAuthoringException(Image.class.getSimpleName()+" has no "+Media.class.getSimpleName());}
 		
 		renderPre(image);
@@ -36,18 +37,34 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		if(image.isSetAlignment()){alignment(image.getAlignment());}
 		
 		StringBuffer sbIncludeGraphics = new StringBuffer();
+		if(!inFigure){sbIncludeGraphics.append("\\raisebox{-\\totalheight}{");}
 		sbIncludeGraphics.append("  \\includegraphics");
 		sbIncludeGraphics.append(imageArguments(image));
 		sbIncludeGraphics.append("{").append(cmm.getImageRef(image.getMedia())).append("}");
+		if(!inFigure){sbIncludeGraphics.append("}");}
 		txt.add(sbIncludeGraphics.toString());
 		
 		renderPost(image);
 	}
 	
+	private void setEnvironment(Object parent)
+	{
+		logger.info(parent.getClass().getSimpleName());
+		
+		if(parent instanceof LatexCellRenderer)
+		{
+			
+		}
+		else
+		{
+			inFigure = true;
+		}
+	}
+	
 	private void renderPre(Image image) throws OfxAuthoringException
 	{
 		preTxt.addAll(LatexCommentRenderer.stars());
-		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Image.class.getSimpleName()+" with "+this.getClass().getSimpleName()));
+		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Image.class.getSimpleName()+" (figure:"+inFigure+") with "+this.getClass().getSimpleName()));
 		
 		if(image.isSetComment())
 		{
@@ -56,14 +73,14 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 			renderer.add(rComment);
 		}
 
-		preTxt.add("\\begin{figure}");
+		if(inFigure){preTxt.add("\\begin{figure}");}
 	}
 	
 	private void renderPost(Image image)
 	{
-		if(image.isSetTitle()) {postTxt.add("  \\caption{"+image.getTitle().getValue()+"}");}
-		if(image.isSetId())    {postTxt.add("  \\label{"+image.getId()+"}");}
-		postTxt.add("\\end{figure}");
+		if(inFigure && image.isSetTitle()) {postTxt.add("  \\caption{"+image.getTitle().getValue()+"}");}
+		if(inFigure && image.isSetId())    {postTxt.add("  \\label{"+image.getId()+"}");}
+		if(inFigure){postTxt.add("\\end{figure}");}
 		postTxt.add("");
 	}
 	
