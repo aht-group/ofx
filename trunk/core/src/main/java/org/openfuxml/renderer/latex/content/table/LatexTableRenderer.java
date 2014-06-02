@@ -4,6 +4,7 @@ import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
+import org.openfuxml.interfaces.CrossMediaManager;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -17,13 +18,18 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 	final static Logger logger = LoggerFactory.getLogger(LatexTableRenderer.class);
 	
 	public static enum Type {grid,line}
-	boolean preBlankLine;
 	
-	public LatexTableRenderer(){this(true);}
-	public LatexTableRenderer(boolean preBlankLine)
+	boolean preBlankLine;
+	public void setPreBlankLine(boolean preBlankLine) {this.preBlankLine = preBlankLine;}
+	
+	@Deprecated public LatexTableRenderer(){}
+	
+	public LatexTableRenderer(CrossMediaManager cmm)
 	{
-		this.preBlankLine=preBlankLine;
+		super(cmm);
 	}
+	
+	
 	
 	public void render(Table table) throws OfxAuthoringException
 	{		

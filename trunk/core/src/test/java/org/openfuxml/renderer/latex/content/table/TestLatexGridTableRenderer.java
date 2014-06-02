@@ -25,7 +25,8 @@ public class TestLatexGridTableRenderer extends AbstractLatexTableTest
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexTableRenderer(false);
+		renderer = new LatexTableRenderer();
+		renderer.setPreBlankLine(false);
 	}
 	
 	@After public void close(){renderer=null;}

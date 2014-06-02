@@ -14,7 +14,6 @@ import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.listing.LatexListingRenderer;
-import org.openfuxml.renderer.latex.content.media.LatexImageRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
@@ -25,7 +24,6 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexSectionRenderer.class);
 	
-	private CrossMediaManager cmm;
 	private LatexPreamble latexPreamble;
 	int lvl;
 	
@@ -37,7 +35,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	public LatexSectionRenderer(CrossMediaManager cmm, int lvl, LatexPreamble latexPreamble)
 	{
-		this.cmm=cmm;
+		super(cmm);
 		this.lvl=lvl;
 		this.latexPreamble=latexPreamble;
 	}
@@ -85,7 +83,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 			else if(s instanceof Table){renderTable((Table)s);}
 			else if(s instanceof List){renderList((List)s,this);}
             else if(s instanceof Listing){renderListing((Listing)s);}
-            else if(s instanceof Image){renderImage((Image)s);}
+            else if(s instanceof Image){renderImage(cmm,(Image)s);}
             else if(s instanceof Comment){}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
 		}
@@ -105,18 +103,11 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	private void renderTable(Table table) throws OfxAuthoringException
 	{
-		LatexTableRenderer f = new LatexTableRenderer();
+		LatexTableRenderer f = new LatexTableRenderer(cmm);
 		f.render(table);
 		renderer.add(f);
 	}
-	
-	private void renderImage(Image image) throws OfxAuthoringException
-	{
-		LatexImageRenderer f = new LatexImageRenderer(cmm);
-		f.render(image);
-		renderer.add(f);
-	}
-	
+		
 	private void renderSection(Section section) throws OfxAuthoringException
 	{
 		LatexSectionRenderer sf = new LatexSectionRenderer(cmm,lvl+1,latexPreamble);

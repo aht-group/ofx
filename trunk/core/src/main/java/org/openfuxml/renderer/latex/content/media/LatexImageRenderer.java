@@ -8,7 +8,6 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.interfaces.CrossMediaManager;
 import org.openfuxml.interfaces.OfxLatexRenderer;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.openfuxml.renderer.latex.util.LatexWidthCalculator;
@@ -19,16 +18,13 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexImageRenderer.class);
 		
-	private CrossMediaManager cmm;
-	
 	public LatexImageRenderer()
-	{	
-		cmm = new NoOpCrossMediaManager();
+	{
+		
 	}
-	
 	public LatexImageRenderer(CrossMediaManager cmm)
 	{	
-        this.cmm=cmm;
+		super(cmm);
 	}
 	
 	public void render(Image image) throws OfxAuthoringException
