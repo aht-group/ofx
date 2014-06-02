@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.util.OfxContentDebugger;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class TestLatexGridTableRenderer extends AbstractLatexTableTest
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexTableRenderer();
+		renderer = new LatexTableRenderer(new NoOpCrossMediaManager());
 		renderer.setPreBlankLine(false);
 	}
 	

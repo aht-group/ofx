@@ -86,10 +86,10 @@ public class AbstractOfxLatexRenderer
 		renderer.add(f);
 	}
 	
-	protected void renderImage(CrossMediaManager cmm, Image image) throws OfxAuthoringException
+	protected void renderImage(Image image) throws OfxAuthoringException
 	{
 		LatexImageRenderer f = new LatexImageRenderer(cmm);
-		f.render(image);
+		f.render(this,image);
 		renderer.add(f);
 	}
 

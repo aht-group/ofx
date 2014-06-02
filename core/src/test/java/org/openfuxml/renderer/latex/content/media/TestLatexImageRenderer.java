@@ -16,6 +16,7 @@ import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.media.XmlMediaFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.media.cross.LatexCrossMediaManager;
+import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.util.OfxContentDebugger;
@@ -40,7 +41,7 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
 		cmm = new LatexCrossMediaManager(fTarget,"base");
 		
         rSection = new LatexSectionRenderer(cmm,1, new LatexPreamble());
-        rImage = new LatexImageRenderer();
+        rImage = new LatexImageRenderer(new NoOpCrossMediaManager());
         
         image = new Image();
         image.setId("my.id");
@@ -54,7 +55,7 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
     @Test
     public void direct() throws IOException, OfxAuthoringException
     {
-    	rImage.render(image);
+    	rImage.render(this,image);
         List<String> content = rImage.getContent();
         OfxContentDebugger.debug(content);
     }

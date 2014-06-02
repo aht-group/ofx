@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.content.list.TestLatexListRenderer;
 import org.openfuxml.renderer.latex.content.structure.TestLatexParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
@@ -27,7 +28,7 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexCellRenderer();
+		renderer = new LatexCellRenderer(new NoOpCrossMediaManager(),null);
 	}
 	
 	@After public void close(){renderer=null;}
