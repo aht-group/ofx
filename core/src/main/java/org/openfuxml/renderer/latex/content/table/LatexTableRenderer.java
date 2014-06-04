@@ -51,23 +51,29 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 			renderer.add(rComment);
 		}
 		
+		LatexTabluarWidthCalculator tabularWidthCalculator = new LatexTabluarWidthCalculator(table.getSpecification().getColumns());
 		boolean floating = table.getSpecification().getFloat().isValue();
+		boolean flex = tabularWidthCalculator.isFlexTable();
 		
 		renderPre(table,floating);
 		tableRenderer.render(table);
-		
-		LatexTabluarWidthCalculator tabularWidthCalculator = new LatexTabluarWidthCalculator(table.getSpecification().getColumns());
+			
 		renderer.add(new StringRenderer(tabularWidthCalculator.getLatexLengthCalculations()));
 		
 		renderer.add(new StringRenderer(""));
 		StringBuffer sb = new StringBuffer();
-		sb.append("\\begin{tabularx}");
-		sb.append(tabularWidthCalculator.buildTableWidth(table.getSpecification()));
+		
+		if(flex){sb.append("\\begin{tabularx}");}
+		else{sb.append("\\begin{tabular}");}
+		
+		if(flex){sb.append(tabularWidthCalculator.buildTableWidth(table.getSpecification()));}
 		sb.append(tableRenderer.buildTabularCols(tabularWidthCalculator, table.getSpecification()));
 		renderer.add(new StringRenderer(sb.toString()));
 		
 		renderer.add(tableRenderer);
-		renderer.add(new StringRenderer("\\end{tabularx}"));
+		
+		if(flex){renderer.add(new StringRenderer("\\end{tabularx}"));}
+		else{renderer.add(new StringRenderer("\\end{tabular}"));}
 		
 		renderPost(table,floating);
 	}

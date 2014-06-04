@@ -10,7 +10,7 @@
 	</appender>
 	
 	<logger name="net.sf.exlp" additivity="false">
-		<level value="ERROR"/>
+		<level value="INFO"/>
 		<appender-ref ref="A1"/>
 	</logger>
 	
@@ -20,7 +20,7 @@
 	</logger>
     
 	<root>
-		<priority value="ERROR" />
+		<priority value="DEBUG" />
 		<appender-ref ref="A1" />
 	</root>
 
