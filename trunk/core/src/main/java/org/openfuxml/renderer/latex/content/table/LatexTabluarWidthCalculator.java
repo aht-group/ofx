@@ -147,6 +147,15 @@ public class LatexTabluarWidthCalculator
 		return listLatexCalculation;
 	}
 	
+	public boolean isFlexTable()
+	{
+		for(Column column : columns.getColumn())
+		{
+			if(column.isSetWidth() && column.getWidth().isSetFlex() && column.getWidth().isFlex()){return true;}
+		}
+		return false;
+	}
+	
 	public String buildTableWidth(Specification specification)
 	{
 		if(specification.isSetWidth()){widthTable = specification.getWidth();}
