@@ -49,11 +49,11 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 	
 	private void setEnvironment(Object parent)
 	{
-		logger.info(parent.getClass().getSimpleName());
+		logger.trace("Parent renderer is "+parent.getClass().getSimpleName());
 		
 		if(parent instanceof LatexCellRenderer)
 		{
-			
+			inFigure = false;
 		}
 		else
 		{
