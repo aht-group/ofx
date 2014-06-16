@@ -26,7 +26,7 @@ public class Pdf2PdfTranscoder implements CrossMediaTranscoder
 	
 	public Pdf2PdfTranscoder(File dir)
 	{
-		this.dir=dir;
+		this.dir=new File(dir,"pdf");
 		mrl = new MultiResourceLoader();
 	}
 	
