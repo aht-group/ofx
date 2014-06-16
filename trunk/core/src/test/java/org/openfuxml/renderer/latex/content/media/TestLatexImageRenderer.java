@@ -38,7 +38,7 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
 	public void initRenderer()
 	{
 		File fTarget = new File("target");
-		cmm = new LatexCrossMediaManager(fTarget,"base");
+		cmm = new LatexCrossMediaManager(new File(fTarget,"base"));
 		
         rSection = new LatexSectionRenderer(cmm,1, new LatexPreamble());
         rImage = new LatexImageRenderer(new NoOpCrossMediaManager());

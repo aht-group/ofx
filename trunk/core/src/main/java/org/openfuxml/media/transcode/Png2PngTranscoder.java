@@ -26,7 +26,7 @@ public class Png2PngTranscoder implements CrossMediaTranscoder
 	
 	public Png2PngTranscoder(File dir)
 	{
-		this.dir=dir;
+		this.dir=new File(dir,"png");
 		mrl = new MultiResourceLoader();
 	}
 	

@@ -19,22 +19,19 @@ import org.slf4j.LoggerFactory;
 public class LatexCrossMediaManager implements CrossMediaManager
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexCrossMediaManager.class);
-	public static String keyOfxLatexImageDir = "ofx.renderer.latex.dir.image";
 	
 	private File texBase;
-	private String imageBaseDir;
 	private List<Media> listMedia;
 	
 	private MediaSourceModificationTracker msmt;
 	
-	public LatexCrossMediaManager(File texBase, String imageBaseDir)
+	public LatexCrossMediaManager(File texBase)
 	{
-		this(texBase,imageBaseDir,null);
+		this(texBase,null);
 	}
-	public LatexCrossMediaManager(File texBase, String imageBaseDir,MediaSourceModificationTracker msmt)
+	public LatexCrossMediaManager(File texBase, MediaSourceModificationTracker msmt)
 	{
 		this.texBase=texBase;
-		this.imageBaseDir=imageBaseDir;
 		this.msmt=msmt;
 		listMedia = new ArrayList<Media>();
 	}
@@ -58,7 +55,6 @@ public class LatexCrossMediaManager implements CrossMediaManager
 	{
 		logger.info("Transcoding "+listMedia.size());
 		
-		File fImage = new File(texBase,imageBaseDir);
 		CrossMediaTranscoder transcoder = null;
 		
 		for(Media media : listMedia)
@@ -66,9 +62,9 @@ public class LatexCrossMediaManager implements CrossMediaManager
 			CrossMediaManager.Format format = CrossMediaFileUtil.getFormat(media.getSrc());
 			switch(format)
 			{
-				case PDF:	transcoder = new Pdf2PdfTranscoder(fImage);break;
-				case SVG:	transcoder = new Svg2PdfTranscoder(fImage);break;
-				case PNG:	transcoder = new Png2PngTranscoder(fImage);break;
+				case PDF:	transcoder = new Pdf2PdfTranscoder(texBase);break;
+				case SVG:	transcoder = new Svg2PdfTranscoder(texBase);break;
+				case PNG:	transcoder = new Png2PngTranscoder(texBase);break;
 				default:	logger.warn("Format "+format+" Not Implemented");break;
 			}
 			if(isSourceChanged(media) || !transcoder.isTargetExisting(media))
