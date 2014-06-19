@@ -69,4 +69,12 @@ public class ObjectFactory {
         return new Line();
     }
 
+    /**
+     * Create an instance of {@link Height }
+     * 
+     */
+    public Height createHeight() {
+        return new Height();
+    }
+
 }

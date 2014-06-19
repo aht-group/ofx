@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.openfuxml.content.layout.Alignment;
+import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Title;
@@ -28,6 +29,7 @@ import org.openfuxml.content.ofx.Title;
  *         &lt;element ref="{http://www.openfuxml.org}comment" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org/layout}alignment" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org/layout}width" minOccurs="0"/>
+ *         &lt;element ref="{http://www.openfuxml.org/layout}height" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org/media}media"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -44,6 +46,7 @@ import org.openfuxml.content.ofx.Title;
     "comment",
     "alignment",
     "width",
+    "height",
     "media"
 })
 @XmlRootElement(name = "image")
@@ -59,6 +62,8 @@ public class Image implements Serializable
     protected Alignment alignment;
     @XmlElement(namespace = "http://www.openfuxml.org/layout")
     protected Width width;
+    @XmlElement(namespace = "http://www.openfuxml.org/layout")
+    protected Height height;
     @XmlElement(required = true)
     protected Media media;
     @XmlAttribute(name = "id")
@@ -174,6 +179,34 @@ public class Image implements Serializable
 
     public boolean isSetWidth() {
         return (this.width!= null);
+    }
+
+    /**
+     * Gets the value of the height property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Height }
+     *     
+     */
+    public Height getHeight() {
+        return height;
+    }
+
+    /**
+     * Sets the value of the height property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Height }
+     *     
+     */
+    public void setHeight(Height value) {
+        this.height = value;
+    }
+
+    public boolean isSetHeight() {
+        return (this.height!= null);
     }
 
     /**

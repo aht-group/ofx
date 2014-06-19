@@ -2,13 +2,34 @@ package org.openfuxml.factory.table;
 
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.table.Column;
+import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
+import org.openfuxml.factory.xml.layout.XmlAlignmentFactory.Horizontal;
 
 public class OfxColumnFactory
 {
-	public static Column createCol(int relative)
+	
+	public static Column build(Horizontal hAlignment)
+	{
+		Column col = new Column();
+		col.setAlignment(XmlAlignmentFactory.buildHorizontal(hAlignment));
+		return col;
+	}
+	
+	public static Column percentage(double value)
+	{
+		Width width = new Width();
+		width.setUnit("percentage");
+		width.setValue(value);
+		Column col = new Column();
+		col.setWidth(width);
+		return col;
+	}
+	
+	public static Column relative(int relative)
 	{
 		Width width = new Width();
 		width.setValue(relative);
+		
 		Column col = new Column();
 		col.setWidth(width);
 		return col;
@@ -27,16 +48,6 @@ public class OfxColumnFactory
 	{
 		Width width = new Width();
 		width.setFlex(true);
-		width.setValue(value);
-		Column col = new Column();
-		col.setWidth(width);
-		return col;
-	}
-	
-	public static Column percentage(double value)
-	{
-		Width width = new Width();
-		width.setUnit("percentage");
 		width.setValue(value);
 		Column col = new Column();
 		col.setWidth(width);

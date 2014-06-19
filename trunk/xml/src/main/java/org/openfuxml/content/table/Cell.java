@@ -69,8 +69,8 @@ public class Cell
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * {@link Paragraph }
      * {@link org.openfuxml.content.list.List }
+     * {@link Paragraph }
      * 
      * 
      */

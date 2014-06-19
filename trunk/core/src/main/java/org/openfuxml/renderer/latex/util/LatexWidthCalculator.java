@@ -3,6 +3,7 @@ package org.openfuxml.renderer.latex.util;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
+import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.slf4j.Logger;
@@ -41,6 +42,25 @@ public class LatexWidthCalculator
 		else
 		{
 			throw new OfxAuthoringException("No valid width");
+		}
+		
+		return sb.toString();
+	}
+	public String buildHeight(Height height) throws OfxAuthoringException
+	{
+		if(!height.isSetValue()){throw new OfxAuthoringException("No width-value given");}
+		
+		StringBuffer sb = new StringBuffer();
+		if(!height.isSetUnit()){height.setUnit("cm");}
+		
+		if(height.getUnit().equals("cm") || height.getUnit().equals("em"))
+		{
+			sb.append(height.getValue());
+			sb.append(height.getUnit());
+		}
+		else
+		{
+			throw new OfxAuthoringException("No valid height");
 		}
 		
 		return sb.toString();

@@ -9,10 +9,13 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.table.Column;
 import org.openfuxml.content.table.Columns;
 import org.openfuxml.content.table.Specification;
+import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.xml.layout.XmlAlignmentFactory.Horizontal;
 
 public class LatexTabluarWidthCalculator
 {
@@ -29,7 +32,7 @@ public class LatexTabluarWidthCalculator
 	
 	private Map<Integer,String> mapCol;
 	
-	public LatexTabluarWidthCalculator(Columns columns)
+	public LatexTabluarWidthCalculator(Columns columns) throws OfxAuthoringException
 	{
 		this.columns=columns;
 		
@@ -45,75 +48,100 @@ public class LatexTabluarWidthCalculator
 		calculate();
 	}
 	
-	private void calculate()
+	private void calculate() throws OfxAuthoringException
 	{
 		double sumFlex=0;
 		for(Column column : columns.getColumn())
 		{
-			Width width = column.getWidth();
-			
-			if(width.isSetFlex() && width.isFlex() && width.isSetValue())
+			if(column.isSetWidth())
 			{
-				sumFlex=sumFlex+width.getValue();
+				Width width = column.getWidth();
+				
+				if(width.isSetFlex() && width.isFlex() && width.isSetValue())
+				{
+					sumFlex=sumFlex+width.getValue();
+				}
 			}
 		}
 		
-		logger.trace("SumFlex: "+sumFlex);
+		logger.info("SumFlex: "+sumFlex);
 		
 		int index=0;
 		for(Column column : columns.getColumn())
 		{	
 			index++;
-			Width width = column.getWidth();
-			if(!width.isSetUnit()){width.setUnit("percentage");}
 			
-			byte[] b = {(byte)(index+64)};
-			String var = "\\tabLen"+(new String(b));
+			if(column.isSetAlignment() && column.isSetWidth()){throw new OfxAuthoringException("Table.columen with width AND alignment currently not supported");} 
 			
-			boolean flex = width.isSetFlex() && width.isFlex();
-			
-			if(flex)
+			if(column.isSetWidth())
 			{
-				logger.trace("Width?" +(width.isSetValue()));
-				StringBuffer sb = new StringBuffer();
-				if(width.isSetValue())
-				{
-					double thisFlex = width.getValue()/sumFlex;
-					sb.append(">{\\hsize=").append(df.format(thisFlex)).append("\\hsize}X");
-				}
-				else
-				{
-					sb.append("X");
-				}
-				mapCol.put(index, sb.toString());
+				Width width = column.getWidth();
+				if(!width.isSetUnit()){width.setUnit("percentage");}
 				
-			}
-			else
-			{
-				StringBuffer sbDef = new StringBuffer();
-				sbDef.append("\\ifthenelse");
-				sbDef.append("{\\isundefined{").append(var).append("}}");
-				sbDef.append("{\\newlength{").append(var).append("}}");
-				sbDef.append("{}");
-				listDefinition.add(sbDef.toString());
+				byte[] b = {(byte)(index+64)};
+				String var = "\\tabLen"+(new String(b));
 				
-				if(width.getUnit().equals("percentage"))
+				if(isFlex(column))
 				{
-					double colWidth = (widthTable.getValue()/100)*(width.getValue()/100);
+					logger.trace("Width?" +(width.isSetValue()));
+					StringBuffer sb = new StringBuffer();
+					if(width.isSetValue())
+					{
+						double thisFlex = width.getValue()/sumFlex;
+						sb.append(">{\\hsize=").append(df.format(thisFlex)).append("\\hsize}X");
+					}
+					else
+					{
+						sb.append("X");
+					}
+					mapCol.put(index, sb.toString());
 					
-					StringBuffer sbValue = new StringBuffer();
-					sbValue.append("\\setlength{").append(var).append("}");
-					sbValue.append("{").append(df.format(colWidth)).append("\\textwidth}");
-					listValue.add(sbValue.toString());
-					mapCol.put(index, "p{"+var+"}");
 				}
 				else
 				{
-					logger.warn("NYI unit "+width.getUnit());
+					StringBuffer sbDef = new StringBuffer();
+					sbDef.append("\\ifthenelse");
+					sbDef.append("{\\isundefined{").append(var).append("}}");
+					sbDef.append("{\\newlength{").append(var).append("}}");
+					sbDef.append("{}");
+					listDefinition.add(sbDef.toString());
+					
+					if(width.getUnit().equals("percentage"))
+					{
+						double colWidth = (widthTable.getValue()/100)*(width.getValue()/100);
+						
+						StringBuffer sbValue = new StringBuffer();
+						sbValue.append("\\setlength{").append(var).append("}");
+						sbValue.append("{").append(df.format(colWidth)).append("\\textwidth}");
+						listValue.add(sbValue.toString());
+						mapCol.put(index, "p{"+var+"}");
+					}
+					else
+					{
+						logger.warn("NYI unit "+width.getUnit());
+					}
 				}
 			}
-			logger.trace(index+" "+getColDefinition(index));
+			else if(column.isSetAlignment())
+			{
+				Alignment alg = column.getAlignment();
+				Horizontal h = Horizontal.valueOf(alg.getHorizontal());
+				switch(h)
+				{
+					case left: mapCol.put(index, "l");break;
+					case center: mapCol.put(index, "c");break;
+					default: {throw new OfxAuthoringException("Alignment "+alg.getHorizontal()+" not supported");} 
+				}
+				
+			}
+			
+			logger.info(index+" "+getColDefinition(index));
 		}
+	}
+	
+	private boolean isFlex(Column column)
+	{
+		return column.isSetWidth() && column.getWidth().isSetFlex() && column.getWidth().isFlex();
 	}
 	
 	public String getColDefinition(int i)
@@ -124,10 +152,12 @@ public class LatexTabluarWidthCalculator
 	protected int getDivide()
 	{
 		double relativeSum=0;
-		for(int i=0;i<columns.getColumn().size();i++)
-		{			
-			Column col = columns.getColumn().get(i);
-			relativeSum=relativeSum+col.getWidth().getValue();
+		for(Column c : columns.getColumn())
+		{
+			if(!isFlex(c))
+			{
+				relativeSum=relativeSum+c.getWidth().getValue();
+			}
 		}
 		return (int)relativeSum*muliplier;
 	}

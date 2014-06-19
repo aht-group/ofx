@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.apache.commons.configuration.Configuration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
 	private LatexSectionRenderer renderer;
 
     private Section section;
-
+    
 	@Before
 	public void init()
 	{
@@ -50,6 +51,7 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
         Assert.assertEquals(7, content.size());
+        testLatex(content);
     }
 	
 	@Test public void sectionWithHeaderButContainer() throws OfxAuthoringException
@@ -87,15 +89,16 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	Configuration config = OfxCoreTestBootstrap.init();
 
     	TestLatexSectionRenderer test = new TestLatexSectionRenderer();
+    	test.initLatexTestEnvironment(config);
         test.init();
 
- //   	test.section();
- //     test.sectionWithHeaderButContainer();
- //       test.sectionInclude();
-        test.sectionIncludeWithContent();
+       	test.section();
+//     test.sectionWithHeaderButContainer();
+//       test.sectionInclude();
+//        test.sectionIncludeWithContent();
     }
    
 }

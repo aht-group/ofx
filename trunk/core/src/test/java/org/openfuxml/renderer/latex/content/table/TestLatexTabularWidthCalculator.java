@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.openfuxml.content.table.Columns;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.table.OfxColumnFactory;
+import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.test.AbstractOfxCoreTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +30,10 @@ public class TestLatexTabularWidthCalculator extends AbstractOfxCoreTest
 	{
 		Columns cols = new Columns();
 		
-		cols.getColumn().add(OfxColumnFactory.createCol(10));
-		cols.getColumn().add(OfxColumnFactory.createCol(20));
+//		cols.getColumn().add(OfxColumnFactory.build(XmlAlignmentFactory.Horizontal.center));
+		cols.getColumn().add(OfxColumnFactory.percentage(20));
+		
+		cols.getColumn().add(OfxColumnFactory.flex(1));
 		
 		return cols;
 	}
@@ -40,7 +43,7 @@ public class TestLatexTabularWidthCalculator extends AbstractOfxCoreTest
     {    	    	
     	LatexTabluarWidthCalculator tabUtil = new LatexTabluarWidthCalculator(createColumns());
     	Assert.assertEquals("p{\\tabLenA}", tabUtil.getColDefinition(1));
-    	Assert.assertEquals("p{\\tabLenB}", tabUtil.getColDefinition(2));
+    	Assert.assertEquals(">{\\hsize=1.00\\hsize}X", tabUtil.getColDefinition(2));
     }
     
     @Test
@@ -56,7 +59,7 @@ public class TestLatexTabularWidthCalculator extends AbstractOfxCoreTest
     @Test
     public void multiplier() throws IOException, OfxAuthoringException
     {    	    	
-    	int expected = 30*LatexTabluarWidthCalculator.muliplier;
+    	int expected = 20*LatexTabluarWidthCalculator.muliplier;
     	LatexTabluarWidthCalculator tabUtil = new LatexTabluarWidthCalculator(createColumns());
     	Assert.assertEquals(expected, tabUtil.getDivide());
     } 
@@ -70,7 +73,7 @@ public class TestLatexTabularWidthCalculator extends AbstractOfxCoreTest
     }
     
     @Test
-    public void decimalFormat()
+    public void decimalFormat() throws OfxAuthoringException
     {
     	LatexTabluarWidthCalculator twc = new LatexTabluarWidthCalculator(createColumns());
     	String expected ="0.25";

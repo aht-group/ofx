@@ -33,10 +33,11 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
 	
 	@After public void close(){renderer=null;}
 	
-	public static Cell create()
+	public static Cell create(){return create(10);}
+	public static Cell create(int words)
 	{
 		Cell cell = new Cell();
-    	cell.getContent().add(TestLatexParagraphRenderer.create());
+    	cell.getContent().add(TestLatexParagraphRenderer.create(words));
     	return cell;
 	}
 	
