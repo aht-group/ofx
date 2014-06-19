@@ -51,14 +51,8 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 	{
 		logger.trace("Parent renderer is "+parent.getClass().getSimpleName());
 		
-		if(parent instanceof LatexCellRenderer)
-		{
-			inFigure = false;
-		}
-		else
-		{
-			inFigure = true;
-		}
+		if(parent instanceof LatexCellRenderer) {inFigure = false;}
+		else {inFigure = true;}
 	}
 	
 	private void renderPre(Image image) throws OfxAuthoringException

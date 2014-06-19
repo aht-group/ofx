@@ -11,6 +11,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.content.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.media.XmlMediaFactory;
@@ -18,6 +19,7 @@ import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.media.cross.LatexCrossMediaManager;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
+import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.util.OfxContentDebugger;
 import org.openfuxml.test.OfxCoreTestBootstrap;
@@ -29,8 +31,10 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
 	final static Logger logger = LoggerFactory.getLogger(TestLatexImageRenderer.class);
 	
 	private LatexCrossMediaManager cmm;
+	
     private LatexSectionRenderer rSection;
     private LatexImageRenderer rImage;
+    private LatexCellRenderer rCell;
     
     private Image image;
 	
@@ -42,6 +46,7 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
 		
         rSection = new LatexSectionRenderer(cmm,1, new LatexPreamble());
         rImage = new LatexImageRenderer(new NoOpCrossMediaManager());
+        rCell = new LatexCellRenderer(new NoOpCrossMediaManager());
         
         image = new Image();
         image.setId("my.id");
@@ -57,6 +62,17 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
     {
     	rImage.render(this,image);
         List<String> content = rImage.getContent();
+        OfxContentDebugger.debug(content);
+    }
+    
+    @Test
+    public void inCell() throws IOException, OfxAuthoringException
+    {
+    	Cell cell = new Cell();
+    	cell.getContent().add(image);
+    	
+    	rCell.render(cell);
+        List<String> content = rCell.getContent();
         OfxContentDebugger.debug(content);
     }
 
@@ -81,7 +97,8 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
     	test.setSaveReference(true);
     	
     	test.initRenderer();
-    	test.direct();
+//    	test.direct();
+    	test.inCell();
 //		test.section();
     }
 }

@@ -19,6 +19,11 @@ public class LatexCellRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	private Emphasis emphasisOverride;
 	
+	public LatexCellRenderer(CrossMediaManager cmm)
+	{
+		this(cmm,null);
+	}
+	
 	public LatexCellRenderer(CrossMediaManager cmm, Emphasis emphasis)
 	{
 		super(cmm);
