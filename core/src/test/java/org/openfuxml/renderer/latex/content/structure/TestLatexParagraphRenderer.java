@@ -23,10 +23,11 @@ public class TestLatexParagraphRenderer extends AbstractLatexContentTest
 	
 	@After public void close(){renderer=null;}
 	
-	public static Paragraph create()
+	public static Paragraph create(){return create(10);}
+	public static Paragraph create(int words)
 	{
     	Paragraph p = new Paragraph();
-    	p.getContent().add(li.getWords(10));
+    	p.getContent().add(li.getWords(words));
     	return p;
 	}
 	

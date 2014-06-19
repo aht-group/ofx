@@ -22,17 +22,27 @@ public class OfxLatexDefinitionBuilder
 	
 	public OfxLatexDefinitionBuilder(String baseLatex)
 	{
-		this.baseLatex= new File(baseLatex);
+		this(new File(baseLatex));
+	}
+	
+	public OfxLatexDefinitionBuilder(File baseLatex)
+	{
+		this.baseLatex=baseLatex;
 		mrl = new MultiResourceLoader();
 	}
 	
 	public void copyPackages() throws OfxConfigurationException {copyResource("tex.ofx-core","packages");}
+	public void copyTest() throws OfxConfigurationException {copyResource("tex.ofx-core.test","","render");}
 	
 	protected void copyResource(String library, String resource) throws OfxConfigurationException
 	{
+		copyResource(library, "tex"+File.separator, resource);
+	}
+	protected void copyResource(String library, String subDir, String resource) throws OfxConfigurationException
+	{
 		try
 		{
-			File fTarget = new File(baseLatex,"tex"+File.separator+resource+".tex");
+			File fTarget = new File(baseLatex,subDir+resource+".tex");
 			InputStream is = mrl.searchIs(library+"/"+resource+".tex");
 			byte[] bytes = IOUtils.toByteArray(is);
 			FileIO.writeFileIfDiffers(bytes, fTarget);

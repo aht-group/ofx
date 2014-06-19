@@ -3,28 +3,24 @@
 
 \begin{table}[htb]
 
-\ifthenelse{\isundefined{\tabLenA}}{\newlength{\tabLenA}}{}
-\ifthenelse{\isundefined{\tabLenB}}{\newlength{\tabLenB}}{}
 
-\setlength{\tabLenA}{0.10\textwidth}
-\setlength{\tabLenB}{0.20\textwidth}
 
-\begin{tabular}{p{\tabLenA}p{\tabLenB}}
+\begin{tabularx}{\textwidth}{l>{\hsize=1.00\hsize}X}
 \toprule
 \toprule
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+Lorem
 &
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
 \\
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+Lorem
 &
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{TestTitle}
 \end{table}

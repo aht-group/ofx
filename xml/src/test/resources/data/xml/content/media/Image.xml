@@ -4,5 +4,6 @@
     <ofx:comment/>
     <layout:alignment horizontal="center"/>
     <layout:width unit="pt" flex="false">12.3</layout:width>
+    <layout:height unit="pt">45.6</layout:height>
     <media:media id="myId" src="mySrc" dst="myDst"/>
 </media:image>

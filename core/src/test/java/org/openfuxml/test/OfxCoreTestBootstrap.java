@@ -15,6 +15,8 @@ public class OfxCoreTestBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxCoreTestBootstrap.class);
 		
+	public static final String cfgKeyLatexTarget = "ofx.latex.basedir";
+	
 	public static String xmlConfig = "config.ofx-core.test/ofx.xml";
 	
 	public static Configuration init()

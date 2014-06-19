@@ -1,16 +1,23 @@
 package org.openfuxml.renderer.latex.content.table;
 
 import java.io.IOException;
+import java.util.List;
 
+import net.sf.exlp.util.xml.JaxbUtil;
+
+import org.apache.commons.configuration.Configuration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.table.Body;
+import org.openfuxml.content.table.Columns;
 import org.openfuxml.content.table.Content;
 import org.openfuxml.content.table.Head;
 import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.table.OfxColumnFactory;
+import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
@@ -35,12 +42,18 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
 	
 	public static Table createTable()
 	{
+		Columns cols = new Columns();
+		cols.getColumn().add(OfxColumnFactory.build(XmlAlignmentFactory.Horizontal.left));
+		cols.getColumn().add(OfxColumnFactory.flex(10));
+//		cols.getColumn().add(OfxColumnFactory.percentage(20));
+		
 		Specification specification = new Specification();
-		specification.setColumns(TestLatexTabularWidthCalculator.createColumns());
+		specification.setColumns(cols);
 
+		int[] r1 = {1,20};
 		Body body = new Body();
-		body.getRow().add(TestLatexRowFactory.create());
-		body.getRow().add(TestLatexRowFactory.create());
+		body.getRow().add(TestLatexRowFactory.create(r1));
+		body.getRow().add(TestLatexRowFactory.create(r1));
 		
 		Content content = new Content();
 		content.getBody().add(body);
@@ -84,24 +97,29 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
     }
     
     @Test
-    public void floatObject() throws OfxAuthoringException
+    public void noFloat() throws OfxAuthoringException
     {
     	Table table = TestLatexTableRenderer.createTable();
     	table.getSpecification().setFloat(XmlFloatFactory.build(false));
+    	
+    	JaxbUtil.info(table);
     	renderer.render(table);
-    	OfxContentDebugger.debug(renderer.getContent());
+    	List<String> content = renderer.getContent();
+    	OfxContentDebugger.debug(content);
+    	testLatex(content);
     }
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	Configuration config = OfxCoreTestBootstrap.init();
 			
     	TestLatexTableRenderer.initLoremIpsum();
     	TestLatexTableRenderer test = new TestLatexTableRenderer();
+    	test.initLatexTestEnvironment(config);
     	test.setSaveReference(true);
     	
 //    	test.initRenderer();test.withoutSpecification();
-    	test.initRenderer();test.floatObject();
+    	test.initRenderer();test.noFloat();
 
     }
 }

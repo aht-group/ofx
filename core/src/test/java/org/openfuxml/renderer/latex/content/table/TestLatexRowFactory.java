@@ -32,9 +32,17 @@ public class TestLatexRowFactory extends AbstractLatexTableTest
 	
 	public static Row create()
 	{
+		int[] words = {10,10};
+		return create(words);
+	}
+	
+	public static Row create(int[] words)
+	{
 		Row row = new Row();
-		row.getCell().add(TestLatexCellFactory.create());
-		row.getCell().add(TestLatexCellFactory.create());
+		for(int i=0;i<words.length;i++)
+		{
+			row.getCell().add(TestLatexCellFactory.create(words[i]));
+		}
 		return row;
 	}
 	

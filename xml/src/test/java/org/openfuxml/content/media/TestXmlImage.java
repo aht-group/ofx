@@ -7,6 +7,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.content.layout.TestXmlAlignment;
+import org.openfuxml.content.layout.TestXmlHeight;
 import org.openfuxml.content.layout.TestXmlWidth;
 import org.openfuxml.content.ofx.TestXmlComment;
 import org.openfuxml.content.ofx.TestXmlTitle;
@@ -41,6 +42,7 @@ public class TestXmlImage extends AbstractXmlMediaTest
     		xml.setComment(TestXmlComment.create(false));
     		xml.setMedia(TestXmlMedia.create(false));
     		xml.setWidth(TestXmlWidth.create(false));
+    		xml.setHeight(TestXmlHeight.create(false));
     	}
     	
     	return xml;
