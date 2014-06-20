@@ -36,13 +36,13 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 
 		if(image.isSetAlignment()){alignment(image.getAlignment());}
 		
-		StringBuffer sbIncludeGraphics = new StringBuffer();
-		if(!inFigure){sbIncludeGraphics.append("\\raisebox{-\\totalheight}{");}
-		sbIncludeGraphics.append("  \\includegraphics");
-		sbIncludeGraphics.append(imageArguments(image));
-		sbIncludeGraphics.append("{").append(cmm.getImageRef(image.getMedia())).append("}");
-		if(!inFigure){sbIncludeGraphics.append("}");}
-		txt.add(sbIncludeGraphics.toString());
+		StringBuffer sb = new StringBuffer();
+		if(!inFigure){sb.append("$\\vcenter{\\hbox{");}
+		sb.append("  \\includegraphics");
+		sb.append(imageArguments(image));
+		sb.append("{").append(cmm.getImageRef(image.getMedia())).append("}");
+		if(!inFigure){sb.append("}}$");}
+		txt.add(sb.toString());
 		
 		renderPost(image);
 	}
