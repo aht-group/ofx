@@ -42,6 +42,11 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
 	
 	public static Table createTable()
 	{
+		int[] words = {1,20};
+		return createTable(words);
+	}
+	public static Table createTable(int[] words)
+	{
 		Columns cols = new Columns();
 		cols.getColumn().add(OfxColumnFactory.build(XmlAlignmentFactory.Horizontal.left));
 		cols.getColumn().add(OfxColumnFactory.flex(10));
@@ -49,11 +54,10 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
 		
 		Specification specification = new Specification();
 		specification.setColumns(cols);
-
-		int[] r1 = {1,20};
+		
 		Body body = new Body();
-		body.getRow().add(TestLatexRowFactory.create(r1));
-		body.getRow().add(TestLatexRowFactory.create(r1));
+		body.getRow().add(TestLatexRowFactory.create(words));
+		body.getRow().add(TestLatexRowFactory.create(words));
 		
 		Content content = new Content();
 		content.getBody().add(body);

@@ -40,6 +40,11 @@
         		<artifactId>ofx-core</artifactId>
         		<version>${project.version}</version>
         	</dependency>
+  			<dependency>
+        		<groupId>org.openfuxml</groupId>
+        		<artifactId>ofx-doc</artifactId>
+        		<version>${project.version}</version>
+        	</dependency>
         	<dependency>
         		<groupId>org.openfuxml</groupId>
         		<artifactId>ofx-chart</artifactId>

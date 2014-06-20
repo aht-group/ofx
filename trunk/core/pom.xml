@@ -84,6 +84,8 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 		</dependency>
+		
+		<!-- Test -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -93,6 +95,12 @@
     		<groupId>de.sven-jacobs</groupId>
     		<artifactId>loremipsum</artifactId>
     		<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openfuxml</groupId>
+			<artifactId>ofx-doc</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>

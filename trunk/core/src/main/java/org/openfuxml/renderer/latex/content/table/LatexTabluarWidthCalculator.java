@@ -64,7 +64,7 @@ public class LatexTabluarWidthCalculator
 			}
 		}
 		
-		logger.info("SumFlex: "+sumFlex);
+		logger.trace("SumFlex: "+sumFlex);
 		
 		int index=0;
 		for(Column column : columns.getColumn())
@@ -135,7 +135,7 @@ public class LatexTabluarWidthCalculator
 				
 			}
 			
-			logger.info(index+" "+getColDefinition(index));
+			logger.trace(index+" "+getColDefinition(index));
 		}
 	}
 	
