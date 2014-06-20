@@ -82,8 +82,9 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 	{
 		preTxt.add("");
 		
-		if(floating){preTxt.add("\\begin{table}[htb]");}
-		else{preTxt.add("\\begin{center}");}
+		if(floating){preTxt.add("\\begin{table}[!htbp]");}
+//		else{preTxt.add("\\begin{center}");}
+		else{preTxt.add("\\begin{table}[H]");}
 		
 		alignment(table.getSpecification());
 	}
@@ -99,8 +100,8 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		if(table.isSetId()) {postTxt.add("\\label{"+table.getId()+"}");}
 		
 		if(floating){postTxt.add("\\end{table}");}
-		else{postTxt.add("\\end{center}");}
-		
+	//	else{postTxt.add("\\end{center}");}
+		else{postTxt.add("\\end{table}");}
 	}
 	
 	private OfxLatexTableRenderer getRendererForType()
