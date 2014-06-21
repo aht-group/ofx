@@ -35,7 +35,7 @@ public class HtmlTranscoder
 	
 	private Serializable transcodeNode(Node node)
 	{
-		System.out.println(node.nodeName());
+//		System.out.println(node.nodeName());
 		if(node.nodeName().equals("ol"))
 		{
 			HtmlListTranscoder t = new HtmlListTranscoder();
