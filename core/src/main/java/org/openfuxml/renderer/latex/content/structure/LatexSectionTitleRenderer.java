@@ -5,6 +5,7 @@ import org.openfuxml.content.ofx.Title;
 import org.openfuxml.interfaces.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
+import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +32,7 @@ public class LatexSectionTitleRenderer extends AbstractOfxLatexRenderer implemen
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("\\").append(latexPreamble.getSectionHeaderName(lvl));
-        sb.append("{").append(title.getValue()).append("}");
+        sb.append("{").append(TexSpecialChars.replace(title.getValue())).append("}");
 		txt.add(sb.toString());
 
         if(section!=null && section.isSetId())

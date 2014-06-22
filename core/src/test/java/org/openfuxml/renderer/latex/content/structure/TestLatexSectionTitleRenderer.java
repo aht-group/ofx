@@ -58,6 +58,16 @@ public class TestLatexSectionTitleRenderer extends AbstractLatexContentTest
         Assert.assertEquals(3, content.size());
     }
     
+    @Test
+    public void specialChars() throws IOException, OfxAuthoringException
+    {
+    	title.setValue("M & E");
+        renderer.render(section,title);
+        List<String> content = renderer.getContent();
+        OfxContentDebugger.debug(content);
+        Assert.assertEquals(3, content.size());
+    }
+    
     public static void main(String[] args) throws Exception
     {
     	OfxCoreTestBootstrap.init();
@@ -66,7 +76,8 @@ public class TestLatexSectionTitleRenderer extends AbstractLatexContentTest
         test.init();
 
 //    	test.withoutId();
-        test.withId();
+//        test.withId();
+        test.specialChars();
     }
    
 }
