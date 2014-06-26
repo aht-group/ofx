@@ -11,7 +11,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.openfuxml.interfaces.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

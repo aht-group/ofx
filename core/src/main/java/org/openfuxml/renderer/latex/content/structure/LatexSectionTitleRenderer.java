@@ -2,7 +2,7 @@ package org.openfuxml.renderer.latex.content.structure;
 
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.interfaces.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;

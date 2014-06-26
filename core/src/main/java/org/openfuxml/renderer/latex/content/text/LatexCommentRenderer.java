@@ -6,7 +6,7 @@ import java.util.List;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

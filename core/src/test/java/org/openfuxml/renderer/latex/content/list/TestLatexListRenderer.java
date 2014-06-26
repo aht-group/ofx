@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.list.Type;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;

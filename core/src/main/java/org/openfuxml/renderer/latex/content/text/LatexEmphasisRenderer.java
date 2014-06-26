@@ -2,7 +2,7 @@ package org.openfuxml.renderer.latex.content.text;
 
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;

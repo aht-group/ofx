@@ -1,7 +1,7 @@
 package org.openfuxml.renderer.latex.content.structure;
 
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.slf4j.Logger;
