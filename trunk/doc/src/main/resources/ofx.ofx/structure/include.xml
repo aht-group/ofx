@@ -14,7 +14,7 @@
 			include another fragement at this position.
 			The container handles the way:
 				container:true The inlcude file is merged at this position
-			container:false the include file is referenced (in latex with input) 
+				container:false the include file is referenced (in latex with input) 
 		</ofx:paragraph>
 
 	</ofx:section>
