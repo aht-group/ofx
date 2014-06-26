@@ -1,4 +1,4 @@
-package org.openfuxml.interfaces;
+package org.openfuxml.interfaces.media;
 
 import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;

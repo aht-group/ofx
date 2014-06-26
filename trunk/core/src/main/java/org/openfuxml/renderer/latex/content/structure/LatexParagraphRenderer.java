@@ -3,7 +3,7 @@ package org.openfuxml.renderer.latex.content.structure;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexEmphasisRenderer;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;

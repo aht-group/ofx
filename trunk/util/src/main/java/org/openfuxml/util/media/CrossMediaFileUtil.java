@@ -2,7 +2,7 @@ package org.openfuxml.util.media;
 
 import java.io.File;
 
-import org.openfuxml.interfaces.CrossMediaManager;
+import org.openfuxml.interfaces.media.CrossMediaManager;
 
 public class CrossMediaFileUtil
 {

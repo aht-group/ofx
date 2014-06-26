@@ -15,7 +15,7 @@ import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.fop.svg.PDFTranscoder;
 import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.CrossMediaTranscoder;
+import org.openfuxml.interfaces.media.CrossMediaTranscoder;
 import org.openfuxml.media.cross.LatexCrossMediaManager;
 import org.openfuxml.util.media.CrossMediaFileUtil;
 import org.slf4j.Logger;

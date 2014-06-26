@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.CrossMediaManager;
-import org.openfuxml.interfaces.CrossMediaTranscoder;
+import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.media.CrossMediaTranscoder;
 import org.openfuxml.media.transcode.Pdf2PdfTranscoder;
 import org.openfuxml.media.transcode.Png2PngTranscoder;
 import org.openfuxml.media.transcode.Svg2PdfTranscoder;
