@@ -1,4 +1,4 @@
-package org.openfuxml.factory.table;
+package org.openfuxml.factory.xml.table;
 
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
