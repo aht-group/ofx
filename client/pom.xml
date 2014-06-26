@@ -35,8 +35,7 @@
 		<dependency>
 			<groupId>org.openfuxml</groupId>
 			<artifactId>ofx-xml</artifactId>
-			<type>jar</type>
-			<scope>compile</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.openfuxml</groupId>
@@ -74,10 +73,23 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 		</dependency>
+		
+		
+		<!-- Test -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+   	   		<groupId>com.sun.xml.bind</groupId>
+   	   		<artifactId>jaxb-impl</artifactId>
+   	   		<scope>provided</scope>
+   	   	</dependency>
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
