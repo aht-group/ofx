@@ -1,4 +1,4 @@
-package org.openfuxml.factory.table;
+package org.openfuxml.factory.xml.table;
 
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.table.Column;

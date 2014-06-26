@@ -1,4 +1,4 @@
-package org.openfuxml.interfaces;
+package org.openfuxml.interfaces.renderer.latex;
 
 public interface SectionHeaderNameFactory
 {
