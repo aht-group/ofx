@@ -34,6 +34,7 @@ public class TestXmlParagraph extends AbstractXmlOfxTest
     public static Paragraph create(boolean withChilds)
     {
     	Paragraph xml = new Paragraph();
+    	xml.setLang("en");
     	
     	logger.warn("Not fully implemented");
     	if(withChilds)

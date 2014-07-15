@@ -22,7 +22,7 @@ public class TestXmlItem extends AbstractXmlListTest
 	}
     
     @Test
-    public void testXml() throws FileNotFoundException
+    public void xml() throws FileNotFoundException
     {
     	Item actual = create();
     	Item expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Item.class);

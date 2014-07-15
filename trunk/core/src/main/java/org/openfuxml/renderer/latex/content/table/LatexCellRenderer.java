@@ -34,6 +34,7 @@ public class LatexCellRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	{	
 		for(Object s : cell.getContent())
 		{
+			logger.trace(s.getClass().getName());
 			if     (s instanceof String){}
 			else if(s instanceof Paragraph)
 			{
