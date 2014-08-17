@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.table;
 
+import net.sf.exlp.util.xml.JaxbUtil;
+
 import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -91,16 +93,18 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 	
 	private void renderPost(Table table,boolean floating)
 	{
-		if(table.isSetTitle()) 
+		JaxbUtil.trace(table);
+		if(table.isSetTitle())
 		{
-			if(floating){postTxt.add("\\caption{"+table.getTitle().getValue()+"}");}
-			else{postTxt.add("\\captionof{table}{"+table.getTitle().getValue()+"}");}
+			postTxt.add("\\caption{"+table.getTitle().getValue()+"}");
+//			if(floating){postTxt.add("\\caption{"+table.getTitle().getValue()+"}");}
+//			else{postTxt.add("\\captionof{table}{"+table.getTitle().getValue()+"}");}
 		}
 		
 		if(table.isSetId()) {postTxt.add("\\label{"+table.getId()+"}");}
 		
 		if(floating){postTxt.add("\\end{table}");}
-	//	else{postTxt.add("\\end{center}");}
+//		else{postTxt.add("\\end{center}");}
 		else{postTxt.add("\\end{table}");}
 	}
 	

@@ -27,6 +27,7 @@
             <xsd:sequence>
                 <xsd:element ref="text:emphasis" maxOccurs="unbounded"/>
                 <xsd:element ref="reference" maxOccurs="unbounded"/>
+                <xsd:element ref="media:image" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="lang" type="xsd:string"/>
             <xsd:attribute name="top" use="required">

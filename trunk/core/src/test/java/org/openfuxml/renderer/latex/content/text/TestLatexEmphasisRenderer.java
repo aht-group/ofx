@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.content.OfxEmphasisFactory;
+import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.content.structure.TestLatexParagraphRenderer;
@@ -41,7 +42,7 @@ final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.
     	OfxEmphasisFactory eF = new OfxEmphasisFactory(true,false);
     	Paragraph p = create(eF);
     	
-    	renderer = new LatexParagraphRenderer(true);
+    	renderer = new LatexParagraphRenderer(new NoOpCrossMediaManager(),true);
     	
     	f = new File(rootDir,dir+"/"+Key.bold+".txt");
     	renderer.render(p);
@@ -54,7 +55,7 @@ final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.
     	OfxEmphasisFactory eF = new OfxEmphasisFactory(false,true);
     	Paragraph p = create(eF);
     	
-    	renderer = new LatexParagraphRenderer(true);
+    	renderer = new LatexParagraphRenderer(new NoOpCrossMediaManager(),true);
     	
     	f = new File(rootDir,dir+"/"+Key.italic+".txt");
     	renderer.render(p);
@@ -67,7 +68,7 @@ final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.
     	OfxEmphasisFactory eF = new OfxEmphasisFactory(true,true);
     	Paragraph p = create(eF);
     	
-    	renderer = new LatexParagraphRenderer(true);
+    	renderer = new LatexParagraphRenderer(new NoOpCrossMediaManager(),true);
     	
     	f = new File(rootDir,dir+"/"+Key.italic+"-"+Key.bold+".txt");
     	renderer.render(p);

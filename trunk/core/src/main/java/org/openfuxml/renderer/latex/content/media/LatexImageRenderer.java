@@ -9,6 +9,7 @@ import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.openfuxml.renderer.latex.util.LatexWidthCalculator;
@@ -18,8 +19,11 @@ import org.slf4j.LoggerFactory;
 public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexImageRenderer.class);
-		
+
+	private enum Environment{Figure,Cell,Inline}
+	
 	private boolean inFigure;
+	private Environment environment;
 	
 	public LatexImageRenderer(CrossMediaManager cmm)
 	{	
@@ -34,14 +38,14 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		
 		renderPre(image);
 
-		if(image.isSetAlignment()){alignment(image.getAlignment());}
+		if(Environment.Figure.equals(environment) && image.isSetAlignment()){alignment(image.getAlignment());}
 		
 		StringBuffer sb = new StringBuffer();
-		if(!inFigure){sb.append("$\\vcenter{\\hbox{");}
-		sb.append("  \\includegraphics");
+		if(Environment.Cell.equals(environment)){sb.append("$\\vcenter{\\hbox{");}
+		sb.append(" \\includegraphics");
 		sb.append(imageArguments(image));
 		sb.append("{").append(cmm.getImageRef(image.getMedia())).append("}");
-		if(!inFigure){sb.append("}}$");}
+		if(Environment.Cell.equals(environment)){sb.append("}}$");}
 		txt.add(sb.toString());
 		
 		renderPost(image);
@@ -51,31 +55,38 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 	{
 		logger.trace("Parent renderer is "+parent.getClass().getSimpleName());
 		
-		if(parent instanceof LatexCellRenderer) {inFigure = false;}
-		else {inFigure = true;}
+		if(parent instanceof LatexCellRenderer) {environment=Environment.Cell;inFigure = false;}
+		else if (parent instanceof LatexParagraphRenderer){environment=Environment.Inline;}
+		else {environment=Environment.Figure;inFigure = true;}
 	}
 	
 	private void renderPre(Image image) throws OfxAuthoringException
 	{
-		preTxt.addAll(LatexCommentRenderer.stars());
-		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Image.class.getSimpleName()+" (figure:"+inFigure+") with "+this.getClass().getSimpleName()));
-		
-		if(image.isSetComment())
+		if(Environment.Figure.equals(environment))
 		{
-			LatexCommentRenderer rComment = new LatexCommentRenderer();
-			rComment.render(image.getComment());
-			renderer.add(rComment);
+			preTxt.addAll(LatexCommentRenderer.stars());
+			preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Image.class.getSimpleName()+" (figure:"+inFigure+") with "+this.getClass().getSimpleName()));
+			
+			if(image.isSetComment())
+			{
+				LatexCommentRenderer rComment = new LatexCommentRenderer();
+				rComment.render(image.getComment());
+				renderer.add(rComment);
+			}
+			preTxt.add("\\begin{figure}");
 		}
-
-		if(inFigure){preTxt.add("\\begin{figure}");}
 	}
 	
 	private void renderPost(Image image)
 	{
-		if(inFigure && image.isSetTitle()) {postTxt.add("  \\caption{"+image.getTitle().getValue()+"}");}
-		if(inFigure && image.isSetId())    {postTxt.add("  \\label{"+image.getId()+"}");}
-		if(inFigure){postTxt.add("\\end{figure}");}
-		postTxt.add("");
+		if(Environment.Figure.equals(environment))
+		{
+			if(image.isSetTitle()){postTxt.add("  \\caption{"+image.getTitle().getValue()+"}");}
+			if(image.isSetId()){postTxt.add("  \\label{"+image.getId()+"}");}
+			postTxt.add("\\end{figure}");
+			postTxt.add("");
+		}
+		
 	}
 	
 	private String imageArguments(Image image) throws OfxAuthoringException
