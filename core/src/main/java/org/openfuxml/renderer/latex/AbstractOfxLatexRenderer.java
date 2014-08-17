@@ -47,6 +47,13 @@ public class AbstractOfxLatexRenderer
 		
 	}
 	
+	public String getSingleLine() throws OfxAuthoringException
+	{
+		List<String> resultTxt = getContent();
+		if(resultTxt.size()!=1){throw new OfxAuthoringException("Result is not a single line");}
+		return resultTxt.get(0);
+	}
+	
 	public List<String> getContent()
 	{
 		List<String> resultTxt = new ArrayList<String>();
@@ -74,7 +81,7 @@ public class AbstractOfxLatexRenderer
 	
 	protected void paragraphRenderer(Paragraph paragraph, boolean preBlankLine) throws OfxAuthoringException
 	{
-		LatexParagraphRenderer f = new LatexParagraphRenderer(preBlankLine);
+		LatexParagraphRenderer f = new LatexParagraphRenderer(cmm,preBlankLine);
 		f.render(paragraph);
 		renderer.add(f);
 	}

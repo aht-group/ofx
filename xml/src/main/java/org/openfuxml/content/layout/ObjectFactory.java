@@ -46,6 +46,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Height }
+     * 
+     */
+    public Height createHeight() {
+        return new Height();
+    }
+
+    /**
      * Create an instance of {@link Float }
      * 
      */
@@ -67,14 +75,6 @@ public class ObjectFactory {
      */
     public Line createLine() {
         return new Line();
-    }
-
-    /**
-     * Create an instance of {@link Height }
-     * 
-     */
-    public Height createHeight() {
-        return new Height();
     }
 
 }

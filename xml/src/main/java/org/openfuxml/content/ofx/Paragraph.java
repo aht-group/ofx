@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.openfuxml.content.media.Image;
 import org.openfuxml.content.text.Emphasis;
 
 
@@ -27,6 +28,7 @@ import org.openfuxml.content.text.Emphasis;
  *       &lt;sequence>
  *         &lt;element ref="{http://www.openfuxml.org/text}emphasis" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org}reference" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org/media}image"/>
  *       &lt;/sequence>
  *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="top" use="required">
@@ -57,7 +59,8 @@ public class Paragraph implements Serializable
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
         @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
-        @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class)
+        @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class),
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -84,9 +87,10 @@ public class Paragraph implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
-     * {@link Emphasis }
      * {@link Reference }
+     * {@link Image }
+     * {@link Emphasis }
+     * {@link String }
      * 
      * 
      */

@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
@@ -34,7 +35,7 @@ public class TestLatexParagraphRenderer extends AbstractLatexContentTest
     @Test
     public void withBlank() throws IOException, OfxAuthoringException
     {
-    	renderer = new LatexParagraphRenderer(true);
+    	renderer = new LatexParagraphRenderer(new NoOpCrossMediaManager(),true);
     	
     	f = new File(rootDir,dir+"/"+Key.withBlank+".txt");
     	renderer.render(create());
@@ -44,7 +45,7 @@ public class TestLatexParagraphRenderer extends AbstractLatexContentTest
     @Test
     public void withoutBlank() throws IOException, OfxAuthoringException
     {
-    	renderer = new LatexParagraphRenderer(false);
+    	renderer = new LatexParagraphRenderer(new NoOpCrossMediaManager(),false);
     	
     	f = new File(rootDir,dir+"/"+Key.withoutBlank+".txt");
     	renderer.render(create());
