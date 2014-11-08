@@ -11,7 +11,11 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.openfuxml.interfaces.OfxDefaultSettings;
+import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.util.settings.OfxDefaultSettingsProvider;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +29,15 @@ public class AbstractOfxCoreTest
 	protected static LoremIpsum li;
 	private boolean saveReference = false;
 	protected File f;
+	
+	protected OfxDefaultSettings settings;
+	protected  CrossMediaManager cmm;
+	
+	public AbstractOfxCoreTest()
+	{
+		settings = new OfxDefaultSettingsProvider();
+		cmm = new NoOpCrossMediaManager();
+	}
 
 	@BeforeClass
     public static void initLogger()

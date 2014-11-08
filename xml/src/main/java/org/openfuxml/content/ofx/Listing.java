@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="external" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="codeLang" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="classifier" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -53,6 +54,8 @@ public class Listing implements Serializable
     protected String external;
     @XmlAttribute(name = "codeLang")
     protected String codeLang;
+    @XmlAttribute(name = "classifier")
+    protected String classifier;
 
     /**
      * Gets the value of the title property.
@@ -192,6 +195,34 @@ public class Listing implements Serializable
 
     public boolean isSetCodeLang() {
         return (this.codeLang!= null);
+    }
+
+    /**
+     * Gets the value of the classifier property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getClassifier() {
+        return classifier;
+    }
+
+    /**
+     * Sets the value of the classifier property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setClassifier(String value) {
+        this.classifier = value;
+    }
+
+    public boolean isSetClassifier() {
+        return (this.classifier!= null);
     }
 
 }

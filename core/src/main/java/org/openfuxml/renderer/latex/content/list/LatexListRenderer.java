@@ -5,6 +5,7 @@ import org.openfuxml.content.list.List;
 import org.openfuxml.content.list.Type;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.list.XmlListFactory;
+import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
@@ -21,9 +22,10 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	private ListType listType;
 	private boolean preBlankLine;
 	
-	public LatexListRenderer(){this(true);}
-	public LatexListRenderer(boolean preBlankLine)
+	public LatexListRenderer(CrossMediaManager cmm){this(cmm,true);}
+	public LatexListRenderer(CrossMediaManager cmm, boolean preBlankLine)
 	{
+		super(cmm);
 		this.preBlankLine=preBlankLine;
 	}
 	
@@ -41,7 +43,7 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+debugType+" with: "+this.getClass().getSimpleName()));
 		if(list.isSetComment())
 		{
-			LatexCommentRenderer rComment = new LatexCommentRenderer();
+			LatexCommentRenderer rComment = new LatexCommentRenderer(cmm);
 			rComment.render(list.getComment());
 			preTxt.addAll(rComment.getContent());
 		}
@@ -50,7 +52,7 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		setEnvironment(list.getType(),parent);
 		for(Item item : list.getItem())
 		{
-			LatexItemFactory f = new LatexItemFactory();
+			LatexItemFactory f = new LatexItemFactory(cmm);
 			f.render(listType,item);
 			renderer.add(f);
 		}

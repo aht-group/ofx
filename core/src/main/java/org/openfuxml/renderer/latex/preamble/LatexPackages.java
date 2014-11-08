@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.preamble;
 
+import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
@@ -9,8 +10,9 @@ public class LatexPackages extends AbstractOfxLatexRenderer implements OfxLatexR
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexPackages.class);
 	
-	public LatexPackages()
+	public LatexPackages(CrossMediaManager cmm)
 	{
+		super(cmm);
 
 	}
 	
