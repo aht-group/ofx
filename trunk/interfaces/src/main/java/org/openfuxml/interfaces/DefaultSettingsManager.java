@@ -1,7 +1,7 @@
 package org.openfuxml.interfaces;
 
 
-public interface OfxDefaultSettings
+public interface DefaultSettingsManager
 {
 
 }

@@ -24,7 +24,7 @@ public class TestLatexItemFactory extends AbstractLatexListTest
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexItemFactory(cmm);
+		renderer = new LatexItemFactory(cmm,dsm);
 	}
 	
 	@After public void close(){renderer=null;}

@@ -9,10 +9,9 @@ import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.OfxDefaultSettings;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.content.list.LatexListRenderer;
 import org.openfuxml.renderer.latex.content.media.LatexImageRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
@@ -25,8 +24,8 @@ public class AbstractOfxLatexRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexSectionRenderer.class);
 	
-	protected OfxDefaultSettings settings;
 	protected CrossMediaManager cmm;
+	protected DefaultSettingsManager dsm;
 	
 	protected List<String> preTxt;
 	protected List<String> txt;
@@ -34,10 +33,10 @@ public class AbstractOfxLatexRenderer
 	
 	protected List<OfxLatexRenderer> renderer;
 	
-//	public AbstractOfxLatexRenderer(){this(new NoOpCrossMediaManager());}
-	public AbstractOfxLatexRenderer(CrossMediaManager cmm)
+	public AbstractOfxLatexRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
 		this.cmm=cmm;
+		this.dsm=dsm;
 		preTxt = new ArrayList<String>();
 		txt = new ArrayList<String>();
 		postTxt = new ArrayList<String>();
@@ -83,21 +82,21 @@ public class AbstractOfxLatexRenderer
 	
 	protected void paragraphRenderer(Paragraph paragraph, boolean preBlankLine) throws OfxAuthoringException
 	{
-		LatexParagraphRenderer f = new LatexParagraphRenderer(cmm,preBlankLine);
+		LatexParagraphRenderer f = new LatexParagraphRenderer(cmm,dsm,preBlankLine);
 		f.render(paragraph);
 		renderer.add(f);
 	}
 	
 	protected void renderList(org.openfuxml.content.list.List list,OfxLatexRenderer parent) throws OfxAuthoringException
 	{
-		LatexListRenderer f = new LatexListRenderer(cmm);
+		LatexListRenderer f = new LatexListRenderer(cmm,dsm);
 		f.render(list,parent);
 		renderer.add(f);
 	}
 	
 	protected void renderImage(Image image) throws OfxAuthoringException
 	{
-		LatexImageRenderer f = new LatexImageRenderer(cmm);
+		LatexImageRenderer f = new LatexImageRenderer(cmm,dsm);
 		f.render(this,image);
 		renderer.add(f);
 	}

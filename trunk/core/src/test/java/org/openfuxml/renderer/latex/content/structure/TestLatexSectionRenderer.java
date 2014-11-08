@@ -13,7 +13,6 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.util.OfxContentDebugger;
@@ -33,8 +32,8 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
 	@Before
 	public void init()
 	{
-        preamble = new LatexPreamble(cmm);
-        renderer = new LatexSectionRenderer(new NoOpCrossMediaManager(),1,preamble);
+        preamble = new LatexPreamble(cmm,dsm);
+        renderer = new LatexSectionRenderer(cmm,dsm,1,preamble);
         section = new Section();
         section.setId("myId");
         section.getContent().add(XmlTitleFactory.build("testTitle"));

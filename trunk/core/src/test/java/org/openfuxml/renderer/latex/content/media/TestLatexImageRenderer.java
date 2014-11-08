@@ -52,10 +52,10 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
 		File fTarget = new File("target");
 		cmm = new LatexCrossMediaManager(new File(fTarget,"base"));
 		
-        rSection = new LatexSectionRenderer(cmm,1, new LatexPreamble(cmm));
-        rImage = new LatexImageRenderer(new NoOpCrossMediaManager());
-        rCell = new LatexCellRenderer(new NoOpCrossMediaManager());
-        renderer = new LatexTableRenderer(new NoOpCrossMediaManager());
+        rSection = new LatexSectionRenderer(cmm,dsm,1, new LatexPreamble(cmm,dsm));
+        rImage = new LatexImageRenderer(new NoOpCrossMediaManager(),dsm);
+        rCell = new LatexCellRenderer(new NoOpCrossMediaManager(),dsm);
+        renderer = new LatexTableRenderer(new NoOpCrossMediaManager(),dsm);
         
         image = new Image();
         image.setId("my.id");

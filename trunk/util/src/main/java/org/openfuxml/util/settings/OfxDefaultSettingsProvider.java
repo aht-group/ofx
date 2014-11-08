@@ -1,8 +1,8 @@
 package org.openfuxml.util.settings;
 
-import org.openfuxml.interfaces.OfxDefaultSettings;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 
-public class OfxDefaultSettingsProvider implements OfxDefaultSettings
+public class OfxDefaultSettingsProvider implements DefaultSettingsManager
 {
 
 }

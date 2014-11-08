@@ -7,6 +7,7 @@ import org.openfuxml.content.table.Row;
 import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -18,9 +19,9 @@ public class LatexGridTableRenderer extends AbstractOfxLatexRenderer implements 
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexGridTableRenderer.class);
 	
-	public LatexGridTableRenderer(CrossMediaManager cmm)
+	public LatexGridTableRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
-		super(cmm);
+		super(cmm,dsm);
 	}
 	
 	public void render(Table table) throws OfxAuthoringException
@@ -62,7 +63,7 @@ public class LatexGridTableRenderer extends AbstractOfxLatexRenderer implements 
 		{
 			for(Row row : head.getRow())
 			{
-				LatexRowRenderer f = new LatexRowRenderer(cmm);
+				LatexRowRenderer f = new LatexRowRenderer(cmm,dsm);
 				f.render(row);
 				renderer.add(f);
 				renderer.add(new StringRenderer("\\hline"));
@@ -75,7 +76,7 @@ public class LatexGridTableRenderer extends AbstractOfxLatexRenderer implements 
 	{
 		for(Row row : tbody.getRow())
 		{
-			LatexRowRenderer f = new LatexRowRenderer(cmm);
+			LatexRowRenderer f = new LatexRowRenderer(cmm,dsm);
 			f.render(row);
 			renderer.add(f);
 			renderer.add(new StringRenderer("\\hline"));

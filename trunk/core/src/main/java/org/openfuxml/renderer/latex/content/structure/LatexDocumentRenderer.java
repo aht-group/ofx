@@ -3,11 +3,13 @@ package org.openfuxml.renderer.latex.content.structure;
 import org.openfuxml.content.ofx.Content;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
+import org.openfuxml.util.settings.OfxDefaultSettingsProvider;
 import org.openfuxml.xml.renderer.cmp.Pdf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,12 +25,12 @@ public class LatexDocumentRenderer extends AbstractOfxLatexRenderer implements O
 	@Deprecated
 	public LatexDocumentRenderer(Pdf pdf, LatexPreamble latexPreamble)
 	{
-		this(new NoOpCrossMediaManager(),pdf,latexPreamble);
+		this(new NoOpCrossMediaManager(),new OfxDefaultSettingsProvider(),pdf,latexPreamble);
 	}
 	
-	public LatexDocumentRenderer(CrossMediaManager cmm, Pdf pdf, LatexPreamble latexPreamble)
+	public LatexDocumentRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm,Pdf pdf, LatexPreamble latexPreamble)
 	{
-		super(cmm);
+		super(cmm,dsm);
 		this.cmm=cmm;
 		this.pdf=pdf;
 		this.latexPreamble=latexPreamble;
@@ -51,7 +53,7 @@ public class LatexDocumentRenderer extends AbstractOfxLatexRenderer implements O
 	
 	private void renderSection(Section section) throws OfxAuthoringException
 	{
-		LatexSectionRenderer sf = new LatexSectionRenderer(cmm,lvl+1,latexPreamble);
+		LatexSectionRenderer sf = new LatexSectionRenderer(cmm,dsm,lvl+1,latexPreamble);
 		sf.render(section);
 		renderer.add(sf);
 	}

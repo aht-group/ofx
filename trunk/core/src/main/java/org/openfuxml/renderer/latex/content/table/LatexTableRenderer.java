@@ -6,6 +6,7 @@ import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -24,9 +25,9 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 	boolean preBlankLine;
 	public void setPreBlankLine(boolean preBlankLine) {this.preBlankLine = preBlankLine;}
 	
-	public LatexTableRenderer(CrossMediaManager cmm)
+	public LatexTableRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
-		super(cmm);
+		super(cmm,dsm);
 	}
 	
 	public void render(Table table) throws OfxAuthoringException
@@ -46,7 +47,7 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a Latex table with: "+tableRenderer.getClass().getSimpleName()));
 		if(table.isSetComment())
 		{
-			LatexCommentRenderer rComment = new LatexCommentRenderer(cmm);
+			LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
 			rComment.render(table.getComment());
 			renderer.add(rComment);
 		}
@@ -113,8 +114,8 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		
 		switch(type)
 		{
-			case line: tableRenderer = new LatexLineTableRenderer(cmm);break;
-			default: tableRenderer = new LatexGridTableRenderer(cmm);break;
+			case line: tableRenderer = new LatexLineTableRenderer(cmm,dsm);break;
+			default: tableRenderer = new LatexGridTableRenderer(cmm,dsm);break;
 		}
 		return tableRenderer;
 	}

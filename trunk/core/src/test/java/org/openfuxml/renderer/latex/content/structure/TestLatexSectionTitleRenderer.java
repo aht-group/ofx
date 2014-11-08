@@ -32,8 +32,8 @@ public class TestLatexSectionTitleRenderer extends AbstractLatexContentTest
 	@Before
 	public void init()
 	{
-        preamble = new LatexPreamble(cmm);
-        renderer = new LatexSectionTitleRenderer(cmm,1,preamble);
+        preamble = new LatexPreamble(cmm,dsm);
+        renderer = new LatexSectionTitleRenderer(cmm,dsm,1,preamble);
         section = new Section();
         section.setId("myId");
         title = XmlTitleFactory.build("test");
