@@ -69,7 +69,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 			
 			if(image.isSetComment())
 			{
-				LatexCommentRenderer rComment = new LatexCommentRenderer();
+				LatexCommentRenderer rComment = new LatexCommentRenderer(cmm);
 				rComment.render(image.getComment());
 				renderer.add(rComment);
 			}

@@ -24,8 +24,6 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 	boolean preBlankLine;
 	public void setPreBlankLine(boolean preBlankLine) {this.preBlankLine = preBlankLine;}
 	
-	@Deprecated private LatexTableRenderer(){}
-	
 	public LatexTableRenderer(CrossMediaManager cmm)
 	{
 		super(cmm);
@@ -48,7 +46,7 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a Latex table with: "+tableRenderer.getClass().getSimpleName()));
 		if(table.isSetComment())
 		{
-			LatexCommentRenderer rComment = new LatexCommentRenderer();
+			LatexCommentRenderer rComment = new LatexCommentRenderer(cmm);
 			rComment.render(table.getComment());
 			renderer.add(rComment);
 		}

@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.preamble;
 
+import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.interfaces.renderer.latex.SectionHeaderNameFactory;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -13,9 +14,10 @@ public class LatexPreamble extends AbstractOfxLatexRenderer implements OfxLatexR
 	private SectionHeaderNameFactory shnf;
 	private LatexArticle article;
 	
-	public LatexPreamble()
+	public LatexPreamble(CrossMediaManager cmm)
 	{
-		article = new LatexArticle();
+		super(cmm);
+		article = new LatexArticle(cmm);
 		shnf = article;
 	}
 	

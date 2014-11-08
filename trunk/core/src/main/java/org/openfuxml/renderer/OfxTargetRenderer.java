@@ -7,6 +7,7 @@ import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxImplementationException;
+import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.OfxRenderProcessor.DirCode;
 import org.openfuxml.renderer.OfxRenderProcessor.FileCode;
 import org.openfuxml.renderer.latex.OfxLatexRenderer;
@@ -79,7 +80,7 @@ public class OfxTargetRenderer
 	
 	private void phaseLatex(Pdf pdf, File fSrc) throws OfxAuthoringException, OfxConfigurationException
 	{
-		OfxLatexRenderer renderer = new OfxLatexRenderer(cmp.getTargets().getPdf().get(0));
+		OfxLatexRenderer renderer = new OfxLatexRenderer(new NoOpCrossMediaManager(), cmp.getTargets().getPdf().get(0));
   		renderer.render(fSrc.getAbsolutePath());
 		
 		File dstFile = cmpConfigUtil.getFile(pdf.getDir(), PdfDir.latex.toString(), PdfFile.latex.toString(),true);

@@ -2,6 +2,7 @@ package org.openfuxml.renderer.latex.content.structure;
 
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
@@ -16,8 +17,9 @@ public class LatexSectionTitleRenderer extends AbstractOfxLatexRenderer implemen
 	private LatexPreamble latexPreamble;
 	int lvl;
 	
-	public LatexSectionTitleRenderer(int lvl, LatexPreamble latexPreamble)
+	public LatexSectionTitleRenderer(CrossMediaManager cmm, int lvl, LatexPreamble latexPreamble)
 	{
+		super(cmm);
 		this.latexPreamble=latexPreamble;
 		this.lvl=lvl;
 	}

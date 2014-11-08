@@ -9,6 +9,7 @@ import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.OfxDefaultSettings;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
@@ -24,6 +25,7 @@ public class AbstractOfxLatexRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexSectionRenderer.class);
 	
+	protected OfxDefaultSettings settings;
 	protected CrossMediaManager cmm;
 	
 	protected List<String> preTxt;
@@ -32,7 +34,7 @@ public class AbstractOfxLatexRenderer
 	
 	protected List<OfxLatexRenderer> renderer;
 	
-	public AbstractOfxLatexRenderer(){this(new NoOpCrossMediaManager());}
+//	public AbstractOfxLatexRenderer(){this(new NoOpCrossMediaManager());}
 	public AbstractOfxLatexRenderer(CrossMediaManager cmm)
 	{
 		this.cmm=cmm;
@@ -88,7 +90,7 @@ public class AbstractOfxLatexRenderer
 	
 	protected void renderList(org.openfuxml.content.list.List list,OfxLatexRenderer parent) throws OfxAuthoringException
 	{
-		LatexListRenderer f = new LatexListRenderer();
+		LatexListRenderer f = new LatexListRenderer(cmm);
 		f.render(list,parent);
 		renderer.add(f);
 	}

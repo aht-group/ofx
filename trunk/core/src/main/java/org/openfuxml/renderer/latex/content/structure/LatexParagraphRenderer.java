@@ -73,7 +73,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 	
 	private void renderEmphasis(StringBuffer sb, Emphasis emphasis) throws OfxAuthoringException
 	{
-		LatexEmphasisRenderer stf = new LatexEmphasisRenderer();
+		LatexEmphasisRenderer stf = new LatexEmphasisRenderer(cmm);
 		stf.render(emphasis);
 		for(String s : stf.getContent()){sb.append(s);}
 	}

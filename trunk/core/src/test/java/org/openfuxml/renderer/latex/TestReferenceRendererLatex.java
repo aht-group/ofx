@@ -33,7 +33,7 @@ public class TestReferenceRendererLatex extends AbstractOfxCoreTest
 	public void noContent() throws OfxAuthoringException
 	{
 		ofxDocument.setContent(null);
-		OfxLatexRenderer latexRenderer = new OfxLatexRenderer(null);
+		OfxLatexRenderer latexRenderer = new OfxLatexRenderer(cmm,null);
 		latexRenderer.render(ofxDocument);
 	}
 	
@@ -42,7 +42,7 @@ public class TestReferenceRendererLatex extends AbstractOfxCoreTest
 		logger.info("Writing expected Document");
 		JaxbUtil.info(ofxDocument);
 		
-		OfxLatexRenderer latexRenderer = new OfxLatexRenderer(pdfSettings);
+		OfxLatexRenderer latexRenderer = new OfxLatexRenderer(cmm,pdfSettings);
 		latexRenderer.render(ofxDocument);
 		for(String s : latexRenderer.getContent())
 		{

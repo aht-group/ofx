@@ -20,7 +20,6 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexLineTableRenderer.class);
 	
-	@Deprecated private LatexLineTableRenderer(){}
 	public LatexLineTableRenderer(CrossMediaManager cmm)
 	{
 		super(cmm);

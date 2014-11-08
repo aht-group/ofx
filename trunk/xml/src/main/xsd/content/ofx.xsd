@@ -77,16 +77,17 @@
             </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="listing">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="title" maxOccurs="1"/>
-                <xsd:element ref="raw" maxOccurs="1"/>
-            </xsd:sequence>
-            <xsd:attribute name="id" type="xsd:string"/>
-            <xsd:attribute name="external" type="xsd:string"/>
-	        <xsd:attribute name="codeLang" type="xsd:string"/>
-        </xsd:complexType>
+	<xsd:element name="listing">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="title" maxOccurs="1"/>
+				<xsd:element ref="raw" maxOccurs="1"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:string"/>
+			<xsd:attribute name="external" type="xsd:string"/>
+			<xsd:attribute name="codeLang" type="xsd:string"/>
+			<xsd:attribute name="classifier" type="xsd:string"/><!-- Can be used for global content filters -->
+	</xsd:complexType>
     </xsd:element>
     <xsd:element name="raw">
         <xsd:complexType>

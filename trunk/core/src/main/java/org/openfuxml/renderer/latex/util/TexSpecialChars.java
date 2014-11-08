@@ -1,11 +1,9 @@
 package org.openfuxml.renderer.latex.util;
 
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
-import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TexSpecialChars extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class TexSpecialChars
 {
 	final static Logger logger = LoggerFactory.getLogger(TexSpecialChars.class);
 	

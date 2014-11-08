@@ -16,7 +16,6 @@ public class LatexDocumentRenderer extends AbstractOfxLatexRenderer implements O
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexDocumentRenderer.class);
 	
-	private CrossMediaManager cmm;
 	private int lvl;
 	private LatexPreamble latexPreamble;
 	private Pdf pdf;
@@ -29,6 +28,7 @@ public class LatexDocumentRenderer extends AbstractOfxLatexRenderer implements O
 	
 	public LatexDocumentRenderer(CrossMediaManager cmm, Pdf pdf, LatexPreamble latexPreamble)
 	{
+		super(cmm);
 		this.cmm=cmm;
 		this.pdf=pdf;
 		this.latexPreamble=latexPreamble;

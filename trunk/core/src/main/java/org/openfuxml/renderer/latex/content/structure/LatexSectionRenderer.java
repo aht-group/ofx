@@ -11,7 +11,6 @@ import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.listing.LatexListingRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
@@ -26,12 +25,6 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	private LatexPreamble latexPreamble;
 	int lvl;
-	
-	@Deprecated
-	public LatexSectionRenderer(int lvl, LatexPreamble latexPreamble)
-	{
-		this(new NoOpCrossMediaManager(),lvl,latexPreamble);
-	}
 	
 	public LatexSectionRenderer(CrossMediaManager cmm, int lvl, LatexPreamble latexPreamble)
 	{
@@ -52,7 +45,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 			{
 				preTxt.addAll(LatexCommentRenderer.comment("All content of "+Section.class.getSimpleName()+" will be ignored because of inlcude"));
 			}
-			LatexIncludeRenderer rComment = new LatexIncludeRenderer();
+			LatexIncludeRenderer rComment = new LatexIncludeRenderer(cmm);
 			rComment.render(Section.class,section.getInclude(),true);
 			renderer.add(rComment);
 			return;
@@ -64,7 +57,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		{
 			if (s instanceof Comment)
 			{
-				LatexCommentRenderer rComment = new LatexCommentRenderer();
+				LatexCommentRenderer rComment = new LatexCommentRenderer(cmm);
 				rComment.render((Comment)s);
 				renderer.add(rComment);
 			}
@@ -95,7 +88,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	{
 		if(!section.isContainer())
 		{
-			LatexSectionTitleRenderer stf = new LatexSectionTitleRenderer(lvl,latexPreamble);
+			LatexSectionTitleRenderer stf = new LatexSectionTitleRenderer(cmm,lvl,latexPreamble);
 			stf.render(section,title);
 			renderer.add(stf);
 		}
@@ -117,7 +110,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 
     private void renderListing(Listing listing) throws OfxAuthoringException
     {
-        LatexListingRenderer r = new LatexListingRenderer();
+        LatexListingRenderer r = new LatexListingRenderer(cmm,settings);
         r.render(listing);
         renderer.add(r);
     }

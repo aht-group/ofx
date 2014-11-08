@@ -33,7 +33,7 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
 	@Before
 	public void init()
 	{
-        preamble = new LatexPreamble();
+        preamble = new LatexPreamble(cmm);
         renderer = new LatexSectionRenderer(new NoOpCrossMediaManager(),1,preamble);
         section = new Section();
         section.setId("myId");

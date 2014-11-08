@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.graph;
 
+import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
@@ -11,9 +12,10 @@ public class LatexTreeRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	private LatexTreeNodeRenderer treeNodeRenderer;
 	
-	public LatexTreeRenderer()
+	public LatexTreeRenderer(CrossMediaManager cmm)
 	{
-		treeNodeRenderer = new LatexTreeNodeRenderer();
+		super(cmm);
+		treeNodeRenderer = new LatexTreeNodeRenderer(cmm);
 	}
 	
 /*	public void render(Tree tree) throws OfxAuthoringException

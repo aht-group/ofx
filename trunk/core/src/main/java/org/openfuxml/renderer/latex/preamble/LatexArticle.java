@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.preamble;
 
+import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.interfaces.renderer.latex.SectionHeaderNameFactory;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -10,11 +11,12 @@ public class LatexArticle extends AbstractOfxLatexRenderer implements OfxLatexRe
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexArticle.class);
 	
-	public LatexArticle()
-	{		
+	public LatexArticle(CrossMediaManager cmm)
+	{
+		super(cmm);
 		txt.add("\\documentclass[12pt]{article}");
 		
-		LatexPackages renderPackages = new LatexPackages();
+		LatexPackages renderPackages = new LatexPackages(cmm);
 		renderer.add(renderPackages);		
 		
 		txt.add("\\title{\\LaTeX}");

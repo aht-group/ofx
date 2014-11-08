@@ -31,8 +31,8 @@ public class TestLatexListingRenderer extends AbstractLatexListingTest
 	@Before
 	public void initRenderer()
 	{
-        rSection = new LatexSectionRenderer(1, new LatexPreamble());
-        rListing = new LatexListingRenderer();
+        rSection = new LatexSectionRenderer(cmm,1, new LatexPreamble(cmm));
+        rListing = new LatexListingRenderer(cmm,settings);
 
         listing = new Listing();
 
