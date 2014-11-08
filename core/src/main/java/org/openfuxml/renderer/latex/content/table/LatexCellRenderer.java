@@ -7,6 +7,7 @@ import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.content.OfxEmphasisFactory;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -19,14 +20,14 @@ public class LatexCellRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	private Emphasis emphasisOverride;
 	
-	public LatexCellRenderer(CrossMediaManager cmm)
+	public LatexCellRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
-		this(cmm,null);
+		this(cmm,dsm,null);
 	}
 	
-	public LatexCellRenderer(CrossMediaManager cmm, Emphasis emphasis)
+	public LatexCellRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm,Emphasis emphasis)
 	{
-		super(cmm);
+		super(cmm,dsm);
 		this.emphasisOverride=emphasis;
 	}
 	

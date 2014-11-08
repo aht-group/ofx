@@ -2,7 +2,7 @@ package org.openfuxml.renderer.latex.content.listing;
 
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.OfxDefaultSettings;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -13,12 +13,9 @@ public class LatexListingRenderer extends AbstractOfxLatexRenderer implements Of
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexListingRenderer.class);
 	
-	private OfxDefaultSettings settings;
-	
-	public LatexListingRenderer(CrossMediaManager cmm, OfxDefaultSettings settings)
+	public LatexListingRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
-		super(cmm);
-		this.settings=settings;
+		super(cmm,dsm);
         preTxt.add("");
         postTxt.add("");
 	}

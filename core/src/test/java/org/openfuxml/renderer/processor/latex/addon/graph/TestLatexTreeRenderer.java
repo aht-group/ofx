@@ -18,7 +18,7 @@ public class TestLatexTreeRenderer extends AbstractLatexGraphTest
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexTreeRenderer(cmm);
+		renderer = new LatexTreeRenderer(cmm,dsm);
 	}
 	
 	@After public void close(){renderer=null;}

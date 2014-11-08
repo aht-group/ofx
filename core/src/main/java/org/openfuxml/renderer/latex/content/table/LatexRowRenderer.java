@@ -4,6 +4,7 @@ import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Row;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -18,9 +19,9 @@ public class LatexRowRenderer extends AbstractOfxLatexRenderer implements OfxLat
 	private Emphasis emphasisOverride;
 	public void setEmphasisOverride(Emphasis emphasisOverride) {this.emphasisOverride = emphasisOverride;}
 	
-	public LatexRowRenderer(CrossMediaManager cmm)
+	public LatexRowRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
-		super(cmm);
+		super(cmm,dsm);
 		postTxt.add("\\\\");
 	}
 	
@@ -33,7 +34,7 @@ public class LatexRowRenderer extends AbstractOfxLatexRenderer implements OfxLat
 			if(!firstCell){renderer.add(new StringRenderer("&"));}
 			firstCell = false;
 			
-			LatexCellRenderer f = new LatexCellRenderer(cmm,emphasisOverride);
+			LatexCellRenderer f = new LatexCellRenderer(cmm,dsm,emphasisOverride);
 			f.render(cell);
 			renderer.add(f);
 		}

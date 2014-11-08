@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.preamble;
 
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -10,10 +11,9 @@ public class LatexPackages extends AbstractOfxLatexRenderer implements OfxLatexR
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexPackages.class);
 	
-	public LatexPackages(CrossMediaManager cmm)
+	public LatexPackages(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
-		super(cmm);
-
+		super(cmm,dsm);
 	}
 	
 	public void render()

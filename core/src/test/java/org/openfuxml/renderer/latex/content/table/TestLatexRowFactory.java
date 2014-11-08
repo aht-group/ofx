@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.table.Row;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +24,7 @@ public class TestLatexRowFactory extends AbstractLatexTableTest
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexRowRenderer(new NoOpCrossMediaManager());
+		renderer = new LatexRowRenderer(cmm,dsm);
 	}
 	
 	@After public void close(){renderer=null;}

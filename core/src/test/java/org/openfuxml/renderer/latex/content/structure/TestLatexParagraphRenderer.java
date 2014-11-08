@@ -35,7 +35,7 @@ public class TestLatexParagraphRenderer extends AbstractLatexContentTest
     @Test
     public void withBlank() throws IOException, OfxAuthoringException
     {
-    	renderer = new LatexParagraphRenderer(new NoOpCrossMediaManager(),true);
+    	renderer = new LatexParagraphRenderer(cmm,dsm,true);
     	
     	f = new File(rootDir,dir+"/"+Key.withBlank+".txt");
     	renderer.render(create());
@@ -45,7 +45,7 @@ public class TestLatexParagraphRenderer extends AbstractLatexContentTest
     @Test
     public void withoutBlank() throws IOException, OfxAuthoringException
     {
-    	renderer = new LatexParagraphRenderer(new NoOpCrossMediaManager(),false);
+    	renderer = new LatexParagraphRenderer(cmm,dsm,false);
     	
     	f = new File(rootDir,dir+"/"+Key.withoutBlank+".txt");
     	renderer.render(create());

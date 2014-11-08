@@ -6,6 +6,7 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -20,9 +21,9 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 	final static Logger logger = LoggerFactory.getLogger(LatexParagraphRenderer.class);
 	
 	
-	public LatexParagraphRenderer(CrossMediaManager cmm,boolean preBlankLine)
+	public LatexParagraphRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm,boolean preBlankLine)
 	{
-		super(cmm);
+		super(cmm,dsm);
 		if(preBlankLine){preTxt.add("");}
 	}
 	
@@ -49,7 +50,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 		if(nonInlineCounter==1 && image!=null)
 		{
 			paragraph.getContent().remove(image);
-			LatexImageRenderer rImage = new LatexImageRenderer(cmm);
+			LatexImageRenderer rImage = new LatexImageRenderer(cmm,dsm);
 			rImage.render(this,image);
 			txt.add("\\begin{window}[0, r, "+rImage.getSingleLine()+", {}]");
 		}
@@ -73,7 +74,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 	
 	private void renderEmphasis(StringBuffer sb, Emphasis emphasis) throws OfxAuthoringException
 	{
-		LatexEmphasisRenderer stf = new LatexEmphasisRenderer(cmm);
+		LatexEmphasisRenderer stf = new LatexEmphasisRenderer(cmm,dsm);
 		stf.render(emphasis);
 		for(String s : stf.getContent()){sb.append(s);}
 	}

@@ -6,6 +6,7 @@ import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -25,9 +26,9 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 	private boolean inFigure;
 	private Environment environment;
 	
-	public LatexImageRenderer(CrossMediaManager cmm)
+	public LatexImageRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{	
-		super(cmm);
+		super(cmm,dsm);
 	}
 	
 	public void render(Object parent, Image image) throws OfxAuthoringException
@@ -69,7 +70,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 			
 			if(image.isSetComment())
 			{
-				LatexCommentRenderer rComment = new LatexCommentRenderer(cmm);
+				LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
 				rComment.render(image.getComment());
 				renderer.add(rComment);
 			}

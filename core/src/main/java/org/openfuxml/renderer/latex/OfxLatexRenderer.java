@@ -8,6 +8,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.latex.content.structure.LatexDocumentRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
@@ -24,9 +25,9 @@ public class OfxLatexRenderer
 	private LatexDocumentRenderer rDocument;
 	private List<String> txt;
 	
-	public OfxLatexRenderer(CrossMediaManager cmm,Pdf pdf)
+	public OfxLatexRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm,Pdf pdf)
 	{
-		latexPreamble = new LatexPreamble(cmm);
+		latexPreamble = new LatexPreamble(cmm,dsm);
 		rDocument = new LatexDocumentRenderer(pdf,latexPreamble);
 		
 		txt = new ArrayList<String>();

@@ -3,6 +3,7 @@ package org.openfuxml.renderer.latex.content.list;
 import org.openfuxml.content.list.Item;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -14,9 +15,9 @@ public class LatexItemFactory extends AbstractOfxLatexRenderer implements OfxLat
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexItemFactory.class);
 	
-	public LatexItemFactory(CrossMediaManager cmm)
+	public LatexItemFactory(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
-		super(cmm);
+		super(cmm,dsm);
 	}
 	
 	public void render(ListType lt, Item item) throws OfxAuthoringException

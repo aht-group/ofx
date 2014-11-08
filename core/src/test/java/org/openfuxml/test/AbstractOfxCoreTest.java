@@ -11,7 +11,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.openfuxml.interfaces.OfxDefaultSettings;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
@@ -30,12 +30,12 @@ public class AbstractOfxCoreTest
 	private boolean saveReference = false;
 	protected File f;
 	
-	protected OfxDefaultSettings settings;
+	protected DefaultSettingsManager dsm;
 	protected  CrossMediaManager cmm;
 	
 	public AbstractOfxCoreTest()
 	{
-		settings = new OfxDefaultSettingsProvider();
+		dsm = new OfxDefaultSettingsProvider();
 		cmm = new NoOpCrossMediaManager();
 	}
 

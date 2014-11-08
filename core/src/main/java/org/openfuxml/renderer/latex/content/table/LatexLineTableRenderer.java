@@ -9,6 +9,7 @@ import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -20,9 +21,9 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexLineTableRenderer.class);
 	
-	public LatexLineTableRenderer(CrossMediaManager cmm)
+	public LatexLineTableRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
-		super(cmm);
+		super(cmm,dsm);
 	}
 	
 	public void render(Table table) throws OfxAuthoringException
@@ -52,7 +53,7 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 		{
 			for(Row row : head.getRow())
 			{
-				LatexRowRenderer f = new LatexRowRenderer(cmm);
+				LatexRowRenderer f = new LatexRowRenderer(cmm,dsm);
 				f.setEmphasisOverride(emphasis);
 				f.render(row);
 				renderer.add(f);
@@ -74,7 +75,7 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 				}
 			}
 			
-			LatexRowRenderer f = new LatexRowRenderer(cmm);
+			LatexRowRenderer f = new LatexRowRenderer(cmm,dsm);
 			f.render(row);
 			renderer.add(f);
 		}

@@ -6,6 +6,7 @@ import java.util.List;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -16,9 +17,9 @@ public class LatexCommentRenderer extends AbstractOfxLatexRenderer implements Of
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexCommentRenderer.class);
 	
-	public LatexCommentRenderer(CrossMediaManager cmm)
+	public LatexCommentRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
-		super(cmm);
+		super(cmm,dsm);
 	}
 	
 	public void render(Comment comment) throws OfxAuthoringException
