@@ -9,7 +9,7 @@ import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
-import org.openfuxml.util.settings.OfxDefaultSettingsProvider;
+import org.openfuxml.util.settings.OfxDefaultSettingsManager;
 import org.openfuxml.xml.renderer.cmp.Pdf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class LatexDocumentRenderer extends AbstractOfxLatexRenderer implements O
 	@Deprecated
 	public LatexDocumentRenderer(Pdf pdf, LatexPreamble latexPreamble)
 	{
-		this(new NoOpCrossMediaManager(),new OfxDefaultSettingsProvider(),pdf,latexPreamble);
+		this(new NoOpCrossMediaManager(),new OfxDefaultSettingsManager(),pdf,latexPreamble);
 	}
 	
 	public LatexDocumentRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm,Pdf pdf, LatexPreamble latexPreamble)
