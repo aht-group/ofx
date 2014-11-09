@@ -11,6 +11,7 @@ import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
@@ -44,7 +45,7 @@ public class TestLatexListingRenderer extends AbstractLatexListingTest
 	}
 
     @Test
-    public void direct() throws IOException, OfxAuthoringException
+    public void direct() throws IOException, OfxAuthoringException, OfxConfigurationException
     {
         rListing.render(listing);
         List<String> content = rListing.getContent();
@@ -52,7 +53,7 @@ public class TestLatexListingRenderer extends AbstractLatexListingTest
     }
 
     @Test
-    public void section() throws IOException, OfxAuthoringException
+    public void section() throws IOException, OfxAuthoringException, OfxConfigurationException
     {
         Section section = new Section();
         section.getContent().add(XmlTitleFactory.build("test"));

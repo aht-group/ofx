@@ -27,6 +27,9 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="external" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="codeLang" type="{http://www.w3.org/2001/XMLSchema}string" />
  *       &lt;attribute name="classifier" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="setting" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="numbering" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       &lt;attribute name="linebreak" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -56,6 +59,12 @@ public class Listing implements Serializable
     protected String codeLang;
     @XmlAttribute(name = "classifier")
     protected String classifier;
+    @XmlAttribute(name = "setting")
+    protected String setting;
+    @XmlAttribute(name = "numbering")
+    protected Boolean numbering;
+    @XmlAttribute(name = "linebreak")
+    protected Boolean linebreak;
 
     /**
      * Gets the value of the title property.
@@ -223,6 +232,98 @@ public class Listing implements Serializable
 
     public boolean isSetClassifier() {
         return (this.classifier!= null);
+    }
+
+    /**
+     * Gets the value of the setting property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getSetting() {
+        return setting;
+    }
+
+    /**
+     * Sets the value of the setting property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSetting(String value) {
+        this.setting = value;
+    }
+
+    public boolean isSetSetting() {
+        return (this.setting!= null);
+    }
+
+    /**
+     * Gets the value of the numbering property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isNumbering() {
+        return numbering;
+    }
+
+    /**
+     * Sets the value of the numbering property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setNumbering(boolean value) {
+        this.numbering = value;
+    }
+
+    public boolean isSetNumbering() {
+        return (this.numbering!= null);
+    }
+
+    public void unsetNumbering() {
+        this.numbering = null;
+    }
+
+    /**
+     * Gets the value of the linebreak property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isLinebreak() {
+        return linebreak;
+    }
+
+    /**
+     * Sets the value of the linebreak property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setLinebreak(boolean value) {
+        this.linebreak = value;
+    }
+
+    public boolean isSetLinebreak() {
+        return (this.linebreak!= null);
+    }
+
+    public void unsetLinebreak() {
+        this.linebreak = null;
     }
 
 }

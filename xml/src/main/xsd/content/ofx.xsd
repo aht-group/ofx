@@ -87,6 +87,9 @@
 			<xsd:attribute name="external" type="xsd:string"/>
 			<xsd:attribute name="codeLang" type="xsd:string"/>
 			<xsd:attribute name="classifier" type="xsd:string"/><!-- Can be used for global content filters -->
+			<xsd:attribute name="setting" type="xsd:string"/><!-- Can be used for default settings -->
+			<xsd:attribute name="numbering" type="xsd:boolean"/>
+			<xsd:attribute name="linebreak" type="xsd:boolean"/>
 	</xsd:complexType>
     </xsd:element>
     <xsd:element name="raw">

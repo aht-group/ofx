@@ -15,6 +15,7 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
 import org.openfuxml.factory.xml.layout.XmlHeightFactory;
@@ -86,7 +87,7 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
     }
 
     @Test @Ignore
-    public void section() throws IOException, OfxAuthoringException
+    public void section() throws IOException, OfxAuthoringException, OfxConfigurationException
     {
         Section section = new Section();
         section.getContent().add(XmlTitleFactory.build("test"));
