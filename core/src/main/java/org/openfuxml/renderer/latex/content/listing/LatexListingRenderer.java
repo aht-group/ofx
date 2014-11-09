@@ -31,6 +31,7 @@ public class LatexListingRenderer extends AbstractOfxLatexRenderer implements Of
         sb.append(",tabsize=2");
         sb.append(",frame=none");
         sb.append(",backgroundcolor=\\color{lgrau}");
+        sb.append(",showstringspaces=false");
         
         if(listing.isSetNumbering() && listing.isNumbering()){sb.append(",numbers=left,numberstyle=\\scriptsize");}
         else{sb.append(",numbers=none");}
