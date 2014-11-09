@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.test.AbstractOfxCoreTest;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.util.reference.OfxReferenceDocumentBuilder;
@@ -30,14 +31,14 @@ public class TestReferenceRendererLatex extends AbstractOfxCoreTest
 	}
 	
 	@Test(expected=OfxAuthoringException.class)
-	public void noContent() throws OfxAuthoringException
+	public void noContent() throws OfxAuthoringException, OfxConfigurationException
 	{
 		ofxDocument.setContent(null);
 		OfxLatexRenderer latexRenderer = new OfxLatexRenderer(cmm,dsm,null);
 		latexRenderer.render(ofxDocument);
 	}
 	
-	public void writeExpected() throws OfxAuthoringException
+	public void writeExpected() throws OfxAuthoringException, OfxConfigurationException
 	{
 		logger.info("Writing expected Document");
 		JaxbUtil.info(ofxDocument);

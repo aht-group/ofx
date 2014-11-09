@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
@@ -43,7 +44,7 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
         section.getContent().add(p);
 	}
     
-	@Test public void section() throws OfxAuthoringException
+	@Test public void section() throws OfxAuthoringException, OfxConfigurationException
     {
 		JaxbUtil.trace(section);
     	renderer.render(section);
@@ -53,7 +54,7 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
         testLatex(content);
     }
 	
-	@Test public void sectionWithHeaderButContainer() throws OfxAuthoringException
+	@Test public void sectionWithHeaderButContainer() throws OfxAuthoringException, OfxConfigurationException
     {
     	section.setContainer(true);
     	JaxbUtil.trace(section);
@@ -63,7 +64,7 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
         Assert.assertEquals(4, content.size());
     }
 	
-	@Test public void sectionInclude() throws OfxAuthoringException
+	@Test public void sectionInclude() throws OfxAuthoringException, OfxConfigurationException
     {
     	section.setContainer(true);
     	section.setInclude("test");
@@ -75,7 +76,7 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
         Assert.assertEquals(4, content.size());
     }
 	
-	@Test public void sectionIncludeWithContent() throws OfxAuthoringException
+	@Test public void sectionIncludeWithContent() throws OfxAuthoringException, OfxConfigurationException
     {
     	section.setContainer(true);
     	section.setInclude("test");

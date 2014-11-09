@@ -8,6 +8,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.latex.content.structure.LatexDocumentRenderer;
@@ -33,7 +34,7 @@ public class OfxLatexRenderer
 		txt = new ArrayList<String>();
 	}
 	
-	public void render(String ofxDocFileName) throws OfxAuthoringException
+	public void render(String ofxDocFileName) throws OfxAuthoringException, OfxConfigurationException
 	{
 		try
 		{
@@ -44,7 +45,7 @@ public class OfxLatexRenderer
 		catch (FileNotFoundException e) {logger.error("",e);}
 	}
 	
-	public void render(Document ofxDocument) throws OfxAuthoringException
+	public void render(Document ofxDocument) throws OfxAuthoringException, OfxConfigurationException
 	{
 		OfxDocumentStructureVerifier.checkForContent(ofxDocument);
 		rDocument.render(ofxDocument.getContent());

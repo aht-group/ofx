@@ -3,6 +3,7 @@ package org.openfuxml.renderer.latex.content.structure;
 import org.openfuxml.content.ofx.Content;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -36,7 +37,7 @@ public class LatexDocumentRenderer extends AbstractOfxLatexRenderer implements O
 		this.latexPreamble=latexPreamble;
 	}
 	
-	public void render(Content content) throws OfxAuthoringException
+	public void render(Content content) throws OfxAuthoringException, OfxConfigurationException
 	{
 		lvl = 0;
 		
@@ -51,7 +52,7 @@ public class LatexDocumentRenderer extends AbstractOfxLatexRenderer implements O
 		postTxt.add("\\end{document}");
 	}
 	
-	private void renderSection(Section section) throws OfxAuthoringException
+	private void renderSection(Section section) throws OfxAuthoringException, OfxConfigurationException
 	{
 		LatexSectionRenderer sf = new LatexSectionRenderer(cmm,dsm,lvl+1,latexPreamble);
 		sf.render(section);

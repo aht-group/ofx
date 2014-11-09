@@ -9,6 +9,7 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -34,7 +35,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		this.latexPreamble=latexPreamble;
 	}
 	
-	public void render(Section section) throws OfxAuthoringException
+	public void render(Section section) throws OfxAuthoringException, OfxConfigurationException
 	{
 		if(!section.isSetContainer()){section.setContainer(false);}
 		if(section.isContainer()){lvl=lvl-1;}
@@ -102,14 +103,14 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		renderer.add(f);
 	}
 		
-	private void renderSection(Section section) throws OfxAuthoringException
+	private void renderSection(Section section) throws OfxAuthoringException, OfxConfigurationException
 	{
 		LatexSectionRenderer sf = new LatexSectionRenderer(cmm,dsm,lvl+1,latexPreamble);
 		sf.render(section);
 		renderer.add(sf);
 	}
 
-    private void renderListing(Listing listing) throws OfxAuthoringException
+    private void renderListing(Listing listing) throws OfxAuthoringException, OfxConfigurationException
     {
         LatexListingRenderer r = new LatexListingRenderer(cmm,dsm);
         r.render(listing);
