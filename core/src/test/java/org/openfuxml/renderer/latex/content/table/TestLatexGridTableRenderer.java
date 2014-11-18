@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -31,7 +32,7 @@ public class TestLatexGridTableRenderer extends AbstractLatexTableTest
 	
 	@After public void close(){renderer=null;}
 
-    @Test
+    @Test @Ignore
     public void table() throws IOException, OfxAuthoringException
     {
     	Table table = TestLatexTableRenderer.createTable();
@@ -40,7 +41,7 @@ public class TestLatexGridTableRenderer extends AbstractLatexTableTest
     	renderTest(renderer,f);
     }
     
-    @Test
+    @Test @Ignore
     public void withHead() throws OfxAuthoringException
     {
     	Table table = TestLatexTableRenderer.createTable();

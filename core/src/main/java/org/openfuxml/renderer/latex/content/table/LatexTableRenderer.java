@@ -2,7 +2,6 @@ package org.openfuxml.renderer.latex.content.table;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
@@ -12,7 +11,6 @@ import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
-import org.openfuxml.renderer.latex.content.text.StringRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,13 +32,12 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 	{		
 		if(!table.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
 		if(!table.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
+		if(table.getContent().getBody().size()!=1){throw new OfxAuthoringException("<content> must exactly have 1 body!");}
 		
-		if(!table.getSpecification().isSetFloat() || !table.getSpecification().getFloat().isSetValue())
-		{
-			table.getSpecification().setFloat(XmlFloatFactory.build(true));
-		}
+		if(!table.getSpecification().isSetLong()){table.getSpecification().setLong(false);}
+		if(!table.getSpecification().isSetFloat()){table.getSpecification().setFloat(XmlFloatFactory.build(false));}
 		
-		OfxLatexTableRenderer tableRenderer = getRendererForType();
+		OfxLatexTableRenderer tableRenderer = new LatexTabuRenderer(cmm,dsm); //getRendererForType();
 		
 		if(preBlankLine){preTxt.add("");}
 		preTxt.addAll(LatexCommentRenderer.stars());
@@ -53,30 +50,16 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		}
 		
 		LatexTabluarWidthCalculator tabularWidthCalculator = new LatexTabluarWidthCalculator(table.getSpecification().getColumns());
+		boolean longTable = table.getSpecification().isLong();
 		boolean floating = table.getSpecification().getFloat().isValue();
 		boolean flex = tabularWidthCalculator.isFlexTable();
 		
-		renderPre(table,floating);
+		if(!longTable){renderPre(table,floating);}
+
 		tableRenderer.render(table);
-			
-		renderer.add(new StringRenderer(tabularWidthCalculator.getLatexLengthCalculations()));
-		
-		renderer.add(new StringRenderer(""));
-		StringBuffer sb = new StringBuffer();
-		
-		if(flex){sb.append("\\begin{tabularx}");}
-		else{sb.append("\\begin{tabular}");}
-		
-		if(flex){sb.append(tabularWidthCalculator.buildTableWidth(table.getSpecification()));}
-		sb.append(tableRenderer.buildTabularCols(tabularWidthCalculator, table.getSpecification()));
-		renderer.add(new StringRenderer(sb.toString()));
-		
 		renderer.add(tableRenderer);
 		
-		if(flex){renderer.add(new StringRenderer("\\end{tabularx}"));}
-		else{renderer.add(new StringRenderer("\\end{tabular}"));}
-		
-		renderPost(table,floating);
+		if(!longTable){renderPost(table,floating);}
 	}
 	
 	private void renderPre(Table table,boolean floating)
@@ -84,29 +67,20 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		preTxt.add("");
 		
 		if(floating){preTxt.add("\\begin{table}[!htbp]");}
-//		else{preTxt.add("\\begin{center}");}
 		else{preTxt.add("\\begin{table}[H]");}
-		
-		alignment(table.getSpecification());
 	}
 	
 	private void renderPost(Table table,boolean floating)
 	{
 		JaxbUtil.trace(table);
-		if(table.isSetTitle())
-		{
-			postTxt.add("\\caption{"+table.getTitle().getValue()+"}");
-//			if(floating){postTxt.add("\\caption{"+table.getTitle().getValue()+"}");}
-//			else{postTxt.add("\\captionof{table}{"+table.getTitle().getValue()+"}");}
-		}
+		
 		
 		if(table.isSetId()) {postTxt.add("\\label{"+table.getId()+"}");}
 		
-		if(floating){postTxt.add("\\end{table}");}
-//		else{postTxt.add("\\end{center}");}
-		else{postTxt.add("\\end{table}");}
+		postTxt.add("\\end{table}");
 	}
 	
+	@SuppressWarnings("unused")
 	private OfxLatexTableRenderer getRendererForType()
 	{
 		OfxLatexTableRenderer tableRenderer;
@@ -118,10 +92,5 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 			default: tableRenderer = new LatexGridTableRenderer(cmm,dsm);break;
 		}
 		return tableRenderer;
-	}
-	
-	private void alignment(Specification specification)
-	{
-		getRendererForType();
 	}
 }

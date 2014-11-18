@@ -59,6 +59,7 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
 		body.getRow().add(TestLatexRowFactory.create(words));
 		
 		Content content = new Content();
+		content.setHead(createTableHead());
 		content.getBody().add(body);
 		
 		Table table = new Table();
@@ -105,7 +106,7 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
     	Table table = TestLatexTableRenderer.createTable();
     	table.getSpecification().setFloat(XmlFloatFactory.build(false));
     	
-    	JaxbUtil.info(table);
+    	JaxbUtil.trace(table);
     	renderer.render(table);
     	List<String> content = renderer.getContent();
     	OfxContentDebugger.debug(content);

@@ -31,7 +31,7 @@ public class TestXmlSpecification extends AbstractXmlTableTest
     public static Specification create(boolean withChilds)
     {
     	Specification xml = new Specification();
-    	
+    	xml.setLong(false);
     	
     	if(withChilds)
     	{
