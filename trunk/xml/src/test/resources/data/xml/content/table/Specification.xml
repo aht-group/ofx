@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<table:specification xmlns:layout="http://www.openfuxml.org/layout" xmlns:table="http://www.openfuxml.org/table">
+<table:specification xmlns:layout="http://www.openfuxml.org/layout" xmlns:table="http://www.openfuxml.org/table" long="false">
     <table:columns/>
     <layout:alignment horizontal="center"/>
     <layout:width unit="pt" flex="false">12.3</layout:width>

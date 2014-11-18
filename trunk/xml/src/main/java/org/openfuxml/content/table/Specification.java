@@ -4,6 +4,7 @@ package org.openfuxml.content.table;
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -27,6 +28,7 @@ import org.openfuxml.content.layout.Width;
  *         &lt;element ref="{http://www.openfuxml.org/layout}width" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org/layout}float" minOccurs="0"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="long" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -54,6 +56,8 @@ public class Specification
     protected Width width;
     @XmlElement(name = "float", namespace = "http://www.openfuxml.org/layout")
     protected Float _float;
+    @XmlAttribute(name = "long")
+    protected Boolean _long;
 
     /**
      * Gets the value of the columns property.
@@ -165,6 +169,38 @@ public class Specification
 
     public boolean isSetFloat() {
         return (this._float!= null);
+    }
+
+    /**
+     * Gets the value of the long property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isLong() {
+        return _long;
+    }
+
+    /**
+     * Sets the value of the long property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setLong(boolean value) {
+        this._long = value;
+    }
+
+    public boolean isSetLong() {
+        return (this._long!= null);
+    }
+
+    public void unsetLong() {
+        this._long = null;
     }
 
 }
