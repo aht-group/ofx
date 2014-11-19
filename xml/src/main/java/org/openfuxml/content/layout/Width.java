@@ -31,6 +31,12 @@ import javax.xml.bind.annotation.XmlValue;
  *           &lt;/restriction>
  *         &lt;/simpleType>
  *       &lt;/attribute>
+ *       &lt;attribute name="narrow">
+ *         &lt;simpleType>
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}boolean">
+ *           &lt;/restriction>
+ *         &lt;/simpleType>
+ *       &lt;/attribute>
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>
@@ -54,6 +60,8 @@ public class Width
     protected String unit;
     @XmlAttribute(name = "flex", required = true)
     protected boolean flex;
+    @XmlAttribute(name = "narrow")
+    protected Boolean narrow;
 
     /**
      * Gets the value of the value property.
@@ -121,6 +129,38 @@ public class Width
 
     public boolean isSetFlex() {
         return true;
+    }
+
+    /**
+     * Gets the value of the narrow property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isNarrow() {
+        return narrow;
+    }
+
+    /**
+     * Sets the value of the narrow property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setNarrow(boolean value) {
+        this.narrow = value;
+    }
+
+    public boolean isSetNarrow() {
+        return (this.narrow!= null);
+    }
+
+    public void unsetNarrow() {
+        this.narrow = null;
     }
 
 }
