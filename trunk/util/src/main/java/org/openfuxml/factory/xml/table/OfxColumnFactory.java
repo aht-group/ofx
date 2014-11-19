@@ -44,9 +44,11 @@ public class OfxColumnFactory
 		return col;
 	}
 	
-	public static Column flex(double value)
+	public static Column flex(double value){return flex(value,false);}
+	public static Column flex(double value,boolean narrow)
 	{
 		Width width = new Width();
+		width.setNarrow(narrow);
 		width.setFlex(true);
 		width.setValue(value);
 		Column col = new Column();
