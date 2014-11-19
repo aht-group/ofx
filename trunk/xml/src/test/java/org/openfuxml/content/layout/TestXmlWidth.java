@@ -30,6 +30,7 @@ public class TestXmlWidth extends AbstractXmlLayoutTest
     	Width xml = new Width();
     	xml.setValue(12.3);
     	xml.setFlex(false);
+    	xml.setNarrow(false);
     	xml.setUnit("pt");
     	
     	if(withChilds)

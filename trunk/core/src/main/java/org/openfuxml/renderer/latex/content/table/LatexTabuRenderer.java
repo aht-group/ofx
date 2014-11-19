@@ -1,7 +1,10 @@
 package org.openfuxml.renderer.latex.content.table;
 
+import net.sf.exlp.util.xml.JaxbUtil;
+
 import org.openfuxml.content.layout.Line;
 import org.openfuxml.content.table.Body;
+import org.openfuxml.content.table.Column;
 import org.openfuxml.content.table.Content;
 import org.openfuxml.content.table.Head;
 import org.openfuxml.content.table.Row;
@@ -27,7 +30,8 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	}
 	
 	public void render(Table table) throws OfxAuthoringException
-	{			
+	{	
+		JaxbUtil.info(table);
 		boolean longTable = table.getSpecification().isLong();
 		
 		String tableType = null;
@@ -35,15 +39,8 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		else{tableType="tabu";}
 		
 		StringBuffer preSb = new StringBuffer();
-		preSb.append("\\begin{").append(tableType).append("} to \\linewidth");
-		preSb.append("{");
-		
-		for(int i=0;i<table.getSpecification().getColumns().getColumn().size();i++)
-		{
-			preSb.append("X");
-		}
-		
-		preSb.append("}");
+		preSb.append("\\begin{").append(tableType).append("} to \\linewidth ");
+		preSb.append(renderPreamble(table.getSpecification()));
 		
 		preTxt.add(preSb.toString());
 		
@@ -63,12 +60,39 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		}
 	}
 	
+	private StringBuffer renderPreamble(Specification specification) throws OfxAuthoringException
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("{");
+		
+		for(Column c : specification.getColumns().getColumn())
+		{
+			if(c.isSetWidth() && c.getWidth().isSetFlex() && c.getWidth().isFlex())
+			{
+				int relative = (new Double(c.getWidth().getValue()*100)).intValue();
+				
+				sb.append("X[");
+				if(c.getWidth().isSetNarrow() && c.getWidth().isNarrow()){sb.append("-");}
+				sb.append(relative);
+				sb.append("]");
+			}
+			else if(c.isSetAlignment())
+			{
+				if(c.getAlignment().getHorizontal().equals("center")){sb.append("c");}
+			}
+				
+			
+		}
+		
+		sb.append("}");		
+		return sb;
+	}
+	
 	private void renderTabu(Specification specification, Content tgroup) throws OfxAuthoringException
 	{		
 		renderTableHeader(tgroup.getHead());
 		renderBody(tgroup.getBody().get(0));
 	}
-
 	
 	private void renderTableHeader(Head head) throws OfxAuthoringException
 	{	
