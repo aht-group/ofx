@@ -70,6 +70,12 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
+    	<jxb:bindings schemaLocation="../xsd/content/graph.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.content.graph"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
     <jxb:bindings schemaLocation="../xsd/../../../../../exlp/xml/src/main/xsd/util/io.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="net.sf.exlp.xml.io"/>
