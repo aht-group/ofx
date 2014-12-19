@@ -29,7 +29,12 @@ public class HtmlListTranscoder
 		{
 			Element e = (Element)node;
 			Paragraph p = new Paragraph();
-			p.getContent().add(e.text());
+			
+//			logger.info("nbsc"+e.text().contains("\u00a0"));
+			String text = e.text();
+			text = text.replaceAll("\u00a0", "");
+			
+			p.getContent().add(text);
 			
 			Item item = new Item();
 			item.getContent().add(p);
