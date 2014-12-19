@@ -1,7 +1,5 @@
 package org.openfuxml.renderer.latex.content.table;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.openfuxml.content.layout.Line;
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Column;
@@ -31,7 +29,6 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	public void render(Table table) throws OfxAuthoringException
 	{	
-		JaxbUtil.info(table);
 		boolean longTable = table.getSpecification().isLong();
 		
 		String tableType = null;
@@ -78,10 +75,9 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 			}
 			else if(c.isSetAlignment())
 			{
+				if(c.getAlignment().getHorizontal().equals("left")){sb.append("l");}
 				if(c.getAlignment().getHorizontal().equals("center")){sb.append("c");}
 			}
-				
-			
 		}
 		
 		sb.append("}");		

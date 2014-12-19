@@ -6,4 +6,5 @@ import org.openfuxml.exception.OfxConfigurationException;
 public interface DefaultSettingsManager
 {
 	public void apply(Listing listing) throws OfxConfigurationException;
+	public boolean includeEscapeTexlipse();
 }

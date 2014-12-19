@@ -22,10 +22,12 @@ public class LatexIncludeRenderer extends AbstractOfxLatexRenderer implements Of
 	{
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+parent.getSimpleName()+" with: "+this.getClass().getSimpleName()));
 		
+		if(dsm.includeEscapeTexlipse()){txt.add("%###");}
 		StringBuffer sb = new StringBuffer();
 		sb.append("\\input{").append(include).append("}");
-		
 		txt.add(sb.toString());
+		if(dsm.includeEscapeTexlipse()){txt.add("%###");}
+		
 		if(postBlankLine){txt.add("");}
 	}
 }
