@@ -46,7 +46,8 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		{
 			LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
 			rComment.render(table.getComment());
-			renderer.add(rComment);
+			preTxt.addAll(rComment.getContent());
+//			renderer.add(rComment);
 		}
 		
 		LatexTabluarWidthCalculator tabularWidthCalculator = new LatexTabluarWidthCalculator(table.getSpecification().getColumns());
