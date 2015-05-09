@@ -17,7 +17,6 @@
 	<url>http://sourceforge.net/projects/openfuxml</url>
 
 	<modules>
-		<module>addon</module>
 		<module>bom</module>
 		<module>client</module>
 		<module>doc</module>
