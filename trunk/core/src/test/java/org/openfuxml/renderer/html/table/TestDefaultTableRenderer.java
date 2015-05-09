@@ -1,42 +1,46 @@
-package org.openfuxml.test.renderer.pre;
+package org.openfuxml.renderer.html.table;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.output.Format;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openfuxml.content.ofx.Document;
+import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.renderer.processor.pre.OfxContainerMerger;
+import org.openfuxml.renderer.processor.html.interfaces.OfxTableRenderer;
+import org.openfuxml.renderer.processor.html.table.DefaultTableRenderer;
 import org.openfuxml.test.AbstractFileProcessingTest;
-import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RunWith(Parameterized.class)
-public class TestContainerMerger extends AbstractFileProcessingTest
+public class TestDefaultTableRenderer extends AbstractFileProcessingTest
 {
-	final static Logger logger = LoggerFactory.getLogger(TestContainerMerger.class);
+	final static Logger logger = LoggerFactory.getLogger(TestDefaultTableRenderer.class);
 	
-	private OfxContainerMerger containerMerger;
+	private OfxTableRenderer renderer;
 	
-	public static String srcDirName = "src/test/resources/data/pre/container/in";
-	public static final String dstDirName = "src/test/resources/data/pre/container/out";
+	public static String srcDirName = "src/test/resources/data/html/table/ofx";
+	public static final String dstDirName = "src/test/resources/data/html/table/web";
 	
-	public TestContainerMerger(File fTest)
+	public TestDefaultTableRenderer(File fTest)
 	{
 		this.fTest = fTest;
 		String name = fTest.getName().substring(0, fTest.getName().length()-4);
-		fRef = new File(dstDirName,name+".xml");
+		fRef = new File(dstDirName,name+".html");
 	}
 	
 	@Parameterized.Parameters
@@ -45,13 +49,13 @@ public class TestContainerMerger extends AbstractFileProcessingTest
 	@Before
 	public void init() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{	
-		containerMerger = new OfxContainerMerger();
+		renderer = new DefaultTableRenderer();
 	}
 	
 	@After
 	public void close()
 	{
-		containerMerger = null;
+		renderer = null;
 	}
     
     @Test
@@ -60,21 +64,27 @@ public class TestContainerMerger extends AbstractFileProcessingTest
     	render(false);
     }
 	
-	private void render(boolean saveReference) throws FileNotFoundException, OfxInternalProcessingException
+	private void render(boolean saveReference) throws FileNotFoundException
 	{
 		logger.debug(fTest.getAbsolutePath());
-		Document ofxSrc = JaxbUtil.loadJAXB(fTest.getAbsolutePath(), Document.class);
+		Table table = (Table)JaxbUtil.loadJAXB(fTest.getAbsolutePath(), Table.class);
 
-		Document ofxDst = containerMerger.merge(ofxSrc);
+		Element html = new Element("html");
+		Element body = new Element("body");
+		body.addContent(renderer.render(table));
+		html.addContent(body);
+		
+		Document doc = new Document();
+		doc.setRootElement(html);
 		
 		if(saveReference)
 		{
-			JaxbUtil.save(fRef, ofxDst, true);
+			JDomUtil.save(doc, fRef, Format.getPrettyFormat());
 		}
 		else
 		{
-			Document ofxRef = JaxbUtil.loadJAXB(fRef.getAbsolutePath(), Document.class);
-			Assert.assertEquals(JaxbUtil.toString(ofxRef),JaxbUtil.toString(ofxDst));
+			Document docRef = JDomUtil.load(fRef);
+			Assert.assertEquals(JDomUtil.toString(docRef),JDomUtil.toString(doc));
 		}	
 	}
 	
@@ -83,17 +93,16 @@ public class TestContainerMerger extends AbstractFileProcessingTest
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
 			loggerInit.addAltPath("src/test/resources/config");
 			loggerInit.init();	
-		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
-			
-		boolean saveReference = false;
+		
+		boolean saveReference = true;
 		int id = -1;
 		int index = 0;
 		
-		for(Object[] o : TestContainerMerger.initFileNames())
+		for(Object[] o : TestDefaultTableRenderer.initFileNames())
 		{
 			File fTest = (File)o[0];
 		
-			TestContainerMerger test = new TestContainerMerger(fTest);
+			TestDefaultTableRenderer test = new TestDefaultTableRenderer(fTest);
 			test.init();
 			logger.trace(id+" "+index);
 			if(id<0 | id==index){test.render(saveReference);}
