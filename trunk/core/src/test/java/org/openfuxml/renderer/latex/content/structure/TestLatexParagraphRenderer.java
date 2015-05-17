@@ -7,7 +7,6 @@ import org.junit.After;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
