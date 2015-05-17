@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.table.Columns;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.table.OfxColumnFactory;
 import org.openfuxml.test.AbstractOfxCoreTest;
 import org.slf4j.Logger;

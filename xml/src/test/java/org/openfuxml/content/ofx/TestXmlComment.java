@@ -6,7 +6,6 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openfuxml.content.ofx.Document;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;

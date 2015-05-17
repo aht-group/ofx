@@ -80,7 +80,7 @@ public class OfxHtmlRenderer
 				
 				try
 				{
-					Class cl = Class.forName(r.getClassName());
+					Class<?> cl = Class.forName(r.getClassName());
 					Object oRenderer = cl.getConstructor().newInstance();
 					if     (oRenderer instanceof OfxNavigationRenderer) {renderNav(eRenderer,(OfxNavigationRenderer)oRenderer,ofxDoc, section);}
 					else if(oRenderer instanceof OfxHeaderRenderer) {renderHeader(eRenderer,(OfxHeaderRenderer)oRenderer,ofxDoc, section);}

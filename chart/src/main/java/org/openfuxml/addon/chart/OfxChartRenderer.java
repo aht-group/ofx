@@ -12,7 +12,6 @@ import org.openfuxml.addon.chart.renderer.timeseries.TimeSeriesChartRenderer;
 import org.openfuxml.addon.chart.renderer.xy.SplineChartRenderer;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
