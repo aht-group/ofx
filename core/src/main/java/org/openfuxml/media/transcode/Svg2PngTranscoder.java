@@ -2,7 +2,6 @@ package org.openfuxml.media.transcode;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
@@ -28,11 +27,9 @@ public class Svg2PngTranscoder
 		g.stream(w);
 	    
 		InputStream isFromFirstData = new ByteArrayInputStream(os.toByteArray()); 
-		File pngFile = new File("/Volumes/ramdisk/test.png");
 	    PNGTranscoder t = new PNGTranscoder();
 	   
 	    TranscoderInput input = new TranscoderInput(isFromFirstData);
-	    pngFile.createNewFile();
 	     
 	    ByteArrayOutputStream ostream = new ByteArrayOutputStream();
 	    TranscoderOutput output = new TranscoderOutput(ostream);
