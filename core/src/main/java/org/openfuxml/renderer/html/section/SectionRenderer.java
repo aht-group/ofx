@@ -11,6 +11,7 @@ import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
+import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.renderer.processor.html.interfaces.OfxSectionRenderer;
 import org.openfuxml.renderer.processor.html.interfaces.OfxTableRenderer;
 import org.openfuxml.renderer.processor.html.section.ParagraphRenderer;
@@ -73,7 +74,7 @@ public class SectionRenderer implements OfxSectionRenderer
 	private void createHeader(Title title)
 	{
 		Element h1 = new Element("h1");
-		h1.setText(title.getValue());
+		h1.setText(TxtTitleFactory.build(title));
 		
 		Element hgroup = new Element("hgroup");
 		hgroup.setContent(h1);
@@ -125,7 +126,7 @@ public class SectionRenderer implements OfxSectionRenderer
 		private void createHeader(Title title)
 		{
 			Element h1 = new Element("h3");
-			h1.setText(title.getValue());
+			h1.setText(TxtTitleFactory.build(title));
 			
 			Element hgroup = new Element("hgroup");
 			hgroup.setContent(h1);
