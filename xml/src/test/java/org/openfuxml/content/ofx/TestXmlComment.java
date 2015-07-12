@@ -6,6 +6,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openfuxml.content.text.TestXmlRaw;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
@@ -15,14 +16,10 @@ public class TestXmlComment extends AbstractXmlOfxTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		setXmlFile(dirSuffix, Comment.class);
-	}
+	@BeforeClass public static void initFiles() {setXmlFile(dirSuffix, Comment.class);}
     
     @Test
-    public void jaxbStructure() throws FileNotFoundException
+    public void xml() throws FileNotFoundException
     {
     	Comment actual = create(true);
     	Comment expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Comment.class);

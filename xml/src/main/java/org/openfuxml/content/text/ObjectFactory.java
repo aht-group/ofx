@@ -45,4 +45,12 @@ public class ObjectFactory {
         return new Raw();
     }
 
+    /**
+     * Create an instance of {@link Text }
+     * 
+     */
+    public Text createText() {
+        return new Text();
+    }
+
 }
