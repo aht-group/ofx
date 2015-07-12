@@ -15,16 +15,12 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexTitleRenderer.class);
 	
-	private LatexPreamble latexPreamble;
-	
-	public LatexTitleRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm,LatexPreamble latexPreamble)
+	public LatexTitleRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm,dsm);
-		this.latexPreamble=latexPreamble;
 	}
 
-    public void render(int lvl,Title title){render(lvl,null,title);}
-	public void render(int lvl,Section section, Title title)
+	public void render(Title title,Section section,int lvl,LatexPreamble latexPreamble)
 	{
 		logger.trace("Render title");
 		if(title.isSetNumbering()){logger.warn("Ignoring numbring");}
@@ -36,7 +32,7 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
         sb.append("{").append(TexSpecialChars.replace(title.getValue())).append("}");
 		txt.add(sb.toString());
 
-        if(section!=null && section.isSetId())
+        if(section.isSetId())
         {
             txt.add("\\label{"+section.getId()+"}");
         }

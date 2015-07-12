@@ -33,7 +33,7 @@ public class TestLatexTitleRenderer extends AbstractLatexContentTest
 	public void init()
 	{
         preamble = new LatexPreamble(cmm,dsm);
-        renderer = new LatexTitleRenderer(cmm,dsm,preamble);
+        renderer = new LatexTitleRenderer(cmm,dsm);
         section = new Section();
         section.setId("myId");
         title = XmlTitleFactory.build("test");
@@ -43,7 +43,7 @@ public class TestLatexTitleRenderer extends AbstractLatexContentTest
     public void withoutId() throws IOException, OfxAuthoringException
     {
         section.setId(null);
-        renderer.render(1,section,title);
+        renderer.render(title,section,1,preamble);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
         Assert.assertEquals(2, content.size());
@@ -52,7 +52,7 @@ public class TestLatexTitleRenderer extends AbstractLatexContentTest
     @Test
     public void withId() throws IOException, OfxAuthoringException
     {
-        renderer.render(1,section,title);
+        renderer.render(title,section,1,preamble);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
         Assert.assertEquals(3, content.size());
@@ -62,7 +62,7 @@ public class TestLatexTitleRenderer extends AbstractLatexContentTest
     public void specialChars() throws IOException, OfxAuthoringException
     {
     	title.setValue("M & E");
-        renderer.render(1,section,title);
+        renderer.render(title,section,1,preamble);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
         Assert.assertEquals(3, content.size());
