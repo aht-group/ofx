@@ -11,6 +11,7 @@ import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
+import org.openfuxml.renderer.latex.content.structure.LatexTitleRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.openfuxml.renderer.latex.util.LatexWidthCalculator;
@@ -82,7 +83,12 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 	{
 		if(Environment.Figure.equals(environment))
 		{
-			if(image.isSetTitle()){postTxt.add("  \\caption{"+image.getTitle().getValue()+"}");}
+			if(image.isSetTitle())
+			{
+				LatexTitleRenderer stf = new LatexTitleRenderer(cmm,dsm);
+				stf.render(image);
+				postTxt.addAll(stf.getContent());
+			}
 			if(image.isSetId()){postTxt.add("  \\label{"+image.getId()+"}");}
 			postTxt.add("\\end{figure}");
 			postTxt.add("");
