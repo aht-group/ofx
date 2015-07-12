@@ -90,8 +90,8 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	{
 		if(!section.isContainer())
 		{
-			LatexTitleRenderer stf = new LatexTitleRenderer(cmm,dsm,latexPreamble);
-			stf.render(lvl,section,title);
+			LatexTitleRenderer stf = new LatexTitleRenderer(cmm,dsm);
+			stf.render(title,section,lvl,latexPreamble);
 			renderer.add(stf);
 		}
 	}
