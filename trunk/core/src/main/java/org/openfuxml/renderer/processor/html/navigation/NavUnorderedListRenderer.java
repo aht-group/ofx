@@ -6,6 +6,7 @@ import org.jdom2.Element;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.renderer.processor.html.interfaces.OfxNavigationRenderer;
 import org.openfuxml.xml.xpath.content.SectionXpath;
 import org.slf4j.Logger;
@@ -40,7 +41,7 @@ public class NavUnorderedListRenderer implements OfxNavigationRenderer
 		{
 			Title title = SectionXpath.getTitle(section);
 			a.setAttribute("href", section.getId()+".html");
-			a.setText(title.getValue());
+			a.setText(TxtTitleFactory.build(title));
 		}
 		catch (ExlpXpathNotFoundException e)
 		{

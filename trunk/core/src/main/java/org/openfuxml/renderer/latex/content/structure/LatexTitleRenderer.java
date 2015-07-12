@@ -6,6 +6,7 @@ import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.ofx.Title2;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.content.text.Text;
+import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -33,7 +34,7 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("\\").append(latexPreamble.getSectionHeaderName(lvl));
-        sb.append("{").append(TexSpecialChars.replace(title.getValue())).append("}");
+        sb.append("{").append(TexSpecialChars.replace(TxtTitleFactory.build(title))).append("}");
 		txt.add(sb.toString());
 
         if(section.isSetId())
@@ -51,7 +52,7 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("\\").append(latexPreamble.getSectionHeaderName(lvl));
-        sb.append("{").append(toText(title)).append("}");
+        sb.append("{").append(TxtTitleFactory.build(title)).append("}");
 		txt.add(sb.toString());
 
         if(section.isSetId())
@@ -62,23 +63,11 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
 	
 	public void render(Table table)
 	{
-		txt.add("\\caption{"+table.getTitle().getValue()+"}");
+		txt.add("\\caption{"+TxtTitleFactory.build(table.getTitle())+"}");
 	}
 	
 	public void render(Image image)
 	{
-		txt.add("  \\caption{"+image.getTitle().getValue()+"}");
-	}
-	
-	private String toText(Title2 title)
-	{
-		StringBuffer sb = new StringBuffer();
-		for(Object s : title.getContent())
-		{
-			if     (s instanceof String){sb.append(((String)s).trim());}
-			else if(s instanceof Text) {sb.append(((Text)s).getValue().trim());}
-			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
-		}
-		return TexSpecialChars.replace(sb.toString());
+		txt.add("  \\caption{"+TxtTitleFactory.build(image.getTitle())+"}");
 	}
 }
