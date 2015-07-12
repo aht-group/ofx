@@ -1,29 +1,24 @@
-package org.openfuxml.content.ofx;
+package org.openfuxml.content.text;
 
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.openfuxml.test.AbstractOfxXmlTest;
+import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlRaw extends AbstractXmlOfxTest
+import net.sf.exlp.util.xml.JaxbUtil;
+
+public class TestXmlRaw extends AbstractXmlOfxTextTest
 {	
-	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractXmlOfxTextTest.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		setXmlFile(dirSuffix, Raw.class);
-	}
+	@BeforeClass public static void initFiles() {setXmlFile(dirSuffix, Raw.class);}
     
-    @Ignore @Test
-    public void jaxbStructure() throws FileNotFoundException
+    @Test
+    public void xml() throws FileNotFoundException
     {
         Raw actual = create();
         Raw expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Raw.class);
@@ -33,7 +28,7 @@ public class TestXmlRaw extends AbstractXmlOfxTest
     public static Raw create()
     {
         Raw xml = new Raw();
-    	xml.setValue("myValue");
+    	xml.setValue("myRawValue");
     	
     	return xml;
     }
