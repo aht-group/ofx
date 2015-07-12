@@ -50,10 +50,8 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 //			renderer.add(rComment);
 		}
 		
-		LatexTabluarWidthCalculator tabularWidthCalculator = new LatexTabluarWidthCalculator(table.getSpecification().getColumns());
 		boolean longTable = table.getSpecification().isLong();
 		boolean floating = table.getSpecification().getFloat().isValue();
-		boolean flex = tabularWidthCalculator.isFlexTable();
 		
 		if(!longTable){renderPre(table,floating);}
 

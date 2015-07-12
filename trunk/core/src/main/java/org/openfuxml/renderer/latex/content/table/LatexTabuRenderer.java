@@ -14,6 +14,7 @@ import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.structure.LatexTitleRenderer;
 import org.openfuxml.renderer.latex.content.text.StringRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -147,7 +148,9 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	{
 		if(table.isSetTitle())
 		{
-			postTxt.add("\\caption{"+table.getTitle().getValue()+"}");
+			LatexTitleRenderer stf = new LatexTitleRenderer(cmm,dsm);
+			stf.render(table);
+			postTxt.addAll(stf.getContent());
 		}
 	}
 }

@@ -1,7 +1,9 @@
 package org.openfuxml.renderer.latex.content.structure;
 
+import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.table.Table;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -36,5 +38,15 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
         {
             txt.add("\\label{"+section.getId()+"}");
         }
+	}
+	
+	public void render(Table table)
+	{
+		txt.add("\\caption{"+table.getTitle().getValue()+"}");
+	}
+	
+	public void render(Image image)
+	{
+		txt.add("  \\caption{"+image.getTitle().getValue()+"}");
 	}
 }

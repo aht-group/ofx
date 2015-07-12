@@ -20,8 +20,6 @@ import org.slf4j.LoggerFactory;
 public class TestLatexTitleRenderer extends AbstractLatexContentTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexTitleRenderer.class);
-	
-	private static enum Key {withBlank,withoutBlank}
 
     private LatexPreamble preamble;
 	private LatexTitleRenderer renderer;
@@ -61,7 +59,7 @@ public class TestLatexTitleRenderer extends AbstractLatexContentTest
     @Test
     public void specialChars() throws IOException, OfxAuthoringException
     {
-    	title.setValue("M & E");
+    	title = XmlTitleFactory.build("M & E");
         renderer.render(title,section,1,preamble);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
