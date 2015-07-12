@@ -8,8 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.ofx.Title2;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
+import org.openfuxml.factory.xml.text.OfxTextFactory;
 import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.util.OfxContentDebugger;
@@ -66,6 +68,18 @@ public class TestLatexTitleRenderer extends AbstractLatexContentTest
         Assert.assertEquals(3, content.size());
     }
     
+    public void text()
+    {
+    	Title2 title = new Title2();
+    	title.getContent().add("Test");
+    	title.getContent().add("Test2");
+    	title.getContent().add(OfxTextFactory.build("Test3"));
+    	
+    	renderer.render(title,section,1,preamble);
+    	List<String> content = renderer.getContent();
+    	for(String s : content){System.out.println(s);}
+    }
+    
     public static void main(String[] args) throws Exception
     {
     	OfxCoreTestBootstrap.init();
@@ -75,7 +89,8 @@ public class TestLatexTitleRenderer extends AbstractLatexContentTest
 
 //    	test.withoutId();
 //        test.withId();
-        test.specialChars();
+//        test.specialChars();
+        test.text();
     }
    
 }

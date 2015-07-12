@@ -87,10 +87,10 @@ public class Paragraph implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Reference }
-     * {@link Image }
      * {@link String }
+     * {@link Image }
      * {@link Emphasis }
+     * {@link Reference }
      * 
      * 
      */

@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.openfuxml.content.text.Text;
 
 
 /**
@@ -23,10 +24,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org}sections" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org}section" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/wiki}content" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org/text}text" maxOccurs="unbounded"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="numbering" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -38,19 +39,19 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "content"
 })
-@XmlRootElement(name = "content")
-public class Content
+@XmlRootElement(name = "title2")
+public class Title2
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElementRefs({
-        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = org.openfuxml.addon.wiki.data.jaxb.Content.class),
-        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class)
-    })
+    @XmlElementRef(name = "text", namespace = "http://www.openfuxml.org/text", type = Text.class)
     @XmlMixed
     protected List<Serializable> content;
+    @XmlAttribute(name = "numbering")
+    protected Boolean numbering;
+    @XmlAttribute(name = "lang")
+    protected String lang;
 
     /**
      * Gets the value of the content property.
@@ -70,10 +71,8 @@ public class Content
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Section }
-     * {@link org.openfuxml.addon.wiki.data.jaxb.Content }
      * {@link String }
-     * {@link Sections }
+     * {@link Text }
      * 
      * 
      */
@@ -90,6 +89,66 @@ public class Content
 
     public void unsetContent() {
         this.content = null;
+    }
+
+    /**
+     * Gets the value of the numbering property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isNumbering() {
+        return numbering;
+    }
+
+    /**
+     * Sets the value of the numbering property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setNumbering(boolean value) {
+        this.numbering = value;
+    }
+
+    public boolean isSetNumbering() {
+        return (this.numbering!= null);
+    }
+
+    public void unsetNumbering() {
+        this.numbering = null;
+    }
+
+    /**
+     * Gets the value of the lang property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getLang() {
+        return lang;
+    }
+
+    /**
+     * Sets the value of the lang property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLang(String value) {
+        this.lang = value;
+    }
+
+    public boolean isSetLang() {
+        return (this.lang!= null);
     }
 
 }
