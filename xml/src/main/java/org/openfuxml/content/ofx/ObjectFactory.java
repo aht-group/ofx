@@ -117,12 +117,4 @@ public class ObjectFactory {
         return new Metadata();
     }
 
-    /**
-     * Create an instance of {@link Title2 }
-     * 
-     */
-    public Title2 createTitle2() {
-        return new Title2();
-    }
-
 }

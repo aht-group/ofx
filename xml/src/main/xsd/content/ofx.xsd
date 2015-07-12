@@ -134,23 +134,13 @@
             <xsd:attribute name="container" type="xsd:boolean"/><!-- true: Not rendered as a section, only as a container -->
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="title2">
+    <xsd:element name="title">
         <xsd:complexType mixed="true">
             <xsd:sequence>
                 <xsd:element ref="text:text" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="numbering" type="xsd:boolean"/>
             <xsd:attribute name="lang" type="xsd:string"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="title">
-        <xsd:complexType>
-            <xsd:simpleContent>
-                <xsd:extension base="xsd:string">
-                    <xsd:attribute name="numbering" type="xsd:boolean"/>
-                    <xsd:attribute name="lang" type="xsd:string"/>
-                </xsd:extension>
-            </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="comment">

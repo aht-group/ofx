@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.content.ofx.Title2;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.factory.xml.text.OfxTextFactory;
@@ -70,7 +69,7 @@ public class TestLatexTitleRenderer extends AbstractLatexContentTest
     
     public void text()
     {
-    	Title2 title = new Title2();
+    	Title title = new Title();
     	title.getContent().add("Test");
     	title.getContent().add("Test2");
     	title.getContent().add(OfxTextFactory.build("Test3"));

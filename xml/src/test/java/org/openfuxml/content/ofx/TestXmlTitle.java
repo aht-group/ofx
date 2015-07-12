@@ -33,7 +33,7 @@ public class TestXmlTitle extends AbstractXmlOfxTest
     {
     	Title xml = new Title();
     	xml.setNumbering(true);
-    	xml.setValue("myTitle");
+    	xml.getContent().add("myTitle");
     	xml.setLang("myLang");
     	
     	return xml;
