@@ -11,22 +11,20 @@ import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LatexSectionTitleRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(LatexSectionTitleRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexTitleRenderer.class);
 	
 	private LatexPreamble latexPreamble;
-	int lvl;
 	
-	public LatexSectionTitleRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm,int lvl, LatexPreamble latexPreamble)
+	public LatexTitleRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm,LatexPreamble latexPreamble)
 	{
 		super(cmm,dsm);
 		this.latexPreamble=latexPreamble;
-		this.lvl=lvl;
 	}
 
-    public void render(Title title){render(null,title);}
-	public void render(Section section, Title title)
+    public void render(int lvl,Title title){render(lvl,null,title);}
+	public void render(int lvl,Section section, Title title)
 	{
 		logger.trace("Render title");
 		if(title.isSetNumbering()){logger.warn("Ignoring numbring");}

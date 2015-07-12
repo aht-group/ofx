@@ -3,9 +3,6 @@ package org.openfuxml.addon.wiki.processor.template.transformator;
 import java.io.Serializable;
 import java.util.List;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
-
 import org.jdom2.Element;
 import org.jdom2.Namespace;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
@@ -13,7 +10,6 @@ import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Columns;
@@ -24,8 +20,12 @@ import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.factory.ofx.table.ColumnFactory;
+import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 public class WikiTemplateGenericTable implements WikiTemplateTransformator
 {
@@ -57,7 +57,7 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 	private Table getTable(List<TemplateKv> listKv)
 	{
 		Table table = new Table();
-		table.setTitle(getTitle());
+		table.setTitle(XmlTitleFactory.build("TestTitle"));
 		table.setSpecification(getSpecification());
 		table.setContent(getTableContent(listKv));
 		return table;
@@ -73,13 +73,6 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 		
 		specification.setColumns(columns);
 		return specification;
-	}
-	
-	private Title getTitle()
-	{
-		Title title = new Title();
-		title.setValue("TestTitel");
-		return title;
 	}
 	
 	private Content getTableContent(List<TemplateKv> listKv)

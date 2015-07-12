@@ -17,14 +17,14 @@ import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestLatexSectionTitleRenderer extends AbstractLatexContentTest
+public class TestLatexTitleRenderer extends AbstractLatexContentTest
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestLatexSectionTitleRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TestLatexTitleRenderer.class);
 	
 	private static enum Key {withBlank,withoutBlank}
 
     private LatexPreamble preamble;
-	private LatexSectionTitleRenderer renderer;
+	private LatexTitleRenderer renderer;
 
     private Section section;
     private Title title;
@@ -33,7 +33,7 @@ public class TestLatexSectionTitleRenderer extends AbstractLatexContentTest
 	public void init()
 	{
         preamble = new LatexPreamble(cmm,dsm);
-        renderer = new LatexSectionTitleRenderer(cmm,dsm,1,preamble);
+        renderer = new LatexTitleRenderer(cmm,dsm,preamble);
         section = new Section();
         section.setId("myId");
         title = XmlTitleFactory.build("test");
@@ -43,7 +43,7 @@ public class TestLatexSectionTitleRenderer extends AbstractLatexContentTest
     public void withoutId() throws IOException, OfxAuthoringException
     {
         section.setId(null);
-        renderer.render(section,title);
+        renderer.render(1,section,title);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
         Assert.assertEquals(2, content.size());
@@ -52,7 +52,7 @@ public class TestLatexSectionTitleRenderer extends AbstractLatexContentTest
     @Test
     public void withId() throws IOException, OfxAuthoringException
     {
-        renderer.render(section,title);
+        renderer.render(1,section,title);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
         Assert.assertEquals(3, content.size());
@@ -62,7 +62,7 @@ public class TestLatexSectionTitleRenderer extends AbstractLatexContentTest
     public void specialChars() throws IOException, OfxAuthoringException
     {
     	title.setValue("M & E");
-        renderer.render(section,title);
+        renderer.render(1,section,title);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
         Assert.assertEquals(3, content.size());
@@ -72,7 +72,7 @@ public class TestLatexSectionTitleRenderer extends AbstractLatexContentTest
     {
     	OfxCoreTestBootstrap.init();
 
-    	TestLatexSectionTitleRenderer test = new TestLatexSectionTitleRenderer();
+    	TestLatexTitleRenderer test = new TestLatexTitleRenderer();
         test.init();
 
 //    	test.withoutId();
