@@ -7,9 +7,16 @@ public class XmlTitleFactory
 	public static Title build(String title){return build(null,title);}
 	public static Title build(String lang, String title)
 	{
-		Title xml = new Title();
+		Title xml = build();
 		xml.setLang(lang);
 		xml.getContent().add(title);
+		return xml;
+	}
+	
+	public static Title build()
+	{
+		Title xml = new Title();
+
 		return xml;
 	}
 }
