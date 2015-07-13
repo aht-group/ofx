@@ -6,10 +6,6 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sf.exlp.util.io.RelativePathFactory;
-import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
-import net.sf.exlp.util.xml.JDomUtil;
-
 import org.apache.commons.io.FilenameUtils;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -19,10 +15,15 @@ import org.jdom2.xpath.XPath;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
 import org.openfuxml.content.ofx.Document;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.RelativePathFactory;
+import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
+import net.sf.exlp.util.xml.JDomUtil;
 
 public class ExternalContentEagerLoader
 {
@@ -57,6 +58,12 @@ public class ExternalContentEagerLoader
 		
 		XPathExpression<Element> xpe= xpFactory.compile("//*[@include]", Filters.element());
 		return xpe;
+	}
+	
+	public <T extends Object> T load(String resourceName, Class<T> c) throws FileNotFoundException, OfxAuthoringException
+	{
+		org.jdom2.Document doc = load(resourceName);
+		return JDomUtil.toJaxb(doc, c);
 	}
 	
 	public org.jdom2.Document load(String resourceName) throws FileNotFoundException, OfxAuthoringException
