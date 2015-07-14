@@ -51,10 +51,10 @@ public class MediaSourceModificationTracker
 		}
 	}
 	
-	
 	public boolean isChanged(Media media)
 	{
 		String hashValue;
+		boolean srcHasChanged = true;
 		
 		try
 		{
@@ -67,9 +67,8 @@ public class MediaSourceModificationTracker
 		try
 		{
 			net.sf.exlp.xml.io.File file = IoXpath.getFileByName(dir, media.getSrc());
-			boolean changed = !hashValue.equals(file.getHash().getValue());
+			srcHasChanged = !hashValue.equals(file.getHash().getValue());
 			file.getHash().setValue(hashValue);
-			return changed;
 		}
 		catch (ExlpXpathNotFoundException e)
 		{
@@ -79,7 +78,8 @@ public class MediaSourceModificationTracker
 			dir.getFile().add(file);
 		}
 		catch (ExlpXpathNotUniqueException e) {e.printStackTrace();}
-		return true;
+		logger.info("isChanged: "+media.getSrc()+" "+srcHasChanged);
+		return srcHasChanged;
 	}
 	
 	public void persist()

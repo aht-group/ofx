@@ -24,7 +24,7 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
 	
 	public void render(Title title,Section section,int lvl,LatexPreamble latexPreamble)
 	{
-		logger.info("Render title");
+		logger.trace("Render title");
 		if(title.isSetNumbering()){logger.warn("Ignoring numbring");}
 		
 		txt.add("");

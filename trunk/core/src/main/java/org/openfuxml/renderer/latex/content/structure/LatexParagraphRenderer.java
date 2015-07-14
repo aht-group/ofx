@@ -3,6 +3,7 @@ package org.openfuxml.renderer.latex.content.structure;
 import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
@@ -12,6 +13,7 @@ import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.media.LatexImageRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexEmphasisRenderer;
+import org.openfuxml.renderer.latex.structure.LatexReferenceRenderer;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +28,6 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 		super(cmm,dsm);
 		if(preBlankLine){preTxt.add("");}
 	}
-	
 	
 	public void render(Paragraph paragraph) throws OfxAuthoringException
 	{	
@@ -62,6 +63,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 			else if(o instanceof String){sb.append(TexSpecialChars.replace((String)o));}
 			else if(o instanceof Emphasis){renderEmphasis(sb, (Emphasis)o);}
 			else if(o instanceof Image){logger.info("INLINE Image NYI");}
+			else if(o instanceof Reference){renderReference(sb,(Reference)o);}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
 		txt.add(sb.toString());
@@ -77,5 +79,12 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 		LatexEmphasisRenderer stf = new LatexEmphasisRenderer(cmm,dsm);
 		stf.render(emphasis);
 		for(String s : stf.getContent()){sb.append(s);}
+	}
+	
+	protected void renderReference(StringBuffer sb, Reference reference) throws OfxAuthoringException
+	{
+		LatexReferenceRenderer lrr = new LatexReferenceRenderer(cmm,dsm);
+		lrr.render(reference);
+		for(String s : lrr.getContent()){sb.append(s);}
 	}
 }
