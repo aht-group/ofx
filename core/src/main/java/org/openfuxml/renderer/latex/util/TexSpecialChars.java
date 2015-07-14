@@ -14,6 +14,11 @@ public class TexSpecialChars
 		s=s.replaceAll("∞","\\$ \\\\inf \\$");
 		s=s.replaceAll("&", "\\\\&");
         s=s.replaceAll("_", "\\\\_");
+        
+        s=s.replaceAll("µ", "xx");
+        s=s.replaceAll("°", "xx");
+        s=s.replaceAll("μ", "xx");
+        
 		return s;
 
 	}
