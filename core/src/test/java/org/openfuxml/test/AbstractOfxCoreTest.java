@@ -4,16 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.io.RelativePathFactory;
-import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.text.OfxTextRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.xml.OfxNsPrefixMapper;
@@ -21,6 +17,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.RelativePathFactory;
+import net.sf.exlp.util.io.StringIO;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractOfxCoreTest
 {
@@ -89,6 +89,20 @@ public class AbstractOfxCoreTest
 	}
 	
 	protected void debug(OfxLatexRenderer renderer)
+	{
+		if(logger.isDebugEnabled())
+		{
+			logger.debug("Debugging "+renderer.getClass().getSimpleName());
+			System.out.println("************************************");
+			for(String s : renderer.getContent())
+			{
+				System.out.println(s);
+			}
+			System.out.println("************************************");
+		}
+	}
+	
+	protected void debug(OfxTextRenderer renderer)
 	{
 		if(logger.isDebugEnabled())
 		{
