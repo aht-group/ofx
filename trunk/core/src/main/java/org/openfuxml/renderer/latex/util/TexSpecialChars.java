@@ -19,8 +19,12 @@ public class TexSpecialChars
         s=s.replaceAll("μ", "\\$\\\\mu\\$");
         s=s.replaceAll("°C", "\\$\\\\,^{\\\\circ}\\\\mathrm{C} \\$");
         
+        
         s=s.replaceAll("<=", "\\$\\\\leq\\$");
         s=s.replaceAll("<", "\\$<\\$");
+        
+        
 		return s;
+
 	}
 }

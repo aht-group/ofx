@@ -101,14 +101,7 @@
 			<groupId>org.openfuxml</groupId>
 			<artifactId>ofx-doc</artifactId>
 			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.openfuxml</groupId>
-			<artifactId>ofx-util</artifactId>
-			<type>jar</type>
-			<scope>test</scope>
-			<classifier>tests</classifier>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>

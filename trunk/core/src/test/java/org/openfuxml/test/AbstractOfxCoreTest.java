@@ -14,7 +14,6 @@ import org.junit.BeforeClass;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
-import org.openfuxml.interfaces.renderer.text.OfxTextRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.xml.OfxNsPrefixMapper;
@@ -31,13 +30,13 @@ public class AbstractOfxCoreTest
 	private boolean saveReference = false;
 	protected File f;
 	
-	protected CrossMediaManager cmm;
 	protected DefaultSettingsManager dsm;
+	protected  CrossMediaManager cmm;
 	
 	public AbstractOfxCoreTest()
 	{
-		cmm = new NoOpCrossMediaManager();
 		dsm = new OfxDefaultSettingsManager();
+		cmm = new NoOpCrossMediaManager();
 	}
 
 	@BeforeClass
@@ -90,20 +89,6 @@ public class AbstractOfxCoreTest
 	}
 	
 	protected void debug(OfxLatexRenderer renderer)
-	{
-		if(logger.isDebugEnabled())
-		{
-			logger.debug("Debugging "+renderer.getClass().getSimpleName());
-			System.out.println("************************************");
-			for(String s : renderer.getContent())
-			{
-				System.out.println(s);
-			}
-			System.out.println("************************************");
-		}
-	}
-	
-	protected void debug(OfxTextRenderer renderer)
 	{
 		if(logger.isDebugEnabled())
 		{
