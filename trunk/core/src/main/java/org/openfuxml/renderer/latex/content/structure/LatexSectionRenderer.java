@@ -3,6 +3,7 @@ package org.openfuxml.renderer.latex.content.structure;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Comment;
+import org.openfuxml.content.ofx.Include;
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
@@ -78,6 +79,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 			else if(s instanceof Table){renderTable((Table)s);}
 			else if(s instanceof List){renderList((List)s,this);}
             else if(s instanceof Listing){renderListing((Listing)s);}
+            else if(s instanceof Include){renderInclude((Include)s);}
             else if(s instanceof Image){renderImage((Image)s);}
             else if(s instanceof Comment){}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
@@ -108,6 +110,13 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		LatexSectionRenderer sf = new LatexSectionRenderer(cmm,dsm,lvl+1,latexPreamble);
 		sf.render(section);
 		renderer.add(sf);
+	}
+	
+	private void renderInclude(Include include) throws OfxAuthoringException
+	{
+		LatexIncludeRenderer ir = new LatexIncludeRenderer(cmm,dsm);
+		ir.render(include);
+		renderer.add(ir);
 	}
 
     private void renderListing(Listing listing) throws OfxAuthoringException, OfxConfigurationException

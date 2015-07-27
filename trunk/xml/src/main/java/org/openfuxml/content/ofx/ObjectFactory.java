@@ -102,6 +102,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Include }
+     * 
+     */
+    public Include createInclude() {
+        return new Include();
+    }
+
+    /**
      * Create an instance of {@link Document }
      * 
      */
