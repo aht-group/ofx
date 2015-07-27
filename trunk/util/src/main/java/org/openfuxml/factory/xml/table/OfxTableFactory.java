@@ -1,17 +1,16 @@
 package org.openfuxml.factory.xml.table;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Content;
 import org.openfuxml.content.table.Head;
 import org.openfuxml.content.table.Row;
 import org.openfuxml.content.table.Table;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OfxTableFactory
 {
-	@SuppressWarnings("unused")
-	private static Log logger = LogFactory.getLog(OfxTableFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxTableFactory.class);
 	
 	public static Table build(String[] columns, Object[][] data)
 	{
