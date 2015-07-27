@@ -25,6 +25,12 @@
         		<artifactId>ofx-util</artifactId>
         		<version>${project.version}</version>
         	</dependency>
+			<dependency>
+        		<groupId>org.openfuxml</groupId>
+        		<artifactId>ofx-util</artifactId>
+        		<version>${project.version}</version>
+        		<classifier>tests</classifier>
+        	</dependency>
         	<dependency>
         		<groupId>org.openfuxml</groupId>
         		<artifactId>ofx-wiki</artifactId>
