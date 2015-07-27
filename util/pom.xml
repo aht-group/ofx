@@ -12,19 +12,7 @@
     <artifactId>ofx-util</artifactId>
     <packaging>jar</packaging>
     <name>OFX - Util</name>
-	
-	<dependencyManagement>
-		<dependencies>      	         
-			<dependency>
-				<groupId>org.openfuxml</groupId>
-				<artifactId>ofx-bom</artifactId>
-				<version>${project.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	
+		
 	<dependencies>
 		<dependency>
 			<groupId>org.openfuxml</groupId>
@@ -92,4 +80,32 @@
 	        <scope>test</scope>
 	      </dependency>
 	</dependencies>
+	
+	<dependencyManagement>
+		<dependencies>      	         
+			<dependency>
+				<groupId>org.openfuxml</groupId>
+				<artifactId>ofx-bom</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+	<build>
+		<plugins>
+			<plugin>
+  				<groupId>org.apache.maven.plugins</groupId>
+  				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+  					<execution>
+    					<goals>
+       						<goal>test-jar</goal>
+    					</goals>
+  					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
