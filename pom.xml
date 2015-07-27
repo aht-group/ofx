@@ -69,6 +69,7 @@
 	</licenses>
 
 	<scm>
+		<!-- MOVED TO GITHUB -->
     	<connection>scm:svn:https://svn.code.sf.net/p/openfuxml/code/trunk</connection>
     	<developerConnection>scm:svn:https://svn.code.sf.net/p/openfuxml/code/trunk</developerConnection>
     	<url>https://svn.code.sf.net/p/openfuxml/code/trunk/</url>
