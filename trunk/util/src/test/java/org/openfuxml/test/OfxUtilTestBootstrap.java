@@ -1,8 +1,5 @@
 package org.openfuxml.test;
 
-import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.config.ConfigLoader;
-import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -28,7 +25,8 @@ public class OfxUtilTestBootstrap
 			loggerInit.addAltPath("config.ofx-util.test");
 			loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
-		
+		return null;
+/*		
 		try
 		{
 			String cfn = ExlpCentralConfigPointer.getFile("ofx","core").getAbsolutePath();
@@ -44,5 +42,5 @@ public class OfxUtilTestBootstrap
 		logger.debug("Config and Logger initialized");
 
 		return config;
-	}
+*/	}
 }

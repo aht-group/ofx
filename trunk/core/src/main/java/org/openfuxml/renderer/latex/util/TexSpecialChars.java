@@ -15,11 +15,12 @@ public class TexSpecialChars
 		s=s.replaceAll("&", "\\\\&");
         s=s.replaceAll("_", "\\\\_");
         
-        s=s.replaceAll("µ", "xx");
-        s=s.replaceAll("°", "xx");
-        s=s.replaceAll("μ", "xx");
+        s=s.replaceAll("µ", "\\$\\\\mu\\$");
+        s=s.replaceAll("μ", "\\$\\\\mu\\$");
+        s=s.replaceAll("°C", "\\$\\\\,^{\\\\circ}\\\\mathrm{C} \\$");
         
+        s=s.replaceAll("<=", "\\$\\\\leq\\$");
+        s=s.replaceAll("<", "\\$<\\$");
 		return s;
-
 	}
 }
