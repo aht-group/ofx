@@ -10,7 +10,7 @@
     <xsd:import namespace="http://www.openfuxml.org" schemaLocation="ofx.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/layout" schemaLocation="layout.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/list" schemaLocation="list.xsd"/>
-     <xsd:element name="text">
+	<xsd:element name="text">
         <xsd:complexType>
             <xsd:simpleContent>
                 <xsd:extension base="xsd:string">

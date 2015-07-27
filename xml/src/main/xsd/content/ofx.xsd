@@ -118,6 +118,7 @@
                 <xsd:element ref="section" maxOccurs="unbounded"/>
 	            <xsd:element ref="listing" maxOccurs="unbounded"/>
                 <xsd:element ref="sections" maxOccurs="unbounded"/>
+                <xsd:element ref="include" maxOccurs="unbounded"/>
                 <xsd:element ref="table:table" maxOccurs="unbounded"/>
                 <xsd:element ref="media:image" maxOccurs="unbounded"/>
                 <xsd:element ref="list:list" maxOccurs="unbounded"/>
@@ -148,6 +149,15 @@
             <xsd:sequence>
                 <xsd:element ref="raw" maxOccurs="unbounded"/>
             </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="include">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="lang"  type="xsd:string"/>
+                </xsd:extension>
+            </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>

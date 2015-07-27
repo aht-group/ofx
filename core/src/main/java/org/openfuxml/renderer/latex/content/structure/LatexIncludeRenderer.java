@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.structure;
 
+import org.openfuxml.content.ofx.Include;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
@@ -29,5 +30,14 @@ public class LatexIncludeRenderer extends AbstractOfxLatexRenderer implements Of
 		if(dsm.includeEscapeTexlipse()){txt.add("%###");}
 		
 		if(postBlankLine){txt.add("");}
+	}
+	
+	public void render(Include include) throws OfxAuthoringException
+	{
+		if(dsm.includeEscapeTexlipse()){txt.add("%###");}
+		StringBuffer sb = new StringBuffer();
+		sb.append("\\input{").append(include.getValue()).append("}");
+		txt.add(sb.toString());
+		if(dsm.includeEscapeTexlipse()){txt.add("%###");}
 	}
 }

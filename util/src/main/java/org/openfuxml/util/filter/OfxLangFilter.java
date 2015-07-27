@@ -1,16 +1,17 @@
 package org.openfuxml.util.filter;
 
-import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.jdom2.Attribute;
 import org.jdom2.filter.Filters;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.content.table.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxLangFilter
 {
@@ -27,7 +28,14 @@ public class OfxLangFilter
 	{
 		org.jdom2.Document j2Doc = JaxbUtil.toDocument(section);
 		filterLang(j2Doc);
-		return (Section)JDomUtil.toJaxb(j2Doc, Section.class);
+		return JDomUtil.toJaxb(j2Doc, Section.class);
+	}
+	
+	public Table filterLang(Table table)
+	{
+		org.jdom2.Document j2Doc = JaxbUtil.toDocument(table);
+		filterLang(j2Doc);
+		return JDomUtil.toJaxb(j2Doc, Table.class);
 	}
 	
 	public void filterLang(Document ofxDocument)
