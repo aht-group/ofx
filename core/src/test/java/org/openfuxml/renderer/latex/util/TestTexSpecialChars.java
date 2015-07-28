@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.util;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -15,7 +16,6 @@ public class TestTexSpecialChars extends AbstractOfxCoreTest
 
 	private Document ofxDocument;
 	private Pdf pdfSettings;
-
 	
 	@Test
 	public void underScore() throws OfxAuthoringException
@@ -31,13 +31,23 @@ public class TestTexSpecialChars extends AbstractOfxCoreTest
         String result = TexSpecialChars.replace(txt);
         logger.info(result);
     }
+    
+    @Test
+    public void dollar()
+    {
+    	String txt = "$";
+    	String expected = "\\$";
+    	String actual = TexSpecialChars.replace(txt);
+    	Assert.assertEquals(expected, actual);
+    }
   
     public static void main(String[] args) throws Exception
     {
     	OfxCoreTestBootstrap.init();
 			
-    	TestTexSpecialChars rrLatex = new TestTexSpecialChars();
-    	rrLatex.underScore();
-        rrLatex.backslash();
+    	TestTexSpecialChars cli = new TestTexSpecialChars();
+//   	cli.underScore();
+//   	cli.backslash();
+    	cli.dollar();
     }
 }

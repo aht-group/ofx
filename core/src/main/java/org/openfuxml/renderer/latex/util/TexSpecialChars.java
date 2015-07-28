@@ -10,6 +10,7 @@ public class TexSpecialChars
 	public static String replace(String s)
 	{		
 //		s=s.replaceAll("\\\\", "/");
+		s=s.replaceAll("\\$","\\\\\\$");
 		s=s.replaceAll("#", "\\\\#");
 		s=s.replaceAll("∞","\\$ \\\\inf \\$");
 		s=s.replaceAll("&", "\\\\&");
@@ -19,12 +20,9 @@ public class TexSpecialChars
         s=s.replaceAll("μ", "\\$\\\\mu\\$");
         s=s.replaceAll("°C", "\\$\\\\,^{\\\\circ}\\\\mathrm{C} \\$");
         
-        
         s=s.replaceAll("<=", "\\$\\\\leq\\$");
         s=s.replaceAll("<", "\\$<\\$");
         
-        
 		return s;
-
 	}
 }
