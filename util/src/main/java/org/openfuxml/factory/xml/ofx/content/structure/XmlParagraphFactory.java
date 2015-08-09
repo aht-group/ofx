@@ -15,4 +15,11 @@ public class XmlParagraphFactory
 		xml.setLang(lang);
 		return xml;
 	}
+	
+	public static Paragraph text(String text)
+	{
+		Paragraph xml = new Paragraph();
+		xml.getContent().add(text);
+		return xml;
+	}
 }
