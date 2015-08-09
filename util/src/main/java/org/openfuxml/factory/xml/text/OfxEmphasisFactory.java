@@ -1,4 +1,4 @@
-package org.openfuxml.factory.content;
+package org.openfuxml.factory.xml.text;
 
 import org.openfuxml.content.text.Emphasis;
 
@@ -25,5 +25,13 @@ public class OfxEmphasisFactory
 		emphasis.setItalic(italic);
 		emphasis.setValue(text);
 		return emphasis;
+	}
+	
+	public static Emphasis typewriter(String text)
+	{
+		Emphasis xml = new Emphasis();
+		xml.setStyle("typewriter");
+		xml.setValue(text);
+		return xml;
 	}
 }
