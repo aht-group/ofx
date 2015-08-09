@@ -7,6 +7,7 @@ public class XmlListFactory
 {
 	public static enum Ordering {ordered,unordered}
 	
+	public static List build(Ordering ordering){return build(ordering.toString());}
 	public static List build(String ordering)
 	{
 		Type type = new Type();
