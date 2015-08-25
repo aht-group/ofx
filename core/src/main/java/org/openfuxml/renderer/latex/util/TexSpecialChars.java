@@ -22,7 +22,7 @@ public class TexSpecialChars
         
         s=s.replaceAll("<=", "\\$\\\\leq\\$");
         s=s.replaceAll("<", "\\$<\\$");
-        
+        s=s.replaceAll("%", "\\\\%");
 		return s;
 	}
 }
