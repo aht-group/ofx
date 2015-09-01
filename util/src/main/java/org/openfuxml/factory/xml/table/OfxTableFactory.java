@@ -32,9 +32,9 @@ public class OfxTableFactory
 		while(rs.next())
 		{	
 			Object[] row = new Object[meta.getColumnCount()];
-			for(int i=1;i<meta.getColumnCount();i++)
+			for(int i=0;i<meta.getColumnCount();i++)
 			{
-				row[i-1] = rs.getObject(i);
+				row[i] = rs.getObject(i+1);
 			}
 			data.add(row);
 		}
@@ -98,7 +98,6 @@ public class OfxTableFactory
 				row.getCell().add(OfxCellFactory.createParagraphCell(""));
 			}
 		}
-		
 		return row;
 	}
 }
