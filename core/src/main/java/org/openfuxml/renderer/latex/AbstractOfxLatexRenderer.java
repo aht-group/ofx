@@ -5,7 +5,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -75,7 +74,7 @@ public class AbstractOfxLatexRenderer
 	{
 		for(String s : getContent())
 		{
-			w.write(s+SystemUtils.LINE_SEPARATOR);
+			w.write(s+dsm.lineSeparator());
 		}
 		w.flush();
 	}

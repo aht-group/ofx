@@ -3,6 +3,7 @@ package org.openfuxml.processor.settings;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
@@ -54,4 +55,5 @@ public abstract class AbstractDefaultSettingsManager implements DefaultSettingsM
 	}
 	
 	@Override public boolean includeEscapeTexlipse(){return false;}
+	@Override public String lineSeparator() {return SystemUtils.LINE_SEPARATOR;}
 }

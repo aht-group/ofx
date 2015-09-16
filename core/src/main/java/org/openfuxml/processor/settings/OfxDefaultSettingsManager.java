@@ -1,5 +1,6 @@
 package org.openfuxml.processor.settings;
 
+import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 
@@ -19,4 +20,5 @@ public class OfxDefaultSettingsManager extends AbstractDefaultSettingsManager im
 		mapDefaults.put(Listing.class.getName(), xml);
 	}
 
+	@Override public String lineSeparator() {return SystemUtils.LINE_SEPARATOR;}
 }
