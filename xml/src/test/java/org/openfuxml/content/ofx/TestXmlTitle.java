@@ -15,14 +15,10 @@ public class TestXmlTitle extends AbstractXmlOfxTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		setXmlFile(dirSuffix, Title.class);
-	}
+	@BeforeClass public static void initFiles(){setXmlFile(dirSuffix, Title.class);}
     
     @Test
-    public void jaxbStructure() throws FileNotFoundException
+    public void xml() throws FileNotFoundException
     {
     	Title actual = create(true);
     	Title expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Title.class);
