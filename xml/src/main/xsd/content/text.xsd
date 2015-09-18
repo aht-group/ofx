@@ -2,11 +2,7 @@
 <xsd:schema targetNamespace="http://www.openfuxml.org/text"
 	xmlns:text="http://www.openfuxml.org/table"
 	xmlns:ofx="http://www.openfuxml.org"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
-    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-    jaxb:extensionBindingPrefixes="xjc"
-    jaxb:version="2.0">
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="http://www.openfuxml.org" schemaLocation="ofx.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/layout" schemaLocation="layout.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/list" schemaLocation="list.xsd"/>

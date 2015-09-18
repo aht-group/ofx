@@ -5,13 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.sf.exlp.util.io.FileIO;
-import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
-
 import org.apache.commons.io.IOUtils;
+import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.FileIO;
+import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 
 public class OfxLatexDefinitionBuilder
 {	
@@ -50,4 +51,6 @@ public class OfxLatexDefinitionBuilder
 		catch (FileNotFoundException e) {throw new OfxConfigurationException(e.getMessage());}
 		catch (IOException e) {throw new OfxConfigurationException(e.getMessage());}
 	}
+	
+	
 }

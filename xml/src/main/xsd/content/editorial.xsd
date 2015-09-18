@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.openfuxml.org/editorial"
+	xmlns:editorial="http://www.openfuxml.org/editorial"
+	xmlns:ofx="http://www.openfuxml.org"
+	xmlns:text="http://www.openfuxml.org/text"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.openfuxml.org" schemaLocation="ofx.xsd"/>
+    <xsd:import namespace="http://www.openfuxml.org/text" schemaLocation="text.xsd"/>
+	<xsd:element name="glossary">
+        <xsd:complexType>
+            <xsd:sequence>
+            	<xsd:element ref="ofx:comment" minOccurs="0" maxOccurs="1"/>
+            	<xsd:element ref="editorial:term" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="code" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="term">
+        <xsd:complexType>
+        	<xsd:sequence>
+            	<xsd:element ref="text:text" maxOccurs="unbounded"/>
+            	<xsd:element ref="ofx:paragraph" maxOccurs="unbounded"/>
+            </xsd:sequence>
+            <xsd:attribute name="code" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

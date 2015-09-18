@@ -8,7 +8,7 @@ import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractOfxXmlTest extends AbstractAhtUtilsXmlTest
+public abstract class AbstractOfxXmlTest <T extends Object> extends AbstractAhtUtilsXmlTest<T>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	

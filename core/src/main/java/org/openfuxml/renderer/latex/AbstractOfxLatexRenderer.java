@@ -5,6 +5,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -52,6 +53,11 @@ public class AbstractOfxLatexRenderer
 		List<String> resultTxt = getContent();
 		if(resultTxt.size()!=1){throw new OfxAuthoringException("Result is not a single line");}
 		return resultTxt.get(0);
+	}
+	
+	public String getContentAsSingleLine(String delimiter)
+	{
+		return StringUtils.join(getContent(), "");
 	}
 	
 	public List<String> getContent()

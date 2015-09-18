@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ed:term xmlns:text="http://www.openfuxml.org/text" xmlns:ofx="http://www.openfuxml.org" xmlns:layout="http://www.openfuxml.org/layout" xmlns:media="http://www.openfuxml.org/media" xmlns:ed="http://www.openfuxml.org/editorial" xmlns:wiki="http://www.openfuxml.org/wiki" xmlns:l="http://www.openfuxml.org/list" xmlns:table="http://www.openfuxml.org/table" code="myCode">
+    <text:text lang="myLang">myRawValue</text:text>
+    <text:text lang="myLang">myRawValue</text:text>
+    <ofx:paragraph lang="en"/>
+    <ofx:paragraph lang="en"/>
+</ed:term>

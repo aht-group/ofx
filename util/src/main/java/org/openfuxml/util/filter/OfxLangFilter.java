@@ -4,6 +4,7 @@ import org.jdom2.Attribute;
 import org.jdom2.filter.Filters;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
+import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Table;
@@ -36,6 +37,13 @@ public class OfxLangFilter
 		org.jdom2.Document j2Doc = JaxbUtil.toDocument(table);
 		filterLang(j2Doc);
 		return JDomUtil.toJaxb(j2Doc, Table.class);
+	}
+	
+	public Glossary filterLang(Glossary glossary)
+	{
+		org.jdom2.Document j2Doc = JaxbUtil.toDocument(glossary);
+		filterLang(j2Doc);
+		return JDomUtil.toJaxb(j2Doc, Glossary.class);
 	}
 	
 	public void filterLang(Document ofxDocument)

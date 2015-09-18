@@ -4,15 +4,15 @@ import java.io.File;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import net.sf.exlp.util.DateUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.io.FilenameUtils;
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractAhtUtilsXmlTest
+import net.sf.exlp.util.DateUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
+
+public abstract class AbstractAhtUtilsXmlTest <T extends Object>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractAhtUtilsXmlTest.class);
 

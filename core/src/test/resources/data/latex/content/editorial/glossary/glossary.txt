@@ -1,0 +1,20 @@
+% ******************************************************
+% Rendering a Glossary with: LatexGlossaryRenderer
+% 
+% Do not modify this auto-generated file, it will be overwritten without warning!
+
+\newglossaryentry{c1}
+{
+	name=Code-1,
+	description={
+Description-1
+}
+}
+
+\newglossaryentry{c2}
+{
+	name=Code-2,
+	description={
+Description-2
+}
+}

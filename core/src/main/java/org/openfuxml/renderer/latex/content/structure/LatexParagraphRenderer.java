@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.structure;
 
+import java.util.List;
+
 import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
@@ -22,11 +24,19 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexParagraphRenderer.class);
 	
-	
 	public LatexParagraphRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm,boolean preBlankLine)
 	{
 		super(cmm,dsm);
 		if(preBlankLine){preTxt.add("");}
+	}
+	
+	public void render(List<Paragraph> paragraphs) throws OfxAuthoringException
+	{	
+		for(int i=0;i<paragraphs.size();i++)
+		{
+			render(paragraphs.get(i));
+			if(i!=paragraphs.size()-1 && paragraphs.size()>0){txt.add("");}
+		}
 	}
 	
 	public void render(Paragraph paragraph) throws OfxAuthoringException
@@ -62,7 +72,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 			if(o==null){throw new OfxAuthoringException(Paragraph.class.getSimpleName()+" has no content");}
 			else if(o instanceof String){sb.append(TexSpecialChars.replace((String)o));}
 			else if(o instanceof Emphasis){renderEmphasis(sb, (Emphasis)o);}
-			else if(o instanceof Image){logger.info("INLINE Image NYI");}
+			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
 			else if(o instanceof Reference){renderReference(sb,(Reference)o);}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
