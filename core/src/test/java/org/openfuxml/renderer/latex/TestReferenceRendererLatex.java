@@ -1,8 +1,5 @@
 package org.openfuxml.renderer.latex;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Document;
@@ -15,6 +12,8 @@ import org.openfuxml.util.reference.OfxReferencePdfBuilder;
 import org.openfuxml.xml.renderer.cmp.Pdf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestReferenceRendererLatex extends AbstractOfxCoreTest
 {	
@@ -53,8 +52,7 @@ public class TestReferenceRendererLatex extends AbstractOfxCoreTest
   
     public static void main(String[] args) throws Exception
     {
-    	Configuration config = OfxCoreTestBootstrap.init();
-			
+    	OfxCoreTestBootstrap.init();	
     	TestReferenceRendererLatex rrLatex = new TestReferenceRendererLatex();
     	rrLatex.init();
     	rrLatex.writeExpected();

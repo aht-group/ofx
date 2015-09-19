@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 
+import org.openfuxml.content.editorial.Acronyms;
 import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Table;
@@ -11,6 +12,7 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.renderer.latex.content.editorial.LatexAcronymRenderer;
 import org.openfuxml.renderer.latex.content.editorial.LatexGlossaryRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
@@ -88,11 +90,29 @@ public class OfxMultiLangLatexWriter
 			logger.info(f.getAbsolutePath());
 			OfxLangFilter omf = new OfxLangFilter(lang);
 			
-			LatexGlossaryRenderer gr = new LatexGlossaryRenderer(cmm,dsm);
-			gr.render(omf.filterLang(glossary));
+			LatexGlossaryRenderer r = new LatexGlossaryRenderer(cmm,dsm);
+			r.render(omf.filterLang(glossary));
 
 			StringWriter sw = new StringWriter();
-			gr.write(sw);
+			r.write(sw);
+			logger.trace("Writing to : "+f.getAbsolutePath());
+			StringIO.writeTxt(f, sw.toString());
+		}
+	}
+	
+	public void acronym(Acronyms acronyms) throws OfxAuthoringException, IOException
+	{
+		for(String lang : keys)
+		{
+			File f = buildFile(lang+"/editorial/acronyms");
+			logger.info(f.getAbsolutePath());
+			OfxLangFilter omf = new OfxLangFilter(lang);
+			
+			LatexAcronymRenderer r = new LatexAcronymRenderer(cmm,dsm);
+			r.render(omf.filterLang(acronyms));
+
+			StringWriter sw = new StringWriter();
+			r.write(sw);
 			logger.trace("Writing to : "+f.getAbsolutePath());
 			StringIO.writeTxt(f, sw.toString());
 		}

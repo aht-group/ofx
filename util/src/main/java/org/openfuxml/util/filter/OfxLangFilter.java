@@ -4,6 +4,7 @@ import org.jdom2.Attribute;
 import org.jdom2.filter.Filters;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
+import org.openfuxml.content.editorial.Acronyms;
 import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
@@ -44,6 +45,13 @@ public class OfxLangFilter
 		org.jdom2.Document j2Doc = JaxbUtil.toDocument(glossary);
 		filterLang(j2Doc);
 		return JDomUtil.toJaxb(j2Doc, Glossary.class);
+	}
+	
+	public Acronyms filterLang(Acronyms acronyms)
+	{
+		org.jdom2.Document j2Doc = JaxbUtil.toDocument(acronyms);
+		filterLang(j2Doc);
+		return JDomUtil.toJaxb(j2Doc, Acronyms.class);
 	}
 	
 	public void filterLang(Document ofxDocument)
