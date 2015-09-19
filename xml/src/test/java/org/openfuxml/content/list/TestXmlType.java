@@ -1,50 +1,28 @@
 package org.openfuxml.content.list;
 
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlType extends AbstractXmlListTest
+public class TestXmlType extends AbstractXmlListTest<Type>
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestXmlType.class);
 	
-	@BeforeClass
-	public static void initFiles()
-	{
-		setXmlFile(dirSuffix, Type.class);
-	}
-    
-    @Test
-    public void testXml() throws FileNotFoundException
-    {
-    	Type actual = create();
-    	Type expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Type.class);
-    	assertJaxbEquals(expected, actual);
-    }
+	public TestXmlType(){super(Type.class);}
+	public static Type create(boolean withChildren){return (new TestXmlType()).build(withChildren);}
    
-    private static Type create(){return create(true);}
-    public static Type create(boolean withChilds)
+    public Type build(boolean withChildren)
     {
     	Type xml = new Type();
     	xml.setDescription(false);
     	xml.setOrdering("ordered");    	
     	return xml;
     }
-    
-    public void save() {save(create(),fXml,false);}
 	
 	public static void main(String[] args)
     {
 		OfxXmlTstBootstrap.init();
-			
-		TestXmlType.initFiles();	
 		TestXmlType test = new TestXmlType();
-		test.save();
+		test.saveReferenceXml();
     }
 }

@@ -1,46 +1,29 @@
 package org.openfuxml.content.layout;
 
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlFloat extends AbstractXmlLayoutTest
+public class TestXmlFloat extends AbstractXmlLayoutTest<Float>
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
-	@BeforeClass public static void initFiles() {setXmlFile(dirSuffix, Float.class);}
-    
-    @Test
-    public void xml() throws FileNotFoundException
-    {
-    	Float actual = create();
-    	Float expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Float.class);
-    	assertJaxbEquals(expected, actual);
-    }
+	public TestXmlFloat(){super(Float.class);}
+	public static Float create(boolean withChildren){return (new TestXmlFloat()).build(withChildren);}
    
-    public static Float create()
+    public Float build(boolean withChildren)
     {
     	Float xml = new Float();
     	xml.setValue(true);
     	
     	return xml;
     }
-    
-    public void save() {save(create(),fXml,false);}
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();
-			
-		TestXmlFloat.initFiles();	
+		OfxXmlTstBootstrap.init();	
 		TestXmlFloat test = new TestXmlFloat();
-		test.save();
+		test.saveReferenceXml();
     }
 }

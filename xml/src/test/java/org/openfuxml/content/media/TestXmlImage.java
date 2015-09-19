@@ -1,11 +1,5 @@
 package org.openfuxml.content.media;
 
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.openfuxml.content.layout.TestXmlAlignment;
 import org.openfuxml.content.layout.TestXmlHeight;
 import org.openfuxml.content.layout.TestXmlWidth;
@@ -16,21 +10,14 @@ import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlImage extends AbstractXmlMediaTest
+public class TestXmlImage extends AbstractXmlMediaTest<Image>
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
-	@BeforeClass public static void initFiles() {setXmlFile(dirSuffix, Image.class);}
-    
-    @Test
-    public void xml() throws FileNotFoundException
-    {
-    	Image actual = create(true);
-    	Image expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Image.class);
-    	assertJaxbEquals(expected, actual);
-    }
+	public TestXmlImage(){super(Image.class);}
+	public static Image create(boolean withChildren){return (new TestXmlImage()).build(withChildren);}
    
-    public static Image create(boolean withChilds)
+    public Image build(boolean withChilds)
     {
     	Image xml = new Image();
     	xml.setId("myId");
@@ -44,18 +31,13 @@ public class TestXmlImage extends AbstractXmlMediaTest
     		xml.setWidth(TestXmlWidth.create(false));
     		xml.setHeight(TestXmlHeight.create(false));
     	}
-    	
     	return xml;
     }
-    
-    public void save() {save(create(true),fXml,false);}
 	
 	public static void main(String[] args)
     {
 		OfxXmlTstBootstrap.init();
-			
-		TestXmlImage.initFiles();	
 		TestXmlImage test = new TestXmlImage();
-		test.save();
+		test.saveReferenceXml();
     }
 }

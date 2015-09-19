@@ -1,51 +1,34 @@
 package org.openfuxml.content.ofx;
 
-import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.openfuxml.content.text.TestXmlRaw;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlComment extends AbstractXmlOfxTest
+public class TestXmlComment extends AbstractXmlOfxTest<Comment>
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
-	@BeforeClass public static void initFiles() {setXmlFile(dirSuffix, Comment.class);}
-    
-    @Test
-    public void xml() throws FileNotFoundException
-    {
-    	Comment actual = create(true);
-    	Comment expected = JaxbUtil.loadJAXB(fXml.getAbsolutePath(), Comment.class);
-    	assertJaxbEquals(expected, actual);
-    }
+	public TestXmlComment(){super(Comment.class);}
+	public static Comment create(boolean withChildren){return (new TestXmlComment()).build(withChildren);}
    
-    public static Comment create(boolean withChilds)
+    public Comment build(boolean withChilds)
     {
     	Comment xml = new Comment();
     	
     	if(withChilds)
     	{
-    		xml.getRaw().add(TestXmlRaw.create());
+    		xml.getRaw().add(TestXmlRaw.create(false));
     	}
     	
     	return xml;
     }
-    
-    public void save() {save(create(true),fXml,false);}
 	
 	public static void main(String[] args)
     {
 		OfxXmlTstBootstrap.init();
-			
-		TestXmlComment.initFiles();	
 		TestXmlComment test = new TestXmlComment();
-		test.save();
+		test.saveReferenceXml();
     }
 }

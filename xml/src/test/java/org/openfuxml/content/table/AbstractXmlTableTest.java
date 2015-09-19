@@ -2,7 +2,10 @@ package org.openfuxml.content.table;
 
 import org.openfuxml.test.AbstractOfxXmlTest;
 
-public abstract class AbstractXmlTableTest extends AbstractOfxXmlTest
+public abstract class AbstractXmlTableTest <T extends Object> extends AbstractOfxXmlTest<T>
 {
-	protected static final String dirSuffix = "content/table";
+	public AbstractXmlTableTest(Class<T> cXml)
+	{
+		super(cXml,"content/table");
+	}
 }

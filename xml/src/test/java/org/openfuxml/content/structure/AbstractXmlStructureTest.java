@@ -2,7 +2,10 @@ package org.openfuxml.content.structure;
 
 import org.openfuxml.test.AbstractOfxXmlTest;
 
-public abstract class AbstractXmlStructureTest extends AbstractOfxXmlTest
+public abstract class AbstractXmlStructureTest <T extends Object> extends AbstractOfxXmlTest<T>
 {
-	protected static final String dirSuffix = "content/structure";
+	public AbstractXmlStructureTest(Class<T> cXml)
+	{
+		super(cXml,"content/structure");
+	}
 }

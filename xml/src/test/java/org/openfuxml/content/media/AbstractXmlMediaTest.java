@@ -2,7 +2,10 @@ package org.openfuxml.content.media;
 
 import org.openfuxml.test.AbstractOfxXmlTest;
 
-public abstract class AbstractXmlMediaTest extends AbstractOfxXmlTest
+public abstract class AbstractXmlMediaTest <T extends Object> extends AbstractOfxXmlTest<T>
 {
-	protected static final String dirSuffix = "content/media";
+	public AbstractXmlMediaTest(Class<T> cXml)
+	{
+		super(cXml,"content/media");
+	}
 }

@@ -2,7 +2,10 @@ package org.openfuxml.content.text;
 
 import org.openfuxml.test.AbstractOfxXmlTest;
 
-public abstract class AbstractXmlOfxTextTest extends AbstractOfxXmlTest
+public abstract class AbstractXmlOfxTextTest <T extends Object> extends AbstractOfxXmlTest<T>
 {
-	protected static final String dirSuffix = "content/text";
+	public AbstractXmlOfxTextTest(Class<T> cXml)
+	{
+		super(cXml,"content/text");
+	}
 }

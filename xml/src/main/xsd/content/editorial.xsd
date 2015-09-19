@@ -15,6 +15,19 @@
             <xsd:attribute name="code" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="acronyms">
+        <xsd:complexType>
+            <xsd:sequence>
+            	<xsd:element ref="ofx:comment" minOccurs="0" maxOccurs="1"/>
+            	<xsd:element ref="editorial:term" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="acronym">
+        <xsd:complexType>
+            <xsd:attribute name="code" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="term">
         <xsd:complexType>
         	<xsd:sequence>

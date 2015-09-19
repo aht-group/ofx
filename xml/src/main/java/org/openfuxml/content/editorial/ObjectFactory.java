@@ -45,4 +45,20 @@ public class ObjectFactory {
         return new Term();
     }
 
+    /**
+     * Create an instance of {@link Acronym }
+     * 
+     */
+    public Acronym createAcronym() {
+        return new Acronym();
+    }
+
+    /**
+     * Create an instance of {@link Acronyms }
+     * 
+     */
+    public Acronyms createAcronyms() {
+        return new Acronyms();
+    }
+
 }

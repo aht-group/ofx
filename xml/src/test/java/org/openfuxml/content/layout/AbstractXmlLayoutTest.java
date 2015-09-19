@@ -2,7 +2,10 @@ package org.openfuxml.content.layout;
 
 import org.openfuxml.test.AbstractOfxXmlTest;
 
-public abstract class AbstractXmlLayoutTest extends AbstractOfxXmlTest
+public abstract class AbstractXmlLayoutTest <T extends Object> extends AbstractOfxXmlTest<T>
 {
-	protected static final String dirSuffix = "content/layout";
+	public AbstractXmlLayoutTest(Class<T> cXml)
+	{
+		super(cXml,"content/layout");
+	}
 }

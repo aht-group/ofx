@@ -1,8 +1,9 @@
 package org.openfuxml.content.ofx;
 
-import org.openfuxml.test.AbstractOfxXmlTest;
-
-public abstract class AbstractXmlOfxTest extends AbstractOfxXmlTest
+public abstract class AbstractXmlOfxTest <T extends Object> extends org.openfuxml.test.AbstractOfxXmlTest<T>
 {
-	protected static final String dirSuffix = "content/ofx";
+	public AbstractXmlOfxTest(Class<T> cXml)
+	{
+		super(cXml,"content/ofx");
+	}
 }

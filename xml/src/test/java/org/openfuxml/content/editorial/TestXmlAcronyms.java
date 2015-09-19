@@ -6,17 +6,16 @@ import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlGlossary extends AbstractXmlEditorialTest<Glossary>
+public class TestXmlAcronyms extends AbstractXmlEditorialTest<Acronyms>
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
-    
-	public TestXmlGlossary(){super(Glossary.class);}
-	public static Glossary create(boolean withChildren){return (new TestXmlGlossary()).build(withChildren);}
-   
-    public Glossary build(boolean withChildren)
+	
+	public TestXmlAcronyms(){super(Acronyms.class);}
+	public static Acronyms create(boolean withChildren){return (new TestXmlAcronyms()).build(withChildren);}
+	    
+    public Acronyms build(boolean withChildren)
     {
-    	Glossary xml = new Glossary();
-    	xml.setCode("myCode");
+    	Acronyms xml = new Acronyms();
     	
     	if(withChildren)
     	{
@@ -29,8 +28,8 @@ public class TestXmlGlossary extends AbstractXmlEditorialTest<Glossary>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();
-		TestXmlGlossary test = new TestXmlGlossary();
+		OfxXmlTstBootstrap.init();	
+		TestXmlAcronyms test = new TestXmlAcronyms();
 		test.saveReferenceXml();
     }
 }

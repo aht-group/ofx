@@ -2,7 +2,10 @@ package org.openfuxml.content.list;
 
 import org.openfuxml.test.AbstractOfxXmlTest;
 
-public abstract class AbstractXmlListTest extends AbstractOfxXmlTest
+public abstract class AbstractXmlListTest <T extends Object> extends AbstractOfxXmlTest<T>
 {
-	protected static final String dirSuffix = "content/list";
+	public AbstractXmlListTest(Class<T> cXml)
+	{
+		super(cXml,"content/list");
+	}
 }

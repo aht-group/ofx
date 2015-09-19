@@ -12,6 +12,12 @@ public abstract class AbstractOfxXmlTest <T extends Object> extends AbstractAhtU
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
+	public AbstractOfxXmlTest(){this(null,null);}
+	public AbstractOfxXmlTest(Class<T> cXml,String xmlDirSuffix)
+	{
+		super(cXml,xmlDirSuffix);
+	}
+	
 	@BeforeClass
     public static void initLogger()
 	{
