@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<wiki:server xmlns:wiki="http://www.openfuxml.org/wiki" id="myId" default="true" name="name" url="http://">
+    <wiki:auth type="wiki" name="name" password="xyz"/>
+</wiki:server>
