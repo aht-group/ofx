@@ -55,8 +55,8 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
 		specification.setColumns(cols);
 		
 		Body body = new Body();
-		body.getRow().add(TestLatexRowFactory.create(words));
-		body.getRow().add(TestLatexRowFactory.create(words));
+		body.getRow().add(TestLatexRowRenderer.create(words));
+		body.getRow().add(TestLatexRowRenderer.create(words));
 		
 		Content content = new Content();
 		content.setHead(createTableHead());
@@ -72,7 +72,7 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
 	public static Head createTableHead()
 	{
 		Head head = new Head();
-		head.getRow().add(TestLatexRowFactory.create());
+		head.getRow().add(TestLatexRowRenderer.create());
 		return head;
 	}
 	

@@ -12,9 +12,9 @@ import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestLatexRowFactory extends AbstractLatexTableTest
+public class TestLatexRowRenderer extends AbstractLatexTableTest
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestLatexRowFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TestLatexRowRenderer.class);
 	
 	private static enum Key {standard}
 	
@@ -40,7 +40,7 @@ public class TestLatexRowFactory extends AbstractLatexTableTest
 		Row row = new Row();
 		for(int i=0;i<words.length;i++)
 		{
-			row.getCell().add(TestLatexCellFactory.create(words[i]));
+			row.getCell().add(TestLatexCellRenderer.create(words[i]));
 		}
 		return row;
 	}
@@ -57,8 +57,8 @@ public class TestLatexRowFactory extends AbstractLatexTableTest
     {
     	OfxCoreTestBootstrap.init();
 			
-    	TestLatexRowFactory.initLoremIpsum();
-    	TestLatexRowFactory test = new TestLatexRowFactory();
+    	TestLatexRowRenderer.initLoremIpsum();
+    	TestLatexRowRenderer test = new TestLatexRowRenderer();
     	test.setSaveReference(true);
     	
  //   	test.initRenderer();test.paragraph();

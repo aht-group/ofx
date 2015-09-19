@@ -9,16 +9,15 @@ import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.content.list.TestLatexListRenderer;
 import org.openfuxml.renderer.latex.content.structure.TestLatexParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestLatexCellFactory extends AbstractLatexTableTest
+public class TestLatexCellRenderer extends AbstractLatexTableTest
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestLatexCellFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(TestLatexCellRenderer.class);
 	
 	private static enum Key {string,list,specialChar}
 	
@@ -28,7 +27,7 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexCellRenderer(new NoOpCrossMediaManager(),null);
+		renderer = new LatexCellRenderer(cmm,dsm);
 	}
 	
 	@After public void close(){renderer=null;}
@@ -84,8 +83,8 @@ public class TestLatexCellFactory extends AbstractLatexTableTest
     {
     	OfxCoreTestBootstrap.init();
 			
-    	TestLatexCellFactory.initLoremIpsum();
-    	TestLatexCellFactory test = new TestLatexCellFactory();
+    	TestLatexCellRenderer.initLoremIpsum();
+    	TestLatexCellRenderer test = new TestLatexCellRenderer();
     	test.setSaveReference(true);
     	
     	test.initRenderer();test.paragraph();
