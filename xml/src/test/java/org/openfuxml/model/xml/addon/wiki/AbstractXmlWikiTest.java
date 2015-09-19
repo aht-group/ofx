@@ -1,11 +1,11 @@
 package org.openfuxml.model.xml.addon.wiki;
 
-import java.io.File;
-
 import org.openfuxml.test.AbstractOfxXmlTest;
 
-public abstract class AbstractXmlWikiTest extends AbstractOfxXmlTest
+public abstract class AbstractXmlWikiTest <T extends Object> extends AbstractOfxXmlTest<T>
 {
-	protected static final String rootDir = "src/test/resources/data/xml/addon/wiki";
-	protected static File fXml;
+	public AbstractXmlWikiTest(Class<T> cXml)
+	{
+		super(cXml,"addon/wiki");
+	}
 }
