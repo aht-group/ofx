@@ -54,6 +54,12 @@
 \usepackage{forest}
 
 %%%%%%%%%%%
+% For hyperlinks
+%%%%%%%%%%%
+\usepackage{hyperref}
+
+
+%%%%%%%%%%%
 % For integration of the FontAwesome Open Source Font
 %%%%%%%%%%%
 \usepackage{fontawesome}
@@ -69,12 +75,13 @@
 \usepackage{wrapfig}
 
 %%%%%%%%%%%
-% For Enumerations with numbers in circle frames
+% For Enumerations with numbers and in general circle frames
 %%%%%%%%%%%
 \usepackage{enumitem}
 \usepackage{tikz}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
   \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
 
 %%%%%%%%%%%
 % For special parts like warnings
