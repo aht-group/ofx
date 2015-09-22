@@ -54,6 +54,16 @@
 \usepackage{forest}
 
 %%%%%%%%%%%
+% For integration of the FontAwesome Open Source Font
+%%%%%%%%%%%
+\usepackage{fontawesome}
+
+%%%%%%%%%%%
+% For creating glossaries and accronym indexes
+%%%%%%%%%%%
+\usepackage{glossaries}
+
+%%%%%%%%%%%
 % For wrapping images
 %%%%%%%%%%%
 \usepackage{wrapfig}
@@ -75,8 +85,12 @@
 
 \colorlet{shadecolor}{gray!10}
 
-\newenvironment{Note}
+\newenvironment{Warning}
   {\begin{shaded}\marginnote{\faExclamationTriangle}}
+  {\end{shaded}}
+
+\newenvironment{Remark}
+  {\begin{shaded}\marginnote{\faInfo}}
   {\end{shaded}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
