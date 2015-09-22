@@ -53,6 +53,32 @@
 %Trees
 \usepackage{forest}
 
+%%%%%%%%%%%
+% For wrapping images
+%%%%%%%%%%%
+\usepackage{wrapfig}
+
+%%%%%%%%%%%
+% For Enumerations with numbers in circle frames
+%%%%%%%%%%%
+\usepackage{enumitem}
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+  \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+%%%%%%%%%%%
+% For special parts like warnings
+%%%%%%%%%%%
+\usepackage{xcolor}
+\usepackage{marginnote}
+\usepackage{framed}
+
+\colorlet{shadecolor}{gray!10}
+
+\newenvironment{Note}
+  {\begin{shaded}\marginnote{\faExclamationTriangle}}
+  {\end{shaded}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 

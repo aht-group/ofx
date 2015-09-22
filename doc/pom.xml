@@ -11,7 +11,7 @@
 	
     <artifactId>ofx-doc</artifactId>
     <packaging>jar</packaging>
-    <name>OFX - Core</name>
+    <name>OFX - Doc</name>
 	
 	<dependencyManagement>
 		<dependencies>      	         
