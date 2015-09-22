@@ -136,12 +136,23 @@
 	                <t:cell><ofx:paragraph>collectbox</ofx:paragraph></t:cell>
 	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
 	            </t:row>
-	             <t:row>
+				<t:row>
 	                <t:cell><ofx:paragraph>enumitem</ofx:paragraph></t:cell>
 	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
 	            </t:row>
-	        </t:body>
+				<t:row>
+	                <t:cell><ofx:paragraph>wrapfig</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
+				<t:row>
+	                <t:cell><ofx:paragraph>framed</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
+				<t:row>
+	                <t:cell><ofx:paragraph>marginnote</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
+			</t:body>
 	    </t:content>
 	</t:table>
-	
 </ofx:section>

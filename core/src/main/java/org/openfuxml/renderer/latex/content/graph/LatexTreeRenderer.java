@@ -11,6 +11,7 @@ public class LatexTreeRenderer extends AbstractOfxLatexRenderer implements OfxLa
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexTreeRenderer.class);
 	
+	@SuppressWarnings("unused")
 	private LatexTreeNodeRenderer treeNodeRenderer;
 	
 	public LatexTreeRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
