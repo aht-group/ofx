@@ -21,6 +21,7 @@ import org.openfuxml.util.filter.OfxLangFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.StringIO;
 
 public class OfxMultiLangLatexWriter
@@ -28,7 +29,10 @@ public class OfxMultiLangLatexWriter
 	final static Logger logger = LoggerFactory.getLogger(OfxMultiLangLatexWriter.class);
 	
 	private String[] keys;
+	
 	private File baseLatex;
+	private RelativePathFactory rpf;
+	
 	private CrossMediaManager cmm;
 	private DefaultSettingsManager dsm;
 	
@@ -40,13 +44,16 @@ public class OfxMultiLangLatexWriter
 		this.dsm=dsm;
 		
 		dirTable = "table";
+		logger.info("Base Directory for "+OfxMultiLangLatexWriter.class.getSimpleName()+": "+baseLatex.getAbsolutePath());
+		rpf = new RelativePathFactory(baseLatex);
 	}
 	
 	private String dirTable;
 	public String getDirTable() {return dirTable;}
 	public void setDirTable(String dirTable) {this.dirTable = dirTable;}
 
-	public void table(String fileName, Table table) throws OfxAuthoringException, IOException
+	public void table(String fileName, Table table) throws OfxAuthoringException, IOException {table(fileName,table,dirTable);}
+	public void table(String fileName, Table table, String myTableDir) throws OfxAuthoringException, IOException
 	{
 		for(String lang : keys)
 		{
@@ -56,7 +63,7 @@ public class OfxMultiLangLatexWriter
 			tableRenderer.setPreBlankLine(false);
 			tableRenderer.render(omf.filterLang(table));
 			
-			File f = buildFile(lang+"/"+dirTable+"/"+fileName);
+			File f = buildFile(lang+"/"+myTableDir+"/"+fileName);
 			logger.trace(f.getAbsolutePath());
 			StringWriter sw = new StringWriter();
 			tableRenderer.write(sw);
@@ -77,7 +84,16 @@ public class OfxMultiLangLatexWriter
 
 			StringWriter sw = new StringWriter();
 			sectionRenderer.write(sw);
-			logger.trace("Writing to : "+f.getAbsolutePath());
+			
+			StringBuffer sb = new StringBuffer();
+			sb.append("Writing ").append(Section.class.getSimpleName());
+			if(section.isSetId())
+			{
+				sb.append(" (").append(section.getId()).append(")");
+			}
+			sb.append(" to ").append(rpf.relativate(f));
+			
+			logger.info(sb.toString());
 			StringIO.writeTxt(f, sw.toString());
 		}
 	}

@@ -78,7 +78,7 @@ public class MediaSourceModificationTracker
 			dir.getFile().add(file);
 		}
 		catch (ExlpXpathNotUniqueException e) {e.printStackTrace();}
-		logger.info("isChanged: "+media.getSrc()+" "+srcHasChanged);
+		if(srcHasChanged){logger.info("isChanged: "+media.getSrc()+" "+srcHasChanged);}
 		return srcHasChanged;
 	}
 	
