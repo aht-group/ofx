@@ -21,9 +21,9 @@ import org.openfuxml.content.ofx.Comment;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element ref="{http://www.openfuxml.org}comment" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org/list}type"/>
  *         &lt;element ref="{http://www.openfuxml.org/list}item" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.openfuxml.org}comment" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,20 +34,48 @@ import org.openfuxml.content.ofx.Comment;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "comment",
     "type",
-    "item",
-    "comment"
+    "item"
 })
 @XmlRootElement(name = "list")
 public class List implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
+    @XmlElement(namespace = "http://www.openfuxml.org")
+    protected Comment comment;
     @XmlElement(required = true)
     protected Type type;
     protected java.util.List<Item> item;
-    @XmlElement(namespace = "http://www.openfuxml.org")
-    protected Comment comment;
+
+    /**
+     * Gets the value of the comment property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Comment }
+     *     
+     */
+    public Comment getComment() {
+        return comment;
+    }
+
+    /**
+     * Sets the value of the comment property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Comment }
+     *     
+     */
+    public void setComment(Comment value) {
+        this.comment = value;
+    }
+
+    public boolean isSetComment() {
+        return (this.comment!= null);
+    }
 
     /**
      * Gets the value of the type property.
@@ -112,34 +140,6 @@ public class List implements Serializable
 
     public void unsetItem() {
         this.item = null;
-    }
-
-    /**
-     * Gets the value of the comment property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Comment }
-     *     
-     */
-    public Comment getComment() {
-        return comment;
-    }
-
-    /**
-     * Sets the value of the comment property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Comment }
-     *     
-     */
-    public void setComment(Comment value) {
-        this.comment = value;
-    }
-
-    public boolean isSetComment() {
-        return (this.comment!= null);
     }
 
 }

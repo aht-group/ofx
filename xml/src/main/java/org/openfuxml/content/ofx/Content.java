@@ -70,10 +70,10 @@ public class Content
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link String }
      * {@link Sections }
      * {@link Section }
      * {@link org.openfuxml.addon.wiki.data.jaxb.Content }
-     * {@link String }
      * 
      * 
      */
