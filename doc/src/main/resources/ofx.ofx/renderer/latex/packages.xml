@@ -152,6 +152,18 @@
 	                <t:cell><ofx:paragraph>marginnote</ofx:paragraph></t:cell>
 	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
 	            </t:row>
+				<t:row>
+	                <t:cell><ofx:paragraph>relsize</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
+				<t:row>
+	                <t:cell><ofx:paragraph>menukeys</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
+				<t:row>
+	                <t:cell><ofx:paragraph>catoptions</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>	            
 			</t:body>
 	    </t:content>
 	</t:table>
