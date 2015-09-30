@@ -35,7 +35,6 @@ public abstract class AbstractAhtUtilsXmlTest <T extends Object>
 		{
 			initXmlFile();
 		}
-		
 	}
 	
 	public void initXmlFile()

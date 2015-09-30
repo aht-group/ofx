@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.content.media.TestXmlImage;
+import org.openfuxml.content.structure.TestXmlHighlight;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
@@ -32,6 +33,7 @@ public class TestXmlSection extends AbstractXmlOfxTest<Section>
     		xml.getContent().add(TestXmlTitle.create(false));
     		xml.getContent().add(TestXmlTitle.create(false));
     		xml.getContent().add(TestXmlParagraph.create(false));
+    		xml.getContent().add(TestXmlHighlight.create(false));
             xml.getContent().add(TestXmlListing.create(false));
             xml.getContent().add(TestXmlImage.create(false));
     	}

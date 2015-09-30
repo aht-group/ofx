@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ofx:highlight xmlns:ofx="http://www.openfuxml.org" xmlns:text="http://www.openfuxml.org/text" xmlns:layout="http://www.openfuxml.org/layout" xmlns:media="http://www.openfuxml.org/media" xmlns:l="http://www.openfuxml.org/list" xmlns:wiki="http://www.openfuxml.org/wiki" xmlns:table="http://www.openfuxml.org/table">
+    <ofx:paragraph lang="en"/>
+</ofx:highlight>

@@ -30,19 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Text }
-     * 
-     */
-    public Text createText() {
-        return new Text();
-    }
-
-    /**
      * Create an instance of {@link Emphasis }
      * 
      */
     public Emphasis createEmphasis() {
         return new Emphasis();
+    }
+
+    /**
+     * Create an instance of {@link Text }
+     * 
+     */
+    public Text createText() {
+        return new Text();
     }
 
     /**

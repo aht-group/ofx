@@ -38,46 +38,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Content }
-     * 
-     */
-    public Content createContent() {
-        return new Content();
-    }
-
-    /**
-     * Create an instance of {@link Sections }
-     * 
-     */
-    public Sections createSections() {
-        return new Sections();
-    }
-
-    /**
-     * Create an instance of {@link Section }
-     * 
-     */
-    public Section createSection() {
-        return new Section();
-    }
-
-    /**
-     * Create an instance of {@link Comment }
-     * 
-     */
-    public Comment createComment() {
-        return new Comment();
-    }
-
-    /**
-     * Create an instance of {@link Title }
-     * 
-     */
-    public Title createTitle() {
-        return new Title();
-    }
-
-    /**
      * Create an instance of {@link Paragraph }
      * 
      */
@@ -94,6 +54,38 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Title }
+     * 
+     */
+    public Title createTitle() {
+        return new Title();
+    }
+
+    /**
+     * Create an instance of {@link Comment }
+     * 
+     */
+    public Comment createComment() {
+        return new Comment();
+    }
+
+    /**
+     * Create an instance of {@link Highlight }
+     * 
+     */
+    public Highlight createHighlight() {
+        return new Highlight();
+    }
+
+    /**
+     * Create an instance of {@link Section }
+     * 
+     */
+    public Section createSection() {
+        return new Section();
+    }
+
+    /**
      * Create an instance of {@link Listing }
      * 
      */
@@ -102,11 +94,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Sections }
+     * 
+     */
+    public Sections createSections() {
+        return new Sections();
+    }
+
+    /**
      * Create an instance of {@link Include }
      * 
      */
     public Include createInclude() {
         return new Include();
+    }
+
+    /**
+     * Create an instance of {@link Content }
+     * 
+     */
+    public Content createContent() {
+        return new Content();
     }
 
     /**
