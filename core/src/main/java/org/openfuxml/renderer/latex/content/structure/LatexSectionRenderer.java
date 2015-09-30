@@ -3,6 +3,7 @@ package org.openfuxml.renderer.latex.content.structure;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Comment;
+import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Include;
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.content.ofx.Paragraph;
@@ -76,6 +77,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 			else if(s instanceof Title){renderTitle(section,(Title)s);}
 			else if(s instanceof Section){renderSection((Section)s);}
 			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,true);}
+			else if(s instanceof Highlight){highlightRenderer((Highlight)s);}
 			else if(s instanceof Table){renderTable((Table)s);}
 			else if(s instanceof List){renderList((List)s,this);}
             else if(s instanceof Listing){renderListing((Listing)s);}

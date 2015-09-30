@@ -38,6 +38,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Symbol }
+     * 
+     */
+    public Symbol createSymbol() {
+        return new Symbol();
+    }
+
+    /**
      * Create an instance of {@link Text }
      * 
      */

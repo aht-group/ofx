@@ -29,10 +29,19 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
+        <xsd:element name="marginalia">
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+                <xsd:element ref="paragraph" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="paragraph">
         <xsd:complexType mixed="true">
             <xsd:sequence>
                 <xsd:element ref="text:emphasis" maxOccurs="unbounded"/>
+                <xsd:element ref="text:symbol" maxOccurs="unbounded"/>
+                <xsd:element ref="marginalia" maxOccurs="unbounded"/>
                 <xsd:element ref="reference" maxOccurs="unbounded"/>
                 <xsd:element ref="media:image" maxOccurs="1"/>
             </xsd:sequence>

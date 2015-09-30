@@ -1,9 +1,8 @@
-package org.openfuxml.renderer.latex.content.layout;
+package org.openfuxml.renderer.latex.content.structure;
 
 import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -21,7 +20,7 @@ public class LatexHighlightRenderer extends AbstractOfxLatexRenderer implements 
 		super(cmm,dsm);
 	}
 	
-	public void render(Highlight highlight) throws OfxAuthoringException, OfxConfigurationException
+	public void render(Highlight highlight) throws OfxAuthoringException
 	{
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Highlight.class.getSimpleName()+" with: "+this.getClass().getSimpleName()));
 		preTxt.add("");

@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.content.text.Symbol;
 
 
 /**
@@ -27,6 +28,8 @@ import org.openfuxml.content.text.Emphasis;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{http://www.openfuxml.org/text}emphasis" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org/text}symbol" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org}marginalia" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org}reference" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org/media}image"/>
  *       &lt;/sequence>
@@ -58,9 +61,11 @@ public class Paragraph implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
+        @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class),
         @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class)
+        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
+        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
+        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -87,10 +92,12 @@ public class Paragraph implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link Emphasis }
      * {@link Reference }
      * {@link Image }
      * {@link String }
-     * {@link Emphasis }
+     * {@link Marginalia }
+     * {@link Symbol }
      * 
      * 
      */

@@ -25,6 +25,16 @@
             </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="symbol">
+        <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:string">
+                    <xsd:attribute name="math"  type="xsd:boolean"/>
+                    <xsd:attribute name="code" type="xsd:string"/>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="emphasis">
         <xsd:complexType>
             <xsd:simpleContent>

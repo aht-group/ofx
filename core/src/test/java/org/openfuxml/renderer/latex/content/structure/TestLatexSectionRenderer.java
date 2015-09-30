@@ -8,6 +8,7 @@ import org.apache.commons.configuration.Configuration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -86,6 +87,21 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
         OfxContentDebugger.debug(content);
         Assert.assertEquals(5, content.size());
     }
+	
+	@Test public void sectionWithHighlight() throws OfxAuthoringException, OfxConfigurationException
+    {
+		section.getContent().clear();
+		Highlight highlight = new Highlight();
+		highlight.getContent().add(XmlParagraphFactory.text("test"));
+		section.getContent().add(highlight);
+		
+		JaxbUtil.trace(section);
+    	renderer.render(section);
+        List<String> content = renderer.getContent();
+        OfxContentDebugger.debug(content);
+//        Assert.assertEquals(7, content.size());
+ //       testLatex(content);
+    }
     
     public static void main(String[] args) throws Exception
     {
@@ -95,10 +111,11 @@ public class TestLatexSectionRenderer extends AbstractLatexContentTest
     	test.initLatexTestEnvironment(config);
         test.init();
 
-       	test.section();
+//       	test.section();
 //     test.sectionWithHeaderButContainer();
 //       test.sectionInclude();
 //        test.sectionIncludeWithContent();
+       	test.sectionWithHighlight();
     }
    
 }

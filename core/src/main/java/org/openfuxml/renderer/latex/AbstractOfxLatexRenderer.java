@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.openfuxml.content.media.Image;
+import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
@@ -14,6 +15,7 @@ import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.list.LatexListRenderer;
 import org.openfuxml.renderer.latex.content.media.LatexImageRenderer;
+import org.openfuxml.renderer.latex.content.structure.LatexHighlightRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;
@@ -89,6 +91,13 @@ public class AbstractOfxLatexRenderer
 	{
 		LatexParagraphRenderer f = new LatexParagraphRenderer(cmm,dsm,preBlankLine);
 		f.render(paragraph);
+		renderer.add(f);
+	}
+	
+	protected void highlightRenderer(Highlight highlight) throws OfxAuthoringException
+	{
+		LatexHighlightRenderer f = new LatexHighlightRenderer(cmm,dsm);
+		f.render(highlight);
 		renderer.add(f);
 	}
 	

@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.media.Image;
+import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.content.text.Symbol;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.interfaces.DefaultSettingsManager;
@@ -15,10 +17,13 @@ import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.media.LatexImageRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexEmphasisRenderer;
+import org.openfuxml.renderer.latex.content.text.LatexSymbolRenderer;
 import org.openfuxml.renderer.latex.structure.LatexReferenceRenderer;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
@@ -41,6 +46,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 	
 	public void render(Paragraph paragraph) throws OfxAuthoringException
 	{	
+		JaxbUtil.trace(paragraph);
 		int nonInlineCounter = 0;
 		Image image=null;
 		for(Object o : paragraph.getContent())
@@ -74,6 +80,8 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 			else if(o instanceof Emphasis){renderEmphasis(sb, (Emphasis)o);}
 			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
 			else if(o instanceof Reference){renderReference(sb,(Reference)o);}
+			else if(o instanceof Marginalia){renderMarginalia(sb,(Marginalia)o);}
+			else if(o instanceof Symbol){renderSymbol(sb,(Symbol)o);}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
 		txt.add(sb.toString());
@@ -96,5 +104,19 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 		LatexReferenceRenderer lrr = new LatexReferenceRenderer(cmm,dsm);
 		lrr.render(reference);
 		for(String s : lrr.getContent()){sb.append(s);}
+	}
+	
+	protected void renderMarginalia(StringBuffer sb, Marginalia marginalia) throws OfxAuthoringException
+	{
+		LatexMarginaliaRenderer lmr = new LatexMarginaliaRenderer(cmm,dsm);
+		lmr.render(marginalia);
+		for(String s : lmr.getContent()){sb.append(s);}
+	}
+	
+	protected void renderSymbol(StringBuffer sb, Symbol symbol) throws OfxAuthoringException
+	{
+		LatexSymbolRenderer lmr = new LatexSymbolRenderer(cmm,dsm);
+		lmr.render(symbol);
+		for(String s : lmr.getContent()){sb.append(s);}
 	}
 }

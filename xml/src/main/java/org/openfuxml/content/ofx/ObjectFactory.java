@@ -46,6 +46,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Marginalia }
+     * 
+     */
+    public Marginalia createMarginalia() {
+        return new Marginalia();
+    }
+
+    /**
      * Create an instance of {@link Reference }
      * 
      */
