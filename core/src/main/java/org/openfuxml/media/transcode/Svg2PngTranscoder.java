@@ -39,4 +39,24 @@ public class Svg2PngTranscoder
 	    ostream.close();
 	    return ostream.toByteArray();
 	}
+	
+	public static byte[] transcode(int height, SVGGraphics2D g) throws IOException, TranscoderException
+	{
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		Writer w = new OutputStreamWriter(os, "UTF-8");
+		g.stream(w);
+	    
+		InputStream isFromFirstData = new ByteArrayInputStream(os.toByteArray()); 
+	    PNGTranscoder t = new PNGTranscoder();
+	   
+	    TranscoderInput input = new TranscoderInput(isFromFirstData);
+	     
+	    ByteArrayOutputStream ostream = new ByteArrayOutputStream();
+	    TranscoderOutput output = new TranscoderOutput(ostream);
+	     
+	    t.transcode(input, output);
+	    ostream.flush();
+	    ostream.close();
+	    return ostream.toByteArray();
+	}
 }
