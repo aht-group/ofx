@@ -5,6 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.renderer.latex.content.structure.LatexMarginaliaRenderer;
+import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
+import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.test.AbstractOfxCoreTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +18,17 @@ public class TestLatexWidthCalculator extends AbstractOfxCoreTest
 
 	private LatexWidthCalculator lwc;
 	private Width width;
+	private LatexSectionRenderer sectionRenderer;
+	private LatexMarginaliaRenderer marginaliaRenderer;
 
 	@Before
 	public void init()
 	{
 		lwc = new LatexWidthCalculator();
 		width = new Width();
+		
+		sectionRenderer = new LatexSectionRenderer(cmm,dsm,1,new LatexPreamble(cmm,dsm));
+		marginaliaRenderer = new LatexMarginaliaRenderer(cmm,dsm);
 	}
 	
 	@Test
@@ -30,7 +38,7 @@ public class TestLatexWidthCalculator extends AbstractOfxCoreTest
 		width.setValue(12);
 		
 		String expected = "12.0cm";
-        String actual = lwc.buildWidth(width);
+        String actual = lwc.buildWidth(sectionRenderer,width);
         Assert.assertEquals(expected, actual);
 	}
 	
@@ -40,8 +48,7 @@ public class TestLatexWidthCalculator extends AbstractOfxCoreTest
 		width.setUnit("percentage");
 		width.setValue(12);
 		
-		String expected = "0.12\\linewidth";
-        String actual = lwc.buildWidth(width);
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("0.12\\linewidth", lwc.buildWidth(sectionRenderer,width));
+        Assert.assertEquals("0.12\\linewidth", lwc.buildWidth(marginaliaRenderer,width));
 	}
 }

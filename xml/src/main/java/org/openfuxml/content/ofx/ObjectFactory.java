@@ -54,14 +54,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Reference }
-     * 
-     */
-    public Reference createReference() {
-        return new Reference();
-    }
-
-    /**
      * Create an instance of {@link Title }
      * 
      */
@@ -75,6 +67,14 @@ public class ObjectFactory {
      */
     public Comment createComment() {
         return new Comment();
+    }
+
+    /**
+     * Create an instance of {@link Reference }
+     * 
+     */
+    public Reference createReference() {
+        return new Reference();
     }
 
     /**

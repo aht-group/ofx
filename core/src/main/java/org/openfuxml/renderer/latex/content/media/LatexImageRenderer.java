@@ -10,6 +10,7 @@ import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.structure.LatexMarginaliaRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexTitleRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
@@ -27,14 +28,17 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 	private boolean inFigure;
 	private Environment environment;
 	
+	private LatexWidthCalculator lwc;
+	
 	public LatexImageRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{	
 		super(cmm,dsm);
+		lwc = new LatexWidthCalculator();
 	}
 	
-	public void render(Object parent, Image image) throws OfxAuthoringException
+	public void render(Object parentRenderer, Image image) throws OfxAuthoringException
 	{
-		setEnvironment(parent);
+		setEnvironment(parentRenderer);
 		
 		if(!image.isSetMedia()){throw new OfxAuthoringException(Image.class.getSimpleName()+" has no "+Media.class.getSimpleName());}
 		
@@ -45,7 +49,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		StringBuffer sb = new StringBuffer();
 		if(Environment.Cell.equals(environment)){sb.append("$\\vcenter{\\hbox{");}
 		sb.append(" \\includegraphics");
-		sb.append(imageArguments(image));
+		sb.append(imageArguments(parentRenderer,image));
 		sb.append("{").append(cmm.getImageRef(image.getMedia())).append("}");
 		if(Environment.Cell.equals(environment)){sb.append("}}$");}
 		txt.add(sb.toString());
@@ -59,6 +63,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		
 		if(parent instanceof LatexCellRenderer) {environment=Environment.Cell;inFigure = false;}
 		else if (parent instanceof LatexParagraphRenderer){environment=Environment.Inline;}
+		else if (parent instanceof LatexMarginaliaRenderer){environment=Environment.Inline;}
 		else {environment=Environment.Figure;inFigure = true;}
 	}
 	
@@ -96,7 +101,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		
 	}
 	
-	private String imageArguments(Image image) throws OfxAuthoringException
+	private String imageArguments(Object parentRenderer, Image image) throws OfxAuthoringException
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
@@ -108,13 +113,11 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		else if(image.isSetWidth())
 		{
 			sb.append("width=");
-			LatexWidthCalculator lwc = new LatexWidthCalculator();
-			sb.append(lwc.buildWidth(image.getWidth()));
+			sb.append(lwc.buildWidth(parentRenderer,image.getWidth()));
 		}
 		else if(image.isSetHeight())
 		{
 			sb.append("height=");
-			LatexWidthCalculator lwc = new LatexWidthCalculator();
 			sb.append(lwc.buildHeight(image.getHeight()));
 		}
 		else {sb.append("width=12cm");}

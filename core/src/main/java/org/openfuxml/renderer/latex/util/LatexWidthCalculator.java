@@ -6,6 +6,7 @@ import java.text.DecimalFormatSymbols;
 import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.renderer.latex.content.structure.LatexMarginaliaRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,7 @@ public class LatexWidthCalculator
 		df = new DecimalFormat("0.00",otherSymbols);
 	}
 	
-	public String buildWidth(Width width) throws OfxAuthoringException
+	public String buildWidth(Object parentRenderer, Width width) throws OfxAuthoringException
 	{
 		if(!width.isSetValue()){throw new OfxAuthoringException("No width-value given");}
 		
@@ -37,7 +38,8 @@ public class LatexWidthCalculator
 		else if(width.getUnit().equals("percentage"))
 		{
 			sb.append(df.format(width.getValue()/100));
-			sb.append("\\linewidth");
+			if(parentRenderer instanceof LatexMarginaliaRenderer){sb.append("\\marginparwidth");}
+			else{sb.append("\\linewidth");}
 		}
 		else
 		{
