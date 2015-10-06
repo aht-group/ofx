@@ -4,12 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.io.StringIO;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -19,6 +17,9 @@ import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.StringIO;
 
 @RunWith(Parameterized.class)
 public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
@@ -55,7 +56,7 @@ public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
 		xhtmlFinalP = null;
 	}
     
-    @Test
+    @Test @Ignore
     public void test() throws OfxInternalProcessingException
     {
     	logger.debug(fTest.getAbsolutePath());
@@ -68,6 +69,7 @@ public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
 		String outTxt = xhtmlFinalP.process(inTxt);
 		if(saveReference)
 		{
+			logger.info("Write "+fRef);
 			StringIO.writeTxt(fRef, outTxt);
 		}
 		else
@@ -103,7 +105,7 @@ public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
 		
 		boolean saveReference = true;
 		
-		int id = -1;
+		int id = 0;
 		
 		TestXhtmlFinalProcessor.chain(id,saveReference);
     }
