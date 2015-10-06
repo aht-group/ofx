@@ -49,6 +49,6 @@ public class TestLatexWidthCalculator extends AbstractOfxCoreTest
 		width.setValue(12);
 		
         Assert.assertEquals("0.12\\linewidth", lwc.buildWidth(sectionRenderer,width));
-        Assert.assertEquals("0.12\\linewidth", lwc.buildWidth(marginaliaRenderer,width));
+        Assert.assertEquals("0.12\\marginparwidth", lwc.buildWidth(marginaliaRenderer,width));
 	}
 }

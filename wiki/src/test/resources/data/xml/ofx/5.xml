@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ofx:section xmlns:ofx="http://www.openfuxml.org" xmlns:list="http://www.openfuxml.org/list" xmlns:table="http://www.openfuxml.org/table" xmlns:layout="http://www.openfuxml.org/layout" xmlns:wiki="http://www.openfuxml.org/wiki" transparent="true">
+<ofx:section xmlns:ofx="http://www.openfuxml.org" xmlns:layout="http://www.openfuxml.org/layout" xmlns:list="http://www.openfuxml.org/list" xmlns:table="http://www.openfuxml.org/table" xmlns:wiki="http://www.openfuxml.org/wiki" transparent="true">
 
     
 	
@@ -69,7 +69,7 @@
 
 			<list:item>
 				<ofx:paragraph>
-					<ofx:reference target="#phaseExternalMerge">phaseExternalMerge</ofx:reference>
+					<ofx:reference target="#phaseExternalMerge_2">phaseExternalMerge</ofx:reference>
 
 				</ofx:paragraph>
 			</list:item>
