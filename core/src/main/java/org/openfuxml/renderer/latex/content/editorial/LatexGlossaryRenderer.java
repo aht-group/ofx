@@ -87,9 +87,7 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 		txt.add("");
 		txt.add("\\newglossaryentry{"+term.getCode()+"}");
 		txt.add("{\tname="+tr.getContentAsSingleLine(" ")+",");
-//		txt.add("\tdescription={");
 		txt.addAll(c);
-//		txt.add("}");
 		txt.add("}");
 	}
 }

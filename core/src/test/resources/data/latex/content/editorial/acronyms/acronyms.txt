@@ -4,11 +4,7 @@
 % Do not modify this auto-generated file, it will be overwritten without warning!
 \newacronym{c1}
 {Code-1}
-{
-Description-1
-}
+{Description-1}
 \newacronym{c2}
 {Code-2}
-{
-Description-2
-}
+{Description-2}

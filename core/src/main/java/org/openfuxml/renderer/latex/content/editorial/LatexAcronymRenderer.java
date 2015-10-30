@@ -63,8 +63,6 @@ public class LatexAcronymRenderer extends AbstractOfxLatexRenderer implements Of
 		
 		txt.add("\\newacronym{"+term.getCode()+"}");
 		txt.add("{"+tr.getContentAsSingleLine(" ")+"}");
-		txt.add("{");
-		txt.addAll(pr.getContent());
-		txt.add("}");
+		txt.add("{"+pr.getContentAsSingleLine(" ")+"}");
 	}
 }

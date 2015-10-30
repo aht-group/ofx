@@ -59,7 +59,7 @@ public class AbstractOfxLatexRenderer
 	
 	public String getContentAsSingleLine(String delimiter)
 	{
-		return StringUtils.join(getContent(), "");
+		return StringUtils.join(getContent(), delimiter);
 	}
 	
 	public List<String> getContent()
