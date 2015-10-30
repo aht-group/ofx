@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.editorial;
 
+import java.util.List;
+
 import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.content.editorial.Term;
 import org.openfuxml.content.ofx.Paragraph;
@@ -71,13 +73,23 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 		LatexParagraphRenderer pr = new LatexParagraphRenderer(cmm,dsm,false);
 		pr.render(term.getParagraph());
 		
+		List<String> c = pr.getContent();
+		if(c.size()>0)
+		{
+			c.set(0, "\tdescription={"+c.get(0));
+			
+			int indexLast = c.size()-1;
+			c.set(indexLast, c.get(indexLast)+"}");
+			
+		}
+		else{c.add("}");}
+		
 		txt.add("");
 		txt.add("\\newglossaryentry{"+term.getCode()+"}");
-		txt.add("{");		
-		txt.add("\tname="+tr.getContentAsSingleLine(" ")+",");
-		txt.add("\tdescription={");
-		txt.addAll(pr.getContent());
-		txt.add("}");
+		txt.add("{\tname="+tr.getContentAsSingleLine(" ")+",");
+//		txt.add("\tdescription={");
+		txt.addAll(c);
+//		txt.add("}");
 		txt.add("}");
 	}
 }
