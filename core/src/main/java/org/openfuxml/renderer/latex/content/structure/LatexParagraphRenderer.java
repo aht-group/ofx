@@ -3,6 +3,7 @@ package org.openfuxml.renderer.latex.content.structure;
 import java.util.List;
 
 import org.openfuxml.content.layout.Alignment;
+import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
@@ -48,7 +49,9 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 	{	
 		JaxbUtil.trace(paragraph);
 		int nonInlineCounter = 0;
+		
 		Image image=null;
+		Font font = null;
 		for(Object o : paragraph.getContent())
 		{
 			if(o instanceof Image)
@@ -61,8 +64,33 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 				XmlAlignmentFactory.Horizontal horizontal = XmlAlignmentFactory.Horizontal.valueOf(image.getAlignment().getHorizontal());
 				if(!horizontal.equals(XmlAlignmentFactory.Horizontal.inline)){nonInlineCounter++;}
 			}
+			if(o instanceof Font)
+			{
+				if(font!=null){throw new OfxAuthoringException("More than one "+Font.class.getSimpleName()+" in "+Paragraph.class.getSimpleName()+" not allowed");}
+				font = (Font)o;
+			}
 		}
 		if(nonInlineCounter>1){throw new OfxAuthoringException("More than one non-inline "+Image.class.getSimpleName()+" in "+Paragraph.class.getSimpleName()+" not allowed");}
+		
+		if(font!=null)
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("{");
+			if(font.isSetRelativeSize())
+			{
+				if(font.getRelativeSize()==-4){sb.append("\\tiny");}
+				else if(font.getRelativeSize()==-3){sb.append("\\scriptsize");}
+				else if(font.getRelativeSize()==-2){sb.append("\\footnotesize");}
+				else if(font.getRelativeSize()==-1){sb.append("\\small");}
+				else if(font.getRelativeSize()==0){sb.append("\\normalsize");}
+				else if(font.getRelativeSize()==1){sb.append("\\large");}
+				else if(font.getRelativeSize()==2){sb.append("\\Large");}
+				else if(font.getRelativeSize()==3){sb.append("\\LARGE");}
+				else if(font.getRelativeSize()==4){sb.append("\\huge");}
+				else if(font.getRelativeSize()==5){sb.append("\\Huge");}
+			}
+			txt.add(sb.toString());
+		}
 		
 		if(nonInlineCounter==1 && image!=null)
 		{
@@ -90,6 +118,8 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 		{
 			txt.add("\\end{window}");
 		}
+		
+		if(font!=null){txt.add("}");}
 	}
 	
 	private void renderEmphasis(StringBuffer sb, Emphasis emphasis) throws OfxAuthoringException

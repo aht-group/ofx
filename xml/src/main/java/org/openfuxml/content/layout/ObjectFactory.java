@@ -30,6 +30,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Font }
+     * 
+     */
+    public Font createFont() {
+        return new Font();
+    }
+
+    /**
      * Create an instance of {@link Alignment }
      * 
      */

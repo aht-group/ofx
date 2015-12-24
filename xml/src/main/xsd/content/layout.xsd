@@ -49,6 +49,11 @@
             </xsd:simpleContent>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="font">
+		 <xsd:complexType>
+            <xsd:attribute name="relativeSize" type="xsd:int"/>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="height">
 		 <xsd:complexType>
             <xsd:simpleContent>

@@ -40,6 +40,7 @@
     <xsd:element name="paragraph">
         <xsd:complexType mixed="true">
             <xsd:sequence>
+            	<xsd:element ref="layout:font" maxOccurs="1"/>
                 <xsd:element ref="text:emphasis" maxOccurs="unbounded"/>
                 <xsd:element ref="text:symbol" maxOccurs="unbounded"/>
                 <xsd:element ref="marginalia" maxOccurs="unbounded"/>
