@@ -80,7 +80,8 @@ public class OfxMultiLangLatexWriter
 			OfxLangFilter omf = new OfxLangFilter(lang);
 			
 			LatexSectionRenderer sectionRenderer = new LatexSectionRenderer(cmm,dsm,sectionLevel,new LatexPreamble(cmm,dsm));
-			sectionRenderer.render(omf.filterLang(section));
+			Section sectionFiltered = omf.filterLang(section);
+			sectionRenderer.render(sectionFiltered);
 
 			StringWriter sw = new StringWriter();
 			sectionRenderer.write(sw);

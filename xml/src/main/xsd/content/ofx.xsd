@@ -131,6 +131,7 @@
             	<xsd:element ref="comment" minOccurs="0" maxOccurs="1"/>
                 <xsd:element ref="title" maxOccurs="unbounded"/>
                 <xsd:element ref="wiki:content" maxOccurs="unbounded"/>
+                <xsd:element ref="marginalia" maxOccurs="unbounded"/>
                 <xsd:element ref="highlight" maxOccurs="unbounded"/>
                 <xsd:element ref="paragraph" maxOccurs="unbounded"/>
                 <xsd:element ref="section" maxOccurs="unbounded"/>

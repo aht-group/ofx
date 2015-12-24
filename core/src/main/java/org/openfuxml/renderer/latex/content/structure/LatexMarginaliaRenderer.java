@@ -24,15 +24,15 @@ public class LatexMarginaliaRenderer extends AbstractOfxLatexRenderer implements
 	{
 //		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Highlight.class.getSimpleName()+" with: "+this.getClass().getSimpleName()));
 
-		preTxt.add("\\marginnote{");
+		preTxt.add("\\marginpar{");
 		
 		int index = 0;
-		for(Object s : marginalia.getContent())
+		for(Object o : marginalia.getContent())
 		{
-			if     (s instanceof String){}
-			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,index!=0);index++;}
-			else if(s instanceof Image){renderImage((Image)s);}
-			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
+			if     (o instanceof String){}
+			else if(o instanceof Image){renderImage((Image)o);index++;}
+			else if(o instanceof Paragraph){paragraphRenderer((Paragraph)o,index>0);index++;}
+			else {logger.warn("No Renderer for Element "+o.getClass().getSimpleName());}
 		}
 
 		postTxt.add("}");

@@ -6,6 +6,7 @@ import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Include;
 import org.openfuxml.content.ofx.Listing;
+import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
@@ -22,6 +23,8 @@ import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.StringUtil;
 
 public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
@@ -67,18 +70,19 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 			}
 		}
 		
+		logger.trace(StringUtil.stars());
 		logger.trace("Render section");
-		
-		
 		
 		for(Object s : section.getContent())
 		{
+			logger.trace(s.getClass().getSimpleName());
 			if     (s instanceof String){}
 			else if(s instanceof Title){renderTitle(section,(Title)s);}
 			else if(s instanceof Section){renderSection((Section)s);}
 			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,true);}
 			else if(s instanceof Highlight){highlightRenderer((Highlight)s);}
 			else if(s instanceof Table){renderTable((Table)s);}
+			else if(s instanceof Marginalia){renderMarginalia((Marginalia)s);}
 			else if(s instanceof List){renderList((List)s,this);}
             else if(s instanceof Listing){renderListing((Listing)s);}
             else if(s instanceof Include){renderInclude((Include)s);}
@@ -105,6 +109,13 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		LatexTableRenderer f = new LatexTableRenderer(cmm,dsm);
 		f.render(table);
 		renderer.add(f);
+	}
+	
+	private void renderMarginalia(Marginalia marginalia) throws OfxAuthoringException
+	{
+		LatexMarginaliaRenderer r = new LatexMarginaliaRenderer(cmm,dsm);
+		r.render(marginalia);
+		renderer.add(r);
 	}
 		
 	private void renderSection(Section section) throws OfxAuthoringException, OfxConfigurationException
