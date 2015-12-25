@@ -1,6 +1,5 @@
 package org.openfuxml.renderer.latex.content.structure;
 
-import org.apache.fop.render.RendererContextConstants;
 import org.openfuxml.content.layout.Box;
 import org.openfuxml.content.layout.Container;
 import org.openfuxml.content.media.Image;

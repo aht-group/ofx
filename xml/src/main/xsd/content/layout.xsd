@@ -2,12 +2,14 @@
 <xsd:schema targetNamespace="http://www.openfuxml.org/layout"
 	xmlns="http://www.openfuxml.org/layout"
 	xmlns:ofx="http://www.openfuxml.org"
+	xmlns:media="http://www.openfuxml.org/media"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
     jaxb:extensionBindingPrefixes="xjc"
     jaxb:version="2.0">
     <xsd:import namespace="http://www.openfuxml.org" schemaLocation="ofx.xsd"/>
+    <xsd:import namespace="http://www.openfuxml.org/media" schemaLocation="media.xsd"/>
     <xsd:element name="layout">
         <xsd:complexType>
             <xsd:sequence>
@@ -20,6 +22,17 @@
             <xsd:sequence>
             	<xsd:element ref="font" minOccurs="0" maxOccurs="1"/>
                 <xsd:element ref="ofx:paragraph" maxOccurs="unbounded"/>
+                <xsd:element ref="column" maxOccurs="unbounded"/>
+                <xsd:element ref="container" maxOccurs="unbounded"/>
+                <xsd:element ref="media:image" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+	<xsd:element name="column">
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+                <xsd:element ref="container" maxOccurs="unbounded"/>
+                <xsd:element ref="media:image" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>

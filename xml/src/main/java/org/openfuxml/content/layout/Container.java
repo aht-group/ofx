@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 
 
@@ -26,6 +27,9 @@ import org.openfuxml.content.ofx.Paragraph;
  *       &lt;sequence>
  *         &lt;element ref="{http://www.openfuxml.org/layout}font" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org}paragraph" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org/layout}column" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org/layout}container" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org/media}image" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -45,6 +49,9 @@ public class Container implements Serializable
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
         @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
+        @XmlElementRef(name = "column", namespace = "http://www.openfuxml.org/layout", type = Column.class),
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
+        @XmlElementRef(name = "container", namespace = "http://www.openfuxml.org/layout", type = Container.class),
         @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class)
     })
     @XmlMixed
@@ -68,9 +75,12 @@ public class Container implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Paragraph }
      * {@link Font }
+     * {@link Paragraph }
+     * {@link Column }
      * {@link String }
+     * {@link Image }
+     * {@link Container }
      * 
      * 
      */
