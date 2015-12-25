@@ -62,14 +62,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Alignment }
-     * 
-     */
-    public Alignment createAlignment() {
-        return new Alignment();
-    }
-
-    /**
      * Create an instance of {@link Width }
      * 
      */
@@ -83,6 +75,14 @@ public class ObjectFactory {
      */
     public Height createHeight() {
         return new Height();
+    }
+
+    /**
+     * Create an instance of {@link Alignment }
+     * 
+     */
+    public Alignment createAlignment() {
+        return new Alignment();
     }
 
     /**

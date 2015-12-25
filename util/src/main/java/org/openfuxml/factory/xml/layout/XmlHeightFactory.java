@@ -4,13 +4,21 @@ import org.openfuxml.content.layout.Height;
 
 public class XmlHeightFactory
 {
-	public static enum Unit {em}
+	public static enum Unit {em,shift}
 	
 	public static Height em(double value)
 	{
 		Height xml = new Height();
 		xml.setValue(value);
 		xml.setUnit(Unit.em.toString());
+		return xml;
+	}
+	
+	public static Height shift(double value)
+	{
+		Height xml = new Height();
+		xml.setValue(value);
+		xml.setUnit(Unit.shift.toString());
 		return xml;
 	}
 }

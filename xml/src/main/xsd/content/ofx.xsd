@@ -34,6 +34,8 @@
             <xsd:sequence>
             	<xsd:element ref="layout:box" maxOccurs="1"/>
             	<xsd:element ref="layout:container" maxOccurs="unbounded"/>
+            	<xsd:element ref="layout:width" minOccurs="0" maxOccurs="1"/>
+            	<xsd:element ref="layout:column" maxOccurs="unbounded"/>
                 <xsd:element ref="paragraph" maxOccurs="unbounded"/>
                 <xsd:element ref="media:image" maxOccurs="unbounded"/>
             </xsd:sequence>

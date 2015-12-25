@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.openfuxml.content.layout.Column;
 import org.openfuxml.content.layout.Container;
+import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Paragraph;
@@ -14,7 +16,9 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.layout.LatexColumnRenderer;
 import org.openfuxml.renderer.latex.content.layout.LatexContainerRenderer;
+import org.openfuxml.renderer.latex.content.layout.LatexWidthRenderer;
 import org.openfuxml.renderer.latex.content.list.LatexListRenderer;
 import org.openfuxml.renderer.latex.content.media.LatexImageRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexHighlightRenderer;
@@ -100,6 +104,20 @@ public class AbstractOfxLatexRenderer
 	{
 		LatexContainerRenderer f = new LatexContainerRenderer(cmm,dsm);
 		f.render(container);
+		renderer.add(f);
+	}
+	
+	protected void columnRenderer(Column column) throws OfxAuthoringException
+	{
+		LatexColumnRenderer f = new LatexColumnRenderer(cmm,dsm);
+		f.render(this,column);
+		renderer.add(f);
+	}
+	
+	protected void widthRenderer(Width width) throws OfxAuthoringException
+	{
+		LatexWidthRenderer f = new LatexWidthRenderer(cmm,dsm);
+		f.render(this,width);
 		renderer.add(f);
 	}
 	

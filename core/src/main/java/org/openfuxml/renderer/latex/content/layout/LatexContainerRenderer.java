@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.layout;
 
+import org.openfuxml.content.layout.Column;
 import org.openfuxml.content.layout.Container;
 import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.media.Image;
@@ -49,6 +50,7 @@ public class LatexContainerRenderer extends AbstractOfxLatexRenderer implements 
 			else if(o instanceof Paragraph){paragraphRenderer((Paragraph)o,true);}
 			else if(o instanceof Container){containerRenderer((Container)o);}
 			else if(o instanceof Image){renderImage((Image)o);}
+			else if(o instanceof Column){columnRenderer((Column)o);}
 			else if(o instanceof Font){}
 			else {logger.warn("No Renderer for Element "+o.getClass().getSimpleName());}
 		}

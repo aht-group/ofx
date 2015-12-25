@@ -31,6 +31,8 @@
 	<xsd:element name="column">
         <xsd:complexType mixed="true">
             <xsd:sequence>
+            	<xsd:element ref="width" minOccurs="0" maxOccurs="1"/>
+            	<xsd:element ref="height" minOccurs="0" maxOccurs="1"/>
                 <xsd:element ref="container" maxOccurs="unbounded"/>
                 <xsd:element ref="media:image" maxOccurs="unbounded"/>
             </xsd:sequence>

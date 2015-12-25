@@ -51,8 +51,8 @@ public class Container implements Serializable
         @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
         @XmlElementRef(name = "column", namespace = "http://www.openfuxml.org/layout", type = Column.class),
         @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "container", namespace = "http://www.openfuxml.org/layout", type = Container.class),
-        @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class)
+        @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class),
+        @XmlElementRef(name = "container", namespace = "http://www.openfuxml.org/layout", type = Container.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -75,12 +75,12 @@ public class Container implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Font }
+     * {@link Container }
+     * {@link String }
      * {@link Paragraph }
      * {@link Column }
-     * {@link String }
      * {@link Image }
-     * {@link Container }
+     * {@link Font }
      * 
      * 
      */

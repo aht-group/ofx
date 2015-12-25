@@ -1,7 +1,9 @@
 package org.openfuxml.renderer.latex.content.structure;
 
 import org.openfuxml.content.layout.Box;
+import org.openfuxml.content.layout.Column;
 import org.openfuxml.content.layout.Container;
+import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
@@ -46,6 +48,8 @@ public class LatexMarginaliaRenderer extends AbstractOfxLatexRenderer implements
 			else if(o instanceof Image){renderImage((Image)o);index++;}
 			else if(o instanceof Paragraph){paragraphRenderer((Paragraph)o,index>0);index++;}
 			else if(o instanceof Container){containerRenderer((Container)o);}
+			else if(o instanceof Column){columnRenderer((Column)o);}
+			else if(o instanceof Width){widthRenderer((Width)o);}
 			else if(o instanceof Box){}
 			else {logger.warn("No Renderer for Element "+o.getClass().getSimpleName());}
 		}

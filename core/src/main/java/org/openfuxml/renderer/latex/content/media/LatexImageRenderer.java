@@ -10,6 +10,7 @@ import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.layout.LatexColumnRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexMarginaliaRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexTitleRenderer;
@@ -25,7 +26,6 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 
 	private enum Environment{Figure,Cell,Inline}
 	
-	private boolean inFigure;
 	private Environment environment;
 	
 	private LatexWidthCalculator lwc;
@@ -61,10 +61,12 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 	{
 		logger.trace("Parent renderer is "+parent.getClass().getSimpleName());
 		
-		if(parent instanceof LatexCellRenderer) {environment=Environment.Cell;inFigure = false;}
+		
+		if(parent instanceof LatexCellRenderer) {environment=Environment.Cell;}
 		else if (parent instanceof LatexParagraphRenderer){environment=Environment.Inline;}
 		else if (parent instanceof LatexMarginaliaRenderer){environment=Environment.Inline;}
-		else {environment=Environment.Figure;inFigure = true;}
+		else if (parent instanceof LatexColumnRenderer){environment=Environment.Inline;}
+		else {environment=Environment.Figure;}
 	}
 	
 	private void renderPre(Image image) throws OfxAuthoringException
@@ -72,7 +74,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		if(Environment.Figure.equals(environment))
 		{
 			preTxt.addAll(LatexCommentRenderer.stars());
-			preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Image.class.getSimpleName()+" (figure:"+inFigure+") with "+this.getClass().getSimpleName()));
+			preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Image.class.getSimpleName()+" (environment:"+environment+") with "+this.getClass().getSimpleName()));
 			
 			if(image.isSetComment())
 			{
