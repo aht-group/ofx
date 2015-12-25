@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.structure;
 
+import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Comment;
@@ -21,10 +22,9 @@ import org.openfuxml.renderer.latex.content.listing.LatexListingRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
+import org.openfuxml.renderer.latex.util.LatexFontUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
@@ -60,24 +60,29 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Section.class.getSimpleName()+" with: "+this.getClass().getSimpleName()));
 		
-		for(Object s : section.getContent())
+		logger.trace("Render section");
+		
+		// Comment always on top!
+		for(Object o : section.getContent())
 		{
-			if (s instanceof Comment)
+			if (o instanceof Comment)
 			{
 				LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
-				rComment.render((Comment)s);
+				rComment.render((Comment)o);
 				renderer.add(rComment);
 			}
 		}
 		
-		logger.trace(StringUtil.stars());
-		logger.trace("Render section");
+		// Title after comment!
+		for(Object s : section.getContent())
+		{
+			if(s instanceof Title){renderTitle(section,(Title)s);}
+		}
+		
 		
 		for(Object s : section.getContent())
 		{
-			logger.trace(s.getClass().getSimpleName());
 			if     (s instanceof String){}
-			else if(s instanceof Title){renderTitle(section,(Title)s);}
 			else if(s instanceof Section){renderSection((Section)s);}
 			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,true);}
 			else if(s instanceof Highlight){highlightRenderer((Highlight)s);}
@@ -88,10 +93,9 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
             else if(s instanceof Include){renderInclude((Include)s);}
             else if(s instanceof Image){renderImage((Image)s);}
             else if(s instanceof Comment){}
+            else if(s instanceof Title){}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
 		}
-//		if(section.getContent()logger.debug(getSectionHeader("x"));
-		
 	}
 	
 	private void renderTitle(Section section,Title title)

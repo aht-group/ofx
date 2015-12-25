@@ -20,6 +20,7 @@ import org.openfuxml.renderer.latex.content.media.LatexImageRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexEmphasisRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexSymbolRenderer;
 import org.openfuxml.renderer.latex.structure.LatexReferenceRenderer;
+import org.openfuxml.renderer.latex.util.LatexFontUtil;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,25 +73,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 		}
 		if(nonInlineCounter>1){throw new OfxAuthoringException("More than one non-inline "+Image.class.getSimpleName()+" in "+Paragraph.class.getSimpleName()+" not allowed");}
 		
-		if(font!=null)
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("{");
-			if(font.isSetRelativeSize())
-			{
-				if(font.getRelativeSize()==-4){sb.append("\\tiny");}
-				else if(font.getRelativeSize()==-3){sb.append("\\scriptsize");}
-				else if(font.getRelativeSize()==-2){sb.append("\\footnotesize");}
-				else if(font.getRelativeSize()==-1){sb.append("\\small");}
-				else if(font.getRelativeSize()==0){sb.append("\\normalsize");}
-				else if(font.getRelativeSize()==1){sb.append("\\large");}
-				else if(font.getRelativeSize()==2){sb.append("\\Large");}
-				else if(font.getRelativeSize()==3){sb.append("\\LARGE");}
-				else if(font.getRelativeSize()==4){sb.append("\\huge");}
-				else if(font.getRelativeSize()==5){sb.append("\\Huge");}
-			}
-			txt.add(sb.toString());
-		}
+		if(font!=null){txt.add(LatexFontUtil.environmentBegin(font));}
 		
 		if(nonInlineCounter==1 && image!=null)
 		{
@@ -106,10 +89,11 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 			if(o==null){throw new OfxAuthoringException(Paragraph.class.getSimpleName()+" has no content");}
 			else if(o instanceof String){sb.append(TexSpecialChars.replace((String)o));}
 			else if(o instanceof Emphasis){renderEmphasis(sb, (Emphasis)o);}
-			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
 			else if(o instanceof Reference){renderReference(sb,(Reference)o);}
 			else if(o instanceof Marginalia){renderMarginalia(sb,(Marginalia)o);}
 			else if(o instanceof Symbol){renderSymbol(sb,(Symbol)o);}
+			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
+			else if(o instanceof Font){}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
 		txt.add(sb.toString());
@@ -119,7 +103,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 			txt.add("\\end{window}");
 		}
 		
-		if(font!=null){txt.add("}");}
+		if(font!=null){txt.add(LatexFontUtil.environmentEnd());}
 	}
 	
 	private void renderEmphasis(StringBuffer sb, Emphasis emphasis) throws OfxAuthoringException

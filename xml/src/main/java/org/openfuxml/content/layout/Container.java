@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.ofx;
+package org.openfuxml.content.layout;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,9 +11,7 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.openfuxml.content.layout.Box;
-import org.openfuxml.content.layout.Container;
-import org.openfuxml.content.media.Image;
+import org.openfuxml.content.ofx.Paragraph;
 
 
 /**
@@ -26,10 +24,8 @@ import org.openfuxml.content.media.Image;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/layout}box"/>
- *         &lt;element ref="{http://www.openfuxml.org/layout}container" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org/layout}font" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org}paragraph" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/media}image" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -42,16 +38,14 @@ import org.openfuxml.content.media.Image;
 @XmlType(name = "", propOrder = {
     "content"
 })
-@XmlRootElement(name = "marginalia")
-public class Marginalia implements Serializable
+@XmlRootElement(name = "container")
+public class Container implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "box", namespace = "http://www.openfuxml.org/layout", type = Box.class),
         @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
-        @XmlElementRef(name = "container", namespace = "http://www.openfuxml.org/layout", type = Container.class)
+        @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -75,10 +69,8 @@ public class Marginalia implements Serializable
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Paragraph }
-     * {@link Container }
-     * {@link Image }
+     * {@link Font }
      * {@link String }
-     * {@link Box }
      * 
      * 
      */

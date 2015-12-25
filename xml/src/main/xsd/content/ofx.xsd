@@ -32,6 +32,8 @@
         <xsd:element name="marginalia">
         <xsd:complexType mixed="true">
             <xsd:sequence>
+            	<xsd:element ref="layout:box" maxOccurs="1"/>
+            	<xsd:element ref="layout:container" maxOccurs="unbounded"/>
                 <xsd:element ref="paragraph" maxOccurs="unbounded"/>
                 <xsd:element ref="media:image" maxOccurs="unbounded"/>
             </xsd:sequence>
