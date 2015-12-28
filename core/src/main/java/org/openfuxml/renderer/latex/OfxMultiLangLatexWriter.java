@@ -94,7 +94,7 @@ public class OfxMultiLangLatexWriter
 			}
 			sb.append(" to ").append(rpf.relativate(f));
 			
-			logger.info(sb.toString());
+			logger.debug(sb.toString());
 			StringIO.writeTxt(f, sw.toString());
 		}
 	}
