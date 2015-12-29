@@ -12,4 +12,11 @@ public class XmlLineFactory
 		xml.setOrientation(Orientation.top.toString());
 		return xml;
 	}
+	
+	public static Line bottom()
+	{
+		Line xml = new Line();
+		xml.setOrientation(Orientation.bottom.toString());
+		return xml;
+	}
 }

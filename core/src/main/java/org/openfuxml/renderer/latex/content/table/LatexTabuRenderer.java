@@ -10,6 +10,7 @@ import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.xml.ofx.layout.XmlLineFactory;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.interfaces.media.CrossMediaManager;
@@ -110,22 +111,17 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		renderer.add(new StringRenderer("\\toprule"));
 	}
 	
-	@SuppressWarnings("unused")
 	private void renderBody(Body tbody) throws OfxAuthoringException
 	{
 		for(Row row : tbody.getRow())
 		{
-			if(row.isSetLayout())
-			{
-				for(Line line : row.getLayout().getLine())
-				{
-					renderer.add(new StringRenderer("\\midrule"));
-				}
-			}
+			horizontalLines(row,XmlLineFactory.Orientation.top);
 			
 			LatexRowRenderer f = new LatexRowRenderer(cmm,dsm);
 			f.render(row);
 			renderer.add(f);
+			
+			horizontalLines(row,XmlLineFactory.Orientation.bottom);
 		}
 		renderer.add(new StringRenderer("\\bottomrule"));
 	}
@@ -151,6 +147,21 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 			LatexTitleRenderer stf = new LatexTitleRenderer(cmm,dsm);
 			stf.render(table);
 			postTxt.addAll(stf.getContent());
+		}
+	}
+	
+	private void horizontalLines(Row row, XmlLineFactory.Orientation orientation) throws OfxAuthoringException
+	{
+		if(row.isSetLayout())
+		{
+			for(Line line : row.getLayout().getLine())
+			{
+				if(!line.isSetOrientation()){throw new OfxAuthoringException("Inside a "+Table.class.getSimpleName()+", the "+Row.class.getSimpleName()+" with a "+Line.class.getSimpleName()+" needs a orientation");}
+				if(line.getOrientation().equals(orientation.toString()))
+				{
+					renderer.add(new StringRenderer("\\midrule"));
+				}
+			}
 		}
 	}
 }
