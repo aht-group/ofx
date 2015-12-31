@@ -46,10 +46,10 @@ public class Column implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "width", namespace = "http://www.openfuxml.org/layout", type = Width.class),
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
         @XmlElementRef(name = "container", namespace = "http://www.openfuxml.org/layout", type = Container.class),
-        @XmlElementRef(name = "height", namespace = "http://www.openfuxml.org/layout", type = Height.class)
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
+        @XmlElementRef(name = "height", namespace = "http://www.openfuxml.org/layout", type = Height.class),
+        @XmlElementRef(name = "width", namespace = "http://www.openfuxml.org/layout", type = Width.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -72,10 +72,10 @@ public class Column implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Container }
-     * {@link Height }
-     * {@link Width }
      * {@link String }
+     * {@link Container }
+     * {@link Width }
+     * {@link Height }
      * {@link Image }
      * 
      * 

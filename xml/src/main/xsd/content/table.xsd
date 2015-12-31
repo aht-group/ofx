@@ -92,6 +92,7 @@
     <xsd:element name="cell">
         <xsd:complexType mixed="true">
             <xsd:sequence>
+            	<xsd:element ref="layout:font" minOccurs="0" maxOccurs="1"/>
                 <xsd:element ref="ofx:paragraph" maxOccurs="unbounded"/>
                 <xsd:element ref="list:list" maxOccurs="unbounded"/>
                 <xsd:element ref="media:image" maxOccurs="unbounded"/>

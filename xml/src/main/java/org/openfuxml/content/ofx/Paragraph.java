@@ -63,11 +63,11 @@ public class Paragraph implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
-        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
         @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class),
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
         @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class),
+        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
+        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
         @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class)
     })
     @XmlMixed
@@ -95,12 +95,12 @@ public class Paragraph implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Symbol }
+     * {@link Font }
+     * {@link Image }
+     * {@link Emphasis }
      * {@link String }
      * {@link Reference }
-     * {@link Image }
-     * {@link Font }
-     * {@link Emphasis }
+     * {@link Symbol }
      * {@link Marginalia }
      * 
      * 
