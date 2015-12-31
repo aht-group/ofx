@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.table;
 
+import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Row;
 import org.openfuxml.content.text.Emphasis;
@@ -16,8 +17,8 @@ public class LatexRowRenderer extends AbstractOfxLatexRenderer implements OfxLat
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexRowRenderer.class);
 	
-	private Emphasis emphasisOverride;
-	public void setEmphasisOverride(Emphasis emphasisOverride) {this.emphasisOverride = emphasisOverride;}
+	private Emphasis emphasisOverride; public void setEmphasisOverride(Emphasis emphasisOverride) {this.emphasisOverride = emphasisOverride;}
+	private Font font; public void setFont(Font font) {this.font = font;}
 	
 	public LatexRowRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
@@ -34,7 +35,10 @@ public class LatexRowRenderer extends AbstractOfxLatexRenderer implements OfxLat
 			if(!firstCell){renderer.add(new StringRenderer("&"));}
 			firstCell = false;
 			
-			LatexCellRenderer f = new LatexCellRenderer(cmm,dsm,emphasisOverride);
+			LatexCellRenderer f = new LatexCellRenderer(cmm,dsm);
+			f.setEmphasisOverride(emphasisOverride);
+			f.setFont(font);
+			
 			f.render(cell);
 			renderer.add(f);
 		}

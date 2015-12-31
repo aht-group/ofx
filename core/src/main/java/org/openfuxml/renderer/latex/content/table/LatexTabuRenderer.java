@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.table;
 
+import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.layout.Line;
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Column;
@@ -113,11 +114,18 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	private void renderBody(Body tbody) throws OfxAuthoringException
 	{
+		Font font = null;
+		if(tbody.isSetLayout())
+		{
+			if(tbody.getLayout().isSetFont()){font=tbody.getLayout().getFont();}
+		}
+		
 		for(Row row : tbody.getRow())
 		{
 			horizontalLines(row,XmlLineFactory.Orientation.top);
 			
 			LatexRowRenderer f = new LatexRowRenderer(cmm,dsm);
+			f.setFont(font);
 			f.render(row);
 			renderer.add(f);
 			

@@ -52,12 +52,12 @@ public class Marginalia implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "container", namespace = "http://www.openfuxml.org/layout", type = Container.class),
         @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "box", namespace = "http://www.openfuxml.org/layout", type = Box.class),
         @XmlElementRef(name = "column", namespace = "http://www.openfuxml.org/layout", type = Column.class),
-        @XmlElementRef(name = "width", namespace = "http://www.openfuxml.org/layout", type = Width.class)
+        @XmlElementRef(name = "container", namespace = "http://www.openfuxml.org/layout", type = Container.class),
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
+        @XmlElementRef(name = "width", namespace = "http://www.openfuxml.org/layout", type = Width.class),
+        @XmlElementRef(name = "box", namespace = "http://www.openfuxml.org/layout", type = Box.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -80,13 +80,13 @@ public class Marginalia implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
      * {@link Paragraph }
+     * {@link String }
      * {@link Container }
      * {@link Column }
-     * {@link Width }
-     * {@link Box }
      * {@link Image }
+     * {@link Box }
+     * {@link Width }
      * 
      * 
      */

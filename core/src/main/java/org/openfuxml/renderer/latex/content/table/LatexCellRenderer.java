@@ -20,23 +20,16 @@ public class LatexCellRenderer extends AbstractOfxLatexRenderer implements OfxLa
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexCellRenderer.class);
 	
-	private Emphasis emphasisOverride;
-	
+	private Emphasis emphasisOverride; public void setEmphasisOverride(Emphasis emphasisOverride) {this.emphasisOverride = emphasisOverride;}
+	private Font font; public void setFont(Font font) {this.font = font;}
+
 	public LatexCellRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
-		this(cmm,dsm,null);
-	}
-	
-	public LatexCellRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm,Emphasis emphasis)
-	{
 		super(cmm,dsm);
-		this.emphasisOverride=emphasis;
 	}
 	
 	public void render(Cell cell) throws OfxAuthoringException
 	{	
-		Font font = null;
-		
 		// Font has special handling!
 		for(Object o : cell.getContent())
 		{
