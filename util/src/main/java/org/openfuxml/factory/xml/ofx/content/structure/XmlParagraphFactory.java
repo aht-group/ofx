@@ -22,4 +22,12 @@ public class XmlParagraphFactory
 		xml.getContent().add(text);
 		return xml;
 	}
+	
+	public static Paragraph build(String lang, String text)
+	{
+		Paragraph xml = new Paragraph();
+		xml.setLang(lang);
+		xml.getContent().add(text);
+		return xml;
+	}
 }
