@@ -26,9 +26,14 @@ public class LatexAcronymRenderer extends AbstractOfxLatexRenderer implements Of
 		super(cmm,dsm);
 	}
 	
-	public void renderGlossaryItem(Acronym acronym) throws OfxAuthoringException
+	public void render(Acronym acronym) throws OfxAuthoringException
 	{
-
+		StringBuffer sb = new StringBuffer();
+		sb.append("\\acrshort{");
+		sb.append(acronym.getCode());
+		sb.append("}");
+		
+		txt.add(sb.toString());
 	}
 	
 	public void render(Acronyms acronyms) throws OfxAuthoringException

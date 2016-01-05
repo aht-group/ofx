@@ -40,7 +40,12 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 	
 	private void renderGlossaryItem(Glossary glossary) throws OfxAuthoringException
 	{
-
+		StringBuffer sb = new StringBuffer();
+		sb.append("\\gls{");
+		sb.append(glossary.getCode());
+		sb.append("}");
+		
+		txt.add(sb.toString());
 	}
 	
 	private void renderGlossary(Glossary glossary) throws OfxAuthoringException

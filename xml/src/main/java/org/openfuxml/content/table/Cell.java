@@ -48,8 +48,8 @@ public class Cell
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
         @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class),
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
         @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
         @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class)
     })
@@ -74,11 +74,11 @@ public class Cell
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
-     * {@link Image }
      * {@link org.openfuxml.content.list.List }
-     * {@link Paragraph }
+     * {@link Image }
      * {@link Font }
+     * {@link Paragraph }
+     * {@link String }
      * 
      * 
      */

@@ -1,0 +1,2 @@
+
+Lorem \acrshort{c1} Lorem ipsum dolor

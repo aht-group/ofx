@@ -15,8 +15,6 @@ import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 public class TestLatexEmphasisRenderer extends AbstractLatexContentTest
 {	
 final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);

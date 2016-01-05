@@ -2,6 +2,8 @@ package org.openfuxml.renderer.latex.content.structure;
 
 import java.util.List;
 
+import org.openfuxml.content.editorial.Acronym;
+import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.media.Image;
@@ -16,6 +18,8 @@ import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.editorial.LatexAcronymRenderer;
+import org.openfuxml.renderer.latex.content.editorial.LatexGlossaryRenderer;
 import org.openfuxml.renderer.latex.content.media.LatexImageRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexEmphasisRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexSymbolRenderer;
@@ -92,6 +96,8 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 			else if(o instanceof Reference){renderReference(sb,(Reference)o);}
 			else if(o instanceof Marginalia){renderMarginalia(sb,(Marginalia)o);}
 			else if(o instanceof Symbol){renderSymbol(sb,(Symbol)o);}
+			else if(o instanceof Glossary){renderGlossary(sb, (Glossary)o);}
+			else if(o instanceof Acronym){renderAcronym(sb, (Acronym)o);}
 			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
 			else if(o instanceof Font){}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
@@ -110,6 +116,20 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 	{
 		LatexEmphasisRenderer stf = new LatexEmphasisRenderer(cmm,dsm);
 		stf.render(emphasis);
+		for(String s : stf.getContent()){sb.append(s);}
+	}
+	
+	private void renderGlossary(StringBuffer sb, Glossary glossary) throws OfxAuthoringException
+	{
+		LatexGlossaryRenderer stf = new LatexGlossaryRenderer(cmm,dsm);
+		stf.render(glossary);
+		for(String s : stf.getContent()){sb.append(s);}
+	}
+	
+	private void renderAcronym(StringBuffer sb, Acronym acronym) throws OfxAuthoringException
+	{
+		LatexAcronymRenderer stf = new LatexAcronymRenderer(cmm,dsm);
+		stf.render(acronym);
 		for(String s : stf.getContent()){sb.append(s);}
 	}
 	
