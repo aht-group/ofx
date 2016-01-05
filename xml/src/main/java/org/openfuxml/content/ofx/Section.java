@@ -66,20 +66,20 @@ public class Section implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
+        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
         @XmlElementRef(name = "include", namespace = "http://www.openfuxml.org", type = Include.class),
-        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
         @XmlElementRef(name = "comment", namespace = "http://www.openfuxml.org", type = Comment.class),
         @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "highlight", namespace = "http://www.openfuxml.org", type = Highlight.class),
-        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
-        @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
-        @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class),
+        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
         @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
+        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class),
+        @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
         @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
-        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class)
+        @XmlElementRef(name = "highlight", namespace = "http://www.openfuxml.org", type = Highlight.class),
+        @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
+        @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class)
     })
     @XmlMixed
     protected java.util.List<Serializable> content;
@@ -116,21 +116,21 @@ public class Section implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link Marginalia }
+     * {@link Image }
+     * {@link org.openfuxml.content.list.List }
      * {@link Table }
+     * {@link Sections }
      * {@link Include }
-     * {@link Listing }
+     * {@link Highlight }
+     * {@link Paragraph }
      * {@link Comment }
      * {@link Section }
-     * {@link Image }
-     * {@link Highlight }
-     * {@link Sections }
-     * {@link Template }
-     * {@link Title }
-     * {@link Marginalia }
-     * {@link Content }
-     * {@link Paragraph }
      * {@link String }
-     * {@link org.openfuxml.content.list.List }
+     * {@link Template }
+     * {@link Listing }
+     * {@link Content }
+     * {@link Title }
      * 
      * 
      */

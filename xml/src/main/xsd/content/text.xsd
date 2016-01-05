@@ -49,6 +49,7 @@
                     </xsd:attribute>
                     <xsd:attribute name="bold" type="xsd:boolean"/>
                     <xsd:attribute name="italic" type="xsd:boolean"/>
+                    <xsd:attribute name="quote" type="xsd:boolean"/>
                     <xsd:attribute name="underline" type="xsd:boolean"/>
                 </xsd:extension>
             </xsd:simpleContent>

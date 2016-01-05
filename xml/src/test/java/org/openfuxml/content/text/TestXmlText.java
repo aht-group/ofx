@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public class TestXmlText extends AbstractXmlOfxTextTest<Text>
 {	
-	final static Logger logger = LoggerFactory.getLogger(AbstractXmlOfxTextTest.class);
+	final static Logger logger = LoggerFactory.getLogger(TestXmlText.class);
 	
 	public TestXmlText(){super(Text.class);}
 	public static Text create(boolean withChildren){return (new TestXmlText()).build(withChildren);}
