@@ -10,7 +10,8 @@
         <xsd:complexType>
             <xsd:simpleContent>
                 <xsd:extension base="xsd:string">
-                    <xsd:attribute name="lang"  type="xsd:string"/>
+                    <xsd:attribute name="lang" type="xsd:string"/>
+                    <xsd:attribute name="classifier"  type="xsd:string"/>
                 </xsd:extension>
             </xsd:simpleContent>
         </xsd:complexType>

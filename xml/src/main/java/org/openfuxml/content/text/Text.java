@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlValue;
  *   &lt;simpleContent>
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
  *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="classifier" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>
@@ -40,6 +41,8 @@ public class Text implements Serializable
     protected String value;
     @XmlAttribute(name = "lang")
     protected String lang;
+    @XmlAttribute(name = "classifier")
+    protected String classifier;
 
     /**
      * Gets the value of the value property.
@@ -95,6 +98,34 @@ public class Text implements Serializable
 
     public boolean isSetLang() {
         return (this.lang!= null);
+    }
+
+    /**
+     * Gets the value of the classifier property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getClassifier() {
+        return classifier;
+    }
+
+    /**
+     * Sets the value of the classifier property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setClassifier(String value) {
+        this.classifier = value;
+    }
+
+    public boolean isSetClassifier() {
+        return (this.classifier!= null);
     }
 
 }

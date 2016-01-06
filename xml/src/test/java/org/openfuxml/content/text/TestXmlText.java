@@ -15,6 +15,7 @@ public class TestXmlText extends AbstractXmlOfxTextTest<Text>
     {
     	Text xml = new Text();
     	xml.setLang("myLang");
+    	xml.setClassifier("myClassifier");
     	xml.setValue("myRawValue");
     	return xml;
     }

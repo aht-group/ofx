@@ -4,6 +4,8 @@ import org.openfuxml.content.editorial.Glossary;
 
 public class XmlGlossaryFactory
 {	
+	public static enum Classifier {name,text}
+	
 	public static Glossary build(String code)
 	{
 		Glossary xml = new Glossary();

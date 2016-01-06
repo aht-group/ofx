@@ -40,8 +40,8 @@ public class TestLatexGlossaryRenderer extends AbstractLatexContentTest
 	public static Glossary create()
 	{
 		Glossary g = new Glossary();
-    	g.getTerm().add(XmlTermFactory.build("c1", "Code-1", "Description-1"));
-    	g.getTerm().add(XmlTermFactory.build("c2", "Code-2", "Description-2"));
+    	g.getTerm().add(XmlTermFactory.buildC("c1", XmlGlossaryFactory.Classifier.name, "Code-1", "Description-1"));
+    	g.getTerm().add(XmlTermFactory.buildC("c2", XmlGlossaryFactory.Classifier.text, "Code-2", "Description-2"));
 		
 		Comment comment = XmlCommentFactory.build();
 		OfxCommentBuilder.doNotModify(comment);
@@ -78,7 +78,7 @@ public class TestLatexGlossaryRenderer extends AbstractLatexContentTest
     public void termWithoutCode() throws OfxAuthoringException
     {    	
     	Glossary g = create();
-    	g.getTerm().add(XmlTermFactory.build(null, "name", "description"));
+    	g.getTerm().add(XmlTermFactory.build(null, null, "name", "description"));
     	renderer.render(g);
     }
     
@@ -86,7 +86,7 @@ public class TestLatexGlossaryRenderer extends AbstractLatexContentTest
     public void termWithoutText() throws OfxAuthoringException
     {    	
     	Glossary g = create();
-    	g.getTerm().add(XmlTermFactory.build("code", null, "description"));
+    	g.getTerm().add(XmlTermFactory.build("code", null, null, "description"));
     	renderer.render(g);
     }
     
@@ -94,7 +94,7 @@ public class TestLatexGlossaryRenderer extends AbstractLatexContentTest
     public void termWithoutParagraph() throws OfxAuthoringException
     {    	
     	Glossary g = create();
-    	g.getTerm().add(XmlTermFactory.build("code", "name", null));
+    	g.getTerm().add(XmlTermFactory.build("code", null, "name", null));
     	renderer.render(g);
     }
     
@@ -106,7 +106,7 @@ public class TestLatexGlossaryRenderer extends AbstractLatexContentTest
     	TestLatexGlossaryRenderer test = new TestLatexGlossaryRenderer();
     	test.init();
     	test.setSaveReference(true);
-//    	test.glossary();
-    	test.glossaryItem();
+    	test.glossary();
+//    	test.glossaryItem();
     }
 }
