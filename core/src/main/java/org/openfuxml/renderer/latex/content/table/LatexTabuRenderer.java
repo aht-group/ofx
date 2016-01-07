@@ -38,6 +38,9 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		if(longTable){tableType="longtabu";}
 		else{tableType="tabu";}
 		
+//		\renewcommand{\arraystretch}{1.5}
+//		\linespread{0.75}\selectfont
+		
 		StringBuffer preSb = new StringBuffer();
 		preSb.append("\\begin{").append(tableType).append("} to \\linewidth ");
 		preSb.append(renderPreamble(table.getSpecification()));
@@ -81,6 +84,7 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 				if(c.getAlignment().getHorizontal().equals("left")){sb.append("l");}
 				if(c.getAlignment().getHorizontal().equals("center")){sb.append("c");}
 			}
+			sb.append("<{\\strut}");
 		}
 		
 		sb.append("}");		
