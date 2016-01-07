@@ -7,6 +7,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -23,6 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{http://www.openfuxml.org}paragraph" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org}marginalia" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,7 +42,10 @@ public class Highlight implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class)
+    @XmlElementRefs({
+        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
+        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class)
+    })
     @XmlMixed
     protected List<Serializable> content;
 
@@ -62,6 +67,7 @@ public class Highlight implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link Marginalia }
      * {@link String }
      * {@link Paragraph }
      * 

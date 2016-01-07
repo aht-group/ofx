@@ -70,8 +70,8 @@ public class Title implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Text }
      * {@link String }
+     * {@link Text }
      * 
      * 
      */

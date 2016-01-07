@@ -46,8 +46,8 @@ public class Content
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
         @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = org.openfuxml.addon.wiki.data.jaxb.Content.class),
-        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class)
+        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = org.openfuxml.addon.wiki.data.jaxb.Content.class)
     })
     @XmlMixed
     protected List<Serializable> content;

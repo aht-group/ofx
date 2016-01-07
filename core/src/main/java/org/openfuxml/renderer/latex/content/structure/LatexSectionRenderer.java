@@ -112,14 +112,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		f.render(table);
 		renderer.add(f);
 	}
-	
-	private void renderMarginalia(Marginalia marginalia) throws OfxAuthoringException
-	{
-		LatexMarginaliaRenderer r = new LatexMarginaliaRenderer(cmm,dsm);
-		r.render(marginalia);
-		renderer.add(r);
-	}
-		
+			
 	private void renderSection(Section section) throws OfxAuthoringException, OfxConfigurationException
 	{
 		LatexSectionRenderer sf = new LatexSectionRenderer(cmm,dsm,lvl+1,latexPreamble);

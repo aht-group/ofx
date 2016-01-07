@@ -28,6 +28,7 @@
         <xsd:complexType mixed="true">
             <xsd:sequence>
                 <xsd:element ref="paragraph" maxOccurs="unbounded"/>
+                <xsd:element ref="marginalia" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
