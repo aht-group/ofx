@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element ref="{http://www.openfuxml.org/layout}line" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org/layout}font" minOccurs="0"/>
+ *         &lt;element ref="{http://www.openfuxml.org/layout}spacing" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,7 +35,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "line",
-    "font"
+    "font",
+    "spacing"
 })
 @XmlRootElement(name = "layout")
 public class Layout
@@ -45,6 +47,7 @@ public class Layout
     @XmlElement(required = true)
     protected List<Line> line;
     protected Font font;
+    protected Spacing spacing;
 
     /**
      * Gets the value of the line property.
@@ -109,6 +112,34 @@ public class Layout
 
     public boolean isSetFont() {
         return (this.font!= null);
+    }
+
+    /**
+     * Gets the value of the spacing property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Spacing }
+     *     
+     */
+    public Spacing getSpacing() {
+        return spacing;
+    }
+
+    /**
+     * Sets the value of the spacing property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Spacing }
+     *     
+     */
+    public void setSpacing(Spacing value) {
+        this.spacing = value;
+    }
+
+    public boolean isSetSpacing() {
+        return (this.spacing!= null);
     }
 
 }

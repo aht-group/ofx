@@ -20,6 +20,8 @@ public class TestXmlLayout extends AbstractXmlLayoutTest<Layout>
     	if(withChilds)
     	{
     		xml.getLine().add(TestXmlLine.create(false));xml.getLine().add(TestXmlLine.create(false));
+    		
+    		xml.setSpacing(TestXmlSpacing.create(false));
     	}
     	
     	return xml;

@@ -109,4 +109,12 @@ public class ObjectFactory {
         return new Line();
     }
 
+    /**
+     * Create an instance of {@link Spacing }
+     * 
+     */
+    public Spacing createSpacing() {
+        return new Spacing();
+    }
+
 }

@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.list;
 
+import org.openfuxml.content.layout.Layout;
+import org.openfuxml.content.layout.Spacing;
 import org.openfuxml.content.list.Item;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.list.Type;
@@ -51,6 +53,9 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		preTxt.add("");
 		
 		setEnvironment(list.getType(),parent);
+		if(list.isSetLayout()){layout(list.getLayout());}
+		
+		
 		for(Item item : list.getItem())
 		{
 			LatexItemFactory f = new LatexItemFactory(cmm,dsm);
@@ -139,5 +144,16 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		preTxt.add("\\begin{description}");
 		postTxt.add("");
 		postTxt.add("\\end{description}");
+	}
+	
+	private void layout(Layout layout)
+	{
+		if(layout.isSetSpacing())
+		{
+			Spacing space = layout.getSpacing();
+			preTxt.add("\\setlength{\\itemsep}{"+space.getValue()+space.getUnit()+"}");
+			preTxt.add("\\setlength{\\parskip}{"+space.getValue()+space.getUnit()+"}");
+			preTxt.add("\\setlength{\\parsep}{"+space.getValue()+space.getUnit()+"}");
+		}
 	}
 }

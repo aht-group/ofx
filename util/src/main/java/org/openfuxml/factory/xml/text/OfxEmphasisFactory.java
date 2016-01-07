@@ -36,6 +36,14 @@ public class OfxEmphasisFactory
 		return emphasis;
 	}
 	
+	public static Emphasis italic(String text)
+	{
+		Emphasis xml = new Emphasis();
+		xml.setItalic(true);
+		xml.setValue(text);
+		return xml;
+	}
+	
 	public static Emphasis typewriter(String text)
 	{
 		Emphasis xml = new Emphasis();

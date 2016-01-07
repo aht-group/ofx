@@ -67,14 +67,14 @@ public class Paragraph implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
+        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
+        @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class),
         @XmlElementRef(name = "glossary", namespace = "http://www.openfuxml.org/editorial", type = Glossary.class),
+        @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class),
+        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
         @XmlElementRef(name = "acronym", namespace = "http://www.openfuxml.org/editorial", type = Acronym.class),
         @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
-        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
-        @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class),
-        @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class)
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -101,15 +101,15 @@ public class Paragraph implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link Marginalia }
+     * {@link Font }
      * {@link Glossary }
+     * {@link Emphasis }
+     * {@link Reference }
+     * {@link Symbol }
      * {@link Acronym }
      * {@link String }
-     * {@link Symbol }
      * {@link Image }
-     * {@link Reference }
-     * {@link Marginalia }
-     * {@link Emphasis }
-     * {@link Font }
      * 
      * 
      */
