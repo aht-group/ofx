@@ -24,7 +24,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexImageRenderer.class);
 
-	private enum Environment{Figure,Cell,Inline}
+	private enum Environment{Figure,Cell,Inline,Margin}
 	
 	private Environment environment;
 	
@@ -44,9 +44,15 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		
 		renderPre(image);
 
-		if(Environment.Figure.equals(environment) && image.isSetAlignment()){alignment(image.getAlignment());}
-		
 		StringBuffer sb = new StringBuffer();
+		
+		if(image.isSetAlignment())
+		{
+			logger.trace("Setting Alignment for "+environment);
+			if(Environment.Figure.equals(environment)){txt.add("  "+alignment(image.getAlignment()));}
+			else if(Environment.Margin.equals(environment)){sb.append(alignment(image.getAlignment()));}
+		}
+		
 		if(Environment.Cell.equals(environment)){sb.append("$\\vcenter{\\hbox{");}
 		sb.append(" \\includegraphics");
 		sb.append(imageArguments(parentRenderer,image));
@@ -61,10 +67,9 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 	{
 		logger.trace("Parent renderer is "+parent.getClass().getSimpleName());
 		
-		
 		if(parent instanceof LatexCellRenderer) {environment=Environment.Cell;}
 		else if (parent instanceof LatexParagraphRenderer){environment=Environment.Inline;}
-		else if (parent instanceof LatexMarginaliaRenderer){environment=Environment.Inline;}
+		else if (parent instanceof LatexMarginaliaRenderer){environment=Environment.Margin;}
 		else if (parent instanceof LatexColumnRenderer){environment=Environment.Inline;}
 		else {environment=Environment.Figure;}
 	}
@@ -128,16 +133,21 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		return sb.toString();
 	}
 	
-	private void alignment(Alignment alignment)
+	private String alignment(Alignment alignment)
 	{
 		if(alignment.isSetHorizontal())
 		{
 			XmlAlignmentFactory.Horizontal horizontal = XmlAlignmentFactory.Horizontal.valueOf(alignment.getHorizontal());
 			switch (horizontal)
 			{
-				case center: txt.add("  \\center");break;
+				case center: return("\\center");
 				default:	logger.warn("Alignment (horizontal): "+horizontal.toString()+" not handled");
 			}
 		}
+		else
+		{
+			logger.warn("Alignment not supported");
+		}
+		return "";
 	}
 }

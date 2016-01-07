@@ -30,13 +30,22 @@ public class LatexMarginaliaRenderer extends AbstractOfxLatexRenderer implements
 
 		Box box = null;
 		
+		int boxCounter=0;
+		int imageCounter=0;
+		
 		for(Object o : marginalia.getContent())
 		{
-			if (o instanceof Box){box=(Box)o;}
+			if (o instanceof Box){box=(Box)o;boxCounter++;}
+			if (o instanceof Image){imageCounter++;}
 		}
 		
+		String env;
+		if(boxCounter==1 && imageCounter==0){env="marginpar";}
+		else if(boxCounter==0 && imageCounter==1){env="marginnote";}
+		else{env="marginnote";}
+		
 		StringBuffer sbPre = new StringBuffer();
-		sbPre.append("\\marginpar{");
+		sbPre.append("\\").append(env).append("{");
 		if(box!=null){sbPre.append("\\fbox{\\parbox{\\marginparwidth}{");}
 		
 		preTxt.add(sbPre.toString());

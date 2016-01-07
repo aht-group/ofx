@@ -137,6 +137,7 @@ public class AbstractOfxLatexRenderer
 	
 	protected void renderImage(Image image) throws OfxAuthoringException
 	{
+		logger.trace("Marginalia rendering Image");
 		LatexImageRenderer f = new LatexImageRenderer(cmm,dsm);
 		f.render(this,image);
 		renderer.add(f);
