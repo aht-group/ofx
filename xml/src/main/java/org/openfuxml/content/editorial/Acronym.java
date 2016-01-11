@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "acronym")
-public class Acronym
-    implements Serializable
+public class Acronym implements Serializable
 {
 
     private final static long serialVersionUID = 1L;

@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.content.table;
 
+import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.layout.Line;
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Column;
@@ -10,6 +11,7 @@ import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.xml.ofx.layout.XmlLineFactory;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.interfaces.media.CrossMediaManager;
@@ -35,6 +37,9 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		String tableType = null;
 		if(longTable){tableType="longtabu";}
 		else{tableType="tabu";}
+		
+//		\renewcommand{\arraystretch}{1.5}
+//		\linespread{0.75}\selectfont
 		
 		StringBuffer preSb = new StringBuffer();
 		preSb.append("\\begin{").append(tableType).append("} to \\linewidth ");
@@ -79,6 +84,7 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 				if(c.getAlignment().getHorizontal().equals("left")){sb.append("l");}
 				if(c.getAlignment().getHorizontal().equals("center")){sb.append("c");}
 			}
+			sb.append("<{\\strut}");
 		}
 		
 		sb.append("}");		
@@ -110,22 +116,24 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		renderer.add(new StringRenderer("\\toprule"));
 	}
 	
-	@SuppressWarnings("unused")
 	private void renderBody(Body tbody) throws OfxAuthoringException
 	{
+		Font font = null;
+		if(tbody.isSetLayout())
+		{
+			if(tbody.getLayout().isSetFont()){font=tbody.getLayout().getFont();}
+		}
+		
 		for(Row row : tbody.getRow())
 		{
-			if(row.isSetLayout())
-			{
-				for(Line line : row.getLayout().getLine())
-				{
-					renderer.add(new StringRenderer("\\midrule"));
-				}
-			}
+			horizontalLines(row,XmlLineFactory.Orientation.top);
 			
 			LatexRowRenderer f = new LatexRowRenderer(cmm,dsm);
+			f.setFont(font);
 			f.render(row);
 			renderer.add(f);
+			
+			horizontalLines(row,XmlLineFactory.Orientation.bottom);
 		}
 		renderer.add(new StringRenderer("\\bottomrule"));
 	}
@@ -151,6 +159,21 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 			LatexTitleRenderer stf = new LatexTitleRenderer(cmm,dsm);
 			stf.render(table);
 			postTxt.addAll(stf.getContent());
+		}
+	}
+	
+	private void horizontalLines(Row row, XmlLineFactory.Orientation orientation) throws OfxAuthoringException
+	{
+		if(row.isSetLayout())
+		{
+			for(Line line : row.getLayout().getLine())
+			{
+				if(!line.isSetOrientation()){throw new OfxAuthoringException("Inside a "+Table.class.getSimpleName()+", the "+Row.class.getSimpleName()+" with a "+Line.class.getSimpleName()+" needs a orientation");}
+				if(line.getOrientation().equals(orientation.toString()))
+				{
+					renderer.add(new StringRenderer("\\midrule"));
+				}
+			}
 		}
 	}
 }

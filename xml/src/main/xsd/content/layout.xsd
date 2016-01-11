@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://www.openfuxml.org/layout"
 	xmlns="http://www.openfuxml.org/layout"
+	xmlns:ofx="http://www.openfuxml.org"
+	xmlns:media="http://www.openfuxml.org/media"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
     jaxb:extensionBindingPrefixes="xjc"
     jaxb:version="2.0">
+    <xsd:import namespace="http://www.openfuxml.org" schemaLocation="ofx.xsd"/>
+    <xsd:import namespace="http://www.openfuxml.org/media" schemaLocation="media.xsd"/>
     <xsd:element name="layout">
         <xsd:complexType>
             <xsd:sequence>
 				<xsd:element ref="line" maxOccurs="unbounded"/>
+				<xsd:element ref="font" minOccurs="0" maxOccurs="1"/>
+				<xsd:element ref="spacing" minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="container">
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+            	<xsd:element ref="font" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="ofx:paragraph" maxOccurs="unbounded"/>
+                <xsd:element ref="column" maxOccurs="unbounded"/>
+                <xsd:element ref="container" maxOccurs="unbounded"/>
+                <xsd:element ref="media:image" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+	<xsd:element name="column">
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+            	<xsd:element ref="width" minOccurs="0" maxOccurs="1"/>
+            	<xsd:element ref="height" minOccurs="0" maxOccurs="1"/>
+                <xsd:element ref="container" maxOccurs="unbounded"/>
+                <xsd:element ref="media:image" maxOccurs="unbounded"/>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -24,6 +51,11 @@
 					</xsd:restriction>
 				</xsd:simpleType>
 			</xsd:attribute>
+    	</xsd:complexType>
+    </xsd:element>
+    <xsd:element name="box">
+    	<xsd:complexType>
+	    	
     	</xsd:complexType>
     </xsd:element>
     <xsd:element name="width">
@@ -47,6 +79,11 @@
                     </xsd:attribute>
                 </xsd:extension>
             </xsd:simpleContent>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="font">
+		 <xsd:complexType>
+            <xsd:attribute name="relativeSize" type="xsd:int"/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="height">
@@ -82,5 +119,18 @@
 				</xsd:simpleType>
 			</xsd:attribute>
     	</xsd:complexType>
+    </xsd:element>
+    <xsd:element name="spacing">
+		 <xsd:complexType>
+            <xsd:simpleContent>
+                <xsd:extension base="xsd:double">
+                    <xsd:attribute name="unit" use="required">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string"/>
+                        </xsd:simpleType>
+                    </xsd:attribute>
+                </xsd:extension>
+            </xsd:simpleContent>
+        </xsd:complexType>
     </xsd:element>
 </xsd:schema>

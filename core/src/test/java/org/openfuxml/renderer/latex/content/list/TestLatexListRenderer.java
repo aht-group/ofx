@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.list.Type;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.xml.layout.XmlSpacingFactory;
+import org.openfuxml.factory.xml.ofx.layout.XmlLayoutFactory;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
@@ -22,7 +24,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexListRenderer.class);
 	
-	private static enum Key {ordered,unordered,description}
+	private static enum Key {ordered,unordered,description,layout}
 	private String dir = "list";
 	
 	private LatexListRenderer renderer;
@@ -37,13 +39,15 @@ public class TestLatexListRenderer extends AbstractLatexListTest
 	
 	@After public void close(){renderer=null;}
 	
-	public static List createList()
+	public static List createList(){return createList(0);}
+	public static List createList(int size)
 	{
 		Type type = new Type();
 		type.setOrdering("unordered");
 		
 		List list = new List();
 		list.setType(type);
+		for(int i=0;i<size;i++){list.getItem().add(TestLatexItemFactory.createItem());}
 		return list;
 	}
 	
@@ -84,9 +88,23 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     }
       
     @Test
-    public void unordered() throws OfxAuthoringException, IOException
+    public void layout() throws OfxAuthoringException, IOException
     {	
     	f = new File(rootDir,dir+"/"+Key.unordered+".txt");
+    	List list = createList(2);
+    	list.setLayout(XmlLayoutFactory.build(XmlSpacingFactory.pt(0)));
+
+    	JaxbUtil.info(list);
+    	renderer.render(list,parentSection);
+    	debug(renderer);
+    	save(renderer,f);
+    	assertText(renderer,f);
+    }
+    
+    @Test
+    public void unordered() throws OfxAuthoringException, IOException
+    {	
+    	f = new File(rootDir,dir+"/"+Key.layout+".txt");
     	List list = createList();
     	list.getItem().add(TestLatexItemFactory.createItem());
     	JaxbUtil.info(list);
@@ -133,10 +151,9 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     	TestLatexListRenderer test = new TestLatexListRenderer();
     	test.setSaveReference(true);
     	
-    	test.initRenderer();test.unordered();   	
-    	test.initRenderer();test.ordered();
-    	test.initRenderer();test.description();
-    	
+    	test.initRenderer();test.unordered();
+//    	test.initRenderer();test.ordered();
+//    	test.initRenderer();test.description();
+    	test.initRenderer();test.layout();
     }
-   
 }

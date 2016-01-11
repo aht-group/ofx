@@ -30,11 +30,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Alignment }
+     * Create an instance of {@link Font }
      * 
      */
-    public Alignment createAlignment() {
-        return new Alignment();
+    public Font createFont() {
+        return new Font();
+    }
+
+    /**
+     * Create an instance of {@link Box }
+     * 
+     */
+    public Box createBox() {
+        return new Box();
+    }
+
+    /**
+     * Create an instance of {@link Container }
+     * 
+     */
+    public Container createContainer() {
+        return new Container();
+    }
+
+    /**
+     * Create an instance of {@link Column }
+     * 
+     */
+    public Column createColumn() {
+        return new Column();
     }
 
     /**
@@ -51,6 +75,14 @@ public class ObjectFactory {
      */
     public Height createHeight() {
         return new Height();
+    }
+
+    /**
+     * Create an instance of {@link Alignment }
+     * 
+     */
+    public Alignment createAlignment() {
+        return new Alignment();
     }
 
     /**
@@ -75,6 +107,14 @@ public class ObjectFactory {
      */
     public Line createLine() {
         return new Line();
+    }
+
+    /**
+     * Create an instance of {@link Spacing }
+     * 
+     */
+    public Spacing createSpacing() {
+        return new Spacing();
     }
 
 }

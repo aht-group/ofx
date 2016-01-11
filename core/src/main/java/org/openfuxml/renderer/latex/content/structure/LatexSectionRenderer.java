@@ -6,6 +6,7 @@ import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Include;
 import org.openfuxml.content.ofx.Listing;
+import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
@@ -57,37 +58,42 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Section.class.getSimpleName()+" with: "+this.getClass().getSimpleName()));
 		
-		for(Object s : section.getContent())
+		logger.trace("Render section");
+		
+		// Comment always on top!
+		for(Object o : section.getContent())
 		{
-			if (s instanceof Comment)
+			if (o instanceof Comment)
 			{
 				LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
-				rComment.render((Comment)s);
+				rComment.render((Comment)o);
 				renderer.add(rComment);
 			}
 		}
 		
-		logger.trace("Render section");
-		
+		// Title after comment!
+		for(Object s : section.getContent())
+		{
+			if(s instanceof Title){renderTitle(section,(Title)s);}
+		}
 		
 		
 		for(Object s : section.getContent())
 		{
 			if     (s instanceof String){}
-			else if(s instanceof Title){renderTitle(section,(Title)s);}
 			else if(s instanceof Section){renderSection((Section)s);}
 			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,true);}
 			else if(s instanceof Highlight){highlightRenderer((Highlight)s);}
 			else if(s instanceof Table){renderTable((Table)s);}
+			else if(s instanceof Marginalia){renderMarginalia((Marginalia)s);}
 			else if(s instanceof List){renderList((List)s,this);}
             else if(s instanceof Listing){renderListing((Listing)s);}
             else if(s instanceof Include){renderInclude((Include)s);}
             else if(s instanceof Image){renderImage((Image)s);}
             else if(s instanceof Comment){}
+            else if(s instanceof Title){}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
 		}
-//		if(section.getContent()logger.debug(getSectionHeader("x"));
-		
 	}
 	
 	private void renderTitle(Section section,Title title)
@@ -106,7 +112,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		f.render(table);
 		renderer.add(f);
 	}
-		
+			
 	private void renderSection(Section section) throws OfxAuthoringException, OfxConfigurationException
 	{
 		LatexSectionRenderer sf = new LatexSectionRenderer(cmm,dsm,lvl+1,latexPreamble);

@@ -8,10 +8,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.content.ofx.Comment;
+import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.xml.editorial.XmlGlossaryFactory;
 import org.openfuxml.factory.xml.editorial.XmlTermFactory;
 import org.openfuxml.factory.xml.ofx.content.XmlCommentFactory;
+import org.openfuxml.factory.xml.text.OfxEmphasisFactory;
 import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
+import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.content.structure.TestLatexParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.util.OfxCommentBuilder;
@@ -37,8 +42,8 @@ public class TestLatexGlossaryRenderer extends AbstractLatexContentTest
 	public static Glossary create()
 	{
 		Glossary g = new Glossary();
-    	g.getTerm().add(XmlTermFactory.build("c1", "Code-1", "Description-1"));
-    	g.getTerm().add(XmlTermFactory.build("c2", "Code-2", "Description-2"));
+    	g.getTerm().add(XmlTermFactory.buildC("c1", XmlGlossaryFactory.Classifier.name, "Code-1", "Description-1"));
+    	g.getTerm().add(XmlTermFactory.buildC("c2", XmlGlossaryFactory.Classifier.text, "Code-2", "Description-2"));
 		
 		Comment comment = XmlCommentFactory.build();
 		OfxCommentBuilder.doNotModify(comment);
@@ -47,10 +52,42 @@ public class TestLatexGlossaryRenderer extends AbstractLatexContentTest
     	return g;
 	}
 	
-    @Test public void glossary() throws IOException, OfxAuthoringException
+	private static Paragraph paragraph()
+	{
+		Paragraph p = new Paragraph();
+    	p.getContent().add(li.getWords(1)+" ");
+    	p.getContent().add(XmlGlossaryFactory.build("c1"));
+    	p.getContent().add(" "+li.getWords(3));
+    	return p;
+	}
+	
+    @Test public void glossaryList() throws IOException, OfxAuthoringException
     {    	
     	f = new File(rootDir,dir+"/glossary.txt");
     	renderer.render(create());
+    	renderTest(renderer,f);
+    }
+    
+    @Test public void glossary() throws IOException, OfxAuthoringException
+    {    	
+    	f = new File(rootDir,dir+"/glossary-1.txt");
+    	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cmm,dsm,true);
+    	renderer.render(paragraph());
+    	renderTest(renderer,f);
+    }
+    
+    @Test public void glossaryEmphasis() throws IOException, OfxAuthoringException
+    {    	
+    	Emphasis e = OfxEmphasisFactory.italic("test");
+    	
+    	Paragraph p = new Paragraph();
+    	p.getContent().add(li.getWords(1)+" ");
+    	p.getContent().add(XmlGlossaryFactory.build("c1"));
+    	p.getContent().add(" "+li.getWords(3));
+    	
+    	f = new File(rootDir,dir+"/glossary-2.txt");
+    	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cmm,dsm,true);
+    	renderer.render(paragraph());
     	renderTest(renderer,f);
     }
     
@@ -58,7 +95,7 @@ public class TestLatexGlossaryRenderer extends AbstractLatexContentTest
     public void termWithoutCode() throws OfxAuthoringException
     {    	
     	Glossary g = create();
-    	g.getTerm().add(XmlTermFactory.build(null, "name", "description"));
+    	g.getTerm().add(XmlTermFactory.build(null, null, "name", "description"));
     	renderer.render(g);
     }
     
@@ -66,7 +103,7 @@ public class TestLatexGlossaryRenderer extends AbstractLatexContentTest
     public void termWithoutText() throws OfxAuthoringException
     {    	
     	Glossary g = create();
-    	g.getTerm().add(XmlTermFactory.build("code", null, "description"));
+    	g.getTerm().add(XmlTermFactory.build("code", null, null, "description"));
     	renderer.render(g);
     }
     
@@ -74,7 +111,7 @@ public class TestLatexGlossaryRenderer extends AbstractLatexContentTest
     public void termWithoutParagraph() throws OfxAuthoringException
     {    	
     	Glossary g = create();
-    	g.getTerm().add(XmlTermFactory.build("code", "name", null));
+    	g.getTerm().add(XmlTermFactory.build("code", null, "name", null));
     	renderer.render(g);
     }
     
@@ -86,6 +123,8 @@ public class TestLatexGlossaryRenderer extends AbstractLatexContentTest
     	TestLatexGlossaryRenderer test = new TestLatexGlossaryRenderer();
     	test.init();
     	test.setSaveReference(true);
-    	test.glossary();
+//    	test.glossaryList();
+//    	test.glossary();
+    	test.glossaryEmphasis();
     }
 }

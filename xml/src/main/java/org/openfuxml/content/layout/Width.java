@@ -49,8 +49,7 @@ import javax.xml.bind.annotation.XmlValue;
     "value"
 })
 @XmlRootElement(name = "width")
-public class Width
-    implements Serializable
+public class Width implements Serializable
 {
 
     private final static long serialVersionUID = 1L;

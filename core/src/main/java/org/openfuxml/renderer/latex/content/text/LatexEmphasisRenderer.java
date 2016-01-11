@@ -23,9 +23,19 @@ public class LatexEmphasisRenderer extends AbstractOfxLatexRenderer implements O
 	{
 		boolean typewriter = emphasis.isSetStyle() && emphasis.getStyle().equals("typewriter");
 		boolean bold = emphasis.isSetBold() && emphasis.isBold();
-		boolean italic = emphasis.isSetItalic() && emphasis.isSetItalic();
+		boolean italic = emphasis.isSetItalic() && emphasis.isItalic();
+		boolean quote = emphasis.isSetQuote() && emphasis.isQuote();
+		
+		if(logger.isTraceEnabled())
+		{
+			logger.debug("typewriter: "+typewriter);
+			logger.debug("bold: "+bold);
+			logger.debug("italic: "+italic);
+			logger.debug("quote: "+quote);
+		}
 		
 		StringBuffer sb = new StringBuffer();
+		if(quote){sb.append("\\enquote{");}
 		if(typewriter){sb.append("\\texttt{");}
 		if(bold) {sb.append("\\textbf{");}
 		if(italic) {sb.append("\\textit{");}
@@ -33,6 +43,7 @@ public class LatexEmphasisRenderer extends AbstractOfxLatexRenderer implements O
 		if(bold){sb.append("}");}
 		if(italic){sb.append("}");}
 		if(typewriter){sb.append("}");}
+		if(quote){sb.append("}");}
 		
 		txt.add(sb.toString());
 	}

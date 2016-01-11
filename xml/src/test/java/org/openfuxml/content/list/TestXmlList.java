@@ -1,5 +1,6 @@
 package org.openfuxml.content.list;
 
+import org.openfuxml.content.layout.TestXmlLayout;
 import org.openfuxml.content.ofx.TestXmlComment;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ public class TestXmlList extends AbstractXmlListTest<List>
     	{
     		xml.setComment(TestXmlComment.create(false));
     		xml.setType(TestXmlType.create(false));
+    		xml.setLayout(TestXmlLayout.create(false));
     		
     		xml.getItem().add(TestXmlItem.create(false));xml.getItem().add(TestXmlItem.create(false));
     	}

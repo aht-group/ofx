@@ -1,6 +1,7 @@
 package org.openfuxml.renderer.latex.content.structure;
 
 import org.openfuxml.content.ofx.Highlight;
+import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
@@ -31,6 +32,7 @@ public class LatexHighlightRenderer extends AbstractOfxLatexRenderer implements 
 		{
 			if     (s instanceof String){}
 			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,index!=0);index++;}
+			else if(s instanceof Marginalia){renderMarginalia((Marginalia)s);}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
 		}
 

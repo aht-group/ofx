@@ -7,9 +7,15 @@ import org.openfuxml.content.ofx.Paragraph;
 
 public class OfxListItemFactory
 {
-	public static Item build(List<Paragraph> paragraphs)
+	public static Item build()
 	{
 		Item item = new Item();
+		return item;
+	}
+	
+	public static Item build(List<Paragraph> paragraphs)
+	{
+		Item item = build();
 		item.getContent().addAll(paragraphs);
 		return item;
 	}

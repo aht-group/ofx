@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.xml.layout.XmlFontFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
 import org.openfuxml.renderer.util.OfxContentDebugger;
@@ -24,7 +25,7 @@ public class TestLatexParagraphRenderer extends AbstractLatexContentTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	
-	private static enum Key {withBlank,withoutBlank,marginalia}
+	private static enum Key {withBlank,withoutBlank,marginalia,fontRelative}
 	
 	private LatexParagraphRenderer renderer;
 	private String dir = "paragraph";
@@ -59,7 +60,6 @@ public class TestLatexParagraphRenderer extends AbstractLatexContentTest
     @Test
     public void marginalia() throws IOException, OfxAuthoringException
     {
-    	
     	Marginalia m = new Marginalia();
     	m.getContent().add(XmlParagraphFactory.text("marg"));
     	
@@ -77,6 +77,17 @@ public class TestLatexParagraphRenderer extends AbstractLatexContentTest
  //   	renderTest(renderer,f);
     }
     
+    @Test
+    public void fontRelative() throws IOException, OfxAuthoringException
+    {
+    	Paragraph p = create();
+    	p.getContent().add(XmlFontFactory.relative(-2));
+    	
+    	f = new File(rootDir,dir+"/"+Key.fontRelative+".txt");
+    	renderer.render(p);
+    	renderTest(renderer,f);
+    }
+    
     public static void main(String[] args) throws Exception
     {
     	OfxCoreTestBootstrap.init();
@@ -86,8 +97,9 @@ public class TestLatexParagraphRenderer extends AbstractLatexContentTest
     	test.init();
     	test.setSaveReference(true);
     	
-    	test.withBlank();
-    	test.withoutBlank();
-    	test.marginalia();
+//    	test.withBlank();
+//  	test.withoutBlank();
+//    	test.marginalia();
+    	test.fontRelative();
     }
 }

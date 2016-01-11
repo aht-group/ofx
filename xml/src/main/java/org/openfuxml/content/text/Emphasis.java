@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlValue;
  *       &lt;/attribute>
  *       &lt;attribute name="bold" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="italic" type="{http://www.w3.org/2001/XMLSchema}boolean" />
+ *       &lt;attribute name="quote" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *       &lt;attribute name="underline" type="{http://www.w3.org/2001/XMLSchema}boolean" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
@@ -54,6 +55,8 @@ public class Emphasis implements Serializable
     protected Boolean bold;
     @XmlAttribute(name = "italic")
     protected Boolean italic;
+    @XmlAttribute(name = "quote")
+    protected Boolean quote;
     @XmlAttribute(name = "underline")
     protected Boolean underline;
 
@@ -175,6 +178,38 @@ public class Emphasis implements Serializable
 
     public void unsetItalic() {
         this.italic = null;
+    }
+
+    /**
+     * Gets the value of the quote property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isQuote() {
+        return quote;
+    }
+
+    /**
+     * Sets the value of the quote property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setQuote(boolean value) {
+        this.quote = value;
+    }
+
+    public boolean isSetQuote() {
+        return (this.quote!= null);
+    }
+
+    public void unsetQuote() {
+        this.quote = null;
     }
 
     /**

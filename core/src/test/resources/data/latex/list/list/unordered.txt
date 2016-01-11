@@ -3,6 +3,12 @@
 % Rendering a (list) List with: LatexListRenderer
 
 \begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+
+\item
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
 
 \item
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam

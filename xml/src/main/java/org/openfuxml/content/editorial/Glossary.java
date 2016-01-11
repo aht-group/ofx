@@ -40,8 +40,7 @@ import org.openfuxml.content.ofx.Comment;
     "term"
 })
 @XmlRootElement(name = "glossary")
-public class Glossary
-    implements Serializable
+public class Glossary implements Serializable
 {
 
     private final static long serialVersionUID = 1L;

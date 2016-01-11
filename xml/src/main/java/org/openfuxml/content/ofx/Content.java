@@ -71,8 +71,8 @@ public class Content
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Section }
-     * {@link Sections }
      * {@link String }
+     * {@link Sections }
      * {@link org.openfuxml.addon.wiki.data.jaxb.Content }
      * 
      * 

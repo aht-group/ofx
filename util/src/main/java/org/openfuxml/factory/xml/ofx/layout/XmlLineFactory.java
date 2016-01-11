@@ -6,10 +6,17 @@ public class XmlLineFactory
 {
 	public static enum Orientation{top,bottom,left,right};
 	
-	public static Line buildTop()
+	public static Line top()
 	{
 		Line xml = new Line();
 		xml.setOrientation(Orientation.top.toString());
+		return xml;
+	}
+	
+	public static Line bottom()
+	{
+		Line xml = new Line();
+		xml.setOrientation(Orientation.bottom.toString());
 		return xml;
 	}
 }

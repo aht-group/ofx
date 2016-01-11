@@ -27,7 +27,8 @@ public class LatexArticle extends AbstractOfxLatexRenderer implements OfxLatexRe
 	// http://en.wikibooks.org/wiki/LaTeX/Document_Structure
 	public String getSectionHeaderName(int lvl)
 	{
-		if      (lvl==1){return "section";}
+		if      (lvl==0){return "chapter";}
+		else if (lvl==1){return "section";}
 		else if (lvl==2){return "subsection";}
 		else if (lvl==3){return "subsubsection";}
 		else if (lvl==4){return "paragraph";}

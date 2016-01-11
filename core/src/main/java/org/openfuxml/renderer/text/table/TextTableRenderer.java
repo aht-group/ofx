@@ -46,22 +46,31 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 	
 	private void renderCells(Table table) throws OfxAuthoringException
 	{
-		for(Cell cell : table.getContent().getHead().getRow().get(0).getCell())
+		if(table.isSetContent())
 		{
-			TextCellRenderer r = new TextCellRenderer(cmm,dsm);
-			r.render(cell);
-			rendererHeader.add(r);
-		}
-		for(Row row : table.getContent().getBody().get(0).getRow())
-		{
-			List<OfxTextRenderer> rowRenderer = new ArrayList<OfxTextRenderer>();
-			for(Cell cell : row.getCell())
+			if(table.getContent().isSetHead())
 			{
-				TextCellRenderer r = new TextCellRenderer(cmm,dsm);
-				r.render(cell);
-				rowRenderer.add(r);
+				for(Cell cell : table.getContent().getHead().getRow().get(0).getCell())
+				{
+					TextCellRenderer r = new TextCellRenderer(cmm,dsm);
+					r.render(cell);
+					rendererHeader.add(r);
+				}
 			}
-			rendererBody.add(rowRenderer);
+			if(table.getContent().isSetBody())
+			{
+				for(Row row : table.getContent().getBody().get(0).getRow())
+				{
+					List<OfxTextRenderer> rowRenderer = new ArrayList<OfxTextRenderer>();
+					for(Cell cell : row.getCell())
+					{
+						TextCellRenderer r = new TextCellRenderer(cmm,dsm);
+						r.render(cell);
+						rowRenderer.add(r);
+					}
+					rendererBody.add(rowRenderer);
+				}
+			}
 		}
 		
 		columnSize = new int[rendererHeader.size()];

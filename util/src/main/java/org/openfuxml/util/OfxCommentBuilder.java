@@ -19,4 +19,9 @@ public class OfxCommentBuilder
 		comment.getRaw().add(XmlRawFactory.build(""));
 		comment.getRaw().add(XmlRawFactory.build("Do not modify this auto-generated file, it will be overwritten without warning!"));
 	}
+	
+	public static void raw(Comment comment, String text)
+	{
+		comment.getRaw().add(XmlRawFactory.build(text));
+	}
 }

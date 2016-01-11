@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<text:text xmlns:text="http://www.openfuxml.org/text" lang="myLang">myRawValue</text:text>
+<text:text xmlns:text="http://www.openfuxml.org/text" lang="myLang" classifier="myClassifier">myRawValue</text:text>

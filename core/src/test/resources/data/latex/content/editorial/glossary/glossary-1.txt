@@ -1,0 +1,2 @@
+
+Lorem \gls{c1} Lorem ipsum dolor

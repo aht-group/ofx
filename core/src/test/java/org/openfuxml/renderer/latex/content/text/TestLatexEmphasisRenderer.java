@@ -19,7 +19,7 @@ public class TestLatexEmphasisRenderer extends AbstractLatexContentTest
 {	
 final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	
-	private static enum Key {bold,italic}
+	private static enum Key {bold,italic,quote}
 	
 	private LatexParagraphRenderer renderer;
 	private String dir = "emphasis";
@@ -48,8 +48,7 @@ final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.
     	renderTest(renderer,f);
     }
     
-    @Test
-    public void italic() throws IOException, OfxAuthoringException
+    @Test public void italic() throws IOException, OfxAuthoringException
     {
     	OfxEmphasisFactory eF = new OfxEmphasisFactory(false,true);
     	Paragraph p = create(eF);
@@ -57,6 +56,17 @@ final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.
     	renderer = new LatexParagraphRenderer(cmm,dsm,true);
     	
     	f = new File(rootDir,dir+"/"+Key.italic+".txt");
+    	renderer.render(p);
+    	renderTest(renderer,f);
+    }
+    
+    @Test public void quote() throws IOException, OfxAuthoringException
+    {
+    	OfxEmphasisFactory eF = new OfxEmphasisFactory(false,false,true);
+    	Paragraph p = create(eF);
+    	renderer = new LatexParagraphRenderer(cmm,dsm,true);
+    	
+    	f = new File(rootDir,dir+"/"+Key.quote+".txt");
     	renderer.render(p);
     	renderTest(renderer,f);
     }
@@ -84,6 +94,7 @@ final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.
     	
     	test.bold();
     	test.italic();
+    	test.quote();
     	test.italicBold();
     }
 }

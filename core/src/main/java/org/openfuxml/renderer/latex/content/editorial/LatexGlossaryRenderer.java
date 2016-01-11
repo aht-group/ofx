@@ -40,7 +40,12 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 	
 	private void renderGlossaryItem(Glossary glossary) throws OfxAuthoringException
 	{
-
+		StringBuffer sb = new StringBuffer();
+		sb.append("\\gls{");
+		sb.append(glossary.getCode());
+		sb.append("}");
+		
+		txt.add(sb.toString());
 	}
 	
 	private void renderGlossary(Glossary glossary) throws OfxAuthoringException
@@ -66,9 +71,9 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 		if(!term.isSetCode()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a @code");}
 		if(!term.isSetText()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Text.class.getSimpleName());}
 		if(!term.isSetParagraph()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Paragraph.class.getSimpleName());}
-		
-		LatexTextRenderer tr = new LatexTextRenderer(cmm,dsm);
-		tr.render(term.getText());
+				
+//		LatexTextRenderer tr = new LatexTextRenderer(cmm,dsm);
+//		tr.render(term.getText());
 		
 		LatexParagraphRenderer pr = new LatexParagraphRenderer(cmm,dsm,false);
 		pr.render(term.getParagraph());
@@ -86,7 +91,15 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 		
 		txt.add("");
 		txt.add("\\newglossaryentry{"+term.getCode()+"}");
-		txt.add("{\tname="+tr.getContentAsSingleLine(" ")+",");
+		txt.add("{");
+		for(Text t : term.getText())
+		{
+			if(!t.isSetClassifier()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+"."+Text.class.getSimpleName()+" needs a classifier! Code:"+term.getCode());}
+			LatexTextRenderer tr = new LatexTextRenderer(cmm,dsm);
+			tr.render(t);
+			txt.add("\t"+t.getClassifier()+"="+tr.getContentAsSingleLine(" ")+",");
+		}
+		
 		txt.addAll(c);
 		txt.add("}");
 	}

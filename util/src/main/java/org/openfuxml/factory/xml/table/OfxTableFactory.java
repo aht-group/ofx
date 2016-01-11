@@ -60,6 +60,16 @@ public class OfxTableFactory
 		return table;
 	}
 	
+	public static Table build(List<Object[]> data)
+	{
+		Table table = new Table();
+		
+		Content content = new Content();
+		content.getBody().add(buildBody(data));
+		table.setContent(content);
+		return table;
+	}
+	
 	private static Head buildHead(List<String> header)
 	{
 		Row row = new Row();

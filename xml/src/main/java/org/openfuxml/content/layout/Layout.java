@@ -22,6 +22,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{http://www.openfuxml.org/layout}line" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org/layout}font" minOccurs="0"/>
+ *         &lt;element ref="{http://www.openfuxml.org/layout}spacing" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,7 +34,9 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "line"
+    "line",
+    "font",
+    "spacing"
 })
 @XmlRootElement(name = "layout")
 public class Layout
@@ -42,6 +46,8 @@ public class Layout
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
     protected List<Line> line;
+    protected Font font;
+    protected Spacing spacing;
 
     /**
      * Gets the value of the line property.
@@ -78,6 +84,62 @@ public class Layout
 
     public void unsetLine() {
         this.line = null;
+    }
+
+    /**
+     * Gets the value of the font property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Font }
+     *     
+     */
+    public Font getFont() {
+        return font;
+    }
+
+    /**
+     * Sets the value of the font property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Font }
+     *     
+     */
+    public void setFont(Font value) {
+        this.font = value;
+    }
+
+    public boolean isSetFont() {
+        return (this.font!= null);
+    }
+
+    /**
+     * Gets the value of the spacing property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Spacing }
+     *     
+     */
+    public Spacing getSpacing() {
+        return spacing;
+    }
+
+    /**
+     * Sets the value of the spacing property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Spacing }
+     *     
+     */
+    public void setSpacing(Spacing value) {
+        this.spacing = value;
+    }
+
+    public boolean isSetSpacing() {
+        return (this.spacing!= null);
     }
 
 }

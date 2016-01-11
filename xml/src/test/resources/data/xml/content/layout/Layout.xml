@@ -2,4 +2,5 @@
 <layout:layout xmlns:layout="http://www.openfuxml.org/layout">
     <layout:line orientation="bottom"/>
     <layout:line orientation="bottom"/>
+    <layout:spacing unit="pt">45.6</layout:spacing>
 </layout:layout>

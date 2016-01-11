@@ -43,11 +43,11 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
 	
 	public void render(Table table)
 	{
-		txt.add("\\caption{"+TxtTitleFactory.build(table.getTitle())+"}");
+		txt.add("\\caption{"+TexSpecialChars.replace(TxtTitleFactory.build(table.getTitle()))+"}");
 	}
 	
 	public void render(Image image)
 	{
-		txt.add("  \\caption{"+TxtTitleFactory.build(image.getTitle())+"}");
+		txt.add("  \\caption{"+TexSpecialChars.replace(TxtTitleFactory.build(image.getTitle()))+"}");
 	}
 }

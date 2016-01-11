@@ -37,8 +37,7 @@ import javax.xml.bind.annotation.XmlValue;
     "value"
 })
 @XmlRootElement(name = "height")
-public class Height
-    implements Serializable
+public class Height implements Serializable
 {
 
     private final static long serialVersionUID = 1L;

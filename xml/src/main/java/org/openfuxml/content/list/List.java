@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.openfuxml.content.layout.Layout;
 import org.openfuxml.content.ofx.Comment;
 
 
@@ -22,6 +23,7 @@ import org.openfuxml.content.ofx.Comment;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{http://www.openfuxml.org}comment" minOccurs="0"/>
+ *         &lt;element ref="{http://www.openfuxml.org/layout}layout" minOccurs="0"/>
  *         &lt;element ref="{http://www.openfuxml.org/list}type"/>
  *         &lt;element ref="{http://www.openfuxml.org/list}item" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
@@ -35,6 +37,7 @@ import org.openfuxml.content.ofx.Comment;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "comment",
+    "layout",
     "type",
     "item"
 })
@@ -45,6 +48,8 @@ public class List implements Serializable
     private final static long serialVersionUID = 1L;
     @XmlElement(namespace = "http://www.openfuxml.org")
     protected Comment comment;
+    @XmlElement(namespace = "http://www.openfuxml.org/layout")
+    protected Layout layout;
     @XmlElement(required = true)
     protected Type type;
     protected java.util.List<Item> item;
@@ -75,6 +80,34 @@ public class List implements Serializable
 
     public boolean isSetComment() {
         return (this.comment!= null);
+    }
+
+    /**
+     * Gets the value of the layout property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Layout }
+     *     
+     */
+    public Layout getLayout() {
+        return layout;
+    }
+
+    /**
+     * Sets the value of the layout property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Layout }
+     *     
+     */
+    public void setLayout(Layout value) {
+        this.layout = value;
+    }
+
+    public boolean isSetLayout() {
+        return (this.layout!= null);
     }
 
     /**

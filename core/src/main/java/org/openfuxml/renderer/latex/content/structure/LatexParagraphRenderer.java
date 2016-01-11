@@ -2,7 +2,10 @@ package org.openfuxml.renderer.latex.content.structure;
 
 import java.util.List;
 
+import org.openfuxml.content.editorial.Acronym;
+import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.content.layout.Alignment;
+import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
@@ -15,10 +18,13 @@ import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.editorial.LatexAcronymRenderer;
+import org.openfuxml.renderer.latex.content.editorial.LatexGlossaryRenderer;
 import org.openfuxml.renderer.latex.content.media.LatexImageRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexEmphasisRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexSymbolRenderer;
 import org.openfuxml.renderer.latex.structure.LatexReferenceRenderer;
+import org.openfuxml.renderer.latex.util.LatexFontUtil;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +54,9 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 	{	
 		JaxbUtil.trace(paragraph);
 		int nonInlineCounter = 0;
+		
 		Image image=null;
+		Font font = null;
 		for(Object o : paragraph.getContent())
 		{
 			if(o instanceof Image)
@@ -61,8 +69,15 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 				XmlAlignmentFactory.Horizontal horizontal = XmlAlignmentFactory.Horizontal.valueOf(image.getAlignment().getHorizontal());
 				if(!horizontal.equals(XmlAlignmentFactory.Horizontal.inline)){nonInlineCounter++;}
 			}
+			if(o instanceof Font)
+			{
+				if(font!=null){throw new OfxAuthoringException("More than one "+Font.class.getSimpleName()+" in "+Paragraph.class.getSimpleName()+" not allowed");}
+				font = (Font)o;
+			}
 		}
 		if(nonInlineCounter>1){throw new OfxAuthoringException("More than one non-inline "+Image.class.getSimpleName()+" in "+Paragraph.class.getSimpleName()+" not allowed");}
+		
+		if(font!=null){txt.add(LatexFontUtil.environmentBegin(font));}
 		
 		if(nonInlineCounter==1 && image!=null)
 		{
@@ -78,10 +93,13 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 			if(o==null){throw new OfxAuthoringException(Paragraph.class.getSimpleName()+" has no content");}
 			else if(o instanceof String){sb.append(TexSpecialChars.replace((String)o));}
 			else if(o instanceof Emphasis){renderEmphasis(sb, (Emphasis)o);}
-			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
 			else if(o instanceof Reference){renderReference(sb,(Reference)o);}
 			else if(o instanceof Marginalia){renderMarginalia(sb,(Marginalia)o);}
 			else if(o instanceof Symbol){renderSymbol(sb,(Symbol)o);}
+			else if(o instanceof Glossary){renderGlossary(sb, (Glossary)o);}
+			else if(o instanceof Acronym){renderAcronym(sb, (Acronym)o);}
+			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
+			else if(o instanceof Font){}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
 		txt.add(sb.toString());
@@ -90,12 +108,28 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 		{
 			txt.add("\\end{window}");
 		}
+		
+		if(font!=null){txt.add(LatexFontUtil.environmentEnd());}
 	}
 	
 	private void renderEmphasis(StringBuffer sb, Emphasis emphasis) throws OfxAuthoringException
 	{
 		LatexEmphasisRenderer stf = new LatexEmphasisRenderer(cmm,dsm);
 		stf.render(emphasis);
+		for(String s : stf.getContent()){sb.append(s);}
+	}
+	
+	private void renderGlossary(StringBuffer sb, Glossary glossary) throws OfxAuthoringException
+	{
+		LatexGlossaryRenderer stf = new LatexGlossaryRenderer(cmm,dsm);
+		stf.render(glossary);
+		for(String s : stf.getContent()){sb.append(s);}
+	}
+	
+	private void renderAcronym(StringBuffer sb, Acronym acronym) throws OfxAuthoringException
+	{
+		LatexAcronymRenderer stf = new LatexAcronymRenderer(cmm,dsm);
+		stf.render(acronym);
 		for(String s : stf.getContent()){sb.append(s);}
 	}
 	

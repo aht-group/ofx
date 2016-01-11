@@ -6,6 +6,7 @@ public class OfxEmphasisFactory
 {
 	private boolean bold;
 	private boolean italic;
+	private boolean quote;
 	
 	public OfxEmphasisFactory(Emphasis emphasis)
 	{
@@ -18,13 +19,29 @@ public class OfxEmphasisFactory
 		this.italic=italic;
 	}
 	
+	public OfxEmphasisFactory(boolean bold, boolean italic, boolean quote)
+	{
+		this.bold=bold;
+		this.italic=italic;
+		this.quote=quote;
+	}
+	
 	public Emphasis build(String text)
 	{
 		Emphasis emphasis = new Emphasis();
 		emphasis.setBold(bold);
 		emphasis.setItalic(italic);
+		emphasis.setQuote(quote);
 		emphasis.setValue(text);
 		return emphasis;
+	}
+	
+	public static Emphasis italic(String text)
+	{
+		Emphasis xml = new Emphasis();
+		xml.setItalic(true);
+		xml.setValue(text);
+		return xml;
 	}
 	
 	public static Emphasis typewriter(String text)
