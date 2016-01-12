@@ -38,8 +38,8 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		if(longTable){tableType="longtabu";}
 		else{tableType="tabu";}
 		
-//		\renewcommand{\arraystretch}{1.5}
-//		\linespread{0.75}\selectfont
+		preTxt.add("\\setlength{\\extrarowheight}{1.5mm}");//konstante Reihenabstände in einer Tabelle
+		preTxt.add("\\linespread{0.75}\\selectfont");        				//Zeilenabstand (Text allgemein)
 		
 		StringBuffer preSb = new StringBuffer();
 		preSb.append("\\begin{").append(tableType).append("} to \\linewidth ");
