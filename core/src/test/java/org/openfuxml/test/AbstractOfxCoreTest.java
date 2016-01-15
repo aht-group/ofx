@@ -11,7 +11,6 @@ import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxCharacterRenderer;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
-import org.openfuxml.interfaces.renderer.text.OfxTextRenderer;
 import org.openfuxml.interfaces.renderer.wiki.OfxWikiRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
