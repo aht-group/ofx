@@ -10,6 +10,7 @@ import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.interfaces.renderer.text.OfxTextRenderer;
+import org.openfuxml.interfaces.renderer.wiki.OfxWikiRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.xml.OfxNsPrefixMapper;
@@ -121,6 +122,16 @@ public class AbstractOfxCoreTest
 		debug(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
+	}
+	
+	protected void renderTest(OfxWikiRenderer renderer, File f) throws IOException
+	{
+		System.out.println("************************************");
+		for(String s : renderer.getContent())
+		{
+			System.out.println(s);
+		}
+		System.out.println("************************************");
 	}
 	
 	public void setSaveReference(boolean saveReference) {this.saveReference = saveReference;}

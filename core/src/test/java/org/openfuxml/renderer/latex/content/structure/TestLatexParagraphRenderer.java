@@ -82,7 +82,7 @@ public class TestLatexParagraphRenderer extends AbstractLatexContentTest
     {
     	Paragraph p = create();
     	p.getContent().add(XmlFontFactory.relative(-2));
-    	
+    	JaxbUtil.info(p);
     	f = new File(rootDir,dir+"/"+Key.fontRelative+".txt");
     	renderer.render(p);
     	renderTest(renderer,f);
