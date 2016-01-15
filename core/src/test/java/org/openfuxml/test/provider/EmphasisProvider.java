@@ -12,32 +12,31 @@ public class EmphasisProvider extends AbstractElementProvider
 	
 	public static enum Key {bold,italic,quote}
 	
-	public Paragraph bold()
+	public static Paragraph bold()
 	{
 		OfxEmphasisFactory eF = new OfxEmphasisFactory(true,false);
     	return create(eF);
 	}
 	
-	public Paragraph italic()
+	public static Paragraph italic()
 	{
 		OfxEmphasisFactory eF = new OfxEmphasisFactory(false,true);
     	return create(eF);
 	}
 	
-	public Paragraph italicBold()
+	public static Paragraph italicBold()
 	{
 		OfxEmphasisFactory eF = new OfxEmphasisFactory(true,true);
     	return create(eF);
 	}
 	
-	public Paragraph quote()
+	public static Paragraph quote()
 	{
 		OfxEmphasisFactory eF = new OfxEmphasisFactory(false,false,true);
     	return create(eF);
 	}
 	
-	
-	private Paragraph create(OfxEmphasisFactory eF)
+	private static Paragraph create(OfxEmphasisFactory eF)
 	{
 		Paragraph p = new Paragraph();
     	p.getContent().add(li.getWords(1)+" ");

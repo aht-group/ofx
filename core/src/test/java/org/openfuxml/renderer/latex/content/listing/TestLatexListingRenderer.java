@@ -70,7 +70,7 @@ public class TestLatexListingRenderer extends AbstractLatexListingTest
 			
     	TestLatexListingRenderer.initLoremIpsum();
     	TestLatexListingRenderer test = new TestLatexListingRenderer();
-    	test.setSaveReference(true);
+    	test.setEnvironment(true);
     	
     	test.initRenderer();
     	test.direct();

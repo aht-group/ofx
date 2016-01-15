@@ -122,7 +122,7 @@ public class TestLatexGlossaryRenderer extends AbstractLatexContentTest
     	TestLatexGlossaryRenderer.initLoremIpsum();
     	TestLatexGlossaryRenderer test = new TestLatexGlossaryRenderer();
     	test.init();
-    	test.setSaveReference(true);
+    	test.setEnvironment(true);
 //    	test.glossaryList();
 //    	test.glossary();
     	test.glossaryEmphasis();

@@ -25,7 +25,7 @@ public class TestTextTableRenderer extends AbstractOfxCoreTest
 	public void testOfx() throws OfxAuthoringException
 	{
 		renderer.render(table);
-		debug(renderer);
+		debugCharacter(renderer);
 	}
 	
 	public static void main(String[] args) throws Exception

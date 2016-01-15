@@ -96,7 +96,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
 
     	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -109,7 +109,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     	list.getItem().add(TestLatexItemFactory.createItem());
     	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -123,7 +123,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     	list.getItem().add(TestLatexItemFactory.createItem());
     	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -138,7 +138,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     	list.getType().setOrdering(null);
     	list.getItem().add(TestLatexItemFactory.createItem(li.getWords(1)));
     	renderer.render(list,parentSection);
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -149,7 +149,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
 			
     	TestLatexListRenderer.initLoremIpsum();
     	TestLatexListRenderer test = new TestLatexListRenderer();
-    	test.setSaveReference(true);
+    	test.setEnvironment(true);
     	
     	test.initRenderer();test.unordered();
 //    	test.initRenderer();test.ordered();

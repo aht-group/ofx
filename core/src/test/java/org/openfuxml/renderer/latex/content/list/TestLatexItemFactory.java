@@ -46,7 +46,7 @@ public class TestLatexItemFactory extends AbstractLatexListTest
     {
     	f = new File(rootDir,dir+"/"+Key.itemize+".txt");
     	renderer.render(LatexListRenderer.ListType.list,createItem());
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -62,7 +62,7 @@ public class TestLatexItemFactory extends AbstractLatexListTest
     {
     	f = new File(rootDir,dir+"/"+Key.description+".txt");
     	renderer.render(LatexListRenderer.ListType.description,createItem(li.getWords(1)));
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -73,7 +73,7 @@ public class TestLatexItemFactory extends AbstractLatexListTest
 			
     	TestLatexItemFactory.initLoremIpsum();
     	TestLatexItemFactory test = new TestLatexItemFactory();
-    	test.setSaveReference(true);
+    	test.setEnvironment(true);
     	
    	test.initRenderer();test.itemize();
 //    	test.initRenderer();test.description();
