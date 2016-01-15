@@ -1,2 +1,2 @@
 
-Lorem \enquote{Lorem ipsum} Lorem ipsum dolor
+Lorem \textit{Lorem ipsum} Lorem ipsum dolor
