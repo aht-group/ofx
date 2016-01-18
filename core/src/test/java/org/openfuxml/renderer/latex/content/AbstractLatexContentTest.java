@@ -43,6 +43,5 @@ public abstract class AbstractLatexContentTest extends AbstractOfxCoreTest
 			w.add(content);
 			w.writeFile(new File(latexBase,"test.tex"));
 		}
-		
 	}
 }

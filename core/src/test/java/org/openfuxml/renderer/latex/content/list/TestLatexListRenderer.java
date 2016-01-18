@@ -3,8 +3,6 @@ package org.openfuxml.renderer.latex.content.list;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -17,8 +15,11 @@ import org.openfuxml.factory.xml.ofx.layout.XmlLayoutFactory;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
+import org.openfuxml.test.provider.ListItemProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestLatexListRenderer extends AbstractLatexListTest
 {	
@@ -47,7 +48,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
 		
 		List list = new List();
 		list.setType(type);
-		for(int i=0;i<size;i++){list.getItem().add(TestLatexItemFactory.createItem());}
+		for(int i=0;i<size;i++){list.getItem().add(ListItemProvider.build());}
 		return list;
 	}
 	
@@ -96,7 +97,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
 
     	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -106,10 +107,10 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     {	
     	f = new File(rootDir,dir+"/"+Key.layout+".txt");
     	List list = createList();
-    	list.getItem().add(TestLatexItemFactory.createItem());
+    	list.getItem().add(ListItemProvider.build());
     	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -120,10 +121,10 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     	f = new File(rootDir,dir+"/"+Key.ordered+".txt");
     	List list = createList();
     	list.getType().setOrdering("ordered");
-    	list.getItem().add(TestLatexItemFactory.createItem());
+    	list.getItem().add(ListItemProvider.build());
     	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -136,9 +137,9 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     	List list = createList();
     	list.getType().setDescription(true);
     	list.getType().setOrdering(null);
-    	list.getItem().add(TestLatexItemFactory.createItem(li.getWords(1)));
+    	list.getItem().add(ListItemProvider.description());
     	renderer.render(list,parentSection);
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -149,7 +150,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
 			
     	TestLatexListRenderer.initLoremIpsum();
     	TestLatexListRenderer test = new TestLatexListRenderer();
-    	test.setSaveReference(true);
+    	test.setEnvironment(true);
     	
     	test.initRenderer();test.unordered();
 //    	test.initRenderer();test.ordered();

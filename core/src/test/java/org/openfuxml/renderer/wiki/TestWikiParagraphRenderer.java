@@ -57,7 +57,7 @@ public class TestWikiParagraphRenderer extends AbstractWikiContentTest
     	TestWikiParagraphRenderer.initLoremIpsum();
     	TestWikiParagraphRenderer test = new TestWikiParagraphRenderer();
     	test.init();
-    	test.setSaveReference(true);
+    	test.setEnvironment(true);
     	
     	test.plain();
     }

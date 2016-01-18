@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
@@ -21,15 +20,9 @@ public class TestLatexEmphasisRenderer extends AbstractLatexContentTest
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	
 	private static enum Key {bold,italic,quote}
+	private static String dir = "emphasis";
 	
-	private static EmphasisProvider ep;
 	private LatexParagraphRenderer renderer;
-	
-	@BeforeClass
-	public static void initClass()
-	{
-		ep = new EmphasisProvider();
-	}
 	
 	@Before
 	public void init()
@@ -39,30 +32,25 @@ public class TestLatexEmphasisRenderer extends AbstractLatexContentTest
 	
 	@After public void close(){renderer=null;}
 	
-	private String dir = "emphasis";
-	
-	
-	
-	
     @Test
     public void bold() throws IOException, OfxAuthoringException
     {
     	f = new File(rootDir,dir+"/"+Key.bold+".txt");
-    	renderer.render(ep.bold());
+    	renderer.render(EmphasisProvider.bold());
     	renderTest(renderer,f);
     }
     
     @Test public void italic() throws IOException, OfxAuthoringException
     {    	
     	f = new File(rootDir,dir+"/"+Key.italic+".txt");
-    	renderer.render(ep.italic());
+    	renderer.render(EmphasisProvider.italic());
     	renderTest(renderer,f);
     }
     
     @Test public void quote() throws IOException, OfxAuthoringException
     {
     	f = new File(rootDir,dir+"/"+Key.quote+".txt");
-    	renderer.render(ep.italic());
+    	renderer.render(EmphasisProvider.italic());
     	renderTest(renderer,f);
     }
     
@@ -70,7 +58,7 @@ public class TestLatexEmphasisRenderer extends AbstractLatexContentTest
     public void italicBold() throws IOException, OfxAuthoringException
     {
     	f = new File(rootDir,dir+"/"+Key.italic+"-"+Key.bold+".txt");
-    	renderer.render(ep.italicBold());
+    	renderer.render(EmphasisProvider.italicBold());
     	renderTest(renderer,f);
     }
     
@@ -79,9 +67,8 @@ public class TestLatexEmphasisRenderer extends AbstractLatexContentTest
     	OfxCoreTestBootstrap.init();
 			
     	TestLatexEmphasisRenderer test = new TestLatexEmphasisRenderer();
-    	TestLatexEmphasisRenderer.initClass();
     	
-    	test.setSaveReference(true);
+    	test.setEnvironment(true);
     	
     	test.init();test.bold();
     	test.init();test.italic();

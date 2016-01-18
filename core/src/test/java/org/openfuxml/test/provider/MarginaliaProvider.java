@@ -1,19 +1,18 @@
 package org.openfuxml.test.provider;
 
+import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.renderer.latex.content.structure.TestLatexParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.svenjacobs.loremipsum.LoremIpsum;
-
-public class AbstractElementProvider
+public class MarginaliaProvider extends AbstractElementProvider
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	
-	protected static LoremIpsum li;
-	
-	static
+	public static Marginalia withParagraph()
 	{
-		li = new LoremIpsum();
+		Marginalia marginalia = new Marginalia();
+		marginalia.getContent().add(ParagraphProvider.create());
+		return marginalia;
 	}
 }

@@ -134,7 +134,7 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
     	TestLatexImageRenderer.initLoremIpsum();
     	TestLatexImageRenderer test = new TestLatexImageRenderer();
     	test.initLatexTestEnvironment(config);
-    	test.setSaveReference(true);
+    	test.setEnvironment(true);
     	
     	test.initRenderer();
 //    	test.direct();
