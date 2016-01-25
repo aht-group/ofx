@@ -2,8 +2,8 @@ package org.openfuxml.renderer.markdown;
 
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
 import org.openfuxml.renderer.markdown.structure.MdSectionRenderer;
-import org.openfuxml.interfaces.renderer.markdown.OfxMarkdownRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,13 +19,13 @@ public class AbstractOfxMarkdownRenderer
 	protected DefaultSettingsManager dsm; // config e.g. line separator
 
 	protected List<String> txt;
-	protected ArrayList<OfxMarkdownRenderer> renderer;
+	protected ArrayList<OfxMdRenderer> renderer;
 
 	public AbstractOfxMarkdownRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		this.cmm = cmm;
 		this.dsm = dsm;
-		renderer = new ArrayList<OfxMarkdownRenderer>();
+		renderer = new ArrayList<OfxMdRenderer>();
 		txt = new ArrayList<String>();
 	}
 
@@ -34,7 +34,7 @@ public class AbstractOfxMarkdownRenderer
 		List<String> resultTxt = new ArrayList<String>();
 
 		resultTxt.addAll(txt);
-		for(OfxMarkdownRenderer r : renderer)
+		for(OfxMdRenderer r : renderer)
 		{
 			resultTxt.addAll(r.getContent());
 		}
