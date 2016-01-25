@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.renderer.OfxCharacterRenderer;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
-import org.openfuxml.interfaces.renderer.text.OfxTextRenderer;
+import org.openfuxml.interfaces.renderer.wiki.OfxWikiRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.xml.OfxNsPrefixMapper;
@@ -27,16 +29,22 @@ public class AbstractOfxCoreTest
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxCoreTest.class);
 	
 	protected static LoremIpsum li;
-	private boolean saveReference = false;
+	private boolean saveReference;
 	protected File f;
 	
 	protected DefaultSettingsManager dsm;
-	protected  CrossMediaManager cmm;
+	protected CrossMediaManager cmm;
 	
 	public AbstractOfxCoreTest()
 	{
+		saveReference = false;
 		dsm = new OfxDefaultSettingsManager();
 		cmm = new NoOpCrossMediaManager();
+	}
+	
+	protected void setEnvironment(boolean saveReference)
+	{
+		this.saveReference = saveReference;
 	}
 
 	@BeforeClass
@@ -87,41 +95,35 @@ public class AbstractOfxCoreTest
 		String expected = StringIO.loadTxt(f);
 		Assert.assertEquals(expected, actual.toString());
 	}
-	
-	protected void debug(OfxLatexRenderer renderer)
-	{
-		if(logger.isDebugEnabled())
-		{
-			logger.debug("Debugging "+renderer.getClass().getSimpleName());
-			System.out.println("************************************");
-			for(String s : renderer.getContent())
-			{
-				System.out.println(s);
-			}
-			System.out.println("************************************");
-		}
-	}
-	
-	protected void debug(OfxTextRenderer renderer)
-	{
-		if(logger.isDebugEnabled())
-		{
-			logger.debug("Debugging "+renderer.getClass().getSimpleName());
-			System.out.println("************************************");
-			for(String s : renderer.getContent())
-			{
-				System.out.println(s);
-			}
-			System.out.println("************************************");
-		}
-	}
-	
+		
 	protected void renderTest(OfxLatexRenderer renderer, File f) throws IOException
 	{
-		debug(renderer);
-    	save(renderer,f);
+		debugCharacter(renderer);
+    	if(saveReference){save(renderer,f);}
     	assertText(renderer,f);
 	}
 	
-	public void setSaveReference(boolean saveReference) {this.saveReference = saveReference;}
+	protected void renderTest(OfxWikiRenderer renderer, File f) throws IOException
+	{
+		System.out.println("************************************");
+		for(String s : renderer.getContent())
+		{
+			System.out.println(s);
+		}
+		System.out.println("************************************");
+	}
+	
+	protected void debugCharacter(OfxCharacterRenderer renderer)
+	{
+		if(logger.isDebugEnabled())
+		{
+			logger.debug("Debugging s"+renderer.getClass().getSimpleName());
+			System.out.println(StringUtils.repeat("\u21E3", 80));
+			for(String s : renderer.getContent())
+			{
+				System.out.println(s);
+			}
+			System.out.println(StringUtils.repeat("\u21E1", 80));
+		}
+	}
 }

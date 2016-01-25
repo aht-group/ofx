@@ -59,7 +59,7 @@ public class TestLatexRowRenderer extends AbstractLatexTableTest
 			
     	TestLatexRowRenderer.initLoremIpsum();
     	TestLatexRowRenderer test = new TestLatexRowRenderer();
-    	test.setSaveReference(true);
+    	test.setEnvironment(true);
     	
  //   	test.initRenderer();test.paragraph();
     	test.initRenderer();test.standard();

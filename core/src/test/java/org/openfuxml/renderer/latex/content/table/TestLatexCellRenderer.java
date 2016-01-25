@@ -10,8 +10,8 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.content.list.TestLatexListRenderer;
-import org.openfuxml.renderer.latex.content.structure.TestLatexParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
+import org.openfuxml.test.provider.ParagraphProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +36,7 @@ public class TestLatexCellRenderer extends AbstractLatexTableTest
 	public static Cell create(int words)
 	{
 		Cell cell = new Cell();
-    	cell.getContent().add(TestLatexParagraphRenderer.create(words));
+    	cell.getContent().add(ParagraphProvider.create(words));
     	return cell;
 	}
 	
@@ -45,7 +45,7 @@ public class TestLatexCellRenderer extends AbstractLatexTableTest
     {    	    	
     	f = new File(rootDir,dir+"/"+Key.string+".txt");
     	renderer.render(create());
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -58,7 +58,7 @@ public class TestLatexCellRenderer extends AbstractLatexTableTest
     	
     	f = new File(rootDir,dir+"/"+Key.list+".txt");
     	renderer.render(cell);
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -74,7 +74,7 @@ public class TestLatexCellRenderer extends AbstractLatexTableTest
     	
     	f = new File(rootDir,dir+"/"+Key.specialChar+".txt");
     	renderer.render(cell);
-    	debug(renderer);
+    	debugCharacter(renderer);
     	save(renderer,f);
     	assertText(renderer,f);
     }
@@ -85,7 +85,7 @@ public class TestLatexCellRenderer extends AbstractLatexTableTest
 			
     	TestLatexCellRenderer.initLoremIpsum();
     	TestLatexCellRenderer test = new TestLatexCellRenderer();
-    	test.setSaveReference(true);
+    	test.setEnvironment(true);
     	
     	test.initRenderer();test.paragraph();
     	test.initRenderer();test.list();

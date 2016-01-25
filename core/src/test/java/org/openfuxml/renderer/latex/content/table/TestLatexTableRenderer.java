@@ -120,7 +120,7 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
     	TestLatexTableRenderer.initLoremIpsum();
     	TestLatexTableRenderer test = new TestLatexTableRenderer();
     	test.initLatexTestEnvironment(config);
-    	test.setSaveReference(true);
+    	test.setEnvironment(true);
     	
 //    	test.initRenderer();test.withoutSpecification();
     	test.initRenderer();test.noFloat();

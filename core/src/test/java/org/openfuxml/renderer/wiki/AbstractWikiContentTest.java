@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.content;
+package org.openfuxml.renderer.wiki;
 
 import java.io.File;
 import java.util.List;
@@ -13,11 +13,11 @@ import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractLatexContentTest extends AbstractOfxCoreTest
+public abstract class AbstractWikiContentTest extends AbstractOfxCoreTest
 {
-	final static Logger logger = LoggerFactory.getLogger(AbstractLatexContentTest.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractWikiContentTest.class);
 	
-	protected static final String rootDir = "src/test/resources/data/latex/content";
+	protected static final String rootDir = "src/test/resources/data/wiki/content";
 
 	protected File latexBase;
 	
@@ -43,5 +43,6 @@ public abstract class AbstractLatexContentTest extends AbstractOfxCoreTest
 			w.add(content);
 			w.writeFile(new File(latexBase,"test.tex"));
 		}
+		
 	}
 }

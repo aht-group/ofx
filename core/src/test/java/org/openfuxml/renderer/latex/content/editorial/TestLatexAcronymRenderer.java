@@ -105,7 +105,7 @@ public class TestLatexAcronymRenderer extends AbstractLatexContentTest
     	TestLatexAcronymRenderer.initLoremIpsum();
     	TestLatexAcronymRenderer test = new TestLatexAcronymRenderer();
     	test.init();
-    	test.setSaveReference(true);
+    	test.setEnvironment(true);
     	test.acronym();
  //   	test.acronyms();
     }
