@@ -1,6 +1,5 @@
 package org.openfuxml.renderer.latex.content.structure;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.junit.After;
@@ -10,51 +9,51 @@ import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFontFactory;
-import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
+import org.openfuxml.renderer.latex.content.AbstractTestLatexRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.ParagraphProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
-public class TestLatexParagraphRenderer extends AbstractLatexContentTest
+public class TestLatexParagraphRenderer extends AbstractTestLatexRenderer
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	
 	private static enum Key {withBlank,withoutBlank,marginalia,fontRelative}
 	
 	private LatexParagraphRenderer renderer;
-	private String dir = "paragraph";
 	
-	@Before public void init(){renderer = new LatexParagraphRenderer(cmm,dsm,false);}
+	@Before public void init()
+	{
+		super.initDir("content/paragraph");
+		renderer = new LatexParagraphRenderer(cmm,dsm,false);
+	}
 	@After public void close(){renderer=null;}
 		
     @Test
     public void withBlank() throws IOException, OfxAuthoringException
     {
-    	f = new File(rootDir,dir+"/"+Key.withBlank+".txt");
+    	initFile(Key.withBlank);
     	renderer.render(ParagraphProvider.create());
-    	renderTest(renderer,f);
+    	renderTest(renderer);
     }
     
     @Test @Ignore
     public void withoutBlank() throws IOException, OfxAuthoringException
     {
-    	f = new File(rootDir,dir+"/"+Key.withoutBlank+".txt");
+    	initFile(Key.withoutBlank);
     	renderer.render(ParagraphProvider.create());
-    	renderTest(renderer,f);
+    	renderTest(renderer);
     }
         
     @Test
     public void fontRelative() throws IOException, OfxAuthoringException
     {
+    	initFile(Key.fontRelative);
     	Paragraph p = ParagraphProvider.create();
     	p.getContent().add(XmlFontFactory.relative(-2));
-    	JaxbUtil.info(p);
-    	f = new File(rootDir,dir+"/"+Key.fontRelative+".txt");
     	renderer.render(p);
-    	renderTest(renderer,f);
+    	renderTest(renderer);
     }
     
     public static void main(String[] args) throws Exception

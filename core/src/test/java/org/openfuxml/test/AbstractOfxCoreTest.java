@@ -11,6 +11,7 @@ import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxCharacterRenderer;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
 import org.openfuxml.interfaces.renderer.wiki.OfxWikiRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
@@ -29,7 +30,10 @@ public class AbstractOfxCoreTest
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxCoreTest.class);
 	
 	protected static LoremIpsum li;
+	protected String fileSuffix;
 	private boolean saveReference;
+	
+	protected File referenceDir;
 	protected File f;
 	
 	protected DefaultSettingsManager dsm;
@@ -45,6 +49,11 @@ public class AbstractOfxCoreTest
 	protected void setEnvironment(boolean saveReference)
 	{
 		this.saveReference = saveReference;
+	}
+	
+	protected <E extends Enum<E>> void initFile(E key)
+	{
+		f = new File(referenceDir,key.toString()+"."+fileSuffix);
 	}
 
 	@BeforeClass
@@ -75,7 +84,20 @@ public class AbstractOfxCoreTest
 		Assert.assertEquals("XML-ref differes from XML-test",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
 	}
 	
+	@Deprecated
 	protected void save(OfxLatexRenderer renderer, File f) throws IOException
+	{
+		if(saveReference)
+		{
+			RelativePathFactory rpf = new RelativePathFactory(new File("src/test/resources"),RelativePathFactory.PathSeparator.CURRENT);
+			logger.debug("Saving Reference to "+rpf.relativate(f)+" "+f.getAbsolutePath());
+			StringWriter actual = new StringWriter();
+			renderer.write(actual);
+			StringIO.writeTxt(f, actual.toString());
+		}
+	}
+	
+	protected void save(OfxCharacterRenderer renderer) throws IOException
 	{
 		if(saveReference)
 		{
@@ -87,6 +109,7 @@ public class AbstractOfxCoreTest
 		}
 	}
 	
+	@Deprecated
 	protected void assertText(OfxLatexRenderer renderer, File f) throws IOException
 	{
 		StringWriter actual = new StringWriter();
@@ -95,12 +118,35 @@ public class AbstractOfxCoreTest
 		String expected = StringIO.loadTxt(f);
 		Assert.assertEquals(expected, actual.toString());
 	}
+	
+	protected void assertText(OfxCharacterRenderer renderer) throws IOException
+	{
+		StringWriter actual = new StringWriter();
+		renderer.write(actual);
 		
+		String expected = StringIO.loadTxt(f);
+		Assert.assertEquals(expected, actual.toString());
+	}
+		
+	@Deprecated
 	protected void renderTest(OfxLatexRenderer renderer, File f) throws IOException
 	{
 		debugCharacter(renderer);
     	if(saveReference){save(renderer,f);}
     	assertText(renderer,f);
+	}
+	
+	protected void renderTest(OfxLatexRenderer renderer) throws IOException
+	{
+		debugCharacter(renderer);
+    	if(saveReference){save(renderer,f);}
+    	assertText(renderer,f);
+	}
+	protected void renderTest(OfxMdRenderer renderer) throws IOException
+	{
+		debugCharacter(renderer);
+    	if(saveReference){save(renderer);}
+    	assertText(renderer);
 	}
 	
 	protected void renderTest(OfxWikiRenderer renderer, File f) throws IOException
@@ -117,7 +163,7 @@ public class AbstractOfxCoreTest
 	{
 		if(logger.isDebugEnabled())
 		{
-			logger.debug("Debugging s"+renderer.getClass().getSimpleName());
+			logger.debug("Debugging "+renderer.getClass().getSimpleName());
 			System.out.println(StringUtils.repeat("\u21E3", 80));
 			for(String s : renderer.getContent())
 			{

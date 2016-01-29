@@ -1,9 +1,7 @@
 package org.openfuxml.renderer.latex.content.structure;
 
 import java.io.IOException;
-import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Section;
@@ -11,85 +9,77 @@ import org.openfuxml.content.ofx.Title;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.factory.xml.text.OfxTextFactory;
-import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
+import org.openfuxml.renderer.latex.content.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
-import org.openfuxml.renderer.util.OfxContentDebugger;
 import org.openfuxml.test.OfxCoreTestBootstrap;
+import org.openfuxml.test.provider.TitleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestLatexTitleRenderer extends AbstractLatexContentTest
+public class TestLatexTitleRenderer extends AbstractTestLatexRenderer
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexTitleRenderer.class);
 
+	private static enum Key {withoutId,withId,specialChar,text}
+	
     private LatexPreamble preamble;
 	private LatexTitleRenderer renderer;
-
-    private Section section;
-    private Title title;
 
 	@Before
 	public void init()
 	{
+		super.initDir("structure/title");
         preamble = new LatexPreamble(cmm,dsm);
         renderer = new LatexTitleRenderer(cmm,dsm);
-        section = new Section();
-        section.setId("myId");
-        title = XmlTitleFactory.build("test");
 	}
 	
     @Test
     public void withoutId() throws IOException, OfxAuthoringException
     {
+    	initFile(Key.withoutId);
+    	Section section = TitleProvider.build();
         section.setId(null);
-        renderer.render(title,section,1,preamble);
-        List<String> content = renderer.getContent();
-        OfxContentDebugger.debug(content);
-        Assert.assertEquals(2, content.size());
+        renderer.render(TitleProvider.create(),section,1,preamble);
+    	renderTest(renderer);
     }
 
     @Test
     public void withId() throws IOException, OfxAuthoringException
     {
-        renderer.render(title,section,1,preamble);
-        List<String> content = renderer.getContent();
-        OfxContentDebugger.debug(content);
-        Assert.assertEquals(3, content.size());
+    	initFile(Key.withId);
+        renderer.render(TitleProvider.create(),TitleProvider.build(),1,preamble);
+        renderTest(renderer);
     }
     
     @Test
     public void specialChars() throws IOException, OfxAuthoringException
     {
-    	title = XmlTitleFactory.build("M & E");
-        renderer.render(title,section,1,preamble);
-        List<String> content = renderer.getContent();
-        OfxContentDebugger.debug(content);
-        Assert.assertEquals(3, content.size());
+    	initFile(Key.withoutId);
+        renderer.render(XmlTitleFactory.build("M & E"),TitleProvider.build(),1,preamble);
+        renderTest(renderer);
     }
     
-    public void text()
+    public void text() throws IOException
     {
+    	initFile(Key.text);
     	Title title = new Title();
     	title.getContent().add("Test");
     	title.getContent().add("Test2");
     	title.getContent().add(OfxTextFactory.build("Test3"));
     	
-    	renderer.render(title,section,1,preamble);
-    	List<String> content = renderer.getContent();
-    	for(String s : content){System.out.println(s);}
+    	renderer.render(title,TitleProvider.build(),1,preamble);
+    	renderTest(renderer);
     }
     
     public static void main(String[] args) throws Exception
     {
     	OfxCoreTestBootstrap.init();
-
     	TestLatexTitleRenderer test = new TestLatexTitleRenderer();
-        test.init();
+        test.setEnvironment(true);
 
-//    	test.withoutId();
-//        test.withId();
-//        test.specialChars();
-        test.text();
+        test.init();test.withoutId();
+        test.init();test.withId();
+        test.init();test.specialChars();
+        test.init();test.text();
     }
-   
 }

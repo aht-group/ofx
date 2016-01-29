@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
+import org.openfuxml.renderer.latex.content.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.content.structure.TestLatexParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
@@ -15,7 +15,7 @@ import org.openfuxml.test.provider.EmphasisProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestLatexEmphasisRenderer extends AbstractLatexContentTest
+public class TestLatexEmphasisRenderer extends AbstractTestLatexRenderer
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	

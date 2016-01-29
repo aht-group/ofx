@@ -13,13 +13,27 @@ import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractLatexContentTest extends AbstractOfxCoreTest
+public abstract class AbstractTestLatexRenderer extends AbstractOfxCoreTest
 {
-	final static Logger logger = LoggerFactory.getLogger(AbstractLatexContentTest.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractTestLatexRenderer.class);
 	
 	protected static final String rootDir = "src/test/resources/data/latex/content";
-
 	protected File latexBase;
+	
+	public AbstractTestLatexRenderer()
+	{
+		fileSuffix = "txt";
+	}
+	
+	protected void initDir(String dir)
+	{
+		referenceDir = new File("src/test/resources/data/latex",dir);
+	}
+	
+	protected <E extends Enum<E>> void initFile(E key)
+	{
+		f = new File(referenceDir,key.toString()+"."+fileSuffix);
+	}
 	
 	protected void initLatexTestEnvironment(Configuration config)
 	{

@@ -15,14 +15,14 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
-import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
+import org.openfuxml.renderer.latex.content.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.util.OfxContentDebugger;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestLatexSectionRenderer extends AbstractLatexContentTest
+public class TestLatexSectionRenderer extends AbstractTestLatexRenderer
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexSectionRenderer.class);
 

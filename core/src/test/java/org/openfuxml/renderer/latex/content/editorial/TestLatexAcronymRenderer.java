@@ -13,7 +13,7 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.editorial.XmlAcronymFactory;
 import org.openfuxml.factory.xml.editorial.XmlTermFactory;
 import org.openfuxml.factory.xml.ofx.content.XmlCommentFactory;
-import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
+import org.openfuxml.renderer.latex.content.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.content.structure.TestLatexParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
@@ -21,7 +21,7 @@ import org.openfuxml.util.OfxCommentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestLatexAcronymRenderer extends AbstractLatexContentTest
+public class TestLatexAcronymRenderer extends AbstractTestLatexRenderer
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	

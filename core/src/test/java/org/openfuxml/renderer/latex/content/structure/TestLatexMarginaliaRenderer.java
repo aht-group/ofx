@@ -12,7 +12,7 @@ import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
-import org.openfuxml.renderer.latex.content.AbstractLatexContentTest;
+import org.openfuxml.renderer.latex.content.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.util.OfxContentDebugger;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.MarginaliaProvider;
@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class TestLatexMarginaliaRenderer extends AbstractLatexContentTest
+public class TestLatexMarginaliaRenderer extends AbstractTestLatexRenderer
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexMarginaliaRenderer.class);
 
