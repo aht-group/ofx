@@ -1,6 +1,5 @@
 package org.openfuxml.renderer.markdown.structure;
 
-
 import java.io.IOException;
 
 import org.junit.Before;
@@ -22,21 +21,20 @@ public class TestMdTitleRenderer extends AbstractTestMdRenderer
 	
 	private MdTitleRenderer renderer;
 
-	@Before
-	void init()
+	@Before public void init()
 	{
 		super.initDir("structure/title");
 		renderer = new MdTitleRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
 	}
 
-	@Test void lvl1() throws IOException
+	@Test public void lvl1() throws IOException
 	{
 		initFile(Key.lvl1);
         renderer.render(TitleProvider.create(),1);
     	renderTest(renderer);
 	}
 	
-	@Test void lvl2() throws IOException
+	@Test public void lvl2() throws IOException
 	{
 		initFile(Key.lvl2);
         renderer.render(TitleProvider.create(),2);

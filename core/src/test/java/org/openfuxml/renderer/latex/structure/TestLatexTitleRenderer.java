@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.content.structure;
+package org.openfuxml.renderer.latex.structure;
 
 import java.io.IOException;
 
@@ -9,7 +9,8 @@ import org.openfuxml.content.ofx.Title;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.factory.xml.text.OfxTextFactory;
-import org.openfuxml.renderer.latex.content.AbstractTestLatexRenderer;
+import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
+import org.openfuxml.renderer.latex.content.structure.LatexTitleRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.TitleProvider;

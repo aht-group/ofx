@@ -13,7 +13,7 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFontFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
-import org.openfuxml.renderer.latex.content.AbstractTestLatexRenderer;
+import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.util.OfxContentDebugger;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;

@@ -1,6 +1,6 @@
 package org.openfuxml.renderer.latex.content.media;
 
-import org.openfuxml.renderer.latex.content.AbstractTestLatexRenderer;
+import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 
 public abstract class AbstractLatexMediaTest extends AbstractTestLatexRenderer
 {

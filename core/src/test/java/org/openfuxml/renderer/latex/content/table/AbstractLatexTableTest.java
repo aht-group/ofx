@@ -1,6 +1,6 @@
 package org.openfuxml.renderer.latex.content.table;
 
-import org.openfuxml.renderer.latex.content.AbstractTestLatexRenderer;
+import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 
 public abstract class AbstractLatexTableTest extends AbstractTestLatexRenderer
 {

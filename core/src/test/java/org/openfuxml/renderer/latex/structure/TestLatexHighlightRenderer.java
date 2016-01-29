@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.content.structure;
+package org.openfuxml.renderer.latex.structure;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
-import org.openfuxml.renderer.latex.content.AbstractTestLatexRenderer;
+import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexHighlightRenderer;
 import org.openfuxml.renderer.util.OfxContentDebugger;
 import org.openfuxml.test.OfxCoreTestBootstrap;

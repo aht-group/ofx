@@ -2,7 +2,7 @@ package org.openfuxml.test.provider;
 
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.factory.xml.text.OfxEmphasisFactory;
-import org.openfuxml.renderer.latex.content.structure.TestLatexParagraphRenderer;
+import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
