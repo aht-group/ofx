@@ -12,6 +12,7 @@ import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxCharacterRenderer;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
+import org.openfuxml.interfaces.renderer.text.OfxTextRenderer;
 import org.openfuxml.interfaces.renderer.wiki.OfxWikiRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
@@ -139,10 +140,16 @@ public class AbstractOfxCoreTest
 	protected void renderTest(OfxLatexRenderer renderer) throws IOException
 	{
 		debugCharacter(renderer);
-    	if(saveReference){save(renderer,f);}
-    	assertText(renderer,f);
+    	if(saveReference){save(renderer);}
+    	assertText(renderer);
 	}
 	protected void renderTest(OfxMdRenderer renderer) throws IOException
+	{
+		debugCharacter(renderer);
+    	if(saveReference){save(renderer);}
+    	assertText(renderer);
+	}
+	protected void renderTest(OfxTextRenderer renderer) throws IOException
 	{
 		debugCharacter(renderer);
     	if(saveReference){save(renderer);}

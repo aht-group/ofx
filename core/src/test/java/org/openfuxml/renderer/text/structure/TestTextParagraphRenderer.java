@@ -6,36 +6,41 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.test.AbstractOfxCoreTest;
+import org.openfuxml.renderer.text.AbstractTestTextRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.ParagraphProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestTextParagraphRenderer extends AbstractOfxCoreTest
+public class TestTextParagraphRenderer extends AbstractTestTextRenderer
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestTextParagraphRenderer.class);
 	
+	private static enum Key {simple}
+	
 	private TextParagraphRenderer renderer;
     
-	@Before public void init() {renderer = new TextParagraphRenderer(cmm,dsm);}
+	@Before public void init()
+	{
+		super.initDir("content/paragraph");
+		renderer = new TextParagraphRenderer(cmm,dsm);
+	}
 	@After public void close() {renderer = null;}
 	
     @Test
-    public void test() throws IOException, OfxAuthoringException
+    public void simple() throws IOException, OfxAuthoringException
     {
+    	initFile(Key.simple);
     	renderer.render(ParagraphProvider.create());
-    	debugCharacter(renderer);
+    	renderTest(renderer);
     }
     
     public static void main(String[] args) throws Exception
     {
     	OfxCoreTestBootstrap.init();
-			
-    	TestTextParagraphRenderer.initLoremIpsum();
-    	TestTextParagraphRenderer cli = new TestTextParagraphRenderer();
-    	cli.init();
+    	TestTextParagraphRenderer test = new TestTextParagraphRenderer();
+    	test.setEnvironment(true);
     	
-    	cli.test();
+    	test.init();test.simple();
     }
 }

@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.markdown.content.structure;
+package org.openfuxml.renderer.markdown.structure;
 
 
 import java.io.IOException;
