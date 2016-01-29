@@ -10,7 +10,7 @@
 		<ofx:title lang="en">Including other files</ofx:title>
 	
 		<ofx:paragraph lang="en" version="1">
-			style: "typewriter" will print the text in a typewriter fint
+			style: "typewriter" will print the text in a typewriter font
 		</ofx:paragraph>
 
 	</ofx:section>

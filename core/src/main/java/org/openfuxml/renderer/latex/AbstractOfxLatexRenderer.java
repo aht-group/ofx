@@ -41,7 +41,7 @@ public class AbstractOfxLatexRenderer
 	protected List<String> txt;
 	protected List<String> postTxt;
 	
-	protected List<OfxLatexRenderer> renderer;
+	protected List<OfxLatexRenderer> renderer; //listing different renderer e.g. Section, Title, List; nacheinander abgearbeitet
 	
 	public AbstractOfxLatexRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
