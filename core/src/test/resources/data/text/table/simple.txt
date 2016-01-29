@@ -1,0 +1,9 @@
++------------+-----------+---------------------------------------+-------+--------+
+| First Name | Last Name |              University               | Years | Active |
++------------+-----------+---------------------------------------+-------+--------+
+| David      | Wright    | Harvard University                    | 5     | false  |
+| Andrew     | Donnel    | University of Oxford                  | 3     | true   |
+| Lisa       | Barke     | Massachusetts Institute of Technology | 2     | false  |
+| Richard    | Snow      | University of California, Los Angeles | 5     | true   |
+| Marry      | Winter    | University of Cambridge               | 4     | false  |
++------------+-----------+---------------------------------------+-------+--------+
