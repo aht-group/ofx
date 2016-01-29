@@ -7,13 +7,12 @@ import java.io.Writer;
 
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.transcoder.TranscoderException;
-import org.openfuxml.media.cross.LatexCrossMediaManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Svg2SvgTranscoder
 {
-	final static Logger logger = LoggerFactory.getLogger(LatexCrossMediaManager.class);
+	final static Logger logger = LoggerFactory.getLogger(Svg2PngTranscoder.class);
 	
 	public static byte[] transcode(SVGGraphics2D g) throws IOException, TranscoderException
 	{

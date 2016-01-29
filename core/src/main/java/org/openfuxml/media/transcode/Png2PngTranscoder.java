@@ -5,30 +5,26 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.sf.exlp.util.io.FileIO;
-import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
-
 import org.apache.commons.io.IOUtils;
 import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.media.CrossMediaTranscoder;
-import org.openfuxml.media.cross.LatexCrossMediaManager;
 import org.openfuxml.util.media.CrossMediaFileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Png2PngTranscoder implements CrossMediaTranscoder
+import net.sf.exlp.util.io.FileIO;
+
+public class Png2PngTranscoder extends AbstractCrossMediaTranscoder implements CrossMediaTranscoder
 {
-	final static Logger logger = LoggerFactory.getLogger(LatexCrossMediaManager.class);
-	
-	private File dir;
-	private MultiResourceLoader mrl;
+	final static Logger logger = LoggerFactory.getLogger(Svg2PngTranscoder.class);
 	
 	public Png2PngTranscoder(File dir)
 	{
-		this.dir=new File(dir,"png");
-		mrl = new MultiResourceLoader();
+		super(new File(dir,"png"));
 	}
+	
+	@Override public File buildTarget(Media media) {return new File(dir,media.getDst()+".png");}
 	
 	@Override
 	public void transcode(Media media) throws OfxAuthoringException
@@ -47,20 +43,5 @@ public class Png2PngTranscoder implements CrossMediaTranscoder
 		catch (IOException e) {throw new OfxAuthoringException(e.getMessage());}
 		
 //		FileIO.writeFileIfDiffers(bytes, fTarget);
-	}
-	
-
-
-	@Override
-	public boolean isTargetExisting(Media media)
-	{
-		File file = buildTarget(media);
-		return file.exists() && file.isFile();
-	}
-
-	@Override
-	public File buildTarget(Media media)
-	{
-		return new File(dir,media.getDst()+".png");
 	}
 }

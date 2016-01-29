@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
-
 import org.apache.batik.transcoder.Transcoder;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
@@ -18,26 +16,22 @@ import org.apache.fop.svg.PDFTranscoder;
 import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.media.CrossMediaTranscoder;
-import org.openfuxml.media.cross.LatexCrossMediaManager;
 import org.openfuxml.util.media.CrossMediaFileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Svg2PdfTranscoder implements CrossMediaTranscoder
+public class Svg2PdfTranscoder extends AbstractCrossMediaTranscoder implements CrossMediaTranscoder
 {
-	final static Logger logger = LoggerFactory.getLogger(LatexCrossMediaManager.class);
-	
-	private File dir;
-	private MultiResourceLoader mrl;
+	final static Logger logger = LoggerFactory.getLogger(Svg2PngTranscoder.class);
 	
 	public Svg2PdfTranscoder(File dir)
 	{
-		this.dir=new File(dir,"pdf");
-		mrl = new MultiResourceLoader();
+		super(new File(dir,"pdf"));
 	}
 	
-	@Override
-	public void transcode(Media media) throws OfxAuthoringException
+	@Override public File buildTarget(Media media) {return new File(dir,media.getDst()+".pdf");}
+	
+	@Override public void transcode(Media media) throws OfxAuthoringException
 	{
 		File file = buildTarget(media);
 		CrossMediaFileUtil.createParentDirs(file);
@@ -71,18 +65,5 @@ public class Svg2PdfTranscoder implements CrossMediaTranscoder
 
 		os.flush();
 		os.close(); 
-	}
-	
-	@Override
-	public boolean isTargetExisting(Media media)
-	{
-		File file = buildTarget(media);
-		return file.exists() && file.isFile();
-	}
-
-	@Override
-	public File buildTarget(Media media)
-	{
-		return new File(dir,media.getDst()+".pdf");
 	}
 }
