@@ -3,10 +3,13 @@ package org.openfuxml.renderer.markdown;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
+import org.openfuxml.renderer.markdown.structure.MdListRenderer;
 import org.openfuxml.renderer.markdown.structure.MdSectionRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,5 +42,20 @@ public class AbstractOfxMarkdownRenderer
 			resultTxt.addAll(r.getContent());
 		}
 		return resultTxt;
+	}
+
+	public void listRenderer(org.openfuxml.content.list.List list, OfxMdRenderer parent)
+	{
+		MdListRenderer listR = new MdListRenderer(cmm,dsm);
+		listR.render(list, parent);
+		renderer.add(listR);
+	}
+	public void write(Writer w) throws IOException
+	{
+		for(String s : getContent())
+		{
+			w.write(s+dsm.lineSeparator());
+		}
+		w.flush();
 	}
 }

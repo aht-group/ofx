@@ -28,17 +28,11 @@ public class MdTitleRenderer extends AbstractOfxMarkdownRenderer implements OfxM
 
 		StringBuffer sb = new StringBuffer();
 
-		//Markdown only implements 6 header level! Maybe decreasing max level because of header design
-		//ToDo add section or paragraph level and relate title level to it
-		while(sb.length() < lvl && sb.length() < 7){sb.append("#");}
+		//Markdown only implements 6 header level! Maybe decreasing max level to 4 because of header design?
+		if(lvl >6){lvl = 6;}
+		while(sb.length() < lvl){sb.append("#");}
 
 		sb.append(TxtTitleFactory.build(title));
 		txt.add(sb.toString());
-	}
-
-	@Override
-	public void write(Writer w) throws IOException
-	{
-
 	}
 }

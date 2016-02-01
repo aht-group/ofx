@@ -101,8 +101,8 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 			else if(o instanceof Glossary){renderGlossary(sb, (Glossary)o);}
 			else if(o instanceof Acronym){renderAcronym(sb, (Acronym)o);}
 			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
-			else if(o instanceof Font){}
 			else if(o instanceof Index){renderIndex(sb,(Index)o);}
+			else if(o instanceof Font){}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
 		txt.add(sb.toString());
