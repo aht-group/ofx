@@ -6,6 +6,7 @@ import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
 import org.openfuxml.content.editorial.Acronyms;
 import org.openfuxml.content.editorial.Glossary;
+import org.openfuxml.content.editorial.Index;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Table;
@@ -71,5 +72,12 @@ public class OfxLangFilter
 				att.getParent().detach();
 			}
 		}
+	}
+
+	public Index filterLang(Index index)
+	{
+		org.jdom2.Document j2Doc = JaxbUtil.toDocument(index);
+		filterLang(j2Doc);
+		return JDomUtil.toJaxb(j2Doc, Index.class);
 	}
 }

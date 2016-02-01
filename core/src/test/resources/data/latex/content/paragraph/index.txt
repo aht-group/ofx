@@ -1,0 +1,2 @@
+
+Lorem testIndex\index{TestIndex} Lorem ipsum dolor

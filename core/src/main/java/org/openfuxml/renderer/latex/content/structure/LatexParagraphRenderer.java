@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openfuxml.content.editorial.Acronym;
 import org.openfuxml.content.editorial.Glossary;
+import org.openfuxml.content.editorial.Index;
 import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.media.Image;
@@ -20,6 +21,7 @@ import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.editorial.LatexAcronymRenderer;
 import org.openfuxml.renderer.latex.content.editorial.LatexGlossaryRenderer;
+import org.openfuxml.renderer.latex.content.editorial.LatexIndexRenderer;
 import org.openfuxml.renderer.latex.content.media.LatexImageRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexEmphasisRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexSymbolRenderer;
@@ -100,6 +102,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 			else if(o instanceof Acronym){renderAcronym(sb, (Acronym)o);}
 			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
 			else if(o instanceof Font){}
+			else if(o instanceof Index){renderIndex(sb,(Index)o);}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
 		txt.add(sb.toString());
@@ -130,6 +133,13 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 	{
 		LatexAcronymRenderer stf = new LatexAcronymRenderer(cmm,dsm);
 		stf.render(acronym);
+		for(String s : stf.getContent()){sb.append(s);}
+	}
+
+	private void renderIndex(StringBuffer sb, Index index) throws OfxAuthoringException
+	{
+		LatexIndexRenderer stf = new LatexIndexRenderer(cmm,dsm);
+		stf.render(index);
 		for(String s : stf.getContent()){sb.append(s);}
 	}
 	
