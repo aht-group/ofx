@@ -60,15 +60,13 @@ public class TestLatexParagraphRenderer extends AbstractTestLatexRenderer
     public static void main(String[] args) throws Exception
     {
     	OfxCoreTestBootstrap.init();
-			
     	TestLatexParagraphRenderer.initLoremIpsum();
     	TestLatexParagraphRenderer test = new TestLatexParagraphRenderer();
-    	test.init();
     	test.setEnvironment(true);
     	
-//    	test.withBlank();
-//  	test.withoutBlank();
-//    	test.marginalia();
-    	test.fontRelative();
+//    	test.init();test.withBlank();
+//  	test.init();test.withoutBlank();
+//    	test.init();test.marginalia();
+    	test.init();test.fontRelative();
     }
 }

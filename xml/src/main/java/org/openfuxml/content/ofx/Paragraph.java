@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.openfuxml.content.editorial.Acronym;
 import org.openfuxml.content.editorial.Glossary;
+import org.openfuxml.content.editorial.Index;
 import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.text.Emphasis;
@@ -36,6 +37,7 @@ import org.openfuxml.content.text.Symbol;
  *         &lt;element ref="{http://www.openfuxml.org}marginalia" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org/editorial}glossary" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org/editorial}acronym" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.openfuxml.org/editorial}index" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org}reference" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org/media}image"/>
  *       &lt;/sequence>
@@ -67,14 +69,15 @@ public class Paragraph implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
+        @XmlElementRef(name = "acronym", namespace = "http://www.openfuxml.org/editorial", type = Acronym.class),
         @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class),
-        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
-        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
+        @XmlElementRef(name = "index", namespace = "http://www.openfuxml.org/editorial", type = Index.class),
+        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
         @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
         @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class),
         @XmlElementRef(name = "glossary", namespace = "http://www.openfuxml.org/editorial", type = Glossary.class),
-        @XmlElementRef(name = "acronym", namespace = "http://www.openfuxml.org/editorial", type = Acronym.class)
+        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
+        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -101,15 +104,16 @@ public class Paragraph implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Symbol }
-     * {@link String }
      * {@link Emphasis }
-     * {@link Reference }
-     * {@link Marginalia }
-     * {@link Image }
-     * {@link Font }
-     * {@link Glossary }
      * {@link Acronym }
+     * {@link Symbol }
+     * {@link Index }
+     * {@link Image }
+     * {@link String }
+     * {@link Font }
+     * {@link Marginalia }
+     * {@link Glossary }
+     * {@link Reference }
      * 
      * 
      */

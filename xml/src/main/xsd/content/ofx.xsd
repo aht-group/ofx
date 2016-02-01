@@ -53,6 +53,7 @@
                 <xsd:element ref="marginalia" maxOccurs="unbounded"/>
                 <xsd:element ref="ed:glossary" maxOccurs="unbounded"/>
                 <xsd:element ref="ed:acronym" maxOccurs="unbounded"/>
+                <xsd:element ref="ed:index" maxOccurs="unbounded"/>
                 <xsd:element ref="reference" maxOccurs="unbounded"/>
                 <xsd:element ref="media:image" maxOccurs="1"/>
             </xsd:sequence>

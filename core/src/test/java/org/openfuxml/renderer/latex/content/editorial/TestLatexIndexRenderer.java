@@ -1,59 +1,44 @@
 package org.openfuxml.renderer.latex.content.editorial;
 
+import java.io.IOException;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.factory.xml.editorial.XmlIndexFactory;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-
-import java.io.IOException;
+import org.openfuxml.test.provider.ParagraphProvider;
 
 public class TestLatexIndexRenderer extends AbstractTestLatexRenderer
 {
-	private enum Key {index}
+	private enum Key {simple}
 	LatexIndexRenderer renderer;
-	@Before
-	public void init()
+	
+	@Before public void init()
 	{
-		super.initDir("content/paragraph");
+		super.initDir("editorial/index");
 		renderer = new LatexIndexRenderer(cmm,dsm);
 	}
-	@After
-	public void close()
-	{
-		renderer=null;
-	}
-
-	private static Paragraph paragraph()
-	{
-		Paragraph p = new Paragraph();
-		p.getContent().add(li.getWords(1)+" ");
-		p.getContent().add(XmlIndexFactory.build("testIndex"));
-		p.getContent().add(" "+li.getWords(3));
-		return p;
-	}
+	@After public void close() {renderer=null;}
 
 	@Test
 	public void index() throws OfxAuthoringException, IOException
 	{
-		initFile(Key.index);
+		initFile(Key.simple);
 		LatexParagraphRenderer renderer = new LatexParagraphRenderer(cmm,dsm,true);
-		renderer.render(paragraph());
+		renderer.render(ParagraphProvider.paragraphWithIndex());
 		renderTest(renderer);
 	}
 
 	public static void main(String[] args) throws Exception
 	{
 		OfxCoreTestBootstrap.init();
-
 		TestLatexIndexRenderer.initLoremIpsum();
 		TestLatexIndexRenderer test = new TestLatexIndexRenderer();
-		test.init();
-		test.index();
+		test.setEnvironment(true);
+		
+		test.init();test.index();
 	}
 }
