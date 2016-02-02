@@ -168,6 +168,14 @@
 	                <t:cell><ofx:paragraph>listliketab</ofx:paragraph></t:cell>
 	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
 	            </t:row>
+				<t:row>
+	                <t:cell><ofx:paragraph>imakeidx</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
+				<t:row>
+	                <t:cell><ofx:paragraph>xpatch</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
 			</t:body>
 	    </t:content>
 	</t:table>
