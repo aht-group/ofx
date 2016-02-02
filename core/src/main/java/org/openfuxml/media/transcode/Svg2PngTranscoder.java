@@ -11,6 +11,11 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.batik.svggen.SVGGeneratorContext;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
@@ -22,6 +27,8 @@ import org.openfuxml.interfaces.media.CrossMediaTranscoder;
 import org.openfuxml.util.media.CrossMediaFileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements CrossMediaTranscoder
 {
@@ -79,6 +86,13 @@ public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements C
 	
 	public static void transcode(Integer height, InputStream is, OutputStream os) throws TranscoderException, IOException
 	{
+//		List<InputStream> list = StreamUtil.clone(is1, 2);
+		if(height!=null)
+		{
+//			SVGGraphics2D svg = getSVGGraphics2D(is);		
+//			logger.info(svg.toString());
+		}
+		
 		TranscoderInput tIn = new TranscoderInput(is);
 	    TranscoderOutput tOut = new TranscoderOutput(os);
 	    PNGTranscoder t = new PNGTranscoder();
@@ -87,5 +101,32 @@ public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements C
 	    t.transcode(tIn,tOut);
 	    os.flush();
 	    os.close();
+	}
+	
+	public static SVGGraphics2D getSVGGraphics2D(InputStream is){
+
+	    SVGGraphics2D svg = null;
+
+	    try
+	    {
+	        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder builder = factory.newDocumentBuilder();
+	        Document parse = builder.parse(is);
+
+	        SVGGeneratorContext ctx = SVGGeneratorContext.createDefault(parse);
+	        svg = new SVGGraphics2D(ctx,false);
+
+	    } catch (ParserConfigurationException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    } catch (SAXException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+
+	    return svg;
 	}
 }
