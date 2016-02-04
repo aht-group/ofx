@@ -3,6 +3,7 @@ package org.openfuxml.factory.xml.media;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.media.Media;
 import org.openfuxml.factory.xml.layout.XmlHeightFactory;
+import org.openfuxml.factory.xml.layout.XmlWidthFactory;
 
 public class XmlImageFactory
 {
@@ -22,6 +23,22 @@ public class XmlImageFactory
 		Image image = new Image();
 		image.setMedia(media);
 		image.setHeight(XmlHeightFactory.em(em));
+		return image;
+	}
+	
+	public static Image px(int width, int height)
+	{		
+		Image image = new Image();
+		image.setWidth(XmlWidthFactory.px(width));
+		image.setHeight(XmlHeightFactory.px(height));
+		return image;
+	}
+	
+	public static Image idHeight(long id, int height)
+	{		
+		Image image = new Image();
+		image.setId(""+id);
+		image.setHeight(XmlHeightFactory.px(height));
 		return image;
 	}
 }

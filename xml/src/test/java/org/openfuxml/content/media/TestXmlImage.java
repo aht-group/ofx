@@ -21,6 +21,7 @@ public class TestXmlImage extends AbstractXmlMediaTest<Image>
     {
     	Image xml = new Image();
     	xml.setId("myId");
+    	xml.setVersion("myVersion");
     	
     	if(withChilds)
     	{

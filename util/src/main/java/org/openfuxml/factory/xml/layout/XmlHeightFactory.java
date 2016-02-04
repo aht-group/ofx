@@ -4,7 +4,7 @@ import org.openfuxml.content.layout.Height;
 
 public class XmlHeightFactory
 {
-	public static enum Unit {em,shift}
+	public static enum Unit {em,shift,px}
 	
 	public static Height em(double value)
 	{
@@ -19,6 +19,14 @@ public class XmlHeightFactory
 		Height xml = new Height();
 		xml.setValue(value);
 		xml.setUnit(Unit.shift.toString());
+		return xml;
+	}
+	
+	public static Height px(int value)
+	{
+		Height xml = new Height();
+		xml.setValue(value);
+		xml.setUnit(Unit.px.toString());
 		return xml;
 	}
 }

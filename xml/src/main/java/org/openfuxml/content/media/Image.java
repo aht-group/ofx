@@ -33,6 +33,7 @@ import org.openfuxml.content.ofx.Title;
  *         &lt;element ref="{http://www.openfuxml.org/media}media"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -68,6 +69,8 @@ public class Image implements Serializable
     protected Media media;
     @XmlAttribute(name = "id")
     protected String id;
+    @XmlAttribute(name = "version")
+    protected String version;
 
     /**
      * Gets the value of the title property.
@@ -263,6 +266,34 @@ public class Image implements Serializable
 
     public boolean isSetId() {
         return (this.id!= null);
+    }
+
+    /**
+     * Gets the value of the version property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getVersion() {
+        return version;
+    }
+
+    /**
+     * Sets the value of the version property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setVersion(String value) {
+        this.version = value;
+    }
+
+    public boolean isSetVersion() {
+        return (this.version!= null);
     }
 
 }

@@ -4,13 +4,21 @@ import org.openfuxml.content.layout.Width;
 
 public class XmlWidthFactory
 {
-	public static enum Unit {cm,percentage}
+	public static enum Unit {cm,percentage,px}
 	
 	public static Width cm(double value)
 	{
 		Width xml = new Width();
 		xml.setValue(value);
 		xml.setUnit(Unit.cm.toString());
+		return xml;
+	}
+	
+	public static Width px(int value)
+	{
+		Width xml = new Width();
+		xml.setValue(value);
+		xml.setUnit(Unit.px.toString());
 		return xml;
 	}
 	

@@ -1,5 +1,6 @@
 package org.openfuxml.media.transcode;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -10,25 +11,27 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import javax.imageio.ImageIO;
 
-import org.apache.batik.svggen.SVGGeneratorContext;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.PNGTranscoder;
+import org.openfuxml.content.media.Image;
 import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.xml.media.XmlImageFactory;
 import org.openfuxml.interfaces.media.CrossMediaTranscoder;
 import org.openfuxml.util.media.CrossMediaFileUtil;
+import org.openfuxml.util.media.ImageDimensionRatio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
+
+import net.sf.exlp.util.io.StreamUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements CrossMediaTranscoder
 {
@@ -86,47 +89,45 @@ public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements C
 	
 	public static void transcode(Integer height, InputStream is, OutputStream os) throws TranscoderException, IOException
 	{
-//		List<InputStream> list = StreamUtil.clone(is1, 2);
+		List<InputStream> list = StreamUtil.clone(is,2);
+		
+		Image image = size(list.get(0));
+		
 		if(height!=null)
 		{
-//			SVGGraphics2D svg = getSVGGraphics2D(is);		
-//			logger.info(svg.toString());
+			JaxbUtil.trace(image);
+			image = ImageDimensionRatio.height(image, height);
+			JaxbUtil.trace(image);
 		}
 		
-		TranscoderInput tIn = new TranscoderInput(is);
+		TranscoderInput tIn = new TranscoderInput(list.get(1));
 	    TranscoderOutput tOut = new TranscoderOutput(os);
 	    PNGTranscoder t = new PNGTranscoder();
-	    if(height!=null){t.addTranscodingHint(PNGTranscoder.KEY_HEIGHT,new Float(height));}
+	    
+	    t.addTranscodingHint(PNGTranscoder.KEY_HEIGHT,new Float(image.getHeight().getValue()));
+	    t.addTranscodingHint(PNGTranscoder.KEY_WIDTH,new Float(image.getWidth().getValue()));
 	    
 	    t.transcode(tIn,tOut);
 	    os.flush();
 	    os.close();
 	}
 	
-	public static SVGGraphics2D getSVGGraphics2D(InputStream is){
-
-	    SVGGraphics2D svg = null;
-
-	    try
-	    {
-	        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder builder = factory.newDocumentBuilder();
-	        Document parse = builder.parse(is);
-
-	        SVGGeneratorContext ctx = SVGGeneratorContext.createDefault(parse);
-	        svg = new SVGGraphics2D(ctx,false);
-
-	    } catch (ParserConfigurationException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-	    } catch (SAXException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-	    } catch (IOException e) {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-	    }
-
-	    return svg;
+	public static Image size(InputStream is) throws TranscoderException, IOException
+	{
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		TranscoderInput tIn = new TranscoderInput(is);
+	    TranscoderOutput tOut = new TranscoderOutput(os);
+	    PNGTranscoder t = new PNGTranscoder();
+	    
+	    t.transcode(tIn,tOut);
+	    os.flush();
+	    os.close();
+	    
+	    ByteArrayInputStream input = new ByteArrayInputStream(os.toByteArray());
+	    
+	    BufferedImage bimg = ImageIO.read(input);
+	    int width          = bimg.getWidth();
+	    int height         = bimg.getHeight();
+	    return XmlImageFactory.px(width, height);
 	}
 }

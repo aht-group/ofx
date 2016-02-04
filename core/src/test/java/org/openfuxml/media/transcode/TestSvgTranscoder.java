@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,7 +17,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.batik.svggen.SVGGeneratorContext;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.transcoder.TranscoderException;
-import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -27,17 +25,16 @@ import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import net.sf.exlp.util.io.StreamUtil;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 
 public class TestSvgTranscoder extends AbstractOfxCoreTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestSvgTranscoder.class);
 
-	public static final String svgTest = "data/svg/under-construction.svg";
+	public static final String svgTest1 = "data/svg/under-construction.svg";
+	public static final String svgTest2 = "/Volumes/ramdisk/landscape.svg";
 	
 	private Media media;
 	private File fTarget;
@@ -48,7 +45,7 @@ public class TestSvgTranscoder extends AbstractOfxCoreTest
 		fTarget = new File("/Volumes/ramdisk");
 		
 		media = new Media();
-		media.setSrc(svgTest);
+		media.setSrc(svgTest1);
 		media.setDst("test");
 	}
 	
@@ -67,7 +64,7 @@ public class TestSvgTranscoder extends AbstractOfxCoreTest
 	public void pngHeight() throws TranscoderException, IOException
 	{
 		MultiResourceLoader mrl = new MultiResourceLoader();
-		InputStream is = mrl.searchIs(svgTest); 
+		InputStream is = mrl.searchIs(svgTest2); 
 		OutputStream os = new FileOutputStream(new File(fTarget,"test.png"));
 		Svg2PngTranscoder.transcode(20, is, os);
 		os.close();
@@ -102,7 +99,7 @@ public class TestSvgTranscoder extends AbstractOfxCoreTest
     	
 //    	test.pdf();
 //    	test.png();
-//    	test.pngHeight();
-    	test.url();
+    	test.pngHeight();
+//    	test.url();
     }
 }
