@@ -9,8 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -76,12 +74,8 @@ public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements C
 	}
 	
 	public static byte[] transcode(Integer height, SVGGraphics2D g) throws IOException, TranscoderException
-	{
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		Writer w = new OutputStreamWriter(baos, "UTF-8");
-		g.stream(w);
-	    
-		InputStream is = new ByteArrayInputStream(baos.toByteArray());
+	{	    
+		InputStream is = new ByteArrayInputStream(Svg2SvgTranscoder.transcode(g));
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		transcode(height,is,os);
 	    return os.toByteArray();
