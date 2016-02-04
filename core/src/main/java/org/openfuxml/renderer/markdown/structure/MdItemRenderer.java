@@ -22,13 +22,10 @@ public class MdItemRenderer extends AbstractOfxMarkdownRenderer implements OfxMd
 	{
 		for(Object s : item.getContent())
 		{
-			if     (!(s instanceof String))
-			{
+			if(s instanceof String){MdListRenderer.item +=(String)s;}
 			if(s instanceof Paragraph){/*paragraphRenderer((Paragraph)s,false);*/}
 			if(s instanceof List){listRenderer((List)s, parent);}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
-			}
-
 		}
 	}
 }

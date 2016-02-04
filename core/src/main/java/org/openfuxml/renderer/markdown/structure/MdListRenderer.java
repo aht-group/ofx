@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 public class MdListRenderer extends AbstractOfxMarkdownRenderer implements OfxMdRenderer
 {
 	private final Logger logger = LoggerFactory.getLogger(MdListRenderer.class);
+
+	static String item ="";
 	public MdListRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
@@ -20,30 +22,31 @@ public class MdListRenderer extends AbstractOfxMarkdownRenderer implements OfxMd
 
 	public void render(List list, OfxMdRenderer parent)
 	{
-		if(parent instanceof MdListRenderer)
-		{
-			txt.add("\t");
-		}
+
 		if(list.getType().isSetOrdering() && list.getType().getOrdering().equals("ordered"))
 		{
 			int iterator = 1;
 			for(Item i : list.getItem())
 			{
-				txt.add(iterator + ". ");
-				MdItemRenderer iRender = new MdItemRenderer(cmm, dsm);
-				iRender.render(i, this);
-				renderer.add(iRender);
-				iterator++;
+					item += iterator + ". ";
+					MdItemRenderer iRender = new MdItemRenderer(cmm, dsm);
+					iRender.render(i, this);
+					renderer.add(iRender);
+					txt.add(item);
+					item = "";
+					iterator++;
 			}
 		}
 		else
 		{
 			for(Item i : list.getItem())
 			{
-				txt.add("* ");
-				MdItemRenderer iRender = new MdItemRenderer(cmm, dsm);
-				iRender.render(i, this);
-				renderer.add(iRender);
+					item += "* ";
+					MdItemRenderer iRender = new MdItemRenderer(cmm, dsm);
+					iRender.render(i, this);
+					txt.add(item);
+					item = "";
+					renderer.add(iRender);
 			}
 		}
 	}
