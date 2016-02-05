@@ -8,7 +8,7 @@ import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SectionProvider extends AbstractElementProvider
+public class SectionAndTitleProvider extends AbstractElementProvider
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	
