@@ -1,0 +1,2 @@
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam ![This would be an inline Image](src/folder/img.png) Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam

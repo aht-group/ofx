@@ -1,9 +1,8 @@
 package org.openfuxml.renderer.markdown.structure;
 
 import org.openfuxml.content.list.List;
-import org.openfuxml.content.ofx.Listing;
-import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.media.Image;
+import org.openfuxml.content.ofx.*;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
@@ -27,6 +26,18 @@ public class MdSectionRenderer extends AbstractOfxMarkdownRenderer implements Of
 
 	public void render(Section section)
 	{
+		//Comments always on top!
+		for(Object s : section.getContent())
+		{
+			if(s instanceof Comment)
+			{
+				MdCommentRenderer titleR = new MdCommentRenderer(cmm, dsm);
+				titleR.render((Comment)s);
+				renderer.add(titleR);
+			}
+		}
+
+		//Title always immediately after comments
 		for(Object s : section.getContent())
 		{
 			if(s instanceof Title)
@@ -42,6 +53,8 @@ public class MdSectionRenderer extends AbstractOfxMarkdownRenderer implements Of
 			{
 				if(o instanceof Section){render((Section)o);}
 				else if(o instanceof List){listRenderer((List)o, this);}
+				else if(o instanceof Paragraph){paragraphRenderer((Paragraph)o);}
+				else if(o instanceof Image){imageRenderer((Image)o);}
 			}
 			else {logger.warn("No Renderer for Element "+o.getClass().getSimpleName());}
 		}

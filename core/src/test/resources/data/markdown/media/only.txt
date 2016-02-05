@@ -1,0 +1,2 @@
+![This would be an Image outside a paragraph](src/folder/img.png)  
+*This would be an Image outside a paragraph*
