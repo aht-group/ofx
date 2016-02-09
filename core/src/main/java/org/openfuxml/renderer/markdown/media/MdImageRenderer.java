@@ -30,7 +30,7 @@ public class MdImageRenderer extends AbstractOfxMarkdownRenderer implements OfxM
 		sb.append("\n\n![");
 		sb.append(title);
 		sb.append("](");
-		sb.append(image.getMedia().getSrc());
+		sb.append(image.getMedia().getSrc().trim());
 		sb.append(")  \n"); //Two spaces before linebreak are important to move the title below the image
 		sb.append(caption(title));
 		txt.add(sb.toString());

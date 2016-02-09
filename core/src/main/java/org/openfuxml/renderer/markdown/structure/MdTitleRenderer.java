@@ -30,9 +30,10 @@ public class MdTitleRenderer extends AbstractOfxMarkdownRenderer implements OfxM
 
 		//Markdown only implements 6 header level! Maybe decreasing max level to 4 because of header design?
 		if(lvl >6){lvl = 6;}
-		while(sb.length() < lvl){sb.append("#");}
-
-		sb.append(TxtTitleFactory.build(title));
+		sb.append("\n");
+		while(sb.length() < lvl+1){sb.append("#");}
+		sb.append(" ");
+		sb.append(TxtTitleFactory.build(title).replaceAll("\t", ""));
 		txt.add(sb.toString());
 	}
 }

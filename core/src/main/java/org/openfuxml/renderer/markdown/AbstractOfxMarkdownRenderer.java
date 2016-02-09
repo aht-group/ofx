@@ -22,8 +22,8 @@ public class AbstractOfxMarkdownRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(MdSectionRenderer.class);
 
-	protected CrossMediaManager cmm; // implementing, rendering images
-	protected DefaultSettingsManager dsm; // config e.g. line separator
+	protected CrossMediaManager cmm;
+	protected DefaultSettingsManager dsm;
 
 	protected List<String> txt;
 	protected ArrayList<OfxMdRenderer> renderer;
@@ -48,10 +48,10 @@ public class AbstractOfxMarkdownRenderer
 		return resultTxt;
 	}
 
-	public void listRenderer(org.openfuxml.content.list.List list, OfxMdRenderer parent)
+	public void listRenderer(org.openfuxml.content.list.List list)
 	{
 		MdListRenderer listR = new MdListRenderer(cmm,dsm);
-		listR.render(list, parent);
+		listR.render(list);
 		renderer.add(listR);
 	}
 	public void paragraphRenderer(Paragraph paragraph)

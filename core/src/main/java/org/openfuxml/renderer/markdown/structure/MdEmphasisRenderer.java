@@ -13,10 +13,7 @@ public class MdEmphasisRenderer extends AbstractOfxMarkdownRenderer implements O
 {
 	final static Logger logger = LoggerFactory.getLogger(MdEmphasisRenderer.class);
 
-	public MdEmphasisRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
-	{
-		super(cmm, dsm);
-	}
+	public MdEmphasisRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm){super(cmm, dsm);}
 
 	public void render(Emphasis emphasis)
 	{
@@ -32,7 +29,7 @@ public class MdEmphasisRenderer extends AbstractOfxMarkdownRenderer implements O
 		if(typewriter){sb.append("`");}
 		sb.append(emphasis.getValue());
 		if(italic){sb.append("_");}
-		if(bold){sb.append("**");} // close withe the same symbol!
+		if(bold){sb.append("**");} // always close withe the same symbol!
 		if(quote){sb.append("\n\n");} // only one linebreak will continue the quote!
 		if(typewriter){sb.append("`");}
 

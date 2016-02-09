@@ -17,29 +17,27 @@ public class TestMdListRenderer extends AbstractTestMdRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(TestMdListRenderer.class);
 
-	private enum Key {ordered, unordered, nested}
+	private enum Key {ordered, unordered}
 	
 	private MdListRenderer renderer;
-	private OfxMdRenderer parent;
 
 	@Before public void init()
 	{
 		super.initDir("structure/list");
 		renderer = new MdListRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
-		parent = new MdSectionRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager(),1);
 	}
 
 	@Test public void ordered() throws IOException
 	{
 		initFile(Key.ordered);
-        renderer.render(ListProvider.description(true), parent);
+        renderer.render(ListProvider.description(true));
     	renderTest(renderer);
 	}
 	
 	@Test public void unordered() throws IOException
 	{
 		initFile(Key.unordered);
-        renderer.render(ListProvider.description(false), parent);
+        renderer.render(ListProvider.description(false));
     	renderTest(renderer);
 	}
 

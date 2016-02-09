@@ -69,7 +69,7 @@ public class TestMdEmphasisRenderer extends AbstractTestMdRenderer
 		
         test.init();test.bold();
         test.init();test.italic();
-		test.init();test.combination(); // wrong series of emphasis marker: has to be: **_ _**
+		test.init();test.combination();
 		test.init();test.quote();
 		test.init();test.typewriter();
 	}

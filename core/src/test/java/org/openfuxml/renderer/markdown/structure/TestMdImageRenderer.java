@@ -51,6 +51,6 @@ public class TestMdImageRenderer extends AbstractTestMdRenderer
         test.setEnvironment(true);
 		
         test.init();test.inline();
-//        test.init();test.only();
+        test.init();test.only();
 	}
 }

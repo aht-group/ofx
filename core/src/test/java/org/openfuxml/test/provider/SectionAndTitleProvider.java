@@ -35,7 +35,7 @@ public class SectionAndTitleProvider extends AbstractElementProvider
 	private static Comment createComment()
 	{
 		Comment c = XmlCommentFactory.build();
-		Raw r = new Raw(); r.setValue(li.getWords(4));
+		Raw r = new Raw(); r.setValue("This is a comment!");
 		c.getRaw().add(r);
 		return c;
 
