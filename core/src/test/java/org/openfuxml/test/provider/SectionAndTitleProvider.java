@@ -12,6 +12,13 @@ public class SectionAndTitleProvider extends AbstractElementProvider
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	
+	public static Section withTitleContent()
+	{
+		Section xml = build();
+		xml.getContent().add(create());
+		return xml;
+	}
+	
 	public static Section build()
 	{
 		Section xml = XmlSectionFactory.build();
