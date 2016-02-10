@@ -1,9 +1,7 @@
 package org.openfuxml.renderer;
 
 import java.io.File;
-
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
-
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxImplementationException;
@@ -11,8 +9,9 @@ import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.OfxRenderProcessor.DirCode;
 import org.openfuxml.renderer.OfxRenderProcessor.FileCode;
+import org.openfuxml.renderer.html.OfxHTMLRenderer;
 import org.openfuxml.renderer.latex.OfxLatexRenderer;
-import org.openfuxml.renderer.processor.html.OfxHtmlRenderer;
+import org.openfuxml.renderer.markdown.OfxMarkdownRenderer;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.openfuxml.xml.renderer.cmp.Html;
@@ -22,12 +21,12 @@ import org.slf4j.LoggerFactory;
 
 public class OfxTargetRenderer
 {
-	public static enum PdfDir {latex};
-	public static enum PdfFile {latex};
+	public enum PdfDir {latex};
+	public enum PdfFile {latex};
 	
 	final static Logger logger = LoggerFactory.getLogger(OfxTargetRenderer.class);
 		
-	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
+	public enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
 	
 	private OfxRenderConfiguration cmpConfigUtil;
 	private Cmp cmp;
@@ -75,8 +74,14 @@ public class OfxTargetRenderer
 	
 	public void renderHtml(Html html, File fSrc) throws OfxAuthoringException, OfxConfigurationException, OfxImplementationException
 	{
-		OfxHtmlRenderer htmlRenderer = new OfxHtmlRenderer(cmpConfigUtil,html);
+		OfxHTMLRenderer htmlRenderer = new OfxHTMLRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
 		htmlRenderer.render(fSrc.getAbsolutePath());
+	}
+
+	public void renderMarkdown(File fSrc) throws OfxAuthoringException, OfxConfigurationException, OfxImplementationException
+	{
+		OfxMarkdownRenderer mdRenderer = new OfxMarkdownRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		mdRenderer.render(fSrc.getAbsolutePath());
 	}
 	
 	private void phaseLatex(Pdf pdf, File fSrc) throws OfxAuthoringException, OfxConfigurationException

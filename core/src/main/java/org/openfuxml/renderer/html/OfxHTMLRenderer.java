@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.markdown;
+package org.openfuxml.renderer.html;
 
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -6,31 +6,29 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.OfxRenderer;
-import org.openfuxml.renderer.markdown.structure.MdDocumentRenderer;
-import org.openfuxml.renderer.util.OfxDocumentStructureVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OfxMarkdownRenderer extends OfxRenderer
+public class OfxHTMLRenderer extends OfxRenderer
 {
-	private List<String> txt;
-	private MdDocumentRenderer rDocument;
+//	Logger logger = LoggerFactory.getLogger(OfxHTMLRenderer.class);
 
-	public OfxMarkdownRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
+	private List<String> txt;
+
+	public OfxHTMLRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
-		logger = LoggerFactory.getLogger(OfxMarkdownRenderer.class);
 		txt = new ArrayList<String>();
-		rDocument = new MdDocumentRenderer(cmm, dsm);
+		logger = LoggerFactory.getLogger(OfxHTMLRenderer.class);
 	}
 
 	public List<String> getContent(){return txt;}
 
+	@Override
 	public void render(Document ofxDocument) throws OfxAuthoringException, OfxConfigurationException
 	{
-		OfxDocumentStructureVerifier.checkForContent(ofxDocument);
-		rDocument.render(ofxDocument.getContent());
-		txt.addAll(rDocument.getContent());
-	}}
+
+	}
+}

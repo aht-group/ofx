@@ -10,12 +10,14 @@ import org.junit.BeforeClass;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxCharacterRenderer;
+import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
 import org.openfuxml.interfaces.renderer.text.OfxTextRenderer;
 import org.openfuxml.interfaces.renderer.wiki.OfxWikiRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
+import org.openfuxml.renderer.html.OfxHTMLRenderer;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -164,6 +166,13 @@ public class AbstractOfxCoreTest
 			System.out.println(s);
 		}
 		System.out.println("************************************");
+	}
+
+	protected void renderTest(OfxHtmlRenderer renderer) throws IOException
+	{
+		debugCharacter(renderer);
+		if(saveReference){save(renderer);}
+		assertText(renderer);
 	}
 	
 	protected void debugCharacter(OfxCharacterRenderer renderer)

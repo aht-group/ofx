@@ -82,7 +82,11 @@ public class Document
      *     
      */
     public Content getContent() {
-        return content;
+		if(content == null)
+		{
+			content = new Content();
+		}
+		return content;
     }
 
     /**
