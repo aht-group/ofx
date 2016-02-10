@@ -1,9 +1,8 @@
 package org.openfuxml.renderer.markdown.structure;
 
 import org.openfuxml.content.list.List;
-import org.openfuxml.content.ofx.Listing;
-import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.media.Image;
+import org.openfuxml.content.ofx.*;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
@@ -27,6 +26,13 @@ public class MdSectionRenderer extends AbstractOfxMarkdownRenderer implements Of
 
 	public void render(Section section)
 	{
+		//Comments always on top!
+		for(Object s : section.getContent())
+		{
+			if(s instanceof Comment){renderComment((Comment)s);}
+		}
+
+		//Title always immediately after comments
 		for(Object s : section.getContent())
 		{
 			if(s instanceof Title)
@@ -38,12 +44,34 @@ public class MdSectionRenderer extends AbstractOfxMarkdownRenderer implements Of
 		}
 		for(Object o : section.getContent())
 		{
-			if(!(o instanceof String) && !(o instanceof Title))
+			if(o instanceof Section){renderSection((Section)o);}
+			else if(o instanceof String){txt.add(((String)o).trim());}
+			else if(o instanceof List)
 			{
-				if(o instanceof Section){render((Section)o);}
-				else if(o instanceof List){listRenderer((List)o, this);}
+				if(((List)o).isSetComment())
+				{
+					MdCommentRenderer.first = true;
+					renderComment(((List)o).getComment());
+				}
+				listRenderer((List)o);
 			}
-			else {logger.warn("No Renderer for Element "+o.getClass().getSimpleName());}
+			else if(o instanceof Paragraph){paragraphRenderer((Paragraph)o);}
+			else if(o instanceof Image){imageRenderer((Image)o);}
 		}
+	}
+
+	private void renderSection(Section section)
+	{
+		MdCommentRenderer.first = true;
+		MdSectionRenderer sr = new MdSectionRenderer(cmm,dsm,lvl+1);
+		sr.render(section);
+		renderer.add(sr);
+	}
+
+	private void renderComment(Comment comment)
+	{
+		MdCommentRenderer commentR = new MdCommentRenderer(cmm, dsm);
+		commentR.render(comment);
+		renderer.add(commentR);
 	}
 }

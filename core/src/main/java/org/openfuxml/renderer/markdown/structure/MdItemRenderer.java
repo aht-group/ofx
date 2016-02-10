@@ -18,17 +18,21 @@ public class MdItemRenderer extends AbstractOfxMarkdownRenderer implements OfxMd
 		super(cmm, dsm);
 	}
 
-	public void render(Item item, OfxMdRenderer parent)
+	public void render(Item item)
 	{
+		MdListRenderer.item += item.getName() + "\n";
 		for(Object s : item.getContent())
 		{
-			if     (!(s instanceof String))
-			{
-			if(s instanceof Paragraph){/*paragraphRenderer((Paragraph)s,false);*/}
-			if(s instanceof List){listRenderer((List)s, parent);}
+			if(s instanceof String){MdListRenderer.item +=((String)s).replaceAll("\t|\n", "");}
+			if(s instanceof Paragraph){paragraphRenderer((Paragraph)s);}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
-			}
-
 		}
+	}
+
+	public void paragraphRenderer(Paragraph paragraph)
+	{
+		MdParagraphRenderer paraR = new MdParagraphRenderer(cmm,dsm);
+		paraR.render(paragraph);
+		for(String s : paraR.getContent()){MdListRenderer.item += s.replaceAll("\n", "");}
 	}
 }

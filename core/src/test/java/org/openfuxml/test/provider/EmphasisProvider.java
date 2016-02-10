@@ -10,7 +10,7 @@ public class EmphasisProvider extends AbstractElementProvider
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	
-	public static enum Key {bold,italic,quote}
+	public enum Key {bold,italic,quote}
 	
 	public static Paragraph bold()
 	{
@@ -35,6 +35,8 @@ public class EmphasisProvider extends AbstractElementProvider
 		OfxEmphasisFactory eF = new OfxEmphasisFactory(false,false,true);
     	return create(eF);
 	}
+
+	public static Paragraph typewriter(){return create();}
 	
 	private static Paragraph create(OfxEmphasisFactory eF)
 	{
@@ -43,5 +45,14 @@ public class EmphasisProvider extends AbstractElementProvider
     	p.getContent().add(eF.build(li.getWords(2)));
     	p.getContent().add(" "+li.getWords(3));
     	return p;
+	}
+
+	private static Paragraph create()
+	{
+		Paragraph p = new Paragraph();
+		p.getContent().add(li.getWords(1)+" ");
+		p.getContent().add(OfxEmphasisFactory.typewriter(li.getWords(2)));
+		p.getContent().add(" "+li.getWords(3));
+		return p;
 	}
 }
