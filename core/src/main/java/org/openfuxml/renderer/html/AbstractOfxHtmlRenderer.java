@@ -6,6 +6,7 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
+import org.openfuxml.renderer.html.structure.HtmlParagraphRenderer;
 import org.openfuxml.renderer.markdown.structure.MdSectionRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,9 @@ public class AbstractOfxHtmlRenderer
 	protected CrossMediaManager cmm;
 	protected DefaultSettingsManager dsm;
 
-	protected List<Element> txt;
+	protected List<String> txt;
+	protected static final String docStart = HtmlElement.docType() + "\n" + new HtmlElement().openTag("html", false);
+	private static final String docEnd = new HtmlElement().closeTag("html");
 	protected ArrayList<OfxHtmlRenderer> renderer;
 
 	public AbstractOfxHtmlRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
@@ -31,14 +34,16 @@ public class AbstractOfxHtmlRenderer
 		this.cmm = cmm;
 		this.dsm = dsm;
 		renderer = new ArrayList<OfxHtmlRenderer>();
-		txt = new ArrayList<Element>();
+		txt = new ArrayList<String>();
 	}
 
 	public List<String> getContent()
 	{
 		List<String> resultTxt = new ArrayList<String>();
-		for(Element e : txt){resultTxt.add(e.toString());}
+//		resultTxt.add();
+		resultTxt.addAll(txt);
 		for(OfxHtmlRenderer r : renderer){resultTxt.addAll(r.getContent());}
+//		resultTxt.add(docEnd);
 		return resultTxt;
 	}
 
@@ -47,6 +52,8 @@ public class AbstractOfxHtmlRenderer
 	}
 	public void paragraphRenderer(Paragraph paragraph)
 	{
+		HtmlParagraphRenderer paraRenderer = new HtmlParagraphRenderer(cmm,dsm);
+
 	}
 
 	public void imageRenderer(Image image)
@@ -54,6 +61,8 @@ public class AbstractOfxHtmlRenderer
 	}
 	public void write(Writer w) throws IOException
 	{
+		getContent().add(0,docStart);
+		getContent().add(getContent().size()-1, docEnd);
 		for(String s : getContent()){w.write(s+dsm.lineSeparator());}
 		w.flush();
 	}

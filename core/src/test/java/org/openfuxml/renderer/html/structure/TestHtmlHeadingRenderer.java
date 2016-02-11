@@ -5,8 +5,6 @@ import org.junit.Test;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
-import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
-import org.openfuxml.renderer.markdown.structure.MdTitleRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.SectionAndTitleProvider;
 import org.slf4j.Logger;
@@ -14,18 +12,18 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class TestHtmlTitleRenderer extends AbstractTestHtmlRenderer
+public class TestHtmlHeadingRenderer extends AbstractTestHtmlRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(TestHtmlTitleRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TestHtmlHeadingRenderer.class);
 
 	private enum Key {lvl1,lvl2}
 	
-	private HtmlTitleRenderer renderer;
+	private HtmlHeadingRenderer renderer;
 
 	@Before public void init()
 	{
 		super.initDir("section");
-		renderer = new HtmlTitleRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		renderer = new HtmlHeadingRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
 	}
 
 	@Test public void lvl1() throws IOException
@@ -45,7 +43,7 @@ public class TestHtmlTitleRenderer extends AbstractTestHtmlRenderer
 	public static void main(String[] args) throws IOException
 	{
 		OfxCoreTestBootstrap.init();
-		TestHtmlTitleRenderer test = new TestHtmlTitleRenderer();
+		TestHtmlHeadingRenderer test = new TestHtmlHeadingRenderer();
         test.setEnvironment(true);
 		
         test.init();test.lvl1();

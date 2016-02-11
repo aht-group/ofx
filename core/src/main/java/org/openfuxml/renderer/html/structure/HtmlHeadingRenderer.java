@@ -10,9 +10,9 @@ import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 
 /*Klasse für HTML Überschriften, e.g <h1>...</h1>*/
-public class HtmlTitleRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
+public class HtmlHeadingRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
-	public HtmlTitleRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm){super(cmm, dsm);}
+	public HtmlHeadingRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm){super(cmm, dsm);}
 
 	/*
 	* Methode zum Erzeugen von Überschriften
@@ -21,11 +21,11 @@ public class HtmlTitleRenderer extends AbstractOfxHtmlRenderer implements OfxHtm
 	*/
 	public void render(Title title, int lvl)
 	{
-//		StringBuffer sb = new StringBuffer();
-//		sb.append(new HtmlElement().createPre("h" + String.valueOf(lvl)));
-//		sb.append(TxtTitleFactory.build(title));
-//		sb.append(new HtmlElement().createPost("h" + String.valueOf(lvl)));
-//
-//		txt.add(sb.toString());
+		StringBuffer sb = new StringBuffer();
+		sb.append(new HtmlElement().openTag("h" + String.valueOf(lvl), false));
+		sb.append(TxtTitleFactory.build(title));
+		sb.append(new HtmlElement().closeTag("h" + String.valueOf(lvl)));
+
+		txt.add(sb.toString());
 	}
 }
