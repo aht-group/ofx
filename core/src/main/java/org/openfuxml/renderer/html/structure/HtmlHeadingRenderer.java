@@ -19,13 +19,12 @@ public class HtmlHeadingRenderer extends AbstractOfxHtmlRenderer implements OfxH
 	* @para title: Title Object, heraus gelesen aus dem Quelldokument
 	* @para lvl: Ebene des Titels
 	*/
-	public void render(Title title, int lvl)
+	public void render(HtmlElement parent, Title title, int lvl)
 	{
-		StringBuffer sb = new StringBuffer();
-		sb.append(new HtmlElement().openTag("h" + String.valueOf(lvl), false));
-		sb.append(TxtTitleFactory.build(title));
-		sb.append(new HtmlElement().closeTag("h" + String.valueOf(lvl)));
+		String h$ = "h" + String.valueOf(lvl);
+		HtmlElement heading = new HtmlElement(h$);
+		heading.addContent(TxtTitleFactory.build(title));
 
-		txt.add(sb.toString());
+		parent.addContent(heading);
 	}
 }

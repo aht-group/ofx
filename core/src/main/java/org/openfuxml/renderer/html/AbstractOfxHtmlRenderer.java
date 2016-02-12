@@ -1,6 +1,8 @@
 package org.openfuxml.renderer.html;
 
-import org.jdom2.Element;
+import org.jdom2.*;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.interfaces.DefaultSettingsManager;
@@ -24,46 +26,49 @@ public class AbstractOfxHtmlRenderer
 	protected CrossMediaManager cmm;
 	protected DefaultSettingsManager dsm;
 
-	protected List<String> txt;
-	protected static final String docStart = HtmlElement.docType() + "\n" + new HtmlElement().openTag("html", false);
-	private static final String docEnd = new HtmlElement().closeTag("html");
-	protected ArrayList<OfxHtmlRenderer> renderer;
+	protected HtmlElement html;
+	protected Document doc;
+//	protected ArrayList<OfxHtmlRenderer> renderer;
 
 	public AbstractOfxHtmlRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		this.cmm = cmm;
 		this.dsm = dsm;
-		renderer = new ArrayList<OfxHtmlRenderer>();
-		txt = new ArrayList<String>();
+//		renderer = new ArrayList<OfxHtmlRenderer>();
+		html = new HtmlElement("html");
+		html.setNamespace(Namespace.getNamespace("http://www.w3.org/1999/xhtml"));
+		doc = new Document(html, new DocType("html"));
 	}
 
 	public List<String> getContent()
 	{
-		List<String> resultTxt = new ArrayList<String>();
-//		resultTxt.add();
-		resultTxt.addAll(txt);
-		for(OfxHtmlRenderer r : renderer){resultTxt.addAll(r.getContent());}
-//		resultTxt.add(docEnd);
-		return resultTxt;
+		return null;
+	}
+
+	public List<Content> getContent (HtmlElement parent)
+	{
+		return parent.getContent();
 	}
 
 	public void listRenderer(org.openfuxml.content.list.List list)
 	{
 	}
-	public void paragraphRenderer(Paragraph paragraph)
+	public void paragraphRenderer(HtmlElement parent,Paragraph paragraph)
 	{
 		HtmlParagraphRenderer paraRenderer = new HtmlParagraphRenderer(cmm,dsm);
-
+		paraRenderer.render(parent,paragraph);
 	}
 
-	public void imageRenderer(Image image)
+	public void imageRenderer(HtmlElement parent,Image image)
 	{
 	}
 	public void write(Writer w) throws IOException
 	{
-		getContent().add(0,docStart);
-		getContent().add(getContent().size()-1, docEnd);
-		for(String s : getContent()){w.write(s+dsm.lineSeparator());}
-		w.flush();
+		try{
+			XMLOutputter xmlOutput = new XMLOutputter();
+			xmlOutput.setFormat(Format.getPrettyFormat());
+			xmlOutput.output(doc, w);
+
+		} catch (IOException io){io.printStackTrace();}
 	}
 }

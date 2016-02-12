@@ -8,6 +8,7 @@ import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
+import org.openfuxml.renderer.html.HtmlElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,30 +24,31 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 		this.lvl = lvl;
 	}
 
-	public void render(Section section)
+	public void render(HtmlElement parent, Section section)
 	{
 		//Comments always on top!
-		/*Kommentare immer zuerst*/
+		/*Alle Kommentare werden Html konform an den Anfang gesetz*/
 		for(Object s : section.getContent())
 		{
 			if(s instanceof Comment){renderComment((Comment)s);}
 		}
 
-		//Title always immediately after comments
-		/*Überschriften direkt nach den Kommentaren*/
+		/*@para lvl: Gibt die Hierarchie-Ebene der Überschrift an.*/
 		for(Object s : section.getContent())
 		{
 			if(s instanceof Title)
 			{
 				HtmlHeadingRenderer titleR = new HtmlHeadingRenderer(cmm, dsm);
-				titleR.render((Title)s,lvl);
-				renderer.add(titleR);
+				titleR.render(parent, (Title)s,lvl);
 			}
 		}
+
+		/*Der eigentliche Inhalt des Abschnittes wird hier nach Typ unterschieden
+		* und verarbeitet.*/
 		for(Object o : section.getContent())
 		{
-			if(o instanceof Section){renderSection((Section)o);}
-//			else if(o instanceof String){txt.add(((String)o).trim());}
+			if(o instanceof Section){renderSection(parent,(Section)o);}
+//			else if(o instanceof String){}
 //			else if(o instanceof List)
 //			{
 //				if(((List)o).isSetComment())
@@ -56,27 +58,26 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 //				}
 //				listRenderer((List)o);
 //			}
-			else if(o instanceof Paragraph){paragraphRenderer((Paragraph)o);}
+			else if(o instanceof Paragraph){paragraphRenderer(parent,(Paragraph)o);}
 //			else if(o instanceof Image){imageRenderer((Image)o);}
 		}
 	}
 
 	/*
 	Verarbeitet sogenannte Subsection
-	@para section: Objekt einer neuen Section
+	@para section: Objekt der untergeordneten Section
 	*/
-	private void renderSection(Section section)
+	private void renderSection(HtmlElement parent, Section section)
 	{
 		HtmlSectionRenderer sr = new HtmlSectionRenderer(cmm,dsm,lvl+1);
-		sr.render(section);
-		renderer.add(sr);
+		sr.render(parent, section);
 	}
 
-
+	/*Verarbeitet Kommentare
+	* @para comment: Kommentar Objekt*/
 	private void renderComment(Comment comment)
 	{
 //		MdCommentRenderer commentR = new MdCommentRenderer(cmm, dsm);
 //		commentR.render(comment);
-//		renderer.add(commentR);
 	}
 }

@@ -2,22 +2,23 @@ package org.openfuxml.renderer.html.structure;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
-import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.test.OfxCoreTestBootstrap;
+import org.openfuxml.test.provider.EmphasisProvider;
 import org.openfuxml.test.provider.SectionAndTitleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class TestHtmlHeadingRenderer extends AbstractTestHtmlRenderer
+public class TestHtmlEmphasisRenderer extends AbstractTestHtmlRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(TestHtmlHeadingRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TestHtmlEmphasisRenderer.class);
 
-	private enum Key {lvl1,lvl2}
+	private enum Key {emphasis}
 	
 	private HtmlBody renderer;
 
@@ -27,28 +28,25 @@ public class TestHtmlHeadingRenderer extends AbstractTestHtmlRenderer
 		renderer = new HtmlBody(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
 	}
 
-	@Test public void lvl1() throws IOException
+	@Test public void emphasis() throws IOException
 	{
-		initFile(Key.lvl1);
-
-        renderer.render(SectionAndTitleProvider.build(),1);
+		initFile(Key.emphasis);
+		Section section = SectionAndTitleProvider.build();
+		section.getContent().add(EmphasisProvider.bold());
+		section.getContent().add(EmphasisProvider.italic());
+		section.getContent().add(EmphasisProvider.italicBold());
+		section.getContent().add(EmphasisProvider.typewriter());
+		section.getContent().add(EmphasisProvider.quote());
+        renderer.render(section,1);
     	renderTest(renderer);
 	}
 	
-	@Test public void lvl2() throws IOException
-	{
-		initFile(Key.lvl2);
-		renderer.render(SectionAndTitleProvider.build(),2);
-    	renderTest(renderer);
-	}
-
 	public static void main(String[] args) throws IOException
 	{
 		OfxCoreTestBootstrap.init();
-		TestHtmlHeadingRenderer test = new TestHtmlHeadingRenderer();
+		TestHtmlEmphasisRenderer test = new TestHtmlEmphasisRenderer();
         test.setEnvironment(true);
 		
-        test.init();test.lvl1();
-        test.init();test.lvl2();
+        test.init();test.emphasis();
 	}
 }

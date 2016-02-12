@@ -17,16 +17,15 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 
 	public void render(Section section, int lvl)
 	{
-		HtmlElement tag = new HtmlElement();
-		txt.add(tag.openTag("body", false));
-		renderSection(section, lvl);
-		txt.add(tag.closeTag("body"));
+		HtmlElement body = new HtmlElement("body");
+		renderSection(body, section, lvl);
+		html.getContent().add(body);
 	}
 
-	private void renderSection(Section section, int lvl)
+	private void renderSection(HtmlElement parent, Section section, int lvl)
 	{
 		HtmlSectionRenderer sectionRenderer = new HtmlSectionRenderer(cmm, dsm, lvl);
-		sectionRenderer.render(section);
-		for(String s : sectionRenderer.getContent()){txt.add(s);}
+		sectionRenderer.render(parent, section);
+//		for(String s : sectionRenderer.getContent()){txt.add(s);}
 	}
 }

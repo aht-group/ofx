@@ -170,7 +170,7 @@ public class AbstractOfxCoreTest
 
 	protected void renderTest(OfxHtmlRenderer renderer) throws IOException
 	{
-		debugCharacter(renderer);
+//		debugCharacter(renderer);
 		if(saveReference){save(renderer);}
 		assertText(renderer);
 	}
