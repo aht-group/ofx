@@ -13,11 +13,19 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import org.apache.batik.bridge.BridgeContext;
+import org.apache.batik.bridge.DocumentLoader;
+import org.apache.batik.bridge.GVTBuilder;
+import org.apache.batik.bridge.UserAgent;
+import org.apache.batik.bridge.UserAgentAdapter;
+import org.apache.batik.dom.svg.SAXSVGDocumentFactory;
+import org.apache.batik.gvt.GraphicsNode;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.PNGTranscoder;
+import org.apache.batik.util.XMLResourceDescriptor;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -27,6 +35,7 @@ import org.openfuxml.util.media.CrossMediaFileUtil;
 import org.openfuxml.util.media.ImageDimensionRatio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
 
 import net.sf.exlp.util.io.StreamUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -106,7 +115,7 @@ public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements C
 	    os.close();
 	}
 	
-	public static Image size(InputStream is) throws TranscoderException, IOException
+	@Deprecated public static Image sizePng(InputStream is) throws TranscoderException, IOException
 	{
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		TranscoderInput tIn = new TranscoderInput(is);
@@ -123,5 +132,20 @@ public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements C
 	    int width          = bimg.getWidth();
 	    int height         = bimg.getHeight();
 	    return XmlImageFactory.px(width, height);
+	}
+	
+	@Deprecated public static Image size(InputStream is) throws TranscoderException, IOException
+	{
+		SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
+
+	    Document document = factory.createDocument(null, is);
+	    UserAgent agent = new UserAgentAdapter();
+	    DocumentLoader loader= new DocumentLoader(agent);
+	    BridgeContext context = new BridgeContext(agent, loader);
+	    context.setDynamic(true);
+	    GVTBuilder builder= new GVTBuilder();
+	    GraphicsNode root= builder.build(context, document);
+
+	    return XmlImageFactory.size(root.getPrimitiveBounds().getWidth(), root.getPrimitiveBounds().getHeight());
 	}
 }
