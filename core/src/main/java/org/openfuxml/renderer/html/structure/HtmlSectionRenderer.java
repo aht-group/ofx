@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.html.structure;
 
+import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
@@ -26,11 +27,13 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 
 	public void render(HtmlElement parent, Section section)
 	{
+		HtmlElement div = new HtmlElement("div");
+
 		//Comments always on top!
 		/*Alle Kommentare werden Html konform an den Anfang gesetz*/
 		for(Object s : section.getContent())
 		{
-			if(s instanceof Comment){renderComment((Comment)s);}
+			if(s instanceof Comment){renderComment(div, (Comment)s);}
 		}
 
 		/*@para lvl: Gibt die Hierarchie-Ebene der Überschrift an.*/
@@ -39,7 +42,7 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 			if(s instanceof Title)
 			{
 				HtmlHeadingRenderer titleR = new HtmlHeadingRenderer(cmm, dsm);
-				titleR.render(parent, (Title)s,lvl);
+				titleR.render(div, (Title)s,lvl);
 			}
 		}
 
@@ -47,7 +50,7 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 		* und verarbeitet.*/
 		for(Object o : section.getContent())
 		{
-			if(o instanceof Section){renderSection(parent,(Section)o);}
+			if(o instanceof Section){renderSection(div,(Section)o);}
 //			else if(o instanceof String){}
 //			else if(o instanceof List)
 //			{
@@ -58,9 +61,10 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 //				}
 //				listRenderer((List)o);
 //			}
-			else if(o instanceof Paragraph){paragraphRenderer(parent,(Paragraph)o);}
-//			else if(o instanceof Image){imageRenderer((Image)o);}
+			else if(o instanceof Paragraph){paragraphRenderer(div,(Paragraph)o);}
+			else if(o instanceof Image){imageRenderer(div,(Image)o);}
 		}
+		parent.addContent(div);
 	}
 
 	/*
@@ -75,9 +79,9 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 
 	/*Verarbeitet Kommentare
 	* @para comment: Kommentar Objekt*/
-	private void renderComment(Comment comment)
+	private void renderComment(HtmlElement parent, Comment comment)
 	{
-//		MdCommentRenderer commentR = new MdCommentRenderer(cmm, dsm);
-//		commentR.render(comment);
+		HtmlCommentRenderer commentR = new HtmlCommentRenderer(cmm, dsm);
+		commentR.render(parent, comment);
 	}
 }

@@ -8,6 +8,7 @@ import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
+import org.openfuxml.renderer.html.media.HtmlImageRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +42,7 @@ public class HtmlParagraphRenderer extends AbstractOfxHtmlRenderer implements Of
 
 	private void renderImage(HtmlElement p, Image i)
 	{
-
+		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cmm, dsm);
+		imgRenderer.renderInline(p, i);
 	}
 }

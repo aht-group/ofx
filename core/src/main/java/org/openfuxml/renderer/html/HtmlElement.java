@@ -2,9 +2,6 @@ package org.openfuxml.renderer.html;
 
 import org.jdom2.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /*Klasse erzeugt Objekte, welche letztendlich die einzelnen Tags
 * im Html Dokument darstellen*/
 public class HtmlElement extends Element
@@ -13,19 +10,25 @@ public class HtmlElement extends Element
 	{
 		super(name);
 	}
-//	public List<HtmlElement> getChildren()
-//	{
-//		List<HtmlElement> childern = new ArrayList<HtmlElement>();
-//		for(Element e : this.getChildren())
-//		{
-//			childern.add(((HtmlElement)e));
-//		}
-//		return childern;
-//	}
 
+	/*Zur internen Spezifizierung von CSS Formatierung einzelner HTML Elemente*/
+	public void setStyleAttribute(HtmlElement element, String value){element.setAttribute("style", value);}
 
-	public static Document docType(HtmlElement element)
+	/*HTML spezifischer Zeilenumbruch. */
+	public HtmlElement explicitLinebreak() {return new HtmlElement("br");}
+
+	/*Horizontale Trennlinie, z.B. zur optischen Trennung von Inhalten*/
+	public HtmlElement HorizontalLine() {return new HtmlElement("hr");}
+
+	public HtmlElement addContent(String s)
 	{
-		return new Document(element);
+		return this.addContent(new Text(s));
 	}
+
+	public HtmlElement addContent(Content c)
+	{
+		this.getContent().add(c);
+		return this;
+	}
+
 }

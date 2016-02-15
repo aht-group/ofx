@@ -17,7 +17,7 @@ public class TestHtmlBodyRenderer extends AbstractTestHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(TestHtmlBodyRenderer.class);
 
-	private enum Key {body}
+	private enum Key {body, withComment}
 	
 	private HtmlBody renderer;
 
@@ -34,6 +34,13 @@ public class TestHtmlBodyRenderer extends AbstractTestHtmlRenderer
     	renderTest(renderer);
 	}
 
+	@Test public void withComment() throws IOException
+	{
+		initFile(Key.withComment);
+		renderer.render(SectionAndTitleProvider.buildWithComment(),1);
+		renderTest(renderer);
+	}
+
 	public static void main(String[] args) throws IOException
 	{
 		OfxCoreTestBootstrap.init();
@@ -41,5 +48,6 @@ public class TestHtmlBodyRenderer extends AbstractTestHtmlRenderer
         test.setEnvironment(true);
 		
         test.init();test.body();
+		test.init();test.withComment();
 	}
 }

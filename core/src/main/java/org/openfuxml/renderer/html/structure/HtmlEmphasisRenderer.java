@@ -25,14 +25,14 @@ public class HtmlEmphasisRenderer extends AbstractOfxHtmlRenderer implements Ofx
 		boolean quote = emphasis.isSetQuote() && emphasis.isQuote();
 
 		HtmlElement emph = null;
-		if(bold){emph = new HtmlElement("bold");}
-		if(italic){emph = new HtmlElement("italic");}
+		if(bold){emph = new HtmlElement("b");}
+		if(italic){emph = new HtmlElement("i");}
 		if(typewriter){emph = new HtmlElement("code");}
 		if(quote){emph = new HtmlElement("q");}
 		if(bold && italic)
 		{
-			emph = new HtmlElement("bold"); emph.addContent(new HtmlElement("italic"));
-			emph.getChild("italic").addContent(emphasis.getValue());
+			emph = new HtmlElement("b"); emph.addContent(new HtmlElement("i"));
+			emph.getChild("i").addContent(emphasis.getValue());
 		}
 		if(emph != null && emph.getContent().size() == 0){emph.addContent(emphasis.getValue());}
 		parent.addContent(emph);
