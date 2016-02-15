@@ -29,4 +29,11 @@ public class XmlHeightFactory
 		xml.setUnit(Unit.px.toString());
 		return xml;
 	}
+	
+	public static Height size(double value)
+	{
+		Height xml = new Height();
+		xml.setValue(value);
+		return xml;
+	}
 }

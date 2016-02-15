@@ -34,6 +34,14 @@ public class XmlImageFactory
 		return image;
 	}
 	
+	public static Image size(double width, double height)
+	{		
+		Image image = new Image();
+		image.setWidth(XmlWidthFactory.size(width));
+		image.setHeight(XmlHeightFactory.size(height));
+		return image;
+	}
+	
 	public static Image idHeight(long id, int height)
 	{		
 		Image image = new Image();
