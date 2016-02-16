@@ -1,10 +1,7 @@
 package org.openfuxml.renderer.html.structure;
 
 import org.openfuxml.content.media.Image;
-import org.openfuxml.content.ofx.Comment;
-import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.ofx.*;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
@@ -63,6 +60,7 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 //			}
 			else if(o instanceof Paragraph){paragraphRenderer(div,(Paragraph)o);}
 			else if(o instanceof Image){imageRenderer(div,(Image)o);}
+			else if(o instanceof Marginalia){marginaliaRenderer(div,(Marginalia)o);}
 		}
 		parent.addContent(div);
 	}

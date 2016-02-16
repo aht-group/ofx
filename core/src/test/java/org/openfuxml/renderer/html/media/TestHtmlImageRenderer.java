@@ -36,7 +36,7 @@ public class TestHtmlImageRenderer extends AbstractTestMdRenderer
 	{
 		initFile(Key.inline);
 		Section sec = new Section(); sec.getContent().add(ImageProvider.create("This would be an inline Image"));
-		body.render(sec, 1);
+		body.render(sec);
     	renderTest(body);
 	}
 	
@@ -44,7 +44,7 @@ public class TestHtmlImageRenderer extends AbstractTestMdRenderer
 	{
 		initFile(Key.only);
 		Section sec = new Section(); sec.getContent().add(ImageProvider.createImageOnly("This would be an inline Image"));
-		body.render(sec, 1);
+		body.render(sec);
 		renderTest(body);
 	}
 

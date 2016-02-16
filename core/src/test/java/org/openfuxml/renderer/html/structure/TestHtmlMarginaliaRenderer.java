@@ -2,22 +2,23 @@ package org.openfuxml.renderer.html.structure;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
-import org.openfuxml.renderer.html.head.HtmlHead;
 import org.openfuxml.test.OfxCoreTestBootstrap;
+import org.openfuxml.test.provider.MarginaliaProvider;
 import org.openfuxml.test.provider.SectionAndTitleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class TestHtmlBodyRenderer extends AbstractTestHtmlRenderer
+public class TestHtmlMarginaliaRenderer extends AbstractTestHtmlRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(TestHtmlBodyRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TestHtmlMarginaliaRenderer.class);
 
-	private enum Key {body, withComment}
+	private enum Key {marginalia}
 	
 	private HtmlBody renderer;
 
@@ -27,27 +28,21 @@ public class TestHtmlBodyRenderer extends AbstractTestHtmlRenderer
 		renderer = new HtmlBody(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
 	}
 
-	@Test public void body() throws IOException
+	@Test public void marginalia() throws IOException
 	{
-		initFile(Key.body);
-        renderer.render(SectionAndTitleProvider.build());
+		initFile(Key.marginalia);
+		Section section = new Section();
+		section.getContent().add(MarginaliaProvider.withParagraph());
+        renderer.render(section);
     	renderTest(renderer);
-	}
-
-	@Test public void withComment() throws IOException
-	{
-		initFile(Key.withComment);
-		renderer.render(SectionAndTitleProvider.buildWithComment());
-		renderTest(renderer);
 	}
 
 	public static void main(String[] args) throws IOException
 	{
 		OfxCoreTestBootstrap.init();
-		TestHtmlBodyRenderer test = new TestHtmlBodyRenderer();
+		TestHtmlMarginaliaRenderer test = new TestHtmlMarginaliaRenderer();
         test.setEnvironment(true);
 		
-        test.init();test.body();
-		test.init();test.withComment();
+        test.init();test.marginalia();
 	}
 }

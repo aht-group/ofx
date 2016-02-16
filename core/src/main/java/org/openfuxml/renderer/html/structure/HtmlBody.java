@@ -15,10 +15,10 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	public HtmlBody(CrossMediaManager cmm, DefaultSettingsManager dsm){super(cmm, dsm);}
 
-	public void render(Section section, int lvl)
+	public void render(Section section)
 	{
 		HtmlElement body = new HtmlElement("body");
-		renderSection(body, section, lvl);
+		renderSection(body, section, 1);
 		html.getContent().add(body);
 	}
 

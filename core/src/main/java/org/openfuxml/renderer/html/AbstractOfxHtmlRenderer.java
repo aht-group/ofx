@@ -4,10 +4,12 @@ import org.jdom2.*;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.openfuxml.content.media.Image;
+import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
+import org.openfuxml.renderer.html.structure.HtmlMarginaliaRenderer;
 import org.openfuxml.renderer.html.structure.HtmlParagraphRenderer;
 import org.openfuxml.renderer.markdown.structure.MdSectionRenderer;
 import org.openfuxml.xml.renderer.cmp.Html;
@@ -61,6 +63,12 @@ public class AbstractOfxHtmlRenderer
 		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cmm, dsm);
 		imgRenderer.render(parent, image);
 	}
+
+	public void marginaliaRenderer(HtmlElement parent,Marginalia marg)
+	{
+		HtmlMarginaliaRenderer imgRenderer = new HtmlMarginaliaRenderer(cmm, dsm);
+		imgRenderer.render(parent, marg);
+	}
 	public void write(Writer w) throws IOException
 	{
 		try{
@@ -71,8 +79,8 @@ public class AbstractOfxHtmlRenderer
 
 	private static Format ownPrettyFormat()
 	{
-		Format f = Format.getCompactFormat();
-		f.setTextMode(Format.TextMode.PRESERVE);
+		Format f = Format.getPrettyFormat();
+		f.setTextMode(Format.TextMode.NORMALIZE);
 		f.setIndent("\t");
 		f.setOmitDeclaration(true);
 		return f;

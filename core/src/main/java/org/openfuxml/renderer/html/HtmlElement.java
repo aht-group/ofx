@@ -31,4 +31,6 @@ public class HtmlElement extends Element
 		return this;
 	}
 
+	public boolean isSetAttribute (){return getAttributes() != null;}
+
 }

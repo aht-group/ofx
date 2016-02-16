@@ -2,6 +2,7 @@ package org.openfuxml.renderer.html.structure;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
@@ -31,14 +32,15 @@ public class TestHtmlHeadingRenderer extends AbstractTestHtmlRenderer
 	{
 		initFile(Key.lvl1);
 
-        renderer.render(SectionAndTitleProvider.build(),1);
+        renderer.render(SectionAndTitleProvider.build());
     	renderTest(renderer);
 	}
 	
 	@Test public void lvl2() throws IOException
 	{
 		initFile(Key.lvl2);
-		renderer.render(SectionAndTitleProvider.build(),2);
+		Section section = new Section(); section.getContent().add(SectionAndTitleProvider.build());
+		renderer.render(section);
     	renderTest(renderer);
 	}
 
