@@ -54,12 +54,6 @@ public class HtmlParagraphRenderer extends AbstractOfxHtmlRenderer implements Of
 		}
 	}
 
-	private void renderEmphasis(HtmlElement p, Emphasis em)
-	{
-		HtmlEmphasisRenderer emph = new HtmlEmphasisRenderer(cmm,dsm);
-		emph.render(p, em);
-	}
-
 	private void renderImage(HtmlElement p, Image i)
 	{
 		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cmm, dsm);

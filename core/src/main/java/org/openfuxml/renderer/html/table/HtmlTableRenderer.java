@@ -1,0 +1,93 @@
+package org.openfuxml.renderer.html.table;
+
+import org.jdom2.Text;
+import org.openfuxml.content.list.List;
+import org.openfuxml.content.media.Image;
+import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.ofx.Reference;
+import org.openfuxml.content.table.*;
+import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
+import org.openfuxml.renderer.html.HtmlElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLatexRenderer
+{
+	final static Logger logger = LoggerFactory.getLogger(HtmlTableRenderer.class);
+
+	public HtmlTableRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
+	{
+		super(cmm,dsm);
+	}
+
+	public void render(HtmlElement parent, Table tab)
+	{
+		HtmlElement table = new HtmlElement("table");
+		table.setAttribute("id", tab.getId()); //benötigt für interne Referenzen!
+		renderHead(table, tab.getContent().getHead());
+		renderBody(table, tab.getContent().getBody());
+		parent.addContent(table);
+	}
+
+	private void renderHead(HtmlElement table, Head head)
+	{
+		for(Row r : head.getRow())
+		{
+			HtmlElement tr = new HtmlElement("tr");
+			int column = 0;
+			for(Cell c : r.getCell())
+			{
+				HtmlElement th = new HtmlElement("th");
+				th.setAttribute("class", "col" + ++column); //Jede Zelle einer Spalte bekommt die gleiche class. Benötigt für spaltenweises CSS formatieren.
+				for(Object o : c.getContent())
+				{
+					if(o instanceof Paragraph){paragraphRenderer(th, (Paragraph)o);}
+					else if(o instanceof String){th.addContent((String)o);}
+					else if(o instanceof Image){imageRenderer(th, (Image)o);}
+				}
+				tr.addContent(th);
+			}
+			table.addContent(tr);
+		}
+	}
+
+	private void renderBody(HtmlElement table, java.util.List<Body> bodyList)
+	{
+		for(Body body : bodyList)
+		{
+			for(Row r : body.getRow())
+			{
+				HtmlElement tr = new HtmlElement("tr");
+				int column = 0;
+				for(Cell c : r.getCell())
+				{
+					HtmlElement td = new HtmlElement("td");
+					td.setAttribute("class", "col" + ++column); //s. renderHead()
+					for(Object o : c.getContent())
+					{
+						if(o instanceof Paragraph){paragraphRenderer(td, (Paragraph)o);}
+						else if(o instanceof String){td.addContent((String)o);}
+						else if(o instanceof Image){imageRenderer(td, (Image)o);}
+						else if(o instanceof List){listRenderer(td, (List)o);}
+					}
+					tr.addContent(td);
+				}
+				table.addContent(tr);
+			}
+		}
+	}
+
+	public void paragraphRenderer(HtmlElement parent, Paragraph p)
+	{
+		for(Object o : p.getContent())
+		{
+			if(o instanceof String){parent.addContent((String)o);}
+			else if(o instanceof Image){imageRenderer(parent, (Image)o);}
+			else if(o instanceof Emphasis){renderEmphasis(parent, ((Emphasis)o));}
+		}
+	}
+}
