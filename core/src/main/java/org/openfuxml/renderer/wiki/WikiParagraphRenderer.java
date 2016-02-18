@@ -35,7 +35,6 @@ public class WikiParagraphRenderer extends AbstractOfxLatexRenderer implements O
 		for(Object o : paragraph.getContent())
 		{
 			if(o==null){throw new OfxAuthoringException(Paragraph.class.getSimpleName()+" has no content");}
-				//TODO Separieren zwischen den Erlaubten Elementen
 			else if(o instanceof String){txt.add((String)o);}
 			else if(o instanceof Emphasis){emphasisRenderer(sb, (Emphasis)o);}
 			else if(o instanceof Reference){}
@@ -47,16 +46,13 @@ public class WikiParagraphRenderer extends AbstractOfxLatexRenderer implements O
 			else if(o instanceof Font){logger.warn("INLINE Image NYI");}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
-		
+		txt.add(sb.toString());
 	}
 	
 	private void emphasisRenderer(StringBuffer sb, Emphasis emphasis) throws OfxAuthoringException
 	{
-		logger.info("emphasis Renderer");
 		WikiEmphasisRenderer wer = new WikiEmphasisRenderer(cmm, dsm);
 		wer.render(emphasis);
 		for(String s : wer.getContent()){sb.append(s);}
 	}
-	
-	
 }

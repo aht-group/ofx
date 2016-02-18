@@ -5,8 +5,8 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 
-public class WikiEmphasisRenderer extends AbstractOfxWikiRenderer implements OfxWikiRenderer {
-	
+public class WikiEmphasisRenderer extends AbstractOfxWikiRenderer implements OfxWikiRenderer
+{
 	public WikiEmphasisRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
 		super(cmm,dsm);
