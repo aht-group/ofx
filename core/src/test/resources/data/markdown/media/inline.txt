@@ -1,3 +1,3 @@
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><body xmlns=""><div><p>
-				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam<img alt="This would be an inline Image" src="src/folder/img.png" />Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-			</p></div></body></html>
+
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam ![This would be an inline Image](src/folder/img.png) Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam

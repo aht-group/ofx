@@ -1,7 +1,10 @@
 package org.openfuxml.test.provider;
 
+import org.openfuxml.content.layout.Height;
+import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.table.Head;
 import org.openfuxml.factory.xml.editorial.XmlIndexFactory;
 import org.openfuxml.factory.xml.media.XmlMediaFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
@@ -36,6 +39,22 @@ public class ImageProvider extends AbstractElementProvider
 		Image p = new Image();
 		p.setTitle(XmlTitleFactory.build(imageTitle));
 		p.setMedia(XmlMediaFactory.build("src/folder/img.png", "dst/folder/img.png"));
+		p.setWidth(setWidth()); p.setHeight(setHeight());
 		return p;
+	}
+
+	private static Width setWidth()
+	{
+		Width w = new Width();
+		w.setUnit("percentage");
+		w.setValue(75d);
+		return w;
+	}
+	private static Height setHeight()
+	{
+		Height h = new Height();
+		h.setUnit("percentage");
+		h.setValue(75d);
+		return h;
 	}
 }

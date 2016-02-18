@@ -5,13 +5,16 @@ import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
+import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.*;
 import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
+import org.openfuxml.xml.renderer.cmp.Html;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,9 +31,14 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 	{
 		HtmlElement table = new HtmlElement("table");
 		table.setAttribute("id", tab.getId()); //benötigt für interne Referenzen!
+		table.setAttribute("style", "width:100%");
+		table.addContent(caption(tab.getTitle()));
 		renderHead(table, tab.getContent().getHead());
 		renderBody(table, tab.getContent().getBody());
+
 		parent.addContent(table);
+
+		if(tab.getSpecification() != null){HtmlElement.addStyleElement(styleProperties(tab.getSpecification().getColumns()), html);}
 	}
 
 	private void renderHead(HtmlElement table, Head head)
@@ -89,5 +97,31 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 			else if(o instanceof Image){imageRenderer(parent, (Image)o);}
 			else if(o instanceof Emphasis){renderEmphasis(parent, ((Emphasis)o));}
 		}
+	}
+
+	private String styleProperties(Columns columns)
+	{
+		String prop="";
+		int i = 0;
+		for(Column c : columns.getColumn())
+		{
+			prop += ".col" + ++i + "{";
+			if(c.getAlignment() != null && c.getAlignment().getHorizontal() != null){ prop += "text-align: " + c.getAlignment().getHorizontal() + ";";}
+			if(c.getWidth() != null && c.getWidth().getValue() != 0.0){prop += "width: " + c.getWidth().getValue();}
+			if(c.getWidth() != null && c.getWidth().getUnit() != null)
+			{
+				if(c.getWidth().getUnit().equals("percentage")){prop += "%";}
+				else{prop += c.getWidth().getUnit();}
+			}
+			prop += ";}\n";
+		}
+		return prop;
+	}
+
+	private HtmlElement caption(Title title)
+	{
+		HtmlElement caption =  new HtmlElement("caption");
+		caption.addContent(TxtTitleFactory.build(title));
+		return caption;
 	}
 }

@@ -26,7 +26,7 @@ public class TestHtmlHeadRenderer extends AbstractTestHtmlRenderer
 
 	@Before public void init()
 	{
-		super.initDir("section");
+		super.initDir("head");
 		renderer = new HtmlHead(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
 	}
 

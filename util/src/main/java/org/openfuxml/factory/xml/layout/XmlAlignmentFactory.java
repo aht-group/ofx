@@ -4,7 +4,7 @@ import org.openfuxml.content.layout.Alignment;
 
 public class XmlAlignmentFactory
 {
-	public static enum Horizontal {left,center,right,inline}
+	public enum Horizontal {left,center,right,inline}
 	
 	public static Alignment buildHorizontal(Horizontal horizontal)
 	{

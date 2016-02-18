@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
+import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.structure.HtmlBody;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.renderer.markdown.media.MdImageRenderer;
@@ -16,19 +17,17 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class TestHtmlImageRenderer extends AbstractTestMdRenderer
+public class TestHtmlImageRenderer extends AbstractTestHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(TestHtmlImageRenderer.class);
 
 	private enum Key {inline, only}
 	
-	private HtmlImageRenderer renderer;
 	private HtmlBody body;
 
 	@Before public void init()
 	{
 		super.initDir("media");
-		renderer = new HtmlImageRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
 		body = new HtmlBody(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
 	}
 

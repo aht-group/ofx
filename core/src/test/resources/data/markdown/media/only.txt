@@ -1,3 +1,6 @@
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><body xmlns=""><div><figure>
-				<img alt="This would be an inline Image" src="src/folder/img.png" /><figcaption>This would be an inline Image</figcaption>
-			</figure></div></body></html>
+
+
+![This would be an Image outside a paragraph](src/folder/img.png)  
+*This would be an Image outside a paragraph*
+
+

@@ -32,16 +32,14 @@ public class AbstractOfxHtmlRenderer
 	protected CrossMediaManager cmm;
 	protected DefaultSettingsManager dsm;
 
-	protected HtmlElement html;
-	protected Document doc;
+	protected static HtmlElement html = new HtmlElement("html");
+	protected static Document doc = new Document(html, new DocType("html"));
 
 	public AbstractOfxHtmlRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		this.cmm = cmm;
 		this.dsm = dsm;
-		html = new HtmlElement("html");
 		html.setNamespace(Namespace.getNamespace("http://www.w3.org/1999/xhtml"));
-		doc = new Document(html, new DocType("html"));
 	}
 
 	/*Das Wurzelelement html rekursiv als List von Java String Objekten zurückgeben.

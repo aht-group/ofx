@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.html.media;
 
+import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.DefaultSettingsManager;
@@ -7,6 +8,7 @@ import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
+import org.openfuxml.xml.renderer.cmp.Html;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,11 +43,8 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdR
 		HtmlElement img = new HtmlElement("img");
 		img.setAttribute("alt", title);
 		img.setAttribute("src", image.getMedia().getSrc());
-		if(image.isSetHeight()|| image.isSetWidth())
-		{
-			String style = "width:" + image.getWidth().getValue() + "px;height:" + image.getHeight().getValue() + "px;";
-			img.setAttribute("style", style);
-		}
+		if(image.isSetHeight()|| image.isSetWidth()){img.setAttribute("style", HtmlElement.evaluateSize(image.getWidth()) + HtmlElement.evaluateSize(image.getHeight()));}
+
 		figure.addContent(img);
 		figure.addContent(caption(title));
 		parent.addContent(figure);

@@ -12,6 +12,7 @@ import java.util.List;
 
 public class HtmlHead extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
+	private HtmlElement head;
 	public HtmlHead(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
@@ -30,11 +31,13 @@ public class HtmlHead extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 
 	public void render(List<String> cssFiles, String pageTitle)
 	{
-		HtmlElement head = new HtmlElement("head");
+		head = new HtmlElement("head");
 		metaData(head);
 		if(cssFiles != null){css(head,cssFiles);}
 		pageTitle(head, pageTitle);
+		style(head);
 		html.getContent().add(head);
+
 	}
 
 	private void metaData(HtmlElement head)
@@ -67,4 +70,12 @@ public class HtmlHead extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		title.addContent(pageTitle);
 		parent.addContent(title);
 	}
+
+	private void style(HtmlElement parent)
+	{
+		HtmlElement style = new HtmlElement("style");
+		style.setAttribute("type","text/css");
+		parent.addContent(style);
+	}
+
 }
