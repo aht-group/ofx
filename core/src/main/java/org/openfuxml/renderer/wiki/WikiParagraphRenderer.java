@@ -50,7 +50,9 @@ public class WikiParagraphRenderer extends AbstractOfxLatexRenderer implements O
 		
 	}
 	
-	private void emphasisRenderer(StringBuffer sb, Emphasis emphasis) throws OfxAuthoringException{
+	private void emphasisRenderer(StringBuffer sb, Emphasis emphasis) throws OfxAuthoringException
+	{
+		logger.info("emphasis Renderer");
 		WikiEmphasisRenderer wer = new WikiEmphasisRenderer(cmm, dsm);
 		wer.render(emphasis);
 		for(String s : wer.getContent()){sb.append(s);}

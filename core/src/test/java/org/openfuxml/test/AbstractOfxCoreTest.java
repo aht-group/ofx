@@ -139,25 +139,13 @@ public class AbstractOfxCoreTest
     	assertText(renderer,f);
 	}
 	
-	protected void renderTest(OfxLatexRenderer renderer) throws IOException
+	protected void renderTest(OfxCharacterRenderer renderer) throws IOException
 	{
 		debugCharacter(renderer);
     	if(saveReference){save(renderer);}
     	assertText(renderer);
 	}
-	protected void renderTest(OfxMdRenderer renderer) throws IOException
-	{
-		debugCharacter(renderer);
-    	if(saveReference){save(renderer);}
-    	assertText(renderer);
-	}
-	protected void renderTest(OfxTextRenderer renderer) throws IOException
-	{
-		debugCharacter(renderer);
-    	if(saveReference){save(renderer);}
-    	assertText(renderer);
-	}
-	
+		
 	protected void renderTest(OfxWikiRenderer renderer, File f) throws IOException
 	{
 		System.out.println("************************************");

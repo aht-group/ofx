@@ -14,30 +14,22 @@ public class WikiEmphasisRenderer extends AbstractOfxWikiRenderer implements Ofx
 	
 	public void render(Emphasis emphasis) throws OfxAuthoringException
 	{
-		boolean typewriter = emphasis.isSetStyle() && emphasis.getStyle().equals("typewriter");
 		boolean bold = emphasis.isSetBold() && emphasis.isBold();
 		boolean italic = emphasis.isSetItalic() && emphasis.isItalic();
-		boolean quote = emphasis.isSetQuote() && emphasis.isQuote();
 		
 		if(logger.isTraceEnabled())
 		{
-			logger.debug("typewriter: "+typewriter);
 			logger.debug("bold: "+bold);
 			logger.debug("italic: "+italic);
-			logger.debug("quote: "+quote);
 		}
 		
 		//TODO
 		StringBuffer sb = new StringBuffer();
-//		if(quote){sb.append("");}
-//		if(typewriter){sb.append("");}
 		if(bold) {sb.append("'''");}
 		if(italic) {sb.append("''");}
 		
 		if(bold){sb.append("'''");}
 		if(italic){sb.append("''");}
-//		if(typewriter){sb.append("");}
-//		if(quote){sb.append("");}
 		
 		txt.add(sb.toString());
 	}
