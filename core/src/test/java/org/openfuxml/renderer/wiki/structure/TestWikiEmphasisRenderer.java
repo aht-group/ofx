@@ -3,15 +3,12 @@ package org.openfuxml.renderer.wiki.structure;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
-import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.renderer.wiki.AbstractTestWikiRenderer;
 import org.openfuxml.renderer.wiki.WikiParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.EmphasisProvider;
-import org.openfuxml.test.provider.ListProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +19,7 @@ public class TestWikiEmphasisRenderer extends AbstractTestWikiRenderer{
 
 	final static Logger logger = LoggerFactory.getLogger(TestWikiEmphasisRenderer.class);
 
-	private enum Key {italic, bold, quote, typewriter, combination}
+	private enum Key {italic, bold, combination}
 	
 	private WikiParagraphRenderer renderer;
 
