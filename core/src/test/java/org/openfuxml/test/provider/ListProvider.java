@@ -12,7 +12,7 @@ public class ListProvider extends AbstractElementProvider
 {
 	final static Logger logger = LoggerFactory.getLogger(TestMdListRenderer.class);
 
-	public static List description(boolean ordering){return build(li.getWords(1), ordering, false);}
+	public static List build(boolean ordering){return build(li.getWords(1), ordering, false);}
 	public static List build(boolean ordering, boolean nested){return build(null, ordering, nested);}
 
 	private static List build(String name, boolean ordering, boolean nested)
@@ -28,6 +28,19 @@ public class ListProvider extends AbstractElementProvider
 		l.getItem().add(buildItem(name));
 		l.getItem().add(buildItem(name));
 		l.getItem().add(buildItem(name));
+
+		return l;
+	}
+
+	public static List buildDescription()
+	{
+		List l = new List();
+		Type t = new Type();t.setDescription(true);
+		l.setType(t);
+		l.getItem().add(buildItem(li.getWords(1)));
+		l.getItem().add(buildItem(li.getWords(1,1)));
+		l.getItem().add(buildItem(li.getWords(1,2)));
+		l.getItem().add(buildItem(li.getWords(1,3)));
 
 		return l;
 	}

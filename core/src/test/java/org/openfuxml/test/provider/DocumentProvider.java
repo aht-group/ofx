@@ -15,8 +15,8 @@ public class DocumentProvider extends AbstractElementProvider
 	{
 		Document xml = XmlDocumentFactory.build();
 
-		xml.getContent().getContent().add(SectionAndTitleProvider.withTitleContent());
-		xml.getContent().getContent().add(SectionAndTitleProvider.withTitleContent());
+		xml.getContent().getContent().add(SectionAndTitleProvider.build());
+		xml.getContent().getContent().add(SectionAndTitleProvider.build());
 
 		return xml;
 	}
@@ -24,8 +24,8 @@ public class DocumentProvider extends AbstractElementProvider
 	public static Document buildWithSubcontent()
 	{
 		Document xml = XmlDocumentFactory.build();
-		Section s1 = SectionAndTitleProvider.withTitleContent();
-		s1.getContent().add(SectionAndTitleProvider.withTitleContent());
+		Section s1 = SectionAndTitleProvider.build();
+		s1.getContent().add(SectionAndTitleProvider.buildWithComment());
 		xml.getContent().getContent().add(s1);
 
 		return xml;

@@ -15,12 +15,12 @@ import java.util.List;
 
 public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
-//	private static HtmlElement body = new HtmlElement("body");
+	private static HtmlElement body;
 	public HtmlBody(CrossMediaManager cmm, DefaultSettingsManager dsm){super(cmm, dsm);}
 
 	public void render(Content content)
 	{
-		HtmlElement body = new HtmlElement("body");
+		body = new HtmlElement("body");
 		HtmlElement cont = new HtmlElement("div");
 		for(Object c : content.getContent())
 		{
@@ -38,11 +38,13 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 
 	public void render(Section section)
 	{
-		HtmlElement body = new HtmlElement("body");
-		HtmlElement div = new HtmlElement("div");
+		if(html.getChild("body") == null)
+		{
+			body = new HtmlElement("body");
+			html.getContent().add(body);
+		}
+		else{body.removeContent();}
 		renderSection(body, section, 1);
-		body.addContent(div);
-		html.getContent().add(body);
 	}
 
 	private void renderSection(HtmlElement parent, Section section, int lvl)

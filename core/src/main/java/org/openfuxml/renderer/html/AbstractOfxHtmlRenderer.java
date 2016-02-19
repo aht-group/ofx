@@ -12,6 +12,7 @@ import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
 import org.openfuxml.renderer.html.structure.HtmlEmphasisRenderer;
+import org.openfuxml.renderer.html.structure.HtmlListRenderer;
 import org.openfuxml.renderer.html.structure.HtmlMarginaliaRenderer;
 import org.openfuxml.renderer.html.structure.HtmlParagraphRenderer;
 import org.openfuxml.renderer.html.table.HtmlTableRenderer;
@@ -54,6 +55,8 @@ public class AbstractOfxHtmlRenderer
 
 	public void listRenderer(HtmlElement parent,org.openfuxml.content.list.List list)
 	{
+		HtmlListRenderer listRenderer = new HtmlListRenderer(cmm, dsm);
+		listRenderer.render(parent, list);
 	}
 
 	/*Allgemeines verarbeiten von Paragraphen*/
@@ -61,6 +64,18 @@ public class AbstractOfxHtmlRenderer
 	{
 		HtmlParagraphRenderer paraRenderer = new HtmlParagraphRenderer(cmm,dsm);
 		paraRenderer.render(parent,paragraph);
+	}
+
+	/*Für den Fall, dass in der XML Vorlage ein Paragraph Element vorhanden ist,
+	* dieses in HTML aber nicht möglich ist. (z.b. HTML erlaubt keine verschachtelten <p> Elemente)*/
+	public void paragraphContentRenderer(HtmlElement parent, Paragraph p)
+	{
+		for(Object o : p.getContent())
+		{
+			if(o instanceof String){parent.addContent((String)o);}
+			else if(o instanceof Image){imageRenderer(parent, (Image)o);}
+			else if(o instanceof Emphasis){renderEmphasis(parent, ((Emphasis)o));}
+		}
 	}
 
 	/*Allgemeines verarbeiten von Bildern/Grafiken, außerhalb anderer Elemente!

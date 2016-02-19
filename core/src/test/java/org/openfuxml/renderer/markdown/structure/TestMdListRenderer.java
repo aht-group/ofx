@@ -30,14 +30,14 @@ public class TestMdListRenderer extends AbstractTestMdRenderer
 	@Test public void ordered() throws IOException
 	{
 		initFile(Key.ordered);
-        renderer.render(ListProvider.description(true));
+        renderer.render(ListProvider.build(true));
     	renderTest(renderer);
 	}
 	
 	@Test public void unordered() throws IOException
 	{
 		initFile(Key.unordered);
-        renderer.render(ListProvider.description(false));
+        renderer.render(ListProvider.build(false));
     	renderTest(renderer);
 	}
 

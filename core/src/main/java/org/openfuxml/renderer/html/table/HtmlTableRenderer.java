@@ -1,20 +1,16 @@
 package org.openfuxml.renderer.html.table;
 
-import org.jdom2.Text;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.*;
-import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
-import org.openfuxml.xml.renderer.cmp.Html;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,7 +73,8 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 					td.setAttribute("class", "col" + ++column); //s. renderHead()
 					for(Object o : c.getContent())
 					{
-						if(o instanceof Paragraph){paragraphRenderer(td, (Paragraph)o);}
+						if(o instanceof Paragraph){
+							paragraphContentRenderer(td, (Paragraph)o);}
 						else if(o instanceof String){td.addContent((String)o);}
 						else if(o instanceof Image){imageRenderer(td, (Image)o);}
 						else if(o instanceof List){listRenderer(td, (List)o);}
@@ -86,16 +83,6 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 				}
 				table.addContent(tr);
 			}
-		}
-	}
-
-	public void paragraphRenderer(HtmlElement parent, Paragraph p)
-	{
-		for(Object o : p.getContent())
-		{
-			if(o instanceof String){parent.addContent((String)o);}
-			else if(o instanceof Image){imageRenderer(parent, (Image)o);}
-			else if(o instanceof Emphasis){renderEmphasis(parent, ((Emphasis)o));}
 		}
 	}
 

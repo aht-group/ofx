@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html.structure;
 
+import org.jdom2.DocType;
+import org.jdom2.Document;
 import org.openfuxml.content.ofx.Content;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -8,6 +10,7 @@ import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
+import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.html.head.HtmlHead;
 import org.openfuxml.renderer.markdown.structure.MdSectionRenderer;
 import org.slf4j.Logger;
@@ -23,6 +26,8 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 	{
 		super(cmm,dsm);
 		this.cmm=cmm;
+		html = new HtmlElement("html");
+		doc = new Document(html, new DocType("html"));
 		this.pageTitle = pageTitle;
 	}
 	
@@ -30,14 +35,13 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 	{
 		HtmlHead head = new	HtmlHead(cmm,dsm);
 		head.render(null, pageTitle);
-//		System.out.println("Doc 1 Html content size: " + html.getContent().size());
-		renderBody(content);
-	}
-	
-	private void renderBody(Content content) throws OfxAuthoringException, OfxConfigurationException
-	{
 		HtmlBody body = new HtmlBody(cmm,dsm);
-//		System.out.println("Doc 2 Html content size: " + html.getContent().size());
 		body.render(content);
 	}
+	
+//	private void renderBody(Content content) throws OfxAuthoringException, OfxConfigurationException
+//	{
+//		HtmlBody body = new HtmlBody(cmm,dsm);
+//		body.render(content);
+//	}
 }

@@ -5,7 +5,7 @@ import org.openfuxml.exception.OfxAuthoringException;
 
 public interface CrossMediaManager
 {
-	public static enum Format {SVG,PDF,PNG}
+	enum Format {SVG,PDF,PNG}
 	
 	String getImageRef(Media imageMedia);
 	

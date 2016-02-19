@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.html.structure;
 
+import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.*;
 import org.openfuxml.content.table.Table;
@@ -50,15 +51,10 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 		{
 			if(o instanceof Section){renderSection(div,(Section)o);}
 //			else if(o instanceof String){}
-//			else if(o instanceof List)
-//			{
-//				if(((List)o).isSetComment())
-//				{
-//					MdCommentRenderer.first = true;
-//					renderComment(((List)o).getComment());
-//				}
-//				listRenderer((List)o);
-//			}
+			else if(o instanceof List)
+			{
+				listRenderer(div,(List)o);
+			}
 			else if(o instanceof Paragraph){paragraphRenderer(div,(Paragraph)o);}
 			else if(o instanceof Image){imageRenderer(div,(Image)o);}
 			else if(o instanceof Marginalia){marginaliaRenderer(div,(Marginalia)o);}

@@ -51,6 +51,6 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
         test.setEnvironment(true);
 		
         test.init();test.doc();
-//		test.init();test.withSub();
+		test.init();test.withSub();
 	}
 }

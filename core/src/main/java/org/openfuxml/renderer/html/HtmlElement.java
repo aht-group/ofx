@@ -47,8 +47,8 @@ public class HtmlElement extends Element
 
 	public static void addStyleElement(String styleElement, HtmlElement html)
 	{
-//		HtmlElement style = (HtmlElement)html.getChild("head").getChild("style");
-//		style.addContent(styleElement);
+		HtmlElement style = (HtmlElement)html.getChild("head").getChild("style");
+		style.addContent(styleElement);
 	}
 
 }
