@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.html.structure;
 
+//import com.sun.istack.internal.NotNull;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
@@ -13,6 +14,7 @@ public class HtmlReferenceRenderer extends AbstractOfxHtmlRenderer implements Of
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlReferenceRenderer.class);
 
+
 	public HtmlReferenceRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm,dsm);
@@ -21,7 +23,7 @@ public class HtmlReferenceRenderer extends AbstractOfxHtmlRenderer implements Of
 	/*Referenzen innerhalb des Dokumentes.
 	Das referenzierte Objekt benötigt eine id!
 	*/
-	public void renderIntern(HtmlElement parent, Reference reference, String text)
+	public void renderIntern(HtmlElement parent, Reference reference,/*@NotNull*/ String text)
 	{
 		HtmlElement ref = new HtmlElement("a");
 		String target = "#" + reference.getTarget();

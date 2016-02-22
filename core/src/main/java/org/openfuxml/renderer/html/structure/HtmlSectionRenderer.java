@@ -12,6 +12,8 @@ import org.openfuxml.renderer.html.HtmlElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
+
 public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlSectionRenderer.class);
@@ -35,32 +37,28 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 			if(s instanceof Comment){renderComment(div, (Comment)s);}
 		}
 
-		/*@para lvl: Gibt die Hierarchie-Ebene der Überschrift an.*/
-		for(Object s : section.getContent())
-		{
-			if(s instanceof Title)
-			{
-				HtmlHeadingRenderer titleR = new HtmlHeadingRenderer(cmm, dsm);
-				titleR.render(div, (Title)s,lvl);
-			}
-		}
-
 		/*Der eigentliche Inhalt des Abschnittes wird hier nach Typ unterschieden
 		* und verarbeitet.*/
 		for(Object o : section.getContent())
 		{
 			if(o instanceof Section){renderSection(div,(Section)o);}
+			else if(o instanceof Sections){processSections(div, ((Sections)o));}
+			else if(o instanceof Title){titleRenderer(div, ((Title)o));}
 //			else if(o instanceof String){}
-			else if(o instanceof List)
-			{
-				listRenderer(div,(List)o);
-			}
+			else if(o instanceof List){listRenderer(div,(List)o);}
 			else if(o instanceof Paragraph){paragraphRenderer(div,(Paragraph)o);}
 			else if(o instanceof Image){imageRenderer(div,(Image)o);}
 			else if(o instanceof Marginalia){marginaliaRenderer(div,(Marginalia)o);}
 			else if(o instanceof Table){renderTable(div,(Table)o);}
+			else if(o instanceof Listing){renderListing(div,(Listing)o);}
 		}
 		parent.addContent(div);
+	}
+
+	private void renderListing(HtmlElement div, Listing listing)
+	{
+		HtmlListingRenderer listingRenderer = new HtmlListingRenderer(cmm, dsm);
+		listingRenderer.render(div, listing);
 	}
 
 	/*
@@ -79,5 +77,20 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 	{
 		HtmlCommentRenderer commentR = new HtmlCommentRenderer(cmm, dsm);
 		commentR.render(parent, comment);
+	}
+
+	private void titleRenderer(HtmlElement parent, Title title)
+	{
+		HtmlHeadingRenderer titleR = new HtmlHeadingRenderer(cmm, dsm);
+		/*@para lvl: Gibt die Hierarchie-Ebene der Überschrift an.*/
+		titleR.render(parent, title,lvl);
+	}
+
+	private void processSections(HtmlElement div, Sections sections)
+	{
+		for(Object o : sections.getContent())
+		{
+			if(o instanceof Section){renderSection(div,(Section)o);}
+		}
 	}
 }

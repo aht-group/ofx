@@ -19,7 +19,7 @@ public class MarginaliaProvider extends AbstractElementProvider
 	
 	public static Paragraph inParagraph()
 	{
-    	Paragraph paragraph = ParagraphProvider.create(5);
+    	Paragraph paragraph = ParagraphProvider.create(15);
     	paragraph.getContent().add(0, MarginaliaProvider.withParagraph());
     	return paragraph;
 	}

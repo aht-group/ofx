@@ -26,10 +26,11 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdR
 	 * Außerhalb von Fließtext ist die @Link render() Methode zu verwenden.*/
 	public void renderInline(HtmlElement parent, Image image)
 	{
-		String title = TxtTitleFactory.build(image.getTitle());
 		HtmlElement img = new HtmlElement("img");
-
+		String title = "This is an image.";
+		if(image.getTitle() != null){title = TxtTitleFactory.build(image.getTitle());}
 		img.setAttribute("alt", title);
+
 		img.setAttribute("src", image.getMedia().getSrc());
 
 		parent.addContent(img);
@@ -38,9 +39,11 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdR
 	/*Figure zum Einfügen von Bildern/Grafiken unabhängig vom Fließtext.*/
 	public void render(HtmlElement parent, Image image)
 	{
-		String title = TxtTitleFactory.build(image.getTitle());
+		String title = "This is an image.";
+		if(image.getTitle() != null){title = TxtTitleFactory.build(image.getTitle());}
 		HtmlElement figure = new HtmlElement("figure");
 		HtmlElement img = new HtmlElement("img");
+		img.setAttribute("id", image.getId());
 		img.setAttribute("alt", title);
 		img.setAttribute("src", image.getMedia().getSrc());
 		if(image.isSetHeight()|| image.isSetWidth()){img.setAttribute("style", HtmlElement.evaluateSize(image.getWidth()) + HtmlElement.evaluateSize(image.getHeight()));}
@@ -50,7 +53,12 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdR
 		parent.addContent(figure);
 	}
 
-	/*Fügt dem Bild/ der Grafik einen Untertitel hinzu.
+	/*Fügt dem Bild/der Grafik einen Untertitel hinzu.
 	!Nur in Verbindung mit einem Figure Element!*/
 	private HtmlElement caption(String title){return new HtmlElement("figcaption").addContent(title);}
+
+	public void marginaliaFloatStyle(HtmlElement parent, int width, int height)
+	{
+		parent.getChild("img").setAttribute("style", "float: left;width:" + width + "em;height:" + height + "em;");
+	}
 }

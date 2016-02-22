@@ -3,6 +3,7 @@ package org.openfuxml.renderer.html;
 import org.jdom2.*;
 import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.layout.Width;
+import org.openfuxml.renderer.html.head.HtmlHead;
 
 /*Klasse erzeugt Objekte, welche letztendlich die einzelnen Tags
 * im Html Dokument darstellen*/
@@ -45,8 +46,12 @@ public class HtmlElement extends Element
 
 	private static String evaluateUnit(String unit){return unit.equalsIgnoreCase("percentage") ? "%" : unit;}
 
+	/*Für Elemente mit fester Formatierung, wo Zeilenumbrüche etc. erhalten bleiben müssen.*/
+	public static HtmlElement preFormatted(){return new HtmlElement("pre");}
+
 	public static void addStyleElement(String styleElement, HtmlElement html)
 	{
+		if(html.getChild("head").getChild("style") == null){HtmlHead.style((HtmlElement)html.getChild("head"));}
 		HtmlElement style = (HtmlElement)html.getChild("head").getChild("style");
 		style.addContent(styleElement);
 	}

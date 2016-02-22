@@ -32,7 +32,6 @@ public class HtmlItemRenderer extends AbstractOfxHtmlRenderer implements OfxMdRe
 				processContent(li, item);
 				list.addContent(li);
 			}
-
 	}
 
 	private void render(HtmlElement list, Item item)

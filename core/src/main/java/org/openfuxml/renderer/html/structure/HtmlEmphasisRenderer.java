@@ -1,6 +1,9 @@
 package org.openfuxml.renderer.html.structure;
 
+import org.jdom2.Attribute;
+import org.openfuxml.content.list.List;
 import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.content.text.Symbol;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -9,6 +12,9 @@ import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.jar.Attributes;
 
 
 public class HtmlEmphasisRenderer extends AbstractOfxHtmlRenderer implements OfxMdRenderer
@@ -37,4 +43,5 @@ public class HtmlEmphasisRenderer extends AbstractOfxHtmlRenderer implements Ofx
 		if(emph != null && emph.getContent().size() == 0){emph.addContent(emphasis.getValue());}
 		parent.addContent(emph);
 	}
+
 }

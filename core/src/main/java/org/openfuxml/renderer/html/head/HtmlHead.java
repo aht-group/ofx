@@ -71,7 +71,7 @@ public class HtmlHead extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		parent.addContent(title);
 	}
 
-	private void style(HtmlElement parent)
+	public static void style(HtmlElement parent)
 	{
 		HtmlElement style = new HtmlElement("style");
 		style.setAttribute("type","text/css");
