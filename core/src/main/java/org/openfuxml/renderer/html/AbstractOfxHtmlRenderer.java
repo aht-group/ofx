@@ -1,21 +1,18 @@
 package org.openfuxml.renderer.html;
 
 import org.jdom2.*;
+import org.jdom2.Document;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.openfuxml.content.media.Image;
-import org.openfuxml.content.ofx.Marginalia;
-import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.ofx.*;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.content.text.Symbol;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
-import org.openfuxml.renderer.html.structure.HtmlEmphasisRenderer;
-import org.openfuxml.renderer.html.structure.HtmlListRenderer;
-import org.openfuxml.renderer.html.structure.HtmlMarginaliaRenderer;
-import org.openfuxml.renderer.html.structure.HtmlParagraphRenderer;
+import org.openfuxml.renderer.html.structure.*;
 import org.openfuxml.renderer.html.table.HtmlTableRenderer;
 import org.openfuxml.renderer.markdown.structure.MdSectionRenderer;
 import org.slf4j.Logger;
@@ -118,6 +115,12 @@ public class AbstractOfxHtmlRenderer
 	{
 		HtmlTableRenderer emph = new HtmlTableRenderer(cmm,dsm);
 		emph.render(p, table);
+	}
+
+	public void commentRenderer(HtmlElement parent, org.openfuxml.content.ofx.Comment comment)
+	{
+		HtmlCommentRenderer commentRenderer = new HtmlCommentRenderer(cmm,dsm);
+		commentRenderer.render(parent, comment);
 	}
 
 	/*Dokument in eine Datei schreiben.*/
