@@ -1,18 +1,17 @@
 package org.openfuxml.renderer.html.structure;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
-import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.SectionAndTitleProvider;
+import org.openfuxml.test.provider.SectionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public class TestHtmlHeadingRenderer extends AbstractTestHtmlRenderer
 {
@@ -32,14 +31,14 @@ public class TestHtmlHeadingRenderer extends AbstractTestHtmlRenderer
 	{
 		initFile(Key.lvl1);
 
-        renderer.render(SectionAndTitleProvider.build());
+        renderer.render(SectionProvider.build());
     	renderTest(renderer);
 	}
 	
 	@Test public void lvl2() throws IOException
 	{
 		initFile(Key.lvl2);
-		Section section = new Section(); section.getContent().add(SectionAndTitleProvider.build());
+		Section section = new Section(); section.getContent().add(SectionProvider.build());
 		renderer.render(section);
     	renderTest(renderer);
 	}

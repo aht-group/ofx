@@ -13,7 +13,8 @@ import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexTitleRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.SectionAndTitleProvider;
+import org.openfuxml.test.provider.SectionProvider;
+import org.openfuxml.test.provider.TitleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,9 +39,9 @@ public class TestLatexTitleRenderer extends AbstractTestLatexRenderer
     public void withoutId() throws IOException, OfxAuthoringException
     {
     	initFile(Key.withoutId);
-    	Section section = SectionAndTitleProvider.build();
+    	Section section = SectionProvider.build();
         section.setId(null);
-        renderer.render(SectionAndTitleProvider.create(),section,1,preamble);
+        renderer.render(TitleProvider.create(),section,1,preamble);
     	renderTest(renderer);
     }
 
@@ -48,7 +49,7 @@ public class TestLatexTitleRenderer extends AbstractTestLatexRenderer
     public void withId() throws IOException, OfxAuthoringException
     {
     	initFile(Key.withId);
-        renderer.render(SectionAndTitleProvider.create(), SectionAndTitleProvider.build(),1,preamble);
+        renderer.render(TitleProvider.create(), SectionProvider.build(),1,preamble);
         renderTest(renderer);
     }
     
@@ -56,7 +57,7 @@ public class TestLatexTitleRenderer extends AbstractTestLatexRenderer
     public void specialChars() throws IOException, OfxAuthoringException
     {
     	initFile(Key.withoutId);
-        renderer.render(XmlTitleFactory.build("M & E"), SectionAndTitleProvider.build(),1,preamble);
+        renderer.render(XmlTitleFactory.build("M & E"), SectionProvider.build(),1,preamble);
         renderTest(renderer);
     }
     
@@ -68,7 +69,7 @@ public class TestLatexTitleRenderer extends AbstractTestLatexRenderer
     	title.getContent().add("Test2");
     	title.getContent().add(OfxTextFactory.build("Test3"));
     	
-    	renderer.render(title, SectionAndTitleProvider.build(),1,preamble);
+    	renderer.render(title, SectionProvider.build(),1,preamble);
     	renderTest(renderer);
     }
     

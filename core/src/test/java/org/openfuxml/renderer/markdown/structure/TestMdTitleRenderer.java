@@ -8,7 +8,7 @@ import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.SectionAndTitleProvider;
+import org.openfuxml.test.provider.TitleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,14 +29,14 @@ public class TestMdTitleRenderer extends AbstractTestMdRenderer
 	@Test public void lvl1() throws IOException
 	{
 		initFile(Key.lvl1);
-        renderer.render(SectionAndTitleProvider.create(),1);
+        renderer.render(TitleProvider.create(),1);
     	renderTest(renderer);
 	}
 	
 	@Test public void lvl2() throws IOException
 	{
 		initFile(Key.lvl2);
-        renderer.render(SectionAndTitleProvider.create(),2);
+        renderer.render(TitleProvider.create(),2);
     	renderTest(renderer);
 	}
 

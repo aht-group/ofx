@@ -6,7 +6,7 @@ import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.SectionAndTitleProvider;
+import org.openfuxml.test.provider.SectionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +31,7 @@ public class TestMdSectionRenderer extends AbstractTestMdRenderer
 		lvl = 1;
 		renderer = new MdSectionRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager(), lvl);
 		initFile(Key.lvl1);
-        renderer.render(SectionAndTitleProvider.build());
+        renderer.render(SectionProvider.build());
     	renderTest(renderer);
 	}
 	
@@ -40,7 +40,7 @@ public class TestMdSectionRenderer extends AbstractTestMdRenderer
 		lvl = 2;
 		renderer = new MdSectionRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager(), lvl);
 		initFile(Key.lvl2);
-        renderer.render(SectionAndTitleProvider.build());
+        renderer.render(SectionProvider.build());
     	renderTest(renderer);
 	}
 
@@ -48,7 +48,7 @@ public class TestMdSectionRenderer extends AbstractTestMdRenderer
 	{
 		renderer = new MdSectionRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager(), 1);
 		initFile(Key.withComment);
-		renderer.render(SectionAndTitleProvider.buildWithComment());
+		renderer.render(SectionProvider.buildWithComment());
 		renderTest(renderer);
 	}
 

@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html.structure;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Section;
@@ -8,11 +10,8 @@ import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.ListProvider;
-import org.openfuxml.test.provider.SectionAndTitleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public class TestHtmlListRenderer extends AbstractTestHtmlRenderer
 {

@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html.structure;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Section;
@@ -8,11 +10,9 @@ import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.EmphasisProvider;
-import org.openfuxml.test.provider.SectionAndTitleProvider;
+import org.openfuxml.test.provider.SectionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public class TestHtmlEmphasisRenderer extends AbstractTestHtmlRenderer
 {
@@ -31,7 +31,7 @@ public class TestHtmlEmphasisRenderer extends AbstractTestHtmlRenderer
 	@Test public void emphasis() throws IOException
 	{
 		initFile(Key.emphasis);
-		Section section = SectionAndTitleProvider.build();
+		Section section = SectionProvider.build();
 		section.getContent().add(EmphasisProvider.bold());
 		section.getContent().add(EmphasisProvider.italic());
 		section.getContent().add(EmphasisProvider.italicBold());

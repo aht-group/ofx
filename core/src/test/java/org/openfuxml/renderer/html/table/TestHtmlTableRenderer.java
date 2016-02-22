@@ -12,7 +12,7 @@ import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.structure.HtmlBody;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.SectionAndTitleProvider;
+import org.openfuxml.test.provider.SectionProvider;
 import org.openfuxml.test.provider.TableProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
