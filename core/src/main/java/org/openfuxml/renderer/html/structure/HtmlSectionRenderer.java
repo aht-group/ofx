@@ -49,6 +49,7 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 			else if(o instanceof Paragraph){paragraphRenderer(div,(Paragraph)o);}
 			else if(o instanceof Image){imageRenderer(div,(Image)o);}
 			else if(o instanceof Marginalia){marginaliaRenderer(div,(Marginalia)o);}
+			else if(o instanceof Highlight){highlightRenderer(div,(Highlight)o);}
 			else if(o instanceof Table){renderTable(div,(Table)o);}
 			else if(o instanceof Listing){renderListing(div,(Listing)o);}
 		}
@@ -59,6 +60,12 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 	{
 		HtmlListingRenderer listingRenderer = new HtmlListingRenderer(cmm, dsm);
 		listingRenderer.render(div, listing);
+	}
+
+	private void highlightRenderer(HtmlElement div, Highlight highlight)
+	{
+		HtmlHighlightRenderer Hrenderer = new HtmlHighlightRenderer(cmm,dsm);
+		Hrenderer.render(div, highlight);
 	}
 
 	/*

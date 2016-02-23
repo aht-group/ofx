@@ -5,6 +5,7 @@ import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.content.text.Symbol;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
@@ -41,6 +42,9 @@ public class HtmlParagraphRenderer extends AbstractOfxHtmlRenderer implements Of
 			else if(o instanceof Emphasis){renderEmphasis(parent, ((Emphasis)o));}
 			else if(o instanceof Reference){renderReference(parent, ((Reference)o));}
 			else if(o instanceof Marginalia){marginaliaRenderer(parent, ((Marginalia)o));}
+			else if(o instanceof Symbol){renderSymbol(parent, ((Symbol)o));}
+//			else if(o instanceof Font){/*setAttribute style="font:"*/}
+
 		}
 	}
 

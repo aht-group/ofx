@@ -79,7 +79,7 @@ public class AbstractOfxHtmlRenderer
 
 	/*Mit Symbol sind Icons der Font Awesome gemeint. Die Dazugehörige .css muss im Head als <link> angegeben werden,
 	* ansonsten wird ein Browser sie nicht darstellen.*/
-	private void renderSymbol(HtmlElement parent, Symbol symbol)
+	public void renderSymbol(HtmlElement parent, Symbol symbol)
 	{
 			HtmlElement sym = new HtmlElement("i");
 			java.util.List<Attribute> attr = new ArrayList<Attribute>();
