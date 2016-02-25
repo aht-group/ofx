@@ -1,8 +1,8 @@
 package org.openfuxml.renderer.html.table;
 
+import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
-import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.*;
@@ -13,7 +13,7 @@ import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
-import org.openfuxml.renderer.html.structure.HtmlCommentRenderer;
+import org.openfuxml.renderer.html.util.HtmlFontUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,19 +31,22 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 		HtmlElement table = new HtmlElement("table");
 		table.setAttribute("id", tab.getId()); //benötigt für interne Referenzen!
 		table.setAttribute("style", "width:100%");
+		if(tab.isSetComment()){commentRenderer(table, tab.getComment());}
+
+		//Reihenfolge beachten: Caption, Head, Foot, Body. Foot ist optional
 		table.addContent(caption(tab.getTitle()));
 		renderHead(table, tab.getContent().getHead());
+		if(tab.getContent().isSetFoot()){renderFoot(table, tab.getContent().getFoot());}
 		renderBody(table, tab.getContent().getBody());
 
 		parent.addContent(table);
-
-		if(tab.isSetComment()){commentRenderer(table, tab.getComment());}
 
 		if(tab.getSpecification() != null){HtmlElement.addStyleElement(styleProperties(tab.getSpecification().getColumns()), html);}
 	}
 
 	private void renderHead(HtmlElement table, Head head)
 	{
+		HtmlElement thead = new HtmlElement("thead");
 		for(Row r : head.getRow())
 		{
 			HtmlElement tr = new HtmlElement("tr");
@@ -51,43 +54,38 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 			for(Cell c : r.getCell())
 			{
 				HtmlElement th = new HtmlElement("th");
-				th.setAttribute("class", "col" + ++column); //Jede Zelle einer Spalte bekommt die gleiche class. Benötigt für spaltenweises CSS formatieren.
-				for(Object o : c.getContent())
-				{
-					if(o instanceof Paragraph){paragraphRenderer(th, (Paragraph)o);}
-					else if(o instanceof String){th.addContent((String)o);}
-					else if(o instanceof Image){imageRenderer(th, (Image)o);}
-				}
+				//Jede Zelle einer Spalte bekommt das gleiche "class" Attribut. Benötigt für spaltenweises formatieren via CSS.
+				th.setAttribute("class", "col" + ++column);
+				for(Object o : c.getContent()){
+					cellContent(o, th);}
 				tr.addContent(th);
 			}
-			table.addContent(tr);
+			thead.addContent(tr);
+
 		}
+		table.addContent(thead);
+	}
+
+	private void renderFoot(HtmlElement table, Foot foot)
+	{
+		HtmlElement tfoot = new HtmlElement("tfoot");
+			for(Row r : foot.getRow())
+			{
+				rowContent(tfoot, r);
+			}
+		table.addContent(tfoot);
 	}
 
 	private void renderBody(HtmlElement table, java.util.List<Body> bodyList)
 	{
 		for(Body body : bodyList)
 		{
+			HtmlElement tbody = new HtmlElement("tbody");
 			for(Row r : body.getRow())
 			{
-				HtmlElement tr = new HtmlElement("tr");
-				int column = 0;
-				for(Cell c : r.getCell())
-				{
-					HtmlElement td = new HtmlElement("td");
-					td.setAttribute("class", "col" + ++column); //s. renderHead()
-					for(Object o : c.getContent())
-					{
-						if(o instanceof Paragraph){
-							paragraphContentRenderer(td, (Paragraph)o);}
-						else if(o instanceof String){td.addContent((String)o);}
-						else if(o instanceof Image){imageRenderer(td, (Image)o);}
-						else if(o instanceof List){listRenderer(td, (List)o);}
-					}
-					tr.addContent(td);
-				}
-				table.addContent(tr);
+				rowContent(tbody, r);
 			}
+			table.addContent(tbody);
 		}
 	}
 
@@ -126,5 +124,29 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 	{
 		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cmm, dsm);
 		imgRenderer.renderInline(p, i);
+	}
+
+	private void rowContent(HtmlElement part,Row row)
+	{
+		HtmlElement tr = new HtmlElement("tr");
+		int column = 0;
+		for(Cell c : row.getCell())
+		{
+			HtmlElement td = new HtmlElement("td");
+			td.setAttribute("class", "col" + ++column); //s. renderHead()
+			for(Object o : c.getContent()){
+				cellContent(o, td);}
+			tr.addContent(td);
+		}
+		part.addContent(tr);
+	}
+
+	private void cellContent(Object o, HtmlElement td)
+	{
+		if(o instanceof Paragraph){paragraphContentRenderer(td, (Paragraph)o);}
+		else if(o instanceof String){td.addContent((String)o);}
+		else if(o instanceof Image){imageRenderer(td, (Image)o);}
+		else if(o instanceof List){listRenderer(td, (List)o);}
+		else if(o instanceof Font){td.setStyleAttribute(HtmlFontUtil.fonSize(((Font)o)));}
 	}
 }

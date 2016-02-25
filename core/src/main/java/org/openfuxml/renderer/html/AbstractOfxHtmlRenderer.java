@@ -65,16 +65,11 @@ public class AbstractOfxHtmlRenderer
 	}
 
 	/*Für den Fall, dass in der XML Vorlage ein Paragraph Element vorhanden ist,
-	* dieses in HTML aber nicht möglich ist. (z.b. HTML erlaubt keine verschachtelten <p> Elemente)*/
+	* dieses in HTML aber nicht möglich ist. (z.B. HTML erlaubt keine verschachtelten <p> Elemente)*/
 	public void paragraphContentRenderer(HtmlElement parent, Paragraph p)
 	{
-		for(Object o : p.getContent())
-		{
-			if(o instanceof String){parent.addContent((String)o);}
-			else if(o instanceof Image){imageRenderer(parent, (Image)o);}
-			else if(o instanceof Emphasis){renderEmphasis(parent, ((Emphasis)o));}
-			else if(o instanceof Symbol){renderSymbol(parent, ((Symbol)o));}
-		}
+		HtmlParagraphRenderer paraRenderer = new HtmlParagraphRenderer(cmm,dsm);
+		paraRenderer.renderWithout(parent,p);
 	}
 
 	/*Mit Symbol sind Icons der Font Awesome gemeint. Die Dazugehörige .css muss im Head als <link> angegeben werden,

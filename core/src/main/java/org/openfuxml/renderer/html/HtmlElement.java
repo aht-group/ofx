@@ -15,7 +15,7 @@ public class HtmlElement extends Element
 	}
 
 	/*Zur internen Spezifizierung von CSS Formatierung einzelner HTML Elemente*/
-	public void setStyleAttribute(HtmlElement element, String value){element.setAttribute("style", value);}
+	public void setStyleAttribute(String value){this.setAttribute("style", value);}
 
 	/*HTML spezifischer Zeilenumbruch. */
 	public HtmlElement explicitLinebreak() {return new HtmlElement("br");}
@@ -36,6 +36,8 @@ public class HtmlElement extends Element
 
 	public boolean isSetAttribute (){return getAttributes() != null;}
 
+	/*Werte von Width oder Hight Objekte mit der dazugehörigen Einheit verbinden und in einen String einfügen.
+	* String dient zum Einfügen in "style" Attribute oder tags.*/
 	public static String evaluateSize(Object o)
 	{
 		String size="";
@@ -44,11 +46,14 @@ public class HtmlElement extends Element
 		return size;
 	}
 
+	/*Umwandeln von "percentage" in das % - Zeichen. Ansonsten Einheit übernehmen wie sie ist.*/
 	private static String evaluateUnit(String unit){return unit.equalsIgnoreCase("percentage") ? "%" : unit;}
 
 	/*Für Elemente mit fester Formatierung, wo Zeilenumbrüche etc. erhalten bleiben müssen.*/
 	public static HtmlElement preFormatted(){return new HtmlElement("pre");}
 
+	/*<style> Element im <head> hinzufügen, sofern noch nicht vorhanden.
+	* Inhalt als String zum <style> hinzufügen.*/
 	public static void addStyleElement(String styleElement, HtmlElement html)
 	{
 		if(html.getChild("head").getChild("style") == null){HtmlHead.style((HtmlElement)html.getChild("head"));}

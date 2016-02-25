@@ -31,7 +31,7 @@ public class TestHtmlMarginaliaRenderer extends AbstractTestHtmlRenderer
 	{
 		initFile(Key.marginalia);
 		Section section = new Section();
-		section.getContent().add(MarginaliaProvider.withParagraph());
+		section.getContent().add(MarginaliaProvider.inParagraph());
         renderer.render(section);
     	renderTest(renderer);
 	}

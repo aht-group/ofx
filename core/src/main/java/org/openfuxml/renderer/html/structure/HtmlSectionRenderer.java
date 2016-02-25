@@ -28,7 +28,7 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 
 	public void render(HtmlElement parent, Section section)
 	{
-		HtmlElement div = new HtmlElement("div");
+		HtmlElement div = new HtmlElement("section");
 
 		//Comments always on top!
 		/*Alle Kommentare werden Html konform an den Anfang gesetz*/
@@ -74,7 +74,7 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 	*/
 	private void renderSection(HtmlElement parent, Section section)
 	{
-		HtmlSectionRenderer sr = new HtmlSectionRenderer(cmm,dsm,lvl+1);
+		HtmlSectionRenderer sr = new HtmlSectionRenderer(cmm,dsm,++lvl);
 		sr.render(parent, section);
 	}
 

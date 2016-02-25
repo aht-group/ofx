@@ -37,6 +37,7 @@ public class TestHtmlEmphasisRenderer extends AbstractTestHtmlRenderer
 		section.getContent().add(EmphasisProvider.italicBold());
 		section.getContent().add(EmphasisProvider.typewriter());
 		section.getContent().add(EmphasisProvider.quote());
+		section.getContent().add(EmphasisProvider.underline());
         renderer.render(section);
     	renderTest(renderer);
 	}

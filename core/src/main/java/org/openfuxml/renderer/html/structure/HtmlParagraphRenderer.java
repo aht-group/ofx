@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.html.structure;
 
+import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
@@ -12,6 +13,7 @@ import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
+import org.openfuxml.renderer.html.util.HtmlFontUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,11 +31,17 @@ public class HtmlParagraphRenderer extends AbstractOfxHtmlRenderer implements Of
 	public void render(HtmlElement parent, Paragraph paragraph)
 	{
 		HtmlElement p = new HtmlElement("p");
-		renderContent(p, paragraph);
-		parent.addContent(p);
+		renderContent(p,parent, paragraph);
+		if(p.getParent() == null)
+			parent.addContent(p);
 	}
 
-	public void renderContent(HtmlElement parent, Paragraph paragraph)
+	public void renderWithout (HtmlElement parent, Paragraph paragraph)
+	{
+		renderContent(parent,null, paragraph);
+	}
+
+	public void renderContent(HtmlElement parent,HtmlElement grandparent, Paragraph paragraph)
 	{
 		for(Object o : paragraph.getContent())
 		{
@@ -41,10 +49,16 @@ public class HtmlParagraphRenderer extends AbstractOfxHtmlRenderer implements Of
 			else if(o instanceof Image){imageRenderer(parent,(Image)o);}
 			else if(o instanceof Emphasis){renderEmphasis(parent, ((Emphasis)o));}
 			else if(o instanceof Reference){renderReference(parent, ((Reference)o));}
-			else if(o instanceof Marginalia){marginaliaRenderer(parent, ((Marginalia)o));}
 			else if(o instanceof Symbol){renderSymbol(parent, ((Symbol)o));}
-//			else if(o instanceof Font){/*setAttribute style="font:"*/}
-
+			else if(o instanceof Font){parent.setStyleAttribute(HtmlFontUtil.fonSize(((Font)o)));}
+			else if(o instanceof Marginalia)
+			{
+				HtmlElement div = new HtmlElement("div");
+				marginaliaRenderer(div, ((Marginalia)o));
+				parent.setStyleAttribute("margin:0;");
+				div.addContent(parent);
+				grandparent.addContent(div);
+			}
 		}
 	}
 

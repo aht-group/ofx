@@ -25,21 +25,26 @@ public class HtmlMarginaliaRenderer extends AbstractOfxHtmlRenderer implements O
 	
 	public void render(HtmlElement parent, Marginalia marginalia)
 	{
-		parent.setAttribute("id","marginalia"+ ++count);
-		parent.setAttribute("style", "background-color:lightgray");
+		parent.setStyleAttribute("display:table-row;");
+		HtmlElement div = new HtmlElement("div");
+		div.setStyleAttribute("float: left;width:15%;margin-right: 5px;");
 		for(Object o : marginalia.getContent())
 		{
-			if(o instanceof String){parent.addContent(((String)o));}
-			else if(o instanceof Emphasis){renderEmphasis(parent, ((Emphasis)o));}
-			else if(o instanceof Image){imageRenderer(parent,(Image)o);}
-			else if(o instanceof Paragraph){paragraphContentRenderer(parent, ((Paragraph)o));}
+			if(o instanceof String){div.addContent(((String)o));}
+			else if(o instanceof Emphasis){renderEmphasis(div, ((Emphasis)o));}
+			else if(o instanceof Image){imageRenderer(div,(Image)o);}
+			else if(o instanceof Paragraph){paragraphContentRenderer(div, ((Paragraph)o));}
 		}
+		parent.addContent(div);
 	}
 
 	public void imageRenderer(HtmlElement p, Image i)
 	{
 		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cmm, dsm);
 		imgRenderer.renderInline(p, i);
-		imgRenderer.marginaliaFloatStyle(p,4,4);
+		if(i.isSetHeight() || i.isSetWidth())
+			imgRenderer.marginaliaFloatStyle(p,HtmlElement.evaluateSize(i));
+		else
+			imgRenderer.marginaliaFloatStyle(p,"width:4em;height:4em;");
 	}
 }

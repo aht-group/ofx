@@ -36,6 +36,12 @@ public class EmphasisProvider extends AbstractElementProvider
     	return create(eF);
 	}
 
+	public static Paragraph underline()
+	{
+		OfxEmphasisFactory eF = new OfxEmphasisFactory(false,false,false,true);
+		return create(eF);
+	}
+
 	public static Paragraph typewriter(){return create();}
 	
 	private static Paragraph create(OfxEmphasisFactory eF)

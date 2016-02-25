@@ -46,7 +46,7 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdR
 		img.setAttribute("id", image.getId());
 		img.setAttribute("alt", title);
 		img.setAttribute("src", image.getMedia().getSrc());
-		if(image.isSetHeight()|| image.isSetWidth()){img.setAttribute("style", HtmlElement.evaluateSize(image.getWidth()) + HtmlElement.evaluateSize(image.getHeight()));}
+		if(image.isSetHeight()|| image.isSetWidth()){img.setStyleAttribute(HtmlElement.evaluateSize(image.getWidth()) + HtmlElement.evaluateSize(image.getHeight()));}
 
 		figure.addContent(img);
 		figure.addContent(caption(title));
@@ -57,8 +57,8 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdR
 	!Nur in Verbindung mit einem Figure Element!*/
 	private HtmlElement caption(String title){return new HtmlElement("figcaption").addContent(title);}
 
-	public void marginaliaFloatStyle(HtmlElement parent, int width, int height)
+	public void marginaliaFloatStyle(HtmlElement parent, String size)
 	{
-		parent.getChild("img").setAttribute("style", "float: left;width:" + width + "em;height:" + height + "em;");
+		((HtmlElement)parent.getChild("img")).setStyleAttribute("float: left;" + size);
 	}
 }

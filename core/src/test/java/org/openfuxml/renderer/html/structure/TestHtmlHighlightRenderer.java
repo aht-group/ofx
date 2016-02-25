@@ -33,7 +33,7 @@ public class TestHtmlHighlightRenderer extends AbstractTestHtmlRenderer
 		initFile(Key.highlight);
 		Section section = new Section();
 		Highlight highlight = new Highlight();
-		highlight.getContent().add(MarginaliaProvider.withParagraph());
+		highlight.getContent().add(MarginaliaProvider.inParagraph());
 		section.getContent().add(highlight);
         renderer.render(section);
     	renderTest(renderer);
