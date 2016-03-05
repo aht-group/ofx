@@ -14,6 +14,8 @@ import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.ConfigurationProviderFacotry;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.AbstractOfxRenderer;
@@ -30,9 +32,15 @@ public class AbstractOfxWikiRenderer extends AbstractOfxRenderer
 	
 	protected List<OfxWikiRenderer> renderer;
 	
-	public AbstractOfxWikiRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	@Deprecated
+	public AbstractOfxWikiRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
-		super(cmm,dsm);
+		this(ConfigurationProviderFacotry.build(cmm,dsm));
+	}
+	
+	public AbstractOfxWikiRenderer(ConfigurationProvider cp)
+	{
+		super(cp);
 		preTxt = new ArrayList<String>();
 		txt = new ArrayList<String>();
 		postTxt = new ArrayList<String>();

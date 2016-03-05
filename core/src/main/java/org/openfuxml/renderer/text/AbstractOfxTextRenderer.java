@@ -8,6 +8,8 @@ import java.util.List;
 import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.ConfigurationProviderFacotry;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.text.OfxTextRenderer;
@@ -27,9 +29,15 @@ public class AbstractOfxTextRenderer extends AbstractOfxRenderer
 	
 	protected List<OfxTextRenderer> renderer;
 	
-	public AbstractOfxTextRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	@Deprecated
+	public AbstractOfxTextRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
-		super(cmm,dsm);
+		this(ConfigurationProviderFacotry.build(cmm,dsm));
+	}
+	
+	public AbstractOfxTextRenderer(ConfigurationProvider cp)
+	{
+		super(cp);
 		preTxt = new ArrayList<String>();
 		txt = new ArrayList<String>();
 		postTxt = new ArrayList<String>();

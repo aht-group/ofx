@@ -17,6 +17,8 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.content.text.Symbol;
+import org.openfuxml.factory.ConfigurationProviderFacotry;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.AbstractOfxRenderer;
@@ -37,10 +39,16 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 
 	protected static HtmlElement html = new HtmlElement("html");
 	protected static Document doc = new Document(html, new DocType("html"));
-
+	
+	@Deprecated
 	public AbstractOfxHtmlRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
-		super(cmm,dsm);
+		this(ConfigurationProviderFacotry.build(cmm,dsm));
+	}
+	
+	public AbstractOfxHtmlRenderer(ConfigurationProvider cp)
+	{
+		super(cp);
 		html.setNamespace(Namespace.getNamespace("http://www.w3.org/1999/xhtml"));
 	}
 

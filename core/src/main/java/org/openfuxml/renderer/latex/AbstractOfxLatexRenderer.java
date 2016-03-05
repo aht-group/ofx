@@ -14,6 +14,8 @@ import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.ConfigurationProviderFacotry;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -41,9 +43,15 @@ public class AbstractOfxLatexRenderer extends AbstractOfxRenderer
 	
 	protected List<OfxLatexRenderer> renderer; //listing different renderer e.g. Section, Title, List; nacheinander abgearbeitet
 	
-	public AbstractOfxLatexRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	@Deprecated
+	public AbstractOfxLatexRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
-		super(cmm,dsm);
+		this(ConfigurationProviderFacotry.build(cmm,dsm));
+	}
+	
+	public AbstractOfxLatexRenderer(ConfigurationProvider cp)
+	{
+		super(cp);
 		preTxt = new ArrayList<String>();
 		txt = new ArrayList<String>();
 		postTxt = new ArrayList<String>();

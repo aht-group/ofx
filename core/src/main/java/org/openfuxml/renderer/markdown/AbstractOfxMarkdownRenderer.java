@@ -2,6 +2,8 @@ package org.openfuxml.renderer.markdown;
 
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.factory.ConfigurationProviderFacotry;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -25,9 +27,15 @@ public class AbstractOfxMarkdownRenderer extends AbstractOfxRenderer
 	protected List<String> txt;
 	protected ArrayList<OfxMdRenderer> renderer;
 
+	@Deprecated
 	public AbstractOfxMarkdownRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
-		super(cmm,dsm);
+		this(ConfigurationProviderFacotry.build(cmm,dsm));
+	}
+	
+	public AbstractOfxMarkdownRenderer(ConfigurationProvider cp)
+	{
+		super(cp);
 		renderer = new ArrayList<OfxMdRenderer>();
 		txt = new ArrayList<String>();
 	}

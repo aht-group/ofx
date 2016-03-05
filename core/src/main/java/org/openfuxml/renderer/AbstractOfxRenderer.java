@@ -20,6 +20,8 @@ public class AbstractOfxRenderer
 	public AbstractOfxRenderer(ConfigurationProvider cp)
 	{
 		this.cp=cp;
+		this.cmm=cp.getCrossMediaManager();
+		this.dsm=cp.getDefaultSettingsManager();
 	}
 	
 	@Deprecated //Use ConfigurationProvider
