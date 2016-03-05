@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
-import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

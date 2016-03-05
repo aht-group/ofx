@@ -1,43 +1,46 @@
 package org.openfuxml.renderer.html;
 
-import org.jdom2.*;
-import org.jdom2.Document;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
-import org.openfuxml.content.media.Image;
-import org.openfuxml.content.ofx.*;
-import org.openfuxml.content.table.Table;
-import org.openfuxml.content.text.Emphasis;
-import org.openfuxml.content.text.Symbol;
-import org.openfuxml.interfaces.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.renderer.html.media.HtmlImageRenderer;
-import org.openfuxml.renderer.html.structure.*;
-import org.openfuxml.renderer.html.table.HtmlTableRenderer;
-import org.openfuxml.renderer.markdown.structure.MdSectionRenderer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jdom2.Attribute;
+import org.jdom2.DocType;
+import org.jdom2.Document;
+import org.jdom2.Namespace;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
+import org.openfuxml.content.media.Image;
+import org.openfuxml.content.ofx.Marginalia;
+import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.table.Table;
+import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.content.text.Symbol;
+import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.renderer.AbstractOfxRenderer;
+import org.openfuxml.renderer.html.media.HtmlImageRenderer;
+import org.openfuxml.renderer.html.structure.HtmlCommentRenderer;
+import org.openfuxml.renderer.html.structure.HtmlEmphasisRenderer;
+import org.openfuxml.renderer.html.structure.HtmlListRenderer;
+import org.openfuxml.renderer.html.structure.HtmlMarginaliaRenderer;
+import org.openfuxml.renderer.html.structure.HtmlParagraphRenderer;
+import org.openfuxml.renderer.html.table.HtmlTableRenderer;
+import org.openfuxml.renderer.markdown.structure.MdSectionRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class AbstractOfxHtmlRenderer
+public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(MdSectionRenderer.class);
-
-	protected CrossMediaManager cmm;
-	protected DefaultSettingsManager dsm;
 
 	protected static HtmlElement html = new HtmlElement("html");
 	protected static Document doc = new Document(html, new DocType("html"));
 
 	public AbstractOfxHtmlRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
-		this.cmm = cmm;
-		this.dsm = dsm;
+		super(cmm,dsm);
 		html.setNamespace(Namespace.getNamespace("http://www.w3.org/1999/xhtml"));
 	}
 

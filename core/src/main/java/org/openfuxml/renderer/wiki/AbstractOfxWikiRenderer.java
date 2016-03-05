@@ -16,14 +16,13 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractOfxWikiRenderer {
+public class AbstractOfxWikiRenderer extends AbstractOfxRenderer
+{
 	final static Logger logger = LoggerFactory.getLogger(WikiParagraphRenderer.class);
-	
-	protected CrossMediaManager cmm;
-	protected DefaultSettingsManager dsm;
 	
 	protected List<String> preTxt;
 	protected List<String> txt;
@@ -33,8 +32,7 @@ public class AbstractOfxWikiRenderer {
 	
 	public AbstractOfxWikiRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
-		this.cmm=cmm;
-		this.dsm=dsm;
+		super(cmm,dsm);
 		preTxt = new ArrayList<String>();
 		txt = new ArrayList<String>();
 		postTxt = new ArrayList<String>();

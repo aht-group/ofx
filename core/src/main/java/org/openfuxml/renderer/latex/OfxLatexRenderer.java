@@ -13,7 +13,6 @@ import org.openfuxml.renderer.latex.content.structure.LatexDocumentRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.util.OfxDocumentStructureVerifier;
 import org.openfuxml.xml.renderer.cmp.Pdf;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class OfxLatexRenderer extends OfxRenderer
@@ -26,7 +25,7 @@ public class OfxLatexRenderer extends OfxRenderer
 	{
 		logger = LoggerFactory.getLogger(OfxLatexRenderer.class);
 		latexPreamble = new LatexPreamble(cmm,dsm);
-		rDocument = new LatexDocumentRenderer(pdf,latexPreamble);
+		rDocument = new LatexDocumentRenderer(cmm,dsm,pdf,latexPreamble);
 		
 		txt = new ArrayList<String>();
 	}
