@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.epub.factory;
+package org.openfuxml.renderer.epub;
 
 import java.util.ArrayList;
 import java.util.List;
