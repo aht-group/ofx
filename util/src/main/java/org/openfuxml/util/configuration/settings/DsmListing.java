@@ -1,4 +1,4 @@
-package org.openfuxml.processor.settings;
+package org.openfuxml.util.configuration.settings;
 
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.interfaces.DefaultSettingsManager;

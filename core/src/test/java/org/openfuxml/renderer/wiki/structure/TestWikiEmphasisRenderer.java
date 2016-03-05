@@ -4,11 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
-import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.wiki.AbstractTestWikiRenderer;
 import org.openfuxml.renderer.wiki.WikiParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.EmphasisProvider;
+import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

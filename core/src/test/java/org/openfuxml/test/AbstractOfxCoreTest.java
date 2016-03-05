@@ -14,7 +14,7 @@ import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.interfaces.renderer.wiki.OfxWikiRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
-import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
+import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

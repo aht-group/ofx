@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

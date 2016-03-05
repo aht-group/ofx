@@ -3,12 +3,12 @@ package org.openfuxml.renderer.markdown.structure;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
-import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.renderer.markdown.media.MdImageRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.EmphasisProvider;
 import org.openfuxml.test.provider.ImageProvider;
+import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
