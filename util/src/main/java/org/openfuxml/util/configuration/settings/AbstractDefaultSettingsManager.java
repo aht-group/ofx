@@ -1,4 +1,4 @@
-package org.openfuxml.processor.settings;
+package org.openfuxml.util.configuration.settings;
 
 import java.util.Hashtable;
 import java.util.Map;

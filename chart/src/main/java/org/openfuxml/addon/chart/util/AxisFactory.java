@@ -32,6 +32,7 @@ public class AxisFactory
 		switch(OfxChartTypeResolver.getAxisType(ofxAxis.getAxisType()))
 		{
 			case Number: axis = createNumberAxis(ofxAxis);break;
+			default: logger.warn("NYI");
 		}
 		
 		

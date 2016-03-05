@@ -32,6 +32,8 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.exception.OfxRenderingException;
 import org.openfuxml.processor.pre.ExternalContentEagerLoader;
+import org.openfuxml.processor.pre.OfxContainerMerger;
+import org.openfuxml.processor.pre.OfxIdGenerator;
 import org.openfuxml.renderer.OfxRenderProcessor.DirCode;
 import org.openfuxml.renderer.OfxRenderProcessor.FileCode;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;

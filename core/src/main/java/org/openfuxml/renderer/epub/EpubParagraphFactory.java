@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.processor.epub.factory;
+package org.openfuxml.renderer.epub;
 
 import org.jdom2.Element;
 import org.jdom2.Namespace;

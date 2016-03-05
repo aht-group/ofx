@@ -1,4 +1,4 @@
-package org.openfuxml.processor.settings;
+package org.openfuxml.util.configuration.settings;
 
 import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.ofx.Listing;

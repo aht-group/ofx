@@ -16,7 +16,6 @@ import org.junit.runners.Parameterized;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.renderer.processor.pre.OfxContainerMerger;
 import org.openfuxml.test.AbstractFileProcessingTest;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;

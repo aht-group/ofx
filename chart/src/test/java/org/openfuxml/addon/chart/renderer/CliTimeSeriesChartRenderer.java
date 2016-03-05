@@ -36,7 +36,7 @@ public class CliTimeSeriesChartRenderer
 //		cf.setWithGaps(true);
 		Chart chart = cf.build();
 		
-//		chart.setColors(getColors());
+		chart.setColors(getColors());
 		
 		chart.getDataSet().add(getX("a"));
 		chart.getDataSet().add(getX("b"));

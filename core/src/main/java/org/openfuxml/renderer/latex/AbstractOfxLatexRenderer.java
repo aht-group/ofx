@@ -14,9 +14,12 @@ import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.ConfigurationProviderFacotry;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.latex.content.layout.LatexColumnRenderer;
 import org.openfuxml.renderer.latex.content.layout.LatexContainerRenderer;
 import org.openfuxml.renderer.latex.content.layout.LatexWidthRenderer;
@@ -30,12 +33,9 @@ import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractOfxLatexRenderer
+public class AbstractOfxLatexRenderer extends AbstractOfxRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexSectionRenderer.class);
-	
-	protected CrossMediaManager cmm;
-	protected DefaultSettingsManager dsm;
 	
 	protected List<String> preTxt;
 	protected List<String> txt;
@@ -43,10 +43,15 @@ public class AbstractOfxLatexRenderer
 	
 	protected List<OfxLatexRenderer> renderer; //listing different renderer e.g. Section, Title, List; nacheinander abgearbeitet
 	
-	public AbstractOfxLatexRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	@Deprecated
+	public AbstractOfxLatexRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
-		this.cmm=cmm;
-		this.dsm=dsm;
+		this(ConfigurationProviderFacotry.build(cmm,dsm));
+	}
+	
+	public AbstractOfxLatexRenderer(ConfigurationProvider cp)
+	{
+		super(cp);
 		preTxt = new ArrayList<String>();
 		txt = new ArrayList<String>();
 		postTxt = new ArrayList<String>();

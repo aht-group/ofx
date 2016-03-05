@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
-import org.openfuxml.processor.settings.OfxDefaultSettingsManager;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.structure.HtmlBody;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
@@ -12,6 +11,7 @@ import org.openfuxml.renderer.markdown.media.MdImageRenderer;
 import org.openfuxml.renderer.markdown.structure.MdParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.ImageProvider;
+import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

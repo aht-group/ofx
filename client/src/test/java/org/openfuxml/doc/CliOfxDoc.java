@@ -12,6 +12,6 @@ public class CliOfxDoc
 	public static void main (String[] args) throws Exception
 	{
 		Configuration config = OfxClientTestBootstrap.init();
-		logger.info("TEST");
+		logger.info("TEST "+(config!=null));
 	}
 }
