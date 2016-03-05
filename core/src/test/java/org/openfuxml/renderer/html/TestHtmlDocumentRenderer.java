@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.structure.HtmlBody;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
@@ -27,7 +28,7 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 	@Before public void init()
 	{
 		super.initDir("");
-		renderer = new HtmlDocumentRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager(), "Test Doc");
+		renderer = new HtmlDocumentRenderer(new OfxConfigurationProvider(), "Test Doc");
 	}
 
 	@Test public void doc() throws IOException, OfxConfigurationException, OfxAuthoringException

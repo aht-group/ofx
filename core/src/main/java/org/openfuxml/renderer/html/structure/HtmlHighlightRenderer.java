@@ -3,6 +3,7 @@ package org.openfuxml.renderer.html.structure;
 import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -15,11 +16,16 @@ public class HtmlHighlightRenderer extends AbstractOfxHtmlRenderer implements Of
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlHighlightRenderer.class);
 
+	@Deprecated
 	public HtmlHighlightRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm,dsm);
 	}
-	
+
+	public HtmlHighlightRenderer(ConfigurationProvider cp) {
+		super(cp);
+	}
+
 	public void render(HtmlElement parent, Highlight highlight)
 	{
 		HtmlElement ele = new HtmlElement("div");

@@ -3,6 +3,7 @@ package org.openfuxml.renderer.html;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.OfxRenderer;
@@ -18,8 +19,14 @@ public class OfxHTMLRenderer extends OfxRenderer
 
 	private List<String> txt;
 
+	@Deprecated
 	public OfxHTMLRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
+		txt = new ArrayList<String>();
+		logger = LoggerFactory.getLogger(OfxHTMLRenderer.class);
+	}
+
+	public OfxHTMLRenderer(ConfigurationProvider cp) {
 		txt = new ArrayList<String>();
 		logger = LoggerFactory.getLogger(OfxHTMLRenderer.class);
 	}

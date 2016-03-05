@@ -3,6 +3,7 @@ package org.openfuxml.renderer.markdown.structure;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.renderer.markdown.media.MdImageRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
@@ -26,8 +27,8 @@ public class TestMdImageRenderer extends AbstractTestMdRenderer
 	@Before public void init()
 	{
 		super.initDir("media");
-		renderer = new MdImageRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
-		pRenderer = new MdParagraphRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		renderer = new MdImageRenderer(new OfxConfigurationProvider());
+		pRenderer = new MdParagraphRenderer(new OfxConfigurationProvider());
 	}
 
 	@Test public void inline() throws IOException

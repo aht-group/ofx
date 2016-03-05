@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.TitleProvider;
@@ -23,7 +24,7 @@ public class TestMdTitleRenderer extends AbstractTestMdRenderer
 	@Before public void init()
 	{
 		super.initDir("structure/title");
-		renderer = new MdTitleRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		renderer = new MdTitleRenderer(new OfxConfigurationProvider());
 	}
 
 	@Test public void lvl1() throws IOException

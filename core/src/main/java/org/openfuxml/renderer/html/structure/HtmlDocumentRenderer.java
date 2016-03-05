@@ -6,6 +6,7 @@ import org.openfuxml.content.ofx.Content;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -22,6 +23,7 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 
 	private String pageTitle;
 
+	@Deprecated
 	public HtmlDocumentRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm, String pageTitle)
 	{
 		super(cmm,dsm);
@@ -30,12 +32,19 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 		doc = new Document(html, new DocType("html"));
 		this.pageTitle = pageTitle;
 	}
-	
+
+	public HtmlDocumentRenderer(ConfigurationProvider cp, String pageTitle) {
+		super(cp);
+		html = new HtmlElement("html");
+		doc = new Document(html, new DocType("html"));
+		this.pageTitle = pageTitle;
+	}
+
 	public void render(Content content) throws OfxAuthoringException, OfxConfigurationException
 	{
-		HtmlHead head = new	HtmlHead(cmm,dsm);
+		HtmlHead head = new	HtmlHead(cp);
 		head.render(null, pageTitle);
-		HtmlBody body = new HtmlBody(cmm,dsm);
+		HtmlBody body = new HtmlBody(cp);
 		body.render(content);
 	}
 	

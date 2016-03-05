@@ -1,6 +1,7 @@
 package org.openfuxml.renderer.html.structure;
 
 import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -19,7 +20,12 @@ public class HtmlEmphasisRenderer extends AbstractOfxHtmlRenderer implements Ofx
 			quote=false,
 			typewriter=false,
 			underline=false;
+	@Deprecated
 	public HtmlEmphasisRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm){super(cmm, dsm);}
+
+	public HtmlEmphasisRenderer(ConfigurationProvider cp) {
+		super(cp);
+	}
 
 	/*Verarbeitet die Klassische Textgestaltung wie Fettdruck etc.*/
 	public void render(HtmlElement parent, Emphasis emphasis)

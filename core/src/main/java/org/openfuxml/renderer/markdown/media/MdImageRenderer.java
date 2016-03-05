@@ -4,6 +4,7 @@ import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.factory.txt.TxtTitleFactory;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -16,9 +17,14 @@ public class MdImageRenderer extends AbstractOfxMarkdownRenderer implements OfxM
 {
 	final static Logger logger = LoggerFactory.getLogger(MdImageRenderer.class);
 
+	@Deprecated
 	public MdImageRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
+	}
+
+	public MdImageRenderer(ConfigurationProvider cp) {
+		super(cp);
 	}
 
 	public void render(Image image)

@@ -8,6 +8,7 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.html.structure.HtmlSectionRenderer;
@@ -29,15 +30,13 @@ public class OfxMultiLangHTMLWriter
 	private File baseHTML;
 	private RelativePathFactory rpf;
 
-	private CrossMediaManager cmm;
-	private DefaultSettingsManager dsm;
+	private ConfigurationProvider cp;
 
-	public OfxMultiLangHTMLWriter(File baseHTML, String[] keys, CrossMediaManager cmm, DefaultSettingsManager dsm)
+	public OfxMultiLangHTMLWriter(File baseHTML, String[] keys, ConfigurationProvider cp)
 	{
-		this.baseHTML=baseHTML;
-		this.keys=keys;
-		this.cmm=cmm;
-		this.dsm=dsm;
+		this.baseHTML = baseHTML;
+		this.keys = keys;
+		this.cp = cp;
 		
 		dirTable = "table";
 		logger.info("Base Directory for "+OfxMultiLangHTMLWriter.class.getSimpleName()+": "+baseHTML.getAbsolutePath());
@@ -54,10 +53,10 @@ public class OfxMultiLangHTMLWriter
 		for(String lang : keys)
 		{
 			OfxLangFilter omf = new OfxLangFilter(lang);
-			
-			HtmlTableRenderer tableRenderer = new HtmlTableRenderer(cmm,dsm);
+
+			HtmlTableRenderer tableRenderer = new HtmlTableRenderer(cp);
 			tableRenderer.render(null,omf.filterLang(table));
-			
+
 			File f = buildFile(lang+"/"+myTableDir+"/"+fileName);
 			logger.trace(f.getAbsolutePath());
 			StringWriter sw = new StringWriter();
@@ -74,7 +73,7 @@ public class OfxMultiLangHTMLWriter
 			logger.trace(f.getAbsolutePath());
 			OfxLangFilter omf = new OfxLangFilter(lang);
 			
-			HtmlSectionRenderer sectionRenderer = new HtmlSectionRenderer(cmm,dsm,sectionLevel);
+			HtmlSectionRenderer sectionRenderer = new HtmlSectionRenderer(cp,sectionLevel);
 			Section sectionFiltered = omf.filterLang(section);
 			sectionRenderer.render(null, sectionFiltered);
 

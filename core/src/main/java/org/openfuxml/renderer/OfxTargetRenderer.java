@@ -80,7 +80,7 @@ public class OfxTargetRenderer
 
 	public void renderMarkdown(File fSrc) throws OfxAuthoringException, OfxConfigurationException, OfxImplementationException
 	{
-		OfxMarkdownRenderer mdRenderer = new OfxMarkdownRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		OfxMarkdownRenderer mdRenderer = new OfxMarkdownRenderer(new OfxConfigurationProvider());
 		mdRenderer.render(fSrc.getAbsolutePath());
 	}
 	

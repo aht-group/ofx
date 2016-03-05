@@ -4,6 +4,7 @@ package org.openfuxml.renderer.markdown.structure;
 import org.openfuxml.content.list.Item;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.ofx.Comment;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -16,9 +17,15 @@ public class MdListRenderer extends AbstractOfxMarkdownRenderer implements OfxMd
 	private final Logger logger = LoggerFactory.getLogger(MdListRenderer.class);
 
 	static String item ="\n";
+
+	@Deprecated
 	public MdListRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
+	}
+
+	public MdListRenderer(ConfigurationProvider cp) {
+		super(cp);
 	}
 
 	public void render(List list)
@@ -30,7 +37,7 @@ public class MdListRenderer extends AbstractOfxMarkdownRenderer implements OfxMd
 			for(Item i : list.getItem())
 			{
 				item += iterator + ". ";
-				MdItemRenderer iRender = new MdItemRenderer(cmm, dsm);
+				MdItemRenderer iRender = new MdItemRenderer(cp);
 				iRender.render(i);
 				renderer.add(iRender);
 				txt.add(item);
@@ -43,7 +50,7 @@ public class MdListRenderer extends AbstractOfxMarkdownRenderer implements OfxMd
 			for(Item i : list.getItem())
 			{
 				item += "* ";
-				MdItemRenderer iRender = new MdItemRenderer(cmm, dsm);
+				MdItemRenderer iRender = new MdItemRenderer(cp);
 				iRender.render(i);
 				txt.add(item);
 				item = "\n";

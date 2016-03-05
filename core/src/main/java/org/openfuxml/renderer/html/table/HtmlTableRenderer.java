@@ -7,6 +7,7 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.*;
 import org.openfuxml.factory.txt.TxtTitleFactory;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -21,9 +22,14 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlTableRenderer.class);
 
+	@Deprecated
 	public HtmlTableRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm,dsm);
+	}
+
+	public HtmlTableRenderer(ConfigurationProvider cp) {
+		super(cp);
 	}
 
 	public void render(HtmlElement parent, Table tab)
@@ -122,7 +128,7 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 	/*Rein optische Entscheidung Grafikelemente in einer Tabelle als inline Elemente zu verarbeiten */
 	public void imageRenderer(HtmlElement p, Image i)
 	{
-		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cmm, dsm);
+		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cp);
 		imgRenderer.renderInline(p, i);
 	}
 

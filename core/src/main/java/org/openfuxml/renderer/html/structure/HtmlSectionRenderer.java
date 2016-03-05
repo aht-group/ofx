@@ -4,6 +4,7 @@ import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.*;
 import org.openfuxml.content.table.Table;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
@@ -20,9 +21,15 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 
 	int lvl;
 
+	@Deprecated
 	public HtmlSectionRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm, int lvl)
 	{
 		super(cmm, dsm);
+		this.lvl = lvl;
+	}
+
+	public HtmlSectionRenderer(ConfigurationProvider cp, int lvl) {
+		super(cp);
 		this.lvl = lvl;
 	}
 
@@ -58,13 +65,13 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 
 	private void renderListing(HtmlElement div, Listing listing)
 	{
-		HtmlListingRenderer listingRenderer = new HtmlListingRenderer(cmm, dsm);
+		HtmlListingRenderer listingRenderer = new HtmlListingRenderer(cp);
 		listingRenderer.render(div, listing);
 	}
 
 	private void highlightRenderer(HtmlElement div, Highlight highlight)
 	{
-		HtmlHighlightRenderer Hrenderer = new HtmlHighlightRenderer(cmm,dsm);
+		HtmlHighlightRenderer Hrenderer = new HtmlHighlightRenderer(cp);
 		Hrenderer.render(div, highlight);
 	}
 
@@ -74,7 +81,7 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 	*/
 	private void renderSection(HtmlElement parent, Section section)
 	{
-		HtmlSectionRenderer sr = new HtmlSectionRenderer(cmm,dsm,++lvl);
+		HtmlSectionRenderer sr = new HtmlSectionRenderer(cp,++lvl);
 		sr.render(parent, section);
 	}
 
@@ -82,13 +89,13 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 	* @para comment: Kommentar Objekt*/
 	private void renderComment(HtmlElement parent, Comment comment)
 	{
-		HtmlCommentRenderer commentR = new HtmlCommentRenderer(cmm, dsm);
+		HtmlCommentRenderer commentR = new HtmlCommentRenderer(cp);
 		commentR.render(parent, comment);
 	}
 
 	private void titleRenderer(HtmlElement parent, Title title)
 	{
-		HtmlHeadingRenderer titleR = new HtmlHeadingRenderer(cmm, dsm);
+		HtmlHeadingRenderer titleR = new HtmlHeadingRenderer(cp);
 		/*@para lvl: Gibt die Hierarchie-Ebene der Überschrift an.*/
 		titleR.render(parent, title,lvl);
 	}

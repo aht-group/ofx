@@ -1,6 +1,7 @@
 package org.openfuxml.renderer.markdown.structure;
 
 import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -13,7 +14,12 @@ public class MdEmphasisRenderer extends AbstractOfxMarkdownRenderer implements O
 {
 	final static Logger logger = LoggerFactory.getLogger(MdEmphasisRenderer.class);
 
+	@Deprecated
 	public MdEmphasisRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm){super(cmm, dsm);}
+
+	public MdEmphasisRenderer(ConfigurationProvider cp) {
+		super(cp);
+	}
 
 	public void render(Emphasis emphasis)
 	{

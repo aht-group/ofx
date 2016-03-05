@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.MarginaliaProvider;
@@ -25,7 +26,7 @@ public class TestHtmlHighlightRenderer extends AbstractTestHtmlRenderer
 	@Before public void init()
 	{
 		super.initDir("section");
-		renderer = new HtmlBody(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		renderer = new HtmlBody(new OfxConfigurationProvider());
 	}
 
 	@Test public void highlight() throws IOException

@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.ListProvider;
@@ -24,7 +25,7 @@ public class TestMdListRenderer extends AbstractTestMdRenderer
 	@Before public void init()
 	{
 		super.initDir("structure/list");
-		renderer = new MdListRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		renderer = new MdListRenderer(new OfxConfigurationProvider());
 	}
 
 	@Test public void ordered() throws IOException

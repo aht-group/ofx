@@ -54,20 +54,20 @@ public class AbstractOfxMarkdownRenderer extends AbstractOfxRenderer
 
 	public void listRenderer(org.openfuxml.content.list.List list)
 	{
-		MdListRenderer listR = new MdListRenderer(cmm,dsm);
+		MdListRenderer listR = new MdListRenderer(cp);
 		listR.render(list);
 		renderer.add(listR);
 	}
 	public void paragraphRenderer(Paragraph paragraph)
 	{
-		MdParagraphRenderer paraR = new MdParagraphRenderer(cmm,dsm);
+		MdParagraphRenderer paraR = new MdParagraphRenderer(cp);
 		paraR.render(paragraph);
 		renderer.add(paraR);
 	}
 
 	public void imageRenderer(Image image)
 	{
-		MdImageRenderer imageRenderer = new MdImageRenderer(cmm,dsm);
+		MdImageRenderer imageRenderer = new MdImageRenderer(cp);
 		imageRenderer.render(image);
 		renderer.add(imageRenderer);
 	}

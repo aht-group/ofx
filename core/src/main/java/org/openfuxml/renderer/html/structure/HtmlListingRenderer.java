@@ -2,6 +2,7 @@ package org.openfuxml.renderer.html.structure;
 
 
 import org.openfuxml.content.ofx.Listing;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -14,9 +15,14 @@ public class HtmlListingRenderer extends AbstractOfxHtmlRenderer implements OfxM
 {
 	private final Logger logger = LoggerFactory.getLogger(HtmlListingRenderer.class);
 
+	@Deprecated
 	public HtmlListingRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
+	}
+
+	public HtmlListingRenderer(ConfigurationProvider cp) {
+		super(cp);
 	}
 
 	public void render(HtmlElement parent, Listing listing)

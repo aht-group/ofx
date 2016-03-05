@@ -2,6 +2,7 @@ package org.openfuxml.renderer.markdown.structure;
 
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.factory.txt.TxtTitleFactory;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -16,9 +17,14 @@ public class MdTitleRenderer extends AbstractOfxMarkdownRenderer implements OfxM
 {
 	private final Logger logger = LoggerFactory.getLogger(MdTitleRenderer.class);
 
+	@Deprecated
 	public MdTitleRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
+	}
+
+	public MdTitleRenderer(ConfigurationProvider cp) {
+		super(cp);
 	}
 
 	public void render(Title title, int lvl)

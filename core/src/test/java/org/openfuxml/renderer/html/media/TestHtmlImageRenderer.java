@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.structure.HtmlBody;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
@@ -28,7 +29,7 @@ public class TestHtmlImageRenderer extends AbstractTestHtmlRenderer
 	@Before public void init()
 	{
 		super.initDir("media");
-		body = new HtmlBody(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		body = new HtmlBody(new OfxConfigurationProvider());
 	}
 
 	@Test public void inline() throws IOException

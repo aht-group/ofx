@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.html.head;
 
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
@@ -13,9 +14,16 @@ import java.util.List;
 public class HtmlHead extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	private HtmlElement head;
+	@Deprecated
 	public HtmlHead(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
+		metaAttr = new ArrayList<HtmlAttribute>();
+		metaAttr.add(new HtmlAttribute("charset", "UTF-8"));
+	}
+
+	public HtmlHead(ConfigurationProvider cp) {
+		super(cp);
 		metaAttr = new ArrayList<HtmlAttribute>();
 		metaAttr.add(new HtmlAttribute("charset", "UTF-8"));
 	}

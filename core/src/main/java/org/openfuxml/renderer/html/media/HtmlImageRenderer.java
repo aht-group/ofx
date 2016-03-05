@@ -3,6 +3,7 @@ package org.openfuxml.renderer.html.media;
 import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.factory.txt.TxtTitleFactory;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -17,13 +18,18 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdR
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlImageRenderer.class);
 
+	@Deprecated
 	public HtmlImageRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
 	}
 
+	public HtmlImageRenderer(ConfigurationProvider cp) {
+		super(cp);
+	}
+
 	/*Simples Image Element. Geeignet zum einen für Grafiken in den Text einzufügen.
-	 * Außerhalb von Fließtext ist die @Link render() Methode zu verwenden.*/
+		 * Außerhalb von Fließtext ist die @Link render() Methode zu verwenden.*/
 	public void renderInline(HtmlElement parent, Image image)
 	{
 		HtmlElement img = new HtmlElement("img");

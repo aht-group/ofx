@@ -2,6 +2,7 @@ package org.openfuxml.renderer.markdown.structure;
 
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Raw;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -17,9 +18,14 @@ public class MdCommentRenderer extends AbstractOfxMarkdownRenderer implements Of
 
 	public static boolean first = true;
 
+	@Deprecated
 	public MdCommentRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
+	}
+
+	public MdCommentRenderer(ConfigurationProvider cp) {
+		super(cp);
 	}
 
 	public void render(Comment comment)

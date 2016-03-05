@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.markdown.structure.MdDocumentRenderer;
 import org.openfuxml.renderer.markdown.structure.MdParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
@@ -27,7 +28,7 @@ public class TestMdDocumentRenderer extends AbstractTestMdRenderer
 	@Before public void init()
 	{
 		super.initDir("structure");
-		renderer = new MdDocumentRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		renderer = new MdDocumentRenderer(new OfxConfigurationProvider());
 	}
 
 	@Test public void test() throws IOException, OfxConfigurationException, OfxAuthoringException

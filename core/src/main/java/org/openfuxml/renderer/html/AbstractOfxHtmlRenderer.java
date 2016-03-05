@@ -64,14 +64,14 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 
 	public void listRenderer(HtmlElement parent,org.openfuxml.content.list.List list)
 	{
-		HtmlListRenderer listRenderer = new HtmlListRenderer(cmm, dsm);
+		HtmlListRenderer listRenderer = new HtmlListRenderer(cp);
 		listRenderer.render(parent, list);
 	}
 
 	/*Allgemeines verarbeiten von Paragraphen*/
 	public void paragraphRenderer(HtmlElement parent,Paragraph paragraph)
 	{
-		HtmlParagraphRenderer paraRenderer = new HtmlParagraphRenderer(cmm,dsm);
+		HtmlParagraphRenderer paraRenderer = new HtmlParagraphRenderer(cp);
 		paraRenderer.render(parent,paragraph);
 	}
 
@@ -79,7 +79,7 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 	* dieses in HTML aber nicht möglich ist. (z.B. HTML erlaubt keine verschachtelten <p> Elemente)*/
 	public void paragraphContentRenderer(HtmlElement parent, Paragraph p)
 	{
-		HtmlParagraphRenderer paraRenderer = new HtmlParagraphRenderer(cmm,dsm);
+		HtmlParagraphRenderer paraRenderer = new HtmlParagraphRenderer(cp);
 		paraRenderer.renderWithout(parent,p);
 	}
 
@@ -99,33 +99,33 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 	 *Für inline Gebrauch ggf diese Methode überschreiben.  */
 	public void imageRenderer(HtmlElement parent,Image image)
 	{
-		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cmm, dsm);
+		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cp);
 		imgRenderer.render(parent, image);
 	}
 
 	/*Allgemeines verarbeiten von Marginalia. (Marginalia = */
 	public void marginaliaRenderer(HtmlElement parent,Marginalia marg)
 	{
-		HtmlMarginaliaRenderer imgRenderer = new HtmlMarginaliaRenderer(cmm, dsm);
+		HtmlMarginaliaRenderer imgRenderer = new HtmlMarginaliaRenderer(cp);
 		imgRenderer.render(parent, marg);
 	}
 
 	/*Allgemeines verarbeiten von Paragraphen*/
 	public void renderEmphasis(HtmlElement p, Emphasis em)
 	{
-		HtmlEmphasisRenderer emph = new HtmlEmphasisRenderer(cmm,dsm);
+		HtmlEmphasisRenderer emph = new HtmlEmphasisRenderer(cp);
 		emph.render(p, em);
 	}
 
 	public void renderTable(HtmlElement p, Table table)
 	{
-		HtmlTableRenderer emph = new HtmlTableRenderer(cmm,dsm);
+		HtmlTableRenderer emph = new HtmlTableRenderer(cp);
 		emph.render(p, table);
 	}
 
 	public void commentRenderer(HtmlElement parent, org.openfuxml.content.ofx.Comment comment)
 	{
-		HtmlCommentRenderer commentRenderer = new HtmlCommentRenderer(cmm,dsm);
+		HtmlCommentRenderer commentRenderer = new HtmlCommentRenderer(cp);
 		commentRenderer.render(parent, comment);
 	}
 

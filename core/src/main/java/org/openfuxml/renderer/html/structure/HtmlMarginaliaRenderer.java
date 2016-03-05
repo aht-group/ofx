@@ -4,6 +4,7 @@ import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -18,11 +19,16 @@ public class HtmlMarginaliaRenderer extends AbstractOfxHtmlRenderer implements O
 	final static Logger logger = LoggerFactory.getLogger(HtmlMarginaliaRenderer.class);
 	static int count=0;
 
+	@Deprecated
 	public HtmlMarginaliaRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm,dsm);
 	}
-	
+
+	public HtmlMarginaliaRenderer(ConfigurationProvider cp) {
+		super(cp);
+	}
+
 	public void render(HtmlElement parent, Marginalia marginalia)
 	{
 		parent.setStyleAttribute("display:table-row;");
@@ -40,7 +46,7 @@ public class HtmlMarginaliaRenderer extends AbstractOfxHtmlRenderer implements O
 
 	public void imageRenderer(HtmlElement p, Image i)
 	{
-		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cmm, dsm);
+		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cp);
 		imgRenderer.renderInline(p, i);
 		if(i.isSetHeight() || i.isSetWidth())
 			imgRenderer.marginaliaFloatStyle(p,HtmlElement.evaluateSize(i));

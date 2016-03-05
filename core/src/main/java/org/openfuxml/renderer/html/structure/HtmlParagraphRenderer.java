@@ -7,6 +7,7 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.content.text.Symbol;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
@@ -22,11 +23,15 @@ public class HtmlParagraphRenderer extends AbstractOfxHtmlRenderer implements Of
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlParagraphRenderer.class);
 
+	@Deprecated
 	public HtmlParagraphRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
 	}
 
+	public HtmlParagraphRenderer(ConfigurationProvider cp) {
+		super(cp);
+	}
 
 	public void render(HtmlElement parent, Paragraph paragraph)
 	{
@@ -64,7 +69,7 @@ public class HtmlParagraphRenderer extends AbstractOfxHtmlRenderer implements Of
 
 	private void renderReference(HtmlElement parent, Reference r)
 	{
-		HtmlReferenceRenderer referenceRender = new HtmlReferenceRenderer(cmm, dsm);
+		HtmlReferenceRenderer referenceRender = new HtmlReferenceRenderer(cp);
 
 		//"xxx" Sequenz ist nur ein vorläufiger Füller für den Text eines internen Links.
 		referenceRender.renderIntern(parent,r,"xxx");
@@ -72,7 +77,7 @@ public class HtmlParagraphRenderer extends AbstractOfxHtmlRenderer implements Of
 
 	public void imageRenderer(HtmlElement p, Image i)
 	{
-		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cmm, dsm);
+		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cp);
 		imgRenderer.renderInline(p, i);
 	}
 }

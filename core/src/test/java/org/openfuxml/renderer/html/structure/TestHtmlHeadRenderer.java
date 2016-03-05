@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.head.HtmlHead;
 import org.openfuxml.test.OfxCoreTestBootstrap;
@@ -25,7 +26,7 @@ public class TestHtmlHeadRenderer extends AbstractTestHtmlRenderer
 	@Before public void init()
 	{
 		super.initDir("head");
-		renderer = new HtmlHead(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		renderer = new HtmlHead(new OfxConfigurationProvider());
 	}
 
 	@Test public void head() throws IOException

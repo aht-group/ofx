@@ -3,6 +3,7 @@ package org.openfuxml.renderer.markdown.structure;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -16,9 +17,14 @@ public class MdParagraphRenderer extends AbstractOfxMarkdownRenderer implements 
 {
 	final static Logger logger = LoggerFactory.getLogger(MdParagraphRenderer.class);
 
+	@Deprecated
 	public MdParagraphRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
+	}
+
+	public MdParagraphRenderer(ConfigurationProvider cp) {
+		super(cp);
 	}
 
 	public void render(Paragraph paragraph)
@@ -37,14 +43,14 @@ public class MdParagraphRenderer extends AbstractOfxMarkdownRenderer implements 
 
 	private void rendererImage(StringBuffer sb, Image image)
 	{
-		MdImageRenderer iRenderer = new MdImageRenderer(cmm,dsm);
+		MdImageRenderer iRenderer = new MdImageRenderer(cp);
 		iRenderer.renderInline(image);
 		for(String s : iRenderer.getContent()){sb.append(s);}
 	}
 
 	private void rendererEmphasis(StringBuffer sb, Emphasis emphasis)
 	{
-		MdEmphasisRenderer emRenderer = new MdEmphasisRenderer(cmm, dsm);
+		MdEmphasisRenderer emRenderer = new MdEmphasisRenderer(cp);
 		emRenderer.render(emphasis);
 		for(String s : emRenderer.getContent()){sb.append(s);}
 	}

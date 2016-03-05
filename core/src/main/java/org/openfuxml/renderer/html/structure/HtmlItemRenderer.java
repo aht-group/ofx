@@ -4,6 +4,7 @@ import org.openfuxml.content.list.Item;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -18,9 +19,14 @@ import org.slf4j.LoggerFactory;
 public class HtmlItemRenderer extends AbstractOfxHtmlRenderer implements OfxMdRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlItemRenderer.class);
+	@Deprecated
 	public HtmlItemRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
+	}
+
+	public HtmlItemRenderer(ConfigurationProvider cp) {
+		super(cp);
 	}
 
 	public void render(HtmlElement list, Item item, boolean isDescription)

@@ -3,6 +3,7 @@ package org.openfuxml.renderer.markdown.structure;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.*;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
@@ -18,9 +19,15 @@ public class MdSectionRenderer extends AbstractOfxMarkdownRenderer implements Of
 
 	int lvl;
 
+	@Deprecated
 	public MdSectionRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm, int lvl)
 	{
 		super(cmm, dsm);
+		this.lvl = lvl;
+	}
+
+	public MdSectionRenderer(ConfigurationProvider cp, int lvl) {
+		super(cp);
 		this.lvl = lvl;
 	}
 
@@ -37,7 +44,7 @@ public class MdSectionRenderer extends AbstractOfxMarkdownRenderer implements Of
 		{
 			if(s instanceof Title)
 			{
-				MdTitleRenderer titleR = new MdTitleRenderer(cmm, dsm);
+				MdTitleRenderer titleR = new MdTitleRenderer(cp);
 				titleR.render((Title)s,lvl);
 				renderer.add(titleR);
 			}
@@ -63,14 +70,14 @@ public class MdSectionRenderer extends AbstractOfxMarkdownRenderer implements Of
 	private void renderSection(Section section)
 	{
 		MdCommentRenderer.first = true;
-		MdSectionRenderer sr = new MdSectionRenderer(cmm,dsm,lvl+1);
+		MdSectionRenderer sr = new MdSectionRenderer(cp,lvl+1);
 		sr.render(section);
 		renderer.add(sr);
 	}
 
 	private void renderComment(Comment comment)
 	{
-		MdCommentRenderer commentR = new MdCommentRenderer(cmm, dsm);
+		MdCommentRenderer commentR = new MdCommentRenderer(cp);
 		commentR.render(comment);
 		renderer.add(commentR);
 	}

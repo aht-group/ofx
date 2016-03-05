@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.SectionProvider;
@@ -23,7 +24,7 @@ public class TestHtmlListingRenderer extends AbstractTestHtmlRenderer
 	@Before public void init()
 	{
 		super.initDir("section");
-		renderer = new HtmlBody(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		renderer = new HtmlBody(new OfxConfigurationProvider());
 	}
 
 	@Test public void body() throws IOException

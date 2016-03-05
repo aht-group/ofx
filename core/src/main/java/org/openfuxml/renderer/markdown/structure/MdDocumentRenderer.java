@@ -4,6 +4,7 @@ import org.openfuxml.content.ofx.Content;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -17,14 +18,17 @@ public class MdDocumentRenderer extends AbstractOfxMarkdownRenderer implements O
 	final static Logger logger = LoggerFactory.getLogger(MdDocumentRenderer.class);
 
 	private int lvl;
-	private Pdf pdf;
-
+	@Deprecated
 	public MdDocumentRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm,dsm);
 		this.cmm=cmm;
 	}
-	
+
+	public MdDocumentRenderer(ConfigurationProvider cp) {
+		super(cp);
+	}
+
 	public void render(Content content) throws OfxAuthoringException, OfxConfigurationException
 	{
 		lvl = 0;
@@ -37,7 +41,7 @@ public class MdDocumentRenderer extends AbstractOfxMarkdownRenderer implements O
 	
 	private void renderSection(Section section) throws OfxAuthoringException, OfxConfigurationException
 	{
-		MdSectionRenderer sf = new MdSectionRenderer(cmm,dsm,lvl+1);
+		MdSectionRenderer sf = new MdSectionRenderer(cp,lvl+1);
 		sf.render(section);
 		renderer.add(sf);
 	}

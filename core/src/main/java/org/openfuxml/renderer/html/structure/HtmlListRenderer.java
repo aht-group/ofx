@@ -3,6 +3,7 @@ package org.openfuxml.renderer.html.structure;
 
 import org.openfuxml.content.list.Item;
 import org.openfuxml.content.list.List;
+import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
@@ -15,9 +16,14 @@ public class HtmlListRenderer extends AbstractOfxHtmlRenderer implements OfxMdRe
 {
 	private final Logger logger = LoggerFactory.getLogger(HtmlListRenderer.class);
 
+	@Deprecated
 	public HtmlListRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		super(cmm, dsm);
+	}
+
+	public HtmlListRenderer(ConfigurationProvider cp) {
+		super(cp);
 	}
 
 	public void render(HtmlElement parent, List list)
@@ -39,7 +45,7 @@ public class HtmlListRenderer extends AbstractOfxHtmlRenderer implements OfxMdRe
 
 	private void itemRenderer(HtmlElement list, Item i, boolean isDescription)
 	{
-		HtmlItemRenderer itemR = new HtmlItemRenderer(cmm, dsm);
+		HtmlItemRenderer itemR = new HtmlItemRenderer(cp);
 		itemR.render(list, i, isDescription);
 	}
 

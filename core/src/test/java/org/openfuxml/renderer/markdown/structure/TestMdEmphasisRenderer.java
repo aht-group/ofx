@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.EmphasisProvider;
@@ -25,7 +26,7 @@ public class TestMdEmphasisRenderer extends AbstractTestMdRenderer
 	@Before public void init()
 	{
 		super.initDir("structure/emphasis");
-		renderer = new MdParagraphRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		renderer = new MdParagraphRenderer(new OfxConfigurationProvider());
 	}
 
 	@Test public void italic() throws IOException
