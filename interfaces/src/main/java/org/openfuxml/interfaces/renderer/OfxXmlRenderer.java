@@ -1,13 +1,11 @@
 package org.openfuxml.interfaces.renderer;
 
-import java.io.IOException;
-import java.io.Writer;
 import java.util.List;
 
 import org.jdom2.Element;
+import org.openfuxml.interfaces.io.OfxStreamWriter;
 
-public interface OfxXmlRenderer
+public interface OfxXmlRenderer extends OfxStreamWriter
 {
 	List<Element> getContent();
-	void write(Writer w) throws IOException;
 }
