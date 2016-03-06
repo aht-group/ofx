@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
-import org.w3c.dom.Element;
+import org.jdom2.Element;
 
 public interface OfxXmlRenderer
 {

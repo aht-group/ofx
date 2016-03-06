@@ -12,7 +12,7 @@ import org.openfuxml.content.table.Table;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.layout.XmlLineFactory;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;

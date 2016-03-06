@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.exception.OfxConfigurationException;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

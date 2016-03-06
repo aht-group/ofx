@@ -1,4 +1,4 @@
-package org.openfuxml.interfaces;
+package org.openfuxml.interfaces.configuration;
 
 import org.openfuxml.interfaces.media.CrossMediaManager;
 

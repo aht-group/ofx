@@ -7,7 +7,7 @@ import org.openfuxml.content.list.List;
 import org.openfuxml.content.list.Type;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.list.XmlListFactory;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;

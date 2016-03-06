@@ -7,7 +7,7 @@ import java.io.StringWriter;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxCharacterRenderer;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;

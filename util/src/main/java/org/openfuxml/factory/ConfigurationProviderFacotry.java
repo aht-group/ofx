@@ -1,7 +1,7 @@
 package org.openfuxml.factory;
 
-import org.openfuxml.interfaces.ConfigurationProvider;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 

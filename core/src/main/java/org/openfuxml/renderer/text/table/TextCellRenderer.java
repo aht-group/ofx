@@ -3,7 +3,7 @@ package org.openfuxml.renderer.text.table;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxTextRenderer;
 import org.openfuxml.renderer.text.AbstractOfxTextRenderer;

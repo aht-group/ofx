@@ -1,6 +1,6 @@
 package org.openfuxml.renderer.latex.preamble;
 
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.factory.LatexSectionHeaderNameFactory;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;

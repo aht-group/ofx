@@ -6,7 +6,7 @@ import java.util.List;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.OfxRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexDocumentRenderer;

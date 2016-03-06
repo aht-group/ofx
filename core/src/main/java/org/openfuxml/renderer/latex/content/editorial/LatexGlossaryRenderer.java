@@ -7,7 +7,7 @@ import org.openfuxml.content.editorial.Term;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.text.Text;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
