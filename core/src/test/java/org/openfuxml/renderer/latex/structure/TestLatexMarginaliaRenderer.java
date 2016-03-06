@@ -39,7 +39,7 @@ public class TestLatexMarginaliaRenderer extends AbstractTestLatexRenderer
     @Test public void inParagraph() throws IOException, OfxAuthoringException
     {
     	initFile(Key.inParagraph);
-    	LatexParagraphRenderer rendererParagraph = new LatexParagraphRenderer(cmm,dsm,false); ;
+    	LatexParagraphRenderer rendererParagraph = new LatexParagraphRenderer(cp,false); ;
     	rendererParagraph.render(MarginaliaProvider.inParagraph());
     	renderTest(rendererParagraph);
     }

@@ -1,8 +1,7 @@
 package org.openfuxml.renderer.latex.preamble;
 
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.factory.LatexSectionHeaderNameFactory;
-import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
@@ -15,10 +14,10 @@ public class LatexPreamble extends AbstractOfxLatexRenderer implements OfxLatexR
 	private LatexSectionHeaderNameFactory shnf;
 	private LatexArticle article;
 	
-	public LatexPreamble(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public LatexPreamble(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
-		article = new LatexArticle(cmm,dsm);
+		super(cp);
+		article = new LatexArticle(cp);
 		shnf = article;
 	}
 	

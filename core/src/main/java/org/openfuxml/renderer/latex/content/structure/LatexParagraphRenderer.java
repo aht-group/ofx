@@ -15,8 +15,7 @@ import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.content.text.Symbol;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.editorial.LatexAcronymRenderer;
@@ -37,9 +36,9 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexParagraphRenderer.class);
 	
-	public LatexParagraphRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm,boolean preBlankLine)
+	public LatexParagraphRenderer(ConfigurationProvider cp, boolean preBlankLine)
 	{
-		super(cmm,dsm);
+		super(cp);
 		if(preBlankLine){preTxt.add("");}
 	}
 	
@@ -117,7 +116,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 	
 	private void renderEmphasis(StringBuffer sb, Emphasis emphasis) throws OfxAuthoringException
 	{
-		LatexEmphasisRenderer stf = new LatexEmphasisRenderer(cmm,dsm);
+		LatexEmphasisRenderer stf = new LatexEmphasisRenderer(cp);
 		stf.render(emphasis);
 		for(String s : stf.getContent()){sb.append(s);}
 	}
@@ -138,14 +137,14 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 
 	private void renderIndex(StringBuffer sb, Index index) throws OfxAuthoringException
 	{
-		LatexIndexRenderer stf = new LatexIndexRenderer(cmm,dsm);
+		LatexIndexRenderer stf = new LatexIndexRenderer(cp);
 		stf.render(index);
 		for(String s : stf.getContent()){sb.append(s);}
 	}
 	
 	protected void renderReference(StringBuffer sb, Reference reference) throws OfxAuthoringException
 	{
-		LatexReferenceRenderer lrr = new LatexReferenceRenderer(cmm,dsm);
+		LatexReferenceRenderer lrr = new LatexReferenceRenderer(cp);
 		lrr.render(reference);
 		for(String s : lrr.getContent()){sb.append(s);}
 	}
@@ -159,7 +158,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 	
 	protected void renderSymbol(StringBuffer sb, Symbol symbol) throws OfxAuthoringException
 	{
-		LatexSymbolRenderer lmr = new LatexSymbolRenderer(cmm,dsm);
+		LatexSymbolRenderer lmr = new LatexSymbolRenderer(cp);
 		lmr.render(symbol);
 		for(String s : lmr.getContent()){sb.append(s);}
 	}

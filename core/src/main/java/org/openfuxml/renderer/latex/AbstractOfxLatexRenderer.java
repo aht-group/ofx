@@ -102,7 +102,7 @@ public class AbstractOfxLatexRenderer extends AbstractOfxRenderer
 	
 	protected void paragraphRenderer(Paragraph paragraph, boolean preBlankLine) throws OfxAuthoringException
 	{
-		LatexParagraphRenderer f = new LatexParagraphRenderer(cmm,dsm,preBlankLine);
+		LatexParagraphRenderer f = new LatexParagraphRenderer(cp,preBlankLine);
 		f.render(paragraph);
 		renderer.add(f);
 	}
@@ -137,7 +137,7 @@ public class AbstractOfxLatexRenderer extends AbstractOfxRenderer
 	
 	protected void renderList(org.openfuxml.content.list.List list,OfxLatexRenderer parent) throws OfxAuthoringException
 	{
-		LatexListRenderer f = new LatexListRenderer(cmm,dsm);
+		LatexListRenderer f = new LatexListRenderer(cp);
 		f.render(list,parent);
 		renderer.add(f);
 	}

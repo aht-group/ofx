@@ -2,8 +2,7 @@ package org.openfuxml.renderer.latex.content.text;
 
 import org.openfuxml.content.text.Symbol;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
@@ -13,9 +12,9 @@ public class LatexSymbolRenderer extends AbstractOfxLatexRenderer implements Ofx
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexSymbolRenderer.class);
 	
-	public LatexSymbolRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public LatexSymbolRenderer(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 	}
 	
 	public void render(Symbol symbol) throws OfxAuthoringException

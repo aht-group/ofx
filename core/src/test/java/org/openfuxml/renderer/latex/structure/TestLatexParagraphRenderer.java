@@ -27,7 +27,7 @@ public class TestLatexParagraphRenderer extends AbstractTestLatexRenderer
 	@Before public void init()
 	{
 		super.initDir("content/paragraph");
-		renderer = new LatexParagraphRenderer(cmm,dsm,false);
+		renderer = new LatexParagraphRenderer(cp,false);
 	}
 	@After public void close(){renderer=null;}
 		

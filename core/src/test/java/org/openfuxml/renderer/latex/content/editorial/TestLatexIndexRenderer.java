@@ -19,7 +19,7 @@ public class TestLatexIndexRenderer extends AbstractTestLatexRenderer
 	@Before public void init()
 	{
 		super.initDir("editorial/index");
-		renderer = new LatexIndexRenderer(cmm,dsm);
+		renderer = new LatexIndexRenderer(cp);
 	}
 	@After public void close() {renderer=null;}
 
@@ -27,7 +27,7 @@ public class TestLatexIndexRenderer extends AbstractTestLatexRenderer
 	public void index() throws OfxAuthoringException, IOException
 	{
 		initFile(Key.simple);
-		LatexParagraphRenderer renderer = new LatexParagraphRenderer(cmm,dsm,true);
+		LatexParagraphRenderer renderer = new LatexParagraphRenderer(cp,true);
 		renderer.render(ParagraphProvider.paragraphWithIndex());
 		renderTest(renderer);
 	}

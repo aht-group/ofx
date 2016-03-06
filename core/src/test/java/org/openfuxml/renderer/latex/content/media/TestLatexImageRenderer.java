@@ -52,7 +52,7 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
 		File fTarget = new File("target");
 		cmm = new LatexCrossMediaManager(new File(fTarget,"base"));
 		
-        rSection = new LatexSectionRenderer(cmm,dsm,1, new LatexPreamble(cmm,dsm));
+        rSection = new LatexSectionRenderer(cp,1, new LatexPreamble(cp));
         rImage = new LatexImageRenderer(cp);
         rCell = new LatexCellRenderer(cp);
         renderer = new LatexTableRenderer(cp);

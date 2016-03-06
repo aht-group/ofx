@@ -6,6 +6,7 @@ import java.util.List;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.OfxRenderer;
@@ -24,8 +25,8 @@ public class OfxLatexRenderer extends OfxRenderer
 	public OfxLatexRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm,Pdf pdf)
 	{
 		logger = LoggerFactory.getLogger(OfxLatexRenderer.class);
-		latexPreamble = new LatexPreamble(cmm,dsm);
-		rDocument = new LatexDocumentRenderer(cmm,dsm,pdf,latexPreamble);
+		latexPreamble = new LatexPreamble(ConfigurationProviderFacotry.build(cmm,dsm));
+		rDocument = new LatexDocumentRenderer(ConfigurationProviderFacotry.build(cmm,dsm),pdf,latexPreamble);
 		
 		txt = new ArrayList<String>();
 	}

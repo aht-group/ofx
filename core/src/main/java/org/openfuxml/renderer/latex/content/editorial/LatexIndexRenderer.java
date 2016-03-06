@@ -2,8 +2,7 @@ package org.openfuxml.renderer.latex.content.editorial;
 
 import org.openfuxml.content.editorial.Index;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
@@ -13,9 +12,9 @@ public class LatexIndexRenderer extends AbstractOfxLatexRenderer implements OfxL
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexIndexRenderer.class);
 
-	public LatexIndexRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
+	public LatexIndexRenderer(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 	}
 	
 	public void render(Index index) throws OfxAuthoringException

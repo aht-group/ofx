@@ -27,7 +27,7 @@ public class TestLatexEmphasisRenderer extends AbstractTestLatexRenderer
 	@Before
 	public void init()
 	{
-		renderer = new LatexParagraphRenderer(cmm,dsm,true);
+		renderer = new LatexParagraphRenderer(cp,true);
 	}
 	
 	@After public void close(){renderer=null;}

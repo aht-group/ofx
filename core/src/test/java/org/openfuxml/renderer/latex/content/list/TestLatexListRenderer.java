@@ -34,8 +34,8 @@ public class TestLatexListRenderer extends AbstractLatexListTest
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexListRenderer(cmm,dsm);
-		parentSection = new LatexSectionRenderer(cmm,dsm,0,null);
+		renderer = new LatexListRenderer(cp);
+		parentSection = new LatexSectionRenderer(cp,0,null);
 	}
 	
 	@After public void close(){renderer=null;}

@@ -74,7 +74,7 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 //		LatexTextRenderer tr = new LatexTextRenderer(cmm,dsm);
 //		tr.render(term.getText());
 		
-		LatexParagraphRenderer pr = new LatexParagraphRenderer(cmm,dsm,false);
+		LatexParagraphRenderer pr = new LatexParagraphRenderer(cp,false);
 		pr.render(term.getParagraph());
 		
 		List<String> c = pr.getContent();
@@ -94,7 +94,7 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 		for(Text t : term.getText())
 		{
 			if(!t.isSetClassifier()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+"."+Text.class.getSimpleName()+" needs a classifier! Code:"+term.getCode());}
-			LatexTextRenderer tr = new LatexTextRenderer(cmm,dsm);
+			LatexTextRenderer tr = new LatexTextRenderer(cp);
 			tr.render(t);
 			txt.add("\t"+t.getClassifier()+"="+tr.getContentAsSingleLine(" ")+",");
 		}

@@ -59,10 +59,10 @@ public class LatexAcronymRenderer extends AbstractOfxLatexRenderer implements Of
 		if(!term.isSetText()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Text.class.getSimpleName());}
 		if(!term.isSetParagraph()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Paragraph.class.getSimpleName());}	
 		
-		LatexTextRenderer tr = new LatexTextRenderer(cmm,dsm);
+		LatexTextRenderer tr = new LatexTextRenderer(cp);
 		tr.render(term.getText());
 		
-		LatexParagraphRenderer pr = new LatexParagraphRenderer(cmm,dsm,false);
+		LatexParagraphRenderer pr = new LatexParagraphRenderer(cp,false);
 		pr.render(term.getParagraph());
 		
 		txt.add("\\newacronym{"+term.getCode()+"}");

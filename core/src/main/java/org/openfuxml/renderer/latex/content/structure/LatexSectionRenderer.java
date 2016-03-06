@@ -13,8 +13,7 @@ import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.listing.LatexListingRenderer;
@@ -31,9 +30,9 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	private LatexPreamble latexPreamble;
 	int lvl;
 	
-	public LatexSectionRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm, int lvl, LatexPreamble latexPreamble)
+	public LatexSectionRenderer(ConfigurationProvider cp, int lvl, LatexPreamble latexPreamble)
 	{
-		super(cmm,dsm);
+		super(cp);
 		this.lvl=lvl;
 		this.latexPreamble=latexPreamble;
 	}
@@ -115,7 +114,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 			
 	private void renderSection(Section section) throws OfxAuthoringException, OfxConfigurationException
 	{
-		LatexSectionRenderer sf = new LatexSectionRenderer(cmm,dsm,lvl+1,latexPreamble);
+		LatexSectionRenderer sf = new LatexSectionRenderer(cp,lvl+1,latexPreamble);
 		sf.render(section);
 		renderer.add(sf);
 	}
@@ -129,7 +128,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 
     private void renderListing(Listing listing) throws OfxAuthoringException, OfxConfigurationException
     {
-        LatexListingRenderer r = new LatexListingRenderer(cmm,dsm);
+        LatexListingRenderer r = new LatexListingRenderer(cp);
         r.render(listing);
         renderer.add(r);
     }
