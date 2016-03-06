@@ -12,9 +12,8 @@ import org.openfuxml.content.table.Table;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.layout.XmlLineFactory;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
-import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexTitleRenderer;
 import org.openfuxml.renderer.latex.content.text.StringRenderer;
@@ -25,9 +24,9 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexTabuRenderer.class);
 	
-	public LatexTabuRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public LatexTabuRenderer(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 	}
 	
 	public void render(Table table) throws OfxAuthoringException
@@ -107,7 +106,7 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		{
 			for(Row row : head.getRow())
 			{
-				LatexRowRenderer f = new LatexRowRenderer(cmm,dsm);
+				LatexRowRenderer f = new LatexRowRenderer(cp);
 				f.setEmphasisOverride(emphasis);
 				f.render(row);
 				renderer.add(f);
@@ -128,7 +127,7 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		{
 			horizontalLines(row,XmlLineFactory.Orientation.top);
 			
-			LatexRowRenderer f = new LatexRowRenderer(cmm,dsm);
+			LatexRowRenderer f = new LatexRowRenderer(cp);
 			f.setFont(font);
 			f.render(row);
 			renderer.add(f);
@@ -156,7 +155,7 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	{
 		if(table.isSetTitle())
 		{
-			LatexTitleRenderer stf = new LatexTitleRenderer(cmm,dsm);
+			LatexTitleRenderer stf = new LatexTitleRenderer(cp);
 			stf.render(table);
 			postTxt.addAll(stf.getContent());
 		}

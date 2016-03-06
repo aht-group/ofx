@@ -7,9 +7,8 @@ import org.openfuxml.content.editorial.Term;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.text.Text;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
@@ -21,9 +20,9 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexGlossaryRenderer.class);
 	
-	public LatexGlossaryRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public LatexGlossaryRenderer(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 	}
 	
 	public void render(Glossary glossary) throws OfxAuthoringException
@@ -55,7 +54,7 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 		
 		if(glossary.isSetComment())
 		{
-			LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
+			LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 			rComment.render(glossary.getComment());
 			preTxt.addAll(rComment.getContent());
 		}
@@ -75,7 +74,7 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 //		LatexTextRenderer tr = new LatexTextRenderer(cmm,dsm);
 //		tr.render(term.getText());
 		
-		LatexParagraphRenderer pr = new LatexParagraphRenderer(cmm,dsm,false);
+		LatexParagraphRenderer pr = new LatexParagraphRenderer(cp,false);
 		pr.render(term.getParagraph());
 		
 		List<String> c = pr.getContent();
@@ -95,7 +94,7 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 		for(Text t : term.getText())
 		{
 			if(!t.isSetClassifier()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+"."+Text.class.getSimpleName()+" needs a classifier! Code:"+term.getCode());}
-			LatexTextRenderer tr = new LatexTextRenderer(cmm,dsm);
+			LatexTextRenderer tr = new LatexTextRenderer(cp);
 			tr.render(t);
 			txt.add("\t"+t.getClassifier()+"="+tr.getContentAsSingleLine(" ")+",");
 		}

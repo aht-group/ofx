@@ -3,10 +3,10 @@ package org.openfuxml.renderer.html.structure;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.factory.xml.text.OfxTextFactory;
-import org.openfuxml.interfaces.ConfigurationProvider;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
+import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 

@@ -1,11 +1,10 @@
 package org.openfuxml.renderer.html.structure;
 
 import org.openfuxml.content.ofx.Reference;
-import org.openfuxml.content.ofx.Section;
-import org.openfuxml.interfaces.ConfigurationProvider;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
@@ -13,7 +12,7 @@ import org.openfuxml.renderer.html.table.HtmlTableRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HtmlReferenceRenderer extends AbstractOfxHtmlRenderer implements OfxLatexRenderer
+public class HtmlReferenceRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlReferenceRenderer.class);
 

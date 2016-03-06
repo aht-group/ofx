@@ -32,7 +32,7 @@ public class TestLatexGlossaryRenderer extends AbstractTestLatexRenderer
 	
 	@Before public void init()
 	{
-		renderer = new LatexGlossaryRenderer(cmm,dsm);
+		renderer = new LatexGlossaryRenderer(cp);
 	}
 	@After public void close()
 	{
@@ -71,7 +71,7 @@ public class TestLatexGlossaryRenderer extends AbstractTestLatexRenderer
     @Test public void glossary() throws IOException, OfxAuthoringException
     {    	
     	f = new File(rootDir,dir+"/glossary-1.txt");
-    	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cmm,dsm,true);
+    	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cp,true);
     	renderer.render(paragraph());
     	renderTest(renderer,f);
     }
@@ -86,7 +86,7 @@ public class TestLatexGlossaryRenderer extends AbstractTestLatexRenderer
     	p.getContent().add(" "+li.getWords(3));
     	
     	f = new File(rootDir,dir+"/glossary-2.txt");
-    	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cmm,dsm,true);
+    	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cp,true);
     	renderer.render(paragraph());
     	renderTest(renderer,f);
     }

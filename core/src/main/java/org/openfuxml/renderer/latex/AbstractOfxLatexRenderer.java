@@ -15,10 +15,10 @@ import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.ConfigurationProviderFacotry;
-import org.openfuxml.interfaces.ConfigurationProvider;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.latex.content.layout.LatexColumnRenderer;
 import org.openfuxml.renderer.latex.content.layout.LatexContainerRenderer;
@@ -102,49 +102,49 @@ public class AbstractOfxLatexRenderer extends AbstractOfxRenderer
 	
 	protected void paragraphRenderer(Paragraph paragraph, boolean preBlankLine) throws OfxAuthoringException
 	{
-		LatexParagraphRenderer f = new LatexParagraphRenderer(cmm,dsm,preBlankLine);
+		LatexParagraphRenderer f = new LatexParagraphRenderer(cp,preBlankLine);
 		f.render(paragraph);
 		renderer.add(f);
 	}
 	
 	protected void containerRenderer(Container container) throws OfxAuthoringException
 	{
-		LatexContainerRenderer f = new LatexContainerRenderer(cmm,dsm);
+		LatexContainerRenderer f = new LatexContainerRenderer(cp);
 		f.render(container);
 		renderer.add(f);
 	}
 	
 	protected void columnRenderer(Column column) throws OfxAuthoringException
 	{
-		LatexColumnRenderer f = new LatexColumnRenderer(cmm,dsm);
+		LatexColumnRenderer f = new LatexColumnRenderer(cp);
 		f.render(this,column);
 		renderer.add(f);
 	}
 	
 	protected void widthRenderer(Width width) throws OfxAuthoringException
 	{
-		LatexWidthRenderer f = new LatexWidthRenderer(cmm,dsm);
+		LatexWidthRenderer f = new LatexWidthRenderer(cp);
 		f.render(this,width);
 		renderer.add(f);
 	}
 	
 	protected void highlightRenderer(Highlight highlight) throws OfxAuthoringException
 	{
-		LatexHighlightRenderer f = new LatexHighlightRenderer(cmm,dsm);
+		LatexHighlightRenderer f = new LatexHighlightRenderer(cp);
 		f.render(highlight);
 		renderer.add(f);
 	}
 	
 	protected void renderList(org.openfuxml.content.list.List list,OfxLatexRenderer parent) throws OfxAuthoringException
 	{
-		LatexListRenderer f = new LatexListRenderer(cmm,dsm);
+		LatexListRenderer f = new LatexListRenderer(cp);
 		f.render(list,parent);
 		renderer.add(f);
 	}
 	
 	protected void renderImage(Image image) throws OfxAuthoringException
 	{
-		LatexImageRenderer f = new LatexImageRenderer(cmm,dsm);
+		LatexImageRenderer f = new LatexImageRenderer(cp);
 		f.render(this,image);
 		renderer.add(f);
 	}
@@ -152,7 +152,7 @@ public class AbstractOfxLatexRenderer extends AbstractOfxRenderer
 	protected void renderMarginalia(Marginalia marginalia) throws OfxAuthoringException
 	{
 		logger.trace("Rendering Marginalia");
-		LatexMarginaliaRenderer r = new LatexMarginaliaRenderer(cmm,dsm);
+		LatexMarginaliaRenderer r = new LatexMarginaliaRenderer(cp);
 		r.render(marginalia);
 		renderer.add(r);
 	}

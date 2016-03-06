@@ -1,23 +1,22 @@
 package org.openfuxml.renderer.latex.preamble;
 
-import org.openfuxml.interfaces.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
-import org.openfuxml.interfaces.renderer.latex.SectionHeaderNameFactory;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.factory.LatexSectionHeaderNameFactory;
+import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LatexArticle extends AbstractOfxLatexRenderer implements OfxLatexRenderer,SectionHeaderNameFactory
+public class LatexArticle extends AbstractOfxLatexRenderer implements OfxLatexRenderer,LatexSectionHeaderNameFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexArticle.class);
 	
-	public LatexArticle(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public LatexArticle(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 		txt.add("\\documentclass[12pt]{article}");
 		
-		LatexPackages renderPackages = new LatexPackages(cmm,dsm);
+		LatexPackages renderPackages = new LatexPackages(cp);
 		renderer.add(renderPackages);		
 		
 		txt.add("\\title{\\LaTeX}");

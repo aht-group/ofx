@@ -6,9 +6,8 @@ import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
-import org.openfuxml.interfaces.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.layout.LatexColumnRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexMarginaliaRenderer;
@@ -30,9 +29,9 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 	
 	private LatexWidthCalculator lwc;
 	
-	public LatexImageRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public LatexImageRenderer(ConfigurationProvider cp)
 	{	
-		super(cmm,dsm);
+		super(cp);
 		lwc = new LatexWidthCalculator();
 	}
 	
@@ -83,7 +82,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 			
 			if(image.isSetComment())
 			{
-				LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
+				LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 				rComment.render(image.getComment());
 				renderer.add(rComment);
 			}
@@ -97,7 +96,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		{
 			if(image.isSetTitle())
 			{
-				LatexTitleRenderer stf = new LatexTitleRenderer(cmm,dsm);
+				LatexTitleRenderer stf = new LatexTitleRenderer(cp);
 				stf.render(image);
 				postTxt.addAll(stf.getContent());
 			}

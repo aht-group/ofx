@@ -2,10 +2,10 @@ package org.openfuxml.renderer.html.structure;
 
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Raw;
-import org.openfuxml.interfaces.ConfigurationProvider;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
+import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;

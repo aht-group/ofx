@@ -6,9 +6,8 @@ import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.util.LatexFontUtil;
 import org.slf4j.Logger;
@@ -21,9 +20,9 @@ public class LatexContainerRenderer extends AbstractOfxLatexRenderer implements 
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexContainerRenderer.class);
 	
-	public LatexContainerRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
+	public LatexContainerRenderer(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 	}
 	
 	public void render(Container container) throws OfxAuthoringException

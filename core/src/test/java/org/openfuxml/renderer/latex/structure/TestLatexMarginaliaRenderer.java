@@ -25,7 +25,7 @@ public class TestLatexMarginaliaRenderer extends AbstractTestLatexRenderer
 	@Before public void init()
 	{
 		super.initDir("structure/marginalia");
-		renderer = new LatexMarginaliaRenderer(cmm,dsm);
+		renderer = new LatexMarginaliaRenderer(cp);
 	}
 	@After public void close(){renderer=null;}
 	
@@ -39,7 +39,7 @@ public class TestLatexMarginaliaRenderer extends AbstractTestLatexRenderer
     @Test public void inParagraph() throws IOException, OfxAuthoringException
     {
     	initFile(Key.inParagraph);
-    	LatexParagraphRenderer rendererParagraph = new LatexParagraphRenderer(cmm,dsm,false); ;
+    	LatexParagraphRenderer rendererParagraph = new LatexParagraphRenderer(cp,false); ;
     	rendererParagraph.render(MarginaliaProvider.inParagraph());
     	renderTest(rendererParagraph);
     }

@@ -4,9 +4,9 @@ import org.openfuxml.content.ofx.Content;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
-import org.openfuxml.interfaces.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.factory.ConfigurationProviderFacotry;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
@@ -26,13 +26,12 @@ public class LatexDocumentRenderer extends AbstractOfxLatexRenderer implements O
 	@Deprecated
 	public LatexDocumentRenderer(Pdf pdf, LatexPreamble latexPreamble)
 	{
-		this(new NoOpCrossMediaManager(),new OfxDefaultSettingsManager(),pdf,latexPreamble);
+		this(ConfigurationProviderFacotry.build(new NoOpCrossMediaManager(),new OfxDefaultSettingsManager()),pdf,latexPreamble);
 	}
 	
-	public LatexDocumentRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm,Pdf pdf, LatexPreamble latexPreamble)
+	public LatexDocumentRenderer(ConfigurationProvider cp, Pdf pdf, LatexPreamble latexPreamble)
 	{
-		super(cmm,dsm);
-		this.cmm=cmm;
+		super(cp);
 		this.pdf=pdf;
 		this.latexPreamble=latexPreamble;
 	}
@@ -54,7 +53,7 @@ public class LatexDocumentRenderer extends AbstractOfxLatexRenderer implements O
 	
 	private void renderSection(Section section) throws OfxAuthoringException, OfxConfigurationException
 	{
-		LatexSectionRenderer sf = new LatexSectionRenderer(cmm,dsm,lvl+1,latexPreamble);
+		LatexSectionRenderer sf = new LatexSectionRenderer(cp,lvl+1,latexPreamble);
 		sf.render(section);
 		renderer.add(sf);
 	}

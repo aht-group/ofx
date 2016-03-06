@@ -7,12 +7,14 @@ import java.io.StringWriter;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.openfuxml.interfaces.DefaultSettingsManager;
+import org.openfuxml.factory.ConfigurationProviderFacotry;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxCharacterRenderer;
-import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
-import org.openfuxml.interfaces.renderer.wiki.OfxWikiRenderer;
+import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
+import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.OfxWikiRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.openfuxml.xml.OfxNsPrefixMapper;
@@ -39,11 +41,14 @@ public class AbstractOfxCoreTest
 	protected DefaultSettingsManager dsm;
 	protected CrossMediaManager cmm;
 	
+	protected ConfigurationProvider cp;
+	
 	public AbstractOfxCoreTest()
 	{
 		saveReference = false;
 		dsm = new OfxDefaultSettingsManager();
 		cmm = new NoOpCrossMediaManager();
+		cp = ConfigurationProviderFacotry.build(cmm, dsm);
 	}
 	
 	protected void setEnvironment(boolean saveReference)

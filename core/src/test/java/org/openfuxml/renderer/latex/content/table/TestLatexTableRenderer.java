@@ -34,7 +34,7 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexTableRenderer(cmm,dsm);
+		renderer = new LatexTableRenderer(cp);
 	}
 	
 	@After public void close(){renderer=null;}

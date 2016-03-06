@@ -30,7 +30,7 @@ public class TestLatexAcronymRenderer extends AbstractTestLatexRenderer
 	
 	@Before public void init()
 	{
-		renderer = new LatexAcronymRenderer(cmm,dsm);
+		renderer = new LatexAcronymRenderer(cp);
 	}
 	@After public void close()
 	{
@@ -62,7 +62,7 @@ public class TestLatexAcronymRenderer extends AbstractTestLatexRenderer
     @Test public void acronym() throws IOException, OfxAuthoringException
     {    	
     	f = new File(rootDir,dir+"/acronym.txt");
-    	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cmm,dsm,true);
+    	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cp,true);
     	renderer.render(paragraph());
     	renderTest(renderer,f);
     }

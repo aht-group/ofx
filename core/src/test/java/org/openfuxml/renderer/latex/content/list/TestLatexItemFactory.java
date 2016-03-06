@@ -20,7 +20,7 @@ public class TestLatexItemFactory extends AbstractLatexListTest
 	private LatexItemFactory renderer;
 	private String dir = "item";
 	
-	@Before public void init(){renderer = new LatexItemFactory(cmm,dsm);}
+	@Before public void init(){renderer = new LatexItemFactory(cp);}
 	@After public void close(){renderer = null;}
 	
     @Test public void itemize() throws IOException, OfxAuthoringException

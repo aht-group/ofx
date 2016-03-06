@@ -7,9 +7,8 @@ import org.openfuxml.content.list.List;
 import org.openfuxml.content.list.Type;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.list.XmlListFactory;
-import org.openfuxml.interfaces.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
@@ -25,10 +24,10 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	private ListType listType;
 	private boolean preBlankLine;
 	
-	public LatexListRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm){this(cmm,dsm,true);}
-	public LatexListRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm,boolean preBlankLine)
+	public LatexListRenderer(ConfigurationProvider cp){this(cp,true);}
+	public LatexListRenderer(ConfigurationProvider cp,boolean preBlankLine)
 	{
-		super(cmm,dsm);
+		super(cp);
 		this.preBlankLine=preBlankLine;
 	}
 	
@@ -46,7 +45,7 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+debugType+" with: "+this.getClass().getSimpleName()));
 		if(list.isSetComment())
 		{
-			LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
+			LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 			rComment.render(list.getComment());
 			preTxt.addAll(rComment.getContent());
 		}
@@ -58,7 +57,7 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		
 		for(Item item : list.getItem())
 		{
-			LatexItemFactory f = new LatexItemFactory(cmm,dsm);
+			LatexItemFactory f = new LatexItemFactory(cp);
 			f.render(listType,item);
 			renderer.add(f);
 		}

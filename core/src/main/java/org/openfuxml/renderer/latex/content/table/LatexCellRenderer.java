@@ -8,9 +8,8 @@ import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.text.OfxEmphasisFactory;
-import org.openfuxml.interfaces.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.util.LatexFontUtil;
 import org.slf4j.Logger;
@@ -23,9 +22,9 @@ public class LatexCellRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	private Emphasis emphasisOverride; public void setEmphasisOverride(Emphasis emphasisOverride) {this.emphasisOverride = emphasisOverride;}
 	private Font font; public void setFont(Font font) {this.font = font;}
 
-	public LatexCellRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public LatexCellRenderer(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 	}
 	
 	public void render(Cell cell) throws OfxAuthoringException
