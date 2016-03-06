@@ -5,8 +5,7 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.txt.TxtTitleFactory;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
@@ -18,9 +17,9 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexTitleRenderer.class);
 	
-	public LatexTitleRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
+	public LatexTitleRenderer(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 	}
 	
 	public void render(Title title,Section section,int lvl,LatexPreamble latexPreamble)

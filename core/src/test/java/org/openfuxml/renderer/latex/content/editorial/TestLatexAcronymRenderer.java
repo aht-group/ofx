@@ -30,7 +30,7 @@ public class TestLatexAcronymRenderer extends AbstractTestLatexRenderer
 	
 	@Before public void init()
 	{
-		renderer = new LatexAcronymRenderer(cmm,dsm);
+		renderer = new LatexAcronymRenderer(cp);
 	}
 	@After public void close()
 	{

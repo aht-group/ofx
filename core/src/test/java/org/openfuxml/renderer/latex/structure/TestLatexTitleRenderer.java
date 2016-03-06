@@ -32,7 +32,7 @@ public class TestLatexTitleRenderer extends AbstractTestLatexRenderer
 	{
 		super.initDir("structure/title");
         preamble = new LatexPreamble(cmm,dsm);
-        renderer = new LatexTitleRenderer(cmm,dsm);
+        renderer = new LatexTitleRenderer(cp);
 	}
 	
     @Test

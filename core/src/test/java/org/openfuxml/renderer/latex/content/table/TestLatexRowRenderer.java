@@ -24,7 +24,7 @@ public class TestLatexRowRenderer extends AbstractLatexTableTest
 	@Before
 	public void initRenderer()
 	{
-		renderer = new LatexRowRenderer(cmm,dsm);
+		renderer = new LatexRowRenderer(cp);
 	}
 	
 	@After public void close(){renderer=null;}

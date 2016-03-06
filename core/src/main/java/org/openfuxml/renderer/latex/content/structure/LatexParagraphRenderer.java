@@ -84,7 +84,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 		if(nonInlineCounter==1 && image!=null)
 		{
 			paragraph.getContent().remove(image);
-			LatexImageRenderer rImage = new LatexImageRenderer(cmm,dsm);
+			LatexImageRenderer rImage = new LatexImageRenderer(cp);
 			rImage.render(this,image);
 			txt.add("\\begin{window}[0, r, "+rImage.getSingleLine()+", {}]");
 		}
@@ -124,14 +124,14 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 	
 	private void renderGlossary(StringBuffer sb, Glossary glossary) throws OfxAuthoringException
 	{
-		LatexGlossaryRenderer stf = new LatexGlossaryRenderer(cmm,dsm);
+		LatexGlossaryRenderer stf = new LatexGlossaryRenderer(cp);
 		stf.render(glossary);
 		for(String s : stf.getContent()){sb.append(s);}
 	}
 	
 	private void renderAcronym(StringBuffer sb, Acronym acronym) throws OfxAuthoringException
 	{
-		LatexAcronymRenderer stf = new LatexAcronymRenderer(cmm,dsm);
+		LatexAcronymRenderer stf = new LatexAcronymRenderer(cp);
 		stf.render(acronym);
 		for(String s : stf.getContent()){sb.append(s);}
 	}
@@ -152,7 +152,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 	
 	protected void renderMarginalia(StringBuffer sb, Marginalia marginalia) throws OfxAuthoringException
 	{
-		LatexMarginaliaRenderer lmr = new LatexMarginaliaRenderer(cmm,dsm);
+		LatexMarginaliaRenderer lmr = new LatexMarginaliaRenderer(cp);
 		lmr.render(marginalia);
 		for(String s : lmr.getContent()){sb.append(s);}
 	}

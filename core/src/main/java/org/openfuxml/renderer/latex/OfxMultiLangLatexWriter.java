@@ -10,6 +10,8 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.factory.ConfigurationProviderFacotry;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.latex.content.editorial.LatexAcronymRenderer;
@@ -36,12 +38,16 @@ public class OfxMultiLangLatexWriter
 	private CrossMediaManager cmm;
 	private DefaultSettingsManager dsm;
 	
+	private ConfigurationProvider cp;
+	
 	public OfxMultiLangLatexWriter(File baseLatex, String[] keys, CrossMediaManager cmm,DefaultSettingsManager dsm)
 	{
 		this.baseLatex=baseLatex;
 		this.keys=keys;
 		this.cmm=cmm;
 		this.dsm=dsm;
+		
+		cp = ConfigurationProviderFacotry.build(cmm,dsm);
 		
 		dirTable = "table";
 		logger.info("Base Directory for "+OfxMultiLangLatexWriter.class.getSimpleName()+": "+baseLatex.getAbsolutePath());
@@ -59,7 +65,7 @@ public class OfxMultiLangLatexWriter
 		{
 			OfxLangFilter omf = new OfxLangFilter(lang);
 			
-			LatexTableRenderer tableRenderer = new LatexTableRenderer(cmm,dsm);
+			LatexTableRenderer tableRenderer = new LatexTableRenderer(cp);
 			tableRenderer.setPreBlankLine(false);
 			tableRenderer.render(omf.filterLang(table));
 			
@@ -107,7 +113,7 @@ public class OfxMultiLangLatexWriter
 			logger.info(f.getAbsolutePath());
 			OfxLangFilter omf = new OfxLangFilter(lang);
 			
-			LatexGlossaryRenderer r = new LatexGlossaryRenderer(cmm,dsm);
+			LatexGlossaryRenderer r = new LatexGlossaryRenderer(ConfigurationProviderFacotry.build(cmm,dsm));
 			r.render(omf.filterLang(glossary));
 
 			StringWriter sw = new StringWriter();
@@ -125,7 +131,7 @@ public class OfxMultiLangLatexWriter
 			logger.info(f.getAbsolutePath());
 			OfxLangFilter omf = new OfxLangFilter(lang);
 			
-			LatexAcronymRenderer r = new LatexAcronymRenderer(cmm,dsm);
+			LatexAcronymRenderer r = new LatexAcronymRenderer(cp);
 			r.render(omf.filterLang(acronyms));
 
 			StringWriter sw = new StringWriter();

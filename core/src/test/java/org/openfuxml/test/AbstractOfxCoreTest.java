@@ -7,6 +7,8 @@ import java.io.StringWriter;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.openfuxml.factory.ConfigurationProviderFacotry;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxCharacterRenderer;
@@ -39,11 +41,14 @@ public class AbstractOfxCoreTest
 	protected DefaultSettingsManager dsm;
 	protected CrossMediaManager cmm;
 	
+	protected ConfigurationProvider cp;
+	
 	public AbstractOfxCoreTest()
 	{
 		saveReference = false;
 		dsm = new OfxDefaultSettingsManager();
 		cmm = new NoOpCrossMediaManager();
+		cp = ConfigurationProviderFacotry.build(cmm, dsm);
 	}
 	
 	protected void setEnvironment(boolean saveReference)

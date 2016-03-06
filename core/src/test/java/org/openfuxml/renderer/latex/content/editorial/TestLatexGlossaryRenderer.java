@@ -32,7 +32,7 @@ public class TestLatexGlossaryRenderer extends AbstractTestLatexRenderer
 	
 	@Before public void init()
 	{
-		renderer = new LatexGlossaryRenderer(cmm,dsm);
+		renderer = new LatexGlossaryRenderer(cp);
 	}
 	@After public void close()
 	{

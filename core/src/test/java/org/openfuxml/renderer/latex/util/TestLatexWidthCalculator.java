@@ -28,7 +28,7 @@ public class TestLatexWidthCalculator extends AbstractOfxCoreTest
 		width = new Width();
 		
 		sectionRenderer = new LatexSectionRenderer(cmm,dsm,1,new LatexPreamble(cmm,dsm));
-		marginaliaRenderer = new LatexMarginaliaRenderer(cmm,dsm);
+		marginaliaRenderer = new LatexMarginaliaRenderer(cp);
 	}
 	
 	@Test

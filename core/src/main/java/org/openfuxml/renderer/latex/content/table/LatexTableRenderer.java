@@ -1,18 +1,17 @@
 package org.openfuxml.renderer.latex.content.table;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
-import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
@@ -23,9 +22,9 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 	boolean preBlankLine;
 	public void setPreBlankLine(boolean preBlankLine) {this.preBlankLine = preBlankLine;}
 	
-	public LatexTableRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public LatexTableRenderer(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 	}
 	
 	public void render(Table table) throws OfxAuthoringException
@@ -37,14 +36,14 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		if(!table.getSpecification().isSetLong()){table.getSpecification().setLong(false);}
 		if(!table.getSpecification().isSetFloat()){table.getSpecification().setFloat(XmlFloatFactory.build(false));}
 		
-		OfxLatexTableRenderer tableRenderer = new LatexTabuRenderer(cmm,dsm); //getRendererForType();
+		OfxLatexTableRenderer tableRenderer = new LatexTabuRenderer(cp); //getRendererForType();
 		
 		if(preBlankLine){preTxt.add("");}
 		preTxt.addAll(LatexCommentRenderer.stars());
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a Latex table with: "+tableRenderer.getClass().getSimpleName()));
 		if(table.isSetComment())
 		{
-			LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
+			LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 			rComment.render(table.getComment());
 			preTxt.addAll(rComment.getContent());
 //			renderer.add(rComment);
@@ -87,8 +86,8 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		
 		switch(type)
 		{
-			case line: tableRenderer = new LatexLineTableRenderer(cmm,dsm);break;
-			default: tableRenderer = new LatexGridTableRenderer(cmm,dsm);break;
+			case line: tableRenderer = new LatexLineTableRenderer(cp);break;
+			default: tableRenderer = new LatexGridTableRenderer(cp);break;
 		}
 		return tableRenderer;
 	}

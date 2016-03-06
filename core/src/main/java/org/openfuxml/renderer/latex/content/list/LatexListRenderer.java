@@ -46,7 +46,7 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+debugType+" with: "+this.getClass().getSimpleName()));
 		if(list.isSetComment())
 		{
-			LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
+			LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 			rComment.render(list.getComment());
 			preTxt.addAll(rComment.getContent());
 		}

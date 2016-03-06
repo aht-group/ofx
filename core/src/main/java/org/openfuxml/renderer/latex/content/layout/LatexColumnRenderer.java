@@ -8,8 +8,7 @@ import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.util.LatexRaiseboxUtil;
@@ -26,9 +25,9 @@ public class LatexColumnRenderer extends AbstractOfxLatexRenderer implements Ofx
 	
 	private LatexWidthCalculator lwc;
 	
-	public LatexColumnRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
+	public LatexColumnRenderer(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 		lwc = new LatexWidthCalculator();
 	}
 	

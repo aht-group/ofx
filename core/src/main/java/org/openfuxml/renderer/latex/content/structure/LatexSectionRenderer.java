@@ -50,7 +50,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 			{
 				preTxt.addAll(LatexCommentRenderer.comment("All content of "+Section.class.getSimpleName()+" will be ignored because of inlcude"));
 			}
-			LatexIncludeRenderer rComment = new LatexIncludeRenderer(cmm,dsm);
+			LatexIncludeRenderer rComment = new LatexIncludeRenderer(cp);
 			rComment.render(Section.class,section.getInclude(),true);
 			renderer.add(rComment);
 			return;
@@ -65,7 +65,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		{
 			if (o instanceof Comment)
 			{
-				LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
+				LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 				rComment.render((Comment)o);
 				renderer.add(rComment);
 			}
@@ -100,7 +100,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	{
 		if(!section.isContainer())
 		{
-			LatexTitleRenderer stf = new LatexTitleRenderer(cmm,dsm);
+			LatexTitleRenderer stf = new LatexTitleRenderer(cp);
 			stf.render(title,section,lvl,latexPreamble);
 			renderer.add(stf);
 		}
@@ -108,7 +108,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	private void renderTable(Table table) throws OfxAuthoringException
 	{
-		LatexTableRenderer f = new LatexTableRenderer(cmm,dsm);
+		LatexTableRenderer f = new LatexTableRenderer(cp);
 		f.render(table);
 		renderer.add(f);
 	}
@@ -122,7 +122,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	private void renderInclude(Include include) throws OfxAuthoringException
 	{
-		LatexIncludeRenderer ir = new LatexIncludeRenderer(cmm,dsm);
+		LatexIncludeRenderer ir = new LatexIncludeRenderer(cp);
 		ir.render(include);
 		renderer.add(ir);
 	}

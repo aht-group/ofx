@@ -7,8 +7,7 @@ import org.openfuxml.content.editorial.Term;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.text.Text;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
@@ -21,9 +20,9 @@ public class LatexAcronymRenderer extends AbstractOfxLatexRenderer implements Of
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexAcronymRenderer.class);
 	
-	public LatexAcronymRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public LatexAcronymRenderer(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 	}
 	
 	public void render(Acronym acronym) throws OfxAuthoringException
@@ -43,7 +42,7 @@ public class LatexAcronymRenderer extends AbstractOfxLatexRenderer implements Of
 		
 		if(acronyms.isSetComment())
 		{
-			LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
+			LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 			rComment.render(acronyms.getComment());
 			preTxt.addAll(rComment.getContent());
 		}

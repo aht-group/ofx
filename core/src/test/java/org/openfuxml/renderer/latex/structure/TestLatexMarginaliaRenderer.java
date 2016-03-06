@@ -25,7 +25,7 @@ public class TestLatexMarginaliaRenderer extends AbstractTestLatexRenderer
 	@Before public void init()
 	{
 		super.initDir("structure/marginalia");
-		renderer = new LatexMarginaliaRenderer(cmm,dsm);
+		renderer = new LatexMarginaliaRenderer(cp);
 	}
 	@After public void close(){renderer=null;}
 	

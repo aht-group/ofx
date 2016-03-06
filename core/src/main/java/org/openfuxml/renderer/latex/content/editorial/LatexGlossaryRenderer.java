@@ -7,8 +7,7 @@ import org.openfuxml.content.editorial.Term;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.text.Text;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
@@ -21,9 +20,9 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexGlossaryRenderer.class);
 	
-	public LatexGlossaryRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public LatexGlossaryRenderer(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 	}
 	
 	public void render(Glossary glossary) throws OfxAuthoringException
@@ -55,7 +54,7 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 		
 		if(glossary.isSetComment())
 		{
-			LatexCommentRenderer rComment = new LatexCommentRenderer(cmm,dsm);
+			LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 			rComment.render(glossary.getComment());
 			preTxt.addAll(rComment.getContent());
 		}

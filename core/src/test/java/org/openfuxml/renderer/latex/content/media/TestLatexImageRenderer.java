@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -22,7 +20,6 @@ import org.openfuxml.factory.xml.layout.XmlHeightFactory;
 import org.openfuxml.factory.xml.media.XmlMediaFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.media.cross.LatexCrossMediaManager;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.media.transcode.Pdf2PdfTranscoder;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
@@ -33,6 +30,8 @@ import org.openfuxml.renderer.util.OfxContentDebugger;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestLatexImageRenderer extends AbstractLatexMediaTest
 {	
@@ -54,9 +53,9 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
 		cmm = new LatexCrossMediaManager(new File(fTarget,"base"));
 		
         rSection = new LatexSectionRenderer(cmm,dsm,1, new LatexPreamble(cmm,dsm));
-        rImage = new LatexImageRenderer(new NoOpCrossMediaManager(),dsm);
-        rCell = new LatexCellRenderer(new NoOpCrossMediaManager(),dsm);
-        renderer = new LatexTableRenderer(new NoOpCrossMediaManager(),dsm);
+        rImage = new LatexImageRenderer(cp);
+        rCell = new LatexCellRenderer(cp);
+        renderer = new LatexTableRenderer(cp);
         
         image = new Image();
         image.setId("my.id");

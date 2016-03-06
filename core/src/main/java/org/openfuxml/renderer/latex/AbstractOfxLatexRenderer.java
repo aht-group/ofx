@@ -109,28 +109,28 @@ public class AbstractOfxLatexRenderer extends AbstractOfxRenderer
 	
 	protected void containerRenderer(Container container) throws OfxAuthoringException
 	{
-		LatexContainerRenderer f = new LatexContainerRenderer(cmm,dsm);
+		LatexContainerRenderer f = new LatexContainerRenderer(cp);
 		f.render(container);
 		renderer.add(f);
 	}
 	
 	protected void columnRenderer(Column column) throws OfxAuthoringException
 	{
-		LatexColumnRenderer f = new LatexColumnRenderer(cmm,dsm);
+		LatexColumnRenderer f = new LatexColumnRenderer(cp);
 		f.render(this,column);
 		renderer.add(f);
 	}
 	
 	protected void widthRenderer(Width width) throws OfxAuthoringException
 	{
-		LatexWidthRenderer f = new LatexWidthRenderer(cmm,dsm);
+		LatexWidthRenderer f = new LatexWidthRenderer(cp);
 		f.render(this,width);
 		renderer.add(f);
 	}
 	
 	protected void highlightRenderer(Highlight highlight) throws OfxAuthoringException
 	{
-		LatexHighlightRenderer f = new LatexHighlightRenderer(cmm,dsm);
+		LatexHighlightRenderer f = new LatexHighlightRenderer(cp);
 		f.render(highlight);
 		renderer.add(f);
 	}
@@ -144,7 +144,7 @@ public class AbstractOfxLatexRenderer extends AbstractOfxRenderer
 	
 	protected void renderImage(Image image) throws OfxAuthoringException
 	{
-		LatexImageRenderer f = new LatexImageRenderer(cmm,dsm);
+		LatexImageRenderer f = new LatexImageRenderer(cp);
 		f.render(this,image);
 		renderer.add(f);
 	}
@@ -152,7 +152,7 @@ public class AbstractOfxLatexRenderer extends AbstractOfxRenderer
 	protected void renderMarginalia(Marginalia marginalia) throws OfxAuthoringException
 	{
 		logger.trace("Rendering Marginalia");
-		LatexMarginaliaRenderer r = new LatexMarginaliaRenderer(cmm,dsm);
+		LatexMarginaliaRenderer r = new LatexMarginaliaRenderer(cp);
 		r.render(marginalia);
 		renderer.add(r);
 	}

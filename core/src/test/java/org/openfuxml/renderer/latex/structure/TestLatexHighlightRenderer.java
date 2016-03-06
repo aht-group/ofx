@@ -25,7 +25,7 @@ public class TestLatexHighlightRenderer extends AbstractTestLatexRenderer
 	@Before public void init()
 	{
 		super.initDir("structure/highlight");
-		renderer = new LatexHighlightRenderer(cmm,dsm);
+		renderer = new LatexHighlightRenderer(cp);
 	}
 	@After public void close(){renderer=null;}
     
