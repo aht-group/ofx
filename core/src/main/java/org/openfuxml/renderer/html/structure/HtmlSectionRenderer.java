@@ -20,6 +20,7 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 	final static Logger logger = LoggerFactory.getLogger(HtmlSectionRenderer.class);
 
 	int lvl;
+	static int sectionCount = 0;
 
 	@Deprecated
 	public HtmlSectionRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm, int lvl)
@@ -35,6 +36,8 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 
 	public void render(HtmlElement parent, Section section)
 	{
+		if (lvl == 1) {sectionCount++;}
+
 		HtmlElement div = new HtmlElement("section");
 
 		//Comments always on top!

@@ -1,9 +1,6 @@
 package org.openfuxml.renderer.html.structure;
 
-import org.jdom2.DocType;
-import org.jdom2.Document;
 import org.openfuxml.content.ofx.Content;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.ConfigurationProvider;
@@ -11,9 +8,7 @@ import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
-import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.html.head.HtmlHead;
-import org.openfuxml.renderer.markdown.structure.MdSectionRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,15 +23,13 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 	{
 		super(cmm,dsm);
 		this.cmm=cmm;
-		html = new HtmlElement("html");
-		doc = new Document(html, new DocType("html"));
+		init();
 		this.pageTitle = pageTitle;
 	}
 
 	public HtmlDocumentRenderer(ConfigurationProvider cp, String pageTitle) {
 		super(cp);
-		html = new HtmlElement("html");
-		doc = new Document(html, new DocType("html"));
+		init();
 		this.pageTitle = pageTitle;
 	}
 

@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.html.media;
 
+import org.jdom2.output.support.SAXTarget;
 import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.factory.txt.TxtTitleFactory;
@@ -17,6 +18,8 @@ import org.slf4j.LoggerFactory;
 public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlImageRenderer.class);
+
+	public static int imgcount = 0;
 
 	@Deprecated
 	public HtmlImageRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
@@ -47,6 +50,7 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdR
 	{
 		String title = "This is an image.";
 		if(image.getTitle() != null){title = TxtTitleFactory.build(image.getTitle());}
+		imgcount++;
 		HtmlElement figure = new HtmlElement("figure");
 		HtmlElement img = new HtmlElement("img");
 		img.setAttribute("id", image.getId());

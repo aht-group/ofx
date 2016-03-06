@@ -4,10 +4,14 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.content.ofx.Listing;
+import org.openfuxml.content.ofx.Raw;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
+import org.openfuxml.test.provider.ListingProvider;
 import org.openfuxml.test.provider.SectionProvider;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
@@ -17,7 +21,7 @@ public class TestHtmlListingRenderer extends AbstractTestHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(TestHtmlListingRenderer.class);
 
-	private enum Key {body, withComment}
+	private enum Key {raw, external}
 	
 	private HtmlBody renderer;
 
@@ -27,19 +31,21 @@ public class TestHtmlListingRenderer extends AbstractTestHtmlRenderer
 		renderer = new HtmlBody(new OfxConfigurationProvider());
 	}
 
-	@Test public void body() throws IOException
+	@Test public void raw() throws IOException
 	{
-		initFile(Key.body);
-        renderer.render(SectionProvider.build());
+		initFile(Key.raw);
+        renderer.render(ListingProvider.build());
     	renderTest(renderer);
 	}
 
-	@Test public void withComment() throws IOException
+
+	@Test public void external() throws IOException
 	{
-		initFile(Key.withComment);
-		renderer.render(SectionProvider.buildWithComment());
+		initFile(Key.external);
+		renderer.render(ListingProvider.buildEx());
 		renderTest(renderer);
 	}
+
 
 	public static void main(String[] args) throws IOException
 	{
@@ -47,7 +53,7 @@ public class TestHtmlListingRenderer extends AbstractTestHtmlRenderer
 		TestHtmlListingRenderer test = new TestHtmlListingRenderer();
         test.setEnvironment(true);
 		
-        test.init();test.body();
-		test.init();test.withComment();
+//        test.init();test.raw();
+		test.init();test.external();
 	}
 }

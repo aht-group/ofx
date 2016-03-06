@@ -37,23 +37,23 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(MdSectionRenderer.class);
 
-	protected static HtmlElement html = new HtmlElement("html");
-	protected static Document doc = new Document(html, new DocType("html"));
+	protected HtmlElement html;
+	protected Document doc;
 	
 	@Deprecated
-	public AbstractOfxHtmlRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
-	{
-		this(ConfigurationProviderFacotry.build(cmm,dsm));
-	}
+	public AbstractOfxHtmlRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm) {this(ConfigurationProviderFacotry.build(cmm,dsm));}
 	
-	public AbstractOfxHtmlRenderer(ConfigurationProvider cp)
+	public AbstractOfxHtmlRenderer(ConfigurationProvider cp){super(cp);}
+
+	public void init()
 	{
-		super(cp);
+		html = new HtmlElement("html");
+		doc = new Document(html, new DocType("html"));
 		html.setNamespace(Namespace.getNamespace("http://www.w3.org/1999/xhtml"));
 	}
 
 	/*Das Wurzelelement html rekursiv als List von Java String Objekten zurückgeben.
-	 * Hauptsächlich zu Test und Debug Zwecken */
+		 * Hauptsächlich zu Test und Debug Zwecken */
 	public List<String> getContent()
 	{
 		List<String> content = new ArrayList<String>();
@@ -133,7 +133,7 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 	public void write(Writer w) throws IOException
 	{
 		try{
-			XMLOutputter xmlOutput = new XMLOutputter(ownPrettyFormat().setLineSeparator(dsm.lineSeparator()));
+			XMLOutputter xmlOutput = new XMLOutputter(ownPrettyFormat().setLineSeparator("\n"));
 			xmlOutput.output(doc, w);
 		} catch (IOException io){io.printStackTrace();}
 	}

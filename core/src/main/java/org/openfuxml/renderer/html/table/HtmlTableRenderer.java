@@ -22,6 +22,8 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlTableRenderer.class);
 
+	public static int tblcount = 0;
+
 	@Deprecated
 	public HtmlTableRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
@@ -34,6 +36,7 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 
 	public void render(HtmlElement parent, Table tab)
 	{
+		tblcount++;
 		HtmlElement table = new HtmlElement("table");
 		table.setAttribute("id", tab.getId()); //benötigt für interne Referenzen!
 		table.setAttribute("style", "width:100%");

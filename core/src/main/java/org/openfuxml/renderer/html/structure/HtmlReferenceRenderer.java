@@ -1,12 +1,15 @@
 package org.openfuxml.renderer.html.structure;
 
 import org.openfuxml.content.ofx.Reference;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
+import org.openfuxml.renderer.html.media.HtmlImageRenderer;
+import org.openfuxml.renderer.html.table.HtmlTableRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,21 +30,31 @@ public class HtmlReferenceRenderer extends AbstractOfxHtmlRenderer implements Of
 	/*Referenzen innerhalb des Dokumentes.
 		Das referenzierte Objekt benötigt eine id!
 		*/
-	public void renderIntern(HtmlElement parent, Reference reference,/*@NotNull*/ String text)
+	public void renderIntern(HtmlElement parent, Reference reference)
 	{
 		HtmlElement ref = new HtmlElement("a");
 		String target = "#" + reference.getTarget();
 		ref.setAttribute("href",target);
-		ref.addContent(text);
+		ref.addContent(HtmlSectionRenderer.sectionCount + numbering(reference.getTarget()));
 		parent.addContent(ref);
 	}
 
-	/*Referenzen/Links zu anderen Webseiten usw.*/
+	/*Referenzen/Links zu anderen Webseiten */
 	public void renderExtern(HtmlElement parent, String link, String text)
 	{
 		HtmlElement ref = new HtmlElement("a");
 		ref.setAttribute("href",link);
 		ref.addContent(text);
 		parent.addContent(ref);
+	}
+
+	private String numbering(String target)
+	{
+		String nr = ".";
+		switch (target.charAt(0)){
+			case 't': nr+= HtmlTableRenderer.tblcount; break;
+			case 'i': nr+= HtmlImageRenderer.imgcount; break;
+		}
+		return nr;
 	}
 }

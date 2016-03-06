@@ -29,8 +29,8 @@ public class HtmlListRenderer extends AbstractOfxHtmlRenderer implements OfxMdRe
 	public void render(HtmlElement parent, List list)
 	{
 		HtmlElement element;
-
-		String type = "ul"; boolean isDescription = false;
+		String type = "ul";
+		boolean isDescription = false;
 		if(list.getType().isSetOrdering() && list.getType().getOrdering().equalsIgnoreCase("ordered")){type = "ol";}
 		if(list.getType().isSetDescription() && list.getType().isDescription())
 		{
@@ -49,8 +49,4 @@ public class HtmlListRenderer extends AbstractOfxHtmlRenderer implements OfxMdRe
 		itemR.render(list, i, isDescription);
 	}
 
-//	private void stuff(HtmlElement element,Item i, boolean isDescription)
-//	{
-//		itemRenderer(element, i, isDescription);
-//	}
 }

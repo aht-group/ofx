@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.html.structure;
 
+import org.apache.batik.ext.awt.image.renderable.PadRable;
 import org.openfuxml.content.ofx.Content;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Sections;
@@ -9,6 +10,9 @@ import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
+import org.openfuxml.renderer.html.media.HtmlImageRenderer;
+import org.openfuxml.renderer.html.table.HtmlTableRenderer;
+import sun.dc.pr.PRError;
 
 
 public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
@@ -28,6 +32,7 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		HtmlElement cont = new HtmlElement("div");
 		for(Object c : content.getContent())
 		{
+			resetCounter();
 			if(c instanceof Sections){
 				for(Object s : ((Sections)c).getContent())
 				{
@@ -42,6 +47,7 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 
 	public void render(Section section)
 	{
+		init();
 		if(html.getChild("body") == null)
 		{
 			body = new HtmlElement("body");
@@ -49,6 +55,12 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		}
 		else{body.removeContent();}
 		renderSection(body, section, 1);
+	}
+
+	private void resetCounter()
+	{
+		HtmlImageRenderer.imgcount = 0;
+		HtmlTableRenderer.tblcount = 0;
 	}
 
 	private void renderSection(HtmlElement parent, Section section, int lvl)
