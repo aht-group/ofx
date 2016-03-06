@@ -12,7 +12,7 @@ import org.openfuxml.content.text.Symbol;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.wiki.OfxWikiRenderer;
+import org.openfuxml.interfaces.renderer.OfxWikiRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

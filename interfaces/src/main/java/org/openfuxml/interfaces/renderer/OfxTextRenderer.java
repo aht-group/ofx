@@ -1,7 +1,6 @@
-package org.openfuxml.interfaces.renderer.text;
+package org.openfuxml.interfaces.renderer;
 
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.renderer.OfxCharacterRenderer;
 
 public interface OfxTextRenderer extends OfxCharacterRenderer
 {

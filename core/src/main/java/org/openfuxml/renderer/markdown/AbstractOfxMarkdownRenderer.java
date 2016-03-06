@@ -6,7 +6,7 @@ import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
+import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.markdown.media.MdImageRenderer;
 import org.openfuxml.renderer.markdown.structure.MdListRenderer;

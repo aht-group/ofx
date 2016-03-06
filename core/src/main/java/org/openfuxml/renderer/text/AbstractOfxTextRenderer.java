@@ -12,7 +12,7 @@ import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.text.OfxTextRenderer;
+import org.openfuxml.interfaces.renderer.OfxTextRenderer;
 import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.text.structure.TextParagraphRenderer;

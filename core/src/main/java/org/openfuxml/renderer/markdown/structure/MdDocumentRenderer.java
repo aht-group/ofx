@@ -7,7 +7,7 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
+import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
 import org.openfuxml.xml.renderer.cmp.Pdf;
 import org.slf4j.Logger;

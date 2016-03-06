@@ -6,7 +6,7 @@ import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.html.OfxHtmlRenderer;
+import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 

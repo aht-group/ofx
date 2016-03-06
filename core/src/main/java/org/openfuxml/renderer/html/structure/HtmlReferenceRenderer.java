@@ -4,7 +4,7 @@ import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 import org.slf4j.Logger;

@@ -10,7 +10,7 @@ import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.ConfigurationProvider;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;

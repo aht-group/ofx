@@ -2,7 +2,7 @@ package org.openfuxml.renderer.markdown.structure;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.interfaces.renderer.md.OfxMdRenderer;
+import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;

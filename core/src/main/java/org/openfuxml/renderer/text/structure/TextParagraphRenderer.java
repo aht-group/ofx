@@ -4,7 +4,7 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.text.OfxTextRenderer;
+import org.openfuxml.interfaces.renderer.OfxTextRenderer;
 import org.openfuxml.renderer.text.AbstractOfxTextRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
