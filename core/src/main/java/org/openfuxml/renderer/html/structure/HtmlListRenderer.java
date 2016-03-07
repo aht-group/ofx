@@ -1,6 +1,8 @@
 package org.openfuxml.renderer.html.structure;
 
-
+/**
+ * Author: Rebecca Roblick
+ */
 import org.openfuxml.content.list.Item;
 import org.openfuxml.content.list.List;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;

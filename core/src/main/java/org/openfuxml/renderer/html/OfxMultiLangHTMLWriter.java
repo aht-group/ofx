@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html;
-
+/**
+ * Author: Rebecca Roblick
+ */
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.StringIO;
 import org.openfuxml.content.editorial.Acronyms;

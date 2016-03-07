@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html;
-
+/**
+ * Author: Rebecca Roblick
+ */
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -23,11 +25,7 @@ import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
-import org.openfuxml.renderer.html.structure.HtmlCommentRenderer;
-import org.openfuxml.renderer.html.structure.HtmlEmphasisRenderer;
-import org.openfuxml.renderer.html.structure.HtmlListRenderer;
-import org.openfuxml.renderer.html.structure.HtmlMarginaliaRenderer;
-import org.openfuxml.renderer.html.structure.HtmlParagraphRenderer;
+import org.openfuxml.renderer.html.structure.*;
 import org.openfuxml.renderer.html.table.HtmlTableRenderer;
 import org.openfuxml.renderer.markdown.structure.MdSectionRenderer;
 import org.slf4j.Logger;
@@ -37,20 +35,12 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(MdSectionRenderer.class);
 
-	protected HtmlElement html;
-	protected Document doc;
+
 	
 	@Deprecated
 	public AbstractOfxHtmlRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm) {this(ConfigurationProviderFacotry.build(cmm,dsm));}
 	
 	public AbstractOfxHtmlRenderer(ConfigurationProvider cp){super(cp);}
-
-	public void init()
-	{
-		html = new HtmlElement("html");
-		doc = new Document(html, new DocType("html"));
-		html.setNamespace(Namespace.getNamespace("http://www.w3.org/1999/xhtml"));
-	}
 
 	/*Das Wurzelelement html rekursiv als List von Java String Objekten zurückgeben.
 		 * Hauptsächlich zu Test und Debug Zwecken */
@@ -58,7 +48,7 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 	{
 		List<String> content = new ArrayList<String>();
 		XMLOutputter xmlOutput = new XMLOutputter(ownPrettyFormat());
-		content.add(xmlOutput.outputString(html));
+		content.add(xmlOutput.outputString(HtmlDocumentRenderer.html));
 		return content;
 	}
 
@@ -134,7 +124,7 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 	{
 		try{
 			XMLOutputter xmlOutput = new XMLOutputter(ownPrettyFormat().setLineSeparator("\n"));
-			xmlOutput.output(doc, w);
+			xmlOutput.output(HtmlDocumentRenderer.doc, w);
 		} catch (IOException io){io.printStackTrace();}
 	}
 

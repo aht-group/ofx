@@ -1,6 +1,7 @@
 package org.openfuxml.renderer.html.structure;
-
-import org.apache.batik.ext.awt.image.renderable.PadRable;
+/**
+ * Author: Rebecca Roblick
+ */
 import org.openfuxml.content.ofx.Content;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Sections;
@@ -12,7 +13,6 @@ import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
 import org.openfuxml.renderer.html.table.HtmlTableRenderer;
-import sun.dc.pr.PRError;
 
 
 public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
@@ -42,16 +42,17 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 			else if(c instanceof Section){renderSection(cont, ((Section)c), 1);}
 		}
 		body.addContent(cont);
-		html.getContent().add(body);
+		HtmlDocumentRenderer.html.getContent().add(body);
 	}
 
 	public void render(Section section)
 	{
-		init();
-		if(html.getChild("body") == null)
+
+		new HtmlDocumentRenderer(cp,"").init();
+		if(HtmlDocumentRenderer.html.getChild("body") == null)
 		{
 			body = new HtmlElement("body");
-			html.getContent().add(body);
+			HtmlDocumentRenderer.html.getContent().add(body);
 		}
 		else{body.removeContent();}
 		renderSection(body, section, 1);

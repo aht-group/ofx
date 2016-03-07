@@ -1,6 +1,8 @@
 package org.openfuxml.renderer.html.util;
 
-
+/**
+ * Author: Rebecca Roblick
+ */
 import org.openfuxml.content.layout.Font;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

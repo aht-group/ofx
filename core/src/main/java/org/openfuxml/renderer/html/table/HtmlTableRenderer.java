@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html.table;
-
+/**
+ * Author: Rebecca Roblick
+ */
 import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
@@ -14,6 +16,7 @@ import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
+import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
 import org.openfuxml.renderer.html.util.HtmlFontUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +53,7 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 
 		parent.addContent(table);
 
-		if(tab.getSpecification() != null){HtmlElement.addStyleElement(styleProperties(tab.getSpecification().getColumns()), html);}
+		if(tab.getSpecification() != null){HtmlElement.addStyleElement(styleProperties(tab.getSpecification().getColumns()), HtmlDocumentRenderer.html);}
 	}
 
 	private void renderHead(HtmlElement table, Head head)

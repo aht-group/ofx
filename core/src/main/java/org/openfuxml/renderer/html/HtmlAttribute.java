@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html;
-
+/**
+ * Author: Rebecca Roblick
+ */
 import org.jdom2.Attribute;
 
 public class HtmlAttribute extends Attribute

@@ -1,7 +1,8 @@
 package org.openfuxml.renderer.html.media;
 
-import org.jdom2.output.support.SAXTarget;
-import org.openfuxml.content.layout.Height;
+/**
+ * Author: Rebecca Roblick
+ */
 import org.openfuxml.content.media.Image;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
@@ -10,7 +11,6 @@ import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
-import org.openfuxml.xml.renderer.cmp.Html;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

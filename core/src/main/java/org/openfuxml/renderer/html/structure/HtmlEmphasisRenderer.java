@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html.structure;
-
+/**
+ * Author: Rebecca Roblick
+ */
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;

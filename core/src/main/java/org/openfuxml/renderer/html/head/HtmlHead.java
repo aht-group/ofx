@@ -1,5 +1,8 @@
 package org.openfuxml.renderer.html.head;
 
+/**
+ * Author: Rebecca Roblick
+ */
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
@@ -7,6 +10,7 @@ import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlAttribute;
 import org.openfuxml.renderer.html.HtmlElement;
+import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +48,7 @@ public class HtmlHead extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		if(cssFiles != null){css(head,cssFiles);}
 		pageTitle(head, pageTitle);
 		style(head);
-		html.getContent().add(head);
+		HtmlDocumentRenderer.html.getContent().add(head);
 
 	}
 

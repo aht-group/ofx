@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html;
-
+/**
+ * Author: Rebecca Roblick
+ */
 import org.jdom2.*;
 import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.layout.Width;

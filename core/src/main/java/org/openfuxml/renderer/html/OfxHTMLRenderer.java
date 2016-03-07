@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html;
-
+/**
+ * Author: Rebecca Roblick
+ */
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;

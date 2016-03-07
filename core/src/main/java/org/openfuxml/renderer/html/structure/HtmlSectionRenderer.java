@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html.structure;
-
+/**
+ * Author: Rebecca Roblick
+ */
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.*;
