@@ -15,8 +15,6 @@ import org.openfuxml.renderer.html.HtmlElement;
 /*Klasse für HTML Überschriften, e.g <h1>...</h1>*/
 public class HtmlHeadingRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
-	@Deprecated
-	public HtmlHeadingRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm){super(cmm, dsm);}
 
 	public HtmlHeadingRenderer(ConfigurationProvider cp) {
 		super(cp);

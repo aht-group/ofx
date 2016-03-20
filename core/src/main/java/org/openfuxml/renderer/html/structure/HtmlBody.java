@@ -17,10 +17,7 @@ import org.openfuxml.renderer.html.table.HtmlTableRenderer;
 
 public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
-	private static HtmlElement body;
-
-	@Deprecated
-	public HtmlBody(CrossMediaManager cmm, DefaultSettingsManager dsm){super(cmm, dsm);}
+	private HtmlElement body;
 
 	public HtmlBody(ConfigurationProvider cp) {
 		super(cp);
@@ -42,17 +39,17 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 			else if(c instanceof Section){renderSection(cont, ((Section)c), 1);}
 		}
 		body.addContent(cont);
-		HtmlDocumentRenderer.html.getContent().add(body);
+		HtmlDocumentRenderer.getInstance().getHtml().getContent().add(body);
 	}
 
 	public void render(Section section)
 	{
 
 		new HtmlDocumentRenderer(cp,"").init();
-		if(HtmlDocumentRenderer.html.getChild("body") == null)
+		if(HtmlDocumentRenderer.getInstance().getHtml().getChild("body") == null)
 		{
 			body = new HtmlElement("body");
-			HtmlDocumentRenderer.html.getContent().add(body);
+			HtmlDocumentRenderer.getInstance().getHtml().getContent().add(body);
 		}
 		else{body.removeContent();}
 		renderSection(body, section, 1);

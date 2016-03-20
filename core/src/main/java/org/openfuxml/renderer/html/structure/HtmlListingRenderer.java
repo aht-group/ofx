@@ -5,8 +5,6 @@ package org.openfuxml.renderer.html.structure;
  */
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
@@ -20,11 +18,7 @@ public class HtmlListingRenderer extends AbstractOfxHtmlRenderer implements OfxM
 	private final Logger logger = LoggerFactory.getLogger(HtmlListingRenderer.class);
 
 
-	@Deprecated //ToDo delete all deprecated constructor
-	public HtmlListingRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
-	{
-		super(cmm, dsm);
-	}
+	//ToDo delete all deprecated constructor
 
 	public HtmlListingRenderer(ConfigurationProvider cp) {
 		super(cp);
@@ -38,7 +32,7 @@ public class HtmlListingRenderer extends AbstractOfxHtmlRenderer implements OfxM
 		if(listing.isSetRaw()){code.addContent(listing.getRaw().getValue());}
 		if(listing.isSetExternal()){
 			try {
-				code.addContent(getExtrernal(listing.getExternal()));
+				code.addContent(getExternal(listing.getExternal()));
 			} catch (IOException e) {
 				logger.error(e.getMessage());
 			}
@@ -48,7 +42,7 @@ public class HtmlListingRenderer extends AbstractOfxHtmlRenderer implements OfxM
 		parent.addContent(pre.addContent(code));
 	}
 
-	public String getExtrernal(String ex) throws IOException {
+	public String getExternal(String ex) throws IOException {
 		File f = new File(ex);
 		String tmp ="";
 		BufferedReader br = new BufferedReader(new FileReader(f));

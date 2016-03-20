@@ -74,7 +74,7 @@ public class OfxTargetRenderer
 	
 	public void renderHtml(Html html, File fSrc) throws OfxAuthoringException, OfxConfigurationException, OfxImplementationException
 	{
-		OfxHTMLRenderer htmlRenderer = new OfxHTMLRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		OfxHTMLRenderer htmlRenderer = new OfxHTMLRenderer(new OfxConfigurationProvider(),"");
 		htmlRenderer.render(fSrc.getAbsolutePath());
 	}
 

@@ -58,7 +58,7 @@ public class AbstractOfxLatexRenderer extends AbstractOfxRenderer
 		renderer = new ArrayList<OfxLatexRenderer>();
 	}
 	
-	protected void addPackages9()
+	protected void addPackages()
 	{
 		
 	}

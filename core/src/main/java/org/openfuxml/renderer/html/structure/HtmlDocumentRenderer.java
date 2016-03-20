@@ -21,9 +21,16 @@ import org.slf4j.LoggerFactory;
 public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements OfxMdRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlDocumentRenderer.class);
-	public static HtmlElement html;
-	public static Document doc;
+
+	private HtmlElement html;
+	public HtmlElement getHtml() {return html;}
+	public void setHtml(HtmlElement html) {this.html = html;}
+
+	public Document doc;
 	private String pageTitle;
+
+	private static HtmlDocumentRenderer instance;
+	public static HtmlDocumentRenderer getInstance() {return instance;}
 
 	@Deprecated
 	public HtmlDocumentRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm, String pageTitle)
@@ -36,8 +43,8 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 
 	public HtmlDocumentRenderer(ConfigurationProvider cp, String pageTitle) {
 		super(cp);
-
 		this.pageTitle = pageTitle;
+		instance = this;
 	}
 
 	public void render(Content content) throws OfxAuthoringException, OfxConfigurationException

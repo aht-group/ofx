@@ -48,7 +48,7 @@ public class HtmlHead extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		if(cssFiles != null){css(head,cssFiles);}
 		pageTitle(head, pageTitle);
 		style(head);
-		HtmlDocumentRenderer.html.getContent().add(head);
+		HtmlDocumentRenderer.getInstance().getHtml().getContent().add(head);
 
 	}
 

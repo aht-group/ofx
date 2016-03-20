@@ -53,7 +53,7 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 
 		parent.addContent(table);
 
-		if(tab.getSpecification() != null){HtmlElement.addStyleElement(styleProperties(tab.getSpecification().getColumns()), HtmlDocumentRenderer.html);}
+		if(tab.getSpecification() != null){HtmlElement.addStyleElement(styleProperties(tab.getSpecification().getColumns()), HtmlDocumentRenderer.getInstance().getHtml());}
 	}
 
 	private void renderHead(HtmlElement table, Head head)
