@@ -67,9 +67,9 @@ public class Highlight implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link Marginalia }
      * {@link String }
      * {@link Paragraph }
-     * {@link Marginalia }
      * 
      * 
      */

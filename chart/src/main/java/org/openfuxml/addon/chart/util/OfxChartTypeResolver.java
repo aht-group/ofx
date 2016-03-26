@@ -1,7 +1,7 @@
 package org.openfuxml.addon.chart.util;
 
 import org.metachart.xml.chart.AxisType;
-import org.openfuxml.xml.addon.chart.Renderer;
+import org.metachart.xml.chart.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

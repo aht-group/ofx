@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import org.metachart.xml.chart.Data;
-import org.openfuxml.xml.addon.chart.DataSet;
-import org.openfuxml.xml.addon.chart.RendererTimeseries;
+import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.RendererTimeseries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

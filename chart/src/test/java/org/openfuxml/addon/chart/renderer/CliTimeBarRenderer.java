@@ -8,12 +8,12 @@ import java.util.Random;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.metachart.xml.chart.Data;
+import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Grid;
+import org.metachart.xml.chart.Renderer;
 import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.addon.chart.test.OfxChartTestBootstrap;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.DataSet;
-import org.openfuxml.xml.addon.chart.Grid;
-import org.openfuxml.xml.addon.chart.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

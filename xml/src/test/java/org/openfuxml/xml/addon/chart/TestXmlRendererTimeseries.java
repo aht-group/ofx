@@ -3,13 +3,14 @@ package org.openfuxml.xml.addon.chart;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.metachart.xml.chart.RendererTimeseries;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestXmlRendererTimeseries extends AbstractXmlChartTest
 {	

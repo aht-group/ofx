@@ -19,7 +19,7 @@ public class ChartColorFactory
 	{
 		if(ofxChart.isSetColors()  && ofxChart.getColors().isSetColor())
 		{
-			for(org.openfuxml.xml.addon.chart.Color c : ofxChart.getColors().getColor())
+			for(org.metachart.xml.chart.Color c : ofxChart.getColors().getColor())
 			{
 				if(c.getTyp().equals(area.toString()))
 				{
@@ -30,16 +30,16 @@ public class ChartColorFactory
 		return getDefault(area);
 	}
 	
-	public static synchronized org.openfuxml.xml.addon.chart.Color create(int r, int g, int b, int a,Area area)
+	public static synchronized org.metachart.xml.chart.Color create(int r, int g, int b, int a,Area area)
 	{
-		org.openfuxml.xml.addon.chart.Color color = create(r, g, b, a);
+		org.metachart.xml.chart.Color color = create(r, g, b, a);
 		color.setTyp(area.toString());
 		return color;
 	}
 	
-	public static synchronized org.openfuxml.xml.addon.chart.Color create(int r, int g, int b, int a)
+	public static synchronized org.metachart.xml.chart.Color create(int r, int g, int b, int a)
 	{
-		org.openfuxml.xml.addon.chart.Color color = new org.openfuxml.xml.addon.chart.Color();
+		org.metachart.xml.chart.Color color = new org.metachart.xml.chart.Color();
 		color.setR(r);
 		color.setG(g);
 		color.setB(b);
@@ -47,7 +47,7 @@ public class ChartColorFactory
 		return color;
 	}
 	
-	public static Color create(org.openfuxml.xml.addon.chart.Color color)
+	public static Color create(org.metachart.xml.chart.Color color)
 	{
 		return new Color(color.getR(), color.getG(), color.getB(), color.getA());
 	}
@@ -55,7 +55,7 @@ public class ChartColorFactory
 	public static synchronized Map<String,java.awt.Color> getColorMap(Chart.Colors colors, String typ)
 	{
 		Map<String,java.awt.Color> map = new Hashtable<String,java.awt.Color>();
-		for(org.openfuxml.xml.addon.chart.Color color : colors.getColor())
+		for(org.metachart.xml.chart.Color color : colors.getColor())
 		{
 			if(color.getTyp().equals(typ))
 			{

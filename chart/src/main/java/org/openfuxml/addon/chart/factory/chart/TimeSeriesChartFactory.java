@@ -6,10 +6,10 @@ import java.util.List;
 import org.metachart.factory.xml.XmlAxisFactory;
 import org.metachart.xml.chart.Axis;
 import org.metachart.xml.chart.AxisType;
+import org.metachart.xml.chart.Renderer;
+import org.metachart.xml.chart.RendererTimeseries;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Renderer;
-import org.openfuxml.xml.addon.chart.RendererTimeseries;
 
 public class TimeSeriesChartFactory
 {

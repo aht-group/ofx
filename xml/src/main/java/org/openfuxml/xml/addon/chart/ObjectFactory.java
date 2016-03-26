@@ -30,14 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Renderer }
-     * 
-     */
-    public Renderer createRenderer() {
-        return new Renderer();
-    }
-
-    /**
      * Create an instance of {@link Chart }
      * 
      */
@@ -46,91 +38,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Title }
-     * 
-     */
-    public Title createTitle() {
-        return new Title();
-    }
-
-    /**
-     * Create an instance of {@link Dimension }
-     * 
-     */
-    public Dimension createDimension() {
-        return new Dimension();
-    }
-
-    /**
-     * Create an instance of {@link Color }
-     * 
-     */
-    public Color createColor() {
-        return new Color();
-    }
-
-    /**
-     * Create an instance of {@link RendererTimeseries }
-     * 
-     */
-    public RendererTimeseries createRendererTimeseries() {
-        return new RendererTimeseries();
-    }
-
-    /**
-     * Create an instance of {@link Grid }
-     * 
-     */
-    public Grid createGrid() {
-        return new Grid();
-    }
-
-    /**
-     * Create an instance of {@link Renderer.Timebar }
-     * 
-     */
-    public Renderer.Timebar createRendererTimebar() {
-        return new Renderer.Timebar();
-    }
-
-    /**
-     * Create an instance of {@link Renderer.Bar }
-     * 
-     */
-    public Renderer.Bar createRendererBar() {
-        return new Renderer.Bar();
-    }
-
-    /**
-     * Create an instance of {@link Renderer.Gantt }
-     * 
-     */
-    public Renderer.Gantt createRendererGantt() {
-        return new Renderer.Gantt();
-    }
-
-    /**
      * Create an instance of {@link Chart.Colors }
      * 
      */
     public Chart.Colors createChartColors() {
         return new Chart.Colors();
-    }
-
-    /**
-     * Create an instance of {@link DataSet }
-     * 
-     */
-    public DataSet createDataSet() {
-        return new DataSet();
-    }
-
-    /**
-     * Create an instance of {@link Label }
-     * 
-     */
-    public Label createLabel() {
-        return new Label();
     }
 
 }

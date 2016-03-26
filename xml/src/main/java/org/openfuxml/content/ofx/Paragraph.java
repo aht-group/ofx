@@ -69,15 +69,15 @@ public class Paragraph implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class),
+        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
+        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
+        @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class),
+        @XmlElementRef(name = "glossary", namespace = "http://www.openfuxml.org/editorial", type = Glossary.class),
+        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
         @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
         @XmlElementRef(name = "acronym", namespace = "http://www.openfuxml.org/editorial", type = Acronym.class),
-        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
-        @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class),
-        @XmlElementRef(name = "index", namespace = "http://www.openfuxml.org/editorial", type = Index.class),
-        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
-        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
-        @XmlElementRef(name = "glossary", namespace = "http://www.openfuxml.org/editorial", type = Glossary.class)
+        @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class),
+        @XmlElementRef(name = "index", namespace = "http://www.openfuxml.org/editorial", type = Index.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -104,16 +104,16 @@ public class Paragraph implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Font }
-     * {@link Acronym }
-     * {@link Image }
      * {@link Symbol }
-     * {@link String }
-     * {@link Marginalia }
-     * {@link Index }
-     * {@link Emphasis }
      * {@link Reference }
+     * {@link Emphasis }
      * {@link Glossary }
+     * {@link Marginalia }
+     * {@link String }
+     * {@link Image }
+     * {@link Acronym }
+     * {@link Font }
+     * {@link Index }
      * 
      * 
      */

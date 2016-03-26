@@ -50,8 +50,8 @@ public class Cell
     @XmlElementRefs({
         @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class),
         @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
-        @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class),
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class)
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
+        @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class)
     })
     @XmlMixed
     protected java.util.List<Serializable> content;
@@ -74,11 +74,11 @@ public class Cell
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link org.openfuxml.content.list.List }
-     * {@link String }
-     * {@link Paragraph }
-     * {@link Font }
      * {@link Image }
+     * {@link org.openfuxml.content.list.List }
+     * {@link Font }
+     * {@link Paragraph }
+     * {@link String }
      * 
      * 
      */

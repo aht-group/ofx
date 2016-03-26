@@ -14,12 +14,12 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.metachart.xml.chart.Data;
+import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Renderer.Timebar;
 import org.openfuxml.addon.chart.interfaces.ChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.DataSet;
-import org.openfuxml.xml.addon.chart.Renderer.Timebar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

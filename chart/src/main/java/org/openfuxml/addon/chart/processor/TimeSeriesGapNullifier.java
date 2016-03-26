@@ -5,9 +5,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.metachart.xml.chart.Data;
+import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.RendererTimeseries;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
-import org.openfuxml.xml.addon.chart.DataSet;
-import org.openfuxml.xml.addon.chart.RendererTimeseries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

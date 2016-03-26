@@ -11,6 +11,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.metachart.xml.chart.Axis;
+import org.metachart.xml.chart.Color;
+import org.metachart.xml.chart.DataSet;
+import org.metachart.xml.chart.Dimension;
+import org.metachart.xml.chart.Grid;
+import org.metachart.xml.chart.Renderer;
+import org.metachart.xml.chart.Title;
 
 
 /**
@@ -23,23 +29,23 @@ import org.metachart.xml.chart.Axis;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/chart}renderer"/>
+ *         &lt;element ref="{http://www.metachart.org/xml}renderer"/>
  *         &lt;element ref="{http://www.metachart.org/xml}axis" maxOccurs="2"/>
- *         &lt;element ref="{http://www.openfuxml.org/chart}title"/>
- *         &lt;element ref="{http://www.openfuxml.org/chart}dimension"/>
+ *         &lt;element ref="{http://www.metachart.org/xml}title"/>
+ *         &lt;element ref="{http://www.metachart.org/xml}dimension"/>
  *         &lt;element name="colors">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element ref="{http://www.openfuxml.org/chart}color" maxOccurs="unbounded"/>
+ *                   &lt;element ref="{http://www.metachart.org/xml}color" maxOccurs="unbounded"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element ref="{http://www.openfuxml.org/chart}grid"/>
- *         &lt;element ref="{http://www.openfuxml.org/chart}dataSet" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.metachart.org/xml}grid"/>
+ *         &lt;element ref="{http://www.metachart.org/xml}dataSet" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}int" />
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -67,19 +73,19 @@ public class Chart
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.metachart.org/xml", required = true)
     protected Renderer renderer;
     @XmlElement(namespace = "http://www.metachart.org/xml", required = true)
     protected List<Axis> axis;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.metachart.org/xml", required = true)
     protected Title title;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.metachart.org/xml", required = true)
     protected Dimension dimension;
     @XmlElement(namespace = "", required = true)
     protected Chart.Colors colors;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.metachart.org/xml", required = true)
     protected Grid grid;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.metachart.org/xml", required = true)
     protected List<DataSet> dataSet;
     @XmlAttribute(name = "id")
     protected Integer id;
@@ -405,7 +411,7 @@ public class Chart
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element ref="{http://www.openfuxml.org/chart}color" maxOccurs="unbounded"/>
+     *         &lt;element ref="{http://www.metachart.org/xml}color" maxOccurs="unbounded"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -423,7 +429,7 @@ public class Chart
     {
 
         private final static long serialVersionUID = 1L;
-        @XmlElement(required = true)
+        @XmlElement(namespace = "http://www.metachart.org/xml", required = true)
         protected List<Color> color;
 
         /**
