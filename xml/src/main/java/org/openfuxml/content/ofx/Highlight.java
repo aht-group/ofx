@@ -43,8 +43,8 @@ public class Highlight implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
-        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class)
+        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
+        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class)
     })
     @XmlMixed
     protected List<Serializable> content;

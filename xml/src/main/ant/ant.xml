@@ -33,5 +33,6 @@
 			</classpath>
 		</java>
 		<delete dir="${src.dir}/net"/>
+		<delete dir="${src.dir}/org/metachart"/>
 	</target>	
 </project>

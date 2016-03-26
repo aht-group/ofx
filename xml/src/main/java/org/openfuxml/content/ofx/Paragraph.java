@@ -69,15 +69,15 @@ public class Paragraph implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "acronym", namespace = "http://www.openfuxml.org/editorial", type = Acronym.class),
         @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class),
-        @XmlElementRef(name = "index", namespace = "http://www.openfuxml.org/editorial", type = Index.class),
-        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
+        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
+        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
+        @XmlElementRef(name = "glossary", namespace = "http://www.openfuxml.org/editorial", type = Glossary.class),
         @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
         @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class),
-        @XmlElementRef(name = "glossary", namespace = "http://www.openfuxml.org/editorial", type = Glossary.class),
-        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
-        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class)
+        @XmlElementRef(name = "acronym", namespace = "http://www.openfuxml.org/editorial", type = Acronym.class),
+        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
+        @XmlElementRef(name = "index", namespace = "http://www.openfuxml.org/editorial", type = Index.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -105,15 +105,15 @@ public class Paragraph implements Serializable
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Emphasis }
-     * {@link Acronym }
-     * {@link Symbol }
-     * {@link Index }
-     * {@link Image }
-     * {@link String }
-     * {@link Font }
      * {@link Marginalia }
-     * {@link Glossary }
      * {@link Reference }
+     * {@link Glossary }
+     * {@link Image }
+     * {@link Font }
+     * {@link Symbol }
+     * {@link Acronym }
+     * {@link Index }
+     * {@link String }
      * 
      * 
      */

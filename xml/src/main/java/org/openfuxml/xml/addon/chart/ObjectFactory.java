@@ -30,14 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AxisType }
-     * 
-     */
-    public AxisType createAxisType() {
-        return new AxisType();
-    }
-
-    /**
      * Create an instance of {@link Renderer }
      * 
      */
@@ -51,38 +43,6 @@ public class ObjectFactory {
      */
     public Chart createChart() {
         return new Chart();
-    }
-
-    /**
-     * Create an instance of {@link AxisType.Date }
-     * 
-     */
-    public AxisType.Date createAxisTypeDate() {
-        return new AxisType.Date();
-    }
-
-    /**
-     * Create an instance of {@link AxisType.Number }
-     * 
-     */
-    public AxisType.Number createAxisTypeNumber() {
-        return new AxisType.Number();
-    }
-
-    /**
-     * Create an instance of {@link Axis }
-     * 
-     */
-    public Axis createAxis() {
-        return new Axis();
-    }
-
-    /**
-     * Create an instance of {@link Label }
-     * 
-     */
-    public Label createLabel() {
-        return new Label();
     }
 
     /**
@@ -174,19 +134,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AxisType.Date.Ticker }
+     * Create an instance of {@link Label }
      * 
      */
-    public AxisType.Date.Ticker createAxisTypeDateTicker() {
-        return new AxisType.Date.Ticker();
-    }
-
-    /**
-     * Create an instance of {@link AxisType.Number.Ticker }
-     * 
-     */
-    public AxisType.Number.Ticker createAxisTypeNumberTicker() {
-        return new AxisType.Number.Ticker();
+    public Label createLabel() {
+        return new Label();
     }
 
 }

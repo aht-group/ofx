@@ -1,11 +1,11 @@
 package org.openfuxml.addon.chart.util;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.openfuxml.xml.addon.chart.AxisType;
+import org.metachart.xml.chart.AxisType;
 import org.openfuxml.xml.addon.chart.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxChartTypeResolver
 {

@@ -33,6 +33,11 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.metachart</groupId>
+			<artifactId>metachart-xml</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
 	
 		<!-- ExLP -->
 		<dependency>

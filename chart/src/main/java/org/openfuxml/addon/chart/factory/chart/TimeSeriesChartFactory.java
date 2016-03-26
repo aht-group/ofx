@@ -3,10 +3,10 @@ package org.openfuxml.addon.chart.factory.chart;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openfuxml.addon.chart.factory.xml.XmlAxisFactory;
+import org.metachart.factory.xml.XmlAxisFactory;
+import org.metachart.xml.chart.Axis;
+import org.metachart.xml.chart.AxisType;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
-import org.openfuxml.xml.addon.chart.Axis;
-import org.openfuxml.xml.addon.chart.AxisType;
 import org.openfuxml.xml.addon.chart.Chart;
 import org.openfuxml.xml.addon.chart.Renderer;
 import org.openfuxml.xml.addon.chart.RendererTimeseries;

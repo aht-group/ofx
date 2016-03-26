@@ -1,19 +1,19 @@
 package org.openfuxml.addon.chart.renderer.generic;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
+import org.metachart.xml.chart.Axis;
 import org.openfuxml.addon.chart.util.AxisFactory;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
-import org.openfuxml.xml.addon.chart.Axis;
 import org.openfuxml.xml.addon.chart.Grid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class XYPlotRenderer extends AbstractChartRenderer
 {

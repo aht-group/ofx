@@ -32,6 +32,11 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.metachart</groupId>
+			<artifactId>metachart-util</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
 		
 		<!-- XML -->
 		<dependency>

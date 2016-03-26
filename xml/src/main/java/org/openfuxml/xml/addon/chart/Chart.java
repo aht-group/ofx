@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.metachart.xml.chart.Axis;
 
 
 /**
@@ -23,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{http://www.openfuxml.org/chart}renderer"/>
- *         &lt;element ref="{http://www.openfuxml.org/chart}axis" maxOccurs="2"/>
+ *         &lt;element ref="{http://www.metachart.org/xml}axis" maxOccurs="2"/>
  *         &lt;element ref="{http://www.openfuxml.org/chart}title"/>
  *         &lt;element ref="{http://www.openfuxml.org/chart}dimension"/>
  *         &lt;element name="colors">
@@ -68,7 +69,7 @@ public class Chart
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
     protected Renderer renderer;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.metachart.org/xml", required = true)
     protected List<Axis> axis;
     @XmlElement(required = true)
     protected Title title;

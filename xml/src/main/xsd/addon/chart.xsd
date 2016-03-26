@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://www.openfuxml.org/chart"
     xmlns="http://www.openfuxml.org/chart"
+	xmlns:mc  ="http://www.metachart.org/xml"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.metachart.org/xml" schemaLocation="../../../../../../metachart/xml/src/main/xsd/metachart/chart.xsd"/>
     <xsd:element name="chart">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="renderer" maxOccurs="1"/>
-                <xsd:element ref="axis" maxOccurs="2"/>
+                <xsd:element ref="mc:axis" maxOccurs="2"/>
                 <xsd:element ref="title" maxOccurs="1"/>
             		<xsd:element ref="dimension" maxOccurs="1"/>
                 <xsd:element name="colors" maxOccurs="1">
@@ -42,49 +44,7 @@
 			<xsd:attribute name="label" type="xsd:string"/>
 			<xsd:attribute name="key" type="xsd:string"/>
 		</xsd:complexType>
-	</xsd:element>
-    <xsd:element name="axis">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="axisType" maxOccurs="1"/>
-                <xsd:element ref="label" maxOccurs="1"/>
-            </xsd:sequence>
-            <xsd:attribute name="code" type="xsd:string"/>
-            <xsd:attribute name="dateformat" type="xsd:string"/>
-            <xsd:attribute name="autoRangIncludeNull" type="xsd:boolean"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="axisType">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="number" maxOccurs="1">
-                    <xsd:complexType>
-                        <xsd:sequence>
-                            <xsd:element name="ticker" maxOccurs="1">
-                                <xsd:complexType>
-                                    <xsd:attribute name="size" type="xsd:int"/>
-                                </xsd:complexType>
-                            </xsd:element>
-                        </xsd:sequence>
-                    </xsd:complexType>
-                </xsd:element>
-                <xsd:element name="date" maxOccurs="1">
-                    <xsd:complexType>
-                        <xsd:sequence>
-                            <xsd:element name="ticker" maxOccurs="unbounded">
-                                <xsd:complexType>
-                                    <xsd:attribute name="timePeriod" type="xsd:string"/>
-                                    <xsd:attribute name="format" type="xsd:string"/>
-                                </xsd:complexType>
-                            </xsd:element>
-                        </xsd:sequence>
-                        <xsd:attribute name="autoRangeTimePeriod" type="xsd:string"/>
-                        <xsd:attribute name="majorTickTimePeriod" type="xsd:string"/>
-                    </xsd:complexType>
-                </xsd:element>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
+	</xsd:element>    
     <xsd:element name="renderer">
         <xsd:complexType>
             <xsd:sequence>
