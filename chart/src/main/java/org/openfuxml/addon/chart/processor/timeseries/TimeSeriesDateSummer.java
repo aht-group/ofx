@@ -3,7 +3,7 @@ package org.openfuxml.addon.chart.processor.timeseries;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openfuxml.xml.addon.chart.Data;
+import org.metachart.xml.chart.Data;
 import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.RendererTimeseries;
 import org.slf4j.Logger;

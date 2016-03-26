@@ -1,8 +1,8 @@
 package org.openfuxml.addon.chart.factory.xml;
 
-import net.sf.exlp.util.DateUtil;
+import org.metachart.xml.chart.Data;
 
-import org.openfuxml.xml.addon.chart.Data;
+import net.sf.exlp.util.DateUtil;
 
 public class XmlDataFactory
 {

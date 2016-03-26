@@ -93,7 +93,7 @@
     <xsd:element name="dataSet">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="data" maxOccurs="unbounded"/>
+                <xsd:element ref="mc:data" maxOccurs="unbounded"/>
             		<xsd:element ref="dataSet" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="label" type="xsd:string"/>
@@ -107,17 +107,6 @@
             <xsd:attribute name="text" type="xsd:string"/>
             <xsd:attribute name="size" type="xsd:int"/>
             <xsd:attribute name="font" type="xsd:string"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="data">
-        <xsd:complexType>
-            <xsd:attribute name="x" type="xsd:double"/>
-            <xsd:attribute name="y" type="xsd:double"/>
-            <xsd:attribute name="record" type="xsd:dateTime"/>
-            <xsd:attribute name="from" type="xsd:dateTime"/>
-            <xsd:attribute name="to" type="xsd:dateTime"/>
-            <xsd:attribute name="label" type="xsd:string"/>
-            <xsd:attribute name="category" type="xsd:string"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>

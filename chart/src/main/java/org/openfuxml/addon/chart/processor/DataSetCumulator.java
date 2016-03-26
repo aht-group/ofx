@@ -1,6 +1,6 @@
 package org.openfuxml.addon.chart.processor;
 
-import org.openfuxml.xml.addon.chart.Data;
+import org.metachart.xml.chart.Data;
 import org.openfuxml.xml.addon.chart.DataSet;
 import org.openfuxml.xml.addon.chart.RendererTimeseries;
 import org.slf4j.Logger;

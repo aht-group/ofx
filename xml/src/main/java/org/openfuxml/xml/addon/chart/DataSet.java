@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.metachart.xml.chart.Data;
 
 
 /**
@@ -22,7 +23,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/chart}data" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://www.metachart.org/xml}data" maxOccurs="unbounded"/>
  *         &lt;element ref="{http://www.openfuxml.org/chart}dataSet" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" />
@@ -46,7 +47,7 @@ public class DataSet
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.metachart.org/xml", required = true)
     protected List<Data> data;
     @XmlElement(required = true)
     protected List<DataSet> dataSet;

@@ -3,8 +3,6 @@ package org.openfuxml.addon.chart.renderer.timeseries;
 import java.util.Date;
 import java.util.List;
 
-import net.sf.exlp.util.DateUtil;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.time.Day;
@@ -13,6 +11,7 @@ import org.jfree.data.time.Month;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
+import org.metachart.xml.chart.Data;
 import org.openfuxml.addon.chart.interfaces.ChartRenderer;
 import org.openfuxml.addon.chart.processor.DataSetCumulator;
 import org.openfuxml.addon.chart.processor.TimeSeriesGapNullifier;
@@ -22,10 +21,11 @@ import org.openfuxml.addon.chart.renderer.generic.XYPlotRenderer;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
 import org.openfuxml.addon.chart.util.TimePeriodFactory.OfxChartTimePeriod;
 import org.openfuxml.xml.addon.chart.Chart;
-import org.openfuxml.xml.addon.chart.Data;
 import org.openfuxml.xml.addon.chart.DataSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.DateUtil;
 
 public class TimeSeriesChartRenderer extends XYPlotRenderer implements ChartRenderer
 {
