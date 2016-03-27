@@ -8,11 +8,11 @@ import java.util.Random;
 
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.metachart.factory.chart.TimeSeriesChartFactory;
 import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.DataSet;
 import org.openfuxml.addon.chart.OfxChartRenderer;
-import org.openfuxml.addon.chart.factory.chart.TimeSeriesChartFactory;
 import org.openfuxml.addon.chart.test.OfxChartTestBootstrap;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.slf4j.Logger;
