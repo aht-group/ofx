@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.metachart.xml.chart.Chart;
 import org.openfuxml.addon.chart.OfxChartRenderer;
-import org.openfuxml.xml.addon.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxChart extends HttpServlet
 {

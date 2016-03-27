@@ -1,9 +1,8 @@
 package org.openfuxml.addon.chart;
 
-import net.sf.exlp.util.xml.JDomUtil;
-
 import org.jdom2.Document;
 import org.jfree.chart.JFreeChart;
+import org.metachart.xml.chart.Chart;
 import org.openfuxml.addon.chart.interfaces.ChartRenderer;
 import org.openfuxml.addon.chart.renderer.BarChartRenderer;
 import org.openfuxml.addon.chart.renderer.TimeBarRenderer;
@@ -11,9 +10,10 @@ import org.openfuxml.addon.chart.renderer.gantt.GanttChartRenderer;
 import org.openfuxml.addon.chart.renderer.timeseries.TimeSeriesChartRenderer;
 import org.openfuxml.addon.chart.renderer.xy.SplineChartRenderer;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
-import org.openfuxml.xml.addon.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JDomUtil;
 
 public class OfxChartRenderer
 {

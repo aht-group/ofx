@@ -14,6 +14,7 @@ import org.jfree.data.time.Month;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.DataSet;
 import org.openfuxml.addon.chart.interfaces.ChartRenderer;
@@ -23,7 +24,6 @@ import org.openfuxml.addon.chart.util.ChartLabelResolver;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
 import org.openfuxml.addon.chart.util.OfxCustomPaintColors;
-import org.openfuxml.xml.addon.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

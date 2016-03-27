@@ -1,8 +1,8 @@
 package org.openfuxml.addon.chart.util;
 
 import org.metachart.xml.chart.Axis;
+import org.metachart.xml.chart.Chart;
 import org.openfuxml.addon.chart.util.OfxChartTypeResolver.AxisOrientation;
-import org.openfuxml.xml.addon.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

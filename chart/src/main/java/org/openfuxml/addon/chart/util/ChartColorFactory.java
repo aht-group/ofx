@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.openfuxml.xml.addon.chart.Chart;
+import org.metachart.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

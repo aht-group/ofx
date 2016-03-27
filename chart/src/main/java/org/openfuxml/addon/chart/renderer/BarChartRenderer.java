@@ -8,12 +8,12 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.DataSet;
 import org.openfuxml.addon.chart.interfaces.ChartRenderer;
 import org.openfuxml.addon.chart.renderer.generic.AbstractChartRenderer;
 import org.openfuxml.addon.chart.util.ChartLabelResolver;
-import org.openfuxml.xml.addon.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

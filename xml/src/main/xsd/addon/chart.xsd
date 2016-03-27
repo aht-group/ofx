@@ -4,26 +4,5 @@
 	xmlns:mc  ="http://www.metachart.org/xml"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="http://www.metachart.org/xml" schemaLocation="../../../../../../metachart/xml/src/main/xsd/metachart/chart.xsd"/>
-    <xsd:element name="chart">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="mc:renderer" maxOccurs="1"/>
-                <xsd:element ref="mc:axis" maxOccurs="2"/>
-                <xsd:element ref="mc:title" maxOccurs="1"/>
-				<xsd:element ref="mc:dimension" maxOccurs="1"/>
-                <xsd:element name="colors" maxOccurs="1">
-                    <xsd:complexType>
-                        <xsd:sequence>
-                            <xsd:element ref="mc:color" maxOccurs="unbounded"/>
-                        </xsd:sequence>
-                    </xsd:complexType>
-                </xsd:element>
-                <xsd:element ref="mc:grid" maxOccurs="1"/>      
-            	<xsd:element ref="mc:dataSet" maxOccurs="unbounded"/>
-            </xsd:sequence>
-            <xsd:attribute name="id" type="xsd:int"/>
-            <xsd:attribute name="code" type="xsd:string"/>
-            <xsd:attribute name="legend" type="xsd:boolean"/>
-        </xsd:complexType>
-    </xsd:element>
+    
 </xsd:schema>

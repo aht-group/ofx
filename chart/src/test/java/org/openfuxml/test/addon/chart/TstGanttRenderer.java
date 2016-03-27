@@ -7,6 +7,7 @@ import java.io.OutputStream;
 
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.metachart.xml.chart.Chart;
 import org.metachart.xml.chart.Color;
 import org.metachart.xml.chart.Data;
 import org.metachart.xml.chart.DataSet;
@@ -15,7 +16,6 @@ import org.metachart.xml.chart.Renderer;
 import org.openfuxml.addon.chart.OfxChartRenderer;
 import org.openfuxml.addon.chart.util.ChartColorFactory;
 import org.openfuxml.xml.OfxNsPrefixMapper;
-import org.openfuxml.xml.addon.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

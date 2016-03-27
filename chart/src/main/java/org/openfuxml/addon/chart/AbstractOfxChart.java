@@ -9,12 +9,12 @@ import java.util.UUID;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.configuration.Configuration;
-import org.openfuxml.xml.addon.chart.Chart;
+import org.metachart.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractOfxChart
 {
