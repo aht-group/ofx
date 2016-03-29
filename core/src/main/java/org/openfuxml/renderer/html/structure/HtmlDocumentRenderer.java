@@ -26,7 +26,10 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 	public HtmlElement getHtml() {return html;}
 	public void setHtml(HtmlElement html) {this.html = html;}
 
-	public Document doc;
+	private Document doc;
+	public Document getDoc(){return doc;}
+	public void setDoc(Document doc) {this.doc = doc;}
+
 	private String pageTitle;
 
 	private static HtmlDocumentRenderer instance;

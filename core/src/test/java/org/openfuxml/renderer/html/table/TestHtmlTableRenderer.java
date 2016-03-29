@@ -7,6 +7,7 @@ import org.openfuxml.content.ofx.Content;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.structure.HtmlBody;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
@@ -30,7 +31,7 @@ public class TestHtmlTableRenderer extends AbstractTestHtmlRenderer
 	@Before public void init()
 	{
 		super.initDir("table");
-		renderer = new HtmlBody(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
+		renderer = new HtmlBody(new OfxConfigurationProvider());
 	}
 
 	@Test public void simple() throws IOException
@@ -50,7 +51,7 @@ public class TestHtmlTableRenderer extends AbstractTestHtmlRenderer
 	@Test public void withHead() throws IOException, OfxConfigurationException, OfxAuthoringException
 	{
 		initFile(Key.withHead);
-		HtmlDocumentRenderer docR = new HtmlDocumentRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager(), "TableTest");
+		HtmlDocumentRenderer docR = new HtmlDocumentRenderer(new OfxConfigurationProvider(), "TableTest");
 		Content c = new Content();
 		c.getContent().add(TableProvider.build(4,6));
 		docR.render(c);

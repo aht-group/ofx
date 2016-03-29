@@ -48,7 +48,7 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 	{
 		List<String> content = new ArrayList<String>();
 		XMLOutputter xmlOutput = new XMLOutputter(ownPrettyFormat());
-		content.add(xmlOutput.outputString(HtmlDocumentRenderer.html));
+		content.add(xmlOutput.outputString(HtmlDocumentRenderer.getInstance().getHtml()));
 		return content;
 	}
 
@@ -124,7 +124,7 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 	{
 		try{
 			XMLOutputter xmlOutput = new XMLOutputter(ownPrettyFormat().setLineSeparator("\n"));
-			xmlOutput.output(HtmlDocumentRenderer.doc, w);
+			xmlOutput.output(HtmlDocumentRenderer.getInstance().getDoc(), w);
 		} catch (IOException io){io.printStackTrace();}
 	}
 
