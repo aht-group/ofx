@@ -6,12 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.openfuxml.content.layout.Column;
-import org.openfuxml.content.layout.Container;
-import org.openfuxml.content.layout.Width;
-import org.openfuxml.content.media.Image;
-import org.openfuxml.content.ofx.Highlight;
-import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.ConfigurationProviderFacotry;
@@ -22,13 +16,17 @@ import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ * @author yannkruger
+ *
+ */
 public class AbstractOfxWikiRenderer extends AbstractOfxRenderer
 {
+
 	final static Logger logger = LoggerFactory.getLogger(WikiParagraphRenderer.class);
 	
-	protected List<String> preTxt;
 	protected List<String> txt;
-	protected List<String> postTxt;
 	
 	protected List<OfxWikiRenderer> renderer;
 	
@@ -41,17 +39,10 @@ public class AbstractOfxWikiRenderer extends AbstractOfxRenderer
 	public AbstractOfxWikiRenderer(ConfigurationProvider cp)
 	{
 		super(cp);
-		preTxt = new ArrayList<String>();
 		txt = new ArrayList<String>();
-		postTxt = new ArrayList<String>();
 		renderer = new ArrayList<OfxWikiRenderer>();
 	}
-	
-	protected void addPackages9()
-	{
 		
-	}
-	
 	public String getSingleLine() throws OfxAuthoringException
 	{
 		List<String> resultTxt = getContent();
@@ -67,7 +58,6 @@ public class AbstractOfxWikiRenderer extends AbstractOfxRenderer
 	public List<String> getContent()
 	{
 		List<String> resultTxt = new ArrayList<String>();
-		resultTxt.addAll(preTxt);
 		
 		resultTxt.addAll(txt);
 		for(OfxWikiRenderer r : renderer)
@@ -75,7 +65,6 @@ public class AbstractOfxWikiRenderer extends AbstractOfxRenderer
 			resultTxt.addAll(r.getContent());
 		}
 		
-		resultTxt.addAll(postTxt);
 		
 		return resultTxt;
 	}
@@ -89,48 +78,11 @@ public class AbstractOfxWikiRenderer extends AbstractOfxRenderer
 		w.flush();
 	}
 	
-	protected void paragraphRenderer(Paragraph paragraph, boolean preBlankLine) throws OfxAuthoringException
+	public void paragraphRenderer(Paragraph paragraph) throws OfxAuthoringException
 	{
-		
-	}
-	
-	protected void containerRenderer(Container container) throws OfxAuthoringException
-	{
-		
-	}
-	
-	protected void columnRenderer(Column column) throws OfxAuthoringException
-	{
-		
-	}
-	
-	protected void widthRenderer(Width width) throws OfxAuthoringException
-	{
-		
-	}
-	
-	protected void highlightRenderer(Highlight highlight) throws OfxAuthoringException
-	{
-		
-	}
-	
-	protected void renderList(org.openfuxml.content.list.List list,OfxWikiRenderer parent) throws OfxAuthoringException
-	{
-		
-	}
-	
-	protected void renderImage(Image image) throws OfxAuthoringException
-	{
-		
-	}
-	
-	protected void renderMarginalia(Marginalia marginalia) throws OfxAuthoringException
-	{
-		
+		WikiParagraphRenderer wpr = new WikiParagraphRenderer(cmm,dsm);
+		wpr.render(paragraph);
+		renderer.add(wpr);
 	}
 
-    protected void addString(String s)
-    {
-       
-    }
 }

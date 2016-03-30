@@ -6,6 +6,11 @@ import org.openfuxml.test.AbstractOfxCoreTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ * @author yannkruger
+ *
+ */
 public class AbstractTestWikiRenderer  extends AbstractOfxCoreTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractTestWikiRenderer.class);

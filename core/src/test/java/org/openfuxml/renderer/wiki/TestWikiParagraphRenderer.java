@@ -1,6 +1,5 @@
 package org.openfuxml.renderer.wiki;
 
-import java.io.File;
 import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
@@ -11,14 +10,18 @@ import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestWikiParagraphRenderer extends AbstractWikiContentTest
+/**
+ * Initial Test
+ * @author yannkruger
+ *
+ */
+public class TestWikiParagraphRenderer extends AbstractTestWikiRenderer 
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestWikiParagraphRenderer.class);
 	
-	private static enum Key {plain}
+	private enum Key {plain}
 	
 	private WikiParagraphRenderer renderer;
-	private String dir = "paragraph";
 	
 	@Before public void init(){renderer = new WikiParagraphRenderer(cmm,dsm);}
 	@After public void close(){renderer=null;}
@@ -34,9 +37,9 @@ public class TestWikiParagraphRenderer extends AbstractWikiContentTest
     @Test
     public void plain() throws IOException, OfxAuthoringException
     {
-    	f = new File(rootDir,dir+"/"+Key.plain+".txt");
-    	renderer.render(create());
-    	renderTest(renderer,f);
+    	initFile(Key.plain);
+        renderer.render(create());
+    	renderTest(renderer);
     }
     
     
