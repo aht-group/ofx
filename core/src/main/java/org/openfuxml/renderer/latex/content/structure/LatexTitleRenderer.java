@@ -22,7 +22,7 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
 		super(cp);
 	}
 	
-	public void render(Title title,Section section,int lvl,LatexPreamble latexPreamble)
+	public void render(Title title, Section section, int lvl, LatexPreamble latexPreamble)
 	{
 		logger.trace("Render title");
 		if(title.isSetNumbering()){logger.warn("Ignoring numbring");}

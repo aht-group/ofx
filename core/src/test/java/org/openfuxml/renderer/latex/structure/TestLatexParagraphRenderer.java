@@ -64,9 +64,8 @@ public class TestLatexParagraphRenderer extends AbstractTestLatexRenderer
     	TestLatexParagraphRenderer test = new TestLatexParagraphRenderer();
     	test.setEnvironment(true);
     	
-//    	test.init();test.withBlank();
-//  	test.init();test.withoutBlank();
-//    	test.init();test.marginalia();
+    	test.init();test.withBlank();
+    	test.init();test.withoutBlank();
     	test.init();test.fontRelative();
     }
 }

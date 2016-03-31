@@ -90,7 +90,5 @@ public class TestLatexCellRenderer extends AbstractLatexTableTest
     	test.initRenderer();test.paragraph();
     	test.initRenderer();test.list();
     	test.initRenderer();test.specialChar();
-
     }
-   
 }

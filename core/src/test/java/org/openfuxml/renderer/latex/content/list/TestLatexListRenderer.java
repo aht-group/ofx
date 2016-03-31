@@ -152,7 +152,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     	TestLatexListRenderer test = new TestLatexListRenderer();
     	test.setEnvironment(true);
     	
-    	test.initRenderer();test.unordered();
+//    	test.initRenderer();test.unordered();
 //    	test.initRenderer();test.ordered();
 //    	test.initRenderer();test.description();
     	test.initRenderer();test.layout();

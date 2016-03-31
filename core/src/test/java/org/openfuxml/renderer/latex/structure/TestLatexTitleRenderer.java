@@ -56,7 +56,7 @@ public class TestLatexTitleRenderer extends AbstractTestLatexRenderer
     @Test
     public void specialChars() throws IOException, OfxAuthoringException
     {
-    	initFile(Key.withoutId);
+    	initFile(Key.specialChar);
         renderer.render(XmlTitleFactory.build("M & E"), SectionProvider.build(),1,preamble);
         renderTest(renderer);
     }
@@ -80,8 +80,8 @@ public class TestLatexTitleRenderer extends AbstractTestLatexRenderer
         test.setEnvironment(true);
 
         test.init();test.withoutId();
-        test.init();test.withId();
-        test.init();test.specialChars();
-        test.init();test.text();
+		test.init();test.withId();
+		test.init();test.specialChars();
+		test.init();test.text();
     }
 }

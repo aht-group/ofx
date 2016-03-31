@@ -43,7 +43,6 @@ public class TestLatexHighlightRenderer extends AbstractTestLatexRenderer
     	TestLatexHighlightRenderer test = new TestLatexHighlightRenderer();
     	test.setEnvironment(true);
         
-    	test.init();
-       	test.highlight();
+    	test.init();test.highlight();
     }
 }

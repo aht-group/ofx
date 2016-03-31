@@ -1,3 +1,2 @@
 
-\section{M \& E}
-\label{myId}
+\section{Lorem ipsum dolor sit}
