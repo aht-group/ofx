@@ -14,6 +14,11 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+/**
+ * Testing the correct transformation of the xml file to wiki syntax
+ * @author yannkruger
+ *
+ */
 public class TestWikiEmphasisRenderer extends AbstractTestWikiRenderer{
 
 

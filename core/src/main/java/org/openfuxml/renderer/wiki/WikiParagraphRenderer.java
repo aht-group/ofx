@@ -1,31 +1,33 @@
 package org.openfuxml.renderer.wiki;
 
-import org.openfuxml.content.editorial.Acronym;
-import org.openfuxml.content.editorial.Glossary;
-import org.openfuxml.content.layout.Font;
-import org.openfuxml.content.media.Image;
-import org.openfuxml.content.ofx.Marginalia;
+import org.openfuxml.renderer.wiki.OfxWikiRenderer;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.text.Emphasis;
-import org.openfuxml.content.text.Symbol;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.OfxWikiRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class WikiParagraphRenderer extends AbstractOfxLatexRenderer implements OfxWikiRenderer
+/**
+ *  Rendering of paragraph children to wiki syntax
+ * @param paragraph
+ * @throws OfxAuthoringException
+ * @author yannkruger
+ *
+ */
+public class WikiParagraphRenderer extends AbstractOfxWikiRenderer implements OfxWikiRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(WikiParagraphRenderer.class);
 
 	public WikiParagraphRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm) {
 		super(cmm, dsm);
 	}
+	
 	
 	public void render(Paragraph paragraph) throws OfxAuthoringException
 	{	
@@ -35,15 +37,9 @@ public class WikiParagraphRenderer extends AbstractOfxLatexRenderer implements O
 		for(Object o : paragraph.getContent())
 		{
 			if(o==null){throw new OfxAuthoringException(Paragraph.class.getSimpleName()+" has no content");}
-			else if(o instanceof String){txt.add((String)o);}
+			else if(o instanceof String){sb.append((String)o);}
 			else if(o instanceof Emphasis){emphasisRenderer(sb, (Emphasis)o);}
-			else if(o instanceof Reference){}
-			else if(o instanceof Marginalia){}
-			else if(o instanceof Symbol){}
-			else if(o instanceof Glossary){}
-			else if(o instanceof Acronym){}
-			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
-			else if(o instanceof Font){logger.warn("INLINE Image NYI");}
+			else if(o instanceof Reference){referenceRenderer(sb, (Reference)o);}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
 		txt.add(sb.toString());
@@ -54,5 +50,13 @@ public class WikiParagraphRenderer extends AbstractOfxLatexRenderer implements O
 		WikiEmphasisRenderer wer = new WikiEmphasisRenderer(cmm, dsm);
 		wer.render(emphasis);
 		for(String s : wer.getContent()){sb.append(s);}
+	}
+	
+	//TODO FIX
+	private void referenceRenderer(StringBuffer sb, Reference reference) throws OfxAuthoringException
+	{
+//		WikiReferenceRenderer wrr = new WikiReferenceRenderer(cmm, dsm);
+//		wrr.render(reference);
+//		for(String s : wrr.getContent()){sb.append(s);}
 	}
 }

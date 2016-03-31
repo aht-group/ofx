@@ -5,6 +5,11 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 
+/**
+ * Rendering emphasis(bold,italic) to wiki syntax
+ * @author yannkruger
+ *
+ */
 public class WikiEmphasisRenderer extends AbstractOfxWikiRenderer implements OfxWikiRenderer
 {
 	public WikiEmphasisRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
@@ -12,6 +17,11 @@ public class WikiEmphasisRenderer extends AbstractOfxWikiRenderer implements Ofx
 		super(cmm,dsm);
 	}
 	
+	/**
+	 * Transform the XML child into wiki syntax
+	 * @param emphasis
+	 * @throws OfxAuthoringException
+	 */
 	public void render(Emphasis emphasis) throws OfxAuthoringException
 	{
 		boolean bold = emphasis.isSetBold() && emphasis.isBold();
@@ -27,6 +37,8 @@ public class WikiEmphasisRenderer extends AbstractOfxWikiRenderer implements Ofx
 		StringBuffer sb = new StringBuffer();
 		if(bold) {sb.append("'''");}
 		if(italic) {sb.append("''");}
+		
+		sb.append(emphasis.getValue());
 		
 		if(bold){sb.append("'''");}
 		if(italic){sb.append("''");}
