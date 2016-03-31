@@ -27,8 +27,7 @@ public class TestLatexTitleRenderer extends AbstractTestLatexRenderer
     private LatexPreamble preamble;
 	private LatexTitleRenderer renderer;
 
-	@Before
-	public void init()
+	@Before public void init()
 	{
 		super.initDir("structure/title");
         preamble = new LatexPreamble(cp);

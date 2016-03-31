@@ -6,12 +6,10 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.head.HtmlHead;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

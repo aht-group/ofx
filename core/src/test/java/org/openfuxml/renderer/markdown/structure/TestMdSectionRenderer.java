@@ -1,17 +1,14 @@
 package org.openfuxml.renderer.markdown.structure;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
-import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.SectionProvider;
-import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public class TestMdSectionRenderer extends AbstractTestMdRenderer
 {
@@ -30,7 +27,7 @@ public class TestMdSectionRenderer extends AbstractTestMdRenderer
 	@Test public void lvl1() throws IOException
 	{
 		lvl = 1;
-		renderer = new MdSectionRenderer(new OfxConfigurationProvider(), lvl);
+		renderer = new MdSectionRenderer(cp, lvl);
 		initFile(Key.lvl1);
         renderer.render(SectionProvider.build());
     	renderTest(renderer);
@@ -39,7 +36,7 @@ public class TestMdSectionRenderer extends AbstractTestMdRenderer
 	@Test public void lvl2() throws IOException
 	{
 		lvl = 2;
-		renderer = new MdSectionRenderer(new OfxConfigurationProvider(), lvl);
+		renderer = new MdSectionRenderer(cp, lvl);
 		initFile(Key.lvl2);
         renderer.render(SectionProvider.build());
     	renderTest(renderer);
@@ -47,7 +44,7 @@ public class TestMdSectionRenderer extends AbstractTestMdRenderer
 
 	@Test public void withComment() throws IOException
 	{
-		renderer = new MdSectionRenderer(new OfxConfigurationProvider(), 1);
+		renderer = new MdSectionRenderer(cp, 1);
 		initFile(Key.withComment);
 		renderer.render(SectionProvider.buildWithComment());
 		renderTest(renderer);

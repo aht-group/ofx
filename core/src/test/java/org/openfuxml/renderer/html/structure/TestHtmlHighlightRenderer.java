@@ -1,19 +1,17 @@
 package org.openfuxml.renderer.html.structure;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.MarginaliaProvider;
-import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public class TestHtmlHighlightRenderer extends AbstractTestHtmlRenderer
 {

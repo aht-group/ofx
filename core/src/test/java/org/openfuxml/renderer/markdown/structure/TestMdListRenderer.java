@@ -1,18 +1,14 @@
 package org.openfuxml.renderer.markdown.structure;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.interfaces.renderer.OfxMdRenderer;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
-import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.ListProvider;
-import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public class TestMdListRenderer extends AbstractTestMdRenderer
 {
@@ -25,7 +21,7 @@ public class TestMdListRenderer extends AbstractTestMdRenderer
 	@Before public void init()
 	{
 		super.initDir("structure/list");
-		renderer = new MdListRenderer(new OfxConfigurationProvider());
+		renderer = new MdListRenderer(cp);
 	}
 
 	@Test public void ordered() throws IOException

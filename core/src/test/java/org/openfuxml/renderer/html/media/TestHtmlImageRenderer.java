@@ -1,22 +1,17 @@
 package org.openfuxml.renderer.html.media;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.structure.HtmlBody;
-import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
-import org.openfuxml.renderer.markdown.media.MdImageRenderer;
-import org.openfuxml.renderer.markdown.structure.MdParagraphRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.ImageProvider;
-import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public class TestHtmlImageRenderer extends AbstractTestHtmlRenderer
 {

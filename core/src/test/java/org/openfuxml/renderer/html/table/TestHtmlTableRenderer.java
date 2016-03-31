@@ -1,24 +1,20 @@
 package org.openfuxml.renderer.html.table;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.addon.wiki.data.jaxb.Color;
 import org.openfuxml.content.ofx.Content;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.structure.HtmlBody;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.SectionProvider;
 import org.openfuxml.test.provider.TableProvider;
-import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public class TestHtmlTableRenderer extends AbstractTestHtmlRenderer
 {
@@ -64,8 +60,8 @@ public class TestHtmlTableRenderer extends AbstractTestHtmlRenderer
 		TestHtmlTableRenderer test = new TestHtmlTableRenderer();
         test.setEnvironment(true);
 		
-//        test.init();test.simple();
-//		test.init();test.complex();
+        test.init();test.simple();
+		test.init();test.complex();
 		test.init();test.withHead();
 	}
 }

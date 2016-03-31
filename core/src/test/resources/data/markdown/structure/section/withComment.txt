@@ -1,5 +1,5 @@
 
 
-[//]:# (Lorem ipsum dolor sit)
+[//]:# (This is a comment!)
 
 # Lorem ipsum dolor sit

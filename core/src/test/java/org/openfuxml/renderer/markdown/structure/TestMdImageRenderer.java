@@ -1,19 +1,15 @@
 package org.openfuxml.renderer.markdown.structure;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
-import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.renderer.markdown.media.MdImageRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.EmphasisProvider;
 import org.openfuxml.test.provider.ImageProvider;
-import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 public class TestMdImageRenderer extends AbstractTestMdRenderer
 {
@@ -27,8 +23,8 @@ public class TestMdImageRenderer extends AbstractTestMdRenderer
 	@Before public void init()
 	{
 		super.initDir("media");
-		renderer = new MdImageRenderer(new OfxConfigurationProvider());
-		pRenderer = new MdParagraphRenderer(new OfxConfigurationProvider());
+		renderer = new MdImageRenderer(cp);
+		pRenderer = new MdParagraphRenderer(cp);
 	}
 
 	@Test public void inline() throws IOException
