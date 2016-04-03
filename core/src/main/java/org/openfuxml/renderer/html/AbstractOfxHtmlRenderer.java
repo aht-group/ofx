@@ -16,6 +16,7 @@ import org.jdom2.output.XMLOutputter;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.content.text.Symbol;
@@ -50,6 +51,12 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 		XMLOutputter xmlOutput = new XMLOutputter(ownPrettyFormat());
 		content.add(xmlOutput.outputString(HtmlDocumentRenderer.getInstance().getHtml()));
 		return content;
+	}
+
+	public void renderSection(HtmlElement parent, Section section, int lvl)
+	{
+		HtmlSectionRenderer sectionRenderer = new HtmlSectionRenderer(cp, lvl);
+		sectionRenderer.render(parent, section);
 	}
 
 	public void listRenderer(HtmlElement parent,org.openfuxml.content.list.List list)

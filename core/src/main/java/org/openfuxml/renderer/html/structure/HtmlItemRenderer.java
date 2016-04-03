@@ -31,6 +31,8 @@ public class HtmlItemRenderer extends AbstractOfxHtmlRenderer implements OfxMdRe
 		super(cp);
 	}
 
+	/*Erstellt <li> tags für Listeneinträge und übergibt sie zurück an das
+	HtmlElement der Liste*/
 	public void render(HtmlElement list, Item item, boolean isDescription)
 	{
 		if(isDescription){render(list, item);}
@@ -42,6 +44,7 @@ public class HtmlItemRenderer extends AbstractOfxHtmlRenderer implements OfxMdRe
 			}
 	}
 
+	/*Erstellt anstelle von <li> tags die <dd> und <dt> tags für Definitionslisten */
 	private void render(HtmlElement list, Item item)
 	{
 		HtmlElement dd = new HtmlElement("dd"); //dd & dt alternate
@@ -51,6 +54,9 @@ public class HtmlItemRenderer extends AbstractOfxHtmlRenderer implements OfxMdRe
 		list.addContent(dd);list.addContent(dt);
 	}
 
+	/* Verarbeiten des Item Inhaltes. <p> tags innerhalb eines Listen-tags sind zwar
+	möglich, verbrauchen aber unnötig Platz, daher wird nur der Inhalt der Paragraph
+	Objekte verarbeitet. */
 	private void processContent(HtmlElement element, Item item)
 	{
 		for(Object o : item.getContent())

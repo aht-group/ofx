@@ -31,7 +31,7 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdR
 		super(cp);
 	}
 
-	/*Simples Image Element. Geeignet zum einen für Grafiken in den Text einzufügen.
+	/*Simples Image Element. Geeignet um kleine Grafiken in den Text einzufügen.
 		 * Außerhalb von Fließtext ist die @Link render() Methode zu verwenden.*/
 	public void renderInline(HtmlElement parent, Image image)
 	{

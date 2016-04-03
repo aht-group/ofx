@@ -12,7 +12,7 @@ import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 
-/*Klasse für HTML Überschriften, e.g <h1>...</h1>*/
+/*Klasse für HTML Überschriften, z.B <h1>...</h1>*/
 public class HtmlHeadingRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 
@@ -20,15 +20,14 @@ public class HtmlHeadingRenderer extends AbstractOfxHtmlRenderer implements OfxH
 		super(cp);
 	}
 
-	/*
-		* Methode zum Erzeugen von Überschriften
-		* @para title: Title Object, heraus gelesen aus dem Quelldokument
-		* @para lvl: Ebene des Titels
-		*/
+	/*Methode zum Erzeugen von Überschriften
+	* @para title: Title Object, heraus gelesen aus dem Quelldokument
+	* @para lvl: Ebene des Titels*/
 	public void render(HtmlElement parent, Title title, int lvl)
 	{
-		String h$ = "h" + String.valueOf(lvl);
-		HtmlElement heading = new HtmlElement(h$);
+		if(lvl > 6)
+			lvl = 6;
+		HtmlElement heading = new HtmlElement(("h" + String.valueOf(lvl)));
 		heading.addContent(TxtTitleFactory.build(title));
 
 		parent.addContent(heading);

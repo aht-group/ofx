@@ -23,6 +23,10 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		super(cp);
 	}
 
+	/*Verarbeitet die oberste Ebene eines HTML Dokumentes.
+	Fürgt das erzeugte body Objekt dem html Objekt aus der Klasse HtmlDocumentRenderer hinzu.
+	@param content: Wurzelobjekt des Dokumentes.
+	 */
 	public void render(Content content)
 	{
 		body = new HtmlElement("body");
@@ -42,9 +46,12 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		HtmlDocumentRenderer.getInstance().getHtml().getContent().add(body);
 	}
 
+	/*Verarbeitet ein Section Objekt als Wurzelobjekt. Hautsächlich für Tests.
+	Fürgt das erzeugte body Objekt dem html Objekt aus der Klasse HtmlDocumentRenderer hinzu.
+	@param section: Wurzelobjekt des Tests.
+	 */
 	public void render(Section section)
 	{
-
 		new HtmlDocumentRenderer(cp,"").init();
 		if(HtmlDocumentRenderer.getInstance().getHtml().getChild("body") == null)
 		{
@@ -55,15 +62,12 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		renderSection(body, section, 1);
 	}
 
+	/*
+
+	 */
 	private void resetCounter()
 	{
 		HtmlImageRenderer.imgcount = 0;
 		HtmlTableRenderer.tblcount = 0;
-	}
-
-	private void renderSection(HtmlElement parent, Section section, int lvl)
-	{
-		HtmlSectionRenderer sectionRenderer = new HtmlSectionRenderer(cp, lvl);
-		sectionRenderer.render(parent, section);
 	}
 }

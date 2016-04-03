@@ -16,8 +16,6 @@ import java.io.*;
 public class HtmlListingRenderer extends AbstractOfxHtmlRenderer implements OfxMdRenderer
 {
 	private final Logger logger = LoggerFactory.getLogger(HtmlListingRenderer.class);
-
-
 	//ToDo delete all deprecated constructor
 
 	public HtmlListingRenderer(ConfigurationProvider cp) {

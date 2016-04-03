@@ -72,7 +72,6 @@ public class HtmlParagraphRenderer extends AbstractOfxHtmlRenderer implements Of
 	private void renderReference(HtmlElement parent, Reference r)
 	{
 		HtmlReferenceRenderer referenceRender = new HtmlReferenceRenderer(cp);
-		//"xxx" Sequenz ist nur ein vorläufiger Füller für den Text eines internen Links.
 		referenceRender.renderIntern(parent,r);
 	}
 

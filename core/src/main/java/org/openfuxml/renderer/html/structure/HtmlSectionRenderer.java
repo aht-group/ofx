@@ -36,6 +36,11 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 		this.lvl = lvl;
 	}
 
+	/*
+	<section> tag als HtmlElement Objekt erzeugen und
+	Kommentare zuerst umwandeln, an den Anfang setzten,
+	danach den eigentlich Inhalt abarbeiten
+	*/
 	public void render(HtmlElement parent, Section section)
 	{
 		if (lvl == 1) {sectionCount++;}
@@ -43,20 +48,20 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 		HtmlElement div = new HtmlElement("section");
 
 		//Comments always on top!
-		/*Alle Kommentare werden Html konform an den Anfang gesetz*/
+
 		for(Object s : section.getContent())
 		{
-			if(s instanceof Comment){renderComment(div, (Comment)s);}
+			if(s instanceof Comment){commentRenderer(div, (Comment)s);}
 		}
 
 		/*Der eigentliche Inhalt des Abschnittes wird hier nach Typ unterschieden
 		* und verarbeitet.*/
 		for(Object o : section.getContent())
 		{
-			if(o instanceof Section){renderSection(div,(Section)o);}
+			if(o instanceof Section){renderSection(div,(Section)o, ++lvl);}
 			else if(o instanceof Sections){processSections(div, ((Sections)o));}
 			else if(o instanceof Title){titleRenderer(div, ((Title)o));}
-//			else if(o instanceof String){}
+			else if(o instanceof String){div.addContent(((String) o));}
 			else if(o instanceof List){listRenderer(div,(List)o);}
 			else if(o instanceof Paragraph){paragraphRenderer(div,(Paragraph)o);}
 			else if(o instanceof Image){imageRenderer(div,(Image)o);}
@@ -67,37 +72,31 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 		}
 		parent.addContent(div);
 	}
-
+/*HtmlListingRenderer aufrufen um Listing Objekte zu verarbeiten*/
 	private void renderListing(HtmlElement div, Listing listing)
 	{
 		HtmlListingRenderer listingRenderer = new HtmlListingRenderer(cp);
 		listingRenderer.render(div, listing);
 	}
 
+	/*HtmlHighlightRenderer aufrufen um Highlight Objekte zu verarbeiten*/
 	private void highlightRenderer(HtmlElement div, Highlight highlight)
 	{
 		HtmlHighlightRenderer Hrenderer = new HtmlHighlightRenderer(cp);
 		Hrenderer.render(div, highlight);
 	}
 
-	/*
-	Verarbeitet sogenannte Subsection
-	@para section: Objekt der untergeordneten Section
-	*/
-	private void renderSection(HtmlElement parent, Section section)
-	{
-		HtmlSectionRenderer sr = new HtmlSectionRenderer(cp,++lvl);
-		sr.render(parent, section);
-	}
+//	/*
+//	Verarbeitet sogenannte Subsection
+//	@para section: Objekt der untergeordneten Section
+//	*/
+//	private void renderSection(HtmlElement parent, Section section)
+//	{
+//		HtmlSectionRenderer sr = new HtmlSectionRenderer(cp,++lvl);
+//		sr.render(parent, section);
+//	}
 
-	/*Verarbeitet Kommentare
-	* @para comment: Kommentar Objekt*/
-	private void renderComment(HtmlElement parent, Comment comment)
-	{
-		HtmlCommentRenderer commentR = new HtmlCommentRenderer(cp);
-		commentR.render(parent, comment);
-	}
-
+	/*HtmlHeadingRenderer aufrufen um Title Objekte zu verarbeiten*/
 	private void titleRenderer(HtmlElement parent, Title title)
 	{
 		HtmlHeadingRenderer titleR = new HtmlHeadingRenderer(cp);
@@ -105,11 +104,12 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 		titleR.render(parent, title,lvl);
 	}
 
+	/*Sections Objekte nach weiteren Section Objekten durchsuchen und diese verarbeiten*/
 	private void processSections(HtmlElement div, Sections sections)
 	{
 		for(Object o : sections.getContent())
 		{
-			if(o instanceof Section){renderSection(div,(Section)o);}
+			if(o instanceof Section){renderSection(div,(Section)o,++lvl);}
 		}
 	}
 }
