@@ -11,7 +11,7 @@ public class HtmlFontUtil
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlFontUtil.class);
 
-	public static String fonSize(Font font)
+	public static String fontSize(Font font)
 	{
 		String fontsize = "font-size:";
 		if(font.isSetRelativeSize())

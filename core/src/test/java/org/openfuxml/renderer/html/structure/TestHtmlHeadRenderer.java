@@ -30,7 +30,7 @@ public class TestHtmlHeadRenderer extends AbstractTestHtmlRenderer
 	@Test public void head() throws IOException
 	{
 		initFile(Key.head);
-        renderer.render(null, "");
+        renderer.render(null);
     	renderTest(renderer);
 	}
 	@Test public void cssHead() throws IOException
@@ -38,7 +38,7 @@ public class TestHtmlHeadRenderer extends AbstractTestHtmlRenderer
 		initFile(Key.cssHead);
 		List<String> cssFiles = new ArrayList<String>();
 		cssFiles.add("pseudo.css");
-		renderer.render(cssFiles,"");
+		renderer.render(cssFiles);
 		renderTest(renderer);
 	}
 

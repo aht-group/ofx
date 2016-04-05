@@ -57,7 +57,7 @@ public class HtmlParagraphRenderer extends AbstractOfxHtmlRenderer implements Of
 			else if(o instanceof Emphasis){renderEmphasis(parent, ((Emphasis)o));}
 			else if(o instanceof Reference){renderReference(parent, ((Reference)o));}
 			else if(o instanceof Symbol){renderSymbol(parent, ((Symbol)o));}
-			else if(o instanceof Font){parent.setStyleAttribute(HtmlFontUtil.fonSize(((Font)o)));}
+			else if(o instanceof Font){parent.setStyleAttribute(HtmlFontUtil.fontSize(((Font)o)));}
 			else if(o instanceof Marginalia)
 			{
 				HtmlElement div = new HtmlElement("div");

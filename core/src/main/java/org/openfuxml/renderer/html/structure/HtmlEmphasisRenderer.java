@@ -13,7 +13,6 @@ import org.openfuxml.xml.renderer.cmp.Html;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public class HtmlEmphasisRenderer extends AbstractOfxHtmlRenderer implements OfxMdRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlEmphasisRenderer.class);

@@ -41,6 +41,11 @@ public class HtmlHead extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 	private List<HtmlAttribute> metaAttr;
 	public List<HtmlAttribute> getMetaAttr(){return metaAttr;}
 
+	public void render(List<String> cssFiles){
+		new HtmlDocumentRenderer(cp,"").init();
+		render(cssFiles,"");
+	}
+
 	public void render(List<String> cssFiles, String pageTitle)
 	{
 		head = new HtmlElement("head");

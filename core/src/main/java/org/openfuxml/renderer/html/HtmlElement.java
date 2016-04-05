@@ -62,5 +62,4 @@ public class HtmlElement extends Element
 		HtmlElement style = (HtmlElement)html.getChild("head").getChild("style");
 		style.addContent(styleElement);
 	}
-
 }

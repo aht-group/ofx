@@ -38,6 +38,7 @@ public class ImageProvider extends AbstractElementProvider
 	{
 		Image p = new Image();
 		p.setTitle(XmlTitleFactory.build(imageTitle));
+		p.setId("imageID");
 		p.setMedia(XmlMediaFactory.build("src/folder/img.png", "dst/folder/img.png"));
 		p.setWidth(setWidth()); p.setHeight(setHeight());
 		return p;

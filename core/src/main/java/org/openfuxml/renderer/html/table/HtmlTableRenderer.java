@@ -53,7 +53,7 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 
 		parent.addContent(table);
 
-		if(tab.getSpecification() != null){HtmlElement.addStyleElement(styleProperties(tab.getSpecification().getColumns()), HtmlDocumentRenderer.getInstance().getHtml());}
+		if(tab.isSetSpecification() && tab.getSpecification() != null){HtmlElement.addStyleElement(styleProperties(tab.getSpecification().getColumns()), HtmlDocumentRenderer.getInstance().getHtml());}
 	}
 
 	private void renderHead(HtmlElement table, Head head)
@@ -159,6 +159,6 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxLat
 		else if(o instanceof String){td.addContent((String)o);}
 		else if(o instanceof Image){imageRenderer(td, (Image)o);}
 		else if(o instanceof List){listRenderer(td, (List)o);}
-		else if(o instanceof Font){td.setStyleAttribute(HtmlFontUtil.fonSize(((Font)o)));}
+		else if(o instanceof Font){td.setStyleAttribute(HtmlFontUtil.fontSize(((Font)o)));}
 	}
 }

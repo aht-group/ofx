@@ -33,6 +33,28 @@ public class TableProvider extends AbstractElementProvider
 		return xml;
 	}
 
+	public static Section buildWithoutSpecification()
+	{
+		Section xml = XmlSectionFactory.build();
+		xml.getContent().add(createSimple());
+		return xml;
+	}
+
+	public static Section buildWithoutSpecification(int col, int row)
+	{
+		Section xml = XmlSectionFactory.build();
+		xml.getContent().add(createSimple(col, row));
+		return xml;
+	}
+
+	public static Table createSimple(){return createSimple(4,2,1);}
+	public static Table createSimple(int col, int row){return createSimple(4,col,row);}
+	private static Table createSimple(int words, int col, int row){
+		Table xml = OfxTableFactory.build(createHead(col),createBody(words,col,row));
+		xml.setTitle(title());
+		xml.setId(li.getWords(words-3,words+2));
+		return xml;
+	}
 	public static Table create(){return create(4,2,1);}
 	public static Table create(int col, int row){return create(4,col,row);}
 	private static Table create(int words, int col, int row)

@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jdom2.Attribute;
-import org.jdom2.DocType;
-import org.jdom2.Document;
-import org.jdom2.Namespace;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.openfuxml.content.media.Image;
@@ -28,16 +25,13 @@ import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
 import org.openfuxml.renderer.html.structure.*;
 import org.openfuxml.renderer.html.table.HtmlTableRenderer;
-import org.openfuxml.renderer.markdown.structure.MdSectionRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(MdSectionRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractOfxHtmlRenderer.class);
 
-
-	
 	@Deprecated
 	public AbstractOfxHtmlRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm) {this(ConfigurationProviderFacotry.build(cmm,dsm));}
 	
@@ -144,5 +138,4 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 		f.setOmitDeclaration(true);
 		return f;
 	}
-
 }

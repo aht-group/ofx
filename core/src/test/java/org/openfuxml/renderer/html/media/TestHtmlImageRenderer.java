@@ -38,7 +38,7 @@ public class TestHtmlImageRenderer extends AbstractTestHtmlRenderer
 	@Test public void only() throws IOException
 	{
 		initFile(Key.only);
-		Section sec = new Section(); sec.getContent().add(ImageProvider.createImageOnly("This would be an inline Image"));
+		Section sec = new Section(); sec.getContent().add(ImageProvider.createImageOnly("This would be an Image"));
 		body.render(sec);
 		renderTest(body);
 	}
