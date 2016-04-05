@@ -50,6 +50,7 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 		instance = this;
 	}
 
+	/*Dokument-konvertierung starten.*/
 	public void render(Content content) throws OfxAuthoringException, OfxConfigurationException
 	{
 		init();
@@ -58,17 +59,11 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 		HtmlBody body = new HtmlBody(cp);
 		body.render(content);
 	}
-
+ /*Initialisieren der html und doc Objekte, sowie Namespace für das html Objekt setzen.*/
 	public void init()
 	{
 		html = new HtmlElement("html");
 		doc = new Document(html, new DocType("html"));
 		html.setNamespace(Namespace.getNamespace("http://www.w3.org/1999/xhtml"));
 	}
-
-//	private void renderBody(Content content) throws OfxAuthoringException, OfxConfigurationException
-//	{
-//		HtmlBody body = new HtmlBody(cmm,dsm);
-//		body.render(content);
-//	}
 }
