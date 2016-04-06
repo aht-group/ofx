@@ -51,6 +51,5 @@ public class TestWikiSectionRenderer extends AbstractTestWikiRenderer{
         test.setEnvironment(true);
 		
         test.init();test.section();
-	}
-	
+	}	
 }
