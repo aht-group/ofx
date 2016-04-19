@@ -22,7 +22,7 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 	final static Logger logger = LoggerFactory.getLogger(HtmlSectionRenderer.class);
 
 	int lvl;
-	static int sectionCount = 0;
+	public static int sectionCount = 0;
 
 	@Deprecated
 	public HtmlSectionRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm, int lvl)

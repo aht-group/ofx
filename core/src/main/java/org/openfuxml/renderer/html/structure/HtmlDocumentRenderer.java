@@ -11,14 +11,14 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.OfxMdRenderer;
+import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.html.head.HtmlHead;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements OfxMdRenderer
+public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlDocumentRenderer.class);
 

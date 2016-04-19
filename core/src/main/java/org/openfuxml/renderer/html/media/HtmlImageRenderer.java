@@ -8,14 +8,16 @@ import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
+import org.openfuxml.renderer.html.structure.HtmlSectionRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdRenderer
+public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlImageRenderer.class);
 
@@ -39,8 +41,8 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdR
 		String title = "This is an image.";
 		if(image.getTitle() != null){title = TxtTitleFactory.build(image.getTitle());}
 		img.setAttribute("alt", title);
-
 		img.setAttribute("src", image.getMedia().getSrc());
+		if(image.isSetHeight()|| image.isSetWidth()){img.setStyleAttribute(HtmlElement.evaluateSize(image.getWidth()) + HtmlElement.evaluateSize(image.getHeight()));}
 
 		parent.addContent(img);
 	}
@@ -49,7 +51,7 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxMdR
 	public void render(HtmlElement parent, Image image)
 	{
 		String title = "This is an image.";
-		if(image.getTitle() != null){title = TxtTitleFactory.build(image.getTitle());}
+		if(image.getTitle() != null){title = "Image " + HtmlSectionRenderer.sectionCount + "." + imgcount + ": " + TxtTitleFactory.build(image.getTitle());}
 		imgcount++;
 		HtmlElement figure = new HtmlElement("figure");
 		HtmlElement img = new HtmlElement("img");

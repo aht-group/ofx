@@ -6,14 +6,13 @@ import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.OfxMdRenderer;
+import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
-import org.openfuxml.xml.renderer.cmp.Html;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HtmlEmphasisRenderer extends AbstractOfxHtmlRenderer implements OfxMdRenderer
+public class HtmlEmphasisRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlEmphasisRenderer.class);
 	boolean bold=false,

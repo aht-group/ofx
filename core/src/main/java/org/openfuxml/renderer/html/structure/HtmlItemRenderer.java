@@ -9,6 +9,7 @@ import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
@@ -18,7 +19,7 @@ import org.openfuxml.renderer.markdown.structure.MdParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HtmlItemRenderer extends AbstractOfxHtmlRenderer implements OfxMdRenderer
+public class HtmlItemRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlItemRenderer.class);
 	@Deprecated

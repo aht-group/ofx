@@ -5,6 +5,7 @@ package org.openfuxml.renderer.html.structure;
  */
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
@@ -13,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 
-public class HtmlListingRenderer extends AbstractOfxHtmlRenderer implements OfxMdRenderer
+public class HtmlListingRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	private final Logger logger = LoggerFactory.getLogger(HtmlListingRenderer.class);
 	//ToDo delete all deprecated constructor
