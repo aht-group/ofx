@@ -8,18 +8,21 @@ import org.openfuxml.renderer.util.OfxDocumentStructureVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ * @author yannkruger
+ *
+ */
 public class OfxWordRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxWordRenderer.class);
 	
-	public OfxWordRenderer()
-	{
+	public OfxWordRenderer(){
 		
 	}
-	
+		
 	public void render(Document ofxDocument, File target) throws OfxAuthoringException
 	{
 		OfxDocumentStructureVerifier.checkForContent(ofxDocument);
-		
 	}
 }
