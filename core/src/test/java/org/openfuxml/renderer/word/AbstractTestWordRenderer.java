@@ -2,15 +2,14 @@ package org.openfuxml.renderer.word;
 
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
-import org.openfuxml.renderer.wiki.AbstractTestWikiRenderer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.openfuxml.factory.xml.table.OfxTableFactory;
+import org.openfuxml.test.provider.TableProvider;
 
 public class AbstractTestWordRenderer {
-
-	final static Logger logger = LoggerFactory.getLogger(AbstractTestWikiRenderer.class);
 
 	/**
 	 * Creates a test paragraph as XML
@@ -30,9 +29,28 @@ public class AbstractTestWordRenderer {
 	 */
 	public Section buildSection() {
 		Section s = new Section();
-		s.getContent().add(XmlTitleFactory.build("Introduction"));
+		s.getContent().add(XmlTitleFactory.build("Test Section"));
 		s.getContent().add(buildParagraph());
 		return s;
+	}
+	
+	/**
+	 * Creates a test title
+	 * @return Ofx Title
+	 */
+	public Title buildTitle() {
+		Title t = new Title();
+		t.getContent().add(XmlTitleFactory.build("Test Title"));
+		return t;
+	}
+	
+	/**
+	 * Creates a test table
+	 * @return
+	 */
+	public Table buildTable(){
+		Table t = TableProvider.create();
+		return t;
 	}
 
 }

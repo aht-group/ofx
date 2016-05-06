@@ -1,7 +1,6 @@
 package org.openfuxml.renderer.word;
 
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
@@ -12,7 +11,8 @@ import net.sf.exlp.util.xml.JaxbUtil;
 public class TestWordParagraphRenderer extends AbstractTestWordRenderer {
 		
 	public static void main(String[] args) throws Exception{
-				
+		
+		TestWordParagraphRenderer twpr = new TestWordParagraphRenderer();
 		WordParagraphRenderer wpr = new WordParagraphRenderer(new ConfigurationProvider() {
 			
 			@Override
@@ -28,8 +28,7 @@ public class TestWordParagraphRenderer extends AbstractTestWordRenderer {
 			}
 		});	
 		
-		Paragraph p = XmlParagraphFactory.build("Test 123");
-		p.getContent().add("Test Text CV");
+		Paragraph p = twpr.buildParagraph();
 		
 		JaxbUtil.info(p);
 		

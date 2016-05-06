@@ -29,7 +29,6 @@ public class WordParagraphRenderer extends AbstractOfxWordRenderer {
 			}
 			else if(o instanceof String){
 				XWPFRun r = p.createRun();
-		        r.setTextPosition(-10);
 		        r.setText((String)o);
 			}
 		}
