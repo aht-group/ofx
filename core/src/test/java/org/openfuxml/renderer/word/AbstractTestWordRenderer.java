@@ -6,7 +6,7 @@ import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
-import org.openfuxml.factory.xml.table.OfxTableFactory;
+import org.openfuxml.test.provider.SectionProvider;
 import org.openfuxml.test.provider.TableProvider;
 
 public class AbstractTestWordRenderer {
@@ -28,9 +28,9 @@ public class AbstractTestWordRenderer {
 	 * @return Ofx Section
 	 */
 	public Section buildSection() {
-		Section s = new Section();
-		s.getContent().add(XmlTitleFactory.build("Test Section"));
-		s.getContent().add(buildParagraph());
+		Section s = SectionProvider.buildWithMultiLevels();
+		s.getContent().add(TableProvider.create());
+		s.getContent().add(TableProvider.create());
 		return s;
 	}
 	

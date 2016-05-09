@@ -7,15 +7,11 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.word.structure.WordTableRenderer;
-import org.openfuxml.renderer.word.structure.WordTitleRenderer;
-
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestWordTableRenderer extends AbstractTestWordRenderer {

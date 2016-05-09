@@ -5,6 +5,9 @@ import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.word.structure.WordSectionRenderer;
+
+import com.sun.media.jfxmedia.logging.Logger;
+
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestWordSectionRenderer extends AbstractTestWordRenderer {
@@ -34,6 +37,7 @@ public static void main(String[] args) throws Exception{
 	
 	wtr.renderSection(wtr.getDocument(), s, lvl);
 	wtr.writeDocument(wtr.getDocument());
+	
 }
 
 }
