@@ -2,12 +2,14 @@ package org.openfuxml.renderer.word;
 
 import java.io.FileOutputStream;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.renderer.AbstractOfxRenderer;
+import org.openfuxml.renderer.word.structure.WordDocumentRenderer;
 import org.openfuxml.renderer.word.structure.WordParagraphRenderer;
 import org.openfuxml.renderer.word.structure.WordSectionRenderer;
 import org.openfuxml.renderer.word.structure.WordTableRenderer;
@@ -77,7 +79,7 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer{
 	} 
 	
 	/**
-	 * resposible for title rendering
+	 * responsible for title rendering
 	 * @param doc
 	 * @param title
 	 * @param lvl
@@ -86,10 +88,19 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer{
 		WordTitleRenderer titleRenderer = new WordTitleRenderer(cp);
 		this.doc = titleRenderer.renderer(doc, title, lvl);
 	}
-	
+	/**
+	 * responsible for the Table rendering
+	 * @param doc
+	 * @param t
+	 */
 	public void renderTable(XWPFDocument doc, Table t){
 		WordTableRenderer tableRenderer = new WordTableRenderer(cp);
 		this.doc = tableRenderer.renderer(doc, t);
+	}
+	
+	public void renderDocument(XWPFDocument doc, Document docOfx, int lvl){
+		WordDocumentRenderer documentRenderer = new WordDocumentRenderer(cp,lvl);
+		this.doc = documentRenderer.renderer(doc, docOfx);
 	}
 	
 }

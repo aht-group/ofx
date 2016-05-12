@@ -126,7 +126,9 @@ public class WordTableRenderer extends AbstractOfxWordRenderer{
 				for(Object o : c.getContent()){
 					
 					if (o instanceof Paragraph){
-						t.getRow(z).getCell(s).setText(((Paragraph)o).getContent().toString());
+//						logger.info("Inhalt der Zelle: " + ((Paragraph)o).getContent().toString().substring(1, ((Paragraph)o).getContent().toString().length()-1));
+						//Entfernen der eckigen Klammern
+						t.getRow(z).getCell(s).setText(((Paragraph)o).getContent().toString().substring(1, ((Paragraph)o).getContent().toString().length()-1));
 						s++;
 						//Neue Zelle erstellen... 
 						if(t.getRow(0).getTableCells().size() < r.getCell().size()){
@@ -163,19 +165,15 @@ public class WordTableRenderer extends AbstractOfxWordRenderer{
 		
 		for(Body body : b)
 		{
-//			logger.info("body");
 			for(Row r : body.getRow())
 			{	
-//				logger.info("row");
 				for(Cell c : r.getCell())
 				{
-//					logger.info("cell");
 					for(Object o : c.getContent()){
 						
 						 if (o instanceof Paragraph){
-//							logger.info("Paragraph");
-//							logger.info("row z: " + z + " cell s = " + s);
-							t.getRow(z).getCell(s).setText(((Paragraph)o).getContent().toString());
+//							Entfernen der eckigen Klammern mit "substring"
+							t.getRow(z).getCell(s).setText(((Paragraph)o).getContent().toString().substring(1, ((Paragraph)o).getContent().toString().length()-1));
 							s++;
 							//Neue Zelle erstellen... 
 							if(t.getRow(0).getTableCells().size() < r.getCell().size()){
@@ -191,7 +189,6 @@ public class WordTableRenderer extends AbstractOfxWordRenderer{
 				s=0;
 				
 				if(body.getRow().size() >= t.getRows().size()){
-//					logger.info("body row created");
 					t.createRow();
 				}
 				

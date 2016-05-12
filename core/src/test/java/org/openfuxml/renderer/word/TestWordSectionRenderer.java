@@ -16,7 +16,7 @@ public static void main(String[] args) throws Exception{
 	int lvl = 0;
 	
 	TestWordSectionRenderer twsr = new TestWordSectionRenderer();
-	WordSectionRenderer wtr = new WordSectionRenderer(new ConfigurationProvider() {
+	WordSectionRenderer wsr = new WordSectionRenderer(new ConfigurationProvider() {
 		
 		@Override
 		public DefaultSettingsManager getDefaultSettingsManager() {
@@ -32,11 +32,12 @@ public static void main(String[] args) throws Exception{
 	}, lvl);	
 	
 	Section s = twsr.buildSection(); 
-		
+	
+	//XML Ausgabe
 	JaxbUtil.info(s);
 	
-	wtr.renderSection(wtr.getDocument(), s, lvl);
-	wtr.writeDocument(wtr.getDocument());
+	wsr.renderSection(wsr.getDocument(), s, lvl);
+	wsr.writeDocument(wsr.getDocument());
 	
 }
 
