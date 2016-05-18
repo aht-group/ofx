@@ -47,7 +47,7 @@ public class TestHtmlListingRenderer extends AbstractTestHtmlRenderer
 		TestHtmlListingRenderer test = new TestHtmlListingRenderer();
         test.setEnvironment(true);
 		
-//        test.init();test.raw();
+       test.init();test.raw();
 		test.init();test.external();
 	}
 }

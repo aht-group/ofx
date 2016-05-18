@@ -3,6 +3,7 @@ package org.openfuxml.renderer.html.structure;
 import java.io.IOException;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
@@ -45,7 +46,8 @@ public class TestHtmlReferenceRenderer extends AbstractTestHtmlRenderer
     	renderTest(renderer);
 	}
 
-	@Test public void extern() throws IOException
+	@Test @Ignore
+	public void extern() throws IOException
 	{
 		initFile(Key.extern);
 		Section s = new Section ();
