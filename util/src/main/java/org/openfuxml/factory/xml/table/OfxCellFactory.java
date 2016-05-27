@@ -1,5 +1,7 @@
 package org.openfuxml.factory.xml.table;
 
+import java.text.DecimalFormat;
+
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.table.Cell;
@@ -8,6 +10,7 @@ public class OfxCellFactory
 {
 	public static Cell build(){return new Cell();}
 	
+	public static Cell createParagraphCell(DecimalFormat df, double value){return createParagraphCell(df.format(value));}
 	public static Cell createParagraphCell(int text){return createParagraphCell(""+text);}
 	public static Cell createParagraphCell(String text)
 	{
