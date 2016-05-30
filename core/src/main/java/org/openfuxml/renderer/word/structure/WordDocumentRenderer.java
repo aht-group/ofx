@@ -20,6 +20,14 @@ public class WordDocumentRenderer extends AbstractOfxWordRenderer{
 	}
 	
 	/**
+	 * Rekursiver Aufruf des Sectionrenderers, um verschiedene Ebenen (z.B. Untertitel) mit lvl anzuzeigen
+	 */
+	public WordDocumentRenderer(ConfigurationProvider cp){
+		super(cp);
+		this.lvl = 0;
+	}
+	
+	/**
 	 * Erstmal nur für einen Titel, da CV nur einen Titel hat, sonst TitelRenderer Klasse erstellen
 	 * @param doc
 	 * @param section

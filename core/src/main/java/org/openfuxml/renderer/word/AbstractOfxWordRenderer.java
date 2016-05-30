@@ -32,7 +32,7 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer{
 	public AbstractOfxWordRenderer(ConfigurationProvider cp){
 		super(cp);
 		doc = new XWPFDocument();
-		initLogger();
+//		initLogger();
 	}
 	
 	/**
@@ -98,8 +98,8 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer{
 		this.doc = tableRenderer.renderer(doc, t);
 	}
 	
-	public void renderDocument(XWPFDocument doc, Document docOfx, int lvl){
-		WordDocumentRenderer documentRenderer = new WordDocumentRenderer(cp,lvl);
+	public void renderDocument(XWPFDocument doc, Document docOfx){
+		WordDocumentRenderer documentRenderer = new WordDocumentRenderer(cp);
 		this.doc = documentRenderer.renderer(doc, docOfx);
 	}
 	

@@ -1,11 +1,13 @@
 package org.openfuxml.renderer.word;
 
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
+import org.openfuxml.test.provider.DocumentProvider;
 import org.openfuxml.test.provider.SectionProvider;
 import org.openfuxml.test.provider.TableProvider;
 
@@ -32,6 +34,11 @@ public class AbstractTestWordRenderer {
 		s.getContent().add(TableProvider.create());
 		s.getContent().add(TableProvider.create());
 		return s;
+	}
+	
+	public Document buildDocument(){
+		Document d = DocumentProvider.build();
+		return d;
 	}
 	
 	/**
