@@ -18,6 +18,8 @@ import org.openfuxml.renderer.html.head.HtmlHead;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlDocumentRenderer.class);
@@ -57,6 +59,14 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 		HtmlHead head = new	HtmlHead(cp);
 		head.render(null, pageTitle);
 		HtmlBody body = new HtmlBody(cp);
+		body.render(content);
+	}
+
+	public void render(Content content, List<String>css) throws OfxAuthoringException, OfxConfigurationException {
+		this.init();
+		HtmlHead head = new HtmlHead(this.cp);
+		head.render(css, this.pageTitle);
+		HtmlBody body = new HtmlBody(this.cp);
 		body.render(content);
 	}
  /*Initialisieren der html und doc Objekte, sowie Namespace für das html Objekt setzen.*/

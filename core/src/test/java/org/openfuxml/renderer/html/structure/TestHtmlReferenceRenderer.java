@@ -33,10 +33,11 @@ public class TestHtmlReferenceRenderer extends AbstractTestHtmlRenderer
 	{
 		Reference ref = new Reference();
 		ref.setTarget(target);
+		ref.setValue(target);
 		return ref;
 	}
 
-	@Test @Ignore public void intern() throws IOException
+	@Test /*@Ignore*/ public void intern() throws IOException
 	{
 		initFile(Key.intern);
 		Section s = new Section ();
@@ -46,12 +47,14 @@ public class TestHtmlReferenceRenderer extends AbstractTestHtmlRenderer
     	renderTest(renderer);
 	}
 
-	@Test @Ignore
+	@Test /*@Ignore*/
 	public void extern() throws IOException
 	{
 		initFile(Key.extern);
 		Section s = new Section ();
-		Paragraph p = ParagraphProvider.create(); p.getContent().add(buildReference("www.google.de"));
+		Reference r = buildReference("www.google.com");
+		r.setType("external");
+		Paragraph p = ParagraphProvider.create(); p.getContent().add(r);
 		s.getContent().add(p);
 		renderer.render(s);
 		renderTest(renderer);

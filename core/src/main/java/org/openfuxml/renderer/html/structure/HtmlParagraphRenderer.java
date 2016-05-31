@@ -72,7 +72,10 @@ public class HtmlParagraphRenderer extends AbstractOfxHtmlRenderer implements Of
 	private void renderReference(HtmlElement parent, Reference r)
 	{
 		HtmlReferenceRenderer referenceRender = new HtmlReferenceRenderer(cp);
-		referenceRender.renderIntern(parent,r);
+		if(r.isSetType() && r.getType().equals("external"))
+				referenceRender.renderExtern(parent,r.getTarget(), r.getValue());
+		else
+			referenceRender.renderIntern(parent,r);
 	}
 
 	public void imageRenderer(HtmlElement p, Image i)

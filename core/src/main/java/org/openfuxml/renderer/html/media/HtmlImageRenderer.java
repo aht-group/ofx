@@ -59,9 +59,13 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxHtm
 		img.setAttribute("alt", title);
 		img.setAttribute("src", image.getMedia().getSrc());
 		if(image.isSetHeight()|| image.isSetWidth()){img.setStyleAttribute(HtmlElement.evaluateSize(image.getWidth()) + HtmlElement.evaluateSize(image.getHeight()));}
-
+		if(image.isSetAlignment() && image.getAlignment().getHorizontal().equals("center")) {
+			figure.setStyleAttribute("display:block;margin-left: auto;margin-right: auto; " + HtmlElement.evaluateSize(image.getWidth(), 2.0));
+			img.getAttribute("style").setValue(img.getAttribute("style").getValue() + "display:block;margin-left: auto;margin-right: auto;");
+		}
 		figure.addContent(img);
-		figure.addContent(caption(title));
+		if(!TxtTitleFactory.build(image.getTitle()).isEmpty())
+			figure.addContent(caption(title));
 		parent.addContent(figure);
 	}
 

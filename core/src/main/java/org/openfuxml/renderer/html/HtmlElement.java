@@ -48,6 +48,15 @@ public class HtmlElement extends Element
 		return size;
 	}
 
+	public static String evaluateSize(Object o, double multiplier)
+	{
+		String size="";
+		if(o != null && o instanceof Width){size = "width: " +
+				(((Width)o).getUnit().equalsIgnoreCase("percentage") && ((Width)o).getValue()*multiplier > 100 ? 100: ((Width)o).getValue()*multiplier) + evaluateUnit(((Width)o).getUnit()) + ";";}
+		if(o != null && o instanceof Height){size = "height: " + (((Height)o).getUnit().equalsIgnoreCase("percentage") && ((Height)o).getValue()*multiplier > 100 ? 100: ((Height)o).getValue()*multiplier) + evaluateUnit(((Height)o).getUnit())+ ";";}
+		return size;
+	}
+
 	/*Umwandeln von "percentage" in das % - Zeichen. Ansonsten Einheit übernehmen wie sie ist.*/
 	private static String evaluateUnit(String unit){return unit.equalsIgnoreCase("percentage") ? "%" : unit;}
 

@@ -1,5 +1,6 @@
 package org.openfuxml.test.provider;
 
+import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.media.Image;
@@ -41,6 +42,8 @@ public class ImageProvider extends AbstractElementProvider
 		p.setId("imageID");
 		p.setMedia(XmlMediaFactory.build("src/folder/img.png", "dst/folder/img.png"));
 		p.setWidth(setWidth()); p.setHeight(setHeight());
+		Alignment a = new Alignment(); a.setHorizontal("center");
+		p.setAlignment(a);
 		return p;
 	}
 

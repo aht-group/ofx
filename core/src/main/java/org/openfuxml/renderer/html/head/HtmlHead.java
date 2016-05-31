@@ -52,7 +52,7 @@ public class HtmlHead extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		metaData(head);
 		if(cssFiles != null){css(head,cssFiles);}
 		pageTitle(head, pageTitle);
-		style(head);
+//		style(head);
 		HtmlDocumentRenderer.getInstance().getHtml().getContent().add(head);
 
 	}
