@@ -25,11 +25,18 @@ public class TestHtmlReferenceRenderer extends AbstractTestHtmlRenderer
 
 	@Before public void init()
 	{
-		super.initDir("section");
+		super.initDir("reference");
 		renderer = new HtmlBody(new OfxConfigurationProvider());
 	}
+	
+	private Reference buildReference(String target)
+	{
+		Reference ref = new Reference();
+		ref.setTarget(target);
+		return ref;
+	}
 
-	@Test public void intern() throws IOException
+	@Test @Ignore public void intern() throws IOException
 	{
 		initFile(Key.intern);
 		Section s = new Section ();
@@ -50,16 +57,6 @@ public class TestHtmlReferenceRenderer extends AbstractTestHtmlRenderer
 		renderTest(renderer);
 	}
 
-
-	private Reference buildReference(String target)
-	{
-		Reference ref = new Reference();
-		ref.setTarget(target);
-		return ref;
-	}
-
-	/* main() zum Ausführen als Applikation, wichtig vor jedem einzelnen Test init()
-	* aufzurufen.*/
 	public static void main(String[] args) throws IOException
 	{
 		OfxCoreTestBootstrap.init();
@@ -67,6 +64,6 @@ public class TestHtmlReferenceRenderer extends AbstractTestHtmlRenderer
         test.setEnvironment(true);
 		
         test.init();test.intern();
-//		test.init();test.extern();
+		test.init();test.extern();
 	}
 }

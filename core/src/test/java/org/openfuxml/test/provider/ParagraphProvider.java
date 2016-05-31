@@ -14,7 +14,7 @@ public class ParagraphProvider extends AbstractElementProvider
 	public static Paragraph create(int words)
 	{
     	Paragraph p = new Paragraph();
-    	p.getContent().add(li.getWords(words)+"\n"+li.getWords(words));
+    	p.getContent().add(li.getWords(words));
     	return p;
 	}
 	

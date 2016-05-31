@@ -2,11 +2,8 @@
 
 \begin{shaded}
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
 
 Lorem ipsum dolor sit
-Lorem ipsum dolor sit
 
-Lorem ipsum dolor sit amet,
 Lorem ipsum dolor sit amet,
 \end{shaded}
