@@ -8,6 +8,7 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.structure.HtmlBody;
+import org.openfuxml.renderer.html.structure.HtmlSectionRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.ImageProvider;
 import org.slf4j.Logger;
@@ -48,8 +49,9 @@ public class TestHtmlImageRenderer extends AbstractTestHtmlRenderer
 		OfxCoreTestBootstrap.init();
 		TestHtmlImageRenderer test = new TestHtmlImageRenderer();
         test.setEnvironment(true);
-		
+
+		test.init();test.only();
         test.init();test.inline();
-        test.init();test.only();
+
 	}
 }
