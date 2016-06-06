@@ -37,7 +37,7 @@ public class TestHtmlReferenceRenderer extends AbstractTestHtmlRenderer
 		return ref;
 	}
 
-	@Test /*@Ignore*/ public void intern() throws IOException
+	@Test @Ignore public void intern() throws IOException
 	{
 		initFile(Key.intern);
 		Section s = new Section ();

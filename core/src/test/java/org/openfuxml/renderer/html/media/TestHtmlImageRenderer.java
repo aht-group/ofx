@@ -3,6 +3,7 @@ package org.openfuxml.renderer.html.media;
 import java.io.IOException;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.renderer.OfxConfigurationProvider;
@@ -36,7 +37,8 @@ public class TestHtmlImageRenderer extends AbstractTestHtmlRenderer
     	renderTest(body);
 	}
 	
-	@Test public void only() throws IOException
+	@Test @Ignore
+	public void only() throws IOException
 	{
 		initFile(Key.only);
 		Section sec = new Section(); sec.getContent().add(ImageProvider.createImageOnly("This would be an Image"));
