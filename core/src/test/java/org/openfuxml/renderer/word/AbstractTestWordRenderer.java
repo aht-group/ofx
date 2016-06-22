@@ -31,6 +31,7 @@ public class AbstractTestWordRenderer {
 	 */
 	public Section buildSection() {
 		Section s = SectionProvider.buildWithMultiLevels();
+//		s.getContent().add(buildTitle());
 		s.getContent().add(TableProvider.create());
 		s.getContent().add(TableProvider.create());
 		return s;
@@ -38,6 +39,8 @@ public class AbstractTestWordRenderer {
 	
 	public Document buildDocument(){
 		Document d = DocumentProvider.build();
+		d.getContent().getContent().add(buildSection());
+		d.getContent().getContent().add(buildTable());
 		return d;
 	}
 	
@@ -47,7 +50,10 @@ public class AbstractTestWordRenderer {
 	 */
 	public Title buildTitle() {
 		Title t = new Title();
-		t.getContent().add(XmlTitleFactory.build("Test Title"));
+		t.getContent().add(XmlTitleFactory.build("Test Title 1"));
+		t.getContent().add(XmlTitleFactory.build("Test Title 2"));
+		t.getContent().add(XmlTitleFactory.build("Test Title 3"));
+		t.getContent().add(XmlTitleFactory.build("Test Title 4"));
 		return t;
 	}
 	

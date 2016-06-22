@@ -89,7 +89,7 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer{
 		this.doc = titleRenderer.renderer(doc, title, lvl);
 	}
 	/**
-	 * responsible for the Table rendering
+	 * responsible for table rendering
 	 * @param doc
 	 * @param t
 	 */
@@ -98,6 +98,11 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer{
 		this.doc = tableRenderer.renderer(doc, t);
 	}
 	
+	/**
+	 * responsible for document rendering
+	 * @param doc
+	 * @param docOfx
+	 */
 	public void renderDocument(XWPFDocument doc, Document docOfx){
 		WordDocumentRenderer documentRenderer = new WordDocumentRenderer(cp);
 		this.doc = documentRenderer.renderer(doc, docOfx);

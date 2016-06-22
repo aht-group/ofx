@@ -42,7 +42,6 @@ public class WordTitleRenderer extends AbstractOfxWordRenderer{
 			else if(o instanceof Title){renderTitle(doc, (Title)o, lvl++);}
 			else{logger.info("Kein logger für " + o.getClass().getSimpleName());}
 		}
-		
 		return doc;
 	} 
 	
