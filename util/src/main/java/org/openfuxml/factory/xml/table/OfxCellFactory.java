@@ -22,6 +22,13 @@ public class OfxCellFactory
 		return cell;
 	}
 	
+	// BUILD Allows null values
+	public static Cell paragraph(String text)
+	{
+		if(text==null){text = "";}
+		return createParagraphCell(text);
+	}
+	
 	public static Cell image(Image image)
 	{
 		Cell cell = new Cell();
