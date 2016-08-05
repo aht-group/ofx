@@ -19,17 +19,17 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org}sections" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org}section" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/wiki}content" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}sections" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}section" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/wiki}content" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -45,9 +45,9 @@ public class Content
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = org.openfuxml.addon.wiki.data.jaxb.Content.class),
         @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
-        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class)
+        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = org.openfuxml.addon.wiki.data.jaxb.Content.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -70,10 +70,10 @@ public class Content
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link org.openfuxml.addon.wiki.data.jaxb.Content }
      * {@link Sections }
-     * {@link String }
      * {@link Section }
+     * {@link String }
+     * {@link org.openfuxml.addon.wiki.data.jaxb.Content }
      * 
      * 
      */

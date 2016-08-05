@@ -20,18 +20,18 @@ import org.openfuxml.content.media.Image;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/layout}width" minOccurs="0"/>
- *         &lt;element ref="{http://www.openfuxml.org/layout}height" minOccurs="0"/>
- *         &lt;element ref="{http://www.openfuxml.org/layout}container" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/media}image" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/layout}width" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/layout}height" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/layout}container" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/media}image" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -47,9 +47,9 @@ public class Column implements Serializable
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
         @XmlElementRef(name = "width", namespace = "http://www.openfuxml.org/layout", type = Width.class),
-        @XmlElementRef(name = "container", namespace = "http://www.openfuxml.org/layout", type = Container.class),
         @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "height", namespace = "http://www.openfuxml.org/layout", type = Height.class)
+        @XmlElementRef(name = "height", namespace = "http://www.openfuxml.org/layout", type = Height.class),
+        @XmlElementRef(name = "container", namespace = "http://www.openfuxml.org/layout", type = Container.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -72,10 +72,10 @@ public class Column implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Image }
      * {@link Width }
      * {@link Container }
      * {@link String }
+     * {@link Image }
      * {@link Height }
      * 
      * 

@@ -38,6 +38,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link AbsatzOhne }
+     * 
+     */
+    public AbsatzOhne createAbsatzOhne() {
+        return new AbsatzOhne();
+    }
+
+    /**
      * Create an instance of {@link Grafik }
      * 
      */
@@ -51,14 +59,6 @@ public class ObjectFactory {
      */
     public Medienobjekt.Objekttitel createMedienobjektObjekttitel() {
         return new Medienobjekt.Objekttitel();
-    }
-
-    /**
-     * Create an instance of {@link AbsatzOhne }
-     * 
-     */
-    public AbsatzOhne createAbsatzOhne() {
-        return new AbsatzOhne();
     }
 
 }

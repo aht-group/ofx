@@ -30,6 +30,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Text }
+     * 
+     */
+    public Text createText() {
+        return new Text();
+    }
+
+    /**
      * Create an instance of {@link Emphasis }
      * 
      */
@@ -43,14 +51,6 @@ public class ObjectFactory {
      */
     public Symbol createSymbol() {
         return new Symbol();
-    }
-
-    /**
-     * Create an instance of {@link Text }
-     * 
-     */
-    public Text createText() {
-        return new Text();
     }
 
     /**

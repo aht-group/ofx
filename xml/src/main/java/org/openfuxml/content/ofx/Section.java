@@ -23,35 +23,35 @@ import org.openfuxml.content.table.Table;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org}comment" minOccurs="0"/>
- *         &lt;element ref="{http://www.openfuxml.org}title" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/wiki}content" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org}marginalia" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org}highlight" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org}paragraph" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org}section" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org}listing" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org}sections" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org}include" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/table}table" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/media}image" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/list}list" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/wiki}template" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="classifier" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="external" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="source" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="include" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="container" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}comment" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}title" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/wiki}content" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}marginalia" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}highlight" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}paragraph" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}section" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}listing" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}sections" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}include" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/table}table" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/media}image" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/list}list" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/wiki}template" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="classifier" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="external" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="source" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="include" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="container" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -66,20 +66,20 @@ public class Section implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
-        @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
-        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
-        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
-        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
         @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class),
         @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
-        @XmlElementRef(name = "highlight", namespace = "http://www.openfuxml.org", type = Highlight.class),
-        @XmlElementRef(name = "comment", namespace = "http://www.openfuxml.org", type = Comment.class),
+        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
+        @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
         @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class),
+        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
+        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
         @XmlElementRef(name = "include", namespace = "http://www.openfuxml.org", type = Include.class),
-        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class)
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
+        @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class),
+        @XmlElementRef(name = "comment", namespace = "http://www.openfuxml.org", type = Comment.class),
+        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
+        @XmlElementRef(name = "highlight", namespace = "http://www.openfuxml.org", type = Highlight.class),
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class)
     })
     @XmlMixed
     protected java.util.List<Serializable> content;
@@ -116,21 +116,21 @@ public class Section implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Template }
-     * {@link Table }
-     * {@link Marginalia }
-     * {@link Image }
-     * {@link Content }
-     * {@link Listing }
-     * {@link Sections }
      * {@link org.openfuxml.content.list.List }
      * {@link Paragraph }
-     * {@link Highlight }
-     * {@link Comment }
      * {@link String }
+     * {@link Sections }
+     * {@link Table }
      * {@link Title }
+     * {@link Marginalia }
+     * {@link Listing }
      * {@link Include }
+     * {@link Image }
+     * {@link Template }
+     * {@link Comment }
      * {@link Section }
+     * {@link Highlight }
+     * {@link Content }
      * 
      * 
      */

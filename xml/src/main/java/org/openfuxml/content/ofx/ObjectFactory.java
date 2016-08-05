@@ -30,27 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Raw }
+     * Create an instance of {@link Document }
      * 
      */
-    public Raw createRaw() {
-        return new Raw();
+    public Document createDocument() {
+        return new Document();
     }
 
     /**
-     * Create an instance of {@link Paragraph }
+     * Create an instance of {@link Metadata }
      * 
      */
-    public Paragraph createParagraph() {
-        return new Paragraph();
-    }
-
-    /**
-     * Create an instance of {@link Marginalia }
-     * 
-     */
-    public Marginalia createMarginalia() {
-        return new Marginalia();
+    public Metadata createMetadata() {
+        return new Metadata();
     }
 
     /**
@@ -62,11 +54,59 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Content }
+     * 
+     */
+    public Content createContent() {
+        return new Content();
+    }
+
+    /**
+     * Create an instance of {@link Sections }
+     * 
+     */
+    public Sections createSections() {
+        return new Sections();
+    }
+
+    /**
+     * Create an instance of {@link Section }
+     * 
+     */
+    public Section createSection() {
+        return new Section();
+    }
+
+    /**
      * Create an instance of {@link Comment }
      * 
      */
     public Comment createComment() {
         return new Comment();
+    }
+
+    /**
+     * Create an instance of {@link Raw }
+     * 
+     */
+    public Raw createRaw() {
+        return new Raw();
+    }
+
+    /**
+     * Create an instance of {@link Marginalia }
+     * 
+     */
+    public Marginalia createMarginalia() {
+        return new Marginalia();
+    }
+
+    /**
+     * Create an instance of {@link Paragraph }
+     * 
+     */
+    public Paragraph createParagraph() {
+        return new Paragraph();
     }
 
     /**
@@ -86,14 +126,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Section }
-     * 
-     */
-    public Section createSection() {
-        return new Section();
-    }
-
-    /**
      * Create an instance of {@link Listing }
      * 
      */
@@ -102,43 +134,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Sections }
-     * 
-     */
-    public Sections createSections() {
-        return new Sections();
-    }
-
-    /**
      * Create an instance of {@link Include }
      * 
      */
     public Include createInclude() {
         return new Include();
-    }
-
-    /**
-     * Create an instance of {@link Content }
-     * 
-     */
-    public Content createContent() {
-        return new Content();
-    }
-
-    /**
-     * Create an instance of {@link Document }
-     * 
-     */
-    public Document createDocument() {
-        return new Document();
-    }
-
-    /**
-     * Create an instance of {@link Metadata }
-     * 
-     */
-    public Metadata createMetadata() {
-        return new Metadata();
     }
 
 }

@@ -30,6 +30,54 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Cmp }
+     * 
+     */
+    public Cmp createCmp() {
+        return new Cmp();
+    }
+
+    /**
+     * Create an instance of {@link Targets }
+     * 
+     */
+    public Targets createTargets() {
+        return new Targets();
+    }
+
+    /**
+     * Create an instance of {@link Pdf }
+     * 
+     */
+    public Pdf createPdf() {
+        return new Pdf();
+    }
+
+    /**
+     * Create an instance of {@link Toc }
+     * 
+     */
+    public Toc createToc() {
+        return new Toc();
+    }
+
+    /**
+     * Create an instance of {@link Html }
+     * 
+     */
+    public Html createHtml() {
+        return new Html();
+    }
+
+    /**
+     * Create an instance of {@link Source }
+     * 
+     */
+    public Source createSource() {
+        return new Source();
+    }
+
+    /**
      * Create an instance of {@link Preprocessor }
      * 
      */
@@ -51,54 +99,6 @@ public class ObjectFactory {
      */
     public Wiki createWiki() {
         return new Wiki();
-    }
-
-    /**
-     * Create an instance of {@link Toc }
-     * 
-     */
-    public Toc createToc() {
-        return new Toc();
-    }
-
-    /**
-     * Create an instance of {@link Source }
-     * 
-     */
-    public Source createSource() {
-        return new Source();
-    }
-
-    /**
-     * Create an instance of {@link Pdf }
-     * 
-     */
-    public Pdf createPdf() {
-        return new Pdf();
-    }
-
-    /**
-     * Create an instance of {@link Cmp }
-     * 
-     */
-    public Cmp createCmp() {
-        return new Cmp();
-    }
-
-    /**
-     * Create an instance of {@link Targets }
-     * 
-     */
-    public Targets createTargets() {
-        return new Targets();
-    }
-
-    /**
-     * Create an instance of {@link Html }
-     * 
-     */
-    public Html createHtml() {
-        return new Html();
     }
 
 }

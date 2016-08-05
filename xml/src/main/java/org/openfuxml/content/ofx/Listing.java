@@ -16,23 +16,23 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org}title"/>
- *         &lt;element ref="{http://www.openfuxml.org}raw"/>
- *       &lt;/sequence>
- *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="external" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="codeLang" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="classifier" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="setting" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="numbering" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="linebreak" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}title"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}raw"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="external" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="codeLang" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="classifier" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="setting" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="numbering" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="linebreak" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

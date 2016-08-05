@@ -27,34 +27,34 @@ import org.openfuxml.content.text.Symbol;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/layout}font"/>
- *         &lt;element ref="{http://www.openfuxml.org/text}emphasis" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/text}symbol" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org}marginalia" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/editorial}glossary" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/editorial}acronym" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/editorial}index" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org}reference" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/media}image"/>
- *       &lt;/sequence>
- *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="top" use="required">
- *         &lt;simpleType>
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *             &lt;enumeration value="normal"/>
- *             &lt;enumeration value="small"/>
- *             &lt;enumeration value="mini"/>
- *             &lt;enumeration value="zero"/>
- *           &lt;/restriction>
- *         &lt;/simpleType>
- *       &lt;/attribute>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/layout}font"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/text}emphasis" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/text}symbol" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}marginalia" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/editorial}glossary" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/editorial}acronym" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/editorial}index" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}reference" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/media}image"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="top" use="required"&gt;
+ *         &lt;simpleType&gt;
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *             &lt;enumeration value="normal"/&gt;
+ *             &lt;enumeration value="small"/&gt;
+ *             &lt;enumeration value="mini"/&gt;
+ *             &lt;enumeration value="zero"/&gt;
+ *           &lt;/restriction&gt;
+ *         &lt;/simpleType&gt;
+ *       &lt;/attribute&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -69,15 +69,15 @@ public class Paragraph implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
-        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
         @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class),
-        @XmlElementRef(name = "glossary", namespace = "http://www.openfuxml.org/editorial", type = Glossary.class),
-        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "acronym", namespace = "http://www.openfuxml.org/editorial", type = Acronym.class),
+        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
         @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class),
-        @XmlElementRef(name = "index", namespace = "http://www.openfuxml.org/editorial", type = Index.class)
+        @XmlElementRef(name = "glossary", namespace = "http://www.openfuxml.org/editorial", type = Glossary.class),
+        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
+        @XmlElementRef(name = "index", namespace = "http://www.openfuxml.org/editorial", type = Index.class),
+        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
+        @XmlElementRef(name = "acronym", namespace = "http://www.openfuxml.org/editorial", type = Acronym.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -104,16 +104,16 @@ public class Paragraph implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Symbol }
-     * {@link Reference }
      * {@link Emphasis }
+     * {@link Symbol }
+     * {@link Font }
      * {@link Glossary }
-     * {@link Marginalia }
+     * {@link Reference }
      * {@link String }
      * {@link Image }
-     * {@link Acronym }
-     * {@link Font }
      * {@link Index }
+     * {@link Marginalia }
+     * {@link Acronym }
      * 
      * 
      */

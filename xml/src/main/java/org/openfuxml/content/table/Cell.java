@@ -21,18 +21,18 @@ import org.openfuxml.content.ofx.Paragraph;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/layout}font" minOccurs="0"/>
- *         &lt;element ref="{http://www.openfuxml.org}paragraph" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/list}list" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/media}image" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/layout}font" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}paragraph" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/list}list" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/media}image" maxOccurs="unbounded"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -50,8 +50,8 @@ public class Cell
     @XmlElementRefs({
         @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class),
         @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class)
+        @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class),
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class)
     })
     @XmlMixed
     protected java.util.List<Serializable> content;
@@ -74,11 +74,11 @@ public class Cell
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Image }
      * {@link org.openfuxml.content.list.List }
-     * {@link Font }
      * {@link Paragraph }
+     * {@link Font }
      * {@link String }
+     * {@link Image }
      * 
      * 
      */

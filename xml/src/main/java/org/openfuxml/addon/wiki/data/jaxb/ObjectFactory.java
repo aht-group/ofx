@@ -118,19 +118,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link MarkupProcessor }
+     * Create an instance of {@link Ofx }
      * 
      */
-    public MarkupProcessor createMarkupProcessor() {
-        return new MarkupProcessor();
+    public Ofx createOfx() {
+        return new Ofx();
     }
 
     /**
-     * Create an instance of {@link Injections }
+     * Create an instance of {@link Wikireplace }
      * 
      */
-    public Injections createInjections() {
-        return new Injections();
+    public Wikireplace createWikireplace() {
+        return new Wikireplace();
     }
 
     /**
@@ -214,19 +214,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Replacements }
+     * Create an instance of {@link Injections }
      * 
      */
-    public Replacements createReplacements() {
-        return new Replacements();
-    }
-
-    /**
-     * Create an instance of {@link Wikireplace }
-     * 
-     */
-    public Wikireplace createWikireplace() {
-        return new Wikireplace();
+    public Injections createInjections() {
+        return new Injections();
     }
 
     /**
@@ -235,6 +227,22 @@ public class ObjectFactory {
      */
     public Templates createTemplates() {
         return new Templates();
+    }
+
+    /**
+     * Create an instance of {@link Replacements }
+     * 
+     */
+    public Replacements createReplacements() {
+        return new Replacements();
+    }
+
+    /**
+     * Create an instance of {@link Color }
+     * 
+     */
+    public Color createColor() {
+        return new Color();
     }
 
     /**
@@ -254,11 +262,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Color }
+     * Create an instance of {@link MarkupProcessor }
      * 
      */
-    public Color createColor() {
-        return new Color();
+    public MarkupProcessor createMarkupProcessor() {
+        return new MarkupProcessor();
     }
 
     /**
@@ -267,14 +275,6 @@ public class ObjectFactory {
      */
     public Servers createServers() {
         return new Servers();
-    }
-
-    /**
-     * Create an instance of {@link Ofx }
-     * 
-     */
-    public Ofx createOfx() {
-        return new Ofx();
     }
 
 }

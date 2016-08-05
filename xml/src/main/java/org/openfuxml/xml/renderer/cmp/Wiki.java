@@ -20,19 +20,19 @@ import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.openfuxml.org/wiki}markupProcessor"/>
- *         &lt;element ref="{http://www.openfuxml.org/wiki}xhtmlProcessor"/>
- *         &lt;element ref="{http://www.openfuxml.org/wiki}templates"/>
- *         &lt;element ref="{http://www.openfuxml.org/wiki}servers"/>
- *       &lt;/sequence>
- *       &lt;attribute name="fetchArticle" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/wiki}markupProcessor"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/wiki}xhtmlProcessor"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/wiki}templates"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/wiki}servers"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="fetchArticle" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

@@ -15,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="typ" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="r" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="g" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="b" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="a" type="{http://www.w3.org/2001/XMLSchema}int" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;attribute name="typ" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="r" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
+ *       &lt;attribute name="g" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
+ *       &lt;attribute name="b" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
+ *       &lt;attribute name="a" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 

@@ -18,17 +18,17 @@ import net.sf.exlp.xml.io.Dir;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element ref="{http://exlp.sf.net/io}dir" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/cmp}merge" maxOccurs="unbounded"/>
- *         &lt;element ref="{http://www.openfuxml.org/cmp}wiki"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://exlp.sf.net/io}dir" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/cmp}merge" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/cmp}wiki"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
