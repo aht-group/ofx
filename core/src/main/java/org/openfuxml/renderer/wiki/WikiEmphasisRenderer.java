@@ -19,8 +19,8 @@ public class WikiEmphasisRenderer extends AbstractOfxWikiRenderer implements Ofx
 	
 	/**
 	 * Transform the XML child into wiki syntax
-	 * @param emphasis
-	 * @throws OfxAuthoringException
+	 * @param emphasis Emphasis markup
+	 * @throws OfxAuthoringException exception
 	 */
 	public void render(Emphasis emphasis) throws OfxAuthoringException
 	{

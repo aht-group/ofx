@@ -19,21 +19,23 @@ public class WordSectionRenderer extends AbstractOfxWordRenderer{
 	
 	/**
 	 * Rekursiver Aufruf des Sectionrenderers, um verschiedene Ebenen (z.B. Untertitel) mit lvl anzuzeigen
-	 * @param lvl
+	 * @param cp x
+	 * @param lvl x
 	 */
-	public WordSectionRenderer(ConfigurationProvider cp, int lvl){
+	public WordSectionRenderer(ConfigurationProvider cp, int lvl)
+	{
 		super(cp);
 		this.lvl = lvl;
 	}
 	
 	/**
 	 * Erstmal nur für einen Titel, da CV nur einen Titel hat, sonst TitelRenderer Klasse erstellen
-	 * @param doc
-	 * @param section
-	 * @return
+	 * @param doc x 
+	 * @param section x
+	 * @return x
 	 */
-	public XWPFDocument renderer(XWPFDocument doc, Section section){
-		
+	public XWPFDocument renderer(XWPFDocument doc, Section section)
+	{
 		for (Object o : section.getContent())
 		{
 			if(o instanceof Title)
@@ -53,28 +55,29 @@ public class WordSectionRenderer extends AbstractOfxWordRenderer{
 	
 	/**
 	 * Hilfsmethode, die den renderer Aufrufen
-	 * @param doc
-	 * @param section
+	 * @param doc x
+	 * @param section x
 	 */
-	public void renderSection(XWPFDocument doc, Section section){
+	public void renderSection(XWPFDocument doc, Section section)
+	{
 		WordSectionRenderer wsr = new WordSectionRenderer(cp, lvl++);
 		wsr.renderer(doc, section);
 	}	
 	
 	/**
 	 * Hilfsmethode, die den renderer Aufrufen
-	 * @param doc
-	 * @param title
+	 * @param doc x
+	 * @param title x
 	 */
-	public void renderTitle(XWPFDocument doc, Title title, int lvl){
+	public void renderTitle(XWPFDocument doc, Title title, int lvl)
+	{
 		WordTitleRenderer wtr = new WordTitleRenderer(cp);
 		wtr.renderer(doc, title, lvl);
 	}
 	
-	public void renderTable(XWPFDocument doc, Table table){
+	public void renderTable(XWPFDocument doc, Table table)
+	{
 		WordTableRenderer wtr = new WordTableRenderer(cp);
 		wtr.renderer(doc,table);
 	}
-	
-
 }

@@ -35,9 +35,9 @@ public class WordTableRenderer extends AbstractOfxWordRenderer{
 	 * Head: Überschriften
 	 * Body: Inhalt
 	 * 
-	 * @param doc
-	 * @param table
-	 * @return doc
+	 * @param doc x
+	 * @param table x
+	 * @return doc x
 	 */
 	public XWPFDocument renderer(XWPFDocument doc, Table table){
 		
@@ -57,9 +57,9 @@ public class WordTableRenderer extends AbstractOfxWordRenderer{
 	
 	/**
 	 * Rendert die Spezifikationen pro Spalte
-	 * @param t
-	 * @param sp
-	 * @param doc
+	 * @param t x
+	 * @param sp x
+	 * @param doc x
 	 * @return
 	 */
 	private XWPFTable renderSpecification(XWPFTable t, Specification sp, XWPFDocument doc){
@@ -112,10 +112,11 @@ public class WordTableRenderer extends AbstractOfxWordRenderer{
 	
 	/**
 	 * Rendert die Überschrift der Tabelle, prüft ob es einen Nachfolger für eine weitere Spalte gibt
-	 * @param o
+	 * @param o x
 	 * @return
 	 */
-	private XWPFTable renderHeadline(XWPFTable t, Head h, XWPFDocument doc){
+	private XWPFTable renderHeadline(XWPFTable t, Head h, XWPFDocument doc)
+	{
 		int z = 0;
 		int s = 0;
 		
@@ -123,9 +124,10 @@ public class WordTableRenderer extends AbstractOfxWordRenderer{
 		{
 			for(Cell c : r.getCell())
 			{
-				for(Object o : c.getContent()){
-					
-					if (o instanceof Paragraph){
+				for(Object o : c.getContent())
+				{
+					if (o instanceof Paragraph)
+					{
 //						logger.info("Inhalt der Zelle: " + ((Paragraph)o).getContent().toString().substring(1, ((Paragraph)o).getContent().toString().length()-1));
 						//Entfernen der eckigen Klammern
 						t.getRow(z).getCell(s).setText(((Paragraph)o).getContent().toString().substring(1, ((Paragraph)o).getContent().toString().length()-1));

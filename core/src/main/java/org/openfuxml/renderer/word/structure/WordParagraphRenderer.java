@@ -9,25 +9,29 @@ import org.openfuxml.renderer.word.AbstractOfxWordRenderer;
 
 public class WordParagraphRenderer extends AbstractOfxWordRenderer {
 
-	public WordParagraphRenderer(ConfigurationProvider cp) {
+	public WordParagraphRenderer(ConfigurationProvider cp)
+	{
 		super(cp);
 	}
 	
 	/**
 	 * Erstellt einen leeren Paragraphen am Anfang, für alle weiteren Informationen
-	 * @param doc
-	 * @param paragraph
-	 * @return
+	 * @param doc x
+	 * @param paragraph x
+	 * @return x
 	 */
 	public XWPFDocument renderer(XWPFDocument doc, Paragraph paragraph){
 		
 		XWPFParagraph p = doc.createParagraph();
 		
-		for (Object o : paragraph.getContent()){
-			if(o instanceof Paragraph){
+		for (Object o : paragraph.getContent())
+		{
+			if(o instanceof Paragraph)
+			{
 				renderParagraph(doc,(Paragraph)o);
 			}
-			else if(o instanceof String){
+			else if(o instanceof String)
+			{
 				XWPFRun r = p.createRun();
 		        r.setText((String)o);
 			}
@@ -35,5 +39,4 @@ public class WordParagraphRenderer extends AbstractOfxWordRenderer {
 		
 		return doc;
 	}
-
 }

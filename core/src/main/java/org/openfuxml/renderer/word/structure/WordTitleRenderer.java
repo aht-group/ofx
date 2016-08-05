@@ -20,10 +20,10 @@ public class WordTitleRenderer extends AbstractOfxWordRenderer{
 	
 	/**
 	 * Paragraph wird erst im instance of String erzeugt, damit keine leeren Paragraphen entstehen, lvl entspricht den Überschriften
-	 * @param doc
-	 * @param title
-	 * @param lvl
-	 * @return doc
+	 * @param doc x 
+	 * @param title x
+	 * @param lvl x
+	 * @return doc x
 	 */
 	public XWPFDocument renderer(XWPFDocument doc, Title title, int lvl){
 

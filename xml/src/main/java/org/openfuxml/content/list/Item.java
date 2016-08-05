@@ -71,8 +71,8 @@ public class Item
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Paragraph }
      * {@link String }
+     * {@link Paragraph }
      * 
      * 
      */

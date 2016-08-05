@@ -14,11 +14,8 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 /**
- *  Rendering of paragraph children to wiki syntax
- * @param paragraph
- * @throws OfxAuthoringException
+ * Rendering of paragraph children to wiki syntax
  * @author yannkruger
- *
  */
 public class WikiParagraphRenderer extends AbstractOfxWikiRenderer implements OfxWikiRenderer
 {
@@ -27,7 +24,6 @@ public class WikiParagraphRenderer extends AbstractOfxWikiRenderer implements Of
 	public WikiParagraphRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm) {
 		super(cmm, dsm);
 	}
-	
 	
 	public void render(Paragraph paragraph) throws OfxAuthoringException
 	{	
