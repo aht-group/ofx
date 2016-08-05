@@ -56,17 +56,12 @@
         		<artifactId>ofx-jsf</artifactId>
         		<version>${project.version}</version>
         	</dependency>
-			<dependency>
-        		<groupId>org.openfuxml</groupId>
-        		<artifactId>ofx-addon</artifactId>
-        		<version>${project.version}</version>
-        	</dependency>
         	
         	<!-- Managed BOMs -->
         	<dependency>
         		<groupId>net.sf.exlp</groupId>
         		<artifactId>exlp-bom</artifactId>
-        		<version>0.1.11</version>
+        		<version>0.1.12-SNAPSHOT</version>
         		<type>pom</type>
         		<scope>import</scope>
         	</dependency>
