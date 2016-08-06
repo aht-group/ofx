@@ -95,4 +95,29 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>org/openfuxml/addon/wiki/data/jaxb/*.java</exclude>
+						<exclude>org/openfuxml/content/editorial/*.java</exclude>
+						<exclude>org/openfuxml/content/fuxml/*.java</exclude>
+						<exclude>org/openfuxml/content/graph/*.java</exclude>
+						<exclude>org/openfuxml/content/layout/*.java</exclude>
+						<exclude>org/openfuxml/content/list/*.java</exclude>
+						<exclude>org/openfuxml/content/media/*.java</exclude>
+						<exclude>org/openfuxml/content/ofx/*.java</exclude>
+						<exclude>org/openfuxml/content/table/*.java</exclude>
+						<exclude>org/openfuxml/content/text/*.java</exclude>
+						<exclude>org/openfuxml/xml/renderer/cmp/*.java</exclude>
+						<exclude>org/openfuxml/xml/renderer/html/*.java</exclude>
+					</excludes>
+	        </configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
