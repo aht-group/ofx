@@ -1,11 +1,14 @@
 package org.openfuxml.renderer.word.structure;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.List;
 
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.openfuxml.content.ofx.Paragraph;
@@ -18,15 +21,17 @@ import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.renderer.word.AbstractOfxWordRenderer;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WordTableRenderer extends AbstractOfxWordRenderer{
 
-	final static Logger logger = LoggerFactory.getLogger(WordTitleRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(WordTableRenderer.class);
 		
 	
-	public WordTableRenderer(ConfigurationProvider cp) {
+	public WordTableRenderer(ConfigurationProvider cp) throws FileNotFoundException, IOException {
 		super(cp);
 	}
 	
@@ -129,8 +134,9 @@ public class WordTableRenderer extends AbstractOfxWordRenderer{
 					if (o instanceof Paragraph)
 					{
 //						logger.info("Inhalt der Zelle: " + ((Paragraph)o).getContent().toString().substring(1, ((Paragraph)o).getContent().toString().length()-1));
-						//Entfernen der eckigen Klammern
+						//Entfernen der eckigen Klammern						
 						t.getRow(z).getCell(s).setText(((Paragraph)o).getContent().toString().substring(1, ((Paragraph)o).getContent().toString().length()-1));
+					    
 						s++;
 						//Neue Zelle erstellen... 
 						if(t.getRow(0).getTableCells().size() < r.getCell().size()){
@@ -165,18 +171,23 @@ public class WordTableRenderer extends AbstractOfxWordRenderer{
 		int z = 1; // 0 = Head, 1 = body
 		int s = 0;
 		
+		
 		for(Body body : b)
 		{
 			for(Row r : body.getRow())
 			{	
+				
 				for(Cell c : r.getCell())
 				{
+					
 					for(Object o : c.getContent()){
 						
 						 if (o instanceof Paragraph){
+							 
 //							Entfernen der eckigen Klammern mit "substring"
 							t.getRow(z).getCell(s).setText(((Paragraph)o).getContent().toString().substring(1, ((Paragraph)o).getContent().toString().length()-1));
 							s++;
+							
 							//Neue Zelle erstellen... 
 							if(t.getRow(0).getTableCells().size() < r.getCell().size()){
 //								logger.info("New table Cell");
@@ -199,8 +210,6 @@ public class WordTableRenderer extends AbstractOfxWordRenderer{
 		
 		return t;
 	}
-
-	
 	
 	
 }

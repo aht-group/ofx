@@ -25,7 +25,7 @@ public class TestWordDocumentRenderer extends AbstractTestWordRenderer{
 	Document d = twdr.buildDocument(); 
 	
 //	XML Ausgabe
-	JaxbUtil.info(d);
+//	JaxbUtil.info(d);
 	
 	wdr.renderer(wdr.getDocument(), d);
 	wdr.writeDocument(wdr.getDocument());

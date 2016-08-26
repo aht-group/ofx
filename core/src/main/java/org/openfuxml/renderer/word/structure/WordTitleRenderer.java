@@ -1,5 +1,8 @@
 package org.openfuxml.renderer.word.structure;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -14,7 +17,7 @@ public class WordTitleRenderer extends AbstractOfxWordRenderer{
 	final static Logger logger = LoggerFactory.getLogger(WordTitleRenderer.class);
 		
 	
-	public WordTitleRenderer(ConfigurationProvider cp) {
+	public WordTitleRenderer(ConfigurationProvider cp) throws FileNotFoundException, IOException {
 		super(cp);
 	}
 	
@@ -24,8 +27,10 @@ public class WordTitleRenderer extends AbstractOfxWordRenderer{
 	 * @param title x
 	 * @param lvl x
 	 * @return doc x
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public XWPFDocument renderer(XWPFDocument doc, Title title, int lvl){
+	public XWPFDocument renderer(XWPFDocument doc, Title title, int lvl) throws FileNotFoundException, IOException{
 
 		for (Object o : title.getContent()){
 			if(o instanceof String){

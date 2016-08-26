@@ -1,6 +1,10 @@
 package org.openfuxml.renderer.word;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Paragraph;
@@ -18,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 
 /**
  * 
@@ -29,11 +34,18 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxWordRenderer.class);
 	protected XWPFDocument doc;
 		
-	public AbstractOfxWordRenderer(ConfigurationProvider cp){
+	public AbstractOfxWordRenderer(ConfigurationProvider cp) throws FileNotFoundException, IOException{
 		super(cp);
-		doc = new XWPFDocument();
+		
+		MultiResourceLoader mrl = new MultiResourceLoader();
+		
+//		doc = new XWPFDocument();
+		doc = new XWPFDocument(mrl.searchIs("/cv/CV_Template.docx"));
 //		initLogger();
 	}
+	
+
+	
 	
 	/**
 	 * initializieren des loggers 
@@ -64,8 +76,10 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer
 	 * @param doc x
 	 * @param section x
 	 * @param lvl x
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void renderSection(XWPFDocument doc, Section section, int lvl)
+	public void renderSection(XWPFDocument doc, Section section, int lvl) throws FileNotFoundException, IOException
 	{
 		WordSectionRenderer sectionRenderer = new WordSectionRenderer(cp, lvl);
 		this.doc = sectionRenderer.renderer(doc, section);		
@@ -75,8 +89,10 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer
 	 * responsible for paragraph rendering
 	 * @param doc x
 	 * @param paragraph x
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void renderParagraph(XWPFDocument doc, Paragraph paragraph)
+	public void renderParagraph(XWPFDocument doc, Paragraph paragraph) throws FileNotFoundException, IOException
 	{
 		WordParagraphRenderer paragraphRenderer = new WordParagraphRenderer(cp);
 		this.doc = paragraphRenderer.renderer(doc, paragraph);
@@ -87,8 +103,10 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer
 	 * @param doc x 
 	 * @param title x
 	 * @param lvl x
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void renderTitle(XWPFDocument doc, Title title, int lvl)
+	public void renderTitle(XWPFDocument doc, Title title, int lvl) throws FileNotFoundException, IOException
 	{
 		WordTitleRenderer titleRenderer = new WordTitleRenderer(cp);
 		this.doc = titleRenderer.renderer(doc, title, lvl);
@@ -98,8 +116,10 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer
 	 * responsible for table rendering
 	 * @param doc x
 	 * @param t x
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void renderTable(XWPFDocument doc, Table t)
+	public void renderTable(XWPFDocument doc, Table t) throws FileNotFoundException, IOException
 	{
 		WordTableRenderer tableRenderer = new WordTableRenderer(cp);
 		this.doc = tableRenderer.renderer(doc, t);
@@ -109,8 +129,10 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer
 	 * responsible for document rendering
 	 * @param doc x
 	 * @param docOfx x
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public void renderDocument(XWPFDocument doc, Document docOfx)
+	public void renderDocument(XWPFDocument doc, Document docOfx) throws FileNotFoundException, IOException
 	{
 		WordDocumentRenderer documentRenderer = new WordDocumentRenderer(cp);
 		this.doc = documentRenderer.renderer(doc, docOfx);
