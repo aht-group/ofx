@@ -15,4 +15,15 @@ public class OfxListFactory
 		
 		return list;
 	}
+	
+	public static List description()
+	{
+		Type type = new Type();
+		type.setDescription(true);
+		
+		List list = new List();
+		list.setType(type);
+		
+		return list;
+	}
 }

@@ -21,4 +21,17 @@ public class XmlListItemFactory
 
 		return xml;
 	}
+	
+	public static Item build(String localeCode, String name, String text)
+	{
+		Paragraph p = new Paragraph();
+		p.getContent().add(text);
+		
+		Item xml = build();
+		xml.setLang(localeCode);
+		xml.setName(name);
+		xml.getContent().add(p);
+
+		return xml;
+	}
 }
