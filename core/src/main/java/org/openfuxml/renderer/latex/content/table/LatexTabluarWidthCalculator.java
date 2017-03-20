@@ -145,7 +145,7 @@ public class LatexTabluarWidthCalculator implements TabluarWidthCalculator
 		return column.isSetWidth() && column.getWidth().isSetFlex() && column.getWidth().isFlex();
 	}
 	
-	public String getColDefinition(int i)
+	@Override public String getColDefinition(int i)
 	{
 		return mapCol.get(i);
 	}

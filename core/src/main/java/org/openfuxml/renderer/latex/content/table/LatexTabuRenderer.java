@@ -14,6 +14,7 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.layout.XmlLineFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
+import org.openfuxml.interfaces.renderer.util.TabluarWidthCalculator;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexTitleRenderer;
 import org.openfuxml.renderer.latex.content.text.StringRenderer;
@@ -138,7 +139,7 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	}
 	
 	@Override
-	public String buildTabularCols(LatexTabluarWidthCalculator tabularWidthCalculator, Specification spec)
+	public String buildTabularCols(TabluarWidthCalculator tabularWidthCalculator, Specification spec)
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");

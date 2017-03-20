@@ -9,6 +9,7 @@ import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
+import org.openfuxml.interfaces.renderer.util.TabluarWidthCalculator;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.text.StringRenderer;
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ public class LatexGridTableRenderer extends AbstractOfxLatexRenderer implements 
 	}
 	
 	@Override
-	public String buildTabularCols(LatexTabluarWidthCalculator tabularWidthCalculator, Specification spec)
+	public String buildTabularCols(TabluarWidthCalculator tabularWidthCalculator, Specification spec)
 	{
 		StringBuffer sb = new StringBuffer();
 		
