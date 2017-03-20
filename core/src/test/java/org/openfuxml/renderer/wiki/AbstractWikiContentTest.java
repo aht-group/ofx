@@ -7,7 +7,7 @@ import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
 import org.apache.commons.configuration.Configuration;
 import org.openfuxml.exception.OfxConfigurationException;
-import org.openfuxml.renderer.latex.util.OfxLatexDefinitionBuilder;
+import org.openfuxml.renderer.latex.util.OfxLatexResources;
 import org.openfuxml.test.AbstractOfxCoreTest;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public abstract class AbstractWikiContentTest extends AbstractOfxCoreTest
 		
 		try
 		{
-			OfxLatexDefinitionBuilder latexBuilder = new OfxLatexDefinitionBuilder(latexBase);
+			OfxLatexResources latexBuilder = new OfxLatexResources(latexBase);
 			latexBuilder.copyPackages();
 			latexBuilder.copyTest();
 		}
