@@ -3,6 +3,7 @@ package org.openfuxml.renderer.latex.preamble;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.openfuxml.renderer.latex.content.text.StringRenderer;
 import org.openfuxml.renderer.latex.preamble.packages.ReportLatexPackages;
@@ -139,5 +140,10 @@ public abstract class AbstractLatexDocument extends AbstractOfxLatexRenderer imp
 		
 		logger.warn("Level "+lvl+" not supported by "+LatexArticle.class.getSimpleName());
 		return "section";
+	}
+	
+	public void addSectionRenderer(LatexSectionRenderer sectionRenderer)
+	{
+		renderer.add(sectionRenderer);
 	}
 }
