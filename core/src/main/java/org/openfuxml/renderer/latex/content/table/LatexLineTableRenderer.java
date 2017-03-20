@@ -10,7 +10,7 @@ import org.openfuxml.content.table.Table;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
-import org.openfuxml.interfaces.latex.OfxLatexTableRenderer;
+import org.openfuxml.interfaces.renderer.latex.OfxLatexTableRenderer;
 import org.openfuxml.interfaces.renderer.util.TabluarWidthCalculator;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.text.StringRenderer;
