@@ -16,8 +16,9 @@ import org.openfuxml.content.table.Columns;
 import org.openfuxml.content.table.Specification;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory.Horizontal;
+import org.openfuxml.interfaces.renderer.util.TabluarWidthCalculator;
 
-public class LatexTabluarWidthCalculator
+public class LatexTabluarWidthCalculator implements TabluarWidthCalculator
 {
 	static Log logger = LogFactory.getLog(LatexTabluarWidthCalculator.class);
 	

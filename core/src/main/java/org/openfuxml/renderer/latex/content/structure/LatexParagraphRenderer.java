@@ -16,7 +16,7 @@ import org.openfuxml.content.text.Symbol;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
-import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.editorial.LatexAcronymRenderer;
 import org.openfuxml.renderer.latex.content.editorial.LatexGlossaryRenderer;

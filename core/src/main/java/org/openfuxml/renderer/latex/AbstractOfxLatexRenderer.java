@@ -18,7 +18,7 @@ import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
+import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.latex.content.layout.LatexColumnRenderer;
 import org.openfuxml.renderer.latex.content.layout.LatexContainerRenderer;
