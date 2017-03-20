@@ -6,9 +6,9 @@ import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.renderer.latex.LatexSectionHeaderNameFactory;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
-import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
 		super(cp);
 	}
 	
-	public void render(Title title, Section section, int lvl, LatexPreamble latexPreamble)
+	public void render(Title title, Section section, int lvl, LatexSectionHeaderNameFactory latexPreamble)
 	{
 		logger.trace("Render title");
 		if(title.isSetNumbering()){logger.warn("Ignoring numbring");}

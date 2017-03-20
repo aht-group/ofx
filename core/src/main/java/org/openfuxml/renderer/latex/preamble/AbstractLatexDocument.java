@@ -1,8 +1,5 @@
 package org.openfuxml.renderer.latex.preamble;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -129,5 +126,18 @@ public abstract class AbstractLatexDocument extends AbstractOfxLatexRenderer imp
 		r.line("");
 		r.line("\\include{"+f+"}");
 		renderer.add(r);
+	}
+	
+	public String getDefaultSectionHeaderName(int lvl)
+	{
+		if      (lvl==0){return "chapter";}
+		else if (lvl==1){return "section";}
+		else if (lvl==2){return "subsection";}
+		else if (lvl==3){return "subsubsection";}
+		else if (lvl==4){return "paragraph";}
+		else if (lvl==5){return "subparagraph";}
+		
+		logger.warn("Level "+lvl+" not supported by "+LatexArticle.class.getSimpleName());
+		return "section";
 	}
 }

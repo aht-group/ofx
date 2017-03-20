@@ -1,11 +1,12 @@
 package org.openfuxml.renderer.latex.preamble;
 
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.renderer.latex.LatexSectionHeaderNameFactory;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LatexSrcBook extends AbstractLatexDocument implements OfxLatexRenderer
+public class LatexSrcBook extends AbstractLatexDocument implements OfxLatexRenderer,LatexSectionHeaderNameFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexSrcBook.class);
 	
@@ -20,5 +21,7 @@ public class LatexSrcBook extends AbstractLatexDocument implements OfxLatexRende
 		txt.add("   bibtotocnumbered,");
 		txt.add("   openany");
 		txt.add("]{scrbook}");
-	}	
+	}
+	
+	@Override public String getSectionHeaderName(int lvl){return super.getDefaultSectionHeaderName(lvl);}
 }

@@ -14,12 +14,12 @@ import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.interfaces.renderer.latex.LatexSectionHeaderNameFactory;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.listing.LatexListingRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
-import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +27,10 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexSectionRenderer.class);
 	
-	private LatexPreamble latexPreamble;
+	private LatexSectionHeaderNameFactory latexPreamble;
 	int lvl;
 	
-	public LatexSectionRenderer(ConfigurationProvider cp, int lvl, LatexPreamble latexPreamble)
+	public LatexSectionRenderer(ConfigurationProvider cp, int lvl, LatexSectionHeaderNameFactory latexPreamble)
 	{
 		super(cp);
 		this.lvl=lvl;
