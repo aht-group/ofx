@@ -39,7 +39,7 @@ public class LatexCommentRenderer extends AbstractOfxLatexRenderer implements Of
 		return result;
 	}
 	
-	private static String line(String s)
+	public static String line(String s)
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("% ");

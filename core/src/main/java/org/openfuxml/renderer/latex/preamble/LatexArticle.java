@@ -3,11 +3,11 @@ package org.openfuxml.renderer.latex.preamble;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.factory.LatexSectionHeaderNameFactory;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
-import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
+import org.openfuxml.renderer.latex.preamble.packages.SimpleLatexPackages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LatexArticle extends AbstractOfxLatexRenderer implements OfxLatexRenderer,LatexSectionHeaderNameFactory
+public class LatexArticle extends AbstractLatexDocument implements OfxLatexRenderer,LatexSectionHeaderNameFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexArticle.class);
 	
@@ -16,7 +16,7 @@ public class LatexArticle extends AbstractOfxLatexRenderer implements OfxLatexRe
 		super(cp);
 		txt.add("\\documentclass[12pt]{article}");
 		
-		LatexPackages renderPackages = new LatexPackages(cp);
+		SimpleLatexPackages renderPackages = new SimpleLatexPackages(cp);
 		renderer.add(renderPackages);		
 		
 		txt.add("\\title{\\LaTeX}");

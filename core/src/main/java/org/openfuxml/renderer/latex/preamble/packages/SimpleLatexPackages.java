@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.latex.preamble;
+package org.openfuxml.renderer.latex.preamble.packages;
 
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxLatexRenderer;
@@ -6,18 +6,17 @@ import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LatexPackages extends AbstractOfxLatexRenderer implements OfxLatexRenderer
+public class SimpleLatexPackages extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(LatexPackages.class);
+	final static Logger logger = LoggerFactory.getLogger(SimpleLatexPackages.class);
 	
-	public LatexPackages(ConfigurationProvider cp)
+	public SimpleLatexPackages(ConfigurationProvider cp)
 	{
 		super(cp);
 	}
 	
 	public void render()
 	{
-		logger.trace("Render title");
 		txt.add("");
 		txt.add("%% Packages");
 		txt.add("\\usepackage{amsmath}");

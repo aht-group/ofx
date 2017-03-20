@@ -16,16 +16,36 @@ public class StringRenderer implements OfxLatexRenderer
 	
 	private List<String> result;
 	
+	public StringRenderer()
+	{
+		result = new ArrayList<String>();
+	}
+	
 	public StringRenderer(String string)
 	{
 		result = new ArrayList<String>();
 		result.add(string);
 	}
 	
+	public StringRenderer(String... string)
+	{
+		result = new ArrayList<String>();
+		for(String s : string)
+		{
+			result.add(s);
+		}
+		
+	}
+	
 	public StringRenderer(List<String> strings)
 	{
 		result = new ArrayList<String>();
 		result.addAll(strings);
+	}
+	
+	public void line(String text)
+	{
+		result.add(text);
 	}
 
 	@Override public List<String> getContent()
