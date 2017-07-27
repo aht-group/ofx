@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public class Svg2SvgTranscoder
 {
-	final static Logger logger = LoggerFactory.getLogger(Svg2PngTranscoder.class);
+	final static Logger logger = LoggerFactory.getLogger(Svg2SvgTranscoder.class);
 	
 	public static byte[] transcode(SVGGraphics2D g) throws IOException, TranscoderException
 	{

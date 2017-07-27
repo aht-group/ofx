@@ -7,7 +7,11 @@ import org.openfuxml.content.ofx.Sections;
 
 public class XmlSectionQuery
 {
-	public static Section find(Sections sections, String classifier)
+	public static <E extends Enum<E>> Section find(Sections sections, E classifier)
+	{
+		return find(sections,classifier.toString());
+	}
+	private static Section find(Sections sections, String classifier)
 	{
 		for(Serializable s : sections.getContent())
 		{
