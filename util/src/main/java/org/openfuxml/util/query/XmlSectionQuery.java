@@ -11,6 +11,7 @@ public class XmlSectionQuery
 	{
 		return find(sections,classifier.toString());
 	}
+	
 	private static Section find(Sections sections, String classifier)
 	{
 		for(Serializable s : sections.getContent())

@@ -25,13 +25,16 @@
 	                <t:cell><ofx:paragraph>fontawesome</ofx:paragraph></t:cell>
 	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
 	            </t:row>
-	            
 	            <t:row>
 	                <t:cell><ofx:paragraph>lipsum</ofx:paragraph></t:cell>
 	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>todonotes</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
+				<t:row>
+	                <t:cell><ofx:paragraph>multido</ofx:paragraph></t:cell>
 	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
@@ -176,6 +179,26 @@
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>xpatch</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
+				<t:row>
+	                <t:cell><ofx:paragraph>qtree</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
+				<t:row>
+	                <t:cell><ofx:paragraph>pict2e</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
+				<t:row>
+	                <t:cell><ofx:paragraph>pstricks</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
+	            <t:row>
+	                <t:cell><ofx:paragraph>inlinedef</ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	            </t:row>
+				<t:row>
+	                <t:cell><ofx:paragraph>pst-grad</ofx:paragraph></t:cell>
 	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
 	            </t:row>
 			</t:body>

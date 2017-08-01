@@ -1,6 +1,9 @@
 package org.openfuxml.factory.xml.table;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
@@ -34,5 +37,18 @@ public class OfxCellFactory
 		Cell cell = new Cell();
 		cell.getContent().add(image);
 		return cell;
+	}
+	
+	public static List<Paragraph> toParagraphs(Cell cell)
+	{
+		List<Paragraph> paragraphs = new ArrayList<Paragraph>();
+		for(Serializable s : cell.getContent())
+		{
+			if(s instanceof Paragraph)
+			{
+				paragraphs.add((Paragraph)s);
+			}
+		}
+		return paragraphs;
 	}
 }

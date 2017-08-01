@@ -13,12 +13,12 @@ public class TextParagraphRenderer extends AbstractOfxTextRenderer implements Of
 {
 	final static Logger logger = LoggerFactory.getLogger(TextParagraphRenderer.class);
 	
-	public TextParagraphRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public TextParagraphRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{
 		this(cmm,dsm,false);
 	}
 	
-	public TextParagraphRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm,boolean preBlankLine)
+	public TextParagraphRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm, boolean preBlankLine)
 	{
 		super(cmm,dsm);
 		if(preBlankLine){preTxt.add("");}
