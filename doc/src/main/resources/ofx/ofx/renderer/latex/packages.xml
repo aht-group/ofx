@@ -8,8 +8,8 @@
 	<t:table id="table.admin.development.maven.shortcuts">	
 	    <ofx:title lang="en" version="1">Additional LaTeX Packages</ofx:title>
 	    <t:specification>
-	        <t:columns> 
-	            <t:column><layout:width unit="percentage" flex="true" narrow="true">30.0</layout:width></t:column>
+	        <t:columns>
+				<t:column><layout:width unit="percentage" flex="true" narrow="true">30.0</layout:width></t:column>
 	            <t:column><layout:width unit="percentage" flex="true" narrow="false">70.0</layout:width></t:column>
 	        </t:columns>
 	    </t:specification>
@@ -23,183 +23,344 @@
 	        <t:body>
 	            <t:row>
 	                <t:cell><ofx:paragraph>fontawesome</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
-	            </t:row>
+	                <t:cell><ofx:paragraph>
+	                "Font Awesome" gives you scalable vector icons that can instantly be customized - size, color, 
+	                drop shadow, and anything that can be done with the power of CSS.
+	                </ofx:paragraph></t:cell>
+	           </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>lipsum</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
-	            </t:row>
+	                <t:cell><ofx:paragraph>
+	                This package gives you easy access to the Lorem Ipsum dummy text - an option is available to 
+	                separate the paragraphs of the dummy text into TeXparagraphs.
+	                </ofx:paragraph></t:cell>
+	             </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>todonotes</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package lets the user mark things to do later, in a simple and visually appealing way. 
+	                The package takes several options to enable customization/finetuning of the visual appearance.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>multido</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package provides the "\multido" command, which was originally designed for use with "PSTricks". 
+	                Fixed-point arithmetic is used when working on the loop variable, so that the package is equally applicable
+	                in graphics applications like "PSTricks" as it is with the more common integer loops.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>hyphenat</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                This package can disable all hyphenation or enable hyphenation of nonalphabetics or monospaced fonts.
+	                It can also enable hyphenation within ‘words’ that contain nonalphabetic characters
+	                (e.g., that include underscores), and hyphenation of text typeset in monospaced (e.g., cmtt) fonts.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>csquotes</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                This package provides advanced facilities for inline and display quotations. 
+	                It is designed for a wide range of tasks ranging from the most simple applications to the more complex
+	                demands of formal quotations.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>glossaries</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The glossaries package supports acronyms and multiple glossaries, and has provision for operation in several 
+	                languages (using the facilities of either babel or polyglossia). New entries are defined to have a name and 
+	                description (and optionally an associated symbol).
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>mfirstuc</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package provides commands "\makefirstuc" that uppercases the first letter in its argument, and
+	                "\xmakefirstuc" which expands the argument before uppercasing.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>xfor</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package redefines the LaTeX internal "\@for" macro so that the loop may be prematurely terminated.
+	                The action is akin to the C/Java break statement, except that the loop does not terminate until the end 
+	                of the current iteration.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>datatool</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                Tools to load and manipulate data: datatool.sty - create DBs or import external files, 
+	                datapie.sty - represent as a pie chart, 
+	                dataplot.sty - represented as a 2dimensional scatter or line plot, 
+	                databar.sty - represent as a bar chart, 
+	                datagidx.sty - indexing or creating glossaries/lists of acronyms, 
+	                databib.sty - a bibliography may be loaded into a data-tool database, and manipulated there before being printed, 
+	                person.sty - displaying a person’s name and pronoun in a document
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>substr</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
-	            </t:row>
+	                <t:cell><ofx:paragraph>
+	                Commands to deal with substrings of strings: determine if one string is a substring of another, return the parts
+	                of a string before or after a substring, count the number of occurrences of a substring
+	                </ofx:paragraph></t:cell>
+	          	</t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>tracklang</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The tracklang package is provided for package developers who want a simple interface to find out which
+	                languages the user has requested through packages such as babel or polyglossia. 
+	                (This package does not provide any translations! Its purpose is simply to track which languages have been 
+	                requested by the user.)
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>acronym</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                This package ensures that all acronyms used in the text are spelled out in full at least once.
+	                It also provides an environment to build a list of acronyms used.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>bigfoot</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package aims to provide a ‘one-stop’ solution to requirements for footnotes. 
+	                It offers: Multiple footnote,formatted in separate paragraphs, or be run into a single paragraph.
+	                Things you might have expected (such as "\verb-like" material in footnotes, and colour selections over page breaks)
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>xstring</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package provides macros for manipulating strings — testing a string’s contents, extracting substrings, 
+	                substitution of substrings and providing numbers such as string length, position of, or number of recurrences of 
+	                a substring.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>multirow</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package has a lot of flexibility, including an option for specifying an entry at the “natural” width of its text.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>picinpar</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                Creating ‘windows’ in paragraphs, for inserting graphics, etc. (including “dropped capitals”).
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>capt-of</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                Defines a command "\captionof" for putting a caption to something that's not a float.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>tabu</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package provides an environment, tabu, which will make any sort of tabular (that doesn't need to split across pages), 
+	                and an environment longtabu which provides the facilities of tabu in a modified longtable environment. 
+	                (Note that this latter offers an enhancement of ltxtable.)
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>varwidth</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The varwidth environment is superficially similar to minipage, but the specified width is just a maximum value — 
+	                the box may get a narrower “natural” width.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>paralist</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                Provides enumerate and itemize environments that can be used within paragraphs to format the items either as running text
+	                or as separate paragraphs with a preceding number or symbol. Also provides compacted versions of enumerate and itemize.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>marvosym</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                Martin Vogel’s Symbol font (marvosym) contains the Euro currency symbol as defined by the European commission, 
+	                along with symbols for structural engineering. Symbols for steel cross-sections, astronomy signs (sun, moon, planets), 
+	                the 12 signs of the zodiac, scissor symbols, CE sign and others.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>symbol</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                LaTex symbol
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>forest</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                Drawing (linguistic) trees: a packing algorithm which can produce very compact trees. The package provides
+	                a PGF/TikZ-based mechanism for drawing linguistic (and other kinds of) trees.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>pgfopts</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The pgfkeys package (part of the pgf distribution) is a well-designed way of defining and using large numbers
+	                of keys for key-value syntaxes.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>elocalloc</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                Local allocation macros, with names taken from etex.sty but with implementation based on the LaTeX 2015 allocation macros.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	             <t:row>
 	                <t:cell><ofx:paragraph>environ</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package provides the "\collect@body" command (as in amsmath), as well as a "\long" version "\Collect@Body", 
+	                for collecting the body text of an environment.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	             <t:row>
 	                <t:cell><ofx:paragraph>trimspaces</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                A very short package that allows you to expandably remove spaces around a token list (commands are provided to 
+	                remove spaces before, spaces after, or both) or to remove surrounding spaces within a macro definition, or to define 
+	                space-stripped macros.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	             <t:row>
 	                <t:cell><ofx:paragraph>adjustbox</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package provides several macros to adjust boxed content. One purpose is to supplement the standard graphics package, 
+	                which defines the macros "\resizebox", "\scalebox" and "\rotatebox" , with the macros "\trimbox" and "\clipbox".
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	             <t:row>
 	                <t:cell><ofx:paragraph>collectbox</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package provides macros to collect and process a macro argument (i.e., something which looks like a macro argument)
+	                as a horizontal box rather than as a real macro argument.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>enumitem</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                This package provides user control over the layout of the three basic list environments: enumerate, itemize and description.
+	                It supersedes both enumerate and mdwlist (providing well-structured replacements for all their funtionality), and in addition
+	                provides functions to compute the layout of labels, and to ‘clone’ the standard environments, to create new environments 
+	                with counters of their own.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>wrapfig</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                Allows figures or tables to have text wrapped around them. Does not work in combination with list environments, 
+	                but can be used in a parbox or minipage, and in twocolumn format. Supports the float package.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>framed</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package creates three environments: framed - which puts an ordinary frame box around the region) 
+	                shaded - which shades the region), leftbar - which places a line at the left side. The environments allow a break at 
+	                their start (the "\FrameCommand" enables creation of a title that is “attached” to the environment), 
+	                breaks are also allowed in the course of the framed/shaded matter.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>marginnote</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                This package provides the command "\marginnote" that may be used instead of "\marginpar" at almost every place where 
+	                "\marginpar" cannot be used, e.g., inside floats, footnotes, or in frames made with the framed package.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>relsize</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The basic command of the package is "\relsize", whose argument is a number of "\magsteps" to change size; from this are 
+	                defined commands "\larger", "\smaller", "\textlarger", etc.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>menukeys</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                This package is designed to format menu sequences, paths and keyboard shortcuts automatically. There are several 
+	                predefined styles and one can define his own styles in a flexible way.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>catoptions</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package changes package loading internals so that all subsequently loaded packages can rely on normal/standard 
+	                catcodes of all ASCII characters. The package defines canonical control sequences to represent all the visible 
+	                ASCII characters. It also provides robust option parsing mechanisms (XDeclareOption, XExecuteOptions and XProcessOptions,
+	                which will be used by "\documentclass" if the package has already been loaded).
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>listliketab</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The listliketab package helps the user make list-like tabulars, i.e., a tabular that is indistinguishable from an 
+	                itemize or enumerate environment. The advantage of using a tabular is that the user can add additional columns to 
+	         		each entry in the list.
+	         		</ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>imakeidx</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package is known to work in LaTeX documents processed with pdfLaTeX, XeLaTeX and LuaLaTeX. If makeindex is used 
+	                for processing the index entries, no particular setting up is needed when TeX Live is used. Using xindy or other 
+	                programs it is necessary to enable shell escape; shell escape is also needed if splitindex is used.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>xpatch</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package generalises the macro patching commands provided by Philipp Lehmann’s etoolbox.
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>qtree</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package offers support for drawing tree diagrams, and is especially suitable for linguistics use. It allows 
+	                trees to be specified in a simple bracket notation, automatically calculates branch sizes, and supports both 
+	                DVI/PostScript and PDF output by use of pict2e facilities. 
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>pict2e</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package extends the existing LaTeX picture environment, using the familiar technique (cf. the graphics and 
+	                color packages) of driver files (at present, drivers for PostScript output from LaTeX, and for use with pdfLaTeX 
+	                are available). The package documentation has a fair number of examples of use, showing where things are 
+	                improved by comparison with the LaTeX picture environment. 
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>pstricks</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                Following a small rearrangement of the archive, this catalogue entry is now deprecated. For details of the package 
+	                please use entry "PSTricks" ‘base’ in its place. 	                
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 	            <t:row>
 	                <t:cell><ofx:paragraph>inlinedef</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package provides a macro "\Inline" that precedes a "\def" or "\gdef". Within the definition text of an inlined 
+	                definition, keywords such as "\Expand" may be used to selectively inline certain expansions at definition-time. 
+	                This eases the process of redefining macros in terms of the original definition, as well as definitions in which the token 
+	                that must be expanded is deep within, where "\expandafter" would be difficult and "\edef" is not suitable. Another 
+	                application is as an easier version of "\aftergroup", by defining a macro in terms of expanded local variables, 
+	                then ending the group with "\expandafter", "\endgroup", "\macro". 
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 				<t:row>
 	                <t:cell><ofx:paragraph>pst-grad</ofx:paragraph></t:cell>
-	                <t:cell><ofx:paragraph></ofx:paragraph></t:cell>
+	                <t:cell><ofx:paragraph>
+	                The package fills with colour gradients, using "PSTricks". The RGB, CMYK and HSB models are supported. 
+	                Other colour gradient mechanisms are to be found in package pst-slpe. 
+	                </ofx:paragraph></t:cell>
 	            </t:row>
 			</t:body>
 	    </t:content>
