@@ -18,6 +18,7 @@ public class AbstractTestWordRenderer {
 	 * 
 	 * @return Ofx Paragraph
 	 */
+	@Deprecated
 	public Paragraph buildParagraph() {
 		Paragraph p = XmlParagraphFactory.build("Test 123");
 		p.getContent().add("Test Text CV");
@@ -29,6 +30,7 @@ public class AbstractTestWordRenderer {
 	 * 
 	 * @return Ofx Section
 	 */
+	@Deprecated
 	public Section buildSection() {
 		Section s = SectionProvider.buildWithMultiLevels();
 //		s.getContent().add(buildTitle());
@@ -37,6 +39,7 @@ public class AbstractTestWordRenderer {
 		return s;
 	}
 	
+	@Deprecated
 	public Document buildDocument(){
 		Document d = DocumentProvider.build();
 		d.getContent().getContent().add(buildSection());
@@ -48,6 +51,7 @@ public class AbstractTestWordRenderer {
 	 * Creates a test title
 	 * @return Ofx Title
 	 */
+	@Deprecated
 	public Title buildTitle() {
 		Title t = new Title();
 		t.getContent().add(XmlTitleFactory.build("Test Title 1"));
@@ -61,6 +65,7 @@ public class AbstractTestWordRenderer {
 	 * Creates a test table
 	 * @return
 	 */
+	@Deprecated
 	public Table buildTable(){
 		Table t = TableProvider.create();
 		return t;

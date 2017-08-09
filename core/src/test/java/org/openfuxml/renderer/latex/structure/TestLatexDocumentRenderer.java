@@ -53,7 +53,7 @@ public class TestLatexDocumentRenderer extends AbstractOfxCoreTest
   
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();	
+    	OfxCoreTestBootstrap.init();
     	TestLatexDocumentRenderer rrLatex = new TestLatexDocumentRenderer();
     	rrLatex.init();
     	rrLatex.writeExpected();

@@ -4,25 +4,22 @@ import java.io.File;
 
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.renderer.util.OfxDocumentStructureVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * 
- * @author yannkruger
- *
- */
-public class OfxWordRenderer
+public class OfxWordRenderer extends AbstractOfxWordRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxWordRenderer.class);
 	
-	public OfxWordRenderer(){
-		
+	public OfxWordRenderer(ConfigurationProvider cp)
+	{
+		super(cp);
 	}
 		
-	public void render(Document ofxDocument, File target) throws OfxAuthoringException
+	public void render(Document document, File target) throws OfxAuthoringException
 	{
-		OfxDocumentStructureVerifier.checkForContent(ofxDocument);
+		OfxDocumentStructureVerifier.checkForContent(document);
 	}
 }
