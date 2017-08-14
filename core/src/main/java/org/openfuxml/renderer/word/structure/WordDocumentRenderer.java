@@ -48,7 +48,7 @@ public class WordDocumentRenderer
 		logger.trace("WordDocumentRenderer.render()");
 		
 		lvl = 0;
-		//JaxbUtil.info(ofxContent);
+		JaxbUtil.info(ofxContent);
 		for (Object s : ofxContent.getContent())
 		{
 			

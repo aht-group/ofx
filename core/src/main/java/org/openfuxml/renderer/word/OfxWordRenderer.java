@@ -4,6 +4,7 @@ import java.io.File;
 
 
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.renderer.util.OfxDocumentStructureVerifier;
 import org.openfuxml.renderer.word.structure.WordDocumentRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public class OfxWordRenderer extends AbstractOfxWordRenderer
 		
 	public void render(org.openfuxml.content.ofx.Document ofxDocument, File target) throws Exception
 	{
-		//OfxDocumentStructureVerifier.checkForContent(ofxDocument);
+		OfxDocumentStructureVerifier.checkForContent(ofxDocument);
 		WordDocumentRenderer wDR = new WordDocumentRenderer();
 		
 		Document doc = wDR.render(ofxDocument.getContent());

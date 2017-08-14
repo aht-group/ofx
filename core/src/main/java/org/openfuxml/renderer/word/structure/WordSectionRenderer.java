@@ -28,14 +28,14 @@ public class WordSectionRenderer
 	{
 		logger.trace("WordSectionRenderer.render()");
 		
-		Section sectionToAdd = new Section(doc);
+		//Section sectionToAdd = new Section(doc);
 
 		// Comment always on top!
-		for (Object o : ofxSection.getContent())
+		for (Object s : ofxSection.getContent())
 		{
-			if (o instanceof org.openfuxml.content.ofx.Comment)
+			if (s instanceof org.openfuxml.content.ofx.Comment)
 			{
-				renderComment((org.openfuxml.content.ofx.Comment) o);
+				renderComment((org.openfuxml.content.ofx.Comment) s);
 			}
 		}
 
@@ -100,20 +100,21 @@ public class WordSectionRenderer
 				logger.warn("No Renderer for Element " + s.getClass().getSimpleName());
 			}
 		}
-		// doc.getSections().add(sectionToAdd);
+		//doc.getSections().add(sectionToAdd);
 	}
 
-	private void renderComment(org.openfuxml.content.ofx.Comment o)
+	private void renderComment(org.openfuxml.content.ofx.Comment s)
 	{
 		logger.trace("WordSectionRenderer.renderComment()");
 		WordCommentRenderer wCR = new WordCommentRenderer(doc, builder);
-		wCR.render(o);
+		wCR.render(s);
 	}
 
 	private void renderTitel(org.openfuxml.content.ofx.Title s)
 	{
-		// TODO Auto-generated method stub
-
+		logger.trace("WordSectionRenderer.renderTitel()");
+		WordTitleRenderer wTR = new WordTitleRenderer(doc, builder);
+		wTR.render(s);
 	}
 
 	private void renderImage(org.openfuxml.content.media.Image s)
