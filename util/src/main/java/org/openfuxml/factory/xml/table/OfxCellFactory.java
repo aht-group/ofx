@@ -25,6 +25,17 @@ public class OfxCellFactory
 		return cell;
 	}
 	
+	public static Cell buildParagraph(String localeCode, String text)
+	{
+		Paragraph p = new Paragraph();
+		p.setLang(localeCode);
+		p.getContent().add(text);
+		
+		Cell cell = new Cell();
+		cell.getContent().add(p);
+		return cell;
+	}
+	
 	// BUILD Allows null values
 	public static Cell paragraph(String text)
 	{

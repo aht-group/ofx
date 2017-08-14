@@ -1,6 +1,7 @@
 package org.openfuxml.util.translation;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.openfuxml.interfaces.configuration.TranslationProvider;
@@ -17,9 +18,15 @@ public class OfxTranslationProvider implements TranslationProvider
 	
 
 	@Override
-	public String getTranslation(String localeCode, String key) {
+	public String toTranslation(String localeCode, String key) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String toDate(String locleCode, Date record) {
+		// TODO Auto-generated method stub
+		return "NYI:toDate";
 	}
 	
 }

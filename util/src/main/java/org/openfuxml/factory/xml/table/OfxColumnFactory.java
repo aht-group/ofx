@@ -2,12 +2,17 @@ package org.openfuxml.factory.xml.table;
 
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.table.Column;
+import org.openfuxml.content.table.Columns;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory.Horizontal;
 
 public class OfxColumnFactory
 {
 	
+	public static void add(Columns cols, Horizontal hAlignment)
+	{
+		cols.getColumn().add(OfxColumnFactory.build(hAlignment));
+	}
 	public static Column build(Horizontal hAlignment)
 	{
 		Column col = new Column();
