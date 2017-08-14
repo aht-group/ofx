@@ -2,12 +2,13 @@ package org.openfuxml.renderer.word;
 
 import java.io.File;
 
-import org.openfuxml.content.ofx.Document;
-import org.openfuxml.exception.OfxAuthoringException;
+
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
-import org.openfuxml.renderer.util.OfxDocumentStructureVerifier;
+import org.openfuxml.renderer.word.structure.WordDocumentRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.aspose.words.Document;
 
 public class OfxWordRenderer extends AbstractOfxWordRenderer
 {
@@ -18,8 +19,12 @@ public class OfxWordRenderer extends AbstractOfxWordRenderer
 		super(cp);
 	}
 		
-	public void render(Document document, File target) throws OfxAuthoringException
+	public void render(org.openfuxml.content.ofx.Document ofxDocument, File target) throws Exception
 	{
-		OfxDocumentStructureVerifier.checkForContent(document);
-	}
+		//OfxDocumentStructureVerifier.checkForContent(ofxDocument);
+		WordDocumentRenderer wDR = new WordDocumentRenderer();
+		
+		Document doc = wDR.render(ofxDocument.getContent());
+		doc.save(target.getAbsolutePath());
+	}	
 }

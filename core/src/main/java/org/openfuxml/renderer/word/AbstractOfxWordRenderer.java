@@ -15,4 +15,5 @@ public class AbstractOfxWordRenderer extends AbstractOfxRenderer
 	{
 		super(cp);
 	}
+	
 }

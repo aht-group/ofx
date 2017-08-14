@@ -23,7 +23,7 @@ public class TestWordDocumentRenderer extends AbstractTestWordRenderer
 		ConfigurationProvider cp = ConfigurationProviderFacotry.build(cmm,dsm);
 	
 		Document document = DocumentProvider.buildComplex(); 
-		JaxbUtil.info(document);
+		//JaxbUtil.info(document);
 	
 		OfxWordRenderer owr = new OfxWordRenderer(cp);	
 		owr.render(document, new File("target/ofx.docx"));
