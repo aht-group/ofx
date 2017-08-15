@@ -147,6 +147,8 @@ public class WordSectionRenderer
 	private void renderTable(org.openfuxml.content.table.Table s)
 	{
 		logger.trace("WordSectionRenderer.renderTable()");
+		WordTableRenderer wTR = new WordTableRenderer(doc, builder);
+		wTR.render(s);
 	}
 
 	private void highlightRenderer(org.openfuxml.content.ofx.Highlight s)

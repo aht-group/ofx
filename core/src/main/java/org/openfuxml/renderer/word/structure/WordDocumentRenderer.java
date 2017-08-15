@@ -9,6 +9,7 @@ import org.openfuxml.renderer.util.OfxDocumentStructureVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aspose.words.BreakType;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
 import com.aspose.words.PageSetup;
@@ -57,6 +58,10 @@ public class WordDocumentRenderer
 				renderSection((org.openfuxml.content.ofx.Section) s);
 			}
 		}
+		builder.moveToDocumentEnd();
+
+		// to avoid blank last page!!!!
+		builder.insertBreak(BreakType.PAGE_BREAK);
 		return doc;
 	}
 

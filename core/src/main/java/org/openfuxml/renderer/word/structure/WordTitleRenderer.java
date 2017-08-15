@@ -35,9 +35,9 @@ public class WordTitleRenderer
 		{
 
 			ParagraphFormat paragraphFormat = builder.getParagraphFormat();
-			paragraphFormat.setFirstLineIndent(12);
+			paragraphFormat.setFirstLineIndent(0);
 			SetAlignment sA = new SetAlignment(doc, builder);
-			sA.setAlignment(setAlignmentEnum.center);
+			sA.setAlignment(setAlignmentEnum.left);
 			paragraphFormat.setKeepTogether(true);
 			builder.writeln(s.toString()+ ":");
 			logger.debug(s.toString()+ ":");

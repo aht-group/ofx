@@ -31,9 +31,6 @@ public class WordParagraphRenderer
 	
 	public void render(org.openfuxml.content.ofx.Paragraph ofxParagraph)
 	{
-		SetFont sF = new SetFont(doc, builder);
-		
-		sF.setFont(setFontEnum.text);
 
 		logger.trace("WordParagraphRenderer.render()");
 		for (Serializable s : ofxParagraph.getContent())
