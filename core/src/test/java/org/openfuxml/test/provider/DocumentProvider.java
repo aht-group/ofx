@@ -54,4 +54,58 @@ public class DocumentProvider extends AbstractElementProvider
 
 		return xml;
 	}
+
+	public static Document buildComplexWithTable()
+	{
+		Document xml = XmlDocumentFactory.withContent();
+		Section s1 = SectionProvider.build();
+		s1.getContent().add(ParagraphProvider.create(100));
+		s1.getContent().add(SectionProvider.buildWithComment());
+		s1.getContent().add(TableProvider.create(4, 3));
+		xml.getContent().getContent().add(s1);
+
+		return xml;
+	}
+	
+	public static Document buildComplexWith2Table()
+	{
+		Document xml = XmlDocumentFactory.withContent();
+		Section s1 = SectionProvider.build();
+		s1.getContent().add(ParagraphProvider.create(100));
+		s1.getContent().add(SectionProvider.buildWithComment());
+		s1.getContent().add(TableProvider.create(3, 10));
+		s1.getContent().add(TableProvider.create(4, 3));
+		xml.getContent().getContent().add(s1);
+
+		return xml;
+	}
+	
+	public static Document buildComplexWith3Table()
+	{
+		Document xml = XmlDocumentFactory.withContent();
+		Section s1 = SectionProvider.build();
+		s1.getContent().add(ParagraphProvider.create(100));
+		s1.getContent().add(SectionProvider.buildWithComment());
+		s1.getContent().add(TableProvider.create(3, 10));
+		s1.getContent().add(TableProvider.create(4, 3));
+		s1.getContent().add(TableProvider.create(2, 5));
+		xml.getContent().getContent().add(s1);
+
+		return xml;
+	}
+	
+	public static Document buildComplexWith3TableWithParagraphInBetween()
+	{
+		Document xml = XmlDocumentFactory.withContent();
+		Section s1 = SectionProvider.build();
+		s1.getContent().add(ParagraphProvider.create(100));
+		s1.getContent().add(SectionProvider.buildWithComment());
+		s1.getContent().add(TableProvider.create(3, 10));
+		s1.getContent().add(TableProvider.create(4, 3));
+		s1.getContent().add(ParagraphProvider.create(100));
+		s1.getContent().add(TableProvider.create(2, 5));
+		xml.getContent().getContent().add(s1);
+
+		return xml;
+	}
 }

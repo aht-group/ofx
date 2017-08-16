@@ -6,6 +6,7 @@ import com.aspose.words.Section;
 
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.renderer.word.structure.WordTableRenderer.tableAddBorderTo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,8 @@ public class WordSectionRenderer
 
 	Document doc;
 	DocumentBuilder builder;
+	int tableCount=0;
+	int tableCurrent=0;
 
 	public WordSectionRenderer(Document doc, DocumentBuilder builder)
 	{
@@ -50,6 +53,14 @@ public class WordSectionRenderer
 
 		for (Object s : ofxSection.getContent())
 		{
+			if (s instanceof org.openfuxml.content.table.Table)
+			{
+				tableCount++;
+			}
+		}
+		
+		for (Object s : ofxSection.getContent())
+		{
 
 			if (s instanceof String)
 			{
@@ -69,6 +80,7 @@ public class WordSectionRenderer
 			}
 			else if (s instanceof org.openfuxml.content.table.Table)
 			{
+				tableCurrent++;
 				renderTable((org.openfuxml.content.table.Table) s);
 			}
 			else if (s instanceof org.openfuxml.content.ofx.Marginalia)
@@ -144,11 +156,12 @@ public class WordSectionRenderer
 		logger.trace("WordSectionRenderer.renderMarginalia()");
 	}
 
-	private void renderTable(org.openfuxml.content.table.Table s)
+	private void renderTable(org.openfuxml.content.table.Table s) throws OfxAuthoringException
 	{
 		logger.trace("WordSectionRenderer.renderTable()");
+		logger.debug("tableCurrent: "+tableCurrent+" tableCount:"+tableCount);
 		WordTableRenderer wTR = new WordTableRenderer(doc, builder);
-		wTR.render(s);
+		wTR.render(s,tableCount,tableCurrent);
 	}
 
 	private void highlightRenderer(org.openfuxml.content.ofx.Highlight s)

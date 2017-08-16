@@ -26,6 +26,7 @@ public class WordDocumentRenderer
 	public DocumentBuilder builder;
 	private int lvl;
 
+
 	public WordDocumentRenderer()
 	{
 		try
@@ -59,9 +60,9 @@ public class WordDocumentRenderer
 			}
 		}
 		builder.moveToDocumentEnd();
-
-		// to avoid blank last page!!!!
-		builder.insertBreak(BreakType.PAGE_BREAK);
+	
+		builder.insertBreak(BreakType.PAGE_BREAK); 
+	
 		return doc;
 	}
 

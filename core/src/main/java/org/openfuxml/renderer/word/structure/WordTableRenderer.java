@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.io.Serializable;
 
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.xml.layout.XmlFloatFactory;
 import org.openfuxml.renderer.word.util.SetFont;
 import org.openfuxml.renderer.word.util.SetFont.setFontEnum;
 import org.slf4j.Logger;
@@ -22,7 +24,7 @@ public class WordTableRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(WordParagraphRenderer.class);
 	
-	private enum tableAddBorderTo{first,last,only};
+	public enum tableAddBorderTo{first,mid,last,only};
 	
 	Document doc;
 	DocumentBuilder builder;
@@ -34,21 +36,23 @@ public class WordTableRenderer
 		this.builder = builder;
 	}
 
-	public void render(org.openfuxml.content.table.Table ofxTable)
-	{
+	public void render(org.openfuxml.content.table.Table ofxTable,	int tableCount, int tableCurrent) throws OfxAuthoringException
+	{		
+		if(!ofxTable.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
+		if(!ofxTable.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
+		if(ofxTable.getContent().getBody().size()!=1){throw new OfxAuthoringException("<content> must exactly have 1 body!");}
+		
+		if(!ofxTable.getSpecification().isSetLong()){ofxTable.getSpecification().setLong(false);}
+		if(!ofxTable.getSpecification().isSetFloat()){ofxTable.getSpecification().setFloat(XmlFloatFactory.build(false));}
+		
 		SetFont sF = new SetFont(doc, builder);
+		
 		table = builder.startTable();
 		builder.insertCell();
-		try
-		{
-			table.setStyleOptions(
-					TableStyleOptions.FIRST_COLUMN | TableStyleOptions.ROW_BANDS | TableStyleOptions.FIRST_ROW);
-		}
-		catch (Exception e)
-		{}
-
-		builder.getCellFormat().setPreferredWidth(
-				PreferredWidth.fromPercent(100 / (ofxTable.getContent().getHead().getRow().size() + 1)));
+		
+		try	{table.setStyleOptions(TableStyleOptions.FIRST_COLUMN | TableStyleOptions.ROW_BANDS | TableStyleOptions.FIRST_ROW);}catch(Exception e){}
+				
+		builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(100 / (ofxTable.getContent().getHead().getRow().get(0).getCell().size())));
 		builder.getParagraphFormat().setSpaceBeforeAuto(false);
 		builder.getParagraphFormat().setSpaceBefore(4);
 		builder.getParagraphFormat().setSpaceAfter(4);
@@ -115,17 +119,30 @@ public class WordTableRenderer
 				}
 				rowHelper++;
 			}
+			
 
 		}
 	
-		builder.endTable();
+		//builder.endTable();
 		try
-		{
-			tableAddGridAndBoarders(tableAddBorderTo.only);
+		{ 
+			logger.debug("borders please!!!!"+tableCount+tableCurrent);
+			if (tableCount==1) {tableAddGridAndBoarders(tableAddBorderTo.only);logger.debug("only");}
+			
+			else if (tableCount==2)
+			{
+				logger.debug("tablecount = 2 " );
+				if (tableCurrent==1) {tableAddGridAndBoarders(tableAddBorderTo.first);logger.debug("2 tables - first");}
+				if (tableCurrent==2) {tableAddGridAndBoarders(tableAddBorderTo.last);logger.debug("2 tables - last");}
+			}
+	
+			else if ((tableCount>=3)&&(tableCurrent==1)) {tableAddGridAndBoarders(tableAddBorderTo.first);logger.debug(">3 tables - first");}
+			else if ((tableCount>=3)&&(tableCurrent!=1)&&(tableCount!=tableCurrent)) {tableAddGridAndBoarders(tableAddBorderTo.mid);logger.debug(">3 tables - mid");}
+			else if ((tableCount>=3)&&(tableCount==tableCurrent)) {tableAddGridAndBoarders(tableAddBorderTo.last);logger.debug(">3 tables - last");}
 		}
 		catch (Exception e)
 		{}
-
+		builder.endTable();
 	}
 
 	private void tableAddGridAndBoarders(tableAddBorderTo tABO) throws Exception
@@ -151,6 +168,10 @@ public class WordTableRenderer
 							cell.getCellFormat().getBorders().getTop().setLineStyle(LineStyle.DOUBLE);
 							cell.getCellFormat().getBorders().getTop().setLineWidth(0.5);
 							break;
+						case mid:
+							cell.getCellFormat().getBorders().getTop().setLineStyle(LineStyle.NONE);
+							cell.getCellFormat().getBorders().getTop().setLineWidth(0.0);
+							break;
 						case last:
 							cell.getCellFormat().getBorders().getTop().setLineStyle(LineStyle.SINGLE);
 							cell.getCellFormat().getBorders().getTop().setLineWidth(0.5);
@@ -168,6 +189,10 @@ public class WordTableRenderer
 						case first:
 							cell.getCellFormat().getBorders().getBottom().setLineStyle(LineStyle.SINGLE);
 							cell.getCellFormat().getBorders().getBottom().setLineWidth(0.5);
+							break;
+						case mid:
+							cell.getCellFormat().getBorders().getBottom().setLineStyle(LineStyle.NONE);
+							cell.getCellFormat().getBorders().getBottom().setLineWidth(0.0);
 							break;
 						case last:
 							cell.getCellFormat().getBorders().getBottom().setLineStyle(LineStyle.DOUBLE);
