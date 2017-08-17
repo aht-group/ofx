@@ -6,7 +6,12 @@ import com.aspose.words.Section;
 
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
-import org.openfuxml.renderer.word.structure.WordTableRenderer.tableAddBorderTo;
+import org.openfuxml.renderer.word.content.WordCommentRenderer;
+import org.openfuxml.renderer.word.content.WordImageRenderer;
+import org.openfuxml.renderer.word.content.WordParagraphRenderer;
+import org.openfuxml.renderer.word.content.WordTableRenderer;
+import org.openfuxml.renderer.word.content.WordTitleRenderer;
+import org.openfuxml.renderer.word.content.WordTableRenderer.tableAddBorderTo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +32,7 @@ public class WordSectionRenderer
 		this.builder = builder;
 	}
 
-	public void render(org.openfuxml.content.ofx.Section ofxSection) throws OfxAuthoringException, OfxConfigurationException
+	public void render(org.openfuxml.content.ofx.Section ofxSection) throws Exception
 	{
 		logger.trace("WordSectionRenderer.render()");
 		
@@ -132,7 +137,8 @@ public class WordSectionRenderer
 	private void renderImage(org.openfuxml.content.media.Image s)
 	{
 		logger.trace("WordSectionRenderer.renderImage()");
-
+		WordImageRenderer wIR = new WordImageRenderer(doc, builder);
+		wIR.render(s);
 	}
 
 	private void renderInclude(org.openfuxml.content.ofx.Include s)
@@ -156,7 +162,7 @@ public class WordSectionRenderer
 		logger.trace("WordSectionRenderer.renderMarginalia()");
 	}
 
-	private void renderTable(org.openfuxml.content.table.Table s) throws OfxAuthoringException
+	private void renderTable(org.openfuxml.content.table.Table s) throws Exception
 	{
 		logger.trace("WordSectionRenderer.renderTable()");
 		logger.debug("tableCurrent: "+tableCurrent+" tableCount:"+tableCount);
@@ -176,7 +182,7 @@ public class WordSectionRenderer
 		wPF.render(s);
 	}
 
-	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) throws OfxAuthoringException, OfxConfigurationException
+	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) throws Exception
 	{
 		logger.trace("WordSectionRenderer.renderSection()");
 		WordSectionRenderer sf = new WordSectionRenderer(doc,builder);

@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.word.structure;
+package org.openfuxml.renderer.word.content;
 
 import java.util.ArrayList;
 import java.util.Date;

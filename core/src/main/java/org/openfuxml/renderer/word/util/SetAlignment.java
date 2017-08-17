@@ -1,6 +1,6 @@
 package org.openfuxml.renderer.word.util;
 
-import org.openfuxml.renderer.word.structure.WordParagraphRenderer;
+import org.openfuxml.renderer.word.content.WordParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

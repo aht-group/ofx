@@ -15,7 +15,7 @@ public class SetFont
 {
 	final static Logger logger = LoggerFactory.getLogger(SetFont.class);
 
-	public enum setFontEnum {textheader, text, footer, title,}
+	public enum setFontEnum {textheader, text, footer, title, image}
 	Document doc;
 	DocumentBuilder builder;
 	private Font font;
@@ -63,6 +63,16 @@ public class SetFont
 				font.setName("Arial");
 				font.setUnderline(Underline.SINGLE);
 			break;
+			case image:
+				font.setSize(6);
+	//			font.setLocaleId(id);
+				font.setColor(Color.BLACK);
+				font.setBold(true);
+				font.setName("Arial");
+				font.setUnderline(Underline.NONE);
+				font.setItalic(true);
+			break;
+			
 		}
 	}
 }

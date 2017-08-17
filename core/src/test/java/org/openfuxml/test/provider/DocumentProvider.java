@@ -43,6 +43,18 @@ public class DocumentProvider extends AbstractElementProvider
 		return xml;
 	}
 	
+	public static Document buildComplexWithImage()
+	{
+		Document xml = XmlDocumentFactory.withContent();
+		Section s1 = SectionProvider.build();
+		s1.getContent().add(ParagraphProvider.create(100));
+		s1.getContent().add(ImageProvider.createImageOnly("!!!!IMAGE!!!!Titel-pleeaaasssseeeee!!!!"));
+		s1.getContent().add(SectionProvider.buildWithComment());
+		xml.getContent().getContent().add(s1);
+
+		return xml;
+	}
+	
 	public static Document buildComplexWithTableSimple()
 	{
 		Document xml = XmlDocumentFactory.withContent();
@@ -98,14 +110,17 @@ public class DocumentProvider extends AbstractElementProvider
 	{
 		Document xml = XmlDocumentFactory.withContent();
 		Section s1 = SectionProvider.build();
+		Section s2 = SectionProvider.build();
 		s1.getContent().add(ParagraphProvider.create(100));
 		s1.getContent().add(SectionProvider.buildWithComment());
-		s1.getContent().add(TableProvider.create(3, 10));
+		s1.getContent().add(TableProvider.create(3, 8));
 		s1.getContent().add(TableProvider.create(4, 3));
-		s1.getContent().add(ParagraphProvider.create(100));
-		s1.getContent().add(TableProvider.create(2, 5));
+		
+		s2.getContent().add(ParagraphProvider.create(80));
+		s2.getContent().add(TableProvider.create(2, 5));
 		xml.getContent().getContent().add(s1);
-
+		xml.getContent().getContent().add(s2);
+		
 		return xml;
 	}
 }

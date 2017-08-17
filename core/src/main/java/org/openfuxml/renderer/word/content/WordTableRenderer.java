@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.word.structure;
+package org.openfuxml.renderer.word.content;
 
 import java.awt.Color;
 import java.io.Serializable;
@@ -15,6 +15,8 @@ import com.aspose.words.Cell;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
 import com.aspose.words.LineStyle;
+import com.aspose.words.NodeType;
+import com.aspose.words.Paragraph;
 import com.aspose.words.PreferredWidth;
 import com.aspose.words.Row;
 import com.aspose.words.Table;
@@ -36,7 +38,7 @@ public class WordTableRenderer
 		this.builder = builder;
 	}
 
-	public void render(org.openfuxml.content.table.Table ofxTable,	int tableCount, int tableCurrent) throws OfxAuthoringException
+	public void render(org.openfuxml.content.table.Table ofxTable,	int tableCount, int tableCurrent) throws Exception
 	{		
 		if(!ofxTable.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
 		if(!ofxTable.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
@@ -133,16 +135,22 @@ public class WordTableRenderer
 			{
 				logger.debug("tablecount = 2 " );
 				if (tableCurrent==1) {tableAddGridAndBoarders(tableAddBorderTo.first);logger.debug("2 tables - first");}
-				if (tableCurrent==2) {tableAddGridAndBoarders(tableAddBorderTo.last);logger.debug("2 tables - last");}
+				if (tableCurrent==2) {tableAddGridAndBoarders(tableAddBorderTo.last);logger.debug("2 tables - last");keepingTableFromBreakingAcrossPages();}
 			}
 	
 			else if ((tableCount>=3)&&(tableCurrent==1)) {tableAddGridAndBoarders(tableAddBorderTo.first);logger.debug(">3 tables - first");}
 			else if ((tableCount>=3)&&(tableCurrent!=1)&&(tableCount!=tableCurrent)) {tableAddGridAndBoarders(tableAddBorderTo.mid);logger.debug(">3 tables - mid");}
-			else if ((tableCount>=3)&&(tableCount==tableCurrent)) {tableAddGridAndBoarders(tableAddBorderTo.last);logger.debug(">3 tables - last");}
+			else if ((tableCount>=3)&&(tableCount==tableCurrent)) 
+			{
+				tableAddGridAndBoarders(tableAddBorderTo.last);
+				logger.debug(">3 tables - last");
+				keepingTableFromBreakingAcrossPages();	
+			}
 		}
 		catch (Exception e)
 		{}
 		builder.endTable();
+		
 	}
 
 	private void tableAddGridAndBoarders(tableAddBorderTo tABO) throws Exception
@@ -216,5 +224,17 @@ public class WordTableRenderer
 				}
 			}
 		}
+	}
+	public void keepingTableFromBreakingAcrossPages() throws Exception {
+		
+
+		for (Cell cell : (Iterable<Cell>) this.table.getChildNodes(NodeType.CELL, true)) {
+			cell.ensureMinimum();
+			for (Paragraph para : cell.getParagraphs())
+				if (!(cell.getParentRow().isLastRow() && para.isEndOfCell()))
+					para.getParagraphFormat().setKeepWithNext(true);
+		}
+		
+		
 	}
 }

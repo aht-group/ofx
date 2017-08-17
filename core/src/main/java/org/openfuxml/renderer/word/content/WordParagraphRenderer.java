@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.word.structure;
+package org.openfuxml.renderer.word.content;
 
 
 import java.io.Serializable;
@@ -31,8 +31,10 @@ public class WordParagraphRenderer
 	
 	public void render(org.openfuxml.content.ofx.Paragraph ofxParagraph)
 	{
-
 		logger.trace("WordParagraphRenderer.render()");
+		SetFont sF = new SetFont(doc, builder);
+		sF.setFont(setFontEnum.text);
+		
 		for (Serializable s : ofxParagraph.getContent())
 		{
 			SetAlignment sA = new SetAlignment(doc, builder);
@@ -41,8 +43,8 @@ public class WordParagraphRenderer
 			paragraphFormat.setFirstLineIndent(0);
 			
 			paragraphFormat.setKeepTogether(true);
-			builder.write(s.toString());
-			builder.writeln();
+			builder.writeln(s.toString());
+
 			logger.debug(s.toString());
 		}
 

@@ -56,7 +56,14 @@ public class WordDocumentRenderer
 			
 			if (s instanceof org.openfuxml.content.ofx.Section)
 			{	
-				renderSection((org.openfuxml.content.ofx.Section) s);
+				try
+				{
+					renderSection((org.openfuxml.content.ofx.Section) s);
+				}
+				catch (Exception e)
+				{
+					
+				}
 			}
 		}
 		builder.moveToDocumentEnd();
@@ -66,9 +73,17 @@ public class WordDocumentRenderer
 		return doc;
 	}
 
-	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) throws OfxAuthoringException, OfxConfigurationException
+	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) 
 	{
 		WordSectionRenderer sf = new WordSectionRenderer(doc,builder);
-		sf.render(ofxSection);
+		try
+		{
+			sf.render(ofxSection);
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

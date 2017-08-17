@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.word.structure;
+package org.openfuxml.renderer.word.content;
 
 import java.io.Serializable;
 
@@ -29,11 +29,12 @@ public class WordTitleRenderer
 	public void render(org.openfuxml.content.ofx.Title ofxTitel)
 	{
 		SetFont sF = new SetFont(doc, builder);
-		sF.setFont(setFontEnum.title);
+	
+	sF.setFont(setFontEnum.title);
+
 		
 		for (Serializable s : ofxTitel.getContent())
 		{
-
 			ParagraphFormat paragraphFormat = builder.getParagraphFormat();
 			paragraphFormat.setFirstLineIndent(0);
 			SetAlignment sA = new SetAlignment(doc, builder);
