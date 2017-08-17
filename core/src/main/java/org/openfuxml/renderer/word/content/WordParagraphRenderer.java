@@ -23,26 +23,24 @@ public class WordParagraphRenderer
 	Document doc;
 	DocumentBuilder builder;
 	
-	public WordParagraphRenderer(Document doc, DocumentBuilder builder)
-	{
-		this.doc = doc;
-		this.builder = builder;
-	}
+	public WordParagraphRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 	
 	public void render(org.openfuxml.content.ofx.Paragraph ofxParagraph)
 	{
-		logger.trace("WordParagraphRenderer.render()");
-		SetFont sF = new SetFont(doc, builder);
-		sF.setFont(setFontEnum.text);
+		//set Font...
+		SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
 		
+		// get content..
 		for (Serializable s : ofxParagraph.getContent())
 		{
+			//set alignment in here for further ...
 			SetAlignment sA = new SetAlignment(doc, builder);
 			sA.setAlignment(setAlignmentEnum.left);
 			ParagraphFormat paragraphFormat = builder.getParagraphFormat();
 			paragraphFormat.setFirstLineIndent(0);
-			
 			paragraphFormat.setKeepTogether(true);
+			
+			//write text..
 			builder.writeln(s.toString());
 
 			logger.debug(s.toString());

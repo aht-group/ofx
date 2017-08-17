@@ -2,20 +2,15 @@ package org.openfuxml.renderer.word.structure;
 
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
-import com.aspose.words.Section;
 
-import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.word.content.WordCommentRenderer;
 import org.openfuxml.renderer.word.content.WordImageRenderer;
+import org.openfuxml.renderer.word.content.WordListRenderer;
 import org.openfuxml.renderer.word.content.WordParagraphRenderer;
 import org.openfuxml.renderer.word.content.WordTableRenderer;
 import org.openfuxml.renderer.word.content.WordTitleRenderer;
-import org.openfuxml.renderer.word.content.WordTableRenderer.tableAddBorderTo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.aspose.words.*;
 
 public class WordSectionRenderer
 {
@@ -26,16 +21,10 @@ public class WordSectionRenderer
 	int tableCount=0;
 	int tableCurrent=0;
 
-	public WordSectionRenderer(Document doc, DocumentBuilder builder)
-	{
-		this.doc = doc;
-		this.builder = builder;
-	}
+	public WordSectionRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 
 	public void render(org.openfuxml.content.ofx.Section ofxSection) throws Exception
 	{
-		logger.trace("WordSectionRenderer.render()");
-		
 		//Section sectionToAdd = new Section(doc);
 
 		// Comment always on top!
@@ -55,7 +44,8 @@ public class WordSectionRenderer
 				renderTitel((org.openfuxml.content.ofx.Title) s);
 			}
 		}
-
+		
+		//table helper for border handling...
 		for (Object s : ofxSection.getContent())
 		{
 			if (s instanceof org.openfuxml.content.table.Table)
@@ -64,13 +54,10 @@ public class WordSectionRenderer
 			}
 		}
 		
+		// content ....
 		for (Object s : ofxSection.getContent())
 		{
-
-			if (s instanceof String)
-			{
-
-			}
+			if (s instanceof String){}
 			else if (s instanceof org.openfuxml.content.ofx.Section)
 			{
 				renderSection((org.openfuxml.content.ofx.Section) s);
@@ -85,7 +72,8 @@ public class WordSectionRenderer
 			}
 			else if (s instanceof org.openfuxml.content.table.Table)
 			{
-				tableCurrent++;
+				//table helper border handling..
+				tableCurrent++;				
 				renderTable((org.openfuxml.content.table.Table) s);
 			}
 			else if (s instanceof org.openfuxml.content.ofx.Marginalia)
@@ -94,7 +82,7 @@ public class WordSectionRenderer
 			}
 			else if (s instanceof org.openfuxml.content.list.List)
 			{
-				renderList((org.openfuxml.content.list.List) s, this);
+				renderList((org.openfuxml.content.list.List) s);
 			}
 			else if (s instanceof org.openfuxml.content.ofx.Listing)
 			{
@@ -122,41 +110,41 @@ public class WordSectionRenderer
 
 	private void renderComment(org.openfuxml.content.ofx.Comment s)
 	{
-		logger.trace("WordSectionRenderer.renderComment()");
 		WordCommentRenderer wCR = new WordCommentRenderer(doc, builder);
 		wCR.render(s);
 	}
 
 	private void renderTitel(org.openfuxml.content.ofx.Title s)
 	{
-		logger.trace("WordSectionRenderer.renderTitel()");
 		WordTitleRenderer wTR = new WordTitleRenderer(doc, builder);
 		wTR.render(s);
 	}
 
-	private void renderImage(org.openfuxml.content.media.Image s)
+	private void renderImage(org.openfuxml.content.media.Image s) throws Exception
 	{
-		logger.trace("WordSectionRenderer.renderImage()");
 		WordImageRenderer wIR = new WordImageRenderer(doc, builder);
 		wIR.render(s);
 	}
 
+	//to do
 	private void renderInclude(org.openfuxml.content.ofx.Include s)
 	{
 		logger.trace("WordSectionRenderer.renderInclude()");
 	}
 
+	//to do
 	private void renderListing(org.openfuxml.content.ofx.Listing s)
 	{
 		logger.trace("WordSectionRenderer.renderListing()");
 	}
 
-	private void renderList(org.openfuxml.content.list.List s, WordSectionRenderer wordSectionRenderer)
+	private void renderList(org.openfuxml.content.list.List s)
 	{
-		logger.trace("WordSectionRenderer.renderList()");
-
+		WordListRenderer wPF = new WordListRenderer(doc, builder);
+		wPF.render(s);
 	}
 
+	//to do
 	private void renderMarginalia(org.openfuxml.content.ofx.Marginalia s)
 	{
 		logger.trace("WordSectionRenderer.renderMarginalia()");
@@ -164,12 +152,11 @@ public class WordSectionRenderer
 
 	private void renderTable(org.openfuxml.content.table.Table s) throws Exception
 	{
-		logger.trace("WordSectionRenderer.renderTable()");
-		logger.debug("tableCurrent: "+tableCurrent+" tableCount:"+tableCount);
 		WordTableRenderer wTR = new WordTableRenderer(doc, builder);
 		wTR.render(s,tableCount,tableCurrent);
 	}
 
+	//to do
 	private void highlightRenderer(org.openfuxml.content.ofx.Highlight s)
 	{
 		logger.trace("WordSectionRenderer.highlightRenderer()");
@@ -177,14 +164,12 @@ public class WordSectionRenderer
 
 	private void paragraphRenderer(org.openfuxml.content.ofx.Paragraph s, boolean b)
 	{
-		logger.trace("WordSectionRenderer.paragraphRenderer()");
 		WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
 		wPF.render(s);
 	}
 
 	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) throws Exception
 	{
-		logger.trace("WordSectionRenderer.renderSection()");
 		WordSectionRenderer sf = new WordSectionRenderer(doc,builder);
 		sf.render(ofxSection);
 	}

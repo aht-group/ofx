@@ -32,6 +32,7 @@ public class TestWordDocumentRenderer extends AbstractTestWordRenderer
 		Document document5 = DocumentProvider.buildComplexWith3Table();
 		Document document6 = DocumentProvider.buildComplexWith3TableWithParagraphInBetween();
 		Document document7 = DocumentProvider.buildComplexWithImage();
+		Document document8 = DocumentProvider.buildComplexWithList();
 		//JaxbUtil.info(document);
 	
 		OfxWordRenderer owr = new OfxWordRenderer(cp);
@@ -43,5 +44,6 @@ public class TestWordDocumentRenderer extends AbstractTestWordRenderer
 		owr.render(document5, new File("target/ofx_buildComplexWith3Table.docx"));
 		owr.render(document6, new File("target/ofx_buildComplexWith3TableWithParagraphInBetween.docx"));
 		owr.render(document7, new File("target/ofx_buildComplexWithImage.docx"));
+		owr.render(document8, new File("target/ofx_buildComplexWithList.docx"));
 	}
 }

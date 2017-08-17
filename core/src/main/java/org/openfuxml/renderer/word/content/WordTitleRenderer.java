@@ -20,18 +20,12 @@ public class WordTitleRenderer
 	Document doc;
 	DocumentBuilder builder;
 	
-	public WordTitleRenderer(Document doc, DocumentBuilder builder)
-	{
-		this.doc = doc;
-		this.builder = builder;
-	}
+	public WordTitleRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 	
 	public void render(org.openfuxml.content.ofx.Title ofxTitel)
 	{
 		SetFont sF = new SetFont(doc, builder);
-	
-	sF.setFont(setFontEnum.title);
-
+		sF.setFont(setFontEnum.title);
 		
 		for (Serializable s : ofxTitel.getContent())
 		{
@@ -41,8 +35,6 @@ public class WordTitleRenderer
 			sA.setAlignment(setAlignmentEnum.left);
 			paragraphFormat.setKeepTogether(true);
 			builder.writeln(s.toString()+ ":");
-			logger.debug(s.toString()+ ":");
 		}
-		
 	}
 }

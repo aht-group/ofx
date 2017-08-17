@@ -123,4 +123,16 @@ public class DocumentProvider extends AbstractElementProvider
 		
 		return xml;
 	}
+	
+	public static Document buildComplexWithList()
+	{
+		Document xml = XmlDocumentFactory.withContent();
+		Section s1 = SectionProvider.build();
+		s1.getContent().add(ParagraphProvider.create(100));
+		s1.getContent().add(ListProvider.build(true));
+		xml.getContent().getContent().add(s1);
+		
+		return xml;
+	}
+	
 }

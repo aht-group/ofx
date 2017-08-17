@@ -1,9 +1,5 @@
 package org.openfuxml.renderer.word.content;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.openfuxml.renderer.word.util.SetFont;
 import org.openfuxml.renderer.word.util.SetFont.setFontEnum;
 import org.slf4j.Logger;
@@ -22,65 +18,51 @@ public class WordImageRenderer
 	Document doc;
 	DocumentBuilder builder;
 	Shape shape;
-	List<String> txt = new ArrayList<String>();
 
-	public WordImageRenderer(Document doc, DocumentBuilder builder)
-	{
-		this.doc = doc;
-		this.builder = builder;
-	}
+	public WordImageRenderer(Document doc, DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 
-	public void render(org.openfuxml.content.media.Image ofxImage)
+	public void render(org.openfuxml.content.media.Image ofxImage) throws Exception
 	{
-		logger.trace("WordImageRenderer.render()");
 		SetFont sF = new SetFont(doc, builder);
-		sF.setFont(setFontEnum.image);
-		try
+		ParagraphFormat paragraphFormat = builder.getParagraphFormat();
+		paragraphFormat.setAlignment(ParagraphAlignment.CENTER);
+		paragraphFormat.setSpaceAfter(4);
+		paragraphFormat.setKeepTogether(true);
+		
+		// insert image..
+		shape = builder.insertImage(ofxImage.getMedia().getSrc());
+		
+		//set aspect ratio..
+		if (ofxImage.getWidth().isFlex()==true){shape.setAspectRatioLocked(true);}else{shape.setAspectRatioLocked(false);}
+		
+		//with Unit..
+		if (ofxImage.getWidth().isSetUnit()==true)
 		{
-			ParagraphFormat paragraphFormat = builder.getParagraphFormat();
-			paragraphFormat.setAlignment(ParagraphAlignment.CENTER);
-			paragraphFormat.setSpaceAfter(2);
-			paragraphFormat.setKeepTogether(true);
-			shape = builder.insertImage(ofxImage.getMedia().getSrc());
-			shape.setWidth(ofxImage.getWidth().getValue());
-			if (ofxImage.getWidth().isFlex() == true)
+			if (ofxImage.getWidth().getUnit()=="percentage")
 			{
-				shape.setAspectRatioLocked(true);
-			}
-			else
-			{
-				shape.setAspectRatioLocked(false);
-			}
-
-			shape.setHeight(ofxImage.getHeight().getValue());
-
-			if (ofxImage.getAlignment().getHorizontal() == "center")
-			{
-				logger.debug("center");
-				shape.setHorizontalAlignment(ParagraphAlignment.CENTER);
-			}
-			else if (ofxImage.getAlignment().getHorizontal() == "left")
-			{
-				logger.debug("left");
-				shape.setHorizontalAlignment(ParagraphAlignment.LEFT);
-			}
-			else if (ofxImage.getAlignment().getHorizontal() == "right")
-			{
-				logger.debug("right");
-				shape.setHorizontalAlignment(ParagraphAlignment.RIGHT);
-			}
-			else if (ofxImage.getAlignment().getHorizontal() == "")
-			{
-				logger.debug("-----");
-				shape.setHorizontalAlignment(ParagraphAlignment.CENTER);
-			}
-			builder.writeln();	
-			sF.setFont(setFontEnum.image);
-			builder.writeln(ofxImage.getTitle().getContent().get(0).toString());	
-					}
-		catch (Exception e)
-		{
-			logger.error("WordImageRenderer.render()");
+				shape.setWidth((shape.getWidth() * ofxImage.getWidth().getValue()) / 100);
+				shape.setHeight((shape.getHeight() * ofxImage.getHeight().getValue()) / 100);
+			}	
+//to do			/*if (ofxImage.getWidth().getUnit() == "relative"){}*/				
 		}
+		//without Unit...
+		else
+		{
+			shape.setWidth(ofxImage.getWidth().getValue());
+			shape.setHeight(ofxImage.getHeight().getValue());
+		}
+		
+		//set alignment..
+		if (ofxImage.getAlignment().getHorizontal()=="center"){shape.setHorizontalAlignment(ParagraphAlignment.CENTER);}
+		else if (ofxImage.getAlignment().getHorizontal()=="left"){shape.setHorizontalAlignment(ParagraphAlignment.LEFT);}
+		else if (ofxImage.getAlignment().getHorizontal()=="right"){shape.setHorizontalAlignment(ParagraphAlignment.RIGHT);}
+		else if (ofxImage.getAlignment().getHorizontal()==""){shape.setHorizontalAlignment(ParagraphAlignment.CENTER);}
+		
+		//write empty line..
+		builder.writeln();
+		
+		//set font and write image title...
+		sF.setFont(setFontEnum.image);
+		builder.writeln(ofxImage.getTitle().getContent().get(0).toString());
 	}
 }

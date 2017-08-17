@@ -45,45 +45,30 @@ public class WordDocumentRenderer
 
 
 
-	public Document render(Content ofxContent) throws OfxAuthoringException, OfxConfigurationException
+	public Document render(Content ofxContent) throws Exception
 	{
-		logger.trace("WordDocumentRenderer.render()");
-		
 		lvl = 0;
-		JaxbUtil.info(ofxContent);
+		//see XML content..
+		// JaxbUtil.info(ofxContent);
+		
 		for (Object s : ofxContent.getContent())
-		{
-			
+		{		
 			if (s instanceof org.openfuxml.content.ofx.Section)
 			{	
-				try
-				{
-					renderSection((org.openfuxml.content.ofx.Section) s);
-				}
-				catch (Exception e)
-				{
-					
-				}
+				renderSection((org.openfuxml.content.ofx.Section) s);
 			}
 		}
 		builder.moveToDocumentEnd();
-	
-		builder.insertBreak(BreakType.PAGE_BREAK); 
+		
+		//for future..
+		//builder.insertBreak(BreakType.PAGE_BREAK); 
 	
 		return doc;
 	}
 
-	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) 
+	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) throws Exception 
 	{
 		WordSectionRenderer sf = new WordSectionRenderer(doc,builder);
-		try
-		{
-			sf.render(ofxSection);
-		}
-		catch (Exception e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		sf.render(ofxSection);
 	}
 }

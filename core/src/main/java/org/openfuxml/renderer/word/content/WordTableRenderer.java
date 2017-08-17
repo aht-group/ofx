@@ -3,7 +3,6 @@ package org.openfuxml.renderer.word.content;
 import java.awt.Color;
 import java.io.Serializable;
 
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
 import org.openfuxml.renderer.word.util.SetFont;
@@ -32,23 +31,20 @@ public class WordTableRenderer
 	DocumentBuilder builder;
 	Table table;
 
-	public WordTableRenderer(Document doc, DocumentBuilder builder)
-	{
-		this.doc = doc;
-		this.builder = builder;
-	}
+	public WordTableRenderer(Document doc, DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 
 	public void render(org.openfuxml.content.table.Table ofxTable,	int tableCount, int tableCurrent) throws Exception
-	{		
+	{	
+		// exeptions..
 		if(!ofxTable.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
 		if(!ofxTable.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
 		if(ofxTable.getContent().getBody().size()!=1){throw new OfxAuthoringException("<content> must exactly have 1 body!");}
-		
 		if(!ofxTable.getSpecification().isSetLong()){ofxTable.getSpecification().setLong(false);}
 		if(!ofxTable.getSpecification().isSetFloat()){ofxTable.getSpecification().setFloat(XmlFloatFactory.build(false));}
-		
+
 		SetFont sF = new SetFont(doc, builder);
 		
+		//start table and formating..
 		table = builder.startTable();
 		builder.insertCell();
 		
@@ -70,7 +66,6 @@ public class WordTableRenderer
 				{
 					if (s instanceof org.openfuxml.content.ofx.Paragraph)
 					{
-						logger.trace("WordSectionRenderer.paragraphRenderer()");
 						WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
 						wPF.render((org.openfuxml.content.ofx.Paragraph) s);
 					}
@@ -82,16 +77,14 @@ public class WordTableRenderer
 				columnHelper++;
 			}
 		}
-
 		builder.endRow();
 
 		// body
-
 		for (org.openfuxml.content.table.Body b : ofxTable.getContent().getBody())
 		{
-
 			builder.insertCell();
 			sF.setFont(setFontEnum.text);
+			
 			int rowHelper = 1;
 			for (org.openfuxml.content.table.Row row : b.getRow())
 			{
@@ -102,7 +95,6 @@ public class WordTableRenderer
 					{
 						if (s instanceof org.openfuxml.content.ofx.Paragraph)
 						{
-							logger.trace("WordSectionRenderer.paragraphRenderer()");
 							WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
 							wPF.render((org.openfuxml.content.ofx.Paragraph) s);
 						}
@@ -112,7 +104,6 @@ public class WordTableRenderer
 						builder.insertCell();
 					}
 					columnHelper2++;
-
 				}
 				builder.endRow();
 				if (rowHelper <= b.getRow().size() - 1)
@@ -121,36 +112,29 @@ public class WordTableRenderer
 				}
 				rowHelper++;
 			}
-			
-
 		}
-	
-		//builder.endTable();
-		try
-		{ 
-			logger.debug("borders please!!!!"+tableCount+tableCurrent);
-			if (tableCount==1) {tableAddGridAndBoarders(tableAddBorderTo.only);logger.debug("only");}
-			
-			else if (tableCount==2)
-			{
-				logger.debug("tablecount = 2 " );
-				if (tableCurrent==1) {tableAddGridAndBoarders(tableAddBorderTo.first);logger.debug("2 tables - first");}
-				if (tableCurrent==2) {tableAddGridAndBoarders(tableAddBorderTo.last);logger.debug("2 tables - last");keepingTableFromBreakingAcrossPages();}
-			}
-	
-			else if ((tableCount>=3)&&(tableCurrent==1)) {tableAddGridAndBoarders(tableAddBorderTo.first);logger.debug(">3 tables - first");}
-			else if ((tableCount>=3)&&(tableCurrent!=1)&&(tableCount!=tableCurrent)) {tableAddGridAndBoarders(tableAddBorderTo.mid);logger.debug(">3 tables - mid");}
-			else if ((tableCount>=3)&&(tableCount==tableCurrent)) 
-			{
-				tableAddGridAndBoarders(tableAddBorderTo.last);
-				logger.debug(">3 tables - last");
-				keepingTableFromBreakingAcrossPages();	
-			}
-		}
-		catch (Exception e)
-		{}
-		builder.endTable();
 		
+		//builder.endTable();
+	
+		logger.debug("borders please!!!!"+tableCount+tableCurrent);
+		if (tableCount==1) {tableAddGridAndBoarders(tableAddBorderTo.only);logger.debug("only");}
+			
+		else if (tableCount==2)
+		{
+			logger.debug("tablecount = 2 " );
+			if (tableCurrent==1) {tableAddGridAndBoarders(tableAddBorderTo.first);logger.debug("2 tables - first");}
+			if (tableCurrent==2) {tableAddGridAndBoarders(tableAddBorderTo.last);logger.debug("2 tables - last");keepingTableFromBreakingAcrossPages();}
+		}
+
+		else if ((tableCount>=3)&&(tableCurrent==1)) {tableAddGridAndBoarders(tableAddBorderTo.first);logger.debug(">3 tables - first");}
+		else if ((tableCount>=3)&&(tableCurrent!=1)&&(tableCount!=tableCurrent)) {tableAddGridAndBoarders(tableAddBorderTo.mid);logger.debug(">3 tables - mid");}
+		else if ((tableCount>=3)&&(tableCount==tableCurrent)) 
+		{
+			tableAddGridAndBoarders(tableAddBorderTo.last);
+			logger.debug(">3 tables - last");
+			keepingTableFromBreakingAcrossPages();	
+		}
+		builder.endTable();
 	}
 
 	private void tableAddGridAndBoarders(tableAddBorderTo tABO) throws Exception
@@ -225,16 +209,20 @@ public class WordTableRenderer
 			}
 		}
 	}
-	public void keepingTableFromBreakingAcrossPages() throws Exception {
-		
-
-		for (Cell cell : (Iterable<Cell>) this.table.getChildNodes(NodeType.CELL, true)) {
+	
+	@SuppressWarnings("unchecked")
+	public void keepingTableFromBreakingAcrossPages() throws Exception 
+	{
+		for (Cell cell : (Iterable<Cell>)this.table.getChildNodes(NodeType.CELL,true))
+		{
 			cell.ensureMinimum();
 			for (Paragraph para : cell.getParagraphs())
+			{
 				if (!(cell.getParentRow().isLastRow() && para.isEndOfCell()))
+				{
 					para.getParagraphFormat().setKeepWithNext(true);
+				}
+			}
 		}
-		
-		
 	}
 }
