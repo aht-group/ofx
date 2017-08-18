@@ -42,8 +42,7 @@ public class WordParagraphRenderer
 			
 			//write text..
 			builder.writeln(s.toString());
-
-			logger.debug(s.toString());
+			builder.writeln();
 		}
 
 	}

@@ -36,11 +36,11 @@ public class WordTableRenderer
 	public void render(org.openfuxml.content.table.Table ofxTable,	int tableCount, int tableCurrent) throws Exception
 	{	
 		// exeptions..
-		if(!ofxTable.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
+		//if(!ofxTable.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
 		if(!ofxTable.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
 		if(ofxTable.getContent().getBody().size()!=1){throw new OfxAuthoringException("<content> must exactly have 1 body!");}
-		if(!ofxTable.getSpecification().isSetLong()){ofxTable.getSpecification().setLong(false);}
-		if(!ofxTable.getSpecification().isSetFloat()){ofxTable.getSpecification().setFloat(XmlFloatFactory.build(false));}
+		//if(!ofxTable.getSpecification().isSetLong()){ofxTable.getSpecification().setLong(false);}
+		//if(!ofxTable.getSpecification().isSetFloat()){ofxTable.getSpecification().setFloat(XmlFloatFactory.build(false));}
 
 		SetFont sF = new SetFont(doc, builder);
 		
@@ -49,12 +49,49 @@ public class WordTableRenderer
 		builder.insertCell();
 		
 		try	{table.setStyleOptions(TableStyleOptions.FIRST_COLUMN | TableStyleOptions.ROW_BANDS | TableStyleOptions.FIRST_ROW);}catch(Exception e){}
-				
-		builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(100 / (ofxTable.getContent().getHead().getRow().get(0).getCell().size())));
+
+		if (ofxTable.isSetSpecification()==false)
+		{
+			builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(100 / (ofxTable.getContent().getHead().getRow().get(0).getCell().size())));
+		}
+		
+		if (ofxTable.isSetSpecification()==true) 
+		{
+			if (ofxTable.getSpecification().isSetAlignment()==true)
+			{
+				if (ofxTable.getSpecification().getAlignment().isSetHorizontal()==true)
+				{
+					builder.getParagraphFormat().setAlignment(ofxTable.getSpecification().getAlignment().getHorizontal().length());
+				}
+			}
+	
+			if (ofxTable.getSpecification().isSetWidth()==true)
+			{
+				if (ofxTable.getSpecification().getWidth().isFlex()==true)
+				{
+					builder.getCellFormat().setPreferredWidth((PreferredWidth.AUTO));
+				}
+				else if (ofxTable.getSpecification().isSetWidth()==false)
+				{
+					if (ofxTable.getSpecification().getWidth().isSetUnit()==true)
+					{
+						if (ofxTable.getSpecification().getWidth().getUnit()=="percentage")
+						{
+							builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(ofxTable.getSpecification().getWidth().getValue()));
+						}
+						else if(ofxTable.getSpecification().getWidth().getUnit()=="absolute")
+						{
+							builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPoints(ofxTable.getSpecification().getWidth().getValue()));
+						}	
+					}
+				}
+			}
+		}
+		
 		builder.getParagraphFormat().setSpaceBeforeAuto(false);
 		builder.getParagraphFormat().setSpaceBefore(4);
 		builder.getParagraphFormat().setSpaceAfter(4);
-
+		
 		// header
 		int columnHelper = 1;
 		for (org.openfuxml.content.table.Row row : ofxTable.getContent().getHead().getRow())
@@ -116,22 +153,19 @@ public class WordTableRenderer
 		
 		//builder.endTable();
 	
-		logger.debug("borders please!!!!"+tableCount+tableCurrent);
-		if (tableCount==1) {tableAddGridAndBoarders(tableAddBorderTo.only);logger.debug("only");}
+		if (tableCount==1) {tableAddGridAndBoarders(tableAddBorderTo.only);}
 			
 		else if (tableCount==2)
 		{
-			logger.debug("tablecount = 2 " );
-			if (tableCurrent==1) {tableAddGridAndBoarders(tableAddBorderTo.first);logger.debug("2 tables - first");}
-			if (tableCurrent==2) {tableAddGridAndBoarders(tableAddBorderTo.last);logger.debug("2 tables - last");keepingTableFromBreakingAcrossPages();}
+			if (tableCurrent==1) {tableAddGridAndBoarders(tableAddBorderTo.first);}
+			if (tableCurrent==2) {tableAddGridAndBoarders(tableAddBorderTo.last);keepingTableFromBreakingAcrossPages();}
 		}
 
-		else if ((tableCount>=3)&&(tableCurrent==1)) {tableAddGridAndBoarders(tableAddBorderTo.first);logger.debug(">3 tables - first");}
-		else if ((tableCount>=3)&&(tableCurrent!=1)&&(tableCount!=tableCurrent)) {tableAddGridAndBoarders(tableAddBorderTo.mid);logger.debug(">3 tables - mid");}
+		else if ((tableCount>=3)&&(tableCurrent==1)) {tableAddGridAndBoarders(tableAddBorderTo.first);}
+		else if ((tableCount>=3)&&(tableCurrent!=1)&&(tableCount!=tableCurrent)) {tableAddGridAndBoarders(tableAddBorderTo.mid);}
 		else if ((tableCount>=3)&&(tableCount==tableCurrent)) 
 		{
 			tableAddGridAndBoarders(tableAddBorderTo.last);
-			logger.debug(">3 tables - last");
 			keepingTableFromBreakingAcrossPages();	
 		}
 		builder.endTable();
