@@ -13,7 +13,7 @@ public class SetAlignment
 {
 	public enum setAlignmentEnum {left, center, rightIndentR70, rightIndentR5}
 	
-	final static Logger logger = LoggerFactory.getLogger(WordParagraphRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(SetAlignment.class);
 
 	Document doc;
 	DocumentBuilder builder;

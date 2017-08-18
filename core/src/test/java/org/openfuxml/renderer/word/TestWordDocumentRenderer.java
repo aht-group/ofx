@@ -31,16 +31,21 @@ public class TestWordDocumentRenderer extends AbstractTestWordRenderer
 		Document document6 = DocumentProvider.buildComplexWith3TableWithParagraphInBetween();
 		Document document7 = DocumentProvider.buildComplexWithImage();
 		Document document8 = DocumentProvider.buildComplexWithList();
-		JaxbUtil.info(document);
-		JaxbUtil.info(document1);
-		JaxbUtil.info(document2);
-		JaxbUtil.info(document3);
-		JaxbUtil.info(document4);
-		JaxbUtil.info(document5);
-		JaxbUtil.info(document6);
-		JaxbUtil.info(document7);
-		JaxbUtil.info(document8);
-				
+		Document document9 = DocumentProvider.buildComplexALL();
+		Document document10 = DocumentProvider.buildComplexWithEmphasis();
+		
+	//	JaxbUtil.info(document);
+	//	JaxbUtil.info(document1);
+	//	JaxbUtil.info(document2);
+	//	JaxbUtil.info(document3);
+	//	JaxbUtil.info(document4);
+	//	JaxbUtil.info(document5);
+	//	JaxbUtil.info(document6);
+	//	JaxbUtil.info(document7);
+	//	JaxbUtil.info(document8);
+	//	JaxbUtil.info(document9);
+	//	JaxbUtil.info(document10);
+		
 		OfxWordRenderer owr = new OfxWordRenderer(cp);
 		
 		owr.render(document, new File("target/ofx_buildComplex.docx"));
@@ -52,5 +57,8 @@ public class TestWordDocumentRenderer extends AbstractTestWordRenderer
 		owr.render(document6, new File("target/ofx_buildComplexWith3TableWithParagraphInBetween.docx"));
 		owr.render(document7, new File("target/ofx_buildComplexWithImage.docx"));
 		owr.render(document8, new File("target/ofx_buildComplexWithList.docx"));
+		owr.render(document9, new File("target/ofx_buildComplexALL.docx"));
+		owr.render(document10, new File("target/ofx_buildComplexWithEmphasis.docx"));
+	
 	}
 }

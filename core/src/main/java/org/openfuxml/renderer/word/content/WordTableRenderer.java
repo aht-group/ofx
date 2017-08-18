@@ -23,7 +23,7 @@ import com.aspose.words.TableStyleOptions;
 
 public class WordTableRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(WordParagraphRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(WordTableRenderer.class);
 	
 	public enum tableAddBorderTo{first,mid,last,only};
 	
@@ -104,7 +104,7 @@ public class WordTableRenderer
 					if (s instanceof org.openfuxml.content.ofx.Paragraph)
 					{
 						WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
-						wPF.render((org.openfuxml.content.ofx.Paragraph) s);
+						wPF.render((org.openfuxml.content.ofx.Paragraph) s,true);
 					}
 				}
 				if ((columnHelper) <= (row.getCell().size() - 1))
@@ -133,7 +133,7 @@ public class WordTableRenderer
 						if (s instanceof org.openfuxml.content.ofx.Paragraph)
 						{
 							WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
-							wPF.render((org.openfuxml.content.ofx.Paragraph) s);
+							wPF.render((org.openfuxml.content.ofx.Paragraph) s, true);
 						}
 					}
 					if ((columnHelper2) <= (row.getCell().size() - 1))

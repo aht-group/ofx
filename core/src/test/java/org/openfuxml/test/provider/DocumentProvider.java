@@ -48,7 +48,7 @@ public class DocumentProvider extends AbstractElementProvider
 		Document xml = XmlDocumentFactory.withContent();
 		Section s1 = SectionProvider.build();
 		s1.getContent().add(ParagraphProvider.create(100));
-		s1.getContent().add(ImageProvider.createImageOnly("!!!!IMAGE!!!!Titel-pleeaaasssseeeee!!!!"));
+		s1.getContent().add(ImageProvider.createImageOnly("IMAGE"));
 		s1.getContent().add(SectionProvider.buildWithComment());
 		xml.getContent().getContent().add(s1);
 
@@ -135,4 +135,36 @@ public class DocumentProvider extends AbstractElementProvider
 		return xml;
 	}
 	
+	public static Document buildComplexWithEmphasis()
+	{
+		Document xml = XmlDocumentFactory.withContent();
+		Section s1 = SectionProvider.build();
+
+		s1.getContent().add(EmphasisProvider.italic());
+		s1.getContent().add(EmphasisProvider.bold());
+		s1.getContent().add(EmphasisProvider.underline());
+		xml.getContent().getContent().add(s1);
+		
+		return xml;
+	}
+	
+	public static Document buildComplexALL()
+	{
+		Document xml = XmlDocumentFactory.withContent();
+		Section s1 = SectionProvider.build();
+		s1.getContent().add(ParagraphProvider.create(100));
+		s1.getContent().add(ListProvider.build(true));
+		s1.getContent().add(ListProvider.build(false));
+		s1.getContent().add(MarginaliaProvider.inParagraph());
+		s1.getContent().add(ParagraphProvider.create(20));
+		s1.getContent().add(ReferenceProvider.create());
+		s1.getContent().add(SectionProvider.buildWithMultiLevels());
+		s1.getContent().add(TableProvider.buildWithoutSpecification());
+		s1.getContent().add(TitleProvider.create());
+		s1.getContent().add(EmphasisProvider.italic());
+
+		xml.getContent().getContent().add(s1);
+		
+		return xml;
+	}
 }

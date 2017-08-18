@@ -3,6 +3,7 @@ package org.openfuxml.renderer.word.structure;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
 
+import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.word.content.WordCommentRenderer;
 import org.openfuxml.renderer.word.content.WordImageRenderer;
 import org.openfuxml.renderer.word.content.WordListRenderer;
@@ -162,10 +163,10 @@ public class WordSectionRenderer
 		logger.trace("WordSectionRenderer.highlightRenderer()");
 	}
 
-	private void paragraphRenderer(org.openfuxml.content.ofx.Paragraph s, boolean b)
+	private void paragraphRenderer(org.openfuxml.content.ofx.Paragraph s, boolean b) throws OfxAuthoringException
 	{
 		WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
-		wPF.render(s);
+		wPF.render(s,true);
 	}
 
 	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) throws Exception
