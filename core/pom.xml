@@ -93,6 +93,14 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>com.aspose</groupId>
+			<artifactId>aspose-words</artifactId>
+			<version>17.7</version>
+			<scope>provided</scope>
+			<classifier>jdk16</classifier>
+		</dependency>
+		
 		<!-- Test -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
