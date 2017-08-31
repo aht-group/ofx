@@ -93,8 +93,8 @@
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-api</artifactId>
 			<version>2.1.14</version>
+			<scope>provided</scope>
 		</dependency>
-
 	</dependencies>
 	
 </project>
