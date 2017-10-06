@@ -7,6 +7,7 @@ public interface TranslationProvider
 {
 	List<String> getLocaleCodes();
 	
+	String toTranslation (String localeCode, String key1, String key2);
 	String toTranslation (String localeCode, String key);
 	String toDate(String localeCode, Date record);
 }

@@ -28,5 +28,11 @@ public class OfxTranslationProvider implements TranslationProvider
 		// TODO Auto-generated method stub
 		return "NYI:toDate";
 	}
+
+	@Override
+	public String toTranslation(String localeCode, String key1, String key2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
