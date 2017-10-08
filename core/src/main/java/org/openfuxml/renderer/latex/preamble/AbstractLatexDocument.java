@@ -113,6 +113,17 @@ public abstract class AbstractLatexDocument extends AbstractOfxLatexRenderer imp
 		renderer.add(r);
 	}
 	
+	public void toc()
+	{
+		StringRenderer r = new StringRenderer();
+		r.line("");
+		r.line("\\frontmatter");
+		r.line("\\tableofcontents");
+		r.line("\\cleardoublepage");
+		r.line("\\mainmatter\\setcounter{page}{1}");
+		renderer.add(r);
+	}
+	
 	public void endDocument()
 	{
 		StringRenderer r = new StringRenderer();

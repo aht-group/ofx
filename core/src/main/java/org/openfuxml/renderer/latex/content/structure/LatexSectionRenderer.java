@@ -23,6 +23,8 @@ import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.exlp.util.xml.JaxbUtil;
+
 public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexSectionRenderer.class);
@@ -91,6 +93,7 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
             else if(s instanceof Image){renderImage((Image)s);}
             else if(s instanceof Comment){}
             else if(s instanceof Title){}
+            else if(s==null) {logger.warn("We have nukll"); JaxbUtil.info(section);}
 			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
 		}
 	}

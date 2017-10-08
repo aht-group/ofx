@@ -9,10 +9,9 @@ import org.openfuxml.factory.xml.layout.XmlAlignmentFactory.Horizontal;
 public class OfxColumnFactory
 {
 	
-	public static void add(Columns cols, Horizontal hAlignment)
-	{
-		cols.getColumn().add(OfxColumnFactory.build(hAlignment));
-	}
+	public static void add(Columns cols, Horizontal hAlignment){cols.getColumn().add(OfxColumnFactory.build(hAlignment));}
+	public static void flex(Columns cols, double value){cols.getColumn().add(OfxColumnFactory.flex(value));}
+	
 	public static Column build(Horizontal hAlignment)
 	{
 		Column col = new Column();
