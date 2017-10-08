@@ -92,9 +92,9 @@ public class TableProvider extends AbstractElementProvider
 	private static Specification specifications()
 	{
 		Columns c = new Columns();
-		c.getColumn().add(OfxColumnFactory.build(XmlAlignmentFactory.Horizontal.center));
+		OfxColumnFactory.add(c,XmlAlignmentFactory.Horizontal.center);
 		c.getColumn().add(OfxColumnFactory.percentage(55d));
-		c.getColumn().add(OfxColumnFactory.build(XmlAlignmentFactory.Horizontal.right));
+		OfxColumnFactory.add(c,XmlAlignmentFactory.Horizontal.right);
 		Width w = new Width(); w.setValue(30d);w.setUnit("percentage");
 		c.getColumn().get(2).setWidth(w);
 		Specification spezi = new Specification();
