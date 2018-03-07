@@ -16,7 +16,6 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
- 
 public class OfxHtmlContentHandler implements ContentHandler
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxHtmlContentHandler.class);

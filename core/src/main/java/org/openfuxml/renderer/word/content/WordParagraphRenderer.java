@@ -1,8 +1,5 @@
 package org.openfuxml.renderer.word.content;
 
-
-import java.io.Serializable;
-
 import org.openfuxml.content.editorial.Acronym;
 import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.content.editorial.Index;
@@ -14,13 +11,10 @@ import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.content.text.Symbol;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.latex.content.text.LatexEmphasisRenderer;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;
-import org.openfuxml.renderer.word.structure.WordSectionRenderer;
 import org.openfuxml.renderer.word.util.SetAlignment;
 import org.openfuxml.renderer.word.util.SetAlignment.setAlignmentEnum;
 import org.openfuxml.renderer.word.util.SetFont;
-
 import org.openfuxml.renderer.word.util.SetFont.setFontEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +22,6 @@ import org.slf4j.LoggerFactory;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
 import com.aspose.words.ParagraphFormat;
-
 
 public class WordParagraphRenderer 
 {
