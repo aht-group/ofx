@@ -41,7 +41,7 @@ public class OpenFuxmlGenerator
 		
 		Object[] objects = new Object[2];
 		objects[0] = titleText;
-		String header = MessageFormat.format(WikiTemplates.htmlHeader, objects);
+		String header = MessageFormat.format(WikiTemplates.htmlHeaderTitle, objects);
 
 		logger.debug("Header ist: "+header);
 		

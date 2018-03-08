@@ -119,7 +119,7 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 		Object[] objects = new Object[2];
 		objects[0] = titleText;
 		
-		String header = MessageFormat.format(WikiTemplates.htmlHeader, objects);
+		String header = MessageFormat.format(WikiTemplates.htmlHeaderTitle, objects);
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append(header);

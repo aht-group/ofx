@@ -1,11 +1,11 @@
-package org.openfuxml.wiki.transform;
+package org.openfuxml.transform;
 
 import java.io.FileNotFoundException;
 
 import org.jdom2.Document;
-import org.jdom2.Element;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
@@ -13,7 +13,7 @@ import org.openfuxml.test.OfxWikiTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 @RunWith(Parameterized.class)
 public class TestXhtmlTransformer extends AbstractFileProcessingTest
@@ -31,10 +31,8 @@ public class TestXhtmlTransformer extends AbstractFileProcessingTest
 	{
 		String txt = "<p>jhbbjh <strong>jkbjhbj</strong> bhbj <em>njhbhb</em></p><p>hui <em>b</em>j</p>";
 		
-		Element xml = xmlP.process(txt);
-		Document doc = new Document();
-		doc.setRootElement(xml);
-		JDomUtil.debug(doc);
+		Section xml = xmlP.process(txt);
+		JaxbUtil.info(xml);
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException

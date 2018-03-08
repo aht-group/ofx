@@ -1,4 +1,4 @@
-package org.openfuxml.addon.wiki.processor.ofx.emitter;
+package org.openfuxml.transform.xhtml.emitter;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -6,25 +6,21 @@ import java.util.TreeMap;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
+import org.openfuxml.factory.txt.TxtTagFactory;
+import org.openfuxml.interfaces.xml.OfxEmphasis;
+import org.openfuxml.transform.xhtml.EmitterFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
-public class OfxEmphasisEmitter extends NestingEmitter
+public class EmphasisEmitter extends NestingEmitter
 {
-	final static Logger logger = LoggerFactory.getLogger(OfxEmphasisEmitter.class);
-
-	public static enum Style {normal,typewriter}
-	public static enum Emphasis {bold,italic,unterline}
+	final static Logger logger = LoggerFactory.getLogger(EmphasisEmitter.class);
 	
-	private Map<String, String> attributes;
-	private Style style;
-	private Emphasis emphasis;
+	private Map<String,String> attributes;
+	private OfxEmphasis.Emphasis emphasis;
 	
-	private final static String tag = "ofx:emphasis";
-	
-	public OfxEmphasisEmitter(EmitterFactory ef, Emphasis emphasis)
+	public EmphasisEmitter(EmitterFactory ef, OfxEmphasis.Emphasis emphasis)
 	{
 		super(ef);
 		this.emphasis=emphasis;
@@ -42,7 +38,7 @@ public class OfxEmphasisEmitter extends NestingEmitter
 	@Override
 	protected boolean localStart(XMLStreamWriter writer, String htmlElementName, Attributes atts) throws XMLStreamException
 	{
-		writer.writeStartElement(tag);
+		writer.writeStartElement(TxtTagFactory.tag(OfxEmphasis.class));
 
 		writeStyle(writer);
 		writeEmphasis(writer);
@@ -83,7 +79,8 @@ public class OfxEmphasisEmitter extends NestingEmitter
 	{
 		switch(emphasis)
 		{
-			case bold: writer.writeAttribute("bold", "true");;break;
+			case bold: writer.writeAttribute("bold", "true");break;
+			case italic: writer.writeAttribute("italic", "true");break;
 		}
 	}
 }

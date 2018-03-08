@@ -1,4 +1,4 @@
-package org.openfuxml.wiki.transform;
+package org.openfuxml.transform;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +33,7 @@ import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
@@ -51,87 +52,43 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 		WikiTemplates.init();
 //		ofxContentTrimmer = new OfxContentTrimmer();
 	}
-	
-	public void processPage(Page page) throws OfxAuthoringException, OfxInternalProcessingException
-	{
-		checkPageConfig(page);
 		
+	public Section process(String xhtmlContent)
+	{
 		try
 		{
-			String srcName =  page.getFile()+"."+WikiProcessor.WikiFileExtension.xhtml;
-			String dstName = page.getFile()+"."+WikiProcessor.WikiFileExtension.xml;
-			String txtMarkup = StringIO.loadTxt(srcDir, srcName);
-			String result = process(txtMarkup, page.getName());
+			String xml = transform2String(xhtmlContent);
+			logger.info(xml);
 			
-			File fDst = new File(dstDir, dstName);
-			Document doc = JDomUtil.txtToDoc(result);
-			doc = checkTransparent(doc, page.getSection());
-			
-			logger.warn("Content Trimmer deactivated here");
-//			doc = ofxContentTrimmer.trim(doc);
-			JDomUtil.save(doc, fDst, Format.getRawFormat());
-		}
-		catch (IOException e) {logger.error("",e);}
-		catch (ParserConfigurationException e) {logger.error("",e);}
-		catch (XMLStreamException e) {logger.error("",e);}
-		catch (SAXException e) {logger.error("",e);}
-		catch (JDOMException e) {logger.error("",e);}
-	}
-	
-	private Document checkTransparent(Document doc, Section section) throws OfxInternalProcessingException
-	{
-		if(section.isSetContainer() && section.isContainer())
-		{
-			Element rootElement = doc.getRootElement();
-			if(rootElement.getName().equalsIgnoreCase(Section.class.getSimpleName()))
-			{
-				rootElement.setAttribute("transparent", "true");
-				logger.debug(rootElement.getName());
-			}
-			else {throw new OfxInternalProcessingException("Root element <"+rootElement.getName()+"> of Wiki.Processing not expected");}
-		}
-		return doc;
-	}
-	
-	public Element process(String xhtmlContent)
-	{
-		Element result = null;
-		try
-		{
-			String xml = process(xhtmlContent, "dummy");
 			Document doc = JDomUtil.txtToDoc(xml);
-			result = doc.getRootElement();
-			result.detach();
-			Element eTitle = (Element)result.getChildren().get(0);
-			eTitle.detach();
-			result.setAttribute("transparent", "true");
+//			JDomUtil.debug(doc);
+			
+			Section section = JaxbUtil.load(xml.getBytes(),Section.class);
+			return section;
 		}
 		catch (IOException e) {logger.error("",e);}
 		catch (ParserConfigurationException e) {logger.error("",e);}
 		catch (XMLStreamException e) {logger.error("",e);}
 		catch (SAXException e) {logger.error("",e);}
 		catch (JDOMException e) {logger.error("",e);}
-		return result;
+		return null;
 	}
 
-	public String process(String xhtmlContent, String titleText) throws IOException, ParserConfigurationException, XMLStreamException, SAXException
+	private String transform2String(String xhtmlContent) throws IOException, ParserConfigurationException, XMLStreamException, SAXException
 	{
-		Object[] objects = new Object[2];
-		objects[0] = titleText;
+		Object[] objects = new Object[1];
+		objects[0] = xhtmlContent;
 		
-		String header = MessageFormat.format(WikiTemplates.htmlHeader, objects);
-		
-		StringBuffer sb = new StringBuffer();
-		sb.append(header);
-		sb.append(xhtmlContent);
-		sb.append(WikiTemplates.htmlFooter);
-		logger.debug("Parsing: "+sb.length()+" characters");
+		String html = MessageFormat.format(TransformerTemplates.html, objects);
+		logger.info(html);
+				
+		logger.info("Parsing: "+html.toString()+" characters");
 
-		InputSource inputSource = new InputSource(new StringReader(sb.toString()));
+		InputSource inputSource = new InputSource(new StringReader(html));
 
 		SAXParserFactory factory = SAXParserFactory.newInstance();
-			factory.setNamespaceAware(true);
-			factory.setValidating(false);
+		factory.setNamespaceAware(true);
+		factory.setValidating(false);
 		SAXParser saxParser = factory.newSAXParser();
 
 		XMLReader xmlReader = saxParser.getXMLReader();
@@ -158,17 +115,16 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 	{
 		int indexXml = xml.indexOf(">");
 		int indexRoot = xml.substring(indexXml+1, xml.length()).indexOf(">");
-		
-//		logger.debug(xml.substring(indexXml+indexRoot+1));
+
 		StringBuffer sb = new StringBuffer();
 		sb.append(xml.substring(0,indexXml+indexRoot+1));
 		sb.append(" xmlns:ofx=\"http://www.openfuxml.org\"");
+		sb.append(" xmlns:").append(OfxNsPrefixMapper.prefix(OfxNsPrefixMapper.NS.text)).append("=\"").append(OfxNsPrefixMapper.namespace(OfxNsPrefixMapper.NS.text)).append("\"");
 		sb.append(" xmlns:list=\"http://www.openfuxml.org/list\"");
 		sb.append(" xmlns:table=\"http://www.openfuxml.org/table\"");
 		sb.append(" xmlns:layout=\"http://www.openfuxml.org/layout\"");
 		sb.append(" xmlns:wiki=\"http://www.openfuxml.org/wiki\"");
 		sb.append(xml.substring(indexXml+indexRoot+1,xml.length()));
-//		logger.debug(sb);
 		
 		return sb.toString();
 	}
@@ -183,13 +139,5 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 		catch (XMLStreamException e1) {throw new IllegalStateException(e1);}
 		catch (FactoryConfigurationError e1) {throw new IllegalStateException(e1);}
 		return new FormattingXMLStreamWriter(writer);
-	}
-	
-	private void checkPageConfig(Page page) throws OfxAuthoringException
-	{
-		JaxbUtil.debug(page);
-		boolean sSection = page.isSetSection();
-		
-		if(!sSection){throw new OfxAuthoringException("None of <section>  selected!");}
 	}
 }

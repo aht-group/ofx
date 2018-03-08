@@ -7,8 +7,9 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.processor.ofx.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.processor.ofx.emitter.OfxSectionEmitter;
+import org.openfuxml.transform.xhtml.EmitterFactory;
+import org.openfuxml.transform.xhtml.emitter.NestingEmitter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
@@ -27,7 +28,7 @@ public class OfxHtmlContentHandler implements ContentHandler
 	private Map<String, String> acronyms = new HashMap<String, String>();
 	private EmitterFactory ef;
 
-	public OfxHtmlContentHandler(XMLStreamWriter writer,String injectionDir)
+	public OfxHtmlContentHandler(XMLStreamWriter writer, String injectionDir)
 	{
 		this.writer=writer;
 		ef = new EmitterFactory(writer,injectionDir);
@@ -35,7 +36,30 @@ public class OfxHtmlContentHandler implements ContentHandler
 		emitter = sctionEmitter;
 	}
 	
-	public void characters(char ch[], int start, int length) throws SAXException
+	@Override public void startDocument() throws SAXException
+	{
+		try
+		{
+			writer.writeStartDocument();
+			writer.writeDTD(WikiTemplates.xmlDoctype);
+		}
+		catch (XMLStreamException e) {throw new SAXException(e);}
+	}
+	
+	@Override public void startElement(String uri, String localName, String name, Attributes atts) throws SAXException
+	{
+		try
+		{
+			if (emitter==null){System.out.println("em==null");}
+			if (!emitter.start(writer, localName, atts))
+			{
+				throw new IllegalStateException();
+			}
+		}
+		catch (XMLStreamException e) {throw new SAXException(e);}
+	}
+	
+	@Override public void characters(char ch[], int start, int length) throws SAXException
 	{
 		try
 		{
@@ -44,20 +68,8 @@ public class OfxHtmlContentHandler implements ContentHandler
 		catch (XMLStreamException e) {throw new SAXException(e);}
 	}
 
-	public void endDocument() throws SAXException
-	{
-		try
-		{
-			emitter.close();
-			emitter = null;
-			writer.writeEndDocument();
 
-			acronyms.clear();
-		}
-		catch (XMLStreamException e) {throw new SAXException(e);}
-	}
-
-	public void endElement(String uri, String localName, String name) throws SAXException
+	@Override public void endElement(String uri, String localName, String name) throws SAXException
 	{
 		try
 		{
@@ -70,38 +82,28 @@ public class OfxHtmlContentHandler implements ContentHandler
 		catch (XMLStreamException e) {throw new SAXException(e);}
 	}
 
-	public void endPrefixMapping(String prefix) throws SAXException {}
+	@Override public void startPrefixMapping(String prefix, String uri) throws SAXException {}
+	@Override public void endPrefixMapping(String prefix) throws SAXException {}
 
-	public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {}
+	@Override public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {}
 
-	public void processingInstruction(String target, String data) throws SAXException {}
+	@Override public void processingInstruction(String target, String data) throws SAXException {}
 
-	public void setDocumentLocator(Locator locator) {}
+	@Override public void setDocumentLocator(Locator locator) {}
 
-	public void skippedEntity(String name) throws SAXException {}
+	@Override public void skippedEntity(String name) throws SAXException {}
 
-	public void startDocument() throws SAXException
+	
+	@Override public void endDocument() throws SAXException
 	{
 		try
 		{
-			writer.writeStartDocument();
-			writer.writeDTD(WikiTemplates.xmlDoctype);
+			emitter.close();
+			emitter = null;
+			writer.writeEndDocument();
+
+			acronyms.clear();
 		}
 		catch (XMLStreamException e) {throw new SAXException(e);}
 	}
-
-	public void startElement(String uri, String localName, String name, Attributes atts) throws SAXException
-	{
-		try
-		{
-			if (emitter==null){System.out.println("em==null");}
-			if (!emitter.start(writer, localName, atts))
-			{
-				throw new IllegalStateException();
-			}
-		}
-		catch (XMLStreamException e) {throw new SAXException(e);}
-	}
-
-	public void startPrefixMapping(String prefix, String uri) throws SAXException {}
 }

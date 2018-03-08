@@ -6,7 +6,8 @@ import java.util.TreeMap;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
+import org.openfuxml.transform.xhtml.EmitterFactory;
+import org.openfuxml.transform.xhtml.emitter.NestingEmitter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;

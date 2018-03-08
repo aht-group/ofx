@@ -7,11 +7,11 @@ import java.util.TreeMap;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
-import org.openfuxml.addon.wiki.processor.ofx.emitter.SimpleMappingEmitter;
+import org.openfuxml.transform.xhtml.EmitterFactory;
+import org.openfuxml.transform.xhtml.emitter.SimpleEmitter;
 import org.xml.sax.Attributes;
 
-public class BookEmitter extends SimpleMappingEmitter
+public class BookEmitter extends SimpleEmitter
 {
 	private String bookTitle;
 

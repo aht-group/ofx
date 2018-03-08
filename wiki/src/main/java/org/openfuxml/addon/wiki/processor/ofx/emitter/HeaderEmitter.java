@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.openfuxml.addon.wiki.emitter.Emitter;
-import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
+import org.openfuxml.interfaces.transformer.Emitter;
+import org.openfuxml.transform.xhtml.EmitterFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;

@@ -7,12 +7,13 @@ import java.util.TreeMap;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
+import org.openfuxml.transform.xhtml.EmitterFactory;
+import org.openfuxml.transform.xhtml.emitter.SimpleEmitter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
-public class OfxSectionEmitter extends SimpleMappingEmitter
+public class OfxSectionEmitter extends SimpleEmitter
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxSectionEmitter.class);
 	

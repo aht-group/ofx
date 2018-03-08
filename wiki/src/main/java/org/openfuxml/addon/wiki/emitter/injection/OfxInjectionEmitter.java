@@ -9,9 +9,9 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.openfuxml.addon.wiki.data.jaxb.Ofxgallery.Ofximage;
 import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
-import org.openfuxml.addon.wiki.processor.ofx.EmitterFactory;
-import org.openfuxml.addon.wiki.processor.ofx.emitter.NestingEmitter;
 import org.openfuxml.addon.wiki.util.JdomXmlStreamer;
+import org.openfuxml.transform.xhtml.EmitterFactory;
+import org.openfuxml.transform.xhtml.emitter.NestingEmitter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
