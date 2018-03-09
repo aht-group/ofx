@@ -29,7 +29,7 @@ public class TestXhtmlTransformer extends AbstractFileProcessingTest
 	
 	public void basic()
 	{
-		String txt = "<p>jhbbjh <strong>jkbjhbj</strong> bhbj <em>njhbhb</em></p><p>hui <em>b</em>j</p>";
+		String txt = "<p>This <em>is</em> a <strong>test</strong>.</p><p>An now a list:</p><ul><li>Point A</li><li>Point B</li></ul>";
 		
 		Section xml = xmlP.process(txt);
 		JaxbUtil.info(xml);
