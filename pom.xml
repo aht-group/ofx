@@ -112,10 +112,11 @@
 			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
 		<repository>
-            <id>aspose</id>
-            <name>Aspose Java API</name>
-            <url>http://maven.aspose.com/artifactory/simple/ext-release-local/</url>
-        </repository>
+			<id>aspose2</id>
+			<name>Aspose Java API</name>
+			<snapshots><enabled>false</enabled></snapshots>
+			<url>http://maven.aspose.com/repository/repo</url>
+		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
