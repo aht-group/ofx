@@ -33,6 +33,7 @@ import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.trancoder.XhtmlSpecialChars;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,6 +77,7 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 
 	private String transform2String(String xhtmlContent) throws IOException, ParserConfigurationException, XMLStreamException, SAXException
 	{
+		xhtmlContent = XhtmlSpecialChars.replace(xhtmlContent);
 		Object[] objects = new Object[1];
 		objects[0] = xhtmlContent;
 		
