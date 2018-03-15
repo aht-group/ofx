@@ -17,8 +17,8 @@ public class WordTitleRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(WordTitleRenderer.class);
 
-	Document doc;
-	DocumentBuilder builder;
+	private Document doc;
+	private DocumentBuilder builder;
 	
 	public WordTitleRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 	

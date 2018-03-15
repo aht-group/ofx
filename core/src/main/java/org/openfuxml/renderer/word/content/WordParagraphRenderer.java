@@ -12,6 +12,7 @@ import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.content.text.Symbol;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;
+import org.openfuxml.renderer.word.util.RemoveUnwantedRegx;
 import org.openfuxml.renderer.word.util.SetAlignment;
 import org.openfuxml.renderer.word.util.SetAlignment.setAlignmentEnum;
 import org.openfuxml.renderer.word.util.SetFont;
@@ -27,8 +28,8 @@ public class WordParagraphRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(WordParagraphRenderer.class);
 
-	Document doc;
-	DocumentBuilder builder;
+	private Document doc;
+	private DocumentBuilder builder;
 	
 	public WordParagraphRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 	
@@ -36,18 +37,28 @@ public class WordParagraphRenderer
 	{
 		SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
 		
+		SetAlignment sA = new SetAlignment(doc, builder);
+		sA.setAlignment(setAlignmentEnum.left);
+		ParagraphFormat paragraphFormat = builder.getParagraphFormat();
+		paragraphFormat.setFirstLineIndent(0);
+		paragraphFormat.setKeepTogether(true);
+		
 		StringBuffer sb = new StringBuffer();
 		for(Object o : ofxParagraph.getContent())
-		{
-			SetAlignment sA = new SetAlignment(doc, builder);
-			sA.setAlignment(setAlignmentEnum.left);
-			ParagraphFormat paragraphFormat = builder.getParagraphFormat();
-			paragraphFormat.setFirstLineIndent(0);
-			paragraphFormat.setKeepTogether(true);
-			
+		{			
 			if(o==null){throw new OfxAuthoringException(Paragraph.class.getSimpleName()+" has no content");}
-			else if(o instanceof String){sb.append(TexSpecialChars.replace((String)o));}
-			else if(o instanceof Emphasis){renderEmphasis((Emphasis)o);}
+			else if(o instanceof String)
+			{
+				String s =(String)o;
+				if(s.length()>0)
+				{
+					RemoveUnwantedRegx rUr = new RemoveUnwantedRegx();					
+					builder.write(rUr.removeUnwantedFrom(s));
+			    }
+
+
+			}
+			else if(o instanceof Emphasis){renderEmphasis(sb,(Emphasis)o);}
 			else if(o instanceof Reference){renderReference(sb,(Reference)o);}
 			else if(o instanceof Marginalia){renderMarginalia(sb,(Marginalia)o);}
 			else if(o instanceof Symbol){renderSymbol(sb,(Symbol)o);}
@@ -57,10 +68,7 @@ public class WordParagraphRenderer
 			else if(o instanceof Index){renderIndex(sb,(Index)o);}
 			else if(o instanceof Font){}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
-			
-			builder.write(sb.toString());
 		}
-		builder.writeln();
 		if (withEmptyLineAfter) {builder.writeln();}
 	}
 	
@@ -100,10 +108,10 @@ public class WordParagraphRenderer
 		
 	}
 
-	private void renderEmphasis(org.openfuxml.content.text.Emphasis ofxEmphasis) throws OfxAuthoringException
+	private void renderEmphasis(StringBuffer sb,org.openfuxml.content.text.Emphasis ofxEmphasis) throws OfxAuthoringException
 	{
 		WordEmphasisRenderer sf = new WordEmphasisRenderer(doc,builder);
-		sf.render(ofxEmphasis);
+		sf.render(sb,ofxEmphasis);
 		
 	}
 }

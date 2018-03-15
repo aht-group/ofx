@@ -27,9 +27,9 @@ public class WordTableRenderer
 	
 	public enum tableAddBorderTo{first,mid,last,only};
 	
-	Document doc;
-	DocumentBuilder builder;
-	Table table;
+	private Document doc;
+	private DocumentBuilder builder;
+	private Table table;
 
 	public WordTableRenderer(Document doc, DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 

@@ -15,8 +15,8 @@ public class WordCommentRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(WordCommentRenderer.class);
 	
-	Document doc;
-	DocumentBuilder builder;
+	private Document doc;
+	private DocumentBuilder builder;
 	
 	public WordCommentRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 
