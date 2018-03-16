@@ -49,7 +49,7 @@ public class WordDocumentRenderer
 	{
 		lvl = 0;
 		//see XML content..
-		// JaxbUtil.info(ofxContent);
+		 JaxbUtil.info(ofxContent);
 		
 		for (Object s : ofxContent.getContent())
 		{		

@@ -17,8 +17,8 @@ public class WordSectionRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(WordSectionRenderer.class);
 
-	Document doc;
-	DocumentBuilder builder;
+	private Document doc;
+	private DocumentBuilder builder;
 	int tableCount=0;
 	int tableCurrent=0;
 

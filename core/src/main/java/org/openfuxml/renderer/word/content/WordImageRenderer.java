@@ -17,9 +17,9 @@ public class WordImageRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(WordImageRenderer.class);
 
-	Document doc;
-	DocumentBuilder builder;
-	Shape shape;
+	private Document doc;
+	private DocumentBuilder builder;
+	private Shape shape;
 
 	public WordImageRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 

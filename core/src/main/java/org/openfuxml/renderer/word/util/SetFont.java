@@ -40,9 +40,9 @@ public class SetFont
 				font.setUnderline(Underline.NONE);
 			break;
 			case title:
-				font.setSize(9);
+				font.setSize(12);
 		//		font.setLocaleId(id);
-				font.setColor(Color.BLACK);
+				font.setColor(Color.decode("#117732"));
 				font.setBold(true);
 				font.setName("Arial");
 				font.setUnderline(Underline.THICK);
