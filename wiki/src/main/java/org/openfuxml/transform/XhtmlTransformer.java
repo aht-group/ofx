@@ -59,7 +59,7 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 		try
 		{
 			String xml = transform2String(xhtmlContent);
-			logger.info(xml);
+			if(logger.isTraceEnabled()){logger.info(xml);}
 			
 			Document doc = JDomUtil.txtToDoc(xml);
 //			JDomUtil.debug(doc);
@@ -82,7 +82,7 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 		objects[0] = xhtmlContent;
 		
 		String html = MessageFormat.format(TransformerTemplates.html, objects);
-		logger.info(html);
+		if(logger.isTraceEnabled()){logger.info(html);}
 				
 		logger.info("Parsing: "+html.toString()+" characters");
 
