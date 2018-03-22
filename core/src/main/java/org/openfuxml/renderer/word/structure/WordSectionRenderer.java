@@ -19,8 +19,11 @@ public class WordSectionRenderer
 
 	private Document doc;
 	private DocumentBuilder builder;
-	int tableCount=0;
-	int tableCurrent=0;
+	private int tableCount=0;
+	private int tableCurrent=0;
+	private int paragraphCount=0;
+
+	private int paragraphCurrent;
 
 	public WordSectionRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 
@@ -55,6 +58,14 @@ public class WordSectionRenderer
 			}
 		}
 		
+		for (Object s : ofxSection.getContent())
+		{
+			if (s instanceof org.openfuxml.content.ofx.Paragraph)
+			{
+				paragraphCount++;
+			}
+		}
+		
 		// content ....
 		for (Object s : ofxSection.getContent())
 		{
@@ -65,7 +76,8 @@ public class WordSectionRenderer
 			}
 			else if (s instanceof org.openfuxml.content.ofx.Paragraph)
 			{
-				paragraphRenderer((org.openfuxml.content.ofx.Paragraph) s, true);
+				paragraphCurrent++;	
+				paragraphRenderer((org.openfuxml.content.ofx.Paragraph) s);
 			}
 			else if (s instanceof org.openfuxml.content.ofx.Highlight)
 			{
@@ -163,10 +175,10 @@ public class WordSectionRenderer
 		logger.trace("WordSectionRenderer.highlightRenderer()");
 	}
 
-	private void paragraphRenderer(org.openfuxml.content.ofx.Paragraph s, boolean b) throws OfxAuthoringException
+	private void paragraphRenderer(org.openfuxml.content.ofx.Paragraph s) throws OfxAuthoringException
 	{
 		WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
-		wPF.render(s,true);
+		wPF.render(s,paragraphCount,paragraphCurrent);
 	}
 
 	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) throws Exception

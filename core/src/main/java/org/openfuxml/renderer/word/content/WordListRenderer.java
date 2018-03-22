@@ -48,7 +48,7 @@ public class WordListRenderer
 						if (o2 instanceof Paragraph)
 						{
 							try {
-								paragraphRenderer((Paragraph)o2, true);
+								paragraphRenderer((Paragraph)o2);
 							} catch (OfxAuthoringException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -62,9 +62,9 @@ public class WordListRenderer
 		
 		}
 	
-	private void paragraphRenderer(org.openfuxml.content.ofx.Paragraph s, boolean b) throws OfxAuthoringException
+	private void paragraphRenderer(org.openfuxml.content.ofx.Paragraph s) throws OfxAuthoringException
 	{
 		WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
-		wPF.render(s,true);
+		wPF.render(s,0,1);
 	}
 }

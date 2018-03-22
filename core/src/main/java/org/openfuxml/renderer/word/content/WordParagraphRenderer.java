@@ -33,7 +33,7 @@ public class WordParagraphRenderer
 	
 	public WordParagraphRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 	
-	public void render(org.openfuxml.content.ofx.Paragraph ofxParagraph, boolean withEmptyLineAfter) throws OfxAuthoringException
+	public void render(org.openfuxml.content.ofx.Paragraph ofxParagraph, int paragraphCount, int paragraphCurrent) throws OfxAuthoringException
 	{
 		SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
 		
@@ -69,7 +69,8 @@ public class WordParagraphRenderer
 			else if(o instanceof Font){}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
-		if (withEmptyLineAfter) {builder.writeln();}
+		if ((paragraphCount!=paragraphCurrent)) {builder.writeln();}
+		else if (paragraphCount!=paragraphCurrent) {}
 	}
 	
 	private void renderIndex(StringBuffer sb, Index o)
