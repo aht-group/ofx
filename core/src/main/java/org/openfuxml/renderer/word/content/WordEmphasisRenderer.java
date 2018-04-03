@@ -3,7 +3,6 @@ package org.openfuxml.renderer.word.content;
 
 
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.word.util.SetFont;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +15,7 @@ public class WordEmphasisRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(WordEmphasisRenderer.class);
 	
+	@SuppressWarnings("unused")
 	private Document doc;
 	private DocumentBuilder builder;
 	private Font font;
@@ -30,7 +30,7 @@ public class WordEmphasisRenderer
 		boolean bold = ofxEmphasis.isSetBold() && ofxEmphasis.isBold();
 		boolean italic = ofxEmphasis.isSetItalic() && ofxEmphasis.isItalic();
 		boolean underline = ofxEmphasis.isSetUnderline() && ofxEmphasis.isUnderline();
-		boolean quote = ofxEmphasis.isSetQuote() && ofxEmphasis.isQuote();
+	//	boolean quote = ofxEmphasis.isSetQuote() && ofxEmphasis.isQuote();
 		
 		try
 		{

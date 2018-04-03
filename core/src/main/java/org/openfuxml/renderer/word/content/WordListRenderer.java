@@ -1,20 +1,20 @@
 package org.openfuxml.renderer.word.content;
 
-import java.io.Serializable;
+import java.awt.Color;
 
 import org.openfuxml.content.list.Item;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.word.util.SetAlignment;
 import org.openfuxml.renderer.word.util.SetFont;
-import org.openfuxml.renderer.word.util.SetAlignment.setAlignmentEnum;
 import org.openfuxml.renderer.word.util.SetFont.setFontEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
-import com.aspose.words.ListTemplate;
+import com.aspose.words.LineStyle;
+import com.aspose.words.ParagraphAlignment;
+import com.aspose.words.PreferredWidth;
 
 public class WordListRenderer
 {
@@ -31,40 +31,45 @@ public class WordListRenderer
 
 	public void render(org.openfuxml.content.list.List ofxList) 
 	{
-		SetFont sF = new SetFont(doc, builder);
-		builder.write(makeItSelf );
-		
-		builder.getListFormat().setList(doc.getLists().add(ListTemplate.NUMBER_ARABIC_DOT));
-		builder.getListFormat().setListLevelNumber(1);
-		
+		SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
+
+		com.aspose.words.Table table = builder.startTable();
+		builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(10));
+        
 		//for each entry..
+		int i = 0;
 		for (Object o : ofxList.getItem())
 		{	
-			
-				if (o instanceof Item) 
-				{
-					for (Object o2 : ((Item) o).getContent())
-					{	
-						if (o2 instanceof Paragraph)
+			if (o instanceof Item) 
+			{
+				for (Object o2 : ((Item) o).getContent())
+				{	
+					if (o2 instanceof Paragraph)
+					{
+						try
 						{
-							try {
-								paragraphRenderer((Paragraph)o2);
-							} catch (OfxAuthoringException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
+							builder.insertCell();
+							builder.getParagraphFormat().setAlignment(ParagraphAlignment.LEFT);
+							builder.write(i+1 + ".");
+							builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(5));
+							builder.insertCell();
+							builder.getParagraphFormat().setAlignment(ParagraphAlignment.JUSTIFY);
+							paragraphRenderer((Paragraph)o2);
+							builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(95));
+							builder.endRow();
+						} catch (OfxAuthoringException e) {}
+						i++;
 					}
-				} 
-			}
-		
-		builder.getListFormat().setList(null);
-		
+				}
+			} 
 		}
+		try{table.setTopPadding(3);		table.setBorders(LineStyle.NONE, 0.0, Color.BLACK);}catch(Exception e2){}
+		builder.endTable();
+	}
 	
 	private void paragraphRenderer(org.openfuxml.content.ofx.Paragraph s) throws OfxAuthoringException
 	{
 		WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
-		wPF.render(s,0,1);
+		wPF.render(s,1,1);
 	}
 }

@@ -11,7 +11,6 @@ import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.content.text.Symbol;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.openfuxml.renderer.word.util.RemoveUnwantedRegx;
 import org.openfuxml.renderer.word.util.SetAlignment;
 import org.openfuxml.renderer.word.util.SetAlignment.setAlignmentEnum;

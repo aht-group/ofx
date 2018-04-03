@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.io.Serializable;
 
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.factory.xml.layout.XmlFloatFactory;
 import org.openfuxml.renderer.word.util.SetFont;
 import org.openfuxml.renderer.word.util.SetFont.setFontEnum;
 import org.slf4j.Logger;

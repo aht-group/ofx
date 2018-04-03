@@ -1,6 +1,5 @@
 package org.openfuxml.renderer.word.util;
 
-import org.openfuxml.renderer.word.content.WordParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +33,7 @@ public class SetAlignment
 			case left:
 				paragraphFormat.setAlignment(ParagraphAlignment.LEFT);
 				paragraphFormat.setLeftIndent(0);
+				paragraphFormat.setFirstLineIndent(0);
 				paragraphFormat.setRightIndent(0);
 			break;
 			case center:

@@ -1,15 +1,7 @@
 package org.openfuxml.renderer.word.util;
 
-import java.awt.Color;
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.aspose.words.Document;
-import com.aspose.words.DocumentBuilder;
-import com.aspose.words.Font;
-import com.aspose.words.Underline;
 
 public class RemoveUnwantedRegx
 {
