@@ -22,11 +22,17 @@ public class WordSectionRenderer
 	private int tableCount=0;
 	private int tableCurrent=0;
 	private int paragraphCount=0;
-
+	private boolean listNumbersFormating=false;
 	private int paragraphCurrent;
 
 	public WordSectionRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
-
+	
+	public void render(org.openfuxml.content.ofx.Section ofxSection, boolean listNumbersFormating)
+	{
+		this.listNumbersFormating=listNumbersFormating;
+		try {render(ofxSection);} catch (Exception e) {}
+	}
+	
 	public void render(org.openfuxml.content.ofx.Section ofxSection) throws Exception
 	{
 		//Section sectionToAdd = new Section(doc);
@@ -154,7 +160,8 @@ public class WordSectionRenderer
 	private void renderList(org.openfuxml.content.list.List s)
 	{
 		WordListRenderer wPF = new WordListRenderer(doc, builder);
-		wPF.render(s);
+		if (listNumbersFormating) {wPF.render(s,true);}
+		else if (!listNumbersFormating) {wPF.render(s);}
 	}
 
 	//to do

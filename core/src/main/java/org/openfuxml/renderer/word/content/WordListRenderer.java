@@ -22,13 +22,22 @@ public class WordListRenderer
 
 	private Document doc;
 	private DocumentBuilder builder;
+	boolean numbersFormating;
 	
 	//...make my own list....
 	String makeItSelf 	= "• ";
 	String makeItSelf2 	= "		";
+
+
 	
 	public WordListRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 
+	public void render(org.openfuxml.content.list.List ofxList, boolean numbersFormating) 
+	{
+		this.numbersFormating=numbersFormating;
+		render(ofxList); 
+	} 
+	
 	public void render(org.openfuxml.content.list.List ofxList) 
 	{
 		SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
@@ -50,7 +59,9 @@ public class WordListRenderer
 						{
 							builder.insertCell();
 							builder.getParagraphFormat().setAlignment(ParagraphAlignment.LEFT);
-							builder.write(i+1 + ".");
+						
+							if (numbersFormating) {builder.write(i+1 + ".");}
+							else if (!numbersFormating) {builder.write(makeItSelf);}
 							builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(5));
 							builder.insertCell();
 							builder.getParagraphFormat().setAlignment(ParagraphAlignment.JUSTIFY);
