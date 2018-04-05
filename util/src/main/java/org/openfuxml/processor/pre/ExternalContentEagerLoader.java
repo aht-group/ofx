@@ -82,11 +82,11 @@ public class ExternalContentEagerLoader
 			Element root = doc.getRootElement();
 			
 			List<Element> list = build().evaluate(root);
-			logger.debug("Now processing childs: "+list.size());
+			logger.debug("Now processing children: "+list.size());
 			for(Element childElement : list)
 			{
 				String source = childElement.getAttribute("include").getValue();
-				String resourceChild = FilenameUtils.getFullPath(resourceName)+source;
+				String resourceChild = FilenameUtils.concat(FilenameUtils.getFullPath(resourceName),source) ;
 
 				logger.debug("Found external in "+resourceChild);
 				
