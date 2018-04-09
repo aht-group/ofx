@@ -117,7 +117,7 @@ public class ExternalContentEagerLoader
 	public Document mergeToOfxDoc(File rootFile) throws OfxInternalProcessingException
 	{
 		org.jdom2.Document doc = mergeToDoc(rootFile);
-		Document ofxDoc = (Document)JDomUtil.toJaxb(doc, Document.class);
+		Document ofxDoc = JDomUtil.toJaxb(doc, Document.class);
 		return ofxDoc;
 	}
 	
