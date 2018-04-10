@@ -95,6 +95,12 @@
 			<version>2.1.14</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+  			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>2.2.5</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	
 </project>

@@ -11,5 +11,11 @@
             <component-type>org.openfuxml.jsf.component.OutputText</component-type>
         </component>
     </tag>
+    <tag>
+        <tag-name>outputSection</tag-name>
+        <component>
+            <component-type>org.openfuxml.jsf.component.OutputSection</component-type>
+        </component>
+    </tag>
  
  </facelet-taglib> 
