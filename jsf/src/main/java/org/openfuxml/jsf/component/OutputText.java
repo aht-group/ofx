@@ -1,4 +1,4 @@
-package org.openfuxml.addon.jsf.component;
+package org.openfuxml.jsf.component;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import javax.faces.context.ResponseWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@FacesComponent("org.openfuxml.addon.jsf.component.OutputText")
+@FacesComponent("org.openfuxml.jsf.component.OutputText")
 @ResourceDependency(library="ofxCss", name="ofxBasic.css")
 public class OutputText extends UIPanel
 {	

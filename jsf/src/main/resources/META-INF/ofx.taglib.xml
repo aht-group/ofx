@@ -8,7 +8,7 @@
      <tag>
         <tag-name>outputText</tag-name>
         <component>
-            <component-type>org.openfuxml.addon.jsf.component.OutputText</component-type>
+            <component-type>org.openfuxml.jsf.component.OutputText</component-type>
         </component>
     </tag>
  
