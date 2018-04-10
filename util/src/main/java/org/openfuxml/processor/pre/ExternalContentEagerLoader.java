@@ -55,18 +55,17 @@ public class ExternalContentEagerLoader
 	protected XPathExpression<Element> build()
 	{
 //		Namespace ns = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
-		
-		XPathExpression<Element> xpe= xpFactory.compile("//*[@include]", Filters.element());
-		return xpe;
+
+		return xpFactory.compile("//*[@include]", Filters.element());
 	}
 	
-	public <T extends Object> T load(String resourceName, Class<T> c) throws FileNotFoundException, OfxAuthoringException
+	public <T extends Object> T load(String resourceName, Class<T> c) throws OfxAuthoringException
 	{
 		org.jdom2.Document doc = load(resourceName);
 		return JDomUtil.toJaxb(doc, c);
 	}
 	
-	public org.jdom2.Document load(String resourceName) throws FileNotFoundException, OfxAuthoringException
+	public org.jdom2.Document load(String resourceName) throws OfxAuthoringException
 	{
 		org.jdom2.Document doc = new org.jdom2.Document();
 		doc.setRootElement(loadElement(resourceName));
@@ -117,8 +116,7 @@ public class ExternalContentEagerLoader
 	public Document mergeToOfxDoc(File rootFile) throws OfxInternalProcessingException
 	{
 		org.jdom2.Document doc = mergeToDoc(rootFile);
-		Document ofxDoc = (Document)JDomUtil.toJaxb(doc, Document.class);
-		return ofxDoc;
+		return JDomUtil.toJaxb(doc, Document.class);
 	}
 	
 	@Deprecated
@@ -149,13 +147,13 @@ public class ExternalContentEagerLoader
 		{
 			List<?> list = xpath.selectNodes(rootElement);
 			logger.debug(list.size()+" external sources in "+rootElement.getName()+" in "+rootFile.getAbsolutePath());
-			
-			for (Iterator<?> iter = list.iterator(); iter.hasNext();)
+
+			for(Object aList : list)
 			{
-				Element childElement = (Element) iter.next();
-				String source =childElement.getAttribute("source").getValue();
-				File childFile = new File(rootFile.getParentFile(),source);
-				logger.trace("Found external in "+rpf.relativate(rootFile.getParentFile(), childFile));
+				Element childElement = (Element)aList;
+				String source = childElement.getAttribute("source").getValue();
+				File childFile = new File(rootFile.getParentFile(), source);
+				logger.trace("Found external in " + rpf.relativate(rootFile.getParentFile(), childFile));
 				ExternalContentEagerLoader em = new ExternalContentEagerLoader();
 				Element eEx = em.getExternal(childFile);
 				eEx.detach();
