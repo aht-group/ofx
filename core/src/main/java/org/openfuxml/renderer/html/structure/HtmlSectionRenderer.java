@@ -31,7 +31,8 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 		this.lvl = lvl;
 	}
 
-	public HtmlSectionRenderer(ConfigurationProvider cp, int lvl) {
+	public HtmlSectionRenderer(ConfigurationProvider cp, int lvl)
+	{
 		super(cp);
 		this.lvl = lvl;
 	}

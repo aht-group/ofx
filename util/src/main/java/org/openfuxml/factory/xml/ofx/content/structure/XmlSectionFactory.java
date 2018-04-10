@@ -14,10 +14,10 @@ public class XmlSectionFactory
 		return new Section();
 	}
 	
-	public static Section build(String lang)
+	public static Section build(String localeCode)
 	{
 		Section xml = new Section();
-		xml.setLang(lang);
+		xml.setLang(localeCode);
 		return xml;
 	}
 	
