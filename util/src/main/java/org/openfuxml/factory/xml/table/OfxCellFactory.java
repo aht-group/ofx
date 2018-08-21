@@ -15,6 +15,7 @@ public class OfxCellFactory
 	
 	public static Cell createParagraphCell(DecimalFormat df, double value){return createParagraphCell(df.format(value));}
 	public static Cell createParagraphCell(int text){return createParagraphCell(""+text);}
+	public static Cell createParagraphCell(long value){return createParagraphCell(""+value);}
 	public static Cell createParagraphCell(String text)
 	{
 		Paragraph p = new Paragraph();

@@ -34,5 +34,11 @@ public class OfxTranslationProvider implements TranslationProvider
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean hasLocale(String localeCode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }
