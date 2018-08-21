@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.factory.xml.table.OfxTableFactory;
+import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +29,7 @@ public class OfxTextSilentRenderer
 	
 	public static void table(ResultSet rs, OutputStream os)
 	{
-		try{table(OfxTableFactory.build(rs),os);}
+		try{table(XmlTableFactory.build(rs),os);}
 		catch (SQLException e) {logger.error(e.getMessage());}
 	}
 	

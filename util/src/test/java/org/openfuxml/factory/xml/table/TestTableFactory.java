@@ -22,7 +22,7 @@ public class TestTableFactory
 	@Test
 	public void tableFactory()
 	{
-		Table table = OfxTableFactory.build(columnNames,data);
+		Table table = XmlTableFactory.build(columnNames,data);
 		JaxbUtil.trace(table);
 		Assert.assertEquals(columnNames.length,table.getContent().getHead().getRow().get(0).getCell().size());
 		Assert.assertEquals(data.length,table.getContent().getBody().get(0).getRow().size());

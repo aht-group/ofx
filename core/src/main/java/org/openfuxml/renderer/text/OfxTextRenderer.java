@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.factory.xml.table.OfxTableFactory;
+import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
@@ -34,7 +34,7 @@ public class OfxTextRenderer
 	
 	public static void table(ResultSet rs, OutputStream os) throws OfxAuthoringException, IOException
 	{
-		try{table(OfxTableFactory.build(rs),os);}
+		try{table(XmlTableFactory.build(rs),os);}
 		catch (SQLException e) {throw new OfxAuthoringException(e.getMessage());}
 	}
 	public static void table(Table table, OutputStream os) throws OfxAuthoringException, IOException

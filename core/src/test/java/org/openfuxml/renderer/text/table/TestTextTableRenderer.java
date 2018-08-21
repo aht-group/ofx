@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.factory.xml.table.OfxTableFactory;
+import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.openfuxml.factory.xml.table.TestTableFactory;
 import org.openfuxml.renderer.text.AbstractTestTextRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
@@ -27,7 +27,7 @@ public class TestTextTableRenderer extends AbstractTestTextRenderer
 	public void simple() throws OfxAuthoringException, IOException
 	{
 		initFile(Key.simple);
-		renderer.render(OfxTableFactory.build(TestTableFactory.columnNames,TestTableFactory.data));
+		renderer.render(XmlTableFactory.build(TestTableFactory.columnNames,TestTableFactory.data));
 		renderTest(renderer);
 	}
 	

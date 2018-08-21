@@ -15,9 +15,11 @@ import org.openfuxml.content.table.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OfxTableFactory
+public class XmlTableFactory
 {
-	final static Logger logger = LoggerFactory.getLogger(OfxTableFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(XmlTableFactory.class);
+	
+	public static Table build() {return new Table();}
 	
 	public static Table build(ResultSet rs) throws SQLException
 	{

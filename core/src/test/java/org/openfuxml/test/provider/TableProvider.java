@@ -7,7 +7,7 @@ import org.openfuxml.content.table.*;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.factory.xml.table.OfxColumnFactory;
-import org.openfuxml.factory.xml.table.OfxTableFactory;
+import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class TableProvider extends AbstractElementProvider
 	public static Table createSimple(){return createSimple(4,2,1);}
 	public static Table createSimple(int col, int row){return createSimple(4,col,row);}
 	private static Table createSimple(int words, int col, int row){
-		Table xml = OfxTableFactory.build(createHead(col),createBody(words,col,row));
+		Table xml = XmlTableFactory.build(createHead(col),createBody(words,col,row));
 		xml.setTitle(title());
 		xml.setId(li.getWords(words-3,words+2));
 		return xml;
@@ -59,7 +59,7 @@ public class TableProvider extends AbstractElementProvider
 	public static Table create(int col, int row){return create(4,col,row);}
 	private static Table create(int words, int col, int row)
 	{
-		Table xml = OfxTableFactory.build(createHead(col),createBody(words,col,row));
+		Table xml = XmlTableFactory.build(createHead(col),createBody(words,col,row));
 		xml.setTitle(title());
 		xml.setSpecification(specifications());
 		xml.setId(li.getWords(words-3,words+2));
