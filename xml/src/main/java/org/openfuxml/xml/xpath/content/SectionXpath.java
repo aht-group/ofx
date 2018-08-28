@@ -66,7 +66,9 @@ public class SectionXpath
     public static <E extends Enum<E>> Section sectionForUniqueClassifier(Sections sections, E classifier) throws ExlpXpathNotUniqueException, ExlpXpathNotFoundException
     {
     		Section section = null;
+    		Section sec = null;
     		boolean found = false;
+    	
     		for(Serializable s  : sections.getContent())
     		{
     			if(s instanceof Section)
@@ -74,8 +76,10 @@ public class SectionXpath
     				section = (Section)s;
     				if(section.getClassifier().contentEquals(classifier.toString()))
     				{
+    					sec = section;
     					if(found==true) {throw new ExlpXpathNotUniqueException("Section not unique");}
     					found=true;
+    					if (found) {return sec;}
     				}
     			}
     		}
