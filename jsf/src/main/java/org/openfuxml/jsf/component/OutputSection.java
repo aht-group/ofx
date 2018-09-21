@@ -47,8 +47,10 @@ public class OutputSection extends UIPanel
 		ValueExpression ve = this.getValueExpression(Properties.value.toString());
 		Section s = (Section)ve.getValue(context.getELContext());
 		
-		
-		responseWriter.write(JaxbUtil.toString(s));
+		if(s!=null)
+		{
+			responseWriter.write(JaxbUtil.toString(s));
+		}	
 	}
 
 	@Override
