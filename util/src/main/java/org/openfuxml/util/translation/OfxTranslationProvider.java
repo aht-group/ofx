@@ -40,5 +40,11 @@ public class OfxTranslationProvider implements TranslationProvider
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String toTime(String localeCode, Date record) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

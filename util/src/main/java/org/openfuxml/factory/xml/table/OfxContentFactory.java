@@ -17,4 +17,11 @@ public class OfxContentFactory
 		content.getBody().add(body);
 		return content;
 	}
+	
+	public static Content build(Body body)
+	{
+		Content content = new Content();
+		content.getBody().add(body);
+		return content;
+	}
 }

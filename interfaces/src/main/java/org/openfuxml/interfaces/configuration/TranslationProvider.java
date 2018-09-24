@@ -11,4 +11,5 @@ public interface TranslationProvider
 	String toTranslation (String localeCode, String key1, String key2);
 	String toTranslation (String localeCode, String key);
 	String toDate(String localeCode, Date record);
+	String toTime(String localeCode, Date record);
 }
