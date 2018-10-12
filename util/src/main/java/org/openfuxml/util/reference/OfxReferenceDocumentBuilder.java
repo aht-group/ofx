@@ -32,16 +32,16 @@ public class OfxReferenceDocumentBuilder
 	{
 		Section introduction = new Section();
 		introduction.getContent().add(XmlTitleFactory.build("Introduction"));
-		introduction.getContent().add(XmlParagraphFactory.build("Test 123"));
+		introduction.getContent().add(XmlParagraphFactory.lang("Test 123"));
 		
 		Section credits = new Section();
 		credits.getContent().add(XmlTitleFactory.build("Credits"));
-		credits.getContent().add(XmlParagraphFactory.build("Test 456"));
+		credits.getContent().add(XmlParagraphFactory.lang("Test 456"));
 		introduction.getContent().add(credits);
 		
 		Section structure = new Section();
 		structure.getContent().add(XmlTitleFactory.build("Structure"));
-		structure.getContent().add(XmlParagraphFactory.build("Test 789"));
+		structure.getContent().add(XmlParagraphFactory.lang("Test 789"));
 		introduction.getContent().add(structure);
 		
 		return introduction;

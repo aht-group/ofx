@@ -51,6 +51,7 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		
 		StringBuffer postSb = new StringBuffer();
 		postSb.append("\\end{").append(tableType).append("}");
+		postSb.append("\\linespread{1}\\selectfont");
 		if(longTable)
 		{
 			buildTitle(table);

@@ -20,7 +20,7 @@ public class AbstractTestWordRenderer {
 	 */
 	@Deprecated
 	public Paragraph buildParagraph() {
-		Paragraph p = XmlParagraphFactory.build("Test 123");
+		Paragraph p = XmlParagraphFactory.lang("Test 123");
 		p.getContent().add("Test Text CV");
 		return p;
 	}

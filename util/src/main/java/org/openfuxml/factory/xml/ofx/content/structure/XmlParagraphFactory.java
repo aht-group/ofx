@@ -9,7 +9,7 @@ public class XmlParagraphFactory
 		return new Paragraph();
 	}
 	
-	public static Paragraph build(String lang)
+	public static Paragraph lang(String lang)
 	{
 		Paragraph xml = new Paragraph();
 		xml.setLang(lang);

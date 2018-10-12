@@ -32,8 +32,8 @@ public class TestOfxMultilangFilter extends AbstractOfxUtilTest
 		sectionSection.getContent().add(XmlSectionFactory.build("en"));
 		
 		sectionParagraph = XmlSectionFactory.build();
-		sectionParagraph.getContent().add(XmlParagraphFactory.build("de"));
-		sectionParagraph.getContent().add(XmlParagraphFactory.build("en"));
+		sectionParagraph.getContent().add(XmlParagraphFactory.lang("de"));
+		sectionParagraph.getContent().add(XmlParagraphFactory.lang("en"));
 	}
 	
 	@Test

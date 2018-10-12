@@ -54,6 +54,14 @@ public class OfxEmphasisFactory
 		return xml;
 	}
 	
+	public static Emphasis bold(String text)
+	{
+		Emphasis xml = new Emphasis();
+		xml.setBold(true);
+		xml.setValue(text);
+		return xml;
+	}
+	
 	public static Emphasis typewriter(String text)
 	{
 		Emphasis xml = new Emphasis();
