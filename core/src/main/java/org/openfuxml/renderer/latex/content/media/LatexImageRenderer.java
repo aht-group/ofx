@@ -86,7 +86,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 				rComment.render(image.getComment());
 				renderer.add(rComment);
 			}
-			preTxt.add("\\begin{figure}");
+			preTxt.add("\\begin{figure}[!htbp]");
 		}
 	}
 	

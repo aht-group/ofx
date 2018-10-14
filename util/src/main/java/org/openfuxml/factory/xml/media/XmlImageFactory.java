@@ -2,6 +2,7 @@ package org.openfuxml.factory.xml.media;
 
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.media.Media;
+import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.layout.XmlHeightFactory;
 import org.openfuxml.factory.xml.layout.XmlWidthFactory;
 
@@ -39,6 +40,15 @@ public class XmlImageFactory
 		Image image = new Image();
 		image.setWidth(XmlWidthFactory.size(width));
 		image.setHeight(XmlHeightFactory.size(height));
+		return image;
+	}
+	
+	public static Image centerPercent(long id, int precentage)
+	{		
+		Image image = new Image();
+		image.setId(Long.valueOf(id).toString());
+		image.setWidth(XmlWidthFactory.percentage(Integer.valueOf(precentage).doubleValue()));
+		image.setAlignment(XmlAlignmentFactory.buildHorizontal(XmlAlignmentFactory.Horizontal.center));
 		return image;
 	}
 	

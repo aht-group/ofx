@@ -84,7 +84,7 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 		String html = MessageFormat.format(TransformerTemplates.html, objects);
 		if(logger.isTraceEnabled()){logger.info(html);}
 				
-		logger.info("Parsing: "+html.toString()+" characters");
+//		logger.info("Parsing: "+html.toString()+" characters");
 
 		InputSource inputSource = new InputSource(new StringReader(html));
 
@@ -99,7 +99,7 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 		StringWriter out = new StringWriter();
 		XMLStreamWriter writer = createXMLStreamWriter(out);
 
-		logger.warn("Using dummy String injectionDir");
+		logger.trace("Using dummy String injectionDir");
 		OfxHtmlContentHandler contentHandler = new OfxHtmlContentHandler(writer,".");
 
 		xmlReader.setContentHandler(contentHandler);

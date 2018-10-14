@@ -15,7 +15,6 @@ public class TxtTagFactory
 		
 		if(c.isAssignableFrom(OfxEmphasis.class))
 		{
-			logger.info("XX");
 			sb.append(OfxNsPrefixMapper.prefix(OfxNsPrefixMapper.NS.text));
 			sb.append(":").append(OfxEmphasis.tag);
 		}
