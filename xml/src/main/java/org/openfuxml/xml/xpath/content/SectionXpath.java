@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.jxpath.JXPathContext;
 import org.openfuxml.content.ofx.Listing;
+import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.content.ofx.Title;
@@ -18,7 +19,7 @@ public class SectionXpath
 {
 	final static Logger logger = LoggerFactory.getLogger(SectionXpath.class);
 	
-	public static synchronized Title getTitle(Section section) throws ExlpXpathNotFoundException
+	public static Title getTitle(Section section) throws ExlpXpathNotFoundException
 	{
 		for(Object o : section.getContent())
 		{
@@ -28,6 +29,18 @@ public class SectionXpath
 			}
 		}
 		throw new ExlpXpathNotFoundException("No "+Title.class.getSimpleName()+" in this section");
+	}
+	
+	public static Paragraph getFirstParagraph(Section section) throws ExlpXpathNotFoundException
+	{
+		for(Object o : section.getContent())
+		{
+			if(o instanceof Paragraph)
+			{
+				return (Paragraph)o;
+			}
+		}
+		throw new ExlpXpathNotFoundException("No "+Paragraph.class.getSimpleName()+" in this section");
 	}
 
     public static synchronized Section getRenderer(Section section, String id) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
@@ -65,25 +78,25 @@ public class SectionXpath
     
     public static <E extends Enum<E>> Section sectionForUniqueClassifier(Sections sections, E classifier) throws ExlpXpathNotUniqueException, ExlpXpathNotFoundException
     {
-    		Section section = null;
-    		Section sec = null;
-    		boolean found = false;
-    	
-    		for(Serializable s  : sections.getContent())
-    		{
-    			if(s instanceof Section)
-    			{
-    				section = (Section)s;
-    				if(section.getClassifier().contentEquals(classifier.toString()))
-    				{
-    					sec = section;
-    					if(found==true) {throw new ExlpXpathNotUniqueException("Section not unique");}
-    					found=true;
-    					if (found) {return sec;}
-    				}
-    			}
-    		}
-    		if(found==false) {throw new ExlpXpathNotFoundException("Section not available");}
-    		return section;
+		Section section = null;
+		Section sec = null;
+		boolean found = false;
+	
+		for(Serializable s  : sections.getContent())
+		{
+			if(s instanceof Section)
+			{
+				section = (Section)s;
+				if(section.getClassifier().contentEquals(classifier.toString()))
+				{
+					sec = section;
+					if(found==true) {throw new ExlpXpathNotUniqueException("Section not unique");}
+					found=true;
+					if (found) {return sec;}
+				}
+			}
+		}
+		if(found==false) {throw new ExlpXpathNotFoundException("Section not available");}
+		return section;
     }
 }
