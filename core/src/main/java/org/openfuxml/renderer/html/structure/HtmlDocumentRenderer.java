@@ -1,7 +1,7 @@
 package org.openfuxml.renderer.html.structure;
-/**
- * Author: Rebecca Roblick
- */
+
+import java.util.List;
+
 import org.jdom2.DocType;
 import org.jdom2.Document;
 import org.jdom2.Namespace;
@@ -9,8 +9,6 @@ import org.openfuxml.content.ofx.Content;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
@@ -18,8 +16,9 @@ import org.openfuxml.renderer.html.head.HtmlHead;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-
+/**
+ * Author: Rebecca Roblick
+ */
 public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlDocumentRenderer.class);
@@ -37,16 +36,8 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 	private static HtmlDocumentRenderer instance;
 	public static HtmlDocumentRenderer getInstance() {return instance;}
 
-	@Deprecated
-	public HtmlDocumentRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm, String pageTitle)
+	public HtmlDocumentRenderer(ConfigurationProvider cp, String pageTitle)
 	{
-		super(cmm,dsm);
-		this.cmm=cmm;
-		init();
-		this.pageTitle = pageTitle;
-	}
-
-	public HtmlDocumentRenderer(ConfigurationProvider cp, String pageTitle) {
 		super(cp);
 		this.pageTitle = pageTitle;
 		instance = this;

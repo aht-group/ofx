@@ -16,7 +16,8 @@ import org.openfuxml.renderer.html.HtmlElement;
 public class HtmlHeadingRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 
-	public HtmlHeadingRenderer(ConfigurationProvider cp) {
+	public HtmlHeadingRenderer(ConfigurationProvider cp)
+	{
 		super(cp);
 	}
 

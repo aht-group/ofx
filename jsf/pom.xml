@@ -27,7 +27,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.openfuxml</groupId>
-			<artifactId>ofx-xml</artifactId>
+			<artifactId>ofx-core</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

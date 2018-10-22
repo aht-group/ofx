@@ -19,7 +19,8 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	private HtmlElement body;
 
-	public HtmlBody(ConfigurationProvider cp) {
+	public HtmlBody(ConfigurationProvider cp)
+	{
 		super(cp);
 	}
 
@@ -34,7 +35,8 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		for(Object c : content.getContent())
 		{
 			resetCounter();
-			if(c instanceof Sections){
+			if(c instanceof Sections)
+			{
 				for(Object s : ((Sections)c).getContent())
 				{
 					if(s instanceof Section){renderSection(cont, ((Section)s), 1);}
@@ -62,9 +64,6 @@ public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		renderSection(body, section, 1);
 	}
 
-	/*
-
-	 */
 	private void resetCounter()
 	{
 		HtmlImageRenderer.imgcount = 0;

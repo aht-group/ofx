@@ -42,7 +42,7 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 	public List<String> getContent()
 	{
 		List<String> content = new ArrayList<String>();
-		XMLOutputter xmlOutput = new XMLOutputter(ownPrettyFormat());
+		XMLOutputter xmlOutput = new XMLOutputter(OfxHTMLRenderer.ownPrettyFormat());
 		content.add(xmlOutput.outputString(HtmlDocumentRenderer.getInstance().getHtml()));
 		return content;
 	}
@@ -120,22 +120,13 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 		commentRenderer.render(parent, comment);
 	}
 
-	/*Dokument in eine Datei schreiben.*/
 	public void write(Writer w) throws IOException
 	{
-		try{
-			XMLOutputter xmlOutput = new XMLOutputter(ownPrettyFormat().setLineSeparator("\n"));
+		try
+		{
+			XMLOutputter xmlOutput = new XMLOutputter(OfxHTMLRenderer.ownPrettyFormat().setLineSeparator("\n"));
 			xmlOutput.output(HtmlDocumentRenderer.getInstance().getDoc(), w);
-		} catch (IOException io){io.printStackTrace();}
-	}
-
-	private static Format ownPrettyFormat()
-	{
-		Format f = Format.getPrettyFormat();
-//		f.setTextMode(Format.TextMode.PRESERVE);
-		f.setTextMode(Format.TextMode.TRIM);
-		f.setIndent("\t");
-		f.setOmitDeclaration(true);
-		return f;
+		}
+		catch (IOException io){io.printStackTrace();}
 	}
 }

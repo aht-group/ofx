@@ -18,30 +18,20 @@ import java.util.List;
 public class HtmlHead extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	private HtmlElement head;
-	@Deprecated
-	public HtmlHead(CrossMediaManager cmm, DefaultSettingsManager dsm)
-	{
-		super(cmm, dsm);
-		metaAttr = new ArrayList<HtmlAttribute>();
-		metaAttr.add(new HtmlAttribute("charset", "UTF-8"));
-	}
 
-	public HtmlHead(ConfigurationProvider cp) {
+	private List<HtmlElement> css; public List<HtmlElement> getCss(){if(css == null){css = new ArrayList<HtmlElement>();}return css;}
+	private List<HtmlElement> metas; public List<HtmlElement> getMetas(){if(metas == null){metas = new ArrayList<HtmlElement>();}return metas;}
+	private List<HtmlAttribute> metaAttr; public List<HtmlAttribute> getMetaAttr(){return metaAttr;}
+	
+	public HtmlHead(ConfigurationProvider cp)
+	{
 		super(cp);
 		metaAttr = new ArrayList<HtmlAttribute>();
 		metaAttr.add(new HtmlAttribute("charset", "UTF-8"));
 	}
 
-	private List<HtmlElement> css;
-	public List<HtmlElement> getCss(){if(css == null){css = new ArrayList<HtmlElement>();}return css;}
-
-	private List<HtmlElement> metas;
-	public List<HtmlElement> getMetas(){if(metas == null){metas = new ArrayList<HtmlElement>();}return metas;}
-
-	private List<HtmlAttribute> metaAttr;
-	public List<HtmlAttribute> getMetaAttr(){return metaAttr;}
-
-	public void render(List<String> cssFiles){
+	public void render(List<String> cssFiles)
+	{
 		new HtmlDocumentRenderer(cp,"").init();
 		render(cssFiles,"");
 	}
@@ -94,5 +84,4 @@ public class HtmlHead extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 		style.setAttribute("type","text/css");
 		parent.addContent(style);
 	}
-
 }

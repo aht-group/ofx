@@ -24,13 +24,6 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 	int lvl;
 	public static int sectionCount = 0;
 
-	@Deprecated
-	public HtmlSectionRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm, int lvl)
-	{
-		super(cmm, dsm);
-		this.lvl = lvl;
-	}
-
 	public HtmlSectionRenderer(ConfigurationProvider cp, int lvl)
 	{
 		super(cp);
@@ -49,7 +42,6 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 		HtmlElement div = new HtmlElement("section");
 
 		//Comments always on top!
-
 		for(Object s : section.getContent())
 		{
 			if(s instanceof Comment){commentRenderer(div, (Comment)s);}

@@ -10,10 +10,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.renderer.OfxConfigurationProvider;
+import org.openfuxml.renderer.html.OfxHTMLRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 @FacesComponent("org.openfuxml.jsf.component.OutputSection")
 @ResourceDependency(library="ofxCss", name="ofxBasic.css")
@@ -29,27 +31,24 @@ public class OutputSection extends UIPanel
 		ResponseWriter responseWriter = context.getResponseWriter();
 		responseWriter.startElement("div", this);
 		
-		StringBuffer sb = new StringBuffer();
-		
-
-		boolean bold = false;//ComponentAttribute.getBoolean("bold", false, context, this);
-		boolean italic = false;//ComponentAttribute.getBoolean("italic", false, context, this);
-		
-//		logger.info("******************");
-//		logger.info("bold: "+bold);
-//		logger.info("italic "+italic);
-		
-		if(bold){sb.append(" ofxBold");}
-		if(italic){sb.append(" ofxItalic");}
-		
-		responseWriter.writeAttribute("class",sb.toString(),null);
-		
 		ValueExpression ve = this.getValueExpression(Properties.value.toString());
 		Section s = (Section)ve.getValue(context.getELContext());
 		
 		if(s!=null)
 		{
-			responseWriter.write(JaxbUtil.toString(s));
+			
+			try
+			{
+				OfxHTMLRenderer htmlRenderer = new OfxHTMLRenderer(new OfxConfigurationProvider(),"");
+				htmlRenderer.render(responseWriter,s);
+			}
+			catch (OfxAuthoringException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (OfxConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}	
 	}
 

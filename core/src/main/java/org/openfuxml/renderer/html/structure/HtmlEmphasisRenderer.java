@@ -1,17 +1,16 @@
 package org.openfuxml.renderer.html.structure;
-/**
- * Author: Rebecca Roblick
- */
+
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.HtmlElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Author: Rebecca Roblick
+ */
 public class HtmlEmphasisRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlEmphasisRenderer.class);
@@ -20,10 +19,9 @@ public class HtmlEmphasisRenderer extends AbstractOfxHtmlRenderer implements Ofx
 			quote=false,
 			typewriter=false,
 			underline=false;
-	@Deprecated
-	public HtmlEmphasisRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm){super(cmm, dsm);}
 
-	public HtmlEmphasisRenderer(ConfigurationProvider cp) {
+	public HtmlEmphasisRenderer(ConfigurationProvider cp)
+	{
 		super(cp);
 	}
 
