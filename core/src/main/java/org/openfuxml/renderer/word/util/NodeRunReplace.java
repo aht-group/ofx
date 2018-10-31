@@ -19,9 +19,9 @@ public class NodeRunReplace
 
 	public Document replace(Map<String, String> replacementTags) throws Exception
 	{		
-		for (int i = 0; i < replacementTags.size(); i++) 
+		for (int i = 10; i < replacementTags.size()+10; i++) 
 		{
-			String tagString = "cNHinRtXt" + i;
+			String tagString = "CNHINRTXT" + i;
 			doc.getRange().replace(tagString.toString(), replacementTags.get(tagString).toString(),
 					new FindReplaceOptions(FindReplaceDirection.FORWARD));
 			System.out.println("replace: " + tagString + "\t with: " + replacementTags.get(tagString).toString());			
