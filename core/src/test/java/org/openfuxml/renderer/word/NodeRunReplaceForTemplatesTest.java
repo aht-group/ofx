@@ -3,16 +3,32 @@ package org.openfuxml.renderer.word;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.renderer.word.util.NodeRunReplace;
 
+import com.aspose.words.Body;
+import com.aspose.words.Cell;
+import com.aspose.words.CellCollection;
 import com.aspose.words.Document;
+import com.aspose.words.DocumentBuilder;
+import com.aspose.words.Node;
+import com.aspose.words.NodeCollection;
+import com.aspose.words.NodeType;
+import com.aspose.words.Paragraph;
+import com.aspose.words.Run;
+import com.aspose.words.Row;
+import com.aspose.words.RowCollection;
+import com.aspose.words.Section;
+import com.aspose.words.SectionCollection;
+import com.aspose.words.Table;
+import com.aspose.words.TableCollection;
 
 public class NodeRunReplaceForTemplatesTest 
 {
 	public static void main(String[] args) throws Exception 
 	{
 		Document doc = new Document("src/test/resources/data/docxtemplate/AHTCVKfW.docx");
-		
+
 		Map<String, String> replacementTags = new HashMap<String, String>();
 
 		replacementTags.put("CNHINRTXT10", "Chef for Word in Java");
@@ -51,11 +67,31 @@ public class NodeRunReplaceForTemplatesTest
 		replacementTags.put("CNHINRTXT43", "dev");
 		replacementTags.put("CNHINRTXT44", "Lasse");
 		replacementTags.put("CNHINRTXT45", "Lasse");
-	
-		
+			
+
 		NodeRunReplace nRR = new NodeRunReplace(doc);
-		nRR.replace(replacementTags);
+		nRR.replace(replacementTags);	
+		
+		// test - add 10 rows to table 4
+		Table table = doc.getSections().get(0).getBody().getTables().get(3);
+		Row lastRow = table.getLastRow();
+		int firstNewRow = table.getRows().getCount();
+		for (int i = 0; i < 10; i++)
+		table.appendChild(lastRow.deepClone(true));
+		RowCollection rows = table.getRows();
+		for (int i = firstNewRow; i < rows.getCount(); i++)
+		{
+			CellCollection cells = rows.get(i).getCells();
+			for (int j = 0; j < cells.getCount(); j++)
+			{
+				Paragraph paragraph = cells.get(j).getLastParagraph();
+				Run lastRun = paragraph.getRuns().get(-1);
+				lastRun.setText(lastRun.getText() + "Row #" + i + ",Cell #" + j);
+			}
+		}
 		
 		doc.save("target/AHTCVKfWtest.docx");
+		doc.save("target/AHTCVKfWtest.html");
+		doc.save("target/AHTCVKfWtest.pdf");
 	}
 }
