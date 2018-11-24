@@ -29,13 +29,13 @@
 			<groupId>org.openfuxml</groupId>
 			<artifactId>ofx-core</artifactId>
 			<type>jar</type>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-util</artifactId>
 			<type>jar</type>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		
 		<!-- XML -->
@@ -70,6 +70,7 @@
 		<dependency>
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
+			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
 					<artifactId>xom</artifactId>

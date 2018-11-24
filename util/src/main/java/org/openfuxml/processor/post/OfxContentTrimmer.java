@@ -75,8 +75,8 @@ public class OfxContentTrimmer
 	public static void main (String[] args) throws Exception
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("resources/config");
-			loggerInit.init();
+		loggerInit.addAltPath("resources/config");
+		loggerInit.init();
 		
 		String propFile = "resources/properties/user.properties";
 		if(args.length==1){propFile=args[0];}

@@ -1,6 +1,5 @@
 package org.openfuxml.transform;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -15,24 +14,15 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.jdom2.Document;
-import org.jdom2.Element;
 import org.jdom2.JDOMException;
-import org.jdom2.output.Format;
+import org.jsoup.Jsoup;
 import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
 import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.ofx.OfxHtmlContentHandler;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
-import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.trancoder.XhtmlSpecialChars;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
@@ -40,6 +30,9 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
+
+import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class XhtmlTransformer extends AbstractWikiProcessor
 {
@@ -54,11 +47,16 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 //		ofxContentTrimmer = new OfxContentTrimmer();
 	}
 		
-	public Section process(String xhtmlContent)
+	public Section process(String htmlContent)
 	{
+//		logger.info(htmlContent);
+		org.jsoup.nodes.Document sDoc = Jsoup.parse(htmlContent);
+	    String xhtmlContent = sDoc.body().html();
+//	    logger.info(xhtmlContent);
+	    
 		try
 		{
-			String xml = transform2String(xhtmlContent);
+			String xml = xhtml2Ofx(xhtmlContent);
 			if(logger.isTraceEnabled()){logger.info(xml);}
 			
 			Document doc = JDomUtil.txtToDoc(xml);
@@ -70,12 +68,16 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 		catch (IOException e) {logger.error("",e);}
 		catch (ParserConfigurationException e) {logger.error("",e);}
 		catch (XMLStreamException e) {logger.error("",e);}
-		catch (SAXException e) {logger.error("",e);}
+		catch (SAXException e)
+		{
+			System.out.println(xhtmlContent);
+			logger.error("",e);
+		}
 		catch (JDOMException e) {logger.error("",e);}
 		return null;
 	}
 
-	private String transform2String(String xhtmlContent) throws IOException, ParserConfigurationException, XMLStreamException, SAXException
+	private String xhtml2Ofx(String xhtmlContent) throws IOException, ParserConfigurationException, XMLStreamException, SAXException
 	{
 		xhtmlContent = XhtmlSpecialChars.replace(xhtmlContent);
 		Object[] objects = new Object[1];
