@@ -8,6 +8,8 @@ import org.openfuxml.factory.xml.layout.XmlWidthFactory;
 
 public class XmlImageFactory
 {
+	public static Image build() {return new Image();}
+	
 	public static Image em(String pathPrefix,String imageName, int em)
 	{
 		int index = imageName.lastIndexOf(".");

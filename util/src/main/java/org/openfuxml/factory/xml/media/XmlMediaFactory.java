@@ -2,6 +2,8 @@ package org.openfuxml.factory.xml.media;
 
 import org.openfuxml.content.media.Media;
 
+import net.sf.exlp.xml.io.File;
+
 public class XmlMediaFactory
 {
 	public static Media dst(String dst)
@@ -14,6 +16,13 @@ public class XmlMediaFactory
 		Media xml = new Media();
 		xml.setSrc(src);
 		xml.setDst(dst);
+		return xml;
+	}
+	
+	public static Media build(File file)
+	{
+		Media xml = new Media();
+		xml.setFile(file);
 		return xml;
 	}
 }
