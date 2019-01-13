@@ -1,16 +1,16 @@
-package org.openfuxml.util.translation;
+package org.openfuxml.renderer;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.openfuxml.interfaces.configuration.TranslationProvider;
+import org.openfuxml.interfaces.configuration.OfxTranslationProvider;
 
-public class OfxTranslationProvider implements TranslationProvider
+public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 {
 	private final List<String> localeCodes; @Override public List<String> getLocaleCodes() {return localeCodes;}
 	
-	public OfxTranslationProvider()
+	private OfxDefaultTranslationProvider()
 	{
 		localeCodes = new ArrayList<String>();
 	}
@@ -46,5 +46,10 @@ public class OfxTranslationProvider implements TranslationProvider
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	@Override
+	public <E extends Enum<E>> String toTranslation(String localeCode, Class<?> c, E code) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

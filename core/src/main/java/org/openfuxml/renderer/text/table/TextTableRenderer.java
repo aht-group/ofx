@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Row;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxTextRenderer;
@@ -33,18 +35,26 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 	
 	public void render(Table table) throws OfxAuthoringException
 	{
-		renderCells(table);
-		renderSeparatorRow();
+		prepareCells(table);
+		
+		if(table.isSetTitle())
+		{
+			int space = renderTitleDashes();
+			renderTitle(space, table.getTitle());
+		}
+		
+		
+		renderSeparatorDashes();
 		renderHeader(rendererHeader);
-		renderSeparatorRow();
+		renderSeparatorDashes();
 		for(List<OfxTextRenderer> r : rendererBody)
 		{
 			renderRow(r);
 		}
-		renderSeparatorRow();
+		renderSeparatorDashes();
 	}
 	
-	private void renderCells(Table table) throws OfxAuthoringException
+	private void prepareCells(Table table) throws OfxAuthoringException
 	{
 		if(table.isSetContent())
 		{
@@ -90,18 +100,6 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 		}
 	}
 	
-	private void renderSeparatorRow()
-	{
-		StringBuffer sb = new StringBuffer();
-		for(int i=0;i<columnSize.length;i++)
-		{
-			sb.append("+");
-			sb.append(StringUtils.repeat("-",columnSize[i]+2));
-		}
-		sb.append("+");
-		this.addString(sb.toString());
-	}
-	
 	private void renderHeader(List<OfxTextRenderer> renderer) throws OfxAuthoringException
 	{
 		StringBuffer sb = new StringBuffer();
@@ -128,4 +126,40 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 		this.addString(sb.toString());
 	}
 	
+	private void renderTitle(int space, Title title)
+	{
+		String text = TxtTitleFactory.build(title);
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("|");
+		sb.append(StringUtils.center(text,space));
+		sb.append("|");
+		this.addString(sb.toString());
+	}
+	
+	private int renderTitleDashes()
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("+");
+		for(int i=0;i<columnSize.length;i++)
+		{
+			if(sb.length()>1) {sb.append("-");}
+			sb.append(StringUtils.repeat("-",columnSize[i]+2));
+		}
+		sb.append("+");
+		this.addString(sb.toString());
+		return sb.length()-2;
+	}
+	
+	private void renderSeparatorDashes()
+	{
+		StringBuffer sb = new StringBuffer();
+		for(int i=0;i<columnSize.length;i++)
+		{
+			sb.append("+");
+			sb.append(StringUtils.repeat("-",columnSize[i]+2));
+		}
+		sb.append("+");
+		this.addString(sb.toString());
+	}
 }

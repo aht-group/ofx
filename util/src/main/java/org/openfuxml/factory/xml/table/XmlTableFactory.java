@@ -12,6 +12,7 @@ import org.openfuxml.content.table.Content;
 import org.openfuxml.content.table.Head;
 import org.openfuxml.content.table.Row;
 import org.openfuxml.content.table.Table;
+import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,9 +52,11 @@ public class XmlTableFactory
 		return build(listHeader,listData);
 	}
 	
-	public static Table build(List<String> header, List<Object[]> data)
+	public static Table build(List<String> header, List<Object[]> data){return build(null,header,data);}
+	public static Table build(String title, List<String> header, List<Object[]> data)
 	{
 		Table table = new Table();
+		if(title!=null){table.setTitle(XmlTitleFactory.build(title));}
 		
 		Content content = new Content();
 		content.setHead(buildHead(header));
