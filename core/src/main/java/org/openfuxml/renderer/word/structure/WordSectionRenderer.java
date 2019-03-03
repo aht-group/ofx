@@ -17,23 +17,45 @@ public class WordSectionRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(WordSectionRenderer.class);
 
-	private Document doc;
-	private DocumentBuilder builder;
+	private final Document doc;
+	private final DocumentBuilder builder;
+	
 	private int tableCount=0;
 	private int tableCurrent=0;
 	private int paragraphCount=0;
 	private boolean listNumbersFormating=false;
 	private int paragraphCurrent;
 
-	public WordSectionRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
+	public WordSectionRenderer(Document doc, DocumentBuilder builder)
+	{
+		this.doc=doc;this.builder=builder;
+	}
 	
 	public void render(org.openfuxml.content.ofx.Section ofxSection, boolean listNumbersFormating)
 	{
 		this.listNumbersFormating=listNumbersFormating;
-		try {render(ofxSection);} catch (Exception e) {}
+		try {renderWithException(ofxSection);} catch (Exception e) {}
 	}
 	
-	public void render(org.openfuxml.content.ofx.Section ofxSection) throws Exception
+	public void render(org.openfuxml.content.ofx.Section ofxSection, String fallbackContent)
+	{
+		if(ofxSection==null) {builder.write(fallbackContent);}
+		else {render(ofxSection);}
+	}
+	
+	public void render(org.openfuxml.content.ofx.Section ofxSection)
+	{
+		if(ofxSection!=null)
+		{
+			try
+			{
+				renderWithException(ofxSection);
+			}
+			catch (Exception e) {e.printStackTrace();}
+		}
+	}
+	
+	public void renderWithException(org.openfuxml.content.ofx.Section ofxSection) throws Exception
 	{
 		//Section sectionToAdd = new Section(doc);
 
@@ -191,7 +213,6 @@ public class WordSectionRenderer
 	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) throws Exception
 	{
 		WordSectionRenderer sf = new WordSectionRenderer(doc,builder);
-		sf.render(ofxSection);
+		sf.renderWithException(ofxSection);
 	}
-
 }

@@ -30,6 +30,13 @@ public class XmlSectionFactory
 		return xml;
 	}
 	
+	public static Section paragraph(String text)
+	{
+		Section xml = new Section();
+		xml.getContent().add(XmlParagraphFactory.text(text));
+		return xml;
+	}
+	
 	public static List<Table> toTables(Section section)
 	{
 		List<Table> tables = new ArrayList<Table>();

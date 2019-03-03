@@ -69,6 +69,6 @@ public class WordDocumentRenderer
 	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) throws Exception 
 	{
 		WordSectionRenderer sf = new WordSectionRenderer(doc,builder);
-		sf.render(ofxSection);
+		sf.renderWithException(ofxSection);
 	}
 }

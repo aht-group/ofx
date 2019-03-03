@@ -14,6 +14,7 @@ public class XmlSectionQuery
 	
 	private static Section find(Sections sections, String classifier)
 	{
+		if(sections==null) {return null;}
 		for(Serializable s : sections.getContent())
 		{
 			if(s instanceof Section)
