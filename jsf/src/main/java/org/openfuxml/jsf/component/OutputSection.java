@@ -42,13 +42,8 @@ public class OutputSection extends UIPanel
 				OfxHTMLRenderer htmlRenderer = new OfxHTMLRenderer(new OfxConfigurationProvider(),"");
 				htmlRenderer.render(responseWriter,s);
 			}
-			catch (OfxAuthoringException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (OfxConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			catch (OfxAuthoringException e) {e.printStackTrace();}
+			catch (OfxConfigurationException e) {e.printStackTrace();}
 		}	
 	}
 
