@@ -17,6 +17,8 @@ import org.openfuxml.renderer.html.OfxHTMLRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.exlp.util.xml.JaxbUtil;
+
 @FacesComponent("org.openfuxml.jsf.component.OutputSection")
 @ResourceDependency(library="ofxCss", name="ofxBasic.css")
 public class OutputSection extends UIPanel
@@ -36,19 +38,14 @@ public class OutputSection extends UIPanel
 		
 		if(s!=null)
 		{
-			
+			JaxbUtil.info(s);
 			try
 			{
 				OfxHTMLRenderer htmlRenderer = new OfxHTMLRenderer(new OfxConfigurationProvider(),"");
 				htmlRenderer.render(responseWriter,s);
 			}
-			catch (OfxAuthoringException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (OfxConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			catch (OfxAuthoringException e) {e.printStackTrace();}
+			catch (OfxConfigurationException e) {e.printStackTrace();}
 		}	
 	}
 

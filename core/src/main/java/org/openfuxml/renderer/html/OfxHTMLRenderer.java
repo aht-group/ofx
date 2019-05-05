@@ -34,10 +34,8 @@ public class OfxHTMLRenderer extends OfxRenderer
 	{
 		txt = new ArrayList<String>();
 		logger = LoggerFactory.getLogger(OfxHTMLRenderer.class);
-		document = new HtmlDocumentRenderer(cp, pageTitle);
+		document = new HtmlDocumentRenderer(cp,pageTitle);
 	}
-
-	
 
 	@Override
 	public void render(Document ofxDocument) throws OfxAuthoringException, OfxConfigurationException

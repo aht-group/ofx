@@ -1,21 +1,25 @@
 package org.openfuxml.renderer.html;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.OfxConfigurationProvider;
-import org.openfuxml.renderer.html.structure.HtmlBody;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.DocumentProvider;
 import org.openfuxml.test.provider.SectionProvider;
-import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+import net.sf.exlp.util.io.StringUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 {
@@ -44,6 +48,19 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 		renderer.render(DocumentProvider.buildWithSubcontent().getContent());
 		renderTest(renderer);
 	}
+	
+	public void test() throws OfxAuthoringException, OfxConfigurationException, IOException
+	{
+		Section section = SectionProvider.buildWithMultiLevels();
+		JaxbUtil.info(section);
+		
+		logger.info(StringUtil.stars());
+		
+		Writer w = new OutputStreamWriter(System.out, "UTF-8");
+		
+		OfxHTMLRenderer htmlRenderer = new OfxHTMLRenderer(new OfxConfigurationProvider(),"");
+		htmlRenderer.render(w,section);
+	}
 
 	public static void main(String[] args) throws IOException, OfxConfigurationException, OfxAuthoringException
 	{
@@ -51,7 +68,8 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 		TestHtmlDocumentRenderer test = new TestHtmlDocumentRenderer();
         test.setEnvironment(true);
 		
-        test.init();test.doc();
-		test.init();test.withSub();
+//        test.init();test.doc();
+//		test.init();test.withSub();
+		test.init();test.test();
 	}
 }

@@ -39,7 +39,7 @@ public class SectionProvider extends AbstractElementProvider
 		xml.getContent().add(TitleProvider.create());
 		
 		Paragraph p = XmlParagraphFactory.build();
-        p.getContent().add("testParagraph");
+        p.getContent().add("testParagraph with lè test");
         p.getContent().add(EmphasisProvider.italicBold());
         xml.getContent().add(p);
 		
