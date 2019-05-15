@@ -13,4 +13,6 @@ public interface OfxTranslationProvider
 	String toTranslation (String localeCode, String key);
 	String toDate(String localeCode, Date record);
 	String toTime(String localeCode, Date record);
+	
+	String toCurrency(String localeCode, Double value);
 }

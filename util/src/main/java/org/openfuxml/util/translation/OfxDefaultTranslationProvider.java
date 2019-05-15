@@ -71,4 +71,10 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String toCurrency(String localeCode, Double value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
