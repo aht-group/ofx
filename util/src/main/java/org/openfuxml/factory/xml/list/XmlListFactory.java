@@ -3,7 +3,7 @@ package org.openfuxml.factory.xml.list;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.list.Type;
 
-public class OfxListFactory
+public class XmlListFactory
 {
 	public static List unordered()
 	{

@@ -12,6 +12,12 @@ import org.openfuxml.content.table.Cell;
 public class OfxCellFactory
 {
 	public static Cell build(){return new Cell();}
+	public static Cell build(List<Paragraph> paragraphs)
+	{
+		Cell cell = build();
+		cell.getContent().addAll(paragraphs);
+		return cell;
+	}
 	
 	public static Cell createParagraphCell(DecimalFormat df, double value){return createParagraphCell(df.format(value));}
 	public static Cell createParagraphCell(int text){return createParagraphCell(""+text);}
@@ -47,8 +53,15 @@ public class OfxCellFactory
 	
 	public static Cell image(Image image)
 	{
-		Cell cell = new Cell();
+		Cell cell = build();
 		cell.getContent().add(image);
+		return cell;
+	}
+	
+	public static Cell list(org.openfuxml.content.list.List list)
+	{
+		Cell cell = build();
+		cell.getContent().add(list);
 		return cell;
 	}
 	
