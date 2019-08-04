@@ -112,9 +112,11 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	private void setOrderedCompactNum()
 	{
-		preTxt.add("\\begin{compactenum}");
+		preTxt.add("\\begin{minipage}[t]{\\linewidth}");
+		preTxt.add("\\begin{itemize}[nosep,leftmargin=1em,labelwidth=*,align=left,parsep=0pt]");
 		postTxt.add("");
-		postTxt.add("\\end{compactenum}");
+		postTxt.add("\\end{itemize}");
+		postTxt.add("\\end{minipage}");
 	}
 	
 	// Unordered List
@@ -133,9 +135,11 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	private void setUnorderedCompactItem()
 	{
-		preTxt.add("\\begin{compactitem}");
+		preTxt.add("\\begin{minipage}[t]{\\linewidth}");
+		preTxt.add("\\begin{itemize}[nosep,leftmargin=1em,labelwidth=*,align=left,parsep=0pt]");
 		postTxt.add("");
-		postTxt.add("\\end{compactitem}");
+		postTxt.add("\\end{itemize}");
+		postTxt.add("\\end{minipage}");
 	}
 	
 	private void setDescription()

@@ -36,11 +36,16 @@ public class ReportLatexPackages extends AbstractOfxLatexRenderer implements Ofx
 		txt.add("\\usepackage{tabu}");
 		txt.add("\\usepackage{tabularx}");
 		txt.add("\\usepackage{longtable}");
-		
 		txt.add("\\usepackage{booktabs}");
 		txt.add("\\usepackage{multicol}");
 		txt.add("\\usepackage{multirow}");
 		
+		txt.add("");
+		txt.add("%% Lists");
+		txt.add("\\usepackage{enumitem}");
+		
+		txt.add("");
+		txt.add("%% Header");
 		txt.add("\\usepackage{fancyhdr}");
 		txt.add("\\pagestyle{fancy}");
 		txt.add("\\fancyhead{}");
