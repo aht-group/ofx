@@ -13,6 +13,13 @@ public class OfxListItemFactory
 		return item;
 	}
 	
+	public static Item build(String localeCode, Paragraph paragraph)
+	{
+		Item item = build();
+		item.setLang(localeCode);
+		item.getContent().add(paragraph);
+		return item;
+	}
 	public static Item build(List<Paragraph> paragraphs)
 	{
 		Item item = build();
