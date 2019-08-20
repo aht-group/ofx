@@ -77,6 +77,14 @@
 				<artifactId>batik-codec</artifactId>
 				<version>1.7</version> <!-- tk 2019-01-09 update from 1.7 to 1.8 -->
 			</dependency>
+			
+			<!--  Aspose -  Words for Java -->
+			<dependency>
+   		 		<groupId>com.aspose</groupId>
+    			<artifactId>aspose-words</artifactId>
+    			<version>19.8</version>
+    			<classifier>jdk17</classifier>
+			</dependency>
         	
 			<dependency>
 	    		<groupId>de.sven-jacobs</groupId>
