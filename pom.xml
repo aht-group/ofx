@@ -112,10 +112,10 @@
 			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
 		<repository>
-			<id>aspose2</id>
+			<!--Aspose for WordRendering -->
+			<id>AsposeJavaAPI</id>
 			<name>Aspose Java API</name>
-			<snapshots><enabled>false</enabled></snapshots>
-			<url>http://maven.aspose.com/repository/repo</url>
+			<url>https://repository.aspose.com/repo/</url>
 		</repository>
 	</repositories>
 	

@@ -100,11 +100,11 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>com.aspose</groupId>
-			<artifactId>aspose-words</artifactId>
-			<version>18.3</version>
-			<scope>provided</scope>
-			<classifier>jdk16</classifier>
+    		<groupId>com.aspose</groupId>
+    		<artifactId>aspose-words</artifactId>
+    		<version>19.8</version>
+    		<scope>provided</scope>
+    		<classifier>jdk17</classifier>
 		</dependency>
 		
 		<!-- Test -->
