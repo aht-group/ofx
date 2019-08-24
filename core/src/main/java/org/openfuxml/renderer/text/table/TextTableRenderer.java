@@ -10,8 +10,7 @@ import org.openfuxml.content.table.Row;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.txt.TxtTitleFactory;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxTextRenderer;
 import org.openfuxml.renderer.text.AbstractOfxTextRenderer;
 import org.slf4j.Logger;
@@ -26,9 +25,9 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 	
 	private int[] columnSize;
 	
-	public TextTableRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public TextTableRenderer(ConfigurationProvider cp)
 	{
-		super(cmm,dsm);
+		super(cp);
 		rendererHeader = new ArrayList<OfxTextRenderer>();
 		rendererBody = new ArrayList<List<OfxTextRenderer>>();
 	}
@@ -62,7 +61,7 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 			{
 				for(Cell cell : table.getContent().getHead().getRow().get(0).getCell())
 				{
-					TextCellRenderer r = new TextCellRenderer(cmm,dsm);
+					TextCellRenderer r = new TextCellRenderer(cp);
 					r.render(cell);
 					rendererHeader.add(r);
 				}
@@ -74,7 +73,7 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 					List<OfxTextRenderer> rowRenderer = new ArrayList<OfxTextRenderer>();
 					for(Cell cell : row.getCell())
 					{
-						TextCellRenderer r = new TextCellRenderer(cmm,dsm);
+						TextCellRenderer r = new TextCellRenderer(cp);
 						r.render(cell);
 						rowRenderer.add(r);
 					}

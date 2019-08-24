@@ -20,7 +20,7 @@ public class TestTextTableRenderer extends AbstractTestTextRenderer
 	public void init()
 	{
 		super.initDir("table");
-		renderer = new TextTableRenderer(cmm,dsm);
+		renderer = new TextTableRenderer(cp);
 	}
 	
 	@Test

@@ -2,7 +2,7 @@ package org.openfuxml.factory.xml.table;
 
 import org.openfuxml.content.table.Columns;
 
-public class OfxColumnsFactory
+public class XmlColumnsFactory
 {
 	public static Columns build()
 	{

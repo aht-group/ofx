@@ -6,10 +6,10 @@ import org.openfuxml.content.table.Columns;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory.Horizontal;
 
-public class OfxColumnFactory
+public class XmlColumnFactory
 {
-	public static void add(Columns cols, Horizontal hAlignment){cols.getColumn().add(OfxColumnFactory.build(hAlignment));}
-	public static void flex(Columns cols, double value){cols.getColumn().add(OfxColumnFactory.flex(value));}
+	public static void add(Columns cols, Horizontal hAlignment){cols.getColumn().add(XmlColumnFactory.build(hAlignment));}
+	public static void flex(Columns cols, double value){cols.getColumn().add(XmlColumnFactory.flex(value));}
 	
 	public static Column build(Horizontal hAlignment)
 	{

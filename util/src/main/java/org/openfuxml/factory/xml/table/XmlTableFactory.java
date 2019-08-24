@@ -80,12 +80,9 @@ public class XmlTableFactory
 		Row row = new Row();
 		for(String column : header)
 		{
-			row.getCell().add(OfxCellFactory.createParagraphCell(column));
+			row.getCell().add(XmlCellFactory.createParagraphCell(column));
 		}
-		
-		Head head = new Head();
-		head.getRow().add(row);
-		return head;
+		return XmlHeadFactory.build(row);
 	}
 	
 	private static Body buildBody(List<Object[]> data)
@@ -106,11 +103,11 @@ public class XmlTableFactory
 		{
 			if(o!=null)
 			{
-				row.getCell().add(OfxCellFactory.createParagraphCell(o.toString()));
+				row.getCell().add(XmlCellFactory.createParagraphCell(o.toString()));
 			}
 			else
 			{
-				row.getCell().add(OfxCellFactory.createParagraphCell(""));
+				row.getCell().add(XmlCellFactory.createParagraphCell(""));
 			}
 		}
 		return row;

@@ -9,7 +9,7 @@ import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.table.Cell;
 
-public class OfxCellFactory
+public class XmlCellFactory
 {
 	public static Cell build(){return new Cell();}
 	public static Cell build(List<Paragraph> paragraphs)

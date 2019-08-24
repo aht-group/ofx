@@ -6,9 +6,9 @@ import org.openfuxml.content.table.Head;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OfxContentFactory
+public class XmlContentFactory
 {
-	final static Logger logger = LoggerFactory.getLogger(OfxContentFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(XmlContentFactory.class);
 	
 	public static Content build(Head head, Body body)
 	{

@@ -17,8 +17,8 @@ import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.xml.ofx.content.XmlCommentFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
-import org.openfuxml.factory.xml.table.OfxCellFactory;
-import org.openfuxml.factory.xml.table.OfxColumnFactory;
+import org.openfuxml.factory.xml.table.XmlCellFactory;
+import org.openfuxml.factory.xml.table.XmlColumnFactory;
 import org.openfuxml.util.OfxCommentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,9 +72,9 @@ public class AppEngineTranscoder
 	{		
 		Row row = new Row();
 		
-		row.getCell().add(OfxCellFactory.createParagraphCell(cron.getChildText("url")));
-		row.getCell().add(OfxCellFactory.createParagraphCell(cron.getChildText("schedule")));
-		row.getCell().add(OfxCellFactory.createParagraphCell(cron.getChildText("description")));
+		row.getCell().add(XmlCellFactory.createParagraphCell(cron.getChildText("url")));
+		row.getCell().add(XmlCellFactory.createParagraphCell(cron.getChildText("schedule")));
+		row.getCell().add(XmlCellFactory.createParagraphCell(cron.getChildText("description")));
 		return row;
 	}
 	
@@ -82,9 +82,9 @@ public class AppEngineTranscoder
 	{
 		Row row = new Row();
 		
-		row.getCell().add(OfxCellFactory.createParagraphCell("URL"));
-		row.getCell().add(OfxCellFactory.createParagraphCell("Schedule"));
-		row.getCell().add(OfxCellFactory.createParagraphCell("Frequency"));
+		row.getCell().add(XmlCellFactory.createParagraphCell("URL"));
+		row.getCell().add(XmlCellFactory.createParagraphCell("Schedule"));
+		row.getCell().add(XmlCellFactory.createParagraphCell("Frequency"));
 		
 		Head head = new Head();
 		head.getRow().add(row);
@@ -96,9 +96,9 @@ public class AppEngineTranscoder
 		int flexWidth=0;int w=0;
 		Columns cols = new Columns();
 		
-		w=20;flexWidth=flexWidth+w;cols.getColumn().add(OfxColumnFactory.flex(w,true));
-		w=20;flexWidth=flexWidth+w;cols.getColumn().add(OfxColumnFactory.flex(w,true));
-		cols.getColumn().add(OfxColumnFactory.flex());
+		w=20;flexWidth=flexWidth+w;cols.getColumn().add(XmlColumnFactory.flex(w,true));
+		w=20;flexWidth=flexWidth+w;cols.getColumn().add(XmlColumnFactory.flex(w,true));
+		cols.getColumn().add(XmlColumnFactory.flex());
 		
 		Specification specification = new Specification();
 		specification.setColumns(cols);

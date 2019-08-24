@@ -19,7 +19,7 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
-import org.openfuxml.factory.xml.table.OfxColumnFactory;
+import org.openfuxml.factory.xml.table.XmlColumnFactory;
 import org.openfuxml.renderer.latex.table.TestLatexRowRenderer;
 import org.openfuxml.renderer.util.OfxContentDebugger;
 import org.openfuxml.test.OfxCoreTestBootstrap;
@@ -48,8 +48,8 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
 	public static Table createTable(int[] words)
 	{
 		Columns cols = new Columns();
-		cols.getColumn().add(OfxColumnFactory.build(XmlAlignmentFactory.Horizontal.left));
-		cols.getColumn().add(OfxColumnFactory.flex(10));
+		cols.getColumn().add(XmlColumnFactory.build(XmlAlignmentFactory.Horizontal.left));
+		cols.getColumn().add(XmlColumnFactory.flex(10));
 //		cols.getColumn().add(OfxColumnFactory.percentage(20));
 		
 		Specification specification = new Specification();

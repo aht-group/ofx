@@ -6,7 +6,7 @@ import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.*;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
-import org.openfuxml.factory.xml.table.OfxColumnFactory;
+import org.openfuxml.factory.xml.table.XmlColumnFactory;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
 import org.slf4j.Logger;
@@ -92,9 +92,9 @@ public class TableProvider extends AbstractElementProvider
 	private static Specification specifications()
 	{
 		Columns c = new Columns();
-		OfxColumnFactory.add(c,XmlAlignmentFactory.Horizontal.center);
-		c.getColumn().add(OfxColumnFactory.percentage(55d));
-		OfxColumnFactory.add(c,XmlAlignmentFactory.Horizontal.right);
+		XmlColumnFactory.add(c,XmlAlignmentFactory.Horizontal.center);
+		c.getColumn().add(XmlColumnFactory.percentage(55d));
+		XmlColumnFactory.add(c,XmlAlignmentFactory.Horizontal.right);
 		Width w = new Width(); w.setValue(30d);w.setUnit("percentage");
 		c.getColumn().get(2).setWidth(w);
 		Specification spezi = new Specification();

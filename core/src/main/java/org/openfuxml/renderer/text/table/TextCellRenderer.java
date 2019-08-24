@@ -3,8 +3,7 @@ package org.openfuxml.renderer.text.table;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxTextRenderer;
 import org.openfuxml.renderer.text.AbstractOfxTextRenderer;
 import org.slf4j.Logger;
@@ -14,14 +13,9 @@ public class TextCellRenderer extends AbstractOfxTextRenderer implements OfxText
 {
 	final static Logger logger = LoggerFactory.getLogger(TextCellRenderer.class);
 	
-	public TextCellRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm)
+	public TextCellRenderer(ConfigurationProvider cp)
 	{
-		this(cmm,dsm,false);
-	}
-	
-	public TextCellRenderer(CrossMediaManager cmm,DefaultSettingsManager dsm,boolean preBlankLine)
-	{
-		super(cmm,dsm);
+		super(cp);
 	}
 	
 	public void render(Cell cell) throws OfxAuthoringException

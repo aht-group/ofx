@@ -10,9 +10,11 @@ import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.text.table.TextCellRenderer;
 import org.openfuxml.renderer.text.table.TextTableRenderer;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
@@ -23,13 +25,13 @@ public class OfxTextRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxTextRenderer.class);
 	
-	private CrossMediaManager cmm;
-	private DefaultSettingsManager dsm;
+	private OfxConfigurationProvider cp;
 	
 	public OfxTextRenderer()
 	{
-		cmm = new NoOpCrossMediaManager();
-		dsm = new OfxDefaultSettingsManager();
+		cp = new OfxConfigurationProvider();
+		cp.setCrossMediaManager(new NoOpCrossMediaManager());
+		cp.setDefaultSettingsManager(new OfxDefaultSettingsManager());
 	}
 	
 	public static void table(ResultSet rs, OutputStream os) throws OfxAuthoringException, IOException
@@ -44,7 +46,7 @@ public class OfxTextRenderer
 	}
 	public void render(Table table, OutputStream os) throws OfxAuthoringException, IOException
 	{
-		TextTableRenderer renderer = new TextTableRenderer(cmm,dsm);
+		TextTableRenderer renderer = new TextTableRenderer(cp);
 		renderer.render(table);
 		PrintWriter w = new PrintWriter(os,true);
 		for(String s : renderer.getContent()){w.println(s);}
@@ -52,7 +54,7 @@ public class OfxTextRenderer
 	
 	public void render(Cell cell, OutputStream os) throws OfxAuthoringException, IOException
 	{
-		TextCellRenderer renderer = new TextCellRenderer(cmm,dsm);
+		TextCellRenderer renderer = new TextCellRenderer(cp);
 		renderer.render(cell);
 		PrintWriter w = new PrintWriter(os,true);
 		for(String s : renderer.getContent()){w.println(s);}

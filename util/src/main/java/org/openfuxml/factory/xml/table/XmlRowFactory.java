@@ -4,9 +4,9 @@ import org.openfuxml.content.table.Row;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OfxRowFactory
+public class XmlRowFactory
 {
-	final static Logger logger = LoggerFactory.getLogger(OfxRowFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(XmlRowFactory.class);
 	
 	public static Row build(){return new Row();}
 }

@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.content.table.Columns;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.factory.xml.table.OfxColumnFactory;
+import org.openfuxml.factory.xml.table.XmlColumnFactory;
 import org.openfuxml.test.AbstractOfxCoreTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +30,9 @@ public class TestLatexTabularWidthCalculator extends AbstractOfxCoreTest
 		Columns cols = new Columns();
 		
 //		cols.getColumn().add(OfxColumnFactory.build(XmlAlignmentFactory.Horizontal.center));
-		cols.getColumn().add(OfxColumnFactory.percentage(20));
+		cols.getColumn().add(XmlColumnFactory.percentage(20));
 		
-		cols.getColumn().add(OfxColumnFactory.flex(1));
+		cols.getColumn().add(XmlColumnFactory.flex(1));
 		
 		return cols;
 	}
