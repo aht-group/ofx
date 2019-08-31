@@ -9,9 +9,13 @@ import org.openfuxml.content.ofx.Sections;
 
 public class XmlSectionsFactory
 {
-	public static Sections build()
+	public static Sections build(){return new Sections();}
+	
+	public static Sections build(Section section)
 	{
-		return new Sections();
+		Sections xml = build();
+		xml.getContent().add(section);
+		return xml;
 	}
 	
 	public static List<Section> toList(Sections sections)
