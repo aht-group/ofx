@@ -1,9 +1,6 @@
 package org.openfuxml.transform;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 import java.text.MessageFormat;
 
 import javax.xml.parsers.FactoryConfigurationError;
@@ -17,6 +14,7 @@ import javax.xml.stream.XMLStreamWriter;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Entities;
 import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
 import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.processor.ofx.OfxHtmlContentHandler;
@@ -51,6 +49,7 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 	{
 //		logger.info(htmlContent);
 		org.jsoup.nodes.Document sDoc = Jsoup.parse(htmlContent);
+		sDoc.outputSettings().escapeMode(Entities.EscapeMode.xhtml);
 	    String xhtmlContent = sDoc.body().html();
 //	    logger.info(xhtmlContent);
 	    
