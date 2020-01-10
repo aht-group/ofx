@@ -102,7 +102,6 @@
 		<dependency>
     		<groupId>com.aspose</groupId>
     		<artifactId>aspose-words</artifactId>
-    		<scope>provided</scope>
     		<classifier>jdk17</classifier>
 		</dependency>
 		
