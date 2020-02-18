@@ -61,7 +61,7 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 			Document doc = JDomUtil.txtToDoc(xml);
 //			JDomUtil.debug(doc);
 			
-			Section section = JaxbUtil.load(xml.getBytes(),Section.class);
+			Section section = JaxbUtil.load(xml.getBytes("UTF-8"),Section.class);
 			return section;
 		}
 		catch (IOException e) {logger.error("",e);}
