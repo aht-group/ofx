@@ -5,14 +5,17 @@ import java.util.List;
 
 public interface OfxTranslationProvider
 {
-	List<String> getLocaleCodes();
 	boolean hasLocale(String localeCode);
+	List<String> getLocaleCodes();
 	
-	<E extends Enum<E>> String toTranslation(String localeCode, Class<?> c, E code);
-	String toTranslation (String localeCode, String key1, String key2);
-	String toTranslation (String localeCode, String key);
+	String tlEntity (String localeCode, String key);
+	
+	String tlAttribute (String localeCode, String key1, String key2);
+	<E extends Enum<E>> String tlAttribute(String localeCode, Class<?> c, E code);
+	
 	String toDate(String localeCode, Date record);
 	String toTime(String localeCode, Date record);
-	
+
 	String toCurrency(String localeCode, Double value);
+	String toCurrency(String localeCode, Double value, boolean grouping, int decimals);
 }
