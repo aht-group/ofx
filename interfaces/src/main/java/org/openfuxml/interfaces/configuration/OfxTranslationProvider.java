@@ -9,6 +9,7 @@ public interface OfxTranslationProvider
 	List<String> getLocaleCodes();
 	
 	String tlEntity (String localeCode, String key);
+	String tlEntity (String localeCode, Class<?> c);
 	
 	String tlAttribute (String localeCode, String key1, String key2);
 	<E extends Enum<E>> String tlAttribute(String localeCode, Class<?> c, E code);
@@ -17,5 +18,5 @@ public interface OfxTranslationProvider
 	String toTime(String localeCode, Date record);
 
 	String toCurrency(String localeCode, Double value);
-	String toCurrency(String localeCode, Double value, boolean grouping, int decimals);
+	String toCurrency(String localeCode, boolean grouping, int decimals, Double value);
 }

@@ -21,14 +21,14 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 	private final List<String> localeCodes; @Override public List<String> getLocaleCodes() {return localeCodes;}
 	
 	private final Map<MultiKey<String>,String> map3;
-	private final Map<MultiKey<String>,String> mapDf;
+	private final Map<MultiKey<String>,DecimalFormat> mapDf;
 	
 	
 	public OfxDefaultTranslationProvider()
 	{
 		localeCodes = new ArrayList<String>();
 		map3 = new HashMap<MultiKey<String>,String>();
-		mapDf = new HashMap<MultiKey<String>,String>();
+		mapDf = new HashMap<MultiKey<String>,DecimalFormat>();
 	}
 	
 	public void addTranslation(String localeCode, String scope, String key, String value)
@@ -37,6 +37,7 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 		map3.put(nk, value);
 	}
 
+	@Override public String tlEntity(String localeCode, Class<?> c) {return tlEntity(localeCode,c.getSimpleName());}
 	@Override
 	public String tlEntity(String localeCode, String key)
 	{
@@ -76,19 +77,66 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 		else {return "NYI: "+record;}
 	}
 	
-	@Override public String toCurrency(String localeCode, Double value){return toCurrency(localeCode,value,true,2);}
-	@Override public String toCurrency(String localeCode, Double value, boolean grouping, int decimals)
+	@Override public String toCurrency(String localeCode, Double value){return toCurrency(localeCode,true,2,value);}
+	@Override public String toCurrency(String localeCode, boolean grouping, int decimals, Double value)
 	{
-	
 		MultiKey<String> mk = new MultiKey<String>(localeCode,Boolean.valueOf(grouping).toString(),Integer.valueOf(decimals).toString());
 		return build(mk).format(value);
 	}
 	
 	private DecimalFormat build(MultiKey<String> mk)
 	{
-		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols();
-		otherSymbols.setDecimalSeparator(',');
-		otherSymbols.setGroupingSeparator('.');
-		return new DecimalFormat("0.00",otherSymbols);
+		if(!mapDf.containsKey(mk))
+		{
+			DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols();
+			otherSymbols.setDecimalSeparator(resolveDecimalSeparator(mk.getKey(0)));
+			if(Boolean.valueOf(mk.getKey(1))) {otherSymbols.setGroupingSeparator(resolveGroupingSeparator(mk.getKey(0)));}
+			
+			DecimalFormat df = new DecimalFormat(prefix(Boolean.valueOf(mk.getKey(1)))+suffix(Integer.valueOf(mk.getKey(2))),otherSymbols);
+			mapDf.put(mk,df);
+		}
+		return mapDf.get(mk);
+	}
+	
+	private String prefix(boolean grouping)
+	{
+		if(grouping) {return "#,###";}
+		else {return "#";}
+	}
+	
+	private String suffix(int decicmals)
+	{
+		if(decicmals==0) {return "";}
+		else
+		{
+			StringBuilder sb = new StringBuilder();
+			sb.append(".");
+			for(int i=0;i<decicmals;i++) {sb.append("0");}
+			return sb.toString();
+		}
+	}
+	
+	private char resolveDecimalSeparator(String localeCode)
+	{
+		if(localeCode.equals("de")) {return ',';}
+		else if(localeCode.equals("en")) {return '.';}
+		else if(localeCode.equals("fr")) {return ',';}
+		else
+		{
+			logger.warn("No DecimalSeparator defined for "+localeCode);
+			{return ',';}
+		}
+	}
+	
+	private char resolveGroupingSeparator(String localeCode)
+	{
+		if(localeCode.equals("de")) {return '.';}
+		else if(localeCode.equals("en")) {return ',';}
+		else if(localeCode.equals("fr")) {return '.';}
+		else
+		{
+			logger.warn("No GroupingSeparator defined for "+localeCode);
+			{return ',';}
+		}
 	}
 }
