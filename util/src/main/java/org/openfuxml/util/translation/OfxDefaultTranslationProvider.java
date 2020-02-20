@@ -1,5 +1,7 @@
 package org.openfuxml.util.translation;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,11 +21,14 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 	private final List<String> localeCodes; @Override public List<String> getLocaleCodes() {return localeCodes;}
 	
 	private final Map<MultiKey<String>,String> map3;
+	private final Map<MultiKey<String>,String> mapDf;
+	
 	
 	public OfxDefaultTranslationProvider()
 	{
 		localeCodes = new ArrayList<String>();
 		map3 = new HashMap<MultiKey<String>,String>();
+		mapDf = new HashMap<MultiKey<String>,String>();
 	}
 	
 	public void addTranslation(String localeCode, String scope, String key, String value)
@@ -71,15 +76,19 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 		else {return "NYI: "+record;}
 	}
 	
-	@Override public String toCurrency(String localeCode, Double value)
-	{
-		if(value==null){return "";}
-		else {return "NYI: "+value;}
-	}
-
+	@Override public String toCurrency(String localeCode, Double value){return toCurrency(localeCode,value,true,2);}
 	@Override public String toCurrency(String localeCode, Double value, boolean grouping, int decimals)
 	{
-		if(value==null){return "";}
-		else {return "NYI: "+value;}
+	
+		MultiKey<String> mk = new MultiKey<String>(localeCode,Boolean.valueOf(grouping).toString(),Integer.valueOf(decimals).toString());
+		return build(mk).format(value);
+	}
+	
+	private DecimalFormat build(MultiKey<String> mk)
+	{
+		DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols();
+		otherSymbols.setDecimalSeparator(',');
+		otherSymbols.setGroupingSeparator('.');
+		return new DecimalFormat("0.00",otherSymbols);
 	}
 }
