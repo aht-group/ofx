@@ -83,7 +83,11 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 		{
 			if     (s instanceof String){}
 			else if(s instanceof Section){renderSection((Section)s);}
-			else if(s instanceof Paragraph){paragraphRenderer((Paragraph)s,true);}
+			else if(s instanceof Paragraph)
+			{
+				try{paragraphRenderer((Paragraph)s,true);}
+				catch(OfxAuthoringException e) {JaxbUtil.info(section);throw e;}
+			}
 			else if(s instanceof Highlight){highlightRenderer((Highlight)s);}
 			else if(s instanceof Table){renderTable((Table)s);}
 			else if(s instanceof Marginalia){renderMarginalia((Marginalia)s);}

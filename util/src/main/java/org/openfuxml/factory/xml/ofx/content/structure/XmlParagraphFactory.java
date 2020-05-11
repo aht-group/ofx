@@ -1,24 +1,29 @@
 package org.openfuxml.factory.xml.ofx.content.structure;
 
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.text.Emphasis;
 
 public class XmlParagraphFactory
 {
-	public static Paragraph build()
+	public static Paragraph build(){return new Paragraph();}
+	
+	public static Paragraph build(Emphasis emphasis)
 	{
-		return new Paragraph();
+		Paragraph xml = build();
+		xml.getContent().add(emphasis);
+		return xml;
 	}
 	
 	public static Paragraph lang(String lang)
 	{
-		Paragraph xml = new Paragraph();
+		Paragraph xml = build();
 		xml.setLang(lang);
 		return xml;
 	}
 	
 	public static Paragraph text(String text)
 	{
-		Paragraph xml = new Paragraph();
+		Paragraph xml = build();
 		xml.getContent().add(text);
 		return xml;
 	}
