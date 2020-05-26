@@ -6,12 +6,14 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.OfxConfigurationProvider;
+import org.openfuxml.renderer.text.structure.TextParagraphRenderer;
 import org.openfuxml.renderer.text.table.TextCellRenderer;
 import org.openfuxml.renderer.text.table.TextTableRenderer;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
@@ -24,11 +26,15 @@ public class OfxTextRenderer
 	
 	private OfxConfigurationProvider cp;
 	
+	private final TextParagraphRenderer paragraphRenderer;
+	
 	public OfxTextRenderer()
 	{
 		cp = new OfxConfigurationProvider();
 		cp.setCrossMediaManager(new NoOpCrossMediaManager());
 		cp.setDefaultSettingsManager(new OfxDefaultSettingsManager());
+		
+		paragraphRenderer = new TextParagraphRenderer(cp.getCrossMediaManager(),cp.getDefaultSettingsManager(),false);
 	}
 	
 	public static void table(ResultSet rs, OutputStream os) throws OfxAuthoringException, IOException
@@ -55,5 +61,10 @@ public class OfxTextRenderer
 		renderer.render(cell);
 		PrintWriter w = new PrintWriter(os,true);
 		for(String s : renderer.getContent()){w.println(s);}
+	}
+	
+	public String toString(Paragraph p) throws OfxAuthoringException
+	{
+		return paragraphRenderer.toText(p);
 	}
 }

@@ -26,6 +26,11 @@ public class TextParagraphRenderer extends AbstractOfxTextRenderer implements Of
 	
 	public void render(Paragraph paragraph) throws OfxAuthoringException
 	{			
+		txt.add(toText(paragraph));
+	}
+	
+	public String toText(Paragraph paragraph) throws OfxAuthoringException
+	{
 		StringBuffer sb = new StringBuffer();
 		for(Object o : paragraph.getContent())
 		{
@@ -34,6 +39,6 @@ public class TextParagraphRenderer extends AbstractOfxTextRenderer implements Of
 //			else if(o instanceof Emphasis){renderEmphasis(sb, (Emphasis)o);}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
-		txt.add(sb.toString());
+		return sb.toString();
 	}
 }

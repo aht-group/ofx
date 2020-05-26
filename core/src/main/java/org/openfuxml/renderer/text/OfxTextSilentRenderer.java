@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -15,6 +16,13 @@ import org.slf4j.LoggerFactory;
 public class OfxTextSilentRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxTextSilentRenderer.class);
+	
+	private OfxTextRenderer renderer;
+	
+	public OfxTextSilentRenderer()
+	{
+		renderer = new OfxTextRenderer();
+	}
 	
 	public static void table(Table table, OutputStream os)
 	{
@@ -42,5 +50,16 @@ public class OfxTextSilentRenderer
 		}
 		catch (OfxAuthoringException e) {logger.error(e.getMessage());}
 		catch (IOException e) {logger.error(e.getMessage());}
+	}
+	
+	public String toString(Paragraph p)
+	{
+		try {
+			return renderer.toString(p);
+		} catch (OfxAuthoringException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
 	}
 }
