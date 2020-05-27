@@ -72,6 +72,34 @@ public class WordParagraphRenderer
 		else if (paragraphCount!=paragraphCurrent) {}
 	}
 	
+	public void render(org.openfuxml.content.ofx.Paragraph ofxParagraph) throws OfxAuthoringException
+	{
+		StringBuffer sb = new StringBuffer();
+		for(Object o : ofxParagraph.getContent())
+		{			
+			if(o==null){throw new OfxAuthoringException(Paragraph.class.getSimpleName()+" has no content");}
+			else if(o instanceof String)
+			{
+				String s =(String)o;
+				if(s.length()>0)
+				{
+					RemoveUnwantedRegx rUr = new RemoveUnwantedRegx();					
+					builder.write(rUr.removeUnwantedFrom(s));
+			    }
+			}
+			else if(o instanceof Emphasis){renderEmphasis(sb,(Emphasis)o);}
+			else if(o instanceof Reference){renderReference(sb,(Reference)o);}
+			else if(o instanceof Marginalia){renderMarginalia(sb,(Marginalia)o);}
+			else if(o instanceof Symbol){renderSymbol(sb,(Symbol)o);}
+			else if(o instanceof Glossary){renderGlossary(sb, (Glossary)o);}
+			else if(o instanceof Acronym){renderAcronym(sb, (Acronym)o);}
+			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
+			else if(o instanceof Index){renderIndex(sb,(Index)o);}
+			else if(o instanceof Font){}
+			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
+		}
+	}
+	
 	private void renderIndex(StringBuffer sb, Index o)
 	{
 		// TODO Auto-generated method stub
