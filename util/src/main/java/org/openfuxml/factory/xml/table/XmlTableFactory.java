@@ -65,6 +65,18 @@ public class XmlTableFactory
 	}
 	
 	public static Table build(List<String> header, List<Object[]> data){return build(null,header,data);}
+	public static Table build2(List<String> header, List<List<Object>> data)
+	{
+		List<Object[]> list = new ArrayList<>();
+		for(List<Object> l : data)
+		{
+			Object[] myArray = new Object[l.size()];
+		    l.toArray(myArray);
+		    list.add(myArray);
+		}
+
+		return build(null,header,list);
+	}
 	public static Table build(String title, List<String> header, List<Object[]> data)
 	{
 		Table table = new Table();
