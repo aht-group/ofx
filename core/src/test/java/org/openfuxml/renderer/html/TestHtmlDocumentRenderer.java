@@ -2,11 +2,11 @@ package org.openfuxml.renderer.html;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -14,7 +14,6 @@ import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.DocumentProvider;
-import org.openfuxml.test.provider.SectionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,15 +50,15 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 	
 	public void test() throws OfxAuthoringException, OfxConfigurationException, IOException
 	{
-		Section section = SectionProvider.buildWithMultiLevels();
-		JaxbUtil.info(section);
+		Document doc = DocumentProvider.buildComplexALL();
+		JaxbUtil.info(doc);
 		
 		logger.info(StringUtil.stars());
 		
 		Writer w = new OutputStreamWriter(System.out, "UTF-8");
 		
-		OfxHTMLRenderer htmlRenderer = new OfxHTMLRenderer(new OfxConfigurationProvider(),"");
-		htmlRenderer.render(w,section);
+		OfxHtmlRenderer2 htmlRenderer = new OfxHtmlRenderer2(new OfxConfigurationProvider(),"");
+		htmlRenderer.render(w,(Section)doc.getContent().getContent().get(0));
 	}
 
 	public static void main(String[] args) throws IOException, OfxConfigurationException, OfxAuthoringException

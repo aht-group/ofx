@@ -23,17 +23,17 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-public class OfxHTMLRenderer extends OfxRenderer
+public class OfxHtmlRenderer2 extends OfxRenderer
 {
-	Logger logger = LoggerFactory.getLogger(OfxHTMLRenderer.class);
+	Logger logger = LoggerFactory.getLogger(OfxHtmlRenderer2.class);
 
 	private List<String> txt; public List<String> getContent(){return txt;}
 	private HtmlDocumentRenderer document;
 
-	public OfxHTMLRenderer(ConfigurationProvider cp, String pageTitle)
+	public OfxHtmlRenderer2(ConfigurationProvider cp, String pageTitle)
 	{
 		txt = new ArrayList<String>();
-		logger = LoggerFactory.getLogger(OfxHTMLRenderer.class);
+		logger = LoggerFactory.getLogger(OfxHtmlRenderer2.class);
 		document = new HtmlDocumentRenderer(cp,pageTitle);
 	}
 
@@ -49,7 +49,7 @@ public class OfxHTMLRenderer extends OfxRenderer
 		HtmlSectionRenderer renderer = new HtmlSectionRenderer(new OfxConfigurationProvider(),1);
         renderer.render(root,section);
         JDomUtil.debug(root);
-        XMLOutputter xmlOutput = new XMLOutputter(OfxHTMLRenderer.ownPrettyFormat());
+        XMLOutputter xmlOutput = new XMLOutputter(OfxHtmlRenderer2.ownPrettyFormat());
         xmlOutput.output(root, writer);
 	}
 	

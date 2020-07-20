@@ -19,13 +19,13 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-@FacesComponent("org.openfuxml.jsf.component.OutputSection")
+@FacesComponent("org.openfuxml.jsf.component.Html")
 @ResourceDependency(library="ofxCss", name="ofxBasic.css")
-public class OutputSection extends UIPanel
+public class Html extends UIPanel
 {	
-	final static Logger logger = LoggerFactory.getLogger(OutputSection.class);
+	final static Logger logger = LoggerFactory.getLogger(Html.class);
 	
-	private static enum Properties {value}
+	private static enum Properties {section}
 	
 	@Override
 	public void encodeBegin(FacesContext context) throws IOException
@@ -33,14 +33,11 @@ public class OutputSection extends UIPanel
 		ResponseWriter responseWriter = context.getResponseWriter();
 		responseWriter.startElement("div", this);
 		
-		ValueExpression ve = this.getValueExpression(Properties.value.toString());
+		ValueExpression ve = this.getValueExpression(Properties.section.toString());
 		Section s = (Section)ve.getValue(context.getELContext());
-		
-		System.out.println("TESTXX");
 		
 		if(s!=null)
 		{
-			logger.warn("TEST");
 			JaxbUtil.info(s);
 			try
 			{

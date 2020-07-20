@@ -23,9 +23,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 
-public class OfxMultiLangHTMLWriter
+public class OfxMultiLangHtmlWriter2
 {
-	final static Logger logger = LoggerFactory.getLogger(OfxMultiLangHTMLWriter.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxMultiLangHtmlWriter2.class);
 
 	private String[] keys;
 
@@ -34,14 +34,14 @@ public class OfxMultiLangHTMLWriter
 
 	private ConfigurationProvider cp;
 
-	public OfxMultiLangHTMLWriter(File baseHTML, String[] keys, ConfigurationProvider cp)
+	public OfxMultiLangHtmlWriter2(File baseHTML, String[] keys, ConfigurationProvider cp)
 	{
 		this.baseHTML = baseHTML;
 		this.keys = keys;
 		this.cp = cp;
 		
 		dirTable = "table";
-		logger.info("Base Directory for "+OfxMultiLangHTMLWriter.class.getSimpleName()+": "+baseHTML.getAbsolutePath());
+		logger.info("Base Directory for "+OfxMultiLangHtmlWriter2.class.getSimpleName()+": "+baseHTML.getAbsolutePath());
 		rpf = new RelativePathFactory(baseHTML);
 	}
 	
