@@ -37,8 +37,8 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 	@Test public void doc() throws IOException, OfxConfigurationException, OfxAuthoringException
 	{
 		initFile(Key.doc);
-        renderer.render(DocumentProvider.build().getContent());
-    	renderTest(renderer);
+        renderer.render(DocumentProvider.buildComplexALL().getContent());
+    	super.renderTest(renderer);
 	}
 
 	@Test public void withSub() throws IOException, OfxConfigurationException, OfxAuthoringException
@@ -67,8 +67,8 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 		TestHtmlDocumentRenderer test = new TestHtmlDocumentRenderer();
         test.setEnvironment(true);
 		
-//        test.init();test.doc();
+        test.init();test.doc();
 //		test.init();test.withSub();
-		test.init();test.test();
+//		test.init();test.test();
 	}
 }
