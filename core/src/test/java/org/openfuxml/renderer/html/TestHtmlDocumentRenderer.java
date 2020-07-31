@@ -1,8 +1,10 @@
 package org.openfuxml.renderer.html;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,11 +14,13 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
+import org.openfuxml.renderer.html.structure.css.HtmlStyleRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.test.provider.DocumentProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -37,7 +41,11 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 	@Test public void doc() throws IOException, OfxConfigurationException, OfxAuthoringException
 	{
 		initFile(Key.doc);
-        renderer.render(DocumentProvider.buildComplexALL().getContent());
+		
+		String cssFilename = "testHtmlDocumentRenderer.css";
+		generateCss(referenceDir.getPath() + "\\" + cssFilename);
+		
+        renderer.render(DocumentProvider.buildComplexALL().getContent(), Arrays.asList(cssFilename));
     	super.renderTest(renderer);
 	}
 
@@ -46,6 +54,13 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 		initFile(Key.withSub);
 		renderer.render(DocumentProvider.buildWithSubcontent().getContent());
 		renderTest(renderer);
+	}
+	
+	private void generateCss(String filename) {
+		HtmlElement parent = new HtmlElement("body");
+		new HtmlStyleRenderer(cp).render(parent);
+		String cssContent = parent.getChildText("style");
+		StringIO.writeTxt(new File(filename), cssContent);
 	}
 	
 	public void test() throws OfxAuthoringException, OfxConfigurationException, IOException

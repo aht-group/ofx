@@ -1,0 +1,71 @@
+.html-container > div > section > h1:first-child, .html-container > div table caption, .html-container > div table th {
+  background: #c4c4c4 -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0)));
+  border: 1px solid #a8a8a8;
+  box-shadow: inset 0 1px 0 white;
+  color: #333333;
+  font-weight: bold;
+  padding: .5em 1em .3em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7); }
+
+.ofxBold {
+  font-weight: bold; }
+
+.ofxItalic {
+  font-style: italic; }
+
+.jeeslPanel .html-container > div > section {
+  background-color: transparent;
+  border: none; }
+  .jeeslPanel .html-container > div > section > h1:first-child {
+    background: none;
+    border: none;
+    box-shadow: none;
+    line-height: 22px;
+    margin: 0;
+    padding: 0;
+    text-shadow: none; }
+
+.html-container {
+  color: #4f4f4f;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  line-height: 22px; }
+  .html-container > div > section {
+    background-color: #f2f2f2;
+    border: 1px solid #a8a8a8;
+    border-radius: 3px;
+    padding: 1em; }
+    .html-container > div > section > h1:first-child {
+      border-radius: 3px;
+      letter-spacing: normal;
+      line-height: 12px;
+      margin: -0.8em -0.8em 1em -0.8em; }
+    .html-container > div > section section {
+      border: 1px solid #a8a8a8;
+      border-width: 1px 0;
+      padding: 10px; }
+      .html-container > div > section section:first-child {
+        border-top: none; }
+      .html-container > div > section section:last-child {
+        border-bottom: none; }
+      .html-container > div > section section ~ section {
+        border-top: none; }
+  .html-container > div section > *:first-child {
+    margin-top: 0; }
+  .html-container > div section > *:last-child {
+    margin-bottom: 0; }
+  .html-container > div section h1, .html-container > div section h2, .html-container > div section h3, .html-container > div section h4, .html-container > div section h5 {
+    font-size: 11px; }
+  .html-container > div table {
+    border-collapse: collapse; }
+    .html-container > div table caption {
+      border-bottom: 0;
+      border-radius: 3px 3px 0 0; }
+    .html-container > div table tbody tr {
+      background: white; }
+      .html-container > div table tbody tr:nth-child(2n) {
+        background: #f1f4f9; }
+      .html-container > div table tbody tr td {
+        padding: 4px 10px;
+        overflow: hidden;
+        border: 1px solid #a8a8a8; }

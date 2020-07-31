@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @FacesComponent("org.openfuxml.jsf.component.OutputText")
-@ResourceDependency(library="ofxCss", name="ofxBasic.css")
+@ResourceDependency(library="css", name="ofxBasic.css")
 public class OutputText extends UIPanel
 {	
 	final static Logger logger = LoggerFactory.getLogger(OutputText.class);

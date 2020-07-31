@@ -1,0 +1,26 @@
+$white-100: hsla(0, 0%, 100%, 1);
+$white-80: hsla(0, 0%, 100%, .8);
+$white-70: hsla(0, 0%, 100%, .7);
+$white-0: hsla(0, 0%, 100%, 0);
+
+$very-light-grey: hsla(0, 0%, 95%, 1);
+$light-grey: hsla(0, 0%, 77%, 1);
+$medium-grey: hsla(0, 0%, 66%, 1);
+$dark-grey: hsla(0, 0%, 31%, 1);
+$very-dark-grey: hsla(0, 0%, 20%, 1);
+
+$very-light-blue: hsla(214, 37%, 96%, 1);
+
+$border-colour: $medium-grey;
+$foreground-colour: $dark-grey;
+
+$panel-background-colour: $very-light-grey;
+$panel-header-background-colour: $light-grey;
+$panel-header-boxshadow-colour: $white-100;
+$panel-header-foreground-colour: $very-dark-grey;
+$panel-header-gradientstart-colour: $white-80;
+$panel-header-gradientend-colour: $white-0;
+$panel-header-textshadow-colour: $white-70;
+
+$table-even-row-background-colour: $very-light-blue;
+$table-odd-row-background-colour: $white-100;

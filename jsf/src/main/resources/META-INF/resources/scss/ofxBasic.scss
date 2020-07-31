@@ -1,0 +1,119 @@
+@import 'ofxCommon';
+
+.ofxBold  {font-weight: bold;}
+.ofxItalic{font-style: italic;}
+
+.jeeslPanel {
+	.html-container {
+		> div {
+			> section {
+				background-color: transparent;
+				border: none;
+
+				> h1 {
+					&:first-child {
+						background: none;
+						border: none;
+						box-shadow: none;
+						line-height: 22px;
+						margin: 0;
+						padding: 0;
+						text-shadow: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+.html-container {
+	color: $foreground-colour;
+	font-family: Arial, sans-serif;
+	font-size: 11px;
+	line-height: 22px;
+																 
+	> div {
+		> section {
+			background-color: $panel-background-colour;
+			border: $border;
+			border-radius: 3px;
+			padding: 1em;
+
+			> h1 {
+				&:first-child {
+					@extend %header;
+
+					border-radius: 3px;
+					letter-spacing: normal;
+					line-height: 12px;
+					margin: -0.8em -0.8em 1em -0.8em;
+				}
+			}
+
+			section {
+				border: $border;
+				border-width: 1px 0;
+				padding: 10px;
+
+				&:first-child {
+					border-top: none;
+				}
+
+				&:last-child {
+					border-bottom: none;
+				}
+
+				~ section {
+					border-top: none;
+				}
+			}
+		}
+
+		section {
+			> * {
+				&:first-child {
+					margin-top: 0;
+				}
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+			
+			h1, h2, h3, h4, h5 {
+				font-size: 11px;
+			}
+		}
+
+		table {
+			border-collapse: collapse;
+
+			caption {
+				@extend %header;
+
+				border-bottom: 0;
+				border-radius: 3px 3px 0 0;
+			}
+
+			th {
+				@extend %header;
+			}
+
+			tbody {
+				tr {
+					background: $table-odd-row-background-colour;
+
+					&:nth-child(2n) {
+						background: $table-even-row-background-colour;
+					}
+
+					td {
+						padding: 4px 10px;
+						overflow: hidden;
+						border: $border;
+					}
+				}
+			}
+		}
+	}
+}

@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 @FacesComponent("org.openfuxml.jsf.component.OutputSection")
-@ResourceDependency(library="ofxCss", name="ofxBasic.css")
+@ResourceDependency(library="css", name="ofxBasic.css")
 public class OutputSection extends UIPanel
 {	
 	final static Logger logger = LoggerFactory.getLogger(OutputSection.class);

@@ -1,0 +1,13 @@
+@import '_colours';
+
+$border: 1px solid $border-colour;
+
+%header {
+	background: $panel-header-background-colour -webkit-gradient(linear,left top,left bottom,from($panel-header-gradientstart-colour),to($panel-header-gradientend-colour));
+	border: $border;
+	box-shadow: inset 0 1px 0 $panel-header-boxshadow-colour;
+	color: $panel-header-foreground-colour;
+	font-weight: bold;
+	padding: .5em 1em .3em;
+	text-shadow: 0 1px 0 $panel-header-textshadow-colour;
+}
