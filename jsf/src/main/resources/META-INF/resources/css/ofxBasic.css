@@ -55,7 +55,8 @@
   .html-container > div section > *:last-child {
     margin-bottom: 0; }
   .html-container > div section h1, .html-container > div section h2, .html-container > div section h3, .html-container > div section h4, .html-container > div section h5 {
-    font-size: 11px; }
+    font-size: 11px;
+    letter-spacing: normal; }
   .html-container > div table {
     border-collapse: collapse; }
     .html-container > div table caption {
