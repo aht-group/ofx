@@ -19,7 +19,7 @@ public class DemoContentProvider
 	
 	public static LoremIpsum li = new LoremIpsum();
 	
-	public static Document buildComplexALL()
+	public static Document build()
 	{
 //		Section s1 = SectionProvider.build();
 //		s1.getContent().add(ParagraphProvider.create(100));
@@ -44,7 +44,7 @@ public class DemoContentProvider
 	{
 		Section xml = XmlSectionFactory.build();
 		xml.setId("1");
-		xml.getContent().add(XmlTitleFactory.build("Chapter 1: OFX Demo Document"));
+		xml.getContent().add(XmlTitleFactory.build("Chapter 1: Paragrahs"));
 		xml.getContent().add(XmlParagraphFactory.text("We will have two simple paragraphs in this section"));
 		xml.getContent().add(XmlParagraphFactory.text(li.getWords(25)));
 		return xml;

@@ -12,7 +12,7 @@ public class CliDemoContentProvider
     {
 		OfxUtilTestBootstrap.init();
 			
-    	Document doc = DemoContentProvider.buildComplexALL();
+    	Document doc = DemoContentProvider.build();
     	JaxbUtil.info(doc);
     }
 }
