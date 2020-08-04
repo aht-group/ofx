@@ -1,9 +1,9 @@
-package org.openfuxml.factory.xml.ofx.list;
+package org.openfuxml.factory.xml.list;
 
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.list.Type;
 
-public class XmlListFactory
+public class XmlListFactory2
 {
 	public static enum Ordering {ordered,unordered}
 	

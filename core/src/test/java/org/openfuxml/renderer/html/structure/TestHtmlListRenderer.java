@@ -8,7 +8,7 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.ListProvider;
+import org.openfuxml.util.provider.ListProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

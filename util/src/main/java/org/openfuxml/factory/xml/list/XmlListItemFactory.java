@@ -1,4 +1,4 @@
-package org.openfuxml.factory.xml.ofx.list;
+package org.openfuxml.factory.xml.list;
 
 import org.openfuxml.content.list.Item;
 import org.openfuxml.content.ofx.Paragraph;

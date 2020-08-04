@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.ListProvider;
+import org.openfuxml.util.provider.ListProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

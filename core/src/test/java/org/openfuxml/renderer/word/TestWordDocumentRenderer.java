@@ -7,7 +7,7 @@ import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.DocumentProvider;
+import org.openfuxml.test.provider.TestDocumentProvider;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -22,17 +22,17 @@ public class TestWordDocumentRenderer extends AbstractTestWordRenderer
 		NoOpCrossMediaManager cmm = new NoOpCrossMediaManager();
 		ConfigurationProvider cp = ConfigurationProviderFacotry.build(cmm,dsm);
 	
-		Document document  = DocumentProvider.buildComplex();
-		Document document1 = DocumentProvider.buildComplexWithTableSimple();
-		Document document2 = DocumentProvider.buildComplexWithTable();
-		Document document3 = DocumentProvider.buildWithSubcontent();
-		Document document4 = DocumentProvider.buildComplexWith2Table();
-		Document document5 = DocumentProvider.buildComplexWith3Table();
-		Document document6 = DocumentProvider.buildComplexWith3TableWithParagraphInBetween();
-		Document document7 = DocumentProvider.buildComplexWithImage();
-		Document document8 = DocumentProvider.buildComplexWithList();
-		Document document9 = DocumentProvider.buildComplexALL();
-		Document document10 = DocumentProvider.buildComplexWithEmphasis();
+		Document document  = TestDocumentProvider.buildComplex();
+		Document document1 = TestDocumentProvider.buildComplexWithTableSimple();
+		Document document2 = TestDocumentProvider.buildComplexWithTable();
+		Document document3 = TestDocumentProvider.buildWithSubcontent();
+		Document document4 = TestDocumentProvider.buildComplexWith2Table();
+		Document document5 = TestDocumentProvider.buildComplexWith3Table();
+		Document document6 = TestDocumentProvider.buildComplexWith3TableWithParagraphInBetween();
+		Document document7 = TestDocumentProvider.buildComplexWithImage();
+		Document document8 = TestDocumentProvider.buildComplexWithList();
+		Document document9 = TestDocumentProvider.buildComplexALL();
+		Document document10 = TestDocumentProvider.buildComplexWithEmphasis();
 		
 		JaxbUtil.info(document);
 		JaxbUtil.info(document1);

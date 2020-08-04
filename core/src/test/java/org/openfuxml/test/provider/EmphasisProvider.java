@@ -3,10 +3,11 @@ package org.openfuxml.test.provider;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.factory.xml.text.OfxEmphasisFactory;
 import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
+import org.openfuxml.util.provider.DemoContentProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EmphasisProvider extends AbstractElementProvider
+public class EmphasisProvider
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	
@@ -47,18 +48,18 @@ public class EmphasisProvider extends AbstractElementProvider
 	private static Paragraph create(OfxEmphasisFactory eF)
 	{
 		Paragraph p = new Paragraph();
-    	p.getContent().add(li.getWords(1)+" ");
-    	p.getContent().add(eF.build(li.getWords(2)));
-    	p.getContent().add(" "+li.getWords(3));
+    	p.getContent().add(DemoContentProvider.li.getWords(1)+" ");
+    	p.getContent().add(eF.build(DemoContentProvider.li.getWords(2)));
+    	p.getContent().add(" "+DemoContentProvider.li.getWords(3));
     	return p;
 	}
 
 	private static Paragraph create()
 	{
 		Paragraph p = new Paragraph();
-		p.getContent().add(li.getWords(1)+" ");
-		p.getContent().add(OfxEmphasisFactory.typewriter(li.getWords(2)));
-		p.getContent().add(" "+li.getWords(3));
+		p.getContent().add(DemoContentProvider.li.getWords(1)+" ");
+		p.getContent().add(OfxEmphasisFactory.typewriter(DemoContentProvider.li.getWords(2)));
+		p.getContent().add(" "+DemoContentProvider.li.getWords(3));
 		return p;
 	}
 }

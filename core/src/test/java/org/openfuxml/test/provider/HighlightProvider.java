@@ -5,7 +5,7 @@ import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HighlightProvider extends AbstractElementProvider
+public class HighlightProvider
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	

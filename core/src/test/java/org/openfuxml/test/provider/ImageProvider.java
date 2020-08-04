@@ -10,10 +10,11 @@ import org.openfuxml.factory.xml.editorial.XmlIndexFactory;
 import org.openfuxml.factory.xml.media.XmlMediaFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
+import org.openfuxml.util.provider.DemoContentProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ImageProvider extends AbstractElementProvider
+public class ImageProvider
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	
@@ -21,9 +22,9 @@ public class ImageProvider extends AbstractElementProvider
 	public static Paragraph create(int words, String imageTitle)
 	{
     	Paragraph p = new Paragraph();
-    	p.getContent().add(li.getWords(words));
+    	p.getContent().add(DemoContentProvider.li.getWords(words));
 		p.getContent().add(createImage(imageTitle));
-		p.getContent().add(li.getWords(words));
+		p.getContent().add(DemoContentProvider.li.getWords(words));
     	return p;
 	}
 	

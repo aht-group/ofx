@@ -1,13 +1,14 @@
 package org.openfuxml.test.provider;
 
-
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.util.provider.DemoContentProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ListingProvider  extends AbstractElementProvider {
+public class ListingProvider
+{
 
 	final static Logger logger = LoggerFactory.getLogger(ListingProvider.class);
 
@@ -32,7 +33,7 @@ public class ListingProvider  extends AbstractElementProvider {
 	private static Raw buildRaw(int words)
 	{
 		Raw r = new Raw();
-		r.setValue(li.getWords(words) + "\n" + li.getWords(words,words) + "\n" + li.getWords(words*2));
+		r.setValue(DemoContentProvider.li.getWords(words) + "\n" + DemoContentProvider.li.getWords(words,words) + "\n" + DemoContentProvider.li.getWords(words*2));
 		return r;
 	}
 }

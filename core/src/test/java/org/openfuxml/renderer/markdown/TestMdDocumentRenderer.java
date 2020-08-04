@@ -8,7 +8,7 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.markdown.structure.MdDocumentRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.DocumentProvider;
+import org.openfuxml.test.provider.TestDocumentProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +29,7 @@ public class TestMdDocumentRenderer extends AbstractTestMdRenderer
 	@Test public void test() throws IOException, OfxConfigurationException, OfxAuthoringException
 	{
 		initFile(Key.doc);
-		renderer.render(DocumentProvider.build().getContent());
+		renderer.render(TestDocumentProvider.build().getContent());
 		renderTest(renderer);
 	}
 

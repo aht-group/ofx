@@ -6,7 +6,7 @@ import org.openfuxml.content.list.Item;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.list.Type;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.factory.xml.ofx.list.XmlListFactory;
+import org.openfuxml.factory.xml.list.XmlListFactory2;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
@@ -86,7 +86,7 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		}
 		else if(listType.equals(ListType.list))
 		{
-			XmlListFactory.Ordering ordering = XmlListFactory.Ordering.valueOf(xmlType.getOrdering());
+			XmlListFactory2.Ordering ordering = XmlListFactory2.Ordering.valueOf(xmlType.getOrdering());
 			switch(ordering)
 			{
 				case unordered: setUnordered(parent);break;

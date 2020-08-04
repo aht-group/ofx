@@ -9,13 +9,14 @@ import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.factory.xml.table.XmlColumnFactory;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
+import org.openfuxml.util.provider.DemoContentProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableProvider extends AbstractElementProvider
+public class TableProvider
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	
@@ -49,10 +50,11 @@ public class TableProvider extends AbstractElementProvider
 
 	public static Table createSimple(){return createSimple(4,2,1);}
 	public static Table createSimple(int col, int row){return createSimple(4,col,row);}
-	private static Table createSimple(int words, int col, int row){
+	private static Table createSimple(int words, int col, int row)
+	{
 		Table xml = XmlTableFactory.build(createHead(col),createBody(words,col,row));
 		xml.setTitle(title());
-		xml.setId(li.getWords(words-3,words+2));
+		xml.setId(DemoContentProvider.li.getWords(words-3,words+2));
 		return xml;
 	}
 	public static Table create(){return create(4,2,1);}
@@ -62,7 +64,7 @@ public class TableProvider extends AbstractElementProvider
 		Table xml = XmlTableFactory.build(createHead(col),createBody(words,col,row));
 		xml.setTitle(title());
 		xml.setSpecification(specifications());
-		xml.setId(li.getWords(words-3,words+2));
+		xml.setId(DemoContentProvider.li.getWords(words-3,words+2));
 		return xml;
 	}
 
@@ -81,7 +83,7 @@ public class TableProvider extends AbstractElementProvider
 			int c = col;
 			String [] data = new String [col];
 			while(c > 0){
-				data [--c] = li.getWords(words);
+				data [--c] = DemoContentProvider.li.getWords(words);
 			}
 			b.add(data);
 			row--;
@@ -105,7 +107,7 @@ public class TableProvider extends AbstractElementProvider
 	private static Title title()
 	{
 		Title t = new Title();
-		t.getContent().add(li.getWords(3));
+		t.getContent().add(DemoContentProvider.li.getWords(3));
 		return t;
 	}
 }

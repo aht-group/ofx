@@ -7,7 +7,7 @@ import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
-import org.openfuxml.test.provider.DocumentProvider;
+import org.openfuxml.test.provider.TestDocumentProvider;
 import org.openfuxml.test.provider.SectionProvider;
 import org.openfuxml.test.provider.TableProvider;
 
@@ -41,7 +41,7 @@ public class AbstractTestWordRenderer {
 	
 	@Deprecated
 	public Document buildDocument(){
-		Document d = DocumentProvider.build();
+		Document d = TestDocumentProvider.build();
 		d.getContent().getContent().add(buildSection());
 		d.getContent().getContent().add(buildTable());
 		return d;

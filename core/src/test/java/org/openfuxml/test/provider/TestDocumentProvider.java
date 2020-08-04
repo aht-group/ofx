@@ -4,10 +4,11 @@ import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlDocumentFactory;
 import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
+import org.openfuxml.util.provider.ListProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DocumentProvider extends AbstractElementProvider
+public class TestDocumentProvider
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	

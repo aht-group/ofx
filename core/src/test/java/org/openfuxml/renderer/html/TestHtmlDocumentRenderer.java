@@ -16,7 +16,7 @@ import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
 import org.openfuxml.renderer.html.structure.css.HtmlStyleRenderer;
 import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.DocumentProvider;
+import org.openfuxml.test.provider.TestDocumentProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,14 +45,14 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 		String cssFilename = "testHtmlDocumentRenderer.css";
 		generateCss(referenceDir.getPath() + "\\" + cssFilename);
 		
-        renderer.render(DocumentProvider.buildComplexALL().getContent(), Arrays.asList(cssFilename));
+        renderer.render(TestDocumentProvider.buildComplexALL().getContent(), Arrays.asList(cssFilename));
     	super.renderTest(renderer);
 	}
 
 	@Test public void withSub() throws IOException, OfxConfigurationException, OfxAuthoringException
 	{
 		initFile(Key.withSub);
-		renderer.render(DocumentProvider.buildWithSubcontent().getContent());
+		renderer.render(TestDocumentProvider.buildWithSubcontent().getContent());
 		renderTest(renderer);
 	}
 	
@@ -65,7 +65,7 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 	
 	public void test() throws OfxAuthoringException, OfxConfigurationException, IOException
 	{
-		Document doc = DocumentProvider.buildComplexALL();
+		Document doc = TestDocumentProvider.buildComplexALL();
 		JaxbUtil.info(doc);
 		
 		logger.info(StringUtil.stars());

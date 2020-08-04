@@ -6,7 +6,7 @@ import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MarginaliaProvider extends AbstractElementProvider
+public class MarginaliaProvider
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
 	

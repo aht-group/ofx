@@ -33,6 +33,12 @@
 			<scope>compile</scope>
 		</dependency>
 		
+		<dependency>
+    		<groupId>de.sven-jacobs</groupId>
+    		<artifactId>loremipsum</artifactId>
+    		<scope>compile</scope>
+		</dependency>
+		
 		<!-- XML -->
 		<dependency>
    	   		<groupId>com.sun.xml.bind</groupId>
