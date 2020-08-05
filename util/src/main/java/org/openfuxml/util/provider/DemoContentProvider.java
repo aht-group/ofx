@@ -1,9 +1,7 @@
 package org.openfuxml.util.provider;
 
-import org.openfuxml.content.list.List;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.factory.xml.list.XmlListFactory2;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlDocumentFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
