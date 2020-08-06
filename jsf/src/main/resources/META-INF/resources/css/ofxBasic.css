@@ -1,4 +1,4 @@
-.html-container > div > section > h1:first-child, .html-container > div table caption, .html-container > div table th {
+.html-container-panel .html-container > div > section > h1:first-child, .html-container > div table caption, .html-container > div table th {
   background: #c4c4c4 -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0)));
   border: 1px solid #a8a8a8;
   box-shadow: inset 0 1px 0 white;
@@ -7,23 +7,30 @@
   padding: .5em 1em .3em;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7); }
 
+ol, ul {
+  list-style: inherit;
+  padding-left: 40px; }
+
 .ofxBold {
   font-weight: bold; }
 
 .ofxItalic {
   font-style: italic; }
 
-.jeeslPanel .html-container > div > section {
-  background-color: transparent;
-  border: none; }
-  .jeeslPanel .html-container > div > section > h1:first-child {
-    background: none;
-    border: none;
-    box-shadow: none;
-    line-height: 22px;
-    margin: 0;
-    padding: 0;
-    text-shadow: none; }
+.html-container-panel {
+  background: #f2f2f2; }
+  .html-container-panel .ui-panel-content {
+    padding: 0; }
+  .html-container-panel .html-container > div > section > h1:first-child {
+    border-radius: 3px;
+    font-size: 1em;
+    letter-spacing: normal;
+    line-height: 12px;
+    margin: -1em -1em 1em; }
+    .html-container-panel .html-container > div > section > h1:first-child + section {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0; }
 
 .html-container {
   color: #4f4f4f;
@@ -31,19 +38,26 @@
   font-size: 11px;
   line-height: 22px; }
   .html-container > div > section {
-    background-color: #f2f2f2;
-    border: 1px solid #a8a8a8;
-    border-radius: 3px;
     padding: 1em; }
-    .html-container > div > section > h1:first-child {
-      border-radius: 3px;
+    .html-container > div > section h1 {
+      color: #333333;
+      font-size: 1.4em;
+      letter-spacing: -1;
+      margin-bottom: 1em; }
+    .html-container > div > section h2 {
+      color: #333333;
+      font-size: 1.2em;
       letter-spacing: normal;
-      line-height: 12px;
-      margin: -0.8em -0.8em 1em -0.8em; }
+      margin-bottom: 0.75em; }
+    .html-container > div > section h3, .html-container > div > section h4, .html-container > div > section h5 {
+      color: #333333;
+      font-size: 1em;
+      letter-spacing: normal;
+      margin-bottom: 0.5em; }
     .html-container > div > section section {
       border: 1px solid #a8a8a8;
       border-width: 1px 0;
-      padding: 10px; }
+      padding: 1em .5em; }
       .html-container > div > section section:first-child {
         border-top: none; }
       .html-container > div > section section:last-child {
@@ -54,9 +68,10 @@
     margin-top: 0; }
   .html-container > div section > *:last-child {
     margin-bottom: 0; }
-  .html-container > div section h1, .html-container > div section h2, .html-container > div section h3, .html-container > div section h4, .html-container > div section h5 {
-    font-size: 11px;
-    letter-spacing: normal; }
+  .html-container > div section > section:first-child {
+    padding-top: 0; }
+  .html-container > div section > section:last-child {
+    padding-bottom: 0; }
   .html-container > div table {
     border-collapse: collapse; }
     .html-container > div table caption {
