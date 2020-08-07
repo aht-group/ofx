@@ -142,3 +142,22 @@ ol, ul {
 		}
 	}
 }
+
+.no-header-panel {
+	.html-container {
+		> div {
+			> section {
+				> h1 {
+					&:first-child {
+						display: none;
+						
+						+ section {
+							border-top: none;
+							padding-top: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+}

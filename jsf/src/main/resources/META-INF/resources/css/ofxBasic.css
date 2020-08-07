@@ -85,3 +85,9 @@ ol, ul {
         padding: 4px 10px;
         overflow: hidden;
         border: 1px solid #a8a8a8; }
+
+.no-header-panel .html-container > div > section > h1:first-child {
+  display: none; }
+  .no-header-panel .html-container > div > section > h1:first-child + section {
+    border-top: none;
+    padding-top: 0; }
