@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-  xmlns:composite="http://java.sun.com/jsf/composite">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:ofx="http://www.openfuxml.org/jsf"
+	  xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
 		<composite:attribute name="section" required="true" shortDescription="A ofx-section"/>
+		<composite:attribute name="title" required="false"/>
 	</composite:interface>
         
 	<composite:implementation>
-		<p:panel>
-			<f:facet name="header">test</f:facet>
-			bla
-		</p:panel>
+		<c:choose>
+		    <c:when test="#{not empty cc.attributes.title}">
+		        <p:panel header="#{cc.attributes.title}" styleClass="jeeslPanel">
+		        	<ofx:html section="#{cc.attributes.section}"/>
+		        </p:panel>
+		    </c:when>    
+		    <c:otherwise>
+		        <p:panel styleClass="html-container-panel">
+					<ofx:html section="#{cc.attributes.section}"/>
+				</p:panel>
+		    </c:otherwise>
+		</c:choose>
 	</composite:implementation>
 </html>
