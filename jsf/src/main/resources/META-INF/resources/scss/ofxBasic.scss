@@ -8,36 +8,6 @@ ol, ul {
 .ofxBold  {font-weight: bold;}
 .ofxItalic{font-style: italic;}
 
-.html-container-panel {
-	background: $panel-background-colour;
-	
-	.ui-panel-content {
-		padding: 0;
-	}
-
-	.html-container {
-		> div {
-			> section {
-				> h1:first-child {
-					@extend %header;
-					
-					border-radius: 3px;
-					font-size: 1em;
-					letter-spacing: normal;
-					line-height: 12px;
-					margin: -1em -1em 1em;
-
-					+ section {
-						border-top: none;
-						margin-top: 0;
-						padding-top: 0;
-					}
-				}
-			}
-		}
-	}
-}
-
 .html-container {
 	color: $foreground-colour;
 	font-family: Arial, sans-serif;
@@ -143,6 +113,36 @@ ol, ul {
 	}
 }
 
+.html-container-panel {
+	background: $panel-background-colour;
+	
+	.ui-panel-content {
+		padding: 0;
+	}
+
+	.html-container {
+		> div {
+			> section {
+				> h1:first-child {
+					@extend %header;
+					
+					border-radius: 3px;
+					font-size: 1em;
+					letter-spacing: normal;
+					line-height: 12px;
+					margin: -1em -1em 1em;
+
+					+ section {
+						border-top: none;
+						margin-top: 0;
+						padding-top: 0;
+					}
+				}
+			}
+		}
+	}
+}
+
 .no-header-panel {
 	.html-container {
 		> div {
@@ -154,6 +154,63 @@ ol, ul {
 						+ section {
 							border-top: none;
 							padding-top: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.html-accordion {
+	padding: 0;
+    border: none;
+
+	.html-container {
+		> div {
+			padding: 1em;
+			
+			> section {
+				background: $panel-background-colour;
+				border: $border;
+				border-radius: 3px;
+				box-sizing: border-box;
+				margin-top: 1em;
+				padding: 1em;
+				height: 33px;
+				overflow: hidden;
+
+				&[data-collapsed=false] {
+					> h1, > h2, > h3, > h4, > h5 {
+						&:first-child {
+							background-color: $panel-header-active-background-colour;
+							
+							&:before {
+								transform: rotate(90deg);
+							}
+						}
+					}
+				}
+				
+				> h1, > h2, > h3, > h4, > h5 {
+					&:first-child {
+						@extend %header;
+						
+						border-width: 0 0 1px 0;
+						box-sizing: border-box;
+						cursor: pointer;
+						font-size: 1em;
+						height: 32px;
+					    letter-spacing: normal;
+					    margin: -1em -1em 0.5em -1em;
+						transition: background 1s ease-in-out;
+						
+						&:before {
+							content: '';
+							display: inline-block;
+						    font-family: 'primeicons';
+						    margin-right: .5em;
+							transition: transform 1s ease-in-out;
 						}
 					}
 				}

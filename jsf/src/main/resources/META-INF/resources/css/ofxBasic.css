@@ -1,4 +1,4 @@
-.html-container-panel .html-container > div > section > h1:first-child, .html-container > div table caption, .html-container > div table th {
+.html-container > div table caption, .html-container > div table th, .html-container-panel .html-container > div > section > h1:first-child, .html-accordion .html-container > div > section > h1:first-child, .html-accordion .html-container > div > section > h2:first-child, .html-accordion .html-container > div > section > h3:first-child, .html-accordion .html-container > div > section > h4:first-child, .html-accordion .html-container > div > section > h5:first-child {
   background: #c4c4c4 -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, 0)));
   border: 1px solid #a8a8a8;
   box-shadow: inset 0 1px 0 white;
@@ -16,21 +16,6 @@ ol, ul {
 
 .ofxItalic {
   font-style: italic; }
-
-.html-container-panel {
-  background: #f2f2f2; }
-  .html-container-panel .ui-panel-content {
-    padding: 0; }
-  .html-container-panel .html-container > div > section > h1:first-child {
-    border-radius: 3px;
-    font-size: 1em;
-    letter-spacing: normal;
-    line-height: 12px;
-    margin: -1em -1em 1em; }
-    .html-container-panel .html-container > div > section > h1:first-child + section {
-      border-top: none;
-      margin-top: 0;
-      padding-top: 0; }
 
 .html-container {
   color: #4f4f4f;
@@ -86,8 +71,57 @@ ol, ul {
         overflow: hidden;
         border: 1px solid #a8a8a8; }
 
+.html-container-panel {
+  background: #f2f2f2; }
+  .html-container-panel .ui-panel-content {
+    padding: 0; }
+  .html-container-panel .html-container > div > section > h1:first-child {
+    border-radius: 3px;
+    font-size: 1em;
+    letter-spacing: normal;
+    line-height: 12px;
+    margin: -1em -1em 1em; }
+    .html-container-panel .html-container > div > section > h1:first-child + section {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0; }
+
 .no-header-panel .html-container > div > section > h1:first-child {
   display: none; }
   .no-header-panel .html-container > div > section > h1:first-child + section {
     border-top: none;
     padding-top: 0; }
+
+.html-accordion {
+  padding: 0;
+  border: none; }
+  .html-accordion .html-container > div {
+    padding: 1em; }
+    .html-accordion .html-container > div > section {
+      background: #f2f2f2;
+      border: 1px solid #a8a8a8;
+      border-radius: 3px;
+      box-sizing: border-box;
+      margin-top: 1em;
+      padding: 1em;
+      height: 33px;
+      overflow: hidden; }
+      .html-accordion .html-container > div > section[data-collapsed=false] > h1:first-child, .html-accordion .html-container > div > section[data-collapsed=false] > h2:first-child, .html-accordion .html-container > div > section[data-collapsed=false] > h3:first-child, .html-accordion .html-container > div > section[data-collapsed=false] > h4:first-child, .html-accordion .html-container > div > section[data-collapsed=false] > h5:first-child {
+        background-color: white; }
+        .html-accordion .html-container > div > section[data-collapsed=false] > h1:first-child:before, .html-accordion .html-container > div > section[data-collapsed=false] > h2:first-child:before, .html-accordion .html-container > div > section[data-collapsed=false] > h3:first-child:before, .html-accordion .html-container > div > section[data-collapsed=false] > h4:first-child:before, .html-accordion .html-container > div > section[data-collapsed=false] > h5:first-child:before {
+          transform: rotate(90deg); }
+      .html-accordion .html-container > div > section > h1:first-child, .html-accordion .html-container > div > section > h2:first-child, .html-accordion .html-container > div > section > h3:first-child, .html-accordion .html-container > div > section > h4:first-child, .html-accordion .html-container > div > section > h5:first-child {
+        border-width: 0 0 1px 0;
+        box-sizing: border-box;
+        cursor: pointer;
+        font-size: 1em;
+        height: 32px;
+        letter-spacing: normal;
+        margin: -1em -1em 0.5em -1em;
+        transition: background 1s ease-in-out; }
+        .html-accordion .html-container > div > section > h1:first-child:before, .html-accordion .html-container > div > section > h2:first-child:before, .html-accordion .html-container > div > section > h3:first-child:before, .html-accordion .html-container > div > section > h4:first-child:before, .html-accordion .html-container > div > section > h5:first-child:before {
+          content: '';
+          display: inline-block;
+          font-family: 'primeicons';
+          margin-right: .5em;
+          transition: transform 1s ease-in-out; }
