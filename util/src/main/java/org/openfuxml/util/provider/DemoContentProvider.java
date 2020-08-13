@@ -1,9 +1,7 @@
 package org.openfuxml.util.provider;
 
-import org.openfuxml.content.list.List;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.factory.xml.list.XmlListFactory2;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlDocumentFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
@@ -36,7 +34,7 @@ public class DemoContentProvider
 		Document xml = XmlDocumentFactory.withContent();
 		xml.getContent().getContent().add(c1());
 		xml.getContent().getContent().add(c2());
-		
+		xml.getContent().getContent().add(c3());
 		return xml;
 	}
 	
@@ -57,6 +55,35 @@ public class DemoContentProvider
 		xml.getContent().add(XmlTitleFactory.build("Chapter 2: Lists"));
 		xml.getContent().add(XmlParagraphFactory.text(li.getWords(25)));
 		xml.getContent().add(ListProvider.unordered());
+		return xml;
+	}
+	
+	private static Section c3()
+	{	
+		Section xml = XmlSectionFactory.build();
+		xml.setId("3");
+		xml.getContent().add(XmlTitleFactory.build("Chapter 3: Sections with Sub-Sections"));
+		xml.getContent().add(XmlParagraphFactory.text(li.getWords(2)));
+		
+		Section x1 = XmlSectionFactory.build();
+		x1.setId("3.1");
+		x1.getContent().add(XmlTitleFactory.build("Section 3.1: Section A"));
+		x1.getContent().add(XmlParagraphFactory.text(li.getWords(2)));
+		
+		
+		Section x11 = XmlSectionFactory.build();
+		x11.setId("3.1.1");
+		x11.getContent().add(XmlTitleFactory.build("Section 3.1.1: Section A.1"));
+		x11.getContent().add(XmlParagraphFactory.text(li.getWords(2)));
+		x1.getContent().add(x11);
+		xml.getContent().add(x1);
+		
+		Section x2 = XmlSectionFactory.build();
+		x2.setId("3.2"); 
+		x2.getContent().add(XmlTitleFactory.build("Section 3.2: Section B"));
+		x2.getContent().add(XmlParagraphFactory.text(li.getWords(2)));
+		xml.getContent().add(x2);
+		
 		return xml;
 	}
 }
