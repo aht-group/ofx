@@ -51,7 +51,7 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 		* und verarbeitet.*/
 		for(Object o : section.getContent())
 		{
-			if(o instanceof Section){renderSection(div,(Section)o, ++lvl);}
+			if(o instanceof Section){renderSection(div,(Section)o, lvl + 1);}
 			else if(o instanceof Sections){processSections(div, ((Sections)o));}
 			else if(o instanceof Title){titleRenderer(div, ((Title)o));}
 			else if(o instanceof String){div.addContent(((String) o));}
@@ -102,7 +102,7 @@ public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxH
 	{
 		for(Object o : sections.getContent())
 		{
-			if(o instanceof Section){renderSection(div,(Section)o,++lvl);}
+			if(o instanceof Section){renderSection(div,(Section)o,lvl + 1);}
 		}
 	}
 }
