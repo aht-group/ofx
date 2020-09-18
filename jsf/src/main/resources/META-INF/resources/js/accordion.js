@@ -24,13 +24,19 @@ $(function() {
 	}
 	
 	var root = $('.html-accordion .html-container > div');
+	var mainSection = root.children().first();
 	
-	$('.html-accordion .html-container > div > section > section').has("> h1:first-child, " +
-																	   "> h2:first-child, " +
-																	   "> h3:first-child, " +
-																	   "> h4:first-child, " +
-																	   "> h5:first-child")
+	$('.html-accordion .html-container > div > section > section').has('> h1:first-child, ' +
+																	   '> h2:first-child, ' +
+																	   '> h3:first-child, ' +
+																	   '> h4:first-child, ' +
+																	   '> h5:first-child, ' +
+																	   '> h6:first-child')
 																  .appendTo(root);
+	
+	if (mainSection.children().length === 0 || (mainSection.children().length === 1 && mainSection.children().has('h1, h2, h3, h4, h5'))) {
+		mainSection.remove();
+	}
 
 	$('.html-accordion .html-container > div > section > h1:first-child, ' +
 	  '.html-accordion .html-container > div > section > h2:first-child, ' +

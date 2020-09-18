@@ -17,26 +17,27 @@ ol, ul {
 	> div {
 		> section {
 			padding: 1em;
+			
+			> section {
+				> section {
+					h1, h2, h3, h4, h5 {
+						font-size: 1em;
+						margin-bottom: 0.5em;
+					}
+				}
+				
+				h1, h2, h3, h4, h5 {
+					font-size: 1.2em;
+					letter-spacing: normal;
+					margin-bottom: 0.75em;
+				}
+			}
 
-			h1 {
+			h1, h2, h3, h4, h5 {
 				color: $panel-header-foreground-colour;
 				font-size: 1.4em;
 				letter-spacing: -1;
 				margin-bottom: 1em;
-			}
-			
-			h2 {
-				color: $panel-header-foreground-colour;
-				font-size: 1.2em;
-				letter-spacing: normal;
-				margin-bottom: 0.75em;
-			}
-			
-			h3, h4, h5 {
-				color: $panel-header-foreground-colour;
-				font-size: 1em;
-				letter-spacing: normal;
-				margin-bottom: 0.5em;
 			}
 
 			section {
@@ -55,6 +56,8 @@ ol, ul {
 				~ section {
 					border-top: none;
 				}
+				
+				
 			}
 		}
 
@@ -215,6 +218,31 @@ ol, ul {
 					}
 				}
 			}
+		}
+	}
+}
+
+.html-tab {
+	border: none;
+	padding: 0;
+	
+	.ui-panel-content {
+		padding: 0;
+	}
+	
+	.ui-tabs-header {
+		&:hover {
+			border: 1px solid #7096ab;
+		    background: #85b2cb -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0.6)),to(rgba(255,255,255,0)));
+		    font-weight: bold;
+		    color: #313131;
+		    box-shadow: 0 0 8px #85b2cb;
+		}
+	}
+	
+	.ui-tabs-panel {
+		section {
+			overflow: hidden;
 		}
 	}
 }
