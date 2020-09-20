@@ -7,6 +7,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.content.ofx.Section;
@@ -16,7 +17,6 @@ import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.util.OfxContentDebugger;
-import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,7 +66,7 @@ public class TestLatexListingRenderer extends AbstractLatexListingTest
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	OfxCoreBootstrap.init();
 			
     	TestLatexListingRenderer.initLoremIpsum();
     	TestLatexListingRenderer test = new TestLatexListingRenderer();

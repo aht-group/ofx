@@ -8,15 +8,16 @@ import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.doc.provider.old.TestDocumentProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
 import org.openfuxml.renderer.html.structure.css.HtmlStyleRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.TestDocumentProvider;
+import org.openfuxml.renderer.html.util.HtmlElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +57,8 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 		renderTest(renderer);
 	}
 	
-	private void generateCss(String filename) {
+	private void generateCss(String filename)
+	{
 		HtmlElement parent = new HtmlElement("body");
 		new HtmlStyleRenderer(cp).render(parent);
 		String cssContent = parent.getChildText("style");
@@ -72,13 +74,13 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 		
 		Writer w = new OutputStreamWriter(System.out, "UTF-8");
 		
-		OfxHtmlRenderer2 htmlRenderer = new OfxHtmlRenderer2(new OfxConfigurationProvider(),"");
+		OfxHtmlRenderer htmlRenderer = new OfxHtmlRenderer(new OfxConfigurationProvider(),"");
 		htmlRenderer.render(w,(Section)doc.getContent().getContent().get(0));
 	}
 
 	public static void main(String[] args) throws IOException, OfxConfigurationException, OfxAuthoringException
 	{
-		OfxCoreTestBootstrap.init();
+		OfxCoreBootstrap.init();
 		TestHtmlDocumentRenderer test = new TestHtmlDocumentRenderer();
         test.setEnvironment(true);
 		

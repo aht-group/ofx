@@ -18,22 +18,24 @@ import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.OfxRenderer;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
 import org.openfuxml.renderer.html.structure.HtmlSectionRenderer;
+import org.openfuxml.renderer.html.util.HtmlElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-public class OfxHtmlRenderer2 extends OfxRenderer
+public class OfxHtmlRenderer extends OfxRenderer
 {
-	Logger logger = LoggerFactory.getLogger(OfxHtmlRenderer2.class);
+	Logger logger = LoggerFactory.getLogger(OfxHtmlRenderer.class);
 
 	private List<String> txt; public List<String> getContent(){return txt;}
+	
 	private HtmlDocumentRenderer document;
 
-	public OfxHtmlRenderer2(ConfigurationProvider cp, String pageTitle)
+	public OfxHtmlRenderer(ConfigurationProvider cp, String pageTitle)
 	{
 		txt = new ArrayList<String>();
-		logger = LoggerFactory.getLogger(OfxHtmlRenderer2.class);
+		logger = LoggerFactory.getLogger(OfxHtmlRenderer.class);
 		document = new HtmlDocumentRenderer(cp,pageTitle);
 	}
 
@@ -49,7 +51,7 @@ public class OfxHtmlRenderer2 extends OfxRenderer
 		HtmlSectionRenderer renderer = new HtmlSectionRenderer(new OfxConfigurationProvider(),1);
         renderer.render(root,section);
         JDomUtil.debug(root);
-        XMLOutputter xmlOutput = new XMLOutputter(OfxHtmlRenderer2.ownPrettyFormat());
+        XMLOutputter xmlOutput = new XMLOutputter(OfxHtmlRenderer.ownPrettyFormat());
         xmlOutput.output(root, writer);
 	}
 	

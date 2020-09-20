@@ -5,14 +5,14 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.doc.provider.text.SectionProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.wiki.AbstractTestWikiRenderer;
 import org.openfuxml.renderer.wiki.WikiSectionRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.SectionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +49,7 @@ public class TestWikiSectionRenderer extends AbstractTestWikiRenderer{
 	
 	public static void main(String[] args) throws IOException, OfxAuthoringException, OfxConfigurationException
 	{
-		OfxCoreTestBootstrap.init();
+		OfxCoreBootstrap.init();
 		TestWikiSectionRenderer test = new TestWikiSectionRenderer();
         test.setEnvironment(true);
 		

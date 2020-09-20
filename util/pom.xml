@@ -97,7 +97,7 @@
 	        <groupId>org.slf4j</groupId>
 	        <artifactId>jcl-over-slf4j</artifactId>
 	        <scope>test</scope>
-	      </dependency>
+		</dependency>
 	      
 	      <dependency>
 		    <groupId>org.apache.commons</groupId>

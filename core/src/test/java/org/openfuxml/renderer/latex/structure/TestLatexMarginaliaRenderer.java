@@ -5,12 +5,12 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
+import org.openfuxml.doc.provider.old.MarginaliaProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexMarginaliaRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.MarginaliaProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +46,7 @@ public class TestLatexMarginaliaRenderer extends AbstractTestLatexRenderer
 	    
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	OfxCoreBootstrap.init();
     	TestLatexMarginaliaRenderer.initLoremIpsum();
     	TestLatexMarginaliaRenderer test = new TestLatexMarginaliaRenderer();
     	test.setEnvironment(true);

@@ -1,15 +1,14 @@
-package org.openfuxml.test.provider;
+package org.openfuxml.doc.provider.text;
 
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.doc.provider.DemoContentProvider;
 import org.openfuxml.factory.xml.text.OfxEmphasisFactory;
-import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
-import org.openfuxml.util.provider.DemoContentProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EmphasisProvider
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(EmphasisProvider.class);
 	
 	public enum Key {bold,italic,quote}
 	

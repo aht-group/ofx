@@ -1,14 +1,14 @@
-package org.openfuxml.test.provider;
+package org.openfuxml.doc.provider.old;
 
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
+import org.openfuxml.doc.provider.text.ParagraphProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MarginaliaProvider
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(MarginaliaProvider.class);
 	
 	public static Marginalia withParagraph()
 	{

@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.editorial.Acronyms;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Paragraph;
@@ -16,7 +17,6 @@ import org.openfuxml.factory.xml.ofx.content.XmlCommentFactory;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.util.OfxCommentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,17 +61,17 @@ public class TestLatexAcronymRenderer extends AbstractTestLatexRenderer
 	
     @Test public void acronym() throws IOException, OfxAuthoringException
     {    	
-    	f = new File(rootDir,dir+"/acronym.txt");
+    	referenceFile = new File(rootDir,dir+"/acronym.txt");
     	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cp,true);
     	renderer.render(paragraph());
-    	renderTest(renderer,f);
+    	renderTest(renderer,referenceFile);
     }
 	
     @Test public void acronyms() throws IOException, OfxAuthoringException
     {    	
-    	f = new File(rootDir,dir+"/acronyms.txt");
+    	referenceFile = new File(rootDir,dir+"/acronyms.txt");
     	renderer.render(create());
-    	renderTest(renderer,f);
+    	renderTest(renderer,referenceFile);
     }
     
     @Test(expected=OfxAuthoringException.class)
@@ -100,7 +100,7 @@ public class TestLatexAcronymRenderer extends AbstractTestLatexRenderer
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	OfxCoreBootstrap.init();
 			
     	TestLatexAcronymRenderer.initLoremIpsum();
     	TestLatexAcronymRenderer test = new TestLatexAcronymRenderer();

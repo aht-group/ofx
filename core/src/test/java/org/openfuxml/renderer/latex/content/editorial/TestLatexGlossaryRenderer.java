@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Paragraph;
@@ -18,7 +19,6 @@ import org.openfuxml.factory.xml.text.OfxEmphasisFactory;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.util.OfxCommentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,17 +63,17 @@ public class TestLatexGlossaryRenderer extends AbstractTestLatexRenderer
 	
     @Test public void glossaryList() throws IOException, OfxAuthoringException
     {    	
-    	f = new File(rootDir,dir+"/glossary.txt");
+    	referenceFile = new File(rootDir,dir+"/glossary.txt");
     	renderer.render(create());
-    	renderTest(renderer,f);
+    	renderTest(renderer,referenceFile);
     }
     
     @Test public void glossary() throws IOException, OfxAuthoringException
     {    	
-    	f = new File(rootDir,dir+"/glossary-1.txt");
+    	referenceFile = new File(rootDir,dir+"/glossary-1.txt");
     	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cp,true);
     	renderer.render(paragraph());
-    	renderTest(renderer,f);
+    	renderTest(renderer,referenceFile);
     }
     
     @Test public void glossaryEmphasis() throws IOException, OfxAuthoringException
@@ -85,10 +85,10 @@ public class TestLatexGlossaryRenderer extends AbstractTestLatexRenderer
     	p.getContent().add(XmlGlossaryFactory.build("c1"));
     	p.getContent().add(" "+li.getWords(3));
     	
-    	f = new File(rootDir,dir+"/glossary-2.txt");
+    	referenceFile = new File(rootDir,dir+"/glossary-2.txt");
     	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cp,true);
     	renderer.render(paragraph());
-    	renderTest(renderer,f);
+    	renderTest(renderer,referenceFile);
     }
     
     @Test(expected=OfxAuthoringException.class)
@@ -117,7 +117,7 @@ public class TestLatexGlossaryRenderer extends AbstractTestLatexRenderer
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	OfxCoreBootstrap.init();
 			
     	TestLatexGlossaryRenderer.initLoremIpsum();
     	TestLatexGlossaryRenderer test = new TestLatexGlossaryRenderer();

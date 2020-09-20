@@ -8,7 +8,7 @@ import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
-import org.openfuxml.renderer.html.HtmlElement;
+import org.openfuxml.renderer.html.util.HtmlElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

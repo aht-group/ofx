@@ -13,7 +13,7 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.OfxConfigurationProvider;
-import org.openfuxml.renderer.html.OfxHtmlRenderer2;
+import org.openfuxml.renderer.html.OfxHtmlRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +41,7 @@ public class Html extends UIPanel
 			JaxbUtil.info(s);
 			try
 			{
-				OfxHtmlRenderer2 htmlRenderer = new OfxHtmlRenderer2(new OfxConfigurationProvider(),"");
+				OfxHtmlRenderer htmlRenderer = new OfxHtmlRenderer(new OfxConfigurationProvider(),"");
 				htmlRenderer.render(responseWriter,s);
 			}
 			catch (OfxAuthoringException e) {e.printStackTrace();}

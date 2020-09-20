@@ -5,11 +5,11 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
+import org.openfuxml.doc.provider.old.TestDocumentProvider;
+import org.openfuxml.doc.provider.table.TableProvider;
+import org.openfuxml.doc.provider.text.SectionProvider;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
-import org.openfuxml.test.provider.TestDocumentProvider;
-import org.openfuxml.test.provider.SectionProvider;
-import org.openfuxml.test.provider.TableProvider;
 
 public class AbstractTestWordRenderer {
 

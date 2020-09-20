@@ -8,9 +8,9 @@ import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
-import org.openfuxml.renderer.html.HtmlAttribute;
-import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
+import org.openfuxml.renderer.html.util.HtmlAttribute;
+import org.openfuxml.renderer.html.util.HtmlElement;
 
 import java.util.ArrayList;
 import java.util.List;

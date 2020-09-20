@@ -6,9 +6,9 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
+import org.openfuxml.doc.provider.old.ListItemProvider;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.ListItemProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,11 +25,11 @@ public class TestLatexItemFactory extends AbstractLatexListTest
 	
     @Test public void itemize() throws IOException, OfxAuthoringException
     {
-    	f = new File(rootDir,dir+"/"+Key.itemize+".txt");
+    	referenceFile = new File(rootDir,dir+"/"+Key.itemize+".txt");
     	renderer.render(LatexListRenderer.ListType.list,ListItemProvider.build());
     	debugCharacter(renderer);
-    	save(renderer,f);
-    	assertText(renderer,f);
+    	save(renderer,referenceFile);
+    	assertText(renderer,referenceFile);
     }
     
     @Test(expected=OfxAuthoringException.class)
@@ -41,16 +41,16 @@ public class TestLatexItemFactory extends AbstractLatexListTest
     @Test
     public void description() throws IOException, OfxAuthoringException
     {
-    	f = new File(rootDir,dir+"/"+Key.description+".txt");
+    	referenceFile = new File(rootDir,dir+"/"+Key.description+".txt");
     	renderer.render(LatexListRenderer.ListType.description,ListItemProvider.description());
     	debugCharacter(renderer);
-    	save(renderer,f);
-    	assertText(renderer,f);
+    	save(renderer,referenceFile);
+    	assertText(renderer,referenceFile);
     }
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	OfxCoreBootstrap.init();
 			
     	TestLatexItemFactory.initLoremIpsum();
     	TestLatexItemFactory test = new TestLatexItemFactory();

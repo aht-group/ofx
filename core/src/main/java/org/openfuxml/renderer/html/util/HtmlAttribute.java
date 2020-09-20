@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.html;
+package org.openfuxml.renderer.html.util;
 /**
  * Author: Rebecca Roblick
  */

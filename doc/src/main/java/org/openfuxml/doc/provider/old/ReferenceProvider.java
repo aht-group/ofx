@@ -1,8 +1,8 @@
-package org.openfuxml.test.provider;
+package org.openfuxml.doc.provider.old;
 
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.doc.provider.DemoContentProvider;
 import org.openfuxml.factory.xml.ofx.OfxReferenceFactory;
-import org.openfuxml.util.provider.DemoContentProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

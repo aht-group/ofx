@@ -10,7 +10,7 @@ import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
-import org.openfuxml.renderer.html.HtmlElement;
+import org.openfuxml.renderer.html.util.HtmlElement;
 
 /*Klasse für HTML Überschriften, z.B <h1>...</h1>*/
 public class HtmlHeadingRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer

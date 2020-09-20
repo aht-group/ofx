@@ -6,10 +6,10 @@ import java.util.List;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
 import org.apache.commons.configuration.Configuration;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.latex.util.OfxLatexResources;
 import org.openfuxml.test.AbstractOfxCoreTest;
-import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public abstract class AbstractWikiContentTest extends AbstractOfxCoreTest
 	
 	protected void initLatexTestEnvironment(Configuration config)
 	{
-		latexBase = new File(config.getString(OfxCoreTestBootstrap.cfgKeyLatexTarget));
+		latexBase = new File(config.getString(OfxCoreBootstrap.cfgKeyLatexTarget));
 		logger.info("Test Environment "+latexBase.getAbsolutePath());
 		
 		try

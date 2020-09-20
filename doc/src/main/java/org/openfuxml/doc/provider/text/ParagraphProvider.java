@@ -1,15 +1,14 @@
-package org.openfuxml.test.provider;
+package org.openfuxml.doc.provider.text;
 
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.doc.provider.DemoContentProvider;
 import org.openfuxml.factory.xml.editorial.XmlIndexFactory;
-import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
-import org.openfuxml.util.provider.DemoContentProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ParagraphProvider
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(ParagraphProvider.class);
 	
 	public static Paragraph create(){return create(10);}
 	public static Paragraph create(int words)

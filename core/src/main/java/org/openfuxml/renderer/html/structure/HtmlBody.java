@@ -10,9 +10,9 @@ import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
-import org.openfuxml.renderer.html.HtmlElement;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
 import org.openfuxml.renderer.html.table.HtmlTableRenderer;
+import org.openfuxml.renderer.html.util.HtmlElement;
 
 
 public class HtmlBody extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer

@@ -12,7 +12,7 @@ import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
-import org.openfuxml.renderer.html.HtmlElement;
+import org.openfuxml.renderer.html.util.HtmlElement;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
 import org.openfuxml.renderer.markdown.structure.MdListRenderer;
 import org.openfuxml.renderer.markdown.structure.MdParagraphRenderer;

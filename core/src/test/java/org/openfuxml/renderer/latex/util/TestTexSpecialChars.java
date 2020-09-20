@@ -2,9 +2,9 @@ package org.openfuxml.renderer.latex.util;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.test.AbstractOfxCoreTest;
-import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +38,7 @@ public class TestTexSpecialChars extends AbstractOfxCoreTest
   
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	OfxCoreBootstrap.init();
 			
     	TestTexSpecialChars cli = new TestTexSpecialChars();
 //   	cli.underScore();

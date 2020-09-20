@@ -9,6 +9,7 @@ import org.apache.commons.configuration.Configuration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Columns;
 import org.openfuxml.content.table.Content;
@@ -22,7 +23,6 @@ import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.factory.xml.table.XmlColumnFactory;
 import org.openfuxml.renderer.latex.table.TestLatexRowRenderer;
 import org.openfuxml.renderer.util.OfxContentDebugger;
-import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -116,7 +116,7 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
     
     public static void main(String[] args) throws Exception
     {
-    	Configuration config = OfxCoreTestBootstrap.init();
+    	Configuration config = OfxCoreBootstrap.init();
 			
     	TestLatexTableRenderer.initLoremIpsum();
     	TestLatexTableRenderer test = new TestLatexTableRenderer();

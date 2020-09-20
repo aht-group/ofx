@@ -7,15 +7,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.list.Type;
+import org.openfuxml.doc.provider.old.ListItemProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlSpacingFactory;
 import org.openfuxml.factory.xml.ofx.layout.XmlLayoutFactory;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.ListItemProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,62 +91,62 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     @Test
     public void layout() throws OfxAuthoringException, IOException
     {	
-    	f = new File(rootDir,dir+"/"+Key.unordered+".txt");
+    	referenceFile = new File(rootDir,dir+"/"+Key.unordered+".txt");
     	List list = createList(2);
     	list.setLayout(XmlLayoutFactory.build(XmlSpacingFactory.pt(0)));
 
     	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
     	debugCharacter(renderer);
-    	save(renderer,f);
-    	assertText(renderer,f);
+    	save(renderer,referenceFile);
+    	assertText(renderer,referenceFile);
     }
     
     @Test
     public void unordered() throws OfxAuthoringException, IOException
     {	
-    	f = new File(rootDir,dir+"/"+Key.layout+".txt");
+    	referenceFile = new File(rootDir,dir+"/"+Key.layout+".txt");
     	List list = createList();
     	list.getItem().add(ListItemProvider.build());
     	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
     	debugCharacter(renderer);
-    	save(renderer,f);
-    	assertText(renderer,f);
+    	save(renderer,referenceFile);
+    	assertText(renderer,referenceFile);
     }
     
     @Test
     public void ordered() throws OfxAuthoringException, IOException
     {	
-    	f = new File(rootDir,dir+"/"+Key.ordered+".txt");
+    	referenceFile = new File(rootDir,dir+"/"+Key.ordered+".txt");
     	List list = createList();
     	list.getType().setOrdering("ordered");
     	list.getItem().add(ListItemProvider.build());
     	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
     	debugCharacter(renderer);
-    	save(renderer,f);
-    	assertText(renderer,f);
+    	save(renderer,referenceFile);
+    	assertText(renderer,referenceFile);
     }
     
     @Ignore("Description NYI")
     @Test
     public void description() throws OfxAuthoringException, IOException
     {	
-    	f = new File(rootDir,dir+"/"+Key.description+".txt");
+    	referenceFile = new File(rootDir,dir+"/"+Key.description+".txt");
     	List list = createList();
     	list.getType().setDescription(true);
     	list.getType().setOrdering(null);
     	list.getItem().add(ListItemProvider.description());
     	renderer.render(list,parentSection);
     	debugCharacter(renderer);
-    	save(renderer,f);
-    	assertText(renderer,f);
+    	save(renderer,referenceFile);
+    	assertText(renderer,referenceFile);
     }
   
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	OfxCoreBootstrap.init();
 			
     	TestLatexListRenderer.initLoremIpsum();
     	TestLatexListRenderer test = new TestLatexListRenderer();
