@@ -171,8 +171,6 @@ ol, ul {
 
 	.html-container {
 		> div {
-			padding: 1em;
-			
 			> section {
 				background: $panel-background-colour;
 				border: $border;
@@ -182,6 +180,10 @@ ol, ul {
 				padding: 1em;
 				height: 33px;
 				overflow: hidden;
+				
+				&:first-child {
+					margin-top: 0;
+				}
 
 				&[data-collapsed=false] {
 					> h1, > h2, > h3, > h4, > h5 {
