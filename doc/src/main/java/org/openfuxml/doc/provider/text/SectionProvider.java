@@ -1,4 +1,4 @@
-package org.openfuxml.test.provider;
+package org.openfuxml.doc.provider.text;
 
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Paragraph;
@@ -7,13 +7,12 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.factory.xml.ofx.content.XmlCommentFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
-import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SectionProvider
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(SectionProvider.class);
 	
 	public static Section build()
 	{

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openfuxml.content.media.Image;
+import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Table;
 
@@ -49,4 +51,7 @@ public class XmlSectionFactory
 		}
 		return tables;
 	}
+	
+	public static Section build(Image image) {Section xml = build();xml.getContent().add(image);return xml;}
+	public static Section build(Paragraph paragraph) {Section xml = build();xml.getContent().add(paragraph);return xml;}
 }

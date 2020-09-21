@@ -2,12 +2,12 @@ package org.openfuxml.renderer.word;
 
 import java.io.File;
 
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Document;
+import org.openfuxml.doc.provider.old.TestDocumentProvider;
 import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.TestDocumentProvider;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -16,7 +16,7 @@ public class TestWordDocumentRenderer extends AbstractTestWordRenderer
 {
 	public static void main(String[] args) throws Exception
 	{
-		OfxCoreTestBootstrap.init();
+		OfxCoreBootstrap.init();
 	
 		OfxDefaultSettingsManager dsm = new OfxDefaultSettingsManager();
 		NoOpCrossMediaManager cmm = new NoOpCrossMediaManager();

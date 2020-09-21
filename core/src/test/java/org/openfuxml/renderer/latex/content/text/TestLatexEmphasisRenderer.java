@@ -6,12 +6,12 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
+import org.openfuxml.doc.provider.text.EmphasisProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.EmphasisProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,36 +35,36 @@ public class TestLatexEmphasisRenderer extends AbstractTestLatexRenderer
     @Test
     public void bold() throws IOException, OfxAuthoringException
     {
-    	f = new File(rootDir,dir+"/"+Key.bold+".txt");
+    	referenceFile = new File(rootDir,dir+"/"+Key.bold+".txt");
     	renderer.render(EmphasisProvider.bold());
-    	renderTest(renderer,f);
+    	renderTest(renderer,referenceFile);
     }
     
     @Test public void italic() throws IOException, OfxAuthoringException
     {    	
-    	f = new File(rootDir,dir+"/"+Key.italic+".txt");
+    	referenceFile = new File(rootDir,dir+"/"+Key.italic+".txt");
     	renderer.render(EmphasisProvider.italic());
-    	renderTest(renderer,f);
+    	renderTest(renderer,referenceFile);
     }
     
     @Test public void quote() throws IOException, OfxAuthoringException
     {
-    	f = new File(rootDir,dir+"/"+Key.quote+".txt");
+    	referenceFile = new File(rootDir,dir+"/"+Key.quote+".txt");
     	renderer.render(EmphasisProvider.italic());
-    	renderTest(renderer,f);
+    	renderTest(renderer,referenceFile);
     }
     
     @Test
     public void italicBold() throws IOException, OfxAuthoringException
     {
-    	f = new File(rootDir,dir+"/"+Key.italic+"-"+Key.bold+".txt");
+    	referenceFile = new File(rootDir,dir+"/"+Key.italic+"-"+Key.bold+".txt");
     	renderer.render(EmphasisProvider.italicBold());
-    	renderTest(renderer,f);
+    	renderTest(renderer,referenceFile);
     }
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	OfxCoreBootstrap.init();
 			
     	TestLatexEmphasisRenderer test = new TestLatexEmphasisRenderer();
     	

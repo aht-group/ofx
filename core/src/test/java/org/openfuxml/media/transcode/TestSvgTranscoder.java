@@ -26,10 +26,10 @@ import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.junit.Before;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.test.AbstractOfxCoreTest;
-import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -124,7 +124,7 @@ public class TestSvgTranscoder extends AbstractOfxCoreTest
 	
 	public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	OfxCoreBootstrap.init();
 			
     	TestSvgTranscoder test = new TestSvgTranscoder();
     	test.init();

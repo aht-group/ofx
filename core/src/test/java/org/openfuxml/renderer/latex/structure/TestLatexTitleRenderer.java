@@ -4,17 +4,17 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
+import org.openfuxml.doc.provider.text.SectionProvider;
+import org.openfuxml.doc.provider.text.TitleProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.factory.xml.text.OfxTextFactory;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexTitleRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.SectionProvider;
-import org.openfuxml.test.provider.TitleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,7 +74,7 @@ public class TestLatexTitleRenderer extends AbstractTestLatexRenderer
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	OfxCoreBootstrap.init();
     	TestLatexTitleRenderer test = new TestLatexTitleRenderer();
         test.setEnvironment(true);
 

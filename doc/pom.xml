@@ -26,7 +26,29 @@
 	</dependencyManagement>
 	
 	<dependencies>
-		
+		<dependency>
+			<groupId>org.openfuxml</groupId>
+			<artifactId>ofx-interfaces</artifactId>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openfuxml</groupId>
+			<artifactId>ofx-xml</artifactId>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openfuxml</groupId>
+			<artifactId>ofx-util</artifactId>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+    		<groupId>de.sven-jacobs</groupId>
+    		<artifactId>loremipsum</artifactId>
+    		<scope>compile</scope>
+		</dependency>
 	</dependencies>
 	
 	<build>

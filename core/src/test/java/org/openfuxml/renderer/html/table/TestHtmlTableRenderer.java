@@ -4,7 +4,9 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Content;
+import org.openfuxml.doc.provider.table.TableProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.OfxConfigurationProvider;
@@ -12,8 +14,6 @@ import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.head.HtmlHead;
 import org.openfuxml.renderer.html.structure.HtmlBody;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.TableProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,7 +59,7 @@ public class TestHtmlTableRenderer extends AbstractTestHtmlRenderer
 
 	public static void main(String[] args) throws IOException, OfxConfigurationException, OfxAuthoringException
 	{
-		OfxCoreTestBootstrap.init();
+		OfxCoreBootstrap.init();
 		TestHtmlTableRenderer test = new TestHtmlTableRenderer();
         test.setEnvironment(true);
 		

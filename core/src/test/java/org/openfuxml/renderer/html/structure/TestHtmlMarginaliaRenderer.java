@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.doc.provider.old.MarginaliaProvider;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.MarginaliaProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +37,7 @@ public class TestHtmlMarginaliaRenderer extends AbstractTestHtmlRenderer
 
 	public static void main(String[] args) throws IOException
 	{
-		OfxCoreTestBootstrap.init();
+		OfxCoreBootstrap.init();
 		TestHtmlMarginaliaRenderer test = new TestHtmlMarginaliaRenderer();
         test.setEnvironment(true);
 		

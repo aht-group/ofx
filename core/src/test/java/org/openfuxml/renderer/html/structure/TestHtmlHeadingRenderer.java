@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.doc.provider.text.SectionProvider;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.SectionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +56,7 @@ public class TestHtmlHeadingRenderer extends AbstractTestHtmlRenderer
 	//main() zum Ausführen als Applikation, wichtig vor jedem einzelnen Test init() aufzurufen.
 	public static void main(String[] args) throws IOException
 	{
-		OfxCoreTestBootstrap.init();
+		OfxCoreBootstrap.init();
 		TestHtmlHeadingRenderer test = new TestHtmlHeadingRenderer();
         test.setEnvironment(true);
 		

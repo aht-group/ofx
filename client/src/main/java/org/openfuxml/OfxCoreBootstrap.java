@@ -1,4 +1,4 @@
-package org.openfuxml.test;
+package org.openfuxml;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.config.ConfigLoader;
@@ -11,13 +11,13 @@ import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OfxCoreTestBootstrap
+public class OfxCoreBootstrap
 {
-	final static Logger logger = LoggerFactory.getLogger(OfxCoreTestBootstrap.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxCoreBootstrap.class);
 		
 	public static final String cfgKeyLatexTarget = "ofx.latex.basedir";
 	
-	public static String xmlConfig = "config.ofx-core.test/ofx.xml";
+	public static String xmlConfig = "ofx/client/config/ofx.xml";
 	
 	public static Configuration init()
 	{
@@ -27,7 +27,7 @@ public class OfxCoreTestBootstrap
 	public static Configuration init(String configFile)
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-			loggerInit.addAltPath("config.ofx-core.test");
+			loggerInit.addAltPath("ofx/client/config/");
 			loggerInit.init();
 
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());

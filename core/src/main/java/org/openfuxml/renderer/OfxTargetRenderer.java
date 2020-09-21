@@ -8,7 +8,7 @@ import org.openfuxml.exception.OfxImplementationException;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.OfxRenderProcessor.DirCode;
 import org.openfuxml.renderer.OfxRenderProcessor.FileCode;
-import org.openfuxml.renderer.html.OfxHtmlRenderer2;
+import org.openfuxml.renderer.html.OfxHtmlRenderer;
 import org.openfuxml.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.renderer.markdown.OfxMarkdownRenderer;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
@@ -74,7 +74,7 @@ public class OfxTargetRenderer
 	
 	public void renderHtml(Html html, File fSrc) throws OfxAuthoringException, OfxConfigurationException, OfxImplementationException
 	{
-		OfxHtmlRenderer2 htmlRenderer = new OfxHtmlRenderer2(new OfxConfigurationProvider(),"");
+		OfxHtmlRenderer htmlRenderer = new OfxHtmlRenderer(new OfxConfigurationProvider(),"");
 		htmlRenderer.render(fSrc.getAbsolutePath());
 	}
 

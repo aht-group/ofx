@@ -2,12 +2,12 @@ package org.openfuxml.renderer.latex.structure;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.test.AbstractOfxCoreTest;
-import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.openfuxml.util.reference.OfxReferenceDocumentBuilder;
 import org.openfuxml.util.reference.OfxReferencePdfBuilder;
 import org.openfuxml.xml.renderer.cmp.Pdf;
@@ -53,7 +53,7 @@ public class TestLatexDocumentRenderer extends AbstractOfxCoreTest
   
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	OfxCoreBootstrap.init();
     	TestLatexDocumentRenderer rrLatex = new TestLatexDocumentRenderer();
     	rrLatex.init();
     	rrLatex.writeExpected();

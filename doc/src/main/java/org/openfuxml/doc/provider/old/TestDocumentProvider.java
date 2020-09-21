@@ -1,16 +1,21 @@
-package org.openfuxml.test.provider;
+package org.openfuxml.doc.provider.old;
 
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.doc.provider.list.ListProvider;
+import org.openfuxml.doc.provider.media.ImageProvider;
+import org.openfuxml.doc.provider.table.TableProvider;
+import org.openfuxml.doc.provider.text.EmphasisProvider;
+import org.openfuxml.doc.provider.text.ParagraphProvider;
+import org.openfuxml.doc.provider.text.SectionProvider;
+import org.openfuxml.doc.provider.text.TitleProvider;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlDocumentFactory;
-import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
-import org.openfuxml.util.provider.ListProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TestDocumentProvider
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TestDocumentProvider.class);
 	
 	public static Document build()
 	{
@@ -49,7 +54,7 @@ public class TestDocumentProvider
 		Document xml = XmlDocumentFactory.withContent();
 		Section s1 = SectionProvider.build();
 		s1.getContent().add(ParagraphProvider.create(100));
-		s1.getContent().add(ImageProvider.createImageOnly("IMAGE"));
+		s1.getContent().add(ImageProvider.figure("IMAGE"));
 		s1.getContent().add(SectionProvider.buildWithComment());
 		xml.getContent().getContent().add(s1);
 

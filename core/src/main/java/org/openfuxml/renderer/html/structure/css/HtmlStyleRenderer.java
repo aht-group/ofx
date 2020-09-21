@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
-import org.openfuxml.renderer.html.HtmlElement;
+import org.openfuxml.renderer.html.util.HtmlElement;
 
 public class HtmlStyleRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {

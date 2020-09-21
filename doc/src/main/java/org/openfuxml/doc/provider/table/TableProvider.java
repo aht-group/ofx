@@ -1,24 +1,25 @@
-package org.openfuxml.test.provider;
-
-import org.openfuxml.content.layout.Width;
-import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.ofx.Title;
-import org.openfuxml.content.table.*;
-import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
-import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
-import org.openfuxml.factory.xml.table.XmlColumnFactory;
-import org.openfuxml.factory.xml.table.XmlTableFactory;
-import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
-import org.openfuxml.util.provider.DemoContentProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package org.openfuxml.doc.provider.table;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openfuxml.content.layout.Width;
+import org.openfuxml.content.ofx.Section;
+import org.openfuxml.content.ofx.Title;
+import org.openfuxml.content.table.Columns;
+import org.openfuxml.content.table.Specification;
+import org.openfuxml.content.table.Table;
+import org.openfuxml.doc.provider.DemoContentProvider;
+import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
+import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
+import org.openfuxml.factory.xml.table.XmlColumnFactory;
+import org.openfuxml.factory.xml.table.XmlTableFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class TableProvider
 {	
-	final static Logger logger = LoggerFactory.getLogger(TestLatexParagraphRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(TableProvider.class);
 	
 	public static Section build()
 	{

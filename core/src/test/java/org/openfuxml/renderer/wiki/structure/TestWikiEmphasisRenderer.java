@@ -2,12 +2,12 @@ package org.openfuxml.renderer.wiki.structure;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
+import org.openfuxml.doc.provider.text.EmphasisProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.wiki.AbstractTestWikiRenderer;
 import org.openfuxml.renderer.wiki.WikiParagraphRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.EmphasisProvider;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +59,7 @@ public class TestWikiEmphasisRenderer extends AbstractTestWikiRenderer{
 
 	public static void main(String[] args) throws IOException, OfxAuthoringException
 	{
-		OfxCoreTestBootstrap.init();
+		OfxCoreBootstrap.init();
 		TestWikiEmphasisRenderer test = new TestWikiEmphasisRenderer();
         test.setEnvironment(true);
 		

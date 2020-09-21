@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
+import org.openfuxml.doc.provider.media.ImageProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.renderer.markdown.media.MdImageRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.test.provider.ImageProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,20 +30,20 @@ public class TestMdImageRenderer extends AbstractTestMdRenderer
 	@Test public void inline() throws IOException
 	{
 		initFile(Key.inline);
-        pRenderer.render(ImageProvider.create("This would be an inline Image"));
+        pRenderer.render(ImageProvider.inline("This would be an inline Image"));
     	renderTest(pRenderer);
 	}
 	
 	@Test public void only() throws IOException
 	{
 		initFile(Key.only);
-        renderer.render(ImageProvider.createImageOnly("This would be an Image outside a paragraph"));
+        renderer.render(ImageProvider.figure("This would be an Image outside a paragraph"));
     	renderTest(renderer);
 	}
 
 	public static void main(String[] args) throws IOException
 	{
-		OfxCoreTestBootstrap.init();
+		OfxCoreBootstrap.init();
 		TestMdImageRenderer test = new TestMdImageRenderer();
         test.setEnvironment(true);
 		

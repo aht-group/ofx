@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.openfuxml.factory.xml.table.TestTableFactory;
 import org.openfuxml.renderer.text.AbstractTestTextRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
 
 public class TestTextTableRenderer extends AbstractTestTextRenderer
 {	
@@ -33,7 +33,7 @@ public class TestTextTableRenderer extends AbstractTestTextRenderer
 	
 	public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();	
+    	OfxCoreBootstrap.init();	
     	TestTextTableRenderer test = new TestTextTableRenderer();
     	test.setEnvironment(true);
     	

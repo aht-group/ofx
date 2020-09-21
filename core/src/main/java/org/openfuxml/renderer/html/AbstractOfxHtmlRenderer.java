@@ -25,6 +25,7 @@ import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
 import org.openfuxml.renderer.html.structure.*;
 import org.openfuxml.renderer.html.table.HtmlTableRenderer;
+import org.openfuxml.renderer.html.util.HtmlElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +43,7 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 	public List<String> getContent()
 	{
 		List<String> content = new ArrayList<String>();
-		XMLOutputter xmlOutput = new XMLOutputter(OfxHtmlRenderer2.ownPrettyFormat());
+		XMLOutputter xmlOutput = new XMLOutputter(OfxHtmlRenderer.ownPrettyFormat());
 		content.add(xmlOutput.outputString(HtmlDocumentRenderer.getInstance().getHtml()));
 		return content;
 	}
@@ -124,7 +125,7 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 	{
 		try
 		{
-			XMLOutputter xmlOutput = new XMLOutputter(OfxHtmlRenderer2.ownPrettyFormat().setLineSeparator("\n"));
+			XMLOutputter xmlOutput = new XMLOutputter(OfxHtmlRenderer.ownPrettyFormat().setLineSeparator("\n"));
 			xmlOutput.output(HtmlDocumentRenderer.getInstance().getDoc(), w);
 		}
 		catch (IOException io){io.printStackTrace();}

@@ -36,7 +36,7 @@ public class AbstractOfxCoreTest
 	private boolean saveReference;
 	
 	protected File referenceDir;
-	protected File f;
+	protected File referenceFile;
 	
 	protected DefaultSettingsManager dsm;
 	protected CrossMediaManager cmm;
@@ -58,7 +58,7 @@ public class AbstractOfxCoreTest
 	
 	protected <E extends Enum<E>> void initFile(E key)
 	{
-		f = new File(referenceDir,key.toString()+"."+fileSuffix);
+		referenceFile = new File(referenceDir,key.toString()+"."+fileSuffix);
 	}
 
 	@BeforeClass
@@ -107,10 +107,10 @@ public class AbstractOfxCoreTest
 		if(saveReference)
 		{
 			RelativePathFactory rpf = new RelativePathFactory(new File("src/test/resources"),RelativePathFactory.PathSeparator.CURRENT);
-			logger.debug("Saving Reference to "+rpf.relativate(f));
+			logger.debug("Saving Reference to "+rpf.relativate(referenceFile));
 			StringWriter actual = new StringWriter();
 			renderer.write(actual);
-			StringIO.writeTxt(f, actual.toString());
+			StringIO.writeTxt(referenceFile, actual.toString());
 		}
 	}
 	
@@ -129,7 +129,7 @@ public class AbstractOfxCoreTest
 		StringWriter actual = new StringWriter();
 		renderer.write(actual);
 		
-		String expected = StringIO.loadTxt(f);
+		String expected = StringIO.loadTxt(referenceFile);
 		Assert.assertEquals(expected, actual.toString());
 	}
 		

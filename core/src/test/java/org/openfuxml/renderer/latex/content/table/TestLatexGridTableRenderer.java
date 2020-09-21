@@ -7,10 +7,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.util.OfxContentDebugger;
-import org.openfuxml.test.OfxCoreTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,9 +36,9 @@ public class TestLatexGridTableRenderer extends AbstractLatexTableTest
     public void table() throws IOException, OfxAuthoringException
     {
     	Table table = TestLatexTableRenderer.createTable();
-    	f = new File(rootDir,dir+"/"+Key.table+".tex");
+    	referenceFile = new File(rootDir,dir+"/"+Key.table+".tex");
     	renderer.render(table);
-    	renderTest(renderer,f);
+    	renderTest(renderer,referenceFile);
     }
     
     @Test @Ignore
@@ -46,14 +46,14 @@ public class TestLatexGridTableRenderer extends AbstractLatexTableTest
     {
     	Table table = TestLatexTableRenderer.createTable();
     	table.getContent().setHead(TestLatexTableRenderer.createTableHead());
-    	f = new File(rootDir,dir+"/"+Key.tableWithHead+".tex");
+    	referenceFile = new File(rootDir,dir+"/"+Key.tableWithHead+".tex");
     	renderer.render(table);
     	OfxContentDebugger.debug(renderer.getContent());
     }
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreTestBootstrap.init();
+    	OfxCoreBootstrap.init();
 			
     	TestLatexGridTableRenderer.initLoremIpsum();
     	TestLatexGridTableRenderer test = new TestLatexGridTableRenderer();

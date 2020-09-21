@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.openfuxml.OfxCoreBootstrap;
+import org.openfuxml.doc.provider.list.ListProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
-import org.openfuxml.test.OfxCoreTestBootstrap;
-import org.openfuxml.util.provider.ListProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +40,7 @@ public class TestMdListRenderer extends AbstractTestMdRenderer
 
 	public static void main(String[] args) throws IOException
 	{
-		OfxCoreTestBootstrap.init();
+		OfxCoreBootstrap.init();
 		TestMdListRenderer test = new TestMdListRenderer();
         test.setEnvironment(true);
 		
