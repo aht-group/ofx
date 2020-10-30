@@ -3,6 +3,7 @@ package org.openfuxml.doc.provider;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.doc.provider.list.ListProvider;
+import org.openfuxml.doc.provider.table.TableProvider;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlDocumentFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
@@ -36,6 +37,7 @@ public class DemoContentProvider
 		xml.getContent().getContent().add(c1());
 		xml.getContent().getContent().add(c2());
 		xml.getContent().getContent().add(c3());
+		xml.getContent().getContent().add(c4());
 		return xml;
 	}
 	
@@ -84,6 +86,17 @@ public class DemoContentProvider
 		x2.getContent().add(XmlTitleFactory.build("Section 3.2: Section B"));
 		x2.getContent().add(XmlParagraphFactory.text(li.getWords(2)));
 		xml.getContent().add(x2);
+		
+		return xml;
+	}
+	
+	private static Section c4()
+	{	
+		Section xml = XmlSectionFactory.build();
+		xml.setId("3");
+		xml.getContent().add(XmlTitleFactory.build("Chapter 4: Table"));
+		xml.getContent().add(XmlParagraphFactory.text(li.getWords(2)));
+		xml.getContent().add(TableProvider.buildWithoutSpecification());
 		
 		return xml;
 	}

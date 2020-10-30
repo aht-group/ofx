@@ -38,7 +38,7 @@ public class CliExampleContentProvider
     {
 		OfxCoreBootstrap.init();
 		CliExampleContentProvider cli = new CliExampleContentProvider();
+//		cli.updateExamples();
 		cli.output();
-		cli.updateExamples();
     }
 }
