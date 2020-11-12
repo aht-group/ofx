@@ -12,11 +12,14 @@ public class TxtTitleFactory
 	public static String build(Title title)
 	{
 		StringBuffer sb = new StringBuffer();
-		for(Object s : title.getContent())
+		if(title!=null)
 		{
-			if     (s instanceof String){sb.append(((String)s).trim());}
-			else if(s instanceof Text) {sb.append(((Text)s).getValue().trim());}
-			else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
+			for(Object s : title.getContent())
+			{
+				if     (s instanceof String){sb.append(((String)s).trim());}
+				else if(s instanceof Text) {sb.append(((Text)s).getValue().trim());}
+				else {logger.warn("No Renderer for Element "+s.getClass().getSimpleName());}
+			}
 		}
 		return sb.toString();
 	}
