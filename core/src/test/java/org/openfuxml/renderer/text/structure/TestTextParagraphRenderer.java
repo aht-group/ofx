@@ -23,7 +23,7 @@ public class TestTextParagraphRenderer extends AbstractTestTextRenderer
 	@Before public void init()
 	{
 		super.initDir("content/paragraph");
-		renderer = new TextParagraphRenderer(cmm,dsm);
+		renderer = new TextParagraphRenderer(cp);
 	}
 	@After public void close() {renderer = null;}
 	

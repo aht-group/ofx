@@ -2,6 +2,7 @@ package org.openfuxml.renderer.text.structure;
 
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxTextRenderer;
@@ -13,14 +14,14 @@ public class TextParagraphRenderer extends AbstractOfxTextRenderer implements Of
 {
 	final static Logger logger = LoggerFactory.getLogger(TextParagraphRenderer.class);
 	
-	public TextParagraphRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
+	public TextParagraphRenderer(ConfigurationProvider cp)
 	{
-		this(cmm,dsm,false);
+		this(cp,false);
 	}
 	
-	public TextParagraphRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm, boolean preBlankLine)
+	public TextParagraphRenderer(ConfigurationProvider cp, boolean preBlankLine)
 	{
-		super(cmm,dsm);
+		super(cp);
 		if(preBlankLine){preTxt.add("");}
 	}
 	

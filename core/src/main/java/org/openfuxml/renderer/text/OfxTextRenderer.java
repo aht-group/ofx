@@ -3,17 +3,23 @@ package org.openfuxml.renderer.text;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
+import java.io.Writer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.text.structure.TextParagraphRenderer;
+import org.openfuxml.renderer.text.structure.TextSectionRenderer;
 import org.openfuxml.renderer.text.table.TextCellRenderer;
 import org.openfuxml.renderer.text.table.TextTableRenderer;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
@@ -34,8 +40,25 @@ public class OfxTextRenderer
 		cp.setCrossMediaManager(new NoOpCrossMediaManager());
 		cp.setDefaultSettingsManager(new OfxDefaultSettingsManager());
 		
-		paragraphRenderer = new TextParagraphRenderer(cp.getCrossMediaManager(),cp.getDefaultSettingsManager(),false);
+		paragraphRenderer = new TextParagraphRenderer(cp,false);
 	}
+	
+	public void render(Document document, Writer writer) throws OfxAuthoringException, OfxConfigurationException, IOException
+	{
+		for(Serializable s : document.getContent().getContent())
+		{
+			if(s instanceof Section){renderSection((Section)s,writer);}
+		}
+	}
+	
+	private void renderSection(Section s,  Writer writer) throws OfxAuthoringException, IOException
+	{
+		TextSectionRenderer r = new TextSectionRenderer(cp,true);
+		r.render(s);
+		for(String line : r.getContent()) {writer.write(line+System.lineSeparator());}
+	}
+	
+	
 	
 	public static void table(ResultSet rs, OutputStream os) throws OfxAuthoringException, IOException
 	{

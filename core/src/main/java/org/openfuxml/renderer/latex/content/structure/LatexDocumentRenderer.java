@@ -43,7 +43,6 @@ public class LatexDocumentRenderer extends AbstractOfxLatexRenderer implements O
 		preTxt.add("\\begin{document}");
 		renderToc();
 		
-		
 		for(Object s : content.getContent())
 		{
 			if(s instanceof Section){renderSection((Section)s);}
