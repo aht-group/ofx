@@ -36,7 +36,7 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 	@Before public void init()
 	{
 		super.initDir("");
-		renderer = new HtmlDocumentRenderer(cp, "Test Doc");
+		renderer = new HtmlDocumentRenderer(cp,"Test Doc");
 	}
 
 	@Test public void doc() throws IOException, OfxConfigurationException, OfxAuthoringException
