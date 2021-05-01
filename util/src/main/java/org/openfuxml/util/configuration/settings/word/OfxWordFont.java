@@ -6,7 +6,7 @@ public class OfxWordFont
 {
 	private boolean italic,italicDefault; public boolean isItalic() {return italic;}
 	private boolean bold,boldDefault; public boolean isBold() {return bold;}
-	private boolean underline,underlineDefault; public boolean isUnderline() {return bold;}
+	private boolean underline,underlineDefault; public boolean isUnderline() {return underline;}
 	private double size, sizeDefault; public double getSize() {return size;}
 	private Color color, colorDefault; public Color getColor() {return color;}
 	private double ident, identDefault; public double getIdent() {return ident;}
