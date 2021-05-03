@@ -12,7 +12,7 @@ public class OfxWordFont
 	private double ident, identDefault; public double getIdent() {return ident;}
 	private int spaceBefore,spaceBeforeDefault; public int getSpaceBefore() {return spaceAfter;}
 	private int spaceAfter,spaceAfterDefault; public int getSpaceAfter() {return spaceAfter;}
-	private int lineSpacing,lineSpacingDefault; public int getLineSpacing() {return spaceAfter;}
+	private int lineSpacing,lineSpacingDefault; public int getLineSpacing() {return lineSpacing;}
 	
 	
 	public static OfxWordFont instance() {return new OfxWordFont();}
