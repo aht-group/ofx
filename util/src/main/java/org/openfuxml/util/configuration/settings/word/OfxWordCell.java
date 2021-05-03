@@ -2,6 +2,10 @@ package org.openfuxml.util.configuration.settings.word;
 
 import java.awt.Color;
 
+import com.aspose.words.CellVerticalAlignment;
+import com.aspose.words.LineStyle;
+import com.aspose.words.ParagraphAlignment;
+
 public class OfxWordCell
 {
 	private	int paragraphAlignment; public int getParagraphAlignment() { return paragraphAlignment; }
@@ -31,56 +35,56 @@ public class OfxWordCell
 	
 	public OfxWordCell()
 	{
-		paragraphAlignment = 0;
-		verticalAlignment = 0;
+		paragraphAlignment = ParagraphAlignment.LEFT;
+		verticalAlignment = CellVerticalAlignment.TOP;
 		cellWidth = 100;
 		
-		topLineStyle = 0;
-		topLineWidth = 1;
+		topLineStyle = LineStyle.NONE;
+		topLineWidth = 0;
 		topLineBorderColor = Color.BLACK;
 		
-		leftLineStyle = 0;
-		leftLineWidth = 1;
+		leftLineStyle = LineStyle.NONE;
+		leftLineWidth = 0;
 		leftLineBorderColor = Color.BLACK;
 		
-		bottomLineStyle = 0;
-		bottomLineWidth = 1;
+		bottomLineStyle = LineStyle.NONE;
+		bottomLineWidth = 0;
 		bottomLineBorderColor = Color.BLACK;
 		
-		rightLineStyle = 0;
-		rightLineWidth = 1;
+		rightLineStyle = LineStyle.NONE;
+		rightLineWidth = 0;
 		rightLineBorderColor = Color.BLACK;
 		
 		tableBackgroundColor = Color.WHITE;
 		textureIndex = 0;
 	}
 	
-	public OfxWordCell paragraphAlignmentCenter() {paragraphAlignment(1);return this;}
-	public OfxWordCell paragraphAlignmentRight() {paragraphAlignment(2);return this;}
+	public OfxWordCell paragraphAlignmentCenter() {paragraphAlignment(ParagraphAlignment.CENTER);return this;}
+	public OfxWordCell paragraphAlignmentRight() {paragraphAlignment(ParagraphAlignment.RIGHT);return this;}
 	public OfxWordCell paragraphAlignment(int value) {paragraphAlignment=value;return this;}
 
-	public OfxWordCell verticalAlignmentCenter() {verticalAlignment(1);return this;}
-	public OfxWordCell verticalAlignmentBottom() {verticalAlignment(2);return this;}
+	public OfxWordCell verticalAlignmentCenter() {verticalAlignment(CellVerticalAlignment.CENTER);return this;}
+	public OfxWordCell verticalAlignmentBottom() {verticalAlignment(CellVerticalAlignment.BOTTOM);return this;}
 	public OfxWordCell verticalAlignment(int value) {verticalAlignment=value;return this;}
 	
 	public OfxWordCell cellWidth(double value) {cellWidth=value;return this;}
 	
-	public OfxWordCell topLineStyleSingle() {topLineStyle(1);return this;}
+	public OfxWordCell topLineStyleSingle() {topLineStyle(LineStyle.SINGLE);return this;}
 	public OfxWordCell topLineStyle(int value) {topLineStyle=value;return this;}
 	public OfxWordCell topLineWidth(double value) {topLineWidth=value;return this;}
 	public OfxWordCell topLineBorderColor(Color value) {topLineBorderColor=value;return this;}
 
-	public OfxWordCell rightLineStyleSingle() {rightLineStyle(1);return this;}
+	public OfxWordCell rightLineStyleSingle() {rightLineStyle(LineStyle.SINGLE);return this;}
 	public OfxWordCell rightLineStyle(int value) {rightLineStyle=value;return this;}
 	public OfxWordCell rightLineWidth(double value) {rightLineWidth=value;return this;}
 	public OfxWordCell rightLineBorderColor(Color value) {rightLineBorderColor=value;return this;}
 	
-	public OfxWordCell bottomLineStyleSingle() {bottomLineStyle(1);return this;}
+	public OfxWordCell bottomLineStyleSingle() {bottomLineStyle(LineStyle.SINGLE);return this;}
 	public OfxWordCell bottomLineStyle(int value) {bottomLineStyle=value;return this;}
 	public OfxWordCell bottomLineWidth(double value) {bottomLineWidth=value;return this;}
 	public OfxWordCell bottomLineBorderColor(Color value) {bottomLineBorderColor=value;return this;}
 
-	public OfxWordCell leftLineStyleSingle() {leftLineStyle(1);return this;}
+	public OfxWordCell leftLineStyleSingle() {leftLineStyle(LineStyle.SINGLE);return this;}
 	public OfxWordCell leftLineStyle(int value) {leftLineStyle=value;return this;}
 	public OfxWordCell leftLineWidth(double value) {leftLineWidth=value;return this;}
 	public OfxWordCell leftLineBorderColor(Color value) {leftLineBorderColor=value;return this;}
