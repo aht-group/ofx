@@ -10,6 +10,10 @@ public class OfxWordFont
 	private double size, sizeDefault; public double getSize() {return size;}
 	private Color color, colorDefault; public Color getColor() {return color;}
 	private double ident, identDefault; public double getIdent() {return ident;}
+	private int spaceBefore,spaceBeforeDefault; public int getSpaceBefore() {return spaceAfter;}
+	private int spaceAfter,spaceAfterDefault; public int getSpaceAfter() {return spaceAfter;}
+	private int lineSpacing,lineSpacingDefault; public int getLineSpacing() {return spaceAfter;}
+	
 	
 	public static OfxWordFont instance() {return new OfxWordFont();}
 	
@@ -21,6 +25,10 @@ public class OfxWordFont
 		underline = false;
 		color = Color.BLACK;
 		ident = 0;
+		spaceBefore = 3;
+		spaceAfter = 3;
+		lineSpacing = 12;
+		
 		save();
 	}
 	
@@ -32,6 +40,9 @@ public class OfxWordFont
 		underlineDefault = underline;
 		colorDefault = color;
 		identDefault = ident;
+		spaceBeforeDefault = spaceBefore;
+		spaceAfterDefault = spaceAfter;
+		lineSpacingDefault = lineSpacing;
 	}
 	
 	public OfxWordFont reset()
@@ -42,6 +53,9 @@ public class OfxWordFont
 		underline = underlineDefault;
 		color = colorDefault;
 		ident = identDefault;
+		spaceBefore = spaceBeforeDefault;
+		spaceAfter = spaceAfterDefault;
+		lineSpacing = lineSpacingDefault;
 		
 		return this;
 	}
@@ -60,4 +74,8 @@ public class OfxWordFont
 	public OfxWordFont color(Color value) {color=value;return this;}
 	
 	public OfxWordFont ident(double value) {ident=value;return this;}
+	
+	public OfxWordFont spaceBefore(int value) {spaceBefore=value;return this;}
+	public OfxWordFont spaceAfter(int value) {spaceAfter=value;return this;}
+	public OfxWordFont lineSpacing(int value) {lineSpacing=value;return this;}
 }
