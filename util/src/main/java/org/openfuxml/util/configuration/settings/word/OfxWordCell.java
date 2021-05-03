@@ -70,31 +70,31 @@ public class OfxWordCell
 	public OfxWordCell cellWidth(double value) {cellWidth=value;return this;}
 	
 	public OfxWordCell topLineStyleSingle() {topLineStyle(LineStyle.SINGLE);return this;}
-	public OfxWordCell topLineStyle(int value) {topLineStyle=value;return this;}
+	public OfxWordCell topLineStyle(int value) {topLineStyle=value; topLineWidth=1; return this;}
 	public OfxWordCell topLineWidth(double value) {topLineWidth=value;return this;}
 	public OfxWordCell topLineBorderColor(Color value) {topLineBorderColor=value;return this;}
 
 	public OfxWordCell rightLineStyleSingle() {rightLineStyle(LineStyle.SINGLE);return this;}
-	public OfxWordCell rightLineStyle(int value) {rightLineStyle=value;return this;}
+	public OfxWordCell rightLineStyle(int value) {rightLineStyle=value; rightLineWidth=1;return this;}
 	public OfxWordCell rightLineWidth(double value) {rightLineWidth=value;return this;}
 	public OfxWordCell rightLineBorderColor(Color value) {rightLineBorderColor=value;return this;}
 	
 	public OfxWordCell bottomLineStyleSingle() {bottomLineStyle(LineStyle.SINGLE);return this;}
-	public OfxWordCell bottomLineStyle(int value) {bottomLineStyle=value;return this;}
+	public OfxWordCell bottomLineStyle(int value) {bottomLineStyle=value; bottomLineWidth=1; return this;}
 	public OfxWordCell bottomLineWidth(double value) {bottomLineWidth=value;return this;}
 	public OfxWordCell bottomLineBorderColor(Color value) {bottomLineBorderColor=value;return this;}
 
 	public OfxWordCell leftLineStyleSingle() {leftLineStyle(LineStyle.SINGLE);return this;}
-	public OfxWordCell leftLineStyle(int value) {leftLineStyle=value;return this;}
+	public OfxWordCell leftLineStyle(int value) {leftLineStyle=value; leftLineWidth=1; return this;}
 	public OfxWordCell leftLineWidth(double value) {leftLineWidth=value;return this;}
 	public OfxWordCell leftLineBorderColor(Color value) {leftLineBorderColor=value;return this;}
 	
 	public OfxWordCell SetAllLineStyleSingle() { SetAllLineStyle(LineStyle.SINGLE);return this;}
 	public OfxWordCell SetAllLineStyle(int value) {
-		topLineStyle=value;
-		rightLineStyle=value;
-		bottomLineStyle=value;
-		leftLineStyle=value;
+		topLineStyle(value);
+		rightLineStyle(value);
+		bottomLineStyle(value);
+		leftLineStyle(value);
 		return this;}
 	
 	public OfxWordCell tableBackgroundColor(Color value) {tableBackgroundColor=value;return this;}
