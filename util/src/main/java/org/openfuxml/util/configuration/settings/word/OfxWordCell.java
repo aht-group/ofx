@@ -6,7 +6,7 @@ public class OfxWordCell
 {
 	private	int paragraphAlignment; public int getParagraphAlignment() { return paragraphAlignment; }
 	private	int verticalAlignment; public int getVerticalAlignment() { return verticalAlignment; }
-	private	double cellWidth; public double getCellWith() { return cellWidth; }
+	private	double cellWidth; public double getCellWidth() { return cellWidth; }
 	
 	private	int topLineStyle; public int getTopLineStyle() { return topLineStyle; }
 	private	double topLineWidth; public double getTopLineWidth() { return topLineWidth; 	}
