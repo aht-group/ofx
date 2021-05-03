@@ -24,7 +24,7 @@ public class OfxWordCell
 	private	double leftLineWidth; public double getLeftLineWidth() { return leftLineWidth; 	}
 	private	Color leftLineBorderColor; public Color getLeftLineBorderColor() { return leftLineBorderColor; }
 	
-	private Color tableBackgroundColor; public Color getTablBackgroundColor() { return tableBackgroundColor;}
+	private Color tableBackgroundColor; public Color getTableBackgroundColor() { return tableBackgroundColor;}
 	private int textureIndex; public int getTextureIndex() {return textureIndex;}
 	
 	public static OfxWordCell instance() {return new OfxWordCell();}
@@ -63,7 +63,7 @@ public class OfxWordCell
 	public OfxWordCell verticalAlignmentBottom() {verticalAlignment(2);return this;}
 	public OfxWordCell verticalAlignment(int value) {verticalAlignment=value;return this;}
 	
-	public OfxWordCell cellWith(double value) {cellWidth=value;return this;}
+	public OfxWordCell cellWidth(double value) {cellWidth=value;return this;}
 	
 	public OfxWordCell topLineStyleSingle() {topLineStyle(1);return this;}
 	public OfxWordCell topLineStyle(int value) {topLineStyle=value;return this;}
