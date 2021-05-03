@@ -89,14 +89,25 @@ public class OfxWordCell
 	public OfxWordCell leftLineWidth(double value) {leftLineWidth=value;return this;}
 	public OfxWordCell leftLineBorderColor(Color value) {leftLineBorderColor=value;return this;}
 	
-	public OfxWordCell SetAllLineStyleSingle() { SetAllLineStyle(LineStyle.SINGLE);return this;}
-	public OfxWordCell SetAllLineStyle(int value) {
+	public OfxWordCell setAllLineStyleSingle() { setAllLineStyle(LineStyle.SINGLE);return this;}
+	public OfxWordCell setAllLineStyle(int value) 
+	{
 		topLineStyle(value);
 		rightLineStyle(value);
 		bottomLineStyle(value);
 		leftLineStyle(value);
-		return this;}
+		return this;
+	}
 	
+	public OfxWordCell setAllLineBordersColor(Color value) 
+	{
+		topLineBorderColor(value);
+		rightLineBorderColor(value);
+		bottomLineBorderColor(value);
+		leftLineBorderColor(value);
+		return this;
+	}
+
 	public OfxWordCell tableBackgroundColor(Color value) {tableBackgroundColor=value;return this;}
 	public OfxWordCell textureIndex(int value) {textureIndex=value;return this;}
 }
