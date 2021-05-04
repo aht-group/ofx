@@ -35,7 +35,6 @@ public class OfxWordCell
 	
 	public OfxWordCell()
 	{
-		paragraphAlignment = ParagraphAlignment.LEFT;
 		verticalAlignment = CellVerticalAlignment.TOP;
 		cellWidth = 100;
 		
@@ -58,10 +57,6 @@ public class OfxWordCell
 		tableBackgroundColor = Color.WHITE;
 		textureIndex = 0;
 	}
-	
-	public OfxWordCell paragraphAlignmentCenter() {paragraphAlignment(ParagraphAlignment.CENTER);return this;}
-	public OfxWordCell paragraphAlignmentRight() {paragraphAlignment(ParagraphAlignment.RIGHT);return this;}
-	public OfxWordCell paragraphAlignment(int value) {paragraphAlignment=value;return this;}
 
 	public OfxWordCell verticalAlignmentCenter() {verticalAlignment(CellVerticalAlignment.CENTER);return this;}
 	public OfxWordCell verticalAlignmentBottom() {verticalAlignment(CellVerticalAlignment.BOTTOM);return this;}

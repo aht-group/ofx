@@ -2,6 +2,8 @@ package org.openfuxml.util.configuration.settings.word;
 
 import java.awt.Color;
 
+import com.aspose.words.ParagraphAlignment;
+
 public class OfxWordFont
 {
 	private boolean italic,italicDefault; public boolean isItalic() {return italic;}
@@ -9,11 +11,12 @@ public class OfxWordFont
 	private boolean underline,underlineDefault; public boolean isUnderline() {return underline;}
 	private double size, sizeDefault; public double getSize() {return size;}
 	private Color color, colorDefault; public Color getColor() {return color;}
-	private double ident, identDefault; public double getIdent() {return ident;}
+	private double leftIdent, leftIdentDefault; public double getIdent() {return leftIdent;}
 	private int spaceBefore,spaceBeforeDefault; public int getSpaceBefore() {return spaceBefore;}
 	private int spaceAfter,spaceAfterDefault; public int getSpaceAfter() {return spaceAfter;}
 	private int lineSpacing,lineSpacingDefault; public int getLineSpacing() {return lineSpacing;}
 	private boolean keepTogether, keepTogetherDefault; public boolean isKeepTogether() {return keepTogether;}
+	private int paragraphAlignment, paragraphAlignmentDefault; public int getParagraphAlignment() {return paragraphAlignment;}
 	
 	public static OfxWordFont instance() {return new OfxWordFont();}
 	
@@ -24,11 +27,12 @@ public class OfxWordFont
 		italic = false;
 		underline = false;
 		color = Color.BLACK;
-		ident = 0;
+		leftIdent = 0;
 		spaceBefore = 3;
 		spaceAfter = 3;
 		lineSpacing = 12;
 		keepTogether = false;
+		paragraphAlignment = ParagraphAlignment.LEFT;
 		save();
 	}
 	
@@ -39,11 +43,12 @@ public class OfxWordFont
 		italicDefault = italic;
 		underlineDefault = underline;
 		colorDefault = color;
-		identDefault = ident;
+		leftIdentDefault = leftIdent;
 		spaceBeforeDefault = spaceBefore;
 		spaceAfterDefault = spaceAfter;
 		lineSpacingDefault = lineSpacing;
 		keepTogetherDefault = keepTogether;
+		paragraphAlignmentDefault = paragraphAlignment;
 	}
 	
 	public OfxWordFont reset()
@@ -53,11 +58,12 @@ public class OfxWordFont
 		italic = italicDefault;
 		underline = underlineDefault;
 		color = colorDefault;
-		ident = identDefault;
+		leftIdent = leftIdentDefault;
 		spaceBefore = spaceBeforeDefault;
 		spaceAfter = spaceAfterDefault;
 		lineSpacing = lineSpacingDefault;
 		keepTogether = keepTogetherDefault;
+		paragraphAlignment = paragraphAlignmentDefault;
 		
 		return this;
 	}
@@ -75,7 +81,7 @@ public class OfxWordFont
 	
 	public OfxWordFont color(Color value) {color=value;return this;}
 	
-	public OfxWordFont ident(double value) {ident=value;return this;}
+	public OfxWordFont leftIdent(double value) {leftIdent=value;return this;}
 	
 	public OfxWordFont spaceBefore(int value) {spaceBefore=value;return this;}
 	public OfxWordFont spaceAfter(int value) {spaceAfter=value;return this;}
@@ -83,4 +89,9 @@ public class OfxWordFont
 	
 	public OfxWordFont keepTogether() {keepTogether(true);return this;}
 	public OfxWordFont keepTogether(boolean value) {keepTogether=value;return this;}
+	
+	public OfxWordFont paragraphAlignmentJustify() {paragraphAlignment(ParagraphAlignment.JUSTIFY);return this;}
+	public OfxWordFont paragraphAlignmentCenter() {paragraphAlignment(ParagraphAlignment.CENTER);return this;}
+	public OfxWordFont paragraphAlignmentRight() {paragraphAlignment(ParagraphAlignment.RIGHT);return this;}
+	public OfxWordFont paragraphAlignment(int value) {paragraphAlignment=value;return this;}
 }
