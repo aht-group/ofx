@@ -10,7 +10,7 @@ public class OfxWordFont
 	private double size, sizeDefault; public double getSize() {return size;}
 	private Color color, colorDefault; public Color getColor() {return color;}
 	private double ident, identDefault; public double getIdent() {return ident;}
-	private int spaceBefore,spaceBeforeDefault; public int getSpaceBefore() {return spaceAfter;}
+	private int spaceBefore,spaceBeforeDefault; public int getSpaceBefore() {return spaceBefore;}
 	private int spaceAfter,spaceAfterDefault; public int getSpaceAfter() {return spaceAfter;}
 	private int lineSpacing,lineSpacingDefault; public int getLineSpacing() {return lineSpacing;}
 	
