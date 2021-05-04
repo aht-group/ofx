@@ -13,7 +13,7 @@ public class OfxWordFont
 	private int spaceBefore,spaceBeforeDefault; public int getSpaceBefore() {return spaceBefore;}
 	private int spaceAfter,spaceAfterDefault; public int getSpaceAfter() {return spaceAfter;}
 	private int lineSpacing,lineSpacingDefault; public int getLineSpacing() {return lineSpacing;}
-	
+	private boolean keepTogether, keepTogetherDefault; public boolean isKeepTogether() {return keepTogether;}
 	
 	public static OfxWordFont instance() {return new OfxWordFont();}
 	
@@ -28,7 +28,7 @@ public class OfxWordFont
 		spaceBefore = 3;
 		spaceAfter = 3;
 		lineSpacing = 12;
-		
+		keepTogether = false;
 		save();
 	}
 	
@@ -43,6 +43,7 @@ public class OfxWordFont
 		spaceBeforeDefault = spaceBefore;
 		spaceAfterDefault = spaceAfter;
 		lineSpacingDefault = lineSpacing;
+		keepTogetherDefault = keepTogether;
 	}
 	
 	public OfxWordFont reset()
@@ -56,6 +57,7 @@ public class OfxWordFont
 		spaceBefore = spaceBeforeDefault;
 		spaceAfter = spaceAfterDefault;
 		lineSpacing = lineSpacingDefault;
+		keepTogether = keepTogetherDefault;
 		
 		return this;
 	}
@@ -78,4 +80,7 @@ public class OfxWordFont
 	public OfxWordFont spaceBefore(int value) {spaceBefore=value;return this;}
 	public OfxWordFont spaceAfter(int value) {spaceAfter=value;return this;}
 	public OfxWordFont lineSpacing(int value) {lineSpacing=value;return this;}
+	
+	public OfxWordFont keepTogether() {keepTogether(true);return this;}
+	public OfxWordFont keepTogether(boolean value) {keepTogether=value;return this;}
 }
