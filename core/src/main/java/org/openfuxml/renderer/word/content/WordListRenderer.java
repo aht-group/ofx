@@ -62,11 +62,11 @@ public class WordListRenderer
 						
 							if (numbersFormating) {builder.write(i+1 + ".");}
 							else if (!numbersFormating) {builder.write(makeItSelf);}
-							builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(5));
+							builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(2));
 							builder.insertCell();
 							builder.getParagraphFormat().setAlignment(ParagraphAlignment.JUSTIFY);
 							paragraphRenderer((Paragraph)o2);
-							builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(95));
+							builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(98));
 							builder.endRow();
 						} catch (OfxAuthoringException e) {}
 						i++;
