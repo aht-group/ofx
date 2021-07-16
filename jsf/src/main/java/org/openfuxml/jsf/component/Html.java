@@ -17,8 +17,6 @@ import org.openfuxml.renderer.html.OfxHtmlRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 @FacesComponent("org.openfuxml.jsf.component.Html")
 @ResourceDependency(library="css", name="ofxBasic.css")
 public class Html extends UIPanel
@@ -38,7 +36,6 @@ public class Html extends UIPanel
 		
 		if(s!=null)
 		{
-			JaxbUtil.info(s);
 			try
 			{
 				OfxHtmlRenderer htmlRenderer = new OfxHtmlRenderer(new OfxConfigurationProvider(),"");

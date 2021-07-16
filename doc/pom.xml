@@ -49,6 +49,13 @@
     		<artifactId>loremipsum</artifactId>
     		<scope>compile</scope>
 		</dependency>
+		
+				<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	
 	<build>
