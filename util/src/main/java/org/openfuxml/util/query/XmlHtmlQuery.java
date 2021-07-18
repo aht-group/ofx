@@ -1,4 +1,4 @@
-package org.openfuxml.xml.xpath.cmp;
+package org.openfuxml.util.query;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import org.openfuxml.xml.renderer.html.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HtmlXpath
+public class XmlHtmlQuery
 {
-	final static Logger logger = LoggerFactory.getLogger(HtmlXpath.class);
+	final static Logger logger = LoggerFactory.getLogger(XmlHtmlQuery.class);
 	
 	@SuppressWarnings("unchecked")
 	public static synchronized Renderer getRenderer(Html html, String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException

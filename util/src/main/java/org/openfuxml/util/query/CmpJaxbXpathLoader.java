@@ -1,4 +1,4 @@
-package org.openfuxml.xml.xpath.cmp;
+package org.openfuxml.util.query;
 
 import java.util.List;
 import java.util.NoSuchElementException;

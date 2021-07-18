@@ -13,10 +13,10 @@ import net.sf.exlp.xml.xpath.IoXpath;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.util.query.XmlHtmlQuery;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.openfuxml.xml.renderer.cmp.Html;
 import org.openfuxml.xml.renderer.html.Renderer;
-import org.openfuxml.xml.xpath.cmp.HtmlXpath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -110,7 +110,7 @@ public class OfxRenderConfiguration
 		{
 			try
 			{
-				renderer = HtmlXpath.getRenderer(html, renderer.getCode());
+				renderer = XmlHtmlQuery.getRenderer(html, renderer.getCode());
 			}
 			catch (ExlpXpathNotFoundException e){throw new OfxConfigurationException("No Renderer configured for code="+renderer.getCode()+" ("+e.getMessage()+")");}
 			catch (ExlpXpathNotUniqueException e){throw new OfxConfigurationException("More than one Renderer configured for code="+renderer.getCode()+" ("+e.getMessage()+")");}

@@ -26,7 +26,7 @@
 	</dependencyManagement>
    	
 	<dependencies>
-		<!-- JAXB-XML -->
+		<!-- ExLP -->
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-xml</artifactId>
@@ -34,19 +34,14 @@
 			<scope>compile</scope>
 		</dependency>
 	
-		<!-- ExLP -->
+		<!-- ExLP 
 		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-interfaces</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.exlp</groupId>
-			<artifactId>exlp-util</artifactId>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
+		</dependency> -->
+		
 		
 		<!-- JAXB -->
 		<dependency>
@@ -76,6 +71,12 @@
    	   	</dependency>
 		
 		<!-- Test -->
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-util</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
