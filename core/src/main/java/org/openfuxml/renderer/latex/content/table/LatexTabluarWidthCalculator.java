@@ -7,8 +7,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.table.Column;
@@ -17,10 +15,12 @@ import org.openfuxml.content.table.Specification;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory.Horizontal;
 import org.openfuxml.interfaces.renderer.util.TabluarWidthCalculator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LatexTabluarWidthCalculator implements TabluarWidthCalculator
 {
-	static Log logger = LogFactory.getLog(LatexTabluarWidthCalculator.class);
+	final static Logger logger = LoggerFactory.getLogger(LatexTabluarWidthCalculator.class);
 	
 	protected final static int muliplier = 1000;
 	

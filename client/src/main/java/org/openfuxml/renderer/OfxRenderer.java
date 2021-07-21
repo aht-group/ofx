@@ -1,7 +1,5 @@
 package org.openfuxml.renderer;
 
-import net.sf.exlp.util.io.LoggerInit;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -10,8 +8,6 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -21,10 +17,14 @@ import org.openfuxml.exception.OfxRenderingException;
 import org.openfuxml.renderer.processor.pre.OfxPreProcessor;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.xml.renderer.cmp.Cmp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.LoggerInit;
 
 public class OfxRenderer
 {
-	static Log logger = LogFactory.getLog(OfxRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxRenderer.class);
 	public static final String exeName = "OfxRenderer";
 	
 	public static enum Phase {iniMerge,wikiIntegrate,wikiMerge,containerMerge,externalMerge,phaseTemplate,mergeTemplate};
