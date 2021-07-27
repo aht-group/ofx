@@ -88,8 +88,8 @@
 		<dependency>
 			<groupId>jfree</groupId>
 			<artifactId>jfreechart</artifactId>
+			<scope>provided</scope>
 			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		
 		<dependency>
