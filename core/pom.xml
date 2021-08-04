@@ -88,6 +88,13 @@
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-transcoder</artifactId>
 			<scope>provided</scope>
+			<version>1.7</version>	<!-- Try 1.8 and above -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-codec</artifactId>
+			<scope>test</scope>
+			<version>1.7</version> <!-- Try 1.8 and above-->
 		</dependency>
 		
 		<dependency>
@@ -123,11 +130,6 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.xmlgraphics</groupId>
-			<artifactId>batik-codec</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

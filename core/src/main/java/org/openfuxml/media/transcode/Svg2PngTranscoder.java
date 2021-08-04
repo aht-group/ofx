@@ -92,9 +92,9 @@ public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements C
 	
 	public static void transcode(Integer height, InputStream is, OutputStream os) throws TranscoderException, IOException
 	{
-		List<InputStream> list = StreamUtil.clone(is,2);
+		List<InputStream> streams = StreamUtil.clone(is,2);
 		
-		Image image = size(list.get(0));
+		Image image = sizeOfPng(streams.get(0));
 		
 		if(height!=null)
 		{
@@ -103,7 +103,7 @@ public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements C
 			JaxbUtil.trace(image);
 		}
 		
-		TranscoderInput tIn = new TranscoderInput(list.get(1));
+		TranscoderInput tIn = new TranscoderInput(streams.get(1));
 	    TranscoderOutput tOut = new TranscoderOutput(os);
 	    PNGTranscoder t = new PNGTranscoder();
 	    
@@ -115,7 +115,7 @@ public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements C
 	    os.close();
 	}
 	
-	@Deprecated public static Image sizePng(InputStream is) throws TranscoderException, IOException
+	@Deprecated private static Image sizeOfPng(InputStream is) throws TranscoderException, IOException
 	{
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		TranscoderInput tIn = new TranscoderInput(is);
@@ -134,18 +134,18 @@ public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements C
 	    return XmlImageFactory.px(width, height);
 	}
 	
-	@Deprecated public static Image size(InputStream is) throws TranscoderException, IOException
-	{
-		SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
-
-	    Document document = factory.createDocument(null, is);
-	    UserAgent agent = new UserAgentAdapter();
-	    DocumentLoader loader= new DocumentLoader(agent);
-	    BridgeContext context = new BridgeContext(agent, loader);
-	    context.setDynamic(true);
-	    GVTBuilder builder= new GVTBuilder();
-	    GraphicsNode root= builder.build(context, document);
-
-	    return XmlImageFactory.size(root.getPrimitiveBounds().getWidth(), root.getPrimitiveBounds().getHeight());
-	}
+//	@Deprecated private static Image sizeOfSvg(InputStream is) throws TranscoderException, IOException
+//	{
+//		SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
+//
+//	    Document document = factory.createDocument(null, is);
+//	    UserAgent agent = new UserAgentAdapter();
+//	    DocumentLoader loader= new DocumentLoader(agent);
+//	    BridgeContext context = new BridgeContext(agent, loader);
+//	    context.setDynamic(true);
+//	    GVTBuilder builder= new GVTBuilder();
+//	    GraphicsNode root= builder.build(context, document);
+//
+//	    return XmlImageFactory.size(root.getPrimitiveBounds().getWidth(), root.getPrimitiveBounds().getHeight());
+//	}
 }

@@ -14,17 +14,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.batik.bridge.BridgeContext;
-import org.apache.batik.bridge.DocumentLoader;
-import org.apache.batik.bridge.GVTBuilder;
-import org.apache.batik.bridge.UserAgent;
-import org.apache.batik.bridge.UserAgentAdapter;
-import org.apache.batik.dom.svg.SAXSVGDocumentFactory;
-import org.apache.batik.gvt.GraphicsNode;
 import org.apache.batik.svggen.SVGGeneratorContext;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.transcoder.TranscoderException;
-import org.apache.batik.util.XMLResourceDescriptor;
 import org.junit.Before;
 import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.media.Media;
@@ -102,25 +94,25 @@ public class TestSvgTranscoder extends AbstractOfxCoreTest
         System.out.println("Rectangle null? "+(r==null));
 	}
 	
-	public void stack() throws MalformedURLException, IOException
-	{
-		SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
-
-//		https://github.com/apache/batik/blob/trunk/samples/chessboard.svg
-        File file = new File("/Volumes/ramdisk/tv2.svg");
-        InputStream is = new FileInputStream(file);
-
-        Document document = factory.createDocument(null, is);
-        UserAgent agent = new UserAgentAdapter();
-        DocumentLoader loader= new DocumentLoader(agent);
-        BridgeContext context = new BridgeContext(agent, loader);
-        context.setDynamic(true);
-        GVTBuilder builder= new GVTBuilder();
-        GraphicsNode root= builder.build(context, document);
-
-        System.out.println(root.getPrimitiveBounds().getWidth());
-        System.out.println(root.getPrimitiveBounds().getHeight());
-	}
+//	public void stack() throws MalformedURLException, IOException
+//	{
+//		SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
+//
+////		https://github.com/apache/batik/blob/trunk/samples/chessboard.svg
+//        File file = new File("/Volumes/ramdisk/tv2.svg");
+//        InputStream is = new FileInputStream(file);
+//
+//        Document document = factory.createDocument(null, is);
+//        UserAgent agent = new UserAgentAdapter();
+//        DocumentLoader loader= new DocumentLoader(agent);
+//        BridgeContext context = new BridgeContext(agent, loader);
+//        context.setDynamic(true);
+//        GVTBuilder builder= new GVTBuilder();
+//        GraphicsNode root= builder.build(context, document);
+//
+//        System.out.println(root.getPrimitiveBounds().getWidth());
+//        System.out.println(root.getPrimitiveBounds().getHeight());
+//	}
 	
 	public static void main(String[] args) throws Exception
     {
@@ -129,9 +121,9 @@ public class TestSvgTranscoder extends AbstractOfxCoreTest
     	TestSvgTranscoder test = new TestSvgTranscoder();
     	test.init();
     	
-//    	test.pdf();
+    	test.pdf();
 //    	test.png();
-    	test.pngHeight();
+//    	test.pngHeight();
 //    	test.url();
 //    	test.stack();
     }
