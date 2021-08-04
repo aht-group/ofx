@@ -30,70 +30,70 @@ import org.xml.sax.SAXException;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 
 public class TestSvgTranscoder extends AbstractOfxCoreTest
-{	
+{
 	final static Logger logger = LoggerFactory.getLogger(TestSvgTranscoder.class);
 
 	public static final String svgTest1 = "data/svg/under-construction.svg";
 	public static final String svgTest2 = "/Volumes/ramdisk/landscape.svg";
 	public static final String svgTest3 = "/Volumes/ramdisk/tv2.svg";
-	
+
 	private Media media;
 	private File fTarget;
-	
+
 	@Before
 	public void init()
 	{
 		fTarget = new File("/Volumes/ramdisk");
-		
+
 		media = new Media();
 		media.setSrc(svgTest1);
 		media.setDst("test");
 	}
-	
+
 	public void pdf() throws OfxAuthoringException
 	{
 		Svg2PdfTranscoder transcoder = new Svg2PdfTranscoder(fTarget);
 		transcoder.transcode(media);
 	}
-	
+
 	public void png() throws OfxAuthoringException
 	{
 		Svg2PngTranscoder transcoder = new Svg2PngTranscoder(fTarget);
 		transcoder.transcode(media);
 	}
-	
+
 	public void pngHeight() throws TranscoderException, IOException
 	{
 		MultiResourceLoader mrl = new MultiResourceLoader();
-		InputStream is = mrl.searchIs(svgTest3); 
+		InputStream is = mrl.searchIs(svgTest3);
 		OutputStream os = new FileOutputStream(new File(fTarget,"test.png"));
 		Svg2PngTranscoder.transcode(20, is, os);
 		os.close();
 	}
-	
+
 	public void url() throws MalformedURLException, IOException, ParserConfigurationException, SAXException
 	{
 //		String s = "https://openclipart.org/download/228858";
 //		InputStream is = new URL(s).openStream();
-		
+
         File file = new File("/Volumes/ramdisk/tv2.svg");
         InputStream is = new FileInputStream(file);
-		
+
 		DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = f.newDocumentBuilder();
         Document doc = builder.parse(is);
 
         SVGGeneratorContext ctx = SVGGeneratorContext.createDefault(doc);
         SVGGraphics2D svg = new SVGGraphics2D(ctx,false);
-        
+
         Dimension d = svg.getSVGCanvasSize();
         Rectangle r = svg.getClipBounds();
-        
+
         System.out.println(svg.toString());
         System.out.println("Dimension null? "+(d==null));
         System.out.println("Rectangle null? "+(r==null));
 	}
-	
+
 //	public void stack() throws MalformedURLException, IOException
 //	{
 //		SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
@@ -113,17 +113,17 @@ public class TestSvgTranscoder extends AbstractOfxCoreTest
 //        System.out.println(root.getPrimitiveBounds().getWidth());
 //        System.out.println(root.getPrimitiveBounds().getHeight());
 //	}
-	
+
 	public static void main(String[] args) throws Exception
     {
     	OfxCoreBootstrap.init();
-			
+
     	TestSvgTranscoder test = new TestSvgTranscoder();
     	test.init();
-    	
+
     	test.pdf();
-//    	test.png();
-//    	test.pngHeight();
+ //   	test.png();
+ //   	test.pngHeight();
 //    	test.url();
 //    	test.stack();
     }

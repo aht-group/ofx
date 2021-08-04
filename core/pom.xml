@@ -88,13 +88,22 @@
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-transcoder</artifactId>
 			<scope>provided</scope>
-			<version>1.7</version>	<!-- Try 1.8 and above -->
+			<version>1.7</version> 	<!-- Try 1.8 and above -->
+			<!-- <version>1.12</version> -->
 		</dependency>
+		<!-- 
+		<dependency>
+		    <groupId>org.apache.xmlgraphics</groupId>
+		    <artifactId>fop</artifactId>
+		    <version>2.3</version>
+		</dependency>
+		 -->
 		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-codec</artifactId>
 			<scope>test</scope>
 			<version>1.7</version> <!-- Try 1.8 and above-->
+			<!-- <version>1.12</version> -->
 		</dependency>
 		
 		<dependency>
