@@ -68,14 +68,19 @@
         	
         	<!-- Images -->
         	<dependency>
+			    <groupId>org.apache.xmlgraphics</groupId>
+			    <artifactId>fop</artifactId>
+			    <version>2.6</version>
+			</dependency>
+        	<dependency>
 				<groupId>org.apache.xmlgraphics</groupId>
 				<artifactId>batik-transcoder</artifactId>
-				<version>1.7</version> <!-- tk 2019-01-09 update from 1.7 to 1.8 -->
+				<version>1.14</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.xmlgraphics</groupId>
 				<artifactId>batik-codec</artifactId>
-				<version>1.7</version> <!-- tk 2019-01-09 update from 1.7 to 1.8 -->
+				<version>1.14</version>
 			</dependency>
 			
 			<!--  Aspose -  Words for Java -->
