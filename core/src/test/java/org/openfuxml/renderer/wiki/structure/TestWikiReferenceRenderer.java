@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.doc.provider.old.ReferenceProvider;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.wiki.AbstractTestWikiRenderer;
 import org.openfuxml.renderer.wiki.WikiParagraphRenderer;
 import org.slf4j.Logger;

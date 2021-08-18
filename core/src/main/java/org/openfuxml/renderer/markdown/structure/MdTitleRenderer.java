@@ -10,9 +10,6 @@ import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.Writer;
-
 public class MdTitleRenderer extends AbstractOfxMarkdownRenderer implements OfxMdRenderer
 {
 	private final Logger logger = LoggerFactory.getLogger(MdTitleRenderer.class);

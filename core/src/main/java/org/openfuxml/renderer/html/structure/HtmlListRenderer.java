@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 public class HtmlListRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
-	private final Logger logger = LoggerFactory.getLogger(HtmlListRenderer.class);
+	final Logger logger = LoggerFactory.getLogger(HtmlListRenderer.class);
 
 	@Deprecated
 	public HtmlListRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)

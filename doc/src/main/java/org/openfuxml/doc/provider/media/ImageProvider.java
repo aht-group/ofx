@@ -15,8 +15,6 @@ import org.openfuxml.interfaces.xml.OfxXmlExampleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 public class ImageProvider extends AbstractXmlExampleProvider implements OfxXmlExampleProvider
 {	
 	final static Logger logger = LoggerFactory.getLogger(ImageProvider.class);

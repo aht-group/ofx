@@ -3,25 +3,15 @@ package org.openfuxml.renderer.word;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.renderer.word.util.NodeRunReplace;
 
-import com.aspose.words.Body;
-import com.aspose.words.Cell;
 import com.aspose.words.CellCollection;
 import com.aspose.words.Document;
-import com.aspose.words.DocumentBuilder;
-import com.aspose.words.Node;
-import com.aspose.words.NodeCollection;
-import com.aspose.words.NodeType;
 import com.aspose.words.Paragraph;
-import com.aspose.words.Run;
 import com.aspose.words.Row;
 import com.aspose.words.RowCollection;
-import com.aspose.words.Section;
-import com.aspose.words.SectionCollection;
+import com.aspose.words.Run;
 import com.aspose.words.Table;
-import com.aspose.words.TableCollection;
 
 public class NodeRunReplaceForTemplatesTest 
 {

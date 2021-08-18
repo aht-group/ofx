@@ -1,19 +1,11 @@
 package org.openfuxml.renderer.word.structure;
 
 import org.openfuxml.content.ofx.Content;
-import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.exception.OfxConfigurationException;
-import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
-import org.openfuxml.renderer.util.OfxDocumentStructureVerifier;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aspose.words.BreakType;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
-import com.aspose.words.PageSetup;
-import com.aspose.words.Section;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 

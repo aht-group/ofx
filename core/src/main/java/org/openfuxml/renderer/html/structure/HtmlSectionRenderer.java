@@ -4,18 +4,21 @@ package org.openfuxml.renderer.html.structure;
  */
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
-import org.openfuxml.content.ofx.*;
+import org.openfuxml.content.ofx.Comment;
+import org.openfuxml.content.ofx.Highlight;
+import org.openfuxml.content.ofx.Listing;
+import org.openfuxml.content.ofx.Marginalia;
+import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.content.ofx.Section;
+import org.openfuxml.content.ofx.Sections;
+import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.util.HtmlElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.Serializable;
 
 public class HtmlSectionRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {

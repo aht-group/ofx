@@ -3,7 +3,6 @@ package org.openfuxml.renderer.markdown.structure;
 
 import org.openfuxml.content.list.Item;
 import org.openfuxml.content.list.List;
-import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
@@ -14,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 public class MdListRenderer extends AbstractOfxMarkdownRenderer implements OfxMdRenderer
 {
-	private final Logger logger = LoggerFactory.getLogger(MdListRenderer.class);
+	final Logger logger = LoggerFactory.getLogger(MdListRenderer.class);
 
 	static String item ="\n";
 

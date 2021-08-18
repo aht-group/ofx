@@ -1,13 +1,11 @@
 package org.openfuxml.renderer.wiki;
 
-import org.openfuxml.renderer.wiki.OfxWikiRenderer;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +19,8 @@ public class WikiParagraphRenderer extends AbstractOfxWikiRenderer implements Of
 {
 	final static Logger logger = LoggerFactory.getLogger(WikiParagraphRenderer.class);
 
-	public WikiParagraphRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm) {
+	public WikiParagraphRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
+	{
 		super(cmm, dsm);
 	}
 	

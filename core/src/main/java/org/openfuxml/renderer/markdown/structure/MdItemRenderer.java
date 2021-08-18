@@ -1,7 +1,6 @@
 package org.openfuxml.renderer.markdown.structure;
 
 import org.openfuxml.content.list.Item;
-import org.openfuxml.content.list.List;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;

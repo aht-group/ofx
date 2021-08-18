@@ -9,7 +9,6 @@ import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
-import org.openfuxml.xml.renderer.cmp.Pdf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

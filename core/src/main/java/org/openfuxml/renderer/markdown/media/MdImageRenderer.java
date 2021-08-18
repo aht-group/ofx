@@ -1,8 +1,6 @@
 package org.openfuxml.renderer.markdown.media;
 
 import org.openfuxml.content.media.Image;
-import org.openfuxml.content.ofx.Comment;
-import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;

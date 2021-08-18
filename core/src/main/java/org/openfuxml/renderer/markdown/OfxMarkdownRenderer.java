@@ -1,5 +1,8 @@
 package org.openfuxml.renderer.markdown;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -9,11 +12,7 @@ import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.OfxRenderer;
 import org.openfuxml.renderer.markdown.structure.MdDocumentRenderer;
 import org.openfuxml.renderer.util.OfxDocumentStructureVerifier;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class OfxMarkdownRenderer extends OfxRenderer
 {
@@ -41,4 +40,5 @@ public class OfxMarkdownRenderer extends OfxRenderer
 		OfxDocumentStructureVerifier.checkForContent(ofxDocument);
 		rDocument.render(ofxDocument.getContent());
 		txt.addAll(rDocument.getContent());
-	}}
+	}
+}

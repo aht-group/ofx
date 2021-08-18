@@ -3,8 +3,6 @@ package org.openfuxml.renderer.wiki;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
-import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.renderer.wiki.OfxWikiRenderer;
 
 /**
  * 

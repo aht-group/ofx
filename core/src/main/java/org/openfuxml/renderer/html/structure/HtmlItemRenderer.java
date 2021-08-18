@@ -3,25 +3,20 @@ package org.openfuxml.renderer.html.structure;
  * Author: Rebecca Roblick
  */
 import org.openfuxml.content.list.Item;
-import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
-import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.util.HtmlElement;
-import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
-import org.openfuxml.renderer.markdown.structure.MdListRenderer;
-import org.openfuxml.renderer.markdown.structure.MdParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class HtmlItemRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlItemRenderer.class);
+	
 	@Deprecated
 	public HtmlItemRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
 	{

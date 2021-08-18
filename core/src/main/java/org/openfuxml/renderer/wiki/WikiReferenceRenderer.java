@@ -3,7 +3,6 @@ package org.openfuxml.renderer.wiki;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
-import org.openfuxml.interfaces.media.CrossMediaManager;
 
 /**
  * Rendering references(hyperlink) to wiki syntax

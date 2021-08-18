@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import org.openfuxml.OfxCoreBootstrap;
-import org.openfuxml.content.ofx.Document;
 import org.openfuxml.doc.provider.DemoContentProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;

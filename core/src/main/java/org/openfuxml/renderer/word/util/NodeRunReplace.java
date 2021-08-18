@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import com.aspose.words.Document;
 import com.aspose.words.FindReplaceDirection;
 import com.aspose.words.FindReplaceOptions;
-import com.aspose.words.Row;
 
 public class NodeRunReplace 
 {

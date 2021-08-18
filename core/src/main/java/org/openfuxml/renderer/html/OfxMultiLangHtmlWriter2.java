@@ -1,27 +1,24 @@
 package org.openfuxml.renderer.html;
-/**
- * Author: Rebecca Roblick
- */
-import net.sf.exlp.util.io.RelativePathFactory;
-import net.sf.exlp.util.io.StringIO;
-import org.openfuxml.content.editorial.Acronyms;
-import org.openfuxml.content.editorial.Glossary;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.renderer.html.structure.HtmlSectionRenderer;
 import org.openfuxml.renderer.html.table.HtmlTableRenderer;
 import org.openfuxml.util.filter.OfxLangFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
+/**
+ * Author: Rebecca Roblick
+ */
+import net.sf.exlp.util.io.RelativePathFactory;
+import net.sf.exlp.util.io.StringIO;
 
 public class OfxMultiLangHtmlWriter2
 {

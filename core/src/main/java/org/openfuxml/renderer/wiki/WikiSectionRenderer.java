@@ -6,8 +6,6 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
-import org.openfuxml.interfaces.media.CrossMediaManager;
-import org.openfuxml.renderer.wiki.OfxWikiRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

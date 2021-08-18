@@ -2,7 +2,6 @@ package org.openfuxml.transform;
 
 import java.io.FileNotFoundException;
 
-import org.jdom2.Document;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openfuxml.content.ofx.Section;

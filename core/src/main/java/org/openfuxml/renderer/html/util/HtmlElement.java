@@ -2,7 +2,9 @@ package org.openfuxml.renderer.html.util;
 /**
  * Author: Rebecca Roblick
  */
-import org.jdom2.*;
+import org.jdom2.Content;
+import org.jdom2.Element;
+import org.jdom2.Text;
 import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.renderer.html.head.HtmlHead;
@@ -11,6 +13,8 @@ import org.openfuxml.renderer.html.head.HtmlHead;
 * im Html Dokument darstellen*/
 public class HtmlElement extends Element
 {
+	private static final long serialVersionUID = 1L;
+
 	public HtmlElement(String name)
 	{
 		super(name);
