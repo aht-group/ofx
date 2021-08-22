@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import com.aspose.words.CellVerticalAlignment;
 import com.aspose.words.LineStyle;
-import com.aspose.words.ParagraphAlignment;
 
 public class OfxWordCell
 {
