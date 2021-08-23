@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.openfuxml.factory.ConfigurationProviderFacotry;

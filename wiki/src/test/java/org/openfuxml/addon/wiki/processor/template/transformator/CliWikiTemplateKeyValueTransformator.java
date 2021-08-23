@@ -1,27 +1,17 @@
 package org.openfuxml.addon.wiki.processor.template.transformator;
 
-import net.sf.exlp.core.handler.EhResultContainer;
-import net.sf.exlp.core.listener.LogListenerString;
-import net.sf.exlp.interfaces.LogEvent;
-import net.sf.exlp.interfaces.LogListener;
-import net.sf.exlp.interfaces.LogParser;
+import org.apache.commons.configuration.Configuration;
+import org.jdom2.Element;
+import org.openfuxml.addon.wiki.data.jaxb.Template;
+import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
+import org.openfuxml.xml.renderer.cmp.Cmp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
-
-import org.apache.commons.configuration.Configuration;
-import org.jdom2.Element;
-import org.jdom2.Namespace;
-import org.openfuxml.addon.wiki.data.jaxb.Template;
-import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
-import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
-import org.openfuxml.addon.wiki.processor.template.exlp.parser.WikiKeyValueParser;
-import org.openfuxml.xml.OfxNsPrefixMapper;
-import org.openfuxml.xml.renderer.cmp.Cmp;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class CliWikiTemplateKeyValueTransformator
 {
