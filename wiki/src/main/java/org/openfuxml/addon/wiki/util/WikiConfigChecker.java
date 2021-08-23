@@ -10,7 +10,7 @@ public class WikiConfigChecker
 {
 	final static Logger logger = LoggerFactory.getLogger(WikiConfigChecker.class);
 	
-	public static synchronized void check(Configuration config)
+	private static synchronized void check(Configuration config)
 	{
 		for(String dir : config.getStringArray("/ofx/dir"))
 		{

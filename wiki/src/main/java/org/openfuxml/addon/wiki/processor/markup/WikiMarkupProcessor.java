@@ -2,13 +2,7 @@ package org.openfuxml.addon.wiki.processor.markup;
 
 import java.io.File;
 
-import net.sf.exlp.util.config.ConfigLoader;
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Injections;
@@ -29,6 +23,9 @@ import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.StringIO;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
@@ -187,33 +184,5 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 	{
 		templateCounter++;
 		return ""+templateCounter;
-	}
-	
-	public static void main (String[] args) throws Exception
-	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("resources/config");
-			loggerInit.init();
-		
-		String propFile = "resources/properties/user.properties";
-		if(args.length==1){propFile=args[0];}
-			
-		ConfigLoader.add(propFile);
-		Configuration config = ConfigLoader.init();
-			
-		String fnCmp = config.getString("ofx.xml.cmp");
-		String fnWikiTxt = config.getString("wiki.processor.test.markup");
-		
-		logger.debug("Cmp:  "+fnCmp);
-		logger.debug("Wiki: "+fnWikiTxt);
-		
-		Cmp cmp = (Cmp)JaxbUtil.loadJAXB(fnCmp, Cmp.class);
-		WikiMarkupProcessor wpMarkup = new WikiMarkupProcessor(cmp);
-		
-		String wikiText = StringIO.loadTxt(fnWikiTxt);
-		logger.debug("Wiki (Before): "+wikiText);
-		
-		wikiText=wpMarkup.process(wikiText, "test");
-		logger.debug("Wiki (After): "+wikiText);
 	}
 }

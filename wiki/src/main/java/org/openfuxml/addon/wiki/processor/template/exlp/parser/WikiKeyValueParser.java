@@ -9,7 +9,7 @@ import net.sf.exlp.interfaces.LogEventHandler;
 import net.sf.exlp.interfaces.LogParser;
 import net.sf.exlp.util.io.LoggerInit;
 
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.openfuxml.addon.wiki.data.jaxb.Markup;
 import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;

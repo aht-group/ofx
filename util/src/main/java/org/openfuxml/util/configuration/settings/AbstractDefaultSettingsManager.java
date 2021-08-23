@@ -3,7 +3,7 @@ package org.openfuxml.util.configuration.settings;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
