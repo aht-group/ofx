@@ -3,7 +3,7 @@ package org.openfuxml.renderer.text.table;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Row;

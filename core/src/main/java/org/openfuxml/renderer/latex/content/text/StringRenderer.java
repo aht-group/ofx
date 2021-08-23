@@ -5,7 +5,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +57,7 @@ public class StringRenderer implements OfxLatexRenderer
 	{
 		for(String s : getContent())
 		{
-			w.write(s+SystemUtils.LINE_SEPARATOR);
+			w.write(s+System.lineSeparator());
 		}
 		w.flush();
 	}

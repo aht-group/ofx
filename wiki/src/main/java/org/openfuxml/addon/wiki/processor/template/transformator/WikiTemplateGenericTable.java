@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.jdom2.Element;
-import org.jdom2.Namespace;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
@@ -30,9 +29,7 @@ import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 public class WikiTemplateGenericTable implements WikiTemplateTransformator
 {
 	final static Logger logger = LoggerFactory.getLogger(WikiTemplateGenericTable.class);
-	
-	private final Namespace nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
-	
+
 	private NsPrefixMapperInterface nsPrefixMapper;
 	private WikiInlineProcessor wikiInlineProcessor;
 	

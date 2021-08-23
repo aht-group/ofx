@@ -11,7 +11,7 @@ import net.sf.exlp.xml.io.Dir;
 import net.sf.exlp.xml.xpath.IoXpath;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.util.query.XmlHtmlQuery;
 import org.openfuxml.xml.renderer.cmp.Cmp;

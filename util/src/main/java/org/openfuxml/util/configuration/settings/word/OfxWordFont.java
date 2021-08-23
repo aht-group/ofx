@@ -2,8 +2,6 @@ package org.openfuxml.util.configuration.settings.word;
 
 import java.awt.Color;
 
-import com.aspose.words.ParagraphAlignment;
-
 public class OfxWordFont
 {
 	private boolean italic,italicDefault; public boolean isItalic() {return italic;}

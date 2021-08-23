@@ -5,7 +5,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.ConfigurationProviderFacotry;
@@ -16,11 +16,6 @@ import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * 
- * @author yannkruger
- *
- */
 public class AbstractOfxWikiRenderer extends AbstractOfxRenderer
 {
 
