@@ -10,13 +10,10 @@ import org.openfuxml.content.ofx.Section;
 import org.openfuxml.doc.provider.text.SectionProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
-import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.renderer.wiki.AbstractTestWikiRenderer;
 import org.openfuxml.renderer.wiki.WikiSectionRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestWikiSectionRenderer extends AbstractTestWikiRenderer{
 

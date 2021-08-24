@@ -1,25 +1,15 @@
 package org.openfuxml.addon.wiki.processor.template;
 
-import java.util.Iterator;
-import java.util.List;
-
-import net.sf.exlp.util.config.ConfigLoader;
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.configuration.Configuration;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.Namespace;
-import org.jdom2.xpath.XPath;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.content.ofx.Document;
-import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.config.ConfigLoader;
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliWikiTemplateCorrector extends AbstractWikiProcessor implements WikiProcessor
 {
