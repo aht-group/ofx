@@ -1,6 +1,9 @@
 package org.openfuxml.transform;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.text.MessageFormat;
 
 import javax.xml.parsers.FactoryConfigurationError;
@@ -11,8 +14,6 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.jdom2.Document;
-import org.jdom2.JDOMException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Entities;
 import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
@@ -29,7 +30,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class XhtmlTransformer extends AbstractWikiProcessor
@@ -58,7 +58,7 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 			String xml = xhtml2Ofx(xhtmlContent);
 			if(logger.isTraceEnabled()){logger.info(xml);}
 			
-			Document doc = JDomUtil.txtToDoc(xml);
+//			Document doc = JDomUtil.txtToDoc(xml);
 //			JDomUtil.debug(doc);
 			
 			Section section = JaxbUtil.load(xml.getBytes("UTF-8"),Section.class);
@@ -72,7 +72,7 @@ public class XhtmlTransformer extends AbstractWikiProcessor
 			System.out.println(xhtmlContent);
 			logger.error("",e);
 		}
-		catch (JDOMException e) {logger.error("",e);}
+//		catch (JDOMException e) {logger.error("",e);}
 		return null;
 	}
 

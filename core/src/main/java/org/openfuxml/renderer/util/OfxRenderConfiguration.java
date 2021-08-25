@@ -4,14 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.io.Dir;
-import net.sf.exlp.xml.xpath.IoXpath;
-
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.util.query.XmlHtmlQuery;
 import org.openfuxml.xml.renderer.cmp.Cmp;
@@ -19,6 +12,12 @@ import org.openfuxml.xml.renderer.cmp.Html;
 import org.openfuxml.xml.renderer.html.Renderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
+import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.exlp.xml.io.Dir;
+import net.sf.exlp.xml.xpath.IoXpath;
 
 public class OfxRenderConfiguration
 {
@@ -62,7 +61,7 @@ public class OfxRenderConfiguration
 		{
 			dir = IoXpath.getDir(dirs, dirCode);
 			if(!dir.isSetName()){throw new OfxConfigurationException("No @name definined for <dir code=\""+dirCode+"\"/>");}
-			f = new File(FilenameUtils.normalize(fCmpParent.getAbsolutePath()+SystemUtils.FILE_SEPARATOR+dir.getName()));
+			f = new File(FilenameUtils.normalize(fCmpParent.getAbsolutePath()+File.separator+dir.getName()));
 		}
 		catch (ExlpXpathNotFoundException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
 		catch (ExlpXpathNotUniqueException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
@@ -95,7 +94,7 @@ public class OfxRenderConfiguration
 			net.sf.exlp.xml.io.File file = IoXpath.getFile(dirs, fileCode);
 			
 			File dir = getDir(listDirs, dirCode);
-			f = new File(FilenameUtils.normalize(dir.getAbsolutePath()+SystemUtils.FILE_SEPARATOR+file.getName()));
+			f = new File(FilenameUtils.normalize(dir.getAbsolutePath()+File.separator+file.getName()));
 			
 			if(!createFile && !f.exists()){throw new OfxConfigurationException("File (code="+fileCode+"does not exist: "+f.getAbsolutePath());}
 		}

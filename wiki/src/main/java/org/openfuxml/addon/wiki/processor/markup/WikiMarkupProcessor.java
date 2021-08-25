@@ -2,7 +2,6 @@ package org.openfuxml.addon.wiki.processor.markup;
 
 import java.io.File;
 
-import org.apache.commons.lang3.SystemUtils;
 import org.openfuxml.addon.wiki.data.jaxb.Category;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
 import org.openfuxml.addon.wiki.data.jaxb.Injections;
@@ -30,7 +29,6 @@ import net.sf.exlp.util.xml.JaxbUtil;
 public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiProcessor
 {
 	final static Logger logger = LoggerFactory.getLogger(WikiMarkupProcessor.class);
-	private final static String ls = SystemUtils.LINE_SEPARATOR;
 	
 	public static enum InjectionType {xml,wiki};
 	
@@ -135,11 +133,11 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 		JaxbUtil.save(f, template, true);
 		
 		StringBuffer sb = new StringBuffer();
-		sb.append(SystemUtils.LINE_SEPARATOR);
+		sb.append(System.lineSeparator());
 		sb.append("<wiki:injection id=\"");
 		sb.append(template.getId());
 		sb.append("\"/>");
-		sb.append(SystemUtils.LINE_SEPARATOR);
+		sb.append(System.lineSeparator());
 		
 		return sb.toString();
 	}
@@ -171,7 +169,7 @@ public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiPr
 				if(inject.getOfxtag()!=null && inject.getOfxtag().length()>0)
 				{
 					sb.append(injectionSb);
-					sb.append(ls);
+					sb.append(System.lineSeparator());
 				}
 				sb.append(wikiText.substring(to+inject.getWikitag().length()+3+1,wikiText.length()));
 			wikiText=sb.toString();

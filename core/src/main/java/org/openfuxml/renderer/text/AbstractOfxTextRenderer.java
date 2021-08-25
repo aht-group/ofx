@@ -1,21 +1,18 @@
 package org.openfuxml.renderer.text;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.SystemUtils;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxTextRenderer;
 import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.text.structure.TextParagraphRenderer;
-import org.openfuxml.renderer.text.structure.TextSectionRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,17 +68,17 @@ public class AbstractOfxTextRenderer extends AbstractOfxRenderer
 	{
 		for(String s : getContent())
 		{
-			w.write(s+SystemUtils.LINE_SEPARATOR);
+			w.write(s+File.separator);
 		}
 		w.flush();
 	}
 	
-	private void renderSection(Section section) throws OfxAuthoringException, OfxConfigurationException
-	{
-		TextSectionRenderer sf = new TextSectionRenderer(cp);
-		sf.render(section);
-		renderer.add(sf);
-	}
+//	private void renderSection(Section section) throws OfxAuthoringException, OfxConfigurationException
+//	{
+//		TextSectionRenderer sf = new TextSectionRenderer(cp);
+//		sf.render(section);
+//		renderer.add(sf);
+//	}
 	
 	protected void paragraphRenderer(Paragraph paragraph) throws OfxAuthoringException
 	{
