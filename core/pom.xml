@@ -153,17 +153,22 @@
         		</exclusion>
         	</exclusions>
 		</dependency>
+		
+		<!-- Leave it uncommented until Word is re-tested
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
-			<version>3.14</version>
+			<version>4.0.0</version>
 			<scope>provided</scope>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>3.14</version>
+			<version>4.0.0</version>
 			<scope>provided</scope>
 		</dependency>
+		 
+		
 	</dependencies>
 </project>
