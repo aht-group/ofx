@@ -15,7 +15,8 @@ import org.openfuxml.renderer.wiki.WikiSectionRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestWikiSectionRenderer extends AbstractTestWikiRenderer{
+public class TestWikiSectionRenderer extends AbstractTestWikiRenderer
+{
 
 	final static Logger logger = LoggerFactory.getLogger(TestWikiSectionRenderer.class);
 	
