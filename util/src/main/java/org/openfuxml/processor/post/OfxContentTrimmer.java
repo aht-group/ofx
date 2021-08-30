@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.security.auth.login.Configuration;
-
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -14,10 +12,6 @@ import org.jdom2.xpath.XPath;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.config.ConfigLoader;
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JDomUtil;
 
 public class OfxContentTrimmer
 {

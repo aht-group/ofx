@@ -3,18 +3,17 @@ package org.openfuxml.addon.wiki.processor.template.exlp.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.exlp.core.parser.AbstractLogParser;
-import net.sf.exlp.interfaces.LogEvent;
-import net.sf.exlp.interfaces.LogEventHandler;
-import net.sf.exlp.interfaces.LogParser;
-import net.sf.exlp.util.io.LoggerInit;
-
-import org.apache.commons.lang3.SystemUtils;
 import org.openfuxml.addon.wiki.data.jaxb.Markup;
 import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.core.parser.AbstractLogParser;
+import net.sf.exlp.interfaces.LogEvent;
+import net.sf.exlp.interfaces.LogEventHandler;
+import net.sf.exlp.interfaces.LogParser;
+import net.sf.exlp.util.io.LoggerInit;
 
 public class WikiKeyValueParser extends AbstractLogParser implements LogParser  
 {
@@ -79,7 +78,7 @@ public class WikiKeyValueParser extends AbstractLogParser implements LogParser
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append(wikiKV.getMarkup().getValue());
-		sb.append(SystemUtils.LINE_SEPARATOR);
+		sb.append(System.lineSeparator());
 		sb.append(m.group(0));
 		wikiKV.getMarkup().setValue(sb.toString());
 	}

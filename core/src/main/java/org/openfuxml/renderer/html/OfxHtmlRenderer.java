@@ -16,7 +16,6 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.OfxRenderer;
-import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
 import org.openfuxml.renderer.html.structure.HtmlSectionRenderer;
 import org.openfuxml.renderer.html.util.HtmlElement;
 import org.slf4j.Logger;
@@ -30,13 +29,13 @@ public class OfxHtmlRenderer extends OfxRenderer
 
 	private List<String> txt; public List<String> getContent(){return txt;}
 	
-	private HtmlDocumentRenderer document;
+//	private HtmlDocumentRenderer document;
 
 	public OfxHtmlRenderer(ConfigurationProvider cp, String pageTitle)
 	{
 		txt = new ArrayList<String>();
 		logger = LoggerFactory.getLogger(OfxHtmlRenderer.class);
-		document = new HtmlDocumentRenderer(cp,pageTitle);
+//		document = new HtmlDocumentRenderer(cp,pageTitle);
 	}
 
 	@Override
