@@ -27,7 +27,6 @@ public class AbstractJsfTest
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
     }
 	
-	//****Copy from AbstractAhtUtilsXmlTest ******
 	protected void assertJaxbEquals(Object expected, Object actual)
 	{
 		Assert.assertEquals("Actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
@@ -44,5 +43,4 @@ public class AbstractJsfTest
 		JaxbUtil.debug(xml);
     	JaxbUtil.save(f, xml, true);
 	}
-	//***********************************
 }
