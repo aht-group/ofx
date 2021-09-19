@@ -62,7 +62,6 @@ public class XhtmlAHxMerge
 			else if(org.jdom2.Element.class.isInstance(o))
 			{
 				Element oldChild = (Element)o;
-				Element newChild = null;
 				if(prevChild!=null)
 				{
 					boolean prevA = prevChild.getName().equals("a");
