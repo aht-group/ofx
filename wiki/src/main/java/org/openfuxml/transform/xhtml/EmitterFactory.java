@@ -23,7 +23,7 @@ public class EmitterFactory
 	private XMLStreamWriter writer;
 	private String injectionDir;
 	
-	public static enum HtmlElement {title,p,i,em,b,strong,ol,ul,li,a,body,sup,wikiinjection};
+	public static enum HtmlElement {title,p,i,em,b,strong,ol,ul,li,a,body,sup,sub,wikiinjection};
 	
 	public EmitterFactory(XMLStreamWriter writer,String injectionDir)
 	{
@@ -38,15 +38,17 @@ public class EmitterFactory
 			HtmlElement htmlElement = HtmlElement.valueOf(elementName);
 			switch (htmlElement)
 			{
-				case sup:			return new SimpleEmitter(this,"hochgestellt");
+//				case sup:			return new SimpleEmitter(this,"hochgestellt");
 				case p:				return new SimpleEmitter(this,"ofx:paragraph");
 				case i:				return new EmphasisEmitter(this,OfxEmphasis.Emphasis.italic);
-				case em:				return new EmphasisEmitter(this,OfxEmphasis.Emphasis.italic);
+				case em:			return new EmphasisEmitter(this,OfxEmphasis.Emphasis.italic);
 				case b:				return new EmphasisEmitter(this,OfxEmphasis.Emphasis.bold);
-				case strong:			return new EmphasisEmitter(this,OfxEmphasis.Emphasis.bold);
-				case ul:				return new OfxListEmitter(this,OfxListEmitter.Ordering.unordered);
-				case ol:				return new OfxListEmitter(this,OfxListEmitter.Ordering.ordered);
-				case li:				return new SimpleEmitter(this,"list:item", "ofx:paragraph");
+				case strong:		return new EmphasisEmitter(this,OfxEmphasis.Emphasis.bold);
+				case sup:			return new EmphasisEmitter(this,OfxEmphasis.Emphasis.superscript);
+				case sub:			return new EmphasisEmitter(this,OfxEmphasis.Emphasis.subscript);
+				case ul:			return new OfxListEmitter(this,OfxListEmitter.Ordering.unordered);
+				case ol:			return new OfxListEmitter(this,OfxListEmitter.Ordering.ordered);
+				case li:			return new SimpleEmitter(this,"list:item", "ofx:paragraph");
 				case a:				return new AnchorEmitter(this);
 				case body:			return new NestingEmitter(this);
 				case title:			return new SimpleEmitter(this,"ofx:title");

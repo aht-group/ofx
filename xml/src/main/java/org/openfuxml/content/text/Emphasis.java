@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlValue;
  *       &lt;attribute name="italic" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="quote" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="underline" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="superscript" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *     &lt;/extension&gt;
  *   &lt;/simpleContent&gt;
  * &lt;/complexType&gt;
@@ -59,6 +60,8 @@ public class Emphasis implements Serializable
     protected Boolean quote;
     @XmlAttribute(name = "underline")
     protected Boolean underline;
+    @XmlAttribute(name = "superscript")
+    protected Boolean superscript;
 
     /**
      * Gets the value of the value property.
@@ -242,6 +245,38 @@ public class Emphasis implements Serializable
 
     public void unsetUnderline() {
         this.underline = null;
+    }
+
+    /**
+     * Gets the value of the superscript property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isSuperscript() {
+        return superscript;
+    }
+
+    /**
+     * Sets the value of the superscript property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setSuperscript(boolean value) {
+        this.superscript = value;
+    }
+
+    public boolean isSetSuperscript() {
+        return (this.superscript!= null);
+    }
+
+    public void unsetSuperscript() {
+        this.superscript = null;
     }
 
 }

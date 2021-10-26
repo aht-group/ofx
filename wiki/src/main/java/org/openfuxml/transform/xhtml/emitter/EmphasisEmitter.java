@@ -81,6 +81,8 @@ public class EmphasisEmitter extends NestingEmitter
 		{
 			case bold: writer.writeAttribute("bold", "true");break;
 			case italic: writer.writeAttribute("italic", "true");break;
+			case superscript: writer.writeAttribute(OfxEmphasis.Emphasis.superscript.toString(), "true");break;
+			case subscript: writer.writeAttribute(OfxEmphasis.Emphasis.subscript.toString(), "true");break;
 			default: logger.warn("Emphasis "+emphasis+" is not yet implemented");
 		}
 	}
