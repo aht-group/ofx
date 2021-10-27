@@ -16,9 +16,10 @@ public class RemoveUnwantedRegx
         {
            if(sb.charAt(i) == '\n')sb.deleteCharAt(i);
            if(sb.charAt(i) == '\r')sb.deleteCharAt(i);
-           if(sb.charAt(i) == '\t')sb.deleteCharAt(i);           
+           if(sb.charAt(i) == '\t')sb.deleteCharAt(i);
+           if(sb.charAt(i) == '\f')sb.deleteCharAt(i);
         }
-		return sb.toString().replaceAll("\\s+", " ").trim();
+		return sb.toString().replaceAll("\\s+", " ");
 	}
 }
 
