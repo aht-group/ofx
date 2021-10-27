@@ -31,7 +31,8 @@ public class WordEmphasisRenderer
 		boolean italic = ofxEmphasis.isSetItalic() && ofxEmphasis.isItalic();
 		boolean underline = ofxEmphasis.isSetUnderline() && ofxEmphasis.isUnderline();
 		boolean superscript = ofxEmphasis.isSetSuperscript() && ofxEmphasis.isSuperscript();
-
+		boolean subscript = ofxEmphasis.isSetSubscript() && ofxEmphasis.isSubscript();
+		
 	//	boolean quote = ofxEmphasis.isSetQuote() && ofxEmphasis.isQuote();
 		
 		try
@@ -41,12 +42,14 @@ public class WordEmphasisRenderer
 			if (underline) {font.setUnderline(Underline.SINGLE);}
 			else {font.setUnderline(Underline.NONE);}
 			font.setSuperscript(superscript);
+			font.setSubscript(subscript);
 			 
 			builder.write(ofxEmphasis.getValue());
 			font.setBold(false);
 			font.setItalic(false);
 			font.setUnderline(Underline.NONE);
 			font.setSuperscript(false);
+			font.setSubscript(false);
 		}
 		catch (Exception e)
 		{}
