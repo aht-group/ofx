@@ -18,7 +18,7 @@ public class RemoveUnwantedRegx
            if(sb.charAt(i) == '\r')sb.deleteCharAt(i);
            if(sb.charAt(i) == '\t')sb.deleteCharAt(i);           
         }
-		return sb.toString().replaceAll("\\s+", " ");
+		return sb.toString().replaceAll("\\s+", " ").trim();
 	}
 }
 
