@@ -29,25 +29,16 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.openfuxml.xml.addon.jsf
-     * 
-     */
+
     public ObjectFactory() {
     }
 
-    /**
-     * Create an instance of {@link Component }
-     * 
-     */
+
     public Component createComponent() {
         return new Component();
     }
 
-    /**
-     * Create an instance of {@link Attribute }
-     * 
-     */
+
     public Attribute createAttribute() {
         return new Attribute();
     }

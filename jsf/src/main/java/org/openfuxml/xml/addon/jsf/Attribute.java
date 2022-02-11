@@ -22,16 +22,16 @@ import javax.xml.bind.annotation.XmlType;
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="default" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="required" type="{http://www.w3.org/2001/XMLSchema}boolean" />
- *       &lt;attribute name="shortDescription" type="{http://www.w3.org/2001/XMLSchema}string" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType
+ *   &lt;complexContent
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"
+ *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" 
+ *       &lt;attribute name="default" type="{http://www.w3.org/2001/XMLSchema}string" 
+ *       &lt;attribute name="required" type="{http://www.w3.org/2001/XMLSchema}boolean" 
+ *       &lt;attribute name="shortDescription" type="{http://www.w3.org/2001/XMLSchema}string" 
+ *     &lt;/restriction
+ *   &lt;/complexContent
+ * &lt;/complexType
  * </pre>
  * 
  * 
