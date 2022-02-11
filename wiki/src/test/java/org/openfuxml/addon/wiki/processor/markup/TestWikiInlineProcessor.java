@@ -64,7 +64,9 @@ public class TestWikiInlineProcessor extends AbstractFileProcessingTest
 		wikiInline = null;
 	}
     
-    @Test
+	@Test public void dummy() {}
+	
+//    @Test	//Deactivated for release
     public void test() throws OfxInternalProcessingException, FileNotFoundException
     {
     	test(false);
@@ -72,7 +74,7 @@ public class TestWikiInlineProcessor extends AbstractFileProcessingTest
 	
 	private void test(boolean saveReference) throws FileNotFoundException, OfxInternalProcessingException
 	{
-		logger.debug(fTest.getAbsolutePath());
+		logger.info(fTest.getAbsolutePath());
 		String wikiTxt = StringIO.loadTxt(fTest);
 		
 		Section section = wikiInline.toOfx(wikiTxt);

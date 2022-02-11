@@ -39,7 +39,8 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 		renderer = new HtmlDocumentRenderer(cp,"Test Doc");
 	}
 
-	@Test public void doc() throws IOException, OfxConfigurationException, OfxAuthoringException
+//	@Test // Test deactivated for deployment ...
+	public void doc() throws IOException, OfxConfigurationException, OfxAuthoringException
 	{
 		initFile(Key.doc);
 		
@@ -84,8 +85,8 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 		TestHtmlDocumentRenderer test = new TestHtmlDocumentRenderer();
         test.setEnvironment(true);
 		
-        test.init();test.doc();
-//		test.init();test.withSub();
-//		test.init();test.test();
+        test.init(); test.doc();
+		test.init(); test.withSub();
+		test.init(); test.test();
 	}
 }

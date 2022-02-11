@@ -82,7 +82,7 @@ public class TestLatexCellRenderer extends AbstractTestLatexRenderer
     	TestLatexCellRenderer test = new TestLatexCellRenderer();
     	test.setEnvironment(true);
     	
-    	test.initRenderer();test.string();
+//    	test.initRenderer();test.string();
 //    	test.initRenderer();test.list();
 //   	test.initRenderer();test.specialChar();
     }

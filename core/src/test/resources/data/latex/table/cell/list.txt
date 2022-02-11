@@ -2,7 +2,9 @@
 % ******************************************************
 % Rendering a (list) List with: LatexListRenderer
 
-\begin{compactitem}
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep,leftmargin=1em,labelwidth=*,align=left,parsep=0pt]
 
-\end{compactitem}
+\end{itemize}
+\end{minipage}
 
