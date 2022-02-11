@@ -55,7 +55,7 @@ public class TestHtmlImageRenderer extends AbstractTestHtmlRenderer
         test.setEnvironment(true);
 
 		test.init();test.fiugre();
-//        test.init();test.inline();
+        test.init();test.inline();
 
 	}
 }
