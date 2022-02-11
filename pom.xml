@@ -43,8 +43,8 @@
 	
 	<scm>
 		<url>https://github.com/aht-group/ofx.git</url>
-		<connection>scm:git:git://github.com/aht-group/ofx.git</connection>
-		<developerConnection>scm:git:git@github.com/aht-group/ofx.git</developerConnection>
+		<connection>scm:git:ssh://git@github.com/aht-group/ofx.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/aht-group/ofx.git</developerConnection>
 	</scm>
 	
 	<developers>
