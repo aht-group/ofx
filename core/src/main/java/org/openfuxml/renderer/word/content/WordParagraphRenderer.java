@@ -48,14 +48,13 @@ public class WordParagraphRenderer
 			if(o==null){throw new OfxAuthoringException(Paragraph.class.getSimpleName()+" has no content");}
 			else if(o instanceof String)
 			{
+				
 				String s =(String)o;
 				if(s.length()>0)
 				{
-					RemoveUnwantedRegx rUr = new RemoveUnwantedRegx();					
-					builder.write(rUr.removeUnwantedFrom(s));
+					RemoveUnwantedRegx rUr = new RemoveUnwantedRegx();
+					try { builder.write(rUr.removeUnwantedFrom(s));	} catch (Exception e) {	builder.write(s); }
 			    }
-
-
 			}
 			else if(o instanceof Emphasis){renderEmphasis(sb,(Emphasis)o);}
 			else if(o instanceof Reference){renderReference(sb,(Reference)o);}
@@ -80,11 +79,12 @@ public class WordParagraphRenderer
 			if(o==null){throw new OfxAuthoringException(Paragraph.class.getSimpleName()+" has no content");}
 			else if(o instanceof String)
 			{
+				
 				String s =(String)o;
 				if(s.length()>0)
 				{
-					RemoveUnwantedRegx rUr = new RemoveUnwantedRegx();					
-					builder.write(rUr.removeUnwantedFrom(s));
+					RemoveUnwantedRegx rUr = new RemoveUnwantedRegx();
+					try { builder.write(rUr.removeUnwantedFrom(s));	} catch (Exception e) {	builder.write(s); }
 			    }
 			}
 			else if(o instanceof Emphasis){renderEmphasis(sb,(Emphasis)o);}
