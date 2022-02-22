@@ -41,8 +41,7 @@ public class WordParagraphRenderer
 		ParagraphFormat paragraphFormat = builder.getParagraphFormat();
 		paragraphFormat.setFirstLineIndent(0);
 		paragraphFormat.setKeepTogether(true);
-		
-		StringBuffer sb = new StringBuffer();
+
 		for(Object o : ofxParagraph.getContent())
 		{			
 			if(o==null){throw new OfxAuthoringException(Paragraph.class.getSimpleName()+" has no content");}
@@ -56,14 +55,14 @@ public class WordParagraphRenderer
 					try { builder.write(rUr.removeUnwantedFrom(s));	} catch (Exception e) {	builder.write(s); }
 			    }
 			}
-			else if(o instanceof Emphasis){renderEmphasis(sb,(Emphasis)o);}
-			else if(o instanceof Reference){renderReference(sb,(Reference)o);}
-			else if(o instanceof Marginalia){renderMarginalia(sb,(Marginalia)o);}
-			else if(o instanceof Symbol){renderSymbol(sb,(Symbol)o);}
-			else if(o instanceof Glossary){renderGlossary(sb, (Glossary)o);}
-			else if(o instanceof Acronym){renderAcronym(sb, (Acronym)o);}
+			else if(o instanceof Emphasis){renderEmphasis((Emphasis)o);}
+			else if(o instanceof Reference){renderReference((Reference)o);}
+			else if(o instanceof Marginalia){renderMarginalia((Marginalia)o);}
+			else if(o instanceof Symbol){renderSymbol((Symbol)o);}
+			else if(o instanceof Glossary){renderGlossary( (Glossary)o);}
+			else if(o instanceof Acronym){renderAcronym( (Acronym)o);}
 			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
-			else if(o instanceof Index){renderIndex(sb,(Index)o);}
+			else if(o instanceof Index){renderIndex((Index)o);}
 			else if(o instanceof Font){}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
@@ -73,7 +72,6 @@ public class WordParagraphRenderer
 	
 	public void render(org.openfuxml.content.ofx.Paragraph ofxParagraph) throws OfxAuthoringException
 	{
-		StringBuffer sb = new StringBuffer();
 		for(Object o : ofxParagraph.getContent())
 		{			
 			if(o==null){throw new OfxAuthoringException(Paragraph.class.getSimpleName()+" has no content");}
@@ -87,59 +85,59 @@ public class WordParagraphRenderer
 					try { builder.write(rUr.removeUnwantedFrom(s));	} catch (Exception e) {	builder.write(s); }
 			    }
 			}
-			else if(o instanceof Emphasis){renderEmphasis(sb,(Emphasis)o);}
-			else if(o instanceof Reference){renderReference(sb,(Reference)o);}
-			else if(o instanceof Marginalia){renderMarginalia(sb,(Marginalia)o);}
-			else if(o instanceof Symbol){renderSymbol(sb,(Symbol)o);}
-			else if(o instanceof Glossary){renderGlossary(sb, (Glossary)o);}
-			else if(o instanceof Acronym){renderAcronym(sb, (Acronym)o);}
+			else if(o instanceof Emphasis){renderEmphasis((Emphasis)o);}
+			else if(o instanceof Reference){renderReference((Reference)o);}
+			else if(o instanceof Marginalia){renderMarginalia((Marginalia)o);}
+			else if(o instanceof Symbol){renderSymbol((Symbol)o);}
+			else if(o instanceof Glossary){renderGlossary( (Glossary)o);}
+			else if(o instanceof Acronym){renderAcronym( (Acronym)o);}
 			else if(o instanceof Image){logger.warn("INLINE Image NYI");}
-			else if(o instanceof Index){renderIndex(sb,(Index)o);}
+			else if(o instanceof Index){renderIndex((Index)o);}
 			else if(o instanceof Font){}
 			else {logger.warn("Unknown object: "+o.getClass().getCanonicalName());}
 		}
 	}
 	
-	private void renderIndex(StringBuffer sb, Index o)
+	private void renderIndex( Index o)
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void renderAcronym(StringBuffer sb, Acronym o)
+	private void renderAcronym(Acronym o)
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void renderGlossary(StringBuffer sb, Glossary o)
+	private void renderGlossary(Glossary o)
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void renderSymbol(StringBuffer sb, Symbol o)
+	private void renderSymbol(Symbol o)
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void renderMarginalia(StringBuffer sb, Marginalia o)
+	private void renderMarginalia(Marginalia o)
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void renderReference(StringBuffer sb, Reference o)
+	private void renderReference(Reference o)
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void renderEmphasis(StringBuffer sb,org.openfuxml.content.text.Emphasis ofxEmphasis) throws OfxAuthoringException
+	private void renderEmphasis(org.openfuxml.content.text.Emphasis ofxEmphasis) throws OfxAuthoringException
 	{
 		WordEmphasisRenderer sf = new WordEmphasisRenderer(doc,builder);
-		sf.render(sb,ofxEmphasis);
+		sf.render(ofxEmphasis);
 		
 	}
 }

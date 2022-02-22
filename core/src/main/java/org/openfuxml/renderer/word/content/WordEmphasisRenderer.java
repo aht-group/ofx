@@ -23,7 +23,7 @@ public class WordEmphasisRenderer
 	public WordEmphasisRenderer(Document doc, DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 	
 	
-	public void render(StringBuffer sb, org.openfuxml.content.text.Emphasis ofxEmphasis) throws OfxAuthoringException
+	public void render(org.openfuxml.content.text.Emphasis ofxEmphasis) throws OfxAuthoringException
 	{
 		font = builder.getFont();
 		
