@@ -8,7 +8,6 @@
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7); }
 
 ol, ul {
-  list-style: inherit;
   padding-left: 40px; }
 
 .ofxBold {
@@ -20,8 +19,8 @@ ol, ul {
 .html-container {
   color: #4f4f4f;
   font-family: Arial, sans-serif;
-  font-size: 11px;
-  line-height: 22px; }
+  font-size: 1rem;
+  line-height: 1.5rem; }
   .html-container > div > section {
     padding: 1em; }
     .html-container > div > section > section > section h1, .html-container > div > section > section > section h2, .html-container > div > section > section > section h3, .html-container > div > section > section > section h4, .html-container > div > section > section > section h5 {

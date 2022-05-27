@@ -1,7 +1,6 @@
 @import 'ofxCommon';
 
 ol, ul {
-	list-style: inherit;
 	padding-left: 40px;
 }
 
@@ -11,8 +10,8 @@ ol, ul {
 .html-container {
 	color: $foreground-colour;
 	font-family: Arial, sans-serif;
-	font-size: 11px;
-	line-height: 22px;
+	font-size: 1rem;
+	line-height: 1.5rem;
 																 
 	> div {
 		> section {
