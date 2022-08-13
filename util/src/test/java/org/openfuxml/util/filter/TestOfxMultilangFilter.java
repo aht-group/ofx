@@ -10,7 +10,6 @@ import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.test.AbstractOfxUtilTest;
-import org.openfuxml.util.filter.OfxLangFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
