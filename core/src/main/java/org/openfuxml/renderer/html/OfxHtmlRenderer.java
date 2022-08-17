@@ -28,8 +28,6 @@ public class OfxHtmlRenderer extends OfxRenderer
 	Logger logger = LoggerFactory.getLogger(OfxHtmlRenderer.class);
 
 	private List<String> txt; public List<String> getContent(){return txt;}
-	
-//	private HtmlDocumentRenderer document;
 
 	public OfxHtmlRenderer(ConfigurationProvider cp, String pageTitle)
 	{
@@ -49,7 +47,7 @@ public class OfxHtmlRenderer extends OfxRenderer
 		HtmlElement root = new HtmlElement("div");
 		HtmlSectionRenderer renderer = new HtmlSectionRenderer(new OfxConfigurationProvider(),1);
         renderer.render(root,section);
-        JDomUtil.debug(root);
+//        JDomUtil.debug(root);
         XMLOutputter xmlOutput = new XMLOutputter(OfxHtmlRenderer.ownPrettyFormat());
         xmlOutput.output(root, writer);
 	}

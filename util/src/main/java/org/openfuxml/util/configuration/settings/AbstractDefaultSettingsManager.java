@@ -46,7 +46,7 @@ public abstract class AbstractDefaultSettingsManager implements DefaultSettingsM
 		{
 			if(!mapSettings.containsKey(Listing.class.getName()) || !mapSettings.get(Listing.class.getName()).containsKey(listing.getSetting()))
 			{
-				throw new OfxConfigurationException("No Setting for "+Listing.class.getSimpleName()+" defined with code="+listing.getSetting()+" "+mapSettings.containsValue(Listing.class.getName()));
+				throw new OfxConfigurationException("No Setting for "+Listing.class.getSimpleName()+" defined with code="+listing.getSetting());
 			}
 			DsmListing.apply(listing, (Listing)mapSettings.get(Listing.class.getName()).get(listing.getSetting()));
 		}

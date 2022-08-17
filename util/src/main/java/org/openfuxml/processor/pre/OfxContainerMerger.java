@@ -57,7 +57,7 @@ public class OfxContainerMerger
 			doc.setRootElement(result);
 		}
 		
-		ofxDoc = (Document)JDomUtil.toJaxb(doc, Document.class);
+		ofxDoc = (Document)JDomUtil.toJaxb(doc,Document.class);
 		return ofxDoc;
 	}
 	

@@ -43,7 +43,7 @@ public class OfxIdGenerator
 	
 	public void createIds(File srcFile, File dstFile) throws OfxInternalProcessingException
 	{
-		if(srcFile==null){throw new OfxInternalProcessingException("FileNoteFound: "+srcFile.getAbsolutePath());}
+		if(srcFile==null){throw new OfxInternalProcessingException("srcFile is null");}
 		doc = JDomUtil.load(srcFile);
 		if(doc==null){throw new OfxInternalProcessingException("FileNoteFound: "+srcFile.getAbsolutePath());}
 		
