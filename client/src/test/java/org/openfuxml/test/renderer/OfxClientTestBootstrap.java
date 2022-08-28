@@ -17,7 +17,7 @@ public class OfxClientTestBootstrap
 		
 	public static final String cfgKeyLatexTarget = "ofx.latex.basedir";
 	
-	public static String xmlConfig = "config.ofx-client.test/ofx.xml";
+	public static String xmlConfig = "ofx/client/config/ofx.xml";
 	
 	public static Configuration init()
 	{
@@ -27,7 +27,7 @@ public class OfxClientTestBootstrap
 	public static Configuration init(String configFile)
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-			loggerInit.addAltPath("config.ofx-client.test");
+			loggerInit.addAltPath("ofx/client/config");
 			loggerInit.init();
 
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());

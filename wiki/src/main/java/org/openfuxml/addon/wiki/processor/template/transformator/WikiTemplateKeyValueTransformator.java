@@ -1,7 +1,6 @@
 package org.openfuxml.addon.wiki.processor.template.transformator;
 
 import org.jdom2.Element;
-import org.jdom2.Namespace;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
@@ -21,7 +20,6 @@ public class WikiTemplateKeyValueTransformator
 {
 	final static Logger logger = LoggerFactory.getLogger(WikiTemplateKeyValueTransformator.class);
 	
-	private Namespace nsOfx;
 	private NsPrefixMapperInterface nsPrefixMapper;
 	private WikiInlineProcessor wikiInlineProcessor;
 	
@@ -29,7 +27,6 @@ public class WikiTemplateKeyValueTransformator
 	{
 		this.wikiInlineProcessor=wikiInlineProcessor;
 		nsPrefixMapper = new OfxNsPrefixMapper();
-		nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
 	}
 	
 	public Element transform(Template templateDef, Template template)

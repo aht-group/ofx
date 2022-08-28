@@ -73,7 +73,7 @@ public class OfxPreProcessor
 		chain(dWorking, fOfxRoot);
 	}
 	
-	public void chain(File dWorking, File actualVersion) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
+	private void chain(File dWorking, File actualVersion) throws OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException
 	{
 		String wikiPlainDir = "wikiPlain";
 		File dirWikiPlain = createDir(dWorking,wikiPlainDir);

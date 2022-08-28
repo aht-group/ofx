@@ -26,7 +26,6 @@ public class OfxContainerMerger
 	
 	private List<XPath> lXpath;
 	
-	
 	public OfxContainerMerger()
 	{
 		lXpath = new ArrayList<XPath>();
