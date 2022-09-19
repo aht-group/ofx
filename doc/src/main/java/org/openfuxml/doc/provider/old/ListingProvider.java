@@ -3,8 +3,8 @@ package org.openfuxml.doc.provider.old;
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.controller.provider.text.SectionProvider;
 import org.openfuxml.doc.provider.DemoContentProvider;
-import org.openfuxml.doc.provider.text.SectionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

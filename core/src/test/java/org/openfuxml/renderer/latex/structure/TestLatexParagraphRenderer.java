@@ -8,7 +8,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.doc.provider.text.ParagraphProvider;
+import org.openfuxml.controller.provider.text.ParagraphProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFontFactory;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;

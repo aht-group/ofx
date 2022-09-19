@@ -4,13 +4,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 
 import org.apache.commons.configuration.Configuration;
+import org.openfuxml.OfxClientBootstrap;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Row;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.renderer.text.OfxTextSilentRenderer;
-import org.openfuxml.test.renderer.OfxClientTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +45,7 @@ public class CliOfxDoc
 	
 	public static void main (String[] args) throws Exception
 	{
-		Configuration config = OfxClientTestBootstrap.init();
+		Configuration config = OfxClientBootstrap.init();
 		logger.info("TEST "+(config!=null));
 		
 		CliOfxDoc cli = new CliOfxDoc();

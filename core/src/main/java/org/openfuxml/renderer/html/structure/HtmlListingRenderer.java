@@ -53,6 +53,7 @@ public class HtmlListingRenderer extends AbstractOfxHtmlRenderer implements OfxH
 			tmp += input+"\n";
 			input = br.readLine();
 		}
+		br.close();
 		return tmp;
 	}
 

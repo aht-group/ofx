@@ -11,9 +11,9 @@ import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OfxCoreBootstrap
+public class OfxClientBootstrap
 {
-	final static Logger logger = LoggerFactory.getLogger(OfxCoreBootstrap.class);
+	final static Logger logger = LoggerFactory.getLogger(OfxClientBootstrap.class);
 		
 	public static final String cfgKeyLatexTarget = "ofx.latex.basedir";
 	

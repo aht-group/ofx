@@ -1,9 +1,9 @@
-package org.openfuxml.doc.provider.list;
+package org.openfuxml.controller.provider.list;
 
 import org.openfuxml.content.list.Item;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.list.Type;
-import org.openfuxml.doc.provider.DemoContentProvider;
+import org.openfuxml.controller.provider.DemoContentProvider;
 import org.openfuxml.factory.xml.list.XmlListFactory2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

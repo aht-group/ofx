@@ -1,4 +1,4 @@
-package org.openfuxml.doc.provider.table;
+package org.openfuxml.controller.provider.table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Columns;
 import org.openfuxml.content.table.Specification;
 import org.openfuxml.content.table.Table;
-import org.openfuxml.doc.provider.DemoContentProvider;
+import org.openfuxml.controller.provider.DemoContentProvider;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.factory.xml.table.XmlColumnFactory;

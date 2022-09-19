@@ -36,7 +36,7 @@ public class CliExampleContentProvider
 	
 	public static void main(String[] args) throws Exception
     {
-		OfxCoreBootstrap.init();
+		OfxClientBootstrap.init();
 		CliExampleContentProvider cli = new CliExampleContentProvider();
 //		cli.updateExamples();
 		cli.output();

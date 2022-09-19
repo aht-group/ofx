@@ -1,4 +1,4 @@
-package org.openfuxml.doc.provider;
+package org.openfuxml.controller.provider;
 
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
@@ -15,12 +15,18 @@ import de.svenjacobs.loremipsum.LoremIpsum;
 
 public class DemoContentProvider
 {	
-	//Deprecatred .. master class moved to utils
 	final static Logger logger = LoggerFactory.getLogger(DemoContentProvider.class);
 	
 	public static LoremIpsum li = new LoremIpsum();
 	
-	public static Document build()
+	private boolean withIds; public DemoContentProvider withIds(boolean withIds) {this.withIds = withIds; return this;}
+	public static DemoContentProvider instance() {return new DemoContentProvider();}
+	public DemoContentProvider()
+	{
+		withIds = true;
+	}
+	
+	public Document build()
 	{
 //		Section s1 = SectionProvider.build();
 //		s1.getContent().add(ParagraphProvider.create(100));
@@ -42,48 +48,48 @@ public class DemoContentProvider
 		return xml;
 	}
 	
-	private static Section c1()
+	private Section c1()
 	{
 		Section xml = XmlSectionFactory.build();
-		xml.setId("1");
+		if(withIds) {xml.setId("1");}
 		xml.getContent().add(XmlTitleFactory.build("Chapter 1: Paragrahs"));
 		xml.getContent().add(XmlParagraphFactory.text("We will have two simple paragraphs in this section"));
 		xml.getContent().add(XmlParagraphFactory.text(li.getWords(25)));
 		return xml;
 	}
 	
-	private static Section c2()
+	private Section c2()
 	{	
 		Section xml = XmlSectionFactory.build();
-		xml.setId("2");
+		if(withIds) {xml.setId("2");}
 		xml.getContent().add(XmlTitleFactory.build("Chapter 2: Lists"));
 		xml.getContent().add(XmlParagraphFactory.text(li.getWords(25)));
 		xml.getContent().add(ListProvider.unordered());
 		return xml;
 	}
 	
-	private static Section c3()
+	private Section c3()
 	{	
 		Section xml = XmlSectionFactory.build();
-		xml.setId("3");
+		if(withIds) {xml.setId("3");}
 		xml.getContent().add(XmlTitleFactory.build("Chapter 3: Sections with Sub-Sections"));
 		xml.getContent().add(XmlParagraphFactory.text(li.getWords(2)));
 		
 		Section x1 = XmlSectionFactory.build();
-		x1.setId("3.1");
+		if(withIds) {x1.setId("3.1");}
 		x1.getContent().add(XmlTitleFactory.build("Section 3.1: Section A"));
 		x1.getContent().add(XmlParagraphFactory.text(li.getWords(2)));
 		
 		
 		Section x11 = XmlSectionFactory.build();
-		x11.setId("3.1.1");
+		if(withIds) {x11.setId("3.1.1");}
 		x11.getContent().add(XmlTitleFactory.build("Section 3.1.1: Section A.1"));
 		x11.getContent().add(XmlParagraphFactory.text(li.getWords(2)));
 		x1.getContent().add(x11);
 		xml.getContent().add(x1);
 		
 		Section x2 = XmlSectionFactory.build();
-		x2.setId("3.2"); 
+		if(withIds) {x2.setId("3.2");} 
 		x2.getContent().add(XmlTitleFactory.build("Section 3.2: Section B"));
 		x2.getContent().add(XmlParagraphFactory.text(li.getWords(2)));
 		xml.getContent().add(x2);
@@ -91,10 +97,10 @@ public class DemoContentProvider
 		return xml;
 	}
 	
-	private static Section c4()
+	private Section c4()
 	{	
 		Section xml = XmlSectionFactory.build();
-		xml.setId("3");
+		if(withIds) {xml.setId("3");}
 		xml.getContent().add(XmlTitleFactory.build("Chapter 4: Table"));
 		xml.getContent().add(XmlParagraphFactory.text(li.getWords(2)));
 		xml.getContent().add(TableProvider.buildWithoutSpecification());

@@ -9,7 +9,7 @@ import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.doc.provider.text.ParagraphProvider;
+import org.openfuxml.controller.provider.text.ParagraphProvider;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package org.openfuxml.doc.provider.text;
+package org.openfuxml.controller.provider.text;
 
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Paragraph;

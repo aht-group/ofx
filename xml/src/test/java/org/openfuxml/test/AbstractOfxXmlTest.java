@@ -2,6 +2,7 @@ package org.openfuxml.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -71,7 +72,8 @@ public abstract class AbstractOfxXmlTest <T extends Object> extends AbstractOfxT
 	
 	protected static XMLGregorianCalendar getDefaultXmlDate()
 	{
-		return DateUtil.getXmlGc4D(DateUtil.getDateFromInt(2011, 11, 11, 11, 11, 11));
+		LocalDateTime ldt = LocalDateTime.of(2011,11,11,11,11,11);
+		return DateUtil.toXmlGc(ldt);
 	}
 	
     public void saveReferenceXml() {save(build(true),xmlFile,false);}

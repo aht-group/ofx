@@ -6,8 +6,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.OfxCoreBootstrap;
-import org.openfuxml.content.ofx.Section;
-import org.openfuxml.doc.provider.text.SectionProvider;
+import org.openfuxml.controller.provider.text.SectionProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.wiki.AbstractTestWikiRenderer;
@@ -22,7 +21,7 @@ public class TestWikiSectionRenderer extends AbstractTestWikiRenderer
 	
 	private enum Key {section}
 	
-	private Section section;
+//	private Section section;
     private WikiSectionRenderer renderer;
     
     //TODO FIX

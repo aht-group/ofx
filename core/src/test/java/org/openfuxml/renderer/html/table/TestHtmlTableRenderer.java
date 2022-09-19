@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Content;
-import org.openfuxml.doc.provider.table.TableProvider;
+import org.openfuxml.controller.provider.table.TableProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.OfxConfigurationProvider;

@@ -50,7 +50,7 @@
     		<scope>compile</scope>
 		</dependency>
 		
-				<!-- Logging -->
+		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>

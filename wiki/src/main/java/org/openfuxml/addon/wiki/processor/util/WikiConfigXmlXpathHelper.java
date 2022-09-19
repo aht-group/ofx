@@ -1,23 +1,26 @@
 package org.openfuxml.addon.wiki.processor.util;
 
 import java.io.FileNotFoundException;
-
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
+import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
 import org.jdom2.Namespace;
-import org.jdom2.xpath.XPath;
+import org.jdom2.filter.Filters;
+import org.jdom2.xpath.XPathExpression;
+import org.jdom2.xpath.XPathFactory;
 import org.openfuxml.addon.wiki.data.jaxb.Injections;
 import org.openfuxml.addon.wiki.data.jaxb.Replacements;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class WikiConfigXmlXpathHelper
 {
@@ -26,18 +29,14 @@ public class WikiConfigXmlXpathHelper
 	public static synchronized Template getTemplate(Templates templates, String name) throws OfxConfigurationException 
 	{
 		Template result = new Template();
-		try
-		{
-			XPath xpath = XPath.newInstance( "//wiki:template[@name='"+name+"']" );
-			xpath.addNamespace(Namespace.getNamespace("ofx", "http://www.openfuxml.org"));
-			xpath.addNamespace(Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki"));
-			
-			Document doc = JaxbUtil.toDocument(templates);
-			Element e = (Element)xpath.selectSingleNode(doc);
-			if(e!=null){result = (Template)JDomUtil.toJaxb(e, Template.class);}
-			else{throw new OfxConfigurationException("No template definition for templateName="+name);}
-		}
-		catch (JDOMException e) {logger.error("",e);}
+		List<Namespace> ns = OfxNsPrefixMapper.toOfxNamespaces();
+		XPathExpression<Element> xpe = XPathFactory.instance().compile("//wiki:template[@name='"+name+"']", Filters.element(), null, ns);
+
+		
+		Document doc = JaxbUtil.toDocument(templates);
+		Element e =  xpe.evaluateFirst(doc);
+		if(e!=null){result = (Template)JDomUtil.toJaxb(e, Template.class);}
+		else{throw new OfxConfigurationException("No template definition for templateName="+name);}
         return result;
 	}
 	

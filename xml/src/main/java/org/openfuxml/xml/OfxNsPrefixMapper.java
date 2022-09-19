@@ -1,5 +1,10 @@
 package org.openfuxml.xml;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jdom2.Namespace;
+
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
@@ -7,6 +12,17 @@ import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 public class OfxNsPrefixMapper extends NamespacePrefixMapper implements NsPrefixMapperInterface
 {
 	public enum NS {text}
+	
+	public static Namespace nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
+	public static Namespace nsWiki = Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki");
+	
+	public static List<Namespace> toOfxNamespaces()
+	{
+		List<Namespace> list = new ArrayList<>();
+		list.add(OfxNsPrefixMapper.nsOfx);
+		list.add(OfxNsPrefixMapper.nsWiki);
+		return list;
+	}
 	
 	public static String prefix(NS ns)
 	{

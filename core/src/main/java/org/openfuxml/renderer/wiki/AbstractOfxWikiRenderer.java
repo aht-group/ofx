@@ -75,7 +75,7 @@ public class AbstractOfxWikiRenderer extends AbstractOfxRenderer
 	
 	public void paragraphRenderer(Paragraph paragraph) throws OfxAuthoringException
 	{
-		WikiParagraphRenderer wpr = new WikiParagraphRenderer(cmm,dsm);
+		WikiParagraphRenderer wpr = new WikiParagraphRenderer(cp);
 		wpr.render(paragraph);
 		renderer.add(wpr);
 	}

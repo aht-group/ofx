@@ -13,11 +13,8 @@ public class WordDocumentRenderer
 {	
 	final static Logger logger = LoggerFactory.getLogger(WordDocumentRenderer.class);
 	
-	private int localeId;
 	public Document doc;
 	public DocumentBuilder builder;
-	private int lvl;
-
 
 	public WordDocumentRenderer()
 	{
@@ -29,7 +26,6 @@ public class WordDocumentRenderer
 		;
 		builder = new DocumentBuilder(doc);
 	}
-	private enum setLocalId	{de,en,fr}
 
 	public Document getDoc(){return doc;}
 
@@ -39,7 +35,7 @@ public class WordDocumentRenderer
 
 	public Document render(Content ofxContent) throws Exception
 	{
-		lvl = 0;
+//		lvl = 0;
 		//see XML content..
 		 JaxbUtil.info(ofxContent);
 		

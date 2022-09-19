@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config>
-	
+	<test>
+		<wiki>
+			<url>https://en.wikipedia.org/w/</url>
+		</wiki>
+	</test>
 </config>

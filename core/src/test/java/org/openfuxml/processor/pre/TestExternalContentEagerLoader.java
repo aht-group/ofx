@@ -66,7 +66,7 @@ public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
     public void xpathWithDocument() throws OfxInternalProcessingException, FileNotFoundException
     {
     	Document doc = JDomUtil.load(fTest);
-    	XPathExpression<Element> xpe = ecel.build();
+    	XPathExpression<Element> xpe = ecel.getXpeInclude();
 
     	List<Element> list = xpe.evaluate(doc);
     	Assert.assertEquals(expectedExternals,list.size());
@@ -76,7 +76,7 @@ public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
     public void xpathWithRootElement() throws OfxInternalProcessingException, FileNotFoundException
     {
     	Document doc = JDomUtil.load(fTest);
-    	XPathExpression<Element> xpe = ecel.build();
+    	XPathExpression<Element> xpe = ecel.getXpeInclude();
 
     	List<Element> list = xpe.evaluate(doc.getRootElement());
     	Assert.assertEquals(expectedExternals,list.size());

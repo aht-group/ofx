@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.OfxCoreBootstrap;
-import org.openfuxml.doc.provider.text.EmphasisProvider;
+import org.openfuxml.controller.provider.text.EmphasisProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;

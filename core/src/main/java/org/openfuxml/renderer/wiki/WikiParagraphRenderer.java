@@ -4,24 +4,19 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
-import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-/**
- * Rendering of paragraph children to wiki syntax
- * @author yannkruger
- */
 public class WikiParagraphRenderer extends AbstractOfxWikiRenderer implements OfxWikiRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(WikiParagraphRenderer.class);
 
-	public WikiParagraphRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
+	public WikiParagraphRenderer(ConfigurationProvider cp)
 	{
-		super(cmm, dsm);
+		super(cp);
 	}
 	
 	public void render(Paragraph paragraph) throws OfxAuthoringException
@@ -42,7 +37,7 @@ public class WikiParagraphRenderer extends AbstractOfxWikiRenderer implements Of
 	
 	private void emphasisRenderer(StringBuffer sb, Emphasis emphasis) throws OfxAuthoringException
 	{
-		WikiEmphasisRenderer wer = new WikiEmphasisRenderer(cmm, dsm);
+		WikiEmphasisRenderer wer = new WikiEmphasisRenderer(cp);
 		wer.render(emphasis);
 		for(String s : wer.getContent()){sb.append(s);}
 	}

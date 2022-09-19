@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.OfxCoreBootstrap;
-import org.openfuxml.doc.provider.text.HighlightProvider;
+import org.openfuxml.controller.provider.text.HighlightProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;

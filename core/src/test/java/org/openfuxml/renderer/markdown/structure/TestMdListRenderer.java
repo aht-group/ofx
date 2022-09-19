@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.OfxCoreBootstrap;
-import org.openfuxml.doc.provider.list.ListProvider;
+import org.openfuxml.controller.provider.list.ListProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

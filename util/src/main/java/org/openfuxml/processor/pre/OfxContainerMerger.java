@@ -1,57 +1,49 @@
 package org.openfuxml.processor.pre;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
 import org.jdom2.Namespace;
-import org.jdom2.xpath.XPath;
+import org.jdom2.filter.Filters;
+import org.jdom2.xpath.XPathExpression;
+import org.jdom2.xpath.XPathFactory;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JDomUtil;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxContainerMerger
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxContainerMerger.class);
 	
-	private List<XPath> lXpath;
+	private List<XPathExpression<Element>> xpaths;
 	
 	public OfxContainerMerger()
 	{
-		lXpath = new ArrayList<XPath>();
-		try
-		{
-			Namespace nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
-			Namespace nsWiki = Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki");
-			
-			XPath xpSections  = XPath.newInstance("//ofx:sections");
-			xpSections.addNamespace(nsOfx); xpSections.addNamespace(nsWiki);
-			lXpath.add(xpSections);
-			
-			XPath xpSectionTransparent  = XPath.newInstance("//ofx:section[@container='true']");
-			xpSectionTransparent.addNamespace(nsOfx); xpSectionTransparent.addNamespace(nsWiki);
-			lXpath.add(xpSectionTransparent);
-		}
-		catch (JDOMException e) {logger.error("",e);}
+		List<Namespace> ns = new ArrayList<>();
+		ns.add(OfxNsPrefixMapper.nsOfx);
+		
+		xpaths = new ArrayList<>();
+		xpaths.add(XPathFactory.instance().compile("//ofx:sections", Filters.element(), null, ns));
+		xpaths.add(XPathFactory.instance().compile("//ofx:section[@container='true']", Filters.element(), null, ns));
 	}
 	
 	public Document merge(Document ofxDoc) throws OfxInternalProcessingException
 	{
 		org.jdom2.Document doc = JaxbUtil.toDocument(ofxDoc);
 
-		for(XPath xpath : lXpath)
+		for(XPathExpression<Element> xpe : xpaths)
 		{
-			Element result = mergeRecursive(doc.getRootElement(),xpath);
+			Element result = mergeRecursive(doc.getRootElement(),xpe);
 			result.detach();
 			doc.setRootElement(result);
 		}
@@ -60,17 +52,15 @@ public class OfxContainerMerger
 		return ofxDoc;
 	}
 	
-	private Element mergeRecursive(Element rootElement, XPath xpath) throws OfxInternalProcessingException
+	private Element mergeRecursive(Element rootElement, XPathExpression<Element> xpe) throws OfxInternalProcessingException
 	{
-		try
+//		try
 		{
-			List<?> list = xpath.selectNodes(rootElement);
-			logger.debug(list.size()+" sections");
+			List<Element> list2 = xpe.evaluate(rootElement);
+			logger.debug(list2.size()+" sections");
 			
-			for (Iterator<?> iter = list.iterator(); iter.hasNext();)
+			for (Element e : list2)
 			{
-				Element e = (Element) iter.next();
-				
 				int index = e.getParentElement().indexOf(e);
 				List<Element> lChilds = new ArrayList<Element>();
 				
@@ -82,7 +72,7 @@ public class OfxContainerMerger
 				e.getParentElement().removeContent(e);
 			}
 		}
-		catch (JDOMException e) {logger.error("",e);}
+//		catch (JDOMException e) {logger.error("",e);}
 		return rootElement;
 	}
 	

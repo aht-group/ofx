@@ -24,7 +24,7 @@ public class TestWikiParagraphRenderer extends AbstractTestWikiRenderer
 	
 	private WikiParagraphRenderer renderer;
 	
-	@Before public void init(){renderer = new WikiParagraphRenderer(cmm,dsm);}
+	@Before public void init(){renderer = new WikiParagraphRenderer(cp);}
 	@After public void close(){renderer=null;}
 	
 	public static Paragraph create(){return create(10);}

@@ -6,9 +6,6 @@ import java.util.List;
 
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-/**
- * Author: Rebecca Roblick
- */
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -20,8 +17,6 @@ import org.openfuxml.renderer.html.structure.HtmlSectionRenderer;
 import org.openfuxml.renderer.html.util.HtmlElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JDomUtil;
 
 public class OfxHtmlRenderer extends OfxRenderer
 {

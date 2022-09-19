@@ -5,9 +5,9 @@ import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Table;
+import org.openfuxml.controller.provider.table.TableProvider;
+import org.openfuxml.controller.provider.text.SectionProvider;
 import org.openfuxml.doc.provider.old.TestDocumentProvider;
-import org.openfuxml.doc.provider.table.TableProvider;
-import org.openfuxml.doc.provider.text.SectionProvider;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 

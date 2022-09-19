@@ -3,19 +3,19 @@ package org.openfuxml.processor.pre;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
 import org.jdom2.Namespace;
 import org.jdom2.filter.Filters;
-import org.jdom2.xpath.XPath;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,29 +32,24 @@ public class ExternalContentEagerLoader
 	
 	private File rootFile;
 	private org.jdom2.Document doc;
-	private XPathFactory xpFactory;
 	
-	private XPath xpath;
+	private XPathExpression<Element> xpeExternal;
+	private XPathExpression<Element> xpeInclude;
 	
+	public XPathExpression<Element> getXpeInclude() {
+		return xpeInclude;
+	}
+
 	public ExternalContentEagerLoader()
 	{
 		mrl = new MultiResourceLoader();
 		rpf = new RelativePathFactory(RelativePathFactory.PathSeparator.CURRENT);
-		try
-		{
-			xpath = XPath.newInstance("//*[@external='true']");
-			xpath.addNamespace(Namespace.getNamespace("ofx", "http://www.openfuxml.org"));
-			xpath.addNamespace(Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki"));		
-		}
-		catch (JDOMException e) {logger.error("",e);}
-		xpFactory = XPathFactory.instance();
-	}
-	
-	protected XPathExpression<Element> build()
-	{
-//		Namespace ns = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
-
-		return xpFactory.compile("//*[@include]", Filters.element());
+		
+		List<Namespace> ns = new ArrayList<>();
+		ns.add(OfxNsPrefixMapper.nsOfx);
+		
+		xpeExternal = XPathFactory.instance().compile("//*[@external='true']", Filters.element(), null, ns);
+		//*[@include] = XPathFactory.instance().compile("//*[@include]", Filters.element(), null, ns);
 	}
 	
 	public <T extends Object> T load(String resourceName, Class<T> c) throws OfxAuthoringException
@@ -78,7 +73,7 @@ public class ExternalContentEagerLoader
 			org.jdom2.Document doc = JDomUtil.load(is);
 			Element root = doc.getRootElement();
 			
-			List<Element> list = build().evaluate(root);
+			List<Element> list = xpeInclude.evaluate(root);
 			logger.debug("Now processing children: "+list.size());
 			for(Element childElement : list)
 			{
@@ -141,26 +136,21 @@ public class ExternalContentEagerLoader
 	@Deprecated
 	private Element mergeRecursive(Element rootElement) throws OfxInternalProcessingException
 	{
-		try
+		List<Element> list2 = xpeExternal.evaluate(rootElement);
+		logger.debug(list2.size()+" sections");
+		
+		for (Element childElement : list2)
 		{
-			List<?> list = xpath.selectNodes(rootElement);
-			logger.debug(list.size()+" external sources in "+rootElement.getName()+" in "+rootFile.getAbsolutePath());
-
-			for(Object aList : list)
-			{
-				Element childElement = (Element)aList;
-				String source = childElement.getAttribute("source").getValue();
-				File childFile = new File(rootFile.getParentFile(), source);
-				logger.trace("Found external in " + rpf.relativate(rootFile.getParentFile(), childFile));
-				ExternalContentEagerLoader em = new ExternalContentEagerLoader();
-				Element eEx = em.getExternal(childFile);
-				eEx.detach();
-				int index = childElement.getParentElement().indexOf(childElement);
-				childElement.getParentElement().setContent(index, eEx);
-				childElement.detach();
-			}
+			String source = childElement.getAttribute("source").getValue();
+			File childFile = new File(rootFile.getParentFile(), source);
+			logger.trace("Found external in " + rpf.relativate(rootFile.getParentFile(), childFile));
+			ExternalContentEagerLoader em = new ExternalContentEagerLoader();
+			Element eEx = em.getExternal(childFile);
+			eEx.detach();
+			int index = childElement.getParentElement().indexOf(childElement);
+			childElement.getParentElement().setContent(index, eEx);
+			childElement.detach();
 		}
-		catch (JDOMException e) {logger.error("",e);}
 		return rootElement;
 	}
 }
