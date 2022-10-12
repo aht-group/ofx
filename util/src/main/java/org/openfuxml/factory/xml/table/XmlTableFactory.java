@@ -20,6 +20,60 @@ public class XmlTableFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlTableFactory.class);
 	
+	private final Table table;
+	
+	public static XmlTableFactory instance(String title) {return new XmlTableFactory(title);}
+	private XmlTableFactory(String title)
+	{
+		table = build();
+		table.setTitle(XmlTitleFactory.build(title));
+		
+		Content content = new Content();
+//		content.setHead(buildHead(header));
+		content.getBody().add(new Body());
+		table.setContent(content);
+	}
+	
+	public void addHeader(String... header)
+	{
+		Row row = new Row();
+		for(String column : header)
+		{
+			row.getCell().add(XmlCellFactory.createParagraphCell(column));
+		}
+		table.getContent().setHead(XmlHeadFactory.build(row));
+	}
+	public void addRow(String id, Object... cell)
+	{
+		Row row = new Row();
+		row.setId(id);
+		
+		for(Object o : cell)
+		{
+			if(o!=null)
+			{
+				row.getCell().add(XmlCellFactory.createParagraphCell(o.toString()));
+			}
+			else
+			{
+				row.getCell().add(XmlCellFactory.createParagraphCell(""));
+			}
+		}
+		table.getContent().getBody().get(0).getRow().add(row);
+	}
+	public boolean hasRowId(String id)
+	{
+		for(Body body : table.getContent().getBody())
+		{
+			for(Row row : body.getRow())
+			{
+				if(row.getId().equals(id)) {return true;}
+			}
+		}
+		return false;
+	}
+	public Table toTable() {return table;}
+	
 	public static Table build() {return new Table();}
 	
 	public static Table build(ResultSet rs) throws SQLException

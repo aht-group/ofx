@@ -70,6 +70,16 @@ public class OfxTextRenderer
 		OfxTextRenderer renderer = new OfxTextRenderer();
 		renderer.render(table, os);
 	}
+	public static void silent(Table table, OutputStream os)
+	{
+		try
+		{
+			OfxTextRenderer renderer = new OfxTextRenderer();
+			renderer.render(table, os);
+		}
+		catch (OfxAuthoringException e) {logger.error(e.getMessage());}
+		catch (IOException e) {logger.error(e.getMessage());}
+	}
 	public void render(Table table, OutputStream os) throws OfxAuthoringException, IOException
 	{
 		TextTableRenderer renderer = new TextTableRenderer(cp);
