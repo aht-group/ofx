@@ -20,7 +20,7 @@ public class XmlTableFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlTableFactory.class);
 	
-	private final Table table;
+	private Table table; public Table getTable() {return table;} public void setTable(Table table) {this.table = table;}
 	
 	public static XmlTableFactory instance(String title) {return new XmlTableFactory(title);}
 	private XmlTableFactory(String title)
@@ -72,7 +72,6 @@ public class XmlTableFactory
 		}
 		return false;
 	}
-	public Table toTable() {return table;}
 	
 	public static Table build() {return new Table();}
 	
