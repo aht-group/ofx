@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Content;
@@ -26,6 +27,7 @@ public class XmlTableFactory
 	private XmlTableFactory(String title)
 	{
 		table = build();
+		table.setId(UUID.randomUUID().toString());
 		table.setTitle(XmlTitleFactory.build(title));
 		
 		Content content = new Content();
@@ -43,7 +45,8 @@ public class XmlTableFactory
 		}
 		table.getContent().setHead(XmlHeadFactory.build(row));
 	}
-	public void addRow(String id, Object... cell)
+	public void addRow(Object... cell) {this.addIdRow(null, cell);}
+	public void addIdRow(String id, Object... cell)
 	{
 		Row row = new Row();
 		row.setId(id);

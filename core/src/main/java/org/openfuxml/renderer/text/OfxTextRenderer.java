@@ -58,8 +58,6 @@ public class OfxTextRenderer
 		for(String line : r.getContent()) {writer.write(line+System.lineSeparator());}
 	}
 	
-	
-	
 	public static void table(ResultSet rs, OutputStream os) throws OfxAuthoringException, IOException
 	{
 		try{table(XmlTableFactory.build(rs),os);}

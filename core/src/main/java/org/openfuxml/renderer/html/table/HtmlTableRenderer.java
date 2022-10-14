@@ -31,9 +31,7 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxHtm
 		super(cmm,dsm);
 	}
 
-	public HtmlTableRenderer(ConfigurationProvider cp) {
-		super(cp);
-	}
+	public HtmlTableRenderer(ConfigurationProvider cp) {super(cp);}
 
 	public void render(HtmlElement parent, Table tab)
 	{
