@@ -11,9 +11,15 @@
 	<composite:interface>
 		<composite:attribute name="section" required="true" shortDescription="A ofx-section"/>
 		<composite:attribute name="title" required="false"/>
+		<composite:attribute name="fontSize" default="1"/>
 	</composite:interface>
         
 	<composite:implementation>
+		<style>
+			.html-container {
+				font-size: #{fontSize}em;
+			}
+		</style>
 		<c:choose>
 		    <c:when test="#{not empty cc.attributes.title}">
 		        <p:panel header="#{cc.attributes.title}" styleClass="jeeslPanel no-header-panel">
