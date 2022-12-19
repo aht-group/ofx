@@ -6,12 +6,13 @@ import java.util.List;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.Namespace;
-import org.jdom2.xpath.XPath;
+import org.jdom2.filter.Filters;
+import org.jdom2.xpath.XPathExpression;
+import org.jdom2.xpath.XPathFactory;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,23 +26,9 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 	private final String startDelimiter = "&lt;wiki:injection id=&quot;";
 	private final String endDelimiter = "&quot;/&gt;";
 	
-	private OfxNsPrefixMapper nsPrefixMapper;
-	private XPath xpath;
-	
 	public WikiTemplateCorrector() 
 	{
-		nsPrefixMapper = new OfxNsPrefixMapper();
 		
-		try
-		{
-			Namespace nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
-			Namespace nsWiki = Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki");
-			
-			xpath = XPath.newInstance("//wiki:template");
-			xpath.addNamespace(nsOfx);
-			xpath.addNamespace(nsWiki);
-		}
-		catch (JDOMException e) {logger.error("",e);}
 	}
 	
 	public Document correctTemplateInjections(Document ofxDoc) throws OfxInternalProcessingException
@@ -55,41 +42,32 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 	
 	private org.jdom2.Document exchangeParagraphByTemplate(org.jdom2.Document doc)
 	{
-		try
-		{
-			Namespace nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
-			Namespace nsWiki = Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki");
-			
-			XPath xpath = XPath.newInstance("//wiki:template");
-			xpath.addNamespace(nsOfx);
-			xpath.addNamespace(nsWiki);
-			
-			Element result = exchangeParagraphByTemplate(doc.getRootElement(),xpath);
-			result.detach();
-			doc.setRootElement(result);
-		}
-		catch (JDOMException e) {logger.error("",e);}
+		Namespace nsOfx = Namespace.getNamespace("ofx", "http://www.openfuxml.org");
+		Namespace nsWiki = Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki");
+		
+		XPathExpression<Element> xpe = XPathFactory.instance().compile("//wiki:template",Filters.element(), null,nsOfx,nsWiki);
+		
+		Element result = exchangeParagraphByTemplate(doc.getRootElement(),xpe);
+		result.detach();
+		doc.setRootElement(result);
+		
 		return doc;
 	}
 	
-	private Element exchangeParagraphByTemplate(Element rootElement, XPath xpath)
+	private Element exchangeParagraphByTemplate(Element rootElement, XPathExpression<Element> xpe)
 	{
-		try
+		List<Element> list = xpe.evaluate(rootElement);
+		logger.debug(list.size()+" sections");
+		
+		for (Iterator<?> iter = list.iterator(); iter.hasNext();)
 		{
-			List<?> list = xpath.selectNodes(rootElement);
-			logger.debug(list.size()+" sections");
-			
-			for (Iterator<?> iter = list.iterator(); iter.hasNext();)
-			{
-				Element eTemplate = (Element) iter.next();
-				int index = eTemplate.getParentElement().getParentElement().indexOf(eTemplate.getParentElement());
-				Element parent = eTemplate.getParentElement().getParentElement();
-				eTemplate.detach();
-				parent.removeContent(index);
-				parent.addContent(index, createExternalTemplate(eTemplate));
-			}
+			Element eTemplate = (Element) iter.next();
+			int index = eTemplate.getParentElement().getParentElement().indexOf(eTemplate.getParentElement());
+			Element parent = eTemplate.getParentElement().getParentElement();
+			eTemplate.detach();
+			parent.removeContent(index);
+			parent.addContent(index, createExternalTemplate(eTemplate));
 		}
-		catch (JDOMException e) {logger.error("",e);}
 		return rootElement;
 	}
 	
@@ -107,7 +85,7 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 	
 	private org.jdom2.Document transformToElement(Document ofxDoc)
 	{
-		String txt = JaxbUtil.toString(ofxDoc, nsPrefixMapper, true);
+		String txt = JaxbUtil.toString(ofxDoc, true);
 		int beginIndex=-1;
 		while((beginIndex = txt.indexOf(startDelimiter))>=0)
 		{
