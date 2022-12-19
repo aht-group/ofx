@@ -2,12 +2,11 @@ package org.openfuxml.renderer;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
-import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.PosixParser;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -65,7 +64,7 @@ public class OfxRenderer
 	public void parseArguments(String args[]) throws ParseException, OfxConfigurationException, OfxAuthoringException, OfxRenderingException, OfxInternalProcessingException, OfxWikiException, OfxImplementationException
 	{
 		options = createOptions();
-		CommandLineParser parser = new PosixParser();
+		CommandLineParser parser = new DefaultParser();
 		CommandLine line = null;
 	    line = parser.parse(options , args); 
 	            
@@ -80,17 +79,13 @@ public class OfxRenderer
         renderTarget();
 	}
 	
-	@SuppressWarnings("static-access")
 	private Options createOptions()
 	{
 		Option oHelp = new Option("help", "Print this message" );
 		Option oDebug = new Option("debug", "Debug output");
 		Option oPre = new Option("pre", "Do PreProcessing");
 		
-		Option oConfigCmp  = OptionBuilder.withArgName("FILENAME")
-						  .hasArg()
-						  .withDescription( "Use cmp configuration file FILENAME (required)")
-						  .create("cmp"); 
+		Option oConfigCmp = Option.builder("cmp").required(true).hasArg(true).argName("FILENAME").desc("Use cmp configuration file FILENAME (required)").build();
 		
 		Options options = new Options();
 		options.addOption(oHelp);
