@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,11 +13,13 @@ import org.junit.runners.Parameterized;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
-import org.openfuxml.processor.pre.ExternalContentEagerLoader;
 import org.openfuxml.test.AbstractFileProcessingTest;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 @RunWith(Parameterized.class)
 public class TestExternalMergerOfxDoc extends AbstractFileProcessingTest

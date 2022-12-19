@@ -37,7 +37,7 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexImageRenderer.class);
 	
-	private LatexCrossMediaManager cmm;
+//	private LatexCrossMediaManager cmm;
 	
     private LatexSectionRenderer rSection;
     private LatexImageRenderer rImage;

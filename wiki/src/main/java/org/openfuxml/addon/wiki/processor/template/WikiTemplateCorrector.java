@@ -38,7 +38,8 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 			Namespace nsWiki = Namespace.getNamespace("wiki", "http://www.openfuxml.org/wiki");
 			
 			xpath = XPath.newInstance("//wiki:template");
-			xpath.addNamespace(nsOfx); xpath.addNamespace(nsWiki);
+			xpath.addNamespace(nsOfx);
+			xpath.addNamespace(nsWiki);
 		}
 		catch (JDOMException e) {logger.error("",e);}
 	}

@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.processor.latex.addon.graph;
 
+import java.util.Objects;
+
 import org.junit.After;
 import org.junit.Before;
 import org.openfuxml.renderer.latex.content.graph.LatexTreeNodeRenderer;
@@ -10,10 +12,10 @@ public class TestLatexTreeNodeRenderer extends AbstractLatexGraphTest
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestLatexTreeNodeRenderer.class);
 	
-	private static enum Key {simple,withoutLabel}
-	
+//	private static enum Key {simple,withoutLabel}
+//	
 	private LatexTreeNodeRenderer renderer;
-	private String dir = "treeNode";
+//	private String dir = "treeNode";
 	
 	@Before
 	public void initRenderer()
@@ -21,7 +23,11 @@ public class TestLatexTreeNodeRenderer extends AbstractLatexGraphTest
 		renderer = new LatexTreeNodeRenderer(cp);
 	}
 	
-	@After public void close(){renderer=null;}
+	@After public void close()
+	{
+		if(Objects.nonNull(renderer)) {logger.debug("Closing renderer");}
+		renderer=null;
+	}
 /*	
 	public static Node createNode(){return createNode("myLabel");}
 	public static Node createNode(String label)

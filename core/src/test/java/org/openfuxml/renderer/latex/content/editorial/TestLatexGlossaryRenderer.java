@@ -78,7 +78,7 @@ public class TestLatexGlossaryRenderer extends AbstractTestLatexRenderer
     
     @Test public void glossaryEmphasis() throws IOException, OfxAuthoringException
     {    	
-    	Emphasis e = OfxEmphasisFactory.italic("test");
+//    	Emphasis e = OfxEmphasisFactory.italic("test");
     	
     	Paragraph p = new Paragraph();
     	p.getContent().add(li.getWords(1)+" ");
