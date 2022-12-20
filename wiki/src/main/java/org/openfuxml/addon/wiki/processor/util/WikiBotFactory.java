@@ -3,25 +3,24 @@ package org.openfuxml.addon.wiki.processor.util;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import net.sourceforge.jwbf.core.actions.HttpActionClient;
-import net.sourceforge.jwbf.core.actions.util.ActionException;
-import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
-
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.impl.client.AbstractHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.openfuxml.addon.wiki.data.jaxb.Server;
 import org.openfuxml.addon.wiki.data.jaxb.Servers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sourceforge.jwbf.core.actions.util.ActionException;
+import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 
 public class WikiBotFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(WikiBotFactory.class);
 	
 	private URL url;
+	
+	@SuppressWarnings("unused")
 	private String httpUsername,httpPassword;
+	
+	@SuppressWarnings("unused")
 	private String wikiUsername,wikiPassword;
 	
 	private MediaWikiBot bot;
@@ -72,23 +71,24 @@ public class WikiBotFactory
 		try
 		{
 			bot = new MediaWikiBot(url);
-			if(httpUsername!=null && httpPassword!=null){bot.setConnection(createActionClient());}
-			if(wikiUsername!=null && wikiPassword!=null){bot.login(wikiUsername, wikiPassword);}
+			logger.info("Password deactivated");
+//			if(httpUsername!=null && httpPassword!=null){bot.setConnection(createActionClient());}
+//			if(wikiUsername!=null && wikiPassword!=null){bot.login(wikiUsername, wikiPassword);}
 		}
-		catch (MalformedURLException e) {logger.error("",e);}
+//		catch (MalformedURLException e) {logger.error("",e);}
 		catch (ActionException e) {logger.error("",e);}
 		return bot;
 	}
 	
-	private HttpActionClient createActionClient() throws MalformedURLException
-	{		
-		
-		AuthScope scope = new AuthScope(url.getHost(), url.getDefaultPort());
-		UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(httpUsername, httpPassword);
-		AbstractHttpClient httpclient = new DefaultHttpClient();
-		httpclient.getCredentialsProvider().setCredentials(scope, credentials);
-		
-		HttpActionClient actionClient = new HttpActionClient(httpclient, url);
-		return actionClient;
-	}
+//	private HttpActionClient createActionClient() throws MalformedURLException
+//	{		
+//		
+//		AuthScope scope = new AuthScope(url.getHost(), url.getDefaultPort());
+//		UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(httpUsername, httpPassword);
+//		AbstractHttpClient httpclient = new DefaultHttpClient();
+//		httpclient.getCredentialsProvider().setCredentials(scope, credentials);
+//		
+//		HttpActionClient actionClient = new HttpActionClient(httpclient, url);
+//		return actionClient;
+//	}
 }

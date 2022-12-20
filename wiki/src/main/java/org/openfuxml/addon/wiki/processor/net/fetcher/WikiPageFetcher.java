@@ -35,8 +35,9 @@ public class WikiPageFetcher
 	{
 		try
 		{	
-			SimpleArticle sa = new SimpleArticle(bot.readContent(article));
-				
+//			SimpleArticle sa = new SimpleArticle(bot.readContent(article));
+			SimpleArticle sa = bot.readData(article);
+			
 		    wikiText = sa.getText();
 		}
 		catch (ActionException e) {logger.error("",e);}
