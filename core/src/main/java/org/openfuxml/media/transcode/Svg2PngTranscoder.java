@@ -99,8 +99,8 @@ public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements C
 	    TranscoderOutput tOut = new TranscoderOutput(os);
 	    PNGTranscoder t = new PNGTranscoder();
 
-	    t.addTranscodingHint(PNGTranscoder.KEY_HEIGHT,new Float(image.getHeight().getValue()));
-	    t.addTranscodingHint(PNGTranscoder.KEY_WIDTH,new Float(image.getWidth().getValue()));
+	    t.addTranscodingHint(PNGTranscoder.KEY_HEIGHT, Double.valueOf(image.getHeight().getValue()).floatValue());
+	    t.addTranscodingHint(PNGTranscoder.KEY_WIDTH, Double.valueOf(image.getWidth().getValue()).floatValue());
 
 	    t.transcode(tIn,tOut);
 	    os.flush();

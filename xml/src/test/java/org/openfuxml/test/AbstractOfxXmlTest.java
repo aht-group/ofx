@@ -2,6 +2,7 @@ package org.openfuxml.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -43,11 +44,15 @@ public abstract class AbstractOfxXmlTest <T extends Object> extends AbstractOfxT
 	{
 		try
 		{
-			T t = cXml.newInstance();
+			T t = cXml.getDeclaredConstructor().newInstance();
 			xmlFile = new File(getXmlDir(xmlDirSuffix),t.getClass().getSimpleName()+".xml");
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
+		catch (IllegalArgumentException e) {e.printStackTrace();}
+		catch (InvocationTargetException e) {e.printStackTrace();}
+		catch (NoSuchMethodException e) {e.printStackTrace();}
+		catch (SecurityException e) {e.printStackTrace();}
 	}
 	
     @Test

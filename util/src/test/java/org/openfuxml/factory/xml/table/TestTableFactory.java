@@ -12,11 +12,11 @@ public class TestTableFactory
 	public static String[] columnNames = {"First Name","Last Name","University","Years","Active"};
 	
 	public static Object[][] data = {
-		    {"David",   "Wright", "Harvard University", new Integer(5), new Boolean(false)},
-		    {"Andrew",  "Donnel", "University of Oxford", new Integer(3), new Boolean(true)},
-		    {"Lisa",    "Barke",  "Massachusetts Institute of Technology", new Integer(2), new Boolean(false)},
-		    {"Richard", "Snow",   "University of California, Los Angeles", new Integer(5), new Boolean(true)},
-		    {"Marry",   "Winter", "University of Cambridge", new Integer(4), new Boolean(false)}
+		    {"David",   "Wright", "Harvard University", Integer.valueOf(5), Boolean.valueOf(false)},
+		    {"Andrew",  "Donnel", "University of Oxford", Integer.valueOf(3), Boolean.valueOf(true)},
+		    {"Lisa",    "Barke",  "Massachusetts Institute of Technology", Integer.valueOf(2), Boolean.valueOf(false)},
+		    {"Richard", "Snow",   "University of California, Los Angeles", Integer.valueOf(5), Boolean.valueOf(true)},
+		    {"Marry",   "Winter", "University of Cambridge", Integer.valueOf(4), Boolean.valueOf(false)}
 		};
 	
 	@Test

@@ -1,21 +1,11 @@
 package org.openfuxml.media.transcode;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.batik.svggen.SVGGeneratorContext;
-import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.transcoder.TranscoderException;
 import org.junit.Before;
 import org.openfuxml.OfxCoreBootstrap;
@@ -24,8 +14,6 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.test.AbstractOfxCoreTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 
@@ -71,49 +59,6 @@ public class TestSvgTranscoder extends AbstractOfxCoreTest
 		os.close();
 	}
 
-	public void url() throws MalformedURLException, IOException, ParserConfigurationException, SAXException
-	{
-//		String s = "https://openclipart.org/download/228858";
-//		InputStream is = new URL(s).openStream();
-
-        File file = new File("/Volumes/ramdisk/tv2.svg");
-        InputStream is = new FileInputStream(file);
-
-		DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = f.newDocumentBuilder();
-        Document doc = builder.parse(is);
-
-        SVGGeneratorContext ctx = SVGGeneratorContext.createDefault(doc);
-        SVGGraphics2D svg = new SVGGraphics2D(ctx,false);
-
-        Dimension d = svg.getSVGCanvasSize();
-        Rectangle r = svg.getClipBounds();
-
-        System.out.println(svg.toString());
-        System.out.println("Dimension null? "+(d==null));
-        System.out.println("Rectangle null? "+(r==null));
-	}
-
-//	public void stack() throws MalformedURLException, IOException
-//	{
-//		SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory(XMLResourceDescriptor.getXMLParserClassName());
-//
-////		https://github.com/apache/batik/blob/trunk/samples/chessboard.svg
-//        File file = new File("/Volumes/ramdisk/tv2.svg");
-//        InputStream is = new FileInputStream(file);
-//
-//        Document document = factory.createDocument(null, is);
-//        UserAgent agent = new UserAgentAdapter();
-//        DocumentLoader loader= new DocumentLoader(agent);
-//        BridgeContext context = new BridgeContext(agent, loader);
-//        context.setDynamic(true);
-//        GVTBuilder builder= new GVTBuilder();
-//        GraphicsNode root= builder.build(context, document);
-//
-//        System.out.println(root.getPrimitiveBounds().getWidth());
-//        System.out.println(root.getPrimitiveBounds().getHeight());
-//	}
-
 	public static void main(String[] args) throws Exception
     {
     	OfxCoreBootstrap.init();
@@ -122,7 +67,7 @@ public class TestSvgTranscoder extends AbstractOfxCoreTest
     	test.init();
 
     	test.pdf();
- //   	test.png();
+    	test.png();
  //   	test.pngHeight();
 //    	test.url();
 //    	test.stack();

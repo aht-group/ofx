@@ -113,7 +113,7 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 	{
 		Ofxchartdata cs = new Ofxchartdata();
 		cs.setType(dataType);
-		cs.setValue(new Double(x));
+		cs.setValue(Double.valueOf(x));
 		
 		boolean labelContanerMissing=true;
 		for(Ofxchartcontainer ofxChartContainer : ofxChart.getOfxchartcontainer())
@@ -165,17 +165,17 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 		
 		Ofxchartdata dX = new Ofxchartdata();
 		dX.setType("X");
-		dX.setValue(new Double(m.group(1)));
+		dX.setValue(Double.valueOf(m.group(1)));
 		ofxDataSet.getOfxchartdata().add(dX);
 		
 		Ofxchartdata dMinY = new Ofxchartdata();
 		dMinY.setType("minY");
-		dMinY.setValue(new Double(m.group(2)));
+		dMinY.setValue(Double.valueOf(m.group(2)));
 		ofxDataSet.getOfxchartdata().add(dMinY);
 	
 		Ofxchartdata dMaxY = new Ofxchartdata();
 		dMaxY.setType("maxY");
-		dMaxY.setValue(new Double(m.group(3)));
+		dMaxY.setValue(Double.valueOf(m.group(3)));
 		ofxDataSet.getOfxchartdata().add(dMaxY);
 
 		int index = ofxChart.getOfxchartcontainer().size()-1;

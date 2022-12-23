@@ -42,7 +42,7 @@ public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
 	public TestExternalContentEagerLoader(File fTest)
 	{
 		this.fTest = fTest;
-		expectedExternals = new Integer(FilenameUtils.removeExtension(fTest.getName()));
+		expectedExternals = Integer.valueOf(FilenameUtils.removeExtension(fTest.getName()));
 		String name = FilenameUtils.removeExtension(fTest.getName());
 		fRef = new File(dstDirName,name+".xml");
 	}

@@ -73,7 +73,7 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		{
 			if(c.isSetWidth() && c.getWidth().isSetFlex() && c.getWidth().isFlex())
 			{
-				int relative = (new Double(c.getWidth().getValue()*100)).intValue();
+				int relative = (Double.valueOf(c.getWidth().getValue()*100)).intValue();
 				
 				sb.append("X[");
 				if(c.getWidth().isSetNarrow() && c.getWidth().isNarrow()){sb.append("-");}
