@@ -18,94 +18,64 @@ public class FormattingXMLStreamWriter implements XMLStreamWriter
 	private Stack<Integer> childCounts = new Stack<Integer>();
 	private int childCount;
 	
-	public FormattingXMLStreamWriter(XMLStreamWriter delegate) {
+	public FormattingXMLStreamWriter(XMLStreamWriter delegate)
+	{
 		this.delegate = delegate;
 	}
 
-	public void close() throws XMLStreamException {
-		delegate.close();
-	}
+	public void close() throws XMLStreamException {delegate.close();}
+	public void flush() throws XMLStreamException {delegate.flush();}
+	public NamespaceContext getNamespaceContext() {return delegate.getNamespaceContext();}
+	public String getPrefix(String uri) throws XMLStreamException {return delegate.getPrefix(uri);}
+	public Object getProperty(String name) throws IllegalArgumentException {return delegate.getProperty(name);}
+	public void setDefaultNamespace(String uri) throws XMLStreamException {delegate.setDefaultNamespace(uri);}
+	public void setNamespaceContext(NamespaceContext context) throws XMLStreamException {delegate.setNamespaceContext(context);}
+	public void setPrefix(String prefix, String uri) throws XMLStreamException {delegate.setPrefix(prefix, uri);}
 
-	public void flush() throws XMLStreamException {
-		delegate.flush();
-	}
-
-	public NamespaceContext getNamespaceContext() {
-		return delegate.getNamespaceContext();
-	}
-
-	public String getPrefix(String uri) throws XMLStreamException {
-		return delegate.getPrefix(uri);
-	}
-
-	public Object getProperty(String name) throws IllegalArgumentException {
-		return delegate.getProperty(name);
-	}
-
-	public void setDefaultNamespace(String uri) throws XMLStreamException {
-		delegate.setDefaultNamespace(uri);
-	}
-
-	public void setNamespaceContext(NamespaceContext context) throws XMLStreamException {
-		delegate.setNamespaceContext(context);
-	}
-
-	public void setPrefix(String prefix, String uri) throws XMLStreamException {
-		delegate.setPrefix(prefix, uri);
-	}
-
-	public void writeAttribute(String prefix, String namespaceURI, String localName, String value) throws XMLStreamException {
-		if (value == null) {
-			value = "";
-		}
+	public void writeAttribute(String prefix, String namespaceURI, String localName, String value) throws XMLStreamException
+	{
+		if (value == null) {value = "";}
 		delegate.writeAttribute(prefix, namespaceURI, localName, value);
 	}
 
 	public void writeAttribute(String namespaceURI, String localName, String value) throws XMLStreamException {
-		if (value == null) {
-			value = "";
-		}
+		if (value == null) {value = "";}
 		delegate.writeAttribute(namespaceURI, localName, value);
 	}
 
-	public void writeAttribute(String localName, String value) throws XMLStreamException {
-		if (value == null) {
-			value = "";
-		}
+	public void writeAttribute(String localName, String value) throws XMLStreamException
+	{
+		if (value == null) {value = "";}
 		delegate.writeAttribute(localName, value);
 	}
 
-	public void writeCData(String data) throws XMLStreamException {
-		delegate.writeCData(data);
-	}
+	public void writeCData(String data) throws XMLStreamException {delegate.writeCData(data);}
+	public void writeCharacters(char[] text, int start, int len) throws XMLStreamException {delegate.writeCharacters(text, start, len);}
 
-	public void writeCharacters(char[] text, int start, int len) throws XMLStreamException {
-		delegate.writeCharacters(text, start, len);
-	}
-
-	public void writeCharacters(String text) throws XMLStreamException {
-		if (text == null) { 
-			return;
-		}
+	public void writeCharacters(String text) throws XMLStreamException
+	{
+		if (text == null) { return;}
 		delegate.writeCharacters(text);
 	}
 
-	public void writeComment(String data) throws XMLStreamException {
-		if (data == null) {
-			data = "";
-		}
+	public void writeComment(String data) throws XMLStreamException
+	{
+		if (data == null) {data = "";}
 		delegate.writeComment(data);
 	}
 
-	public void writeDefaultNamespace(String namespaceURI) throws XMLStreamException {
+	public void writeDefaultNamespace(String namespaceURI) throws XMLStreamException
+	{
 		delegate.writeDefaultNamespace(namespaceURI);
 	}
 
-	public void writeDTD(String dtd) throws XMLStreamException {
+	public void writeDTD(String dtd) throws XMLStreamException
+	{
 		delegate.writeDTD(dtd);
 	}
 
-	public void writeEmptyElement(String prefix, String localName, String namespaceURI) throws XMLStreamException {
+	public void writeEmptyElement(String prefix, String localName, String namespaceURI) throws XMLStreamException
+	{
 		++childCount;
 		maybeIndent();
 		delegate.writeEmptyElement(prefix, localName, namespaceURI);
