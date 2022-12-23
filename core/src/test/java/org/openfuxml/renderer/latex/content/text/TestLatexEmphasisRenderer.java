@@ -37,21 +37,21 @@ public class TestLatexEmphasisRenderer extends AbstractTestLatexRenderer
     {
     	referenceFile = new File(rootDir,dir+"/"+Key.bold+".txt");
     	renderer.render(EmphasisProvider.bold());
-    	renderTest(renderer,referenceFile);
+    	renderTest(renderer);
     }
     
     @Test public void italic() throws IOException, OfxAuthoringException
     {    	
     	referenceFile = new File(rootDir,dir+"/"+Key.italic+".txt");
     	renderer.render(EmphasisProvider.italic());
-    	renderTest(renderer,referenceFile);
+    	renderTest(renderer);
     }
     
     @Test public void quote() throws IOException, OfxAuthoringException
     {
     	referenceFile = new File(rootDir,dir+"/"+Key.quote+".txt");
     	renderer.render(EmphasisProvider.italic());
-    	renderTest(renderer,referenceFile);
+    	renderTest(renderer);
     }
     
     @Test
@@ -59,7 +59,7 @@ public class TestLatexEmphasisRenderer extends AbstractTestLatexRenderer
     {
     	referenceFile = new File(rootDir,dir+"/"+Key.italic+"-"+Key.bold+".txt");
     	renderer.render(EmphasisProvider.italicBold());
-    	renderTest(renderer,referenceFile);
+    	renderTest(renderer);
     }
     
     public static void main(String[] args) throws Exception

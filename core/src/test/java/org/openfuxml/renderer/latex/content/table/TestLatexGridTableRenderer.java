@@ -38,7 +38,7 @@ public class TestLatexGridTableRenderer extends AbstractLatexTableTest
     	Table table = TestLatexTableRenderer.createTable();
     	referenceFile = new File(rootDir,dir+"/"+Key.table+".tex");
     	renderer.render(table);
-    	renderTest(renderer,referenceFile);
+    	renderTest(renderer);
     }
     
     @Test @Ignore

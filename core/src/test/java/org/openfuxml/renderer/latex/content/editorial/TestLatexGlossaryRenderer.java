@@ -63,7 +63,7 @@ public class TestLatexGlossaryRenderer extends AbstractTestLatexRenderer
     {    	
     	referenceFile = new File(rootDir,dir+"/glossary.txt");
     	renderer.render(create());
-    	renderTest(renderer,referenceFile);
+    	renderTest(renderer);
     }
     
     @Test public void glossary() throws IOException, OfxAuthoringException
@@ -71,7 +71,7 @@ public class TestLatexGlossaryRenderer extends AbstractTestLatexRenderer
     	referenceFile = new File(rootDir,dir+"/glossary-1.txt");
     	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cp,true);
     	renderer.render(paragraph());
-    	renderTest(renderer,referenceFile);
+    	renderTest(renderer);
     }
     
     @Test public void glossaryEmphasis() throws IOException, OfxAuthoringException
@@ -86,7 +86,7 @@ public class TestLatexGlossaryRenderer extends AbstractTestLatexRenderer
     	referenceFile = new File(rootDir,dir+"/glossary-2.txt");
     	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cp,true);
     	renderer.render(paragraph());
-    	renderTest(renderer,referenceFile);
+    	renderTest(renderer);
     }
     
     @Test(expected=OfxAuthoringException.class)

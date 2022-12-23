@@ -64,14 +64,14 @@ public class TestLatexAcronymRenderer extends AbstractTestLatexRenderer
     	referenceFile = new File(rootDir,dir+"/acronym.txt");
     	LatexParagraphRenderer renderer = new LatexParagraphRenderer(cp,true);
     	renderer.render(paragraph());
-    	renderTest(renderer,referenceFile);
+    	renderTest(renderer);
     }
 	
     @Test public void acronyms() throws IOException, OfxAuthoringException
     {    	
     	referenceFile = new File(rootDir,dir+"/acronyms.txt");
     	renderer.render(create());
-    	renderTest(renderer,referenceFile);
+    	renderTest(renderer);
     }
     
     @Test(expected=OfxAuthoringException.class)

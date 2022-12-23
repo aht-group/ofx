@@ -98,8 +98,8 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
     	debugCharacter(renderer);
-    	save(renderer,referenceFile);
-    	assertText(renderer,referenceFile);
+    	super.save(renderer);
+    	assertText(renderer);
     }
     
     @Test
@@ -111,8 +111,8 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
     	debugCharacter(renderer);
-    	save(renderer,referenceFile);
-    	assertText(renderer,referenceFile);
+    	super.save(renderer);
+    	super.assertText(renderer);
     }
     
     @Test
@@ -125,8 +125,8 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     	JaxbUtil.info(list);
     	renderer.render(list,parentSection);
     	debugCharacter(renderer);
-    	save(renderer,referenceFile);
-    	assertText(renderer,referenceFile);
+    	super.save(renderer);
+    	super.assertText(renderer);
     }
     
     @Ignore("Description NYI")
@@ -140,8 +140,8 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     	list.getItem().add(ListItemProvider.description());
     	renderer.render(list,parentSection);
     	debugCharacter(renderer);
-    	save(renderer,referenceFile);
-    	assertText(renderer,referenceFile);
+    	save(renderer);
+    	assertText(renderer);
     }
   
     public static void main(String[] args) throws Exception

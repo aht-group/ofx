@@ -28,8 +28,8 @@ public class TestLatexItemFactory extends AbstractLatexListTest
     	referenceFile = new File(rootDir,dir+"/"+Key.itemize+".txt");
     	renderer.render(LatexListRenderer.ListType.list,ListItemProvider.build());
     	debugCharacter(renderer);
-    	save(renderer,referenceFile);
-    	assertText(renderer,referenceFile);
+    	super.save(renderer);
+    	super.assertText(renderer);
     }
     
     @Test(expected=OfxAuthoringException.class)
@@ -44,8 +44,8 @@ public class TestLatexItemFactory extends AbstractLatexListTest
     	referenceFile = new File(rootDir,dir+"/"+Key.description+".txt");
     	renderer.render(LatexListRenderer.ListType.description,ListItemProvider.description());
     	debugCharacter(renderer);
-    	save(renderer,referenceFile);
-    	assertText(renderer,referenceFile);
+    	super.save(renderer);
+    	super.assertText(renderer);
     }
     
     public static void main(String[] args) throws Exception

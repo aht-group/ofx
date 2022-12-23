@@ -34,11 +34,7 @@ public class ExternalContentEagerLoader
 	private org.jdom2.Document doc;
 	
 	private XPathExpression<Element> xpeExternal;
-	private XPathExpression<Element> xpeInclude;
-	
-	public XPathExpression<Element> getXpeInclude() {
-		return xpeInclude;
-	}
+	private XPathExpression<Element> xpeInclude; public XPathExpression<Element> getXpeInclude() {return xpeInclude;}
 
 	public ExternalContentEagerLoader()
 	{
@@ -105,7 +101,6 @@ public class ExternalContentEagerLoader
 		logger.trace("Loaded: "+rootFile.getAbsolutePath());
 	}
 	
-	@Deprecated
 	public Document mergeToOfxDoc(File rootFile) throws OfxInternalProcessingException
 	{
 		org.jdom2.Document doc = mergeToDoc(rootFile);
