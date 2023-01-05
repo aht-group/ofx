@@ -15,7 +15,7 @@ public class OfxUtilTestBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxUtilTestBootstrap.class);
 		
-	public static String xmlConfig = "config.ofx-util.test/ofx.xml";
+	public static String xmlConfig = "ofx/config/util.test/ofx.xml";
 	
 	public static Configuration init()
 	{
@@ -25,8 +25,8 @@ public class OfxUtilTestBootstrap
 	public static Configuration init(String configFile)
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("config.ofx-util.test");
-			loggerInit.init();
+		loggerInit.addAltPath("ofx/config/util.test");
+		loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
 		
 		try

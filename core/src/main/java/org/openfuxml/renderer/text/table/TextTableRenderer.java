@@ -118,7 +118,14 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 		for(int i=0;i<columnSize.length;i++)
 		{
 			sb.append("| ");
-			sb.append(StringUtils.rightPad(renderer.get(i).getSingleLine(),columnSize[i]));
+			if(renderer.size()>i)
+			{
+				sb.append(StringUtils.rightPad(renderer.get(i).getSingleLine(),columnSize[i]));
+			}
+			else
+			{
+				sb.append(StringUtils.rightPad("",columnSize[i]));
+			}
 			sb.append(" ");
 		}
 		sb.append("|");

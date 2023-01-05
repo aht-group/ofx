@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
+import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,4 +25,12 @@ public class OfxSectionFilter
 		}
 		return list;
 	}
+	
+	public static Section toMaxDepth(Section s, int depth)
+	{
+		
+		return s;
+	}
+	
+	
 }
