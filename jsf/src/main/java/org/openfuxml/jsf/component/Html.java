@@ -12,8 +12,10 @@ import javax.faces.context.ResponseWriter;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.jsf.util.ComponentAttribute;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.OfxHtmlRenderer;
+import org.openfuxml.util.filter.OfxSectionFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +25,7 @@ public class Html extends UIPanel
 {	
 	final static Logger logger = LoggerFactory.getLogger(Html.class);
 	
-	private static enum Properties {section}
+	private static enum Propertiy {section,maxDepth}
 	
 	@Override
 	public void encodeBegin(FacesContext context) throws IOException
@@ -31,8 +33,11 @@ public class Html extends UIPanel
 		ResponseWriter responseWriter = context.getResponseWriter();
 		responseWriter.startElement("div class=\"html-container\"", this);
 		
-		ValueExpression ve = this.getValueExpression(Properties.section.toString());
+		ValueExpression ve = this.getValueExpression(Propertiy.section.toString());
 		Section s = (Section)ve.getValue(context.getELContext());
+		
+		int maxDepth = ComponentAttribute.getInteger(Propertiy.maxDepth,-1,context,this);
+		if(maxDepth>=0) {s = OfxSectionFilter.toMaxDepth(s, maxDepth);}
 		
 		if(s!=null)
 		{

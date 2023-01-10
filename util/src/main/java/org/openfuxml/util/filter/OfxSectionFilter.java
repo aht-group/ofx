@@ -1,5 +1,6 @@
 package org.openfuxml.util.filter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +27,29 @@ public class OfxSectionFilter
 		return list;
 	}
 	
-	public static Section toMaxDepth(Section s, int depth)
+	public static Section toMaxDepth(Section xml, int depth)
 	{
+		Section result = XmlSectionFactory.copyOnlyAttributes(xml);
 		
-		return s;
-	}
-	
-	
+		for(Serializable s : xml.getContent())
+		{
+//			logger.info(s.getClass().getSimpleName());
+			if(s instanceof Section)
+			{
+				if(depth>0)
+				{
+					result.getContent().add(OfxSectionFilter.toMaxDepth((Section)s, depth-1));
+					
+				}
+			}
+			else
+			{
+				result.getContent().add(s);
+			}
+		}
+		
+		
+		
+		return result;
+	}	
 }

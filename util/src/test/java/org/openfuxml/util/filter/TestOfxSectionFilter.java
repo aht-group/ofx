@@ -26,7 +26,6 @@ public class TestOfxSectionFilter extends AbstractOfxUtilTest
 		
 		section = XmlSectionFactory.build();
 		section.getContent().add(sub1);
-		
 	}
 	
 	public void test()

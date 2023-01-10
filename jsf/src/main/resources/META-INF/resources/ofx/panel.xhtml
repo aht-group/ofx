@@ -12,6 +12,8 @@
 		<composite:attribute name="section" required="true" shortDescription="A ofx-section"/>
 		<composite:attribute name="title" required="false"/>
 		<composite:attribute name="fontSize" default="1"/>
+		
+		<composite:attribute name="maxDepth" required="false"/>
 	</composite:interface>
         
 	<composite:implementation>
@@ -23,12 +25,12 @@
 		<c:choose>
 		    <c:when test="#{not empty cc.attributes.title}">
 		        <p:panel header="#{cc.attributes.title}" styleClass="jeeslPanel no-header-panel">
-		        	<ofx:html section="#{cc.attributes.section}"/>
+		        	<ofx:html section="#{cc.attributes.section}" maxDepth="#{cc.attrs.maxDepth}"/>
 		        </p:panel>
 		    </c:when>    
 		    <c:otherwise>
 		        <p:panel styleClass="html-container-panel">
-					<ofx:html section="#{cc.attributes.section}"/>
+					<ofx:html section="#{cc.attributes.section}" maxDepth="#{cc.attrs.maxDepth}"/>
 				</p:panel>
 		    </c:otherwise>
 		</c:choose>

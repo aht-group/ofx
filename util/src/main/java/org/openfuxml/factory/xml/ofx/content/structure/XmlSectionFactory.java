@@ -54,4 +54,11 @@ public class XmlSectionFactory
 	
 	public static Section build(Image image) {Section xml = build();xml.getContent().add(image);return xml;}
 	public static Section build(Paragraph paragraph) {Section xml = build();xml.getContent().add(paragraph);return xml;}
+	
+	public static Section copyOnlyAttributes(Section xml)
+	{
+		Section result = new Section();
+		
+		return result;
+	}
 }
