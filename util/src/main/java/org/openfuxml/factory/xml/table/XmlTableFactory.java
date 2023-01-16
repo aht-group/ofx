@@ -31,7 +31,6 @@ public class XmlTableFactory
 		table.setTitle(XmlTitleFactory.build(title));
 		
 		Content content = new Content();
-//		content.setHead(buildHead(header));
 		content.getBody().add(new Body());
 		table.setContent(content);
 	}
@@ -53,14 +52,8 @@ public class XmlTableFactory
 		
 		for(Object o : cell)
 		{
-			if(o!=null)
-			{
-				row.getCell().add(XmlCellFactory.createParagraphCell(o.toString()));
-			}
-			else
-			{
-				row.getCell().add(XmlCellFactory.createParagraphCell(""));
-			}
+			if(o!=null) {row.getCell().add(XmlCellFactory.createParagraphCell(o.toString()));}
+			else {row.getCell().add(XmlCellFactory.createParagraphCell(""));}
 		}
 		table.getContent().getBody().get(0).getRow().add(row);
 	}
