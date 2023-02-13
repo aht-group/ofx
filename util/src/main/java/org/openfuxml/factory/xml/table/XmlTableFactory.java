@@ -45,6 +45,7 @@ public class XmlTableFactory
 		table.getContent().setHead(XmlHeadFactory.build(row));
 	}
 	public void addRow(Object... cell) {this.addIdRow(null, cell);}
+	public void addRow(List<Object> cells) {this.addIdRow(null, cells.toArray());}
 	public void addIdRow(String id, Object... cell)
 	{
 		Row row = new Row();
@@ -57,6 +58,7 @@ public class XmlTableFactory
 		}
 		table.getContent().getBody().get(0).getRow().add(row);
 	}
+	
 	public boolean hasRowId(String id)
 	{
 		for(Body body : table.getContent().getBody())
