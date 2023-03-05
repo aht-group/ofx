@@ -65,8 +65,7 @@ public class OfxRenderer
 	{
 		options = createOptions();
 		CommandLineParser parser = new DefaultParser();
-		CommandLine line = null;
-	    line = parser.parse(options , args); 
+		CommandLine line = parser.parse(options , args); 
 	            
         if(line.hasOption("help")) {printHelp();}
         
