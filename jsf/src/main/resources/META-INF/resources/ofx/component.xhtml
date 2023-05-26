@@ -11,7 +11,7 @@
   </composite:interface>
         
   <composite:implementation>
-    <p:dataTable var="a" value="#{cc.attrs.value.attribute}">
+    <p:dataTable styleClass="jeesl-datatable" var="a" value="#{cc.attrs.value.attribute}">
       <p:column>
         <f:facet name="header"><h:outputText value="Name"/></f:facet>
         <h:outputText value="#{a.name}"/>
