@@ -10,4 +10,5 @@ public interface CrossMediaManager
 	String getImageRef(Media imageMedia);
 	
 	void transcode() throws OfxAuthoringException;
+
 }

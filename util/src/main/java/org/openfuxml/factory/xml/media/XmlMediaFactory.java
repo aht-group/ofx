@@ -6,6 +6,8 @@ import net.sf.exlp.xml.io.File;
 
 public class XmlMediaFactory
 {
+	public static Media build() {return new Media();}
+	
 	public static Media dst(String dst)
 	{
 		return build(null,dst);

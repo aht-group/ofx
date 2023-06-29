@@ -8,6 +8,7 @@ import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.doc.provider.media.ImageProvider;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
+import org.openfuxml.media.cross.HtmlCrossMediaManager;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.structure.HtmlBody;
@@ -27,29 +28,32 @@ public class TestHtmlImageRenderer extends AbstractTestHtmlRenderer
 	@Before public void init()
 	{
 		super.initDir("media");
-		body = new HtmlBody(new OfxConfigurationProvider());
+		OfxConfigurationProvider cp = new OfxConfigurationProvider();
+		cp.setCrossMediaManager(new HtmlCrossMediaManager());
+		
+		body = new HtmlBody(cp);
 	}
-	
 	
 	@Test public void dummy() {}
 	
 //	@Test
-	public void fiugre() throws IOException
+	public void figure() throws IOException
 	{
 		initFile(Key.figure);
 		Section section = XmlSectionFactory.build(ImageProvider.figure("This is a figure"));
-		JaxbUtil.info(section);
+		JaxbUtil.debug(section);
 		body.render(section);
-		renderTest(body);
+		super.renderTest(body);
 	}
 	
 //	@Test
 	public void inline() throws IOException
 	{
 		initFile(Key.inline);
-		Section sec = new Section(); sec.getContent().add(ImageProvider.inline("This would be an inline Image"));
-		body.render(sec);
-    	renderTest(body);
+		Section section = XmlSectionFactory.build(ImageProvider.inline("This would be an inline Image"));
+		JaxbUtil.debug(section);
+		body.render(section);
+		super.renderTest(body);
 	}
 
 	public static void main(String[] args) throws IOException
@@ -58,7 +62,7 @@ public class TestHtmlImageRenderer extends AbstractTestHtmlRenderer
 		TestHtmlImageRenderer test = new TestHtmlImageRenderer();
         test.setEnvironment(true);
 
-		test.init();test.fiugre();
+		test.init();test.figure();
         test.init();test.inline();
 
 	}

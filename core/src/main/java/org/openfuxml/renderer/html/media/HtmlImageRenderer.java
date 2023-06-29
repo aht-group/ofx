@@ -1,4 +1,5 @@
 package org.openfuxml.renderer.html.media;
+import java.util.Objects;
 
 /**
  * Author: Rebecca Roblick
@@ -15,7 +16,6 @@ import org.openfuxml.renderer.html.util.HtmlElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxHtmlRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlImageRenderer.class);
@@ -28,7 +28,8 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxHtm
 		super(cmm, dsm);
 	}
 
-	public HtmlImageRenderer(ConfigurationProvider cp) {
+	public HtmlImageRenderer(ConfigurationProvider cp)
+	{
 		super(cp);
 	}
 
@@ -38,9 +39,9 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxHtm
 	{
 		HtmlElement img = new HtmlElement("img");
 		String title = "This is an image.";
-		if(image.getTitle() != null){title = TxtTitleFactory.build(image.getTitle());}
+		if(image.getTitle() != null) {title = TxtTitleFactory.build(image.getTitle());}
 		img.setAttribute("alt", title);
-		img.setAttribute("src", image.getMedia().getSrc());
+		img.setAttribute("src", cp.getCrossMediaManager().getImageRef(image.getMedia()));
 		if(image.isSetHeight()|| image.isSetWidth()){img.setStyleAttribute(HtmlElement.evaluateSize(image.getWidth()) + HtmlElement.evaluateSize(image.getHeight()));}
 
 		parent.addContent(img);
@@ -52,6 +53,7 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxHtm
 		String title = "This is an image.";
 		if(image.getTitle() != null){title = "Image " + HtmlSectionRenderer.sectionCount + "." + imgcount + ": " + TxtTitleFactory.build(image.getTitle());}
 		imgcount++;
+		
 		HtmlElement figure = new HtmlElement("figure");
 		HtmlElement img = new HtmlElement("img");
 		img.setAttribute("id", image.getId());
@@ -59,7 +61,7 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxHtm
 		
 		if(image.getMedia()!=null)
 		{
-			img.setAttribute("src", image.getMedia().getSrc());
+			img.setAttribute("src", cp.getCrossMediaManager().getImageRef(image.getMedia()));
 		}
 		
 		if(image.isSetHeight()|| image.isSetWidth()){img.setStyleAttribute(HtmlElement.evaluateSize(image.getWidth()) + HtmlElement.evaluateSize(image.getHeight()));}

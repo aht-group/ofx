@@ -23,18 +23,12 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 {
 	final static Logger logger = LoggerFactory.getLogger(HtmlDocumentRenderer.class);
 
-	private HtmlElement html;
-	public HtmlElement getHtml() {return html;}
-	public void setHtml(HtmlElement html) {this.html = html;}
-
-	private Document doc;
-	public Document getDoc(){return doc;}
-	public void setDoc(Document doc) {this.doc = doc;}
+	private HtmlElement html; public HtmlElement getHtml() {return html;} public void setHtml(HtmlElement html) {this.html = html;}
+	private Document doc; public Document getDoc(){return doc;} public void setDoc(Document doc) {this.doc = doc;}
 
 	private String pageTitle;
 
-	private static HtmlDocumentRenderer instance;
-	public static HtmlDocumentRenderer getInstance() {return instance;}
+	private static HtmlDocumentRenderer instance; public static HtmlDocumentRenderer getInstance() {return instance;}
 
 	public HtmlDocumentRenderer(ConfigurationProvider cp, String pageTitle)
 	{
@@ -43,10 +37,9 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 		instance = this;
 	}
 
-	/*Dokument-konvertierung starten.*/
 	public void render(Content content) throws OfxAuthoringException, OfxConfigurationException
 	{
-		init();
+		this.init();
 		HtmlHead head = new	HtmlHead(cp);
 		head.render(null, pageTitle);
 		HtmlBody body = new HtmlBody(cp);
@@ -60,9 +53,9 @@ public class HtmlDocumentRenderer extends AbstractOfxHtmlRenderer implements Ofx
 		HtmlBody body = new HtmlBody(this.cp);
 		body.render(content);
 	}
- /*Initialisieren der html und doc Objekte, sowie Namespace für das html Objekt setzen.*/
+	
 	public void init()
-	{
+	{	/*Initialisieren der html und doc Objekte, sowie Namespace für das html Objekt setzen.*/
 		html = new HtmlElement("html");
 		doc = new Document(html, new DocType("html"));
 		html.setNamespace(Namespace.getNamespace("http://www.w3.org/1999/xhtml"));
