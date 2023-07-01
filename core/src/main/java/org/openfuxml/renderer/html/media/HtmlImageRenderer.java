@@ -7,7 +7,6 @@ import java.util.Objects;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
-import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
@@ -22,15 +21,10 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxHtm
 
 	public static int imgcount = 0;
 
-	@Deprecated
-	public HtmlImageRenderer(CrossMediaManager cmm, DefaultSettingsManager dsm)
-	{
-		super(cmm, dsm);
-	}
-
 	public HtmlImageRenderer(ConfigurationProvider cp)
 	{
 		super(cp);
+		if(Objects.isNull(cp.getCrossMediaManager())) {logger.warn(ConfigurationProvider.class.getSimpleName()+"."+CrossMediaManager.class.getSimpleName()+" is null!");}
 	}
 
 	/*Simples Image Element. Geeignet um kleine Grafiken in den Text einzufügen.

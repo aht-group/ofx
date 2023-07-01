@@ -10,7 +10,7 @@ public class HtmlCrossMediaManager implements CrossMediaManager
 {
 	final static Logger logger = LoggerFactory.getLogger(LatexImageRenderer.class);
 	
-	private String baseUrl = "https://blabla";
+	private String baseUrl = "https://localhost:8080/image/fr";
 	
 	@Override
 	public String getImageRef(Media imageMedia)

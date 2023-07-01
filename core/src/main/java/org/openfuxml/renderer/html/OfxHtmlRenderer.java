@@ -31,13 +31,12 @@ public class OfxHtmlRenderer extends OfxRenderer
 	Logger logger = LoggerFactory.getLogger(OfxHtmlRenderer.class);
 
 	private ConfigurationProvider cp;
-	private List<String> txt; public List<String> getContent(){return txt;}
+	private List<String> txt; public List<String> getContent() {return txt;}
 
 	public OfxHtmlRenderer(ConfigurationProvider cp, String pageTitle)
 	{
 		this.cp=cp;
 		txt = new ArrayList<String>();
-//		document = new HtmlDocumentRenderer(cp,pageTitle);
 	}
 
 	@Override
@@ -49,9 +48,9 @@ public class OfxHtmlRenderer extends OfxRenderer
 	public void render(Writer writer, Section section) throws OfxAuthoringException, OfxConfigurationException, IOException
 	{
 		HtmlElement root = new HtmlElement("div");
-		HtmlSectionRenderer renderer = new HtmlSectionRenderer(new OfxConfigurationProvider(),1);
+		HtmlSectionRenderer renderer = new HtmlSectionRenderer(cp,1);
         renderer.render(root,section);
-//        JDomUtil.debug(root);
+//      JDomUtil.debug(root);
         XMLOutputter xmlOutput = new XMLOutputter(OfxHtmlRenderer.ownPrettyFormat());
         xmlOutput.output(root, writer);
 	}
