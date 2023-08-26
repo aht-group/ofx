@@ -31,9 +31,8 @@ public class OfxUtilTestBootstrap
 		
 		try
 		{
-			String cfn = ExlpCentralConfigPointer.getFile("ofx","core").getAbsolutePath();
-			ConfigLoader.add(cfn);
-			logger.info("Using additional config in: "+cfn );
+			ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance("ofx").jaxb(JaxbUtil.instance());
+			ConfigLoader.add(ccp.toFile("core"));
 		}
 		catch (ExlpConfigurationException e)
 		{
