@@ -3,6 +3,7 @@ package org.openfuxml.renderer.util;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.io.FilenameUtils;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -60,7 +61,7 @@ public class OfxRenderConfiguration
 		try
 		{
 			dir = IoXpath.getDir(dirs, dirCode);
-			if(!dir.isSetName()){throw new OfxConfigurationException("No @name definined for <dir code=\""+dirCode+"\"/>");}
+			if(Objects.isNull(dir.getName())) {throw new OfxConfigurationException("No @name definined for <dir code=\""+dirCode+"\"/>");}
 			f = new File(FilenameUtils.normalize(fCmpParent.getAbsolutePath()+File.separator+dir.getName()));
 		}
 		catch (ExlpXpathNotFoundException e){throw new OfxConfigurationException("Directory not configured for code="+dirCode+" ("+e.getMessage()+")");}
@@ -68,7 +69,7 @@ public class OfxRenderConfiguration
 		
 		if(!f.exists())
 		{
-			if(dir.isSetAllowCreate() && dir.isAllowCreate())
+			if(Objects.nonNull(dir.isAllowCreate()) && dir.isAllowCreate())
 			{
 				f.mkdirs();
 			}
