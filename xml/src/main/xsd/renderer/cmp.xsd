@@ -7,7 +7,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="http://www.openfuxml.org/wiki" schemaLocation="../addon/wiki.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/renderer/html" schemaLocation="html.xsd"/>
-    <xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../exlp/xml/src/main/xsd/util/io.xsd"/>
+    <xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../exlp/xml/src/main/xsd/io.xsd"/>
     <xsd:element name="cmp">
         <xsd:complexType>
             <xsd:sequence>
