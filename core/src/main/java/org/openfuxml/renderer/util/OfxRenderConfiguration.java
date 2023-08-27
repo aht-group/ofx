@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.io.FilenameUtils;
+import org.exlp.model.xml.io.Dir;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.util.query.XmlHtmlQuery;
 import org.openfuxml.xml.renderer.cmp.Cmp;
@@ -17,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.io.Dir;
 import net.sf.exlp.xml.xpath.IoXpath;
 
 public class OfxRenderConfiguration
@@ -92,7 +92,7 @@ public class OfxRenderConfiguration
 		File f = null;
 		try
 		{
-			net.sf.exlp.xml.io.File file = IoXpath.getFile(dirs, fileCode);
+			org.exlp.model.xml.io.File file = IoXpath.getFile(dirs, fileCode);
 			
 			File dir = getDir(listDirs, dirCode);
 			f = new File(FilenameUtils.normalize(dir.getAbsolutePath()+File.separator+file.getName()));

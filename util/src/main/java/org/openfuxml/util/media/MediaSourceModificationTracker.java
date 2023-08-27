@@ -13,10 +13,10 @@ import net.sf.exlp.factory.xml.io.XmlHashFactory;
 import net.sf.exlp.util.io.HashUtil;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.io.Dir;
 import net.sf.exlp.xml.xpath.IoXpath;
 
 import org.apache.commons.io.IOUtils;
+import org.exlp.model.xml.io.Dir;
 import org.openfuxml.content.media.Media;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,14 +66,14 @@ public class MediaSourceModificationTracker
 		
 		try
 		{
-			net.sf.exlp.xml.io.File file = IoXpath.getFileByName(dir, media.getSrc());
+			org.exlp.model.xml.io.File file = IoXpath.getFileByName(dir, media.getSrc());
 			srcHasChanged = !hashValue.equals(file.getHash().getValue());
 			file.getHash().setValue(hashValue);
 		}
 		catch (ExlpXpathNotFoundException e)
 		{
 			logger.error(e.getMessage());
-			net.sf.exlp.xml.io.File file = XmlFileFactory.build(media.getSrc());
+			org.exlp.model.xml.io.File file = XmlFileFactory.build(media.getSrc());
 			file.setHash(XmlHashFactory.build(hashValue));
 			dir.getFile().add(file);
 		}

@@ -8,7 +8,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import net.sf.exlp.xml.io.File;
+
+import org.exlp.model.xml.io.File;
 
 
 /**

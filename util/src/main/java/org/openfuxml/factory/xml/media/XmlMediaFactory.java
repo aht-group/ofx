@@ -1,8 +1,7 @@
 package org.openfuxml.factory.xml.media;
 
+import org.exlp.model.xml.io.File;
 import org.openfuxml.content.media.Media;
-
-import net.sf.exlp.xml.io.File;
 
 public class XmlMediaFactory
 {
