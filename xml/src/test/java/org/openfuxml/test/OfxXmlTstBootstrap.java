@@ -14,7 +14,7 @@ public class OfxXmlTstBootstrap
 	public static void init()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.addAltPath("ofx-xml.test");
+		loggerInit.path("ofx-xml.test");
 		loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
 	}

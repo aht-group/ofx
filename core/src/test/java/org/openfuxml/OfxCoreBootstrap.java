@@ -27,7 +27,7 @@ public class OfxCoreBootstrap
 	public static Configuration init(String configFile)
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-			loggerInit.addAltPath("config.ofx-core.test");
+			loggerInit.path("config.ofx-core.test");
 			loggerInit.init();
 
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());

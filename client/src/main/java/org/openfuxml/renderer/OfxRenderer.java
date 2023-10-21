@@ -105,8 +105,8 @@ public class OfxRenderer
 	private void initLogger(String logConfig)
 	{
 		LoggerInit loggerInit = new LoggerInit(logConfig);	
-		loggerInit.addAltPath("src/main/resources/config");
-		loggerInit.addAltPath("config");
+		loggerInit.path("src/main/resources/config");
+		loggerInit.path("config");
 		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
 		loggerInit.init();
 	}

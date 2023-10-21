@@ -16,7 +16,7 @@ public abstract class AbstractOfxTest
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("ofx-xml.test");
+		loggerInit.path("ofx-xml.test");
 		loggerInit.init();
     }
 	

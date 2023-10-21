@@ -12,7 +12,7 @@ public class OfxWikiTstBootstrap
 	public static void init()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.addAltPath("src/test/resources/config");
+		loggerInit.path("src/test/resources/config");
 		loggerInit.init();		
 	}
 }

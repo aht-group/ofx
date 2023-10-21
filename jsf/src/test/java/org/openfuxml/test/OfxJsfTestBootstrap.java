@@ -14,7 +14,7 @@ public class OfxJsfTestBootstrap
 	public static void init()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.addAltPath("config.ofx-jsf.test");
+		loggerInit.path("config.ofx-jsf.test");
 		loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
 	}

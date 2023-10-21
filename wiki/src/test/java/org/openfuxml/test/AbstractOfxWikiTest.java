@@ -18,7 +18,7 @@ public class AbstractOfxWikiTest
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("src/test/resources/config");
+		loggerInit.path("src/test/resources/config");
 		loggerInit.init();
     }
 	

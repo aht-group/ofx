@@ -23,7 +23,7 @@ public class AbstractJsfTest
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.addAltPath("config.ofx-jsf.test");
+			loggerInit.path("config.ofx-jsf.test");
 			loggerInit.init();
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
     }
