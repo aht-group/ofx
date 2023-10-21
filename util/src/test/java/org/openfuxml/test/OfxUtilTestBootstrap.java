@@ -1,12 +1,12 @@
 package org.openfuxml.test;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,13 +32,13 @@ public class OfxUtilTestBootstrap
 		try
 		{
 			ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance("ofx").jaxb(JaxbUtil.instance());
-			ConfigLoader.add(ccp.toFile("core"));
+			ConfigLoader.addFile(ccp.toFile("core"));
 		}
 		catch (ExlpConfigurationException e)
 		{
 			logger.warn("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+": "+e.getMessage());
 		}
-		ConfigLoader.add(configFile);
+		ConfigLoader.addString(configFile);
 		Configuration config = ConfigLoader.init();					
 		logger.debug("Config and Logger initialized");
 

@@ -1,6 +1,7 @@
 package org.openfuxml.addon.wiki.processor.template.transformator;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.jdom2.Element;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
@@ -8,7 +9,6 @@ import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -25,7 +25,7 @@ public class CliWikiTemplateKeyValueTransformator
 		
 		String propFile = "resources/properties/user.properties";
 		if(args.length==1){propFile=args[0];}
-		ConfigLoader.add(propFile);
+		ConfigLoader.addString(propFile);
 		Configuration config = ConfigLoader.init();
 			
 		String fNameCmp = config.getString("ofx.xml.cmp");
