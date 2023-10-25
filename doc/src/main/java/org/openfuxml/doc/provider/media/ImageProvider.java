@@ -2,7 +2,6 @@ package org.openfuxml.doc.provider.media;
 
 import java.io.File;
 
-import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.media.Image;
