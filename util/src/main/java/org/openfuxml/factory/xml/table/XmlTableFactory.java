@@ -24,6 +24,8 @@ public class XmlTableFactory
 	
 	private Table table; public Table getTable() {return table;} public void setTable(Table table) {this.table = table;}
 	
+	private final List<Object> row;
+	
 	public static XmlTableFactory instance(String title) {return new XmlTableFactory(title);}
 	private XmlTableFactory(String title)
 	{
@@ -34,6 +36,8 @@ public class XmlTableFactory
 		Content content = new Content();
 		content.getBody().add(new Body());
 		table.setContent(content);
+		
+		row = new ArrayList<>();
 	}
 	
 	public void setHeader(String... header)
@@ -45,7 +49,7 @@ public class XmlTableFactory
 		}
 		table.getContent().setHead(XmlHeadFactory.build(row));
 	}
-	public void addHeader(String header)
+	public XmlTableFactory header(String header)
 	{
 		if(Objects.isNull(table.getContent().getHead()))
 		{
@@ -53,7 +57,11 @@ public class XmlTableFactory
 			table.getContent().getHead().getRow().add(XmlRowFactory.build());
 		}
 		table.getContent().getHead().getRow().get(0).getCell().add(XmlCellFactory.createParagraphCell(header));
+		return this;
 	}
+	
+	public XmlTableFactory cell(Object o) {row.add(o); return this;}
+	public XmlTableFactory row() {this.addRow(row); row.clear(); return this;}
 	
 	public void addRow(Object... cell) {this.addIdRow(null, cell);}
 	public void addRow(List<Object> cells) {this.addIdRow(null, cells.toArray());}
