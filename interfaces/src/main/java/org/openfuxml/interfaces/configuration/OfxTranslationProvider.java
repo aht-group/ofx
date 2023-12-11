@@ -13,7 +13,8 @@ public interface OfxTranslationProvider
 	String tlEntity (String localeCode, Class<?> c);
 	
 	String tlAttribute (String localeCode, String key1, String key2);
-	<E extends Enum<E>> String tlAttribute(String localeCode, Class<?> c, E code);
+	<E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code);
+	<E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code);
 	
 	String toDate(String localeCode, LocalDate record);
 	String toDate(String localeCode, Date record);

@@ -46,7 +46,13 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 		return null;
 	}
 
-	@Override public <E extends Enum<E>> String tlAttribute(String localeCode, Class<?> c, E code){return tlAttribute(localeCode,c.getSimpleName(),code.toString());}
+	@Override public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code){return tlAttribute(localeCode,c.getSimpleName(),code.toString());}
+	@Override
+	public <E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code)
+	{
+		logger.warn("NYI");
+		return null;
+	}
 	@Override public String tlAttribute(String localeCode, String scope, String key)
 	{
 		MultiKey<String> mk = new MultiKey<String>(localeCode,scope,key);
