@@ -76,6 +76,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-xml</artifactId>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
 		
 		<!-- XML -->
 		<dependency>
@@ -168,7 +174,6 @@
 			<version>4.0.0</version>
 			<scope>provided</scope>
 		</dependency>
-		 
 		
 	</dependencies>
 </project>

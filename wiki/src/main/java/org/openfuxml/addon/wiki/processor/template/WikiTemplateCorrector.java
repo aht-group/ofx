@@ -85,7 +85,7 @@ public class WikiTemplateCorrector extends AbstractWikiProcessor implements Wiki
 	
 	private org.jdom2.Document transformToElement(Document ofxDoc)
 	{
-		String txt = JaxbUtil.toString(ofxDoc, true);
+		String txt = JaxbUtil.toString(ofxDoc,true);
 		int beginIndex=-1;
 		while((beginIndex = txt.indexOf(startDelimiter))>=0)
 		{

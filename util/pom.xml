@@ -21,17 +21,30 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.openfuxml</groupId>
+			<artifactId>ofx-xml</artifactId>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-interfaces</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-util</artifactId>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.openfuxml</groupId>
-			<artifactId>ofx-xml</artifactId>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-xml</artifactId>
 			<type>jar</type>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
+		
 		
 		<dependency>
     		<groupId>de.sven-jacobs</groupId>
