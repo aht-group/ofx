@@ -3,11 +3,10 @@ package org.openfuxml.xml;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.jdom2.Namespace;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
-
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 public class OfxNsPrefixMapper extends NamespacePrefixMapper implements NsPrefixMapperInterface
 {

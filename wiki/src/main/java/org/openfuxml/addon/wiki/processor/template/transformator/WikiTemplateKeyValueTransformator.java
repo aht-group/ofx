@@ -1,5 +1,6 @@
 package org.openfuxml.addon.wiki.processor.template.transformator;
 
+import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.jdom2.Element;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
@@ -14,7 +15,6 @@ import net.sf.exlp.core.listener.LogListenerString;
 import net.sf.exlp.interfaces.LogEvent;
 import net.sf.exlp.interfaces.LogListener;
 import net.sf.exlp.interfaces.LogParser;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 public class WikiTemplateKeyValueTransformator
 {

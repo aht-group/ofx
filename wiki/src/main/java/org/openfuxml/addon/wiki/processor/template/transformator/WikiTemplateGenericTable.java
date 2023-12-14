@@ -3,6 +3,7 @@ package org.openfuxml.addon.wiki.processor.template.transformator;
 import java.io.Serializable;
 import java.util.List;
 
+import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.jdom2.Element;
 import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
@@ -24,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 public class WikiTemplateGenericTable implements WikiTemplateTransformator
 {
