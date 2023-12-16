@@ -37,11 +37,10 @@ public class OfxNsPrefixMapper extends NamespacePrefixMapper implements NsPrefix
 		switch(ns)
 		{
 			case text:	return "http://www.openfuxml.org/text";
-			default:		return "xxxxxxxxxxxxxx";
+			default:	return "xxxxxxxxxxxxxx";
 		}
 	}
-	
-	
+
     public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix)
     {
     	if("http://www.openfuxml.org".equals(namespaceUri) ){return "ofx";}
