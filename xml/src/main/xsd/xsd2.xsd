@@ -4,6 +4,7 @@
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     jaxb:version="2.0">
 	
-	<xsd:import namespace="http://www.openfuxml.org/graph"   	schemaLocation="content/graph.xsd"/>
+	<xsd:import namespace="http://www.openfuxml.org/graph"   			schemaLocation="content/graph.xsd"/>
+	<xsd:import namespace="http://www.openfuxml.org/renderer/html"    	schemaLocation="renderer/html.xsd"/>
 	
 </xsd:schema>

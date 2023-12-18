@@ -66,10 +66,6 @@ public class Renderer
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the className property.
      * 
@@ -92,10 +88,6 @@ public class Renderer
      */
     public void setClassName(String value) {
         this.className = value;
-    }
-
-    public boolean isSetClassName() {
-        return (this.className!= null);
     }
 
 }

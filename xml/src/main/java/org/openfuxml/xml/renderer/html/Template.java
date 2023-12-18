@@ -66,10 +66,6 @@ public class Template
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the fileCode property.
      * 
@@ -92,10 +88,6 @@ public class Template
      */
     public void setFileCode(String value) {
         this.fileCode = value;
-    }
-
-    public boolean isSetFileCode() {
-        return (this.fileCode!= null);
     }
 
 }

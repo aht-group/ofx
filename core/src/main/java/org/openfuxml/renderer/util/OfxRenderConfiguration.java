@@ -106,7 +106,7 @@ public class OfxRenderConfiguration
 	
 	public Renderer getHtmlRenderer(Html html, Renderer renderer) throws OfxConfigurationException
 	{
-		if(renderer.isSetCode())
+		if(Objects.nonNull(renderer.getCode()))
 		{
 			try
 			{
