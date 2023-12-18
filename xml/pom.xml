@@ -122,4 +122,57 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>javax</id>
+			<!-- <activation><jdk>1.8</jdk></activation> -->
+			<build>
+				<plugins>
+					<plugin>
+		        		<groupId>org.apache.cxf</groupId>
+		    			<artifactId>cxf-xjc-plugin</artifactId>
+		    			<version>3.3.2</version>
+		    			<executions>
+		        			<execution> 
+		            			<id>xjc</id>
+		            			<phase>generate-sources</phase>
+		            			<goals><goal>xsdtojava</goal></goals>
+		  	         			<configuration>
+									<sourceRoot>${basedir}/src/main/java</sourceRoot>
+		                			<xsdOptions>
+		                    			<xsdOption>
+											<bindingFile>${basedir}/src/main/xsd/javax.xjb</bindingFile>
+											<extensionArgs><arg>-encoding</arg><arg>UTF-8</arg><arg>-no-header</arg></extensionArgs>
+		                        			<xsd>${basedir}/src/main/xsd/xsd.xsd</xsd>
+		                    			</xsdOption>
+									</xsdOptions>
+		            			</configuration>
+		        			</execution>
+		    			</executions>                    
+					</plugin>
+					<!--
+					<plugin>
+						<artifactId>maven-clean-plugin</artifactId>
+						<version>3.3.2</version>
+						<executions>
+							<execution>
+								<id>xjc-clean</id>
+	                    		<phase>process-sources</phase>
+								<goals><goal>clean</goal></goals>
+								<configuration>
+									<filesets>
+										<fileset>
+											<directory>src/main/java/org/exlp</directory>
+											<followSymlinks>false</followSymlinks>
+										</fileset>
+									</filesets>
+								</configuration>
+							</execution>
+						</executions>
+  					</plugin>
+					-->
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
