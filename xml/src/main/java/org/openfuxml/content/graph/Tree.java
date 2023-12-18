@@ -65,8 +65,4 @@ public class Tree
         this.node = value;
     }
 
-    public boolean isSetNode() {
-        return (this.node!= null);
-    }
-
 }

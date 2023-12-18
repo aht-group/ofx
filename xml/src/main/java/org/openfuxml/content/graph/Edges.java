@@ -72,12 +72,4 @@ public class Edges
         return this.edge;
     }
 
-    public boolean isSetEdge() {
-        return ((this.edge!= null)&&(!this.edge.isEmpty()));
-    }
-
-    public void unsetEdge() {
-        this.edge = null;
-    }
-
 }

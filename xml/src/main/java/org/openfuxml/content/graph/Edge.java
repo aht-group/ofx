@@ -57,7 +57,7 @@ public class Edge
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -69,16 +69,8 @@ public class Edge
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -89,7 +81,7 @@ public class Edge
      *     {@link Long }
      *     
      */
-    public long getFrom() {
+    public Long getFrom() {
         return from;
     }
 
@@ -101,16 +93,8 @@ public class Edge
      *     {@link Long }
      *     
      */
-    public void setFrom(long value) {
+    public void setFrom(Long value) {
         this.from = value;
-    }
-
-    public boolean isSetFrom() {
-        return (this.from!= null);
-    }
-
-    public void unsetFrom() {
-        this.from = null;
     }
 
     /**
@@ -121,7 +105,7 @@ public class Edge
      *     {@link Long }
      *     
      */
-    public long getTo() {
+    public Long getTo() {
         return to;
     }
 
@@ -133,16 +117,8 @@ public class Edge
      *     {@link Long }
      *     
      */
-    public void setTo(long value) {
+    public void setTo(Long value) {
         this.to = value;
-    }
-
-    public boolean isSetTo() {
-        return (this.to!= null);
-    }
-
-    public void unsetTo() {
-        this.to = null;
     }
 
     /**
@@ -153,7 +129,7 @@ public class Edge
      *     {@link Boolean }
      *     
      */
-    public boolean isDirected() {
+    public Boolean isDirected() {
         return directed;
     }
 
@@ -165,16 +141,8 @@ public class Edge
      *     {@link Boolean }
      *     
      */
-    public void setDirected(boolean value) {
+    public void setDirected(Boolean value) {
         this.directed = value;
-    }
-
-    public boolean isSetDirected() {
-        return (this.directed!= null);
-    }
-
-    public void unsetDirected() {
-        this.directed = null;
     }
 
     /**
@@ -199,10 +167,6 @@ public class Edge
      */
     public void setType(String value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
 }

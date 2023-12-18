@@ -69,10 +69,6 @@ public class Graph
         this.nodes = value;
     }
 
-    public boolean isSetNodes() {
-        return (this.nodes!= null);
-    }
-
     /**
      * Gets the value of the edges property.
      * 
@@ -95,10 +91,6 @@ public class Graph
      */
     public void setEdges(Edges value) {
         this.edges = value;
-    }
-
-    public boolean isSetEdges() {
-        return (this.edges!= null);
     }
 
 }

@@ -72,12 +72,4 @@ public class Nodes
         return this.node;
     }
 
-    public boolean isSetNode() {
-        return ((this.node!= null)&&(!this.node.isEmpty()));
-    }
-
-    public void unsetNode() {
-        this.node = null;
-    }
-
 }

@@ -9,11 +9,10 @@
 	<jxb:globalBindings generateIsSetMethod="false"> 
 		<jxb:serializable uid="1" />
 	</jxb:globalBindings>
-<!--      
-    <jxb:bindings schemaLocation="../../../../../exlp/xml/src/main/xsd/io.xsd" node="/xsd:schema">
+
+	<jxb:bindings schemaLocation="../xsd/content/graph.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.exlp.model.xml.io"/>
+            <jxb:package name="org.openfuxml.content.graph"/>
         </jxb:schemaBindings>
     </jxb:bindings>
--->
 </jxb:bindings>
