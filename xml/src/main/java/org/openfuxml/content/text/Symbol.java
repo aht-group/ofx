@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlValue;
     "value"
 })
 @XmlRootElement(name = "symbol")
-public class Symbol implements Serializable
+public class Symbol
+    implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
@@ -68,10 +69,6 @@ public class Symbol implements Serializable
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the math property.
      * 
@@ -80,7 +77,7 @@ public class Symbol implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isMath() {
+    public Boolean isMath() {
         return math;
     }
 
@@ -92,16 +89,8 @@ public class Symbol implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setMath(boolean value) {
+    public void setMath(Boolean value) {
         this.math = value;
-    }
-
-    public boolean isSetMath() {
-        return (this.math!= null);
-    }
-
-    public void unsetMath() {
-        this.math = null;
     }
 
     /**
@@ -126,10 +115,6 @@ public class Symbol implements Serializable
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }

@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html.structure;
 
+import java.util.Objects;
+
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
@@ -30,11 +32,11 @@ public class HtmlEmphasisRenderer extends AbstractOfxHtmlRenderer implements Ofx
 	{
 		int countAttr = 0;
 
-		if(emphasis.isSetBold()){bold = emphasis.isBold(); if(bold){countAttr++;}}
-		if(emphasis.isSetItalic()){italic = emphasis.isItalic(); if(italic){countAttr++;}}
-		if(emphasis.isSetQuote()){quote = emphasis.isQuote(); if(quote){countAttr++;}}
-		if(emphasis.isSetUnderline()){underline = emphasis.isUnderline(); if(underline){countAttr++;}}
-		if(emphasis.isSetStyle()){typewriter = emphasis.getStyle().equals("typewriter");if(typewriter){countAttr++;}}
+		if(Objects.nonNull(emphasis.isBold())) {bold = emphasis.isBold(); if(bold){countAttr++;}}
+		if(Objects.nonNull(emphasis.isItalic())) {italic = emphasis.isItalic(); if(italic){countAttr++;}}
+		if(Objects.nonNull(emphasis.isQuote())) {quote = emphasis.isQuote(); if(quote){countAttr++;}}
+		if(Objects.nonNull(emphasis.isUnderline())) {underline = emphasis.isUnderline(); if(underline){countAttr++;}}
+		if(Objects.nonNull(emphasis.getStyle())) {typewriter = emphasis.getStyle().equals("typewriter"); if(typewriter){countAttr++;}}
 
 		if(countAttr == 1){parent.addContent(simpleEmphasis(emphasis.getValue()));}
 		else{complexEmphasis(parent,emphasis.getValue(),countAttr);}

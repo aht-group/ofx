@@ -1,6 +1,7 @@
 package org.openfuxml.renderer.latex.content.editorial;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.content.editorial.Term;
@@ -93,7 +94,7 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 		txt.add("{");
 		for(Text t : term.getText())
 		{
-			if(!t.isSetClassifier()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+"."+Text.class.getSimpleName()+" needs a classifier! Code:"+term.getCode());}
+			if(Objects.isNull(t.getClassifier())) {throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+"."+Text.class.getSimpleName()+" needs a classifier! Code:"+term.getCode());}
 			LatexTextRenderer tr = new LatexTextRenderer(cp);
 			tr.render(t);
 			txt.add("\t"+t.getClassifier()+"="+tr.getContentAsSingleLine(" ")+",");

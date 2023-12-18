@@ -88,7 +88,7 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
-        <jxb:bindings schemaLocation="../xsd/../../../../..//metachart/xml/src/main/xsd/metachart/chart.xsd" node="/xsd:schema">
+	<jxb:bindings schemaLocation="../xsd/../../../../..//metachart/xml/src/main/xsd/metachart/chart.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.metachart.xml.chart"/>
         </jxb:schemaBindings>

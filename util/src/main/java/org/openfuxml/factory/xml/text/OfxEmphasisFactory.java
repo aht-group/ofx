@@ -1,5 +1,7 @@
 package org.openfuxml.factory.xml.text;
 
+import java.util.Objects;
+
 import org.openfuxml.content.text.Emphasis;
 
 public class OfxEmphasisFactory
@@ -11,7 +13,7 @@ public class OfxEmphasisFactory
 	
 	public OfxEmphasisFactory(Emphasis emphasis)
 	{
-		this(emphasis.isSetBold()&&emphasis.isBold(),emphasis.isSetItalic()&&emphasis.isItalic());
+		this(Objects.nonNull(emphasis.isBold()) && emphasis.isBold(), Objects.nonNull(emphasis.isItalic()) && emphasis.isItalic());
 	}
 	
 	public OfxEmphasisFactory(boolean bold, boolean italic)

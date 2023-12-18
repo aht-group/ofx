@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.text;
 
+import java.util.Objects;
+
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
@@ -20,10 +22,10 @@ public class LatexEmphasisRenderer extends AbstractOfxLatexRenderer implements O
 	
 	public void render(Emphasis emphasis) throws OfxAuthoringException
 	{
-		boolean typewriter = emphasis.isSetStyle() && emphasis.getStyle().equals("typewriter");
-		boolean bold = emphasis.isSetBold() && emphasis.isBold();
-		boolean italic = emphasis.isSetItalic() && emphasis.isItalic();
-		boolean quote = emphasis.isSetQuote() && emphasis.isQuote();
+		boolean typewriter = Objects.nonNull(emphasis.getStyle()) && emphasis.getStyle().equals("typewriter");
+		boolean bold = Objects.nonNull(emphasis.isBold()) && emphasis.isBold();
+		boolean italic = Objects.nonNull(emphasis.isItalic()) && emphasis.isItalic();
+		boolean quote = Objects.nonNull(emphasis.isQuote()) && emphasis.isQuote();
 		
 		if(logger.isTraceEnabled())
 		{

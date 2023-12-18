@@ -45,7 +45,8 @@ import javax.xml.bind.annotation.XmlValue;
     "value"
 })
 @XmlRootElement(name = "emphasis")
-public class Emphasis implements Serializable
+public class Emphasis
+    implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
@@ -90,10 +91,6 @@ public class Emphasis implements Serializable
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the style property.
      * 
@@ -118,10 +115,6 @@ public class Emphasis implements Serializable
         this.style = value;
     }
 
-    public boolean isSetStyle() {
-        return (this.style!= null);
-    }
-
     /**
      * Gets the value of the bold property.
      * 
@@ -130,7 +123,7 @@ public class Emphasis implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isBold() {
+    public Boolean isBold() {
         return bold;
     }
 
@@ -142,16 +135,8 @@ public class Emphasis implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setBold(boolean value) {
+    public void setBold(Boolean value) {
         this.bold = value;
-    }
-
-    public boolean isSetBold() {
-        return (this.bold!= null);
-    }
-
-    public void unsetBold() {
-        this.bold = null;
     }
 
     /**
@@ -162,7 +147,7 @@ public class Emphasis implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isItalic() {
+    public Boolean isItalic() {
         return italic;
     }
 
@@ -174,16 +159,8 @@ public class Emphasis implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setItalic(boolean value) {
+    public void setItalic(Boolean value) {
         this.italic = value;
-    }
-
-    public boolean isSetItalic() {
-        return (this.italic!= null);
-    }
-
-    public void unsetItalic() {
-        this.italic = null;
     }
 
     /**
@@ -194,7 +171,7 @@ public class Emphasis implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isQuote() {
+    public Boolean isQuote() {
         return quote;
     }
 
@@ -206,16 +183,8 @@ public class Emphasis implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setQuote(boolean value) {
+    public void setQuote(Boolean value) {
         this.quote = value;
-    }
-
-    public boolean isSetQuote() {
-        return (this.quote!= null);
-    }
-
-    public void unsetQuote() {
-        this.quote = null;
     }
 
     /**
@@ -226,7 +195,7 @@ public class Emphasis implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isUnderline() {
+    public Boolean isUnderline() {
         return underline;
     }
 
@@ -238,16 +207,8 @@ public class Emphasis implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setUnderline(boolean value) {
+    public void setUnderline(Boolean value) {
         this.underline = value;
-    }
-
-    public boolean isSetUnderline() {
-        return (this.underline!= null);
-    }
-
-    public void unsetUnderline() {
-        this.underline = null;
     }
 
     /**
@@ -258,7 +219,7 @@ public class Emphasis implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isSuperscript() {
+    public Boolean isSuperscript() {
         return superscript;
     }
 
@@ -270,16 +231,8 @@ public class Emphasis implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setSuperscript(boolean value) {
+    public void setSuperscript(Boolean value) {
         this.superscript = value;
-    }
-
-    public boolean isSetSuperscript() {
-        return (this.superscript!= null);
-    }
-
-    public void unsetSuperscript() {
-        this.superscript = null;
     }
 
     /**
@@ -290,7 +243,7 @@ public class Emphasis implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isSubscript() {
+    public Boolean isSubscript() {
         return subscript;
     }
 
@@ -302,16 +255,8 @@ public class Emphasis implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setSubscript(boolean value) {
+    public void setSubscript(Boolean value) {
         this.subscript = value;
-    }
-
-    public boolean isSetSubscript() {
-        return (this.subscript!= null);
-    }
-
-    public void unsetSubscript() {
-        this.subscript = null;
     }
 
 }

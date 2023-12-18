@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlValue;
     "value"
 })
 @XmlRootElement(name = "text")
-public class Text implements Serializable
+public class Text
+    implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
@@ -68,10 +69,6 @@ public class Text implements Serializable
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the lang property.
      * 
@@ -96,10 +93,6 @@ public class Text implements Serializable
         this.lang = value;
     }
 
-    public boolean isSetLang() {
-        return (this.lang!= null);
-    }
-
     /**
      * Gets the value of the classifier property.
      * 
@@ -122,10 +115,6 @@ public class Text implements Serializable
      */
     public void setClassifier(String value) {
         this.classifier = value;
-    }
-
-    public boolean isSetClassifier() {
-        return (this.classifier!= null);
     }
 
 }

@@ -150,7 +150,6 @@
 		        			</execution>
 		    			</executions>                    
 					</plugin>
-					<!--
 					<plugin>
 						<artifactId>maven-clean-plugin</artifactId>
 						<version>3.3.2</version>
@@ -161,16 +160,13 @@
 								<goals><goal>clean</goal></goals>
 								<configuration>
 									<filesets>
-										<fileset>
-											<directory>src/main/java/org/exlp</directory>
-											<followSymlinks>false</followSymlinks>
-										</fileset>
+										<fileset><directory>src/main/java/org/exlp</directory><followSymlinks>false</followSymlinks></fileset>
+										<fileset><directory>src/main/java/org/metachart</directory><followSymlinks>false</followSymlinks></fileset>
 									</filesets>
 								</configuration>
 							</execution>
 						</executions>
   					</plugin>
-					-->
 				</plugins>
 			</build>
 		</profile>

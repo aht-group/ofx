@@ -2,6 +2,8 @@ package org.openfuxml.renderer.word.content;
 
 
 
+import java.util.Objects;
+
 import org.openfuxml.exception.OfxAuthoringException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,11 +29,11 @@ public class WordEmphasisRenderer
 	{
 		font = builder.getFont();
 		
-		boolean bold = ofxEmphasis.isSetBold() && ofxEmphasis.isBold();
-		boolean italic = ofxEmphasis.isSetItalic() && ofxEmphasis.isItalic();
-		boolean underline = ofxEmphasis.isSetUnderline() && ofxEmphasis.isUnderline();
-		boolean superscript = ofxEmphasis.isSetSuperscript() && ofxEmphasis.isSuperscript();
-		boolean subscript = ofxEmphasis.isSetSubscript() && ofxEmphasis.isSubscript();
+		boolean bold = Objects.nonNull(ofxEmphasis.isBold()) && ofxEmphasis.isBold();
+		boolean italic = Objects.nonNull(ofxEmphasis.isItalic()) && ofxEmphasis.isItalic();
+		boolean underline = Objects.nonNull(ofxEmphasis.isUnderline()) && ofxEmphasis.isUnderline();
+		boolean superscript = Objects.nonNull(ofxEmphasis.isSuperscript()) && ofxEmphasis.isSuperscript();
+		boolean subscript = Objects.nonNull(ofxEmphasis.isSubscript()) && ofxEmphasis.isSubscript();
 		
 	//	boolean quote = ofxEmphasis.isSetQuote() && ofxEmphasis.isQuote();
 		

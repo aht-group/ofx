@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.markdown.structure;
 
+import java.util.Objects;
+
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
@@ -23,10 +25,10 @@ public class MdEmphasisRenderer extends AbstractOfxMarkdownRenderer implements O
 
 	public void render(Emphasis emphasis)
 	{
-		boolean bold = emphasis.isSetBold() && emphasis.isBold();
-		boolean italic = emphasis.isSetItalic() && emphasis.isItalic();
-		boolean typewriter = emphasis.isSetStyle() && emphasis.getStyle().equals("typewriter");
-		boolean quote = emphasis.isSetQuote() && emphasis.isQuote();
+		boolean bold = Objects.nonNull(emphasis.isBold()) && emphasis.isBold();
+		boolean italic = Objects.nonNull(emphasis.isItalic()) && emphasis.isItalic();
+		boolean typewriter = Objects.nonNull(emphasis.getStyle()) && emphasis.getStyle().equals("typewriter");
+		boolean quote = Objects.nonNull(emphasis.isQuote()) && emphasis.isQuote();
 
 		StringBuffer sb = new StringBuffer();
 		if(quote){sb.append("\n> ");}

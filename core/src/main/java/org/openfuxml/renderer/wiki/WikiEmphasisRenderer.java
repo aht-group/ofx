@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.wiki;
 
+import java.util.Objects;
+
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
@@ -18,8 +20,8 @@ public class WikiEmphasisRenderer extends AbstractOfxWikiRenderer implements Ofx
 	 */
 	public void render(Emphasis emphasis) throws OfxAuthoringException
 	{
-		boolean bold = emphasis.isSetBold() && emphasis.isBold();
-		boolean italic = emphasis.isSetItalic() && emphasis.isItalic();
+		boolean bold = Objects.nonNull(emphasis.isBold()) && emphasis.isBold();
+		boolean italic = Objects.nonNull(emphasis.isItalic()) && emphasis.isItalic();
 		
 		if(logger.isTraceEnabled())
 		{

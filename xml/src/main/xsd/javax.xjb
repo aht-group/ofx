@@ -21,9 +21,22 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
+        
+    <jxb:bindings schemaLocation="../xsd/../xsd/content/text.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.content.text"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
     <jxb:bindings schemaLocation="../xsd/../../../../../exlp/xml/src/main/xsd/io.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.exlp.xml.io"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <jxb:bindings schemaLocation="../xsd/../../../../..//metachart/xml/src/main/xsd/metachart/chart.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.metachart.xml.chart"/>
         </jxb:schemaBindings>
     </jxb:bindings>
 </jxb:bindings>
