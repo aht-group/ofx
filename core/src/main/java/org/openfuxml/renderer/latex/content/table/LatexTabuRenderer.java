@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.table;
 
+import java.util.Objects;
+
 import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.layout.Line;
 import org.openfuxml.content.table.Body;
@@ -71,16 +73,16 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		
 		for(Column c : specification.getColumns().getColumn())
 		{
-			if(c.isSetWidth() && c.getWidth().isSetFlex() && c.getWidth().isFlex())
+			if(Objects.nonNull(c.getWidth()) && Objects.nonNull(c.getWidth().isFlex()) && c.getWidth().isFlex())
 			{
 				int relative = (Double.valueOf(c.getWidth().getValue()*100)).intValue();
 				
 				sb.append("X[");
-				if(c.getWidth().isSetNarrow() && c.getWidth().isNarrow()){sb.append("-");}
+				if(Objects.nonNull(c.getWidth().isNarrow()) && c.getWidth().isNarrow()) {sb.append("-");}
 				sb.append(relative);
 				sb.append("]");
 			}
-			else if(c.isSetAlignment())
+			else if(Objects.nonNull(c.getAlignment()))
 			{
 				if(c.getAlignment().getHorizontal().equals("left")){sb.append("l");}
 				if(c.getAlignment().getHorizontal().equals("center")){sb.append("c");}
@@ -120,9 +122,9 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	private void renderBody(Body tbody) throws OfxAuthoringException
 	{
 		Font font = null;
-		if(tbody.isSetLayout())
+		if(Objects.nonNull(tbody.getLayout()))
 		{
-			if(tbody.getLayout().isSetFont()){font=tbody.getLayout().getFont();}
+			if(Objects.nonNull(tbody.getLayout().getFont())) {font=tbody.getLayout().getFont();}
 		}
 		
 		for(Row row : tbody.getRow())
@@ -155,7 +157,7 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	private void buildTitle(Table table)
 	{
-		if(table.isSetTitle())
+		if(Objects.nonNull(table.getTitle()))
 		{
 			LatexTitleRenderer stf = new LatexTitleRenderer(cp);
 			stf.render(table);
@@ -165,11 +167,11 @@ public class LatexTabuRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	private void horizontalLines(Row row, XmlLineFactory.Orientation orientation) throws OfxAuthoringException
 	{
-		if(row.isSetLayout())
+		if(Objects.nonNull(row.getLayout()))
 		{
 			for(Line line : row.getLayout().getLine())
 			{
-				if(!line.isSetOrientation()){throw new OfxAuthoringException("Inside a "+Table.class.getSimpleName()+", the "+Row.class.getSimpleName()+" with a "+Line.class.getSimpleName()+" needs a orientation");}
+				if(Objects.isNull(line.getOrientation())) {throw new OfxAuthoringException("Inside a "+Table.class.getSimpleName()+", the "+Row.class.getSimpleName()+" with a "+Line.class.getSimpleName()+" needs a orientation");}
 				if(line.getOrientation().equals(orientation.toString()))
 				{
 					renderer.add(new StringRenderer("\\midrule"));

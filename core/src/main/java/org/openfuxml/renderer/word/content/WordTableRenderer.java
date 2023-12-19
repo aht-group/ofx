@@ -2,6 +2,7 @@ package org.openfuxml.renderer.word.content;
 
 import java.awt.Color;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.word.util.SetFont;
@@ -49,22 +50,22 @@ public class WordTableRenderer
 		
 		try	{table.setStyleOptions(TableStyleOptions.FIRST_COLUMN | TableStyleOptions.ROW_BANDS | TableStyleOptions.FIRST_ROW);}catch(Exception e){}
 
-		if (ofxTable.isSetSpecification()==false)
+		if(Objects.nonNull(ofxTable.getSpecification()))
 		{
 			builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(100 / (ofxTable.getContent().getHead().getRow().get(0).getCell().size())));
 		}
 		
-		if (ofxTable.isSetSpecification()==true) 
+		if (Objects.nonNull(ofxTable.getSpecification())) 
 		{
-			if (ofxTable.getSpecification().isSetAlignment()==true)
+			if (Objects.nonNull(ofxTable.getSpecification().getAlignment()))
 			{
-				if (ofxTable.getSpecification().getAlignment().isSetHorizontal()==true)
+				if(Objects.nonNull(ofxTable.getSpecification().getAlignment().getHorizontal()s)
 				{
 					builder.getParagraphFormat().setAlignment(ofxTable.getSpecification().getAlignment().getHorizontal().length());
 				}
 			}
 	
-			if (ofxTable.getSpecification().isSetWidth()==true)
+			if (Objects.nonNull(ofxTable.getSpecification().getWidth()))
 			{
 				if (ofxTable.getSpecification().getWidth().isFlex()==true)
 				{

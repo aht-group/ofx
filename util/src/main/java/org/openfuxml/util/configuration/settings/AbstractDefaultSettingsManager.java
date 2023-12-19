@@ -2,6 +2,7 @@ package org.openfuxml.util.configuration.settings;
 
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Objects;
 
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -42,7 +43,7 @@ public abstract class AbstractDefaultSettingsManager implements DefaultSettingsM
 	@Override
 	public void apply(Listing listing) throws OfxConfigurationException
 	{
-		if(listing.isSetSetting())
+		if(Objects.nonNull(listing.getSetting()))
 		{
 			if(!mapSettings.containsKey(Listing.class.getName()) || !mapSettings.get(Listing.class.getName()).containsKey(listing.getSetting()))
 			{

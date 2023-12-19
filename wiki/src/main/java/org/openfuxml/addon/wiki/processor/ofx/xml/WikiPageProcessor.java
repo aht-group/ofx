@@ -6,6 +6,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.text.MessageFormat;
+import java.util.Objects;
 
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
@@ -80,7 +81,7 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 	
 	private Document checkTransparent(Document doc, Section section) throws OfxInternalProcessingException
 	{
-		if(section.isSetContainer() && section.isContainer())
+		if(Objects.nonNull(section.isContainer() && section.isContainer()))
 		{
 			Element rootElement = doc.getRootElement();
 			if(rootElement.getName().equalsIgnoreCase(Section.class.getSimpleName()))
@@ -188,8 +189,7 @@ public class WikiPageProcessor extends AbstractWikiProcessor
 	private void checkPageConfig(Page page) throws OfxAuthoringException
 	{
 		JaxbUtil.debug(page);
-		boolean sSection = page.isSetSection();
 		
-		if(!sSection){throw new OfxAuthoringException("None of <section>  selected!");}
+		if(Objects.isNull(page.getSection())) {throw new OfxAuthoringException("None of <section>  selected!");}
 	}
 }

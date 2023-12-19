@@ -73,7 +73,7 @@ public class WikiExternalIntegrator
 	private Element processWikiContent(Content wikiContent) throws OfxAuthoringException
 	{
 		Element e=null;
-		if     (wikiContent.isSetPage()){e=getSection(wikiContent);}
+		if     (Objects.nonNull(wikiContent.getPage())) {e=getSection(wikiContent);}
 		else if(Objects.nonNull(wikiContent.getCategory())) {e=getCategory(wikiContent);}
 		else {throw new OfxAuthoringException("Element wiki:content has no known child");}
 		return e;

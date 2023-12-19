@@ -1,6 +1,7 @@
 package org.openfuxml.renderer.word.content;
 
 import java.io.File;
+import java.util.Objects;
 
 import org.openfuxml.renderer.word.util.SetFont;
 import org.openfuxml.renderer.word.util.SetFont.setFontEnum;
@@ -48,7 +49,7 @@ public class WordImageRenderer
 			}
 
 			// with Unit..
-			if (ofxImage.getWidth().isSetUnit() == true)
+			if (Objects.nonNull(ofxImage.getWidth().getUnit()))
 			{
 				if (ofxImage.getWidth().getUnit() == "percentage")
 				{

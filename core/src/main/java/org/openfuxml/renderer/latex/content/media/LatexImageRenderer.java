@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.media;
 
+import java.util.Objects;
+
 import javax.print.attribute.standard.Media;
 
 import org.openfuxml.content.layout.Alignment;
@@ -39,13 +41,13 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 	{
 		setEnvironment(parentRenderer);
 		
-		if(!image.isSetMedia()){throw new OfxAuthoringException(Image.class.getSimpleName()+" has no "+Media.class.getSimpleName());}
+		if(Objects.isNull(image.getMedia())) {throw new OfxAuthoringException(Image.class.getSimpleName()+" has no "+Media.class.getSimpleName());}
 		
 		renderPre(image);
 
 		StringBuffer sb = new StringBuffer();
 		
-		if(image.isSetAlignment())
+		if(Objects.nonNull(image.getAlignment()))
 		{
 			logger.trace("Setting Alignment for "+environment);
 			if(Environment.Figure.equals(environment)){txt.add("  "+alignment(image.getAlignment()));}
@@ -94,7 +96,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 	{
 		if(Environment.Figure.equals(environment))
 		{
-			if(image.isSetTitle())
+			if(Objects.nonNull(image.getTitle()))
 			{
 				LatexTitleRenderer stf = new LatexTitleRenderer(cp);
 				stf.render(image);

@@ -13,5 +13,4 @@ public class DsmListing extends AbstractDefaultSettingsManager implements Defaul
 		if(Objects.isNull(xml.isNumbering())) {xml.setNumbering(defaultXml.isNumbering());}
 		if(Objects.isNull(xml.isLinebreak())) {xml.setLinebreak(defaultXml.isLinebreak());}
 	}
-
 }

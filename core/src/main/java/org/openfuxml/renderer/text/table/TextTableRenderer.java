@@ -2,7 +2,9 @@ package org.openfuxml.renderer.text.table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.content.table.Cell;
@@ -36,7 +38,7 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 	{
 		prepareCells(table);
 		
-		if(table.isSetTitle())
+		if(Objects.nonNull(table.getTitle()))
 		{
 			int space = renderTitleDashes();
 			renderTitle(space, table.getTitle());
@@ -55,9 +57,9 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 	
 	private void prepareCells(Table table) throws OfxAuthoringException
 	{
-		if(table.isSetContent())
+		if(Objects.nonNull(table.getContent()))
 		{
-			if(table.getContent().isSetHead())
+			if(Objects.nonNull(table.getContent().getHead()))
 			{
 				for(Cell cell : table.getContent().getHead().getRow().get(0).getCell())
 				{
@@ -66,7 +68,7 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 					rendererHeader.add(r);
 				}
 			}
-			if(table.getContent().isSetBody())
+			if(ObjectUtils.isNotEmpty(table.getContent().getBody()))
 			{
 				for(Row row : table.getContent().getBody().get(0).getRow())
 				{

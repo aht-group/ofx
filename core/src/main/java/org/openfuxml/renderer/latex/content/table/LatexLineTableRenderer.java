@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.table;
 
+import java.util.Objects;
+
 import org.openfuxml.content.layout.Line;
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Content;
@@ -67,7 +69,7 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 	{
 		for(Row row : tbody.getRow())
 		{
-			if(row.isSetLayout())
+			if(Objects.nonNull(row.getLayout()))
 			{
 				for(Line line : row.getLayout().getLine())
 				{

@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.listing;
 
+import java.util.Objects;
+
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -32,15 +34,15 @@ public class LatexListingRenderer extends AbstractOfxLatexRenderer implements Of
         sb.append(",backgroundcolor=\\color{lgrau}");
         sb.append(",showstringspaces=false");
         
-        if(listing.isSetNumbering() && listing.isNumbering()){sb.append(",numbers=left,numberstyle=\\scriptsize");}
+        if(Objects.nonNull(listing.isNumbering()) && listing.isNumbering()){sb.append(",numbers=left,numberstyle=\\scriptsize");}
         else{sb.append(",numbers=none");}
         
-        if(listing.isSetLinebreak() && listing.isLinebreak()){sb.append(",breaklines=true,breakatwhitespace=true,postbreak=\\raisebox{0ex}[0ex][0ex]{\\ensuremath{\\hookrightarrow\\space}}");}
+        if(Objects.nonNull(listing.isLinebreak()) && listing.isLinebreak()){sb.append(",breaklines=true,breakatwhitespace=true,postbreak=\\raisebox{0ex}[0ex][0ex]{\\ensuremath{\\hookrightarrow\\space}}");}
         
         sb.append("}");
 		txt.add(sb.toString());
 		
-		if(listing.isSetExternal())
+		if(Objects.nonNull(listing.getExternal()))
 		{
 			StringBuffer sbInput = new StringBuffer();
 			sbInput.append("\\lstinputlisting{");

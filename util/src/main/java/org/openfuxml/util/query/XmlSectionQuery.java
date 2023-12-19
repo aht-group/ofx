@@ -2,6 +2,7 @@ package org.openfuxml.util.query;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.jxpath.JXPathContext;
 import org.openfuxml.content.ofx.Listing;
@@ -112,7 +113,7 @@ public class XmlSectionQuery
 			if(s instanceof Section)
 			{
 				Section section = (Section)s;
-				if(section.isSetClassifier() && section.getClassifier().equals(classifier)){return section;}
+				if(Objects.nonNull(section.getClassifier()) && section.getClassifier().equals(classifier)){return section;}
 			}
 		}
 		throw new ExlpXpathNotFoundException("No section found for classifier="+classifier) ;
