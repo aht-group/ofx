@@ -8,7 +8,6 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-    jaxb:extensionBindingPrefixes="xjc"
     jaxb:version="2.0">
     <xsd:import namespace="http://www.openfuxml.org" schemaLocation="ofx.xsd"/>
     <xsd:import namespace="http://www.openfuxml.org/layout" schemaLocation="layout.xsd"/>

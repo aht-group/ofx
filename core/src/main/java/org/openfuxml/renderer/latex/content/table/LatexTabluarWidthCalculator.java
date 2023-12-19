@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.table.Column;
@@ -54,7 +56,7 @@ public class LatexTabluarWidthCalculator implements TabluarWidthCalculator
 		double sumFlex=0;
 		for(Column column : columns.getColumn())
 		{
-			if(column.isSetWidth())
+			if(Objects.nonNull(column.getWidth()))
 			{
 				Width width = column.getWidth();
 				
@@ -72,12 +74,12 @@ public class LatexTabluarWidthCalculator implements TabluarWidthCalculator
 		{	
 			index++;
 			
-			if(column.isSetAlignment() && column.isSetWidth()){throw new OfxAuthoringException("Table.columen with width AND alignment currently not supported");} 
+			if(ObjectUtils.allNotNull(column.getAlignment(),column.getWidth())) {throw new OfxAuthoringException("Table.columen with width AND alignment currently not supported");} 
 			
-			if(column.isSetWidth())
+			if(Objects.nonNull(column.getWidth()))
 			{
 				Width width = column.getWidth();
-				if(!width.isSetUnit()){width.setUnit("percentage");}
+				if(Objects.isNull(width.getUnit())) {width.setUnit("percentage");}
 				
 				byte[] b = {(byte)(index+64)};
 				String var = "\\tabLen"+(new String(b));

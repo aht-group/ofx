@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.list;
 
+import java.util.Objects;
+
 import org.openfuxml.content.layout.Layout;
 import org.openfuxml.content.layout.Spacing;
 import org.openfuxml.content.list.Item;
@@ -33,7 +35,7 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	public void render(List list, OfxLatexRenderer parent) throws OfxAuthoringException
 	{	
-		if(!list.isSetType()){throw new OfxAuthoringException("<type> not defined for <list>");}
+		if(Objects.isNull(list.getType())) {throw new OfxAuthoringException("<type> not defined for <list>");}
 		estimateType(list.getType());
 		
 		String debugType=null;

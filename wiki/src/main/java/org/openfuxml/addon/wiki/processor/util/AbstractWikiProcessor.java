@@ -3,6 +3,7 @@ package org.openfuxml.addon.wiki.processor.util;
 import java.io.File;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Objects;
 
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Content;
@@ -50,8 +51,8 @@ public abstract class AbstractWikiProcessor
 	{
 		for(Content content : wikiQueries.getContent())
 		{
-			if(content.isSetPage()){processPage(content);}
-			else if(content.isSetCategory()){processCategory(content);}
+			if(Objects.nonNull(content.getPage())) {processPage(content);}
+			else if(Objects.nonNull(content.getCategory())) {processCategory(content);}
 			else {throw new OfxWikiException("No "+WikiMarkupProcessor.class.getSimpleName()+" available for this element");}
 		}
 	}

@@ -1,5 +1,7 @@
 package org.openfuxml.addon.wiki.util;
 
+import java.util.Objects;
+
 import org.openfuxml.addon.wiki.data.jaxb.Ofx;
 import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
 import org.openfuxml.util.translation.DoubleMapTranslation;
@@ -22,17 +24,17 @@ public class OfxchartUtil
 	
 	public static synchronized Ofxchart translate(Ofxchart ofxchart, DoubleMapTranslation translation, String lang)
 	{
-		if(ofxchart.isSetXAxis() && ofxchart.getXAxis().isSetKey())
+		if(Objects.nonNull(ofxchart.getXAxis()) && Objects.nonNull(ofxchart.getXAxis().getKey()))
 		{
 			String label = translation.translate(ofxchart.getXAxis().getKey(),lang);
 			ofxchart.getXAxis().setLabel(label);
 		}
-		if(ofxchart.isSetYAxis() && ofxchart.getYAxis().isSetKey())
+		if(Objects.nonNull(ofxchart.getYAxis()) && Objects.nonNull(ofxchart.getYAxis().getKey()))
 		{
 			String label = translation.translate(ofxchart.getYAxis().getKey(),lang);
 			ofxchart.getYAxis().setLabel(label);
 		}
-		if(ofxchart.isSetTitle() && ofxchart.getTitle().isSetKey())
+		if(Objects.nonNull(ofxchart.getTitle()) && Objects.nonNull(ofxchart.getTitle().getKey()))
 		{
 			String label = translation.translate(ofxchart.getTitle().getKey(),lang);
 			ofxchart.getTitle().setLabel(label);

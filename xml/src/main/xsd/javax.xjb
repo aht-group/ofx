@@ -10,6 +10,30 @@
 		<jxb:serializable uid="1" />
 	</jxb:globalBindings>
 
+	<jxb:bindings schemaLocation="../xsd/../xsd/content/ofx.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.content.ofx"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	
+	<jxb:bindings schemaLocation="../xsd/../xsd/content/editorial.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.content.editorial"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <jxb:bindings schemaLocation="../xsd/../xsd/content/table.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.content.table"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    <jxb:bindings schemaLocation="../xsd/../xsd/content/list.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.content.list"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+
 	<jxb:bindings schemaLocation="../xsd/content/graph.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.openfuxml.content.graph"/>
@@ -21,6 +45,17 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
+    <jxb:bindings schemaLocation="../xsd/content/layout.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.content.layout"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+	<jxb:bindings schemaLocation="../xsd/addon/wiki.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.addon.wiki.data.jaxb"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
         
     <jxb:bindings schemaLocation="../xsd/../xsd/content/text.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
@@ -28,9 +63,15 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
+	<jxb:bindings schemaLocation="../xsd/../xsd/content/media.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.content.media"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
     <jxb:bindings schemaLocation="../xsd/../../../../../exlp/xml/src/main/xsd/io.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.exlp.xml.io"/>
+            <jxb:package name="org.exlp.model.xml.io"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     

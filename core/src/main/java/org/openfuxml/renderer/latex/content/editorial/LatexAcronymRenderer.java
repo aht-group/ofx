@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.editorial;
 
+import java.util.Objects;
+
 import org.openfuxml.content.editorial.Acronym;
 import org.openfuxml.content.editorial.Acronyms;
 import org.openfuxml.content.editorial.Glossary;
@@ -55,9 +57,9 @@ public class LatexAcronymRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	private void render(Term term) throws OfxAuthoringException
 	{
-		if(!term.isSetCode()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a @code");}
-		if(!term.isSetText()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Text.class.getSimpleName());}
-		if(!term.isSetParagraph()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Paragraph.class.getSimpleName());}	
+		if(Objects.isNull(term.getCode())) {throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a @code");}
+		if(Objects.isNull(term.getText())) {throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Text.class.getSimpleName());}
+		if(Objects.isNull(term.getParagraph())) {throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Paragraph.class.getSimpleName());}	
 		
 		LatexTextRenderer tr = new LatexTextRenderer(cp);
 		tr.render(term.getText());

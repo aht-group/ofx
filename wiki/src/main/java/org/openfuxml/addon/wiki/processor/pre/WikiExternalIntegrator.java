@@ -1,6 +1,7 @@
 package org.openfuxml.addon.wiki.processor.pre;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.jdom2.Element;
 import org.jdom2.Namespace;
@@ -73,7 +74,7 @@ public class WikiExternalIntegrator
 	{
 		Element e=null;
 		if     (wikiContent.isSetPage()){e=getSection(wikiContent);}
-		else if(wikiContent.isSetCategory()){e=getCategory(wikiContent);}
+		else if(Objects.nonNull(wikiContent.getCategory())) {e=getCategory(wikiContent);}
 		else {throw new OfxAuthoringException("Element wiki:content has no known child");}
 		return e;
 	}

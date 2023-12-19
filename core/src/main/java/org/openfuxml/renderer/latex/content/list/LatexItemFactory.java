@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.list;
 
+import java.util.Objects;
+
 import org.openfuxml.content.list.Item;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -27,7 +29,7 @@ public class LatexItemFactory extends AbstractOfxLatexRenderer implements OfxLat
 		
 		if(lt==LatexListRenderer.ListType.description)
 		{
-			if(!item.isSetName()){throw new OfxAuthoringException("<description.list> needss a item@name");}
+			if(Objects.isNull(item.getName())) {throw new OfxAuthoringException("<description.list> needss a item@name");}
 			sb.append(" [").append(item.getName()).append("]");
 		}
 		preTxt.add(sb.toString());

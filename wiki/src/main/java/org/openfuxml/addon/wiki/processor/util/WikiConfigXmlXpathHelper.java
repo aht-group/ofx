@@ -2,6 +2,7 @@ package org.openfuxml.addon.wiki.processor.util;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Objects;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -46,7 +47,7 @@ public class WikiConfigXmlXpathHelper
 		{
 			try
 			{
-				if(replacements.isSetSource())
+				if(Objects.nonNull(replacements.getSource()))
 				{
 					replacements = (Replacements)JaxbUtil.loadJAXB(replacements.getSource(), Replacements.class);
 				}
@@ -67,7 +68,7 @@ public class WikiConfigXmlXpathHelper
 		{
 			try
 			{
-				if(injections.isSetSource())
+				if(Objects.nonNull(injections.getSource()))
 				{
 					logger.debug("Loading external "+Injections.class.getSimpleName()+" file: "+injections.getSource());
 					injections = (Injections)JaxbUtil.loadJAXB(injections.getSource(), Injections.class);
