@@ -82,14 +82,6 @@ public class Title implements Serializable
         return this.content;
     }
 
-    public boolean isSetContent() {
-        return ((this.content!= null)&&(!this.content.isEmpty()));
-    }
-
-    public void unsetContent() {
-        this.content = null;
-    }
-
     /**
      * Gets the value of the numbering property.
      * 
@@ -98,7 +90,7 @@ public class Title implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isNumbering() {
+    public Boolean isNumbering() {
         return numbering;
     }
 
@@ -110,16 +102,8 @@ public class Title implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setNumbering(boolean value) {
+    public void setNumbering(Boolean value) {
         this.numbering = value;
-    }
-
-    public boolean isSetNumbering() {
-        return (this.numbering!= null);
-    }
-
-    public void unsetNumbering() {
-        this.numbering = null;
     }
 
     /**
@@ -144,10 +128,6 @@ public class Title implements Serializable
      */
     public void setLang(String value) {
         this.lang = value;
-    }
-
-    public boolean isSetLang() {
-        return (this.lang!= null);
     }
 
 }

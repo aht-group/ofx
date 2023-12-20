@@ -85,14 +85,6 @@ public class Server
         return this.auth;
     }
 
-    public boolean isSetAuth() {
-        return ((this.auth!= null)&&(!this.auth.isEmpty()));
-    }
-
-    public void unsetAuth() {
-        this.auth = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -117,10 +109,6 @@ public class Server
         this.id = value;
     }
 
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
     /**
      * Gets the value of the default property.
      * 
@@ -129,7 +117,7 @@ public class Server
      *     {@link Boolean }
      *     
      */
-    public boolean isDefault() {
+    public Boolean isDefault() {
         return _default;
     }
 
@@ -141,16 +129,8 @@ public class Server
      *     {@link Boolean }
      *     
      */
-    public void setDefault(boolean value) {
+    public void setDefault(Boolean value) {
         this._default = value;
-    }
-
-    public boolean isSetDefault() {
-        return (this._default!= null);
-    }
-
-    public void unsetDefault() {
-        this._default = null;
     }
 
     /**
@@ -177,10 +157,6 @@ public class Server
         this.name = value;
     }
 
-    public boolean isSetName() {
-        return (this.name!= null);
-    }
-
     /**
      * Gets the value of the url property.
      * 
@@ -203,10 +179,6 @@ public class Server
      */
     public void setUrl(String value) {
         this.url = value;
-    }
-
-    public boolean isSetUrl() {
-        return (this.url!= null);
     }
 
 }

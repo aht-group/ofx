@@ -86,9 +86,8 @@ public class LatexTabluarWidthCalculator implements TabluarWidthCalculator
 				
 				if(isFlex(column))
 				{
-					logger.trace("Width?" +(width.isSetValue()));
 					StringBuffer sb = new StringBuffer();
-					if(width.isSetValue())
+					if(Objects.nonNull(width.getValue()))
 					{
 						double thisFlex = width.getValue()/sumFlex;
 						sb.append(">{\\hsize=").append(df.format(thisFlex)).append("\\hsize}X");
@@ -125,7 +124,7 @@ public class LatexTabluarWidthCalculator implements TabluarWidthCalculator
 					}
 				}
 			}
-			else if(column.isSetAlignment())
+			else if(Objects.nonNull(column.getAlignment()))
 			{
 				Alignment alg = column.getAlignment();
 				Horizontal h = Horizontal.valueOf(alg.getHorizontal());
@@ -184,7 +183,7 @@ public class LatexTabluarWidthCalculator implements TabluarWidthCalculator
 	{
 		for(Column column : columns.getColumn())
 		{
-			if(Objects.nonNull(column.getWidth()) && column.getWidth().isSetFlex() && column.getWidth().isFlex()){return true;}
+			if(Objects.nonNull(column.getWidth()) && Objects.nonNull(column.getWidth().isFlex()) && column.getWidth().isFlex()){return true;}
 		}
 		return false;
 	}

@@ -97,7 +97,7 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
     public void withoutBody() throws IOException, OfxAuthoringException
     {
     	Table table = createTable();
-    	table.getContent().unsetBody();
+    	table.getContent().getBody().clear();
     	renderer.render(table);
     }
     

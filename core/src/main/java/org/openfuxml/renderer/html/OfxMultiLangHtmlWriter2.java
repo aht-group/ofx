@@ -2,6 +2,7 @@ package org.openfuxml.renderer.html;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Objects;
 
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Table;
@@ -81,7 +82,7 @@ public class OfxMultiLangHtmlWriter2
 			
 			StringBuffer sb = new StringBuffer();
 			sb.append("Writing ").append(Section.class.getSimpleName());
-			if(section.isSetId())
+			if(Objects.nonNull(section.getId()))
 			{
 				sb.append(" (").append(section.getId()).append(")");
 			}

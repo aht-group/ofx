@@ -75,10 +75,6 @@ public class Glossary implements Serializable
         this.comment = value;
     }
 
-    public boolean isSetComment() {
-        return (this.comment!= null);
-    }
-
     /**
      * Gets the value of the term property.
      * 
@@ -108,14 +104,6 @@ public class Glossary implements Serializable
         return this.term;
     }
 
-    public boolean isSetTerm() {
-        return ((this.term!= null)&&(!this.term.isEmpty()));
-    }
-
-    public void unsetTerm() {
-        this.term = null;
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -138,10 +126,6 @@ public class Glossary implements Serializable
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }

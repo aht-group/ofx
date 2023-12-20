@@ -81,14 +81,6 @@ public class Sections implements Serializable
         return this.content;
     }
 
-    public boolean isSetContent() {
-        return ((this.content!= null)&&(!this.content.isEmpty()));
-    }
-
-    public void unsetContent() {
-        this.content = null;
-    }
-
     /**
      * Gets the value of the external property.
      * 
@@ -97,7 +89,7 @@ public class Sections implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isExternal() {
+    public Boolean isExternal() {
         return external;
     }
 
@@ -109,16 +101,8 @@ public class Sections implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setExternal(boolean value) {
+    public void setExternal(Boolean value) {
         this.external = value;
-    }
-
-    public boolean isSetExternal() {
-        return (this.external!= null);
-    }
-
-    public void unsetExternal() {
-        this.external = null;
     }
 
     /**
@@ -143,10 +127,6 @@ public class Sections implements Serializable
      */
     public void setSource(String value) {
         this.source = value;
-    }
-
-    public boolean isSetSource() {
-        return (this.source!= null);
     }
 
 }

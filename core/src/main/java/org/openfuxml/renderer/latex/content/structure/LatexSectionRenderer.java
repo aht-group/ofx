@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.structure;
 
+import java.util.Objects;
+
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Comment;
@@ -41,11 +43,11 @@ public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements Of
 	
 	public void render(Section section) throws OfxAuthoringException, OfxConfigurationException
 	{
-		if(!section.isSetContainer()){section.setContainer(false);}
+		if(Objects.isNull(section.isContainer())){section.setContainer(false);}
 		if(section.isContainer()){lvl=lvl-1;}
 		
 		preTxt.addAll(LatexCommentRenderer.stars());
-		if(section.isContainer() && section.isSetInclude())
+		if(section.isContainer() && Objects.nonNull(section.getInclude()))
 		{
 			if(section.getContent().size()>0)
 			{

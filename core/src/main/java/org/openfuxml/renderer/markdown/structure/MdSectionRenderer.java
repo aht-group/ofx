@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.markdown.structure;
 
+import java.util.Objects;
+
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Comment;
@@ -56,7 +58,7 @@ public class MdSectionRenderer extends AbstractOfxMarkdownRenderer implements Of
 			else if(o instanceof String){txt.add(((String)o).trim());}
 			else if(o instanceof List)
 			{
-				if(((List)o).isSetComment())
+				if(Objects.nonNull(((List)o).getComment()))
 				{
 					MdCommentRenderer.first = true;
 					renderComment(((List)o).getComment());

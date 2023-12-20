@@ -30,30 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Box }
-     * 
-     */
-    public Box createBox() {
-        return new Box();
-    }
-
-    /**
-     * Create an instance of {@link Container }
-     * 
-     */
-    public Container createContainer() {
-        return new Container();
-    }
-
-    /**
-     * Create an instance of {@link Font }
-     * 
-     */
-    public Font createFont() {
-        return new Font();
-    }
-
-    /**
      * Create an instance of {@link Alignment }
      * 
      */
@@ -75,6 +51,30 @@ public class ObjectFactory {
      */
     public Height createHeight() {
         return new Height();
+    }
+
+    /**
+     * Create an instance of {@link Box }
+     * 
+     */
+    public Box createBox() {
+        return new Box();
+    }
+
+    /**
+     * Create an instance of {@link Container }
+     * 
+     */
+    public Container createContainer() {
+        return new Container();
+    }
+
+    /**
+     * Create an instance of {@link Font }
+     * 
+     */
+    public Font createFont() {
+        return new Font();
     }
 
     /**

@@ -36,7 +36,7 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
         sb.append("{").append(TexSpecialChars.replace(TxtTitleFactory.build(title))).append("}");
 		txt.add(sb.toString());
 
-        if(section.isSetId())
+        if(Objects.nonNull(section.getId()))
         {
             txt.add("\\label{"+section.getId()+"}");
         }

@@ -61,10 +61,6 @@ public class Ofxchartdata
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return true;
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -89,10 +85,6 @@ public class Ofxchartdata
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -115,10 +107,6 @@ public class Ofxchartdata
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }

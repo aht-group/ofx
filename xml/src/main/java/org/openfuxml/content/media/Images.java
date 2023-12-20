@@ -72,12 +72,4 @@ public class Images
         return this.image;
     }
 
-    public boolean isSetImage() {
-        return ((this.image!= null)&&(!this.image.isEmpty()));
-    }
-
-    public void unsetImage() {
-        this.image = null;
-    }
-
 }

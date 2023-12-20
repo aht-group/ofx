@@ -65,8 +65,4 @@ public class Metadata
         this.title = value;
     }
 
-    public boolean isSetTitle() {
-        return (this.title!= null);
-    }
-
 }

@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.util;
 
+import java.util.Objects;
+
 import org.openfuxml.content.layout.Font;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +14,7 @@ public class LatexFontUtil
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");
-		if(font.isSetRelativeSize())
+		if(Objects.nonNull(font.getRelativeSize()))
 		{
 			if(font.getRelativeSize()==-4){sb.append("\\tiny");}
 			else if(font.getRelativeSize()==-3){sb.append("\\scriptsize");}

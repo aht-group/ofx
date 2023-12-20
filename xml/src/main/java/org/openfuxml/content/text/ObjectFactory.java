@@ -38,11 +38,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Raw }
+     * Create an instance of {@link Emphasis }
      * 
      */
-    public Raw createRaw() {
-        return new Raw();
+    public Emphasis createEmphasis() {
+        return new Emphasis();
     }
 
     /**
@@ -54,11 +54,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Emphasis }
+     * Create an instance of {@link Raw }
      * 
      */
-    public Emphasis createEmphasis() {
-        return new Emphasis();
+    public Raw createRaw() {
+        return new Raw();
     }
 
 }

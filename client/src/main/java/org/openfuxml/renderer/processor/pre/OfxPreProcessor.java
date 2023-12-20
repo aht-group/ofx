@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
@@ -213,7 +214,7 @@ public class OfxPreProcessor
 		File fContents = new File(dWorking,"contens.xml");
 		if(wiki.isFetchArticle())
 		{
-			if(wikiQueries.isSetContent())
+			if(ObjectUtils.isNotEmpty(wikiQueries.getContent()))
 			{
 				WikiBotFactory wbf = new WikiBotFactory(wiki.getServers());
 				

@@ -82,14 +82,6 @@ public class Term
         return this.text;
     }
 
-    public boolean isSetText() {
-        return ((this.text!= null)&&(!this.text.isEmpty()));
-    }
-
-    public void unsetText() {
-        this.text = null;
-    }
-
     /**
      * Gets the value of the paragraph property.
      * 
@@ -119,14 +111,6 @@ public class Term
         return this.paragraph;
     }
 
-    public boolean isSetParagraph() {
-        return ((this.paragraph!= null)&&(!this.paragraph.isEmpty()));
-    }
-
-    public void unsetParagraph() {
-        this.paragraph = null;
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -149,10 +133,6 @@ public class Term
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }

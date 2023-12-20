@@ -76,10 +76,6 @@ public class Page
         this.section = value;
     }
 
-    public boolean isSetSection() {
-        return (this.section!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -102,10 +98,6 @@ public class Page
      */
     public void setId(String value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
     }
 
     /**
@@ -132,10 +124,6 @@ public class Page
         this.name = value;
     }
 
-    public boolean isSetName() {
-        return (this.name!= null);
-    }
-
     /**
      * Gets the value of the file property.
      * 
@@ -158,10 +146,6 @@ public class Page
      */
     public void setFile(String value) {
         this.file = value;
-    }
-
-    public boolean isSetFile() {
-        return (this.file!= null);
     }
 
 }

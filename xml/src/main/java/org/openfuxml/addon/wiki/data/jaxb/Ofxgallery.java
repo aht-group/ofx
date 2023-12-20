@@ -82,14 +82,6 @@ public class Ofxgallery
         return this.ofximage;
     }
 
-    public boolean isSetOfximage() {
-        return ((this.ofximage!= null)&&(!this.ofximage.isEmpty()));
-    }
-
-    public void unsetOfximage() {
-        this.ofximage = null;
-    }
-
 
     /**
      * <p>Java class for anonymous complex type.
@@ -146,10 +138,6 @@ public class Ofxgallery
             this.value = value;
         }
 
-        public boolean isSetValue() {
-            return (this.value!= null);
-        }
-
         /**
          * Gets the value of the wikilink property.
          * 
@@ -172,10 +160,6 @@ public class Ofxgallery
          */
         public void setWikilink(String value) {
             this.wikilink = value;
-        }
-
-        public boolean isSetWikilink() {
-            return (this.wikilink!= null);
         }
 
     }

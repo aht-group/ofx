@@ -69,8 +69,4 @@ public class Alignment
         this.horizontal = value;
     }
 
-    public boolean isSetHorizontal() {
-        return (this.horizontal!= null);
-    }
-
 }

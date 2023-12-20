@@ -65,8 +65,4 @@ public class XhtmlProcessor
         this.replacements = value;
     }
 
-    public boolean isSetReplacements() {
-        return (this.replacements!= null);
-    }
-
 }

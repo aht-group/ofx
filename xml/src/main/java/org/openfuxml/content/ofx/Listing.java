@@ -90,10 +90,6 @@ public class Listing implements Serializable
         this.title = value;
     }
 
-    public boolean isSetTitle() {
-        return (this.title!= null);
-    }
-
     /**
      * Gets the value of the raw property.
      * 
@@ -116,10 +112,6 @@ public class Listing implements Serializable
      */
     public void setRaw(Raw value) {
         this.raw = value;
-    }
-
-    public boolean isSetRaw() {
-        return (this.raw!= null);
     }
 
     /**
@@ -146,10 +138,6 @@ public class Listing implements Serializable
         this.id = value;
     }
 
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
     /**
      * Gets the value of the external property.
      * 
@@ -172,10 +160,6 @@ public class Listing implements Serializable
      */
     public void setExternal(String value) {
         this.external = value;
-    }
-
-    public boolean isSetExternal() {
-        return (this.external!= null);
     }
 
     /**
@@ -202,10 +186,6 @@ public class Listing implements Serializable
         this.codeLang = value;
     }
 
-    public boolean isSetCodeLang() {
-        return (this.codeLang!= null);
-    }
-
     /**
      * Gets the value of the classifier property.
      * 
@@ -228,10 +208,6 @@ public class Listing implements Serializable
      */
     public void setClassifier(String value) {
         this.classifier = value;
-    }
-
-    public boolean isSetClassifier() {
-        return (this.classifier!= null);
     }
 
     /**
@@ -258,10 +234,6 @@ public class Listing implements Serializable
         this.setting = value;
     }
 
-    public boolean isSetSetting() {
-        return (this.setting!= null);
-    }
-
     /**
      * Gets the value of the numbering property.
      * 
@@ -270,7 +242,7 @@ public class Listing implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isNumbering() {
+    public Boolean isNumbering() {
         return numbering;
     }
 
@@ -282,16 +254,8 @@ public class Listing implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setNumbering(boolean value) {
+    public void setNumbering(Boolean value) {
         this.numbering = value;
-    }
-
-    public boolean isSetNumbering() {
-        return (this.numbering!= null);
-    }
-
-    public void unsetNumbering() {
-        this.numbering = null;
     }
 
     /**
@@ -302,7 +266,7 @@ public class Listing implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isLinebreak() {
+    public Boolean isLinebreak() {
         return linebreak;
     }
 
@@ -314,16 +278,8 @@ public class Listing implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setLinebreak(boolean value) {
+    public void setLinebreak(Boolean value) {
         this.linebreak = value;
-    }
-
-    public boolean isSetLinebreak() {
-        return (this.linebreak!= null);
-    }
-
-    public void unsetLinebreak() {
-        this.linebreak = null;
     }
 
 }

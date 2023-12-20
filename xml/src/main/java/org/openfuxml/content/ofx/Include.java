@@ -65,10 +65,6 @@ public class Include implements Serializable
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the lang property.
      * 
@@ -91,10 +87,6 @@ public class Include implements Serializable
      */
     public void setLang(String value) {
         this.lang = value;
-    }
-
-    public boolean isSetLang() {
-        return (this.lang!= null);
     }
 
 }

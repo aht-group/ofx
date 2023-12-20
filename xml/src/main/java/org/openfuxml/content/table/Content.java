@@ -73,10 +73,6 @@ public class Content
         this.head = value;
     }
 
-    public boolean isSetHead() {
-        return (this.head!= null);
-    }
-
     /**
      * Gets the value of the body property.
      * 
@@ -106,14 +102,6 @@ public class Content
         return this.body;
     }
 
-    public boolean isSetBody() {
-        return ((this.body!= null)&&(!this.body.isEmpty()));
-    }
-
-    public void unsetBody() {
-        this.body = null;
-    }
-
     /**
      * Gets the value of the foot property.
      * 
@@ -136,10 +124,6 @@ public class Content
      */
     public void setFoot(Foot value) {
         this.foot = value;
-    }
-
-    public boolean isSetFoot() {
-        return (this.foot!= null);
     }
 
 }

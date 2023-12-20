@@ -96,10 +96,6 @@ public class Image implements Serializable
         this.title = value;
     }
 
-    public boolean isSetTitle() {
-        return (this.title!= null);
-    }
-
     /**
      * Gets the value of the comment property.
      * 
@@ -122,10 +118,6 @@ public class Image implements Serializable
      */
     public void setComment(Comment value) {
         this.comment = value;
-    }
-
-    public boolean isSetComment() {
-        return (this.comment!= null);
     }
 
     /**
@@ -152,10 +144,6 @@ public class Image implements Serializable
         this.alignment = value;
     }
 
-    public boolean isSetAlignment() {
-        return (this.alignment!= null);
-    }
-
     /**
      * Gets the value of the width property.
      * 
@@ -178,10 +166,6 @@ public class Image implements Serializable
      */
     public void setWidth(Width value) {
         this.width = value;
-    }
-
-    public boolean isSetWidth() {
-        return (this.width!= null);
     }
 
     /**
@@ -208,10 +192,6 @@ public class Image implements Serializable
         this.height = value;
     }
 
-    public boolean isSetHeight() {
-        return (this.height!= null);
-    }
-
     /**
      * Gets the value of the media property.
      * 
@@ -234,10 +214,6 @@ public class Image implements Serializable
      */
     public void setMedia(Media value) {
         this.media = value;
-    }
-
-    public boolean isSetMedia() {
-        return (this.media!= null);
     }
 
     /**
@@ -264,10 +240,6 @@ public class Image implements Serializable
         this.id = value;
     }
 
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
     /**
      * Gets the value of the version property.
      * 
@@ -290,10 +262,6 @@ public class Image implements Serializable
      */
     public void setVersion(String value) {
         this.version = value;
-    }
-
-    public boolean isSetVersion() {
-        return (this.version!= null);
     }
 
 }

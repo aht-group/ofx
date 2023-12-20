@@ -1,6 +1,7 @@
 package org.openfuxml.renderer.latex.content.structure;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.openfuxml.content.editorial.Acronym;
 import org.openfuxml.content.editorial.Glossary;
@@ -63,7 +64,7 @@ public class LatexParagraphRenderer extends AbstractOfxLatexRenderer implements 
 			if(o instanceof Image)
 			{
 				image = (Image)o;
-				if(!image.isSetAlignment() || !image.getAlignment().isSetHorizontal())
+				if(Objects.isNull(image.getAlignment()) || Objects.isNull(image.getAlignment().getHorizontal()))
 				{
 					throw new OfxAuthoringException(Image.class.getSimpleName()+" in "+Paragraph.class.getSimpleName()+" needs an horizontal "+Alignment.class.getSimpleName());
 				}

@@ -69,10 +69,6 @@ public class Document
         this.metadata = value;
     }
 
-    public boolean isSetMetadata() {
-        return (this.metadata!= null);
-    }
-
     /**
      * Gets the value of the content property.
      * 
@@ -95,10 +91,6 @@ public class Document
      */
     public void setContent(Content value) {
         this.content = value;
-    }
-
-    public boolean isSetContent() {
-        return (this.content!= null);
     }
 
 }

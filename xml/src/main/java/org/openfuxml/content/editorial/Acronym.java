@@ -60,8 +60,4 @@ public class Acronym implements Serializable
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
 }

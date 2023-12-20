@@ -62,10 +62,6 @@ public class Height implements Serializable
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return true;
-    }
-
     /**
      * Gets the value of the unit property.
      * 
@@ -88,10 +84,6 @@ public class Height implements Serializable
      */
     public void setUnit(String value) {
         this.unit = value;
-    }
-
-    public boolean isSetUnit() {
-        return (this.unit!= null);
     }
 
 }

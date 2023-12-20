@@ -79,14 +79,6 @@ public class Replacements
         return this.wikireplace;
     }
 
-    public boolean isSetWikireplace() {
-        return ((this.wikireplace!= null)&&(!this.wikireplace.isEmpty()));
-    }
-
-    public void unsetWikireplace() {
-        this.wikireplace = null;
-    }
-
     /**
      * Gets the value of the external property.
      * 
@@ -95,7 +87,7 @@ public class Replacements
      *     {@link Boolean }
      *     
      */
-    public boolean isExternal() {
+    public Boolean isExternal() {
         return external;
     }
 
@@ -107,16 +99,8 @@ public class Replacements
      *     {@link Boolean }
      *     
      */
-    public void setExternal(boolean value) {
+    public void setExternal(Boolean value) {
         this.external = value;
-    }
-
-    public boolean isSetExternal() {
-        return (this.external!= null);
-    }
-
-    public void unsetExternal() {
-        this.external = null;
     }
 
     /**
@@ -141,10 +125,6 @@ public class Replacements
      */
     public void setSource(String value) {
         this.source = value;
-    }
-
-    public boolean isSetSource() {
-        return (this.source!= null);
     }
 
 }

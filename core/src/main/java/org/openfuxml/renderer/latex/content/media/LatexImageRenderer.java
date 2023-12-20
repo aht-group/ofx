@@ -82,7 +82,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 			preTxt.addAll(LatexCommentRenderer.stars());
 			preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Image.class.getSimpleName()+" (environment:"+environment+") with "+this.getClass().getSimpleName()));
 			
-			if(image.isSetComment())
+			if(Objects.nonNull(image.getComment()))
 			{
 				LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 				rComment.render(image.getComment());
@@ -102,7 +102,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 				stf.render(image);
 				postTxt.addAll(stf.getContent());
 			}
-			if(image.isSetId()){postTxt.add("  \\label{"+image.getId()+"}");}
+			if(Objects.nonNull(image.getId())) {postTxt.add("  \\label{"+image.getId()+"}");}
 			postTxt.add("\\end{figure}");
 			postTxt.add("");
 		}
@@ -136,7 +136,7 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 	
 	private String alignment(Alignment alignment)
 	{
-		if(alignment.isSetHorizontal())
+		if(Objects.nonNull(alignment.getHorizontal()))
 		{
 			XmlAlignmentFactory.Horizontal horizontal = XmlAlignmentFactory.Horizontal.valueOf(alignment.getHorizontal());
 			switch (horizontal)

@@ -42,7 +42,7 @@ public class LatexAcronymRenderer extends AbstractOfxLatexRenderer implements Of
 		preTxt.addAll(LatexCommentRenderer.stars());
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Acronyms.class.getSimpleName()+" with: "+this.getClass().getSimpleName()));
 		
-		if(acronyms.isSetComment())
+		if(Objects.nonNull(acronyms.getComment()))
 		{
 			LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 			rComment.render(acronyms.getComment());

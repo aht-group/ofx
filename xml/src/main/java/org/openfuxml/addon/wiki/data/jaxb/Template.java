@@ -86,10 +86,6 @@ public class Template implements Serializable
         this.markup = value;
     }
 
-    public boolean isSetMarkup() {
-        return (this.markup!= null);
-    }
-
     /**
      * Gets the value of the templateKv property.
      * 
@@ -119,14 +115,6 @@ public class Template implements Serializable
         return this.templateKv;
     }
 
-    public boolean isSetTemplateKv() {
-        return ((this.templateKv!= null)&&(!this.templateKv.isEmpty()));
-    }
-
-    public void unsetTemplateKv() {
-        this.templateKv = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -149,10 +137,6 @@ public class Template implements Serializable
      */
     public void setId(String value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
     }
 
     /**
@@ -179,10 +163,6 @@ public class Template implements Serializable
         this.name = value;
     }
 
-    public boolean isSetName() {
-        return (this.name!= null);
-    }
-
     /**
      * Gets the value of the clazz property.
      * 
@@ -207,10 +187,6 @@ public class Template implements Serializable
         this.clazz = value;
     }
 
-    public boolean isSetClazz() {
-        return (this.clazz!= null);
-    }
-
     /**
      * Gets the value of the external property.
      * 
@@ -219,7 +195,7 @@ public class Template implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isExternal() {
+    public Boolean isExternal() {
         return external;
     }
 
@@ -231,16 +207,8 @@ public class Template implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setExternal(boolean value) {
+    public void setExternal(Boolean value) {
         this.external = value;
-    }
-
-    public boolean isSetExternal() {
-        return (this.external!= null);
-    }
-
-    public void unsetExternal() {
-        this.external = null;
     }
 
     /**
@@ -265,10 +233,6 @@ public class Template implements Serializable
      */
     public void setSource(String value) {
         this.source = value;
-    }
-
-    public boolean isSetSource() {
-        return (this.source!= null);
     }
 
 }

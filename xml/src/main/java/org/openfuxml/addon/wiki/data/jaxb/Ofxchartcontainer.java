@@ -80,14 +80,6 @@ public class Ofxchartcontainer
         return this.ofxchartdata;
     }
 
-    public boolean isSetOfxchartdata() {
-        return ((this.ofxchartdata!= null)&&(!this.ofxchartdata.isEmpty()));
-    }
-
-    public void unsetOfxchartdata() {
-        this.ofxchartdata = null;
-    }
-
     /**
      * Gets the value of the ofxchartcontainer property.
      * 
@@ -117,14 +109,6 @@ public class Ofxchartcontainer
         return this.ofxchartcontainer;
     }
 
-    public boolean isSetOfxchartcontainer() {
-        return ((this.ofxchartcontainer!= null)&&(!this.ofxchartcontainer.isEmpty()));
-    }
-
-    public void unsetOfxchartcontainer() {
-        this.ofxchartcontainer = null;
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -147,10 +131,6 @@ public class Ofxchartcontainer
      */
     public void setType(String value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
 }

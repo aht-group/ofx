@@ -80,14 +80,6 @@ public class Ofx
         return this.wikireplace;
     }
 
-    public boolean isSetWikireplace() {
-        return ((this.wikireplace!= null)&&(!this.wikireplace.isEmpty()));
-    }
-
-    public void unsetWikireplace() {
-        this.wikireplace = null;
-    }
-
     /**
      * Gets the value of the wikiinjection property.
      * 
@@ -117,14 +109,6 @@ public class Ofx
         return this.wikiinjection;
     }
 
-    public boolean isSetWikiinjection() {
-        return ((this.wikiinjection!= null)&&(!this.wikiinjection.isEmpty()));
-    }
-
-    public void unsetWikiinjection() {
-        this.wikiinjection = null;
-    }
-
     /**
      * Gets the value of the ofxchart property.
      * 
@@ -152,14 +136,6 @@ public class Ofx
             ofxchart = new ArrayList<Ofxchart>();
         }
         return this.ofxchart;
-    }
-
-    public boolean isSetOfxchart() {
-        return ((this.ofxchart!= null)&&(!this.ofxchart.isEmpty()));
-    }
-
-    public void unsetOfxchart() {
-        this.ofxchart = null;
     }
 
 }

@@ -69,10 +69,6 @@ public class MarkupProcessor
         this.injections = value;
     }
 
-    public boolean isSetInjections() {
-        return (this.injections!= null);
-    }
-
     /**
      * Gets the value of the replacements property.
      * 
@@ -95,10 +91,6 @@ public class MarkupProcessor
      */
     public void setReplacements(Replacements value) {
         this.replacements = value;
-    }
-
-    public boolean isSetReplacements() {
-        return (this.replacements!= null);
     }
 
 }

@@ -68,8 +68,8 @@ public class Highlight implements Serializable
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * {@link Paragraph }
      * {@link Marginalia }
+     * {@link Paragraph }
      * 
      * 
      */
@@ -78,14 +78,6 @@ public class Highlight implements Serializable
             content = new ArrayList<Serializable>();
         }
         return this.content;
-    }
-
-    public boolean isSetContent() {
-        return ((this.content!= null)&&(!this.content.isEmpty()));
-    }
-
-    public void unsetContent() {
-        this.content = null;
     }
 
 }

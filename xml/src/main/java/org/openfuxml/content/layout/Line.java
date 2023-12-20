@@ -70,8 +70,4 @@ public class Line
         this.orientation = value;
     }
 
-    public boolean isSetOrientation() {
-        return (this.orientation!= null);
-    }
-
 }

@@ -62,8 +62,4 @@ public class Raw
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
 }

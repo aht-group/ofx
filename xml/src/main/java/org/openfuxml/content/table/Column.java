@@ -71,10 +71,6 @@ public class Column
         this.alignment = value;
     }
 
-    public boolean isSetAlignment() {
-        return (this.alignment!= null);
-    }
-
     /**
      * Gets the value of the width property.
      * 
@@ -97,10 +93,6 @@ public class Column
      */
     public void setWidth(Width value) {
         this.width = value;
-    }
-
-    public boolean isSetWidth() {
-        return (this.width!= null);
     }
 
 }

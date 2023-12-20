@@ -72,10 +72,6 @@ public class Wikireplace
         this.description = value;
     }
 
-    public boolean isSetDescription() {
-        return (this.description!= null);
-    }
-
     /**
      * Gets the value of the from property.
      * 
@@ -100,10 +96,6 @@ public class Wikireplace
         this.from = value;
     }
 
-    public boolean isSetFrom() {
-        return (this.from!= null);
-    }
-
     /**
      * Gets the value of the to property.
      * 
@@ -126,10 +118,6 @@ public class Wikireplace
      */
     public void setTo(String value) {
         this.to = value;
-    }
-
-    public boolean isSetTo() {
-        return (this.to!= null);
     }
 
 }

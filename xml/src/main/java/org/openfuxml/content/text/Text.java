@@ -33,8 +33,7 @@ import javax.xml.bind.annotation.XmlValue;
     "value"
 })
 @XmlRootElement(name = "text")
-public class Text
-    implements Serializable
+public class Text implements Serializable
 {
 
     private final static long serialVersionUID = 1L;

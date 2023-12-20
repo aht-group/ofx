@@ -83,14 +83,6 @@ public class Item
         return this.content;
     }
 
-    public boolean isSetContent() {
-        return ((this.content!= null)&&(!this.content.isEmpty()));
-    }
-
-    public void unsetContent() {
-        this.content = null;
-    }
-
     /**
      * Gets the value of the lang property.
      * 
@@ -115,10 +107,6 @@ public class Item
         this.lang = value;
     }
 
-    public boolean isSetLang() {
-        return (this.lang!= null);
-    }
-
     /**
      * Gets the value of the name property.
      * 
@@ -141,10 +129,6 @@ public class Item
      */
     public void setName(String value) {
         this.name = value;
-    }
-
-    public boolean isSetName() {
-        return (this.name!= null);
     }
 
 }

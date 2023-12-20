@@ -71,10 +71,6 @@ public class Type
         this.ordering = value;
     }
 
-    public boolean isSetOrdering() {
-        return (this.ordering!= null);
-    }
-
     /**
      * Gets the value of the description property.
      * 
@@ -83,7 +79,7 @@ public class Type
      *     {@link Boolean }
      *     
      */
-    public boolean isDescription() {
+    public Boolean isDescription() {
         return description;
     }
 
@@ -95,16 +91,8 @@ public class Type
      *     {@link Boolean }
      *     
      */
-    public void setDescription(boolean value) {
+    public void setDescription(Boolean value) {
         this.description = value;
-    }
-
-    public boolean isSetDescription() {
-        return (this.description!= null);
-    }
-
-    public void unsetDescription() {
-        this.description = null;
     }
 
 }

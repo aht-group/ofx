@@ -81,10 +81,6 @@ public class Table implements Serializable
         this.title = value;
     }
 
-    public boolean isSetTitle() {
-        return (this.title!= null);
-    }
-
     /**
      * Gets the value of the specification property.
      * 
@@ -107,10 +103,6 @@ public class Table implements Serializable
      */
     public void setSpecification(Specification value) {
         this.specification = value;
-    }
-
-    public boolean isSetSpecification() {
-        return (this.specification!= null);
     }
 
     /**
@@ -137,10 +129,6 @@ public class Table implements Serializable
         this.content = value;
     }
 
-    public boolean isSetContent() {
-        return (this.content!= null);
-    }
-
     /**
      * Gets the value of the comment property.
      * 
@@ -165,10 +153,6 @@ public class Table implements Serializable
         this.comment = value;
     }
 
-    public boolean isSetComment() {
-        return (this.comment!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -191,10 +175,6 @@ public class Table implements Serializable
      */
     public void setId(String value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
     }
 
 }

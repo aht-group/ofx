@@ -82,10 +82,6 @@ public class Category
         this.table = value;
     }
 
-    public boolean isSetTable() {
-        return (this.table!= null);
-    }
-
     /**
      * Gets the value of the section property.
      * 
@@ -108,10 +104,6 @@ public class Category
      */
     public void setSection(Object value) {
         this.section = value;
-    }
-
-    public boolean isSetSection() {
-        return (this.section!= null);
     }
 
     /**
@@ -143,14 +135,6 @@ public class Category
         return this.page;
     }
 
-    public boolean isSetPage() {
-        return ((this.page!= null)&&(!this.page.isEmpty()));
-    }
-
-    public void unsetPage() {
-        this.page = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -175,10 +159,6 @@ public class Category
         this.id = value;
     }
 
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
     /**
      * Gets the value of the name property.
      * 
@@ -201,10 +181,6 @@ public class Category
      */
     public void setName(String value) {
         this.name = value;
-    }
-
-    public boolean isSetName() {
-        return (this.name!= null);
     }
 
 }

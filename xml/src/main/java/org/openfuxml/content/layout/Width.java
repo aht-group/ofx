@@ -78,10 +78,6 @@ public class Width implements Serializable
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return true;
-    }
-
     /**
      * Gets the value of the unit property.
      * 
@@ -106,10 +102,6 @@ public class Width implements Serializable
         this.unit = value;
     }
 
-    public boolean isSetUnit() {
-        return (this.unit!= null);
-    }
-
     /**
      * Gets the value of the flex property.
      * 
@@ -126,10 +118,6 @@ public class Width implements Serializable
         this.flex = value;
     }
 
-    public boolean isSetFlex() {
-        return true;
-    }
-
     /**
      * Gets the value of the narrow property.
      * 
@@ -138,7 +126,7 @@ public class Width implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isNarrow() {
+    public Boolean isNarrow() {
         return narrow;
     }
 
@@ -150,16 +138,8 @@ public class Width implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setNarrow(boolean value) {
+    public void setNarrow(Boolean value) {
         this.narrow = value;
-    }
-
-    public boolean isSetNarrow() {
-        return (this.narrow!= null);
-    }
-
-    public void unsetNarrow() {
-        this.narrow = null;
     }
 
 }

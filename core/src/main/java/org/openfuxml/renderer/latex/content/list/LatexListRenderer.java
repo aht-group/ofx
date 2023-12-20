@@ -39,13 +39,13 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		estimateType(list.getType());
 		
 		String debugType=null;
-		if(list.getType().isSetDescription() && list.getType().isDescription()){debugType=ListType.description.toString()+" "+List.class.getSimpleName();}
+		if(Objects.nonNull(list.getType().isDescription()) && list.getType().isDescription()){debugType=ListType.description.toString()+" "+List.class.getSimpleName();}
 		else{debugType = "("+listType+") "+List.class.getSimpleName();}
 		
 		if(preBlankLine){preTxt.add("");}
 		preTxt.addAll(LatexCommentRenderer.stars());
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+debugType+" with: "+this.getClass().getSimpleName()));
-		if(list.isSetComment())
+		if(Objects.nonNull(list.getComment()))
 		{
 			LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 			rComment.render(list.getComment());
@@ -54,7 +54,7 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 		preTxt.add("");
 		
 		setEnvironment(list.getType(),parent);
-		if(list.isSetLayout()){layout(list.getLayout());}
+		if(Objects.nonNull(list.getLayout())) {layout(list.getLayout());}
 		
 		
 		for(Item item : list.getItem())
@@ -68,12 +68,12 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	private void estimateType(Type xmlType) throws OfxAuthoringException
 	{
-		if(xmlType.isSetDescription() && xmlType.isDescription())
+		if(Objects.nonNull(xmlType.isDescription()) && xmlType.isDescription())
 		{
 			listType = ListType.description;
-			if(xmlType.isSetOrdering()){throw new OfxAuthoringException("<type> is a description, but ordering is set!");}
+			if(Objects.nonNull(xmlType.getOrdering())) {throw new OfxAuthoringException("<type> is a description, but ordering is set!");}
 		}
-		else if(xmlType.isSetOrdering())
+		else if(Objects.nonNull(xmlType.getOrdering()))
 		{
 			listType = ListType.list;
 		}
@@ -153,7 +153,7 @@ public class LatexListRenderer extends AbstractOfxLatexRenderer implements OfxLa
 	
 	private void layout(Layout layout)
 	{
-		if(layout.isSetSpacing())
+		if(Objects.nonNull(layout.getSpacing()))
 		{
 			Spacing space = layout.getSpacing();
 			preTxt.add("\\setlength{\\itemsep}{"+space.getValue()+space.getUnit()+"}");

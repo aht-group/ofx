@@ -30,6 +30,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Images }
+     * 
+     */
+    public Images createImages() {
+        return new Images();
+    }
+
+    /**
      * Create an instance of {@link Image }
      * 
      */
@@ -43,14 +51,6 @@ public class ObjectFactory {
      */
     public Media createMedia() {
         return new Media();
-    }
-
-    /**
-     * Create an instance of {@link Images }
-     * 
-     */
-    public Images createImages() {
-        return new Images();
     }
 
 }

@@ -3,6 +3,7 @@ package org.openfuxml.renderer.latex;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Objects;
 
 import org.openfuxml.content.editorial.Acronyms;
 import org.openfuxml.content.editorial.Glossary;
@@ -85,7 +86,7 @@ public class OfxMultiLangLatexWriter
 			
 			StringBuffer sb = new StringBuffer();
 			sb.append("Writing ").append(Section.class.getSimpleName());
-			if(section.isSetId())
+			if(Objects.nonNull(section.getId()))
 			{
 				sb.append(" (").append(section.getId()).append(")");
 			}

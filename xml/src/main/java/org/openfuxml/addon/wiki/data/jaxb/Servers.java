@@ -72,12 +72,4 @@ public class Servers
         return this.server;
     }
 
-    public boolean isSetServer() {
-        return ((this.server!= null)&&(!this.server.isEmpty()));
-    }
-
-    public void unsetServer() {
-        this.server = null;
-    }
-
 }

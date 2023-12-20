@@ -66,19 +66,19 @@ public class Section implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
         @XmlElementRef(name = "comment", namespace = "http://www.openfuxml.org", type = Comment.class),
-        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
-        @XmlElementRef(name = "include", namespace = "http://www.openfuxml.org", type = Include.class),
-        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
+        @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class),
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
         @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
-        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
         @XmlElementRef(name = "highlight", namespace = "http://www.openfuxml.org", type = Highlight.class),
+        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
+        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
+        @XmlElementRef(name = "listing", namespace = "http://www.openfuxml.org", type = Listing.class),
+        @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
+        @XmlElementRef(name = "include", namespace = "http://www.openfuxml.org", type = Include.class),
+        @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
         @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
         @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class),
-        @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = Content.class),
-        @XmlElementRef(name = "title", namespace = "http://www.openfuxml.org", type = Title.class),
         @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class)
     })
     @XmlMixed
@@ -116,21 +116,21 @@ public class Section implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Listing }
+     * {@link String }
+     * {@link Content }
+     * {@link Template }
+     * {@link org.openfuxml.content.list.List }
+     * {@link Image }
      * {@link Comment }
-     * {@link Section }
+     * {@link Highlight }
      * {@link Include }
-     * {@link Sections }
+     * {@link Listing }
      * {@link Marginalia }
      * {@link Paragraph }
-     * {@link Highlight }
-     * {@link Image }
-     * {@link String }
-     * {@link org.openfuxml.content.list.List }
-     * {@link Table }
-     * {@link Content }
+     * {@link Section }
+     * {@link Sections }
      * {@link Title }
-     * {@link Template }
+     * {@link Table }
      * 
      * 
      */
@@ -139,14 +139,6 @@ public class Section implements Serializable
             content = new ArrayList<Serializable>();
         }
         return this.content;
-    }
-
-    public boolean isSetContent() {
-        return ((this.content!= null)&&(!this.content.isEmpty()));
-    }
-
-    public void unsetContent() {
-        this.content = null;
     }
 
     /**
@@ -173,10 +165,6 @@ public class Section implements Serializable
         this.id = value;
     }
 
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
     /**
      * Gets the value of the classifier property.
      * 
@@ -199,10 +187,6 @@ public class Section implements Serializable
      */
     public void setClassifier(String value) {
         this.classifier = value;
-    }
-
-    public boolean isSetClassifier() {
-        return (this.classifier!= null);
     }
 
     /**
@@ -229,10 +213,6 @@ public class Section implements Serializable
         this.lang = value;
     }
 
-    public boolean isSetLang() {
-        return (this.lang!= null);
-    }
-
     /**
      * Gets the value of the external property.
      * 
@@ -241,7 +221,7 @@ public class Section implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isExternal() {
+    public Boolean isExternal() {
         return external;
     }
 
@@ -253,16 +233,8 @@ public class Section implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setExternal(boolean value) {
+    public void setExternal(Boolean value) {
         this.external = value;
-    }
-
-    public boolean isSetExternal() {
-        return (this.external!= null);
-    }
-
-    public void unsetExternal() {
-        this.external = null;
     }
 
     /**
@@ -289,10 +261,6 @@ public class Section implements Serializable
         this.source = value;
     }
 
-    public boolean isSetSource() {
-        return (this.source!= null);
-    }
-
     /**
      * Gets the value of the include property.
      * 
@@ -317,10 +285,6 @@ public class Section implements Serializable
         this.include = value;
     }
 
-    public boolean isSetInclude() {
-        return (this.include!= null);
-    }
-
     /**
      * Gets the value of the container property.
      * 
@@ -329,7 +293,7 @@ public class Section implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isContainer() {
+    public Boolean isContainer() {
         return container;
     }
 
@@ -341,16 +305,8 @@ public class Section implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setContainer(boolean value) {
+    public void setContainer(Boolean value) {
         this.container = value;
-    }
-
-    public boolean isSetContainer() {
-        return (this.container!= null);
-    }
-
-    public void unsetContainer() {
-        this.container = null;
     }
 
 }

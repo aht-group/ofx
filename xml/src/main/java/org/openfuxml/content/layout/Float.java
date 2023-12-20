@@ -54,8 +54,4 @@ public class Float
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return true;
-    }
-
 }

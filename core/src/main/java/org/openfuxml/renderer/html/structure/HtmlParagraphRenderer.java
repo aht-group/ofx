@@ -1,4 +1,6 @@
 package org.openfuxml.renderer.html.structure;
+import java.util.Objects;
+
 /**
  * Author: Rebecca Roblick
  */
@@ -72,7 +74,7 @@ public class HtmlParagraphRenderer extends AbstractOfxHtmlRenderer implements Of
 	private void renderReference(HtmlElement parent, Reference r)
 	{
 		HtmlReferenceRenderer referenceRender = new HtmlReferenceRenderer(cp);
-		if(r.isSetType() && r.getType().equals("external"))
+		if(Objects.nonNull(r.getType()) && r.getType().equals("external"))
 				referenceRender.renderExtern(parent,r.getTarget(), r.getValue());
 		else
 			referenceRender.renderIntern(parent,r);

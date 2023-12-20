@@ -30,6 +30,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Title }
+     * 
+     */
+    public Title createTitle() {
+        return new Title();
+    }
+
+    /**
+     * Create an instance of {@link Comment }
+     * 
+     */
+    public Comment createComment() {
+        return new Comment();
+    }
+
+    /**
+     * Create an instance of {@link Raw }
+     * 
+     */
+    public Raw createRaw() {
+        return new Raw();
+    }
+
+    /**
      * Create an instance of {@link Document }
      * 
      */
@@ -43,14 +67,6 @@ public class ObjectFactory {
      */
     public Metadata createMetadata() {
         return new Metadata();
-    }
-
-    /**
-     * Create an instance of {@link Title }
-     * 
-     */
-    public Title createTitle() {
-        return new Title();
     }
 
     /**
@@ -75,22 +91,6 @@ public class ObjectFactory {
      */
     public Section createSection() {
         return new Section();
-    }
-
-    /**
-     * Create an instance of {@link Comment }
-     * 
-     */
-    public Comment createComment() {
-        return new Comment();
-    }
-
-    /**
-     * Create an instance of {@link Raw }
-     * 
-     */
-    public Raw createRaw() {
-        return new Raw();
     }
 
     /**

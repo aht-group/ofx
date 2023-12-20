@@ -33,8 +33,7 @@ import javax.xml.bind.annotation.XmlValue;
     "value"
 })
 @XmlRootElement(name = "symbol")
-public class Symbol
-    implements Serializable
+public class Symbol implements Serializable
 {
 
     private final static long serialVersionUID = 1L;

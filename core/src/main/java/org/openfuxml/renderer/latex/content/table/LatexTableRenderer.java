@@ -75,7 +75,7 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 		JaxbUtil.trace(table);
 		
 		
-		if(table.isSetId()) {postTxt.add("\\label{"+table.getId()+"}");}
+		if(Objects.nonNull(table.getId())) {postTxt.add("\\label{"+table.getId()+"}");}
 		
 		postTxt.add("\\end{table}");
 	}

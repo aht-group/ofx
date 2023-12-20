@@ -72,10 +72,6 @@ public class Body
         this.layout = value;
     }
 
-    public boolean isSetLayout() {
-        return (this.layout!= null);
-    }
-
     /**
      * Gets the value of the row property.
      * 
@@ -103,14 +99,6 @@ public class Body
             row = new ArrayList<Row>();
         }
         return this.row;
-    }
-
-    public boolean isSetRow() {
-        return ((this.row!= null)&&(!this.row.isEmpty()));
-    }
-
-    public void unsetRow() {
-        this.row = null;
     }
 
 }

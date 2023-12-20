@@ -45,8 +45,7 @@ import javax.xml.bind.annotation.XmlValue;
     "value"
 })
 @XmlRootElement(name = "emphasis")
-public class Emphasis
-    implements Serializable
+public class Emphasis implements Serializable
 {
 
     private final static long serialVersionUID = 1L;

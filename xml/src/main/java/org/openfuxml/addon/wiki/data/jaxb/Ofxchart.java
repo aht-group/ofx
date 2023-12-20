@@ -157,10 +157,6 @@ public class Ofxchart
         this.title = value;
     }
 
-    public boolean isSetTitle() {
-        return (this.title!= null);
-    }
-
     /**
      * Gets the value of the xAxis property.
      * 
@@ -183,10 +179,6 @@ public class Ofxchart
      */
     public void setXAxis(Ofxchart.XAxis value) {
         this.xAxis = value;
-    }
-
-    public boolean isSetXAxis() {
-        return (this.xAxis!= null);
     }
 
     /**
@@ -213,10 +205,6 @@ public class Ofxchart
         this.yAxis = value;
     }
 
-    public boolean isSetYAxis() {
-        return (this.yAxis!= null);
-    }
-
     /**
      * Gets the value of the colors property.
      * 
@@ -239,10 +227,6 @@ public class Ofxchart
      */
     public void setColors(Ofxchart.Colors value) {
         this.colors = value;
-    }
-
-    public boolean isSetColors() {
-        return (this.colors!= null);
     }
 
     /**
@@ -269,10 +253,6 @@ public class Ofxchart
         this.size = value;
     }
 
-    public boolean isSetSize() {
-        return (this.size!= null);
-    }
-
     /**
      * Gets the value of the grid property.
      * 
@@ -295,10 +275,6 @@ public class Ofxchart
      */
     public void setGrid(Ofxchart.Grid value) {
         this.grid = value;
-    }
-
-    public boolean isSetGrid() {
-        return (this.grid!= null);
     }
 
     /**
@@ -330,14 +306,6 @@ public class Ofxchart
         return this.ofxchartcontainer;
     }
 
-    public boolean isSetOfxchartcontainer() {
-        return ((this.ofxchartcontainer!= null)&&(!this.ofxchartcontainer.isEmpty()));
-    }
-
-    public void unsetOfxchartcontainer() {
-        this.ofxchartcontainer = null;
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -360,10 +328,6 @@ public class Ofxchart
      */
     public void setType(String value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
     /**
@@ -390,10 +354,6 @@ public class Ofxchart
         this.id = value;
     }
 
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
     /**
      * Gets the value of the legend property.
      * 
@@ -402,7 +362,7 @@ public class Ofxchart
      *     {@link Boolean }
      *     
      */
-    public boolean isLegend() {
+    public Boolean isLegend() {
         return legend;
     }
 
@@ -414,16 +374,8 @@ public class Ofxchart
      *     {@link Boolean }
      *     
      */
-    public void setLegend(boolean value) {
+    public void setLegend(Boolean value) {
         this.legend = value;
-    }
-
-    public boolean isSetLegend() {
-        return (this.legend!= null);
-    }
-
-    public void unsetLegend() {
-        this.legend = null;
     }
 
 
@@ -487,14 +439,6 @@ public class Ofxchart
             return this.color;
         }
 
-        public boolean isSetColor() {
-            return ((this.color!= null)&&(!this.color.isEmpty()));
-        }
-
-        public void unsetColor() {
-            this.color = null;
-        }
-
     }
 
 
@@ -536,7 +480,7 @@ public class Ofxchart
          *     {@link Boolean }
          *     
          */
-        public boolean isRange() {
+        public Boolean isRange() {
             return range;
         }
 
@@ -548,16 +492,8 @@ public class Ofxchart
          *     {@link Boolean }
          *     
          */
-        public void setRange(boolean value) {
+        public void setRange(Boolean value) {
             this.range = value;
-        }
-
-        public boolean isSetRange() {
-            return (this.range!= null);
-        }
-
-        public void unsetRange() {
-            this.range = null;
         }
 
         /**
@@ -568,7 +504,7 @@ public class Ofxchart
          *     {@link Boolean }
          *     
          */
-        public boolean isDomain() {
+        public Boolean isDomain() {
             return domain;
         }
 
@@ -580,16 +516,8 @@ public class Ofxchart
          *     {@link Boolean }
          *     
          */
-        public void setDomain(boolean value) {
+        public void setDomain(Boolean value) {
             this.domain = value;
-        }
-
-        public boolean isSetDomain() {
-            return (this.domain!= null);
-        }
-
-        public void unsetDomain() {
-            this.domain = null;
         }
 
     }
@@ -633,7 +561,7 @@ public class Ofxchart
          *     {@link Integer }
          *     
          */
-        public int getHeight() {
+        public Integer getHeight() {
             return height;
         }
 
@@ -645,16 +573,8 @@ public class Ofxchart
          *     {@link Integer }
          *     
          */
-        public void setHeight(int value) {
+        public void setHeight(Integer value) {
             this.height = value;
-        }
-
-        public boolean isSetHeight() {
-            return (this.height!= null);
-        }
-
-        public void unsetHeight() {
-            this.height = null;
         }
 
         /**
@@ -665,7 +585,7 @@ public class Ofxchart
          *     {@link Integer }
          *     
          */
-        public int getWidth() {
+        public Integer getWidth() {
             return width;
         }
 
@@ -677,16 +597,8 @@ public class Ofxchart
          *     {@link Integer }
          *     
          */
-        public void setWidth(int value) {
+        public void setWidth(Integer value) {
             this.width = value;
-        }
-
-        public boolean isSetWidth() {
-            return (this.width!= null);
-        }
-
-        public void unsetWidth() {
-            this.width = null;
         }
 
     }
@@ -746,10 +658,6 @@ public class Ofxchart
             this.label = value;
         }
 
-        public boolean isSetLabel() {
-            return (this.label!= null);
-        }
-
         /**
          * Gets the value of the key property.
          * 
@@ -772,10 +680,6 @@ public class Ofxchart
          */
         public void setKey(String value) {
             this.key = value;
-        }
-
-        public boolean isSetKey() {
-            return (this.key!= null);
         }
 
     }
@@ -838,10 +742,6 @@ public class Ofxchart
             this.label = value;
         }
 
-        public boolean isSetLabel() {
-            return (this.label!= null);
-        }
-
         /**
          * Gets the value of the key property.
          * 
@@ -866,10 +766,6 @@ public class Ofxchart
             this.key = value;
         }
 
-        public boolean isSetKey() {
-            return (this.key!= null);
-        }
-
         /**
          * Gets the value of the dateformat property.
          * 
@@ -892,10 +788,6 @@ public class Ofxchart
          */
         public void setDateformat(String value) {
             this.dateformat = value;
-        }
-
-        public boolean isSetDateformat() {
-            return (this.dateformat!= null);
         }
 
     }
@@ -955,10 +847,6 @@ public class Ofxchart
             this.label = value;
         }
 
-        public boolean isSetLabel() {
-            return (this.label!= null);
-        }
-
         /**
          * Gets the value of the key property.
          * 
@@ -981,10 +869,6 @@ public class Ofxchart
          */
         public void setKey(String value) {
             this.key = value;
-        }
-
-        public boolean isSetKey() {
-            return (this.key!= null);
         }
 
     }

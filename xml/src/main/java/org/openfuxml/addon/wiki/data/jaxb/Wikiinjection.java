@@ -99,10 +99,6 @@ public class Wikiinjection
         this.wikicontent = value;
     }
 
-    public boolean isSetWikicontent() {
-        return (this.wikicontent!= null);
-    }
-
     /**
      * Gets the value of the ofxchart property.
      * 
@@ -130,14 +126,6 @@ public class Wikiinjection
             ofxchart = new ArrayList<Ofxchart>();
         }
         return this.ofxchart;
-    }
-
-    public boolean isSetOfxchart() {
-        return ((this.ofxchart!= null)&&(!this.ofxchart.isEmpty()));
-    }
-
-    public void unsetOfxchart() {
-        this.ofxchart = null;
     }
 
     /**
@@ -169,14 +157,6 @@ public class Wikiinjection
         return this.ofxgallery;
     }
 
-    public boolean isSetOfxgallery() {
-        return ((this.ofxgallery!= null)&&(!this.ofxgallery.isEmpty()));
-    }
-
-    public void unsetOfxgallery() {
-        this.ofxgallery = null;
-    }
-
     /**
      * Gets the value of the format property.
      * 
@@ -199,10 +179,6 @@ public class Wikiinjection
      */
     public void setFormat(String value) {
         this.format = value;
-    }
-
-    public boolean isSetFormat() {
-        return (this.format!= null);
     }
 
     /**
@@ -229,10 +205,6 @@ public class Wikiinjection
         this.article = value;
     }
 
-    public boolean isSetArticle() {
-        return (this.article!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -255,10 +227,6 @@ public class Wikiinjection
      */
     public void setId(String value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
     }
 
     /**
@@ -285,10 +253,6 @@ public class Wikiinjection
         this.wikitag = value;
     }
 
-    public boolean isSetWikitag() {
-        return (this.wikitag!= null);
-    }
-
     /**
      * Gets the value of the ofxtag property.
      * 
@@ -311,10 +275,6 @@ public class Wikiinjection
      */
     public void setOfxtag(String value) {
         this.ofxtag = value;
-    }
-
-    public boolean isSetOfxtag() {
-        return (this.ofxtag!= null);
     }
 
 
@@ -368,10 +328,6 @@ public class Wikiinjection
          */
         public void setValue(String value) {
             this.value = value;
-        }
-
-        public boolean isSetValue() {
-            return (this.value!= null);
         }
 
     }

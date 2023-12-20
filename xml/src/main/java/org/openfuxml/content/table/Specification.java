@@ -83,10 +83,6 @@ public class Specification
         this.columns = value;
     }
 
-    public boolean isSetColumns() {
-        return (this.columns!= null);
-    }
-
     /**
      * Gets the value of the alignment property.
      * 
@@ -109,10 +105,6 @@ public class Specification
      */
     public void setAlignment(Alignment value) {
         this.alignment = value;
-    }
-
-    public boolean isSetAlignment() {
-        return (this.alignment!= null);
     }
 
     /**
@@ -139,10 +131,6 @@ public class Specification
         this.width = value;
     }
 
-    public boolean isSetWidth() {
-        return (this.width!= null);
-    }
-
     /**
      * Gets the value of the float property.
      * 
@@ -167,10 +155,6 @@ public class Specification
         this._float = value;
     }
 
-    public boolean isSetFloat() {
-        return (this._float!= null);
-    }
-
     /**
      * Gets the value of the long property.
      * 
@@ -179,7 +163,7 @@ public class Specification
      *     {@link Boolean }
      *     
      */
-    public boolean isLong() {
+    public Boolean isLong() {
         return _long;
     }
 
@@ -191,16 +175,8 @@ public class Specification
      *     {@link Boolean }
      *     
      */
-    public void setLong(boolean value) {
+    public void setLong(Boolean value) {
         this._long = value;
-    }
-
-    public boolean isSetLong() {
-        return (this._long!= null);
-    }
-
-    public void unsetLong() {
-        this._long = null;
     }
 
 }

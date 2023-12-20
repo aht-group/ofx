@@ -69,15 +69,15 @@ public class Paragraph implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
-        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
-        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
-        @XmlElementRef(name = "acronym", namespace = "http://www.openfuxml.org/editorial", type = Acronym.class),
-        @XmlElementRef(name = "glossary", namespace = "http://www.openfuxml.org/editorial", type = Glossary.class),
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
         @XmlElementRef(name = "font", namespace = "http://www.openfuxml.org/layout", type = Font.class),
         @XmlElementRef(name = "emphasis", namespace = "http://www.openfuxml.org/text", type = Emphasis.class),
-        @XmlElementRef(name = "index", namespace = "http://www.openfuxml.org/editorial", type = Index.class)
+        @XmlElementRef(name = "symbol", namespace = "http://www.openfuxml.org/text", type = Symbol.class),
+        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class),
+        @XmlElementRef(name = "glossary", namespace = "http://www.openfuxml.org/editorial", type = Glossary.class),
+        @XmlElementRef(name = "acronym", namespace = "http://www.openfuxml.org/editorial", type = Acronym.class),
+        @XmlElementRef(name = "index", namespace = "http://www.openfuxml.org/editorial", type = Index.class),
+        @XmlElementRef(name = "reference", namespace = "http://www.openfuxml.org", type = Reference.class),
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -104,16 +104,16 @@ public class Paragraph implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Symbol }
-     * {@link Reference }
-     * {@link Marginalia }
+     * {@link String }
      * {@link Acronym }
      * {@link Glossary }
-     * {@link Image }
-     * {@link String }
-     * {@link Font }
-     * {@link Emphasis }
      * {@link Index }
+     * {@link Font }
+     * {@link Image }
+     * {@link Marginalia }
+     * {@link Reference }
+     * {@link Emphasis }
+     * {@link Symbol }
      * 
      * 
      */
@@ -122,14 +122,6 @@ public class Paragraph implements Serializable
             content = new ArrayList<Serializable>();
         }
         return this.content;
-    }
-
-    public boolean isSetContent() {
-        return ((this.content!= null)&&(!this.content.isEmpty()));
-    }
-
-    public void unsetContent() {
-        this.content = null;
     }
 
     /**
@@ -156,10 +148,6 @@ public class Paragraph implements Serializable
         this.lang = value;
     }
 
-    public boolean isSetLang() {
-        return (this.lang!= null);
-    }
-
     /**
      * Gets the value of the top property.
      * 
@@ -182,10 +170,6 @@ public class Paragraph implements Serializable
      */
     public void setTop(String value) {
         this.top = value;
-    }
-
-    public boolean isSetTop() {
-        return (this.top!= null);
     }
 
 }

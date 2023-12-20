@@ -71,12 +71,4 @@ public class Comment implements Serializable
         return this.raw;
     }
 
-    public boolean isSetRaw() {
-        return ((this.raw!= null)&&(!this.raw.isEmpty()));
-    }
-
-    public void unsetRaw() {
-        this.raw = null;
-    }
-
 }

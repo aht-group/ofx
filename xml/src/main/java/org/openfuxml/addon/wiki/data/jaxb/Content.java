@@ -79,10 +79,6 @@ public class Content implements Serializable
         this.server = value;
     }
 
-    public boolean isSetServer() {
-        return (this.server!= null);
-    }
-
     /**
      * Gets the value of the page property.
      * 
@@ -105,10 +101,6 @@ public class Content implements Serializable
      */
     public void setPage(Page value) {
         this.page = value;
-    }
-
-    public boolean isSetPage() {
-        return (this.page!= null);
     }
 
     /**
@@ -135,10 +127,6 @@ public class Content implements Serializable
         this.category = value;
     }
 
-    public boolean isSetCategory() {
-        return (this.category!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -163,10 +151,6 @@ public class Content implements Serializable
         this.id = value;
     }
 
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
     /**
      * Gets the value of the source property.
      * 
@@ -189,10 +173,6 @@ public class Content implements Serializable
      */
     public void setSource(String value) {
         this.source = value;
-    }
-
-    public boolean isSetSource() {
-        return (this.source!= null);
     }
 
 }

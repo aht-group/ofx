@@ -78,14 +78,6 @@ public class Layout
         return this.line;
     }
 
-    public boolean isSetLine() {
-        return ((this.line!= null)&&(!this.line.isEmpty()));
-    }
-
-    public void unsetLine() {
-        this.line = null;
-    }
-
     /**
      * Gets the value of the font property.
      * 
@@ -110,10 +102,6 @@ public class Layout
         this.font = value;
     }
 
-    public boolean isSetFont() {
-        return (this.font!= null);
-    }
-
     /**
      * Gets the value of the spacing property.
      * 
@@ -136,10 +124,6 @@ public class Layout
      */
     public void setSpacing(Spacing value) {
         this.spacing = value;
-    }
-
-    public boolean isSetSpacing() {
-        return (this.spacing!= null);
     }
 
 }

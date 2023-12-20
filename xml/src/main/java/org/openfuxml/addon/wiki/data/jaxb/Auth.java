@@ -75,10 +75,6 @@ public class Auth
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the name property.
      * 
@@ -103,10 +99,6 @@ public class Auth
         this.name = value;
     }
 
-    public boolean isSetName() {
-        return (this.name!= null);
-    }
-
     /**
      * Gets the value of the password property.
      * 
@@ -129,10 +121,6 @@ public class Auth
      */
     public void setPassword(String value) {
         this.password = value;
-    }
-
-    public boolean isSetPassword() {
-        return (this.password!= null);
     }
 
 }

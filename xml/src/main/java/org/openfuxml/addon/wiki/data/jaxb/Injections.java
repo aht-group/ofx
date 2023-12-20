@@ -83,14 +83,6 @@ public class Injections
         return this.wikiinjection;
     }
 
-    public boolean isSetWikiinjection() {
-        return ((this.wikiinjection!= null)&&(!this.wikiinjection.isEmpty()));
-    }
-
-    public void unsetWikiinjection() {
-        this.wikiinjection = null;
-    }
-
     /**
      * Gets the value of the template property.
      * 
@@ -120,14 +112,6 @@ public class Injections
         return this.template;
     }
 
-    public boolean isSetTemplate() {
-        return ((this.template!= null)&&(!this.template.isEmpty()));
-    }
-
-    public void unsetTemplate() {
-        this.template = null;
-    }
-
     /**
      * Gets the value of the external property.
      * 
@@ -136,7 +120,7 @@ public class Injections
      *     {@link Boolean }
      *     
      */
-    public boolean isExternal() {
+    public Boolean isExternal() {
         return external;
     }
 
@@ -148,16 +132,8 @@ public class Injections
      *     {@link Boolean }
      *     
      */
-    public void setExternal(boolean value) {
+    public void setExternal(Boolean value) {
         this.external = value;
-    }
-
-    public boolean isSetExternal() {
-        return (this.external!= null);
-    }
-
-    public void unsetExternal() {
-        this.external = null;
     }
 
     /**
@@ -182,10 +158,6 @@ public class Injections
      */
     public void setSource(String value) {
         this.source = value;
-    }
-
-    public boolean isSetSource() {
-        return (this.source!= null);
     }
 
 }

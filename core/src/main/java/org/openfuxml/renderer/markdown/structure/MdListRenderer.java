@@ -1,6 +1,8 @@
 package org.openfuxml.renderer.markdown.structure;
 
 
+import java.util.Objects;
+
 import org.openfuxml.content.list.Item;
 import org.openfuxml.content.list.List;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
@@ -30,7 +32,7 @@ public class MdListRenderer extends AbstractOfxMarkdownRenderer implements OfxMd
 	public void render(List list)
 	{
 		txt.add(item);
-		if(list.getType().isSetOrdering() && list.getType().getOrdering().equals("ordered"))
+		if(Objects.nonNull(list.getType().getOrdering()) && list.getType().getOrdering().equals("ordered"))
 		{
 			int iterator = 1;
 			for(Item i : list.getItem())

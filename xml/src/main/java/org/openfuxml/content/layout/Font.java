@@ -44,7 +44,7 @@ public class Font implements Serializable
      *     {@link Integer }
      *     
      */
-    public int getRelativeSize() {
+    public Integer getRelativeSize() {
         return relativeSize;
     }
 
@@ -56,16 +56,8 @@ public class Font implements Serializable
      *     {@link Integer }
      *     
      */
-    public void setRelativeSize(int value) {
+    public void setRelativeSize(Integer value) {
         this.relativeSize = value;
-    }
-
-    public boolean isSetRelativeSize() {
-        return (this.relativeSize!= null);
-    }
-
-    public void unsetRelativeSize() {
-        this.relativeSize = null;
     }
 
 }

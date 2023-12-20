@@ -52,12 +52,12 @@ public class Marginalia implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
-        @XmlElementRef(name = "column", namespace = "http://www.openfuxml.org/layout", type = Column.class),
-        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
         @XmlElementRef(name = "box", namespace = "http://www.openfuxml.org/layout", type = Box.class),
         @XmlElementRef(name = "container", namespace = "http://www.openfuxml.org/layout", type = Container.class),
-        @XmlElementRef(name = "width", namespace = "http://www.openfuxml.org/layout", type = Width.class)
+        @XmlElementRef(name = "width", namespace = "http://www.openfuxml.org/layout", type = Width.class),
+        @XmlElementRef(name = "column", namespace = "http://www.openfuxml.org/layout", type = Column.class),
+        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
+        @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -80,13 +80,13 @@ public class Marginalia implements Serializable
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Paragraph }
-     * {@link Column }
-     * {@link Image }
      * {@link String }
      * {@link Box }
+     * {@link Column }
      * {@link Container }
      * {@link Width }
+     * {@link Image }
+     * {@link Paragraph }
      * 
      * 
      */
@@ -95,14 +95,6 @@ public class Marginalia implements Serializable
             content = new ArrayList<Serializable>();
         }
         return this.content;
-    }
-
-    public boolean isSetContent() {
-        return ((this.content!= null)&&(!this.content.isEmpty()));
-    }
-
-    public void unsetContent() {
-        this.content = null;
     }
 
 }

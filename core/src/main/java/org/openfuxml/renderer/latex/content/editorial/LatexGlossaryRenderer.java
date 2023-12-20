@@ -28,7 +28,7 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 	
 	public void render(Glossary glossary) throws OfxAuthoringException
 	{	
-		if(glossary.isSetCode())
+		if(Objects.nonNull(glossary.getCode()))
 		{
 			renderGlossaryItem(glossary);
 		}
@@ -53,7 +53,7 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 		preTxt.addAll(LatexCommentRenderer.stars());
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a "+Glossary.class.getSimpleName()+" with: "+this.getClass().getSimpleName()));
 		
-		if(glossary.isSetComment())
+		if(Objects.nonNull(glossary.getComment()))
 		{
 			LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 			rComment.render(glossary.getComment());
@@ -68,9 +68,9 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 	
 	private void renderGlossaryTerm(Term term) throws OfxAuthoringException
 	{
-		if(!term.isSetCode()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a @code");}
-		if(!term.isSetText()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Text.class.getSimpleName());}
-		if(!term.isSetParagraph()){throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Paragraph.class.getSimpleName());}
+		if(Objects.isNull(term.getCode())) {throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a @code");}
+		if(Objects.isNull(term.getText())) {throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Text.class.getSimpleName());}
+		if(Objects.isNull(term.getParagraph())) {throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Paragraph.class.getSimpleName());}
 				
 //		LatexTextRenderer tr = new LatexTextRenderer(cmm,dsm);
 //		tr.render(term.getText());

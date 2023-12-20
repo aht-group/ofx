@@ -26,6 +26,7 @@ import org.openfuxml.content.layout.Layout;
  *         &lt;element ref="{http://www.openfuxml.org/layout}layout" minOccurs="0"/&gt;
  *         &lt;element ref="{http://www.openfuxml.org/table}cell" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -48,37 +49,8 @@ public class Row
     protected Layout layout;
     @XmlElement(required = true)
     protected List<Cell> cell;
-    
     @XmlAttribute(name = "id")
     protected String id;
-    
-    /**
-     * Gets the value of the id property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setId(String value) {
-        this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
 
     /**
      * Gets the value of the layout property.
@@ -102,10 +74,6 @@ public class Row
      */
     public void setLayout(Layout value) {
         this.layout = value;
-    }
-
-    public boolean isSetLayout() {
-        return (this.layout!= null);
     }
 
     /**
@@ -137,12 +105,28 @@ public class Row
         return this.cell;
     }
 
-    public boolean isSetCell() {
-        return ((this.cell!= null)&&(!this.cell.isEmpty()));
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getId() {
+        return id;
     }
 
-    public void unsetCell() {
-        this.cell = null;
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setId(String value) {
+        this.id = value;
     }
 
 }

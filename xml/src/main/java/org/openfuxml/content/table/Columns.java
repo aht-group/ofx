@@ -70,12 +70,4 @@ public class Columns
         return this.column;
     }
 
-    public boolean isSetColumn() {
-        return ((this.column!= null)&&(!this.column.isEmpty()));
-    }
-
-    public void unsetColumn() {
-        this.column = null;
-    }
-
 }

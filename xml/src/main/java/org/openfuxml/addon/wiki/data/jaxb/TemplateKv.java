@@ -69,10 +69,6 @@ public class TemplateKv
         this.markup = value;
     }
 
-    public boolean isSetMarkup() {
-        return (this.markup!= null);
-    }
-
     /**
      * Gets the value of the key property.
      * 
@@ -95,10 +91,6 @@ public class TemplateKv
      */
     public void setKey(String value) {
         this.key = value;
-    }
-
-    public boolean isSetKey() {
-        return (this.key!= null);
     }
 
 }

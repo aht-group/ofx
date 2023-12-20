@@ -81,10 +81,6 @@ public class Reference implements Serializable
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -107,10 +103,6 @@ public class Reference implements Serializable
      */
     public void setType(String value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
     /**
@@ -137,10 +129,6 @@ public class Reference implements Serializable
         this.target = value;
     }
 
-    public boolean isSetTarget() {
-        return (this.target!= null);
-    }
-
     /**
      * Gets the value of the name property.
      * 
@@ -165,10 +153,6 @@ public class Reference implements Serializable
         this.name = value;
     }
 
-    public boolean isSetName() {
-        return (this.name!= null);
-    }
-
     /**
      * Gets the value of the prefix property.
      * 
@@ -191,10 +175,6 @@ public class Reference implements Serializable
      */
     public void setPrefix(String value) {
         this.prefix = value;
-    }
-
-    public boolean isSetPrefix() {
-        return (this.prefix!= null);
     }
 
 }

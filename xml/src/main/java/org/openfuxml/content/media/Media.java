@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.exlp.model.xml.io.File;
 
 
@@ -77,10 +76,6 @@ public class Media
         this.file = value;
     }
 
-    public boolean isSetFile() {
-        return (this.file!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -103,10 +98,6 @@ public class Media
      */
     public void setId(String value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
     }
 
     /**
@@ -133,10 +124,6 @@ public class Media
         this.src = value;
     }
 
-    public boolean isSetSrc() {
-        return (this.src!= null);
-    }
-
     /**
      * Gets the value of the dst property.
      * 
@@ -159,10 +146,6 @@ public class Media
      */
     public void setDst(String value) {
         this.dst = value;
-    }
-
-    public boolean isSetDst() {
-        return (this.dst!= null);
     }
 
 }

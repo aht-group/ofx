@@ -37,7 +37,7 @@ public class WordTableRenderer
 	{	
 		// exeptions..
 		//if(!ofxTable.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
-		if(!ofxTable.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
+		if(Objects.isNull(ofxTable.getContent())){throw new OfxAuthoringException("<table> without <content>");}
 		if(ofxTable.getContent().getBody().size()!=1){throw new OfxAuthoringException("<content> must exactly have 1 body!");}
 		//if(!ofxTable.getSpecification().isSetLong()){ofxTable.getSpecification().setLong(false);}
 		//if(!ofxTable.getSpecification().isSetFloat()){ofxTable.getSpecification().setFloat(XmlFloatFactory.build(false));}

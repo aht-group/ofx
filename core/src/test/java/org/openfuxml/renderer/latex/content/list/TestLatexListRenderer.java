@@ -64,7 +64,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     public void noOrderingNoDescription() throws OfxAuthoringException, IOException
     {	
     	List list = createList();
-    	list.getType().unsetDescription();
+    	list.getType().setDescription(null);
     	list.getType().setOrdering(null);
     	renderer.render(list,parentSection);
     }

@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html.table;
 
+import java.util.Objects;
+
 import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.list.List;
 import org.openfuxml.content.media.Image;
@@ -39,17 +41,17 @@ public class HtmlTableRenderer extends AbstractOfxHtmlRenderer implements OfxHtm
 		HtmlElement table = new HtmlElement("table");
 		table.setAttribute("id", tab.getId()); //benötigt für interne Referenzen!
 		table.setAttribute("style", "width:100%");
-		if(tab.isSetComment()){commentRenderer(table, tab.getComment());}
+		if(Objects.nonNull(tab.getComment())) {commentRenderer(table, tab.getComment());}
 
 		//Reihenfolge beachten: Caption, Head, Foot, Body. Foot ist optional
 		table.addContent(caption(tab.getTitle()));
 		renderHead(table, tab.getContent().getHead());
-		if(tab.getContent().isSetFoot()){renderFoot(table, tab.getContent().getFoot());}
+		if(Objects.nonNull(tab.getContent().getFoot())) {renderFoot(table, tab.getContent().getFoot());}
 		renderBody(table, tab.getContent().getBody());
 
 		parent.addContent(table);
 
-		if(tab.isSetSpecification() && tab.getSpecification() != null){HtmlElement.addStyleElement(styleProperties(tab.getSpecification().getColumns()), HtmlDocumentRenderer.getInstance().getHtml());}
+		if(Objects.nonNull(tab.getSpecification() )) {HtmlElement.addStyleElement(styleProperties(tab.getSpecification().getColumns()), HtmlDocumentRenderer.getInstance().getHtml());}
 	}
 
 	private void renderHead(HtmlElement table, Head head)

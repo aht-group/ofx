@@ -72,10 +72,6 @@ public class Acronyms
         this.comment = value;
     }
 
-    public boolean isSetComment() {
-        return (this.comment!= null);
-    }
-
     /**
      * Gets the value of the term property.
      * 
@@ -103,14 +99,6 @@ public class Acronyms
             term = new ArrayList<Term>();
         }
         return this.term;
-    }
-
-    public boolean isSetTerm() {
-        return ((this.term!= null)&&(!this.term.isEmpty()));
-    }
-
-    public void unsetTerm() {
-        this.term = null;
     }
 
 }

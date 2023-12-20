@@ -30,8 +30,8 @@ public class LatexLineTableRenderer extends AbstractOfxLatexRenderer implements 
 	
 	public void render(Table table) throws OfxAuthoringException
 	{	
-		if(!table.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
-		if(!table.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
+		if(Objects.isNull(table.getSpecification())) {throw new OfxAuthoringException("<table> without <specification>");}
+		if(Objects.isNull(table.getContent())) {throw new OfxAuthoringException("<table> without <content>");}
 		
 		renderTabular(table.getSpecification(),table.getContent());
 	}

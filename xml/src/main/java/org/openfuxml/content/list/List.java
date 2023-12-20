@@ -78,10 +78,6 @@ public class List implements Serializable
         this.comment = value;
     }
 
-    public boolean isSetComment() {
-        return (this.comment!= null);
-    }
-
     /**
      * Gets the value of the layout property.
      * 
@@ -106,10 +102,6 @@ public class List implements Serializable
         this.layout = value;
     }
 
-    public boolean isSetLayout() {
-        return (this.layout!= null);
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -132,10 +124,6 @@ public class List implements Serializable
      */
     public void setType(Type value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
     /**
@@ -165,14 +153,6 @@ public class List implements Serializable
             item = new ArrayList<Item>();
         }
         return this.item;
-    }
-
-    public boolean isSetItem() {
-        return ((this.item!= null)&&(!this.item.isEmpty()));
-    }
-
-    public void unsetItem() {
-        this.item = null;
     }
 
 }

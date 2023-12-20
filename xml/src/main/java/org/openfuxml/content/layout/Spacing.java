@@ -63,10 +63,6 @@ public class Spacing
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return true;
-    }
-
     /**
      * Gets the value of the unit property.
      * 
@@ -89,10 +85,6 @@ public class Spacing
      */
     public void setUnit(String value) {
         this.unit = value;
-    }
-
-    public boolean isSetUnit() {
-        return (this.unit!= null);
     }
 
 }
