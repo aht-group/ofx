@@ -2,6 +2,7 @@ package org.openfuxml.renderer.latex.util;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.Objects;
 
 import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.layout.Width;
@@ -25,10 +26,10 @@ public class LatexWidthCalculator
 	
 	public String buildWidth(Object parentRenderer, Width width) throws OfxAuthoringException
 	{
-		if(!width.isSetValue()){throw new OfxAuthoringException("No width-value given");}
+		if(Objects.isNull(width.getValue())) {throw new OfxAuthoringException("No width-value given");}
 		
 		StringBuffer sb = new StringBuffer();
-		if(!width.isSetUnit()){width.setUnit("cm");}
+		if(Objects.isNull(width.getUnit())) {width.setUnit("cm");}
 		
 		if(width.getUnit().equals("cm"))
 		{
@@ -50,10 +51,10 @@ public class LatexWidthCalculator
 	}
 	public String buildHeight(Height height) throws OfxAuthoringException
 	{
-		if(!height.isSetValue()){throw new OfxAuthoringException("No width-value given");}
+		if(Objects.isNull(height.getValue())) {throw new OfxAuthoringException("No height-value given");}
 		
 		StringBuffer sb = new StringBuffer();
-		if(!height.isSetUnit()){height.setUnit("cm");}
+		if(Objects.isNull(height.getUnit())) {height.setUnit("cm");}
 		
 		if(height.getUnit().equals("cm") || height.getUnit().equals("em"))
 		{

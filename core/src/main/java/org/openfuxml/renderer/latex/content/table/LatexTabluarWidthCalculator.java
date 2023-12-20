@@ -60,7 +60,7 @@ public class LatexTabluarWidthCalculator implements TabluarWidthCalculator
 			{
 				Width width = column.getWidth();
 				
-				if(width.isSetFlex() && width.isFlex() && width.isSetValue())
+				if(Objects.nonNull(width.isFlex()) && width.isFlex() && Objects.nonNull(width.getValue()))
 				{
 					sumFlex=sumFlex+width.getValue();
 				}
@@ -144,7 +144,7 @@ public class LatexTabluarWidthCalculator implements TabluarWidthCalculator
 	
 	private boolean isFlex(Column column)
 	{
-		return column.isSetWidth() && column.getWidth().isSetFlex() && column.getWidth().isFlex();
+		return Objects.nonNull(column.getWidth()) && Objects.nonNull(column.getWidth().isFlex()) && column.getWidth().isFlex();
 	}
 	
 	@Override public String getColDefinition(int i)
@@ -184,14 +184,14 @@ public class LatexTabluarWidthCalculator implements TabluarWidthCalculator
 	{
 		for(Column column : columns.getColumn())
 		{
-			if(column.isSetWidth() && column.getWidth().isSetFlex() && column.getWidth().isFlex()){return true;}
+			if(Objects.nonNull(column.getWidth()) && column.getWidth().isSetFlex() && column.getWidth().isFlex()){return true;}
 		}
 		return false;
 	}
 	
 	public String buildTableWidth(Specification specification)
 	{
-		if(specification.isSetWidth()){widthTable = specification.getWidth();}
+		if(Objects.nonNull(specification.getWidth())) {widthTable = specification.getWidth();}
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");

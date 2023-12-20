@@ -43,7 +43,7 @@ public class WikiConfigXmlXpathHelper
 	
 	public static synchronized Replacements initReplacements(Replacements replacements) throws OfxConfigurationException
 	{
-		if(replacements.isSetExternal() && replacements.isExternal())
+		if(Objects.nonNull(replacements.isExternal()) && replacements.isExternal())
 		{
 			try
 			{
@@ -64,7 +64,7 @@ public class WikiConfigXmlXpathHelper
 	
 	public static synchronized  Injections initInjections(Injections injections) throws OfxConfigurationException
 	{
-		if(injections.isSetExternal() && injections.isExternal())
+		if(Objects.nonNull(injections.isExternal()) && injections.isExternal())
 		{
 			try
 			{

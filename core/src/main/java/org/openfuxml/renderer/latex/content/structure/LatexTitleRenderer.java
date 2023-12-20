@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.structure;
 
+import java.util.Objects;
+
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
@@ -25,7 +27,7 @@ public class LatexTitleRenderer extends AbstractOfxLatexRenderer implements OfxL
 	public void render(Title title, Section section, int lvl, LatexSectionHeaderNameFactory latexPreamble)
 	{
 		logger.trace("Render title");
-		if(title.isSetNumbering()){logger.warn("Ignoring numbring");}
+		if(Objects.nonNull(title.isNumbering())) {logger.warn("Ignoring numbring");}
 		
 		txt.add("");
 

@@ -59,7 +59,7 @@ public class WordTableRenderer
 		{
 			if (Objects.nonNull(ofxTable.getSpecification().getAlignment()))
 			{
-				if(Objects.nonNull(ofxTable.getSpecification().getAlignment().getHorizontal()s)
+				if(Objects.nonNull(ofxTable.getSpecification().getAlignment().getHorizontal()))
 				{
 					builder.getParagraphFormat().setAlignment(ofxTable.getSpecification().getAlignment().getHorizontal().length());
 				}
@@ -71,9 +71,9 @@ public class WordTableRenderer
 				{
 					builder.getCellFormat().setPreferredWidth((PreferredWidth.AUTO));
 				}
-				else if (ofxTable.getSpecification().isSetWidth()==false)
+				else if (Objects.isNull(ofxTable.getSpecification().getWidth()))
 				{
-					if (ofxTable.getSpecification().getWidth().isSetUnit()==true)
+					if (Objects.nonNull(ofxTable.getSpecification().getWidth().getUnit()))
 					{
 						if (ofxTable.getSpecification().getWidth().getUnit()=="percentage")
 						{

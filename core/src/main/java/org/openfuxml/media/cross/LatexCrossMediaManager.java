@@ -3,6 +3,7 @@ package org.openfuxml.media.cross;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -39,7 +40,7 @@ public class LatexCrossMediaManager implements CrossMediaManager
 	@Override
 	public String getImageRef(Media imageMedia)
 	{
-		if(imageMedia.isSetSrc())
+		if(Objects.nonNull(imageMedia.getSrc()))
 		{
 			listMedia.add(imageMedia);
 		}

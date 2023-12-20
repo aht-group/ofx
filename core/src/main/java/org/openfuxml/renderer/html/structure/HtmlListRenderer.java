@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.html.structure;
 
+import java.util.Objects;
+
 /**
  * Author: Rebecca Roblick
  */
@@ -33,14 +35,14 @@ public class HtmlListRenderer extends AbstractOfxHtmlRenderer implements OfxHtml
 		HtmlElement element;
 		String type = "ul";
 		boolean isDescription = false;
-		if(list.getType().isSetOrdering() && list.getType().getOrdering().equalsIgnoreCase("ordered")){type = "ol";}
-		if(list.getType().isSetDescription() && list.getType().isDescription())
+		if(Objects.nonNull(list.getType().getOrdering()) && list.getType().getOrdering().equalsIgnoreCase("ordered")){type = "ol";}
+		if(Objects.nonNull(list.getType().isDescription()) && list.getType().isDescription())
 		{
 			type = "dl";
 			isDescription = true;
 		}
 		element = new HtmlElement(type);
-		if(list.isSetComment()){commentRenderer(element,list.getComment());}
+		if(Objects.nonNull(list.getComment())) {commentRenderer(element,list.getComment());}
 		for(Item i : list.getItem()){itemRenderer(element, i, isDescription);}
 		parent.addContent(element);
 	}

@@ -1,4 +1,6 @@
 package org.openfuxml.renderer.html.structure;
+import java.util.Objects;
+
 /**
  * Author: Rebecca Roblick
  */
@@ -50,9 +52,13 @@ public class HtmlMarginaliaRenderer extends AbstractOfxHtmlRenderer implements O
 	{
 		HtmlImageRenderer imgRenderer = new HtmlImageRenderer(cp);
 		imgRenderer.renderInline(p, i);
-		if(i.isSetHeight() || i.isSetWidth())
+		if(Objects.nonNull(i.getHeight()) || Objects.nonNull(i.getWidth()))
+		{
 			imgRenderer.marginaliaFloatStyle(p,HtmlElement.evaluateSize(i));
+		}
 		else
+		{
 			imgRenderer.marginaliaFloatStyle(p,"width:4em;height:4em;");
+		}
 	}
 }

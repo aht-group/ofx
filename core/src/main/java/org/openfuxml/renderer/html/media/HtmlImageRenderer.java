@@ -1,6 +1,7 @@
 package org.openfuxml.renderer.html.media;
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 /**
  * Author: Rebecca Roblick
  */
@@ -36,7 +37,7 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxHtm
 		if(image.getTitle() != null) {title = TxtTitleFactory.build(image.getTitle());}
 		img.setAttribute("alt", title);
 		img.setAttribute("src", cp.getCrossMediaManager().getImageRef(image.getMedia()));
-		if(image.isSetHeight()|| image.isSetWidth()){img.setStyleAttribute(HtmlElement.evaluateSize(image.getWidth()) + HtmlElement.evaluateSize(image.getHeight()));}
+		if(Objects.nonNull(image.getHeight()) || Objects.nonNull(image.getWidth())) {img.setStyleAttribute(HtmlElement.evaluateSize(image.getWidth()) + HtmlElement.evaluateSize(image.getHeight()));}
 
 		parent.addContent(img);
 	}
@@ -58,8 +59,8 @@ public class HtmlImageRenderer extends AbstractOfxHtmlRenderer implements OfxHtm
 			img.setAttribute("src", cp.getCrossMediaManager().getImageRef(image.getMedia()));
 		}
 		
-		if(image.isSetHeight()|| image.isSetWidth()){img.setStyleAttribute(HtmlElement.evaluateSize(image.getWidth()) + HtmlElement.evaluateSize(image.getHeight()));}
-		if(image.isSetAlignment() && image.getAlignment().getHorizontal().equals("center"))
+		if(Objects.nonNull(image.getHeight()) || Objects.nonNull(image.getWidth())) {img.setStyleAttribute(HtmlElement.evaluateSize(image.getWidth()) + HtmlElement.evaluateSize(image.getHeight()));}
+		if(Objects.nonNull(image.getAlignment()) && image.getAlignment().getHorizontal().equals("center"))
 		{
 			figure.setStyleAttribute("display:block;margin-left: auto;margin-right: auto; " + HtmlElement.evaluateSize(image.getWidth(), 2.0));
 			img.getAttribute("style").setValue(img.getAttribute("style").getValue() + "display:block;margin-left: auto;margin-right: auto;");

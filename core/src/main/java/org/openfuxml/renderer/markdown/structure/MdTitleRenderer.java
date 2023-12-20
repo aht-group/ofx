@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.markdown.structure;
 
+import java.util.Objects;
+
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
@@ -27,7 +29,7 @@ public class MdTitleRenderer extends AbstractOfxMarkdownRenderer implements OfxM
 	public void render(Title title, int lvl)
 	{
 		logger.trace("Render title");
-		if(!title.isSetNumbering()){logger.warn("No numbering for Markdown!");}
+		if(Objects.isNull(title.isNumbering())) {logger.warn("No numbering for Markdown!");}
 
 		StringBuffer sb = new StringBuffer();
 

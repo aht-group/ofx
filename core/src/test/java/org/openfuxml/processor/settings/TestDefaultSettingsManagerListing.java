@@ -1,5 +1,7 @@
 package org.openfuxml.processor.settings;
 
+import java.util.Objects;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,9 +42,9 @@ public class TestDefaultSettingsManagerListing
 	@Test
     public void codeLang() throws OfxConfigurationException 
     {
-    	Assert.assertFalse(listing.isSetCodeLang());
+    	Assert.assertFalse(Objects.nonNull(listing.getCodeLang()));
     	dsm.apply(listing);
-    	Assert.assertTrue(listing.isSetCodeLang());
+    	Assert.assertTrue(Objects.nonNull(listing.getCodeLang()));
     	Assert.assertEquals("XML", listing.getCodeLang());
     }
 	

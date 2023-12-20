@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Author: Rebecca Roblick
@@ -30,13 +31,14 @@ public class HtmlListingRenderer extends AbstractOfxHtmlRenderer implements OfxH
 		HtmlElement code = new HtmlElement("code");
 		HtmlElement pre = HtmlElement.preFormatted();
 
-		if(listing.isSetRaw()){code.addContent(listing.getRaw().getValue());}
-		if(listing.isSetExternal()){
-			try {
+		if(Objects.nonNull(listing.getRaw())) {code.addContent(listing.getRaw().getValue());}
+		if(Objects.nonNull(listing.getExternal()))
+		{
+			try
+			{
 				code.addContent(getExternal(listing.getExternal()));
-			} catch (IOException e) {
-				logger.error(e.getMessage());
 			}
+			catch (IOException e) {logger.error(e.getMessage());}
 		}
 
 		pre.setAttribute("style", "border: 1px solid gray;background:#EFF9FF;display: inline-flex;padding: 5px");

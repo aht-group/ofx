@@ -1,5 +1,7 @@
 package org.openfuxml.renderer.latex.content.table;
 
+import java.util.Objects;
+
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
@@ -29,19 +31,19 @@ public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxL
 	
 	public void render(Table table) throws OfxAuthoringException
 	{		
-		if(!table.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
-		if(!table.isSetContent()){throw new OfxAuthoringException("<table> without <content>");}
+		if(Objects.isNull(table.getSpecification())) {throw new OfxAuthoringException("<table> without <specification>");}
+		if(Objects.isNull(table.getContent())) {throw new OfxAuthoringException("<table> without <content>");}
 		if(table.getContent().getBody().size()!=1){throw new OfxAuthoringException("<content> must exactly have 1 body!");}
 		
-		if(!table.getSpecification().isSetLong()){table.getSpecification().setLong(false);}
-		if(!table.getSpecification().isSetFloat()){table.getSpecification().setFloat(XmlFloatFactory.build(false));}
+		if(Objects.isNull(table.getSpecification().isLong())) {table.getSpecification().setLong(false);}
+		if(Objects.isNull(table.getSpecification().getFloat())) {table.getSpecification().setFloat(XmlFloatFactory.build(false));}
 		
 		OfxLatexTableRenderer tableRenderer = new LatexTabuRenderer(cp); //getRendererForType();
 		
 		if(preBlankLine){preTxt.add("");}
 		preTxt.addAll(LatexCommentRenderer.stars());
 		preTxt.addAll(LatexCommentRenderer.comment("Rendering a Latex table with: "+tableRenderer.getClass().getSimpleName()));
-		if(table.isSetComment())
+		if(Objects.nonNull(table.getComment()))
 		{
 			LatexCommentRenderer rComment = new LatexCommentRenderer(cp);
 			rComment.render(table.getComment());

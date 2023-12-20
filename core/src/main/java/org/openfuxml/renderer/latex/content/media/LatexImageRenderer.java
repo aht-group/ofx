@@ -114,16 +114,16 @@ public class LatexImageRenderer extends AbstractOfxLatexRenderer implements OfxL
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
 		
-		if(image.isSetWidth() && image.isSetHeight())
+		if(Objects.nonNull(image.getWidth()) && Objects.nonNull(image.getHeight()))
 		{
 			throw new OfxAuthoringException("Image HEIGHT and WEIGHT at the same time currently not supported");
 		}
-		else if(image.isSetWidth())
+		else if(Objects.nonNull(image.getWidth()))
 		{
 			sb.append("width=");
 			sb.append(lwc.buildWidth(parentRenderer,image.getWidth()));
 		}
-		else if(image.isSetHeight())
+		else if(Objects.nonNull(image.getHeight()))
 		{
 			sb.append("height=");
 			sb.append(lwc.buildHeight(image.getHeight()));
