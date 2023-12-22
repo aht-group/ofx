@@ -76,9 +76,9 @@ public class Cell
      * Objects of the following type(s) are allowed in the list
      * {@link String }
      * {@link Font }
-     * {@link org.openfuxml.model.xml.core.list.List }
      * {@link Image }
      * {@link Paragraph }
+     * {@link org.openfuxml.model.xml.core.list.List }
      * 
      * 
      */

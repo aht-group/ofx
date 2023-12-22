@@ -30,7 +30,7 @@
     
     <jxb:bindings schemaLocation="../xsd/../xsd/content/list.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.content.list"/>
+            <jxb:package name="org.openfuxml.model.xml.core.list"/>
         </jxb:schemaBindings>
     </jxb:bindings>
 

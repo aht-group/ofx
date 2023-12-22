@@ -117,7 +117,6 @@ public class Section implements Serializable
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * {@link org.openfuxml.model.xml.core.list.List }
      * {@link Image }
      * {@link Comment }
      * {@link Highlight }
@@ -130,6 +129,7 @@ public class Section implements Serializable
      * {@link Title }
      * {@link Content }
      * {@link Template }
+     * {@link org.openfuxml.model.xml.core.list.List }
      * {@link Table }
      * 
      * 
