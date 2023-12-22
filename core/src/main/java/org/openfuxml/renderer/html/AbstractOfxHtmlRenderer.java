@@ -59,7 +59,7 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 		sectionRenderer.render(parent, section);
 	}
 
-	public void listRenderer(HtmlElement parent,org.openfuxml.content.list.List list)
+	public void listRenderer(HtmlElement parent,org.openfuxml.model.xml.core.list.List list)
 	{
 		HtmlListRenderer listRenderer = new HtmlListRenderer(cp);
 		listRenderer.render(parent, list);

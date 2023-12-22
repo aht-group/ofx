@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.list;
+package org.openfuxml.model.xml.core.list;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;

@@ -2,9 +2,9 @@ package org.openfuxml.renderer.word.content;
 
 import java.awt.Color;
 
-import org.openfuxml.content.list.Item;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.model.xml.core.list.Item;
 import org.openfuxml.renderer.word.util.SetFont;
 import org.openfuxml.renderer.word.util.SetFont.setFontEnum;
 import org.slf4j.Logger;
@@ -32,13 +32,13 @@ public class WordListRenderer
 	
 	public WordListRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 
-	public void render(org.openfuxml.content.list.List ofxList, boolean numbersFormating) 
+	public void render(org.openfuxml.model.xml.core.list.List ofxList, boolean numbersFormating) 
 	{
 		this.numbersFormating=numbersFormating;
 		render(ofxList); 
 	} 
 	
-	public void render(org.openfuxml.content.list.List ofxList) 
+	public void render(org.openfuxml.model.xml.core.list.List ofxList) 
 	{
 		SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
 

@@ -1,7 +1,7 @@
 package org.openfuxml.factory.xml.list;
 
-import org.openfuxml.content.list.List;
-import org.openfuxml.content.list.Type;
+import org.openfuxml.model.xml.core.list.List;
+import org.openfuxml.model.xml.core.list.Type;
 
 public class XmlListFactory
 {

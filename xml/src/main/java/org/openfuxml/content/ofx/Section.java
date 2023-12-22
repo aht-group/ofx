@@ -78,7 +78,7 @@ public class Section implements Serializable
         @XmlElementRef(name = "include", namespace = "http://www.openfuxml.org", type = Include.class),
         @XmlElementRef(name = "table", namespace = "http://www.openfuxml.org/table", type = Table.class),
         @XmlElementRef(name = "image", namespace = "http://www.openfuxml.org/media", type = Image.class),
-        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.content.list.List.class),
+        @XmlElementRef(name = "list", namespace = "http://www.openfuxml.org/list", type = org.openfuxml.model.xml.core.list.List.class),
         @XmlElementRef(name = "template", namespace = "http://www.openfuxml.org/wiki", type = Template.class)
     })
     @XmlMixed
@@ -117,7 +117,7 @@ public class Section implements Serializable
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * {@link org.openfuxml.content.list.List }
+     * {@link org.openfuxml.model.xml.core.list.List }
      * {@link Image }
      * {@link Comment }
      * {@link Highlight }

@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.list;
+package org.openfuxml.model.xml.core.list;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

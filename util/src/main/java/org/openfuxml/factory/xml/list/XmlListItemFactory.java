@@ -2,8 +2,8 @@ package org.openfuxml.factory.xml.list;
 
 import java.util.List;
 
-import org.openfuxml.content.list.Item;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.model.xml.core.list.Item;
 
 public class XmlListItemFactory
 {	

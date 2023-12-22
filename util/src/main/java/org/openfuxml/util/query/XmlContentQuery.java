@@ -3,8 +3,8 @@ package org.openfuxml.util.query;
 import java.io.Serializable;
 import java.util.List;
 
-import org.openfuxml.content.list.Item;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.model.xml.core.list.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -52,7 +52,7 @@ public class AbstractOfxMarkdownRenderer extends AbstractOfxRenderer
 		return resultTxt;
 	}
 
-	public void listRenderer(org.openfuxml.content.list.List list)
+	public void listRenderer(org.openfuxml.model.xml.core.list.List list)
 	{
 		MdListRenderer listR = new MdListRenderer(cp);
 		listR.render(list);

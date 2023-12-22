@@ -58,7 +58,7 @@ public class XmlCellFactory
 		return cell;
 	}
 	
-	public static Cell list(org.openfuxml.content.list.List list)
+	public static Cell list(org.openfuxml.model.xml.core.list.List list)
 	{
 		Cell cell = build();
 		cell.getContent().add(list);

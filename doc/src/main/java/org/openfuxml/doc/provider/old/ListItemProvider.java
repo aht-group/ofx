@@ -1,8 +1,8 @@
 package org.openfuxml.doc.provider.old;
 
-import org.openfuxml.content.list.Item;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.doc.provider.DemoContentProvider;
+import org.openfuxml.model.xml.core.list.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

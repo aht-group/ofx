@@ -2,15 +2,12 @@ package org.openfuxml.renderer.html.structure;
 
 import java.util.Objects;
 
-/**
- * Author: Rebecca Roblick
- */
-import org.openfuxml.content.list.Item;
-import org.openfuxml.content.list.List;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
+import org.openfuxml.model.xml.core.list.Item;
+import org.openfuxml.model.xml.core.list.List;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.util.HtmlElement;
 import org.slf4j.Logger;

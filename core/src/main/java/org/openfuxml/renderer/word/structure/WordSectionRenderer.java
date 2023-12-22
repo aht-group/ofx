@@ -121,9 +121,9 @@ public class WordSectionRenderer
 			{
 				renderMarginalia((org.openfuxml.content.ofx.Marginalia) s);
 			}
-			else if (s instanceof org.openfuxml.content.list.List)
+			else if (s instanceof org.openfuxml.model.xml.core.list.List)
 			{
-				renderList((org.openfuxml.content.list.List) s);
+				renderList((org.openfuxml.model.xml.core.list.List) s);
 			}
 			else if (s instanceof org.openfuxml.content.ofx.Listing)
 			{
@@ -179,7 +179,7 @@ public class WordSectionRenderer
 		logger.trace("WordSectionRenderer.renderListing()");
 	}
 
-	private void renderList(org.openfuxml.content.list.List s)
+	private void renderList(org.openfuxml.model.xml.core.list.List s)
 	{
 		WordListRenderer wPF = new WordListRenderer(doc, builder);
 		if (listNumbersFormating) {wPF.render(s,true);}

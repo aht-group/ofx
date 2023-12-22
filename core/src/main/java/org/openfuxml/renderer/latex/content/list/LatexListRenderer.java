@@ -4,13 +4,13 @@ import java.util.Objects;
 
 import org.openfuxml.content.layout.Layout;
 import org.openfuxml.content.layout.Spacing;
-import org.openfuxml.content.list.Item;
-import org.openfuxml.content.list.List;
-import org.openfuxml.content.list.Type;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.list.XmlListFactory2;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.model.xml.core.list.Item;
+import org.openfuxml.model.xml.core.list.List;
+import org.openfuxml.model.xml.core.list.Type;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
