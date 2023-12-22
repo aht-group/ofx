@@ -128,9 +128,9 @@ public class Section implements Serializable
      * {@link Section }
      * {@link Sections }
      * {@link Title }
-     * {@link Table }
      * {@link Content }
      * {@link Template }
+     * {@link Table }
      * 
      * 
      */
