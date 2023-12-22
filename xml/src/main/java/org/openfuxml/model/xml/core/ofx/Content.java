@@ -71,9 +71,9 @@ public class Content
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * {@link org.openfuxml.model.xml.addon.wiki.Content }
      * {@link Section }
      * {@link Sections }
-     * {@link org.openfuxml.model.xml.addon.wiki.Content }
      * 
      * 
      */

@@ -12,7 +12,7 @@
 
 	<jxb:bindings schemaLocation="../xsd/../xsd/content/ofx.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.content.ofx"/>
+            <jxb:package name="org.openfuxml.model.xml.core.ofx"/>
         </jxb:schemaBindings>
     </jxb:bindings>
 	

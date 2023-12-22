@@ -81,12 +81,12 @@ public class Marginalia implements Serializable
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * {@link Paragraph }
      * {@link Box }
      * {@link Column }
      * {@link Container }
      * {@link Width }
      * {@link Image }
+     * {@link Paragraph }
      * 
      * 
      */
