@@ -12,9 +12,10 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.openfuxml.content.editorial.Acronym;
-import org.openfuxml.content.editorial.Glossary;
-import org.openfuxml.content.editorial.Index;
+
+import org.openfuxml.model.xml.core.editorial.Acronym;
+import org.openfuxml.model.xml.core.editorial.Glossary;
+import org.openfuxml.model.xml.core.editorial.Index;
 import org.openfuxml.model.xml.core.layout.Font;
 import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.model.xml.core.text.Emphasis;

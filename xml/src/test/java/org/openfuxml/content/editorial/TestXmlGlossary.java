@@ -1,6 +1,7 @@
 package org.openfuxml.content.editorial;
 
 import org.openfuxml.content.ofx.TestXmlComment;
+import org.openfuxml.model.xml.core.editorial.Glossary;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;

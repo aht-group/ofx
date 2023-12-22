@@ -4,10 +4,10 @@ import java.io.FileNotFoundException;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.openfuxml.content.editorial.Glossary;
-import org.openfuxml.content.editorial.Term;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.factory.xml.ofx.content.XmlCommentFactory;
+import org.openfuxml.model.xml.core.editorial.Glossary;
+import org.openfuxml.model.xml.core.editorial.Term;
 import org.openfuxml.util.OfxCommentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

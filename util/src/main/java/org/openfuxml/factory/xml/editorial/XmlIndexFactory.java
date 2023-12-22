@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.editorial;
 
-import org.openfuxml.content.editorial.Index;
+import org.openfuxml.model.xml.core.editorial.Index;
 
 public class XmlIndexFactory
 {	

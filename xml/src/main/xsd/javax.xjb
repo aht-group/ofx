@@ -18,7 +18,7 @@
 	
 	<jxb:bindings schemaLocation="../xsd/../xsd/content/editorial.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.content.editorial"/>
+            <jxb:package name="org.openfuxml.model.xml.core.editorial"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     

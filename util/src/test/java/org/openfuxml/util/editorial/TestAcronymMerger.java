@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.content.editorial.Acronyms;
+import org.openfuxml.model.xml.core.editorial.Acronyms;
 import org.openfuxml.test.AbstractOfxUtilTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

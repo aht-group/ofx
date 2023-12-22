@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.editorial;
 
-import org.openfuxml.content.editorial.Glossary;
+import org.openfuxml.model.xml.core.editorial.Glossary;
 
 public class XmlGlossaryFactory
 {	

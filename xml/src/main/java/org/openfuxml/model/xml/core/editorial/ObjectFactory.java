@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.editorial;
+package org.openfuxml.model.xml.core.editorial;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

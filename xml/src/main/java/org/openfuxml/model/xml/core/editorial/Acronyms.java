@@ -1,12 +1,11 @@
 
-package org.openfuxml.content.editorial;
+package org.openfuxml.model.xml.core.editorial;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -26,7 +25,6 @@ import org.openfuxml.content.ofx.Comment;
  *         &lt;element ref="{http://www.openfuxml.org}comment" minOccurs="0"/&gt;
  *         &lt;element ref="{http://www.openfuxml.org/editorial}term" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
- *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -39,8 +37,9 @@ import org.openfuxml.content.ofx.Comment;
     "comment",
     "term"
 })
-@XmlRootElement(name = "glossary")
-public class Glossary implements Serializable
+@XmlRootElement(name = "acronyms")
+public class Acronyms
+    implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
@@ -48,8 +47,6 @@ public class Glossary implements Serializable
     protected Comment comment;
     @XmlElement(required = true)
     protected List<Term> term;
-    @XmlAttribute(name = "code")
-    protected String code;
 
     /**
      * Gets the value of the comment property.
@@ -102,30 +99,6 @@ public class Glossary implements Serializable
             term = new ArrayList<Term>();
         }
         return this.term;
-    }
-
-    /**
-     * Gets the value of the code property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCode() {
-        return code;
-    }
-
-    /**
-     * Sets the value of the code property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCode(String value) {
-        this.code = value;
     }
 
 }

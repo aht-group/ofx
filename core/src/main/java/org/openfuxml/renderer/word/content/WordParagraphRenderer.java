@@ -1,12 +1,12 @@
 package org.openfuxml.renderer.word.content;
 
-import org.openfuxml.content.editorial.Acronym;
-import org.openfuxml.content.editorial.Glossary;
-import org.openfuxml.content.editorial.Index;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.model.xml.core.editorial.Acronym;
+import org.openfuxml.model.xml.core.editorial.Glossary;
+import org.openfuxml.model.xml.core.editorial.Index;
 import org.openfuxml.model.xml.core.layout.Font;
 import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.model.xml.core.text.Emphasis;

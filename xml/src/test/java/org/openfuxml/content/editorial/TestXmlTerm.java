@@ -2,6 +2,7 @@ package org.openfuxml.content.editorial;
 
 import org.openfuxml.content.ofx.TestXmlParagraph;
 import org.openfuxml.content.text.TestXmlText;
+import org.openfuxml.model.xml.core.editorial.Term;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
