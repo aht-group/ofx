@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.graph;
+package org.openfuxml.model.xml.addon.graph;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;

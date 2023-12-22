@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.graph;
+package org.openfuxml.model.xml.addon.graph;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -19,8 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.openfuxml.org/graph}nodes"/&gt;
- *         &lt;element ref="{http://www.openfuxml.org/graph}edges"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/graph}node"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -31,66 +30,39 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "nodes",
-    "edges"
+    "node"
 })
-@XmlRootElement(name = "graph")
-public class Graph
+@XmlRootElement(name = "tree")
+public class Tree
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected Nodes nodes;
-    @XmlElement(required = true)
-    protected Edges edges;
+    protected Node node;
 
     /**
-     * Gets the value of the nodes property.
+     * Gets the value of the node property.
      * 
      * @return
      *     possible object is
-     *     {@link Nodes }
+     *     {@link Node }
      *     
      */
-    public Nodes getNodes() {
-        return nodes;
+    public Node getNode() {
+        return node;
     }
 
     /**
-     * Sets the value of the nodes property.
+     * Sets the value of the node property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Nodes }
+     *     {@link Node }
      *     
      */
-    public void setNodes(Nodes value) {
-        this.nodes = value;
-    }
-
-    /**
-     * Gets the value of the edges property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Edges }
-     *     
-     */
-    public Edges getEdges() {
-        return edges;
-    }
-
-    /**
-     * Sets the value of the edges property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Edges }
-     *     
-     */
-    public void setEdges(Edges value) {
-        this.edges = value;
+    public void setNode(Node value) {
+        this.node = value;
     }
 
 }
