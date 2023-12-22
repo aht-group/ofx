@@ -109,11 +109,11 @@ public class Paragraph implements Serializable
      * {@link Glossary }
      * {@link Index }
      * {@link Font }
-     * {@link Image }
      * {@link Marginalia }
      * {@link Reference }
      * {@link Emphasis }
      * {@link Symbol }
+     * {@link Image }
      * 
      * 
      */

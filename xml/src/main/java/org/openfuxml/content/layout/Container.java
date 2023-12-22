@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.model.xml.core.media.Image;
 
@@ -80,8 +79,8 @@ public class Container implements Serializable
      * {@link Column }
      * {@link Container }
      * {@link Font }
-     * {@link Image }
      * {@link Paragraph }
+     * {@link Image }
      * 
      * 
      */

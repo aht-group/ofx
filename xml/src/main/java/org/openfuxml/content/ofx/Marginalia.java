@@ -85,8 +85,8 @@ public class Marginalia implements Serializable
      * {@link Column }
      * {@link Container }
      * {@link Width }
-     * {@link Image }
      * {@link Paragraph }
+     * {@link Image }
      * 
      * 
      */

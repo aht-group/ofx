@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.openfuxml.model.xml.addon.wiki.Content;
 import org.openfuxml.model.xml.addon.wiki.Template;
 import org.openfuxml.model.xml.core.media.Image;
@@ -118,7 +117,6 @@ public class Section implements Serializable
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * {@link Image }
      * {@link Comment }
      * {@link Highlight }
      * {@link Include }
@@ -131,6 +129,7 @@ public class Section implements Serializable
      * {@link Content }
      * {@link Template }
      * {@link org.openfuxml.model.xml.core.list.List }
+     * {@link Image }
      * {@link Table }
      * 
      * 
