@@ -1,12 +1,12 @@
 package org.openfuxml.renderer.markdown.structure;
 
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.model.xml.core.media.Image;
+import org.openfuxml.model.xml.core.text.Emphasis;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
 import org.openfuxml.renderer.markdown.media.MdImageRenderer;
 import org.slf4j.Logger;

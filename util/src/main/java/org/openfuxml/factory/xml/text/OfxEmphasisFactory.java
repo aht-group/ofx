@@ -2,7 +2,7 @@ package org.openfuxml.factory.xml.text;
 
 import java.util.Objects;
 
-import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.model.xml.core.text.Emphasis;
 
 public class OfxEmphasisFactory
 {

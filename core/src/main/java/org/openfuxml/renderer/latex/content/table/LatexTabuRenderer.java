@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.layout.Line;
-import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.layout.XmlLineFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
@@ -17,6 +16,7 @@ import org.openfuxml.model.xml.core.table.Head;
 import org.openfuxml.model.xml.core.table.Row;
 import org.openfuxml.model.xml.core.table.Specification;
 import org.openfuxml.model.xml.core.table.Table;
+import org.openfuxml.model.xml.core.text.Emphasis;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexTitleRenderer;
 import org.openfuxml.renderer.latex.content.text.StringRenderer;

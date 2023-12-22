@@ -1,5 +1,6 @@
 package org.openfuxml.content.text;
 
+import org.openfuxml.model.xml.core.text.Emphasis;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

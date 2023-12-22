@@ -2,9 +2,9 @@ package org.openfuxml.renderer.wiki;
 
 import java.util.Objects;
 
-import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.model.xml.core.text.Emphasis;
 
 public class WikiEmphasisRenderer extends AbstractOfxWikiRenderer implements OfxWikiRenderer
 {

@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.text;
 
-import org.openfuxml.content.text.Text;
+import org.openfuxml.model.xml.core.text.Text;
 
 public class OfxTextFactory
 {

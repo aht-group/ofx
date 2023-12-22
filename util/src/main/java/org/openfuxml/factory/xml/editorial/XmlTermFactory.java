@@ -1,9 +1,9 @@
 package org.openfuxml.factory.xml.editorial;
 
 import org.openfuxml.content.editorial.Term;
-import org.openfuxml.content.text.Text;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.text.OfxTextFactory;
+import org.openfuxml.model.xml.core.text.Text;
 
 public class XmlTermFactory
 {	

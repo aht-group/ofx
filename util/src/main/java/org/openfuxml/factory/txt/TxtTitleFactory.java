@@ -1,7 +1,7 @@
 package org.openfuxml.factory.txt;
 
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.content.text.Text;
+import org.openfuxml.model.xml.core.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

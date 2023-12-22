@@ -7,10 +7,10 @@ import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Reference;
-import org.openfuxml.content.text.Emphasis;
-import org.openfuxml.content.text.Symbol;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.media.Image;
+import org.openfuxml.model.xml.core.text.Emphasis;
+import org.openfuxml.model.xml.core.text.Symbol;
 import org.openfuxml.renderer.word.util.RemoveUnwantedRegx;
 import org.openfuxml.renderer.word.util.SetAlignment;
 import org.openfuxml.renderer.word.util.SetAlignment.setAlignmentEnum;
@@ -134,7 +134,7 @@ public class WordParagraphRenderer
 		
 	}
 
-	private void renderEmphasis(org.openfuxml.content.text.Emphasis ofxEmphasis) throws OfxAuthoringException
+	private void renderEmphasis(org.openfuxml.model.xml.core.text.Emphasis ofxEmphasis) throws OfxAuthoringException
 	{
 		WordEmphasisRenderer sf = new WordEmphasisRenderer(doc,builder);
 		sf.render(ofxEmphasis);

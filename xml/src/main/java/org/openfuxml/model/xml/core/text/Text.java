@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.text;
+package org.openfuxml.model.xml.core.text;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -19,8 +19,8 @@ import javax.xml.bind.annotation.XmlValue;
  * &lt;complexType&gt;
  *   &lt;simpleContent&gt;
  *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;string"&gt;
- *       &lt;attribute name="math" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="classifier" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/extension&gt;
  *   &lt;/simpleContent&gt;
  * &lt;/complexType&gt;
@@ -32,17 +32,17 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType(name = "", propOrder = {
     "value"
 })
-@XmlRootElement(name = "symbol")
-public class Symbol implements Serializable
+@XmlRootElement(name = "text")
+public class Text implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlValue
     protected String value;
-    @XmlAttribute(name = "math")
-    protected Boolean math;
-    @XmlAttribute(name = "code")
-    protected String code;
+    @XmlAttribute(name = "lang")
+    protected String lang;
+    @XmlAttribute(name = "classifier")
+    protected String classifier;
 
     /**
      * Gets the value of the value property.
@@ -69,51 +69,51 @@ public class Symbol implements Serializable
     }
 
     /**
-     * Gets the value of the math property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean isMath() {
-        return math;
-    }
-
-    /**
-     * Sets the value of the math property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setMath(Boolean value) {
-        this.math = value;
-    }
-
-    /**
-     * Gets the value of the code property.
+     * Gets the value of the lang property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getCode() {
-        return code;
+    public String getLang() {
+        return lang;
     }
 
     /**
-     * Sets the value of the code property.
+     * Sets the value of the lang property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setCode(String value) {
-        this.code = value;
+    public void setLang(String value) {
+        this.lang = value;
+    }
+
+    /**
+     * Gets the value of the classifier property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getClassifier() {
+        return classifier;
+    }
+
+    /**
+     * Sets the value of the classifier property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setClassifier(String value) {
+        this.classifier = value;
     }
 
 }

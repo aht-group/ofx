@@ -1,12 +1,12 @@
 package org.openfuxml.renderer.latex.content.table;
 
 import org.openfuxml.content.layout.Font;
-import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.model.xml.core.table.Cell;
 import org.openfuxml.model.xml.core.table.Row;
+import org.openfuxml.model.xml.core.text.Emphasis;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.text.StringRenderer;
 import org.slf4j.Logger;

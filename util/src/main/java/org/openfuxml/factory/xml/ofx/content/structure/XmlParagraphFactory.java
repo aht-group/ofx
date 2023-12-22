@@ -1,7 +1,7 @@
 package org.openfuxml.factory.xml.ofx.content.structure;
 
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.text.Emphasis;
+import org.openfuxml.model.xml.core.text.Emphasis;
 
 public class XmlParagraphFactory
 {

@@ -2,10 +2,10 @@ package org.openfuxml.renderer.latex.content.text;
 
 import java.util.Objects;
 
-import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.model.xml.core.text.Emphasis;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.util.TexSpecialChars;
 import org.slf4j.Logger;

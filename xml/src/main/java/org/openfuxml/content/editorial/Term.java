@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.text.Text;
+import org.openfuxml.model.xml.core.text.Text;
 
 
 /**
