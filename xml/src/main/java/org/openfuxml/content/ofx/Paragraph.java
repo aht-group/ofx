@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.openfuxml.model.xml.core.editorial.Acronym;
 import org.openfuxml.model.xml.core.editorial.Glossary;
 import org.openfuxml.model.xml.core.editorial.Index;
@@ -106,11 +105,11 @@ public class Paragraph implements Serializable
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * {@link Marginalia }
+     * {@link Reference }
      * {@link Acronym }
      * {@link Glossary }
      * {@link Index }
-     * {@link Marginalia }
-     * {@link Reference }
      * {@link Font }
      * {@link Image }
      * {@link Emphasis }
