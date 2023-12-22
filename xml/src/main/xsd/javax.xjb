@@ -47,7 +47,7 @@
     
     <jxb:bindings schemaLocation="../xsd/content/layout.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.content.layout"/>
+            <jxb:package name="org.openfuxml.model.xml.core.layout"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     

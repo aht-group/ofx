@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.openfuxml.model.xml.core.layout.Box;
 import org.openfuxml.model.xml.core.layout.Column;
 import org.openfuxml.model.xml.core.layout.Container;
@@ -82,11 +81,11 @@ public class Marginalia implements Serializable
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * {@link Paragraph }
      * {@link Box }
      * {@link Column }
      * {@link Container }
      * {@link Width }
-     * {@link Paragraph }
      * {@link Image }
      * 
      * 

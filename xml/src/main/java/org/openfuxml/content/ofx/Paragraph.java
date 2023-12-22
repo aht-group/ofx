@@ -108,9 +108,9 @@ public class Paragraph implements Serializable
      * {@link Acronym }
      * {@link Glossary }
      * {@link Index }
-     * {@link Font }
      * {@link Marginalia }
      * {@link Reference }
+     * {@link Font }
      * {@link Image }
      * {@link Emphasis }
      * {@link Symbol }
