@@ -2,12 +2,12 @@ package org.openfuxml.renderer.latex.content.table;
 
 import java.util.Objects;
 
-import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexTableRenderer;
+import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.slf4j.Logger;

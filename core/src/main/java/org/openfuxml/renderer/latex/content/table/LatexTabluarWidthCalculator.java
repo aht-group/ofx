@@ -11,12 +11,12 @@ import java.util.Objects;
 import org.apache.commons.lang3.ObjectUtils;
 import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.content.layout.Width;
-import org.openfuxml.content.table.Column;
-import org.openfuxml.content.table.Columns;
-import org.openfuxml.content.table.Specification;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory.Horizontal;
 import org.openfuxml.interfaces.renderer.util.TabluarWidthCalculator;
+import org.openfuxml.model.xml.core.table.Column;
+import org.openfuxml.model.xml.core.table.Columns;
+import org.openfuxml.model.xml.core.table.Specification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

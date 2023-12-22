@@ -6,14 +6,14 @@ import java.util.List;
 import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.ofx.Title;
-import org.openfuxml.content.table.Columns;
-import org.openfuxml.content.table.Specification;
-import org.openfuxml.content.table.Table;
 import org.openfuxml.controller.provider.DemoContentProvider;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.factory.xml.table.XmlColumnFactory;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
+import org.openfuxml.model.xml.core.table.Columns;
+import org.openfuxml.model.xml.core.table.Specification;
+import org.openfuxml.model.xml.core.table.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

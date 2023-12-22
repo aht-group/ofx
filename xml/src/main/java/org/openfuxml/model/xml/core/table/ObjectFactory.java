@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.table;
+package org.openfuxml.model.xml.core.table;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

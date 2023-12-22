@@ -2,16 +2,16 @@ package org.openfuxml.renderer.latex.content.table;
 
 import java.util.Objects;
 
-import org.openfuxml.content.table.Body;
-import org.openfuxml.content.table.Content;
-import org.openfuxml.content.table.Head;
-import org.openfuxml.content.table.Row;
-import org.openfuxml.content.table.Specification;
-import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexTableRenderer;
 import org.openfuxml.interfaces.renderer.util.TabluarWidthCalculator;
+import org.openfuxml.model.xml.core.table.Body;
+import org.openfuxml.model.xml.core.table.Content;
+import org.openfuxml.model.xml.core.table.Head;
+import org.openfuxml.model.xml.core.table.Row;
+import org.openfuxml.model.xml.core.table.Specification;
+import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.text.StringRenderer;
 import org.slf4j.Logger;

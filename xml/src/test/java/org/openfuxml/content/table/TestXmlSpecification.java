@@ -3,6 +3,7 @@ package org.openfuxml.content.table;
 import org.openfuxml.content.layout.TestXmlAlignment;
 import org.openfuxml.content.layout.TestXmlFloat;
 import org.openfuxml.content.layout.TestXmlWidth;
+import org.openfuxml.model.xml.core.table.Specification;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;

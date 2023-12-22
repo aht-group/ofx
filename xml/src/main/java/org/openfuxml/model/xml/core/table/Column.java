@@ -1,15 +1,13 @@
 
-package org.openfuxml.content.table;
+package org.openfuxml.model.xml.core.table;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.openfuxml.content.layout.Alignment;
-import org.openfuxml.content.layout.Float;
 import org.openfuxml.content.layout.Width;
 
 
@@ -23,12 +21,9 @@ import org.openfuxml.content.layout.Width;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.openfuxml.org/table}columns" minOccurs="0"/&gt;
  *         &lt;element ref="{http://www.openfuxml.org/layout}alignment" minOccurs="0"/&gt;
  *         &lt;element ref="{http://www.openfuxml.org/layout}width" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.openfuxml.org/layout}float" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
- *       &lt;attribute name="long" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -38,50 +33,19 @@ import org.openfuxml.content.layout.Width;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "columns",
     "alignment",
-    "width",
-    "_float"
+    "width"
 })
-@XmlRootElement(name = "specification")
-public class Specification
+@XmlRootElement(name = "column")
+public class Column
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    protected Columns columns;
     @XmlElement(namespace = "http://www.openfuxml.org/layout")
     protected Alignment alignment;
     @XmlElement(namespace = "http://www.openfuxml.org/layout")
     protected Width width;
-    @XmlElement(name = "float", namespace = "http://www.openfuxml.org/layout")
-    protected Float _float;
-    @XmlAttribute(name = "long")
-    protected Boolean _long;
-
-    /**
-     * Gets the value of the columns property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Columns }
-     *     
-     */
-    public Columns getColumns() {
-        return columns;
-    }
-
-    /**
-     * Sets the value of the columns property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Columns }
-     *     
-     */
-    public void setColumns(Columns value) {
-        this.columns = value;
-    }
 
     /**
      * Gets the value of the alignment property.
@@ -129,54 +93,6 @@ public class Specification
      */
     public void setWidth(Width value) {
         this.width = value;
-    }
-
-    /**
-     * Gets the value of the float property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Float }
-     *     
-     */
-    public Float getFloat() {
-        return _float;
-    }
-
-    /**
-     * Sets the value of the float property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Float }
-     *     
-     */
-    public void setFloat(Float value) {
-        this._float = value;
-    }
-
-    /**
-     * Gets the value of the long property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean isLong() {
-        return _long;
-    }
-
-    /**
-     * Sets the value of the long property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setLong(Boolean value) {
-        this._long = value;
     }
 
 }

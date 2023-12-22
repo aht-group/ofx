@@ -5,10 +5,10 @@ import java.io.StringWriter;
 import java.util.Objects;
 
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.html.structure.HtmlSectionRenderer;
 import org.openfuxml.renderer.html.table.HtmlTableRenderer;
 import org.openfuxml.util.filter.OfxLangFilter;

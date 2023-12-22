@@ -4,7 +4,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.openfuxml.content.table.Table;
+import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.test.OfxUtilTestBootstrap;
 
 public class TestTableFactory

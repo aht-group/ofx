@@ -1,9 +1,9 @@
 package org.openfuxml.interfaces.renderer.latex;
 
-import org.openfuxml.content.table.Specification;
-import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.renderer.util.TabluarWidthCalculator;
+import org.openfuxml.model.xml.core.table.Specification;
+import org.openfuxml.model.xml.core.table.Table;
 
 public interface OfxLatexTableRenderer extends OfxLatexRenderer
 {

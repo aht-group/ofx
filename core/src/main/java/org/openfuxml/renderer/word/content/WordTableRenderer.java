@@ -33,7 +33,7 @@ public class WordTableRenderer
 
 	public WordTableRenderer(Document doc, DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 
-	public void render(org.openfuxml.content.table.Table ofxTable,	int tableCount, int tableCurrent) throws Exception
+	public void render(org.openfuxml.model.xml.core.table.Table ofxTable,	int tableCount, int tableCurrent) throws Exception
 	{	
 		// exeptions..
 		//if(!ofxTable.isSetSpecification()){throw new OfxAuthoringException("<table> without <specification>");}
@@ -94,10 +94,10 @@ public class WordTableRenderer
 		
 		// header
 		int columnHelper = 1;
-		for (org.openfuxml.content.table.Row row : ofxTable.getContent().getHead().getRow())
+		for (org.openfuxml.model.xml.core.table.Row row : ofxTable.getContent().getHead().getRow())
 		{
 			sF.setFont(setFontEnum.textheader);
-			for (org.openfuxml.content.table.Cell cell : row.getCell())
+			for (org.openfuxml.model.xml.core.table.Cell cell : row.getCell())
 			{
 				for (Serializable s : cell.getContent())
 				{
@@ -117,16 +117,16 @@ public class WordTableRenderer
 		builder.endRow();
 
 		// body
-		for (org.openfuxml.content.table.Body b : ofxTable.getContent().getBody())
+		for (org.openfuxml.model.xml.core.table.Body b : ofxTable.getContent().getBody())
 		{
 			builder.insertCell();
 			sF.setFont(setFontEnum.text);
 			
 			int rowHelper = 1;
-			for (org.openfuxml.content.table.Row row : b.getRow())
+			for (org.openfuxml.model.xml.core.table.Row row : b.getRow())
 			{
 				int columnHelper2 = 1;
-				for (org.openfuxml.content.table.Cell cell : row.getCell())
+				for (org.openfuxml.model.xml.core.table.Cell cell : row.getCell())
 				{
 					for (Serializable s : cell.getContent())
 					{

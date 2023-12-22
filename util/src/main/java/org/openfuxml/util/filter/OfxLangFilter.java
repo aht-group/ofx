@@ -9,7 +9,7 @@ import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.content.editorial.Index;
 import org.openfuxml.content.ofx.Document;
 import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.table.Table;
+import org.openfuxml.model.xml.core.table.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

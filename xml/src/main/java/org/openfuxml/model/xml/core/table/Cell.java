@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.table;
+package org.openfuxml.model.xml.core.table;
 
 import java.io.Serializable;
 import java.util.ArrayList;

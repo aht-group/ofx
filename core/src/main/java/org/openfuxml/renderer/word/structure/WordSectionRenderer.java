@@ -80,7 +80,7 @@ public class WordSectionRenderer
 		//table helper for border handling...
 		for (Object s : ofxSection.getContent())
 		{
-			if (s instanceof org.openfuxml.content.table.Table)
+			if (s instanceof org.openfuxml.model.xml.core.table.Table)
 			{
 				tableCount++;
 			}
@@ -111,11 +111,11 @@ public class WordSectionRenderer
 			{
 				highlightRenderer((org.openfuxml.content.ofx.Highlight) s);
 			}
-			else if (s instanceof org.openfuxml.content.table.Table)
+			else if (s instanceof org.openfuxml.model.xml.core.table.Table)
 			{
 				//table helper border handling..
 				tableCurrent++;				
-				renderTable((org.openfuxml.content.table.Table) s);
+				renderTable((org.openfuxml.model.xml.core.table.Table) s);
 			}
 			else if (s instanceof org.openfuxml.content.ofx.Marginalia)
 			{
@@ -192,7 +192,7 @@ public class WordSectionRenderer
 		logger.trace("WordSectionRenderer.renderMarginalia()");
 	}
 
-	private void renderTable(org.openfuxml.content.table.Table s) throws Exception
+	private void renderTable(org.openfuxml.model.xml.core.table.Table s) throws Exception
 	{
 		WordTableRenderer wTR = new WordTableRenderer(doc, builder);
 		wTR.render(s,tableCount,tableCurrent);

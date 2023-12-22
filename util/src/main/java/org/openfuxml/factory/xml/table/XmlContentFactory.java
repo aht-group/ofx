@@ -1,8 +1,8 @@
 package org.openfuxml.factory.xml.table;
 
-import org.openfuxml.content.table.Body;
-import org.openfuxml.content.table.Content;
-import org.openfuxml.content.table.Head;
+import org.openfuxml.model.xml.core.table.Body;
+import org.openfuxml.model.xml.core.table.Content;
+import org.openfuxml.model.xml.core.table.Head;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

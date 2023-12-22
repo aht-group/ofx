@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.table.Cell;
+import org.openfuxml.model.xml.core.table.Cell;
 
 public class XmlCellFactory
 {

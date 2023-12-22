@@ -1,5 +1,6 @@
 package org.openfuxml.content.table;
 
+import org.openfuxml.model.xml.core.table.Cell;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;

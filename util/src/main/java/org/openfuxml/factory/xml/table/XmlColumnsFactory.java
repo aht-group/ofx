@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.table;
 
-import org.openfuxml.content.table.Columns;
+import org.openfuxml.model.xml.core.table.Columns;
 
 public class XmlColumnsFactory
 {

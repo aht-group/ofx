@@ -1,14 +1,16 @@
 
-package org.openfuxml.content.table;
+package org.openfuxml.model.xml.core.table;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.openfuxml.content.layout.Layout;
 
 
 /**
@@ -21,10 +23,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.openfuxml.org/table}head" minOccurs="0"/&gt;
- *         &lt;element ref="{http://www.openfuxml.org/table}body" maxOccurs="unbounded"/&gt;
- *         &lt;element ref="{http://www.openfuxml.org/table}foot" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/layout}layout" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/table}cell" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -34,96 +36,97 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "head",
-    "body",
-    "foot"
+    "layout",
+    "cell"
 })
-@XmlRootElement(name = "content")
-public class Content
+@XmlRootElement(name = "row")
+public class Row
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    protected Head head;
+    @XmlElement(namespace = "http://www.openfuxml.org/layout")
+    protected Layout layout;
     @XmlElement(required = true)
-    protected List<Body> body;
-    protected Foot foot;
+    protected List<Cell> cell;
+    @XmlAttribute(name = "id")
+    protected String id;
 
     /**
-     * Gets the value of the head property.
+     * Gets the value of the layout property.
      * 
      * @return
      *     possible object is
-     *     {@link Head }
+     *     {@link Layout }
      *     
      */
-    public Head getHead() {
-        return head;
+    public Layout getLayout() {
+        return layout;
     }
 
     /**
-     * Sets the value of the head property.
+     * Sets the value of the layout property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Head }
+     *     {@link Layout }
      *     
      */
-    public void setHead(Head value) {
-        this.head = value;
+    public void setLayout(Layout value) {
+        this.layout = value;
     }
 
     /**
-     * Gets the value of the body property.
+     * Gets the value of the cell property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the body property.
+     * This is why there is not a <CODE>set</CODE> method for the cell property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getBody().add(newItem);
+     *    getCell().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Body }
+     * {@link Cell }
      * 
      * 
      */
-    public List<Body> getBody() {
-        if (body == null) {
-            body = new ArrayList<Body>();
+    public List<Cell> getCell() {
+        if (cell == null) {
+            cell = new ArrayList<Cell>();
         }
-        return this.body;
+        return this.cell;
     }
 
     /**
-     * Gets the value of the foot property.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
-     *     {@link Foot }
+     *     {@link String }
      *     
      */
-    public Foot getFoot() {
-        return foot;
+    public String getId() {
+        return id;
     }
 
     /**
-     * Sets the value of the foot property.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Foot }
+     *     {@link String }
      *     
      */
-    public void setFoot(Foot value) {
-        this.foot = value;
+    public void setId(String value) {
+        this.id = value;
     }
 
 }

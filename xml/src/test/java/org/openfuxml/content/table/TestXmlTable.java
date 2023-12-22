@@ -2,6 +2,7 @@ package org.openfuxml.content.table;
 
 import org.openfuxml.content.ofx.TestXmlComment;
 import org.openfuxml.content.ofx.TestXmlTitle;
+import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;

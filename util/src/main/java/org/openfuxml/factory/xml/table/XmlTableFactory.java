@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import org.openfuxml.content.table.Body;
-import org.openfuxml.content.table.Content;
-import org.openfuxml.content.table.Head;
-import org.openfuxml.content.table.Row;
-import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
+import org.openfuxml.model.xml.core.table.Body;
+import org.openfuxml.model.xml.core.table.Content;
+import org.openfuxml.model.xml.core.table.Head;
+import org.openfuxml.model.xml.core.table.Row;
+import org.openfuxml.model.xml.core.table.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

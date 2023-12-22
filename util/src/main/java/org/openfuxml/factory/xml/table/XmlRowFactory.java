@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.table;
 
-import org.openfuxml.content.table.Row;
+import org.openfuxml.model.xml.core.table.Row;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
