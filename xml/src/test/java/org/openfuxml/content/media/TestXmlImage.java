@@ -5,6 +5,7 @@ import org.openfuxml.content.layout.TestXmlHeight;
 import org.openfuxml.content.layout.TestXmlWidth;
 import org.openfuxml.content.ofx.TestXmlComment;
 import org.openfuxml.content.ofx.TestXmlTitle;
+import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;

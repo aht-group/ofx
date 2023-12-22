@@ -1,10 +1,6 @@
 package org.openfuxml.renderer.html.structure;
 import java.util.Objects;
 
-/**
- * Author: Rebecca Roblick
- */
-import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.text.Emphasis;
@@ -12,6 +8,7 @@ import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
+import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
 import org.openfuxml.renderer.html.util.HtmlElement;

@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.jdom2.Attribute;
 import org.jdom2.output.XMLOutputter;
-import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
@@ -19,6 +18,7 @@ import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;

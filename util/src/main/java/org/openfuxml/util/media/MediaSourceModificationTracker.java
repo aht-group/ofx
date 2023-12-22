@@ -17,7 +17,7 @@ import net.sf.exlp.xml.xpath.IoXpath;
 
 import org.apache.commons.io.IOUtils;
 import org.exlp.model.xml.io.Dir;
-import org.openfuxml.content.media.Media;
+import org.openfuxml.model.xml.core.media.Media;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

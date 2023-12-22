@@ -1,7 +1,7 @@
 package org.openfuxml.util.media;
 
-import org.openfuxml.content.media.Image;
 import org.openfuxml.factory.xml.media.XmlImageFactory;
+import org.openfuxml.model.xml.core.media.Image;
 
 public class ImageDimensionRatio
 {

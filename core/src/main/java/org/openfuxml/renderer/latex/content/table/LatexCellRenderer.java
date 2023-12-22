@@ -1,7 +1,6 @@
 package org.openfuxml.renderer.latex.content.table;
 
 import org.openfuxml.content.layout.Font;
-import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.text.Emphasis;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -9,6 +8,7 @@ import org.openfuxml.factory.xml.text.OfxEmphasisFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.model.xml.core.list.List;
+import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.model.xml.core.table.Cell;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.util.LatexFontUtil;

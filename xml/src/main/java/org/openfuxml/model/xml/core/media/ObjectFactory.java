@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.media;
+package org.openfuxml.model.xml.core.media;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

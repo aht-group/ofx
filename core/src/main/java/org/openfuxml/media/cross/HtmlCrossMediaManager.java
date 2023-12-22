@@ -1,7 +1,7 @@
 package org.openfuxml.media.cross;
 
-import org.openfuxml.content.media.Media;
 import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.model.xml.core.media.Media;
 import org.openfuxml.renderer.latex.content.media.LatexImageRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

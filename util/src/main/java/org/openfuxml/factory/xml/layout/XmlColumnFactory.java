@@ -4,8 +4,8 @@ import org.openfuxml.content.layout.Column;
 import org.openfuxml.content.layout.Container;
 import org.openfuxml.content.layout.Height;
 import org.openfuxml.content.layout.Width;
-import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.model.xml.core.media.Image;
 
 public class XmlColumnFactory
 {	

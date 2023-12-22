@@ -24,7 +24,7 @@ public class WordImageRenderer
 
 	public WordImageRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 
-	public void render(org.openfuxml.content.media.Image ofxImage) throws Exception
+	public void render(org.openfuxml.model.xml.core.media.Image ofxImage) throws Exception
 	{
 		File f = new File(ofxImage.getMedia().getSrc());
 		if (f.exists())

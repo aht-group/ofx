@@ -1,5 +1,6 @@
 package org.openfuxml.content.media;
 
+import org.openfuxml.model.xml.core.media.Media;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;

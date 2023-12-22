@@ -2,8 +2,8 @@ package org.openfuxml.media.transcode;
 
 import java.io.File;
 
-import org.openfuxml.content.media.Media;
 import org.openfuxml.media.cross.LatexCrossMediaManager;
+import org.openfuxml.model.xml.core.media.Media;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

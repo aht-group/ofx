@@ -15,7 +15,7 @@ import org.openfuxml.content.layout.Box;
 import org.openfuxml.content.layout.Column;
 import org.openfuxml.content.layout.Container;
 import org.openfuxml.content.layout.Width;
-import org.openfuxml.content.media.Image;
+import org.openfuxml.model.xml.core.media.Image;
 
 
 /**

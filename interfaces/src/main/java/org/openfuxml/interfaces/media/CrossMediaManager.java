@@ -1,7 +1,7 @@
 package org.openfuxml.interfaces.media;
 
-import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.model.xml.core.media.Media;
 
 public interface CrossMediaManager
 {

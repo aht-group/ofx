@@ -65,7 +65,7 @@
     
 	<jxb:bindings schemaLocation="../xsd/../xsd/content/media.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.content.media"/>
+            <jxb:package name="org.openfuxml.model.xml.core.media"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     

@@ -1,11 +1,11 @@
 package org.openfuxml.renderer.markdown.media;
 
-import org.openfuxml.content.media.Image;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
+import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

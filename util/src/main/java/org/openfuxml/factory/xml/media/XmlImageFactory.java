@@ -1,10 +1,10 @@
 package org.openfuxml.factory.xml.media;
 
-import org.openfuxml.content.media.Image;
-import org.openfuxml.content.media.Media;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.layout.XmlHeightFactory;
 import org.openfuxml.factory.xml.layout.XmlWidthFactory;
+import org.openfuxml.model.xml.core.media.Image;
+import org.openfuxml.model.xml.core.media.Media;
 
 public class XmlImageFactory
 {

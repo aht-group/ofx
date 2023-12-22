@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.media;
+package org.openfuxml.model.xml.core.media;
 
 import java.io.Serializable;
 import java.util.ArrayList;

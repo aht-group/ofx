@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.openfuxml.content.media.Media;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.media.CrossMediaTranscoder;
 import org.openfuxml.media.transcode.Pdf2PdfTranscoder;
 import org.openfuxml.media.transcode.Png2PngTranscoder;
 import org.openfuxml.media.transcode.Svg2PdfTranscoder;
+import org.openfuxml.model.xml.core.media.Media;
 import org.openfuxml.util.media.CrossMediaFileUtil;
 import org.openfuxml.util.media.MediaSourceModificationTracker;
 import org.slf4j.Logger;

@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.media;
 
-import org.openfuxml.content.media.Images;
+import org.openfuxml.model.xml.core.media.Images;
 
 public class XmlImagesFactory
 {

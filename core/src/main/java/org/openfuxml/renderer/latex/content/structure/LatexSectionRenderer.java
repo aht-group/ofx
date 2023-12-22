@@ -2,7 +2,6 @@ package org.openfuxml.renderer.latex.content.structure;
 
 import java.util.Objects;
 
-import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Include;
@@ -17,6 +16,7 @@ import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.LatexSectionHeaderNameFactory;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.model.xml.core.list.List;
+import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.listing.LatexListingRenderer;

@@ -2,14 +2,11 @@ package org.openfuxml.renderer.html.media;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
-/**
- * Author: Rebecca Roblick
- */
-import org.openfuxml.content.media.Image;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
+import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.structure.HtmlSectionRenderer;
 import org.openfuxml.renderer.html.util.HtmlElement;

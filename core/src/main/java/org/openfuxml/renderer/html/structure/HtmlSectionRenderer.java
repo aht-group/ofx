@@ -1,5 +1,4 @@
 package org.openfuxml.renderer.html.structure;
-import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Listing;
@@ -11,6 +10,7 @@ import org.openfuxml.content.ofx.Title;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
 import org.openfuxml.model.xml.core.list.List;
+import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.util.HtmlElement;

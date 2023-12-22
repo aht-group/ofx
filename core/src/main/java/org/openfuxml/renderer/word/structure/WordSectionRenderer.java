@@ -133,9 +133,9 @@ public class WordSectionRenderer
 			{
 				renderInclude((org.openfuxml.content.ofx.Include) s);
 			}
-			else if (s instanceof org.openfuxml.content.media.Image)
+			else if (s instanceof org.openfuxml.model.xml.core.media.Image)
 			{
-				renderImage((org.openfuxml.content.media.Image) s);
+				renderImage((org.openfuxml.model.xml.core.media.Image) s);
 			}
 			else if (s instanceof org.openfuxml.content.ofx.Comment)
 			{}
@@ -161,7 +161,7 @@ public class WordSectionRenderer
 		wTR.render(s);
 	}
 
-	private void renderImage(org.openfuxml.content.media.Image s) throws Exception
+	private void renderImage(org.openfuxml.model.xml.core.media.Image s) throws Exception
 	{
 		WordImageRenderer wIR = new WordImageRenderer(doc, builder);
 		wIR.render(s);

@@ -2,7 +2,6 @@ package org.openfuxml.renderer.markdown.structure;
 
 import java.util.Objects;
 
-import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
@@ -12,6 +11,7 @@ import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
 import org.openfuxml.model.xml.core.list.List;
+import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

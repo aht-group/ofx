@@ -1,12 +1,12 @@
 package org.openfuxml.renderer.markdown;
 
-import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
+import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.markdown.media.MdImageRenderer;
 import org.openfuxml.renderer.markdown.structure.MdListRenderer;
