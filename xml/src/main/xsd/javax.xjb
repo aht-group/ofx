@@ -59,7 +59,7 @@
         
     <jxb:bindings schemaLocation="../xsd/../xsd/content/text.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.content.text"/>
+            <jxb:package name="org.openfuxml.model.xml.core.text"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     
