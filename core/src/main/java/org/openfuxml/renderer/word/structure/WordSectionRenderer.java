@@ -31,19 +31,19 @@ public class WordSectionRenderer
 		this.doc=doc;this.builder=builder;
 	}
 	
-	public void render(org.openfuxml.content.ofx.Section ofxSection, boolean listNumbersFormating)
+	public void render(org.openfuxml.model.xml.core.ofx.Section ofxSection, boolean listNumbersFormating)
 	{
 		this.listNumbersFormating=listNumbersFormating;
 		try {renderWithException(ofxSection);} catch (Exception e) {}
 	}
 	
-	public void render(org.openfuxml.content.ofx.Section ofxSection, String fallbackContent)
+	public void render(org.openfuxml.model.xml.core.ofx.Section ofxSection, String fallbackContent)
 	{
 		if(ofxSection==null) {builder.write(fallbackContent);}
 		else {render(ofxSection);}
 	}
 	
-	public void render(org.openfuxml.content.ofx.Section ofxSection)
+	public void render(org.openfuxml.model.xml.core.ofx.Section ofxSection)
 	{
 		if(ofxSection!=null)
 		{
@@ -55,25 +55,25 @@ public class WordSectionRenderer
 		}
 	}
 	
-	public void renderWithException(org.openfuxml.content.ofx.Section ofxSection) throws Exception
+	public void renderWithException(org.openfuxml.model.xml.core.ofx.Section ofxSection) throws Exception
 	{
 		//Section sectionToAdd = new Section(doc);
 
 		// Comment always on top!
 		for (Object s : ofxSection.getContent())
 		{
-			if (s instanceof org.openfuxml.content.ofx.Comment)
+			if (s instanceof org.openfuxml.model.xml.core.ofx.Comment)
 			{
-				renderComment((org.openfuxml.content.ofx.Comment) s);
+				renderComment((org.openfuxml.model.xml.core.ofx.Comment) s);
 			}
 		}
 
 		// Title after comment!
 		for (Object s : ofxSection.getContent())
 		{
-			if (s instanceof org.openfuxml.content.ofx.Title)
+			if (s instanceof org.openfuxml.model.xml.core.ofx.Title)
 			{
-				renderTitel((org.openfuxml.content.ofx.Title) s);
+				renderTitel((org.openfuxml.model.xml.core.ofx.Title) s);
 			}
 		}
 		
@@ -88,7 +88,7 @@ public class WordSectionRenderer
 		
 		for (Object s : ofxSection.getContent())
 		{
-			if (s instanceof org.openfuxml.content.ofx.Paragraph)
+			if (s instanceof org.openfuxml.model.xml.core.ofx.Paragraph)
 			{
 				paragraphCount++;
 			}
@@ -98,18 +98,18 @@ public class WordSectionRenderer
 		for (Object s : ofxSection.getContent())
 		{
 			if (s instanceof String){}
-			else if (s instanceof org.openfuxml.content.ofx.Section)
+			else if (s instanceof org.openfuxml.model.xml.core.ofx.Section)
 			{
-				renderSection((org.openfuxml.content.ofx.Section) s);
+				renderSection((org.openfuxml.model.xml.core.ofx.Section) s);
 			}
-			else if (s instanceof org.openfuxml.content.ofx.Paragraph)
+			else if (s instanceof org.openfuxml.model.xml.core.ofx.Paragraph)
 			{
 				paragraphCurrent++;	
-				paragraphRenderer((org.openfuxml.content.ofx.Paragraph) s);
+				paragraphRenderer((org.openfuxml.model.xml.core.ofx.Paragraph) s);
 			}
-			else if (s instanceof org.openfuxml.content.ofx.Highlight)
+			else if (s instanceof org.openfuxml.model.xml.core.ofx.Highlight)
 			{
-				highlightRenderer((org.openfuxml.content.ofx.Highlight) s);
+				highlightRenderer((org.openfuxml.model.xml.core.ofx.Highlight) s);
 			}
 			else if (s instanceof org.openfuxml.model.xml.core.table.Table)
 			{
@@ -117,29 +117,29 @@ public class WordSectionRenderer
 				tableCurrent++;				
 				renderTable((org.openfuxml.model.xml.core.table.Table) s);
 			}
-			else if (s instanceof org.openfuxml.content.ofx.Marginalia)
+			else if (s instanceof org.openfuxml.model.xml.core.ofx.Marginalia)
 			{
-				renderMarginalia((org.openfuxml.content.ofx.Marginalia) s);
+				renderMarginalia((org.openfuxml.model.xml.core.ofx.Marginalia) s);
 			}
 			else if (s instanceof org.openfuxml.model.xml.core.list.List)
 			{
 				renderList((org.openfuxml.model.xml.core.list.List) s);
 			}
-			else if (s instanceof org.openfuxml.content.ofx.Listing)
+			else if (s instanceof org.openfuxml.model.xml.core.ofx.Listing)
 			{
-				renderListing((org.openfuxml.content.ofx.Listing) s);
+				renderListing((org.openfuxml.model.xml.core.ofx.Listing) s);
 			}
-			else if (s instanceof org.openfuxml.content.ofx.Include)
+			else if (s instanceof org.openfuxml.model.xml.core.ofx.Include)
 			{
-				renderInclude((org.openfuxml.content.ofx.Include) s);
+				renderInclude((org.openfuxml.model.xml.core.ofx.Include) s);
 			}
 			else if (s instanceof org.openfuxml.model.xml.core.media.Image)
 			{
 				renderImage((org.openfuxml.model.xml.core.media.Image) s);
 			}
-			else if (s instanceof org.openfuxml.content.ofx.Comment)
+			else if (s instanceof org.openfuxml.model.xml.core.ofx.Comment)
 			{}
-			else if (s instanceof org.openfuxml.content.ofx.Title)
+			else if (s instanceof org.openfuxml.model.xml.core.ofx.Title)
 			{}
 			else
 			{
@@ -149,13 +149,13 @@ public class WordSectionRenderer
 		//doc.getSections().add(sectionToAdd);
 	}
 
-	private void renderComment(org.openfuxml.content.ofx.Comment s)
+	private void renderComment(org.openfuxml.model.xml.core.ofx.Comment s)
 	{
 		WordCommentRenderer wCR = new WordCommentRenderer(doc, builder);
 		wCR.render(s);
 	}
 
-	private void renderTitel(org.openfuxml.content.ofx.Title s)
+	private void renderTitel(org.openfuxml.model.xml.core.ofx.Title s)
 	{
 		WordTitleRenderer wTR = new WordTitleRenderer(doc, builder);
 		wTR.render(s);
@@ -168,13 +168,13 @@ public class WordSectionRenderer
 	}
 
 	//to do
-	private void renderInclude(org.openfuxml.content.ofx.Include s)
+	private void renderInclude(org.openfuxml.model.xml.core.ofx.Include s)
 	{
 		logger.trace("WordSectionRenderer.renderInclude()");
 	}
 
 	//to do
-	private void renderListing(org.openfuxml.content.ofx.Listing s)
+	private void renderListing(org.openfuxml.model.xml.core.ofx.Listing s)
 	{
 		logger.trace("WordSectionRenderer.renderListing()");
 	}
@@ -187,7 +187,7 @@ public class WordSectionRenderer
 	}
 
 	//to do
-	private void renderMarginalia(org.openfuxml.content.ofx.Marginalia s)
+	private void renderMarginalia(org.openfuxml.model.xml.core.ofx.Marginalia s)
 	{
 		logger.trace("WordSectionRenderer.renderMarginalia()");
 	}
@@ -199,18 +199,18 @@ public class WordSectionRenderer
 	}
 
 	//to do
-	private void highlightRenderer(org.openfuxml.content.ofx.Highlight s)
+	private void highlightRenderer(org.openfuxml.model.xml.core.ofx.Highlight s)
 	{
 		logger.trace("WordSectionRenderer.highlightRenderer()");
 	}
 
-	private void paragraphRenderer(org.openfuxml.content.ofx.Paragraph s) throws OfxAuthoringException
+	private void paragraphRenderer(org.openfuxml.model.xml.core.ofx.Paragraph s) throws OfxAuthoringException
 	{
 		WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
 		wPF.render(s,paragraphCount,paragraphCurrent);
 	}
 
-	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) throws Exception
+	private void renderSection(org.openfuxml.model.xml.core.ofx.Section ofxSection) throws Exception
 	{
 		WordSectionRenderer sf = new WordSectionRenderer(doc,builder);
 		sf.renderWithException(ofxSection);

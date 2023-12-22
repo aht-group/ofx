@@ -1,7 +1,5 @@
 package org.openfuxml.doc.provider.old;
 
-import org.openfuxml.content.ofx.Document;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.controller.provider.list.ListProvider;
 import org.openfuxml.controller.provider.table.TableProvider;
 import org.openfuxml.controller.provider.text.EmphasisProvider;
@@ -10,6 +8,8 @@ import org.openfuxml.controller.provider.text.SectionProvider;
 import org.openfuxml.controller.provider.text.TitleProvider;
 import org.openfuxml.doc.provider.media.ImageProvider;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlDocumentFactory;
+import org.openfuxml.model.xml.core.ofx.Document;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

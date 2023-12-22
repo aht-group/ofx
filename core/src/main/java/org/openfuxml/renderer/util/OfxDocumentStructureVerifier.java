@@ -2,8 +2,8 @@ package org.openfuxml.renderer.util;
 
 import java.util.Objects;
 
-import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.model.xml.core.ofx.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

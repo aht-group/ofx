@@ -1,7 +1,7 @@
 package org.openfuxml.interfaces.configuration;
 
-import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.model.xml.core.ofx.Listing;
 
 public interface DefaultSettingsManager
 {

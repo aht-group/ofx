@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.ofx.content;
 
-import org.openfuxml.content.ofx.Raw;
+import org.openfuxml.model.xml.core.ofx.Raw;
 
 public class XmlRawFactory
 {

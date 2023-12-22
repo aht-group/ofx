@@ -2,7 +2,6 @@ package org.openfuxml.renderer.latex.content.editorial;
 
 import java.util.Objects;
 
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -10,6 +9,7 @@ import org.openfuxml.model.xml.core.editorial.Acronym;
 import org.openfuxml.model.xml.core.editorial.Acronyms;
 import org.openfuxml.model.xml.core.editorial.Glossary;
 import org.openfuxml.model.xml.core.editorial.Term;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.model.xml.core.text.Text;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;

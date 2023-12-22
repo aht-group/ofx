@@ -1,7 +1,7 @@
 package org.openfuxml.util;
 
-import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.factory.xml.ofx.content.XmlRawFactory;
+import org.openfuxml.model.xml.core.ofx.Comment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

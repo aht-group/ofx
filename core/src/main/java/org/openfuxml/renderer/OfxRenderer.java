@@ -1,9 +1,10 @@
 package org.openfuxml.renderer;
 
 import net.sf.exlp.util.xml.JaxbUtil;
-import org.openfuxml.content.ofx.Document;
+
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
+import org.openfuxml.model.xml.core.ofx.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

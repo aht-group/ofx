@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.ofx;
 
-import org.openfuxml.content.ofx.Highlight;
+import org.openfuxml.model.xml.core.ofx.Highlight;
 
 public class XmlHighlightFactory
 {	

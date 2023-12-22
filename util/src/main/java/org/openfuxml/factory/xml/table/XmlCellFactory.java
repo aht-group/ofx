@@ -5,8 +5,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.model.xml.core.media.Image;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.model.xml.core.table.Cell;
 
 public class XmlCellFactory

@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.ofx;
 
-import org.openfuxml.content.ofx.Reference;
+import org.openfuxml.model.xml.core.ofx.Reference;
 
 public class OfxReferenceFactory
 {

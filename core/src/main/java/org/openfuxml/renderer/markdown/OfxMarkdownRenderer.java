@@ -3,12 +3,12 @@ package org.openfuxml.renderer.markdown;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
+import org.openfuxml.model.xml.core.ofx.Document;
 import org.openfuxml.renderer.OfxRenderer;
 import org.openfuxml.renderer.markdown.structure.MdDocumentRenderer;
 import org.openfuxml.renderer.util.OfxDocumentStructureVerifier;

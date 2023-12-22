@@ -2,11 +2,11 @@ package org.openfuxml.renderer.text.structure;
 
 import java.io.Serializable;
 
-import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxTextRenderer;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.renderer.text.AbstractOfxTextRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

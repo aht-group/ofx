@@ -2,10 +2,10 @@ package org.openfuxml.trancoder.html;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.model.xml.core.list.Item;
 import org.openfuxml.model.xml.core.list.List;
 import org.openfuxml.model.xml.core.list.Type;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

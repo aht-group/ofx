@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Objects;
 
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.model.xml.core.editorial.Acronyms;
 import org.openfuxml.model.xml.core.editorial.Glossary;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.latex.content.editorial.LatexAcronymRenderer;
 import org.openfuxml.renderer.latex.content.editorial.LatexGlossaryRenderer;

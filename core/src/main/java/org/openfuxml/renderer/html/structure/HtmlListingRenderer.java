@@ -6,12 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
 
-/**
- * Author: Rebecca Roblick
- */
-import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
+import org.openfuxml.model.xml.core.ofx.Listing;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.util.HtmlElement;
 import org.slf4j.Logger;

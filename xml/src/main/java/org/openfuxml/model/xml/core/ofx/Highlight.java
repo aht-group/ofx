@@ -1,17 +1,16 @@
 
-package org.openfuxml.content.ofx;
+package org.openfuxml.model.xml.core.ofx;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.openfuxml.model.xml.core.text.Text;
 
 
 /**
@@ -24,10 +23,9 @@ import org.openfuxml.model.xml.core.text.Text;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.openfuxml.org/text}text" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}paragraph" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}marginalia" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
- *       &lt;attribute name="numbering" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="lang" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -39,18 +37,17 @@ import org.openfuxml.model.xml.core.text.Text;
 @XmlType(name = "", propOrder = {
     "content"
 })
-@XmlRootElement(name = "title")
-public class Title implements Serializable
+@XmlRootElement(name = "highlight")
+public class Highlight implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElementRef(name = "text", namespace = "http://www.openfuxml.org/text", type = Text.class)
+    @XmlElementRefs({
+        @XmlElementRef(name = "paragraph", namespace = "http://www.openfuxml.org", type = Paragraph.class),
+        @XmlElementRef(name = "marginalia", namespace = "http://www.openfuxml.org", type = Marginalia.class)
+    })
     @XmlMixed
     protected List<Serializable> content;
-    @XmlAttribute(name = "numbering")
-    protected Boolean numbering;
-    @XmlAttribute(name = "lang")
-    protected String lang;
 
     /**
      * Gets the value of the content property.
@@ -71,7 +68,8 @@ public class Title implements Serializable
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * {@link Text }
+     * {@link Marginalia }
+     * {@link Paragraph }
      * 
      * 
      */
@@ -80,54 +78,6 @@ public class Title implements Serializable
             content = new ArrayList<Serializable>();
         }
         return this.content;
-    }
-
-    /**
-     * Gets the value of the numbering property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean isNumbering() {
-        return numbering;
-    }
-
-    /**
-     * Sets the value of the numbering property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setNumbering(Boolean value) {
-        this.numbering = value;
-    }
-
-    /**
-     * Gets the value of the lang property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getLang() {
-        return lang;
-    }
-
-    /**
-     * Sets the value of the lang property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLang(String value) {
-        this.lang = value;
     }
 
 }

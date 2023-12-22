@@ -1,14 +1,14 @@
 package org.openfuxml.renderer.word.content;
 
-import org.openfuxml.content.ofx.Marginalia;
-import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.editorial.Acronym;
 import org.openfuxml.model.xml.core.editorial.Glossary;
 import org.openfuxml.model.xml.core.editorial.Index;
 import org.openfuxml.model.xml.core.layout.Font;
 import org.openfuxml.model.xml.core.media.Image;
+import org.openfuxml.model.xml.core.ofx.Marginalia;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
+import org.openfuxml.model.xml.core.ofx.Reference;
 import org.openfuxml.model.xml.core.text.Emphasis;
 import org.openfuxml.model.xml.core.text.Symbol;
 import org.openfuxml.renderer.word.util.RemoveUnwantedRegx;
@@ -32,7 +32,7 @@ public class WordParagraphRenderer
 	
 	public WordParagraphRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 	
-	public void render(org.openfuxml.content.ofx.Paragraph ofxParagraph, int paragraphCount, int paragraphCurrent) throws OfxAuthoringException
+	public void render(org.openfuxml.model.xml.core.ofx.Paragraph ofxParagraph, int paragraphCount, int paragraphCurrent) throws OfxAuthoringException
 	{
 		SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
 		
@@ -70,7 +70,7 @@ public class WordParagraphRenderer
 		else if (paragraphCount!=paragraphCurrent) {}
 	}
 	
-	public void render(org.openfuxml.content.ofx.Paragraph ofxParagraph) throws OfxAuthoringException
+	public void render(org.openfuxml.model.xml.core.ofx.Paragraph ofxParagraph) throws OfxAuthoringException
 	{
 		for(Object o : ofxParagraph.getContent())
 		{			

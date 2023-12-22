@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.ofx.content;
 
-import org.openfuxml.content.ofx.Comment;
+import org.openfuxml.model.xml.core.ofx.Comment;
 
 public class XmlCommentFactory
 {

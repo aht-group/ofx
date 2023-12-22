@@ -1,8 +1,8 @@
 package org.openfuxml.doc.provider.old;
 
-import org.openfuxml.content.ofx.Marginalia;
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.controller.provider.text.ParagraphProvider;
+import org.openfuxml.model.xml.core.ofx.Marginalia;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

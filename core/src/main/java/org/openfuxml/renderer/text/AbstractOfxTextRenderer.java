@@ -6,10 +6,10 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxTextRenderer;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.text.structure.TextParagraphRenderer;

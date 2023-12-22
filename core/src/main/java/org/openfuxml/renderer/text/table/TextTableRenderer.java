@@ -6,11 +6,11 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.openfuxml.content.ofx.Title;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxTextRenderer;
+import org.openfuxml.model.xml.core.ofx.Title;
 import org.openfuxml.model.xml.core.table.Cell;
 import org.openfuxml.model.xml.core.table.Row;
 import org.openfuxml.model.xml.core.table.Table;

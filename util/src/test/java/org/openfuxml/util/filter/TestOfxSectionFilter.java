@@ -1,8 +1,8 @@
 package org.openfuxml.util.filter;
 
 import org.junit.Before;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.test.AbstractOfxUtilTest;
 import org.openfuxml.test.OfxUtilTestBootstrap;
 import org.slf4j.Logger;

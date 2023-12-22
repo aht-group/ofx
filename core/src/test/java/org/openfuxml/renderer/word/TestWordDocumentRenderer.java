@@ -3,11 +3,11 @@ package org.openfuxml.renderer.word;
 import java.io.File;
 
 import org.openfuxml.OfxCoreBootstrap;
-import org.openfuxml.content.ofx.Document;
 import org.openfuxml.doc.provider.old.TestDocumentProvider;
 import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.model.xml.core.ofx.Document;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 
 import net.sf.exlp.util.xml.JaxbUtil;

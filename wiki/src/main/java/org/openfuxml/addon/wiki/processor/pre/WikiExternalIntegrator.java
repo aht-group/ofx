@@ -8,10 +8,10 @@ import org.jdom2.Namespace;
 import org.jdom2.filter.Filters;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
-import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.addon.wiki.Content;
 import org.openfuxml.model.xml.addon.wiki.Contents;
+import org.openfuxml.model.xml.core.ofx.Document;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,7 +81,7 @@ public class WikiExternalIntegrator
 	
 	private Element getCategory(Content wikiContent)
 	{
-		org.openfuxml.content.ofx.Sections ofxSections = new org.openfuxml.content.ofx.Sections();
+		org.openfuxml.model.xml.core.ofx.Sections ofxSections = new org.openfuxml.model.xml.core.ofx.Sections();
 		ofxSections.setExternal(true);
 		ofxSections.setSource(wikiXmlDirName+"/"+counter+".xml");counter++;
 		Element eResult = JaxbUtil.toDocument(ofxSections).getRootElement();
@@ -91,7 +91,7 @@ public class WikiExternalIntegrator
 	
 	private Element getSection(Content wikiContent)
 	{
-		org.openfuxml.content.ofx.Section ofxSection = new org.openfuxml.content.ofx.Section();
+		org.openfuxml.model.xml.core.ofx.Section ofxSection = new org.openfuxml.model.xml.core.ofx.Section();
 		ofxSection.setExternal(true);
 		ofxSection.setSource(wikiXmlDirName+"/"+counter+".xml");counter++;
 		Element eResult = JaxbUtil.toDocument(ofxSection).getRootElement();

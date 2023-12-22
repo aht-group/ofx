@@ -1,14 +1,11 @@
 package org.openfuxml.renderer.html.structure;
-/**
- * Author: Rebecca Roblick
- */
-import org.openfuxml.content.ofx.Highlight;
-import org.openfuxml.content.ofx.Marginalia;
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
+import org.openfuxml.model.xml.core.ofx.Highlight;
+import org.openfuxml.model.xml.core.ofx.Marginalia;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.util.HtmlElement;
 import org.slf4j.Logger;

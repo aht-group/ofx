@@ -1,7 +1,5 @@
 package org.openfuxml.renderer.latex.content.structure;
 
-import org.openfuxml.content.ofx.Marginalia;
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -10,6 +8,8 @@ import org.openfuxml.model.xml.core.layout.Column;
 import org.openfuxml.model.xml.core.layout.Container;
 import org.openfuxml.model.xml.core.layout.Width;
 import org.openfuxml.model.xml.core.media.Image;
+import org.openfuxml.model.xml.core.ofx.Marginalia;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

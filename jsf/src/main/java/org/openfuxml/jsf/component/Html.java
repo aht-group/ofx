@@ -9,11 +9,11 @@ import javax.faces.component.UIPanel;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.jsf.util.ComponentAttribute;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.renderer.html.OfxHtmlRenderer;
 import org.openfuxml.util.filter.OfxSectionFilter;
 import org.slf4j.Logger;

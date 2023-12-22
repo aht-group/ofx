@@ -1,6 +1,6 @@
 package org.openfuxml.content.structure;
 
-import org.openfuxml.content.ofx.Section;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;

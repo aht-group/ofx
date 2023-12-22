@@ -7,11 +7,11 @@ import net.sf.exlp.util.xml.JDomUtil;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.factory.xml.ofx.content.XmlCommentFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.factory.xml.table.XmlCellFactory;
 import org.openfuxml.factory.xml.table.XmlColumnFactory;
+import org.openfuxml.model.xml.core.ofx.Comment;
 import org.openfuxml.model.xml.core.table.Body;
 import org.openfuxml.model.xml.core.table.Columns;
 import org.openfuxml.model.xml.core.table.Content;

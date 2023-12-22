@@ -8,13 +8,13 @@ import java.io.Writer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.openfuxml.content.ofx.Document;
-import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.model.xml.core.ofx.Document;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.model.xml.core.table.Cell;
 import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.OfxConfigurationProvider;

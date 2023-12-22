@@ -1,13 +1,13 @@
 package org.openfuxml.controller.provider;
 
-import org.openfuxml.content.ofx.Document;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.controller.provider.list.ListProvider;
 import org.openfuxml.controller.provider.table.TableProvider;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlDocumentFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
+import org.openfuxml.model.xml.core.ofx.Document;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

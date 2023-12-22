@@ -1,12 +1,9 @@
 package org.openfuxml.renderer.html.structure;
-/**
- * Author: Rebecca Roblick
- */
-import org.openfuxml.content.ofx.Content;
-import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
+import org.openfuxml.model.xml.core.ofx.Content;
+import org.openfuxml.model.xml.core.ofx.Section;
+import org.openfuxml.model.xml.core.ofx.Sections;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.media.HtmlImageRenderer;
 import org.openfuxml.renderer.html.table.HtmlTableRenderer;

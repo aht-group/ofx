@@ -3,10 +3,10 @@ package org.openfuxml;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openfuxml.content.ofx.Document;
 import org.openfuxml.doc.provider.DemoContentProvider;
 import org.openfuxml.doc.provider.media.ImageProvider;
 import org.openfuxml.interfaces.xml.OfxXmlExampleProvider;
+import org.openfuxml.model.xml.core.ofx.Document;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 

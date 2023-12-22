@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openfuxml.content.media.TestXmlImage;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;

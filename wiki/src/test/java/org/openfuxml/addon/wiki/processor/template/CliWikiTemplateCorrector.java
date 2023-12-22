@@ -4,7 +4,7 @@ import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
-import org.openfuxml.content.ofx.Document;
+import org.openfuxml.model.xml.core.ofx.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

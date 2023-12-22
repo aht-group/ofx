@@ -33,13 +33,13 @@ public class OfxIdGenerator
 		xpath2 = XPathFactory.instance().compile("//ofx:section", Filters.element(), null, OfxNsPrefixMapper.nsOfx);
 	}
 	
-	public org.openfuxml.content.ofx.Document generate(org.openfuxml.content.ofx.Document ofxDoc) throws JDOMException
+	public org.openfuxml.model.xml.core.ofx.Document generate(org.openfuxml.model.xml.core.ofx.Document ofxDoc) throws JDOMException
 	{
 		doc = JaxbUtil.toDocument(ofxDoc);
 		
 		idCreator();
 		
-		return JDomUtil.toJaxb(doc,org.openfuxml.content.ofx.Document.class);
+		return JDomUtil.toJaxb(doc,org.openfuxml.model.xml.core.ofx.Document.class);
 		
 	}
 	

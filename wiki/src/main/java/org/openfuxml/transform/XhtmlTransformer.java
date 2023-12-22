@@ -21,7 +21,7 @@ import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.processor.ofx.OfxHtmlContentHandler;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.util.IgnoreDtdEntityResolver;
-import org.openfuxml.content.ofx.Section;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.trancoder.XhtmlSpecialChars;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;

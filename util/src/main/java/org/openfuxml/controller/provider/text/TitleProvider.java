@@ -1,8 +1,8 @@
 package org.openfuxml.controller.provider.text;
 
-import org.openfuxml.content.ofx.Title;
 import org.openfuxml.controller.provider.DemoContentProvider;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
+import org.openfuxml.model.xml.core.ofx.Title;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

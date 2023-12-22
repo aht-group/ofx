@@ -1,7 +1,7 @@
 package org.openfuxml.util.configuration.settings;
 
-import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
+import org.openfuxml.model.xml.core.ofx.Listing;
 
 public class OfxDefaultSettingsManager extends AbstractDefaultSettingsManager implements DefaultSettingsManager
 {

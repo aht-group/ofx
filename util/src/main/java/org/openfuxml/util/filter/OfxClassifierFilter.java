@@ -7,8 +7,8 @@ import org.jdom2.Attribute;
 import org.jdom2.filter.Filters;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
-import org.openfuxml.content.ofx.Document;
-import org.openfuxml.content.ofx.Section;
+import org.openfuxml.model.xml.core.ofx.Document;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

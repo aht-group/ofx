@@ -2,7 +2,7 @@ package org.openfuxml.renderer.epub;
 
 import org.jdom2.Element;
 import org.jdom2.Namespace;
-import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

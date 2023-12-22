@@ -1,9 +1,9 @@
 package org.openfuxml.renderer.html.structure;
 
-import org.openfuxml.content.ofx.Comment;
-import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
+import org.openfuxml.model.xml.core.ofx.Comment;
+import org.openfuxml.model.xml.core.ofx.Raw;
 import org.openfuxml.renderer.html.AbstractOfxHtmlRenderer;
 import org.openfuxml.renderer.html.util.HtmlElement;
 import org.slf4j.Logger;

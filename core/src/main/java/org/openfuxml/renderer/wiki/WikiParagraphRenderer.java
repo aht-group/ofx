@@ -1,9 +1,9 @@
 package org.openfuxml.renderer.wiki;
 
-import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.Reference;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
+import org.openfuxml.model.xml.core.ofx.Reference;
 import org.openfuxml.model.xml.core.text.Emphasis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

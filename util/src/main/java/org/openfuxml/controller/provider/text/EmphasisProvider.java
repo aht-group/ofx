@@ -1,8 +1,8 @@
 package org.openfuxml.controller.provider.text;
 
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.controller.provider.DemoContentProvider;
 import org.openfuxml.factory.xml.text.OfxEmphasisFactory;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

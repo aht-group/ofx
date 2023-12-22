@@ -9,14 +9,14 @@ import java.util.List;
 
 import org.jdom2.Attribute;
 import org.jdom2.output.XMLOutputter;
-import org.openfuxml.content.ofx.Marginalia;
-import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.model.xml.core.media.Image;
+import org.openfuxml.model.xml.core.ofx.Marginalia;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.model.xml.core.text.Emphasis;
 import org.openfuxml.model.xml.core.text.Symbol;
@@ -120,7 +120,7 @@ public class AbstractOfxHtmlRenderer extends AbstractOfxRenderer
 		emph.render(p, table);
 	}
 
-	public void commentRenderer(HtmlElement parent, org.openfuxml.content.ofx.Comment comment)
+	public void commentRenderer(HtmlElement parent, org.openfuxml.model.xml.core.ofx.Comment comment)
 	{
 		HtmlCommentRenderer commentRenderer = new HtmlCommentRenderer(cp);
 		commentRenderer.render(parent, comment);

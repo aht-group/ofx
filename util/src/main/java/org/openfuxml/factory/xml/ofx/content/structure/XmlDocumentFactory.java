@@ -1,7 +1,7 @@
 package org.openfuxml.factory.xml.ofx.content.structure;
 
-import org.openfuxml.content.ofx.Content;
-import org.openfuxml.content.ofx.Document;
+import org.openfuxml.model.xml.core.ofx.Content;
+import org.openfuxml.model.xml.core.ofx.Document;
 
 public class XmlDocumentFactory
 {

@@ -1,8 +1,8 @@
 package org.openfuxml.controller.processor.pre;
 
 import org.jdom2.JDOMException;
-import org.openfuxml.content.ofx.Document;
 import org.openfuxml.controller.provider.DemoContentProvider;
+import org.openfuxml.model.xml.core.ofx.Document;
 import org.openfuxml.processor.pre.OfxIdGenerator;
 import org.openfuxml.test.OfxUtilTestBootstrap;
 

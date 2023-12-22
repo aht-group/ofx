@@ -11,8 +11,8 @@ import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
-import org.openfuxml.content.ofx.Document;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.model.xml.core.ofx.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

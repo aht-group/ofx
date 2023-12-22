@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.ofx.content.text;
 
-import org.openfuxml.content.ofx.Title;
+import org.openfuxml.model.xml.core.ofx.Title;
 
 public class XmlTitleFactory
 {

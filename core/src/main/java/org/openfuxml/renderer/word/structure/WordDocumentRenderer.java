@@ -1,6 +1,6 @@
 package org.openfuxml.renderer.word.structure;
 
-import org.openfuxml.content.ofx.Content;
+import org.openfuxml.model.xml.core.ofx.Content;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,9 +41,9 @@ public class WordDocumentRenderer
 		
 		for (Object s : ofxContent.getContent())
 		{		
-			if (s instanceof org.openfuxml.content.ofx.Section)
+			if (s instanceof org.openfuxml.model.xml.core.ofx.Section)
 			{	
-				renderSection((org.openfuxml.content.ofx.Section) s);
+				renderSection((org.openfuxml.model.xml.core.ofx.Section) s);
 			}
 		}
 		builder.moveToDocumentEnd();
@@ -54,7 +54,7 @@ public class WordDocumentRenderer
 		return doc;
 	}
 
-	private void renderSection(org.openfuxml.content.ofx.Section ofxSection) throws Exception 
+	private void renderSection(org.openfuxml.model.xml.core.ofx.Section ofxSection) throws Exception 
 	{
 		WordSectionRenderer sf = new WordSectionRenderer(doc,builder);
 		sf.renderWithException(ofxSection);

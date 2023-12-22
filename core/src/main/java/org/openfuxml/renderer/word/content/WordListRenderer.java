@@ -2,9 +2,9 @@ package org.openfuxml.renderer.word.content;
 
 import java.awt.Color;
 
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.list.Item;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.renderer.word.util.SetFont;
 import org.openfuxml.renderer.word.util.SetFont.setFontEnum;
 import org.slf4j.Logger;
@@ -78,7 +78,7 @@ public class WordListRenderer
 		builder.endTable();
 	}
 	
-	private void paragraphRenderer(org.openfuxml.content.ofx.Paragraph s) throws OfxAuthoringException
+	private void paragraphRenderer(org.openfuxml.model.xml.core.ofx.Paragraph s) throws OfxAuthoringException
 	{
 		WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
 		wPF.render(s,1,1);

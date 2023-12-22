@@ -101,10 +101,10 @@ public class WordTableRenderer
 			{
 				for (Serializable s : cell.getContent())
 				{
-					if (s instanceof org.openfuxml.content.ofx.Paragraph)
+					if (s instanceof org.openfuxml.model.xml.core.ofx.Paragraph)
 					{
 						WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
-						wPF.render((org.openfuxml.content.ofx.Paragraph) s, tableCount, tableCurrent);
+						wPF.render((org.openfuxml.model.xml.core.ofx.Paragraph) s, tableCount, tableCurrent);
 					}
 				}
 				if ((columnHelper) <= (row.getCell().size() - 1))
@@ -130,10 +130,10 @@ public class WordTableRenderer
 				{
 					for (Serializable s : cell.getContent())
 					{
-						if (s instanceof org.openfuxml.content.ofx.Paragraph)
+						if (s instanceof org.openfuxml.model.xml.core.ofx.Paragraph)
 						{
 							WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
-							wPF.render((org.openfuxml.content.ofx.Paragraph) s, tableCount, tableCurrent);
+							wPF.render((org.openfuxml.model.xml.core.ofx.Paragraph) s, tableCount, tableCurrent);
 						}
 					}
 					if ((columnHelper2) <= (row.getCell().size() - 1))

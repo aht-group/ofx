@@ -8,12 +8,12 @@ import java.util.List;
 
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-import org.openfuxml.content.ofx.Document;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
+import org.openfuxml.model.xml.core.ofx.Document;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.OfxRenderer;

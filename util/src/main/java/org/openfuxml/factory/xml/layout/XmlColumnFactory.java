@@ -1,11 +1,11 @@
 package org.openfuxml.factory.xml.layout;
 
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.model.xml.core.layout.Column;
 import org.openfuxml.model.xml.core.layout.Container;
 import org.openfuxml.model.xml.core.layout.Height;
 import org.openfuxml.model.xml.core.layout.Width;
 import org.openfuxml.model.xml.core.media.Image;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
 
 public class XmlColumnFactory
 {	

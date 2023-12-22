@@ -2,12 +2,12 @@ package org.openfuxml.renderer.markdown.structure;
 
 import java.util.Objects;
 
-import org.openfuxml.content.ofx.Title;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
+import org.openfuxml.model.xml.core.ofx.Title;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

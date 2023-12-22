@@ -22,7 +22,7 @@ public class WordTitleRenderer
 	
 	public WordTitleRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 	
-	public void render(org.openfuxml.content.ofx.Title ofxTitel)
+	public void render(org.openfuxml.model.xml.core.ofx.Title ofxTitel)
 	{
 		SetFont sF = new SetFont(doc, builder);
 		sF.setFont(setFontEnum.title);

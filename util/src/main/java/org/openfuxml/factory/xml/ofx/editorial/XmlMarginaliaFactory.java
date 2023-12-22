@@ -1,8 +1,8 @@
 package org.openfuxml.factory.xml.ofx.editorial;
 
-import org.openfuxml.content.ofx.Marginalia;
-import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.model.xml.core.media.Image;
+import org.openfuxml.model.xml.core.ofx.Marginalia;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
 
 public class XmlMarginaliaFactory
 {	

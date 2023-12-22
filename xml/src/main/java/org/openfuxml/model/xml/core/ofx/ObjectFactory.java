@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.ofx;
+package org.openfuxml.model.xml.core.ofx;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

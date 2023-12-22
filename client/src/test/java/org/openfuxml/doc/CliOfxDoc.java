@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 
 import org.apache.commons.configuration.Configuration;
 import org.openfuxml.OfxClientBootstrap;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.model.xml.core.table.Cell;
 import org.openfuxml.model.xml.core.table.Row;
 import org.openfuxml.model.xml.core.table.Table;

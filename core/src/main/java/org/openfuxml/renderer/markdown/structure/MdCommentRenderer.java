@@ -1,11 +1,11 @@
 package org.openfuxml.renderer.markdown.structure;
 
-import org.openfuxml.content.ofx.Comment;
-import org.openfuxml.content.ofx.Raw;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxMdRenderer;
+import org.openfuxml.model.xml.core.ofx.Comment;
+import org.openfuxml.model.xml.core.ofx.Raw;
 import org.openfuxml.renderer.markdown.AbstractOfxMarkdownRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

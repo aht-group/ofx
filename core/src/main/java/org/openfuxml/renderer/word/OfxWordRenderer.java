@@ -20,7 +20,7 @@ public class OfxWordRenderer extends AbstractOfxWordRenderer
 		super(cp);
 	}
 		
-	public void render(org.openfuxml.content.ofx.Document ofxDocument, File target) throws Exception
+	public void render(org.openfuxml.model.xml.core.ofx.Document ofxDocument, File target) throws Exception
 	{
 		OfxDocumentStructureVerifier.checkForContent(ofxDocument);
 		WordDocumentRenderer wDR = new WordDocumentRenderer();

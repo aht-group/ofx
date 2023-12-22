@@ -3,7 +3,7 @@ package org.openfuxml.transcoder.html;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.Test;
-import org.openfuxml.content.ofx.Section;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.test.AbstractOfxUtilTest;
 import org.openfuxml.trancoder.html.HtmlTranscoder;
 import org.openfuxml.util.filter.TestOfxClassifierFilter;
