@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.fuxml;
+package org.openfuxml.model.xml.addon.fuxml;
 
 import java.io.Serializable;
 import java.util.ArrayList;
