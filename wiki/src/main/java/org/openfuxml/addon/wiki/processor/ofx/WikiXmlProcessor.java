@@ -1,14 +1,14 @@
 package org.openfuxml.addon.wiki.processor.ofx;
 
 import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.data.jaxb.Content;
-import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.ofx.xml.WikiCategoryProcessor;
 import org.openfuxml.addon.wiki.processor.ofx.xml.WikiPageProcessor;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.model.xml.addon.wiki.Content;
+import org.openfuxml.model.xml.addon.wiki.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

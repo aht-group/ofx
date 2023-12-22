@@ -12,8 +12,8 @@ import net.sf.exlp.interfaces.LogListener;
 import net.sf.exlp.interfaces.LogParser;
 import net.sf.exlp.util.io.LoggerInit;
 
-import org.openfuxml.addon.wiki.data.jaxb.Ofxgallery;
 import org.openfuxml.addon.wiki.event.WikiImageEvent;
+import org.openfuxml.model.xml.addon.wiki.Ofxgallery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

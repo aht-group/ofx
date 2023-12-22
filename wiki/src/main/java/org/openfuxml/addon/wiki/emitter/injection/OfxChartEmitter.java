@@ -5,13 +5,13 @@ import javax.xml.stream.XMLStreamException;
 import net.sf.exlp.util.xml.JDomUtil;
 
 import org.jdom2.Element;
-import org.openfuxml.addon.wiki.data.jaxb.Wikiinjection;
 import org.openfuxml.addon.wiki.util.JdomXmlStreamer;
 import org.openfuxml.addon.wiki.util.WikiContentIO;
 import org.openfuxml.content.fuxml.AbsatzOhne;
 import org.openfuxml.content.fuxml.Grafik;
 import org.openfuxml.content.fuxml.Medienobjekt;
 import org.openfuxml.content.fuxml.Medienobjekt.Objekttitel;
+import org.openfuxml.model.xml.addon.wiki.Wikiinjection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

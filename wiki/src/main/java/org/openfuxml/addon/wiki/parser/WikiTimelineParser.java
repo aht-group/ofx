@@ -18,10 +18,10 @@ import net.sf.exlp.interfaces.LogListener;
 import net.sf.exlp.interfaces.LogParser;
 import net.sf.exlp.util.io.LoggerInit;
 
-import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
-import org.openfuxml.addon.wiki.data.jaxb.Ofxchartcontainer;
-import org.openfuxml.addon.wiki.data.jaxb.Ofxchartdata;
 import org.openfuxml.addon.wiki.event.WikiChartEvent;
+import org.openfuxml.model.xml.addon.wiki.Ofxchart;
+import org.openfuxml.model.xml.addon.wiki.Ofxchartcontainer;
+import org.openfuxml.model.xml.addon.wiki.Ofxchartdata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

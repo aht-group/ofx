@@ -1,5 +1,5 @@
 
-package org.openfuxml.addon.wiki.data.jaxb;
+package org.openfuxml.model.xml.addon.wiki;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -19,7 +19,6 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.openfuxml.org/wiki}injections"/&gt;
  *         &lt;element ref="{http://www.openfuxml.org/wiki}replacements"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -31,43 +30,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "injections",
     "replacements"
 })
-@XmlRootElement(name = "markupProcessor")
-public class MarkupProcessor
+@XmlRootElement(name = "xhtmlProcessor")
+public class XhtmlProcessor
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected Injections injections;
-    @XmlElement(required = true)
     protected Replacements replacements;
-
-    /**
-     * Gets the value of the injections property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Injections }
-     *     
-     */
-    public Injections getInjections() {
-        return injections;
-    }
-
-    /**
-     * Sets the value of the injections property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Injections }
-     *     
-     */
-    public void setInjections(Injections value) {
-        this.injections = value;
-    }
 
     /**
      * Gets the value of the replacements property.

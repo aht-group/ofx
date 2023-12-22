@@ -3,8 +3,8 @@ package org.openfuxml.addon.wiki.processor.util;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.openfuxml.addon.wiki.data.jaxb.Server;
-import org.openfuxml.addon.wiki.data.jaxb.Servers;
+import org.openfuxml.model.xml.addon.wiki.Server;
+import org.openfuxml.model.xml.addon.wiki.Servers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

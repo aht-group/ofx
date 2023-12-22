@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.jdom2.Element;
-import org.openfuxml.addon.wiki.data.jaxb.Template;
-import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
@@ -21,6 +19,8 @@ import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.factory.ofx.table.ColumnFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
+import org.openfuxml.model.xml.addon.wiki.Template;
+import org.openfuxml.model.xml.addon.wiki.TemplateKv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

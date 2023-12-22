@@ -47,7 +47,7 @@ public class Content
     @XmlElementRefs({
         @XmlElementRef(name = "sections", namespace = "http://www.openfuxml.org", type = Sections.class),
         @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
-        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = org.openfuxml.addon.wiki.data.jaxb.Content.class)
+        @XmlElementRef(name = "content", namespace = "http://www.openfuxml.org/wiki", type = org.openfuxml.model.xml.addon.wiki.Content.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -71,7 +71,7 @@ public class Content
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * {@link org.openfuxml.addon.wiki.data.jaxb.Content }
+     * {@link org.openfuxml.model.xml.addon.wiki.Content }
      * {@link Section }
      * {@link Sections }
      * 

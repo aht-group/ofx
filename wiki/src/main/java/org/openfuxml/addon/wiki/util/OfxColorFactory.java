@@ -1,7 +1,7 @@
 package org.openfuxml.addon.wiki.util;
 
-import org.openfuxml.addon.wiki.data.jaxb.Color;
-import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
+import org.openfuxml.model.xml.addon.wiki.Color;
+import org.openfuxml.model.xml.addon.wiki.Ofxchart;
 
 public class OfxColorFactory
 {

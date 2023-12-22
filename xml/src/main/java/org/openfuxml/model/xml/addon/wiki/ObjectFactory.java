@@ -1,5 +1,5 @@
 
-package org.openfuxml.addon.wiki.data.jaxb;
+package org.openfuxml.model.xml.addon.wiki;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

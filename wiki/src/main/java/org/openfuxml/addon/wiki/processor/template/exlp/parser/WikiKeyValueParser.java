@@ -3,9 +3,9 @@ package org.openfuxml.addon.wiki.processor.template.exlp.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.openfuxml.addon.wiki.data.jaxb.Markup;
-import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
+import org.openfuxml.model.xml.addon.wiki.Markup;
+import org.openfuxml.model.xml.addon.wiki.TemplateKv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

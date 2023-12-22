@@ -3,14 +3,14 @@ package org.openfuxml.addon.wiki.processor.xhtml;
 import net.sf.exlp.util.io.StringIO;
 
 import org.jdom2.JDOMException;
-import org.openfuxml.addon.wiki.data.jaxb.Category;
-import org.openfuxml.addon.wiki.data.jaxb.Content;
-import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.mods.OfxPushUp;
 import org.openfuxml.addon.wiki.processor.xhtml.mods.XhtmlAHxMerge;
 import org.openfuxml.addon.wiki.processor.xhtml.mods.XhtmlCodePreMover;
+import org.openfuxml.model.xml.addon.wiki.Category;
+import org.openfuxml.model.xml.addon.wiki.Content;
+import org.openfuxml.model.xml.addon.wiki.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

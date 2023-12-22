@@ -8,10 +8,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
-import org.openfuxml.addon.wiki.data.jaxb.Servers;
-import org.openfuxml.addon.wiki.data.jaxb.Templates;
-import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;
+
+import org.openfuxml.model.xml.addon.wiki.MarkupProcessor;
+import org.openfuxml.model.xml.addon.wiki.Servers;
+import org.openfuxml.model.xml.addon.wiki.Templates;
+import org.openfuxml.model.xml.addon.wiki.XhtmlProcessor;
 
 
 /**

@@ -4,15 +4,15 @@ import java.io.File;
 
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
 
-import org.openfuxml.addon.wiki.data.jaxb.Category;
-import org.openfuxml.addon.wiki.data.jaxb.Content;
-import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.net.fetcher.WikiCategoryFetcher;
 import org.openfuxml.addon.wiki.processor.net.fetcher.WikiPageFetcher;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiContentIO;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
+import org.openfuxml.model.xml.addon.wiki.Category;
+import org.openfuxml.model.xml.addon.wiki.Content;
+import org.openfuxml.model.xml.addon.wiki.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

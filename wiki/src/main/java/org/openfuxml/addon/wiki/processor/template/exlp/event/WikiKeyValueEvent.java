@@ -3,7 +3,7 @@ package org.openfuxml.addon.wiki.processor.template.exlp.event;
 import net.sf.exlp.core.event.AbstractEvent;
 import net.sf.exlp.interfaces.LogEvent;
 
-import org.openfuxml.addon.wiki.data.jaxb.TemplateKv;
+import org.openfuxml.model.xml.addon.wiki.TemplateKv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

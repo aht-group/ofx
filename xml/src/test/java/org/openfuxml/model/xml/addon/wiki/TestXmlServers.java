@@ -1,6 +1,5 @@
 package org.openfuxml.model.xml.addon.wiki;
 
-import org.openfuxml.addon.wiki.data.jaxb.Servers;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 
 public class TestXmlServers extends AbstractXmlWikiTest<Servers>

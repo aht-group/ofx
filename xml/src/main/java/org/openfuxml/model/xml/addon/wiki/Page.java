@@ -1,15 +1,14 @@
 
-package org.openfuxml.addon.wiki.data.jaxb;
+package org.openfuxml.model.xml.addon.wiki;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.openfuxml.content.ofx.Section;
 
 
 /**
@@ -22,12 +21,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.openfuxml.org/wiki}auth" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}section"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="default" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="url" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="file" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -37,52 +35,45 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "auth"
+    "section"
 })
-@XmlRootElement(name = "server")
-public class Server
+@XmlRootElement(name = "page")
+public class Page
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(required = true)
-    protected List<Auth> auth;
+    @XmlElement(namespace = "http://www.openfuxml.org", required = true)
+    protected Section section;
     @XmlAttribute(name = "id")
     protected String id;
-    @XmlAttribute(name = "default")
-    protected Boolean _default;
     @XmlAttribute(name = "name")
     protected String name;
-    @XmlAttribute(name = "url")
-    protected String url;
+    @XmlAttribute(name = "file")
+    protected String file;
 
     /**
-     * Gets the value of the auth property.
+     * Gets the value of the section property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the auth property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getAuth().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Auth }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link Section }
+     *     
      */
-    public List<Auth> getAuth() {
-        if (auth == null) {
-            auth = new ArrayList<Auth>();
-        }
-        return this.auth;
+    public Section getSection() {
+        return section;
+    }
+
+    /**
+     * Sets the value of the section property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Section }
+     *     
+     */
+    public void setSection(Section value) {
+        this.section = value;
     }
 
     /**
@@ -110,30 +101,6 @@ public class Server
     }
 
     /**
-     * Gets the value of the default property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean isDefault() {
-        return _default;
-    }
-
-    /**
-     * Sets the value of the default property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setDefault(Boolean value) {
-        this._default = value;
-    }
-
-    /**
      * Gets the value of the name property.
      * 
      * @return
@@ -158,27 +125,27 @@ public class Server
     }
 
     /**
-     * Gets the value of the url property.
+     * Gets the value of the file property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getUrl() {
-        return url;
+    public String getFile() {
+        return file;
     }
 
     /**
-     * Sets the value of the url property.
+     * Sets the value of the file property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setUrl(String value) {
-        this.url = value;
+    public void setFile(String value) {
+        this.file = value;
     }
 
 }

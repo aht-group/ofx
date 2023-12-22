@@ -12,10 +12,10 @@ import net.sourceforge.jwbf.mediawiki.actions.queries.CategoryMembersSimple;
 import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 
 import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.data.jaxb.Category;
-import org.openfuxml.addon.wiki.data.jaxb.Page;
 import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
+import org.openfuxml.model.xml.addon.wiki.Category;
+import org.openfuxml.model.xml.addon.wiki.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

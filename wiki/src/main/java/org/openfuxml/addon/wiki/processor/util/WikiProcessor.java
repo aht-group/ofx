@@ -3,9 +3,9 @@ package org.openfuxml.addon.wiki.processor.util;
 import java.io.File;
 
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
-import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.model.xml.addon.wiki.Contents;
 
 public interface WikiProcessor
 {

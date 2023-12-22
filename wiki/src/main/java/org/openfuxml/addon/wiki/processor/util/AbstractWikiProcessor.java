@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
-import org.openfuxml.addon.wiki.data.jaxb.Content;
-import org.openfuxml.addon.wiki.data.jaxb.Contents;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor.WikiDir;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.model.xml.addon.wiki.Content;
+import org.openfuxml.model.xml.addon.wiki.Contents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

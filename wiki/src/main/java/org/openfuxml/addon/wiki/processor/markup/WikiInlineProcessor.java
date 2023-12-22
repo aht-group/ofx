@@ -4,15 +4,15 @@ import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jdom2.Element;
-import org.openfuxml.addon.wiki.data.jaxb.MarkupProcessor;
-import org.openfuxml.addon.wiki.data.jaxb.Templates;
-import org.openfuxml.addon.wiki.data.jaxb.XhtmlProcessor;
 import org.openfuxml.addon.wiki.processor.ofx.xml.WikiPageProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlFinalProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.XhtmlReplaceProcessor;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.model.xml.addon.wiki.MarkupProcessor;
+import org.openfuxml.model.xml.addon.wiki.Templates;
+import org.openfuxml.model.xml.addon.wiki.XhtmlProcessor;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

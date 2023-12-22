@@ -1,5 +1,5 @@
 
-package org.openfuxml.addon.wiki.data.jaxb;
+package org.openfuxml.model.xml.addon.wiki;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,12 +22,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="table" type="{http://www.w3.org/2001/XMLSchema}anyType"/&gt;
- *         &lt;element name="section" type="{http://www.w3.org/2001/XMLSchema}anyType"/&gt;
- *         &lt;element ref="{http://www.openfuxml.org/wiki}page" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/wiki}auth" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="default" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="url" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -37,102 +37,52 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "table",
-    "section",
-    "page"
+    "auth"
 })
-@XmlRootElement(name = "category")
-public class Category
+@XmlRootElement(name = "server")
+public class Server
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "", required = true)
-    protected Object table;
-    @XmlElement(namespace = "", required = true)
-    protected Object section;
     @XmlElement(required = true)
-    protected List<Page> page;
+    protected List<Auth> auth;
     @XmlAttribute(name = "id")
     protected String id;
+    @XmlAttribute(name = "default")
+    protected Boolean _default;
     @XmlAttribute(name = "name")
     protected String name;
+    @XmlAttribute(name = "url")
+    protected String url;
 
     /**
-     * Gets the value of the table property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
-     */
-    public Object getTable() {
-        return table;
-    }
-
-    /**
-     * Sets the value of the table property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
-     */
-    public void setTable(Object value) {
-        this.table = value;
-    }
-
-    /**
-     * Gets the value of the section property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
-     */
-    public Object getSection() {
-        return section;
-    }
-
-    /**
-     * Sets the value of the section property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
-     */
-    public void setSection(Object value) {
-        this.section = value;
-    }
-
-    /**
-     * Gets the value of the page property.
+     * Gets the value of the auth property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the page property.
+     * This is why there is not a <CODE>set</CODE> method for the auth property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPage().add(newItem);
+     *    getAuth().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Page }
+     * {@link Auth }
      * 
      * 
      */
-    public List<Page> getPage() {
-        if (page == null) {
-            page = new ArrayList<Page>();
+    public List<Auth> getAuth() {
+        if (auth == null) {
+            auth = new ArrayList<Auth>();
         }
-        return this.page;
+        return this.auth;
     }
 
     /**
@@ -160,6 +110,30 @@ public class Category
     }
 
     /**
+     * Gets the value of the default property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isDefault() {
+        return _default;
+    }
+
+    /**
+     * Sets the value of the default property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setDefault(Boolean value) {
+        this._default = value;
+    }
+
+    /**
      * Gets the value of the name property.
      * 
      * @return
@@ -181,6 +155,30 @@ public class Category
      */
     public void setName(String value) {
         this.name = value;
+    }
+
+    /**
+     * Gets the value of the url property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * Sets the value of the url property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUrl(String value) {
+        this.url = value;
     }
 
 }

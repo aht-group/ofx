@@ -1,10 +1,9 @@
 
-package org.openfuxml.addon.wiki.data.jaxb;
+package org.openfuxml.model.xml.addon.wiki;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -20,9 +19,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.openfuxml.org/wiki}markup"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/wiki}injections"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org/wiki}replacements"/&gt;
  *       &lt;/sequence&gt;
- *       &lt;attribute name="key" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -32,65 +31,66 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "markup"
+    "injections",
+    "replacements"
 })
-@XmlRootElement(name = "templateKv")
-public class TemplateKv
+@XmlRootElement(name = "markupProcessor")
+public class MarkupProcessor
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected Markup markup;
-    @XmlAttribute(name = "key")
-    protected String key;
+    protected Injections injections;
+    @XmlElement(required = true)
+    protected Replacements replacements;
 
     /**
-     * Gets the value of the markup property.
+     * Gets the value of the injections property.
      * 
      * @return
      *     possible object is
-     *     {@link Markup }
+     *     {@link Injections }
      *     
      */
-    public Markup getMarkup() {
-        return markup;
+    public Injections getInjections() {
+        return injections;
     }
 
     /**
-     * Sets the value of the markup property.
+     * Sets the value of the injections property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Markup }
+     *     {@link Injections }
      *     
      */
-    public void setMarkup(Markup value) {
-        this.markup = value;
+    public void setInjections(Injections value) {
+        this.injections = value;
     }
 
     /**
-     * Gets the value of the key property.
+     * Gets the value of the replacements property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Replacements }
      *     
      */
-    public String getKey() {
-        return key;
+    public Replacements getReplacements() {
+        return replacements;
     }
 
     /**
-     * Sets the value of the key property.
+     * Sets the value of the replacements property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Replacements }
      *     
      */
-    public void setKey(String value) {
-        this.key = value;
+    public void setReplacements(Replacements value) {
+        this.replacements = value;
     }
 
 }

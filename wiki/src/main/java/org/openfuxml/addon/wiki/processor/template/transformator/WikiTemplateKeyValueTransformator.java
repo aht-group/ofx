@@ -2,10 +2,10 @@ package org.openfuxml.addon.wiki.processor.template.transformator;
 
 import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.jdom2.Element;
-import org.openfuxml.addon.wiki.data.jaxb.Template;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
 import org.openfuxml.addon.wiki.processor.template.exlp.parser.WikiKeyValueParser;
+import org.openfuxml.model.xml.addon.wiki.Template;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

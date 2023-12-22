@@ -1,6 +1,5 @@
 package org.openfuxml.model.xml.addon.wiki;
 
-import org.openfuxml.addon.wiki.data.jaxb.Auth;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 
 public class TestXmlAuth extends AbstractXmlWikiTest<Auth>

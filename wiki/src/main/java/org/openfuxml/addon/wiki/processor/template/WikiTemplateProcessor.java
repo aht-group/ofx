@@ -6,8 +6,6 @@ import java.io.FileNotFoundException;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
-import org.openfuxml.addon.wiki.data.jaxb.Template;
-import org.openfuxml.addon.wiki.data.jaxb.Templates;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.processor.template.transformator.WikiTemplateKeyValueTransformator;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
@@ -15,6 +13,8 @@ import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlXpathHelper;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.model.xml.addon.wiki.Template;
+import org.openfuxml.model.xml.addon.wiki.Templates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

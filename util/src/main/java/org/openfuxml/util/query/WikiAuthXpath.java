@@ -1,6 +1,6 @@
 package org.openfuxml.util.query;
 
-import org.openfuxml.addon.wiki.data.jaxb.Auth;
+import org.openfuxml.model.xml.addon.wiki.Auth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

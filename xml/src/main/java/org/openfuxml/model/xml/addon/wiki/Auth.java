@@ -1,14 +1,12 @@
 
-package org.openfuxml.addon.wiki.data.jaxb;
+package org.openfuxml.model.xml.addon.wiki;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.openfuxml.content.ofx.Section;
 
 
 /**
@@ -20,12 +18,17 @@ import org.openfuxml.content.ofx.Section;
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.openfuxml.org}section"/&gt;
- *       &lt;/sequence&gt;
- *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="type"&gt;
+ *         &lt;simpleType&gt;
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
+ *             &lt;enumeration value="left"/&gt;
+ *             &lt;enumeration value="center"/&gt;
+ *             &lt;enumeration value="right"/&gt;
+ *           &lt;/restriction&gt;
+ *         &lt;/simpleType&gt;
+ *       &lt;/attribute&gt;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="file" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="password" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -34,70 +37,42 @@ import org.openfuxml.content.ofx.Section;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "section"
-})
-@XmlRootElement(name = "page")
-public class Page
+@XmlType(name = "")
+@XmlRootElement(name = "auth")
+public class Auth
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://www.openfuxml.org", required = true)
-    protected Section section;
-    @XmlAttribute(name = "id")
-    protected String id;
+    @XmlAttribute(name = "type")
+    protected String type;
     @XmlAttribute(name = "name")
     protected String name;
-    @XmlAttribute(name = "file")
-    protected String file;
+    @XmlAttribute(name = "password")
+    protected String password;
 
     /**
-     * Gets the value of the section property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Section }
-     *     
-     */
-    public Section getSection() {
-        return section;
-    }
-
-    /**
-     * Sets the value of the section property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Section }
-     *     
-     */
-    public void setSection(Section value) {
-        this.section = value;
-    }
-
-    /**
-     * Gets the value of the id property.
+     * Gets the value of the type property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getId() {
-        return id;
+    public String getType() {
+        return type;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the type property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setId(String value) {
-        this.id = value;
+    public void setType(String value) {
+        this.type = value;
     }
 
     /**
@@ -125,27 +100,27 @@ public class Page
     }
 
     /**
-     * Gets the value of the file property.
+     * Gets the value of the password property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getFile() {
-        return file;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * Sets the value of the file property.
+     * Sets the value of the password property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setFile(String value) {
-        this.file = value;
+    public void setPassword(String value) {
+        this.password = value;
     }
 
 }

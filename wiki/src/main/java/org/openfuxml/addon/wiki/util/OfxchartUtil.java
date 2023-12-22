@@ -2,8 +2,8 @@ package org.openfuxml.addon.wiki.util;
 
 import java.util.Objects;
 
-import org.openfuxml.addon.wiki.data.jaxb.Ofx;
-import org.openfuxml.addon.wiki.data.jaxb.Ofxchart;
+import org.openfuxml.model.xml.addon.wiki.Ofx;
+import org.openfuxml.model.xml.addon.wiki.Ofxchart;
 import org.openfuxml.util.translation.DoubleMapTranslation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
