@@ -36,7 +36,7 @@
 
 	<jxb:bindings schemaLocation="../xsd/content/graph.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.content.graph"/>
+            <jxb:package name="org.openfuxml.model.xml.addon.graph"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     <jxb:bindings schemaLocation="../xsd/renderer/html.xsd" node="/xsd:schema">
