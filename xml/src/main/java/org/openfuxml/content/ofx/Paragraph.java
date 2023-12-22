@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.openfuxml.content.editorial.Acronym;
 import org.openfuxml.content.editorial.Glossary;
 import org.openfuxml.content.editorial.Index;
-import org.openfuxml.content.layout.Font;
+import org.openfuxml.model.xml.core.layout.Font;
 import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.model.xml.core.text.Emphasis;
 import org.openfuxml.model.xml.core.text.Symbol;

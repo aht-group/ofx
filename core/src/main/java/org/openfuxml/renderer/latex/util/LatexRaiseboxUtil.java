@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 
-import org.openfuxml.content.layout.Height;
+import org.openfuxml.model.xml.core.layout.Height;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

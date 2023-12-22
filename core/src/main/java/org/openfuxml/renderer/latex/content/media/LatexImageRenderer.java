@@ -4,11 +4,11 @@ import java.util.Objects;
 
 import javax.print.attribute.standard.Media;
 
-import org.openfuxml.content.layout.Alignment;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.model.xml.core.layout.Alignment;
 import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.layout.LatexColumnRenderer;

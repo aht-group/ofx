@@ -5,8 +5,8 @@ package org.openfuxml.renderer.html.util;
 import org.jdom2.Content;
 import org.jdom2.Element;
 import org.jdom2.Text;
-import org.openfuxml.content.layout.Height;
-import org.openfuxml.content.layout.Width;
+import org.openfuxml.model.xml.core.layout.Height;
+import org.openfuxml.model.xml.core.layout.Width;
 import org.openfuxml.renderer.html.head.HtmlHead;
 
 /*Klasse erzeugt Objekte, welche letztendlich die einzelnen Tags

@@ -2,14 +2,14 @@ package org.openfuxml.doc.provider.media;
 
 import java.io.File;
 
-import org.openfuxml.content.layout.Height;
-import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.doc.provider.AbstractXmlExampleProvider;
 import org.openfuxml.doc.provider.DemoContentProvider;
 import org.openfuxml.factory.xml.media.XmlMediaFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.interfaces.xml.OfxXmlExampleProvider;
+import org.openfuxml.model.xml.core.layout.Height;
+import org.openfuxml.model.xml.core.layout.Width;
 import org.openfuxml.model.xml.core.media.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

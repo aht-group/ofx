@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.layout;
 
-import org.openfuxml.content.layout.Spacing;
+import org.openfuxml.model.xml.core.layout.Spacing;
 
 public class XmlSpacingFactory
 {	

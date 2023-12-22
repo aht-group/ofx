@@ -2,7 +2,7 @@ package org.openfuxml.renderer.latex.util;
 
 import java.util.Objects;
 
-import org.openfuxml.content.layout.Font;
+import org.openfuxml.model.xml.core.layout.Font;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

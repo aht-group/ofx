@@ -1,8 +1,8 @@
 package org.openfuxml.factory.xml.ofx.layout;
 
-import org.openfuxml.content.layout.Font;
-import org.openfuxml.content.layout.Layout;
-import org.openfuxml.content.layout.Spacing;
+import org.openfuxml.model.xml.core.layout.Font;
+import org.openfuxml.model.xml.core.layout.Layout;
+import org.openfuxml.model.xml.core.layout.Spacing;
 
 public class XmlLayoutFactory
 {

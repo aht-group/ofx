@@ -1,14 +1,14 @@
 package org.openfuxml.renderer.latex.content.layout;
 
-import org.openfuxml.content.layout.Column;
-import org.openfuxml.content.layout.Container;
-import org.openfuxml.content.layout.Font;
-import org.openfuxml.content.layout.Height;
-import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.model.xml.core.layout.Column;
+import org.openfuxml.model.xml.core.layout.Container;
+import org.openfuxml.model.xml.core.layout.Font;
+import org.openfuxml.model.xml.core.layout.Height;
+import org.openfuxml.model.xml.core.layout.Width;
 import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.util.LatexRaiseboxUtil;

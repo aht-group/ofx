@@ -1,5 +1,6 @@
 package org.openfuxml.content.layout;
 
+import org.openfuxml.model.xml.core.layout.Spacing;
 import org.openfuxml.test.AbstractOfxXmlTest;
 import org.openfuxml.test.OfxXmlTstBootstrap;
 import org.slf4j.Logger;

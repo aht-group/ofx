@@ -2,12 +2,12 @@ package org.openfuxml.renderer.latex.content.list;
 
 import java.util.Objects;
 
-import org.openfuxml.content.layout.Layout;
-import org.openfuxml.content.layout.Spacing;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.list.XmlListFactory2;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.model.xml.core.layout.Layout;
+import org.openfuxml.model.xml.core.layout.Spacing;
 import org.openfuxml.model.xml.core.list.Item;
 import org.openfuxml.model.xml.core.list.List;
 import org.openfuxml.model.xml.core.list.Type;

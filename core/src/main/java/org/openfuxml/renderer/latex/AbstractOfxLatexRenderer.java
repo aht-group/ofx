@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.openfuxml.content.layout.Column;
-import org.openfuxml.content.layout.Container;
-import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.ofx.Highlight;
 import org.openfuxml.content.ofx.Marginalia;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.model.xml.core.layout.Column;
+import org.openfuxml.model.xml.core.layout.Container;
+import org.openfuxml.model.xml.core.layout.Width;
 import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.renderer.AbstractOfxRenderer;
 import org.openfuxml.renderer.latex.content.layout.LatexColumnRenderer;

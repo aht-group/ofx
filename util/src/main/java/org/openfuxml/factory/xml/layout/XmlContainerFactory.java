@@ -1,7 +1,7 @@
 package org.openfuxml.factory.xml.layout;
 
-import org.openfuxml.content.layout.Container;
-import org.openfuxml.content.layout.Font;
+import org.openfuxml.model.xml.core.layout.Container;
+import org.openfuxml.model.xml.core.layout.Font;
 
 public class XmlContainerFactory
 {	

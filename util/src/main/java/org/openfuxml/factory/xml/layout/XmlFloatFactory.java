@@ -5,9 +5,9 @@ public class XmlFloatFactory
 {
 	public static enum Horizontal {center}
 	
-	public static org.openfuxml.content.layout.Float build(boolean floating)
+	public static org.openfuxml.model.xml.core.layout.Float build(boolean floating)
 	{
-		org.openfuxml.content.layout.Float xml = new org.openfuxml.content.layout.Float();
+		org.openfuxml.model.xml.core.layout.Float xml = new org.openfuxml.model.xml.core.layout.Float();
 		xml.setValue(floating);
 		return xml;
 	}

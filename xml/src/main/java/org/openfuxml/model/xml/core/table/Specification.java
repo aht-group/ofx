@@ -8,9 +8,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.openfuxml.content.layout.Alignment;
-import org.openfuxml.content.layout.Float;
-import org.openfuxml.content.layout.Width;
+
+import org.openfuxml.model.xml.core.layout.Alignment;
+import org.openfuxml.model.xml.core.layout.Float;
+import org.openfuxml.model.xml.core.layout.Width;
 
 
 /**

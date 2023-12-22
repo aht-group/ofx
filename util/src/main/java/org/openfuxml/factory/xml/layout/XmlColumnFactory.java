@@ -1,10 +1,10 @@
 package org.openfuxml.factory.xml.layout;
 
-import org.openfuxml.content.layout.Column;
-import org.openfuxml.content.layout.Container;
-import org.openfuxml.content.layout.Height;
-import org.openfuxml.content.layout.Width;
 import org.openfuxml.content.ofx.Paragraph;
+import org.openfuxml.model.xml.core.layout.Column;
+import org.openfuxml.model.xml.core.layout.Container;
+import org.openfuxml.model.xml.core.layout.Height;
+import org.openfuxml.model.xml.core.layout.Width;
 import org.openfuxml.model.xml.core.media.Image;
 
 public class XmlColumnFactory

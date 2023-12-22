@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.ofx.layout;
 
-import org.openfuxml.content.layout.Line;
+import org.openfuxml.model.xml.core.layout.Line;
 
 public class XmlLineFactory
 {

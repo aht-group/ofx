@@ -11,10 +11,11 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.openfuxml.content.layout.Box;
-import org.openfuxml.content.layout.Column;
-import org.openfuxml.content.layout.Container;
-import org.openfuxml.content.layout.Width;
+
+import org.openfuxml.model.xml.core.layout.Box;
+import org.openfuxml.model.xml.core.layout.Column;
+import org.openfuxml.model.xml.core.layout.Container;
+import org.openfuxml.model.xml.core.layout.Width;
 import org.openfuxml.model.xml.core.media.Image;
 
 

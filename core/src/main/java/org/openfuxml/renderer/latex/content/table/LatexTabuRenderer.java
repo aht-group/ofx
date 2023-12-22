@@ -2,13 +2,13 @@ package org.openfuxml.renderer.latex.content.table;
 
 import java.util.Objects;
 
-import org.openfuxml.content.layout.Font;
-import org.openfuxml.content.layout.Line;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.layout.XmlLineFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexTableRenderer;
 import org.openfuxml.interfaces.renderer.util.TabluarWidthCalculator;
+import org.openfuxml.model.xml.core.layout.Font;
+import org.openfuxml.model.xml.core.layout.Line;
 import org.openfuxml.model.xml.core.table.Body;
 import org.openfuxml.model.xml.core.table.Column;
 import org.openfuxml.model.xml.core.table.Content;

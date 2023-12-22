@@ -2,7 +2,6 @@ package org.openfuxml.renderer.html.table;
 
 import java.util.Objects;
 
-import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Title;
 import org.openfuxml.factory.txt.TxtTitleFactory;
@@ -10,6 +9,7 @@ import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
 import org.openfuxml.interfaces.media.CrossMediaManager;
 import org.openfuxml.interfaces.renderer.OfxHtmlRenderer;
+import org.openfuxml.model.xml.core.layout.Font;
 import org.openfuxml.model.xml.core.list.List;
 import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.model.xml.core.table.Body;

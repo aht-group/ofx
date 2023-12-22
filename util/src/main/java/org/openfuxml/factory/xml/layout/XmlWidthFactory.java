@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.layout;
 
-import org.openfuxml.content.layout.Width;
+import org.openfuxml.model.xml.core.layout.Width;
 
 public class XmlWidthFactory
 {

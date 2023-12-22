@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.layout;
 
-import org.openfuxml.content.layout.Height;
+import org.openfuxml.model.xml.core.layout.Height;
 
 public class XmlHeightFactory
 {

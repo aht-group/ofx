@@ -1,9 +1,9 @@
 package org.openfuxml.renderer.latex.content.table;
 
-import org.openfuxml.content.layout.Font;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.model.xml.core.layout.Font;
 import org.openfuxml.model.xml.core.table.Cell;
 import org.openfuxml.model.xml.core.table.Row;
 import org.openfuxml.model.xml.core.text.Emphasis;

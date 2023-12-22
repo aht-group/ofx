@@ -1,9 +1,9 @@
 package org.openfuxml.renderer.latex.content.layout;
 
-import org.openfuxml.content.layout.Width;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
+import org.openfuxml.model.xml.core.layout.Width;
 import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.util.LatexWidthCalculator;
 import org.slf4j.Logger;

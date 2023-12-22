@@ -4,9 +4,9 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Objects;
 
-import org.openfuxml.content.layout.Height;
-import org.openfuxml.content.layout.Width;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.model.xml.core.layout.Height;
+import org.openfuxml.model.xml.core.layout.Width;
 import org.openfuxml.renderer.latex.content.structure.LatexMarginaliaRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

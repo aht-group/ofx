@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.layout;
+package org.openfuxml.model.xml.core.layout;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,15 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="horizontal"&gt;
- *         &lt;simpleType&gt;
- *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;enumeration value="left"/&gt;
- *             &lt;enumeration value="center"/&gt;
- *             &lt;enumeration value="right"/&gt;
- *           &lt;/restriction&gt;
- *         &lt;/simpleType&gt;
- *       &lt;/attribute&gt;
+ *       &lt;attribute name="relativeSize" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -36,37 +28,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-@XmlRootElement(name = "alignment")
-public class Alignment
-    implements Serializable
+@XmlRootElement(name = "font")
+public class Font implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlAttribute(name = "horizontal")
-    protected String horizontal;
+    @XmlAttribute(name = "relativeSize")
+    protected Integer relativeSize;
 
     /**
-     * Gets the value of the horizontal property.
+     * Gets the value of the relativeSize property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Integer }
      *     
      */
-    public String getHorizontal() {
-        return horizontal;
+    public Integer getRelativeSize() {
+        return relativeSize;
     }
 
     /**
-     * Sets the value of the horizontal property.
+     * Sets the value of the relativeSize property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Integer }
      *     
      */
-    public void setHorizontal(String value) {
-        this.horizontal = value;
+    public void setRelativeSize(Integer value) {
+        this.relativeSize = value;
     }
 
 }

@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.layout;
+package org.openfuxml.model.xml.core.layout;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -25,6 +25,18 @@ import javax.xml.bind.annotation.XmlValue;
  *           &lt;/restriction&gt;
  *         &lt;/simpleType&gt;
  *       &lt;/attribute&gt;
+ *       &lt;attribute name="flex" use="required"&gt;
+ *         &lt;simpleType&gt;
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}boolean"&gt;
+ *           &lt;/restriction&gt;
+ *         &lt;/simpleType&gt;
+ *       &lt;/attribute&gt;
+ *       &lt;attribute name="narrow"&gt;
+ *         &lt;simpleType&gt;
+ *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}boolean"&gt;
+ *           &lt;/restriction&gt;
+ *         &lt;/simpleType&gt;
+ *       &lt;/attribute&gt;
  *     &lt;/extension&gt;
  *   &lt;/simpleContent&gt;
  * &lt;/complexType&gt;
@@ -36,9 +48,8 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType(name = "", propOrder = {
     "value"
 })
-@XmlRootElement(name = "spacing")
-public class Spacing
-    implements Serializable
+@XmlRootElement(name = "width")
+public class Width implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
@@ -46,6 +57,10 @@ public class Spacing
     protected double value;
     @XmlAttribute(name = "unit", required = true)
     protected String unit;
+    @XmlAttribute(name = "flex", required = true)
+    protected boolean flex;
+    @XmlAttribute(name = "narrow")
+    protected Boolean narrow;
 
     /**
      * Gets the value of the value property.
@@ -85,6 +100,46 @@ public class Spacing
      */
     public void setUnit(String value) {
         this.unit = value;
+    }
+
+    /**
+     * Gets the value of the flex property.
+     * 
+     */
+    public boolean isFlex() {
+        return flex;
+    }
+
+    /**
+     * Sets the value of the flex property.
+     * 
+     */
+    public void setFlex(boolean value) {
+        this.flex = value;
+    }
+
+    /**
+     * Gets the value of the narrow property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isNarrow() {
+        return narrow;
+    }
+
+    /**
+     * Sets the value of the narrow property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setNarrow(Boolean value) {
+        this.narrow = value;
     }
 
 }

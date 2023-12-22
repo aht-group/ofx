@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.layout;
+package org.openfuxml.model.xml.core.layout;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

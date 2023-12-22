@@ -1,6 +1,6 @@
 package org.openfuxml.factory.xml.layout;
 
-import org.openfuxml.content.layout.Alignment;
+import org.openfuxml.model.xml.core.layout.Alignment;
 
 public class XmlAlignmentFactory
 {

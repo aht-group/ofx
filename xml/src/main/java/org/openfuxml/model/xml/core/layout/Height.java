@@ -1,5 +1,5 @@
 
-package org.openfuxml.content.layout;
+package org.openfuxml.model.xml.core.layout;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 
 /**
@@ -16,58 +17,73 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * <pre>
  * &lt;complexType&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="orientation"&gt;
+ *   &lt;simpleContent&gt;
+ *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema&gt;double"&gt;
+ *       &lt;attribute name="unit" use="required"&gt;
  *         &lt;simpleType&gt;
  *           &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *             &lt;enumeration value="top"/&gt;
- *             &lt;enumeration value="bottom"/&gt;
- *             &lt;enumeration value="left"/&gt;
- *             &lt;enumeration value="right"/&gt;
  *           &lt;/restriction&gt;
  *         &lt;/simpleType&gt;
  *       &lt;/attribute&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/simpleContent&gt;
  * &lt;/complexType&gt;
  * </pre>
  * 
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-@XmlRootElement(name = "line")
-public class Line
-    implements Serializable
+@XmlType(name = "", propOrder = {
+    "value"
+})
+@XmlRootElement(name = "height")
+public class Height implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlAttribute(name = "orientation")
-    protected String orientation;
+    @XmlValue
+    protected double value;
+    @XmlAttribute(name = "unit", required = true)
+    protected String unit;
 
     /**
-     * Gets the value of the orientation property.
+     * Gets the value of the value property.
+     * 
+     */
+    public double getValue() {
+        return value;
+    }
+
+    /**
+     * Sets the value of the value property.
+     * 
+     */
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    /**
+     * Gets the value of the unit property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getOrientation() {
-        return orientation;
+    public String getUnit() {
+        return unit;
     }
 
     /**
-     * Sets the value of the orientation property.
+     * Sets the value of the unit property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setOrientation(String value) {
-        this.orientation = value;
+    public void setUnit(String value) {
+        this.unit = value;
     }
 
 }
