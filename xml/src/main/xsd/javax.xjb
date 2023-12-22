@@ -53,7 +53,7 @@
     
 	<jxb:bindings schemaLocation="../xsd/addon/wiki.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.openfuxml.addon.wiki.data.jaxb"/>
+            <jxb:package name="org.openfuxml.model.xml.addon.wiki"/>
         </jxb:schemaBindings>
     </jxb:bindings>
         
