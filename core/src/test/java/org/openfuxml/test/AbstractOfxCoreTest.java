@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import org.apache.commons.lang3.StringUtils;
+import org.exlp.util.io.StringUtil;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.openfuxml.factory.ConfigurationProviderFacotry;
@@ -105,7 +106,7 @@ public class AbstractOfxCoreTest
 		StringWriter actual = new StringWriter();
 		renderer.write(actual);
 		
-		String expected = StringIO.loadTxt(referenceFile);
+		String expected = StringUtil.readFile(referenceFile);
 		Assert.assertEquals(expected, actual.toString());
 	}
 	

@@ -68,6 +68,7 @@ public class ImageProvider extends AbstractXmlExampleProvider implements OfxXmlE
 		p.getContent().add(DemoContentProvider.li.getWords(10));
     	return p;
 	}
+	
 	private static Width setWidth()
 	{
 		Width w = new Width();

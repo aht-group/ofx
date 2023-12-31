@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
+import org.exlp.util.io.StringUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -65,7 +66,7 @@ public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
 	
 	private void test(boolean saveReference) throws OfxInternalProcessingException
 	{
-		String inTxt = StringIO.loadTxt(fTest,false);
+		String inTxt = StringUtil.readFile(fTest);
 		String outTxt = xhtmlFinalP.process(inTxt);
 		if(saveReference)
 		{
@@ -74,7 +75,7 @@ public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
 		}
 		else
 		{
-			String refTxt = StringIO.loadTxt(fRef,false);
+			String refTxt = StringUtil.readFile(fRef);
 			Assert.assertEquals(refTxt.trim(),outTxt.trim());
 		}	
 	}

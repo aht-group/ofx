@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
-
+import org.exlp.util.io.StringUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,6 +19,10 @@ import org.openfuxml.test.AbstractFileProcessingTest;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.StringIO;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 @RunWith(Parameterized.class)
 public class TestXhtmlReplaceProcessor extends AbstractFileProcessingTest
@@ -75,7 +76,7 @@ public class TestXhtmlReplaceProcessor extends AbstractFileProcessingTest
 	
 	private void test(boolean saveReference) throws OfxInternalProcessingException
 	{
-		String inTxt = StringIO.loadTxt(fTest);
+		String inTxt = StringUtil.readFile(fTest);
 		String outTxt = xhtmlP.process(inTxt);
 		if(saveReference)
 		{
@@ -83,7 +84,7 @@ public class TestXhtmlReplaceProcessor extends AbstractFileProcessingTest
 		}
 		else
 		{
-			String refTxt = StringIO.loadTxt(fRef);
+			String refTxt = StringUtil.readFile(fRef);
 			Assert.assertEquals(refTxt.trim(),outTxt.trim());
 		}	
 	}

@@ -5,9 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
-
+import org.exlp.util.io.StringUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,6 +21,9 @@ import org.openfuxml.test.OfxWikiTstBootstrap;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.StringIO;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 @RunWith(Parameterized.class)
 public class TestWikiMarkupProcessor extends AbstractOfxWikiTest
@@ -85,7 +86,7 @@ public class TestWikiMarkupProcessor extends AbstractOfxWikiTest
 	
 	private void wikiPlainToMarkup(boolean saveReference) throws OfxInternalProcessingException
 	{
-		String plainTxt = StringIO.loadTxt(fTest);
+		String plainTxt = StringUtil.readFile(fTest);
 		String markupTxt = wmp.process(plainTxt, "article ... req?");
 		if(saveReference)
 		{
@@ -93,7 +94,7 @@ public class TestWikiMarkupProcessor extends AbstractOfxWikiTest
 		}
 		else
 		{
-			String markupRefTxt = StringIO.loadTxt(fRef);
+			String markupRefTxt = StringUtil.readFile(fRef);
 			Assert.assertEquals(markupRefTxt,markupTxt);
 		}	
 	}

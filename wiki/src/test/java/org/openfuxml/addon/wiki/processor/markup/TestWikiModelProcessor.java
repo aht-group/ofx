@@ -4,8 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
-import net.sf.exlp.util.io.StringIO;
-
+import org.exlp.util.io.StringUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,6 +17,8 @@ import org.openfuxml.test.AbstractFileProcessingTest;
 import org.openfuxml.test.OfxWikiTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.StringIO;
 
 @RunWith(Parameterized.class)
 public class TestWikiModelProcessor extends AbstractFileProcessingTest
@@ -63,7 +64,7 @@ public class TestWikiModelProcessor extends AbstractFileProcessingTest
 	
 	private void wikiPlainToMarkup(boolean saveReference) throws OfxInternalProcessingException
 	{
-		String markupTxt = StringIO.loadTxt(fTest);
+		String markupTxt = StringUtil.readFile(fTest);
 		String modelXhtml = wmp.process(markupTxt);
 		if(saveReference)
 		{
@@ -71,7 +72,7 @@ public class TestWikiModelProcessor extends AbstractFileProcessingTest
 		}
 		else
 		{
-			String xhtmlRef = StringIO.loadTxt(fRef);
+			String xhtmlRef = StringUtil.readFile(fRef);
 			Assert.assertEquals(xhtmlRef.trim(),modelXhtml.trim());
 		}	
 	}

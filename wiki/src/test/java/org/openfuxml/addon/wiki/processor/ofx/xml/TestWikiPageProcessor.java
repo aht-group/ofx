@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JDomUtil;
-
+import org.exlp.util.io.StringUtil;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
@@ -23,6 +20,9 @@ import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JDomUtil;
 
 @RunWith(Parameterized.class)
 public class TestWikiPageProcessor extends AbstractFileProcessingTest
@@ -68,7 +68,7 @@ public class TestWikiPageProcessor extends AbstractFileProcessingTest
 	
 	private void test(boolean saveReference) throws OfxInternalProcessingException
 	{
-		String inTxt = StringIO.loadTxt(fTest,false);
+		String inTxt = StringUtil.readFile(fTest);
 		Element xml = xmlP.process(inTxt);
 		Document doc = new Document();
 		doc.setRootElement(xml);
