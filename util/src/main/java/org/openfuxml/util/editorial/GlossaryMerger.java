@@ -26,7 +26,7 @@ public class GlossaryMerger
 	
 	public GlossaryMerger()
 	{
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 		mapOrigin = new Hashtable<String,String>();
 		glossary = new Glossary();
 		

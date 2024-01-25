@@ -38,7 +38,7 @@ public class ExternalContentEagerLoader
 
 	public ExternalContentEagerLoader()
 	{
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 		rpf = new RelativePathFactory(RelativePathFactory.PathSeparator.CURRENT);
 		
 		List<Namespace> ns = new ArrayList<>();

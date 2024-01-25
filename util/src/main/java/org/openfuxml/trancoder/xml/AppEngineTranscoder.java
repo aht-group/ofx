@@ -31,7 +31,7 @@ public class AppEngineTranscoder
 	
 	public AppEngineTranscoder()
 	{
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 	}
 	
 	public Table cron(String fileName) throws FileNotFoundException

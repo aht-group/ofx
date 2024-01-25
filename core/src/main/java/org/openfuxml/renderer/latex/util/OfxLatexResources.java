@@ -28,7 +28,7 @@ public class OfxLatexResources
 	public OfxLatexResources(File baseLatex)
 	{
 		this.baseLatex=baseLatex;
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 	}
 	
 	public void copyPackages() throws OfxConfigurationException {copyResource("ofx-core/tex","packages");}

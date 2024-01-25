@@ -19,7 +19,7 @@ public abstract class AbstractCrossMediaTranscoder
 	public AbstractCrossMediaTranscoder(File dir)
 	{
 		this.dir=dir;
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 	}
 	
 	public boolean isTargetExisting(Media media)

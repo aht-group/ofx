@@ -11,7 +11,7 @@ public class OfxLicenceActivator
 	
 	public static String aspose(String resource)
 	{
-		MultiResourceLoader mrl = new MultiResourceLoader();
+		MultiResourceLoader mrl = MultiResourceLoader.instance();
 		com.aspose.words.License license = new com.aspose.words.License();
 
 		try

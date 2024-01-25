@@ -26,7 +26,7 @@ public class AcronymMerger
 	
 	public AcronymMerger()
 	{
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 		mapOrigin = new Hashtable<String,String>();
 		acronyms = new Acronyms();
 		

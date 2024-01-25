@@ -52,7 +52,7 @@ public class TestSvgTranscoder extends AbstractOfxCoreTest
 
 	public void pngHeight() throws TranscoderException, IOException
 	{
-		MultiResourceLoader mrl = new MultiResourceLoader();
+		MultiResourceLoader mrl = MultiResourceLoader.instance();
 		InputStream is = mrl.searchIs(svgTest3);
 		OutputStream os = new FileOutputStream(new File(fTarget,"test.png"));
 		Svg2PngTranscoder.transcode(20, is, os);

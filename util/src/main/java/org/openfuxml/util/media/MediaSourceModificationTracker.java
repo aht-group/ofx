@@ -1,6 +1,5 @@
 package org.openfuxml.util.media;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class MediaSourceModificationTracker
 	public MediaSourceModificationTracker(File trackerDb)
 	{
 		this.trackerDb=trackerDb;
-		mrl = new MultiResourceLoader();
+		mrl = MultiResourceLoader.instance();
 		try
 		{
 			dir = JaxbUtil.loadJAXB(trackerDb, Dir.class);

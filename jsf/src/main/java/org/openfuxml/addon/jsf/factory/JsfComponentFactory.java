@@ -45,7 +45,7 @@ public class JsfComponentFactory
 	
 	private void read(String resourceName) throws FileNotFoundException, JDOMException
 	{
-		MultiResourceLoader mrl = new MultiResourceLoader();
+		MultiResourceLoader mrl = MultiResourceLoader.instance();
 		logger.trace("MRL: "+mrl.isAvailable(resourceName));
 		InputStream is = mrl.searchIs(resourceName);
 		
