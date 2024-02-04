@@ -7,6 +7,7 @@ import java.io.Writer;
 import java.util.Arrays;
 
 import org.exlp.util.io.StringUtil;
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.OfxCoreBootstrap;
@@ -23,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 {

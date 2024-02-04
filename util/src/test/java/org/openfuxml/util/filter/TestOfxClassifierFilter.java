@@ -1,7 +1,6 @@
 package org.openfuxml.util.filter;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

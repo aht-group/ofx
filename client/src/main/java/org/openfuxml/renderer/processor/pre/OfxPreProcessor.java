@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.addon.wiki.processor.markup.WikiMarkupProcessor;
@@ -41,8 +42,6 @@ import org.openfuxml.xml.renderer.cmp.Preprocessor;
 import org.openfuxml.xml.renderer.cmp.Wiki;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxPreProcessor
 {

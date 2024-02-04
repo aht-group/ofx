@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import org.apache.commons.io.FilenameUtils;
 import org.exlp.model.xml.io.Dir;
+import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.util.query.XmlHtmlQuery;
 import org.openfuxml.xml.renderer.cmp.Cmp;
@@ -17,7 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.xpath.IoXpath;
 
 public class OfxRenderConfiguration

@@ -1,8 +1,7 @@
 package org.openfuxml.test;
 
-import net.sf.exlp.util.io.LoggerInit;
-
 import org.exlp.interfaces.io.NsPrefixMapperInterface;
+import org.exlp.util.io.log.LoggerInit;
 import org.junit.BeforeClass;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;

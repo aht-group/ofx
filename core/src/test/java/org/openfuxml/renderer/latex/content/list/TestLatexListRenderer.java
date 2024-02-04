@@ -3,6 +3,7 @@ package org.openfuxml.renderer.latex.content.list;
 import java.io.File;
 import java.io.IOException;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -18,8 +19,6 @@ import org.openfuxml.model.xml.core.list.Type;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestLatexListRenderer extends AbstractLatexListTest
 {	

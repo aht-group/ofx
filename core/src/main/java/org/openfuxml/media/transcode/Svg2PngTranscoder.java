@@ -18,6 +18,7 @@ import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.PNGTranscoder;
+import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.media.XmlImageFactory;
 import org.openfuxml.interfaces.media.CrossMediaTranscoder;
@@ -29,7 +30,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StreamUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class Svg2PngTranscoder extends AbstractCrossMediaTranscoder implements CrossMediaTranscoder
 {

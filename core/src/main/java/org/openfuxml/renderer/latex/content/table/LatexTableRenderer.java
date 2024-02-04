@@ -2,6 +2,7 @@ package org.openfuxml.renderer.latex.content.table;
 
 import java.util.Objects;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
@@ -12,8 +13,6 @@ import org.openfuxml.renderer.latex.AbstractOfxLatexRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class LatexTableRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {

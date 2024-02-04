@@ -5,8 +5,7 @@ import java.io.FileNotFoundException;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
+import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.addon.wiki.util.JdomXmlStreamer;
 import org.openfuxml.model.xml.addon.wiki.Wikiinjection;
 import org.openfuxml.model.xml.addon.wiki.Ofxgallery.Ofximage;

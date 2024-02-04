@@ -3,8 +3,7 @@ package org.openfuxml.model.xml.addon.jsf;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openfuxml.test.OfxJsfTestBootstrap;

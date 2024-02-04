@@ -1,8 +1,8 @@
 package org.openfuxml.util.filter;
 
 import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Attribute;
 import org.jdom2.filter.Filters;
 import org.jdom2.xpath.XPathExpression;

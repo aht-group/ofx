@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 
 import org.exlp.util.io.StringUtil;
+import org.exlp.util.io.log.LoggerInit;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
@@ -21,7 +22,6 @@ import org.openfuxml.test.AbstractFileProcessingTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
 @RunWith(Parameterized.class)

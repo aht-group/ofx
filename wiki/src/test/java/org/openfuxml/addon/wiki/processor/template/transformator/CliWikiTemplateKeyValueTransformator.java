@@ -2,6 +2,8 @@ package org.openfuxml.addon.wiki.processor.template.transformator;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.system.property.ConfigLoader;
+import org.exlp.util.io.log.LoggerInit;
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Element;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.model.xml.addon.wiki.Template;
@@ -9,9 +11,7 @@ import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class CliWikiTemplateKeyValueTransformator
 {

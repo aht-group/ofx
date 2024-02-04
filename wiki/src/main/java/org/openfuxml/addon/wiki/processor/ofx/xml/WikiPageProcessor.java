@@ -18,8 +18,8 @@ import javax.xml.stream.XMLStreamWriter;
 
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;

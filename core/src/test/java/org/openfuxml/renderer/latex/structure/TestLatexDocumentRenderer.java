@@ -1,5 +1,6 @@
 package org.openfuxml.renderer.latex.structure;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.OfxCoreBootstrap;
@@ -13,8 +14,6 @@ import org.openfuxml.util.reference.OfxReferencePdfBuilder;
 import org.openfuxml.xml.renderer.cmp.Pdf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestLatexDocumentRenderer extends AbstractOfxCoreTest
 {	

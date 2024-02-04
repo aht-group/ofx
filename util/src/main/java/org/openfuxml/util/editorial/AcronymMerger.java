@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.factory.xml.ofx.content.XmlCommentFactory;
 import org.openfuxml.model.xml.core.editorial.Acronyms;
 import org.openfuxml.model.xml.core.editorial.Term;
@@ -13,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AcronymMerger
 {

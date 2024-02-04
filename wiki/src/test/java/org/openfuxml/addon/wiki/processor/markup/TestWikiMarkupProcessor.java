@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.exlp.util.io.StringUtil;
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 @RunWith(Parameterized.class)
 public class TestWikiMarkupProcessor extends AbstractOfxWikiTest

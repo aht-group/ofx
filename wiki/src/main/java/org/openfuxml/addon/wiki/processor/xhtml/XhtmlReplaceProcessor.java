@@ -1,8 +1,8 @@
 package org.openfuxml.addon.wiki.processor.xhtml;
 
 import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlXpathHelper;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;

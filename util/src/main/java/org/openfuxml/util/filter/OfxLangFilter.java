@@ -1,5 +1,6 @@
 package org.openfuxml.util.filter;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Attribute;
 import org.jdom2.filter.Filters;
 import org.jdom2.xpath.XPathExpression;
@@ -14,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxLangFilter
 {

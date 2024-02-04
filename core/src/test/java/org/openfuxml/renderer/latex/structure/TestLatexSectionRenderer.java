@@ -2,9 +2,8 @@ package org.openfuxml.renderer.latex.structure;
 
 import java.util.List;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.configuration.Configuration;
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

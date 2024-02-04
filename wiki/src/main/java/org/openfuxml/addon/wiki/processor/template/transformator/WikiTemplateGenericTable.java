@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.exlp.interfaces.io.NsPrefixMapperInterface;
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Element;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.exception.OfxInternalProcessingException;
@@ -23,8 +24,6 @@ import org.openfuxml.model.xml.core.table.Specification;
 import org.openfuxml.model.xml.core.table.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class WikiTemplateGenericTable implements WikiTemplateTransformator
 {

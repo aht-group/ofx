@@ -2,11 +2,11 @@ package org.openfuxml.processor.post;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.system.property.ConfigLoader;
+import org.exlp.util.io.log.LoggerInit;
 import org.jdom2.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 
 public class CliOfxContentTrimmer

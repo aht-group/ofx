@@ -3,6 +3,7 @@ package org.openfuxml.processor.pre;
 import java.io.File;
 import java.util.List;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -16,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JDomUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxIdGenerator
 {

@@ -1,12 +1,11 @@
 package org.openfuxml.controller.processor.pre;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.JDOMException;
 import org.openfuxml.controller.provider.DemoContentProvider;
 import org.openfuxml.model.xml.core.ofx.Document;
 import org.openfuxml.processor.pre.OfxIdGenerator;
 import org.openfuxml.test.OfxUtilTestBootstrap;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestIdGenerator
 {

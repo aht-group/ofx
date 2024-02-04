@@ -1,7 +1,6 @@
 package org.openfuxml.transcoder.html;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Test;
 import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.test.AbstractOfxUtilTest;

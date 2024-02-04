@@ -14,6 +14,7 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Entities;
 import org.openfuxml.addon.wiki.FormattingXMLStreamWriter;
@@ -29,8 +30,6 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class XhtmlTransformer extends AbstractWikiProcessor
 {

@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 
 import org.exlp.util.io.StringUtil;
+import org.exlp.util.io.log.LoggerInit;
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,9 +22,6 @@ import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 @RunWith(Parameterized.class)
 public class TestWikiInlineProcessor extends AbstractFileProcessingTest

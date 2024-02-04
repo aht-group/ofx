@@ -2,8 +2,7 @@ package org.openfuxml.test.addon.wiki;
 
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.io.LoggerInit;
-
+import org.exlp.util.io.log.LoggerInit;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openfuxml.addon.wiki.processor.markup.TestWikiModelProcessor;

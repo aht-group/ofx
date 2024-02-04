@@ -3,6 +3,7 @@ package org.openfuxml.addon.wiki.processor.template.exlp.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.exlp.util.io.log.LoggerInit;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
 import org.openfuxml.model.xml.addon.wiki.Markup;
 import org.openfuxml.model.xml.addon.wiki.TemplateKv;
@@ -13,7 +14,6 @@ import net.sf.exlp.core.parser.AbstractLogParser;
 import net.sf.exlp.interfaces.LogEvent;
 import net.sf.exlp.interfaces.LogEventHandler;
 import net.sf.exlp.interfaces.LogParser;
-import net.sf.exlp.util.io.LoggerInit;
 
 public class WikiKeyValueParser extends AbstractLogParser implements LogParser  
 {

@@ -2,6 +2,7 @@ package org.openfuxml.transform;
 
 import java.io.FileNotFoundException;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Test;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
@@ -10,8 +11,6 @@ import org.openfuxml.test.AbstractFileProcessingTest;
 import org.openfuxml.test.OfxWikiTstBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 //@RunWith(Parameterized.class)
 public class TestXhtmlTransformer extends AbstractFileProcessingTest

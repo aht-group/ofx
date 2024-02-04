@@ -2,6 +2,7 @@ package org.openfuxml.renderer.latex.content.structure;
 
 import java.util.Objects;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
@@ -24,8 +25,6 @@ import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
 import org.openfuxml.renderer.latex.content.text.LatexCommentRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class LatexSectionRenderer extends AbstractOfxLatexRenderer implements OfxLatexRenderer
 {

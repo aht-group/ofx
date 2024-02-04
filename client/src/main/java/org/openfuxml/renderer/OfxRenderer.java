@@ -7,6 +7,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.exlp.util.io.log.LoggerInit;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -18,8 +19,6 @@ import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.LoggerInit;
 
 public class OfxRenderer
 {

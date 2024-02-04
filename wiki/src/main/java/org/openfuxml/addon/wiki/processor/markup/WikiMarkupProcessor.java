@@ -2,6 +2,7 @@ package org.openfuxml.addon.wiki.processor.markup;
 
 import java.io.File;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiConfigXmlXpathHelper;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
@@ -24,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class WikiMarkupProcessor extends AbstractWikiProcessor implements WikiProcessor
 {

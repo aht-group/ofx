@@ -3,8 +3,7 @@ package org.openfuxml.renderer.latex.content.listing;
 import java.io.IOException;
 import java.util.List;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.openfuxml.OfxCoreBootstrap;

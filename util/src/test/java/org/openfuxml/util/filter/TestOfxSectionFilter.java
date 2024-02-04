@@ -1,5 +1,6 @@
 package org.openfuxml.util.filter;
 
+import org.exlp.util.jx.JaxbUtil;
 import org.junit.Before;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.model.xml.core.ofx.Section;
@@ -7,8 +8,6 @@ import org.openfuxml.test.AbstractOfxUtilTest;
 import org.openfuxml.test.OfxUtilTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestOfxSectionFilter extends AbstractOfxUtilTest
 {	
