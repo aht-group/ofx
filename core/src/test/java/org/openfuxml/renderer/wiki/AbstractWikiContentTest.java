@@ -3,9 +3,8 @@ package org.openfuxml.renderer.wiki;
 import java.io.File;
 import java.util.List;
 
-import net.sf.exlp.util.io.txt.ExlpTxtWriter;
-
 import org.apache.commons.configuration.Configuration;
+import org.exlp.util.io.txt.ExlpTxtWriter;
 import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.latex.util.OfxLatexResources;

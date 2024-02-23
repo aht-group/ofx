@@ -1,7 +1,8 @@
 package org.openfuxml.renderer;
 
 import java.io.File;
-import net.sf.exlp.util.io.txt.ExlpTxtWriter;
+
+import org.exlp.util.io.txt.ExlpTxtWriter;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxImplementationException;

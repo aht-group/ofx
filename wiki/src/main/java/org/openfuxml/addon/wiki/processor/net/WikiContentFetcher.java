@@ -2,8 +2,7 @@ package org.openfuxml.addon.wiki.processor.net;
 
 import java.io.File;
 
-import net.sf.exlp.util.io.txt.ExlpTxtWriter;
-
+import org.exlp.util.io.txt.ExlpTxtWriter;
 import org.openfuxml.addon.wiki.processor.net.fetcher.WikiCategoryFetcher;
 import org.openfuxml.addon.wiki.processor.net.fetcher.WikiPageFetcher;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
