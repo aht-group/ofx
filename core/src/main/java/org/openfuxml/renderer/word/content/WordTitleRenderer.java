@@ -24,8 +24,8 @@ public class WordTitleRenderer
 	
 	public void render(org.openfuxml.model.xml.core.ofx.Title ofxTitel)
 	{
-		SetFont sF = new SetFont(doc, builder);
-		sF.setFont(setFontEnum.title);
+		//SetFont sF = new SetFont(doc, builder);
+		//sF.setFont(setFontEnum.title);
 		
 		for (Serializable s : ofxTitel.getContent())
 		{

@@ -40,7 +40,7 @@ public class WordListRenderer
 	
 	public void render(org.openfuxml.model.xml.core.list.List ofxList) 
 	{
-		SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
+	//	SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
 
 		com.aspose.words.Table table = builder.startTable();
 		builder.getCellFormat().setPreferredWidth(PreferredWidth.fromPercent(10));
