@@ -3,6 +3,7 @@ package org.openfuxml.test;
 import net.sf.exlp.exception.ExlpConfigurationException;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
 import org.exlp.util.io.log.LoggerInit;
@@ -24,9 +25,8 @@ public class OfxUtilTestBootstrap
 	
 	public static Configuration init(String configFile)
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.path("ofx/config/util.test");
-		loggerInit.init();
+		LoggerBootstrap.instance("cli.util.log4j2.xml").path("ofx/system/io/log").init();
+		
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
 		
 		try
