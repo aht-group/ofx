@@ -1,7 +1,7 @@
 package org.openfuxml.content.text;
 
 import org.openfuxml.model.xml.core.text.Symbol;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class TestXmlSymbol extends AbstractXmlOfxTextTest<Symbol>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();
+		OfxBootstrap.init();
 		TestXmlSymbol test = new TestXmlSymbol();
 		test.saveReferenceXml();
     }

@@ -2,7 +2,7 @@ package org.openfuxml.content.ofx;
 
 import org.openfuxml.model.xml.core.ofx.Title;
 import org.openfuxml.test.AbstractOfxXmlTest;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +25,7 @@ public class TestXmlTitle extends AbstractXmlOfxTest<Title>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();
+		OfxBootstrap.init();
 		TestXmlTitle test = new TestXmlTitle();
 		test.saveReferenceXml();
     }

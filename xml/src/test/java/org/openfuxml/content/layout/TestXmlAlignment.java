@@ -2,7 +2,7 @@ package org.openfuxml.content.layout;
 
 import org.openfuxml.model.xml.core.layout.Alignment;
 import org.openfuxml.test.AbstractOfxXmlTest;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +28,7 @@ public class TestXmlAlignment extends AbstractXmlLayoutTest<Alignment>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();
+		OfxBootstrap.init();
 		TestXmlAlignment test = new TestXmlAlignment();
 		test.saveReferenceXml();
     }

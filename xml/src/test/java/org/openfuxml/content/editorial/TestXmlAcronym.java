@@ -2,7 +2,7 @@ package org.openfuxml.content.editorial;
 
 import org.openfuxml.model.xml.core.editorial.Acronym;
 import org.openfuxml.test.AbstractOfxXmlTest;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class TestXmlAcronym extends AbstractXmlEditorialTest<Acronym>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();
+		OfxBootstrap.init();
 		TestXmlAcronym test = new TestXmlAcronym();
 		test.saveReferenceXml();
     }

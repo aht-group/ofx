@@ -7,7 +7,7 @@ import org.openfuxml.content.ofx.TestXmlComment;
 import org.openfuxml.content.ofx.TestXmlTitle;
 import org.openfuxml.model.xml.core.media.Image;
 import org.openfuxml.test.AbstractOfxXmlTest;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +38,7 @@ public class TestXmlImage extends AbstractXmlMediaTest<Image>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();
+		OfxBootstrap.init();
 		TestXmlImage test = new TestXmlImage();
 		test.saveReferenceXml();
     }

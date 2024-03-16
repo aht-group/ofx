@@ -3,7 +3,7 @@ package org.openfuxml.content.editorial;
 import org.openfuxml.content.ofx.TestXmlComment;
 import org.openfuxml.model.xml.core.editorial.Acronyms;
 import org.openfuxml.test.AbstractOfxXmlTest;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +29,7 @@ public class TestXmlAcronyms extends AbstractXmlEditorialTest<Acronyms>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();	
+		OfxBootstrap.init();	
 		TestXmlAcronyms test = new TestXmlAcronyms();
 		test.saveReferenceXml();
     }

@@ -4,7 +4,7 @@ import org.openfuxml.content.ofx.TestXmlParagraph;
 import org.openfuxml.content.text.TestXmlText;
 import org.openfuxml.model.xml.core.editorial.Term;
 import org.openfuxml.test.AbstractOfxXmlTest;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +31,7 @@ public class TestXmlTerm extends AbstractXmlEditorialTest<Term>
     	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();
+		OfxBootstrap.init();
 		TestXmlTerm test = new TestXmlTerm();
 		test.saveReferenceXml();
     }

@@ -2,7 +2,7 @@ package org.openfuxml.content.layout;
 
 import org.openfuxml.model.xml.core.layout.Float;
 import org.openfuxml.test.AbstractOfxXmlTest;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class TestXmlFloat extends AbstractXmlLayoutTest<Float>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();	
+		OfxBootstrap.init();	
 		TestXmlFloat test = new TestXmlFloat();
 		test.saveReferenceXml();
     }

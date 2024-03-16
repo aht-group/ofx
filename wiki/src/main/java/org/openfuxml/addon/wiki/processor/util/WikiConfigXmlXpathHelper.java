@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Objects;
 
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -87,10 +86,6 @@ public class WikiConfigXmlXpathHelper
 	
 	public static void main (String[] args) throws Exception
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("resources/config");
-			loggerInit.init();
-		
 		String fnInjections = "resources/config/wiki/wikiinjection.xml";
 			
 		Injections injections = (Injections)JaxbUtil.loadJAXB(fnInjections, Injections.class);

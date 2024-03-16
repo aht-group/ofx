@@ -3,7 +3,7 @@ package org.openfuxml.content.list;
 import org.openfuxml.content.layout.TestXmlLayout;
 import org.openfuxml.content.ofx.TestXmlComment;
 import org.openfuxml.model.xml.core.list.List;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +32,7 @@ public class TestXmlList extends AbstractXmlListTest<List>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();
+		OfxBootstrap.init();
 		TestXmlList test = new TestXmlList();
 		test.saveReferenceXml();
     }

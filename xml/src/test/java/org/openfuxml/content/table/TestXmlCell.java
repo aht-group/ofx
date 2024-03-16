@@ -2,7 +2,7 @@ package org.openfuxml.content.table;
 
 import org.openfuxml.model.xml.core.table.Cell;
 import org.openfuxml.test.AbstractOfxXmlTest;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +29,7 @@ public class TestXmlCell extends AbstractXmlTableTest<Cell>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();	
+		OfxBootstrap.init();	
 		TestXmlCell test = new TestXmlCell();
 		test.saveReferenceXml();
     }

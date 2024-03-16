@@ -5,7 +5,7 @@ import org.openfuxml.content.layout.TestXmlFloat;
 import org.openfuxml.content.layout.TestXmlWidth;
 import org.openfuxml.model.xml.core.table.Specification;
 import org.openfuxml.test.AbstractOfxXmlTest;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +34,7 @@ public class TestXmlSpecification extends AbstractXmlTableTest<Specification>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();
+		OfxBootstrap.init();
 		TestXmlSpecification test = new TestXmlSpecification();
 		test.saveReferenceXml();
     }

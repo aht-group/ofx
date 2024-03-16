@@ -3,7 +3,7 @@ package org.openfuxml.content.editorial;
 import org.openfuxml.content.ofx.TestXmlComment;
 import org.openfuxml.model.xml.core.editorial.Glossary;
 import org.openfuxml.test.AbstractOfxXmlTest;
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +30,7 @@ public class TestXmlGlossary extends AbstractXmlEditorialTest<Glossary>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();
+		OfxBootstrap.init();
 		TestXmlGlossary test = new TestXmlGlossary();
 		test.saveReferenceXml();
     }

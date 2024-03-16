@@ -1,6 +1,6 @@
 package org.openfuxml.model.xml.addon.wiki;
 
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 
 public class TestXmlServer extends AbstractXmlWikiTest<Server>
 {	
@@ -23,7 +23,7 @@ public class TestXmlServer extends AbstractXmlWikiTest<Server>
     
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();
+		OfxBootstrap.init();
 		TestXmlServer test = new TestXmlServer();
 		test.saveReferenceXml();
     }

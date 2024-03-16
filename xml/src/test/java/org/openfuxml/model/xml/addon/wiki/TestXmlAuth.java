@@ -1,6 +1,6 @@
 package org.openfuxml.model.xml.addon.wiki;
 
-import org.openfuxml.test.OfxXmlTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 
 public class TestXmlAuth extends AbstractXmlWikiTest<Auth>
 {	
@@ -18,7 +18,7 @@ public class TestXmlAuth extends AbstractXmlWikiTest<Auth>
 	
 	public static void main(String[] args)
     {
-		OfxXmlTstBootstrap.init();	
+		OfxBootstrap.init();	
 		TestXmlAuth test = new TestXmlAuth();
 		test.saveReferenceXml();
     }
