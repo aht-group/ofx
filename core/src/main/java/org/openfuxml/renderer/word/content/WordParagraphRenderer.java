@@ -34,7 +34,7 @@ public class WordParagraphRenderer
 	
 	public void render(org.openfuxml.model.xml.core.ofx.Paragraph ofxParagraph, int paragraphCount, int paragraphCurrent) throws OfxAuthoringException
 	{
-		SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
+		//SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
 		
 		SetAlignment sA = new SetAlignment(doc, builder);
 		sA.setAlignment(setAlignmentEnum.left);

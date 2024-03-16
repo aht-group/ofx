@@ -42,7 +42,7 @@ public class WordTableRenderer
 		//if(!ofxTable.getSpecification().isSetLong()){ofxTable.getSpecification().setLong(false);}
 		//if(!ofxTable.getSpecification().isSetFloat()){ofxTable.getSpecification().setFloat(XmlFloatFactory.build(false));}
 
-		SetFont sF = new SetFont(doc, builder);
+		//SetFont sF = new SetFont(doc, builder);
 		
 		//start table and formating..
 		table = builder.startTable();
@@ -96,7 +96,7 @@ public class WordTableRenderer
 		int columnHelper = 1;
 		for (org.openfuxml.model.xml.core.table.Row row : ofxTable.getContent().getHead().getRow())
 		{
-			sF.setFont(setFontEnum.textheader);
+			//sF.setFont(setFontEnum.textheader);
 			for (org.openfuxml.model.xml.core.table.Cell cell : row.getCell())
 			{
 				for (Serializable s : cell.getContent())
@@ -120,7 +120,7 @@ public class WordTableRenderer
 		for (org.openfuxml.model.xml.core.table.Body b : ofxTable.getContent().getBody())
 		{
 			builder.insertCell();
-			sF.setFont(setFontEnum.text);
+			//sF.setFont(setFontEnum.text);
 			
 			int rowHelper = 1;
 			for (org.openfuxml.model.xml.core.table.Row row : b.getRow())
