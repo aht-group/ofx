@@ -17,8 +17,8 @@ import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.model.xml.addon.wiki.MarkupProcessor;
 import org.openfuxml.model.xml.addon.wiki.Templates;
-import org.openfuxml.test.AbstractOfxWikiTest;
-import org.openfuxml.test.OfxWikiTstBootstrap;
+import org.openfuxml.test.AbstractOfxTest;
+import org.openfuxml.test.OfxBootstrap;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.util.io.StringIO;
 
 @RunWith(Parameterized.class)
-public class TestWikiMarkupProcessor extends AbstractOfxWikiTest
+public class TestWikiMarkupProcessor extends AbstractOfxTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestWikiMarkupProcessor.class);
 	
@@ -101,7 +101,7 @@ public class TestWikiMarkupProcessor extends AbstractOfxWikiTest
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
     {
-		OfxWikiTstBootstrap.init();	
+		OfxBootstrap.init();
 		
 		for(Object[] o : TestWikiMarkupProcessor.initFileNames())
 		{

@@ -14,7 +14,7 @@ import org.junit.runners.Parameterized;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
-import org.openfuxml.test.OfxWikiTstBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -97,7 +97,7 @@ public class TestWikiModelProcessor extends AbstractFileProcessingTest
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
     {
-		OfxWikiTstBootstrap.init();	
+		OfxBootstrap.init();
 		
 		boolean saveReference = true;
 		int id = -1;

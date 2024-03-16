@@ -55,9 +55,7 @@
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-shell</artifactId>
 		</dependency>
-		
-		
-		
+	
 		<!-- XML -->
 		<dependency>
    	   		<groupId>com.sun.xml.bind</groupId>
@@ -163,23 +161,27 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		
+				
+		<!-- Test -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
-		<!-- Test -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.openfuxml</groupId>
 			<artifactId>ofx-xml</artifactId>
 			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-xml</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

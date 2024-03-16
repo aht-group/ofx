@@ -7,7 +7,7 @@ import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractFileProcessingTest extends AbstractOfxWikiTest
+public abstract class AbstractFileProcessingTest extends AbstractOfxTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractFileProcessingTest.class);
 	
