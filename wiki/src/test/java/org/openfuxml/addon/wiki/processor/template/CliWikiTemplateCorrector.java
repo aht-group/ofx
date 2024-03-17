@@ -7,6 +7,7 @@ import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.model.xml.core.ofx.Document;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,9 +17,7 @@ public class CliWikiTemplateCorrector extends AbstractWikiProcessor implements W
 	
 	public static void main (String[] args) throws Exception
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("resources/config");
-			loggerInit.init();
+		OfxBootstrap.init();
 		
 		String propFile = "resources/properties/user.properties";
 		if(args.length==1){propFile=args[0];}

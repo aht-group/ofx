@@ -101,24 +101,4 @@ public class OfxContainerMerger
 		for(Element e : lSection){e.detach();}
 		return lSection;
 	}
-			
-	public static void main (String[] args) throws Exception
-	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("resources/config");
-			loggerInit.init();
-		logger.debug("Testing ExternalMerger");
-		
-		String fName;
-//		fName = "resources/data/xml/preprocessor/merge/container/sections.xml";
-		fName = "resources/data/xml/preprocessor/merge/container/transparent.xml";
-		if(args.length == 1 ){fName = args[0];}
-		
-		Document ofxDocOriginal = JaxbUtil.loadJAXB(fName, Document.class);
-		JaxbUtil.debug(ofxDocOriginal);
-		
-		OfxContainerMerger containerMerger = new OfxContainerMerger();
-		Document ofxDocContainer = containerMerger.merge(ofxDocOriginal);
-		JaxbUtil.debug(ofxDocContainer);
-	}
 }

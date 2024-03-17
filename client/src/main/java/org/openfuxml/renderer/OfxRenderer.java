@@ -8,6 +8,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.exlp.util.io.log.LoggerInit;
+import org.openfuxml.OfxClientBootstrap;
 import org.openfuxml.addon.wiki.data.exception.OfxWikiException;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -103,11 +104,7 @@ public class OfxRenderer
 	
 	private void initLogger(String logConfig)
 	{
-		LoggerInit loggerInit = new LoggerInit(logConfig);	
-		loggerInit.path("src/main/resources/config");
-		loggerInit.path("config");
-		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
-		loggerInit.init();
+		OfxClientBootstrap.init();
 	}
 	
 	public static void main (String[] args) throws Exception

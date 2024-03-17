@@ -3,19 +3,19 @@ package org.openfuxml.renderer.word;
 import java.io.File;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.doc.provider.old.TestDocumentProvider;
 import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.model.xml.core.ofx.Document;
+import org.openfuxml.test.OfxBootstrap;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 
 public class TestWordDocumentRenderer extends AbstractTestWordRenderer
 {
 	public static void main(String[] args) throws Exception
 	{
-		OfxCoreBootstrap.init();
+		OfxBootstrap.init();
 	
 		OfxDefaultSettingsManager dsm = new OfxDefaultSettingsManager();
 		NoOpCrossMediaManager cmm = new NoOpCrossMediaManager();

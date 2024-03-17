@@ -4,12 +4,12 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.controller.provider.text.EmphasisProvider;
 import org.openfuxml.controller.provider.text.SectionProvider;
 import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +43,7 @@ public class TestHtmlEmphasisRenderer extends AbstractTestHtmlRenderer
 	
 	public static void main(String[] args) throws IOException
 	{
-		OfxCoreBootstrap.init();
+		OfxBootstrap.init();
 		TestHtmlEmphasisRenderer test = new TestHtmlEmphasisRenderer();
         test.setEnvironment(true);
 		

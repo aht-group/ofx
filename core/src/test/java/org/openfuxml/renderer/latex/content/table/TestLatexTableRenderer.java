@@ -8,7 +8,6 @@ import org.exlp.util.jx.JaxbUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
@@ -22,6 +21,7 @@ import org.openfuxml.model.xml.core.table.Specification;
 import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.latex.table.TestLatexRowRenderer;
 import org.openfuxml.renderer.util.OfxContentDebugger;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -115,7 +115,7 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
     
     public static void main(String[] args) throws Exception
     {
-    	Configuration config = OfxCoreBootstrap.init();
+    	Configuration config = OfxBootstrap.init();
 			
     	TestLatexTableRenderer.initLoremIpsum();
     	TestLatexTableRenderer test = new TestLatexTableRenderer();

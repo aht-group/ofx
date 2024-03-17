@@ -10,7 +10,6 @@ import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.JaxbUtil;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.doc.provider.old.TestDocumentProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -20,6 +19,7 @@ import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.structure.HtmlDocumentRenderer;
 import org.openfuxml.renderer.html.structure.css.HtmlStyleRenderer;
 import org.openfuxml.renderer.html.util.HtmlElement;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,7 +81,7 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 
 	public static void main(String[] args) throws IOException, OfxConfigurationException, OfxAuthoringException
 	{
-		OfxCoreBootstrap.init();
+		OfxBootstrap.init();
 		TestHtmlDocumentRenderer test = new TestHtmlDocumentRenderer();
         test.setEnvironment(true);
 		

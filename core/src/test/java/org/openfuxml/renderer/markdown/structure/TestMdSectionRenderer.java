@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.controller.provider.text.SectionProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +52,7 @@ public class TestMdSectionRenderer extends AbstractTestMdRenderer
 
 	public static void main(String[] args) throws IOException
 	{
-		OfxCoreBootstrap.init();
+		OfxBootstrap.init();
 		TestMdSectionRenderer test = new TestMdSectionRenderer();
         test.setEnvironment(true);
 		

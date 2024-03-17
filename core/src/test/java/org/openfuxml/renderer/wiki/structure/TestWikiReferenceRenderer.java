@@ -5,11 +5,11 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.doc.provider.old.ReferenceProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.wiki.AbstractTestWikiRenderer;
 import org.openfuxml.renderer.wiki.WikiParagraphRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +44,7 @@ public class TestWikiReferenceRenderer extends AbstractTestWikiRenderer{
 	
 	public static void main(String[] args) throws IOException, OfxAuthoringException
 	{
-		OfxCoreBootstrap.init();
+		OfxBootstrap.init();
 		TestWikiReferenceRenderer test = new TestWikiReferenceRenderer();
         test.setEnvironment(true);
 		

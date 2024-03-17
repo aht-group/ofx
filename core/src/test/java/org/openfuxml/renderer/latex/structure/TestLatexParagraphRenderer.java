@@ -6,13 +6,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.controller.provider.text.ParagraphProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFontFactory;
 import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,7 +59,7 @@ public class TestLatexParagraphRenderer extends AbstractTestLatexRenderer
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreBootstrap.init();
+    	OfxBootstrap.init();
     	TestLatexParagraphRenderer.initLoremIpsum();
     	TestLatexParagraphRenderer test = new TestLatexParagraphRenderer();
     	test.setEnvironment(true);

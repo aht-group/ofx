@@ -6,9 +6,9 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.doc.provider.old.ListItemProvider;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,7 +50,7 @@ public class TestLatexItemFactory extends AbstractLatexListTest
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreBootstrap.init();
+    	OfxBootstrap.init();
 			
     	TestLatexItemFactory.initLoremIpsum();
     	TestLatexItemFactory test = new TestLatexItemFactory();

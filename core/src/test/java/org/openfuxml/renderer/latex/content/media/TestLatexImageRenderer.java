@@ -9,7 +9,6 @@ import org.exlp.util.jx.JaxbUtil;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
@@ -29,6 +28,7 @@ import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
 import org.openfuxml.renderer.latex.content.table.TestLatexTableRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.util.OfxContentDebugger;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -127,7 +127,7 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
     
     public static void main(String[] args) throws Exception
     {
-    	Configuration config = OfxCoreBootstrap.init();
+    	Configuration config = OfxBootstrap.init();
 			
     	TestLatexImageRenderer.initLoremIpsum();
     	TestLatexImageRenderer test = new TestLatexImageRenderer();

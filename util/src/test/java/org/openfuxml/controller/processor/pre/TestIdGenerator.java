@@ -5,7 +5,7 @@ import org.jdom2.JDOMException;
 import org.openfuxml.controller.provider.DemoContentProvider;
 import org.openfuxml.model.xml.core.ofx.Document;
 import org.openfuxml.processor.pre.OfxIdGenerator;
-import org.openfuxml.test.OfxUtilTestBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 
 public class TestIdGenerator
 {
@@ -27,7 +27,7 @@ public class TestIdGenerator
 	
 	public static void main(String[] args) throws Exception
     {
-		OfxUtilTestBootstrap.init();
+		OfxBootstrap.init();
 			
     	TestIdGenerator cli = new TestIdGenerator();
     	cli.tableFactory();

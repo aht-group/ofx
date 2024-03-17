@@ -5,10 +5,10 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.controller.provider.text.ParagraphProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.text.AbstractTestTextRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +37,7 @@ public class TestTextParagraphRenderer extends AbstractTestTextRenderer
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreBootstrap.init();
+    	OfxBootstrap.init();
     	TestTextParagraphRenderer test = new TestTextParagraphRenderer();
     	test.setEnvironment(true);
     	

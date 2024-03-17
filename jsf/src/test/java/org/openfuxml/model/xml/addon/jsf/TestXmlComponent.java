@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import org.exlp.util.jx.JaxbUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openfuxml.test.OfxJsfTestBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.openfuxml.xml.addon.jsf.Component;
 
 public class TestXmlComponent extends AbstractXmlJsfTest
@@ -43,7 +43,7 @@ public class TestXmlComponent extends AbstractXmlJsfTest
 	
 	public static void main(String[] args)
     {
-		OfxJsfTestBootstrap.init();		
+		OfxBootstrap.init();		
 			
 		TestXmlComponent.initFiles();	
 		TestXmlComponent test = new TestXmlComponent();

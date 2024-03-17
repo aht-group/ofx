@@ -5,11 +5,11 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.table.Row;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexRowRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +56,7 @@ public class TestLatexRowRenderer extends AbstractTestLatexRenderer
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreBootstrap.init();
+    	OfxBootstrap.init();
 			
     	TestLatexRowRenderer.initLoremIpsum();
     	TestLatexRowRenderer test = new TestLatexRowRenderer();

@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.test.AbstractOfxUtilTest;
-import org.openfuxml.test.OfxUtilTestBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +37,7 @@ public class TestOfxSectionFilter extends AbstractOfxUtilTest
 	
 	public static void main(String[] args) throws Exception
     {
-		OfxUtilTestBootstrap.init();
+		OfxBootstrap.init();
 			
 		TestOfxSectionFilter cli = new TestOfxSectionFilter();
 		cli.init();

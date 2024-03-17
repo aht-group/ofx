@@ -7,7 +7,6 @@ import org.exlp.util.jx.JaxbUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
@@ -19,6 +18,7 @@ import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
 import org.openfuxml.renderer.util.OfxContentDebugger;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -105,7 +105,7 @@ public class TestLatexSectionRenderer extends AbstractTestLatexRenderer
     
     public static void main(String[] args) throws Exception
     {
-    	Configuration config = OfxCoreBootstrap.init();
+    	Configuration config = OfxBootstrap.init();
 
     	TestLatexSectionRenderer test = new TestLatexSectionRenderer();
     	test.initLatexTestEnvironment(config);

@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.util.io.txt.ExlpTxtWriter;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.latex.util.OfxLatexResources;
 import org.openfuxml.test.AbstractOfxCoreTest;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +36,7 @@ public abstract class AbstractTestLatexRenderer extends AbstractOfxCoreTest
 	
 	protected void initLatexTestEnvironment(Configuration config)
 	{
-		latexBase = new File(config.getString(OfxCoreBootstrap.cfgKeyLatexTarget));
+		latexBase = new File(config.getString("check-config-key"));
 		logger.info("Test Environment "+latexBase.getAbsolutePath());
 		
 		try

@@ -5,9 +5,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.ofx.Paragraph;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +48,7 @@ public class TestWikiParagraphRenderer extends AbstractTestWikiRenderer
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreBootstrap.init();
+    	OfxBootstrap.init();
 			
     	TestWikiParagraphRenderer.initLoremIpsum();
     	TestWikiParagraphRenderer test = new TestWikiParagraphRenderer();

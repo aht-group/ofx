@@ -3,11 +3,11 @@ package org.openfuxml.renderer;
 import java.io.IOException;
 import java.io.StringWriter;
 
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.doc.provider.DemoContentProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.text.OfxTextRenderer;
+import org.openfuxml.test.OfxBootstrap;
 
 public class TestDemoDocumentRenderer
 {	
@@ -22,7 +22,7 @@ public class TestDemoDocumentRenderer
 	
 	public static void main(String[] args) throws Exception
     {
-    	OfxCoreBootstrap.init();	
+    	OfxBootstrap.init();	
     	TestDemoDocumentRenderer cli = new TestDemoDocumentRenderer();
     	
     	cli.text();

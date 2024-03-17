@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
 import org.junit.Assert;
@@ -21,9 +20,7 @@ public class AbstractJsfTest
 	@BeforeClass
     public static void initLogger()
 	{
-		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.path("config.ofx-jsf.test");
-			loggerInit.init();
+		OfxBootstrap.init();
 		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
     }
 	

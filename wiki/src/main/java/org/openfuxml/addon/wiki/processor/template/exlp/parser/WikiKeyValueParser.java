@@ -94,31 +94,4 @@ public class WikiKeyValueParser extends AbstractLogParser implements LogParser
 		LogEvent event = new WikiKeyValueEvent(wikiKV);
 		leh.handleEvent(event);
 	}
-	
-	public static void main(String args[])
-	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("resources/config");
-			loggerInit.init();
-			
-		logger.warn("This is only a pattern test-class!");
-		
-		String sPattern = "^\\|([a-zA-Z]*)=(.*)";
-		String sTest    = "|Goal=blabla bla blablub";
-		
-		logger.debug("Pattern: "+sPattern);
-		logger.debug("Test:    "+sTest);
-		
-		Pattern p = Pattern.compile(sPattern);
-		Matcher m = p.matcher(sTest);
-		logger.debug(""+m.matches());
-		if(m.matches())
-		{
-			logger.debug("Group Count "+m.groupCount());
-			for(int i=0;i<=m.groupCount();i++)
-			{
-				logger.debug(i+" "+m.group(i));
-			}
-		}
-	}
 }

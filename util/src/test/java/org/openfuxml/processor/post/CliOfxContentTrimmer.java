@@ -2,8 +2,8 @@ package org.openfuxml.processor.post;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.system.property.ConfigLoader;
-import org.exlp.util.io.log.LoggerInit;
 import org.jdom2.Document;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,9 +15,7 @@ public class CliOfxContentTrimmer
 	
 	public static void main (String[] args) throws Exception
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.path("resources/config");
-		loggerInit.init();
+		OfxBootstrap.init();
 		
 		String propFile = "resources/properties/user.properties";
 		if(args.length==1){propFile=args[0];}

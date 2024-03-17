@@ -5,11 +5,11 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.controller.provider.text.ParagraphProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
+import org.openfuxml.test.OfxBootstrap;
 
 public class TestLatexIndexRenderer extends AbstractTestLatexRenderer
 {
@@ -34,7 +34,7 @@ public class TestLatexIndexRenderer extends AbstractTestLatexRenderer
 
 	public static void main(String[] args) throws Exception
 	{
-		OfxCoreBootstrap.init();
+		OfxBootstrap.init();
 		TestLatexIndexRenderer.initLoremIpsum();
 		TestLatexIndexRenderer test = new TestLatexIndexRenderer();
 		test.setEnvironment(true);

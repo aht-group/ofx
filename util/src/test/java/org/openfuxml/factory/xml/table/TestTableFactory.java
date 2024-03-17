@@ -4,7 +4,7 @@ import org.exlp.util.jx.JaxbUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openfuxml.model.xml.core.table.Table;
-import org.openfuxml.test.OfxUtilTestBootstrap;
+import org.openfuxml.test.OfxBootstrap;
 
 public class TestTableFactory
 {
@@ -29,7 +29,7 @@ public class TestTableFactory
 	
 	public static void main(String[] args) throws Exception
     {
-		OfxUtilTestBootstrap.init();
+		OfxBootstrap.init();
 			
     	TestTableFactory cli = new TestTableFactory();
     	cli.tableFactory();

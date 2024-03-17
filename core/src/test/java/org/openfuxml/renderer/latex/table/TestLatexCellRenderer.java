@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.controller.provider.text.ParagraphProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.ofx.Paragraph;
@@ -13,6 +12,7 @@ import org.openfuxml.model.xml.core.table.Cell;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.list.TestLatexListRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexCellRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,7 +76,7 @@ public class TestLatexCellRenderer extends AbstractTestLatexRenderer
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreBootstrap.init();
+    	OfxBootstrap.init();
 			
     	TestLatexCellRenderer.initLoremIpsum();
     	TestLatexCellRenderer test = new TestLatexCellRenderer();

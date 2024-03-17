@@ -7,6 +7,7 @@ import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Element;
 import org.openfuxml.addon.wiki.processor.markup.WikiInlineProcessor;
 import org.openfuxml.model.xml.addon.wiki.Template;
+import org.openfuxml.test.OfxBootstrap;
 import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +20,7 @@ public class CliWikiTemplateKeyValueTransformator
 	
 	public static void main (String[] args) throws Exception
 	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("resources/config");
-			loggerInit.init();
+		OfxBootstrap.init();
 		
 		String propFile = "resources/properties/user.properties";
 		if(args.length==1){propFile=args[0];}

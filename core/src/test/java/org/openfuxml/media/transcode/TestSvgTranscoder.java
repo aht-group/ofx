@@ -8,10 +8,10 @@ import java.io.OutputStream;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.junit.Before;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.media.Media;
 import org.openfuxml.test.AbstractOfxCoreTest;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,7 +61,7 @@ public class TestSvgTranscoder extends AbstractOfxCoreTest
 
 	public static void main(String[] args) throws Exception
     {
-    	OfxCoreBootstrap.init();
+    	OfxBootstrap.init();
 
     	TestSvgTranscoder test = new TestSvgTranscoder();
     	test.init();

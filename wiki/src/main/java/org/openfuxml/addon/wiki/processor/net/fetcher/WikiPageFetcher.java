@@ -54,16 +54,5 @@ public class WikiPageFetcher
 	
 	public String getWikiText() {return wikiText;}
 	
-	public static void main(String[] args)
-    {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("resources/config");
-			loggerInit.init();
-		
-		WikiTemplates.init();	
-			
-		WikiBotFactory wbf = new WikiBotFactory();
-		WikiPageFetcher wtf = new WikiPageFetcher(wbf.createBot());
-		wtf.fetchText("Bellagio");
-    }
+	
 }

@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.controller.provider.text.SectionProvider;
 import org.openfuxml.controller.provider.text.TitleProvider;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -15,6 +14,7 @@ import org.openfuxml.model.xml.core.ofx.Title;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexTitleRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,7 +74,7 @@ public class TestLatexTitleRenderer extends AbstractTestLatexRenderer
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreBootstrap.init();
+    	OfxBootstrap.init();
     	TestLatexTitleRenderer test = new TestLatexTitleRenderer();
         test.setEnvironment(true);
 

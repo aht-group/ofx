@@ -78,6 +78,10 @@
     		<scope>provided</scope>
     		<classifier>jdk17</classifier>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-collections4</artifactId>
+		</dependency>
    	   			
 		<!-- Logging -->
 		<dependency>
@@ -115,11 +119,13 @@
         		</exclusion>
         	</exclusions>
 		</dependency>
-	      
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-collections4</artifactId>
+			<groupId>org.openfuxml</groupId>
+			<artifactId>ofx-xml</artifactId>
+			<classifier>tests</classifier>
+			<scope>test</scope>
 		</dependency>
+	      
 	</dependencies>
 	
 	<dependencyManagement>

@@ -20,11 +20,7 @@ public class OfxClientBootstrap
 	
 	public static String xmlConfig = "ofx/client/config/ofx.xml";
 	
-	public static Configuration init()
-	{
-		return init(xmlConfig);
-	}
-	
+	public static Configuration init() {return init(xmlConfig);}
 	public static Configuration init(String configFile)
 	{
 		LoggerBootstrap.instance("cli.client.log4j2.xml").path("ofx/system/io/log").init();

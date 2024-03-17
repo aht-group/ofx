@@ -108,6 +108,18 @@
 			<artifactId>exlp-xml</artifactId> 
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+	 		<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+			<exclusions>
+        		<exclusion>
+        			<artifactId>commons-logging</artifactId>
+        			<groupId>commons-logging</groupId>
+        		</exclusion>
+        	</exclusions>
+		</dependency>
 	</dependencies>
 	
 	<build>

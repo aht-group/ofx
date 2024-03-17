@@ -17,6 +17,7 @@ import org.openfuxml.addon.wiki.processor.markup.TestWikiInlineProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -100,9 +101,7 @@ public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
     {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("src/test/resources/config");
-			loggerInit.init();	
+		OfxBootstrap.init();
 		
 		boolean saveReference = true;
 		

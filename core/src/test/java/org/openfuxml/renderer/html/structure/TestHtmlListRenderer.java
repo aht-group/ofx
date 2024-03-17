@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.controller.provider.list.ListProvider;
 import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +52,7 @@ public class TestHtmlListRenderer extends AbstractTestHtmlRenderer
 
 	public static void main(String[] args) throws IOException
 	{
-		OfxCoreBootstrap.init();
+		OfxBootstrap.init();
 		TestHtmlListRenderer test = new TestHtmlListRenderer();
         test.setEnvironment(true);
 		

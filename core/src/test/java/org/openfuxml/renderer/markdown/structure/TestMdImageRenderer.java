@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.doc.provider.media.ImageProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.renderer.markdown.media.MdImageRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +43,7 @@ public class TestMdImageRenderer extends AbstractTestMdRenderer
 
 	public static void main(String[] args) throws IOException
 	{
-		OfxCoreBootstrap.init();
+		OfxBootstrap.init();
 		TestMdImageRenderer test = new TestMdImageRenderer();
         test.setEnvironment(true);
 		

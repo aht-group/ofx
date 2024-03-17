@@ -222,28 +222,5 @@ public class WikiTimelineParser extends AbstractLogParser implements LogParser
 		catch (JAXBException e) {logger.error("",e);}
 	}
 	
-	public static void main(String args[])
-	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("resources/config");
-			loggerInit.init();
-			
-		LogEventHandler leh = new EhResultContainer();
-		LogParser lp = new WikiTimelineParser(leh);
-		LogListener ll = new LogListenerXml("resources/data/timeline.xml",lp);
-		ll.processMulti("/wikiinjection/wikicontent");
-		EhResultContainer results = (EhResultContainer)leh;
-		logger.debug("Results: "+results.getAlResults().size());
-		WikiChartEvent event = (WikiChartEvent)results.getAlResults().get(0);
-		Ofxchart ofxChart = event.getOfxChart();
-		
-		try
-		{
-			JAXBContext context = JAXBContext.newInstance(Ofxchart.class);
-			Marshaller m = context.createMarshaller(); 
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); 
-			m.marshal(ofxChart, new File("resources/data/timeline-ofxchart.xml"));
-		}
-		catch (JAXBException e) {logger.error("",e);}
-	}
+	
 }

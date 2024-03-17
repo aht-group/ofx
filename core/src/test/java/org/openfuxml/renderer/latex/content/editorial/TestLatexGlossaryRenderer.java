@@ -6,7 +6,6 @@ import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.editorial.XmlGlossaryFactory;
 import org.openfuxml.factory.xml.editorial.XmlTermFactory;
@@ -17,6 +16,7 @@ import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
 import org.openfuxml.renderer.latex.content.structure.LatexParagraphRenderer;
 import org.openfuxml.renderer.latex.structure.TestLatexParagraphRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.openfuxml.util.OfxCommentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -115,7 +115,7 @@ public class TestLatexGlossaryRenderer extends AbstractTestLatexRenderer
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreBootstrap.init();
+    	OfxBootstrap.init();
 			
     	TestLatexGlossaryRenderer.initLoremIpsum();
     	TestLatexGlossaryRenderer test = new TestLatexGlossaryRenderer();

@@ -11,6 +11,7 @@ import org.openfuxml.addon.wiki.processor.xhtml.TestXhtmlFinalProcessor;
 import org.openfuxml.addon.wiki.processor.xhtml.TestXhtmlReplaceProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +22,7 @@ public class TstWikiTransformationChain
 	
 	public static void main(String[] args) throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
     {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("src/test/resources/config");
-			loggerInit.init();	
+		OfxBootstrap.init();
 		
 		int id = 6;
 		boolean saveReference=true;

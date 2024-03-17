@@ -64,16 +64,4 @@ public class WikiGalleryParser extends AbstractLogParser implements LogParser
 		WikiImageEvent event = new WikiImageEvent(ofxImage);
 		leh.handleEvent(event);
 	}
-
-	public static void main(String args[])
-	{
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("resources/config");
-			loggerInit.init();
-			
-		LogEventHandler leh = new EhDebug();
-		LogParser lp = new WikiGalleryParser(leh);
-		LogListener ll = new LogListenerXml("resources/data/gallery.xml",lp);
-		ll.processSingle("/wikiinjection/wikicontent");
-	}
 }

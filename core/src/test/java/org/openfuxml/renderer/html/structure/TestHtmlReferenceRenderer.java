@@ -5,13 +5,13 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.controller.provider.text.ParagraphProvider;
 import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.model.xml.core.ofx.Reference;
 import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,7 +62,7 @@ public class TestHtmlReferenceRenderer extends AbstractTestHtmlRenderer
 
 	public static void main(String[] args) throws IOException
 	{
-		OfxCoreBootstrap.init();
+		OfxBootstrap.init();
 		TestHtmlReferenceRenderer test = new TestHtmlReferenceRenderer();
         test.setEnvironment(true);
 		

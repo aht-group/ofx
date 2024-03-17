@@ -7,10 +7,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.util.OfxContentDebugger;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,7 +53,7 @@ public class TestLatexGridTableRenderer extends AbstractLatexTableTest
     
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreBootstrap.init();
+    	OfxBootstrap.init();
 			
     	TestLatexGridTableRenderer.initLoremIpsum();
     	TestLatexGridTableRenderer test = new TestLatexGridTableRenderer();

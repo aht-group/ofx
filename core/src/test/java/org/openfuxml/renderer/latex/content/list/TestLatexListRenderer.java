@@ -8,7 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.doc.provider.old.ListItemProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlSpacingFactory;
@@ -17,6 +16,7 @@ import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
 import org.openfuxml.model.xml.core.list.List;
 import org.openfuxml.model.xml.core.list.Type;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -145,7 +145,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
   
     public static void main(String[] args) throws Exception
     {
-    	OfxCoreBootstrap.init();
+    	OfxBootstrap.init();
 			
     	TestLatexListRenderer.initLoremIpsum();
     	TestLatexListRenderer test = new TestLatexListRenderer();

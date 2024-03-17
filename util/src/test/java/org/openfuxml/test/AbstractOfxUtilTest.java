@@ -1,6 +1,5 @@
 package org.openfuxml.test;
 
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.junit.BeforeClass;
 import org.openfuxml.xml.OfxNsPrefixMapper;
@@ -14,9 +13,7 @@ public class AbstractOfxUtilTest
 	@BeforeClass
     public static void initLogger()
 	{
-		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.path("config.ofx-util.test");
-		loggerInit.init();
+		OfxBootstrap.init();
     }
 	
 	@BeforeClass

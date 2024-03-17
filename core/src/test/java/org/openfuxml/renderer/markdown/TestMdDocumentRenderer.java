@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.openfuxml.OfxCoreBootstrap;
 import org.openfuxml.doc.provider.old.TestDocumentProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.markdown.structure.MdDocumentRenderer;
+import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +35,7 @@ public class TestMdDocumentRenderer extends AbstractTestMdRenderer
 
 	public static void main(String[] args) throws Exception
 	{
-		OfxCoreBootstrap.init();
+		OfxBootstrap.init();
 		TestMdDocumentRenderer test = new TestMdDocumentRenderer();
         test.setEnvironment(true);
 		
