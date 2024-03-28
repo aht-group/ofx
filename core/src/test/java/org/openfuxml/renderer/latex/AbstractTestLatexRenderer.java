@@ -8,7 +8,6 @@ import org.exlp.util.io.txt.ExlpTxtWriter;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.renderer.latex.util.OfxLatexResources;
 import org.openfuxml.test.AbstractOfxCoreTest;
-import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

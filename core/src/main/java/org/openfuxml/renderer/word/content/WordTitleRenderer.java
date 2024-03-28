@@ -3,9 +3,7 @@ package org.openfuxml.renderer.word.content;
 import java.io.Serializable;
 
 import org.openfuxml.renderer.word.util.SetAlignment;
-import org.openfuxml.renderer.word.util.SetFont;
 import org.openfuxml.renderer.word.util.SetAlignment.setAlignmentEnum;
-import org.openfuxml.renderer.word.util.SetFont.setFontEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

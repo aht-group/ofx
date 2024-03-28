@@ -1,6 +1,5 @@
 package org.openfuxml.addon.wiki.parser;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -10,20 +9,16 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import net.sf.exlp.core.handler.EhResultContainer;
-import net.sf.exlp.core.listener.LogListenerXml;
-import net.sf.exlp.core.parser.AbstractLogParser;
-import net.sf.exlp.interfaces.LogEventHandler;
-import net.sf.exlp.interfaces.LogListener;
-import net.sf.exlp.interfaces.LogParser;
-
-import org.exlp.util.io.log.LoggerInit;
 import org.openfuxml.addon.wiki.event.WikiChartEvent;
 import org.openfuxml.model.xml.addon.wiki.Ofxchart;
 import org.openfuxml.model.xml.addon.wiki.Ofxchartcontainer;
 import org.openfuxml.model.xml.addon.wiki.Ofxchartdata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.core.parser.AbstractLogParser;
+import net.sf.exlp.interfaces.LogEventHandler;
+import net.sf.exlp.interfaces.LogParser;
 
 public class WikiTimelineParser extends AbstractLogParser implements LogParser  
 {

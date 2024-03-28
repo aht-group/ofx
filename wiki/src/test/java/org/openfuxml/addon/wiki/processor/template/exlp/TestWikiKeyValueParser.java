@@ -3,13 +3,9 @@ package org.openfuxml.addon.wiki.processor.template.exlp;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.exlp.util.io.log.LoggerInit;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openfuxml.addon.wiki.WikiTemplates;
 import org.openfuxml.addon.wiki.processor.markup.TestWikiInlineProcessor;
-import org.openfuxml.addon.wiki.processor.net.fetcher.WikiCategoryFetcher;
-import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.test.AbstractFileProcessingTest;
 import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;

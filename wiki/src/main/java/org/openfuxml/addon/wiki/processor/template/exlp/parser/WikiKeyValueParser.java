@@ -3,7 +3,6 @@ package org.openfuxml.addon.wiki.processor.template.exlp.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.exlp.util.io.log.LoggerInit;
 import org.openfuxml.addon.wiki.processor.template.exlp.event.WikiKeyValueEvent;
 import org.openfuxml.model.xml.addon.wiki.Markup;
 import org.openfuxml.model.xml.addon.wiki.TemplateKv;

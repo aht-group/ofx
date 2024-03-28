@@ -5,8 +5,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.word.util.SetFont;
-import org.openfuxml.renderer.word.util.SetFont.setFontEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

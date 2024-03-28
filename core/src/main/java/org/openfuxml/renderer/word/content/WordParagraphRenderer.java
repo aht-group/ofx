@@ -14,8 +14,6 @@ import org.openfuxml.model.xml.core.text.Symbol;
 import org.openfuxml.renderer.word.util.RemoveUnwantedRegx;
 import org.openfuxml.renderer.word.util.SetAlignment;
 import org.openfuxml.renderer.word.util.SetAlignment.setAlignmentEnum;
-import org.openfuxml.renderer.word.util.SetFont;
-import org.openfuxml.renderer.word.util.SetFont.setFontEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

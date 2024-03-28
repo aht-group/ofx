@@ -4,20 +4,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import net.sourceforge.jwbf.core.actions.util.ActionException;
-import net.sourceforge.jwbf.core.actions.util.ProcessException;
-import net.sourceforge.jwbf.mediawiki.actions.queries.CategoryMembersSimple;
-import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
-
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.io.txt.ExlpTxtWriter;
-import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
 import org.openfuxml.model.xml.addon.wiki.Category;
 import org.openfuxml.model.xml.addon.wiki.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sourceforge.jwbf.core.actions.util.ActionException;
+import net.sourceforge.jwbf.core.actions.util.ProcessException;
+import net.sourceforge.jwbf.mediawiki.actions.queries.CategoryMembersSimple;
+import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
 
 public class WikiCategoryFetcher
 {

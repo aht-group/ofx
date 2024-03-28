@@ -4,18 +4,14 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.sf.exlp.core.handler.EhDebug;
-import net.sf.exlp.core.listener.LogListenerXml;
-import net.sf.exlp.core.parser.AbstractLogParser;
-import net.sf.exlp.interfaces.LogEventHandler;
-import net.sf.exlp.interfaces.LogListener;
-import net.sf.exlp.interfaces.LogParser;
-
-import org.exlp.util.io.log.LoggerInit;
 import org.openfuxml.addon.wiki.event.WikiImageEvent;
 import org.openfuxml.model.xml.addon.wiki.Ofxgallery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.core.parser.AbstractLogParser;
+import net.sf.exlp.interfaces.LogEventHandler;
+import net.sf.exlp.interfaces.LogParser;
 
 public class WikiGalleryParser extends AbstractLogParser implements LogParser  
 {

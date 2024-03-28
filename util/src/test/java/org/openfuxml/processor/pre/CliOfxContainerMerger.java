@@ -1,14 +1,10 @@
 package org.openfuxml.processor.pre;
 
-import org.apache.commons.configuration.Configuration;
-import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.util.jx.JaxbUtil;
 import org.jdom2.Document;
 import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.xml.JDomUtil;
 
 public class CliOfxContainerMerger
 {

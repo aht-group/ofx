@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 
 import org.exlp.util.io.StringUtil;
-import org.exlp.util.io.log.LoggerInit;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;

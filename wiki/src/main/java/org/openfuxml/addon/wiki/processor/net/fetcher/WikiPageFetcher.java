@@ -3,17 +3,14 @@ package org.openfuxml.addon.wiki.processor.net.fetcher;
 import java.text.DecimalFormat;
 import java.util.Locale;
 
+import org.exlp.util.io.txt.ExlpTxtWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sourceforge.jwbf.core.actions.util.ActionException;
 import net.sourceforge.jwbf.core.actions.util.ProcessException;
 import net.sourceforge.jwbf.core.contentRep.SimpleArticle;
 import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
-
-import org.exlp.util.io.log.LoggerInit;
-import org.exlp.util.io.txt.ExlpTxtWriter;
-import org.openfuxml.addon.wiki.WikiTemplates;
-import org.openfuxml.addon.wiki.processor.util.WikiBotFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class WikiPageFetcher
 {

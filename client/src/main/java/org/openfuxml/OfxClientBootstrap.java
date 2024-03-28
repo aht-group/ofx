@@ -1,16 +1,15 @@
 package org.openfuxml;
 
-import net.sf.exlp.exception.ExlpConfigurationException;
-
 import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.exception.ExlpConfigurationException;
 
 public class OfxClientBootstrap
 {

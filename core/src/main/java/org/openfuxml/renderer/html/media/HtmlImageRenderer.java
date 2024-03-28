@@ -1,7 +1,6 @@
 package org.openfuxml.renderer.html.media;
 import java.util.Objects;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.openfuxml.factory.txt.TxtTitleFactory;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.media.CrossMediaManager;

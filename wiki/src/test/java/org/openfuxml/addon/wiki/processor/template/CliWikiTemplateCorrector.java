@@ -2,7 +2,6 @@ package org.openfuxml.addon.wiki.processor.template;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.controller.handler.system.property.ConfigLoader;
-import org.exlp.util.io.log.LoggerInit;
 import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.addon.wiki.processor.util.AbstractWikiProcessor;
 import org.openfuxml.addon.wiki.processor.util.WikiProcessor;
