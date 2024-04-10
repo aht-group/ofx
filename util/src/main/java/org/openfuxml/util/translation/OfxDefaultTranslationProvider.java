@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.keyvalue.MultiKey;
+import org.apache.commons.lang3.ObjectUtils;
 import org.openfuxml.interfaces.configuration.OfxTranslationProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,8 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 	private final Map<MultiKey<String>,String> map3;
 	private final Map<MultiKey<String>,DecimalFormat> mapDf;
 	
+	private String localeCode;
+	private Class<?> context;
 	
 	public OfxDefaultTranslationProvider()
 	{
@@ -39,16 +42,29 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 	}
 
 	@Override public String tlEntity(String localeCode, Class<?> c) {return tlEntity(localeCode,c.getSimpleName());}
-	@Override
-	public String tlEntity(String localeCode, String key)
+	@Override public String tlEntity(String localeCode, String key)
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override public void setContext(String localeCode, Class<?> context)
+	{
+		if(ObjectUtils.anyNull(localeCode,context)) {throw new IllegalArgumentException("Both localeCode and context need to be set");}
+		
+		this.localeCode=localeCode;
+		this.context=context;
+		logger.info("LocaleCode:"+localeCode+" Context:"+context.getSimpleName());
+	}
+	
+	@Override public <E extends Enum<E>> String toLabel(E code)
+	{
+		if(ObjectUtils.anyNull(localeCode,context)) {throw new IllegalStateException("Both localeCode and context need to be set");}
+		return this.toLabel(localeCode,context,code);
+	}
 
-	@Override public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code){return tlAttribute(localeCode,c.getSimpleName(),code.toString());}
-	@Override
-	public <E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code)
+	@Override public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code) {return tlAttribute(localeCode,c.getSimpleName(),code.toString());}
+	@Override public <E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code)
 	{
 		logger.warn("NYI");
 		return null;

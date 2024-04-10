@@ -13,6 +13,10 @@ public interface OfxTranslationProvider
 	String tlEntity (String localeCode, Class<?> c);
 	
 	String tlAttribute (String localeCode, String key1, String key2);
+	
+	void setContext(String localeCode, Class<?> c);
+	<E extends Enum<E>> String toLabel(E code);
+	
 	<E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code);
 	<E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code);
 	
