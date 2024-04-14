@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.word.util;
+package org.openfuxml.renderer.docx.aspose.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,18 +8,18 @@ import com.aspose.words.DocumentBuilder;
 import com.aspose.words.ParagraphAlignment;
 import com.aspose.words.ParagraphFormat;
 
-public class SetAlignment
+public class AsposeAlignmentUtil
 {
 	public enum setAlignmentEnum {left, center, rightIndentR70, rightIndentR5}
 	
-	final static Logger logger = LoggerFactory.getLogger(SetAlignment.class);
+	final static Logger logger = LoggerFactory.getLogger(AsposeAlignmentUtil.class);
 
 	Document doc;
 	DocumentBuilder builder;
 
 	private ParagraphFormat paragraphFormat;
 	
-	public SetAlignment(Document doc, DocumentBuilder builder)
+	public AsposeAlignmentUtil(Document doc, DocumentBuilder builder)
 	{
 		this.doc = doc;
 		this.builder = builder;

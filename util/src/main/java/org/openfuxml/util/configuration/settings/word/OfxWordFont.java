@@ -4,9 +4,11 @@ import java.awt.Color;
 
 public class OfxWordFont
 {
-	private boolean italic,italicDefault; public boolean isItalic() {return italic;}
-	private boolean bold,boldDefault; public boolean isBold() {return bold;}
-	private boolean underline,underlineDefault; public boolean isUnderline() {return underline;}
+	private String name; public String getName() {return name;}
+	private int docxLocaleId;  public int getDocxLocaleId() {return docxLocaleId;}
+	private boolean italic, italicDefault; public boolean isItalic() {return italic;}
+	private boolean bold, boldDefault; public boolean isBold() {return bold;}
+	private boolean underline, underlineDefault; public boolean isUnderline() {return underline;}
 	private double size, sizeDefault; public double getSize() {return size;}
 	private Color color, colorDefault; public Color getColor() {return color;}
 	
@@ -42,6 +44,8 @@ public class OfxWordFont
 		return this;
 	}
 	
+	public OfxWordFont name(String value) {name=value; return this;}
+	public OfxWordFont docxLocaleId(int value) {docxLocaleId=value;return this;}
 	public OfxWordFont size(double value) {size=value;return this;}
 	
 	public OfxWordFont italic() {italic(true);return this;}

@@ -3,8 +3,8 @@ package org.openfuxml.renderer.word.content;
 import java.io.File;
 import java.util.Objects;
 
-import org.openfuxml.renderer.word.util.SetFont;
-import org.openfuxml.renderer.word.util.SetFont.setFontEnum;
+import org.openfuxml.renderer.docx.aspose.util.AsposeFontUtil;
+import org.openfuxml.renderer.docx.aspose.util.AsposeFontUtil.setFontEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +29,7 @@ public class WordImageRenderer
 		File f = new File(ofxImage.getMedia().getSrc());
 		if (f.exists())
 		{
-			SetFont sF = new SetFont(doc, builder);
+			AsposeFontUtil sF = new AsposeFontUtil(doc, builder);
 			ParagraphFormat paragraphFormat = builder.getParagraphFormat();
 			paragraphFormat.setAlignment(ParagraphAlignment.CENTER);
 			paragraphFormat.setSpaceAfter(4);

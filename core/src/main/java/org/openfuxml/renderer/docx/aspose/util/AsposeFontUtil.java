@@ -1,8 +1,8 @@
-package org.openfuxml.renderer.word.util;
+package org.openfuxml.renderer.docx.aspose.util;
 
 import java.awt.Color;
 
-
+import org.openfuxml.util.configuration.settings.word.OfxWordFont;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,16 +11,16 @@ import com.aspose.words.DocumentBuilder;
 import com.aspose.words.Font;
 import com.aspose.words.Underline;
 
-public class SetFont
+public class AsposeFontUtil
 {
-	final static Logger logger = LoggerFactory.getLogger(SetFont.class);
+	final static Logger logger = LoggerFactory.getLogger(AsposeFontUtil.class);
 
 	public enum setFontEnum {textheader, text, footer, title, image}
 	Document doc;
 	DocumentBuilder builder;
 	private Font font;
 	
-	public SetFont(Document doc, DocumentBuilder builder)
+	public AsposeFontUtil(Document doc, DocumentBuilder builder)
 	{
 		this.doc = doc;
 		this.builder = builder;
@@ -74,5 +74,20 @@ public class SetFont
 			break;
 			
 		}
+	}
+	
+	public static void apply(OfxWordFont font, DocumentBuilder builder)
+	{
+		Font f = builder.getFont();
+		f.setName("Arial");
+		f.setLocaleId(font.getDocxLocaleId());
+		f.setSize(font.getSize());
+		f.setBold(font.isBold());
+		
+		if(font.isUnderline()) {f.setUnderline(Underline.SINGLE);}
+		else {f.setUnderline(Underline.NONE);}
+		
+		f.setColor(font.getColor());
+		f.setColor(Color.green);
 	}
 }

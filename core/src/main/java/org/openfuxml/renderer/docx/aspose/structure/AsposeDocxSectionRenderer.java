@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.word.structure;
+package org.openfuxml.renderer.docx.aspose.structure;
 
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
@@ -13,9 +13,9 @@ import org.openfuxml.renderer.word.content.WordTitleRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class WordSectionRenderer
+public class AsposeDocxSectionRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(WordSectionRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(AsposeDocxSectionRenderer.class);
 
 	private final Document doc;
 	private final DocumentBuilder builder;
@@ -26,7 +26,7 @@ public class WordSectionRenderer
 	private boolean listNumbersFormating=false;
 	private int paragraphCurrent;
 
-	public WordSectionRenderer(Document doc, DocumentBuilder builder)
+	public AsposeDocxSectionRenderer(Document doc, DocumentBuilder builder)
 	{
 		this.doc=doc;this.builder=builder;
 	}
@@ -212,7 +212,7 @@ public class WordSectionRenderer
 
 	private void renderSection(org.openfuxml.model.xml.core.ofx.Section ofxSection) throws Exception
 	{
-		WordSectionRenderer sf = new WordSectionRenderer(doc,builder);
+		AsposeDocxSectionRenderer sf = new AsposeDocxSectionRenderer(doc,builder);
 		sf.renderWithException(ofxSection);
 	}
 }

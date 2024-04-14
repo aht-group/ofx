@@ -1,11 +1,10 @@
-package org.openfuxml.renderer.word;
+package org.openfuxml.renderer.docx.poi;
 
 import java.io.File;
 
-
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.renderer.docx.aspose.structure.WordDocumentRenderer;
 import org.openfuxml.renderer.util.OfxDocumentStructureVerifier;
-import org.openfuxml.renderer.word.structure.WordDocumentRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

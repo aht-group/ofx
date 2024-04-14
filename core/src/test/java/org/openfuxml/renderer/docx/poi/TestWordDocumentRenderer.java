@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.word;
+package org.openfuxml.renderer.docx.poi;
 
 import java.io.File;
 
@@ -8,6 +8,7 @@ import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.media.cross.NoOpCrossMediaManager;
 import org.openfuxml.model.xml.core.ofx.Document;
+import org.openfuxml.renderer.word.AbstractTestWordRenderer;
 import org.openfuxml.test.OfxBootstrap;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 

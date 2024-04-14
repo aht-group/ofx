@@ -54,7 +54,7 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 		
 		this.localeCode=localeCode;
 		this.context=context;
-		logger.info("LocaleCode:"+localeCode+" Context:"+context.getSimpleName());
+//		logger.info("LocaleCode:"+localeCode+" Context:"+context.getSimpleName());
 	}
 	
 	@Override public <E extends Enum<E>> String toLabel(E code)

@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.word;
+package org.openfuxml.renderer.docx.poi;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;

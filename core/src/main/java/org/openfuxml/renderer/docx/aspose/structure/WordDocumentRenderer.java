@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.word.structure;
+package org.openfuxml.renderer.docx.aspose.structure;
 
 import org.exlp.util.jx.JaxbUtil;
 import org.openfuxml.model.xml.core.ofx.Content;
@@ -55,7 +55,7 @@ public class WordDocumentRenderer
 
 	private void renderSection(org.openfuxml.model.xml.core.ofx.Section ofxSection) throws Exception 
 	{
-		WordSectionRenderer sf = new WordSectionRenderer(doc,builder);
+		AsposeDocxSectionRenderer sf = new AsposeDocxSectionRenderer(doc,builder);
 		sf.renderWithException(ofxSection);
 	}
 }

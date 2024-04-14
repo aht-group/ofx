@@ -2,8 +2,8 @@ package org.openfuxml.renderer.word.content;
 
 import java.io.Serializable;
 
-import org.openfuxml.renderer.word.util.SetAlignment;
-import org.openfuxml.renderer.word.util.SetAlignment.setAlignmentEnum;
+import org.openfuxml.renderer.docx.aspose.util.AsposeAlignmentUtil;
+import org.openfuxml.renderer.docx.aspose.util.AsposeAlignmentUtil.setAlignmentEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +29,7 @@ public class WordTitleRenderer
 		{
 			ParagraphFormat paragraphFormat = builder.getParagraphFormat();
 			paragraphFormat.setFirstLineIndent(0);
-			SetAlignment sA = new SetAlignment(doc, builder);
+			AsposeAlignmentUtil sA = new AsposeAlignmentUtil(doc, builder);
 			sA.setAlignment(setAlignmentEnum.left);
 			paragraphFormat.setKeepTogether(true);
 			builder.writeln(s.toString()+ ":");

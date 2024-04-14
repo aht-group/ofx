@@ -11,9 +11,9 @@ import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.model.xml.core.ofx.Reference;
 import org.openfuxml.model.xml.core.text.Emphasis;
 import org.openfuxml.model.xml.core.text.Symbol;
+import org.openfuxml.renderer.docx.aspose.util.AsposeAlignmentUtil;
+import org.openfuxml.renderer.docx.aspose.util.AsposeAlignmentUtil.setAlignmentEnum;
 import org.openfuxml.renderer.word.util.RemoveUnwantedRegx;
-import org.openfuxml.renderer.word.util.SetAlignment;
-import org.openfuxml.renderer.word.util.SetAlignment.setAlignmentEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +34,7 @@ public class WordParagraphRenderer
 	{
 		//SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
 		
-		SetAlignment sA = new SetAlignment(doc, builder);
+		AsposeAlignmentUtil sA = new AsposeAlignmentUtil(doc, builder);
 		sA.setAlignment(setAlignmentEnum.left);
 		ParagraphFormat paragraphFormat = builder.getParagraphFormat();
 		paragraphFormat.setFirstLineIndent(0);
