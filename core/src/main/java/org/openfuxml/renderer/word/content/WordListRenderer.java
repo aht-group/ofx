@@ -5,6 +5,7 @@ import java.awt.Color;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.list.Item;
 import org.openfuxml.model.xml.core.ofx.Paragraph;
+import org.openfuxml.renderer.docx.aspose.content.AsposeDocxParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,7 +79,7 @@ public class WordListRenderer
 	
 	private void paragraphRenderer(org.openfuxml.model.xml.core.ofx.Paragraph s) throws OfxAuthoringException
 	{
-		WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
+		AsposeDocxParagraphRenderer wPF = new AsposeDocxParagraphRenderer(builder);
 		wPF.render(s,1,1);
 	}
 }

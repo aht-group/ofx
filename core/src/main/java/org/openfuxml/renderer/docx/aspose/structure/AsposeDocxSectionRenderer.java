@@ -1,17 +1,20 @@
 package org.openfuxml.renderer.docx.aspose.structure;
 
-import com.aspose.words.Document;
-import com.aspose.words.DocumentBuilder;
-
+import org.apache.commons.lang3.StringUtils;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.renderer.docx.aspose.content.AsposeDocxParagraphRenderer;
+import org.openfuxml.renderer.docx.aspose.content.AsposeDocxTitleRenderer;
+import org.openfuxml.renderer.docx.aspose.util.OfxAsposeDocxFont;
+import org.openfuxml.renderer.docx.aspose.util.OfxAsposeDocxParagraph;
 import org.openfuxml.renderer.word.content.WordCommentRenderer;
 import org.openfuxml.renderer.word.content.WordImageRenderer;
 import org.openfuxml.renderer.word.content.WordListRenderer;
-import org.openfuxml.renderer.word.content.WordParagraphRenderer;
 import org.openfuxml.renderer.word.content.WordTableRenderer;
-import org.openfuxml.renderer.word.content.WordTitleRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.aspose.words.Document;
+import com.aspose.words.DocumentBuilder;
 
 public class AsposeDocxSectionRenderer
 {
@@ -28,7 +31,8 @@ public class AsposeDocxSectionRenderer
 
 	public AsposeDocxSectionRenderer(Document doc, DocumentBuilder builder)
 	{
-		this.doc=doc;this.builder=builder;
+		this.doc=doc;
+		this.builder=builder;
 	}
 	
 	public void render(org.openfuxml.model.xml.core.ofx.Section ofxSection, boolean listNumbersFormating)
@@ -157,13 +161,13 @@ public class AsposeDocxSectionRenderer
 
 	private void renderTitel(org.openfuxml.model.xml.core.ofx.Title s)
 	{
-		WordTitleRenderer wTR = new WordTitleRenderer(doc, builder);
+		AsposeDocxTitleRenderer wTR = new AsposeDocxTitleRenderer(builder);
 		wTR.render(s);
 	}
 
 	private void renderImage(org.openfuxml.model.xml.core.media.Image s) throws Exception
 	{
-		WordImageRenderer wIR = new WordImageRenderer(doc, builder);
+		WordImageRenderer wIR = new WordImageRenderer(builder);
 		wIR.render(s);
 	}
 
@@ -194,7 +198,7 @@ public class AsposeDocxSectionRenderer
 
 	private void renderTable(org.openfuxml.model.xml.core.table.Table s) throws Exception
 	{
-		WordTableRenderer wTR = new WordTableRenderer(doc, builder);
+		WordTableRenderer wTR = new WordTableRenderer(builder);
 		wTR.render(s,tableCount,tableCurrent);
 	}
 
@@ -206,7 +210,7 @@ public class AsposeDocxSectionRenderer
 
 	private void paragraphRenderer(org.openfuxml.model.xml.core.ofx.Paragraph s) throws OfxAuthoringException
 	{
-		WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
+		AsposeDocxParagraphRenderer wPF = new AsposeDocxParagraphRenderer(builder);
 		wPF.render(s,paragraphCount,paragraphCurrent);
 	}
 
@@ -215,4 +219,13 @@ public class AsposeDocxSectionRenderer
 		AsposeDocxSectionRenderer sf = new AsposeDocxSectionRenderer(doc,builder);
 		sf.renderWithException(ofxSection);
 	}
+	
+	public AsposeDocxSectionRenderer font(OfxAsposeDocxFont font) {font.apply(builder); return this;}
+	public AsposeDocxSectionRenderer paragraph(OfxAsposeDocxParagraph paragraph) {paragraph.apply(builder); return this;}
+	
+	public AsposeDocxSectionRenderer cell() {builder.insertCell(); return this;}
+	public void write(String text) {builder.write(text);}
+	public void writeln(String text) {builder.writeln(text);}
+	
+	public AsposeDocxSectionRenderer tabs(int value) {builder.write(StringUtils.repeat("\t",value)); return this;}
 }

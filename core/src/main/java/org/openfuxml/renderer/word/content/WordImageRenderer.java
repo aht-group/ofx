@@ -1,35 +1,33 @@
 package org.openfuxml.renderer.word.content;
 
+import java.awt.Color;
 import java.io.File;
 import java.util.Objects;
 
-import org.openfuxml.renderer.docx.aspose.util.AsposeFontUtil;
-import org.openfuxml.renderer.docx.aspose.util.AsposeFontUtil.setFontEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
-import com.aspose.words.Shape;
+import com.aspose.words.Font;
 import com.aspose.words.ParagraphAlignment;
 import com.aspose.words.ParagraphFormat;
+import com.aspose.words.Shape;
+import com.aspose.words.Underline;
 
 public class WordImageRenderer
 {
 	final static Logger logger = LoggerFactory.getLogger(WordImageRenderer.class);
 
-	private Document doc;
 	private DocumentBuilder builder;
 	private Shape shape;
 
-	public WordImageRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
+	public WordImageRenderer(DocumentBuilder builder) {this.builder=builder;}
 
 	public void render(org.openfuxml.model.xml.core.media.Image ofxImage) throws Exception
 	{
 		File f = new File(ofxImage.getMedia().getSrc());
 		if (f.exists())
 		{
-			AsposeFontUtil sF = new AsposeFontUtil(doc, builder);
 			ParagraphFormat paragraphFormat = builder.getParagraphFormat();
 			paragraphFormat.setAlignment(ParagraphAlignment.CENTER);
 			paragraphFormat.setSpaceAfter(4);
@@ -86,8 +84,15 @@ public class WordImageRenderer
 			// write empty line..
 			builder.writeln();
 
-			// set font and write image title...
-			sF.setFont(setFontEnum.image);
+			
+			Font font = builder.getFont();
+			font.setSize(6);
+			font.setColor(Color.BLACK);
+			font.setBold(true);
+			font.setName("Arial");
+			font.setUnderline(Underline.NONE);
+			font.setItalic(true);
+			
 			builder.writeln(ofxImage.getTitle().getContent().get(0).toString());
 		}
 		else

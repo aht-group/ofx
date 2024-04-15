@@ -20,9 +20,9 @@ public class WordCommentRenderer
 	
 	public WordCommentRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
 
-	public void render(org.openfuxml.model.xml.core.ofx.Comment ofxComment)
+	public void render(org.openfuxml.model.xml.core.ofx.Comment xml)
 	{		
-		for (org.openfuxml.model.xml.core.ofx.Raw raw : ofxComment.getRaw())
+		for (org.openfuxml.model.xml.core.ofx.Raw raw : xml.getRaw())
 		{
 			//"XXX" ..for "Author" and "Initial" 
 			Comment comment = new Comment(doc, "XXX", "XXX", new Date());

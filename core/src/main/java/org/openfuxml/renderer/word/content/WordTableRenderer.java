@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.renderer.docx.aspose.content.AsposeDocxParagraphRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,11 +26,10 @@ public class WordTableRenderer
 	
 	public enum tableAddBorderTo{first,mid,last,only};
 	
-	private Document doc;
 	private DocumentBuilder builder;
 	private Table table;
 
-	public WordTableRenderer(Document doc, DocumentBuilder builder){this.doc=doc;this.builder=builder;}
+	public WordTableRenderer(DocumentBuilder builder) {this.builder=builder;}
 
 	public void render(org.openfuxml.model.xml.core.table.Table ofxTable,	int tableCount, int tableCurrent) throws Exception
 	{	
@@ -101,7 +101,7 @@ public class WordTableRenderer
 				{
 					if (s instanceof org.openfuxml.model.xml.core.ofx.Paragraph)
 					{
-						WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
+						AsposeDocxParagraphRenderer wPF = new AsposeDocxParagraphRenderer(builder);
 						wPF.render((org.openfuxml.model.xml.core.ofx.Paragraph) s, tableCount, tableCurrent);
 					}
 				}
@@ -130,7 +130,7 @@ public class WordTableRenderer
 					{
 						if (s instanceof org.openfuxml.model.xml.core.ofx.Paragraph)
 						{
-							WordParagraphRenderer wPF = new WordParagraphRenderer(doc, builder);
+							AsposeDocxParagraphRenderer wPF = new AsposeDocxParagraphRenderer(builder);
 							wPF.render((org.openfuxml.model.xml.core.ofx.Paragraph) s, tableCount, tableCurrent);
 						}
 					}

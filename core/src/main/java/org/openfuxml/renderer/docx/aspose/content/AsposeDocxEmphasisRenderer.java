@@ -1,6 +1,4 @@
-package org.openfuxml.renderer.word.content;
-
-
+package org.openfuxml.renderer.docx.aspose.content;
 
 import java.util.Objects;
 
@@ -8,21 +6,18 @@ import org.openfuxml.exception.OfxAuthoringException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
 import com.aspose.words.Font;
 import com.aspose.words.Underline;
 
-public class WordEmphasisRenderer
+public class AsposeDocxEmphasisRenderer
 {
-	final static Logger logger = LoggerFactory.getLogger(WordEmphasisRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(AsposeDocxEmphasisRenderer.class);
 	
-	@SuppressWarnings("unused")
-	private Document doc;
 	private DocumentBuilder builder;
 	private Font font;
 
-	public WordEmphasisRenderer(Document doc, DocumentBuilder builder){this.doc=doc;this.builder=builder;}
+	public AsposeDocxEmphasisRenderer(DocumentBuilder builder){this.builder=builder;}
 	
 	
 	public void render(org.openfuxml.model.xml.core.text.Emphasis ofxEmphasis) throws OfxAuthoringException

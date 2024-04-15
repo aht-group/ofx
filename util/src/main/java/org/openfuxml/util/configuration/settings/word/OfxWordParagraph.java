@@ -13,7 +13,7 @@ public class OfxWordParagraph
 	
 	public static OfxWordParagraph instance() {return new OfxWordParagraph();}
 	
-	public OfxWordParagraph()
+	private OfxWordParagraph()
 	{
 		leftIdent = 0;
 		spaceBefore = 3;

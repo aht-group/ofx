@@ -1,4 +1,4 @@
-package org.openfuxml.renderer.word.content;
+package org.openfuxml.renderer.docx.aspose.content;
 
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.editorial.Acronym;
@@ -11,34 +11,34 @@ import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.model.xml.core.ofx.Reference;
 import org.openfuxml.model.xml.core.text.Emphasis;
 import org.openfuxml.model.xml.core.text.Symbol;
-import org.openfuxml.renderer.docx.aspose.util.AsposeAlignmentUtil;
-import org.openfuxml.renderer.docx.aspose.util.AsposeAlignmentUtil.setAlignmentEnum;
 import org.openfuxml.renderer.word.util.RemoveUnwantedRegx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
+import com.aspose.words.ParagraphAlignment;
 import com.aspose.words.ParagraphFormat;
 
-public class WordParagraphRenderer 
+public class AsposeDocxParagraphRenderer 
 {
-	final static Logger logger = LoggerFactory.getLogger(WordParagraphRenderer.class);
+	final static Logger logger = LoggerFactory.getLogger(AsposeDocxParagraphRenderer.class);
 
-	private Document doc;
 	private DocumentBuilder builder;
 	
-	public WordParagraphRenderer(Document doc,DocumentBuilder builder){this.doc=doc;this.builder=builder;}
+	public AsposeDocxParagraphRenderer(DocumentBuilder builder) {this.builder=builder;}
 	
 	public void render(org.openfuxml.model.xml.core.ofx.Paragraph ofxParagraph, int paragraphCount, int paragraphCurrent) throws OfxAuthoringException
 	{
 		//SetFont sF = new SetFont(doc, builder);sF.setFont(setFontEnum.text);
 		
-		AsposeAlignmentUtil sA = new AsposeAlignmentUtil(doc, builder);
-		sA.setAlignment(setAlignmentEnum.left);
+		
 		ParagraphFormat paragraphFormat = builder.getParagraphFormat();
 		paragraphFormat.setFirstLineIndent(0);
 		paragraphFormat.setKeepTogether(true);
+		paragraphFormat.setAlignment(ParagraphAlignment.LEFT);
+		paragraphFormat.setLeftIndent(0);
+		paragraphFormat.setRightIndent(0);
 
 		for(Object o : ofxParagraph.getContent())
 		{			
@@ -134,7 +134,7 @@ public class WordParagraphRenderer
 
 	private void renderEmphasis(org.openfuxml.model.xml.core.text.Emphasis ofxEmphasis) throws OfxAuthoringException
 	{
-		WordEmphasisRenderer sf = new WordEmphasisRenderer(doc,builder);
+		AsposeDocxEmphasisRenderer sf = new AsposeDocxEmphasisRenderer(builder);
 		sf.render(ofxEmphasis);
 		
 	}
