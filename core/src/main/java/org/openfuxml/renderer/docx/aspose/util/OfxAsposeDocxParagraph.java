@@ -1,10 +1,8 @@
 package org.openfuxml.renderer.docx.aspose.util;
 
 import com.aspose.words.DocumentBuilder;
-import com.aspose.words.Font;
 import com.aspose.words.ParagraphAlignment;
 import com.aspose.words.ParagraphFormat;
-import com.aspose.words.Underline;
 
 public class OfxAsposeDocxParagraph
 {
@@ -22,7 +20,6 @@ public class OfxAsposeDocxParagraph
 		alignment = Alignment.left;
 		indentLeft = 0;
 		indentRight = 0;
-		
 	}
 	
 	public void save()
@@ -32,8 +29,16 @@ public class OfxAsposeDocxParagraph
 	
 	public OfxAsposeDocxParagraph reset()
 	{
-
 		return this;
+	}
+	
+	public OfxAsposeDocxParagraph clone()
+	{
+		OfxAsposeDocxParagraph p = OfxAsposeDocxParagraph.instance();
+		p.alignment(alignment);
+		p.indentLeft(indentLeft);
+		p.indentRight(indentRight);
+		return p;
 	}
 	
 	public OfxAsposeDocxParagraph alignment(Alignment value) {this.alignment=value; return this;}

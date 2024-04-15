@@ -8,8 +8,8 @@ import com.aspose.words.Underline;
 
 public class OfxAsposeDocxFont
 {
-	private String name; public String getName() {return name;}
-	private int docxLocaleId;  public int getDocxLocaleId() {return docxLocaleId;}
+	private String name; public String getName() {return name;} public OfxAsposeDocxFont name(String value) {name=value; return this;}
+	private int docxLocaleId;  public int getDocxLocaleId() {return docxLocaleId;} public OfxAsposeDocxFont docxLocaleId(int value) {docxLocaleId=value; return this;}
 	
 	private boolean italic, italicDefault; public boolean isItalic() {return italic;}
 	private boolean bold, boldDefault; public boolean isBold() {return bold;}
@@ -49,8 +49,21 @@ public class OfxAsposeDocxFont
 		return this;
 	}
 	
-	public OfxAsposeDocxFont name(String value) {name=value; return this;}
-	public OfxAsposeDocxFont docxLocaleId(int value) {docxLocaleId=value;return this;}
+	public OfxAsposeDocxFont clone()
+	{
+		OfxAsposeDocxFont f = OfxAsposeDocxFont.instance();
+		f.name(name);
+		f.docxLocaleId(docxLocaleId);
+		
+		f.italic(italic);
+		f.bold(bold);
+		f.underline(underline);
+		
+		f.color(color);
+		
+		return f;
+	}
+	
 	public OfxAsposeDocxFont size(double value) {size=value;return this;}
 	
 	public OfxAsposeDocxFont italic() {italic(true);return this;}
