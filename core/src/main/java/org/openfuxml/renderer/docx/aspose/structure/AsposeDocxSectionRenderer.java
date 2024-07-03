@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.docx.aspose.content.AsposeDocxParagraphRenderer;
 import org.openfuxml.renderer.docx.aspose.content.AsposeDocxTitleRenderer;
+import org.openfuxml.renderer.docx.aspose.util.OfxAsposeDocxCell;
 import org.openfuxml.renderer.docx.aspose.util.OfxAsposeDocxFont;
 import org.openfuxml.renderer.docx.aspose.util.OfxAsposeDocxParagraph;
 import org.openfuxml.renderer.word.content.WordCommentRenderer;
@@ -220,10 +221,13 @@ public class AsposeDocxSectionRenderer
 		sf.renderWithException(ofxSection);
 	}
 	
+	public AsposeDocxSectionRenderer nr(int i) {logger.trace("NOOP, only to see the number"); return this;}
 	public AsposeDocxSectionRenderer font(OfxAsposeDocxFont font) {font.apply(builder); return this;}
 	public AsposeDocxSectionRenderer paragraph(OfxAsposeDocxParagraph paragraph) {paragraph.apply(builder); return this;}
 	
 	public AsposeDocxSectionRenderer cell() {builder.insertCell(); return this;}
+	public AsposeDocxSectionRenderer cell(OfxAsposeDocxCell cell) {builder.insertCell(); cell.apply(builder); return this;}
+	
 	public void write(String text) {builder.write(text);}
 	public void writeln(String text) {builder.writeln(text);}
 	
