@@ -74,11 +74,7 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 		MultiKey<String> mk = new MultiKey<String>(localeCode,scope,key);
 		if(!map3.containsKey(mk))
 		{
-			StringBuilder sb = new StringBuilder();
-			sb.append("Missing Translation");
-			sb.append(localeCode+"-"+scope+"-"+key);
-			
-			logger.warn(sb.toString());
+			logger.warn("Missing translation {} - {} - {}",scope,key,localeCode);
 		}
 		return map3.get(mk);
 	}
