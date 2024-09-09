@@ -1,4 +1,4 @@
-package org.openfuxml.content.list;
+package org.openfuxml.model.xml.content.list;
 
 import java.nio.file.Paths;
 

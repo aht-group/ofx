@@ -1,4 +1,4 @@
-package org.openfuxml.content.list;
+package org.openfuxml.model.xml.content.list;
 
 import org.openfuxml.content.ofx.TestXmlParagraph;
 import org.openfuxml.model.xml.core.list.Item;
@@ -10,17 +10,17 @@ public class TestXmlItem extends AbstractXmlListTest<Item>
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestXmlItem.class);
 	
-	public TestXmlItem(){super(Item.class);}
-	public static Item create(boolean withChildren){return (new TestXmlItem()).build(withChildren);}
+	public static TestXmlItem instance() {return new TestXmlItem();}
+	private TestXmlItem() {super(Item.class);}
    
-    public Item build(boolean withChildren)
+    @Override public Item build(boolean wChildren)
     {
     	Item xml = new Item();
     	xml.setLang("myLang");
     	xml.setName("myName");
     	xml.getContent().add("myMixed");
     	
-    	if(withChildren)
+    	if(wChildren)
     	{
     		xml.getContent().add(TestXmlParagraph.create(false));
     	}
@@ -30,8 +30,7 @@ public class TestXmlItem extends AbstractXmlListTest<Item>
 	
 	public static void main(String[] args)
     {
-		OfxBootstrap.init();	
-		TestXmlItem test = new TestXmlItem();
-		test.saveReferenceXml();
+		OfxBootstrap.init();
+		TestXmlItem.instance().saveReferenceXml();
     }
 }

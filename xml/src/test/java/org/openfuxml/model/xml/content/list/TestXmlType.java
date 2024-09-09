@@ -1,4 +1,4 @@
-package org.openfuxml.content.list;
+package org.openfuxml.model.xml.content.list;
 
 import org.openfuxml.model.xml.core.list.Type;
 import org.openfuxml.test.OfxBootstrap;
@@ -9,10 +9,10 @@ public class TestXmlType extends AbstractXmlListTest<Type>
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestXmlType.class);
 	
-	public TestXmlType(){super(Type.class);}
-	public static Type create(boolean withChildren){return (new TestXmlType()).build(withChildren);}
+	public static TestXmlType instance() {return new TestXmlType();}
+	private TestXmlType() {super(Type.class);}
    
-    public Type build(boolean withChildren)
+    @Override public Type build(boolean wChildren)
     {
     	Type xml = new Type();
     	xml.setDescription(false);
@@ -23,7 +23,6 @@ public class TestXmlType extends AbstractXmlListTest<Type>
 	public static void main(String[] args)
     {
 		OfxBootstrap.init();
-		TestXmlType test = new TestXmlType();
-		test.saveReferenceXml();
+		TestXmlType.instance().saveReferenceXml();
     }
 }

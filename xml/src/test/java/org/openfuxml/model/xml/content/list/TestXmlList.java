@@ -1,4 +1,4 @@
-package org.openfuxml.content.list;
+package org.openfuxml.model.xml.content.list;
 
 import org.openfuxml.content.layout.TestXmlLayout;
 import org.openfuxml.content.ofx.TestXmlComment;
@@ -11,20 +11,21 @@ public class TestXmlList extends AbstractXmlListTest<List>
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestXmlList.class);
 	
-	public TestXmlList(){super(List.class);}
-	public static List create(boolean withChildren){return (new TestXmlList()).build(withChildren);}
+	public static TestXmlList instance() {return new TestXmlList();}
+	private TestXmlList() {super(List.class);}
    
-    public List build(boolean withChildren)
+    public List build(boolean wChildren)
     {
     	List xml = new List();
     	
-    	if(withChildren)
+    	if(wChildren)
     	{
     		xml.setComment(TestXmlComment.create(false));
-    		xml.setType(TestXmlType.create(false));
+    		xml.setType(TestXmlType.instance().build(false));
     		xml.setLayout(TestXmlLayout.create(false));
     		
-    		xml.getItem().add(TestXmlItem.create(false));xml.getItem().add(TestXmlItem.create(false));
+    		xml.getItem().add(TestXmlItem.instance().build(false));
+    		xml.getItem().add(TestXmlItem.instance().build(false));
     	}
     	
     	return xml;
@@ -33,7 +34,6 @@ public class TestXmlList extends AbstractXmlListTest<List>
 	public static void main(String[] args)
     {
 		OfxBootstrap.init();
-		TestXmlList test = new TestXmlList();
-		test.saveReferenceXml();
+		TestXmlList.instance().saveReferenceXml();
     }
 }
