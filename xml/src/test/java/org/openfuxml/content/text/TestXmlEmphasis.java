@@ -9,8 +9,8 @@ public class TestXmlEmphasis extends AbstractXmlOfxTextTest<Emphasis>
 {	
 	final static Logger logger = LoggerFactory.getLogger(TestXmlEmphasis.class);
 	
-	public TestXmlEmphasis(){super(Emphasis.class);}
-	public static Emphasis create(boolean withChildren){return (new TestXmlEmphasis()).build(withChildren);}
+	public static TestXmlEmphasis instance() {return new TestXmlEmphasis();}
+	private TestXmlEmphasis() {super(Emphasis.class);}
 	   
     public Emphasis build(boolean withChildren)
     {
@@ -26,7 +26,6 @@ public class TestXmlEmphasis extends AbstractXmlOfxTextTest<Emphasis>
 	public static void main(String[] args)
     {
 		OfxBootstrap.init();
-		TestXmlText test = new TestXmlText();
-		test.saveReferenceXml();
+		TestXmlEmphasis.instance().saveReferenceXml();
     }
 }

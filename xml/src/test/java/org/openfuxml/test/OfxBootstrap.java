@@ -1,6 +1,7 @@
 package org.openfuxml.test;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.ConfigurationException;
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.exlp.util.io.config.ExlpCentralConfigPointer;
@@ -9,34 +10,30 @@ import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.exception.ExlpConfigurationException;
-
 public class OfxBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(OfxBootstrap.class);
 	
-	public static String xmlConfig = "ofx/client/config/ofx.xml";
+	private enum System {ofx}
+	public static String xmlConfig = "ofx/system/property/xml-test.xml";
+	
+	private static Configuration config;
 	
 	public static Configuration init() {return init(xmlConfig);}
 	public static Configuration init(String configFile)
 	{
-		LoggerBootstrap.instance("ofx.log4j2.xml").path("ofx/system/io/log").init();
-		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
-		
-		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
+		LoggerBootstrap.instance().path("ofx/system/io/log").init();
+//		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
 		
 		try
 		{
-			ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance("ofx").jaxb(JaxbUtil.instance());
-			ConfigLoader.addFile(ccp.toFile("core"));
+			ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(System.ofx).jaxb(JaxbUtil.instance());
+			ConfigLoader configBootstrap = ConfigLoader.instance();
+//			configBootstrap.add(ccp.toPath("client"));
+//			configBootstrap.add(configFile);
+			config = configBootstrap.combine();
 		}
-		catch (ExlpConfigurationException e)
-		{
-			logger.warn("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+": "+e.getMessage());
-		}
-		ConfigLoader.addString(configFile);
-		Configuration config = ConfigLoader.init();					
-		logger.debug("Config and Logger initialized");
+		catch (ConfigurationException e) {e.printStackTrace();}
 
 		return config;
 	}

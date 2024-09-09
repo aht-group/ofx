@@ -7,7 +7,7 @@ public class TestXmlAuth extends AbstractXmlWikiTest<Auth>
 	public TestXmlAuth(){super(Auth.class);}
 	public static Auth create(boolean withChildren){return (new TestXmlAuth()).build(withChildren);}
    
-    public Auth build(boolean withChildren)
+    public Auth build(boolean wChildren)
     {
     	Auth xml = new Auth();
     	xml.setType("wiki");

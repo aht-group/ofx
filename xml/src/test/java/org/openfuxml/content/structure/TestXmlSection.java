@@ -10,29 +10,26 @@ public class TestXmlSection extends AbstractXmlStructureTest<Section>
 {	
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
 	
-	public TestXmlSection(){super(Section.class);}
-	public static Section create(boolean withChildren){return (new TestXmlSection()).build(withChildren);}
-   
-    public Section build(boolean withChilds)
+	public static TestXmlSection instance() {return new TestXmlSection();}
+	private TestXmlSection() {super(Section.class);}
+	
+    @Override public Section build(boolean wChildren)
     {
     	Section xml = new Section();
     	xml.setContainer(true);
     	xml.setInclude("myInclude");
     	
-    	if(withChilds)
+    	if(wChildren)
     	{
     		
     	}
     	
     	return xml;
     }
-    
-    public void save() {save(create(true),fXml,false);}
-	
+    	
 	public static void main(String[] args)
     {
 		OfxBootstrap.init();
-		TestXmlSection test = new TestXmlSection();
-		test.saveReferenceXml();
+		TestXmlSection.instance().saveReferenceXml();
     }
 }

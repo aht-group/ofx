@@ -6,9 +6,8 @@ import java.util.List;
 import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.jdom2.Namespace;
 
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
-
-public class OfxNsPrefixMapper extends NamespacePrefixMapper implements NsPrefixMapperInterface
+public class OfxNsPrefixMapper //extends NamespacePrefixMapper 
+								implements NsPrefixMapperInterface
 {
 	public enum NS {text}
 	
