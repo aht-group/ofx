@@ -63,18 +63,22 @@
    	   		<scope>provided</scope>
    	   	</dependency>
 	
+		<!-- Wiki Parser to HTML
+			2020-02-27 tk changed from compile to provided
+			2024-11-09 tk trying to remove -->
 		<dependency>
 	        <groupId>info.bliki.wiki</groupId>
 	        <artifactId>bliki-core</artifactId>
 	        <version>3.0.19</version>
-	        <scope>provided</scope>	<!-- 2020-02-27 tk changed from compile to provided -->
+	        <scope>provided</scope>	
 	        <exclusions>
 		    	<exclusion>
 		    		<artifactId>commons-logging</artifactId>
 		    		<groupId>commons-logging</groupId>
 		    	</exclusion>
 			</exclusions>
-        </dependency>
+        </dependency> 
+        
 		<dependency>
 			<groupId>net.sourceforge</groupId>
 			<artifactId>jwbf</artifactId>
