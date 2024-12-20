@@ -22,9 +22,9 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 {	
 	final static Logger logger = LoggerFactory.getLogger(TextTableRenderer.class);
 	
-	private List<OfxTextRenderer> rendererHeader;
-	private List<List<OfxTextRenderer>> rendererBody;
-	
+	protected List<OfxTextRenderer> rendererHeader;
+	protected List<List<OfxTextRenderer>> rendererBody;
+
 	private int[] columnSize;
 	
 	public TextTableRenderer(ConfigurationProvider cp)
@@ -42,8 +42,7 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 		{
 			int space = renderTitleDashes();
 			renderTitle(space, table.getTitle());
-		}
-		
+		}		
 		
 		renderSeparatorDashes();
 		renderHeader(rendererHeader);
@@ -55,7 +54,7 @@ public class TextTableRenderer extends AbstractOfxTextRenderer implements OfxTex
 		renderSeparatorDashes();
 	}
 	
-	private void prepareCells(Table table) throws OfxAuthoringException
+	protected void prepareCells(Table table) throws OfxAuthoringException
 	{
 		if(Objects.nonNull(table.getContent()))
 		{

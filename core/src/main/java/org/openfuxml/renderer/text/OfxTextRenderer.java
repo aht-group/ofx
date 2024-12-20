@@ -20,6 +20,7 @@ import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.text.structure.TextParagraphRenderer;
 import org.openfuxml.renderer.text.structure.TextSectionRenderer;
+import org.openfuxml.renderer.text.table.CsvTableRenderer;
 import org.openfuxml.renderer.text.table.TextCellRenderer;
 import org.openfuxml.renderer.text.table.TextTableRenderer;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
@@ -34,6 +35,7 @@ public class OfxTextRenderer
 	
 	private final TextParagraphRenderer paragraphRenderer;
 	
+	public static OfxTextRenderer instance() {return new OfxTextRenderer();}
 	public OfxTextRenderer()
 	{
 		cp = new OfxConfigurationProvider();
@@ -64,7 +66,6 @@ public class OfxTextRenderer
 		catch (SQLException e) {throw new OfxAuthoringException(e.getMessage());}
 	}
 	
-	
 	public static void silent(Table table, OutputStream os)
 	{
 		try {OfxTextRenderer.table(table, os);}
@@ -81,7 +82,13 @@ public class OfxTextRenderer
 		TextTableRenderer renderer = new TextTableRenderer(cp);
 		renderer.render(table);
 		PrintWriter w = new PrintWriter(os,true);
-		for(String s : renderer.getContent()){w.println(s);}
+		for(String s : renderer.getContent()) {w.println(s);}
+	}
+	public void csv(Table table, OutputStream os) throws OfxAuthoringException
+	{
+		CsvTableRenderer renderer = new CsvTableRenderer(cp);
+		renderer.render(table);
+		
 	}
 	
 	public void render(Cell cell, OutputStream os) throws OfxAuthoringException, IOException
