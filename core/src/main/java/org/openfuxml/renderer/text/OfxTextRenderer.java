@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.Writer;
+import java.nio.file.Path;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -84,11 +85,10 @@ public class OfxTextRenderer
 		PrintWriter w = new PrintWriter(os,true);
 		for(String s : renderer.getContent()) {w.println(s);}
 	}
-	public void csv(Table table, OutputStream os) throws OfxAuthoringException
+	public void csv(Table table, Path path) throws OfxAuthoringException
 	{
 		CsvTableRenderer renderer = new CsvTableRenderer(cp);
-		renderer.render(table);
-		
+		renderer.render(table,path);
 	}
 	
 	public void render(Cell cell, OutputStream os) throws OfxAuthoringException, IOException

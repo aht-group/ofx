@@ -3,6 +3,7 @@ package org.openfuxml.renderer.text.table;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +28,11 @@ public class CsvTableRenderer extends TextTableRenderer implements OfxTextRender
 		super(cp);
 	}
 	
-	public void render(Table table) throws OfxAuthoringException
+	public void render(Table table, Path path) throws OfxAuthoringException
 	{
 		super.prepareCells(table);
-		String filePath = "/Volumes/ramdisk/villages.csv";
 
-		 try (Writer writer = new FileWriter(filePath); CSVPrinter csv = new CSVPrinter(writer,CSVFormat.EXCEL))
+		 try (Writer writer = new FileWriter(path.toFile()); CSVPrinter csv = new CSVPrinter(writer,CSVFormat.EXCEL))
 		 {
 			 List<String> header = new ArrayList<>();
 			 for(OfxTextRenderer r : rendererHeader)
@@ -58,7 +58,7 @@ public class CsvTableRenderer extends TextTableRenderer implements OfxTextRender
 			 }
 			
 			 csv.flush();
-			 logger.info("Data written successfully to " + filePath);
+			 logger.info("Data written successfully to " + path);
 
 		 }
 		 catch (IOException e) {e.printStackTrace();}
