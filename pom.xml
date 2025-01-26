@@ -29,10 +29,6 @@
     	<maven.ignore>file://${basedir}/../doc/src/main/resources/ofx/maven/maven-versions.xml</maven.ignore>
 	</properties>
 
-	<prerequisites>
-		<maven>3.1</maven>
-	</prerequisites>
-
 	<licenses>
 		<license>
 			<name>GNU General Public License</name>
