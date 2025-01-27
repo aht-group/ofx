@@ -30,7 +30,7 @@
 			<groupId>org.openfuxml</groupId>
 			<artifactId>ofx-xml</artifactId>
 			<type>jar</type>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
 		
 		<!-- ExLP -->
@@ -92,12 +92,7 @@
 			</exclusions>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.openfuxml</groupId>
-			<artifactId>ofx-xml</artifactId>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
+
 		
 <!-- 		<dependency>
 			<groupId>jfree</groupId>
@@ -133,18 +128,6 @@
 			<artifactId>junit</artifactId>
 			<type>jar</type>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-	 		<groupId>commons-configuration</groupId>
-			<artifactId>commons-configuration</artifactId>
-			<type>jar</type>
-			<scope>test</scope>
-			<exclusions>
-        		<exclusion>
-        			<artifactId>commons-logging</artifactId>
-        			<groupId>commons-logging</groupId>
-        		</exclusion>
-        	</exclusions>
 		</dependency>
 		<dependency>
 	 		<groupId>commons-configuration</groupId>
