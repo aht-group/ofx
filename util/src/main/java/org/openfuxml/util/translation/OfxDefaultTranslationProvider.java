@@ -41,6 +41,11 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 		map3.put(nk, value);
 	}
 
+	@Override public String tlEntity(Class<?> c)
+	{
+		if(ObjectUtils.anyNull(localeCode)) {throw new IllegalArgumentException("Both localeCode and context need to be set");}
+		return tlEntity(localeCode,c.getSimpleName());
+	}
 	@Override public String tlEntity(String localeCode, Class<?> c) {return tlEntity(localeCode,c.getSimpleName());}
 	@Override public String tlEntity(String localeCode, String key)
 	{
@@ -60,16 +65,19 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 	@Override public <E extends Enum<E>> String toLabel(E code)
 	{
 		if(ObjectUtils.anyNull(localeCode,context)) {throw new IllegalStateException("Both localeCode and context need to be set");}
-		return this.toLabel(localeCode,context,code);
+		return this.tAttribute(localeCode,context,code);
 	}
 
-	@Override public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code) {return tlAttribute(localeCode,c.getSimpleName(),code.toString());}
+	
 	@Override public <E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code)
 	{
 		logger.warn("NYI");
 		return null;
 	}
-	@Override public String tlAttribute(String localeCode, String scope, String key)
+	
+	@Override public <E extends Enum<E>> String tAttribute(String localeCode, Class<?> c, E code) {return tAttribute(localeCode,c.getSimpleName(),code.toString());}
+	@Override public <E extends Enum<E>> String tAttribute(Class<?> c, E code) {throw new UnsupportedOperationException("NYI");}
+	@Override public String tAttribute(String localeCode, String scope, String key)
 	{
 		MultiKey<String> mk = new MultiKey<String>(localeCode,scope,key);
 		if(!map3.containsKey(mk))

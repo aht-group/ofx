@@ -9,15 +9,20 @@ public interface OfxTranslationProvider
 	boolean hasLocale(String localeCode);
 	List<String> getLocaleCodes();
 	
-	String tlEntity (String localeCode, String key);
-	String tlEntity (String localeCode, Class<?> c);
 	
-	String tlAttribute (String localeCode, String key1, String key2);
+	String tlEntity (Class<?> c);
+	String tlEntity (String localeCode, Class<?> c);
+	String tlEntity (String localeCode, String key);
+	
+	
+	<E extends Enum<E>> String tAttribute (Class<?> c, E code);
+	<E extends Enum<E>> String tAttribute(String localeCode, Class<?> c, E code);
+	String tAttribute (String localeCode, String key1, String key2);
 	
 	void setContext(String localeCode, Class<?> c);
 	<E extends Enum<E>> String toLabel(E code);
 	
-	<E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code);
+	
 	<E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code);
 	
 	String toDate(String localeCode, LocalDate record);
