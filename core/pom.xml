@@ -57,11 +57,41 @@
 			<scope>test</scope>
 			<classifier>tests</classifier>
 		</dependency>
+		<dependency>
+			<groupId>org.openfuxml</groupId>
+			<artifactId>ofx-xml</artifactId>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
 		
+		<!-- Apache Commons-->
 		<dependency>
    			<groupId>org.apache.commons</groupId>
    			<artifactId>commons-lang3</artifactId>
    			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+	 		<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<type>jar</type>
+			<scope>test</scope>
+			<exclusions>
+        		<exclusion>
+        			<artifactId>commons-logging</artifactId>
+        			<groupId>commons-logging</groupId>
+        		</exclusion>
+        	</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.10.0</version>
+			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
@@ -84,12 +114,14 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- XML -->
+		<!-- JAXB -->
 		<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-impl</artifactId>
-   	   		<scope>provided</scope>
-   	   	</dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.9</version>
+			<scope>test</scope>
+		</dependency>
+   	   	
 		<dependency>
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
@@ -112,9 +144,7 @@
 			<artifactId>batik-codec</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
 
-		
 		<dependency>
     		<groupId>com.aspose</groupId>
     		<artifactId>aspose-words</artifactId>
@@ -147,35 +177,8 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-	 		<groupId>commons-configuration</groupId>
-			<artifactId>commons-configuration</artifactId>
-			<type>jar</type>
-			<scope>test</scope>
-			<exclusions>
-        		<exclusion>
-        			<artifactId>commons-logging</artifactId>
-        			<groupId>commons-logging</groupId>
-        		</exclusion>
-        	</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-csv</artifactId>
-			<version>1.10.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.openfuxml</groupId>
-			<artifactId>ofx-xml</artifactId>
-			<classifier>tests</classifier>
-			<scope>test</scope>
-		</dependency>
+		
+
 		
 		<!-- Leave it uncommented until Word is re-tested
 		<dependency>

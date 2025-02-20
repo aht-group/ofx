@@ -53,12 +53,13 @@
     		<scope>compile</scope>
 		</dependency>
 		
-		<!-- XML -->
+		<!-- JAXB 
 		<dependency>
    	   		<groupId>com.sun.xml.bind</groupId>
    	   		<artifactId>jaxb-impl</artifactId>
    	   		<scope>provided</scope>
-   	   	</dependency>
+   	   	</dependency> -->
+   	   	
    	   	<dependency>
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>
