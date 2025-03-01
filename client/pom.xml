@@ -88,12 +88,12 @@
 		    	</exclusion>
 			</exclusions>
 		</dependency>
-		<!--
+		<!-- 2020-02-27 tk changed from compile to provided 
 		<dependency>
 	        <groupId>info.bliki.wiki</groupId>
 	        <artifactId>bliki-core</artifactId>
 	        <version>3.0.19</version>
-	        <scope>compile</scope>	 2020-02-27 tk changed from compile to provided 
+	        <scope>compile</scope>	 
 	        <exclusions>
 		    	<exclusion>
 		    		<artifactId>commons-logging</artifactId>
@@ -102,11 +102,14 @@
 			</exclusions>
         </dependency> -->
         
+		<!-- JAXB -->
 		<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-impl</artifactId>
-   	   		<scope>provided</scope>
-   	   	</dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.9</version>
+			<scope>test</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>jaxen</groupId>
 			<artifactId>jaxen</artifactId>

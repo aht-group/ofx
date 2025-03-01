@@ -57,11 +57,13 @@
 		</dependency>
 	
 		<!-- XML -->
+   	   	<!-- Java EE -->
 		<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-impl</artifactId>
-   	   		<scope>provided</scope>
-   	   	</dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
+			<scope>provided</scope>
+		</dependency>
 	
 		<!-- Wiki Parser to HTML
 			2020-02-27 tk changed from compile to provided
