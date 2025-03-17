@@ -31,8 +31,10 @@ public class CsvTableRenderer extends TextTableRenderer implements OfxTextRender
 	public void render(Table table, Path path) throws OfxAuthoringException
 	{
 		super.prepareCells(table);
+		
+		CSVFormat format = CSVFormat.Builder.create(CSVFormat.EXCEL).setDelimiter(";").build();
 
-		 try (Writer writer = new FileWriter(path.toFile()); CSVPrinter csv = new CSVPrinter(writer,CSVFormat.EXCEL))
+		 try (Writer writer = new FileWriter(path.toFile()); CSVPrinter csv = new CSVPrinter(writer,format))
 		 {
 			 List<String> header = new ArrayList<>();
 			 for(OfxTextRenderer r : rendererHeader)
