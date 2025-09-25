@@ -2,6 +2,8 @@ package org.openfuxml.renderer.text.table;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -61,6 +63,43 @@ public class CsvTableRenderer extends TextTableRenderer implements OfxTextRender
 			
 			 csv.flush();
 			 logger.info("Data written successfully to " + path);
+
+		 }
+		 catch (IOException e) {e.printStackTrace();}
+	}
+	public void render(Table table, OutputStream os) throws OfxAuthoringException
+	{
+		super.prepareCells(table);
+		
+		CSVFormat format = CSVFormat.Builder.create(CSVFormat.EXCEL).setDelimiter(";").build();
+
+		 try (Writer writer = new OutputStreamWriter(os); CSVPrinter csv = new CSVPrinter(writer,format))
+		 {
+			 List<String> header = new ArrayList<>();
+			 for(OfxTextRenderer r : rendererHeader)
+			 {
+				 header.add(r.getSingleLine());
+			 }
+			 csv.printRecord(header);
+			 
+			 if(ObjectUtils.isNotEmpty(table.getContent().getBody()))
+			 {
+				 for(Row row : table.getContent().getBody().get(0).getRow())
+				 {
+					 List<String> csvRow = new ArrayList<>();
+					 for(Cell cell : row.getCell())
+					 {
+						TextCellRenderer r = new TextCellRenderer(cp);
+						r.render(cell);
+						csvRow.add(r.getSingleLine());
+						
+					 }
+					 csv.printRecord(csvRow);
+				 }
+			 }
+			
+			 csv.flush();
+			 logger.info("Data written successfully to " + os.toString());
 
 		 }
 		 catch (IOException e) {e.printStackTrace();}

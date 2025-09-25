@@ -90,6 +90,11 @@ public class OfxTextRenderer
 		CsvTableRenderer renderer = new CsvTableRenderer(cp);
 		renderer.render(table,path);
 	}
+	public void csv(Table table, OutputStream os) throws OfxAuthoringException
+	{
+		CsvTableRenderer renderer = new CsvTableRenderer(cp);
+		renderer.render(table,os);
+	}
 	
 	public void render(Cell cell, OutputStream os) throws OfxAuthoringException, IOException
 	{
