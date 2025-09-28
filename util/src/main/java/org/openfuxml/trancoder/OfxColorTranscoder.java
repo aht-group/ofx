@@ -27,4 +27,9 @@ public class OfxColorTranscoder
 		}
 		return new Color(r.intValue(),g.intValue(),b.intValue(),a.intValue());
 	}
+	
+	public static String toHex(Color color)
+	{
+		return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
+	}
 }
