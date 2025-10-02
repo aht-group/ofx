@@ -59,12 +59,12 @@
 	</dependencyManagement>
 	
 	<repositories>
-		<repository>
-			<id>sonatype.snapshot</id>
-			<name>Sonatype Snapshot Repository</name>
-			<url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-			<releases><enabled>false</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
+		 <repository>
+		    <id>sonatype.snapshot</id>
+		    <name>Sonatype Snapshot Repository</name>
+		    <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+		    <releases><enabled>false</enabled></releases>
+		    <snapshots><enabled>true</enabled></snapshots>
 		</repository>
 		<repository>
 			<id>aspose</id>
@@ -79,7 +79,7 @@
 		<pluginRepository>
 			<id>sonatype.snapshot.token</id>
 			<name>Sonatype Snapshot Repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+			<url>https://central.sonatype.com/repository/maven-snapshots/</url>
 			<releases><enabled>false</enabled></releases>
 			<snapshots><enabled>true</enabled></snapshots>
 		</pluginRepository>
