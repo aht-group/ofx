@@ -60,6 +60,7 @@ public class XmlTableFactory
 		return this;
 	}
 	
+	public XmlTableFactory clear() {row.clear(); return this;}
 	public XmlTableFactory cell(Object o) {row.add(o); return this;}
 	public XmlTableFactory row() {this.addRow(row); row.clear(); return this;}
 	
