@@ -3,6 +3,7 @@ package org.openfuxml.util.translation;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -97,6 +98,11 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 		if(record==null){return "";}
 		else {return "NYI: "+record;}
 	}
+	@Override public String toDate(String localeCode, LocalDateTime ldt)
+	{
+		if(ldt==null){return "";}
+		else {return "NYI: "+ldt;}
+	}
 	@Override public String toDate(String locleCode, Date record)
 	{
 		if(record==null){return "";}
@@ -107,6 +113,12 @@ public class OfxDefaultTranslationProvider implements OfxTranslationProvider
 	{
 		if(record==null){return "";}
 		else {return "NYI: "+record;}
+	}
+	@Override
+	public String toTime(String localeCode, LocalDateTime ldt)
+	{
+		if(ldt==null){return "";}
+		else {return "NYI: "+ldt;}
 	}
 	
 	@Override public String toCurrency(String localeCode, Double value){return toCurrency(localeCode,true,2,value);}

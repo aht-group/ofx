@@ -1,6 +1,7 @@
 package org.openfuxml.interfaces.configuration;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,10 @@ public interface OfxTranslationProvider
 	
 	String toDate(String localeCode, LocalDate record);
 	String toDate(String localeCode, Date record);
+	String toDate(String localeCode, LocalDateTime ldt);
+	
 	String toTime(String localeCode, Date record);
+	String toTime(String localeCode, LocalDateTime ldt);
 
 	String toCurrency(String localeCode, Double value);
 	String toCurrency(String localeCode, boolean grouping, int decimals, Double value);
