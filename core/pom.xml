@@ -177,21 +177,11 @@
 			<scope>test</scope>
 		</dependency>
 
-		
-
-		
-		<!-- Leave it uncommented until Word is re-tested
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>4.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-		-->
+		<!-- Leave it uncommented until Word is re-tested -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>4.0.0</version>
+			<version>5.2.3</version>
 			<scope>provided</scope>
 		</dependency>
 		
