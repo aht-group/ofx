@@ -61,7 +61,6 @@
 		<dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
-			<type>jar</type>
 			<scope>test</scope>
 			<exclusions>
         		<exclusion>
@@ -69,6 +68,17 @@
         			<groupId>commons-logging</groupId>
         		</exclusion>
         	</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-configuration2</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+        			<artifactId>commons-logging</artifactId>
+        			<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- 2025-02-10 tk: Trying to remove -->
