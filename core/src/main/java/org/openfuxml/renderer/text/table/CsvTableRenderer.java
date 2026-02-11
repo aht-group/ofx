@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,8 @@ public class CsvTableRenderer extends TextTableRenderer implements OfxTextRender
 		
 		CSVFormat format = CSVFormat.Builder.create(CSVFormat.EXCEL).setDelimiter(";").build();
 
-		 try (Writer writer = new OutputStreamWriter(os); CSVPrinter csv = new CSVPrinter(writer,format))
+		 try (Writer writer = new OutputStreamWriter(os,StandardCharsets.UTF_8); CSVPrinter csv = new CSVPrinter(writer,format))
+//		 try (Writer writer = new OutputStreamWriter(os,Charset.forName("Windows-1252")); CSVPrinter csv = new CSVPrinter(writer,format))
 		 {
 			 List<String> header = new ArrayList<>();
 			 for(OfxTextRenderer r : rendererHeader)
