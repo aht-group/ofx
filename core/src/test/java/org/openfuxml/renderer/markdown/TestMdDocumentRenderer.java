@@ -39,6 +39,7 @@ public class TestMdDocumentRenderer extends AbstractTestMdRenderer
 		TestMdDocumentRenderer test = new TestMdDocumentRenderer();
         test.setEnvironment(true);
 		
-		test.init();test.test();
+		test.init();
+		test.test();
 	}
 }

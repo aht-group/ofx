@@ -11,7 +11,7 @@ import org.openfuxml.renderer.OfxRenderProcessor.DirCode;
 import org.openfuxml.renderer.OfxRenderProcessor.FileCode;
 import org.openfuxml.renderer.html.OfxHtmlRenderer;
 import org.openfuxml.renderer.latex.OfxLatexRenderer;
-import org.openfuxml.renderer.markdown.OfxMarkdownRenderer;
+import org.openfuxml.renderer.markdown.OfxMdRenderer;
 import org.openfuxml.renderer.util.OfxRenderConfiguration;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
 import org.openfuxml.xml.renderer.cmp.Cmp;
@@ -81,7 +81,7 @@ public class OfxTargetRenderer
 
 	public void renderMarkdown(File fSrc) throws OfxAuthoringException, OfxConfigurationException, OfxImplementationException
 	{
-		OfxMarkdownRenderer mdRenderer = new OfxMarkdownRenderer(new OfxConfigurationProvider());
+		OfxMdRenderer mdRenderer = new OfxMdRenderer(new OfxConfigurationProvider());
 		mdRenderer.render(fSrc.getAbsolutePath());
 	}
 	
