@@ -1,11 +1,12 @@
 package org.openfuxml.renderer.text.table;
 
-import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +38,15 @@ public class CsvTableRenderer extends TextTableRenderer implements OfxTextRender
 		
 		CSVFormat format = CSVFormat.Builder.create(CSVFormat.EXCEL).setDelimiter(";").build();
 
-		 try (Writer writer = new FileWriter(path.toFile()); CSVPrinter csv = new CSVPrinter(writer,format))
+//		 try (Writer writer = new FileWriter(path.toFile()); CSVPrinter csv = new CSVPrinter(writer,format))
+		try(OutputStream out = Files.newOutputStream(path);
+				OutputStreamWriter osw = new OutputStreamWriter(out, StandardCharsets.UTF_8);
+				BufferedWriter writer = new BufferedWriter(osw);
+				CSVPrinter csv = new CSVPrinter(writer, format))
 		 {
+			//Change for Umlaute
+			out.write(new byte[] { (byte) 0xEF, (byte) 0xBB, (byte) 0xBF });
+			
 			 List<String> header = new ArrayList<>();
 			 for(OfxTextRenderer r : rendererHeader)
 			 {

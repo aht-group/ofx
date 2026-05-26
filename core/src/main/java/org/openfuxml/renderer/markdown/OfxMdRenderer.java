@@ -3,6 +3,9 @@ package org.openfuxml.renderer.markdown;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +65,13 @@ public class OfxMdRenderer extends OfxRenderer
 		txt.addAll(rDocument.getContent());
 	}
 	
+	public void render(Table table, Path path) throws OfxAuthoringException, IOException
+	{
+		try (OutputStream os = Files.newOutputStream(path,StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING,StandardOpenOption.WRITE))
+		{
+			this.render(table,os);
+	    }
+	} 
 	
 	public void render(Table table, OutputStream os) throws OfxAuthoringException, IOException
 	{

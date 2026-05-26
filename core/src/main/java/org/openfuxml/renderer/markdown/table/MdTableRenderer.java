@@ -39,11 +39,11 @@ public class MdTableRenderer extends AbstractOfxMdRenderer implements OfxTextRen
 	{
 		this.prepareCells(table);
 		
-		if(Objects.nonNull(table.getTitle()))
-		{
-			int space = renderTitleDashes();
-			renderTitle(space, table.getTitle());
-		}		
+//		if(Objects.nonNull(table.getTitle()))
+//		{
+//			int space = renderTitleDashes();
+//			renderTitle(space, table.getTitle());
+//		}		
 		
 		renderHeader(rendererHeader);
 		renderSeparatorDashes();
