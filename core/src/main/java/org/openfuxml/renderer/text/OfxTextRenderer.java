@@ -63,17 +63,22 @@ public class OfxTextRenderer
 	
 	public static void table(ResultSet rs, OutputStream os) throws OfxAuthoringException, IOException
 	{
-		try{table(XmlTableFactory.build(rs),os);}
+		try{rTabletable(XmlTableFactory.build(rs),os);}
 		catch (SQLException e) {throw new OfxAuthoringException(e.getMessage());}
 	}
 	
 	public static void silent(Table table, OutputStream os)
 	{
-		try {OfxTextRenderer.table(table, os);}
+		try {OfxTextRenderer.rTabletable(table, os);}
 		catch (OfxAuthoringException e) {logger.error(e.getMessage());}
 		catch (IOException e) {logger.error(e.getMessage());}
 	}
-	public static void table(Table table, OutputStream os) throws OfxAuthoringException, IOException
+	public void table(Table table, OutputStream os) throws OfxAuthoringException
+	{
+		try {OfxTextRenderer.rTabletable(table, os);}
+		catch (IOException e) {throw new OfxAuthoringException(e.getMessage());}
+	}
+	private static void rTabletable(Table table, OutputStream os) throws OfxAuthoringException, IOException
 	{
 		OfxTextRenderer renderer = new OfxTextRenderer();
 		renderer.render(table, os);
