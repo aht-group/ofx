@@ -45,7 +45,8 @@ public class WikiTemplateGenericTable implements WikiTemplateTransformator
 		Table table = getTable(template.getTemplateKv());	
 		section.getContent().add(table);
 		
-		Element result = JaxbUtil.toDocument(section, nsPrefixMapper).getRootElement();
+		JaxbUtil.setNsPrefixMapper(nsPrefixMapper);
+		Element result = JaxbUtil.toDocument(section).getRootElement();
 		result.detach();
 		return result;
 	}
