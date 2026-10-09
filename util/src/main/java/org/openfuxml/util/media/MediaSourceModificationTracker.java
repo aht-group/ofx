@@ -7,15 +7,15 @@ import java.io.InputStream;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.factory.xml.io.XmlFileFactory;
-import net.sf.exlp.factory.xml.io.XmlHashFactory;
 import net.sf.exlp.util.io.HashUtil;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
-import net.sf.exlp.xml.xpath.IoXpath;
 
 import org.apache.commons.io.IOUtils;
+import org.exlp.factory.xml.io.XmlFileFactory;
+import org.exlp.factory.xml.io.XmlHashFactory;
 import org.exlp.model.xml.io.Dir;
 import org.exlp.util.jx.JaxbUtil;
+import org.exlp.util.query.xpath.IoXpath;
 import org.openfuxml.model.xml.core.media.Media;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
