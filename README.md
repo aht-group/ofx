@@ -35,6 +35,7 @@ The values that guide the project are visible in the source code and the build:
 - How wiki authentication is implemented; the pre-processor currently marks it as `NYI` (`OfxPreProcessor`).
 - Whether the legacy modules under `old/` (server, Swing/SWT client, EPUB add-on) are migrated into the reactor or dropped for good.
 - Whether the build stays on Java 8 or is raised to a current LTS level.
+- Whether the mixed `javax`/`jakarta` namespaces across the modules (for example `interfaces` uses `jakarta.inject`) are unified.
 
 ## Decided Fundamental Decisions
 
