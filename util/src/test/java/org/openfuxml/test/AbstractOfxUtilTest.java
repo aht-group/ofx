@@ -19,6 +19,7 @@ public class AbstractOfxUtilTest
 	@BeforeClass
 	public static void initPrefixMapper()
 	{
-		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
+		//TOOD reactivate the prefix mapper
+//		JaxbUtil.setNsPrefixMapper(new OfxNsPrefixMapper());
 	}
 }

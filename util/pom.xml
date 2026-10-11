@@ -23,7 +23,6 @@
 		<dependency>
 			<groupId>org.openfuxml</groupId>
 			<artifactId>ofx-xml</artifactId>
-			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
 		
@@ -108,7 +107,6 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
