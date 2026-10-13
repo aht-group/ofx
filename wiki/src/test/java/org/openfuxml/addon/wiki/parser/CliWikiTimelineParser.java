@@ -6,8 +6,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.openfuxml.addon.wiki.event.WikiChartEvent;
 import org.openfuxml.addon.wiki.processor.markup.TestWikiInlineProcessor;
 import org.openfuxml.model.xml.addon.wiki.Ofxchart;
@@ -22,8 +20,7 @@ import net.sf.exlp.interfaces.LogEventHandler;
 import net.sf.exlp.interfaces.LogListener;
 import net.sf.exlp.interfaces.LogParser;
 
-@RunWith(Parameterized.class)
-public class TestWikiTimelineParser extends AbstractFileProcessingTest
+public class CliWikiTimelineParser extends AbstractFileProcessingTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestWikiInlineProcessor.class);
 	

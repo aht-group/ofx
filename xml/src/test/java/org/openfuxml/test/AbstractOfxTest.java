@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public abstract class AbstractOfxTest
 {
-	final static Logger logger = LoggerFactory.getLogger(AbstractOfxXmlTest.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractOfxTest.class);
 		
 	@BeforeClass
     public static void initLogger()

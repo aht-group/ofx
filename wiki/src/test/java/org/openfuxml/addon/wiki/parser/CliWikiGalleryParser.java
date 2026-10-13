@@ -1,7 +1,5 @@
 package org.openfuxml.addon.wiki.parser;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.openfuxml.addon.wiki.processor.markup.TestWikiInlineProcessor;
 import org.openfuxml.test.AbstractFileProcessingTest;
 import org.openfuxml.test.OfxBootstrap;
@@ -14,8 +12,7 @@ import net.sf.exlp.interfaces.LogEventHandler;
 import net.sf.exlp.interfaces.LogListener;
 import net.sf.exlp.interfaces.LogParser;
 
-@RunWith(Parameterized.class)
-public class TestWikiGalleryParser extends AbstractFileProcessingTest
+public class CliWikiGalleryParser extends AbstractFileProcessingTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestWikiInlineProcessor.class);
 	
