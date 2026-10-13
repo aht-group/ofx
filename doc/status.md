@@ -14,3 +14,4 @@ None.
 |---|---|---|
 | [ADR-0001](decisions/ADR-0001-java-compile-level.md) | Compile all modules against the Java 8 API | accepted |
 | [ADR-0002](decisions/ADR-0002-maven-build.md) | Maven as the build tool | accepted |
+| [ADR-0003](decisions/ADR-0003-test-strategy.md) | Test strategy | accepted |
