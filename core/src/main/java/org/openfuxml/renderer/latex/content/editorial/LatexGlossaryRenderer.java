@@ -69,8 +69,8 @@ public class LatexGlossaryRenderer extends AbstractOfxLatexRenderer implements O
 	private void renderGlossaryTerm(Term term) throws OfxAuthoringException
 	{
 		if(Objects.isNull(term.getCode())) {throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a @code");}
-		if(Objects.isNull(term.getText())) {throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Text.class.getSimpleName());}
-		if(Objects.isNull(term.getParagraph())) {throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Paragraph.class.getSimpleName());}
+		if(term.getText().isEmpty()) {throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Text.class.getSimpleName());}
+		if(term.getParagraph().isEmpty()) {throw new OfxAuthoringException(Glossary.class.getSimpleName()+"."+Term.class.getSimpleName()+" needs a "+Paragraph.class.getSimpleName());}
 				
 //		LatexTextRenderer tr = new LatexTextRenderer(cmm,dsm);
 //		tr.render(term.getText());
