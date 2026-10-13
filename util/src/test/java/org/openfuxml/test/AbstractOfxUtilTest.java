@@ -1,7 +1,7 @@
 package org.openfuxml.test;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,13 +10,13 @@ public class AbstractOfxUtilTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxUtilTest.class);
 
-	@BeforeClass
+	@BeforeAll
     public static void initLogger()
 	{
 		OfxBootstrap.init();
     }
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initPrefixMapper()
 	{
 		//TOOD reactivate the prefix mapper

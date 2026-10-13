@@ -15,7 +15,7 @@ The values that guide the project are visible in the source code and the build:
 - **Single source of truth** — one `ofx:document` per topic; every output format is derived from it.
 - **Separation of content and output** — the content model (`xml`) is kept apart from the renderers (`core`), so a new target format can be added without changing the content model.
 - **Traceable rendering** — every render run is driven by an explicit `cmp` configuration and reports the files it produces (`OfxRenderer`, `OfxRenderConfiguration`).
-- **Test coverage** — every renderer has a JUnit test with XML test resources (`core/src/test`, `xml/src/test`).
+- **Test coverage** — every renderer has a JUnit 5 test with XML test resources (`core/src/test`, `xml/src/test`).
 - **Open source** — released under the GNU General Public License v3 and published to Maven Central.
 
 ## Technical Assumptions

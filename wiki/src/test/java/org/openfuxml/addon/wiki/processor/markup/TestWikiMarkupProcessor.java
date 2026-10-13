@@ -7,12 +7,11 @@ import java.util.Collection;
 
 import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.model.xml.addon.wiki.MarkupProcessor;
@@ -25,7 +24,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringIO;
 
-@RunWith(Parameterized.class)
 public class TestWikiMarkupProcessor extends AbstractOfxTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestWikiMarkupProcessor.class);
@@ -38,14 +36,13 @@ public class TestWikiMarkupProcessor extends AbstractOfxTest
 	private File fTest;
 	private File fRef;
 
-	public TestWikiMarkupProcessor(File fTest)
+	private void setup(File fTest)
 	{
 		this.fTest = fTest;
 		String name = fTest.getName().substring(0, fTest.getName().length()-4);
 		fRef = new File(dstDirName,name+".txt");
 	}
 	
-	@Parameterized.Parameters
 	public static Collection<Object[]> initFileNames()
 	{
 		Collection<Object[]> c = new ArrayList<Object[]>();
@@ -61,7 +58,7 @@ public class TestWikiMarkupProcessor extends AbstractOfxTest
 		return c;
 	}
 	
-	@Before
+	@BeforeEach
 	public void initWmp() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{
 		Cmp cmp = (Cmp)JaxbUtil.loadJAXB("src/test/resources/config/cmp/wiki.xml", Cmp.class);
@@ -71,16 +68,18 @@ public class TestWikiMarkupProcessor extends AbstractOfxTest
 		wmp = new WikiMarkupProcessor(mpXml.getReplacements(), mpXml.getInjections(), templates);
 	}
 	
-	@After
+	@AfterEach
 	public void closeWmp()
 	{
 		wmp = null;
 	}
     
-    @Test
-    public void testPlainToMarkup() throws OfxInternalProcessingException
+    @ParameterizedTest
+    @MethodSource("initFileNames")
+    public void testPlainToMarkup(File fTest) throws OfxInternalProcessingException
     {
     	logger.debug(fTest.getAbsolutePath());
+    	setup(fTest);
     	wikiPlainToMarkup(false);
     }
 	
@@ -95,7 +94,7 @@ public class TestWikiMarkupProcessor extends AbstractOfxTest
 		else
 		{
 			String markupRefTxt = StringUtil.readFile(fRef);
-			Assert.assertEquals(markupRefTxt,markupTxt);
+			Assertions.assertEquals(markupRefTxt,markupTxt);
 		}	
 	}
 	
@@ -108,7 +107,8 @@ public class TestWikiMarkupProcessor extends AbstractOfxTest
 			File fTest = (File)o[0];
 			logger.debug(fTest.getAbsolutePath());
 			
-			TestWikiMarkupProcessor test = new TestWikiMarkupProcessor(fTest);
+			TestWikiMarkupProcessor test = new TestWikiMarkupProcessor();
+			test.setup(fTest);
 			test.initWmp();
 			test.wikiPlainToMarkup(true);
 			test.closeWmp();

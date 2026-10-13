@@ -2,9 +2,9 @@ package org.openfuxml.renderer.html.structure;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.text.ParagraphProvider;
 import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.model.xml.core.ofx.Reference;
@@ -23,7 +23,7 @@ public class TestHtmlReferenceRenderer extends AbstractTestHtmlRenderer
 	
 	private HtmlBody renderer;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("reference");
 		renderer = new HtmlBody(new OfxConfigurationProvider());
@@ -37,7 +37,7 @@ public class TestHtmlReferenceRenderer extends AbstractTestHtmlRenderer
 		return ref;
 	}
 
-	@Test @Ignore public void intern() throws IOException
+	@Test @Disabled public void intern() throws IOException
 	{
 		initFile(Key.intern);
 		Section s = new Section ();
@@ -47,7 +47,7 @@ public class TestHtmlReferenceRenderer extends AbstractTestHtmlRenderer
     	renderTest(renderer);
 	}
 
-	@Test /*@Ignore*/
+	@Test /*@Disabled*/
 	public void extern() throws IOException
 	{
 		initFile(Key.extern);

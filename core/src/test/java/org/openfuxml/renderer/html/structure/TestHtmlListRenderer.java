@@ -2,8 +2,8 @@ package org.openfuxml.renderer.html.structure;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.list.ListProvider;
 import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.renderer.OfxConfigurationProvider;
@@ -20,7 +20,7 @@ public class TestHtmlListRenderer extends AbstractTestHtmlRenderer
 	
 	private HtmlBody renderer;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("section");
 		renderer = new HtmlBody(new OfxConfigurationProvider());

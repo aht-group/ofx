@@ -11,7 +11,7 @@ date: 2026-10-13
 
 The open question was what the verification of the project consists of and which test programs exist.
 The choice to be decided was how test programs are named, stored, and run.
-The project still runs its test programs with JUnit 4; the framework they run with is the subject of this
+The project ran its test programs with JUnit 4; the framework they run with is the subject of this
 decision.
 
 ## Decision
@@ -34,8 +34,8 @@ decision.
 
 ## Rationale
 
-- Open: the project still runs its test programs on JUnit 4 in the modules `xml`, `util`, `core`, `wiki`,
-  and `jsf`; this decision sets JUnit 5 as the target and makes the migration explicit.
+- The test programs of the modules `xml`, `util`, `core`, `wiki`, and `jsf` were migrated from JUnit 4 to
+  JUnit 5; JUnit 5 is now the framework they run with.
 - The verification command evaluates only the return value; it therefore needs test programs that determine
   success and failure themselves, and not programs that only write their output.
 - The verification command runs without an application container and without a database; a program that
@@ -58,7 +58,7 @@ decision.
 - Files: the test directories `xml/src/test/java`, `util/src/test/java`, `core/src/test/java`,
   `wiki/src/test/java`, `jsf/src/test/java`, and `client/src/test/java` take the test programs.
 - Files: `bom/pom.xml` and the module POMs `xml/pom.xml`, `util/pom.xml`, `core/pom.xml`, `wiki/pom.xml`,
-  and `jsf/pom.xml` – open: their JUnit 4 bindings become JUnit 5 bindings.
+  and `jsf/pom.xml` – their JUnit 4 bindings became JUnit 5 bindings.
 
 ## Open Points
 
@@ -73,25 +73,23 @@ decision.
 
 ### Implementation
 
-- `bom/pom.xml` – open: manages JUnit 5 in the test scope for the modules; today it manages `junit:junit`
-  4.13.2 (point 2)
-- `xml/pom.xml`, `util/pom.xml`, `core/pom.xml`, `wiki/pom.xml`, `jsf/pom.xml` – open: bind JUnit 5 in the
-  test scope; today they bind `junit:junit` (point 2)
-- `core/src/test/java`, `util/src/test/java`, `wiki/src/test/java`, `jsf/src/test/java` – open: carry test
-  programs that use `org.junit.jupiter.api.Test` and the JUnit 5 assertions (points 1 to 3); today they use
-  `org.junit.Test`, `org.junit.Before`, and `org.junit.After`
+- `bom/pom.xml` – manages JUnit 5 (`org.junit.jupiter:junit-jupiter`) in the test scope for the modules
+  (point 2)
+- `xml/pom.xml`, `util/pom.xml`, `core/pom.xml`, `wiki/pom.xml`, `jsf/pom.xml` – bind
+  `org.junit.jupiter:junit-jupiter` in the test scope (point 2)
+- `core/src/test/java`, `util/src/test/java`, `wiki/src/test/java`, `jsf/src/test/java` – carry test
+  programs that use `org.junit.jupiter.api.Test` and the JUnit 5 assertions (points 1 to 3)
 - `xml/src/test/java` – carries the shared base classes `AbstractOfxTest` and `AbstractOfxXmlTest`, which
   the `ofx-xml` test-jar publishes and the other modules consume, and the `Test*` content builders without a
-  `@Test` method; the single test program `TestXmlSection` is marked `@Ignore`; open: the base classes still
-  use `org.junit.BeforeClass` (points 1 to 3)
+  `@Test` method; the single test program `TestXmlSection` is marked `@Disabled` (points 1 to 3)
 - `client/src/test/java` – carries the `main` programs `CliOfxRenderer`, `CliWikiFetcher`, and `CliOfxDoc`
   and no test program in the sense of point 3
 
 ### Tests
 
-- `mvn -q -DskipTests=false verify` – open: the reactor run of 2026-10-13 ends in the module `core` with
-  test failures, so the return value is not 0
+- `mvn -q -DskipTests=false verify` – the reactor run of 2026-10-13 runs the test programs and ends with
+  the return value 0
 
 ### Documentation
 
-- `README.md` (`## Relevant Values`) – names the test coverage with JUnit tests and XML test resources
+- `README.md` (`## Relevant Values`) – names the test coverage with JUnit 5 tests and XML test resources

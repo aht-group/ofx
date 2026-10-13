@@ -2,9 +2,9 @@ package org.openfuxml.renderer.wiki.structure;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.doc.provider.old.ReferenceProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.wiki.AbstractTestWikiRenderer;
@@ -27,14 +27,14 @@ public class TestWikiReferenceRenderer extends AbstractTestWikiRenderer{
 	private WikiParagraphRenderer renderer;
 
 	//TODO FIX
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("structure/reference");
 //		renderer = new WikiParagraphRenderer(new NoOpCrossMediaManager(), new OfxDefaultSettingsManager());
 	}
 
 	//TODO FIX
-	@Ignore
+	@Disabled
 	@Test public void reference() throws IOException, OfxAuthoringException
 	{
 		initFile(Key.reference);

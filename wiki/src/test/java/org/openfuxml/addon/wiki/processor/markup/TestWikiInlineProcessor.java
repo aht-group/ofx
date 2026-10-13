@@ -6,13 +6,11 @@ import java.util.Collection;
 
 import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.model.xml.core.ofx.Section;
@@ -23,7 +21,6 @@ import org.openfuxml.xml.renderer.cmp.Cmp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@RunWith(Parameterized.class)
 public class TestWikiInlineProcessor extends AbstractFileProcessingTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestWikiInlineProcessor.class);
@@ -34,30 +31,29 @@ public class TestWikiInlineProcessor extends AbstractFileProcessingTest
 	public static final String dstDirName = "src/test/resources/data/wiki/inline/out";
 	private static Cmp cmp;
 	
-	public TestWikiInlineProcessor(File fTest)
+	private void setup(File fTest)
 	{
 		this.fTest = fTest;
 		String name = fTest.getName().substring(0, fTest.getName().length()-4);
 		fRef = new File(dstDirName,name+".xml");
 	}
 	
-	@Parameterized.Parameters
 	public static Collection<Object[]> initFileNames() {return initFileNames(srcDirName, ".txt");}
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initCmp() throws FileNotFoundException
 	{
 		String fNameCmp = "src/test/resources/config/cmp/wiki.xml";
 		cmp = (Cmp)JaxbUtil.loadJAXB(fNameCmp, Cmp.class);
 	}
 	
-	@Before
+	@BeforeEach
 	public void init() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{	
 		wikiInline = new WikiInlineProcessor(cmp);
 	}
 	
-	@After
+	@AfterEach
 	public void close()
 	{
 		wikiInline = null;
@@ -84,7 +80,7 @@ public class TestWikiInlineProcessor extends AbstractFileProcessingTest
 		else
 		{
 			Section sectionRef = (Section)JaxbUtil.loadJAXB(fRef.getAbsolutePath(), Section.class);
-			Assert.assertEquals(JaxbUtil.toString(sectionRef),JaxbUtil.toString(section));
+			Assertions.assertEquals(JaxbUtil.toString(sectionRef),JaxbUtil.toString(section));
 		}	
 	}
 	
@@ -102,7 +98,8 @@ public class TestWikiInlineProcessor extends AbstractFileProcessingTest
 		{
 			File fTest = (File)o[0];
 		
-			TestWikiInlineProcessor test = new TestWikiInlineProcessor(fTest);
+			TestWikiInlineProcessor test = new TestWikiInlineProcessor();
+			test.setup(fTest);
 			test.init();
 			logger.trace(id+" "+index);
 			if(id<0 | id==index){test.test(saveReference);}

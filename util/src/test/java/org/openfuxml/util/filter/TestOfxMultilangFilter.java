@@ -1,8 +1,8 @@
 package org.openfuxml.util.filter;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
@@ -19,7 +19,7 @@ public class TestOfxMultilangFilter extends AbstractOfxUtilTest
 
 	private Section sectionTitle,sectionSection,sectionParagraph;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		sectionTitle = XmlSectionFactory.build();
@@ -38,27 +38,27 @@ public class TestOfxMultilangFilter extends AbstractOfxUtilTest
 	@Test
 	public void sectionWithTitles() throws OfxAuthoringException, OfxInternalProcessingException
 	{
-		Assert.assertEquals(2, sectionTitle.getContent().size());
+		Assertions.assertEquals(2, sectionTitle.getContent().size());
 		OfxLangFilter mlf = new OfxLangFilter("de");
 		sectionTitle = mlf.filterLang(sectionTitle);
-		Assert.assertEquals(1, sectionTitle.getContent().size());
+		Assertions.assertEquals(1, sectionTitle.getContent().size());
 	}
 	
 	@Test
 	public void sectionWithSections()
 	{
-		Assert.assertEquals(2, sectionSection.getContent().size());
+		Assertions.assertEquals(2, sectionSection.getContent().size());
 		OfxLangFilter mlf = new OfxLangFilter("de");
 		sectionSection = mlf.filterLang(sectionSection);
-		Assert.assertEquals(1, sectionSection.getContent().size());
+		Assertions.assertEquals(1, sectionSection.getContent().size());
 	}
 	
 	@Test
 	public void sectionWithParagraphs()
 	{
-		Assert.assertEquals(2, sectionParagraph.getContent().size());
+		Assertions.assertEquals(2, sectionParagraph.getContent().size());
 		OfxLangFilter mlf = new OfxLangFilter("de");
 		sectionParagraph = mlf.filterLang(sectionParagraph);
-		Assert.assertEquals(1, sectionParagraph.getContent().size());
+		Assertions.assertEquals(1, sectionParagraph.getContent().size());
 	}
 }

@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.IOException;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.doc.provider.old.ListItemProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlSpacingFactory;
@@ -30,14 +31,14 @@ public class TestLatexListRenderer extends AbstractLatexListTest
 	private LatexListRenderer renderer;
 	private OfxLatexRenderer parentSection;
 	
-	@Before
+	@BeforeEach
 	public void initRenderer()
 	{
 		renderer = new LatexListRenderer(cp);
 		parentSection = new LatexSectionRenderer(cp,0,null);
 	}
 	
-	@After public void close(){renderer=null;}
+	@AfterEach public void close(){renderer=null;}
 	
 	public static List createList(){return createList(0);}
 	public static List createList(int size)
@@ -51,40 +52,48 @@ public class TestLatexListRenderer extends AbstractLatexListTest
 		return list;
 	}
 	
-    @Test(expected=OfxAuthoringException.class)
+    @Test
     public void withoutType() throws OfxAuthoringException, IOException
     {
+        Assertions.assertThrows(OfxAuthoringException.class, () -> {
     	List list = createList();
     	list.setType(null);
     	renderer.render(list,parentSection);
+        });
     }
     
-    @Test(expected=OfxAuthoringException.class)
+    @Test
     public void noOrderingNoDescription() throws OfxAuthoringException, IOException
-    {	
+    {
+        Assertions.assertThrows(OfxAuthoringException.class, () -> {
     	List list = createList();
     	list.getType().setDescription(null);
     	list.getType().setOrdering(null);
     	renderer.render(list,parentSection);
+        });
     }
     
-    @Test(expected=OfxAuthoringException.class)
+    @Test
     public void noOrderingNoDescriptionFalse() throws OfxAuthoringException, IOException
-    {	
+    {
+        Assertions.assertThrows(OfxAuthoringException.class, () -> {
     	List list = createList();
     	list.getType().setDescription(false);
     	list.getType().setOrdering(null);
     	renderer.render(list,parentSection);
+        });
     }
     
     
-    @Test(expected=OfxAuthoringException.class)
+    @Test
     public void descriptionButOrdering() throws OfxAuthoringException, IOException
-    {	
+    {
+        Assertions.assertThrows(OfxAuthoringException.class, () -> {
     	List list = createList();
     	list.getType().setDescription(true);
     	list.getType().setOrdering("x");
     	renderer.render(list,parentSection);
+        });
     }
       
     @Test
@@ -128,7 +137,7 @@ public class TestLatexListRenderer extends AbstractLatexListTest
     	super.assertText(renderer);
     }
     
-    @Ignore("Description NYI")
+    @Disabled("Description NYI")
     @Test
     public void description() throws OfxAuthoringException, IOException
     {	

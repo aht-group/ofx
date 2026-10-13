@@ -2,8 +2,8 @@ package org.openfuxml.renderer.html.structure;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.doc.provider.old.MarginaliaProvider;
 import org.openfuxml.model.xml.core.ofx.Highlight;
 import org.openfuxml.model.xml.core.ofx.Section;
@@ -21,7 +21,7 @@ public class TestHtmlHighlightRenderer extends AbstractTestHtmlRenderer
 	
 	private HtmlBody renderer;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("section");
 		renderer = new HtmlBody(new OfxConfigurationProvider());

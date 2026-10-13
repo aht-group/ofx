@@ -3,8 +3,8 @@ package org.openfuxml.renderer.html.media;
 import java.io.IOException;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.doc.provider.media.ImageProvider;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.media.cross.HtmlCrossMediaManager;
@@ -24,7 +24,7 @@ public class TestHtmlImageRenderer extends AbstractTestHtmlRenderer
 	
 	private HtmlBody body;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("media");
 		OfxConfigurationProvider cp = new OfxConfigurationProvider();

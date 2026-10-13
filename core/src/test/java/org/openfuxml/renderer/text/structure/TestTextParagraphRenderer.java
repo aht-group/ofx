@@ -2,9 +2,9 @@ package org.openfuxml.renderer.text.structure;
 
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.text.ParagraphProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.text.AbstractTestTextRenderer;
@@ -20,12 +20,12 @@ public class TestTextParagraphRenderer extends AbstractTestTextRenderer
 	
 	private TextParagraphRenderer renderer;
     
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("content/paragraph");
 		renderer = new TextParagraphRenderer(cp);
 	}
-	@After public void close() {renderer = null;}
+	@AfterEach public void close() {renderer = null;}
 	
     @Test
     public void simple() throws IOException, OfxAuthoringException

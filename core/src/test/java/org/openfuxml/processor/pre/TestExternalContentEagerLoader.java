@@ -10,12 +10,10 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.xpath.XPathExpression;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
@@ -27,7 +25,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.xml.JDomUtil;
 
-@RunWith(Parameterized.class)
 public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestExternalContentEagerLoader.class);
@@ -39,7 +36,7 @@ public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
 	public static String srcDirName = srcDir+"/data/pre/external/elements/in";
 	public static final String dstDirName = srcDir+"/data/pre/external/elements/out";
 	
-	public TestExternalContentEagerLoader(File fTest)
+	private void setup(File fTest)
 	{
 		this.fTest = fTest;
 		expectedExternals = Integer.valueOf(FilenameUtils.removeExtension(fTest.getName()));
@@ -47,10 +44,9 @@ public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
 		fRef = new File(dstDirName,name+".xml");
 	}
 	
-	@Parameterized.Parameters
 	public static Collection<Object[]> initFileNames() {return initFileNames(srcDirName, ".xml");}
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{	
 		ecel = new ExternalContentEagerLoader();
@@ -59,7 +55,7 @@ public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
 	@Test
 	public void dummy() {}
 	
-	@After
+	@AfterEach
 	public void close()
 	{
 		ecel = null;
@@ -72,7 +68,7 @@ public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
     	XPathExpression<Element> xpe = ecel.getXpeInclude();
 
     	List<Element> list = xpe.evaluate(doc);
-    	Assert.assertEquals(expectedExternals,list.size());
+    	Assertions.assertEquals(expectedExternals,list.size());
     }
 	
 //    @Test
@@ -82,7 +78,7 @@ public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
     	XPathExpression<Element> xpe = ecel.getXpeInclude();
 
     	List<Element> list = xpe.evaluate(doc.getRootElement());
-    	Assert.assertEquals(expectedExternals,list.size());
+    	Assertions.assertEquals(expectedExternals,list.size());
     }
 	
     
@@ -117,7 +113,7 @@ public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
 		else
 		{
 			Document docExcepcted = JDomUtil.load(fRef);
-			Assert.assertEquals(JDomUtil.toString(docExcepcted),JDomUtil.toString(docActual));
+			Assertions.assertEquals(JDomUtil.toString(docExcepcted),JDomUtil.toString(docActual));
 		}	
 	}
 	
@@ -133,7 +129,8 @@ public class TestExternalContentEagerLoader extends AbstractFileProcessingTest
 		{
 			File fTest = (File)o[0];
 		
-			TestExternalContentEagerLoader test = new TestExternalContentEagerLoader(fTest);
+			TestExternalContentEagerLoader test = new TestExternalContentEagerLoader();
+			test.setup(fTest);
 			test.init();
 			logger.trace(id+" "+index);
 			if(id<0 | id==index){test.render(saveReference);}

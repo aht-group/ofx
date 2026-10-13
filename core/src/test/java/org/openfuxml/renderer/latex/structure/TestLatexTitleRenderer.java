@@ -2,8 +2,8 @@ package org.openfuxml.renderer.latex.structure;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.text.SectionProvider;
 import org.openfuxml.controller.provider.text.TitleProvider;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -27,7 +27,7 @@ public class TestLatexTitleRenderer extends AbstractTestLatexRenderer
     private LatexPreamble preamble;
 	private LatexTitleRenderer renderer;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("structure/title");
         preamble = new LatexPreamble(cp);

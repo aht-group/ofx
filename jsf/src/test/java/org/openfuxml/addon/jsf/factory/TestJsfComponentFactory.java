@@ -4,9 +4,9 @@ import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.test.AbstractJsfTest;
 import org.openfuxml.xml.addon.jsf.Attribute;
 import org.openfuxml.xml.addon.jsf.Component;
@@ -21,7 +21,7 @@ public class TestJsfComponentFactory extends AbstractJsfTest
 	private JsfComponentFactory jcf;
 	private final String componentXhtml = "src/main/resources/META-INF/resources/ofx/dummy.xhtml";
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		jcf = new JsfComponentFactory();
@@ -30,9 +30,9 @@ public class TestJsfComponentFactory extends AbstractJsfTest
 	@Test
 	public void testInit()
 	{
-		Assert.assertNotNull(jcf);
+		Assertions.assertNotNull(jcf);
 		Component actual = jcf.buildComponent(componentXhtml);
-		Assert.assertNotNull(actual);
+		Assertions.assertNotNull(actual);
 		JaxbUtil.debug(actual);
 	}
 	
@@ -41,9 +41,9 @@ public class TestJsfComponentFactory extends AbstractJsfTest
 	{
 		Component xml = jcf.buildComponent(componentXhtml);
 		Attribute actual = JsfXpath.getAttribute(xml, "value");
-		Assert.assertEquals(true, actual.isRequired());
-		Assert.assertEquals("value", actual.getName());
-		Assert.assertEquals("myDefault", actual.getDefault());
-		Assert.assertEquals("myDescription", actual.getShortDescription());		
+		Assertions.assertEquals(true, actual.isRequired());
+		Assertions.assertEquals("value", actual.getName());
+		Assertions.assertEquals("myDefault", actual.getDefault());
+		Assertions.assertEquals("myDescription", actual.getShortDescription());		
 	}
 }

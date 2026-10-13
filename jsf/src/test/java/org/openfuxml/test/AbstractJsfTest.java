@@ -7,8 +7,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.exlp.util.jx.JaxbUtil;
 import org.exlp.util.system.DateUtil;
-import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.openfuxml.xml.OfxNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ public class AbstractJsfTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractJsfTest.class);	
 	
-	@BeforeClass
+	@BeforeAll
     public static void initLogger()
 	{
 		OfxBootstrap.init();
@@ -26,7 +26,7 @@ public class AbstractJsfTest
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
 	{
-		Assert.assertEquals("Actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
+		Assertions.assertEquals(JaxbUtil.toString(expected),JaxbUtil.toString(actual),"Actual XML differes from expected XML");
 	}
 	
 	protected static XMLGregorianCalendar getDefaultXmlDate()

@@ -5,13 +5,12 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 
 import org.exlp.util.io.StringUtil;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openfuxml.addon.wiki.processor.markup.TestWikiInlineProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
@@ -22,7 +21,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringIO;
 
-@RunWith(Parameterized.class)
 public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestWikiInlineProcessor.class);
@@ -35,32 +33,33 @@ public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
 	private File fTest;
 	private File fRef;
 
-	public TestXhtmlFinalProcessor(File fTest)
+	private void setup(File fTest)
 	{
 		this.fTest = fTest;
 		String name = fTest.getName().substring(0, fTest.getName().length()-6);
 		fRef = new File(dstDirName,name+".xhtml");
 	}
 	
-	@Parameterized.Parameters
 	public static Collection<Object[]> initFileNames() {return initFileNames(srcDirName, ".xhtml");}
 	
-	@Before
+	@BeforeEach
 	public void init() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{	
 		xhtmlFinalP = new XhtmlFinalProcessor();
 	}
 	
-	@After
+	@AfterEach
 	public void close()
 	{
 		xhtmlFinalP = null;
 	}
     
-    @Test @Ignore
-    public void test() throws OfxInternalProcessingException
+    @ParameterizedTest @Disabled
+    @MethodSource("initFileNames")
+    public void test(File fTest) throws OfxInternalProcessingException
     {
     	logger.debug(fTest.getAbsolutePath());
+    	setup(fTest);
     	test(false);
     }
 	
@@ -76,7 +75,7 @@ public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
 		else
 		{
 			String refTxt = StringUtil.readFile(fRef);
-			Assert.assertEquals(refTxt.trim(),outTxt.trim());
+			Assertions.assertEquals(refTxt.trim(),outTxt.trim());
 		}	
 	}
 	
@@ -88,7 +87,8 @@ public class TestXhtmlFinalProcessor extends AbstractFileProcessingTest
 			if(id<0 | id==index)
 			{
 				File fTest = (File)o[0];
-				TestXhtmlFinalProcessor test = new TestXhtmlFinalProcessor(fTest);
+				TestXhtmlFinalProcessor test = new TestXhtmlFinalProcessor();
+				test.setup(fTest);
 				test.init();
 				logger.trace(id+" "+index);
 				test.test(saveReference);

@@ -2,9 +2,9 @@ package org.openfuxml.renderer.latex.structure;
 
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.text.HighlightProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -22,12 +22,12 @@ public class TestLatexHighlightRenderer extends AbstractTestLatexRenderer
 	
 	private LatexHighlightRenderer renderer;
     
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("structure/highlight");
 		renderer = new LatexHighlightRenderer(cp);
 	}
-	@After public void close(){renderer=null;}
+	@AfterEach public void close(){renderer=null;}
     
 	@Test public void highlight() throws OfxAuthoringException, OfxConfigurationException, IOException
     {

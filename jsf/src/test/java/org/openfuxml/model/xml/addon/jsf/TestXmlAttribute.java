@@ -4,15 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.test.OfxBootstrap;
 import org.openfuxml.xml.addon.jsf.Attribute;
 
 public class TestXmlAttribute extends AbstractXmlJsfTest
 {
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initFiles()
 	{
 		fXml = new File(rootDir,Attribute.class.getSimpleName()+".xml");

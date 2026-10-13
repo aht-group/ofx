@@ -8,8 +8,8 @@ import java.util.Arrays;
 
 import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.doc.provider.old.TestDocumentProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -33,7 +33,7 @@ public class TestHtmlDocumentRenderer extends AbstractTestHtmlRenderer
 	
 	private HtmlDocumentRenderer renderer;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("");
 		renderer = new HtmlDocumentRenderer(cp,"Test Doc");

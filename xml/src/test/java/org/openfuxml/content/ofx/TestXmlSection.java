@@ -2,8 +2,8 @@ package org.openfuxml.content.ofx;
 
 import java.io.FileNotFoundException;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.content.media.TestXmlImage;
 import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.test.AbstractOfxXmlTest;
@@ -41,7 +41,7 @@ public class TestXmlSection extends AbstractXmlOfxTest<Section>
     	return xml;
     }
     
-    @Test @Ignore public void xml() throws FileNotFoundException { }
+    @Test @Disabled public void xml() throws FileNotFoundException { }
 	
 	public static void main(String[] args)
     {

@@ -2,9 +2,9 @@ package org.openfuxml.util.editorial;
 
 import java.io.FileNotFoundException;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.model.xml.core.editorial.Acronyms;
 import org.openfuxml.test.AbstractOfxUtilTest;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ public class TestAcronymMerger extends AbstractOfxUtilTest
 	private String a1 = "data.ofx-util.test/editorial/acronyms/a1.xml";
 	private String a2 = "data.ofx-util.test/editorial/acronyms/a2.xml";
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		gm = new AcronymMerger();
@@ -29,7 +29,7 @@ public class TestAcronymMerger extends AbstractOfxUtilTest
 	{
 		gm.addResource(a1);
 		Acronyms glossary = gm.getAcronyms();
-		Assert.assertEquals(2, glossary.getTerm().size());
+		Assertions.assertEquals(2, glossary.getTerm().size());
 	}
 	
 	@Test
@@ -38,12 +38,14 @@ public class TestAcronymMerger extends AbstractOfxUtilTest
 		gm.addResource(a1);
 		gm.addResource(a2);
 		Acronyms glossary = gm.getAcronyms();
-		Assert.assertEquals(3, glossary.getTerm().size());
+		Assertions.assertEquals(3, glossary.getTerm().size());
 	}
 	
-	@Test(expected=FileNotFoundException.class)
+	@Test
 	public void missing() throws FileNotFoundException
 	{
+	    Assertions.assertThrows(FileNotFoundException.class, () -> {
 		gm.addResource("xx");
+	    });
 	}
 }

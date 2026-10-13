@@ -3,9 +3,9 @@ package org.openfuxml.xml.xpath.jsf;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.model.xml.addon.jsf.TestXmlAttribute;
 import org.openfuxml.model.xml.addon.jsf.TestXmlComponent;
 import org.openfuxml.test.AbstractJsfTest;
@@ -23,7 +23,7 @@ public class TestXPathJsfAttribute extends AbstractJsfTest
 	private final String codeOk = "code";
 	private final String codeMulti = "multi";
 	
-	@Before
+	@BeforeEach
 	public void iniDbseed()
 	{
 		parent = TestXmlComponent.create(false);
@@ -37,18 +37,22 @@ public class TestXPathJsfAttribute extends AbstractJsfTest
 	public void find() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		Attribute test = JsfXpath.getAttribute(parent, codeOk);
-	    Assert.assertEquals(codeOk,test.getName());
+	    Assertions.assertEquals(codeOk,test.getName());
 	}
 
-	@Test(expected=ExlpXpathNotFoundException.class)
+	@Test
 	public void testNotFound() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
+	    Assertions.assertThrows(ExlpXpathNotFoundException.class, () -> {
 		JsfXpath.getAttribute(parent, "-1");
+	    });
 	}
 	
-	 @Test(expected=ExlpXpathNotUniqueException.class)
+	 @Test
 	 public void testUnique() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	 {
+	     Assertions.assertThrows(ExlpXpathNotUniqueException.class, () -> {
 		 JsfXpath.getAttribute(parent, codeMulti);
+	     });
 	 }
 }

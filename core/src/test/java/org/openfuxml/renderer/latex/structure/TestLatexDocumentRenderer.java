@@ -1,8 +1,9 @@
 package org.openfuxml.renderer.latex.structure;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.model.xml.core.ofx.Document;
@@ -22,19 +23,21 @@ public class TestLatexDocumentRenderer extends AbstractOfxCoreTest
 	private Document ofxDocument;
 	private Pdf pdfSettings;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		ofxDocument = OfxReferenceDocumentBuilder.ofxDocument();
 		pdfSettings = OfxReferencePdfBuilder.referencePdfSettings();
 	}
 	
-	@Test(expected=OfxAuthoringException.class)
+	@Test
 	public void noContent() throws OfxAuthoringException, OfxConfigurationException
 	{
+	    Assertions.assertThrows(OfxAuthoringException.class, () -> {
 		ofxDocument.setContent(null);
 		OfxLatexRenderer latexRenderer = new OfxLatexRenderer(cmm,dsm,null);
 		latexRenderer.render(ofxDocument);
+	    });
 	}
 	
 	public void writeExpected() throws OfxAuthoringException, OfxConfigurationException

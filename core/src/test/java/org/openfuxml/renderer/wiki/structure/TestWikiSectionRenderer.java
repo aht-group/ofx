@@ -2,9 +2,9 @@ package org.openfuxml.renderer.wiki.structure;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.text.SectionProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -25,7 +25,7 @@ public class TestWikiSectionRenderer extends AbstractTestWikiRenderer
     private WikiSectionRenderer renderer;
     
     //TODO FIX
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		super.initDir("structure/section");
@@ -35,7 +35,7 @@ public class TestWikiSectionRenderer extends AbstractTestWikiRenderer
 	}
 	
 	//TODO Fix
-	@Ignore
+	@Disabled
 	@Test 
 	public void section() throws OfxAuthoringException, OfxConfigurationException, IOException
     {

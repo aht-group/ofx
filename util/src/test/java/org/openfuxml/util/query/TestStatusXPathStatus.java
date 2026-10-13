@@ -10,7 +10,7 @@ public class TestStatusXPathStatus //extends AbstractOfxXmlTest
 //	private Section root;
 //	private Section s1,s2,s3;
 //	
-//	@Before
+//	@BeforeEach
 //	public void iniDbseed()
 //	{
 //		root = TestXmlSection.create(false);
@@ -24,7 +24,7 @@ public class TestStatusXPathStatus //extends AbstractOfxXmlTest
 //	public void find() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 //	{
 //		Section actual = SectionXpath.getRenderer(root, s1.getId());
-//	    Assert.assertEquals(s1,actual);
+//	    Assertions.assertEquals(s1,actual);
 //	}
 //
 //	@Test(expected=ExlpXpathNotFoundException.class)

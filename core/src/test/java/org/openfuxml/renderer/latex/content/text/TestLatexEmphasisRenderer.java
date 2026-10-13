@@ -3,9 +3,9 @@ package org.openfuxml.renderer.latex.content.text;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.text.EmphasisProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
@@ -24,13 +24,13 @@ public class TestLatexEmphasisRenderer extends AbstractTestLatexRenderer
 	
 	private LatexParagraphRenderer renderer;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		renderer = new LatexParagraphRenderer(cp,true);
 	}
 	
-	@After public void close(){renderer=null;}
+	@AfterEach public void close(){renderer=null;}
 	
     @Test
     public void bold() throws IOException, OfxAuthoringException

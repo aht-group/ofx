@@ -2,8 +2,8 @@ package org.openfuxml.renderer.markdown.structure;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.doc.provider.media.ImageProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.renderer.markdown.media.MdImageRenderer;
@@ -20,7 +20,7 @@ public class TestMdImageRenderer extends AbstractTestMdRenderer
 	private MdImageRenderer renderer;
 	private MdParagraphRenderer pRenderer;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("media");
 		renderer = new MdImageRenderer(cp);

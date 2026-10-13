@@ -3,9 +3,10 @@ package org.openfuxml.renderer.latex.content.editorial;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.editorial.XmlAcronymFactory;
 import org.openfuxml.factory.xml.editorial.XmlTermFactory;
@@ -28,11 +29,11 @@ public class TestLatexAcronymRenderer extends AbstractTestLatexRenderer
 	private LatexAcronymRenderer renderer;
 	private String dir = "editorial/acronyms";
 	
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		renderer = new LatexAcronymRenderer(cp);
 	}
-	@After public void close()
+	@AfterEach public void close()
 	{
 		renderer=null;
 	}
@@ -74,28 +75,34 @@ public class TestLatexAcronymRenderer extends AbstractTestLatexRenderer
     	renderTest(renderer);
     }
     
-    @Test(expected=OfxAuthoringException.class)
+    @Test
     public void termWithoutCode() throws OfxAuthoringException
-    {    	
+    {
+        Assertions.assertThrows(OfxAuthoringException.class, () -> {
     	Acronyms g = create();
     	g.getTerm().add(XmlTermFactory.build(null, "name", "description"));
     	renderer.render(g);
+        });
     }
     
-    @Test(expected=OfxAuthoringException.class)
+    @Test
     public void termWithoutText() throws OfxAuthoringException
-    {    	
+    {
+        Assertions.assertThrows(OfxAuthoringException.class, () -> {
     	Acronyms g = create();
     	g.getTerm().add(XmlTermFactory.build("code", null, "description"));
     	renderer.render(g);
+        });
     }
     
-    @Test(expected=OfxAuthoringException.class)
+    @Test
     public void termWithoutParagraph() throws OfxAuthoringException
-    {    	
+    {
+        Assertions.assertThrows(OfxAuthoringException.class, () -> {
     	Acronyms g = create();
     	g.getTerm().add(XmlTermFactory.build("code", "name", null));
     	renderer.render(g);
+        });
     }
     
     public static void main(String[] args) throws Exception

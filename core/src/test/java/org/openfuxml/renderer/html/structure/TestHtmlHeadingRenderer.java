@@ -2,8 +2,8 @@ package org.openfuxml.renderer.html.structure;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.text.SectionProvider;
 import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.renderer.OfxConfigurationProvider;
@@ -21,10 +21,10 @@ public class TestHtmlHeadingRenderer extends AbstractTestHtmlRenderer
 	private HtmlBody renderer;
 
 	/*Initialisierung des Zielordners und des Renderers.
-	* @Before JUnit Test Annotation, sorgt dafür dass diese Methode immer zuerst aufgerufen wird.
+	* @BeforeEach JUnit Test Annotation, sorgt dafür dass diese Methode immer zuerst aufgerufen wird.
 	* Wichtig wenn man dies als JUnit Test ausführt und nicht als Applikation über die
 	* main() Methode.*/
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("section");
 		renderer = new HtmlBody(new OfxConfigurationProvider());
@@ -34,7 +34,7 @@ public class TestHtmlHeadingRenderer extends AbstractTestHtmlRenderer
 	* Konvertierung der Dummy “Section”, enthält die zu testende Überschrift.
 	* renterTest(arg) speichert Ausgabedatei und vergleicht String-output mit Dateiinhalt als
 	* JUnit Test
-	* @Test: JUnit Annotation, ählich der @Before Annotation für JUnit Tests.
+	* @Test: JUnit Annotation, ählich der @BeforeEach Annotation für JUnit Tests.
 	* Deklariert die eigentlichen Tests.
 	*/
 	@Test public void lvl1() throws IOException

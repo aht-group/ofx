@@ -2,9 +2,9 @@ package org.openfuxml.processor.settings;
 
 import java.util.Objects;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.model.xml.core.ofx.Listing;
 import org.openfuxml.util.configuration.settings.OfxDefaultSettingsManager;
@@ -18,7 +18,7 @@ public class TestDefaultSettingsManagerListing
 	private OfxDefaultSettingsManager dsm;
 	private Listing listing,setting;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{	
 		setting = new Listing();
@@ -32,20 +32,22 @@ public class TestDefaultSettingsManagerListing
 		listing = new Listing();
 	}
 	
-	@Test(expected=OfxConfigurationException.class)
+	@Test
     public void withoutSetting() throws OfxConfigurationException 
     {
+        Assertions.assertThrows(OfxConfigurationException.class, () -> {
     	listing.setSetting("na");
     	dsm.apply(listing);
+        });
     }
 	
 	@Test
     public void codeLang() throws OfxConfigurationException 
     {
-    	Assert.assertFalse(Objects.nonNull(listing.getCodeLang()));
+    	Assertions.assertFalse(Objects.nonNull(listing.getCodeLang()));
     	dsm.apply(listing);
-    	Assert.assertTrue(Objects.nonNull(listing.getCodeLang()));
-    	Assert.assertEquals("XML", listing.getCodeLang());
+    	Assertions.assertTrue(Objects.nonNull(listing.getCodeLang()));
+    	Assertions.assertEquals("XML", listing.getCodeLang());
     }
 	
 	@Test
@@ -53,6 +55,6 @@ public class TestDefaultSettingsManagerListing
     {
     	listing.setSetting(setting.getSetting());
     	dsm.apply(listing);
-    	Assert.assertEquals(setting.getCodeLang(), listing.getCodeLang());
+    	Assertions.assertEquals(setting.getCodeLang(), listing.getCodeLang());
     }
 }

@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.renderer.OfxConfigurationProvider;
 import org.openfuxml.renderer.html.AbstractTestHtmlRenderer;
 import org.openfuxml.renderer.html.head.HtmlHead;
@@ -21,7 +21,7 @@ public class TestHtmlHeadRenderer extends AbstractTestHtmlRenderer
 	
 	private HtmlHead renderer;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("head");
 		renderer = new HtmlHead(new OfxConfigurationProvider());

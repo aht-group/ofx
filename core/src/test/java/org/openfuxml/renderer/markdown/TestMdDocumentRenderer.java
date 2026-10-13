@@ -2,8 +2,8 @@ package org.openfuxml.renderer.markdown;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.doc.provider.old.TestDocumentProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -20,7 +20,7 @@ public class TestMdDocumentRenderer extends AbstractTestMdRenderer
 	
 	private MdDocumentRenderer renderer;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("structure");
 		renderer = new MdDocumentRenderer(cp);

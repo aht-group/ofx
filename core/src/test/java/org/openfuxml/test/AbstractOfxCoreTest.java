@@ -8,8 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.util.io.StringUtil;
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
@@ -61,7 +61,7 @@ public class AbstractOfxCoreTest
 		referenceFile = new File(referenceDir,key.toString()+"."+fileSuffix);
 	}
 
-	@BeforeClass
+	@BeforeAll
     public static void initLogger()
 	{
 		if(!LoggerBootstrap.isLog4jInited())
@@ -70,13 +70,13 @@ public class AbstractOfxCoreTest
 		}
     }
 	
-	@BeforeClass
+	@BeforeAll
     public static void initLoremIpsum()
 	{
 		li = new LoremIpsum();
     }
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initPrefixMapper()
 	{
 		JaxbUtil.setNsPrefixMapper( new OfxNsPrefixMapper());
@@ -84,7 +84,7 @@ public class AbstractOfxCoreTest
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
 	{
-		Assert.assertEquals("XML-ref differes from XML-test",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
+		Assertions.assertEquals(JaxbUtil.toString(expected),JaxbUtil.toString(actual),"XML-ref differes from XML-test");
 	}
 	
 	protected void save(OfxCharacterRenderer renderer) throws IOException
@@ -105,7 +105,7 @@ public class AbstractOfxCoreTest
 		renderer.write(actual);
 		
 		String expected = StringUtil.readFile(referenceFile);
-		Assert.assertEquals(expected, actual.toString());
+		Assertions.assertEquals(expected, actual.toString());
 	}
 	
 	protected void renderTest(OfxCharacterRenderer renderer) throws IOException

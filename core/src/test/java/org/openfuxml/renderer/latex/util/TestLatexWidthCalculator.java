@@ -1,8 +1,8 @@
 package org.openfuxml.renderer.latex.util;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.layout.Width;
 import org.openfuxml.renderer.latex.content.structure.LatexMarginaliaRenderer;
@@ -21,7 +21,7 @@ public class TestLatexWidthCalculator extends AbstractOfxCoreTest
 	private LatexSectionRenderer sectionRenderer;
 	private LatexMarginaliaRenderer marginaliaRenderer;
 
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		lwc = new LatexWidthCalculator();
@@ -39,7 +39,7 @@ public class TestLatexWidthCalculator extends AbstractOfxCoreTest
 		
 		String expected = "12.0cm";
         String actual = lwc.buildWidth(sectionRenderer,width);
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
 	}
 	
 	@Test
@@ -48,7 +48,7 @@ public class TestLatexWidthCalculator extends AbstractOfxCoreTest
 		width.setUnit("percentage");
 		width.setValue(12);
 		
-        Assert.assertEquals("0.12\\linewidth", lwc.buildWidth(sectionRenderer,width));
-        Assert.assertEquals("0.12\\marginparwidth", lwc.buildWidth(marginaliaRenderer,width));
+        Assertions.assertEquals("0.12\\linewidth", lwc.buildWidth(sectionRenderer,width));
+        Assertions.assertEquals("0.12\\marginparwidth", lwc.buildWidth(marginaliaRenderer,width));
 	}
 }

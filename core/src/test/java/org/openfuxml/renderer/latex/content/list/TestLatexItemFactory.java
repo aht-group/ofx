@@ -3,9 +3,10 @@ package org.openfuxml.renderer.latex.content.list;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.doc.provider.old.ListItemProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.test.OfxBootstrap;
@@ -20,8 +21,8 @@ public class TestLatexItemFactory extends AbstractLatexListTest
 	private LatexItemFactory renderer;
 	private String dir = "item";
 	
-	@Before public void init(){renderer = new LatexItemFactory(cp);}
-	@After public void close(){renderer = null;}
+	@BeforeEach public void init(){renderer = new LatexItemFactory(cp);}
+	@AfterEach public void close(){renderer = null;}
 	
     @Test public void itemize() throws IOException, OfxAuthoringException
     {
@@ -32,10 +33,12 @@ public class TestLatexItemFactory extends AbstractLatexListTest
     	super.assertText(renderer);
     }
     
-    @Test(expected=OfxAuthoringException.class)
+    @Test
     public void descriptionNoItemName() throws IOException, OfxAuthoringException
     {
+        Assertions.assertThrows(OfxAuthoringException.class, () -> {
     	renderer.render(LatexListRenderer.ListType.description,ListItemProvider.build());
+        });
     }
     
     @Test

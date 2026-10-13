@@ -2,8 +2,8 @@ package org.openfuxml.renderer.markdown.structure;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.text.SectionProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.test.OfxBootstrap;
@@ -19,7 +19,7 @@ public class TestMdSectionRenderer extends AbstractTestMdRenderer
 	private MdSectionRenderer renderer;
 	int lvl;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("structure/section");
 	}

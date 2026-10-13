@@ -2,8 +2,8 @@ package org.openfuxml.renderer.html.table;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.table.TableProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -25,7 +25,7 @@ public class TestHtmlTableRenderer extends AbstractTestHtmlRenderer
 	
 	private HtmlBody renderer;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("table");
 		renderer = new HtmlBody(new OfxConfigurationProvider());

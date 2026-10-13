@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.batik.transcoder.TranscoderException;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.media.Media;
 import org.openfuxml.test.AbstractOfxCoreTest;
@@ -28,7 +28,7 @@ public class TestSvgTranscoder extends AbstractOfxCoreTest
 	private Media media;
 	private File fTarget;
 
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		fTarget = new File("/Volumes/ramdisk");

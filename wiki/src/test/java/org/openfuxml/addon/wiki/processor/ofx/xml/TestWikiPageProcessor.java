@@ -8,12 +8,11 @@ import org.exlp.util.io.StringUtil;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openfuxml.addon.wiki.processor.markup.TestWikiInlineProcessor;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
@@ -24,7 +23,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-@RunWith(Parameterized.class)
 public class TestWikiPageProcessor extends AbstractFileProcessingTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestWikiInlineProcessor.class);
@@ -37,32 +35,33 @@ public class TestWikiPageProcessor extends AbstractFileProcessingTest
 	private File fTest;
 	private File fRef;
 
-	public TestWikiPageProcessor(File fTest)
+	private void setup(File fTest)
 	{
 		this.fTest = fTest;
 		String name = fTest.getName().substring(0, fTest.getName().length()-6);
 		fRef = new File(dstDirName,name+".xml");
 	}
 	
-	@Parameterized.Parameters
 	public static Collection<Object[]> initFileNames() {return initFileNames(srcDirName, ".xhtml");}
 	
-	@Before
+	@BeforeEach
 	public void init() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{	
 		xmlP = new WikiPageProcessor();
 	}
 	
-	@After
+	@AfterEach
 	public void close()
 	{
 		xmlP = null;
 	}
     
-    @Test
-    public void test() throws OfxInternalProcessingException
+    @ParameterizedTest
+    @MethodSource("initFileNames")
+    public void test(File fTest) throws OfxInternalProcessingException
     {
     	logger.debug(fTest.getAbsolutePath());
+    	setup(fTest);
     	test(false);
     }
 	
@@ -79,7 +78,7 @@ public class TestWikiPageProcessor extends AbstractFileProcessingTest
 		else
 		{
 			Document refDoc = JDomUtil.load(fRef);
-			Assert.assertEquals(JDomUtil.docToTxt(refDoc),JDomUtil.docToTxt(doc));
+			Assertions.assertEquals(JDomUtil.docToTxt(refDoc),JDomUtil.docToTxt(doc));
 		}	
 	}
 	
@@ -91,7 +90,8 @@ public class TestWikiPageProcessor extends AbstractFileProcessingTest
 			if(id<0 | id==index)
 			{
 				File fTest = (File)o[0];
-				TestWikiPageProcessor test = new TestWikiPageProcessor(fTest);
+				TestWikiPageProcessor test = new TestWikiPageProcessor();
+				test.setup(fTest);
 				test.init();
 				logger.trace(id+" "+index);
 				test.test(saveReference);

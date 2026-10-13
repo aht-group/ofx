@@ -5,12 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.model.xml.core.ofx.Document;
@@ -19,7 +18,6 @@ import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@RunWith(Parameterized.class)
 public class TestContainerMerger extends AbstractFileProcessingTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestContainerMerger.class);
@@ -29,31 +27,32 @@ public class TestContainerMerger extends AbstractFileProcessingTest
 	public static String srcDirName = "src/test/resources/data/pre/container/in";
 	public static final String dstDirName = "src/test/resources/data/pre/container/out";
 	
-	public TestContainerMerger(File fTest)
+	private void setup(File fTest)
 	{
 		this.fTest = fTest;
 		String name = fTest.getName().substring(0, fTest.getName().length()-4);
 		fRef = new File(dstDirName,name+".xml");
 	}
 	
-	@Parameterized.Parameters
 	public static Collection<Object[]> initFileNames() {return initFileNames(srcDirName, ".xml");}
 	
-	@Before
+	@BeforeEach
 	public void init() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{	
 		containerMerger = new OfxContainerMerger();
 	}
 	
-	@After
+	@AfterEach
 	public void close()
 	{
 		containerMerger = null;
 	}
     
-    @Test
-    public void render() throws OfxInternalProcessingException, FileNotFoundException
+    @ParameterizedTest
+    @MethodSource("initFileNames")
+    public void render(File fTest) throws OfxInternalProcessingException, FileNotFoundException
     {
+    	setup(fTest);
     	render(false);
     }
 	
@@ -71,7 +70,7 @@ public class TestContainerMerger extends AbstractFileProcessingTest
 		else
 		{
 			Document ofxRef = JaxbUtil.loadJAXB(fRef.getAbsolutePath(), Document.class);
-			Assert.assertEquals(JaxbUtil.toString(ofxRef),JaxbUtil.toString(ofxDst));
+			Assertions.assertEquals(JaxbUtil.toString(ofxRef),JaxbUtil.toString(ofxDst));
 		}	
 	}
 	
@@ -87,7 +86,8 @@ public class TestContainerMerger extends AbstractFileProcessingTest
 		{
 			File fTest = (File)o[0];
 		
-			TestContainerMerger test = new TestContainerMerger(fTest);
+			TestContainerMerger test = new TestContainerMerger();
+			test.setup(fTest);
 			test.init();
 			logger.trace(id+" "+index);
 			if(id<0 | id==index){test.render(saveReference);}

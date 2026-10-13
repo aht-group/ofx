@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
@@ -28,7 +28,7 @@ public class TestLatexListingRenderer extends AbstractLatexListingTest
 
     private Listing listing;
 	
-	@Before
+	@BeforeEach
 	public void initRenderer()
 	{
         rSection = new LatexSectionRenderer(cp,1, new LatexPreamble(cp));

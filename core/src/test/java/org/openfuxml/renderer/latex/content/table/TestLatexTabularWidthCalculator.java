@@ -3,9 +3,9 @@ package org.openfuxml.renderer.latex.content.table;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.table.XmlColumnFactory;
 import org.openfuxml.model.xml.core.table.Columns;
@@ -19,7 +19,7 @@ public class TestLatexTabularWidthCalculator extends AbstractOfxCoreTest
 	
 	private Columns cols;
 	
-	@Before
+	@BeforeEach
 	public void initRenderer()
 	{
 		cols = createColumns();
@@ -41,8 +41,8 @@ public class TestLatexTabularWidthCalculator extends AbstractOfxCoreTest
     public void getColDefinition() throws IOException, OfxAuthoringException
     {    	    	
     	LatexTabluarWidthCalculator tabUtil = new LatexTabluarWidthCalculator(createColumns());
-    	Assert.assertEquals("p{\\tabLenA}", tabUtil.getColDefinition(1));
-    	Assert.assertEquals(">{\\hsize=1.00\\hsize}X", tabUtil.getColDefinition(2));
+    	Assertions.assertEquals("p{\\tabLenA}", tabUtil.getColDefinition(1));
+    	Assertions.assertEquals(">{\\hsize=1.00\\hsize}X", tabUtil.getColDefinition(2));
     }
     
     @Test
@@ -51,7 +51,7 @@ public class TestLatexTabularWidthCalculator extends AbstractOfxCoreTest
     	LatexTabluarWidthCalculator tabUtil = new LatexTabluarWidthCalculator(createColumns());
     	for(int i=0;i<cols.getColumn().size();i++)
     	{
-    		Assert.assertEquals((int)cols.getColumn().get(i).getWidth().getValue()*LatexTabluarWidthCalculator.muliplier, tabUtil.getMultiplier(i));
+    		Assertions.assertEquals((int)cols.getColumn().get(i).getWidth().getValue()*LatexTabluarWidthCalculator.muliplier, tabUtil.getMultiplier(i));
     	}
     }
     
@@ -60,7 +60,7 @@ public class TestLatexTabularWidthCalculator extends AbstractOfxCoreTest
     {    	    	
     	int expected = 20*LatexTabluarWidthCalculator.muliplier;
     	LatexTabluarWidthCalculator tabUtil = new LatexTabluarWidthCalculator(createColumns());
-    	Assert.assertEquals(expected, tabUtil.getDivide());
+    	Assertions.assertEquals(expected, tabUtil.getDivide());
     } 
     
     @Test
@@ -76,6 +76,6 @@ public class TestLatexTabularWidthCalculator extends AbstractOfxCoreTest
     {
     	LatexTabluarWidthCalculator twc = new LatexTabluarWidthCalculator(createColumns());
     	String expected ="0.25";
-    	Assert.assertEquals(expected, twc.precentage(25));
+    	Assertions.assertEquals(expected, twc.precentage(25));
     }
 }

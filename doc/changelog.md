@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-13 – Tests migrated to JUnit 5
+
+What: Migrated the test programs of the modules `xml`, `util`, `core`, `wiki`, and `jsf` from JUnit 4 to
+JUnit 5; replaced the JUnit binding in `bom/pom.xml` and the module POMs with `org.junit.jupiter:junit-jupiter`.
+Result: The test programs run on JUnit 5; `mvn -q -DskipTests=false verify` ends with the return value 0.
+Evidence: `bom/pom.xml`, `xml/pom.xml`, `util/pom.xml`, `core/pom.xml`, `wiki/pom.xml`, `jsf/pom.xml`, and
+the test sources under `*/src/test/java`.
+Files: the POMs and test sources named above, `doc/decisions/ADR-0003-test-strategy.md`, `README.md`,
+`doc/changelog.md`.
+
 ## 2026-10-13 – Test strategy accepted
 
 What: Set ADR-0003 (Test strategy) to accepted.

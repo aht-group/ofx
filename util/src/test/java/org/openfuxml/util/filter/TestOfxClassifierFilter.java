@@ -1,9 +1,9 @@
 package org.openfuxml.util.filter;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
@@ -21,7 +21,7 @@ public class TestOfxClassifierFilter extends AbstractOfxUtilTest
 	
 	private Section section;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		section = XmlSectionFactory.build();
@@ -36,7 +36,7 @@ public class TestOfxClassifierFilter extends AbstractOfxUtilTest
 	@Test
 	public void sections() throws OfxAuthoringException, OfxInternalProcessingException
 	{
-		Assert.assertEquals(4, section.getContent().size());
+		Assertions.assertEquals(4, section.getContent().size());
 	}
 	
 	@Test
@@ -45,7 +45,7 @@ public class TestOfxClassifierFilter extends AbstractOfxUtilTest
 		OfxClassifierFilter mlf = new OfxClassifierFilter(classifier1);
 		section = mlf.filterLang(section);
 		JaxbUtil.trace(section);
-		Assert.assertEquals(2, section.getContent().size());
+		Assertions.assertEquals(2, section.getContent().size());
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ public class TestOfxClassifierFilter extends AbstractOfxUtilTest
 		OfxClassifierFilter mlf = new OfxClassifierFilter(classifier2);
 		section = mlf.filterLang(section);
 		JaxbUtil.trace(section);
-		Assert.assertEquals(3, section.getContent().size());
+		Assertions.assertEquals(3, section.getContent().size());
 	}
 	
 	@Test
@@ -63,6 +63,6 @@ public class TestOfxClassifierFilter extends AbstractOfxUtilTest
 		OfxClassifierFilter mlf = new OfxClassifierFilter(classifier1,classifier2);
 		section = mlf.filterLang(section);
 		JaxbUtil.trace(section);
-		Assert.assertEquals(4, section.getContent().size());
+		Assertions.assertEquals(4, section.getContent().size());
 	}
 }

@@ -1,10 +1,10 @@
 package org.openfuxml.renderer.wiki;
 
 import java.io.IOException;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.ofx.Paragraph;
 import org.openfuxml.test.OfxBootstrap;
@@ -24,8 +24,8 @@ public class TestWikiParagraphRenderer extends AbstractTestWikiRenderer
 	
 	private WikiParagraphRenderer renderer;
 	
-	@Before public void init(){renderer = new WikiParagraphRenderer(cp);}
-	@After public void close(){renderer=null;}
+	@BeforeEach public void init(){renderer = new WikiParagraphRenderer(cp);}
+	@AfterEach public void close(){renderer=null;}
 	
 	public static Paragraph create(){return create(10);}
 	public static Paragraph create(int words)
@@ -36,7 +36,7 @@ public class TestWikiParagraphRenderer extends AbstractTestWikiRenderer
 	}
 	
 	//TODO FIX
-	@Ignore
+	@Disabled
     @Test
     public void plain() throws IOException, OfxAuthoringException
     {

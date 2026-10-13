@@ -2,10 +2,10 @@ package org.openfuxml.renderer.latex.structure;
 
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.text.ParagraphProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlFontFactory;
@@ -24,12 +24,12 @@ public class TestLatexParagraphRenderer extends AbstractTestLatexRenderer
 	
 	private LatexParagraphRenderer renderer;
 	
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("content/paragraph");
 		renderer = new LatexParagraphRenderer(cp,false);
 	}
-	@After public void close(){renderer=null;}
+	@AfterEach public void close(){renderer=null;}
 		
     @Test
     public void withBlank() throws IOException, OfxAuthoringException
@@ -39,7 +39,7 @@ public class TestLatexParagraphRenderer extends AbstractTestLatexRenderer
     	renderTest(renderer);
     }
     
-    @Test @Ignore
+    @Test @Disabled
     public void withoutBlank() throws IOException, OfxAuthoringException
     {
     	initFile(Key.withoutBlank);

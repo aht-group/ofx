@@ -3,7 +3,7 @@ package org.openfuxml.transform;
 import java.io.FileNotFoundException;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.model.xml.core.ofx.Section;
@@ -12,7 +12,6 @@ import org.openfuxml.test.OfxBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//@RunWith(Parameterized.class)
 public class TestXhtmlTransformer extends AbstractFileProcessingTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXhtmlTransformer.class);

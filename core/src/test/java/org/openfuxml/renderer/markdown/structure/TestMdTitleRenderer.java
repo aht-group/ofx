@@ -2,8 +2,8 @@ package org.openfuxml.renderer.markdown.structure;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.text.TitleProvider;
 import org.openfuxml.renderer.markdown.AbstractTestMdRenderer;
 import org.openfuxml.test.OfxBootstrap;
@@ -18,7 +18,7 @@ public class TestMdTitleRenderer extends AbstractTestMdRenderer
 	
 	private MdTitleRenderer renderer;
 
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("structure/title");
 		renderer = new MdTitleRenderer(cp);

@@ -2,9 +2,9 @@ package org.openfuxml.renderer.latex.table;
 
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.text.ParagraphProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.ofx.Paragraph;
@@ -24,14 +24,14 @@ public class TestLatexCellRenderer extends AbstractTestLatexRenderer
 	
 	private LatexCellRenderer renderer;
 	
-	@Before
+	@BeforeEach
 	public void initRenderer()
 	{
 		super.initDir("table/cell");
 		renderer = new LatexCellRenderer(cp);
 	}
 	
-	@After public void close(){renderer=null;}
+	@AfterEach public void close(){renderer=null;}
 	
 	public static Cell create(){return create(10);}
 	public static Cell create(int words)

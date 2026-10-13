@@ -5,9 +5,10 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
@@ -31,13 +32,13 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
 		
 	private LatexTableRenderer renderer;
 	
-	@Before
+	@BeforeEach
 	public void initRenderer()
 	{
 		renderer = new LatexTableRenderer(cp);
 	}
 	
-	@After public void close(){renderer=null;}
+	@AfterEach public void close(){renderer=null;}
 	
 	public static Table createTable()
 	{
@@ -76,28 +77,34 @@ public class TestLatexTableRenderer extends AbstractLatexTableTest
 		return head;
 	}
 	
-    @Test(expected=OfxAuthoringException.class)
+    @Test
     public void withoutSpecification() throws IOException, OfxAuthoringException
     {
+        Assertions.assertThrows(OfxAuthoringException.class, () -> {
     	Table table = createTable();
     	table.setSpecification(null);
     	renderer.render(table);
+        });
     }
     
-    @Test(expected=OfxAuthoringException.class)
+    @Test
     public void withoutContent() throws IOException, OfxAuthoringException
     {
+        Assertions.assertThrows(OfxAuthoringException.class, () -> {
     	Table table = createTable();
     	table.setContent(null);
     	renderer.render(table);
+        });
     }
     
-    @Test(expected=OfxAuthoringException.class)
+    @Test
     public void withoutBody() throws IOException, OfxAuthoringException
     {
+        Assertions.assertThrows(OfxAuthoringException.class, () -> {
     	Table table = createTable();
     	table.getContent().getBody().clear();
     	renderer.render(table);
+        });
     }
     
     @Test

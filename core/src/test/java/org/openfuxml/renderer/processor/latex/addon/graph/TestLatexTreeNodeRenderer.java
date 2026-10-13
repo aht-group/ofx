@@ -2,8 +2,8 @@ package org.openfuxml.renderer.processor.latex.addon.graph;
 
 import java.util.Objects;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openfuxml.renderer.latex.content.graph.LatexTreeNodeRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +17,13 @@ public class TestLatexTreeNodeRenderer extends AbstractLatexGraphTest
 	private LatexTreeNodeRenderer renderer;
 //	private String dir = "treeNode";
 	
-	@Before
+	@BeforeEach
 	public void initRenderer()
 	{
 		renderer = new LatexTreeNodeRenderer(cp);
 	}
 	
-	@After public void close()
+	@AfterEach public void close()
 	{
 		if(Objects.nonNull(renderer)) {logger.debug("Closing renderer");}
 		renderer=null;

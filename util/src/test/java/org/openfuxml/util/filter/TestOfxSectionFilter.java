@@ -1,7 +1,7 @@
 package org.openfuxml.util.filter;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.test.AbstractOfxUtilTest;
@@ -15,7 +15,7 @@ public class TestOfxSectionFilter extends AbstractOfxUtilTest
 	
 	private Section section;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		Section sub2 = XmlSectionFactory.build();

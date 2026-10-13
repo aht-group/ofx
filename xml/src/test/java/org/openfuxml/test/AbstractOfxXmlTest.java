@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 
 import org.exlp.controller.handler.io.log.LoggerBootstrap;
 import org.exlp.test.AbstractXmlTest;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 
 public abstract class AbstractOfxXmlTest <T extends Object> extends AbstractXmlTest<T>
 {
@@ -19,7 +19,7 @@ public abstract class AbstractOfxXmlTest <T extends Object> extends AbstractXmlT
 		LoggerBootstrap.instance().path("ofx/system/io/log").init();
     }
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initPrefixMapper()
 	{
 //		JaxbUtil.setNsPrefixMapper(new GeoJsfNsPrefixMapper());

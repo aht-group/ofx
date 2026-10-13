@@ -5,12 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 
 import org.exlp.util.io.StringUtil;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.exception.OfxInternalProcessingException;
 import org.openfuxml.test.AbstractFileProcessingTest;
@@ -20,7 +19,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringIO;
 
-@RunWith(Parameterized.class)
 public class TestWikiModelProcessor extends AbstractFileProcessingTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestWikiInlineProcessor.class);
@@ -33,32 +31,33 @@ public class TestWikiModelProcessor extends AbstractFileProcessingTest
 	private File fTest;
 	private File fRef;
 
-	public TestWikiModelProcessor(File fTest)
+	private void setup(File fTest)
 	{
 		this.fTest = fTest;
 		String name = fTest.getName().substring(0, fTest.getName().length()-4);
 		fRef = new File(dstDirName,name+".xhtml");
 	}
 	
-	@Parameterized.Parameters
 	public static Collection<Object[]> initFileNames() {return initFileNames(srcDirName, ".txt");}
 	
-	@Before
+	@BeforeEach
 	public void init() throws FileNotFoundException, OfxConfigurationException, OfxInternalProcessingException
 	{	
 		wmp = new WikiModelProcessor();
 	}
 	
-	@After
+	@AfterEach
 	public void close()
 	{
 		wmp = null;
 	}
     
-    @Test
-    public void testPlainToMarkup() throws OfxInternalProcessingException
+    @ParameterizedTest
+    @MethodSource("initFileNames")
+    public void testPlainToMarkup(File fTest) throws OfxInternalProcessingException
     {
     	logger.debug(fTest.getAbsolutePath());
+    	setup(fTest);
     	wikiPlainToMarkup(false);
     }
 	
@@ -73,7 +72,7 @@ public class TestWikiModelProcessor extends AbstractFileProcessingTest
 		else
 		{
 			String xhtmlRef = StringUtil.readFile(fRef);
-			Assert.assertEquals(xhtmlRef.trim(),modelXhtml.trim());
+			Assertions.assertEquals(xhtmlRef.trim(),modelXhtml.trim());
 		}	
 	}
 	
@@ -85,7 +84,8 @@ public class TestWikiModelProcessor extends AbstractFileProcessingTest
 			if(id<0 | id==index)
 			{
 				File fTest = (File)o[0];
-				TestWikiModelProcessor test = new TestWikiModelProcessor(fTest);
+				TestWikiModelProcessor test = new TestWikiModelProcessor();
+				test.setup(fTest);
 				test.init();
 				logger.trace(id+" "+index);
 				test.wikiPlainToMarkup(saveReference);

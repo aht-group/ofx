@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
@@ -45,7 +45,7 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
     
     private Image image;
 	
-	@Before
+	@BeforeEach
 	public void initRenderer()
 	{
 		File fTarget = new File("target");
@@ -84,7 +84,7 @@ public class TestLatexImageRenderer extends AbstractLatexMediaTest
         OfxContentDebugger.debug(content);
     }
 
-    @Test @Ignore
+    @Test @Disabled
     public void section() throws IOException, OfxAuthoringException, OfxConfigurationException
     {
         Section section = new Section();

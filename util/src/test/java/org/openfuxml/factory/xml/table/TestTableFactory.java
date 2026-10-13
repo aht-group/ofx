@@ -1,8 +1,8 @@
 package org.openfuxml.factory.xml.table;
 
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.test.OfxBootstrap;
 
@@ -23,8 +23,8 @@ public class TestTableFactory
 	{
 		Table table = XmlTableFactory.build(columnNames,data);
 		JaxbUtil.trace(table);
-		Assert.assertEquals(columnNames.length,table.getContent().getHead().getRow().get(0).getCell().size());
-		Assert.assertEquals(data.length,table.getContent().getBody().get(0).getRow().size());
+		Assertions.assertEquals(columnNames.length,table.getContent().getHead().getRow().get(0).getCell().size());
+		Assertions.assertEquals(data.length,table.getContent().getBody().get(0).getRow().size());
 	}
 	
 	public static void main(String[] args) throws Exception

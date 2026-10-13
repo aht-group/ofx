@@ -2,9 +2,9 @@ package org.openfuxml.renderer.latex.content.editorial;
 
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.controller.provider.text.ParagraphProvider;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.renderer.latex.AbstractTestLatexRenderer;
@@ -16,12 +16,12 @@ public class TestLatexIndexRenderer extends AbstractTestLatexRenderer
 	private enum Key {simple}
 	LatexIndexRenderer renderer;
 	
-	@Before public void init()
+	@BeforeEach public void init()
 	{
 		super.initDir("editorial/index");
 		renderer = new LatexIndexRenderer(cp);
 	}
-	@After public void close() {renderer=null;}
+	@AfterEach public void close() {renderer=null;}
 
 	@Test
 	public void index() throws OfxAuthoringException, IOException

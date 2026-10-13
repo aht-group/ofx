@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.exlp.util.jx.JaxbUtil;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
@@ -31,7 +31,7 @@ public class TestLatexSectionRenderer extends AbstractTestLatexRenderer
 
     private Section section;
     
-	@Before
+	@BeforeEach
 	public void init()
 	{
         preamble = new LatexPreamble(cp);
@@ -51,7 +51,7 @@ public class TestLatexSectionRenderer extends AbstractTestLatexRenderer
     	renderer.render(section);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
-        Assert.assertEquals(7, content.size());
+        Assertions.assertEquals(7, content.size());
         testLatex(content);
     }
 	
@@ -62,7 +62,7 @@ public class TestLatexSectionRenderer extends AbstractTestLatexRenderer
     	renderer.render(section);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
-        Assert.assertEquals(4, content.size());
+        Assertions.assertEquals(4, content.size());
     }
 	
 	@Test public void sectionInclude() throws OfxAuthoringException, OfxConfigurationException
@@ -74,7 +74,7 @@ public class TestLatexSectionRenderer extends AbstractTestLatexRenderer
     	renderer.render(section);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
-        Assert.assertEquals(4, content.size());
+        Assertions.assertEquals(4, content.size());
     }
 	
 	@Test public void sectionIncludeWithContent() throws OfxAuthoringException, OfxConfigurationException
@@ -85,7 +85,7 @@ public class TestLatexSectionRenderer extends AbstractTestLatexRenderer
     	renderer.render(section);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
-        Assert.assertEquals(5, content.size());
+        Assertions.assertEquals(5, content.size());
     }
 	
 	@Test public void sectionWithHighlight() throws OfxAuthoringException, OfxConfigurationException
@@ -99,7 +99,7 @@ public class TestLatexSectionRenderer extends AbstractTestLatexRenderer
     	renderer.render(section);
         List<String> content = renderer.getContent();
         OfxContentDebugger.debug(content);
-//        Assert.assertEquals(7, content.size());
+//        Assertions.assertEquals(7, content.size());
  //       testLatex(content);
     }
     

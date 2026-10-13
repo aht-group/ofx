@@ -3,10 +3,10 @@ package org.openfuxml.renderer.latex.content.table;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.util.OfxContentDebugger;
@@ -23,16 +23,16 @@ public class TestLatexGridTableRenderer extends AbstractLatexTableTest
 	private LatexTableRenderer renderer;
 	private String dir = "grid";
 	
-	@Before
+	@BeforeEach
 	public void initRenderer()
 	{
 		renderer = new LatexTableRenderer(cp);
 		renderer.setPreBlankLine(false);
 	}
 	
-	@After public void close(){renderer=null;}
+	@AfterEach public void close(){renderer=null;}
 
-    @Test @Ignore
+    @Test @Disabled
     public void table() throws IOException, OfxAuthoringException
     {
     	Table table = TestLatexTableRenderer.createTable();
@@ -41,7 +41,7 @@ public class TestLatexGridTableRenderer extends AbstractLatexTableTest
     	renderTest(renderer);
     }
     
-    @Test @Ignore
+    @Test @Disabled
     public void withHead() throws OfxAuthoringException
     {
     	Table table = TestLatexTableRenderer.createTable();

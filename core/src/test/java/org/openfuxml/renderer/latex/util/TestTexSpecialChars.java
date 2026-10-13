@@ -1,7 +1,7 @@
 package org.openfuxml.renderer.latex.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.test.AbstractOfxCoreTest;
 import org.openfuxml.test.OfxBootstrap;
@@ -33,7 +33,7 @@ public class TestTexSpecialChars extends AbstractOfxCoreTest
     	String txt = "$";
     	String expected = "\\$";
     	String actual = TexSpecialChars.replace(txt);
-    	Assert.assertEquals(expected, actual);
+    	Assertions.assertEquals(expected, actual);
     }
   
     public static void main(String[] args) throws Exception
